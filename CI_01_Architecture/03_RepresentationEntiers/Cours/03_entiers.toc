@@ -1,0 +1,19 @@
+\select@language {french}
+\contentsline {section}{\numberline {1}G\IeC {\'e}n\IeC {\'e}ralit\IeC {\'e}s \cite {cf}}{1}{section.1}
+\contentsline {subsection}{\numberline {1.1}Logique binaire}{1}{subsection.1.1}
+\contentsline {subsection}{\numberline {1.2}Notion de mot}{2}{subsection.1.2}
+\contentsline {subsection}{\numberline {1.3}Notion de pond\IeC {\'e}ration}{3}{subsection.1.3}
+\contentsline {section}{\numberline {2}Repr\IeC {\'e}sentation des nombres entiers naturels -- $\mdmathbb {N}$}{3}{section.2}
+\contentsline {subsection}{\numberline {2.1}De la base k \IeC {\`a} la base 10}{3}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}De la base 10 vers la base k}{4}{subsection.2.2}
+\contentsline {subsubsection}{\numberline {2.2.1}M\IeC {\'e}thode des divisions successives}{4}{subsubsection.2.2.1}
+\contentsline {subsubsection}{\numberline {2.2.2}M\IeC {\'e}thode de la plus grande puissance}{5}{subsubsection.2.2.2}
+\contentsline {subsection}{\numberline {2.3}Capacit\IeC {\'e}s de la repr\IeC {\'e}sentation}{5}{subsection.2.3}
+\contentsline {section}{\numberline {3}Repr\IeC {\'e}sentation des entiers relatifs -- $\mdmathbb {Z}$}{6}{section.3}
+\contentsline {subsection}{\numberline {3.1}Premi\IeC {\`e}re approche}{6}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}Repr\IeC {\'e}sentation en compl\IeC {\'e}ment}{7}{subsection.3.2}
+\contentsline {subsubsection}{\numberline {3.2.1}Premi\IeC {\`e}re m\IeC {\'e}thode pour l\IeC {\textquoteright }obtention du compl\IeC {\'e}ment \IeC {\`a} deux d\IeC {\textquoteright }un nombre n\IeC {\'e}gatif}{8}{subsubsection.3.2.1}
+\contentsline {subsubsection}{\numberline {3.2.2}Seconde m\IeC {\'e}thode pour l\IeC {\textquoteright }obtention du compl\IeC {\'e}ment \IeC {\`a} deux d\IeC {\textquoteright }un nombre n\IeC {\'e}gatif}{8}{subsubsection.3.2.2}
+\contentsline {subsection}{\numberline {3.3}Capacit\IeC {\'e} de repr\IeC {\'e}sentation}{9}{subsection.3.3}
+\contentsline {subsection}{\numberline {3.4}Notation hexad\IeC {\'e}cimale}{9}{subsection.3.4}
+\contentsfinish 

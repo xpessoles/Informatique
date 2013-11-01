@@ -1,0 +1,441 @@
+\documentclass[11pt,oneside]{article}
+\input{style/coursHeadings}
+\input{style/programHeadings}
+
+
+%Si le boolen xp est vrai : compilation pour xabi
+%Sinon compilation Damien
+\newboolean{xp}
+\setboolean{xp}{true}
+
+%\newboolean{prof}
+
+
+\def\xxtitre{\ifthenelse{\boolean{xp}}{
+CI 1 : Architecture matérielle et logicielle}{
+Chapitre 2 -- Représentation des nombres}}
+
+\def\xxsoustitre{\ifthenelse{\boolean{xp}}{
+Chapitre 4 -- Principe de la représentation des nombres réels en mémoire}{
+Partie 2 -- Principe de la représentation des nombres réels en mémoire}}
+
+\def\xxauteur{\ifthenelse{\boolean{xp}}{
+Xavier \textsc{Pessoles} \\ Damien \textsc{Iceta}}{
+Damien \textsc{Iceta} \\ Xavier \textsc{Pessoles}}}
+
+\def\xxpied{\ifthenelse{\boolean{xp}}{
+Cours -- CI 1 : Architecture matérielle et logicielle\\
+Représentation des nombres réels}{
+\xxtitre}}
+
+\def\xxcathegorie{\ifthenelse{\boolean{xp}}{
+2013 -- 2014 \\
+Xavier \textsc{Pessoles}}{
+Informatique - Cours}}
+
+\ifthenelse{\boolean{xp}}{\input{style/enteteXP}}{\input{style/enteteDI}}
+
+
+%---------------------------------------------------------------------------
+
+\setboolean{prof}{true}
+
+\begin{flushright}
+%\textit{D'après ressources de Christophe François.}
+\end{flushright}
+
+\begin{minipage}[c]{.15\linewidth}
+\begin{center}
+%\includegraphics[height=.6cm]{png/w8}
+\end{center}
+\end{minipage}
+
+
+
+
+
+\vspace{.5cm}
+
+
+\begin{savoir}
+
+\begin{itemize}
+\item Capacité Dec - C3 : Initier un sens critique au sujet de la qualité et de la précision des résultats de calculs numériques sur ordinateur
+\begin{itemize}
+%\item Principe de la représentation des nombres entiers en mémoire
+\item Principe de la représentation des nombres réels en mémoire
+\end{itemize}
+\end{itemize}
+\end{savoir}
+
+
+
+
+\setlength{\parskip}{0ex plus 0.2ex minus 0ex}
+ \renewcommand{\contentsname}{}
+ \renewcommand{\baselinestretch}{1}
+
+\tableofcontents
+
+ \renewcommand{\baselinestretch}{1.2}
+\setlength{\parskip}{2ex plus 0.5ex minus 0.2ex}
+
+% \vspace{1cm}
+
+
+
+\section{Représentation de la partie fractionnaire des réels -- $\mathbb{R}$}
+
+En notation décimale, les chiffres à gauche de la virgule représentent des entiers, des dizaines, des centaines, etc. et ceux à droite de la virgule, des dizièmes, des centièmes, des millièmes, etc.
+
+
+\begin{exemple}
+$$
+3,3125_{ (10)}	=	3\cdot 10^0 + 3\cdot10^{- 1} + 1\cdot10^{- 2} + 2\cdot10^{ -3} + 5\cdot10^{ -4}
+$$
+\end{exemple}
+
+Par analogie, pour écrire un nombre binaire à virgule, on utilise les puissances négatives de 2.
+
+\begin{exemple}
+\begin{eqnarray*}
+11,0101_{(2)} &=&	1\cdot 2^{1} + 1\cdot 2^{0} + 0\cdot 2^{-1} + 1\cdot 2^{- 2} + 0\cdot 2^{-3} + 1\cdot 2^{- 4}\\
+		 &=&    2   +   1   +    0    +   0,25  +     0     +   0,0625\\
+		 &=&   3,3125_{(10)}\\
+\end{eqnarray*}
+\end{exemple}
+
+
+Le codage de la partie entière (3 dans l’exemple précédent) ne pose pas de problèmes particuliers. Pour la partie fractionnaire (0,3125), il est nécessaire d’adapter la procédure.
+
+\begin{methode}
+\textbf{Conversion d'une partie fractionnaire en binaire}
+
+\begin{enumerate}
+\item On multiplie la partie fractionnaire par 2. 
+\item La partie entière obtenue représente le poids binaire (limité aux seules valeurs 0 ou 1). 
+\item La partie fractionnaire restante est à nouveau multipliée par 2.
+\item On procède ainsi de suite jusqu’à ce qu’il n’y ait plus de partie fractionnaire ou que le nombre de bits obtenus correspond à la taille du mot mémoire dans lequel on stocke cette partie.
+\end{enumerate}
+\end{methode}
+
+
+\begin{exemple}
+\textit{Conversion de la partie fractionnaire 0,3125}
+
+\begin{center}
+\begin{tabular}{cccccc|c|cc}
+\cline{7-7}
+0,3125 & x & 2 & = & 0,625 & = & 0 & + & 0,625 \\
+0,6250 & x & 2 & = & 1,250 & = & 1 & + & 0,250 \\
+0,2500 & x & 2 & = & 0,500 & = & 0 & + & 0,500 \\
+0,5000 & x & 2 & = & 1,000 & = & 1 & + & 0,000 \\
+\cline{7-7}
+\end{tabular}
+\end{center}
+On considère les parties entières de haut en bas :
+$0,3125_{(10)}=0,0101_{(2)}$.
+%\begin{center}
+%\includegraphics[width=.7\textwidth]{images/reel_0}
+%\end{center}
+\end{exemple}
+
+\begin{rem}
+\textbf{Inconvénients}
+
+Savoir coder la partie fractionnaire d’un nombre à virgule ne suffit pas pour coder tous les nombres à virgule en binaire. En effet, la gestion d’une virgule virtuelle par programme n’est pas aisée. De plus, cette méthode ne permet pas de représenter des nombres très grands ou très petits comme le nombre d’Avogadro ($6,02214129.. \cdot  10^{23}$) ou la constante de Planck ($6,62606957 \cdot 10^{- 34}$).
+\end{rem}
+
+\begin{exemple}
+\textit{Convertir la partie fractionnaire 0,1}
+\end{exemple}
+
+\section{Représentation de la virgule flottante}
+
+Pour représenter des réels, nombres pouvant être positifs, nuls, négatifs et non entiers, on utilise la représentation en virgule flottante (\textit{float} en anglais) qui fait correspondre au nombre 3 informations :
+
+$$
+-243,25_{(10)} = \underbrace{-}_{1}0,\underbrace{24325}_{2}\cdot10^{\underbrace{3}_{3}}
+$$
+On appelle alors : 
+\begin{enumerate}
+\item le signe (positif ou négatif);
+\item la mantisse (nombre de chiffres significatifs);
+\item l'exposant : puissance à laquelle la base est élevée. 
+\end{enumerate}
+
+Sous cette forme normalisée, il suffit de mémoriser le signe, l’exposant et la mantisse pour avoir une représentation du nombre en base 10. Il n’est pas utile de mémoriser le 0 avant la virgule puisque tous les nombres vont commencer par 0. En faisant varier l’exposant, on fait « flotter » la virgule décimale.
+
+C’est cette méthode que l’on va adapter pour coder les réels en binaire naturel. Il faut au préalable les écrire sous la forme (norme IEEE 754 – Institute of Electrical and Electronics Engineers) :
+
+\begin{center}
+signe 1, mantisse x $2^{\text{exposant}}$
+\end{center}
+
+Le mot binaire obtenu sera la juxtaposition de 3 parties :
+
+\begin{center}
+\includegraphics[width=.7\textwidth]{images/reel_1}
+\end{center}
+
+\begin{minipage}[c]{.4\linewidth}
+Le tableau décrit la répartition des bits selon le type de précision : la taille de la mantisse ($m$ bits) donne la précision mais suivant la valeur de l'exposant, la précision sera totalement différente. 
+\ifthenelse{\boolean{xp}}{}{Ainsi : 
+\begin{itemize}
+\item erreur relative : $2^{-m}$ (poids du dernier bit)
+\item erreur absolue : erreur relative * $2^{\text{exposant}}$
+\end{itemize}
+
+Simple précision :  	$2^{- 23} = 1,192 … * 10^{- 7}$ 
+Double précision :  	$2^{- 52} = 2,220 … * 10^{- 16}$
+}
+
+\end{minipage}\hfill
+\begin{minipage}[c]{.59\linewidth}
+\begin{center}
+\begin{tabular}{| l |c|c|c|}
+\hline
+
+& Signe & Exposant & Mantisse \\ \hline
+ Simple précision -- 32 bits & 1 & 8 & 23 \\ \hline
+ Double précision -- 64 bits & 1 & 11 & 52 \\ \hline
+ Précision étendue -- 80 bits & 1 & 15 & 64 \\ \hline
+\end{tabular}
+\end{center}
+\end{minipage}
+
+
+\subsection{Procédure de conversion de réel en binaire (hexadécimale) }
+
+\begin{methode}
+\begin{enumerate}
+\item Convertir en binaire les partie entière et fractionnaire du nombre sans tenir compte du signe.
+\item Décaler la virgule vers la gauche pour le mettre sous la forme normalisée (IEEE 754).
+\item Codage du nombre réel avec les conventions suivantes : 
+\begin{itemize}
+\item Signe = 1 : Nombre négatif 	(Signe = 0 : Nombre positif)
+\item Le chiffre 1 avant la virgule étant invariant pour la forme normalisée, il n’est pas codé.
+\item On utilise un exposant décalé au lieu de l’exposant simple (complément sur octet). Ainsi, on ajoute à l’exposant simple la valeur 127 en simple précision et 1023 en double précision (c’est à dire $2^{n-1}-1$ où $n$ est le nombre de bits de l’exposant).
+\item La mantisse est complétée à droite avec des zéros.
+\end{itemize}
+\end{enumerate}
+\end{methode}
+
+
+\begin{exemple}
+On désire représenter le nombre - 243,25 en virgule flottante au format simple précision.
+
+\begin{enumerate}
+\item $\quad 243,25_{(10)} =  11110011,01_{(2)}$
+\item $\quad 243,25_{(10)} =  1,111001101_{(2)} *  2^7$ : décalage de 7 bits vers la gauche
+\item Exposant décalé : $7 + 127 = 134_{(10)} = 1000\; 0110_{(2)}$ 	sur $n$ = 8 bits
+\item $111001101\quad 00000000000000$
+\end{enumerate}
+\end{exemple}
+
+\begin{center}
+\includegraphics[width=.7\textwidth]{images/reel_2}
+\end{center}
+
+\begin{exercice}
+\textit{Encodage : Encoder le nombre +16,5 en simple précision.}
+
+\ifthenelse{\boolean{prof}}{Corrigé (Vide dans la version élève):
+\begin{itemize}
+\item Encoder en binaire le nombre à virgule 
+$$+16,5 = (10000,1)_2$$
+\item Transformer en notation scientifique (souvenez-vous que décaler la virgule revient à 
+multiplier/diviser par 2)
+$$(10000,1)_2 = (1,00001*2^4
+)_2$$
+\item Identifier les champs
+\begin{itemize}
+\item signe = 0 (positif)
+\item exposant = 4
+\item mantisse = 00001 (on ne prend pas le 1,)
+\end{itemize}
+\item Encoder l’exposant
+4 doit être codé sur 8 bits par excès de 127 => on encode $131 = (1000 0011)_2$
+
+\item Résultat final (En contrôle, écrire tous les 0 à la fin pour faire 32 bits) 
+$$0\ 10000011\ 00001000...$$
+\item Regroupement des bits par 4
+$$0100\ 0001\ 1000\ 0100\ 0000\ 0000\ ...$$
+En Héxa (ne pas oublier les 0 à la fin pour faire 32 bits)
+$$41\ 84\ 00\ 00$$
+\end{itemize}
+}{
+\begin{itemize}
+\item Encoder en binaire le nombre à virgule 
+$$+16,5 = $$
+\item Transformer en notation scientifique (souvenez-vous que décaler la virgule revient à 
+multiplier/diviser par 2)
+$$(10000,1)_2 = $$
+\item Identifier les champs
+\begin{itemize}
+\item signe =   (positif)
+\item exposant =  
+\item mantisse =           (on ne prend pas le 1,)
+\end{itemize}
+\item Encoder l’exposant
+4 doit être codé sur 8 bits par excès de 127 => on encode $131 =  $
+
+\item Résultat final (En contrôle, écrire tous les 0 à la fin pour faire 32 bits) 
+$$0 \ 10000011\ 00001000...$$
+\item Regroupage des bits par 4
+$$0100                $$
+En Héxa (ne pas oublier les 0 à la fin pour faire 32 bits)
+$$41  $$
+\end{itemize}
+}
+\end{exercice}
+
+
+
+
+\subsection{Procédure de conversion binaire (hexadécimale) en réel }
+
+On désire retrouver la valeur du nombre $44\;F3\; E0\; 00$ représenté en virgule flottante.
+
+On commence par placer les valeurs hexadécimales et leurs équivalents binaires dans la « structure » du flottant simple précision :
+
+\begin{center}
+\includegraphics[width=.7\textwidth]{images/reel_3}
+\end{center}
+
+
+\begin{itemize}
+\item Signe = 0 : Nombre positif
+\item Exposant décalé : $1000\;1001_{(2)} = 137_{(10)}$ donc un exposant simple égal à $137 -127 = 10 _{(10)}$;
+\item Mantisse : (1,) 11100111110000000000000. 
+\end{itemize}
+
+Comme l’exposant simple est égal à 10, on peut « dénormaliser » en décalant la virgule de 10 bits vers la droite puis rajouter le bit 1 invariant non stocké dans la mantisse, ce qui conduit à :
+$$
+\underbrace{11110011111}_{\text{Partie entière 1951}} \quad , \quad \underbrace{0000000000000_{(2)}}_{Partie fractionnaire 0} =  1951_{(10)}
+$$
+
+
+\begin{savoir}
+\textbf{Savoir - Faire :  Trouver la représentation en base dix d’un nombre à virgule
+flottante donné en binaire}
+
+On identifie le signe s, la mantisse $m$ et l'exposant $n$ ; on interprète chacun comme
+un nombre décimal en n'oubliant pas de tenir compte du décalage de 1023 pour l'exposant
+; on calcule enfin la quantité $sm2^n$.
+
+Pour un nombre codé en double précision. Si l'on note s le bit de signe, e1 . . . e11 les bits d’exposant et m1 . . .m52 les bits de la
+mantisse, on peut également donner l’expression directe suivante du nombre représenté
+:
+
+$$ (-1)^s * 2^{e1...e11 -1023} * \left(1+\sum_{i=1}^{52} m_i \frac{1}{2^i} \right)$$
+\end{savoir}
+
+\begin{exercice}
+\textit{Décodage : Décoder le nombre réel $(4024000000000000)_{(16)}$ qui est en double précision (puisqu’il utilise 64 bits).}
+
+
+\ifthenelse{\boolean{prof}}{Corrigé (Incomplet dans la version élève):
+\begin{itemize}
+\item Analyser le nombre en binaire (on ne peut rien extraire de l’hexadécimale)
+$$0100\ 0000\ 0010\ 0100\ 0000000$$
+\item Identifier les champs
+\begin{itemize}
+\item signe : 0 (positif)
+\item exposant: 100 0000 0010 (11 bits en double précision)
+\item mantisse : 010000…
+\end{itemize}
+\item Décoder l’exposant
+On trouve un exposant affiché de $(100 0000 0010)_2 = (1026)_{10}$
+Mais il faut se rappeler que pour coder cet exposant, on lui avait ajouté 1023 (sur 11 bits, 
+codage par excès de 1023).
+L’exposant réel vaut donc 3.
+\item Écrire le nombre en binaire en notation scientifique
+$$(1,01*2^3
+)_2$$
+\item En déduire le résultat final:
+$$(1,01*2^3
+)_2 = (1010)_2 = (10)_{10}$$
+(multiplier par 23 revient à décaler la virgule de 3 chiffres à droite en binaire).
+\end{itemize}
+}{
+\begin{itemize}
+\item Analyser le nombre en binaire (on ne peut rien extraire de l’hexadécimale)
+$$ $$
+\item Identifier les champs
+\begin{itemize}
+\item signe :  
+\item exposant: 
+\item mantisse : 
+\end{itemize}
+\item Décoder l’exposant
+On trouve un exposant affiché de $ $
+
+Mais il faut se rappeler que pour coder cet exposant, on lui avait ajouté 1023 (sur 11 bits, 
+codage par excès de 1023).
+L’exposant réel vaut donc 3.
+\item Ecrire le nombre en binaire en notation scientifique
+$$  $$
+\item En déduire le résultat final:
+$$ $$
+(multiplier par 23 revient à décaler la virgule de 3 chiffres à droite en binaire).
+\end{itemize}}
+\end{exercice}
+
+
+
+
+
+\begin{exercice}
+\textit{Trouver le nombre à virgule flottante représenté par le mot:}
+
+1100010001101001001111000011100000000000000000000000000000000000.
+
+\ifthenelse{\boolean{prof}}{Corrigé (Vide dans la version élève):
+
+Le signe est représenté par 1.
+L’exposant est représenté par 10001000110.
+La mantisse est représentée par
+1001001111000011100000000000000000000000000000000000.
+Le signe du nombre est -. Le nombre 10001000110 est égal à 1094 et l’exposant du nombre est donc
+n = 1094 - 1023 = 71. Sa mantisse est
+$$m = 1, 1001001111000011100000000000000000000000000000000000$$
+$$m= 1 + 1/2 + 1/2^4 + 1/2^7 + 1/2^8 + 1/2^9 + 1/2^{10} + 1/2^{15} + 1/2^{16} + 1/2^{17}$$
+$$m= (2^{17} + 2^{16} + 2^{13} + 2^{10} + 2^9 + 2^8 + 2^7 + 2^2 + 2 + 1)/2^{17}$$
+$$m= \frac{206727}{131072}$$
+Le nombre représenté est donc $- \frac{206727}{131072}*2^{71} \approx -3, 724 . . . × 1021$.
+}{}
+\end{exercice}
+
+\begin{exercice}
+Compléter le tableau suivant:
+\begin{figure}[H]
+\begin{center}
+\ifthenelse{\boolean{prof}}{Corrigé (Vide dans la version élève):
+
+\includegraphics[width=.7\textwidth]{images/exo.png}}{\includegraphics[width=.7\textwidth]{images/exo2.png}}
+\end{center}
+\end{figure}
+\end{exercice}
+
+
+\section{Capacités de la représentation}
+
+\begin{center}
+\includegraphics[width=.7\textwidth]{images/reel_4_0}
+\end{center}
+
+En simple précision, l’exposant  -127, codé 0000 0000, est réservé pour zéro et les nombres « non normalisés ». L’exposant 128 codé  1111 1111 est réservé pour coder $+\infty$ (ou $-\infty$ si signe négatif).
+
+
+
+
+
+
+\begin{thebibliography}{2}
+\bibitem{cf}{Christophe François, Représentation de l'information, représentation des nombres.}
+\bibitem{Pruvost}{Gaëtan Pruvost \url{http://perso.limsi.fr/pruvost/res/teach-doc/ieee754.pdf}.}
+\bibitem{Manfred}{Manfred GILLI, METHODES NUMERIQUES, Département d’économétrie
+Université de Genève, 2006.}
+\end{thebibliography}
+\end{document}

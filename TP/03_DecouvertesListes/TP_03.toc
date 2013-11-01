@@ -1,0 +1,15 @@
+\select@language {french}
+\contentsline {paragraph}{\numberline {1}}{1}{paragraph.0.0.0.1}
+\contentsline {paragraph}{\numberline {2}}{1}{paragraph.0.0.0.2}
+\contentsline {paragraph}{\numberline {1}}{1}{paragraph.0.0.0.1}
+\contentsline {paragraph}{\numberline {2}}{2}{paragraph.0.0.0.2}
+\contentsline {paragraph}{\numberline {1}}{2}{paragraph.0.0.0.1}
+\contentsline {paragraph}{\numberline {2}}{2}{paragraph.0.0.0.2}
+\contentsline {paragraph}{\numberline {1}}{2}{paragraph.0.0.0.1}
+\contentsline {paragraph}{\numberline {2}}{2}{paragraph.0.0.0.2}
+\contentsline {paragraph}{\numberline {3}}{2}{paragraph.0.0.0.3}
+\contentsline {paragraph}{\numberline {4}}{2}{paragraph.0.0.0.4}
+\contentsline {paragraph}{\numberline {5}}{2}{paragraph.0.0.0.5}
+\contentsline {paragraph}{\numberline {6}}{3}{paragraph.0.0.0.6}
+\contentsline {paragraph}{\numberline {7}}{3}{paragraph.0.0.0.7}
+\contentsfinish 

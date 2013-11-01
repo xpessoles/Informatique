@@ -1,0 +1,15 @@
+\select@language {french}
+\contentsline {section}{\numberline {1}Syntaxe}{2}{section.1}
+\contentsline {subsection}{\numberline {1.1}S\IeC {\'e}mantique}{2}{subsection.1.1}
+\contentsline {subsection}{\numberline {1.2}D\IeC {\'e}finition de fonctions}{3}{subsection.1.2}
+\contentsline {subsubsection}{\numberline {1.2.1}D\IeC {\'e}finition}{3}{subsubsection.1.2.1}
+\contentsline {subsubsection}{\numberline {1.2.2}Variables locales -- Variables globales}{4}{subsubsection.1.2.2}
+\contentsline {subsubsection}{\numberline {1.2.3}Attributs d'un objet}{5}{subsubsection.1.2.3}
+\contentsline {subsubsection}{\numberline {1.2.4}Documentation des fonctions}{6}{subsubsection.1.2.4}
+\contentsline {subsection}{\numberline {1.3}Import de fonctions}{6}{subsection.1.3}
+\contentsline {section}{\numberline {2}Instructions conditionnelles}{7}{section.2}
+\contentsline {subsection}{\numberline {2.1}Expressions bool\IeC {\'e}ennes}{7}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}Boucle \textsl {Tant que}}{8}{subsection.2.2}
+\contentsline {subsection}{\numberline {2.3}Instruction \textsl {Si, Sinon}}{9}{subsection.2.3}
+\contentsline {section}{\numberline {3}Instructions it\IeC {\'e}ratives}{12}{section.3}
+\contentsfinish 

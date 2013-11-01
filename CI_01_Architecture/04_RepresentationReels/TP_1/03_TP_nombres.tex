@@ -1,0 +1,304 @@
+\documentclass[11pt,oneside]{article}
+\input{style/coursHeadings}
+\input{style/programHeadings}
+
+
+%Si le boolen xp est vrai : compilation pour xabi
+%Sinon compilation Damien
+\newboolean{xp}
+\setboolean{xp}{false}
+
+%\newboolean{prof}
+%\setboolean{prof}{true}
+
+\def\xxtitre{\ifthenelse{\boolean{xp}}{
+CI 1 : Architecture matérielle et logicielle}{
+Chapitre 1 -- Le système informatique}}
+
+\def\xxsoustitre{\ifthenelse{\boolean{xp}}{
+Chapitre 3 -- Représentation des nombres}{
+Partie 2 -- Systèmes d'exploitation}}
+
+\def\xxauteur{\ifthenelse{\boolean{xp}}{
+Xavier \textsc{Pessoles} \\ Damien \textsc{Iceta}}{
+Damien \textsc{Iceta} \\ Xavier \textsc{Pessoles}}}
+
+\def\xxpied{\ifthenelse{\boolean{xp}}{
+Cours -- CI 1 : Architecture matérielle et logicielle\\
+Représentation des Nombres}{
+\xxtitre}}
+
+\def\xxcathegorie{\ifthenelse{\boolean{xp}}{
+2013 -- 2014 \\
+Xavier \textsc{Pessoles}}{
+Informatique - Cours}}
+
+\ifthenelse{\boolean{xp}}{\input{style/enteteXP}}{\input{style/enteteDI}}
+
+
+%---------------------------------------------------------------------------
+
+
+
+
+\begin{minipage}[c]{.15\linewidth}
+\begin{center}
+%\includegraphics[height=.6cm]{png/w8}
+\end{center}
+\end{minipage}
+
+
+
+
+
+\vspace{.5cm}
+
+\ifthenelse{\boolean{xp}}{
+\begin{savoir}
+
+\textbf{Savoirs}
+
+\begin{itemize}
+\item Capacité Dec - C3 : Initier un sens critique au sujet de la qualité et de la précision des résultats de calculs numériques sur ordinateur
+\begin{itemize}
+\item Principe de la représentation des nombres entiers en mémoire
+\item Principe de la représentation des nombres réels en mémoire
+\end{itemize}
+\end{itemize}
+\end{savoir}
+}{}
+
+
+
+\setlength{\parskip}{0ex plus 0.2ex minus 0ex}
+ \renewcommand{\contentsname}{}
+ \renewcommand{\baselinestretch}{1}
+
+\tableofcontents
+
+ \renewcommand{\baselinestretch}{1.2}
+\setlength{\parskip}{2ex plus 0.5ex minus 0.2ex}
+
+% \vspace{1cm}
+
+\section{Manipulation d'entiers relatifs}
+
+Nous allons utiliser la console interactive de Python où chaque ligne tapée est immédiatement exécutée.
+Exécuter les commandes suivantes :
+\begin{py}
+\begin{python}[H]
+3 + 5
+6-8
+2 * 3
+2 ** 3
+\end{python}
+\end{py}
+
+Dans ce mode, on peut d’ores et déjà utiliser des variables pour stocker des valeurs. L’affectation s’écrit avec le symbole = et n’affiche aucune valeur ; mais la variable mémorise la valeur qu’on lui a donnée et peut être utilisée dans la suite de la session.
+Exécuter les commandes suivantes :
+
+\begin{py}
+\begin{python}[H]
+ a = 2
+ a + 2
+ b = 6
+ b = b + 2 
+ b = b + 2
+ b
+\end{python}
+\end{py}
+
+
+La mémoire et l’unité de calcul d’un ordinateur sont constitués de composants qui ne peuvent prendre que deux états, désignés par convention 0 et 1. Une variable prenant valeur dans un ensemble où il n’y a que deux valeurs s’appelle un booléen, un chiffre binaire ou encore un bit (binary digit). Pour représenter un nombre binaire on utilise une suite finie de bits, que l’on appelle un mot ou encore un mot binaire. Les unités de calcul de nos ordinateurs utilisent des mots de 32 bits ou de 64 bits pour les plus récents.
+Quel est le nombre entier relatif le plus grand représentable sur un mot de 32 bits ? De même pour un mot de 64 bits.
+Exécuter les commandes suivantes :
+
+\begin{py}
+\begin{python}[H]
+ a = 2147483647
+ a
+
+\end{python}
+\end{py}
+
+La valeur du résultat d’un calcul pourrait dépasser les capacités d’un mot de 32 ou 64 bits. On appelle ce phénomène dépassement arithmétique (overflow en anglais).
+Exécuter les commandes suivantes :
+\begin{py}
+\begin{python}[H]
+ a = a + 1
+ a
+
+\end{python}
+\end{py}
+
+Il faudrait changer de représentation pour éviter de perdre la valeur du résultat. On constate qu’en Python, ce changement de représentation est fait automatiquement, ce n’est pas le cas dans tous les langages de programmation.
+En Python, lorsque la capacité des entiers machine (32 ou 64 bits) a été dépassée, les nombres sont suivis du marqueur L, qui explicite que l’entier est devenu Long. Ceci pour les versions Python 2.x. Pour les versions Python 3.x, le marqueur L n’est plus utilisé.
+Exécuter les commandes suivantes :
+\begin{py}
+\begin{python}[H]
+ 2 ** 32 - 1
+ 2 ** 31 - 1
+2**30-1
+
+\end{python}
+\end{py}
+
+Comparer la valeur de a, proposée précédemment, aux trois résultats de 2 ** 32 – 1 , 2 ** 31 – 1  et 2 ** 30 – 1. 
+On savait qu’un bit était réservé au signe. Ainsi, l’entier relatif le plus grand représentable sur 32 bits devrait être  2 ** 31 – 1. Pour changer la représentation des entiers, en cas d’overflow, Python utilise plusieurs mots binaires associés et réserve un bit supplémentaire. Il n’est pas utile d’en savoir plus, les curieux se référeront à (livre informatique pour tous page 51)
+Les valeurs en Python sont typées, autrement dit, elles sont classées selon l’objet qu’elles représentent. Une valeur peut ainsi être de type entier, flottant, booléen, chaîne de caractères, 
+Exécuter les commandes suivantes :
+\begin{py}
+\begin{python}[H]
+ a = 2
+ type(a)
+
+\end{python}
+\end{py}1
+
+Où l’on constate que le type de la valeur de a est le type entier ( integer, en anglais).
+
+\section{Manipulation de nombres à virgule flottante, flottants}
+
+Exécuter les commandes suivantes :
+
+\begin{py}
+\begin{python}[H]
+ a = 2.0
+ type(a)
+
+\end{python}
+\end{py}
+
+Où l’on constate que le type de la valeur de a est le type flottant ( float, en anglais).
+
+Exécuter les commandes suivantes :
+\begin{py}
+\begin{python}[H]
+ a = 1 + 1
+ type(a)
+ a = 1 + 1.0
+ type(a)
+
+\end{python}
+\end{py}
+
+Une expression est une suite de caractères définissant une valeur.  Par exemple ici l’expression x + y avec x = 1 et y =1 ou 1.0 définit la valeur 2. On constate qu’une expression en Python n’a pas de type car le type de sa valeur dépend des types de ses sous-expressions.
+Exécuter les commandes suivantes :
+
+\begin{py}
+\begin{python}[H]
+ 5 / 3
+ 5.0 / 3
+
+\end{python}
+\end{py}
+
+Selon la version de Python l’opérateur / calcule le quotient de la division euclidienne de deux entiers ou le quotient décimal. Dans les versions 3.x, l’opérateur / n’existe que pour les flottants, et donc en l’appliquant à des entiers, ils sont convertis en flottants, et le résultat est un flottant égal à leur quotient décimal.
+
+Exécuter les commandes suivantes :
+
+\begin{py}
+\begin{python}[H]
+ 5.0 / 3
+ b = 5 // 3
+ b
+ c = 5.0 % 3
+ c
+ b * 3 + c
+
+\end{python}
+\end{py}
+
+On vient de voir le calcul du quotient et du reste de la division euclidienne. Dans le contexte de la programmation on parle de division entière et de modulo plutôt que de quotient et de reste.
+Exécuter les commandes suivantes :
+
+\begin{py}
+\begin{python}[H]
+ 2 ** 100
+ 2.0 ** 100
+
+\end{python}
+\end{py}
+
+Ici on remarque que les flottants offrent une précision moins bonne que les entiers pour les calculs sur des valeurs entières. 
+Exécuter les commandes suivantes :
+\begin{py}
+\begin{python}[H]
+ a = 5.0 / 3
+ b = 100 * a
+ c = 500.0 / 3
+ b - c
+
+\end{python}
+\end{py}
+
+La représentation en virgule flottante d’un nombre est forcément une valeur approchée de ce nombre.
+
+On se propose de calculer : $1-2+2^x$ pour deux valeurs de $x=-52$ et $x=-53$ d’une part et d’autre part de deux manières différentes.
+Exécuter les commandes suivantes :
+
+\begin{py}
+\begin{python}[H]
+ 1 - 1 + 2**-52
+ 1 + 2**-52 - 1
+
+\end{python}
+\end{py}
+
+Normalement c’est cohérent.
+Exécuter les commandes suivantes :
+
+\begin{py}
+\begin{python}[H]
+ 1 - 1 + 2**-53
+ 1 + 2**-53 - 1
+
+\end{python}
+\end{py}
+
+
+À nouveau, on remarque que la représentation en virgule flottante donne une valeur approchée d’un nombre.
+On rappelle que la représentation d’un nombre en flottant est de la forme :  . Avec   le signe,   la mantisse et   l’exposant. La mantisse est un nombre binaire à virgule compris entre 1 inclus et 2 exclu. L’exposant est un entier relatif.
+
+En Python les nombres sont représentés sur 64 bits de la manière suivante :
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=.5\textwidth]{images/image1.png}
+\caption{}
+\label{}
+\end{center}
+\end{figure}
+
+Comme la mantisse a toujours le chiffre 1 avant la virgule, il est inutile de le représenter et on utilise les 52 bits pour la représenter. Ainsi,
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=.5\textwidth]{images/image2.png}
+\caption{}
+\label{}
+\end{center}
+\end{figure}
+
+Il a quelque cas particuliers qu’on n’évoquera pas ici.
+Exprimer la mantisse et l’exposant de $2^{-52}$  , de même pour $1+ 2^{-52}$  . Expliquer alors l’erreur de calcul pour  $x=-53$  .
+Utiliser Python comme une calculatrice a finalement peu d’intérêt.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{thebibliography}{2}
+\bibitem{cf}{Gille Moissard, UPSTI.}
+%\bibitem{zero}{Apprenez à programmer en Python \url{http://www.siteduzero.com/}.}
+\end{thebibliography}
+\end{document}

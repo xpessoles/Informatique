@@ -1,0 +1,141 @@
+\documentclass[11pt,oneside]{article}
+\input{style/coursHeadings}
+\input{style/programHeadings}
+
+
+%Si le boolen xp est vrai : compilation pour xabi
+%Sinon compilation Damien
+\newboolean{xp}
+\setboolean{xp}{false}
+
+%\newboolean{prof}
+%\setboolean{prof}{true}
+
+\def\xxtitre{\ifthenelse{\boolean{xp}}{
+CI 1 : Architecture matérielle et logicielle}{
+Chapitre 2 -- Représentation des nombres}}
+
+\def\xxsoustitre{\ifthenelse{\boolean{xp}}{
+Chapitre 3 -- Représentation des nombres}{
+Partie 1 -- Principe de la représentation des nombres entiers en mémoire}}
+
+\def\xxauteur{\ifthenelse{\boolean{xp}}{
+Xavier \textsc{Pessoles} \\ Damien \textsc{Iceta}}{
+Damien \textsc{Iceta} \\ Xavier \textsc{Pessoles}}}
+
+\def\xxpied{\ifthenelse{\boolean{xp}}{
+Cours -- CI 1 : Architecture matérielle et logicielle\\
+Représentation des Nombres}{
+\xxtitre}}
+
+\def\xxcathegorie{\ifthenelse{\boolean{xp}}{
+2013 -- 2014 \\
+Xavier \textsc{Pessoles}}{
+Informatique - Cours}}
+
+\ifthenelse{\boolean{xp}}{\input{style/enteteXP}}{\input{style/enteteDI}}
+
+
+%---------------------------------------------------------------------------
+
+
+
+\begin{flushright}
+%\textit{D'après ressources de Christophe François.}
+\end{flushright}
+
+\begin{minipage}[c]{.15\linewidth}
+\begin{center}
+%\includegraphics[height=.6cm]{png/w8}
+\end{center}
+\end{minipage}
+
+
+
+
+
+\vspace{.5cm}
+
+\ifthenelse{\boolean{xp}}{
+\begin{savoir}
+
+\textbf{Savoirs}
+
+\begin{itemize}
+\item Capacité Dec - C3 : Initier un sens critique au sujet de la qualité et de la précision des résultats de calculs numériques sur ordinateur
+\begin{itemize}
+\item Principe de la représentation des nombres entiers en mémoire
+\item Principe de la représentation des nombres réels en mémoire
+\end{itemize}
+\end{itemize}
+\end{savoir}
+}{}
+
+
+
+\setlength{\parskip}{0ex plus 0.2ex minus 0ex}
+ \renewcommand{\contentsname}{}
+ \renewcommand{\baselinestretch}{1}
+
+\tableofcontents
+
+ \renewcommand{\baselinestretch}{1.2}
+\setlength{\parskip}{2ex plus 0.5ex minus 0.2ex}
+
+% \vspace{1cm}
+
+\begin{exercice}
+Exercice avec corrigé: Trouver la représentation en base cinq de 58.
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=.5\textwidth]{images/58.png}
+\label{}
+\end{center}
+\end{figure}
+
+
+Donc, 58 objets se regroupent en 11 paquets et 3 unités, puis les 11 paquets se regroupent en 2 paquets de paquets et 1 paquet.
+
+$$58 = 11 × 5 + 3 = (2 × 5 + 1) × 5 + 3 = (2 × 52) + (1 × 51) + (3 × 50)$$
+
+Donc $58 = 213_5.$
+\end{exercice}
+
+\begin{exercice}
+Exercice avec corrigé Trouver la représentation en base seize du nombre 1207.
+
+En base seize, on a besoin de 16 chiffres : 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, puis a (dix), b (onze), c (douze), d (treize), e (quatorze) et f (quinze).
+
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=.5\textwidth]{images/16.png}
+\label{}
+\end{center}
+\end{figure}
+
+Donc 1207 = 4b716.
+
+\end{exercice}
+
+\begin{exercice}
+Exercice avec corrigé: Trouver les représentations binaires sur huit bits des entiers relatifs 0 et -128.
+L’entier relatif 0 est représenté comme l’entier naturel 0 : 00000000. L’entier relatif -128 est représenté
+comme l’entier naturel -128 + 256 = 128 : 10000000.
+\end{exercice}
+
+\begin{exercice}
+Exercice avec corrigé Trouver les représentations décimales des entiers relatifs dont les représentations
+binaires sur huit bits sont 00010111 et 10001100.
+Le mot 00010111 représente l’entier naturel 23 et donc l’entier relatif 23. Le mot 10001100 représente
+l’entier naturel 140 et donc l’entier relatif $140 - 256 = -116$.
+\end{exercice}
+
+\begin{thebibliography}{2}
+\bibitem{cf}{Christophe François, Représentation de l'information, représentation des nombres.}
+%\bibitem{zero}{Apprenez à programmer en Python \url{http://www.siteduzero.com/}.}
+\bibitem{Manfred}{Manfred GILLI, METHODES NUMERIQUES, Département d’économétrie
+Université de Genève, 2006.}
+\end{thebibliography}
+\end{document}

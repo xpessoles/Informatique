@@ -1,0 +1,106 @@
+\documentclass[11pt,oneside]{article}
+\input{style/coursHeadings}
+\input{style/programHeadings}
+
+
+%Si le boolen xp est vrai : compilation pour xabi
+%Sinon compilation Damien
+\newboolean{xp}
+\setboolean{xp}{true}
+
+%\newboolean{prof}
+%\setboolean{prof}{true}
+
+\def\xxtitre{\ifthenelse{\boolean{xp}}{
+CI 1 : Architecture matérielle et logicielle}{
+Chapitre 2 -- Représentation des nombres}}
+
+\def\xxsoustitre{\ifthenelse{\boolean{xp}}{
+Chapitres 3 \& 4 -- Principe de la représentation des nombres en mémoire}{
+Partie 2 -- Principe de la représentation des nombres réels en mémoire}}
+
+\def\xxauteur{\ifthenelse{\boolean{xp}}{
+Xavier \textsc{Pessoles} \\ Damien \textsc{Iceta}}{
+Damien \textsc{Iceta} \\ Xavier \textsc{Pessoles}}}
+
+\def\xxpied{\ifthenelse{\boolean{xp}}{
+Cours -- CI 1 : Architecture matérielle et logicielle\\
+Représentation des nombres}{
+\xxtitre}}
+
+\def\xxcathegorie{\ifthenelse{\boolean{xp}}{
+2013 -- 2014 \\
+Xavier \textsc{Pessoles}}{
+Informatique - Cours}}
+
+\ifthenelse{\boolean{xp}}{\input{style/enteteXP}}{\input{style/enteteDI}}
+
+
+%---------------------------------------------------------------------------
+
+
+
+\begin{flushright}
+\textit{D'après ressources de Laurent Deschamps.}
+\end{flushright}
+
+\subsection*{Exercice 1}
+\textit{Réalisez la conversion des nombres suivants dans les autres systèmes de numération :}
+\begin{itemize}
+\item $(10050)_{10}$;
+\item $(343,56)_{10}$;
+\item $(1001 0001)_{2}$;
+\item $(A3F)_{16}$;
+\item $(1C2A)_{16}$.
+\end{itemize}
+
+\subsection*{Exercice 2}
+On désire utiliser 12 bits pour comptabiliser des objets.
+\textit{
+\begin{enumerate}
+\item Quel est le nombre maximum d’objets qu’il est possible de compter ?
+\item Indiquer le numéro du premier et du dernier (dans les systèmes de numération décimale, binaire et hexadécimale).
+\end{enumerate}}
+
+\subsection*{Exercice 3}
+On désire compter 65 000 objets.
+\textit{
+\begin{enumerate}
+\item Sur combien de bit peut-on réaliser cette opération ? 
+\item Quel est le numéro du premier et du dernier (dans les systèmes de numération binaire et hexadécimale) ?
+\end{enumerate}}
+
+\subsection*{Exercice 4}
+\textit{Effectuez les opérations arithmétiques suivantes dans les systèmes de numération binaire (codé sur 8 bits) :}
+\begin{itemize}
+\item $71+35$
+\item $121-75$
+\item $15-25$
+\item $- 51 - 77$
+\end{itemize}
+
+\subsection*{Exercice 5}
+Soit une machine où les nombres sont codés sur 8 bits.
+\textit{
+\begin{enumerate}
+\item Donner le nombre le plus grand et le plus petit nombre représentable selon que le codage utilisé est non signé ou signé. 
+\item Écrire dans le format signé les nombres décimaux 1, -1, 111 et 55.
+\item Quelles sont  les valeurs décimales codées par $4C_{16}$ et $B4_{16}$ si le codage est signé ou non ?
+\item Un périphérique de la machine lui délivre des données sur 8 bits dans le format valeur absolue + signe, la valeur absolue sur 7 bits est précédée d’un bit de signe valant 1 si positif ou nul, 0 sinon. Il transmet successivement $9A_{16}$ puis $3C_{16}$, quelles sont les valeurs signifiées ? 
+\end{enumerate}}
+
+
+\subsection*{Exercice 6}
+\textit{Écrire dans le format flottant simple précision (IEEE 754) les nombres 
+1,0 ; 	–1,0 ; 	15,25  et –3,26. Les résultats seront donnés en hexadécimal.}
+
+\end{document}
+
+\subsection*{Exercice 7}
+\subsection*{Exercice 8}
+\subsection*{Exercice 9}
+\subsection*{Exercice 10}
+\subsection*{Exercice 11}
+\subsection*{Exercice 12}
+
+\end{document}

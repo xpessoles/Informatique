@@ -1,0 +1,189 @@
+\documentclass[11pt,oneside]{article}
+\input{coursHeadings}
+\input{programHeadings}
+\usepackage[%
+    pdftitle={TP - Algorithmes de recherche},
+    pdfauthor={Xavier Pessoles},
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=magenta]{hyperref}
+
+\usepackage{pifont}
+
+
+% \makeatletter \let\ps@plain\ps@empty \makeatother
+%% DEBUT DU DOCUMENT
+%% =================
+\sloppy
+\hyphenpenalty 10000
+
+\newcommand{\Pointilles}[1][3]{%
+\multido{}{#1}{\makebox[\linewidth]{\dotfill}\\[\parskip]
+}}
+
+
+\colorlet{shadecolor}{orange!15}
+
+\newtheorem{theorem}{Theorem}
+
+
+\begin{document}
+
+
+\newboolean{prof}
+\setboolean{prof}{true}
+%------------- En tetes et Pieds de Pages ------------
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}
+
+\fancyhead{}
+\fancyhead[L]{%
+\noindent\noindent\begin{minipage}[c]{2.6cm}
+%Lycée Rouvière PTSI
+\includegraphics[width=2cm]{png/logo_ptsi.png}%
+\end{minipage}
+}
+
+\fancyhead[C]{\rule{12cm}{.5pt}}
+
+\fancyhead[R]{%
+\noindent\begin{minipage}[c]{3cm}
+\begin{flushright}
+\footnotesize{\textit{\textsf{Informatique}}}%
+\end{flushright}
+\end{minipage}
+}
+
+\renewcommand{\footrulewidth}{0.2pt}
+
+\fancyfoot[C]{\footnotesize{\bfseries \thepage}}
+\fancyfoot[L]{\footnotesize{\textit{X. Pessoles}} \\ \footnotesize{\textit{C. Lopez}}}
+\ifthenelse{\boolean{prof}}{%
+\fancyfoot[R]{\footnotesize{TP 3 -- CI 2 : Algorithmique \& Programmation}}
+}{%
+\fancyfoot[R]{\footnotesize{TP 3 -- CI 2 : Algorithmique \& Programmation}}
+}
+
+
+
+\begin{center}
+ \Large\textsc{CI 2 -- Algorithmique et Programmation}
+
+% \large\textsc{Introduction à la programmation}
+\end{center}
+
+\begin{center}
+ \large\textsc{TP 3 -- Découverte des listes}
+\end{center}
+%
+\begin{savoir}
+\textbf{Objectif -- Découvrir les listes :}
+\begin{itemize}
+\item créer une liste;
+\item ajouter et supprimer un élément;
+\item accéder à un élément;
+\item extraire une partie de liste.
+\end{itemize}
+\end{savoir}
+%\item Recherche par dichotomie dans un tableau trié
+%\item Recherche par dichotomie du zéro d'une fonction monotone
+%\item Recherche d'un mot dans une chaîne de caractères
+%\end{itemize}
+%\end{savoir}
+% 
+%\begin{warn}
+%\textbf{TODO : Trouver une contextualisation aux exercices}
+%\end{warn}
+
+%\setlength{\parskip}{0ex plus 0.2ex minus 0ex}
+% \renewcommand{\contentsname}{}
+% \renewcommand{\baselinestretch}{1}
+%
+%\tableofcontents
+%
+% \renewcommand{\baselinestretch}{1.2}
+%\setlength{\parskip}{2ex plus 0.5ex minus 0.2ex}
+
+% \vspace{1cm}
+%\textit{Ce document évolue. Merci de signaler toutes erreurs ou coquilles.}
+
+
+\setcounter{paragraph}{0}
+\subsection*{Exercice 1 *}
+
+\begin{py}
+\textbf{Manipulation de listes}
+
+\begin{python}
+>>> tableau = [1,2,3] # Creation d'un tableau
+>>> tableau[0] # Acces a l'element 0 du tableau - ici 1
+>>> len(tableau) # Renvoie la taille d'un tableau
+\end{python}
+
+\textbf{Import de la fonction randrange}
+
+\begin{python}
+>>> from random import randrange
+>>> randrange(0,100) # renvoie aleatoirement un nombre compris entre 0 et 99
+\end{python}
+\end{py}
+
+\paragraph{}
+\textit{Créer une liste composée des nombres pairs allant de 0 (inclus) à 20 (inclus).}
+
+\paragraph{}
+\textit{Tester si le nombre choisi au hasard par le programme dans l'intervalle [0,20] appartient ou non à la liste.}
+
+\setcounter{paragraph}{0}
+\subsection*{Exercice 2 *}
+
+\paragraph{}
+\textit{Créer une liste composée des nombres pairs allant de 0 (inclus) à 20 (inclus).}
+
+\paragraph{}
+\textit{Implémenter une fonction permettant d'ajouter 3 à chaque entier pair et 4 à chaque entier impair et d'afficher la nouvelle liste.}
+
+
+\setcounter{paragraph}{0}
+\subsection*{Exercice 3 * }
+
+\paragraph{}
+\textit{Créer une liste composée de toutes les chaînes de deux caractères construites à partir de "abcdef".}
+
+\paragraph{}
+\textit{Afficher la liste.}
+
+\begin{exemple}
+Si la chaîne de départ est "abc" alors la liste sera composée de "ab", "bc" et "ac".
+\end{exemple}
+
+
+\setcounter{paragraph}{0}
+\subsection*{Exercice 4 *}
+
+\paragraph{}
+\textit{Créer une liste composée des nombres 17, 38, 10, 25 et 72.}
+
+\paragraph{}
+\textit{Implémenter la fonction permettant d'ajouter l'élément 12 à la liste entre 38 et 10 et d'afficher la nouvelle liste.}
+
+
+\paragraph{}
+\textit{Implémenter la fonction permettant d'inverser les éléments de la liste (le premier élément devenant le dernier, le second élément devenant l'avant dernier ...) et d'afficher la nouvelle liste.}
+
+
+\paragraph{}
+\textit{Implémenter la fonction permettant de supprimer l'élément 38 de la liste.}
+
+\paragraph{}
+\textit{Implémenter la fonction permettant d'afficher la sous-liste allant du deuxième au troisième élément.}
+
+\paragraph{}
+\textit{Implémenter la fonction permettant d'afficher la sous-liste allant du premier au deuxième élément.}
+
+\paragraph{}
+\textit{Implémenter la fonction permettant de trier la liste par ordre croissant et d'afficher la nouvelle liste.}
+
+
+
+\end{document}
