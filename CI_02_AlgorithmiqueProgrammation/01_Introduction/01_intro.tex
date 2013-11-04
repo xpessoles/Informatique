@@ -1,125 +1,56 @@
 \documentclass[11pt,oneside]{article}
-\input{coursHeadings}
-\input{programHeadings}
-\usepackage[%
-    pdftitle={Introduction à la programmation},
-    pdfauthor={Patrick Beynet, Xavier Pessoles},
-    colorlinks=true,
-    linkcolor=blue,
-    citecolor=magenta]{hyperref}
-
-\usepackage{pifont}
+\input{style/coursHeadings}
+\input{style/programHeadings}
 
 
-% \makeatletter \let\ps@plain\ps@empty \makeatother
-%% DEBUT DU DOCUMENT
-%% =================
-\sloppy
-\hyphenpenalty 10000
+%Si le boolen xp est vrai : compilation pour xabi
+%Sinon compilation Damien
+\newboolean{xp}
+\setboolean{xp}{true}
 
-\newcommand{\Pointilles}[1][3]{%
-\multido{}{#1}{\makebox[\linewidth]{\dotfill}\\[\parskip]
-}}
+%\newboolean{prof}
+%\setboolean{prof}{true}
+
+\def\xxtitre{\ifthenelse{\boolean{xp}}{
+CI 2 : Algorithmique \& Programmation}{
+Chapitre  -- }}
+
+\def\xxsoustitre{\ifthenelse{\boolean{xp}}{
+Chapitre 1 -- Introduction à la programmation}{
+Partie  -- }}
+
+\def\xxauteur{\ifthenelse{\boolean{xp}}{
+Xavier \textsc{Pessoles} \\ Damien \textsc{Iceta}}{
+Damien \textsc{Iceta} \\ Xavier \textsc{Pessoles}}}
+
+\def\xxpied{\ifthenelse{\boolean{xp}}{
+Cours -- CI 2 : Algorithmique \& Programmation\\
+Ch. 1 : Introduction à la programmation}{
+\xxtitre}}
+
+\def\xxcathegorie{\ifthenelse{\boolean{xp}}{
+2013 -- 2014 \\
+Xavier \textsc{Pessoles}}{
+Informatique - Cours}}
+
+\ifthenelse{\boolean{xp}}{\input{style/enteteXP}}{\input{style/enteteDI}}
 
 
-\colorlet{shadecolor}{orange!15}
+%---------------------------------------------------------------------------
 
-\newtheorem{theorem}{Theorem}
-
-
-\begin{document}
-
-
-\newboolean{prof}
-\setboolean{prof}{true}
-%------------- En tetes et Pieds de Pages ------------
-\pagestyle{fancy}
-\renewcommand{\headrulewidth}{0pt}
-
-\fancyhead{}
-\fancyhead[L]{%
-\noindent\noindent\begin{minipage}[c]{2.6cm}
-%Lycée Rouvière PTSI
-\includegraphics[width=2.5cm]{png/logo_upsti.png}%
-\end{minipage}
-}
-
-\fancyhead[C]{\rule{12cm}{.5pt}}
-
-\fancyhead[R]{%
-\noindent\begin{minipage}[c]{3cm}
-\begin{flushright}
-\footnotesize{\textit{\textsf{Informatique}}}%
-\end{flushright}
-\end{minipage}
-}
-
-\renewcommand{\footrulewidth}{0.2pt}
-
-\fancyfoot[C]{\footnotesize{\bfseries \thepage}}
-\fancyfoot[L]{%
-\begin{minipage}[c]{.2\linewidth}
-\footnotesize{\textsl{Xavier Pessoles}}\\
-\footnotesize{\textsl{UPSTI}}
-\end{minipage}
 \begin{minipage}[c]{.15\linewidth}
-\includegraphics[width=2cm]{png/logoCC.png}
-\end{minipage}}
-
-\ifthenelse{\boolean{prof}}{%
-\fancyfoot[R]{\footnotesize{Cours -- CI 2 : Algorithmique \& Programmation}}
-}{%
-\fancyfoot[R]{\footnotesize{Cours -- CI 6 : PPM}}
-}
-
-
-
 \begin{center}
- \huge\textsc{CI 2 -- Algorithmique et Programmation}
-
-% \large\textsc{Introduction à la programmation}
-\end{center}
-
-\begin{center}
- \LARGE\textsc{Chapitre 1 -- Introduction à la programmation}
-\end{center}
-
-\vspace{.5cm}
-
-
-
-\begin{minipage}[c]{.3\linewidth}
-\begin{center}
-
-\end{center}
-\end{minipage} \hfill
-\begin{minipage}[c]{.3\linewidth}
-\begin{center}
-
-\end{center}
-\end{minipage} \hfill
-\begin{minipage}[c]{.3\linewidth}
-\begin{center}
-
+%\includegraphics[height=.6cm]{png/w8}
 \end{center}
 \end{minipage}
 
+
+
+
+
 \vspace{.5cm}
 
-
-%\begin{center}
-%\includegraphics[width=.9\textwidth]{png/cyclev.png}
-
-%\textit{Cycle de conception d'un produit}
-%\end{center}
-
-%\begin{prob}
-%\textsc{Problématique :}
-
-%En phase d'avant conception d'un produit, quels sont les critères qui vont permettre de choisir les matériaux à utiliser ?
-%\end{prob}
-
-
+\ifthenelse{\boolean{xp}}{
 
 \begin{savoir}
 \textsc{Savoirs :}
@@ -129,7 +60,7 @@
 \end{itemize}
 \end{savoir}
  
-
+}{}
 
 
 
@@ -708,32 +639,106 @@ Lors de l'exécution d'un programme il est souvent nécessaire que ce dernier re
 >>> print("Coucou") # Afficher une chaine de caract.
     Coucou
 >>> i = 2
->>> print("La valeur de i est ",i,".",sep='') # Afficher une phrase composee.
-    La valeur de i est 2.
+>>> print("La valeur de i est '',i,''.'',sep='') # Afficher une phrase composee.
+    La valeur de i est 2. # sep='' permet de supprimer l espace entre 2 et le point
 \end{python}
 \end{py}
 \end{minipage}
 
-\begin{minipage}[c]{.45\linewidth}
+\begin{minipage}[c]{.95\linewidth}
+\begin{sci}
+\begin{scilab}
+print(%io(2),a)     // affiche le contenu de la variable a a l ecran
+write(%io(2),a)    // fonction similaire
+disp(a)               // affiche le contenu de a sans faire figurer a = 
+xinfo('message')  // affiche un message dans la barre d information
+\end{scilab}
+\end{sci}
+
 \end{minipage}
-
-\end{exemple}
-
-
-
-\begin{exemple}
-\begin{minipage}[c]{.45\linewidth}
-\begin{python}[moreemph={[4], 46, 48}]
-
-\end{python}
-\end{minipage}\hfill
-\begin{minipage}[c]{.45\linewidth}
-\end{minipage}
-
 \end{exemple}
 
 \subsection{Gestion des exceptions}
-Gestion des exceptions : try, except (python), try, catch (scilab)
+%Gestion des exceptions : try, except (python), try, catch (scilab)
+
+
+Certaines parties de programmes sont susceptibles de produire des erreurs. C'est par exemple le cas d'une entrée-sortie hasardeuse (saisie au clavier, lecture d'un fichier volumineux) ou bien de l'utilisation d'une opération instable dont le résultat peut provoquer un dépassement…
+ 
+Pour gérer cette situation, on peut utiliser une structure : \textsf{try} -- \textsf{except} en Python ou \textsf{try} -- \textsf{catch} avec Scilab.
+
+\textsf{except} permet de spécifier une action de remplacement en cas d'erreur.
+
+\begin{minipage}[c]{.95\linewidth}
+
+\begin{py}
+\begin{python}
+try :
+    nombre = int(input("Sasir un nombre : "))
+    print ("Le carré de", nombre, "est égale à", nombre*nombre)
+except : 
+    print("Vous n'avez pas donné de nombre correct, nous ne pouvons donc pas donner le carré") 
+\end{python}
+\end{py}
+\end{minipage}
+
+\textsf{try} fonctionne toujours avec \textsf{except}.
+
+Ce programme demande donc un nombre et affiche son carré. Mais s'il y a eu une erreur lors de la récupération de ce nombre, il affiche qu'il est impossible de donner le carré.
+
+Une solution plus complète serait de redemander un nombre tant que la valeur saisie n'est pas un nombre. Pour cela on peut implémenter les lignes de code suivantes :
+\begin{py}
+\begin{python}
+nombreIncorrect = True
+while nombreIncorrect == True :
+    try :
+        nombre = int(input("Saisir un nombre : "))
+        nombreIncorrect = False
+    except :
+        print ("Vous n'avez pas donné de nombre correct, nous ne pouvons donc pas donner le carré")
+print ("Le carré de", nombre, "est égale à", nombre*nombre)
+\end{python}
+\end{py}
+
+
+On crée ici une variable ayant la valeur \textsf{True} pour indiquer que la proposition effectuée est incorrecte. Tant que l'utilisateur ne saisit pas de nombre, nombreIncorrect reste égal à \textsf{True}; on continue donc à demander un nombre et on spécifie l'erreur à l'utilisateur.
+
+Comme on a initialisé la variable à \textsf{True}, on entre dans la boucle. Si l'utilisateur saisi réellement un un nombre, on indique avec \textsf{"nombreIncorrect = False"} que l'on ne doit pas refaire un tour de boucle. La question n'est donc pas reposée. 
+
+On sort donc de la boucle lorsqu'on est sûr que la variable nombre contient un nombre. On peut donc afficher le carré.
+
+On peut aussi utiliser la méthode montrée en exemple dans la documentation de python : 
+\begin{py}
+\begin{python}
+while True :
+    try :
+        nombre = int(input("Un nombre s'il vous plait : "))
+        break
+    except :
+        print ("Vous n'avez pas donné de nombre correct, nous ne pouvons donc pas donner le carré")
+print ("Le carré de", nombre, "est égale à", nombre*nombre)
+\end{python}
+\end{py}
+
+\textsf{While True :} ne s'arrête jamais, c'est une boucle infinie. On demandera toujours un nombre, sauf si on arrête la boucle avec \textsf{break}. Comme le \textsf{break} est dans le \textsf{try}, la boucle s'arrêtera seulement s'il n'y a pas d'erreur, c'est-à-dire que le nombre n'est pas incorrect.
+	
+Les exceptions permettent donc de gérer, dans un certaine mesure, les erreurs.
+
+De la même manière, sous scilab :
+\begin{sci}
+\begin{scilab}
+try
+	<instructions "normales">
+catch
+	<instructions executees en cas d'erreur>
+end
+[message_erreur, numero_erreur] = lasterror(%t) // enregistrement de l erreur
+<suite du script>
+\end{scilab}
+\end{sci}
+
+Scilab exécute le code entre les commandes \textsf{try} et \textsf{catch}; si aucune erreur ne se produit, il va tout de suite après le \textsf{end}.
+
+Si une erreur se produit entre le \textsf{try} et le \textsf{catch}, il exécute directement les instructions entre le \textsf{catch}.
 
 
 

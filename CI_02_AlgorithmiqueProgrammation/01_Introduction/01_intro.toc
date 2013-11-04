@@ -16,5 +16,5 @@
 \contentsline {subsubsection}{\numberline {2.3.4}Affectation externe}{9}{subsubsection.2.3.4}
 \contentsline {subsection}{\numberline {2.4}Sorties \IeC {\`a} l'\IeC {\'e}cran}{9}{subsection.2.4}
 \contentsline {subsection}{\numberline {2.5}Gestion des exceptions}{10}{subsection.2.5}
-\contentsline {section}{\numberline {3}Notions de programmation orient\IeC {\'e}e objets}{10}{section.3}
+\contentsline {section}{\numberline {3}Notions de programmation orient\IeC {\'e}e objets}{12}{section.3}
 \contentsfinish 
