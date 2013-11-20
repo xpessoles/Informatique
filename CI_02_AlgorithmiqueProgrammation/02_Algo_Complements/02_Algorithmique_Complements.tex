@@ -1,0 +1,80 @@
+\documentclass[10pt,oneside]{article}
+\input{style/coursHeadings}
+\input{style/programHeadings}
+
+
+%Si le boolen xp est vrai : compilation pour xabi
+%Sinon compilation Damien
+\newboolean{xp}
+\setboolean{xp}{true}
+
+%\newboolean{prof}
+%\setboolean{prof}{true}
+
+\def\xxtitre{\ifthenelse{\boolean{xp}}{
+CI 2 : Algorithmique \& Programmation}{
+Chapitre  -- }}
+
+\def\xxsoustitre{\ifthenelse{\boolean{xp}}{
+Chapitre 2 -- Introduction à l'algorithmique -- Compléments}{
+Partie  -- }}
+
+\def\xxauteur{\ifthenelse{\boolean{xp}}{
+Xavier \textsc{Pessoles} \\ Damien \textsc{Iceta}}{
+Damien \textsc{Iceta} \\ Xavier \textsc{Pessoles}}}
+
+\def\xxpied{\ifthenelse{\boolean{xp}}{
+Cours -- CI 2 : Algorithmique \& Programmation\\
+Ch. 2 : Introduction à l'algorithmique}{
+\xxtitre}}
+
+\def\xxcathegorie{\ifthenelse{\boolean{xp}}{
+2013 -- 2014 \\
+Xavier \textsc{Pessoles}}{
+Informatique - Cours}}
+
+\ifthenelse{\boolean{xp}}{\input{style/enteteXP}}{\input{style/enteteDI}}
+
+
+%---------------------------------------------------------------------------
+
+\begin{minipage}[c]{.15\linewidth}
+\begin{center}
+%\includegraphics[height=.6cm]{png/w8}
+\end{center}
+\end{minipage}
+
+\vspace{.5cm}
+\subsubsection*{Exercice 1 -- Recherche dans un tableau désordonné}
+\textbf{\textsf{Question -- 1  }}\textit{Étant donné un tableau de nombres, écrire la fonction permettant de savoir si un nombre est présent ou non dans le tableau. On utilisera pour cela la structure \textsf{while}.}
+
+\textbf{\textsf{Question -- 2  }}\textit{Étant donné un tableau de nombres, écrire la fonction permettant de savoir si un nombre est présent ou non dans le tableau. On utilisera pour cela la structure \textsf{for}.}
+
+\textbf{\textsf{Question -- 3  }}\textit{Étant donné un tableau de nombres, écrire la fonction renvoyant le premier indice où une valeur apparaît dans le tableau.}
+
+
+\subsubsection*{Exercice 2 -- Recherche dans un tableau ordonné -- Divide and conquer}
+Lorsqu'un tableau est trié, les méthodes précédentes restent envisageables pour déterminer si une valeur appartient au tableau. En revanche, elles imposent de parcourir toutes les valeurs du tableau ce qui peut être très coûteux en temps de calcul si le tableau est très grand. Pour améliorer les performances de l'algorithme de recherche, on peut utiliser un algorithme du type \textit{Divide and conquer} -- Diviser pour régner. 
+
+La méthode consiste en découper le tableau en 2. On regarde ensuite dans quelle partie du tableau est susceptible de se trouver la valeur recherchée. On redivise en 2 la partie de tableau considérée et on regarde dans quelle partie du tableau est susceptible de se trouver la valeur recherchée \textit{etc}.
+
+On donne le programme suivant : 
+\begin{py}
+\begin{python}
+def recherche_dichotomique(x, a):
+    g, d = 0, len(a)-1
+    while g <= d:
+        m = (g + d) // 2
+        if a[m] == x:
+            return m
+        if a[m] < x:
+            g = m+1
+        else:
+            d = m-1
+        return None
+\end{python}
+\end{py}
+
+\textbf{\textsf{Question  }}\textit{Décrire le fonctionnement du programme donné.}
+
+\end{document}
