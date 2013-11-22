@@ -77,4 +77,43 @@ def recherche_dichotomique(x, a):
 
 \textbf{\textsf{Question  }}\textit{Décrire le fonctionnement du programme donné.}
 
+
+\subsubsection*{Exercice 3 -- Recherche d'un mot dans un texte}
+L'algorithme suivant permet de rechercher un mot dans un texte. 
+
+
+\begin{py}
+\begin{python}
+def recherche_mot(m, t):
+    for i in range(1 + len(t) - len(m)):
+        j = 0
+        while j < len(m) and m[j] == t[i + j]:
+            j += 1
+        if j == len(m):
+            return i
+    return None
+\end{python}
+\end{py}
+\textbf{\textsf{Question  }}\textit{Décrire le fonctionnement du programme donné.}
+
+
+\subsubsection*{Exercice 4}
+\textbf{\textsf{Question  }}\textit{Concevoir un algorithme vérifiant qu’une suite est croissante jusqu’à un certain rang.}
+%\ifthenelse{\boolean{prof}}{
+%\begin{corrige}
+%\begin{enumerate}
+%\item On peut représenter les termes de la suite comme un tableau de flottants u.
+%\item Si la suite est effectivement croissante, il faudra le vérifier à chaque rang, mais si elle ne l’est pas, on pourra interrompre le parcours du tableau dès qu’on aura trouvé deux valeurs en ordre décroissant. L’algorithme que l’on va écrire est donc à rapprocher d’une recherche séquentielle.
+%\item Il y a principalement deux différences avec la recherche séquentielle. D’une part, on ne va pas comparer un élément avec une valeur fixée, mais avec l’élément suivant. D’autre part, on veut savoir si la suite est croissante et donc on renverra True dans le cas où on a parcouru tout le tableau sans trouver de valeurs en ordre décroissant.
+%On pourra écrire une fonction comme celle-ci :
+%\begin{py}
+%\begin{python}
+%def croissante(u):
+%    for i in range(len(u)-1):
+%        if u[i] > u[i+1]:
+%            return False
+%    return True
+%\end{python}
+%\end{py}
+%\end{corrige}}{}
 \end{document}
