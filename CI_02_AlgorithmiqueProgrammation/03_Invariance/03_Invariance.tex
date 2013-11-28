@@ -59,6 +59,7 @@ quotient $\gets$ 0\\
 reste $\gets$ reste $-$ b\\
 quotient $\gets$ quotient $+$ 1\\
 }
+Afficher quotient,reste
 \end{algorithm}
 \end{pseudo}
  
@@ -111,15 +112,14 @@ Cet algorithme permet de calculer le PGCD de deux nombres entiers. Il se base su
 \begin{minipage}[c]{.47\linewidth}
 \begin{pseudo}
 \begin{algorithm}[H]
-\KwData{$a,b \in\mathbb{N}^*$, $a<b$}
+\KwData{$a,b \in\mathbb{N}^*$}
 $x\gets a$\\
 $y\gets b$\\
 \Tq{$y\neq 0$}{
 $r\gets$ reste de la division euclidienne de $x$ par $y$\\
 $x\gets y$\\
-$y\gets r$
-}
-
+$y\gets r$}
+Afficher $x$.
 \end{algorithm}
 \end{pseudo}
 \end{minipage}
@@ -168,9 +168,9 @@ Un invariant de boucle est une propriété ou une formule logique,
 \begin{enumerate}
 \item Définir les préconditions (état des variables avant d’entrer dans la boucle).
 \item Définir un invariant de boucle.
-\item Prouver l’invariant (correspond à $\mathcal{P}(n) \Longleftarrow \mathcal{P}(n + 1)$).
+\item Prouver que l’invariant de boucle est vrai.% (correspond à $\mathcal{P}(n) \Longleftarrow \mathcal{P}(n + 1)$).
 \item Montrer la terminaison du programme.
-\item Condition de sortie de boucle + invariant de boucle $\Longleftarrow$ postcondition.
+\item Montrer qu'en sortie de boucle, la condition reste vraie.%Condition de sortie de boucle + invariant de boucle $\Longleftarrow$ postcondition.
 \end{enumerate}
 \end{methode}
 
@@ -207,15 +207,14 @@ Cet algorithme permet de calculer le PGCD de deux nombres entiers. Il se base su
 
 \begin{pseudo}
 \begin{algorithm}[H]
-\KwData{$a,b \in\mathbb{N}^*$, $a<b$}
+\KwData{$a,b \in\mathbb{N}^*$}
 $x\gets a$\\
 $y\gets b$\\
 \Tq{$y\neq 0$}{
 $r\gets$ reste de la division euclidienne de $x$ par $y$\\
 $x\gets y$\\
-$y\gets r$
-}
-
+$y\gets r$}
+Afficher $x$.
 \end{algorithm}
 \end{pseudo}
 
@@ -291,7 +290,10 @@ On a donc $PGCD(a,b)=PGCD(b,r)$.
 %\end{pseudo}
 
 
-
+\subsection{Exemple}
+\begin{exemple}
+Écrire la fonction qui permet de calculer la valeur prise par $2^n$. On utilisera pour cela une boucle \textsl{while} qui sera mise en \oe{}uvre à l'aide d'un variant et d'un invariant de boucle qu'il faudra définir.
+\end{exemple}
 
 \begin{thebibliography}{2}
 \bibitem{denis}{François Denis \url{http://pageperso.lif.univ-mrs.fr/~francois.denis/algoL2/chap1.pdf}}
