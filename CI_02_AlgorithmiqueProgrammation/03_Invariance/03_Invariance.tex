@@ -295,10 +295,52 @@ On a donc $PGCD(a,b)=PGCD(b,r)$.
 Écrire la fonction qui permet de calculer la valeur prise par $2^n$. On utilisera pour cela une boucle \textsl{while} qui sera mise en \oe{}uvre à l'aide d'un variant et d'un invariant de boucle qu'il faudra définir.
 \end{exemple}
 
+
+Intuitivement, le premier algorithme que l'on peut proposer est le suivant : 
+\begin{py}
+\begin{python}
+def fonction(n):
+    i=0
+    res=1
+    while i<n:
+        res = res*2
+        i=i+1
+    return res
+\end{python}
+\end{py}
+
+Prenons quelques exemples : 
+\begin{itemize}
+\item pour $n=0$ : on retourne directement 1;
+\item pour $n=1$ : on retourne 2 \textit{etc.}
+\end{itemize}
+
+Pour mettre en place le variant, on va commencer par mettre en place un variant qui doit décroître :
+\begin{py}
+\begin{python}
+def fonction(n):
+    i=n
+    res=1
+    while i!=0:
+        res = res*2
+        i=i-1
+    return res
+\end{python}
+\end{py}
+
+$i$ est donc un variant de boucle car : 
+\begin{itemize}
+\item $i$ est toujours un entier positif;
+\item $i$ décroît strictement à chaque itération.
+\end{itemize}
+
+Proposons l'invariant de boucle suivant :
+**
+
 \begin{thebibliography}{2}
 \bibitem{denis}{François Denis \url{http://pageperso.lif.univ-mrs.fr/~francois.denis/algoL2/chap1.pdf}}
 \bibitem{soyeur}{Alain Soyeur \url{http://asoyeur.free.fr/}}
 \bibitem{wack}{Wack et Al., \textit{L'informatique pour tous en classes préparatoires aux grandes écoles}, Editions Eyrolles.}
-\bibitem{Yves Benjamin, Vérification de la validité d'un programme.}
+\bibitem{yb}{Yves Benjamin, Vérification de la validité d'un programme.}
 \end{thebibliography}
 \end{document}
