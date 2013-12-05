@@ -1,0 +1,174 @@
+\documentclass[10pt,oneside]{article}
+\input{style/coursHeadings}
+\input{style/programHeadings}
+
+
+%Si le boolen xp est vrai : compilation pour xabi
+%Sinon compilation Damien
+\newboolean{xp}
+\setboolean{xp}{true}
+
+%\newboolean{prof}
+%\setboolean{prof}{true}
+
+\def\xxtitre{\ifthenelse{\boolean{xp}}{
+CI 2 : Algorithmique \& Programmation}{
+Chapitre  -- }}
+
+\def\xxsoustitre{\ifthenelse{\boolean{xp}}{
+Chapitre 4 -- Introduction à la complexité}{
+Partie  -- }}
+
+\def\xxauteur{\ifthenelse{\boolean{xp}}{
+Xavier \textsc{Pessoles} \\ Damien \textsc{Iceta}}{
+Damien \textsc{Iceta} \\ Xavier \textsc{Pessoles}}}
+
+\def\xxpied{\ifthenelse{\boolean{xp}}{
+Cours -- CI 2 : Algorithmique \& Programmation\\
+Ch. 3 : Introduction à la complexité}{
+\xxtitre}}
+
+\def\xxcathegorie{\ifthenelse{\boolean{xp}}{
+2013 -- 2014 \\
+Xavier \textsc{Pessoles}}{
+Informatique - Cours}}
+
+\ifthenelse{\boolean{xp}}{\input{style/enteteXP}}{\input{style/enteteDI}}
+
+
+%---------------------------------------------------------------------------
+
+
+
+\begin{savoir}
+\textsc{Savoirs :}
+\begin{itemize}
+\item s'interroger sur l'efficacité algorithmique temporelle.
+\end{itemize}
+\end{savoir}
+
+\section{Premier exemple}
+On introduit les algorithmes de tri suivant : 
+\begin{py}
+\begin{python}
+#Tri par sélection
+def tri_selection(tab):
+    for i in range(0,len(tab)):
+        indice = i
+        for j in range(i+1,len(tab)):
+            if tab[j]<tab[indice]:
+               indice = j
+        tab[i],tab[indice]=tab[indice],tab[i]
+    return tab
+\end{python}
+\end{py}
+
+\begin{py}
+\begin{python}    
+#Tri par insertion
+def tri_insertion(tab):
+    for i in range(1,len(tab)):
+        a=tab[i] 
+        j=i-1    
+        while j>=0 and tab[j]>a:
+            tab[j+1]=tab[j]
+            j=j-1
+        tab[j+1]=a
+    return tab
+\end{python}
+\end{py}
+
+\begin{py}
+\begin{python}
+def shellSort(array):
+     "Shell sort using Shell's (original) gap sequence: n/2, n/4, ..., 1."
+     "http://en.wikibooks.org/wiki/Algorithm_Implementation/Sorting/Shell_sort#Python"
+     gap = len(array) // 2
+     # loop over the gaps
+     while gap > 0:
+         # do the insertion sort
+         for i in range(gap, len(array)):
+             val = array[i]
+             j = i
+             while j >= gap and array[j - gap] > val:
+                 array[j] = array[j - gap]
+                 j -= gap
+             array[j] = val
+         gap //= 2
+\end{python}
+\end{py}
+
+La figure ci-dessous montre le temps en secondes pour trier des tableaux de 1 à 1000 éléments en utilisant les méthodes de tri suivant : 
+\begin{itemize}
+\item tri par sélection;
+\item tri par insertion; 
+\item tri shell;
+\item méthode de tri utilisée par Python.
+\end{itemize}
+
+Le premier graphe montre le temps de calcul et le second une estimation du nombre d'opérations. 
+
+\begin{minipage}[c]{.48\linewidth}
+\begin{center}
+\includegraphics[width=.95\textwidth]{images/figure_1}
+\end{center}
+\end{minipage}\hfill
+\begin{minipage}[c]{.48\linewidth}
+\begin{center}
+\includegraphics[width=.95\textwidth]{images/figure_2}
+\end{center}
+\end{minipage}
+
+\section{Deuxième exemple}
+On prend maintenant l'exemple de la recherche d'un élément dans une liste : 
+
+\begin{py}
+\begin{python}
+def recherche(x,tab):
+    for i in range(len(tab)):
+        if tab[i]==x:
+            return True
+    return False
+\end{python}
+\end{py}
+
+
+\begin{py}
+\begin{python}
+def recherche_dichotomique(x, a):
+    g, d = 0, len(a)-1
+    while g <= d:
+        m = (g + d) // 2
+        if a[m] == x:
+            return True
+        if a[m] < x:
+            g = m+1
+        else:
+            d = m-1
+    return None
+\end{python}
+\end{py}
+
+
+\begin{minipage}[c]{.48\linewidth}
+\begin{center}
+\includegraphics[width=.95\textwidth]{images/figure_3}
+\end{center}
+\end{minipage}\hfill
+\begin{minipage}[c]{.48\linewidth}
+\begin{center}
+\includegraphics[width=.95\textwidth]{images/figure_4}
+\end{center}
+\end{minipage}
+
+
+%\section{Troisième exemple}
+
+
+%\begin{thebibliography}{2}
+%\bibitem{denis}{François Denis \url{http://pageperso.lif.univ-mrs.fr/~francois.denis/algoL2/chap1.pdf}}
+%\bibitem{soyeur}{Alain Soyeur \url{http://asoyeur.free.fr/}}
+%\bibitem{wack}{Wack et Al., \textit{L'informatique pour tous en classes préparatoires aux grandes écoles}, Editions Eyrolles.}
+%\bibitem{yb}{Yves Benjamin, Vérification de la validité d'un programme.}
+%\end{thebibliography}
+\end{document}
