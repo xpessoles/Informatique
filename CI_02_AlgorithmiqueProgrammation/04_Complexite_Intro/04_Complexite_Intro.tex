@@ -25,7 +25,7 @@ Damien \textsc{Iceta} \\ Xavier \textsc{Pessoles}}}
 
 \def\xxpied{\ifthenelse{\boolean{xp}}{
 Cours -- CI 2 : Algorithmique \& Programmation\\
-Ch. 3 : Introduction à la complexité}{
+Ch. 4 : Introduction à la complexité}{
 \xxtitre}}
 
 \def\xxcathegorie{\ifthenelse{\boolean{xp}}{
@@ -47,7 +47,9 @@ Informatique - Cours}}
 \end{itemize}
 \end{savoir}
 
-\section{Premier exemple}
+\section{Mise en évidence du problème}
+
+\subsection{Premier exemple}
 On introduit les algorithmes de tri suivant : 
 \begin{py}
 \begin{python}
@@ -119,7 +121,7 @@ Le premier graphe montre le temps de calcul et le second une estimation du nombr
 \end{center}
 \end{minipage}
 
-\section{Deuxième exemple}
+\subsection{Deuxième exemple}
 On prend maintenant l'exemple de la recherche d'un élément dans une liste : 
 
 \begin{py}
@@ -162,13 +164,386 @@ def recherche_dichotomique(x, a):
 \end{minipage}
 
 
-%\section{Troisième exemple}
+\section{Complexité des algorithmes}
+
+\subsection{Présentation}
+Il existe souvent plusieurs façons de programmer un algorithme. Si le nombre d'opérations à effectuer est peu important et les données d'entrée de l'algorithme sont de faibles tailles, le choix de la solution importe peu. En revanche, lorsque le nombre d'opérations et la taille des données d'entrée deviennent importants, deux paramètres deviennent déterminants : le temps d'exécution et l'occupation mémoire. 
 
 
-%\begin{thebibliography}{2}
-%\bibitem{denis}{François Denis \url{http://pageperso.lif.univ-mrs.fr/~francois.denis/algoL2/chap1.pdf}}
-%\bibitem{soyeur}{Alain Soyeur \url{http://asoyeur.free.fr/}}
-%\bibitem{wack}{Wack et Al., \textit{L'informatique pour tous en classes préparatoires aux grandes écoles}, Editions Eyrolles.}
-%\bibitem{yb}{Yves Benjamin, Vérification de la validité d'un programme.}
-%\end{thebibliography}
+\begin{defi}
+\textbf{Complexité en temps}
+
+La complexité en temps donne le nombre d'opérations effectuées lors de l'exécution d'un programme. On appelle $C_o$ le coût en temps d'une opération $o$.
+
+\textbf{Complexité en mémoire (ou en espace)}
+
+La complexité en mémoire donne le nombre d'emplacements mémoires occupés lors de l'exécution d'un programme.
+
+
+\end{defi}
+
+\begin{rem}
+
+On distingue la complexité dans le pire des cas, la complexité dans le meilleure des cas, ou la complexité en moyenne. En effet, pour un même algorithme, suivant les données à manipuler, le résultat sera déterminé plus ou moins rapidement. 
+
+Généralement, on s'intéresse au cas le plus défavorable à savoir, la complexité dans le pire des cas. 
+\end{rem}
+
+%\begin{resultat}
+%Soit une suite de deux instructions ayant un coût respectif de $C_1$ et $C_2$. Le coût total de la suite d'opération est donc $C=C_1 + C_2$.
+%
+%Plus généralement, lorsqu'on réalise une itération, le coût total correspond à la somme des différents coûts. En notant $C_i$ le coût de la $i^{\text{ème}}$ suite d'instruction, le coût total de l'itération est donc :
+%$$
+%C = \sum\limits_{i=1}^{n}C_i
+%$$
+%\end{resultat}
+
+\subsection{Coût temporel d'un algorithme et d'une opération}
+\begin{minipage}[c]{.47\linewidth}
+\begin{resultat}
+On considère que le coût élémentaire $C_e$ correspond au coût d'une affectation, d'une comparaison ou de l'évaluation d'une opération arithmétique. 
+\end{resultat}
+\end{minipage}\hfill
+\begin{minipage}[c]{.47\linewidth}
+\begin{exemple}
+Chacune de ces 3 opérations expressions ont le même coût temporel $C_e$:
+\begin{py}
+\begin{python}
+>>> a=20
+>>> a<=100
+>>> a+a
+\end{python}
+\end{py}
+\end{exemple}
+\end{minipage}
+
+\vspace{.5cm}
+
+\begin{minipage}[c]{.47\linewidth}
+\begin{resultat}
+Pour une séquence de deux instructions de coûts respectifs $C_1$ et $C_2$, le coût total est de la séquence est de $C_1 + C_2$.
+\end{resultat}
+\end{minipage}\hfill
+\begin{minipage}[c]{.47\linewidth}
+\begin{exemple}
+\begin{py}
+\begin{python}
+>>> a=20
+>>> print(a)
+\end{python}
+\end{py}
+Le coût temporel correspond à l'addition du coût élémentaire de l'affectation ajouté au coût de l'affichage.
+\end{exemple}
+\end{minipage}
+
+\vspace{.5cm}
+
+\begin{minipage}[c]{.47\linewidth}
+\begin{resultat}
+Le coût d'un test \textsf{if test : inst\_1 else : inst\_2 } est inférieur ou égal au maximum du coût de l'instruction 1 et du coût de l'instruction 2 additionné au coût du test (coût élémentaire). 
+\end{resultat}
+\end{minipage}\hfill
+\begin{minipage}[c]{.47\linewidth}
+\begin{exemple}
+Soit le programme suivant (sans application réelle) :
+\begin{py}
+\begin{python}
+>>>    if x<0 :
+               x=x+1
+               x=x+2
+           else :
+               x=x+1
+\end{python}
+\end{py}
+
+La comparaison a un coût élémentaire $C_e$. Dans le <<~pire~>> des cas, on réalise deux additions et deux affectations. 
+Le coût temporel total est est donc $C_e + 4C_e = 5C_e$.
+\end{exemple}
+\end{minipage}
+
+\vspace{.5cm}
+
+\begin{minipage}[c]{.47\linewidth}
+\begin{resultat}
+Le coût d'une boucle \textsf{for i in range(n) : inst}  est égal à : $n$ fois le coût de l'instruction \textsf{inst} si elle est indépendante de la valeur de $i$.
+\end{resultat}
+\end{minipage}\hfill
+\begin{minipage}[c]{.47\linewidth}
+\begin{exemple}
+
+\begin{py}
+\begin{python}
+>>> for i in range(20) : print(i)
+\end{python}
+\end{py}
+Si on note $C_p$ le coût de l'affichage, le coût total est de $20 C_p$.
+\end{exemple}
+\end{minipage}
+
+\vspace{.5cm}
+
+%\begin{minipage}[c]{.47\linewidth}
+\begin{resultat}
+Soit la boucle \textsf{while cond : inst}, la condition \textsf{cond} faisant intervenir un variant de boucle. Il est donc possible de connaître le nombre $n$ d'itérations de la boucle. 
+Le coût de la boucle est donc égal à n fois le coût de l'instruction \textsf{inst}.
+\end{resultat}
+%\end{minipage}\hfill
+%\begin{minipage}[c]{.47\linewidth}
+%\begin{exemple}
+
+%\begin{py}
+%\begin{python}
+
+%\end{python}
+%\end{py}
+%\end{exemple}
+%\end{minipage}
+
+
+\subsection{Exemple}
+
+\begin{exemple}
+\textit{Calcul de factorielle}
+
+\begin{pseudo}
+\begin{algorithm}[H]
+\Fonction{
+factorielle($n$):\\
+\eSi{n=0}{
+\Retour{1}
+}{
+$i\gets1$\\
+$res\gets1$\\
+\Tq{$i\leq n$}{
+$res \gets res \cdot i$ \\
+$i\gets i+1$}
+\Retour{res}
+}}
+\end{algorithm}
+\end{pseudo}
+
+\textbf{Complexité en mémoire :} lors de l'exécution du programme, il sera nécessaire de stocker les variables suivantes : 
+\begin{itemize}
+\item $n$;
+\item $res$;
+\item $i$. 
+\end{itemize}
+
+\textbf{Complexité en temps :}
+On réalise une première comparaison dont on note le coût $C_c$.
+ lorsque $n>0$, on réalise à chaque incrément : 
+\begin{itemize}
+\item une comparaison de coût $C_c$;
+\item une multiplication de coût $C_m$;
+\item une addition (itération) de coût $C_i$;
+\item deux affectations de coût $C_a$;
+\end{itemize}
+Pour calculer $n!$ la boucle est réitérée $n$ fois. En conséquence, la complexité en temps s'élève à :
+$$C = n\cdot(C_c+C_m+C_a+C_i)+C_c$$
+\end{exemple}
+
+Il est fréquent que la complexité en temps soit améliorée au prix d'une augmentation de la complexité en espace, et vice-versa.
+La complexité dépend notamment :
+\begin{itemize}
+\item de la puissance de la machine sur laquelle l'algorithme est exécuté;
+\item du langage et compilateur / interpréteur utilisé pour coder l'algorithme;
+\item du style du programmeur.
+\end{itemize}
+
+
+\begin{rem}
+Le coût de la mémoire étant aujourd'hui relativement faible, on cherche en général à améliorer la complexité en temps plutôt que le complexité en mémoire. 
+\end{rem}
+
+\subsection{D'autres exemples}
+\subsubsection{Recherche d'un maximum}
+\begin{exemple}
+\textit{Soit une liste de nombre entiers désordonnés. Comment déterminer le plus grand nombre de la liste ?}
+
+Intuitivement, une solution est de parcourir la liste d'élément et de déterminer le plus grand élément par comparaisons successives.
+
+
+\begin{pseudo}
+\begin{algorithm}[H]
+\KwData{$tab$ tableau de taille $n$}
+$max  \leftarrow -\infty$\\
+\For{$i=1$ \KwTo $n$}{
+\If{$tab[i]>max$}{
+$max  \leftarrow tab[i]$\\
+}}
+\end{algorithm}
+\end{pseudo}
+
+Ainsi, quelle que soit la taille $n$ du tableau, il faudra $n$ itération pour connaître le plus grand élément de la liste. 
+\end{exemple}
+
+\subsubsection{Tri d'une liste}
+
+\begin{exemple}
+\textbf{Algorithme naïf}
+
+\textit{Soit une liste de nombre entiers désordonnés. Comment les trier par ordre croissant ?}
+
+Une méthode dite naïve pourrait être la suivante : 
+\begin{itemize}
+\item trouver le plus petit élément du tableau. Notons $min$ son indice;
+\item on permute alors le $min$\ieme élément avec le premier élément;
+\item ...
+\item on trouve le plus petit élément du tableau compris entre l'indice $i$ et $N$;
+\item on permute alors le $min$\ieme élément avec le $i$\ieme élément.
+\end{itemize}
+
+
+
+\begin{pseudo}
+\begin{algorithm}[H]
+\KwData{$tab$ tableau d'entiers désordonnés de taille $n$}
+\KwResult{$tab$ tableau d'entiers ordonnés}
+\For{$i=1$ \KwTo $n-1$}{
+$ min \leftarrow  i$\\
+\For{$j=i+1$ \KwTo $n$}{
+\If{$tab[j]<tab[min]$}{
+$min  \leftarrow j$\\
+}}
+$tmp  \leftarrow tab[i]$ \\
+$ tab[i] \leftarrow tab[min]$ \\
+$ tab[min] \leftarrow tmp$ \\
+}
+
+\end{algorithm}
+\end{pseudo}
+
+Dans ce cas, pour un tableau de taille $n$, la première boucle sera réalisée $n-1$ fois. Lors de l'itération $i$, la comparaison située dans la seconde boucle sera exécutée $N-(i+1)$ fois. 
+
+En considérant que seule la comparaison à un coût $C$, le coût total s'obtient en comptant le nombre de comparaisons :
+\begin{eqnarray*}
+(N-(1+1)+1)&+&(N-(2+1)+1)+...+(N-(i+1)+1)+...+(N-(N)+1)+(N-(N+1)+1)\\
+&=& (N-1)+(N-2)+...+1 \\
+&=& \dfrac{N(N-1)}{2}
+\end{eqnarray*}
+
+\end{exemple}
+
+\begin{rem}
+Il existe d'autres algorithmes de tris plus performant que l'algorithme présenté ci-dessus : 
+\begin{itemize}
+\item tri de shell (\textsf{shell sort});
+\item tri fusion (\textsf{merge sort});
+\item tri rapide (\textsf{quick sort})...
+\end{itemize}
+\end{rem}
+
+\subsection{Complexité algorithmique}
+\begin{defi}
+\cite{bournez}
+Soient $f$ et $g$ deux fonctions $f,g : \mathbb{N} \rightarrow \mathbb{R}^{+}_{*}$. On note $f(n)=\mathcal{O}(g(n))$ lorsqu'il existe des entiers $c$ et $n_0$ tels que pour tout $n\geq n_0$, 
+$$
+f(n) \leq c\cdot g(n)
+$$
+
+Intuitivement, cela signifie que $f$ est inférieur à $g$ à une constante multiplicative près pour les données suffisamment grandes. 
+
+\end{defi}
+
+\begin{exemple}
+Ainsi, l'algorithme de recherche du maximum dans une liste non trié (présenté précédemment) est de complexité $\mathcal{O}(n)$ où $n$ est le nombre d'éléments de la liste. Cet algorithme est proportionnel au nombre d'éléments.
+
+L'algorithme de tri naïf est de complexité $\mathcal{O}(n^2)$. On parle d'algorithme quadratique. Le temps d'exécution devient très grand lorsque le nombre de données et très important. 
+
+
+Par ordre de complexité croissante on a donc :
+\begin{itemize}
+\item $\mathcal{O}(1)$ : algorithme s'exécutant en temps constant, quelle que soit la taille des données;
+\item $\mathcal{O}(log(n))$ : algorithme rapide (complexité logarithmique) (Exemple : recherche par dichotomie dans un tableau trié);
+\item $\mathcal{O}(n)$ : algorithme linéaire;
+\item $\mathcal{O}(n\cdot log(n))$ : complexité $n \log n$;
+\item $\mathcal{O}(n^2)$ : complexité quadratique;
+\item $\mathcal{O}(2^n)$ : complexité exponentielle. 
+\end{itemize}
+\end{exemple}
+
+\begin{resultat}
+Pour une opération ayant un temps d'exécution de $10^{-9}s$, on peut calculer le temps d'exécution en fonction du nombre de données et de la complexité de l'algorithme : 
+
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline 
+Données & 
+$\mathcal{O}(log(n))$ &
+$\mathcal{O}(n)$ &
+$\mathcal{O}(n\cdot log(n))$ &
+$\mathcal{O}(n^2)$ &
+$\mathcal{O}(2^n)$ \\
+\hline 
+100 &     $2\cdot 10^{-9}\; s$ & $0,1\cdot 10^{-6}\; s$ &$0,2\cdot 10^{-6}\; s$ &$10\cdot 10^{-6}\; s$ &$1,26765\cdot 10^{21} \; s$ \\ \hline
+1 000 &  $3\cdot 10^{-9}\; s$ & $1\cdot 10^{-6}\; s$ & $3\cdot 10^{-6}\; s$ &$0,001\; s$ & $1,0715\cdot 10^{292}  \; s$\\ \hline
+10 000 & $4\cdot 10^{-9}\; s$ & $10\cdot 10^{-6}\; s$ & $40\cdot 10^{-6}\; s$ &$0,1\; s$	 & $+\infty$\\ \hline
+\end{tabular}
+\end{center}
+
+\end{resultat}
+
+\section{Profiling des algorithmes}
+
+Afin d'évaluer la performance des algorithmes, il existe des fonctionnalités permettant de compter le temps consacré à chacune des fonctions ou à chacune des instructions utilisées dans un programme \url{http://docs.python.org/2/library/profile.html}.
+
+\begin{exemple}
+
+Voici un exemple du crible d'Eratosthène.
+
+\begin{py}
+\begin{python}[H]
+def crible(n):
+    tab=[]
+    for i in range(2,n):
+        tab.append(i)
+    for i in range(0,len(tab)):
+        for j in range(len(tab)-1,i,-1):
+            if (tab[j]%tab[i]==0):
+                tab.remove(tab[j])
+    return tab
+    
+import cProfile            
+cProfile.run('crible(10000)')
+
+\end{python}
+\end{py}
+
+\textsf{cProfile} renvoie alors le message suivant :
+
+\begin{py}
+\begin{python}[H]
+ 28770 function calls in 1.957 seconds
+
+   Ordered by: standard name
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.000    0.000    1.957    1.957 <string>:1(<module>)
+        1    0.420    0.420    1.957    1.957 eratosthene.py:4(crible)
+        1    0.000    0.000    1.957    1.957 {built-in method exec}
+     9999    0.015    0.000    0.015    0.000 {built-in method len}
+     9998    0.016    0.000    0.016    0.000 {method 'append' of 'list' objects}
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+     8769    1.505    0.000    1.505    0.000 {method 'remove' of 'list' objects}
+
+\end{python}
+\end{py}
+
+On alors le bilan du temps passé à effectuer chacune des opérations. Ainsi pour améliorer notablement l'algorithme, le plus intéressant serait d'optimiser la méthode \textsf{remove}.
+\end{exemple}
+
+
+
+
+\begin{thebibliography}{2}
+\bibitem{denis}{François Denis \url{http://pageperso.lif.univ-mrs.fr/~francois.denis/algoL2/chap1.pdf}}
+\bibitem{soyeur}{Alain Soyeur \url{http://asoyeur.free.fr/}}
+\bibitem{morain}{François Morain, Cours de l'Ecole Polytechnique, \url{http://www.enseignement.polytechnique.fr/profs/informatique/Francois.Morain/TC/X2004/Poly/www-poly009.html}.}
+\bibitem{kerivent}{Renaud Kerivent et Pascal Monasse, La programmation pour ... , Cours de l’École des Ponts ParisTech - 2012/2013 \url{http://imagine.enpc.fr/~monasse/Info}.}
+\bibitem{bournez}{Olivier Bournez, Cours INFO 561 de l'Ecole Polytechnique, Algorithmes et programmation, \url{http://www.enseignement.polytechnique.fr/informatique/INF561/uploads/Main/poly-good.pdf}.}
+\bibitem{wack}{Wack et Al., \textit{L'informatique pour tous en classes préparatoires aux grandes écoles}, Editions Eyrolles.}
+\end{thebibliography}
 \end{document}
+
+
