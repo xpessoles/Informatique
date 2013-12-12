@@ -47,6 +47,16 @@ Informatique - Cours}}
 \end{itemize}
 \end{savoir}
 
+\setlength{\parskip}{0ex plus 0.2ex minus 0ex}
+ \renewcommand{\contentsname}{}
+ \renewcommand{\baselinestretch}{1}
+
+\tableofcontents
+
+ \renewcommand{\baselinestretch}{1.2}
+\setlength{\parskip}{2ex plus 0.5ex minus 0.2ex}
+
+
 \section{Mise en évidence du problème}
 
 \subsection{Premier exemple}
@@ -330,17 +340,28 @@ $i\gets i+1$}
 \end{itemize}
 
 \textbf{Complexité en temps :}
-On réalise une première comparaison dont on note le coût $C_c$.
- lorsque $n>0$, on réalise à chaque incrément : 
+La première comparaison a un coût élémentaire $C_e$.
+
+Pour $n=0$  le coût du retour est $C_r$.
+
+Pour $n \neq 0$ :
 \begin{itemize}
-\item une comparaison de coût $C_c$;
-\item une multiplication de coût $C_m$;
-\item une addition (itération) de coût $C_i$;
-\item deux affectations de coût $C_a$;
+\item les deux affectations ont un coût respectif $C_e$;
+\item la boucle tant que sera réalisée $n$ fois. Pour chaque itération, 
+\begin{itemize}
+\item la multiplication ainsi que l'affectation ont un chacun un coût $C_e$;
+\item l'incrémentation et l'affectation ont chacun un coût $C_e$;
 \end{itemize}
-Pour calculer $n!$ la boucle est réitérée $n$ fois. En conséquence, la complexité en temps s'élève à :
-$$C = n\cdot(C_c+C_m+C_a+C_i)+C_c$$
+\item le coût du retour est $C_r$.
+\end{itemize}
+En conséquence, la complexité en temps s'élève à :
+$$C_T(n) = C_e + \max\left( C_r;  C_e + C_e + n\left( 4C_e\right) + C_r\right)$$
+
+Ainsi $C_T(n) = C_e (3 + 4n)  + C_r$ et $C_T(n)  \sim n$ lorsque $n$ tend vers l'infini. On parle d'une complexité algorithmique linéaire, notée $\mathcal{O}(n)$.
+
 \end{exemple}
+
+
 
 Il est fréquent que la complexité en temps soit améliorée au prix d'une augmentation de la complexité en espace, et vice-versa.
 La complexité dépend notamment :
@@ -374,7 +395,8 @@ $max  \leftarrow tab[i]$\\
 \end{algorithm}
 \end{pseudo}
 
-Ainsi, quelle que soit la taille $n$ du tableau, il faudra $n$ itération pour connaître le plus grand élément de la liste. 
+Dans ce cas, le coût temporel est :
+$C_T(n) = C_e + n\left(2 C_e \right)$. Ici encore, la complexité de cet algorithme est linéaire car $C_T(n) \sim n$.
 \end{exemple}
 
 \subsubsection{Tri d'une liste}
@@ -413,14 +435,22 @@ $ tab[min] \leftarrow tmp$ \\
 \end{algorithm}
 \end{pseudo}
 
-Dans ce cas, pour un tableau de taille $n$, la première boucle sera réalisée $n-1$ fois. Lors de l'itération $i$, la comparaison située dans la seconde boucle sera exécutée $N-(i+1)$ fois. 
+Ici les bornes de la boucle imbriquée dépendent de l'indice $i$. Ainsi :
+\begin{itemize}
+\item au rang $1$, $C_1 = Ce + \left(n-1\right)\left( 2 C_e\right) + 3 C_e$;
+\item au rang $2$, $C_2 = Ce + \left(n-2\right)\left( 2 C_e\right) + 3 C_e$;
+\item au rang $i$, $C_i = Ce + \left(n-(i-1)\right)\left( 2 C_e\right) + 3 C_e$.
+\end{itemize}
 
-En considérant que seule la comparaison à un coût $C$, le coût total s'obtient en comptant le nombre de comparaisons :
+Le coût temporel peut donc s'exprimer ainsi : 
 \begin{eqnarray*}
-(N-(1+1)+1)&+&(N-(2+1)+1)+...+(N-(i+1)+1)+...+(N-(N)+1)+(N-(N+1)+1)\\
-&=& (N-1)+(N-2)+...+1 \\
-&=& \dfrac{N(N-1)}{2}
+C_T(n) &=& \sum\limits_{i=0}^{n} \left(Ce + \left(n-(i-1)\right)\left( 2 C_e\right) + 3 C_e \right) = C_e\sum\limits_{i=0}^{n} \left( 4 +  2 n - 2 i + 2  \right) \\
+&=& C_e \left( 6n + 2n^2 -2 \dfrac{n(n+1)}{2}\right) = 
+C_e \left( 5n + n^2  \right)
+%&=& C_e \left( 6 n \sum\limits_{i=0}^{n} \left( 4C_e +  2 n C_e - 2 i C_e + 2 C_e  \right) \\
 \end{eqnarray*}
+
+Dans ce cas, $C_T(n)\sim n^2$. On parle de complexité quadratique. Lorsque la taille du tableau double, le temps de calcul est multiplié par 4.
 
 \end{exemple}
 
@@ -432,6 +462,37 @@ Il existe d'autres algorithmes de tris plus performant que l'algorithme présent
 \item tri rapide (\textsf{quick sort})...
 \end{itemize}
 \end{rem}
+
+\subsubsection{Diviser pour régner -- recherche dichotomique}
+\begin{exemple}
+\begin{py}
+\begin{python}
+def recherche_dichotomique(x, a):
+    g, d = 0, len(a)-1
+    while g <= d:
+        m = (g + d) // 2
+        if a[m] == x:
+            return m
+        elif a[m] < x:
+            g = m+1
+        else:
+            d = m-1
+    return None
+\end{python}
+\end{py}
+On peut montrer que la suite $d-g$ décroit strictement (car $d$ décroit et $g$ croit).
+Dans ce cas, la difficulté consiste en déterminer le nombre de fois que sera exécutée la boucle \textsf{while}. On note $C_w = C_e + \max\left(C_e + C_r ; 2 C_e + 2 C_e; 3 C_e + C_e \right) = C_e + \max\left(C_e + C_r ; 4 C_e  \right)$.
+
+%On note $k$ la kième étape. 
+
+%Si :
+%\begin{itemize}
+%\item le tableau contient $1$ élément, la boucle \textsf{while} est exécutée 1 fois;
+%\item le tableau contient $2$ élément, la boucle \textsf{while} est exécutée 2 fois;
+%\item le tableau contient $4$ élément, la boucle \textsf{while} est exécutée 2 fois.
+%\end{itemize}
+
+\end{exemple}
 
 \subsection{Complexité algorithmique}
 \begin{defi}
