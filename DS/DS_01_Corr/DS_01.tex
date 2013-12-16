@@ -9,7 +9,7 @@
 \setboolean{xp}{true}
 
 \newboolean{prof}
-\setboolean{prof}{false}
+\setboolean{prof}{true}
 
 \def\xxtitre{\ifthenelse{\boolean{xp}}{
 }{
@@ -314,7 +314,6 @@ La mantisse est donnée par : $(10001000000000000000000)_2$. Le nombre correspon
 
 \subsection*{Exercice 2 -- Programmation}
 \textit{D'après P. Soleillant}
-
 \setcounter{subparagraph}{0}
 
 Le programme donné ci-dessous permet à un joueur de trouver un nombre entier choisi aléatoirement par l'ordinateur.
@@ -406,7 +405,7 @@ while b != inconnue :
 \subparagraph{}
 \textit{Modifier le programme pour qu'il affiche, en fin de partie, le nombre de coups joués.}
 
-\ifthenelse{\boolean{prof}}{%
+%\ifthenelse{\boolean{prof}}{%
 \begin{corrige}
 \begin{py}
 \begin{python}
@@ -424,12 +423,12 @@ print(i," coups ont ete joues")
 \end{py}
 
 \end{corrige}
-}{}
+%}{}
 
 \subparagraph{}
 \textit{Modifier le programme pour qu'il affiche, en fin de partie, le moyenne des nombres proposés par le joueur.}
 
-\ifthenelse{\boolean{prof}}{%
+%\ifthenelse{\boolean{prof}}{%
 \begin{corrige}
 \begin{py}
 \begin{python}
@@ -449,7 +448,7 @@ print("Moyenne des coups joues :",somme/i)
 \end{py}
 
 \end{corrige}
-}{}
+%}{}
 
 
 
