@@ -1,0 +1,438 @@
+\documentclass[11pt,oneside]{article}
+\input{style/coursHeadings}
+\input{style/programHeadings}
+
+
+%Si le boolen xp est vrai : compilation pour xabi
+%Sinon compilation Damien
+\newboolean{xp}
+\setboolean{xp}{true}
+
+%\newboolean{prof}
+%\setboolean{prof}{true}
+
+\def\xxtitre{\ifthenelse{\boolean{xp}}{
+CI 1 : Architecture matérielle et logicielle}{
+Chapitre 5 -- Conséquences de la représentation limitée des nombres réels en machine}}
+
+\def\xxsoustitre{\ifthenelse{\boolean{xp}}{
+Chapitre 5 -- Conséquences de la représentation limitée des nombres réels en machine}{
+Partie 3 -- Conséquences de la représentation limitée des nombres réels en machine}}
+
+\def\xxauteur{\ifthenelse{\boolean{xp}}{
+Xavier \textsc{Pessoles} \\ Damien \textsc{Iceta}}{
+Damien \textsc{Iceta} \\ Xavier \textsc{Pessoles}}}
+
+\def\xxpied{\ifthenelse{\boolean{xp}}{
+Cours -- CI 1 : Architecture matérielle et logicielle\\
+Conséquence de la représentation des nombres}{
+\xxtitre}}
+
+\def\xxcathegorie{\ifthenelse{\boolean{xp}}{
+2013 -- 2014 \\
+Xavier \textsc{Pessoles}}{
+Informatique - Cours}}
+
+\ifthenelse{\boolean{xp}}{\input{style/enteteXP}}{\input{style/enteteDI}}
+
+
+%---------------------------------------------------------------------------
+
+
+
+%\begin{flushright}
+%\textit{D'après ressources de Christophe François.}
+%\end{flushright}
+
+\begin{minipage}[c]{.15\linewidth}
+\begin{center}
+%\includegraphics[height=.6cm]{png/w8}
+\end{center}
+\end{minipage}
+
+
+
+
+
+\vspace{.5cm}
+
+\ifthenelse{\boolean{xp}}{
+\begin{savoir}
+
+\textbf{Savoirs}
+
+\begin{itemize}
+\item Capacité Dec - C3 : Initier un sens critique au sujet de la qualité et de la précision des résultats de calculs numériques sur ordinateur
+\begin{itemize}
+\item Principe de la représentation des nombres entiers en mémoire
+\item Principe de la représentation des nombres réels en mémoire
+\end{itemize}
+\end{itemize}
+\end{savoir}
+}{}
+
+
+
+\setlength{\parskip}{0ex plus 0.2ex minus 0ex}
+ \renewcommand{\contentsname}{}
+ \renewcommand{\baselinestretch}{1}
+
+\tableofcontents
+
+ \renewcommand{\baselinestretch}{1.2}
+\setlength{\parskip}{2ex plus 0.5ex minus 0.2ex}
+
+% \vspace{1cm}
+
+
+
+
+\section{Problèmes de précision}
+
+A cause de la base utilisée, il est impossible de représenter exactement la plupart des nombres décimaux. Des nombres qui habituellement ne posent pas de problème dans les calculs en mathématiques deviennent ainsi une source d’erreurs multiples.
+
+\begin{exemple}
+\textit{On désire représenter le nombre 0,4 en virgule flottante au format simple précision.}
+
+1 -- Convertir en binaire la partie fractionnaire du nombre
+
+%\begin{center}
+%\includegraphics[width=.5\textwidth]{images/precision}
+%\end{center}
+
+\begin{center}
+\begin{tabular}{ccccccccc}
+\cline{7-7}
+0,4 & x & 2 & = & 0,8 & = & \multicolumn{1}{|c|}{0} & + & 0,8 \\
+0,8 & x & 2 & = & 1,6 & = & \multicolumn{1}{|c|}{1} & + & 0,6 \\
+0,6 & x & 2 & = & 1,2 & = & \multicolumn{1}{|c|}{1} & + & 0,2 \\
+0,2 & x & 2 & = & 0,4 & = & \multicolumn{1}{|c|}{0} & + & 0,4 \\
+\cline{7-7}
+0,4 & x & 2 & = & 0,8 & = & 0 & + & 0,8 \\
+...
+\end{tabular}
+\end{center}
+Par conséquent : $0,4_{(10)} = 0,0110\;0110\; 0110\; 0110 … _{(2)}$.
+
+Le nombre 0,4 admet pour développement en base 2 un développement infini périodique.
+
+2 -- Décaler la virgule vers la gauche pour le mettre sous la forme normalisée (IEEE 754) :
+ 
+$0,4_{(10)} = 1,10 0110 0110 … _{(2)} x 2^{- 2}$ : -2 : décalage de 2 bits vers la droite
+
+3 -- Codage du nombre réel avec les conventions suivantes : 
+\begin{itemize}
+\item signe = 0 : nombre positif;
+\item Exposant décalé :	$- 2 + 127 = 125_{(10)} = 0111\; 1101_{(2)}$
+\end{itemize}
+
+\begin{center}
+\includegraphics[width=.8\textwidth]{images/precision_2}
+\end{center}
+
+La représentation en virgule flottante sera donc forcément une valeur approchée de ce nombre.
+
+D’après ce codage, la valeur approchée choisie pour 0,4 est : 
+
+   $$ 0,4000000059604644775390625$$
+
+
+Si la dernière valeur de la mantisse prenait la valeur 0, comme le suggèrerait l'item 1, on aurait :
+$$
+0,39999997615814208984375
+$$
+
+\end{exemple}
+
+\begin{rem}
+Pour vérifier vos calculs, on peut se reporter aux sites :
+\begin{itemize}
+\item \url{http://babbage.cs.qc.cuny.edu/IEEE-754/}
+\item \url{http://www.binaryconvert.com/result_float.html}
+\end{itemize}
+\end{rem}
+
+\section{Précision machine \cite{Manfred}}
+
+\subsection{Mise en évidence de l'influence du codage sur la précision}
+
+Soit $F$ l'ensemble des nombres en virgule flottante que l'on peu représenter.
+Si l'on représente la mantisse avec un mot de $t$ bits, les éléments $f \in F$ sont définis par
+
+
+\begin{center}
+\includegraphics[width=.5\textwidth]{images/eps2.png}
+%\label{}
+\end{center}
+
+Si l’exposant peut prendre les valeurs entières de l’intervalle $[L, U]$ on a :
+
+$$
+m\leq |f|\leq M \quad \text{avec} \quad m=2^{L-1} \quad \text{et}\quad  M=2^U\left(1-2^{-t}\right)
+$$
+
+
+%\begin{center}
+%\includegraphics[width=.5\textwidth]{images/eps3.png}
+%\label{}
+%\end{center}
+
+\begin{exemple}
+Construction de l’ensemble F pour $t = 3$ (nombre de bits de la mantisse) et $e \in [-1, 2]$ (exposant).
+
+\begin{center}
+\includegraphics[width=.5\textwidth]{images/eps1.png}
+\label{}
+\end{center}
+
+En reportant ces nombres sur une droite on observe que les nombres en virgule flottante
+ne sont pas également espacés.
+
+\begin{center}
+\includegraphics[width=.5\textwidth]{images/eps4.png}
+%\label{}
+\end{center}
+
+\end{exemple}
+
+Pour décrire l’ensemble des nombres réels qui trouvent une représentation dans $F$
+on définit l’ensemble $G$ tel que 
+
+
+$$
+G=\left\{ x\in \mathbb{R} \text{ tel que } m\leq |x| \leq M \right\} \cup \left\{ 0 \right\}
+$$
+%\begin{center}
+%\includegraphics[width=.5\textwidth]{images/eps5.png}
+%\label{}
+%\end{center}
+
+
+Pour arrondir un nombre on utilise la fonction float $G \rightarrow F$ qui peut avoir deux expressions différentes:
+
+\begin{eqnarray*}
+float (x) &=& \hbox{plus proche } f \in F \hbox{ à } x \hbox{qui satisfait } |f| \leq |x| \hbox{ (chopping)}\\
+&\hbox{ou}&\\
+float (x) &=& \hbox{plus proche } f \in F \hbox{ à } x \hbox{ (perfect rounding)}.
+\end{eqnarray*}
+
+
+\begin{exemple}
+Soit l'ensemble $F$ défini pour $t = 3$ et $e \in [-1, 2]$ dans l'exemple précédent,
+alors avec chopping on a float (3.4) = 3 et float (0.94) = 0.875 et avec perfect rounding
+le résultat est float (3.4) = 3.5 et float (0.94) = 1.
+\end{exemple}
+
+
+\begin{defi}
+La précision machine d'une arithmétique en virgule flottante est définie comme le
+plus petit nombre positif eps tel que
+$float (1 + eps) > 1 $.
+\end{defi}
+
+
+Regardons quelle est la valeur de eps pour une machine avec des mots dont la
+mantisse comporte t bits et lorsqu’on arrondit selon la technique dite chopping.
+Représentons le nombre 1 et le plus proche nombre suivant :
+
+\begin{center}
+\includegraphics[width=.5\textwidth]{images/eps6.png}
+\label{}
+\end{center}
+
+La distance qui sépare le nombre 1 du plus proche nombre suivant est égale à $2^{1-t}$.
+Ainsi pour une mantisse comportant t bits on a :
+
+$$eps= 2^{1-t}$$
+
+On peut montrer que  pour une mantisse comportant t bits et si on arrondit avec la fonction float() selon la technique dite "perfect rounding" on a $eps =2^{-t}$.
+Si on utilise des mots en double précision, qui utilise $t = 52 bits$ pour la mantisse et perfect rounding, la précision machine est alors $eps = 2 ^{-52} \approx 2.22 × 10^{-16}.$
+
+
+Pour déterminer directement la précision machine en utilisant python on peut utiliser "np.finfo":
+
+\begin{minipage}[c]{.4\linewidth}
+\begin{py}
+\begin{python}[H]
+>>> np.finfo(np.float64).eps
+2.2204460492503131e-16
+>>> np.finfo(np.float32).eps
+1.1920929e-07
+\end{python}
+\end{py}
+\end{minipage} \hfill
+\begin{minipage}[c]{.5\linewidth}
+
+Au final l'épsilon machine est ici de:
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+Simple précision & Double précision \\
+\hline
+$eps \approx 1,2.10^{-7}$ & $eps \approx 2,2 . 10^{-16}$ \\
+\hline
+\end{tabular}
+\end{center}
+
+(On retrouve bien la valeur déterminée par le calcul.)
+
+\end{minipage}
+
+\section{... et Python}
+\subsection{Premiers exemples}
+On donne les lignes de codes suivantes :
+
+\begin{minipage}[c]{.3\linewidth}
+\begin{py}
+\begin{python}
+a,b,c=3,2,1
+while c<20:
+    print("Iter. ",c," : ",a)
+    a,b,c=a*b,a,c+1
+\end{python}
+\end{py}
+\end{minipage}\hfill
+\begin{minipage}[c]{.3\linewidth}
+\begin{py}
+\begin{python}
+a,b,c=3.,2.,1
+while c<20:
+    print("Iter .",c," : ",a)
+    a,b,c=a*b,a,c+1
+\end{python}
+\end{py}
+\end{minipage}\hfill
+\begin{minipage}[c]{.3\linewidth}
+\begin{py}
+\begin{python}
+>>> a =0.1
+>>> a =3*a
+>>> if (a==0.3) :
+    print("Gagne ! ")
+else :
+    print("Perdu ! ")
+\end{python}
+\end{py}
+\end{minipage}
+
+Comment peut-on expliquer ce comportement ?
+
+Dans python, il est possible d'accéder aux informations suivantes : 
+\begin{py}
+\begin{python}
+>>> import sys
+>>> sys.float_info.max
+>>> sys.float_info.min
+>>>2.0**(1023)
+>>>2.0**(1024)
+>>>2**(1024)
+\end{python}
+\end{py}
+
+
+\subsection{Dépassement de capacité}
+
+\begin{minipage}[c]{.45\linewidth}
+\begin{py}
+\begin{python}
+>>> a=9
+>>> a=a**a
+>>> a=a**a
+\end{python}
+\end{py}
+\end{minipage}\hfill
+\begin{minipage}[c]{.45\linewidth}
+\begin{py}
+\begin{python}
+>>> a=9.
+>>> a=a**a
+>>> a=a**a
+\end{python}
+\end{py}
+\end{minipage}
+
+En python, le dépassement de la capacité maximale peut se manifester sous les aspects \textsl{inf} ou \textsl{OverflowError}.Les nombres flottants sont limités à $10^{308}$. A l'inverse, les nombres très petits peuvent être arrondis à zéro.
+
+
+\begin{minipage}[c]{.45\linewidth}
+\begin{py}
+\begin{python}
+>>> 10.**309
+\end{python}
+\end{py}
+\end{minipage}\hfill
+\begin{minipage}[c]{.45\linewidth}
+\begin{py}
+\begin{python}
+>>> a=10.**(-323)
+>>> a==0, a/10==0
+\end{python}
+\end{py}
+\end{minipage}
+
+\subsection{Erreurs de comparaisons}
+La comparaison de deux nombres de type float peut générer des erreurs.
+\begin{py}
+\begin{python}
+>>> a,b=1.,1e-16
+>>> b>0,a+b>a
+\end{python}
+\end{py}
+
+\subsection{Problèmes liés à la conversion de décimal en flottant}
+\begin{py}
+\begin{python}
+>>> 0.1+0.1+0.1+0.1+0.1+0.1+0.1+0.1
+>>> a,b=1+10**(-15),1
+>>> (a-b)*10**15
+\end{python}
+\end{py}
+
+
+\ifthenelse{\boolean{xp}}{}{
+\section{Conclusion}
+
+Il faut toujours se rappeler qu’un calcul sur système informatique n’est toujours précis qu’avec une certaine précision et qu’un mauvais codage des nombres peut poser de graves problèmes.
+
+\subsubsection*{L’explosion du Vol Ariane 501}
+
+
+
+
+\begin{minipage}[c]{.3\linewidth}
+\begin{center}
+\includegraphics[width=.9\textwidth]{images/fusee.jpg}
+\end{center}
+\end{minipage} \hfill
+\begin{minipage}[c]{.69\linewidth}
+Le 4 juin 1996, lors de son premier vol, la fusée européenne Ariane 5 explose 40 secondes après son décollage causant la perte de la fusée et de son chargement estimé à 500 Millions de \$. Le système de guidage de la fusée s’est arrêté à la suite de l’arrêt des deux unités flottantes qui contrôlaient son programme. 
+
+Après deux semaines d’enquête, un problème est trouvé dans le système de référence inertiel : la vitesse horizontale de la fusée par rapport au sol était calculée sur des flottants 64 bits et dans le programme du calculateur de bord, il y avait une conversion de cette valeur flottante 64 bits vers un entier signé de 16 bits. 
+
+
+Malheureusement, le nombre en question était plus grand que 32767 (overflow), le plus grand entier que l'on peut coder sur 16 bits, et la conversion a été incorrecte.
+
+
+Rien n’était fait pour tester que cette conversion était bien possible mathématiquement (sans dépassement de capacité). Les tests ont été effectués pour Ariane 4 qui, étant moins puissante qu’Ariane 5, avait une vitesse horizontale suffisamment faible pour tenir sur un entier 16 bits ce 
+qui n’était pas le cas d’Ariane 5.
+\end{minipage}
+
+
+\subsubsection*{Remarque}
+
+Un float, comme on peut les utiliser sur les calculatrices TI, est compris entre 1E-999 et 9.999999999999999E999, avec une précision de 16 chiffres significatifs.
+
+Pour les curieux, le format d'encodage de flottants sur TI n'est pas celui généralement utilisé sur PC, qui demande trop de calculs pour l'encodage et le décodage, mais SMAP II BCD.
+}
+
+
+
+
+\begin{thebibliography}{2}
+\bibitem{cf}{Christophe François, Représentation de l'information, représentation des nombres.}
+%\bibitem{zero}{Apprenez à programmer en Python \url{http://www.siteduzero.com/}.}
+\bibitem{Manfred}{Manfred GILLI, Méthodes numériques, Département d’économétrie
+Université de Genève, 2006.}
+\bibitem{pcsi}{Cours d'informatique de PCSI. Lycée Bertran de Born.}
+\end{thebibliography}
+\end{document}
