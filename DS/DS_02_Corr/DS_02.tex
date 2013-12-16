@@ -343,23 +343,23 @@ Pour $j$ allant de 1 à 3 & & & 0 & -- & 0 & [2,3,1,4] \\ \hline
 & Pour $j = 2$ & & 0 & 2 & 0 & [2,3,1,4]\\ \hline
 & tab[2]<tab[0] &$ \Rightarrow$  1<2 est vrai &0 &2 & 0&  [2,3,1,4]\\ \hline
 & Affectation de indice  &&0 &2 & 2&  [2,3,1,4]\\ \hline\hline %%%%%
-& Pour $j=  *$ & & & & & \\ \hline
-& tab[*]<tab[*] & &&& & \\ \hline
-& Affectation ?  && & & & \\ \hline%%%%%
-Permutation ? & && & & & \\ \hline
-Pour $i=*$ & && & & & \\ \hline
-Affectation & &&  &  & & \\ \hline
-Pour $j$ allant de ** à ** & & & &  & & \\ \hline
-& Pour $j=  *$ & & & & & \\ \hline
-& tab[*]<tab[*] & &&& & \\ \hline
-& Affectation ?  && & & & \\ \hline
-& Pour $j=  *$ & & & & & \\ \hline
-& tab[*]<tab[*] & &&& & \\ \hline
-& Affectation ?  && & & & \\ \hline
-& Pour $j=  *$ & & & & & \\ \hline
-& tab[*]<tab[*] & &&& & \\ \hline
-& Affectation ?  && & & & \\ \hline
-Permutation ? & && & & & \\ \hline
+& Pour $j=  3$ &  & 0 & 3 & 2 & [2,3,1,4] \\ \hline
+& tab[3]<tab[0] & $ \Rightarrow$  4<2 est faux & 0 & 3 & 2 & [2,3,1,4]\\ \hline
+& Affectation ?  & Non & 0 & 3 & 2 & [2,3,1,4] \\ \hline%%%%%
+Permutation  & (Oui) & & 0 & 3 & 2 & [1,3,2,4] \\ \hline
+Pour $i=1$ & & & 1 & 3 & 2 & [1,3,2,4] \\ \hline
+Affectation & & & 1 & 3  & 1  & [1,3,2,4] \\ \hline
+Pour $j$ allant de 2 à 3 & & & &  & & \\ \hline
+& Pour $j=  2$ & & 1& 2&1 & [1,3,2,4]\\ \hline
+& tab[2]<tab[1] &$ \Rightarrow$  2<3 est vrai &1&2& 1& [1,3,2,4]\\ \hline
+& Affectation ?  & Oui & 1&2 & 2& [1,3,2,4]\\ \hline
+& Pour $j=  3$ & & 1& 3& 2& [1,3,2,4]\\ \hline
+& tab[3]<tab[2] & $ \Rightarrow$  4<2 est Fau &1&3& 2& [1,3,2,4]\\ \hline
+& Affectation ?  & Non& & & & [1,3,2,4]\\ \hline
+& Pour $j=  *$ & & *&* &* &* \\ \hline
+& tab[*]<tab[*] & &*&*& *& *\\ \hline
+& Affectation ?  && *& *& *& *\\ \hline
+Permutation ? & && & & &[1,2,3,4] \\ \hline
 \end{tabular}
 \end{center}
 
