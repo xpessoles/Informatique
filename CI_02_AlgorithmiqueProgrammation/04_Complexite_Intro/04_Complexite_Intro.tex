@@ -357,7 +357,7 @@ Pour $n \neq 0$ :
 En conséquence, la complexité en temps s'élève à :
 $$C_T(n) = C_e + \max\left( C_r;  C_e + C_e + n\left( 4C_e\right) + C_r\right)$$
 
-Ainsi $C_T(n) = C_e (3 + 4n)  + C_r$ et $C_T(n)  \sim n$ lorsque $n$ tend vers l'infini. On parle d'une complexité algorithmique linéaire, notée $\mathcal{O}(n)$.
+Ainsi $C_T(n) = C_e (3 + 4n)  + C_r$ et $C_T(n)  \underset{+\infty}{\sim} 4C_e n$ lorsque $n$ tend vers l'infini. On parle d'une complexité algorithmique linéaire, notée $\mathcal{O}(n)$.
 
 \end{exemple}
 
@@ -396,7 +396,7 @@ $max  \leftarrow tab[i]$\\
 \end{pseudo}
 
 Dans ce cas, le coût temporel est :
-$C_T(n) = C_e + n\left(2 C_e \right)$. Ici encore, la complexité de cet algorithme est linéaire car $C_T(n) \sim n$.
+$C_T(n) = C_e + n\left(2 C_e \right)$. Ici encore, la complexité de cet algorithme est linéaire car $C_T(n) \underset{+\infty}{\sim} 2 C_e n$.
 \end{exemple}
 
 \subsubsection{Tri d'une liste}
@@ -437,9 +437,9 @@ $ tab[min] \leftarrow tmp$ \\
 
 Ici les bornes de la boucle imbriquée dépendent de l'indice $i$. Ainsi :
 \begin{itemize}
-\item au rang $1$, $C_1 = Ce + \left(n-1\right)\left( 2 C_e\right) + 3 C_e$;
-\item au rang $2$, $C_2 = Ce + \left(n-2\right)\left( 2 C_e\right) + 3 C_e$;
-\item au rang $i$, $C_i = Ce + \left(n-(i-1)\right)\left( 2 C_e\right) + 3 C_e$.
+\item au rang $1$, $C_1 = C_e + \left(n-1\right)\left( 2 C_e\right) + 3 C_e$;
+\item au rang $2$, $C_2 = C_e + \left(n-2\right)\left( 2 C_e\right) + 3 C_e$;
+\item au rang $i$, $C_i = C_e + \left(n-(i-1)\right)\left( 2 C_e\right) + 3 C_e$.
 \end{itemize}
 
 Le coût temporel peut donc s'exprimer ainsi : 
@@ -450,18 +450,18 @@ C_e \left( 5n + n^2  \right)
 %&=& C_e \left( 6 n \sum\limits_{i=0}^{n} \left( 4C_e +  2 n C_e - 2 i C_e + 2 C_e  \right) \\
 \end{eqnarray*}
 
-Dans ce cas, $C_T(n)\sim n^2$. On parle de complexité quadratique. Lorsque la taille du tableau double, le temps de calcul est multiplié par 4.
+Dans ce cas, $C_T(n)\sim C_e n^2$. On parle de complexité quadratique. Lorsque la taille du tableau double, le temps de calcul est multiplié par 4.
 
 \end{exemple}
 
-\begin{rem}
-Il existe d'autres algorithmes de tris plus performant que l'algorithme présenté ci-dessus : 
-\begin{itemize}
-\item tri de shell (\textsf{shell sort});
-\item tri fusion (\textsf{merge sort});
-\item tri rapide (\textsf{quick sort})...
-\end{itemize}
-\end{rem}
+%\begin{rem}
+%Il existe d'autres algorithmes de tris plus performant que l'algorithme présenté ci-dessus : 
+%\begin{itemize}
+%\item tri de shell (\textsf{shell sort});
+%\item tri fusion (\textsf{merge sort});
+%\item tri rapide (\textsf{quick sort})...
+%\end{itemize}
+%\end{rem}
 
 \subsubsection{Diviser pour régner -- recherche dichotomique}
 \begin{exemple}
@@ -481,7 +481,30 @@ def recherche_dichotomique(x, a):
 \end{python}
 \end{py}
 On peut montrer que la suite $d-g$ décroit strictement (car $d$ décroit et $g$ croit).
-Dans ce cas, la difficulté consiste en déterminer le nombre de fois que sera exécutée la boucle \textsf{while}. On note $C_w = C_e + \max\left(C_e + C_r ; 2 C_e + 2 C_e; 3 C_e + C_e \right) = C_e + \max\left(C_e + C_r ; 4 C_e  \right)$.
+Dans ce cas, la difficulté consiste en déterminer le nombre de fois que sera exécutée la boucle \textsf{while}. On note $C_w = C_e + \max\left(C_e + C_r ; 2 C_e + 2 C_e; 3 C_e + C_e \right) = C_e + \max\left(C_e + C_r ; 4 C_e  \right)$ le coût d'une itération de la boucle \textsf{while}.
+
+Au cours de l'algorithme, on va devoir diviser en 2 la taille le tableau jusqu'à ce qu'on trouve (ou pas) l'élément recherché. On cherche donc combien de fois $m$ on peut diviser par 2 la taille du tableau $n$ :
+$$
+\dfrac{n}{2^m} \geq 1 \Longleftrightarrow n \geq 2^m \Longleftrightarrow \ln(n)\geq m \ln(2) $$
+On parlera ici de complexité logarithmique.
+
+%Au cours de l'algorithme, on va devoir diviser la quantité $g+d$ par 2 tant que $g$ est inférieur à $d$. On cherche donc $n$ tel que $g>d$. On considère que la borne $d$ est fixe. On note $p$ la taille du tableau donc $d=p \; \forall n\in\mathbb{N}$ et $g_0=1$.
+%Exprimons la suite décrite par les valeurs de $g$ :
+%\begin{eqnarray*}
+%g_n &= &m_n + 1 = \dfrac{g_{n-1}+p}{2}+1 =\dfrac{1}{2}g_{n-1} + \dfrac{p}{2} + 1\\
+%g_{n-1} &=& \dfrac{1}{2}g_{n-2} + \dfrac{p}{2} + 1 \\
+%g_n &=& \dfrac{1}{2}\left( \dfrac{1}{2}g_{n-2} + \dfrac{p}{2} + 1 \right) + \dfrac{p}{2} + 1
+% = \dfrac{1}{2}\cdot \dfrac{1}{2}g_{n-2} + \dfrac{1}{2}\cdot \dfrac{p}{2} +  \dfrac{1}{2} + \dfrac{p}{2} + 1
+%\end{eqnarray*}
+%
+%On peut donc faire la conjecture que :
+%$$
+%g_n = 1+ \dfrac{1}{2^n}g_0 + \sum\limits_{j=1}^{n}\dfrac{1+p}{2^n} 
+%=  1+ \left( 1+p \right)\sum\limits_{j=1}^{n}\dfrac{1}{2^n} 
+%$$
+%
+%Au rang 1, $g_1= 1+ \dfrac{1}{2}+ \dfrac{1+p}{2} =  \dfrac{3+p}{2}$ 
+
 
 %On note $k$ la kième étape. 
 
@@ -523,9 +546,18 @@ Par ordre de complexité croissante on a donc :
 \end{itemize}
 \end{exemple}
 
+\begin{exemple}
+\begin{itemize}
+\item Le coût temporel de l'algorithme pour calculer une factorielle est $4C_e n$ et on a  $4C_e n \leq c n$. La complexité de l'algorithme est en $\mathcal{O}(n)$.
+\item Le coût temporel de l'algorithme de recherche d'un maximum est $2C_e n$ et on a  $2C_e n \leq c n$. La complexité de l'algorithme est en $\mathcal{O}(n)$.
+\item Le coût temporel de l'algorithme de tri dans une liste en utilisant l'algorithme naïf est $C_e n^2$ et on a  $C_e n^2 \leq c n^2$.  La complexité de l'algorithme est en $\mathcal{O}(n^2)$.
+\item Le coût temporel de l'algorithme de recherche dichotomique est de l'ordre de $C_w \dfrac{\ln(n)}{\ln(2)}$ et on a  $C_w \dfrac{\ln(n)}{\ln(2)} \leq c \ln (n)$. La complexité de l'algorithme est en $\mathcal{O}(\log (n))$.
+\end{itemize}
+\end{exemple}
+
+
 \begin{resultat}
 Pour une opération ayant un temps d'exécution de $10^{-9}s$, on peut calculer le temps d'exécution en fonction du nombre de données et de la complexité de l'algorithme : 
-
 
 \begin{center}
 \begin{tabular}{|c|c|c|c|c|c|}
@@ -556,9 +588,10 @@ Voici un exemple du crible d'Eratosthène.
 \begin{py}
 \begin{python}[H]
 def crible(n):
-    tab=[]
+    tab=[] 
     for i in range(2,n):
         tab.append(i)
+    # Liste en comprehension tab=[x for x in range(2,n)]
     for i in range(0,len(tab)):
         for j in range(len(tab)-1,i,-1):
             if (tab[j]%tab[i]==0):
