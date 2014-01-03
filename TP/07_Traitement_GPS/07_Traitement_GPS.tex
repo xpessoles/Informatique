@@ -77,7 +77,8 @@ Les objectif de ce TP sont :
 
 \begin{exemple}
 Un fichier \textsf{kml} peut se présenter sous la forme suivante : 
-\footnotesize{
+
+\footnotesize
 \begin{verbatim}
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2"
@@ -102,7 +103,8 @@ xmlns:atom="http://www.w3.org/2005/Atom">
 </Document>
 </kml>
 \end{verbatim}
-}
+
+\normalsize
 
 Les données nous intéressant sont les suivantes :
 \begin{verbatim}
@@ -117,25 +119,62 @@ On trouve à l'intérieur des balises \textsf{<when>} et \textsf{</when>} la dat
 
 \end{exemple}
 
+
+
+\subparagraph{}
+\textit{Pour visualiser la trace GPS étudiée, aller sur le site \url{https://www.google.fr/maps} dans sa \textbf{version classique}\footnote{Si vous êtes dans la nouvelle version, cliquer sur le point d'interrogation en bas à droite de la carte puis cliquer sur \textit{Retour à la version classique de Google Maps}.} et saisir dans la zone de recherche \url{http://perso.crans.org/~pessoles/Rhune.kml}.}
+
+
 \begin{py}
-La procédure pour lire une à une les lignes d'un fichier est la suivante :
+Dans vos documents personnels, créer un répertoire \textsf{Informatique} dans lequel vous créerez un répertoire \textsf{07\_GPS}. Après avoir créer votre fichier source Python, sauvegardez-le dans ce dossier. 
+
+Afin que le répertoire précédent soit considéré comme votre répertoire de travail par Python, saisissez en début de fichier .py les lignes suivantes :
 
 \begin{python}
+from os import chdir
+chdir("C:\\Users\\Xavier Pessoles\\Documents\\Informatique")
+\end{python}
 
+Pour télécharger le fichier \textsf{Rhune.py} avec Python, saisir les lignes suivantes :
+
+\begin{python}
+from urllib.request import urlretrieve
+urlretrieve("http://perso.crans.org/~pessoles/Rhune.kml", "Rhune.kml")
+\end{python}
+
+\end{py}
+
+
+
+\subparagraph{}
+\textit{Réaliser la fonction \textsf{Affiche\_n} qui permet d'afficher les n premières lignes du fichier \textsf{Rhune.kml}. Expliquer pourquoi une ligne vide sépare chacune des lignes.}
+
+\begin{py}
+La procédure pour lire une à une les lignes d'un fichier est la suivante :
+\begin{python}
 fid = open('fichier.txt','r') # Ouverture du fichier fichier.txt en lecture
 for ligne in fid.readlines() :
     print(ligne) # affichage successif des lignes du fichier
 
 fid.close()
 \end{python}
+
+On rappelle qu'une chaîne de caractère peut se manipuler comme un liste. 
+\begin{python}
+chaine = "abcdefghi"
+for i in range(len(chaine)):
+    print(chaine[i])
+\end{python}
+
 \end{py}
 
 
 \subparagraph{}
-\textit{Pour visualiser la trace GPS étudiée, aller sur le site \url{https://www.google.fr/maps} dans sa \textbf{version classique}\footnote{Si vous êtes dans la nouvelle version, cliquer sur le point d'interrogation en bas à droite de la carte puis cliquer sur \textit{Retour à la version classique de Google Maps}.} et saisir dans la zone de recherche \url{http://perso.crans.org/~pessoles/Rhune.kml}.}
+\textit{Réaliser la fonction permettant de savoir si le caractère \textsf{w} est compris dans une ligne de texte.}
+
 
 \subparagraph{}
-\textit{Réaliser la fonction \textsf{Affiche\_n} qui permet d'afficher les n premières lignes du fichier. Expliquer pourquoi une ligne vide sépare chacune des lignes.}
+\textit{Réaliser la fonction permettant de savoir si la chaîne de caractère \textsf{<when>} est comprise dans une ligne de texte.}
 
 
 \subparagraph{}
@@ -176,7 +215,7 @@ def heure(ligne):
 
 
 \subparagraph{}
-\textit{En vous inspirant de la fonction précédente, créer une fonction heure, prenant comme argument une chaîne de caractères et renvoyant la longitude de la latitude et de l'altitude d'un point mesuré.}
+\textit{En vous inspirant de la fonction précédente, créer une fonction \textsf{coordonnée}, prenant comme argument une chaîne de caractères et renvoyant un triplet constitué de la longitude, la latitude et de l'altitude d'un point mesuré.}
 
 
 \subparagraph{}
@@ -184,8 +223,60 @@ def heure(ligne):
 
 La distance pour aller d'un point à un autre sur une sphère est appelée orthodromie. On note $(lo_A,la_A)$ la longitude et la latitude du point $A$ ainsi que $(lo_B,la_B)$ la longitude et la latitude du point $B$. L'orthodromie se calcule alors ainsi en kilomètres : 
 $$
-d = 2R\arcsin \sqrt{\sin^2\left( \dfrac{la_B-la_A}{2}\right) + \cos la_A \cos la_B \sin^2\left( \dfrac{lon_B-lon_A}{2}\right)}
+d = 2R\arcsin \sqrt{\sin^2\left( \dfrac{la_B-la_A}{2}\right) + \cos la_A \cos la_B \sin^2\left( \dfrac{lo_B-lo_A}{2}\right)}
 $$
-les angles sont exprimés en radians. $R=6\,371\; km$ représente le rayon de la terre. 
+les angles doivent être exprimés en radians. $R=6\,371\; km$ représente le rayon de la terre.
+
+Le profil du tracé s'obtient en traçant l'altitude en fonction de la distance parcourue. La fonction $\textsf{orthodromie}$ donnée dans le fichier \textsf{ressources.py} permet de calculer la distance entre deux points prélevés.
+
+\subparagraph{}
+\textit{Écrire la fonction permettant d'obtenir un tableau \textsf{tab\_traite} contenant la liste des triplets \textsf{[temps écoulés (en s), distances cumulées (en km), altitude(en m)]}.}
+
+
+\subparagraph{}
+\textit{En utilisant le fichier \textsf{ressources.py}, afficher le profil du parcours.}
+
+
+\begin{py}
+On peut par exemple mettre les distances cumulées dans un tableau et les altitudes dans un autre tableau et utiliser les lignes suivantes (attention les deux tableaux doivent avoir la même taille) :
+\end{py}
+
+\begin{py}
+\begin{python}
+import matplotlib.pyplot as plt
+import numpy as np
+
+p1=plt.plot(distance_cumulee,altitude,linewidth=3)
+plt.grid(True, which="both", linestyle="dotted")
+plt.show()
+\end{python}
+\end{py}
+
+\subparagraph{}
+\textit{Réaliser une fonction permettant de déterminer le dénivelé positif total.}
+
+\subparagraph{}
+\textit{Réaliser une fonction permettant de déterminer la vitesse moyenne du randonneur.}
+
+Afin de sauvegarder les données traitées, on souhaite qu'elles soient écrites dans un fichier texte.
+
+\subparagraph{}
+\textit{Écrire une fonction permettant d'écrire le tableau \textsf{tab\_traite} dans un fichier texte. Les valeurs seront séparées par des tabulations. On insèrera un retour à la ligne après chaque triplet de données.}
+
+
+\subparagraph{}
+\textit{Écrire une fonction permettant d'écrire le tableau \textsf{tab\_traite} dans un fichier texte. En plus de ce qui est demandé dans la question précédente, on souhaite que les nombres soient écrits avec des virgules.}
+
+\begin{py}
+
+Pour créer et écrire dans un fichier texte, on peut procéder ainsi :
+
+\begin{python}
+fid = open ("fichier.txt",'w')
+fid.write("champ1 \tab champ2")
+fid.close()
+\end{python}
+
+\end{py}
 
 \end{document}
