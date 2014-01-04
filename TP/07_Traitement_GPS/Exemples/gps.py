@@ -3,8 +3,22 @@
 from math import sin,sqrt,cos,asin,pi
 fichier = "Rhune.kml"
 
-   
 
+# Question 3
+def is_char_in_text(ligne,lettre):
+   for i in range(len(ligne)):
+      if ligne[i]==lettre:
+         return True
+   return False
+
+# Question 4
+def is_word_in_text(ligne,mot):
+   for i in range(0,len(ligne)-len(mot)+1):
+      if ligne[i:i+len(mot)]==mot:
+         return True
+   return False
+
+# Question 5
 def Affiche_GPS_n(fichier,n):
    # Ouverture du fichier
    fid=open(fichier,'r')
@@ -39,6 +53,7 @@ def heure(ligne):
       return None
 
 def parse_kml(fichier):
+   "Fonction permettant de lire le fichier kml."
    fid=open(fichier,'r')
    kml = []
    for ligne in fid.readlines() :
@@ -52,6 +67,7 @@ def parse_kml(fichier):
    return kml
 
 def orthodromie(loA,laA,loB,laB):
+   
    R = 6371
    loA = loA*pi/180
    loB = loB*pi/180
@@ -64,6 +80,7 @@ def orthodromie(loA,laA,loB,laB):
    return d
 
 def distance(kml):
+   "Génération d'un tableau contenant la distance entre deux points"
    tab_distance=[]
    for i in range(len(kml)-1):
       tab_distance.append(orthodromie(kml[i][3],kml[i][4],kml[i+1][3],kml[i+1][4]))
@@ -83,13 +100,14 @@ def altitude(kml):
    return alti
 
 def distance_cumulee(tab):
+   " Génération d'un tableau contenant les distances cumulées"
    cumul=[0]
    dist = 0
    for i in range (len(tab)):
       dist = dist+tab[i]
       cumul.append(dist)
    return cumul
-
+"""
 k=parse_kml(fichier)
 t=distance(k)
 dist = distance_totale(t)
@@ -103,4 +121,4 @@ import numpy as np
 p1=plt.plot(cumul,alt,linewidth=3)
 plt.grid(True, which="both", linestyle="dotted")
 plt.show()
-   
+"""
