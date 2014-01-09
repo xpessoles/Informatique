@@ -1,0 +1,37 @@
+\documentclass[10pt]{article}
+\usepackage[a4paper,landscape]{geometry}
+
+\usepackage[crop=off]{auto-pst-pdf}
+\usepackage{pstricks} %chargé automatiquement lors de la compilation par pdflatex
+\usepackage{bclogo}
+
+\usepackage{vmargin}
+\setpapersize[landscape]{A4}
+\setmarginsrb{1.5cm}{1cm}{1cm}{1.5cm}{1cm}{1cm}{1cm}{1cm}
+
+% ======= Permet d'utiliser bclogo avec XeLaTeX =======
+\makeatletter
+\@namedef{Gin@rule@.mps}#1{{eps}{.mps}{#1}}
+\def\Gin@extensions{.pdf,.eps,.ps,%
+.png,.jpg,.bmp,.pict,.tif,.psd,.mac,.sga,.tga,.gif,.mps}
+\makeatother
+% =====================================
+
+\begin{document}
+\begin{minipage}[c]{.32\linewidth}
+\begin{bclogo}[couleur=blue!30,logo=\bctrefle]{Titre}
+lmlkmlkmlk
+\end{bclogo}
+\end{minipage} \hfill
+\begin{minipage}[c]{.32\linewidth}
+\begin{bclogo}[couleur=blue!30,logo=\bctrefle]{Titre}
+lmlkmlkmlk
+\end{bclogo}
+\end{minipage} \hfill
+\begin{minipage}[c]{.32\linewidth}
+\begin{bclogo}[couleur=blue!30,logo=\bctrefle]{Titre}
+lmlkmlkmlk
+\end{bclogo} 
+\end{minipage} 
+
+\end{document}
