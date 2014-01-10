@@ -52,14 +52,33 @@ Traitement d'une trace GPS -- \ifthenelse{\boolean{prof}}{P}{E}%
 \input{style/entete1}
 
 \begin{center}
- \huge\textsc{\xxtitre}
+ \Large\textsc{\xxtitre}
 \end{center}
 
 \begin{center}
- \LARGE\textsc{\xxsoustitre}
+ \large\textsc{\xxsoustitre}
 \end{center}
 
 
+\begin{rem}
+\textbf{Utilisation de Spyder}
+
+Dans le cadre de ce TP, nous utiliserons l'environnement de programmation Spyder. Pour lancer cette application :
+\begin{enumerate}
+\item Poste de Travail
+\item Disque local C:
+\item WinPython-32bits-3.3.3.2
+\item Spyder.exe
+\end{enumerate}
+\end{rem}
+
+\begin{objectif}
+Les objectif de ce TP sont :
+\begin{itemize}
+\item d'acquérir les données provenant d'un fichier texte (au format \textsf{kml});
+\item de réaliser des fonctions permettant d'analyser les données pour avoir accès à différentes statistiques.
+\end{itemize}
+\end{objectif}
 
 
 
@@ -67,13 +86,6 @@ Traitement d'une trace GPS -- \ifthenelse{\boolean{prof}}{P}{E}%
 L'application <<Mes Parcours>> disponible sous Android permet, grâce à la puce GPS intégrée à un smartphone, d'enregistrer une trace GPS et d'analyser des données.  
 
 Les données y sont enregistrées dans un fichier \textsf{kml} (\textit{Keyhole Markup Language}) dont le formalisme est basé sur le \textsf{xml} (\textit{eXtensible Markup Language}). Le \textsf{kml}  est adapté à l'enregistrement de données géographiques. 
-\begin{obj}
-Les objectif de ce TP sont :
-\begin{itemize}
-\item d'acquérir les données provenant d'un fichier texte (au format \textsf{kml});
-\item de réaliser des fonctions permettant d'analyser les données pour avoir accès à différentes statistiques.
-\end{itemize}
-\end{obj}
 
 \begin{exemple}
 Un fichier \textsf{kml} peut se présenter sous la forme suivante : 
@@ -132,7 +144,7 @@ Afin que le répertoire précédent soit considéré comme votre répertoire de 
 
 \begin{python}
 from os import chdir
-chdir("C:\\Users\\Xavier Pessoles\\Documents\\Informatique")
+chdir("U:\\Documents\\Informatique\\07_GPS")
 \end{python}
 
 Pour télécharger le fichier \textsf{OuCest.py} avec Python, saisir les lignes suivantes :
@@ -150,12 +162,10 @@ urlretrieve("http://perso.crans.org/~pessoles/OuCest.kml", "OuCest.kml")
 \textit{Réaliser la fonction \textsf{Affiche\_n} qui permet d'afficher les n premières lignes du fichier \textsf{OuCest.kml}. Expliquer pourquoi une ligne vide sépare chacune des lignes.}
 
 \begin{py}
-La procédure pour lire une à une les lignes d'un fichier est la suivante :
+Une des procédures pour lire un fichier est la suivante :
 \begin{python}
 fid = open('fichier.txt','r') # Ouverture du fichier fichier.txt en lecture
-for ligne in fid.readlines() :
-    print(ligne) # affichage successif des lignes du fichier
-
+file = fid.readlines()        # file contient une liste ou chaque élément représente une ligne du fichier
 fid.close()
 \end{python}
 
@@ -170,7 +180,7 @@ for i in range(len(chaine)):
 
 
 \subparagraph{}
-\textit{Réaliser la fonction permettant de savoir si le caractère \textsf{w} est compris dans une ligne de texte.}
+\textit{Réaliser une fonction permettant de savoir si un caractère est compris dans une chaîne de caractères.}
 
 
 \subparagraph{}
