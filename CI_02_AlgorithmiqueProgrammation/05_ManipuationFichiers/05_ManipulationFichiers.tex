@@ -42,9 +42,10 @@ Informatique - Cours}}
 
 
 \begin{savoir}
-\textsc{Savoirs :}
+\textbf{Savoirs :}
 \begin{itemize}
-\item **%'interroger sur l'efficacité algorithmique temporelle.
+\item Manipuler des structures de données : chaînes de caractères (création, accès à un caractère, concaténation).
+\item Gérer les fichiers : notion de chemin d'accès, lecture et écriture de données numériques ou de type de chaîne de caractère depuis ou vers un fichier.
 \end{itemize}
 \end{savoir}
 
@@ -71,7 +72,7 @@ L'ordinateur sert à traiter de l'information qui peut entrer et sortir de diff�
 \begin{itemize}
 \item le clavier, la souris et l'écran, pour l'interface utilisateur du programme ou le shell;
 \item les fichiers, pour les supports mémoire;
-\item les interfaces de communication (réseau, port USB, port série, etc).
+\item les interfaces de communication (réseau, port USB, port série, etc.).
 \end{itemize}
 
 Le clavier et la souris ne permettent pas d'entrer une grosse masse d'information. De même l'écran montre une petite partie de l'information.
@@ -114,8 +115,8 @@ Les fichiers sont tous écrits en binaire. Il est néanmoins possible de les sé
 Les fichiers binaires :
 
 \begin{itemize}
-\item images et documents (bmp, png, jpg, pdf, doc, etc);
-\item son et vidéo (wav, mp3, mp4, etc);
+\item images et documents (bmp, png, jpg, pdf, doc, etc.);
+\item son et vidéo (wav, mp3, mp4, etc.);
 \item exécutables (.exe);
 \item archives compressées (zip, 7z, gz).
 \end{itemize}
@@ -123,11 +124,11 @@ Les fichiers binaires :
 Les fichiers texte :
 
 \begin{itemize}
-\item pages Web (html, css, etc);
+\item pages Web (html, css, etc.);
 \item fichier journal (log), Script shell (bat);
 \item images vectorielles (svg);
 \item programmes Python ou Scilab (py, sce);
-\item les fichiers de données texte (txt, data, etc);
+\item les fichiers de données texte (txt, data, etc.);
 \item les fichiers texte formatés (xml).
 \end{itemize}
 
@@ -153,32 +154,27 @@ Les fichiers texte compressés :
 \begin{center}
 \begin{tabular}{|p{2.5cm}|p{6.5cm}|p{8cm}|}
 \hline
- & Les fichiers binaires& Les fichiers texte\\
+ & Fichiers binaire& Fichiers texte\\
  \hline
-Avantages &  Moins volumineux & Interprétables par l'homme\\
+Avantages &  Moins volumineux & Interprétable par l'homme\\
 
-		  & Indépendants des standards d'encodage des caractères dans les OS &Permettent des d'échanges plus simples entre logiciels\\
-		  & & Ne nécessitent généralement pas de bibliothèques\\
+		  & Indépendant des standards d'encodage des caractères dans les OS &Permet des d'échanges plus simples entre logiciels\\
+		  & & Ne nécessite généralement pas de bibliothèques\\
 \hline
-Inconvénients & Moins faciles à lire & Plus volumineux\\
+Inconvénients & Moins facile à lire & Plus volumineux\\
 
-			& Nécessitent des bibliothèques pour les ouvrir &Dépendants du format d'encodage des caractères\\
+			& Nécessite des bibliothèques pour les ouvrir &Dépendant du format d'encodage des caractères\\
 			\hline
 \end{tabular}
 \end{center}
 
-\vspace{-1cm}
 
 
 \section{Fichiers binaires}
 
-\vspace{-1cm}
-\begin{figure}[H]
-\begin{minipage}[c]{.53\linewidth}
-
-
-
 \subsection{Analyse d'un fichier binaire : BMP}
+
+\begin{minipage}[c]{.53\linewidth}
 
 On peut ouvrir un fichier binaire avec un éditeur héxadécimal.
 
@@ -196,7 +192,7 @@ Un fichier BMP est un format très simple pour mémoriser les images:
 \item nombre de plans (2o);
 \item profondeur : 1 à 32 (2o);
 \item type compression (4o);
-\item \textit{etc}.
+\item etc.
 \end{itemize}
 
 
@@ -214,17 +210,16 @@ Les couleurs commencent à l'octet 122=0x7A (octet en jaune) :
 \includegraphics[width=.5\textwidth]{images/image8.png}
 \end{center}
 \end{minipage} \hfill
-\begin{minipage}[c]{.45\linewidth}
+\begin{minipage}[c]{.25\linewidth}
 \begin{center}
 \includegraphics[width=.5\textwidth]{images/image6.png}
 \end{center}
 \begin{center}
 \includegraphics[width=.99\textwidth]{images/image12.png}
 \includegraphics[width=.99\textwidth]{images/image13.png}
-\caption{Ouverture d'un fichier binaire avec un éditeur hexadécimal}
+\textit{Ouverture d'un fichier binaire avec un éditeur hexadécimal}
 \end{center}
 \end{minipage}
-\end{figure}
 
 
 
@@ -236,11 +231,11 @@ Les couleurs commencent à l'octet 122=0x7A (octet en jaune) :
 Les formats étant généralement assez complexes et variés, les fichiers binaires sont ouverts via des \textbf{librairies}. Ces librairies proposent des commandes toutes prêtes. Par exemple pour les images :
 \begin{itemize}
 \item Python : librairie PIL (Python Imaging Library);
-\item Scilab inclut des commandes pour les images
+\item Scilab inclut des commandes pour les images.
 \end{itemize}
 
 On code très rarement les commandes permettant d'ouvrir les fichiers binaires.
-Pour lire tout de même un fichier binaire on utilise la fonction open, disponible sans avoir besoin de rien importer. Elle prend en paramètre :
+Pour lire tout de même un fichier binaire on utilise la fonction \textsf{open}, disponible sans aucune bibliothèqye. Elle prend en paramètre :
 \begin{itemize}
 \item le chemin (absolu ou relatif) menant au fichier à ouvrir;
 \item le mode d'ouverture.
@@ -255,7 +250,7 @@ Le mode est donné sous la forme d'une chaîne de caractères. Voici les princip
 
 On peut ajouter à tous ces modes le signe b pour ouvrir le fichier en mode binaire.
 
-%La fonction open crée un objet de la classe TextIoWrapper. Par la suite, nous allons utiliser des méthodes de cette classe pour interagir avec le fichier.
+La fonction open crée un objet de la classe \textsf{TextIoWrapper}. Par la suite, nous allons utiliser des méthodes de cette classe pour interagir avec le fichier.
 
 \begin{minipage}[c]{.49\linewidth}
 
@@ -280,11 +275,11 @@ f.close()
 \end{minipage} \hfill
 \begin{minipage}[c]{.49\linewidth}
 3 étapes:
-\begin{itemize}
+\begin{enumerate}
 \item Ouverture du fichier “tongue.bmp”, en lecture mode binaire (“rb”).
 \item Boucle sur chaque octet pour lire et afficher. La méthode read renvoie le contenu du fichier, que l'on capture dans bytes.
-\item Fermeture du fichier: n'oubliez pas de fermer un fichier après l'avoir ouvert. Si d'autres applications, ou d'autres morceaux de votre propre code, souhaitent accéder à ce fichier, ils ne pourront pas car le fichier sera déjà ouvert. C'est surtout vrai en écriture, mais prenez de bonnes habitudes. La méthode à utiliser est close.
-\end{itemize} 
+\item Fermeture du fichier: n'oubliez pas de fermer un fichier après l'avoir ouvert. Si d'autres applications, ou d'autres morceaux de votre propre code, souhaitent accéder à ce fichier, ils ne pourront pas car le fichier sera déjà ouvert. C'est surtout vrai en écriture, mais prenez de bonnes habitudes. La méthode à utiliser est \textsf{close}.
+\end{enumerate} 
 \end{minipage}
 
 
@@ -308,11 +303,11 @@ f.close()
 \end{minipage} \hfill
 \begin{minipage}[c]{.59\linewidth}
 3 étapes:
-\begin{itemize}
+\begin{enumerate}
 \item Il faut ouvrir le fichier avant tout. Ouverture du fichier “monFichier.bin”, en écriture mode binaire (“wb”).
 \item Écriture d'octets (caractères, nombres entiers ou flottants): On utilise la méthode write. Deux modes sont possibles: le mode w ou le mode a. Le premier écrase le contenu éventuel du fichier, alors que le second ajoute ce que l'on écrit à la fin du fichier. Ces deux modes créent le fichier s'il n'existe pas.
 \item Fermeture du fichier. 
-\end{itemize}
+\end{enumerate}
 \end{minipage}
 
 
@@ -332,7 +327,6 @@ Les caractères considérés sont généralement les caractères imprimables, d'
 
 
 
-\begin{figure}[H]
 \begin{minipage}[c]{.49\linewidth}
 Il existe de nombreux standards de codage, dont l'American Standard Code for Information Interchange   ASCII. Cette norme ancienne créée pour gérer des caractères latins non accentués (nécessaire pour écrire en anglais) est à la base de nombreux codages de caractères.
 \newline\newline 
@@ -346,24 +340,25 @@ ce qui rend nécessaire l'utilisation d'autres encodages: UTF-8 par exemple (UCS
 \begin{minipage}[c]{.49\linewidth}
 \begin{center}
 \includegraphics[width=.99\textwidth]{images/image14.png}
-\caption{Table des caractères ASCII}
+\textit{Table des caractères ASCII}
 \end{center}
 \end{minipage}
-\end{figure}
+
 
 \subsection{Lecture d'un fichier sous Python}
-
-
-\begin{minipage}[c]{.63\linewidth}
 
 
 Les fichiers texte sont écrits (en binaire) de façon à respecter un des codes standards de caractères (utf8, iso-8859, ASCII...).
 Ils peuvent s'ouvrir sur un éditeur de texte, ce qui permet de lire ou modifier le contenu beaucoup plus facilement qu'en binaire.
 
-\textsc{Exemple} : fichier de mesure sur l'axe Emericc: 
-$Mesure\_axe\_Emericc.txt$
 
-\textbf{\textsc{Objectif} : Lire les données (paramètres et mesures) et tracer les courbes.}
+\newpage
+
+\begin{exemple}
+
+Exploitation d'un fichier de mesure sur l'axe Emericc: \textsf{Mesure\_axe\_Emericc.txt}.
+
+\textbf{Objectif} : Lire les données (paramètres et mesures) et tracer les courbes.
 
 \begin{itemize}
 \item 12 lignes de paramètres;
@@ -371,6 +366,12 @@ $Mesure\_axe\_Emericc.txt$
 \item 9 lignes de paramètres.
 \end{itemize}
 
+\begin{minipage}[c]{.36\linewidth}
+\begin{center}
+\includegraphics[width=.99\textwidth]{images/image11.png}
+\end{center}
+\end{minipage} \hfill
+\begin{minipage}[c]{.6\linewidth}
 Lecture des noms:
 \begin{py}
 \begin{python}[H]
@@ -386,13 +387,6 @@ noms_grandeurs=noms_grandeurs[1:3]    # suppression de "noms"
 
 \end{python}
 \end{py}
-\end{minipage} \hfill
-\begin{minipage}[c]{.36\linewidth}
-
-\begin{center}
-\includegraphics[width=.99\textwidth]{images/image11.png}
-\end{center}
-
 \end{minipage}
 
 
@@ -410,13 +404,11 @@ nb_points=int(ligne_nbpoints[1])      # conversion en entier
 \end{python}
 \end{py}
 
-\newpage
 Lecture des données:
 \begin{py}
 \begin{python}[H]
 
 numero=[] ; position=[] ; consigne=[] # initialisation tableaux
-
 for i in range(nb_points):
     ligne = f.readline()              # lecture d'une ligne 
     ligne=ligne.rstrip("\n\r")        # suppression retour chariot
@@ -428,15 +420,12 @@ for i in range(nb_points):
 \end{python}
 \end{py}
 
-
-
 \begin{minipage}[c]{.49\linewidth}
 Fermeture du fichier et Tracé de la courbe
 \begin{py}
 \begin{python}[H]
 
 f.close()        # Fermeture fichier
-
 plot(position)   # Tracé de la courbe de position
 \end{python}
 \end{py}
@@ -446,6 +435,15 @@ plot(position)   # Tracé de la courbe de position
 \includegraphics[width=.99\textwidth]{images/image9.png}
 \end{center}
 \end{minipage}
+
+\end{exemple}
+
+
+
+
+
+
+
 
 
 
@@ -674,7 +672,7 @@ Sauvegarde :
 \begin{py}
 \begin{python}[H]
 import pickle
-fic=open("nao.pick","wb"")
+fic=open("nao.pick","wb")
 pickle.dump(v,fic)
 fic.close()
 \end{python}

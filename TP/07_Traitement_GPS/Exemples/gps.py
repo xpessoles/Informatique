@@ -107,7 +107,7 @@ def distance_cumulee(tab):
       dist = dist+tab[i]
       cumul.append(dist)
    return cumul
-"""
+
 k=parse_kml(fichier)
 t=distance(k)
 dist = distance_totale(t)
@@ -121,4 +121,4 @@ import numpy as np
 p1=plt.plot(cumul,alt,linewidth=3)
 plt.grid(True, which="both", linestyle="dotted")
 plt.show()
-"""
+
