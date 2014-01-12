@@ -1,7 +1,7 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
 from math import sin,sqrt,cos,asin,pi
-fichier = "Rhune.kml"
+fichier = "OuCest.kml"
 
 
 # Question 3

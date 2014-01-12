@@ -70,6 +70,11 @@ Dans le cadre de ce TP, nous utiliserons l'environnement de programmation Spyder
 \item WinPython-32bits-3.3.3.2
 \item Spyder.exe
 \end{enumerate}
+
+\textbf{ressources.py}
+
+Le fichier \textsf{ressources.py} contient des fonctions permettant d'éviter de re-saisir un certain nombre de fonctions.
+
 \end{rem}
 
 \begin{objectif}
@@ -231,9 +236,9 @@ def heure(ligne):
 \subparagraph{}
 \textit{Réaliser la fonction permettant d'obtenir un tableau dont chaque élément est une liste \textsf{[heures,minutes,secondes,longitude,latitude,altitude]}.}
 
-La distance pour aller d'un point à un autre sur une sphère est appelée orthodromie. On note $(lo_A,la_A)$ la longitude et la latitude du point $A$ ainsi que $(lo_B,la_B)$ la longitude et la latitude du point $B$. L'orthodromie se calcule alors ainsi en kilomètres : 
+La distance pour aller d'un point à un autre sur une sphère est appelée orthodromie. On note $(\text{lo}_A,\text{la}_A)$ la longitude et la latitude du point $A$ ainsi que $(\text{lo}_B,\text{la}_B)$ la longitude et la latitude du point $B$. L'orthodromie se calcule alors ainsi en kilomètres : 
 $$
-d = 2R\arcsin \sqrt{\sin^2\left( \dfrac{la_B-la_A}{2}\right) + \cos la_A \cos la_B \sin^2\left( \dfrac{lo_B-lo_A}{2}\right)}
+d = 2R\arcsin \sqrt{\sin^2\left( \dfrac{\text{la}_B-\text{la}_A}{2}\right) + \cos \text{la}_A \cos \text{la}_B \sin^2\left( \dfrac{\text{lo}_B-\text{lo}_A}{2}\right)}
 $$
 les angles doivent être exprimés en radians. $R=6\,371\; km$ représente le rayon de la terre.
 

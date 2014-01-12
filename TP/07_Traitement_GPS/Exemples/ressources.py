@@ -10,7 +10,7 @@ chdir("C:\\Users\\Xavier Pessoles\\Documents\\Informatique")
 
 # ======== Telechargement ========
 from urllib.request import urlretrieve
-urlretrieve("http://perso.crans.org/~pessoles/Rhune.kml","Rhune.kml")
+urlretrieve("http://perso.crans.org/~pessoles/OuCest.kml","OuCest.kml")
 # ================================
 
 
