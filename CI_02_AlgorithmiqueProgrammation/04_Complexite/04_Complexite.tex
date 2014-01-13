@@ -439,15 +439,14 @@ Ici les bornes de la boucle imbriquée dépendent de l'indice $i$. Ainsi :
 \begin{itemize}
 \item au rang $1$, $C_1 = C_e + \left(n-1\right)\left( 2 C_e\right) + 3 C_e$;
 \item au rang $2$, $C_2 = C_e + \left(n-2\right)\left( 2 C_e\right) + 3 C_e$;
-\item au rang $i$, $C_i = C_e + \left(n-(i-1)\right)\left( 2 C_e\right) + 3 C_e$.
+\item au rang $i$, $C_i = C_e + \left(n-i)\right)\left( 2 C_e\right) + 3 C_e$.
 \end{itemize}
 
 Le coût temporel peut donc s'exprimer ainsi : 
 \begin{eqnarray*}
-C_T(n) &=& \sum\limits_{i=0}^{n} \left(Ce + \left(n-(i-1)\right)\left( 2 C_e\right) + 3 C_e \right) = C_e\sum\limits_{i=0}^{n} \left( 4 +  2 n - 2 i + 2  \right) \\
-&=& C_e \left( 6n + 2n^2 -2 \dfrac{n(n+1)}{2}\right) = 
-C_e \left( 5n + n^2  \right)
-%&=& C_e \left( 6 n \sum\limits_{i=0}^{n} \left( 4C_e +  2 n C_e - 2 i C_e + 2 C_e  \right) \\
+C_T(n) &=& \sum\limits_{i=0}^{n} \left(Ce + (n-i)\left( 2 C_e\right) + 3 C_e \right) = C_e\sum\limits_{i=0}^{n} \left( 1+2n-2i + 3 \right) \\
+&=&C_e\sum\limits_{i=0}^{n} \left( 4+2n-2i  \right) =  C_e \left( 4n+2n^2 -  2\dfrac{n(n+1)}{2}\right) = C_e\left( 3n+n^2\right)
+%C_e \left( 5n + n^2  \right)
 \end{eqnarray*}
 
 Dans ce cas, $C_T(n)\sim C_e n^2$. On parle de complexité quadratique. Lorsque la taille du tableau double, le temps de calcul est multiplié par 4.
