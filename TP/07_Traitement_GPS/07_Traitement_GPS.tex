@@ -152,12 +152,15 @@ from os import chdir
 chdir("U:\\Documents\\Informatique\\07_GPS")
 \end{python}
 
-Pour télécharger le fichier \textsf{OuCest.py} avec Python, saisir les lignes suivantes :
+ Le fichier \textsf{OuCest.py} a été enregistré sur le réseau du lycée dans le répertoire Eleves-PTSI. 
+
+Si on voulait télécharger ce fichier avec Python (cette méthode n'est pas directement possible sur le réseau du lycée), il faudrait saisir les lignes suivantes :
 
 \begin{python}
 from urllib.request import urlretrieve
 urlretrieve("http://perso.crans.org/~pessoles/OuCest.kml", "OuCest.kml")
 \end{python}
+
 
 \end{py}
 
@@ -185,11 +188,11 @@ for i in range(len(chaine)):
 
 
 \subparagraph{}
-\textit{Réaliser une fonction permettant de savoir si un caractère est compris dans une chaîne de caractères.}
+\textit{Réaliser une fonction permettant de savoir si un caractère est compris dans une chaîne de caractères. On nommera la fonction \textsf{is\_char\_in\_string}. Elle prendra comme argument un caractère (le caractère à rechercher) et une chaîne de caractère. Elle renverra une valeur booléenne.}
 
 
 \subparagraph{}
-\textit{Réaliser la fonction permettant de savoir si la chaîne de caractère \textsf{<when>} est comprise dans une ligne de texte.}
+\textit{Afin d'acquérir les données issues du fichier, il va falloir détecter certains mots clés (par exemple \textsf{<when>}). Réaliser la fonction permettant de savoir si  un mot est dans une chaîne de caractère. On nommera la fonction \textsf{is\_word\_in\_string}. On testera notre fonction en prenant une ligne du fichier ainsi que le mot \textsf{<when>}.}
 
 
 \subparagraph{}
