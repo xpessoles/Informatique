@@ -139,9 +139,9 @@ Lors de l'acquisition de signaux grâce à des capteurs, les signaux mesurés ne
 \end{minipage}
 
 \begin{minipage}[c]{.47\linewidth}
-Enfin, pour pour avoir une idée de l'accélération d'un solide alors qu'il est seulement possible de mesurer une vitesse, l'intégration numérique peut s'avérer nécessaire.
+Enfin, pour pour avoir une idée de la position d'un solide alors qu'il est seulement possible de mesurer une vitesse, l'intégration numérique peut s'avérer nécessaire.
 
-Ainsi, sur la capsuleuse de bocaux seule la vitesse de la croix de Malte (et du maneton) sont possibles. Une intégration permet le calcul de l'accélération angulaire.
+Ainsi, sur la capsuleuse de bocaux seule la vitesse de la croix de Malte (et du maneton) sont possibles. Une intégration permet le calcul de la position angulaire.
 \end{minipage}\hfill
 \begin{minipage}[c]{.47\linewidth}
 \begin{center}
@@ -284,7 +284,7 @@ Soit une fonction \textsf{gen\_f} qui prend comme argument un nombre réel et qu
 \begin{enumerate}
 \item Définir la fonction \textsf{rectangle\_gauche} qui permet d'intégrer une fonction par la méthode des rectangles, à gauche.
 \item Définir la fonction \textsf{rectangle\_droite} qui permet d'intégrer une fonction par la méthode des rectangles, à droite.
-\item Définir la fonction \textsf{rectangle\_droite} qui permet d'intégrer une fonction par la méthode des rectangles en utilisant le point milieu.
+\item Définir la fonction \textsf{rectangle\_milieu} qui permet d'intégrer une fonction par la méthode des rectangles en utilisant le point milieu.
 \item Définir une fonction permettant de comparer les méthodes d'intégration. Elle devra permettre de calculer des intégrales pour différentes valeur du pas. 
 \end{enumerate}
 \end{exemple}
@@ -302,7 +302,7 @@ On fournit un fichier texte brut contenant les mesures provenant d'un capteur.
 \end{exemple}
 
 \newpage
-
+  
 \section{Méthode des trapèzes}
 \subsection{Principe}
 \subsection{Interprétation graphique}
