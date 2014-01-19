@@ -1,4 +1,4 @@
-\documentclass[11pt]{article}
+\documentclass[10pt]{article}
 \input{style/coursHeadings}
 \input{style/programHeadings}
 \input{style/macros_SII}
@@ -55,6 +55,35 @@ Informatique - Cours}}
 
 \ifthenelse{\boolean{xp}}{\input{style/enteteXP}}{\input{style/enteteDI}}
 
+
+\noindent\begin{minipage}[c]{.24\linewidth}
+\begin{center}
+\includegraphics[width=\textwidth]{images/CourbesPython/fonc}
+
+\textit{Fonction à intégrer}
+\end{center}
+\end{minipage} \hfill
+\begin{minipage}[c]{.24\linewidth}
+\begin{center}
+\includegraphics[width=\textwidth]{images/CourbesPython/rect_g}
+
+\textit{Intégration par méthode des rectangles à gauche}
+\end{center}
+\end{minipage} \hfill
+\begin{minipage}[c]{.24\linewidth}
+\begin{center}
+\includegraphics[width=\textwidth]{images/CourbesPython/rect_d}
+
+\textit{Intégration par méthode des rectangles à droite}
+\end{center}
+\end{minipage} \hfill
+\begin{minipage}[c]{.24\linewidth}
+\begin{center}
+\includegraphics[width=\textwidth]{images/CourbesPython/trap}
+
+\textit{Intégration par méthode des trapèzes}
+\end{center}
+\end{minipage}
 
 \begin{savoir}
 Méthodes des rectangles et des trapèzes pour le calcul approché d’une intégrale sur un segment.
@@ -204,32 +233,34 @@ On approxime alors chacune des intégrales par la méthode des rectangles.
 \end{rem}
 \subsection{Interprétation graphique}
 
+On s'intéresse à nouveau à l'approximation de $\pi$ grâce au calcul de $\int\limits_0^{1}\sqrt{1-x^2}\;\mathrm{d}x$ .
+
 \subsubsection*{1 subdivision}
 
 \begin{minipage}[c]{.24\linewidth}
 \begin{center}
-\includegraphics[width=.99\textwidth]{images/pi}
+\includegraphics[width=.99\textwidth]{images/CourbesPython/pi_courbe}
 
 \textit{Calcul intégral}
 \end{center}
 \end{minipage}\hfill
 \begin{minipage}[c]{.24\linewidth}
 \begin{center}
-\includegraphics[width=.99\textwidth]{images/pi_1_g}
+\includegraphics[width=.99\textwidth]{images/CourbesPython/pi_rect_g_1}
 
 \textit{Rectangle à gauche -- $\pi \simeq 4$  }
 \end{center}
 \end{minipage}\hfill
 \begin{minipage}[c]{.24\linewidth}
 \begin{center}
-\includegraphics[width=.99\textwidth]{images/pi_1_m}
+\includegraphics[width=.99\textwidth]{images/CourbesPython/pi_rect_m_1}
 
 \textit{Point milieu -- $\pi \simeq 3,464...$}
 \end{center}
 \end{minipage}\hfill
 \begin{minipage}[c]{.24\linewidth}
 \begin{center}
-\includegraphics[width=.99\textwidth]{images/pi_1_d}
+\includegraphics[width=.99\textwidth]{images/CourbesPython/pi_rect_d_1}
 
 \textit{Rectangle à droite -- $\pi \simeq 0$}
 \end{center}
@@ -240,21 +271,21 @@ On approxime alors chacune des intégrales par la méthode des rectangles.
 
 \begin{minipage}[c]{.32\linewidth}
 \begin{center}
-\includegraphics[width=.99\textwidth]{images/pi_5_g}
+\includegraphics[width=.99\textwidth]{images/CourbesPython/pi_rect_g}
 
 \textit{Rectangle à gauche -- $\pi \simeq 3,437...$  }
 \end{center}
 \end{minipage}\hfill
 \begin{minipage}[c]{.32\linewidth}
 \begin{center}
-\includegraphics[width=.99\textwidth]{images/pi_5_m}
+\includegraphics[width=.99\textwidth]{images/CourbesPython/pi_rect_m}
 
 \textit{Point milieu -- $\pi \simeq 3,037...$}
 \end{center}
 \end{minipage}\hfill
 \begin{minipage}[c]{.32\linewidth}
 \begin{center}
-\includegraphics[width=.99\textwidth]{images/pi_5_d}
+\includegraphics[width=.99\textwidth]{images/CourbesPython/pi_rect_d}
 
 \textit{Rectangle à droite -- $\pi \simeq 2,637...$}
 \end{center}
@@ -301,12 +332,49 @@ On fournit un fichier texte brut contenant les mesures provenant d'un capteur.
 
 \end{exemple}
 
-\newpage
   
 \section{Méthode des trapèzes}
 \subsection{Principe}
+
+\begin{defi}
+Dans cette méthode, la fonction à intégrer est interpolée par un polynôme de degré 1, à savoir une fonction affine. Géométriquement, l'aire sous la courbe est alors approximée par un trapèze :
+
+$$
+I = \int\limits_a^{b} f(x) \mathrm{d}x \simeq \left(b-a\right) \dfrac{f(a)+f(b)}{2} 
+$$
+
+\end{defi}
+
 \subsection{Interprétation graphique}
+\begin{minipage}[c]{.3\linewidth}
+\begin{center}
+\includegraphics[width=.99\textwidth]{images/CourbesPython/pi_trap_1}
+
+\textit{Trapèze avec 1 subdivision -- $\pi \simeq 2$}
+\end{center}
+\end{minipage}\hfill
+\begin{minipage}[c]{.3\linewidth}
+\begin{center}
+\includegraphics[width=.99\textwidth]{images/CourbesPython/pi_trap}
+
+\textit{Trapèzes avec 5 subdivisions -- $\pi \simeq 3,037...$  }
+\end{center}
+\end{minipage} \hfill
+\begin{minipage}[c]{.38\linewidth}
+\begin{rem}
+La méthode des trapèzes est équivalente à la méthode des rectangles -- point milieu.
+\end{rem}
+\end{minipage}
+
 \subsection{Implémentation}
+\begin{exemple}
+\textit{Calcul intégral}
+
+Soit une fonction \textsf{gen\_f} qui prend comme argument un nombre réel et qui renvoie un réel. On fera l'hypothèse que \textsf{gen\_f} est une fonction continue définie sur $\mathbb{R}$. On cherche à calculer l'intégrale de la fonction définie dans \textsf{gen\_f} sur un intervalle donné avec un pas donné. 
+
+Définir la fonction \textsf{integration\_trapeze} qui permet d'intégrer une fonction par la méthode des trapèzes.
+
+\end{exemple}
 
 \section{Calcul d'erreur}
 
