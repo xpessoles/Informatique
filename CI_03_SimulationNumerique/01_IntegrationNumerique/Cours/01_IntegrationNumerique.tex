@@ -380,34 +380,120 @@ Définir la fonction \textsf{integration\_trapeze} qui permet d'intégrer une fo
 Dans la majorité des cas, le calcul numérique d'une intégrale donne un résultat approché du résultat réel. En augmentant la discrétisation de l'intervalle d'intégration, il est possible de diminuer cette erreur. Cependant, une augmentation de cette discrétisation conduit à une augmentation des calculs. 
 
 
-\subsection{Calcul d'erreur -- Rectangles à gauche}
+\subsection{Calcul d'erreur -- Rectangles à gauche (et à droite)}
 Soit $f$ une fonction $\mathcal{C}^1$ sur $I=[a,b]$. L'intervalle $I$ est fractionné en $n$ segments $[a_0, a_1, ..., a_n]$ avec $a_0 = a$ et $a_n=b$. On cherche à calculer :
 $$
 \mathcal{A}=\int\limits_a^{b}f(x)\mathrm{d}x =  \sum\limits_{i=0}^{n-1} \left[\int\limits_{a_i}^{a_{i+1}}f(x)\mathrm{d}x \right]
 $$
 
-On note $\mathcal{A}_i = \int\limits_{a_i}^{a_{i+1}}f(x)\mathrm{d}x $. Par la méthode des rectangles à gauche, $\mathcal{A}_i$ est approximée par $\left(a_{k+1}-a_{k}\right) f(a_k) $. 
+On note $\mathcal{A}_i = \int\limits_{a_i}^{a_{i+1}}f(x)\mathrm{d}x $. Par la méthode des rectangles à gauche, $\mathcal{A}_i$ est approximée par $\left(a_{i+1}-a_{i}\right) f(a_i) $. 
 
 \begin{Objectif}
-Déterminer sur chaque intervalle $[a_i,a_{i+1}]$ l'erreur commise par une intégration utilisant la méthode des rectangles à gauche. On va pour cela chercher à majorer l'erreur $\varepsilon_k$ :
+Déterminer sur chaque intervalle $[a_i,a_{i+1}]$ l'erreur commise par une intégration utilisant la méthode des rectangles à gauche. On va pour cela chercher à majorer l'erreur $\varepsilon_i$ :
 $$
-\varepsilon_k = \left| \int\limits_{a_i}^{a_{i+1}}f(x)\mathrm{d}x -\left(a_{i+1}-a_{i}\right) f(a_i)\right|
+\varepsilon_i = \left| \int\limits_{a_i}^{a_{i+1}}f(x)\mathrm{d}x -\left(a_{i+1}-a_{i}\right) f(a_i)\right|
 $$
 \end{Objectif}
 
 On a $\int\limits_{a_i}^{a_{i+1}}f(a_i)\mathrm{d}x=\left(a_{i+1}-a_{i}\right) f(a_i)$, en conséquence, 
 
+\allowdisplaybreaks
+
 \begin{eqnarray*}
-\varepsilon_k &\leq &  \left| \int\limits_{a_i}^{a_{i+1}}f(x) - \left(a_{i+1}-a_{i}\right) f(a_i) \; \mathrm{d}x\right|  \\
+\varepsilon_i &\leq &  \left| \int\limits_{a_i}^{a_{i+1}}f(x) - \left(a_{i+1}-a_{i}\right) f(a_i) \; \mathrm{d}x\right|  \\
 &\leq &   \int\limits_{a_i}^{a_{i+1}} \left| f(x) - \left(a_{i+1}-a_{i}\right) f(a_i) \right|\; \mathrm{d}x \quad \text{d'après l'inégalité triangulaire}\\
-&\leq &   \int\limits_{a_i}^{a_{i+1}} \underset{[a,b]}{\sup} \left| f'(x)\right| \cdot \left| x-a_i\right|  \; \mathrm{d}x \quad \text{d'après l'inégalité des accroissements finis}\\
+&\leq &   \int\limits_{a_i}^{a_{i+1}} \underbrace{\underset{[a,b]}{\sup} \left| f'(x)\right|}_{M} \cdot \left| x-a_i\right|  \; \mathrm{d}x \quad \text{d'après l'inégalité des accroissements finis}\\
+& \leq & M \int\limits_{a_i}^{a_{i+1}}  \left( x-a_i\right)  \; \mathrm{d}x \quad  \quad \text{parce que}\, x\geq a_i\\
+& \leq & M   \left[ \dfrac{\left(x-a_i\right)^2}{2}\right]_{a_i}^{a_{i+1}} \leq M \dfrac{\left(a_{i+1}-a_i\right)^2}{2}
 \end{eqnarray*}
 
+Dans le cas où $I$ est divisé en $n$ subdivisions régulières, $a_{i+1}-a_i = \dfrac{1}{n}$. On a a alors 
+$$
+\varepsilon_k \leq \dfrac{M}{2n^2} \quad \text{sur}\quad [a_i,a_{i+1}]
+$$
+
+On montre alors que sur $[a,b]$, on a donc :
+$$
+\varepsilon \leq n\dfrac{M}{2n^2} \leq \dfrac{M}{2n} 
+$$
+
+
+\begin{resultat}
+\textbf{Erreur sur la méthode des rectangles à gauche et à droite}
+
+Soit $f$ fonction $\mathcal{C}^1$ sur $I=[a,b]$. Soit $M$ un majorant de $f'$ sur $I$. En intégrant $f$ sur $n$ subdivisions régulières de $I$ par la méthode des rectangles à droite ou à gauche, l'erreur commise$\varepsilon$ est telle que : 
+$$ \varepsilon \leq \dfrac{M}{2n^2}$$ 
+
+\end{resultat}
+
+
+\begin{rem}
+La démonstration pour les rectangles à droite se conduit de manière identique. 
+\end{rem}
+
+\subsection{Calcul d'erreur -- Rectangles au milieu}
+On conserve les notations du cas précédent.
+
+ Par la méthode des rectangles au milieu, sur chaque subdivision de$I$, $\mathcal{A}_i$ est approximée par $\left(a_{i+1}-a_{i}\right) \cdot f\left(\dfrac{a_i+a_{i+1}}{2}\right) $. 
+
+\begin{Objectif}
+Déterminer sur chaque intervalle $[a_i,a_{i+1}]$ l'erreur commise par une intégration utilisant la méthode des rectangles à gauche. On va pour cela chercher à majorer l'erreur $\varepsilon_i$ :
+$$
+\varepsilon_i = \left| \int\limits_{a_i}^{a_{i+1}}f(x)\mathrm{d}x -
+\left(a_{i+1}-a_{i}\right) \cdot f\left(\dfrac{a_i+a_{i+1}}{2}\right)\right|
+$$
+\end{Objectif}
+
+\begin{eqnarray*}
+\varepsilon_i & = & \int\limits_{a_i}^{a_{i+1}}f(x)\mathrm{d}x -
+\left(a_{i+1}-a_{i}\right) \cdot f\left(\dfrac{a_i+a_{i+1}}{2}\right) \\
+ & = &  \int\limits_{a_i}^{a_{i+1}}f(x)\mathrm{d}x 
+ - \int\limits_{a_i}^{a_{i+1}}f\left(\dfrac{a_i+a_{i+1}}{2}\right)dt 
+ - f'\left(\dfrac{a_i+a_{i+1}}{2}\right) 
+ + \underbrace{\int\limits_{a_i}^{a_{i+1}} \left( x - \dfrac{a_i+a_{i+1}}{2}\right)\;\mathrm{d}x}_{0}\quad \text{à comprendre} \\
+\end{eqnarray*}
+
+  On a donc :  
+\begin{eqnarray*}
+|\varepsilon_i| & \leq &\left|
+\int\limits_{a_i}^{a_{i+1}} f(x) - \left[
+f\left(\dfrac{a_i+a_{i+1}}{2} \right)
++f'\left(\dfrac{a_i+a_{i+1}}{2} \right)\left(x - \dfrac{a_i+a_{i+1}}{2}\right)
+\right] \; \mathrm{d}x\right| \\
+& \leq & \int\limits_{a_i}^{a_{i+1}} \left|f(x) - \left[
+f\left(\dfrac{a_i+a_{i+1}}{2} \right)
++f'\left(\dfrac{a_i+a_{i+1}}{2} \right)\left(x - \dfrac{a_i+a_{i+1}}{2}\right)
+\right] \right|\; \mathrm{d}x \quad \text{Inégalité triangulaire}\\
+& \leq & \int\limits_{a_i}^{a_{i+1}} \underbrace{\underset{[a,b]}{\sup} \left| f''(x)\right|}_{M} \cdot \left| x- \dfrac{a_i+a_{i+1}}{2}\right|^2  \; \mathrm{d}x \quad \text{d'après l'inégalité de Taylor Lagrange}\\
+& \leq & M \int\limits_{a_i}^{a_{i+1}} \left( x- \dfrac{a_i+a_{i+1}}{2}\right)^2  \; \mathrm{d}x \leq \dfrac{M}{3} \left[ \left( x- \dfrac{a_i+a_{i+1}}{2}\right)^3\right]_{a_i}^{a_{i+1}} \\
+& \leq & \dfrac{M}{3} \left[ \left( \dfrac{a_{i+1}-a_{i}}{2} \right)^3- \dfrac{a_i-a_{i+1}}{2}\right]\\
+& \leq & \dfrac{2M}{3}\dfrac{1}{8}\left( {a_{i+1}-a_{i}}\right)^3
+\end{eqnarray*}
+
+
+Dans le cas où $I$ est divisé en $n$ subdivisions régulières, $a_{i+1}-a_i = \dfrac{1}{n}$. On a a alors 
+$$
+\varepsilon_k \leq \dfrac{2M}{3}\dfrac{1}{8}\dfrac{1}{n^3} \quad \text{sur}\quad [a_i,a_{i+1}]
+$$
+
+On montre alors que sur $[a,b]$, on a donc :
+$$
+\varepsilon \leq n \dfrac{2M}{3}\dfrac{1}{8}\dfrac{1}{n^3} \leq \dfrac{M}{12 n^2}
+$$
+
+
+\begin{resultat}
+\textbf{Erreur sur la méthode des rectangles -- point milieu}
+
+Soit $f$ fonction $\mathcal{C}^2$ sur $I=[a,b]$. Soit $M$ un majorant de $f''$ sur $I$. En intégrant $f$ sur $n$ subdivisions régulières de $I$ par la méthode des rectangles point milieu, l'erreur commise$\varepsilon$ est telle que : 
+$$ \varepsilon \leq \dfrac{M}{12n^2}$$ 
+
+\end{resultat}
 
 
 \begin{thebibliography}{2}
 \bibitem{1}{Analyse numérique : Intégration numérique, INP Grenoble -- Pagora. \url{https://team.inria.fr/moise/files/2013/03/Cours_integration.pdf}.}
-\bibitem{1}{Adrien Pétri, \textit{Analyse numérique : Intégration numérique}, Notes de cours TSI 1, Lycée Rouvière, Toulon.}
+\bibitem{1}{Adrien Pétri, \textit{Analyse numérique : Intégration numérique}, Notes de cours de TSI 1, Lycée Rouvière, Toulon.}
 \end{thebibliography}
 \end{document}
 
