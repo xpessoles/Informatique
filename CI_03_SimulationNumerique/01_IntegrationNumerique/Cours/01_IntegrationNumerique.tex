@@ -361,9 +361,9 @@ $$
 \end{center}
 \end{minipage} \hfill
 \begin{minipage}[c]{.38\linewidth}
-\begin{rem}
-La méthode des trapèzes est équivalente à la méthode des rectangles -- point milieu.
-\end{rem}
+%\begin{rem}
+%La méthode des trapèzes est équivalente à la méthode des rectangles -- point milieu.
+%\end{rem}
 \end{minipage}
 
 \subsection{Implémentation}
@@ -377,11 +377,37 @@ Définir la fonction \textsf{integration\_trapeze} qui permet d'intégrer une fo
 \end{exemple}
 
 \section{Calcul d'erreur}
+Dans la majorité des cas, le calcul numérique d'une intégrale donne un résultat approché du résultat réel. En augmentant la discrétisation de l'intervalle d'intégration, il est possible de diminuer cette erreur. Cependant, une augmentation de cette discrétisation conduit à une augmentation des calculs. 
 
 
-\subsection{Sous titre 1}
+\subsection{Calcul d'erreur -- Rectangles à gauche}
+Soit $f$ une fonction $\mathcal{C}^1$ sur $I=[a,b]$. L'intervalle $I$ est fractionné en $n$ segments $[a_0, a_1, ..., a_n]$ avec $a_0 = a$ et $a_n=b$. On cherche à calculer :
+$$
+\mathcal{A}=\int\limits_a^{b}f(x)\mathrm{d}x =  \sum\limits_{i=0}^{n-1} \left[\int\limits_{a_i}^{a_{i+1}}f(x)\mathrm{d}x \right]
+$$
+
+On note $\mathcal{A}_i = \int\limits_{a_i}^{a_{i+1}}f(x)\mathrm{d}x $. Par la méthode des rectangles à gauche, $\mathcal{A}_i$ est approximée par $\left(a_{k+1}-a_{k}\right) f(a_k) $. 
+
+\begin{Objectif}
+Déterminer sur chaque intervalle $[a_i,a_{i+1}]$ l'erreur commise par une intégration utilisant la méthode des rectangles à gauche. On va pour cela chercher à majorer l'erreur $\varepsilon_k$ :
+$$
+\varepsilon_k = \left| \int\limits_{a_i}^{a_{i+1}}f(x)\mathrm{d}x -\left(a_{i+1}-a_{i}\right) f(a_i)\right|
+$$
+\end{Objectif}
+
+On a $\int\limits_{a_i}^{a_{i+1}}f(a_i)\mathrm{d}x=\left(a_{i+1}-a_{i}\right) f(a_i)$, en conséquence, 
+
+\begin{eqnarray*}
+\varepsilon_k &\leq &  \left| \int\limits_{a_i}^{a_{i+1}}f(x) - \left(a_{i+1}-a_{i}\right) f(a_i) \; \mathrm{d}x\right|  \\
+&\leq &   \int\limits_{a_i}^{a_{i+1}} \left| f(x) - \left(a_{i+1}-a_{i}\right) f(a_i) \right|\; \mathrm{d}x \quad \text{d'après l'inégalité triangulaire}\\
+&\leq &   \int\limits_{a_i}^{a_{i+1}} \underset{[a,b]}{\sup} \left| f'(x)\right| \cdot \left| x-a_i\right|  \; \mathrm{d}x \quad \text{d'après l'inégalité des accroissements finis}\\
+\end{eqnarray*}
+
+
+
 \begin{thebibliography}{2}
-\bibitem{1}{Analyse numérique : Intagration numérique, INP Grenoble -- Pagora. \url{https://team.inria.fr/moise/files/2013/03/Cours_integration.pdf}.}
+\bibitem{1}{Analyse numérique : Intégration numérique, INP Grenoble -- Pagora. \url{https://team.inria.fr/moise/files/2013/03/Cours_integration.pdf}.}
+\bibitem{1}{Adrien Pétri, \textit{Analyse numérique : Intégration numérique}, Notes de cours TSI 1, Lycée Rouvière, Toulon.}
 \end{thebibliography}
 \end{document}
 
