@@ -422,7 +422,7 @@ $$
 \textbf{Erreur sur la méthode des rectangles à gauche et à droite}
 
 Soit $f$ fonction $\mathcal{C}^1$ sur $I=[a,b]$. Soit $M$ un majorant de $f'$ sur $I$. En intégrant $f$ sur $n$ subdivisions régulières de $I$ par la méthode des rectangles à droite ou à gauche, l'erreur commise$\varepsilon$ est telle que : 
-$$ \varepsilon \leq \dfrac{M}{2n^2}$$ 
+$$ \varepsilon \leq \dfrac{M}{2n}$$ 
 
 \end{resultat}
 
@@ -450,7 +450,7 @@ $$
  & = &  \int\limits_{a_i}^{a_{i+1}}f(x)\mathrm{d}x 
  - \int\limits_{a_i}^{a_{i+1}}f\left(\dfrac{a_i+a_{i+1}}{2}\right)dt 
  - f'\left(\dfrac{a_i+a_{i+1}}{2}\right) 
- + \underbrace{\int\limits_{a_i}^{a_{i+1}} \left( x - \dfrac{a_i+a_{i+1}}{2}\right)\;\mathrm{d}x}_{0}\quad \text{à comprendre} \\
+ + \underbrace{\int\limits_{a_i}^{a_{i+1}} \left( x - \dfrac{a_i+a_{i+1}}{2}\right)\;\mathrm{d}x}_{0} \\%\quad \text{à comprendre} \\
 \end{eqnarray*}
 
   On a donc :  
@@ -490,6 +490,38 @@ $$ \varepsilon \leq \dfrac{M}{12n^2}$$
 
 \end{resultat}
 
+\subsection{Calcul d'erreur -- Méthode des trapèzes}
+
+
+\begin{resultat}
+\textbf{Erreur sur la méthode des trapèzes}
+
+Soit $f$ fonction $\mathcal{C}^2$ sur $I=[a,b]$. %Soit $M$ un majorant de $f''$ sur $I$. 
+En intégrant $f$ sur $n$ subdivisions régulières de $I$ par la méthode des trapèzes, l'erreur commise$\varepsilon$ est telle qu'il existe un entier $M$ tel que : 
+$$ \varepsilon \leq \dfrac{M}{12n^2}$$ 
+
+\end{resultat}
+
+\subsection{Calcul d'erreur à précision constante}
+
+On a vu que la précision des rectangles à gauche ou à droite est en $\mathcal{O}\left(\dfrac{1}{n}\right)$ et celle des trapèzes et du rectangle point milieu est de la forme $\mathcal{O}\left(\dfrac{1}{n^2}\right)$.
+
+\begin{exemple}
+\textit{Donner, avec chacune des méthodes, l'ordre de grandeur de l'échantillonnage pour avoir une erreur inférieure à $10^{-1}$, $10^{-2}$, $10^{-3}$, $10^{-6}$, $10^{-10}$. }
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+Erreur & $10^{-1}$ & $10^{-2}$ & $10^{-3}$ & $10^{-6}$ & $10^{-10}$ \\
+\hline
+\hline
+Méthode des rectangles & $n>10$ & $n>100$ & $n>1\,000$ & $n>10^6$ & $n>10^{10}$  \\
+\hline
+Méthode des trapèzes & $n>\sqrt{10}$ & $n>10$ & $n>32$ & $n>1\;000$ & $n>10^5$ \\
+\hline
+\end{tabular}
+\end{center}
+\end{exemple}
+ 
 
 \begin{thebibliography}{2}
 \bibitem{1}{Analyse numérique : Intégration numérique, INP Grenoble -- Pagora. \url{https://team.inria.fr/moise/files/2013/03/Cours_integration.pdf}.}

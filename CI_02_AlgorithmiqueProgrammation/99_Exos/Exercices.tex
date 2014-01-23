@@ -1,0 +1,110 @@
+\documentclass[10pt]{article}
+\input{style/coursHeadings}
+\input{style/programHeadings}
+\input{style/macros_SII}
+\input{style/macros_Titres}
+\input{style/macros_Frames}
+
+%Si le boolen xp est vrai : compilation pour xabi
+%Sinon compilation Damien
+\newboolean{xp}
+\setboolean{xp}{true}
+
+\newboolean{prof}
+\setboolean{prof}{true}
+
+\usepackage[%
+    pdftitle={},
+    pdfauthor={Xavier Pessoles},
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=magenta]{hyperref}
+
+
+\def\discipline{Informatique}
+\def\xxtitre{\ifthenelse{\boolean{xp}}{
+CI 2 : Algorithmique \& Programmation}{
+Chapitre  -- }}
+
+\def\xxsoustitre{\ifthenelse{\boolean{xp}}{
+Chapitre 4 -- Introduction à la complexité}{
+Partie  -- }}
+
+\def\xxauteur{\ifthenelse{\boolean{xp}}{
+Xavier \textsc{Pessoles}}{
+Damien \textsc{Iceta} \\ Xavier \textsc{Pessoles}}}
+
+\def\xxpied{\ifthenelse{\boolean{xp}}{
+Cours -- CI 2 : Algorithmique \& Programmation\\
+Ch. 4 : Introduction à la complexité}{
+\xxtitre}}
+
+\def\xxcathegorie{\ifthenelse{\boolean{xp}}{
+2013 -- 2014 \\
+Xavier \textsc{Pessoles}}{
+Informatique - Cours}}
+
+
+
+
+
+%---------------------------------------------------------------------------
+
+
+\begin{document}
+
+\ifthenelse{\boolean{xp}}{\input{style/enteteXP}}{\input{style/enteteDI}}
+
+\begin{center}
+\textit{Informatique pour tous en classes préparatoires aux grandes écoles\\
+Wack, Conchon, de Falco, Dowekl, Filliatre, Gonnord -- Éditions Eyrolles}
+\end{center}
+
+ \renewcommand{\baselinestretch}{1.2}
+\setlength{\parskip}{2ex plus 0.5ex minus 0.2ex}
+
+
+
+\subsection*{Exercice 1}
+On donne l'algorithme suivant :
+
+\begin{py}
+\begin{python}
+def donction(m, t):
+    for i in range(1 + len(t) - len(m)):
+        j = 0
+        while j < len(m) and m[j] == t[i + j]:
+            j += 1
+        if j == len(m):
+            return i
+        return None
+\end{python}
+\end{py}
+\begin{enumerate}
+\item \textsf{m} et \textsf{t} étant des chaînes de caractères, déterminer à quoi sert cette fonction.
+\item Déterminer la complexité dans le meilleur des cas et dans le pire des cas.
+\end{enumerate}
+
+\subsection*{Exercice 2}
+
+Le but de cet exercice est d’écrire une fonction qui détermine la médiane d’un tableau
+d’entiers.
+\begin{enumerate}
+\item Programmer l’algorithme suivant : on recherche le minimum et le maximum du tableau, on les supprime et on recommence jusqu’à obtenir un tableau de longueur inférieure ou égale à 2. On déduit alors facilement la valeur de la médiane du ou des entiers restants.
+\item Quelle est la complexité de cet algorithme ? 
+\end{enumerate}
+
+\subsection*{Exercice 3}
+
+Écrire une fonction qui détermine si tous les éléments d’un tableau (d’entiers ou de flottants)
+sont positifs ou nuls. On veillera à sortir de la fonction dès qu’une valeur négative est rencontrée.
+
+\subsection*{Exercice 4}
+
+Écrire une fonction qui calcule le produit scalaire de deux vecteurs représentés par deux
+tableaux de même taille.
+\end{document}
+
+
+
+
