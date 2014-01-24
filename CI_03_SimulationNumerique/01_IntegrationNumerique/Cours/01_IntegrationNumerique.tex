@@ -114,7 +114,7 @@ Soit $f$ une fonction continue sur $[a,b]$ avec $a,b \in \mathbb{R}^2$ et $a<b$.
 $$
 I = \int\limits_{a}^b f(x) \quad \mathrm{d} x
 $$
-Comment calculer $I$ sans connaître de primitive de $f$ ?
+Comment approcher $I$ sans connaître de primitive de $f$ ?
 \end{prob}
 
 
@@ -123,7 +123,7 @@ Comment calculer $I$ sans connaître de primitive de $f$ ?
 \textit{Calcul de $\pi$}
 
 \begin{minipage}[c]{.6\linewidth}
-Parmi les méthode permettant de calculer $\pi$, on peut chercher à calculer l'aire du cercle trigonométrique (de rayon 1). L'aire d'un cercle de rayon 1 vaut $\pi$. On s'intéresse ici à l'aire d'un quart de cercle. Il est nécessaire de modéliser le problème afin d'établir la fonction $f$.
+Parmi les méthode permettant d'approximer $\pi$, on peut chercher à calculer l'aire du cercle trigonométrique (de rayon 1). L'aire d'un cercle de rayon 1 vaut $\pi$. On s'intéresse ici à l'aire d'un quart de cercle. Il est nécessaire de modéliser le problème afin d'établir la fonction $f$.
 
 \end{minipage}\hfill
 \begin{minipage}[c]{.35\linewidth}
@@ -139,7 +139,7 @@ $$
 \dfrac{\pi}{4}=\int\limits_{0}^1 f(x) =\int\limits_{0}^1\sqrt{1-x^2} \quad \mathrm{d} x
 $$
 
-Ainsi une valeur approchée de l'intégrale peut permettre de calculer la valeur de $\pi$.
+Ainsi une valeur approchée de l'intégrale peut permettre d'approximer la valeur de $\pi$.
 \end{exemple}
  
 \begin{exemple}
@@ -300,7 +300,7 @@ Pour 100 subdivisions de l'intervalle, on a :
 
 
 \begin{rem}
-On remarque l'existence d'une erreur dans le calcul intégral. Suivant les cas, le calcul permet de majorer ou de minorer la valeur de l'intégrale définie. 
+On remarque l'existence d'une erreur dans le calcul intégral. Suivant les cas, le calcul permet d'avoir une approximation par excès ou par défaut de l'intégrale que l'on veut approximer. 
 \end{rem}
 
 
@@ -310,13 +310,13 @@ On remarque l'existence d'une erreur dans le calcul intégral. Suivant les cas, 
 \begin{exemple}
 \textit{Calcul intégral}
 
-Soit une fonction \textsf{gen\_f} qui prend comme argument un nombre réel et qui renvoie un réel. On fera l'hypothèse que \textsf{gen\_f} est une fonction continue définie sur $\mathbb{R}$. On cherche à calculer l'intégrale de la fonction définie dans \textsf{gen\_f} sur un intervalle donné avec un pas donné. 
+Soit une fonction \textsf{gen\_f} qui prend comme argument un nombre réel et qui renvoie un réel. On fera l'hypothèse que \textsf{gen\_f} est une fonction définie  et continue sur $\mathbb{R}$. On cherche à approximer l'intégrale de la fonction définie dans \textsf{gen\_f} sur un intervalle donné avec un pas donné. 
 
 \begin{enumerate}
 \item Définir la fonction \textsf{rectangle\_gauche} qui permet d'intégrer une fonction par la méthode des rectangles, à gauche.
 \item Définir la fonction \textsf{rectangle\_droite} qui permet d'intégrer une fonction par la méthode des rectangles, à droite.
 \item Définir la fonction \textsf{rectangle\_milieu} qui permet d'intégrer une fonction par la méthode des rectangles en utilisant le point milieu.
-\item Définir une fonction permettant de comparer les méthodes d'intégration. Elle devra permettre de calculer des intégrales pour différentes valeur du pas. 
+\item Définir une fonction permettant de comparer les méthodes d'intégration. Elle devra permettre d'approximer les intégrales pour différentes valeur du pas. 
 \end{enumerate}
 \end{exemple}
 
@@ -370,7 +370,7 @@ $$
 \begin{exemple}
 \textit{Calcul intégral}
 
-Soit une fonction \textsf{gen\_f} qui prend comme argument un nombre réel et qui renvoie un réel. On fera l'hypothèse que \textsf{gen\_f} est une fonction continue définie sur $\mathbb{R}$. On cherche à calculer l'intégrale de la fonction définie dans \textsf{gen\_f} sur un intervalle donné avec un pas donné. 
+Soit une fonction \textsf{gen\_f} qui prend comme argument un nombre réel et qui renvoie un réel. On fera l'hypothèse que \textsf{gen\_f} est une fonction continue définie sur $\mathbb{R}$. On cherche à approximer l'intégrale de la fonction définie dans \textsf{gen\_f} sur un intervalle donné avec un pas donné. 
 
 Définir la fonction \textsf{integration\_trapeze} qui permet d'intégrer une fonction par la méthode des trapèzes.
 
@@ -380,8 +380,8 @@ Définir la fonction \textsf{integration\_trapeze} qui permet d'intégrer une fo
 Dans la majorité des cas, le calcul numérique d'une intégrale donne un résultat approché du résultat réel. En augmentant la discrétisation de l'intervalle d'intégration, il est possible de diminuer cette erreur. Cependant, une augmentation de cette discrétisation conduit à une augmentation des calculs. 
 
 
-\subsection{Calcul d'erreur -- Rectangles à gauche (et à droite)}
-Soit $f$ une fonction $\mathcal{C}^1$ sur $I=[a,b]$. L'intervalle $I$ est fractionné en $n$ segments $[a_0, a_1, ..., a_n]$ avec $a_0 = a$ et $a_n=b$. On cherche à calculer :
+\subsection{Majoration de l'erreur -- Rectangles à gauche (et à droite)}
+Soit $f$ une fonction $dérivable$ sur $I=[a,b]$ et dont $f'$ continue sur $I$. L'intervalle $I$ est fractionné en $n$ segments $[a_0, a_1, ..., a_n]$ avec $a_0 = a$ et $a_n=b$. On cherche à approximer :
 $$
 \mathcal{A}=\int\limits_a^{b}f(x)\mathrm{d}x =  \sum\limits_{i=0}^{n-1} \left[\int\limits_{a_i}^{a_{i+1}}f(x)\mathrm{d}x \right]
 $$
@@ -400,29 +400,29 @@ On a $\int\limits_{a_i}^{a_{i+1}}f(a_i)\mathrm{d}x=\left(a_{i+1}-a_{i}\right) f(
 \allowdisplaybreaks
 
 \begin{eqnarray*}
-\varepsilon_i &\leq &  \left| \int\limits_{a_i}^{a_{i+1}}f(x) - \left(a_{i+1}-a_{i}\right) f(a_i) \; \mathrm{d}x\right|  \\
-&\leq &   \int\limits_{a_i}^{a_{i+1}} \left| f(x) - \left(a_{i+1}-a_{i}\right) f(a_i) \right|\; \mathrm{d}x \quad \text{d'après l'inégalité triangulaire}\\
-&\leq &   \int\limits_{a_i}^{a_{i+1}} \underbrace{\underset{[a,b]}{\sup} \left| f'(x)\right|}_{M} \cdot \left| x-a_i\right|  \; \mathrm{d}x \quad \text{d'après l'inégalité des accroissements finis}\\
-& \leq & M \int\limits_{a_i}^{a_{i+1}}  \left( x-a_i\right)  \; \mathrm{d}x \quad  \quad \text{parce que}\, x\geq a_i\\
-& \leq & M   \left[ \dfrac{\left(x-a_i\right)^2}{2}\right]_{a_i}^{a_{i+1}} \leq M \dfrac{\left(a_{i+1}-a_i\right)^2}{2}
+\varepsilon_i &\leq &  \left| \int\limits_{a_i}^{a_{i+1}}f(x) -  f(a_i) \; \mathrm{d}x\right|  \\
+&\leq &   \int\limits_{a_i}^{a_{i+1}} \left| f(x) -  f(a_i) \right|\; \mathrm{d}x \quad \text{d'après l'inégalité triangulaire}\\
+&\leq &   \int\limits_{a_i}^{a_{i+1}} \underbrace{\underset{[a,b]}{\sup} \left| f'(x)\right|}_{M_1} \cdot \left| x-a_i\right|  \; \mathrm{d}x \quad \text{d'après l'inégalité des accroissements finis}\\
+& \leq & M_1 \int\limits_{a_i}^{a_{i+1}}  \left( x-a_i\right)  \; \mathrm{d}x \quad  \quad \text{parce que}\, x\geq a_i\\
+& \leq & M_1   \left[ \dfrac{\left(x-a_i\right)^2}{2}\right]_{a_i}^{a_{i+1}} \leq M_1 \dfrac{\left(a_{i+1}-a_i\right)^2}{2}
 \end{eqnarray*}
 
 Dans le cas où $I$ est divisé en $n$ subdivisions régulières, $a_{i+1}-a_i = \dfrac{1}{n}$. On a a alors 
 $$
-\varepsilon_k \leq \dfrac{M}{2n^2} \quad \text{sur}\quad [a_i,a_{i+1}]
+\varepsilon_k \leq \dfrac{M_1}{2n^2} \quad \text{sur}\quad [a_i,a_{i+1}]
 $$
 
 On montre alors que sur $[a,b]$, on a donc :
 $$
-\varepsilon \leq n\dfrac{M}{2n^2} \leq \dfrac{M}{2n} 
+\varepsilon \leq n\dfrac{M_1}{2n^2} \leq \dfrac{M_1}{2n} 
 $$
 
 
 \begin{resultat}
 \textbf{Erreur sur la méthode des rectangles à gauche et à droite}
 
-Soit $f$ fonction $\mathcal{C}^1$ sur $I=[a,b]$. Soit $M$ un majorant de $f'$ sur $I$. En intégrant $f$ sur $n$ subdivisions régulières de $I$ par la méthode des rectangles à droite ou à gauche, l'erreur commise$\varepsilon$ est telle que : 
-$$ \varepsilon \leq \dfrac{M}{2n}$$ 
+Soit $f$ fonction dérivable sur $I=[a,b]$ et dont $f'$ est continue sur $I$. Soit $M_1$ un majorant de $f'$ sur $I$. En intégrant $f$ sur $n$ subdivisions régulières de $I$ par la méthode des rectangles à droite ou à gauche, l'erreur commise $\varepsilon$ est telle que : 
+$$ \varepsilon \leq \dfrac{M_1}{2n}$$ 
 
 \end{resultat}
 
@@ -431,7 +431,7 @@ $$ \varepsilon \leq \dfrac{M}{2n}$$
 La démonstration pour les rectangles à droite se conduit de manière identique. 
 \end{rem}
 
-\subsection{Calcul d'erreur -- Rectangles au milieu}
+\subsection{Majoration de l'erreur -- Rectangles au milieu}
 On conserve les notations du cas précédent.
 
  Par la méthode des rectangles au milieu, sur chaque subdivision de$I$, $\mathcal{A}_i$ est approximée par $\left(a_{i+1}-a_{i}\right) \cdot f\left(\dfrac{a_i+a_{i+1}}{2}\right) $. 
@@ -439,23 +439,23 @@ On conserve les notations du cas précédent.
 \begin{Objectif}
 Déterminer sur chaque intervalle $[a_i,a_{i+1}]$ l'erreur commise par une intégration utilisant la méthode des rectangles à gauche. On va pour cela chercher à majorer l'erreur $\varepsilon_i$ :
 $$
-\varepsilon_i = \left| \int\limits_{a_i}^{a_{i+1}}f(x)\mathrm{d}x -
+\varepsilon_i = \left| \int\limits_{a_i}^{a_{i+1}}f(x)\;\mathrm{d}x -
 \left(a_{i+1}-a_{i}\right) \cdot f\left(\dfrac{a_i+a_{i+1}}{2}\right)\right|
 $$
 \end{Objectif}
 
 \begin{eqnarray*}
-\varepsilon_i & = & \int\limits_{a_i}^{a_{i+1}}f(x)\mathrm{d}x -
-\left(a_{i+1}-a_{i}\right) \cdot f\left(\dfrac{a_i+a_{i+1}}{2}\right) \\
- & = &  \int\limits_{a_i}^{a_{i+1}}f(x)\mathrm{d}x 
- - \int\limits_{a_i}^{a_{i+1}}f\left(\dfrac{a_i+a_{i+1}}{2}\right)dt 
+\varepsilon_i & = &\left| \int\limits_{a_i}^{a_{i+1}}f(x)\;\mathrm{d}x -
+\left(a_{i+1}-a_{i}\right) \cdot f\left(\dfrac{a_i+a_{i+1}}{2}\right)\right| \\
+ & = &  \left|\int\limits_{a_i}^{a_{i+1}}f(x)\;\mathrm{d}x 
+ - \int\limits_{a_i}^{a_{i+1}}f\left(\dfrac{a_i+a_{i+1}}{2}\right)\;\mathrm{d}x 
  - f'\left(\dfrac{a_i+a_{i+1}}{2}\right) 
- + \underbrace{\int\limits_{a_i}^{a_{i+1}} \left( x - \dfrac{a_i+a_{i+1}}{2}\right)\;\mathrm{d}x}_{0} \\%\quad \text{à comprendre} \\
+ \cdot \underbrace{\int\limits_{a_i}^{a_{i+1}} \left( x - \dfrac{a_i+a_{i+1}}{2}\right)\;\mathrm{d}x}_{0} \right|\\%\quad \text{à comprendre} \\
 \end{eqnarray*}
 
   On a donc :  
 \begin{eqnarray*}
-|\varepsilon_i| & \leq &\left|
+\varepsilon_i & \leq &\left|
 \int\limits_{a_i}^{a_{i+1}} f(x) - \left[
 f\left(\dfrac{a_i+a_{i+1}}{2} \right)
 +f'\left(\dfrac{a_i+a_{i+1}}{2} \right)\left(x - \dfrac{a_i+a_{i+1}}{2}\right)
@@ -464,39 +464,39 @@ f\left(\dfrac{a_i+a_{i+1}}{2} \right)
 f\left(\dfrac{a_i+a_{i+1}}{2} \right)
 +f'\left(\dfrac{a_i+a_{i+1}}{2} \right)\left(x - \dfrac{a_i+a_{i+1}}{2}\right)
 \right] \right|\; \mathrm{d}x \quad \text{Inégalité triangulaire}\\
-& \leq & \int\limits_{a_i}^{a_{i+1}} \underbrace{\underset{[a,b]}{\sup} \left| f''(x)\right|}_{M} \cdot \left| x- \dfrac{a_i+a_{i+1}}{2}\right|^2  \; \mathrm{d}x \quad \text{d'après l'inégalité de Taylor Lagrange}\\
-& \leq & M \int\limits_{a_i}^{a_{i+1}} \left( x- \dfrac{a_i+a_{i+1}}{2}\right)^2  \; \mathrm{d}x \leq \dfrac{M}{3} \left[ \left( x- \dfrac{a_i+a_{i+1}}{2}\right)^3\right]_{a_i}^{a_{i+1}} \\
-& \leq & \dfrac{M}{3} \left[ \left( \dfrac{a_{i+1}-a_{i}}{2} \right)^3- \dfrac{a_i-a_{i+1}}{2}\right]\\
-& \leq & \dfrac{2M}{3}\dfrac{1}{8}\left( {a_{i+1}-a_{i}}\right)^3
+& \leq & \int\limits_{a_i}^{a_{i+1}} \underbrace{\underset{[a,b]}{\sup} \left| f''(x)\right|}_{M_2} \cdot \left| x- \dfrac{a_i+a_{i+1}}{2}\right|^2  \; \mathrm{d}x \quad \text{d'après l'inégalité de Taylor Lagrange}\\
+& \leq & M_2 \int\limits_{a_i}^{a_{i+1}} \left( x- \dfrac{a_i+a_{i+1}}{2}\right)^2  \; \mathrm{d}x \leq \dfrac{M_2}{3} \left[ \left( x- \dfrac{a_i+a_{i+1}}{2}\right)^3\right]_{a_i}^{a_{i+1}} \\
+& \leq & \dfrac{M_2}{3} \left[ \left( \dfrac{a_{i+1}-a_{i}}{2} \right)^3- \dfrac{a_i-a_{i+1}}{2}\right]\\
+& \leq & \dfrac{2M_2}{3}\dfrac{1}{8}\left( {a_{i+1}-a_{i}}\right)^3
 \end{eqnarray*}
 
 
 Dans le cas où $I$ est divisé en $n$ subdivisions régulières, $a_{i+1}-a_i = \dfrac{1}{n}$. On a a alors 
 $$
-\varepsilon_k \leq \dfrac{2M}{3}\dfrac{1}{8}\dfrac{1}{n^3} \quad \text{sur}\quad [a_i,a_{i+1}]
+\varepsilon_k \leq \dfrac{2M_2}{3}\dfrac{1}{8}\dfrac{1}{n^3} \quad \text{sur}\quad [a_i,a_{i+1}]
 $$
 
 On montre alors que sur $[a,b]$, on a donc :
 $$
-\varepsilon \leq n \dfrac{2M}{3}\dfrac{1}{8}\dfrac{1}{n^3} \leq \dfrac{M}{12 n^2}
+\varepsilon \leq n \dfrac{2M_2}{3}\dfrac{1}{8}\dfrac{1}{n^3} \leq \dfrac{M_2}{12 n^2}
 $$
 
 
 \begin{resultat}
 \textbf{Erreur sur la méthode des rectangles -- point milieu}
 
-Soit $f$ fonction $\mathcal{C}^2$ sur $I=[a,b]$. Soit $M$ un majorant de $f''$ sur $I$. En intégrant $f$ sur $n$ subdivisions régulières de $I$ par la méthode des rectangles point milieu, l'erreur commise$\varepsilon$ est telle que : 
-$$ \varepsilon \leq \dfrac{M}{12n^2}$$ 
+Soit $f$ fonction deux fois dérivables sur $I=[a,b]$ et dont $f''$ est continue sur $I$. Soit $M_2$ un majorant de $f''$ sur $I$. En intégrant $f$ sur $n$ subdivisions régulières de $I$ par la méthode des rectangles point milieu, l'erreur commise$\varepsilon$ est telle que : 
+$$ \varepsilon \leq \dfrac{M_2}{12n^2}$$ 
 
 \end{resultat}
 
-\subsection{Calcul d'erreur -- Méthode des trapèzes}
+\subsection{Majoration de l'erreur -- Méthode des trapèzes}
 
 
 \begin{resultat}
 \textbf{Erreur sur la méthode des trapèzes}
 
-Soit $f$ fonction $\mathcal{C}^2$ sur $I=[a,b]$. %Soit $M$ un majorant de $f''$ sur $I$. 
+Soit $f$ une fonction deux fois dérivable sur $I=[a,b]$ et dont $f''$ continue sur $I$. %Soit $M$ un majorant de $f''$ sur $I$. 
 En intégrant $f$ sur $n$ subdivisions régulières de $I$ par la méthode des trapèzes, l'erreur commise$\varepsilon$ est telle qu'il existe un entier $M$ tel que : 
 $$ \varepsilon \leq \dfrac{M}{12n^2}$$ 
 
@@ -525,7 +525,7 @@ Méthode des trapèzes & $n>\sqrt{10}$ & $n>10$ & $n>32$ & $n>1\;000$ & $n>10^5$
 
 \begin{thebibliography}{2}
 \bibitem{1}{Analyse numérique : Intégration numérique, INP Grenoble -- Pagora. \url{https://team.inria.fr/moise/files/2013/03/Cours_integration.pdf}.}
-\bibitem{1}{Adrien Pétri, \textit{Analyse numérique : Intégration numérique}, Notes de cours de TSI 1, Lycée Rouvière, Toulon.}
+\bibitem{1}{Adrien Petri, \textit{Analyse numérique : Intégration numérique}, Notes de cours de TSI 1, Lycée Rouvière, Toulon.}
 \end{thebibliography}
 \end{document}
 
