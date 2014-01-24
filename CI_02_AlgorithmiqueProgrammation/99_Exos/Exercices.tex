@@ -70,14 +70,14 @@ On donne l'algorithme suivant :
 
 \begin{py}
 \begin{python}
-def donction(m, t):
+def fonction(m, t):
     for i in range(1 + len(t) - len(m)):
         j = 0
         while j < len(m) and m[j] == t[i + j]:
             j += 1
         if j == len(m):
             return i
-        return None
+    return None
 \end{python}
 \end{py}
 \begin{enumerate}
