@@ -1,0 +1,312 @@
+\documentclass[10pt]{article}
+\input{style/coursHeadings}
+\input{style/programHeadings}
+\input{style/macros_SII}
+\input{style/macros_Titres}
+\input{style/macros_Frames}
+
+%Si le boolen xp est vrai : compilation pour xabi
+%Sinon compilation Damien
+\newboolean{xp}
+\setboolean{xp}{true}
+
+\newboolean{prof}
+\setboolean{prof}{true}
+
+\usepackage[%
+    pdftitle={Devoir Surveillé 3},
+    pdfauthor={Xavier Pessoles},
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=magenta]{hyperref}
+
+
+\def\discipline{Informatique}
+\def\xxtitre{\ifthenelse{\boolean{xp}}{
+Devoir Surveillé 3 -- 1 heure
+}{
+Chapitre  -- }}
+
+\def\xxsoustitre{\ifthenelse{\boolean{xp}}{
+Algorithmique et programmation}{
+Partie  -- }}
+
+\def\xxauteur{\ifthenelse{\boolean{xp}}{
+Xavier \textsc{Pessoles}}{
+Damien \textsc{Iceta} \\ Xavier \textsc{Pessoles}}}
+
+\def\xxpied{\ifthenelse{\boolean{xp}}{
+DS 03 -- Sujet}{
+\xxtitre}}
+
+\def\xxcathegorie{\ifthenelse{\boolean{xp}}{
+2013 -- 2014 \\
+Xavier \textsc{Pessoles}}{
+Informatique - Cours}}
+
+
+
+
+
+%---------------------------------------------------------------------------
+
+
+\begin{document}
+
+\ifthenelse{\boolean{xp}}{\input{style/enteteXP}}{\input{style/enteteDI}}
+
+
+
+\subsection*{Avant-propos -- Calcul d'une puissance}
+On souhaite calculer la puissance $b$ d'un nombre $x$ : $x^b$ avec $x\in\mathbb{R}$ et $b\in\mathbb{N}$. On utilise pour cela la fonction $\textsf{expo}$ basée sur un algorithme naïf prenant comme argument un entier naturel $b$ et un nombre réel $x$ :
+
+\begin{py}
+\begin{python}
+def expo(x,b):
+    res = 1
+    j=b
+    inv = x
+    while j>=1:
+        res = res * x
+        j=j-1
+    return res
+\end{python}
+\end{py}
+
+
+\subparagraph{}
+\textit{Proposer une autre formulation de l'algorithme de la fonction \textsf{expo} en utilisant une boucle $\textsf{for}$.}
+
+%\begin{corrige}
+%\begin{python}
+%def expo(x,n):
+%    res = 1
+%    for i in range(n):
+%        res =res*x
+%    return res
+%\end{python}
+%\end{corrige}
+\subparagraph{}
+\textit{On conserve la fonction \textsf{expo} utilisant la boucle \textsf{while}. Montrer que $j$ est un \textbf{variant} de boucle.}
+
+\ifthenelse{\boolean{prof}}{
+\begin{corrige}
+La boucle \textsf{while} est conditionnée par $j>=1$. Par ailleurs, $j$ est toujours positif est décroit à chaque boucle. $j$ est donc un variant de boucle. Il nous assure que l'algorithme se terminera.
+\end{corrige}}{}
+
+\subparagraph{}
+\textit{On conserve toujours la fonction \textsf{expo} utilisant la boucle \textsf{while}. Montrer que la propriété $\mathcal{P}(n)$ $x^b = inv_n^{j_n}\cdot res_n$ est un \textbf{invariant} de boucle.}
+
+
+\ifthenelse{\boolean{prof}}{
+\begin{corrige}
+\begin{enumerate}
+\item Initialement, $res=1$, $j=n$.
+\item L'invariant de boucle suggéré est $x^b = inv_n^{j_n}\cdot res_n$.
+\item Montrons la validité de notre invariant :
+\begin{itemize}
+\item au rang $0$ : $j_0=b$, $inv_0=x$, $res_0=1$. On a donc $ inv_0^{j_0}\cdot res_0 = x^b\cdot 1 = x^b$. La propriété est donc vraie. 
+\item au rang $n$ : supposons que la propriété $inv_n^{j_n}\cdot res_n$ vraie.
+\item au rang $n+1$ : $j=j_n-1$, $res_{n+1}=res_n\cdot x$, $inv_n=x$. On a donc :
+$inv_{n+1}^{j_{n+1}}\cdot res_{n+1} = x ^{j_n-1}\cdot res_n\cdot x =  x ^{j_n}\cdot x^{-1}\cdot res_n\cdot x = x ^{j_n}\cdot res_n = x^b $. La propriété est donc vérifiée au rang $n+1$. 
+\end{itemize}
+\item La terminaison du programme est vérifiée par l'existence du variant de boucle $j$. 
+\item En sortie de boucle, $j=0$, et $res_n = x^b$. En conséquence, l'invariant de boucle est encore vrai.
+\end{enumerate}
+\end{corrige}
+}{}
+
+
+\subparagraph{}
+\textit{On note $C_e$ le coût d'une opération élémentaire (affectation, opération mathématique simple, incrémentation de boucle, comparaison). Évaluer la complexité temporelle de l'algorithme proposé dans la fonction \textsf{expo}.}
+
+\ifthenelse{\boolean{prof}}{
+\begin{corrige}
+La fonction $\textsf{exo}$  est constituée :
+\begin{itemize}
+\item trois affectations de coût $C_e$ (coût total $3_Ce$);
+\item une boucle \textsf{while} qui doit s'exécuter $b$ fois et qui est constituée :
+\begin{itemize}
+\item de deux instructions composées de de 2 affectations et de deux opérations élémentaires (coût total $4_Ce$);
+\end{itemize}
+\item du coût du \textsf{return} de coût $C_e$. 
+\end{itemize}
+Au final, le coût temporel est de :
+$$
+C_T(b)=3\cdot C_e + b\cdot 4 C_e + C_e
+$$
+
+Ainsi, $C_T(b)\underset{+\infty}{\sim}4C_e b$. La complexité algorithmique est donc linéaire (en $\mathcal{O}(n)$).
+\end{corrige}
+}{}
+
+
+\subparagraph{}
+\textit{Citer une méthode plus efficace permettant de calculer $x^b$. Détailler brièvement son fonctionnement et préciser sa complexité temporelle.}
+\ifthenelse{\boolean{prof}}{
+\begin{corrige}
+La méthode d'exponentiation rapide permet de calculer plus rapidement $x^b$. Sa complexité est en $\mathcal{O}(log(n))$. Pour rappel, $x^b$ se calcule ainsi : 
+$$
+x^b\left\{
+\begin{array}{l}
+\text{si }b=0 \quad x^b=1 \\
+\text{si } $b$ \text{ est pair, } x^b=x^{\dfrac{b}{2}}\cdot x^{\dfrac{b}{2}}\\
+\text{si } $b$ \text{ est impair, } x^b=x^{b-1}\cdot x \\
+\end{array}
+\right.
+$$
+
+\end{corrige}}{}
+
+
+
+\subsection*{Calcul de polynômes}
+On cherche à évaluer un polynôme en différentes valeurs. On note :
+$$
+\forall x \in \mathbb{R} \quad P(x) = \sum\limits_{i=0}^n a_i x^i
+$$
+
+Les coefficients $a_i$ du polynôme sont des entiers positifs stockés dans un tableau \textsf{a} tels que $a=[a_0,a_1,a_2,...,a_n]$. La fonction suivante appelée \textsf{evaluer} prend comme argument un nombre flottant $x$ et un tableau $a$ contenant les coefficients $a_i$ du polynôme.
+Ainsi, si $a=[0,1,2,3]$, alors $a[0]=a_0$, $a[1]=a_1$, etc. alors $P(x)=x+2x^2+3x^3$. La fonction  \textsf{evaluer} retourne $P(x)$.
+
+\begin{py}
+\begin{python}
+def evaluer(a,x):
+    for i in range(len(a)):
+        res = res+a[i]*expo(x,i) 
+    return res
+\end{python}
+\end{py}
+
+
+\subparagraph{}
+\textit{La fonction \textsf{evaluer} a-t-elle l'effet désiré ? Si non, modifier le programme.}
+\ifthenelse{\boolean{prof}}{
+\begin{corrige}
+Il est nécessaire d'initialiser la variable \textsf{res} à 0. 
+\end{corrige}}{}
+
+\subparagraph{}
+\textit{Estimer la complexité algorithmique de la fonction \textsf{evaluer}.}
+\ifthenelse{\boolean{prof}}{
+\begin{corrige}
+Pour un polynôme de degré $n$, la boucle \textsf{for} s'exécutera $n+1$ fois. 
+
+Au rang $i$, le coût de la fonction \textsf{expo} est $3\cdot C_e + i\cdot 4 C_e + C_e$.
+
+Le coût d'un incrément de boucle est donc $C(i)=3\cdot C_e + i\cdot 4 C_e + C_e + 4 C_e$
+
+On a donc un coût total $C(i)=\sum\limits_{0}^{n+1}C(i)$.
+
+On peut donc en conclure que la complexité sera en $\mathcal{O}(n^2)$.
+\end{corrige}}{}
+\subsection*{Méthode de Horner}
+
+Afin de diminuer le coût temporel de l'évaluation d'un polynôme, il est possible d'utiliser la méthode de Horner. Elle consiste en une réécriture du polynôme $P(x)$ : 
+$$
+P(x) = a_0 + x\left(a_1 + x \left(a_2 + x \left(a_3 + .... \right) \right) \right)
+$$
+
+Ainsi le polynôme $P(x)=x+2x^2+3x^3$ est réécrit ainsi :  
+$P(x)=0+x\left( 1 + x\left(2+ 3x \right) \right)$.
+
+\begin{py}
+\begin{python}
+def horner(a,x):
+    res=0
+    n = len(a)-1
+    while n>=0:
+        res = a[n]+x*res
+        n=n-1 
+    return res
+\end{python}
+\end{py}
+
+\subparagraph{}
+\textit{On prend $a=[0,1,2,3]$ et $x=2$. En remplissant un tableau, donner l'évolution des variables $res$ et $n$ à chaque incrément de boucle.}
+\ifthenelse{\boolean{prof}}{
+\begin{corrige}
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+$n$ & res(x) & res \\
+\hline 
+3 & $res=3 + x\cdot 0 = 3$ & 3 \\
+\hline 
+2 & $res=2 + x\cdot 3 $ & 8  \\
+\hline 
+1 & $res=1 + x\left(2 + x\cdot 3\right) =1+ 2x + 3x^2 $ & 17 \\
+\hline 
+0 & $res=0 + x\left( 1+ 2x + 3x^2 \right)= x+2x^2 + 3x^3$  & 34\\
+\hline 
+\end{tabular}
+\end{center}
+\end{corrige}}{}
+
+\subparagraph{}
+\textit{Expliquer en quoi l'algorithme proposé répond à la réécriture du polynôme $P(x)$ suivant la méthode de Horner ?}
+\ifthenelse{\boolean{prof}}{
+\begin{corrige}
+Cf question précédente. 
+\end{corrige}}{}
+
+\subparagraph{}
+\textit{Estimer la complexité algorithmique de la fonction \textsf{horner}. Conclure sur l'intérêt de cet algorithme.}
+\ifthenelse{\boolean{prof}}{
+\begin{corrige}
+On constate directement que la complexité de l'algorithme est linéaire ce qui lui confère une plus grande rapidité que la méthode naïve. 
+\end{corrige}}{}
+
+\subsection*{Intégration numérique}
+On cherche maintenant à intégrer numériquement $P(x)$ sur l'intervalle $[u,v]$ par la méthode des rectangles à gauche :
+
+$$
+I = \int\limits_{u}^{v} P(x) \; \mathrm{d}x
+$$
+
+\subparagraph{}
+\textit{Écrire la fonction \textsf{integrale\_rectangle} prenant comme argument le nombre d'échantillons $n$, le tableau $a$ des coefficients du polynôme ainsi que $u$ et $v$ les bornes de l'intégrale et retournant la valeur $I$ de l'intégrale. }
+\ifthenelse{\boolean{prof}}{
+\begin{corrige}
+
+\end{corrige}}{}
+%\begin{corrige}
+%\begin{py}
+%\begin{python}
+%def integrale_rectangle(n,u,v,a):
+%    res = 0
+%    pas = (v-u)/n)
+%    for i in range(0,n): 
+%        val = a+pas*i
+%        res = res + pas*horner(a,val)
+%    return res
+%\end{python}    
+%\end{py}    
+%\end{corrige}
+\subparagraph{}
+\textit{Quel est l'ordre de grandeur de l'erreur effectuée sur le calcul de l'intégrale.}
+\ifthenelse{\boolean{prof}}{
+\begin{corrige}
+Pour $n$ échantillons, l'erreur peut être majorée par $\dfrac{M}{2n}$ avec $M$ le sup de $P'(x)$ sur l'intervalle $[u,v]$.
+
+\vspace{1cm}
+Il est à noter qu'utiliser la méthode des rectangles pour calculer l'intégrale d'un polynôme n'est pas forcément judicieux. En effet, il est aisé de trouver une primitive de $P(x)$. 
+
+%Ainsi, si $\forall x \in \mathbb{R}$,  $ P(x) = \sum\limits_{i=0}^n a_i x^i$, alors, 
+%$$
+%I = \int\limits_u^{v}\sum\limits_{i=0}^n a_i x^i \;\mathrm{d}x = 
+%\sum\limits_{i=0}^n\int\limits_u^{v} a_i x^i \;\mathrm{d}x = 
+%\sum\limits_{i=0}^n \left( \dfrac{a_i}{i+1}x^{i+1}\right)
+%$$
+%
+% Par la méthode des rectangles à gauche, en notant $p$ le nombre d'échantillons, on peut donc approximer $I$ par $I_m$ avec  
+% $$
+% I_p=\sum\limits_{i=0}^{p-1} \dfrac{v-u}{p} \cdot P\left(u+i \dfrac{v-u}{p}\right) 
+% $$
+
+
+\end{corrige}}{}
+
+\end{document}
+
+
