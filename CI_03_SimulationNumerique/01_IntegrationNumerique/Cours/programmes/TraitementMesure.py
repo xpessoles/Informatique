@@ -50,15 +50,25 @@ def int_rect_n(temps,tab,n):
 
 
 
-#malte_f=val_moy_n(temps,malte,50)
-malte_f=int_rect_n(temps,malte,50)
+malte_f=val_moy_n(temps,malte,50)
+maneton_f=val_moy_n(temps,maneton,50)
+#malte_f=int_rect_n(temps,malte,50)
 mm=[]
 tt=[]
+mama=[]
 for i in range(len(malte_f)):
     tt.append(malte_f[i][0])
     mm.append(malte_f[i][1])
+    mama.append(maneton_f[i][1])
     
 #plt.plot(temps,malte,'r.')
 plt.plot(tt,mm,linewidth=2)
+plt.plot(tt,mama,linewidth=2)
 plt.grid(True, which="both", linestyle="dotted")
-plt.show()
+#plt.show()
+
+fid=open('Mesure_Traitee.txt','w')
+for i in range(len(tt)):
+    ch=str(tt[i])+','+str(mm[i])+'\n'
+    fid.write(ch)
+fid.close()
