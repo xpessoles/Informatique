@@ -13,24 +13,26 @@ g = 9.81
 m = 45.93/1000
 dT = 108./1000. #diametre trou
 db = 42.67/1000. #diametre balle
-def tir_parabolique():
+def tir_parabolique1():
     # Reseau de courbe en tir parabolique
     t = np.linspace(0,8,200)
-    alpha = 20*2*pi/360
+    #alpha = 20*2*pi/360
+    alpha=0.17
     plt.plot(v0*np.cos(alpha)*t,
          -0.5*g*t*t+v0*np.sin(alpha)*t
       ,label="$\\alpha = 20^o$",linewidth=3)
-    alpha = 30*2*pi/360
-    t = np.linspace(0,11,200)
+    #alpha = 30*2*pi/360
+    alpha=1.36
+    t = np.linspace(0,22,200)
     plt.plot(v0*np.cos(alpha)*t,
          -0.5*g*t*t+v0*np.sin(alpha)*t
       ,label="$\\alpha = 30^o$",linewidth=3)
     alpha = 40*2*pi/360
     t = np.linspace(0,14,200)
-    plt.plot(v0*np.cos(alpha)*t,
+    """plt.plot(v0*np.cos(alpha)*t,
          -0.5*g*t*t+v0*np.sin(alpha)*t
       ,label="$\\alpha = 40^o$",linewidth=3)
-
+"""
     
     plt.grid(True, which="both", linestyle="dotted")
     plt.legend(loc='lower left', fancybox=True, shadow=True, prop=dict(size=10))
@@ -106,7 +108,7 @@ def courbe_erreur():
 #courbe_erreur()
 #tir_parabolique(1.3)
 #courbe_alpha()
-#tir_parabolique()
-res = dichotomie(0.0000000001,1.,0.01)[0]*180/pi
-print(res)
-tir_parabolique(dichotomie(0.0000000001,1.,0.01)[0])
+tir_parabolique1()
+#res = dichotomie(0.0000000001,1.,0.01)[0]*180/pi
+#print(res)
+#tir_parabolique(dichotomie(0.0000000001,1.,0.01)[0])
