@@ -15,18 +15,18 @@ dT = 108./1000. #diametre trou
 db = 42.67/1000. #diametre balle
 def tir_parabolique1():
     # Reseau de courbe en tir parabolique
-    t = np.linspace(0,8,200)
+    t = np.linspace(0,4.5,200)
     #alpha = 20*2*pi/360
     alpha=0.17
     plt.plot(v0*np.cos(alpha)*t,
          -0.5*g*t*t+v0*np.sin(alpha)*t
-      ,label="$\\alpha = 20^o$",linewidth=3)
+      ,label="$\\alpha = \\alpha_1$",linewidth=3)
     #alpha = 30*2*pi/360
     alpha=1.36
-    t = np.linspace(0,22,200)
+    t = np.linspace(0,21,200)
     plt.plot(v0*np.cos(alpha)*t,
          -0.5*g*t*t+v0*np.sin(alpha)*t
-      ,label="$\\alpha = 30^o$",linewidth=3)
+      ,label="$\\alpha = \\alpha_2$",linewidth=3)
     alpha = 40*2*pi/360
     t = np.linspace(0,14,200)
     """plt.plot(v0*np.cos(alpha)*t,
@@ -35,7 +35,7 @@ def tir_parabolique1():
 """
     
     plt.grid(True, which="both", linestyle="dotted")
-    plt.legend(loc='lower left', fancybox=True, shadow=True, prop=dict(size=10))
+    plt.legend(loc='upper right', fancybox=True, shadow=True, prop=dict(size=10))
     #plt.xlabel("Temps en $s$")
     #plt.ylabel("Position en $m$")
     #plt.axis([0,xf,-1.2,1.2])
