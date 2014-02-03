@@ -89,7 +89,25 @@ def dichotomie(a,b,epsilon):
             g, fg = m, fm
     return (g+d)/2,i
 
-def courbe_erreur():
+
+def lagrange(a,b,epsilon):
+    assert fonc(a) * fonc(b) <= 0 and epsilon > 0
+    g, d = a, b
+    fg, fd = fonc(g), fonc(d)
+    i=0
+    while (d - g) > 2 * epsilon:
+        print(i,g,d)
+        i=i+1
+        m = -(g*fd-d*fg)/(fg-fd)
+        fm = fonc(m)
+        if fg * fm <= 0:
+            d, fd = m, fm
+        else:
+            g, fg = m, fm
+    return (g+d)/2,i
+
+
+def courbe_erreur_dicho():
     tt=[]
     tab_op =[]
     for i in range(0,1000) :
@@ -105,10 +123,30 @@ def courbe_erreur():
     #plt.ylabel("Position en $m$")
     #plt.axis([0,xf,-1.2,1.2])
     plt.show()
+
+
+def courbe_erreur_lagrange():
+    tt=[]
+    tab_op =[]
+    for i in range(0,1000) :
+        t = 0.000000000001+i*(0.0000001-0.000000000001)/1000
+        res,op = lagrange(0.000000000001,1.,t)
+        tt.append(t)
+        tab_op.append(op)
+
+    plt.plot(tt,tab_op,label="$Nb op$",linewidth=3)
+    plt.grid(True, which="both", linestyle="dotted")
+    plt.legend(loc='lower left', fancybox=True, shadow=True, prop=dict(size=10))
+    #plt.xlabel("Temps en $s$")
+    #plt.ylabel("Position en $m$")
+    #plt.axis([0,xf,-1.2,1.2])
+    plt.show()
+
+#courbe_erreur_lagrange()
 #courbe_erreur()
 #tir_parabolique(1.3)
 #courbe_alpha()
-tir_parabolique1()
+#tir_parabolique1()
 #res = dichotomie(0.0000000001,1.,0.01)[0]*180/pi
 #print(res)
 #tir_parabolique(dichotomie(0.0000000001,1.,0.01)[0])

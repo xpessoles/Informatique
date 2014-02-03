@@ -236,7 +236,7 @@ Il existe plusieurs méthodes pour tester si $f(a)$ et $f(b)$ sont de signes dif
 \subsubsection*{Interprétation graphique}
 
 \begin{center}
-\includegraphics[width=.6\textwidth]{images/courbe_alpha}
+\includegraphics[width=.6\textwidth]{images/InterpretationG}
 \end{center}
 
 
@@ -337,15 +337,133 @@ La méthode de Lagrange diffère de la méthode de dichotomie par le fait que l'
 \item Donner l'algorithme permettant de résoudre l'équation $f(x)=0$ en utilisant la cette méthode.
 \end{enumerate}
 
+\begin{minipage}[c]{.49\linewidth}
+La droite $\Delta_i$ passe par les points $(g_i,f(g_i))$ et $(d_i,f(d_i))$, elle a pour équation $y=ax + b$, trouvons l'ordonnée à l'origine et la pente de la droite :
+$$
+\left\{
+\begin{array}{l}
+f(g_i) = a g_i + b \\
+f(d_i) = a d_i + b 
+\end{array}
+\right.
+\Longleftrightarrow
+\left\{
+\begin{array}{l}
+a = \dfrac{f(g_i)-b}{g_i} \\
+f(d_i) =  \dfrac{f(g_i)-b}{g_i}d_i + b 
+\end{array}
+\right.
+$$ 
+$$
+\left\{
+\begin{array}{l}
+a = \dfrac{f(g_i)-b}{g_i} \\
+b = \dfrac{g_i f(d_i) -d_if(g_i) }{(g_i  -d_i)}
+\end{array}
+\right.
+\Longleftrightarrow
+\left\{
+\begin{array}{l}
+a = \dfrac{f(g_i)(g_i  -d_i)- (g_i f(d_i) -d_if(g_i) )}{g_i(g_i-d_i)} \\
+b = \dfrac{g_i f(d_i) -d_if(g_i) }{(g_i  -d_i)}
+\end{array}
+\right.
+$$ 
+\end{minipage} \hfill
+\begin{minipage}[c]{.43\linewidth}
+\begin{center}
+\includegraphics[width=.9\textwidth]{images/InterpretationG2}
+\end{center}
+\end{minipage}
+\vspace{.25cm}
 
-\newpage
+$$
+\left\{
+\begin{array}{l}
+a = \dfrac{f(g_i)  -  f(d_i)  }{g_i-d_i} \\
+b = \dfrac{g_i f(d_i) -d_if(g_i) }{g_i  -d_i}
+\end{array}
+\right.
+$$ 
+
+On cherche alors  $c$ tel que $f(c)=0$, c'est-à-dire $0=ac+b \Longleftrightarrow c = -\dfrac{b}{a}$.
+
+On a donc : 
+$$
+c = -\dfrac{g_i f(d_i) -d_if(g_i) }{f(g_i)  - f(d_i) }
+$$
+
+L'algorithme est le suivant :
+
+\begin{pseudo}
+\begin{algorithm}[H]
+\Fonction{
+Données:$f$, $a$,$b$, $\varepsilon$ \\
+$g\gets a$\\
+$d \gets b$\\
+$f_g \gets f(g)$\\
+$f_d \gets f(d)$\\
+\Tq{$ (d-g) > 2\varepsilon$}{
+$m \gets  -\dfrac{g_i f(d_i) -d_if(g_i) }{f(g_i)  - f(d_i) }$ \\
+$f_m\gets f(m)$
+
+\eSi{$f_g\cdot f_m \leq 0$}{
+$d \gets m$\\
+$f_d \gets f_m$\\
+}{
+$g \gets m$\\
+$f_d \gets f_m$\\
+}
+}
+\Retour{$(g+d)/2$}
+}
+\end{algorithm}
+\end{pseudo}
+
 
 \section{Méthode de Newton}
 
 \subsection{Principe}
+\begin{theo}
+\textbf{Développement de Taylor à l'ordre 1}
 
+Soit $f$ une fonction $C^1$ sur un intervalle $I$ et $a\in I$. Le développement de Taylor à l'ordre 1 de $f$ est donné par 
+$$
+f(x)=f(a)+ f'(a)\cdot(x-a)+\mathit{o}(x-a)
+$$
+\end{theo}
 
-\subsection{Algorithme de dichotomie}
+Géométriquement, lorsqu'on néglige le reste, le développement de Taylor donne l'équation de la tangente en $a$. Notons $\Delta(x)$ cette équation.
+
+L'abscisse $c$ de l'intersection de la tangente avec l'axe des abscisses est donné par la résolution de 
+$$
+\Delta(c)=0 
+\Longleftrightarrow f(a)+ f'(a)\cdot(c-a) = 0
+\Longleftrightarrow c = a-\dfrac{f(a)}{f'(a)}
+$$
+
+\begin{center}
+\includegraphics[width=.7\textwidth]{images/interpretation_newton}
+\end{center}
+ 
+\subsection{Algorithme de Newton}
+
+L'algorithme est le suivant :
+
+\begin{pseudo}
+\begin{algorithm}[H]
+\Fonction{
+Données:$f$, $f'$, $a$, $\varepsilon$ \\
+$g\gets a$\\
+$c \gets  g-\dfrac{f(g)}{f'(g)} $\\
+\Tq{$ |c-g|> \varepsilon$}{
+$g \gets  c$ \\
+$c \gets c-\dfrac{f(c)}{f'(c)}$
+}
+\Retour{$c$}
+}
+\end{algorithm}
+\end{pseudo}
 
 \subsection{Étude théorique de l'algorithme}
 \subsubsection{Variant de boucle}
@@ -358,6 +476,7 @@ La méthode de Lagrange diffère de la méthode de dichotomie par le fait que l'
 
 \begin{thebibliography}{2}
 \bibitem{1}{Germain Gondor, Problèmes stationnaires à une dimension du type $f(x) = 0$, Lycée Carnot, Dijon. UPSTI.}
+\bibitem{2}{Wack et Al., L’informatique pour tous en classes préparatoires aux grandes écoles, Editions Eyrolles.}
 %\bibitem{1}{Adrien Petri, \textit{Analyse numérique : Intégration numérique}, Notes de cours de TSI 1, Lycée Rouvière, Toulon.}
 \end{thebibliography}
 \end{document}
