@@ -465,18 +465,98 @@ $c \gets c-\dfrac{f(c)}{f'(c)}$
 \end{algorithm}
 \end{pseudo}
 
+
 \subsection{Étude théorique de l'algorithme}
-\subsubsection{Variant de boucle}
 
-\subsubsection{Invariant de boucle}
+Il n'est pas aisé de démontrer la terminaison de l'algorithme de Newton. Cela s'explique par le fait que si la dérivée s'annule en un point, la division $\dfrac{f(c)}{f'(c)}$ ne peut plus se calculer. Par ailleurs, suivant le profil de la courbe, il est possible de trouver une valeur de $c$ pour laquelle $|c-g|$ soit inférieure à $\varepsilon$ sans que $c$ soit une solution satisfaisante de l'équation $f(c)=0$. 
 
-\subsubsection{Complexité algorithmique}
 
-\subsection{Application sur l'exemple}
+Par ailleurs, dans le cadre cet algorithme, il est nécessaire d'initialiser la résolution du problème ce qui n'est pas toujours aisé.
+
+\subsection{Évaluation de la dérivée numérique}
+\subsubsection{Principe}
+L'algorithme de Newton fait apparaître le besoin de calculer la dérivée de la fonction en un point. Pour cela, deux cas de figures peuvent se présenter : 
+\begin{itemize}
+\item ou bien, il est possible de calculer la dérivée de la fonction analytiquement. Dans ce cas, il est possible de programmer directement une fonction permettant d'évaluer la dérivée d'une fonction;
+\item ou bien ce calcul de dérivée n'est pas possible. Dans ce cas on a recours à la dérivation numérique.
+\end{itemize}
+
+\begin{resultat}
+En première approximation, il est possible d'approximer la dérivée en approximant la tangente à la courbe par une droite passant par deux points successifs. Dans ces conditions, pour une valeur de $h$ suffisamment faible, on a : 
+$$
+f'(x_0)\simeq \dfrac{f(x+h)-f(x)}{h}	
+$$
+\end{resultat}
+
+
+%
+%\begin{resultat}
+%\textbf{Théorème de Taylor-Young}
+%Si $f$ est deux fois dérivable en $x_0$ et $f''(x_0)\neq 0$, 
+%$$
+% \dfrac{f(x_0+\varepsilon)-f(x_0)}{\varepsilon} - f'(x_0) \sim \dfrac{f''(x_0)}{2}h
+%$$
+%\end{resultat}%
+
+\subsubsection{Méthodes à un pas}
+
+\begin{minipage}[c]{.49\linewidth}
+\begin{resultat}
+\textbf{Différence avant -- Schéma d'Euler explicite}
+
+Dans ce cas, l'estimation de la dérivée au point $P_i$ s'appuie sur le point $P_{i+1}$ :
+$$
+f'(x_i)\simeq\dfrac{f(x_{i+1})-f(x_i)}{x_{i+1}-x_i}
+$$
+\end{resultat}
+
+\begin{resultat}
+\textbf{Différence arrière -- Schéma d'Euler implicite}
+
+Dans ce cas, l'estimation de la dérivée au point $P_i$ s'appuie sur le point $P_{i-1}$ :
+$$
+f'(x_i)\simeq\dfrac{f(x_{i})-f(x_{i-1})}{x_{i}-x_{i-1}}
+$$
+\end{resultat}
+\end{minipage}\hfill
+\begin{minipage}[c]{.49\linewidth}
+\begin{center}
+\includegraphics[width=\textwidth]{images/derivation_1pas}
+\end{center}
+\end{minipage}
+
+\subsubsection{Méthodes à dux pas}
+
+\begin{minipage}[c]{.49\linewidth}
+\begin{resultat}
+
+On peut aussi utiliser les points $P_{i-1}$ et $P_{i+1}$ pour estimer la dérivée en $P_i$ :
+$$
+f'(x_i)\simeq\dfrac{f(x_{i+1})-f(x_{i-1})}{x_{i+1}-x_{i-1}}
+$$
+
+\end{resultat}
+\end{minipage}\hfill
+\begin{minipage}[c]{.49\linewidth}
+\begin{center}
+\includegraphics[width=\textwidth]{images/derivation_2pas}
+\end{center}
+\end{minipage}
+
+\begin{rem}
+\begin{itemize}
+\item Lorsqu’il s’agit de dériver une fonction temporelle « en temps réel », le point suivant n’est pas encore connu donc seule la différence arrière peut être calculée.
+\item Le calcul de la dérivée conduit à un tableau de valeurs de dimension $n-1$.
+\end{itemize}
+\end{rem}
+
+
 
 \begin{thebibliography}{2}
 \bibitem{1}{Germain Gondor, Problèmes stationnaires à une dimension du type $f(x) = 0$, Lycée Carnot, Dijon. UPSTI.}
 \bibitem{2}{Wack et Al., L’informatique pour tous en classes préparatoires aux grandes écoles, Editions Eyrolles.}
+\bibitem{3}{Pierre Debout, Dérivation numérique.}
+\bibitem{4}{Marc Derumaux, Damion Iceta, Interpolation, intégration et dérivation numérique, Manipulation de fonctions décrites numériquement, UPSTI.}
 %\bibitem{1}{Adrien Petri, \textit{Analyse numérique : Intégration numérique}, Notes de cours de TSI 1, Lycée Rouvière, Toulon.}
 \end{thebibliography}
 \end{document}

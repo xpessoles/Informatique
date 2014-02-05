@@ -142,6 +142,30 @@ def courbe_erreur_lagrange():
     #plt.axis([0,xf,-1.2,1.2])
     plt.show()
 
+def newton(a,epsilon):
+    xi=a
+    print(xi)
+    xf = xi-fonc(xi)/dfonc(xi,epsilon)
+    print(xf)
+    i=0
+    while abs(xf-xi) > epsilon:
+        i=i+1
+        xi = xf
+        print(xi)
+        xf = xi-fonc(xi)/dfonc(xi,epsilon)
+    return xf,i
+
+def dfonc(xi,epsilon):    
+    return (fonc(xi+epsilon)-fonc(xi-epsilon))/(2*epsilon)
+
+
+epsilon = 0.00000001
+res = dichotomie(0.0000000001,1.,epsilon)
+print(res[0]*180/pi,res[1])
+
+res = newton(0.001,epsilon)
+print(res[0]*180/pi,res[1])
+
 #courbe_erreur_lagrange()
 #courbe_erreur()
 #tir_parabolique(1.3)
