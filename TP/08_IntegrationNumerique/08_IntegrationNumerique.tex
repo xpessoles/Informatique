@@ -77,7 +77,7 @@ Dans le cadre de ce TP, nous utiliserons l'environnement de programmation Spyder
 
 
 
-\section{Exercice 1 -- Période propre d'un pendule  -- Difficulté $\star\star\star$}
+\subsection*{Exercice 1 -- Période propre d'un pendule  -- Difficulté $\star\star\star$}
 On se propose de déterminer la période $T$ d’un pendule simple en mettant en \oe{}uvre une méthode d’intégration numérique.
 
 \begin{rem}
@@ -104,7 +104,7 @@ On donne $L=1\;m$ et l'accélération de la pesanteur $g=9,81\; m\cdot s^{-2}$.
 \textit{Montrer que l’énergie mécanique $\mathcal{E}_m(M/\mathcal{R_0})$ de la masselotte peut s'écire indifféremment :}
 \begin{equation}
 \label{eq1}
-\mathcal{E}_m(M/\mathcal{R_0}) = \dfrac{1}{2}m\left( L\dot{\theta} \right)^2 -mgL\cos\theta + \text{cte} \quad \text{ou}\quad \mathcal{E}_m(M/\mathcal{R_0}) = -mgL\cos\theta + \text{cte}
+\mathcal{E}_m(M/\mathcal{R}_0) = \dfrac{1}{2}m\left( L\dot{\theta} \right)^2 -mgL\cos\theta + \text{cte} \quad \text{ou}\quad \mathcal{E}_m(M/\mathcal{R}_0) = -mgL\cos\theta + \text{cte}
 \end{equation}
 
 \subparagraph{}
@@ -135,19 +135,19 @@ $$
 
 
 \subparagraph{\label{q5}}
-\textit{Écrire une fonction Python, appelée Periode, prenant en paramètres la période propre $T_0$ du
+\textit{Écrire une fonction Python, appelée \textsf{Periode}, prenant en paramètres la période propre $T_0$ du
 pendule (exprimée en seconde), l’angle $\theta_0$ (exprimé en degré) et le nom de la méthode d’intégration (sous la forme d’une chaîne de caractères du type "rectangle à gauche", "rectangle à droite", "trapèze") et retournant la période $T$ du pendule (exprimée en seconde).}
 
 
 \subparagraph{}
-\textit{Écrire une fonction, appelée EcartRelatif, prenant en paramètres la période propre $T_0$ et la période
+\textit{Écrire une fonction, appelée \textsf{EcartRelatif}, prenant en paramètres la période propre $T_0$ et la période
 $T$ du pendule et retournant l’écart relatif $\varepsilon_{\%}$ (exprimé en \%) entre $T$ et $T_0$. On rappelle que :}
 $$
 \varepsilon_{\%} = 100 \times \left|\dfrac{T-T_0}{T_0}\right|
 $$
 
 \subparagraph{}
-\textit{Écrire un programme Python permettant de créer trois listes nommées ListeAngle, ListePeriode et ListeEcartRelatif contenant respectivement :
+\textit{Écrire un programme Python permettant de créer trois listes nommées \textsf{ListeAngle}, \textsf{ListePeriode} et \textsf{ListeEcartRelatif} contenant respectivement :
 \begin{itemize}
 \item les valeurs de l’angle $\theta_0$ pour $\theta_0$ variant par pas de $1^\text{o}$ dans l'intervalle $[1^\text{o}; 90^\text{o}]$;
 \item les valeurs correspondantes de la période $T$;
@@ -155,11 +155,11 @@ $$
 \end{itemize}}
 
 \subparagraph{}
-\textit{Écrire une fonction Python, appelée EcartRelatifMax, prenant en paramètre un nombre, appelé
-PourcentageMax, exprimée en \%, permettant de connaitre les valeurs de l’angle $\theta_0$ telles que l’écart relatif entre $T$ et $T_0$ soit toujours strictement inférieur à PourcentageMax. En déduire pour quelles valeurs de $\theta_0$ cet écart relatif est toujours inférieur à 1\%.}
+\textit{Écrire une fonction Python, appelée \textsf{EcartRelatifMax}, prenant en paramètre un nombre, appelé
+\textsf{PourcentageMax}, exprimée en \%, permettant de connaitre les valeurs de l’angle $\theta_0$ telles que l’écart relatif entre $T$ et $T_0$ soit toujours strictement inférieur à \textsf{PourcentageMax}. En déduire pour quelles valeurs de $\theta_0$ cet écart relatif est toujours inférieur à 1\%.}
 
 \subparagraph{\label{q9}}
-\textit{Écrire un programme Python permettant de créer un fichier texte nommé FichierDonnees.txt (ce fichier sera stocké dans votre répertoire), dans lequel seront stockées les valeurs de l’angle $\theta_0$  et les valeurs correspondantes de $T$ et $\varepsilon_{\%}$. Chaque triplet $(\theta_0,T,\varepsilon_{\%})$ sera affiché sur une seule ligne, les
+\textit{Écrire un programme Python permettant de créer un fichier texte nommé \texttt{FichierDonnees.txt} (ce fichier sera stocké dans votre répertoire), dans lequel seront stockées les valeurs de l’angle $\theta_0$  et les valeurs correspondantes de $T$ et $\varepsilon_{\%}$. Chaque triplet $(\theta_0,T,\varepsilon_{\%})$ sera affiché sur une seule ligne, les
 éléments du triplet étant séparés par cinq espaces. Le fichier attendu est donc celui représenté ci-dessous
 :}
 
@@ -169,7 +169,7 @@ PourcentageMax, exprimée en \%, permettant de connaitre les valeurs de l’angl
 37 &2.05975 &2.68
 \end{tabular}
 
-\section*{Exerice 2 : Mise hors gel des canalisations d'eau (temps : 45 min – difficulté : $\star\star $)}
+\subsection*{Exerice 2 : Mise hors gel des canalisations d'eau (temps : 45 min – difficulté : $\star\star $)}
 
 La température dans le sol terrestre étant initialement constante, égale à 5\textdegree C , on cherche à déterminer
 à quelle profondeur minimale il est nécessaire d’enterrer une canalisation d’eau pour qu’une brusque
@@ -205,15 +205,15 @@ Données numériques : $D=2,8\cdot 10^{-7} \; m^2\cdot s^{-1}$ (diffusivité the
 
 \setcounter{subparagraph}{0}
 \subparagraph{}
-\textit{Écrire une fonction Python, appelée $\text{erf}$, prenant en paramètre un nombre réel positif ou nul $x$ et
+\textit{Écrire une fonction Python, appelée \textsf{erf}, prenant en paramètre un nombre réel positif ou nul $x$ et
 retournant la valeur de $\text{erf(x)}$.}
 
 \subparagraph{}
-\textit{Écrire une fonction Python, appelée Temperature, prenant en paramètre la profondeur $z$ (exprimée
+\textit{Écrire une fonction Python, appelée \textsf{Temperature}, prenant en paramètre la profondeur $z$ (exprimée
 en $m$) et le temps $t$ (exprimé en $s$) et retournant la valeur de la température $T(z, t)$.}
 
 \subparagraph{}
-\textit{Écrire un programme Python permettant de créer une liste, nommée ListeErreur, contenant les
+\textit{Écrire un programme Python permettant de créer une liste, nommée \textsf{ListeErreur}, contenant les
 valeurs de la fonction $\text{erf(x)}$ pour $x$ variant par pas de 0,05 dans l’intervalle $[0 ; 2]$.}
 
 \subparagraph{}
