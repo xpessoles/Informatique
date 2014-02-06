@@ -22,8 +22,9 @@
 \fancyhead[L]{%
 \ifthenelse{\boolean{xp}}{%
 \noindent\begin{minipage}[c]{2.6cm}%
-\includegraphics[width=2cm]{png/logo_ptsi.png}%
-\end{minipage}%
+\ifthenelse{\boolean{upsti}}{\includegraphics[width=2cm]{png/logo_upsti.png}%
+}{\includegraphics[width=2cm]{png/logo_ptsi.png}%
+}\end{minipage}%
 }{%
 \footnotesize{\textit{\textsf{Lycée François Premier}}}
 }}

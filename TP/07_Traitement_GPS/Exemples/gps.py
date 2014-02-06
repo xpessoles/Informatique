@@ -87,6 +87,7 @@ def distance(kml):
    return tab_distance
 
 def distance_totale(tab):
+   "Calcul de la distance totale"
    distance = 0
    for i in range(len(tab)):
       distance = distance + tab[i]
@@ -94,6 +95,7 @@ def distance_totale(tab):
 
 
 def altitude(kml):
+   "Génération d'un tableau contenant les altitudes."
    alti=[]
    for i in range (len(kml)):
       alti.append(kml[i][5])
