@@ -88,8 +88,8 @@ méthode numérique. Seules les questions \ref{q5} à \ref{q9} font l’objet de
 
 \begin{minipage}[c]{.6\linewidth}
 Un pendule simple est constitué d’une masselotte $M$ considérée comme ponctuelle et de masse $m$ attachée à une tige de longueur $L$ et de masse nulle pouvant osciller librement dans le plan vertical $(O ,\vect{u_x} ,\vect{u_y} )$. La position de la masselotte
-est repérée à l’instant $t$ par l’angle $\theta(t) = (\vect{u_x} , \vect{OM})$ .À l’instant initial $t = 0$ , on écarte la masselotte de sa position d’équilibre d’un angle  $\theta_0$  ($O\leq \theta_0\leq\pi/2$) et on la lâche sans vitesse initiale. Le
-référentiel terrestre $\mathcal{R}_0(O,\vect{u_x},\vect{u_y},\vect{u_z})$ d’étude est supposé galiléen.
+est repérée à l’instant $t$ par l’angle $\theta(t) = (\vect{u_x} , \vect{OM})$. À l’instant initial $t = 0$ , on écarte la masselotte de sa position d'équilibre d'un angle  $\theta_0$  ($O\leq \theta_0\leq\pi/2$) et on la lâche sans vitesse initiale. Le
+référentiel terrestre $\mathcal{R}_0(O,\vect{u_x},\vect{u_y},\vect{u_z},t)$ d’étude est supposé galiléen.
 \end{minipage}\hfill
 \begin{minipage}[c]{.35\linewidth}
 \begin{center}
@@ -101,20 +101,20 @@ On donne $L=1\;m$ et l'accélération de la pesanteur $g=9,81\; m\cdot s^{-2}$.
 
 
 \subparagraph{\label{q1}}
-\textit{Montrer que l’énergie mécanique $\mathcal{E}_m(M/\mathcal{R_0})$ de la masselotte peut s'écire indifféremment :}
+\textit{Montrer que l’énergie mécanique $\mathcal{E}_m(M/\mathcal{R}_0)$ de la masselotte peut s'écrire indifféremment :}
 \begin{equation}
 \label{eq1}
-\mathcal{E}_m(M/\mathcal{R_0}) = \dfrac{1}{2}m\left( L\dot{\theta} \right)^2 -mgL\cos\theta + \text{cte} \quad \text{ou}\quad \mathcal{E}_m(M/\mathcal{R_0}) = -mgL\cos\theta + \text{cte}
+\mathcal{E}_m(M/\mathcal{R}_0) = \dfrac{1}{2}m\left( L\dot{\theta} \right)^2 -mgL\cos\theta + \text{cte} \quad \text{ou}\quad \mathcal{E}_m(M/\mathcal{R}_0) = -mgL\cos\theta + \text{cte}
 \end{equation}
 
 \subparagraph{}
 \textit{En déduire l'équation différentielle régissant le mouvement de la masselotte (sous la forme d’une équation différentielle du second ordre vérifiée par l’angle $\theta(t)$).}
 
 \subparagraph{}
-\textit{On envisage des mouvements de faible amplitude ( $\theta (t) << 1$). Montrer que l’équation du mouvement de la masselotte est celle d’un oscillateur harmonique non amorti dont la période propre s’écrit $T_0=2\pi\sqrt{L/g}$. Application numérique. Calculer $T_0$.}
+\textit{On envisage des mouvements de faible amplitude ( $|\theta (t)| << 1$). Montrer que l’équation du mouvement de la masselotte est celle d’un oscillateur harmonique non amorti dont la période propre s’écrit $T_0=2\pi\sqrt{L/g}$. Application numérique. Calculer $T_0$.}
 
 
-On envisage maintenant des mouvements de grande amplitude ($\theta(t) >> 1$).
+On envisage maintenant des mouvements de grande amplitude ($|\theta(t)| >> 1$).
 \subparagraph{}
 \textit{Montrer, à partir de l’équation \eqref{eq1}, que la période $T$ des oscillations de la masselotte est telle que :}
 $$

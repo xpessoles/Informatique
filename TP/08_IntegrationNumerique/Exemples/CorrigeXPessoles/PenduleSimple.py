@@ -6,7 +6,7 @@ from math import sin,sqrt,pi,radians
 
 def fonc_phi(x,T0,theta_0):
     k=sin(theta_0/2)
-    val = (T0/pi)*sqrt(2)/(sqrt(1-k*k*sin(x)**2))
+    val = (2.*T0/pi)*2/(sqrt(1-k*k*sin(x)**2))
     return val
 
 def rectangle_gauche(fonc,T0,theta_0,a,b,nb_echantillons):
@@ -58,14 +58,14 @@ for i in range(1,91):
     ListePeriode.append(periode(T0,i,"trapeze"))
     ListeEcartRelatif.append(ecartRelatif(T0,periode(T0,i,"trapeze")))
 
-
+"""
 import matplotlib.pyplot as plt
 import numpy as np
 plt.plot(ListeAngle,ListePeriode,linewidth=3)
 plt.plot(ListeAngle,ListeEcartRelatif,linewidth=3)
 plt.grid(True, which="both", linestyle="dotted")
 plt.show()
-
+"""
 
 print(TRg)
 print(TRd)
