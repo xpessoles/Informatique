@@ -85,7 +85,7 @@ print ("L'écart relatif entre la période propre et la période est inférieur 
 # Création et écriture dans le fichier
 
 import os
-os.chdir ("C:\Informatique")
+os.chdir ("C:\")
 mon_fichier = open ("Fichier_Source.txt", "w")
 for i in range (0, 90, 1) :
     mon_fichier.write (str (ListeAngle [i]))
@@ -96,4 +96,9 @@ for i in range (0, 90, 1) :
     mon_fichier.write ("\n")
 mon_fichier.close ()
 
-   
+L,g =1,9.81
+T0 = 2*pi*sqrt(L/g)
+theta_0=90
+print(Periode(T0,theta_0,"Rectangle à gauche"))
+print(Periode(T0,theta_0,"Rectangle à droite"))
+print(Periode(T0,theta_0,"Trapèze"))
