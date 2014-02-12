@@ -1,0 +1,163 @@
+\documentclass[10pt]{article}
+\input{style/coursHeadings}
+\input{style/programHeadings}
+\input{style/macros_SII}
+\input{style/macros_Titres}
+\input{style/macros_Frames}
+
+%Si le boolen xp est vrai : compilation pour xabi
+%Sinon compilation Damien
+\newboolean{xp}
+\setboolean{xp}{true}
+
+\newboolean{prof}
+\setboolean{prof}{true}
+
+\usepackage[%
+    pdftitle={CI 2 - Algorithmique - Bilan},
+    pdfauthor={Xavier Pessoles},
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=magenta]{hyperref}
+
+
+\def\discipline{Informatique}
+\def\xxtitre{\ifthenelse{\boolean{xp}}{
+CI 2 : Algorithmique \& Programmation}{
+Chapitre  -- }}
+
+\def\xxsoustitre{\ifthenelse{\boolean{xp}}{
+Algorithmes d'Informatique}{
+Partie  -- }}
+
+\def\xxauteur{\ifthenelse{\boolean{xp}}{
+Xavier \textsc{Pessoles}\\ 
+2013 -- 2014 }{
+}}
+
+\def\xxpied{\ifthenelse{\boolean{xp}}{
+CI 2 : Algorithmique \& Programmation\\
+Bilan Algorithmes}{
+\xxtitre}}
+
+\def\xxcathegorie{\ifthenelse{\boolean{xp}}{
+2013 -- 2014 \\
+Xavier \textsc{Pessoles}}{
+Informatique - Cours}}
+
+
+
+
+
+%---------------------------------------------------------------------------
+
+
+\begin{document}
+
+\ifthenelse{\boolean{xp}}{\input{style/enteteXP}}{\input{style/enteteDI}}
+
+
+\setlength{\parskip}{0ex plus 0.2ex minus 0ex}
+ \renewcommand{\contentsname}{}
+ \renewcommand{\baselinestretch}{1}
+
+\tableofcontents
+
+ \renewcommand{\baselinestretch}{1.2}
+\setlength{\parskip}{2ex plus 0.5ex minus 0.2ex}
+
+
+
+\section{Recherches dans une liste}
+\subsection{Recherche d'un nombre dans une liste}
+\subsection{Recherche du maximum dans une liste de nombre}
+\subsection{Recherche par dichotomie dans un tableau trié}
+
+\section{Gestion d'une liste de nombres}
+\subsection{Calcul de la moyenne}
+\subsection{Calcul de la variance}
+\subsection{Calcul de la médiane} %Seconde année
+
+\section{Chaînes de caractères}
+\subsection{Recherche d'un mot dans une chaîne de caractères}
+\subsubsection*{Estimation de la complexité}
+
+\section{Calcul numérique}
+\subsection{Recherche du zéro d'une fonction continue monotone par la méthode de dichotomie}
+\subsubsection*{Précision du calcul}
+\subsubsection*{Rapidité}
+\subsubsection*{Comparaison à zéro}
+
+\subsection{Recherche du zéro d'une fonction continue monotone par la méthode de Newton}
+\subsubsection*{Précision du calcul}
+\subsubsection*{Rapidité}
+
+\subsection{Méthode des rectangles pour le calcul approché d'une intégrale sur un segment}
+\subsection{Méthode des trapèzes pour le calcul approché d'une intégrale sur un segment}
+
+\subsection{Méthode d'Euler pour la résolution d'une équation différentielle}
+\subsubsection*{Complexité algorithmique}
+
+
+\section{Algorithmes de tris}%Seconde année
+\subsection{Tri par insertion}
+\subsection{Tri rapide <<Quicksort>>}
+\subsection{Tri fusion}
+
+\section{Algorithmes classiques}
+\subsection{Division euclidienne}
+\begin{pseudo}
+\begin{algorithm}[H]
+\KwData{$a,b \in\mathbb{N}^*$}
+reste $\gets$ a\\
+quotient $\gets$ 0\\
+\Tq{reste $\geq$ b}{
+reste $\gets$ reste $-$ b\\
+quotient $\gets$ quotient $+$ 1\\
+}
+Retourner quotient,reste
+\end{algorithm}
+\end{pseudo}
+
+\subsection{Algorithme d'Euclide}
+Cet algorithme permet de calculer le PGCD de deux nombres entiers. Il se base sur le fait que si $a$ et $b$ sont deux entiers naturels non nuls, $pgcd(a,b)=pgcd(b, a \text{mod} b)$. 
+
+\begin{pseudo}
+\begin{algorithm}[H]
+\KwData{$a,b \in\mathbb{N}^*$}
+$x\gets a$\\
+$y\gets b$\\
+\Tq{$y\neq 0$}{
+$r\gets$ reste de la division euclidienne de $x$ par $y$\\
+$x\gets y$\\
+$y\gets r$}
+Afficher $x$.
+\end{algorithm}
+\end{pseudo}
+
+
+\subsection{Recherche des nombres premiers -- Crible d'Ératosthène}
+\subsection{Calcul de puissance}
+\subsubsection{Algorithme naïf}
+\begin{py}
+\begin{python}
+def fonction(n):
+    i=n
+    res=1
+    while i!=0:
+        res = res*2
+        i=i-1
+    return res
+\end{python}
+\end{py}
+\subsubsection{Exponentiation rapide}
+\section{Calcul d'un polynôme}
+\subsection{Algorithme naïf}
+\subsection{Méthode de Horner}
+
+%\begin{thebibliography}{2}
+%\bibitem{xx}{xx}
+%\end{thebibliography}
+\end{document}
+
+
