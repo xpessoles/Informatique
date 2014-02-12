@@ -1,0 +1,139 @@
+\documentclass[10pt]{article}
+\input{style/coursHeadings}
+\input{style/programHeadings}
+\input{style/macros_SII}
+\input{style/macros_Titres}
+\input{style/macros_Frames}
+
+%Si le boolen xp est vrai : compilation pour xabi
+%Sinon compilation Damien
+\newboolean{xp}
+\setboolean{xp}{true}
+
+\newboolean{prof}
+\setboolean{prof}{true}
+
+\usepackage[%
+    pdftitle={},
+    pdfauthor={Xavier Pessoles},
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=magenta]{hyperref}
+
+
+\def\discipline{Informatique}
+\def\xxtitre{\ifthenelse{\boolean{xp}}{
+CI 2 : Algorithmique \& Programmation}{
+Chapitre  -- }}
+
+\def\xxsoustitre{\ifthenelse{\boolean{xp}}{
+TD -- Checksum sur les en tête des trames TCP/IP}{
+Partie  -- }}
+
+\def\xxauteur{\ifthenelse{\boolean{xp}}{
+Xavier \textsc{Pessoles}\\
+2013 -- 2014 }{
+Damien \textsc{Iceta} \\ Xavier \textsc{Pessoles}}}
+
+\def\xxpied{\ifthenelse{\boolean{xp}}{
+CI 2 : Algorithmique \& Programmation -- TD \\
+Calcul de checksum}{
+\xxtitre}}
+
+\def\xxcathegorie{\ifthenelse{\boolean{xp}}{
+2013 -- 2014 \\
+Xavier \textsc{Pessoles}}{
+Informatique - Cours}}
+
+
+
+
+
+%---------------------------------------------------------------------------
+
+
+\begin{document}
+
+\ifthenelse{\boolean{xp}}{\input{style/enteteXP}}{\input{style/enteteDI}}
+
+\begin{flushright}
+\textit{D'après ressources de Patrick Beynet.}
+\end{flushright}
+
+ \renewcommand{\baselinestretch}{1.2}
+\setlength{\parskip}{2ex plus 0.5ex minus 0.2ex}
+
+
+
+\subsection*{Mise en situation}
+Pour transférer des données sur Internet, il est nécessaire de les découper en <<paquets>>.
+Ces paquets ne peuvent pouvant pas transiter directement, ils sont encapsulés dans des trames. Sur Internet, ces trames sont définies par le protocole TCP/IP. On parle aussi de couches.
+
+Ainsi, au paquet initial on va ajouter une couche TCP (\textit{Transmission Control Protocol}) qui permet de contrôler de façon fiable le transfert des données. On ajoute alors la couche IP (\textit{Internet Protocol}) qui contient des informations pour router les informations sur le réseau.
+
+On ajoute aussi une couche Ethernet.
+
+\begin{minipage}[c]{.47\linewidth}
+\begin{center}
+ \includegraphics[width=\textwidth]{images/CouchesTCPIP}
+ 
+\textit{Différentes couches constituant un paquet}
+\end{center}
+\end{minipage} \hfill
+\begin{minipage}[c]{.47\linewidth}
+\begin{center}
+ \includegraphics[width=\textwidth]{images/EnTeteIP}
+
+\textit{Structure de la couche IP}
+\end{center}
+\end{minipage}
+
+
+La couche IP (en-tête IP) est constituée de 20 octets (soient 5120 bits ou 40 chiffres en hexadécimal.).
+
+\subparagraph{}
+\textit{Dans le système décimal, une adresse IP est constituée d'une série de 4 nombres compris entre 0 et 255. Proposer une fonction permettant de donner l'adresse IP source d'un paquet à partir d'une en-tête (l'en tête brute de la trame étant une chaîne de caractères).}
+
+
+ Afin de détecter qu'il n'y a pas eu d'altération de cette couche 2 octets sont utilisés pour réaliser une somme de contrôle. 
+\begin{exemple}
+Couche IP : 
+%$$4500 \; 0028 \; 586E \; 4000 \; 8006 \; \underbrace{45E5}_{\text{Somme de contrôle} } \; C0A9 \; FAF6 \; C72F \; D9AC _{16}$$
+$$4500 \; 0028 \; 586E \; 4000 \; 8006 \; \underbrace{\_ \;\_ \;\_ \;\_}_{\text{Somme de contrôle} } \; C0A9 \; FAF6 \; C72F \; D9AC _{16}$$
+\end{exemple}
+
+
+Le calcul de checksum utilisé ici est défini dans la norme RFC 793 dont voici un extrait : 
+\begin{center}
+\begin{minipage}[c]{.7\linewidth}
+\textit{Checksum : 16 bits}
+
+\noindent\textit{The checksum field is the 16 bit one's complement of the one's
+complement sum of all 16 bit words in the header and text. If a
+segment contains an odd number of header and text octets to be
+checksummed, the last octet is padded on the right with zeros to
+form a 16 bit word for checksum purposes. The pad is not
+transmitted as part of the segment. While computing the checksum,
+the checksum field itself is replaced with zeros.}
+\end{minipage}
+\end{center}
+
+
+\subparagraph{}
+\textit{Expliquer comment calculer une somme de contrôle à partir de l'exemple ci-dessus. \footnote{\url{http://mathforum.org/library/drmath/view/54379.html}}}
+
+
+\subparagraph{}
+\textit{Proposer une structure de programme permettant de calculer la checksum.}
+
+
+\subparagraph{}
+\textit{Programmer les algorithmes de chacune des fonctions précédemment définies.}
+
+\subparagraph{}
+\textit{Comment se déroule le test de vérification de l'en-tête ?}
+
+\subparagraph{}
+\textit{Que pensez-vous de la fiabilité de ce test ?}
+
+\end{document}
