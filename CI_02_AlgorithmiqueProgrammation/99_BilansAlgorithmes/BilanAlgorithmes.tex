@@ -70,25 +70,158 @@ Informatique - Cours}}
 
 \section{Recherches dans une liste}
 \subsection{Recherche d'un nombre dans une liste}
+\begin{py}
+\begin{python}
+def is_number_in_list(nb,tab):
+    """Renvoie True si le nombre nb est dans la liste de nombres tab
+    
+    Keyword arguments:
+    nb -- nombre entier
+    tab -- liste de nombre entiers
+    
+    """
+    i=0
+    while i<len(tab) and tab[i]!=nb:
+        i+=1
+    return i<len(tab)
+\end{python}
+\end{py}
 \subsection{Recherche du maximum dans une liste de nombre}
+\begin{py}
+\begin{python}
+def what_is_max(tab):
+    """ Renvoie le plus grand nombre d'une liste
+    
+    Keyword arguments:
+    tab -- liste de nombres 
+    
+    """
+    i=1
+    maxi=tab[0]
+    while i<len(tab):
+        if tab[i]>maxi:
+            maxi=tab[i]
+        i+=1
+    return maxi
+\end{python}
+\end{py}
 \subsection{Recherche par dichotomie dans un tableau trié}
-
+\begin{py}
+\begin{python}
+def is_number_in_list_dicho(nb,tab):
+    """ Renvoie l'index si le nombre nb est dans la liste de nombres tab.
+        Renvoie None sinon.
+    
+    Keyword arguments:
+    nb -- nombre entier
+    tab -- liste de nombres entiers triés
+    
+    """
+    g, d = 0, len(tab)-1
+    while g <= d:
+        m = (g + d) // 2
+        if tab[m] == nb:
+            return m
+        if tab[m] < nb:
+            g = m+1
+        else:
+            d = m-1
+    return None
+\end{python}
+\end{py}
 \section{Gestion d'une liste de nombres}
 \subsection{Calcul de la moyenne}
+\begin{py}
+\begin{python}
+def calcul_moyenne(tab):
+    """ Renvoie la moyenne des éléments d'un tableau.
+    
+    Keyword arguments:
+    tab -- liste de nombres entiers triés
+    
+    """
+    res = 0
+    for i in range(len(tab)):
+        res = res+tab[i]
+    return res/(len(tab))
+\end{python}
+\end{py}    
 \subsection{Calcul de la variance}
 \subsection{Calcul de la médiane} %Seconde année
 
 \section{Chaînes de caractères}
 \subsection{Recherche d'un mot dans une chaîne de caractères}
+
+\begin{py}
+\begin{python}
+def index_of_word_in_text(mot, texte):
+    """ Recherche si le mot est dans le texte.
+    Renvoie l'index si le mot est présent, None sinon.
+    
+    Keyword arguments:
+    mot -- mot recherché
+    texte -- texte
+    
+    """
+    for i in range(1 + len(texte) - len(mot)):
+        j = 0
+        while j < len(mot) and mot[j] == texte[i + j]:
+            j += 1
+        if j == len(mot):
+            return i
+    return None
+\end{python}
+\end{py}
 \subsubsection*{Estimation de la complexité}
 
 \section{Calcul numérique}
 \subsection{Recherche du zéro d'une fonction continue monotone par la méthode de dichotomie}
+\begin{pseudo}
+\begin{algorithm}[H]
+\Fonction{
+Données:$f$, $a$,$b$, $\varepsilon$ \\
+$g\gets a$\\
+$d \gets b$\\
+$f_g \gets f(g)$\\
+$f_d \gets f(d)$\\
+\Tq{$ (d-g) > 2\varepsilon$}{
+$m \gets (g+d)/2$ \\
+$f_m\gets f(m)$
+
+\eSi{$f_g\cdot f_m \leq 0$}{
+$d \gets m$\\
+$f_d \gets f_m$\\
+}{
+$g \gets m$\\
+$f_d \gets f_m$\\
+}
+}
+\Retour{$(g+d)/2$}
+}
+\end{algorithm}
+\end{pseudo}
+
 \subsubsection*{Précision du calcul}
 \subsubsection*{Rapidité}
 \subsubsection*{Comparaison à zéro}
 
 \subsection{Recherche du zéro d'une fonction continue monotone par la méthode de Newton}
+
+\begin{pseudo}
+\begin{algorithm}[H]
+\Fonction{
+Données:$f$, $f'$, $a$, $\varepsilon$ \\
+$g\gets a$\\
+$c \gets  g-\dfrac{f(g)}{f'(g)} $\\
+\Tq{$ |c-g|> \varepsilon$}{
+$g \gets  c$ \\
+$c \gets c-\dfrac{f(c)}{f'(c)}$
+}
+\Retour{$c$}
+}
+\end{algorithm}
+\end{pseudo}
+
 \subsubsection*{Précision du calcul}
 \subsubsection*{Rapidité}
 
@@ -141,12 +274,20 @@ Afficher $x$.
 \subsubsection{Algorithme naïf}
 \begin{py}
 \begin{python}
-def fonction(n):
-    i=n
-    res=1
-    while i!=0:
-        res = res*2
-        i=i-1
+def exponentiation_naive(x,n):
+    """ Renvoie x**n par la méthode naïve.
+    
+    Keyword arguments:
+    x -- un nombre réel
+    n -- un nombre entier
+    
+    """
+    
+    j=n
+    res = 1
+    while j>=1:
+        res = res * x
+        j=j-1
     return res
 \end{python}
 \end{py}
