@@ -5,6 +5,7 @@
 \input{style/macros_Titres}
 \input{style/macros_Frames}
 
+
 %Si le boolen xp est vrai : compilation pour xabi
 %Sinon compilation Damien
 \newboolean{xp}
@@ -90,498 +91,460 @@ Problème dynamique à une dimension,  linéaire ou non, conduisant à la résol
 \setlength{\parskip}{2ex plus 0.5ex minus 0.2ex}
 
 
-\section{Introduction}
-\subsection{Mise en situation}
-
-\textbf{Equation du mouvement}
 
 
-En modélisant la balle de golf \textbf{$S$} comme un solide dont la masse $m$ est considérée concentrée en son centre d'inertie $G$. On considère qu'en première approximation la balle est soumise à son propre poids et à la résistance de l'air.  
-En l'isolant et en lui appliquant le théorème de la résultante dynamique, on a :
-$$
-\sum \vect{F_{\text{ext}\rightarrow \text{balle}}} = m\vectg{G}{S}{\mathcal{R}}
-$$
 
-L'action de pesanteur de la balle est donnée par $\vect{F_{\text{pesanteur}\rightarrow \text{balle}}} = -mg\vect{y}$.
+\section{Mise en place du problème}
 
-On modélise le frottement visqueux de l'air sur la balle par une force colinéaire (et opposée) au vecteur vitesse : $\vect{F_{\text{	Air}\rightarrow \text{Balle}}} = - \mu \vectv{G}{S}{\mathcal{R}} $. 
+Une grande part des problèmes scientifiques se modélisent par une équation différentielle dont on cherche la solution pour dimensionner ou comprendre le phénomène.
 
-On a donc : 
-$$ 
-\vect{F_{\text{pesanteur}\rightarrow \text{balle}}} + \vect{F_{\text{Air}\rightarrow \text{Balle}}} 
-= m \vectg{G}{S}{\mathcal{R}}
-\Longleftrightarrow
- -mg\vect{y} - \mu \vectv{G}{S}{\mathcal{R}} =m \left[ \dfrac{d \vectv{G}{S}{\mathcal{R}}}{dt}\right]_{\mathcal{R}}
-$$
+Quand les équations sont simples (linéaires d'ordre 1 ou 2) la résolution analytique est aisée, mais nombre de modélisations conduisent à des équations non linéaires.  Ce cours a pour objectif de proposer des méthodes pour déterminer une solution approchée.
 
-En conséquence :
-$$ 
- -mg\left[ \begin{array}{c}
-0 \\ 1 \\ 0
-\end{array}\right]_{\mathcal{R}} - 
-\mu \left[ \begin{array}{c}
-x'(t) \\ y'(t) \\ z'(t)
-\end{array}\right]_{\mathcal{R}} = 
-m
-\left[ \begin{array}{c}
-x''(t) \\ y''(t) \\ z''(t)
-\end{array}\right]_{\mathcal{R}}
-$$
+\subsection{Problème de Cauchy}
+
+Le problème de Cauchy consiste à trouver les fonctions $  {Y}$ de $[0, T] \to \mathbb{R}^N$, telles que :
+\[\left\{
+\begin{matrix}
+\dfrac{\d  {Y}}{\d t} =   {F}(t,  {Y}) \\
+  {Y}(t_0)=  {Y_0}
+\end{matrix}\right.
+\]
+où $t_0\in [0, T]$ et $  {Y_0}\in\mathbb{R}^N$ sont des données.
+
+La plupart des systèmes d'équations différentielles de tout ordre peuvent se mettre sous cette forme de système d'équations différentielles du premier ordre\footnote{à l'exception des équations différentielles implicites} (un exemple sera traité plus loin).
+
+\subsection{Existence et unicité de la solution}
+\textbf{Théorème de Cauchy-Lipschitz :} soit $  {F}$ une fonction de $[0,T]\times\mathbb{R}^N \to \mathbb{R}^N$ continue et lipschitzienne en $  {Y}$. 
+
+Alors, $\forall~ t_0\in [0, T]$ et $\forall~   {Y_0}\in\mathbb{R}^N$, le problème de Cauchy admet une solution unique définie sur $[0,T]$.
 
 
-En considérant que le mouvement plan, le mouvement de la balle est donc régit par le système d'équation différentielle suivant :
+\bigskip
+\textbf{Rappel :} $  {F}$ lipschitzienne en $  {Y}$ : 
+\[\exists~ k>0\textrm{ tel que,} \forall~   {Y}\in\mathbb{R}^N, \forall~   {Z}\in\mathbb{R}^N, \forall~ t\in[0,T],\qquad \Vert   {F}(t,  {Y})-  {F}(t,  {Z})\Vert \leq k \Vert    {Y}-  {Z} \Vert\]
 
-$$
-\left\{
-\begin{array}{l}
--\mu \dot{x}=m\ddot{x} \\
--mg -\mu \dot{y}=m\ddot{y}
-\end{array}
-\right.
-$$
 
-%Les efforts de trainée s'opposent à l'évolution de la balle
+\subsection{Résolution numérique}
+L'objectif est d'obtenir une solution approchée au problème de Cauchy pour une discrétisation temporelle de l'intervalle donné. 
+La démarche s'appuie sur la forme initiale de l'équation différentielle où il est facile de voir que la fonction $  {F}(t,  {Y})$ traduit l'évolution de $  {Y}$, c'est-à-dire la pente de la courbe $  {F}(t,  {Y})(t)$. Les schémas d'intégration numériques exploitent $  {F}(t,  {Y})$ pour traduire l'évolution sur un pas de temps.
+
+En notant $h$ le pas de temps et $N$ le nombre de pas de temps, l'intervalle est discrétisé par $t_0=0$, $t_1=h$, ..., $t_N = Nh$.
+
+Sur un sous-intervalle donné, on cherche à déterminer la solution sous la forme :\[\int\limits_{t_i}^{t_{i+1}} \dfrac{\d  {Y}}{\d t} \d t = \int\limits_{t_i}^{t_{i+1}}   {F}(t,  {Y})\d t \qquad\qquad\textrm{on en déduit que :}  {Y}_{i+1} =   {Y}_{i} +  \int\limits_{t_i}^{t_{i+1}}   {F}(t,  {Y})\d t \]
+
+%\parpic[r]{
+%\begin{tikzpicture}\node  {\includegraphics[width=5cm]{illu_tangente1}};
+%\node at (.7,-2) {$  {t}_{i}$};
+%\node at (2.4,-2) {$  {t}_{i+1}$};
+%\node[right] at (2.7,1) {$  {Y}_{i+1}$};
+%\node[right] at (2.7,-1.2) {$  {Y}_{i}$};
+%\node[left] at (0,0) {$h  {\Phi}( t_j,  {Y}_j,h)$};
+%\end{tikzpicture}}
+
+
+Les méthodes de résolution numérique des équations différentielles sont basées sur des techniques d'estimation de l'intégrale de la fonction $  {F}$.
+
+On s'intéressera dans ce cours aux méthodes de résolution à un pas qui se mettent sous la forme générale :
+\[ \displaystyle \left\{\begin{matrix}
+  {Y}_{i+1} =   {Y}_{i} +  h  {\Phi}( t_j,  {Y}_j,h)\\
+  {Y}(t_0)=  {Y_0}
+\end{matrix}\right. \]
+où il faudra choisir $  {\Phi}$ intelligemment.
+
+La fonction $  {\Phi}$ représente la pente de la droite permettant de passer de $  {Y}_{i}$ à $  {Y}_{i+1}$.
+
+
+
+
+\section{Méthodes à un pas}
+L'exemple élémentaire qui servira de support est la résolution de l'équation différentielle :\\ $\dot y(t) + y(t) = 0$ avec $y(0)=1$, dont la solution exacte est $y(t)=e^{-t}$.
+
+\subsection{Méthode d'Euler explicite}
+\subsubsection{Méthode}
+
+%\parpic[r]{
+%\begin{tikzpicture}\node  {\includegraphics[width=5cm]{illu_tangente2_}};
+%\node at (0,-2) {$  {t}_{i}$};
+%\node at (1.3,-2) {$  {t}_{i+1}$};
+%\node[right] at (2.7,-.4) {$  {Y}_{i+1}$};
+%\node[right] at (2.7,-1.1) {$  {Y}_{i}$};
+%\end{tikzpicture}}
+
+
+
+La première façon d'approximer l'intégrale est de réaliser une méthode des rectangles à gauche. \\
+Ainsi $\int\limits_{t_i}^{t_{i+1}}   {F}(t,  {Y})\d t = h   {F}(t_i,  {Y}_i)$.
+
+On en déduit que $  {\Phi} =   {F}(t_i,  {Y}_i) $
+
+Ainsi la relation de récurrence générale est : \\$  {Y}_{i+1} =   {Y}_{i} + h  {F}(t_i,  {Y}_i)$
+
+La pente permettant de passer de $  {Y}_{i}$ à $  {Y}_{i+1}$ est la valeur de $  {F}(t_i,  {Y}_i)$ comme l'illustre la figure ci-contre où le champ de la fonction $  {F}$ est tracée.
+
+%\picskip{1}
+%\bigskip
+
+On peut aussi exprimer la relation sous la forme : $  {F}(t_i,  {Y}_i)=\dfrac{\d  {Y}}{\d t}(t_i) \simeq \dfrac{  {Y}_{i+1}-  {Y}_i}{h}$.  
+
+
+\subsubsection{Propriétés (voir Annexe mathématique pour les définitions)}
+\paragraph{Stabilité} $  {\Phi}$ est lipschitzienne donc le schéma est stable.
+
+\paragraph{Consistance} L'erreur de consistance est $c_i =   {Y}_{ex}(t_{i+1})-  {Y}_{ex}(t_i)-h  {F}( t_i,  {Y}_{ex}(t_i))$
+
+Or le développement de Taylor-Lagrange donne : 
+$  {Y}_{ex}(t_{i}+h)=  {Y}_{ex}(t_{i+1}) = 
+  {Y}_{ex}(t_{i})+h  {\dot Y}_{ex}(t_{i}) + \dfrac{h^2}{2}   {\ddot Y}_{ex}(\xi)$ avec $\xi\in[t_i,t_i+h]$.
+
+Or $  {\dot Y}_{ex} =   {\Phi}(t_i,  {Y}_{ex}(t_i),h) =   {F}(t_i,  {Y}_{ex}(t_i))$
+
+On en déduit que $c_i = \dfrac{h^2}{2}   {\ddot Y}_{ex}(\xi)$ avec $\xi\in[t_i,t_i+h]$
+
+Ainsi la méthode est consistante. Comme elle est stable, on en déduit qu'elle est convergente. 
+
+L'expression de l'erreur de consistance indique que la méthode est d'ordre 1.
+
+\subsubsection{Application}
+
+
+  {\'Ecrire la relation de récurrence de la méthode d'Euler sur l'exemple.}
+
+
+  {Montrer que pour certaines valeurs de $h$, la solution peut présenter des problèmes. Justifier et commenter les courbes de la \ref{euler_expl}.}
+
+\begin{figure}[!ht]
+\centering
+%\includegraphics[width=.8\linewidth]{euler_explicite_}
+
+%\includegraphics[width=.5\linewidth]{euler_explicite_zoom}
+\caption{Solution de l'application pour le schéma Euler explicite.}
+\label{euler_expl}
+\end{figure}
+
+Le tableau suivant donne l'erreur comme étant le maximum de l'écart entre la solution exacte et la solution approchée ainsi que le temps de calcul pour différentes valeurs du pas de temps.
+
+\begin{center}
+\begin{tabular}{*7{|c}|}
+\hline
+%$h$ &   {e-1} &\num{e-2} &\num{e-3} &\num{e-4} &\num{e-5} &\num{e-6} \\ \hline
+%$N$ pas de temps & \num{100} & \num{1000} &\num{10000} &\num{100000} &\num{1000000} &\num{10000000} \\ \hline
+%Erreur & \num{4.1e-1}& \num{4.9e-2}& \num{5.0e-3}& \num{5.0e-04}& \num{5.0e-5}& \num{5.0e-06}\\ \hline
+%Temps (s) & \num{5.2e-3} & \num{1.6e-2}& \num{7.8e-2}& \num{5.7e-1}& \num{5.0}& \num{50} \\ \hline
+\end{tabular}
+\end{center}
+
+On constate que l'erreur évolue linéairement en fonction du pas de temps ainsi que le temps de calcul (complexité en $O(N)$ car une seule boucle).
+
+Il faut descendre à un pas de temps très faible avant d'obtenir un niveau d'erreur satisfaisant. On voit bien ici la limitation des méthodes d'ordre 1.
+
+
+%\bigskip
+%\parpic[r]{
+%\begin{tikzpicture}\node  {\includegraphics[width=5cm]{illu_tangente3_}};
+%\node at (0,-2) {$  {t}_{i}$};
+%\node at (1.3,-2) {$  {t}_{i+1}$};
+%\node[right] at (2.7,0) {$  {Y}_{i+1}$};
+%\node[right] at (2.7,-0.7) {$  {Y}_{i}$};
+%\end{tikzpicture}}
+
+\noindent\begin{minipage}{10cm}
+\subsection{Méthode d'Euler implicite}
+%\vspace{-2ex}
+\subsubsection{Méthode}
+%\vspace{-3ex}
+La seconde façon d'approximer l'intégrale est de réaliser une méthode des rectangles à droite. \\
+Ainsi $\int\limits_{t_i}^{t_{i+1}}   {F}(t,  {Y})\d t = h   {F}(t_{i+1},  {Y}_{i+1})$.
+\end{minipage}
+
+%\picskip{1}
+
+On en déduit que $  {\Phi} =   {F}(t_{i+1},  {Y}_{i+1}) $
+
+Ainsi la relation de récurrence générale est : $  {Y}_{i+1} =   {Y}_{i} + h  {F}(t_{i+1},  {Y}_{i+1})$
+
+La pente permettant de passer de $  {Y}_{i}$ à $  {Y}_{i+1}$ est la valeur de $  {F}(t_{i+1},  {Y}_{i+1})$ comme l'illustre la figure ci-contre où le champ de la fonction $  {F}$ est tracée.
+
+%\picskip{1}
+%\bigskip
+
+On peut aussi exprimer la relation sous la forme : $  {F}(t_{i+1},  {Y}_{i+1})=\dfrac{\d  {Y}}{\d t}(t_{i+1}) \simeq \dfrac{  {Y}_{i+1}-  {Y}_i}{h}$.  
+
+
+
+%\medskip
+On remarque que le second membre dépend aussi de $  {Y}_{i+1}$. Il faut donc dans les cas non linéaires se ramener à un problème stationnaire à résoudre avec la méthode de Newton sur :
+$  {Y}_{i+1} -   {Y}_{i} - h  {F}(t_{i+1},  {Y}_{i+1}) = 0$ ce qui alourdit notablement le calcul. Dans les cas linéaires, il faut au moins une inversion, ce qui est aussi très lourd pour les problèmes de grande dimension. Il faut donc retenir qu'une méthode implicite est généralement plus coûteuse qu'une méthode explicite à pas de temps égal.
+
+\subsubsection{Propriétés}
+De même que pour la méthode explicite, la méthode est convergente et d'ordre 1.
+
+\subsubsection{Application}
+
+  {\'Ecrire la relation de récurrence de la méthode d'Euler implicite sur l'exemple.}
+
+  {Montrer que quelle que soit la valeur de $h$, la solution ne peut plus présenter les mêmes problèmes qu'en explicite.}
+
+La solution approchée pour différents pas de temps est donnée sur la \ref{euler_impl}.
+
+\begin{figure}[!ht]
+\centering
+%\includegraphics[width=.7\linewidth]{euler_implicite}
+
+\caption{Solution de l'application pour le schéma Euler implicite.}
+\label{euler_impl}
+\end{figure}
+
+Le tableau suivant donne l'erreur comme étant le maximum de l'écart entre la solution exacte et la solution approchée ainsi que le temps de calcul pour différentes valeurs du pas de temps.
+
+\begin{center}
+\scalebox{.9}{\begin{tabular}{*7{|c}|}
+\hline
+%$h$ & \num{e-1} &\num{e-2} &\num{e-3} &\num{e-4} &\num{e-5} &\num{e-6} \\ \hline
+%$N$ pas de temps & \num{100} & \num{1000} &\num{10000} &\num{100000} &\num{1000000} &\num{10000000} \\ \hline
+%Erreur & \num{5.9e-1}& \num{5.0e-2}& \num{5.0e-3}& \num{5.0e-04}& \num{5.0e-05}& \num{5.0e-06}\\ \hline
+
+%Temps (s) & \num{5.2e-3} & \num{3.1e-2}& \num{3.7e-1}& \num{3.7}& \num{37}& \num{370} \\ \hline
+\end{tabular}}
+\end{center}
+
+On constate que l'erreur évolue linéairement en fonction du pas de temps ainsi que le temps de calcul (complexité en $O(N)$ car une seule boucle). Le temps de calcul est cependant plus important à cause de la résolution de l'équation avec l'algorithme de Newton (on aurait pu inverser analytiquement la relation dans ce cas d'école).
+
+Il faut descendre à un pas de temps très faible avant d'obtenir un niveau d'erreur satisfaisant. On voit bien ici la limitation des méthodes d'ordre 1.
+
+
+\subsection{Méthode de Runge-Kutta}
+Les méthodes d'Euler peuvent être vu comme une approximation du développement de Taylor-Lagrange à l'ordre 1. Pour augmenter la précision, une solution pourrait être d'augmenter l'ordre de développement ; c'est cependant impossible sans les expressions des dérivées n-ième de la fonction $  {F}$.
+
+Le schéma de Runge-Kutta permet d'obtenir des méthodes d'ordres plus élevés sans utiliser les fonctions dérivées de $  {F}$.
+
+\subsubsection{Expression générale des méthodes de Runge-Kutta explicites}
+
+La méthode générale consiste à déterminer $  {\Phi}$ à partir d'approximations successives.
+
+On choisit $\displaystyle   {\Phi}(\tau,  {Y},h) = \sum_{i=1}^q a_i k_i(\tau,  {Y},h)$ avec\\
+$k_1(\tau,  {Y},h) =   {F}(\tau,  {Y})$\\
+pour $i\geq 2,\qquad k_i(\tau,  {Y},h) =   {F}(\tau+\alpha_ih,   {Y}+\sum_{j=1}^{i-1} \beta_{ij} k_j(\tau,  {Y},h))$
+
+On choisit les paramètres $q$, $a_i$, $\alpha_i$ et $\beta_{ij}$ pour que la méthode soit d'ordre $p$.
+
+\medskip
+On remarque que la méthode d'Euler explicite est le cas particulier de Runge-Kutta d'ordre 1.
+
+En pratique, on va rarement au delà de l'ordre 4.
+
+\subsubsection{Runge-Kutta d'ordre 2 (RK2) -- Méthode de Heun}
+Le relation de récurrence est $  {Y}_{i+1} =   {Y}_{i} + \dfrac{h}{2}  {F}(t_{i},  {Y}_{i})+ \dfrac{h}{2}  {F}(t_{i}+h,  {Y}_{i}+h  {F}(t_{i},  {Y}_{i}))$.\\
+On a donc pris $  {\Phi}(\tau,  {Y},h) = \dfrac{1}{2}(k_1+k_2)$ avec :\\
+$k_1=   {F}(t_{i},  {Y}_{i})$ et $k_2=  {F}(t_{i}+h,  {Y}_{i}+h k_1)$.
+
+Cette relation est une intégration de type trapèze entre la valeur au pas $i$ et la valeur du pas $i+1$ estimée à partir d'une méthode d'Euler explicite. 
+
+La solution approchée de l'application pour différents pas de temps est donnée sur la \ref{heun}.
+
+\begin{figure}[!ht]
+\centering
+%\includegraphics[width=.7\linewidth]{heun}
+
+\caption{Solution de l'application pour le schéma de Heun.}
+\label{heun}
+\end{figure}
+
+Le tableau suivant donne l'erreur comme étant le maximum de l'écart entre la solution exacte et la solution approchée ainsi que le temps de calcul pour différentes valeurs du pas de temps.
+
+\begin{center}
+\scalebox{.9}{
+\begin{tabular}{*7{|c}|}
+\hline
+%$h$ & \num{e-1} &\num{e-2} &\num{e-3} &\num{e-4} &\num{e-5} &\num{e-6} \\ \hline
+%$N$ pas de temps & \num{100} & \num{1000} &\num{10000} &\num{100000} &\num{1000000} &\num{10000000} \\ \hline
+%Erreur & \num{1.8e-2}& \num{1.7e-4}& \num{1.7e-6}& \num{1.7e-8}& \num{1.7e-10}& \num{1.7e-12}\\ \hline
+
+%Temps (s) & \num{1.5e-3} & \num{1.4e-2}& \num{1.3e-1}& \num{1.2}& \num{12}& \num{120} \\ \hline
+\end{tabular}}
+\end{center}
+
+On constate que l'erreur évolue quadratiquement en fonction du pas de temps : en divisant le pas de temps par 10, l'erreur diminue d'un facteur 100.
+
+Le temps de calcul est toujours linéaire car la complexité n'a pas augmenté  (complexité en $O(N)$). Il est environ double de la méthode d'Euler explicite puisqu'il y a deux évaluations de $  {F}(t,  {Y})$.
+
+
+\subsubsection{Runge-Kutta d'ordre 4 (RK4)}
+
+La fonction $  {\Phi}$ est $  {\Phi}(\tau,  {Y},h) = \dfrac{1}{6}(k_1+2k_2+2k_3+k_4)$ avec quatre évaluations successives de $  {F}$ :\\
+$k_1(\tau,  {Y},h) =   {F}(\tau,  {Y})$\\
+$k_2(\tau,  {Y},h) =   {F}(\tau+\dfrac{h}{2},  {Y}+\dfrac{h}{2}k_1(\tau,  {Y},h))$\\
+$k_3(\tau,  {Y},h) =   {F}(\tau+\dfrac{h}{2},  {Y}+\dfrac{h}{2}k_2(\tau,  {Y},h))$\\
+$k_4(\tau,  {Y},h) =   {F}(\tau+h,  {Y}+hk_3(\tau,  {Y},h))$\\
+
+La solution approchée pour différents pas de temps est donnée sur la \ref{rk4}.
+
+\begin{figure}[!ht]
+\centering
+%\includegraphics[width=.7\linewidth]{rk4}
+\caption{Solution de l'application pour le schéma de Runge-Kutta d'ordre 4.}
+\label{rk4}
+\end{figure}
+
+Le tableau suivant donne l'erreur comme étant le maximum de l'écart entre la solution exacte et la solution approchée ainsi que le temps de calcul pour différentes valeurs du pas de temps.
+
+
+\begin{center}
+\scalebox{.9}{
+\begin{tabular}{*7{|c}|}
+\hline
+%$h$ & \num{e-1} &\num{e-2} &\num{e-3} \\ \hline
+%$N$ pas de temps & \num{100} & \num{1000} &\num{10000} \\ \hline
+%Erreur & \num{9.0e-6}& \num{8.4e-10}& \num{9.2e-14}\\ \hline
+%Temps (s) & \num{1.7e-3} & \num{1.6e-2}& \num{2.5e-1} \\ \hline
+\end{tabular}}
+\end{center}
+
+On constate que l'erreur évolue à l'ordre 4 en fonction du pas de temps : en divisant le pas de temps par 10, l'erreur diminue d'un facteur **%\num{10000}.
+
+Le temps de calcul est toujours linéaire car la complexité n'a pas augmentée (complexité en $O(N)$).
+
+\subsection{Conclusion}
+En terme de schéma explicite, la méthode de Runge-Kutta à l'ordre 4 est souvent utilisée.
+
+Cependant, vous devez connaître uniquement la méthode d'Euler.
+
+Concernant le choix du pas de temps, il obéit à un compromis entre le temps de calcul, la stabilité et le stockage en mémoire. Le choix de ce pas de temps dépendra essentiellement de la dynamique du système à représenter : si on veut représenter une dynamique à 10 kHz, il faudrait prendre un pas de temps de l'ordre de **%\num{e-5} (10 points par période).
+Le choix du pas de temps est souvent fait de manière empirique par expérience de l'ingénieur. 
+
+\section{Mise en forme des systèmes d'équations différentielles}
+
+Nous avons dit au départ que tout système d'équations différentielles pouvait se mettre sous la forme du problème de Cauchy. Traitons quelques exemples.
+
+\subsection{\'Equation harmonique}
+Prenons un système masse-ressort. Son équation du mouvement se met sous la forme : \\$\ddot y(t) + \omega_0^2 y(t) = 0$. Les conditions initiales sont $y(0)=1$ et $\dot y(0)=0$.
+
+  {Mettre ce problème sous la forme du problème de Cauchy.}
+
+L'idée est d'introduire des variables supplémentaires. Ici, on introduit la fonction $y_2(t)$ telle qu'elle soit solution de $y_2(t)=\dot{y_1}(t)$ avec $y_1(t)=y(t)$.
+
+L'équation différentielle du système masse-ressort s'écrit ainsi $\dot y_2(t)= - \omega_0^2 y_1(t)$.
+
+En posant $  {Y}(t)=\left(\begin{matrix}
+y_1(t)\\y_2(t)
+\end{matrix}\right)$, $  {F}(t,  {Y})=\left(\begin{matrix}
+y_2(t)\\-\omega_0^2 y_1(t)
+\end{matrix}\right)$ et $  {Y}_0=\left(\begin{matrix}
+1\\0
+\end{matrix}\right)$, on obtient bien la forme du problème de Cauchy. 
+
+
+La résolution se fait de la même manière que précédemment sauf que cette fois les grandeurs manipulées sont des vecteurs et non plus des scalaires. 
+
+\bigskip
+\textbf{Une autre solution classique} permettant de résoudre cette équation différentielle avec la méthode d'Euler explicite est d'appliquer deux fois la définition.
+
+On note $Yp$ la dérivée première. On a $Yp_{i} =\dfrac{Y_{i+1}-Y_i}{h}$
+
+On note $Ypp$ la dérivée seconde. On a $Ypp_{i} =\dfrac{Yp_{i+1}-Yp_i}{h} = \dfrac{Y_{i+2}-2Y_{i+1}+Y_i}{h^2}$.
+
+On en déduit que $Y_{i+2} = (-h^2\omega_0^2 - 1 )Y_i + 2 Y_{i+1}$. On obtient une relation de récurrence directe qui peut être programmée.
+
+Ce schéma est un schéma d'intégration à deux pas qui pourrait s'inscrire dans un cadre plus général des méthodes à plusieurs pas.
+
+\subsection{Système masse-ressort-amortisseur entretenu}
+Soit un système masse-ressort-amortisseur soumis à une excitation extérieure harmonique.
+
+L'équation différentielle se met sous la forme générale : $\ddot y(t) + 2\xi\omega_0 \dot y(t)+\omega_0^2 y(t) = f_0\sin(\omega t)$. Les conditions initiales sont $y(0)=1$ et $\dot y(0)=0$ (solution \ref{mrae}).
+
+  {Mettre ce problème sous la forme du problème de Cauchy.}
+
+%\begin{figure}[!ht]
+%\centering
+%\includegraphics[width=.5\linewidth]{mrae}
+%\caption{Solution de l'équation différentielle du système masse-ressort-amortisseur pour $\omega_0=\SI{2}{rad.s^{-1}}$, $\xi=\num{0.015}$, $f_0=\SI{2}{N}$ et $\omega=\SI{5}{rad.s^{-1}}$.}
+%\label{mrae}
+%\end{figure}
+
+\begin{figure}[!ht]
+
+
+Solution de l'équation différentielle du système masse-ressort-amortisseur pour ***%$\omega_0=\SI{2}{rad.s^{-1}}$,
+% $\xi=\num{0.015}$, $f_0=\SI{2}{N}$ et ***%$\omega=\SI{5}{rad.s^{-1}}$.
+% \label{mrae}
+%{\includegraphics[width=.5\linewidth]{mrae}}
 %
-%On a donc :
-%$$\vectg{G}{S}{\mathcal{R}} = \left[ \dfrac{d^2 \vect{OG}}{dt^2}\right]_{\mathcal{R}}
-%=\left[ \begin{array}{c}
-%x''(t) \\ y''(t) \\ z''(t)
-%\end{array}\right]_{\mathcal{R}}
-%=\left[ \begin{array}{c}
-%0 \\ -g \\ 0
-%\end{array}\right]_{\mathcal{R}}
-%$$
-
-En intégrant successivement $x''(t)$ et $y''(t)$, on a : 
-$$
-\left\{ 
-\begin{array}{l}
-x'(t) =  V_0 \cos\alpha_0\\ 
-y'(t) =  -gt +V_0 \sin\alpha_0
-\end{array}
-\right.
-\quad
-\quad
-\left\{ 
-\begin{array}{l}
-x(t) = V_0 \cos\alpha_0 \; t \\ 
-y(t) = -\dfrac{1}{2}gt^2 +  V_0 \sin\alpha_0 \; t
-\end{array}
-\right.
-$$
-%La balle étant uniquement soumise à son propre poids, on a $\vect{F_{\text{ext}\rightarrow \text{balle}}} = -mg\vect{j}$. 
-%On a donc 
-%$\left[ \dfrac{d^2 \vect{OG}}{dt^2}\right]_{\mathcal{R}}$ = -g\vect{j}$
-%En intégrant l'accélération, on obtient :
-
-\textbf{Mise en équation du problème.}
+%Solution de l'équation différentielle de la réaction de création du glycol.\label{chimie}
+%{\includegraphics[width=.5\linewidth]{chimie}}
+%\caption{Solutions des exemples 2 et 3.}
+\end{figure}
 
 
-On note $\vect{OT}=x_T\vect{i} + y_T\vect{j}$ la position du trou $T$. 
+\subsection{Création du glycol}
+Le glycol (noté $E$) résulte de l'addition d'eau à l'oxyde d'éthylène (noté $O$) en phase gazeuse, selon la réaction
+$O + H_2O \xrightarrow{(1)} E$ de constante de vitesse $k_1$. Cette réaction est effectuée à ***%\SI{473}{K}
+ sous une pression ***%$P = \SI{15,0}{bar}$
+ . Industriellement le temps de passage dans le réacteur ne permet pas d'atteindre l'état d'équilibre thermodynamique
+et on constate l'apparition de diéthylèneglycol (noté $D$) produit par la réaction $O+E \xrightarrow{(2)} D$ se déroulant également en phase gazeuse, de constante de vitesse $k_2$. Les réactions sont supposées d'ordre un par rapport à chacun des réactifs et totales. Pour traduire le fait que l'eau réagit moins vite que le glycol $E$ sur l'oxyde d'éthylène $O$, les constantes de vitesse $k_1$ et $k_2$ sont choisies telles que $k_2 = 5k_1$.
 
-A l'instant $t_f$ où la balle atteint sa position, on a : 
-$$
-\left\{ 
-\begin{array}{l}
-x_T = V_0 \cos\alpha_0 \; t_f \\ 
-y_T = -\dfrac{1}{2}gt_f^2 +  V_0 \sin\alpha_0 \; t_f
-\end{array}
-\right.
-\Longrightarrow 
-y_T = -\dfrac{1}{2}g \left(\dfrac{x_T}{V_0 \cos\alpha_0}\right) ^2 + V_0 \sin\alpha_0 \; \dfrac{x_T}{V_0 \cos\alpha_0}
-$$
-$$
-\Longleftrightarrow 
-y_T+\dfrac{1}{2}g \dfrac{x_T^2}{V_0^2 \cos^2\alpha_0} - x_T \tan\alpha_0 = 0
-$$
+Le mélange initial est constitué d'oxyde d'éthylène et d'eau à la concentration molaire ***%$c_0 = \SI{1,00}{mol.L^{-1}}$ 
+chacun. On notera $x_1$ l'avancement de la réaction (1) en ***%\si{mol.L^{-1}}
+ et $x_2$ l'avancement de la réaction (2) en ***%\si{mol.L^{-1.}}
 
-Considérant que le golfeur a un swing régulier et que sa vitesse d'impact est constante. On cherche l'angle $\alpha_0$ qui permettra de choisir le club le mieux adapté.
+Les équations différentielles modélisant le mécanisme réactionnel sont (solution \ref{chimie}):
+\[ \left\{ \begin{matrix}
+\dfrac{\d x_1}{\d t} = k_1 (c_0-x_1-x_2)(c_0-x_1) \\
+\dfrac{\d x_2}{\d t} = k_2 (c_0-x_1-x_2)(x_1-x_2) 
+\end{matrix}\right.\]
 
+  {Mettre ce problème sous la forme du problème de Cauchy.}
+
+
+\section{Annexe mathématique}
 \subsection{Définitions}
+On note $  {Y}_{ex}(t)$ la solution exacte.
 
-\begin{defi}
-\textbf{Problème stationnaire}
+\paragraph{Erreur de consistance au pas $i$} \[c_i =   {Y}_{ex}(t_{i+1})-  {Y}_{ex}(t_i)-h  {\Phi}( t_j,  {Y}_{ex}(t_j),h)\]
+permet de définir l'erreur réalisée entre l'approximation et la solution exacte au pas de temps $i$.
 
-On appelle problème stationnaire un problème dont l'énoncé reste invariant au cours du temps.
-\end{defi}
+\paragraph{Méthode consistante} \hfill$\displaystyle\lim_{h\to 0} \sum_{i=1}^N|c_i| = 0$\hfill ~
 
 
-\begin{defi}
-\textbf{Application linéaire}
+\paragraph{Méthode stable} Soit le schéma choisi et le schéma perturbé \[ \displaystyle \left\{\begin{matrix}
+  {Y}_{i+1} =   {Y}_{i} +  h  {\Phi}( t_j,  {Y}_j,h)\\
+  {Y}_{ex}(t_0)=  {Y_0}
+\end{matrix}\right. \qquad\qquad
+\displaystyle \left\{\begin{matrix}
+  {Y}^*_{i+1} =   {Y}^*_{i} +  h  {\Phi}( t_j,  {Y^*}_j,h) + \zeta_i\\
+  {Y}_{ex}^*(t_0)=  {Y}^*_0
+\end{matrix}\right.
+\]
 
-Soit $f$ une application de $E$ dans $F$, $E$ et $F$ étant deux espaces vectoriels. Soit $K$ un corps commutatif. $f$ est une application linéaire si :
-\begin{itemize}
-\item $\forall x \in E$, $\forall y \in E$, $f(x+y)=f(x)+f(y)$;
-\item $\forall \lambda \in K$, $\forall x \in E$, $f(\lambda x) =\lambda \cdot f(x)$.
-\end{itemize}
-\end{defi}
+La méthode est stable si :
+ \[\displaystyle \exists~ M>0, \qquad 
+ \sup\limits_{0 \leq i \leq N} 
+ |   {Y}^*_{i}  -   {Y}_{i} 
+ | \leq 
+ M \left(|  {Y}^*_0-  {Y_0} |+\sum_{i=0}^N |\zeta_i|\right)  \]
 
-\begin{exemple}
-Soient $a$ un réel et $f$ une application de $\mathbb{R}$ dans $\mathbb{R}$ telle que $f:x\mapsto ax $. $f$ est une application linéaire.
+\paragraph{Méthode convergente}
+\hfill$ \displaystyle\lim_{h\to 0}\left[\sup\limits_{0\leq i\leq N} |  {Y}_{ex}(t_i)-  {Y}_i| \right] = 0$\hfill ~
 
-$g:x\mapsto \cos x$ n'est pas une application linéaire.
 
-\end{exemple}
+\paragraph{Ordre de convergence} Une méthode est dite d'ordre $p$ si $\displaystyle\exists~ M>0, \forall~ i, \qquad |c_i| \leq M h^{p+1}$
 
-\subsection{Représentation graphique}
+\subsection{Propriétés} 
 
-Afin de résoudre un problème, il est possible d'avoir une représentation de la courbe. Ainsi, en traçant $f(\alpha_0)$ dans le cas du swing de golf, il est possible de répondre au problème en identifiant les points où la courbe sectionne l'axe des abscisses. 
+\paragraph{Propriété 1} Une méthode est convergente si et seulement si elle est stable et consistante.
 
-\begin{center}
-%\includegraphics[width=.9\textwidth]{images/InterpretationGraphique}
-\end{center}
+\paragraph{Propriété 2} Si $  {\Phi}$ est lipschitzienne en $  {Y}$ alors le schéma numérique est stable.
 
-\begin{rem}
-A priori il n'est pas possible de connaître le nombre de solutions que comporte notre problème. Dans notre cas, deux solutions sont possibles. Dans le cas général, il faudra y faire attention.
-\end{rem}
+%\hspace{0.5cm}\begin{minipage}{14cm}
 
-\begin{warn}
-Il est important de faire attention aux représentations graphiques : selon la discrétisation de la courbe affichée, il est possible que des intersections entre la courbe et l'axe des abscisses n'apparaissent pas alors que mathématiquement ces intersections existent. 
-\end{warn}
-
-\subsection{Critères de convergence}
-
-Numériquement, il n'est jamais possible de trouver la solution exacte à l'équation. Ainsi, sur un intervalle $[a,b]$, il est impossible de trouver $c$ tel que $f(c)=0$.
-
-Il sera donc nécessaire de définir un critère de convergence, c'est à dire une valeur $\varepsilon$ telle que $|f(c)|<\varepsilon$.
-
-On pourra par exemple prendre $\varepsilon$ de l'ordre de $10^{-9}$.
-
-\section{Méthode de dichotomie}
-
-\subsection{Principe}
-\begin{theo}
-\textbf{Théorème des valeurs intermédiaires}
-
-Soit $f$ une fonction définie et continue sur l'intervalle $[a,b]$ à valeur dans $\mathbb{R}$. Pour tout $u\in[f(a),f(b)]$, il existe au moins un réel $c\in [a,b]$  tel que $f(c)=u$.
-
- En particulier (Théorème de Bolzano), si $f(a)$ et $f(b)$ sont de signes différents, il existe au moins un réel $c$ tel que $f(c)=0$. 
-\end{theo}
-
-Ainsi, pour une fonction donnée définie sur un intervalle donné, le but de l'algorithme de dichotomie va être de découper en 2 l'intervalle [a,b] en deux, afin d'y trouver la solution. Par divisions successives de l'intervalle, on convergera vers la solution.
-
-\begin{rem}
-\textbf{Tester le signe de $f(a)$ et $f(b)$.}
-
-Il existe plusieurs méthodes pour tester si $f(a)$ et $f(b)$ sont de signes différents. Si on ne se préoccupe pas de savoir la relation d'ordre entre $f(a)$ et $f(b)$, un test efficace consiste en un test du signe de $f(a)\cdot f(b)$. 
-\end{rem}
-
-\subsubsection*{Interprétation graphique}
-
-\begin{center}
-%\includegraphics[width=.6\textwidth]{images/InterpretationG}
-\end{center}
-
-
-\subsection{Algorithme de dichotomie}
-
-L'algorithme de dichotomie est le suivant :
-
-\begin{pseudo}
-\begin{algorithm}[H]
-\Fonction{
-Données:$f$, $a$,$b$, $\varepsilon$ \\
-$g\gets a$\\
-$d \gets b$\\
-$f_g \gets f(g)$\\
-$f_d \gets f(d)$\\
-\Tq{$ (d-g) > 2\varepsilon$}{
-$m \gets (g+d)/2$ \\
-$f_m\gets f(m)$
-
-\eSi{$f_g\cdot f_m \leq 0$}{
-$d \gets m$\\
-$f_d \gets f_m$\\
-}{
-$g \gets m$\\
-$f_d \gets f_m$\\
-}
-}
-\Retour{$(g+d)/2$}
-}
-\end{algorithm}
-\end{pseudo}
-
-\begin{exemple}
- \textit{Implémenter cet algorithme en Python}
-
-On veillera à vérifier que l'équation comporte initialement au moins une solution. On étudiera, a posteriori, la possibilité d'existence de deux solutions. 
- 
-\end{exemple}
-
-\subsection{Étude théorique de l'algorithme}
-\subsubsection{Variant de boucle}
-Montrons que $d-g$ est un variant de boucle. 
-
-Tout d'abord, la quantité $d-g$ reste positive tout au long de l'algorithme. En effet, suivant le cas, après une itération, si $d_i-g_i>0$ on a : 
-\begin{itemize}
-\item dans un cas, $d_{i+1}\gets (g_i+d_i)/2$ et $g_{i+1}=g_i$ en conséquence, $d_{i+1}-g_{i+1} = (d_i - g_i)/2 >0$;
-\item dans l'autre cas, $g_{i+1}\gets (g_i+d_i)/2$ et $d_{i+1}=d_i$ en conséquence, $d_{i+1}-g_{i+1} = (d_i - g_i)/2 >0$.
-\end{itemize}
-En conséquence, à chaque itération, $d-g$ est toujours positif.
-
-Par ailleurs, la quantité $d-g$ décroit tout au long de l'algorithme. En effet, à chaque itération $i$, $d-g=\dfrac{b-a}{2^{i-1}}$. Ainsi, il existera un entier $i$ tel que $d-g>2\varepsilon$.
-
-$d-g$ est donc un variant de boucle. 
-
-
-\subsubsection{Invariant de boucle}
-Montrons que $f(d)\cdot f(g) \leq 0$ est un invariant de boucle.
-
-On rappelle qu'il faut :
-\begin{enumerate}
-\item définir les préconditions (état des variables avant d’entrer dans la boucle);
-\item définir un invariant de boucle;
-\item prouver que l’invariant de boucle est vrai;% (correspond à $\mathcal{P}(n) \Longleftarrow \mathcal{P}(n + 1)$).
-\item montrer la terminaison du programme;
-\item montrer qu'en sortie de boucle, la condition reste vraie.%Condition de sortie de boucle + invariant de boucle $\Longleftarrow$ postcondition.
-\end{enumerate}
-
-
-\subsubsection{Complexité algorithmique}
-
-La boucle $\textsf{while}$ s'exécute jusqu'à ce que $\dfrac{b-a}{2^n}<2\varepsilon$. En conséquence, la boucle s'exécutera suivant la condition suivante : 
-$$\dfrac{b-a}{2^n}<2\varepsilon 
-\Longleftrightarrow
-\dfrac{b-a}{2\varepsilon}<2^n
-\Longleftrightarrow
-n> \dfrac{\ln\left(\dfrac{b-a}{2\varepsilon}\right)}{\ln 2}$$
-
-La complexité de l'algorithme de recherche dichotomique est donc en $\mathcal{O}(log(n))$.
-
-\subsection{Application sur l'exemple}
-
-Le trou étant d'un diamètre de $108\;mm$ et la balle ayant un diamètre de $42,67\; mm$. L'erreur admissible sur l'impact de la balle est donc de $((108-42,67)/2)/1000 \simeq 0,032\; m$. Dans ce cas, obtenir une erreur inférieure pourrait accroître les calculs sans pour autant apporter une réelle plus value du point de vue du golfeur.
-
-Cependant, on peut tout de même observer le nombre d'opérations en fonction de l'erreur demandée :
-
-
-\begin{center}
-%\includegraphics[width=.6\textwidth]{images/courbe_erreur_dicho}
-\end{center}
-
-
-\subsection{Méthode de Lagrange -- Méthode des cordes}
-
-La méthode de Lagrange diffère de la méthode de dichotomie par le fait que l'intervalle n'est pas divisé en 2 parts égales. Dans cette méthode, on cherche $c$, intersection de l'axe des abscisses et de la droite passant par les points $(a,f(a))$ et $(b,f(b))$.
-
-\begin{enumerate}
-\item Donner une interprétation graphique de cette méthode.
-\item Donner l'algorithme permettant de résoudre l'équation $f(x)=0$ en utilisant la cette méthode.
-\end{enumerate}
-
-\begin{minipage}[c]{.49\linewidth}
-La droite $\Delta_i$ passe par les points $(g_i,f(g_i))$ et $(d_i,f(d_i))$, elle a pour équation $y=ax + b$, trouvons l'ordonnée à l'origine et la pente de la droite :
-$$
-\left\{
-\begin{array}{l}
-f(g_i) = a g_i + b \\
-f(d_i) = a d_i + b 
-\end{array}
-\right.
-\Longleftrightarrow
-\left\{
-\begin{array}{l}
-a = \dfrac{f(g_i)-b}{g_i} \\
-f(d_i) =  \dfrac{f(g_i)-b}{g_i}d_i + b 
-\end{array}
-\right.
-$$ 
-$$
-\left\{
-\begin{array}{l}
-a = \dfrac{f(g_i)-b}{g_i} \\
-b = \dfrac{g_i f(d_i) -d_if(g_i) }{(g_i  -d_i)}
-\end{array}
-\right.
-\Longleftrightarrow
-\left\{
-\begin{array}{l}
-a = \dfrac{f(g_i)(g_i  -d_i)- (g_i f(d_i) -d_if(g_i) )}{g_i(g_i-d_i)} \\
-b = \dfrac{g_i f(d_i) -d_if(g_i) }{(g_i  -d_i)}
-\end{array}
-\right.
-$$ 
-\end{minipage} \hfill
-\begin{minipage}[c]{.43\linewidth}
-\begin{center}
-%\includegraphics[width=.9\textwidth]{images/InterpretationG2}
-\end{center}
-\end{minipage}
-\vspace{.25cm}
-
-$$
-\left\{
-\begin{array}{l}
-a = \dfrac{f(g_i)  -  f(d_i)  }{g_i-d_i} \\
-b = \dfrac{g_i f(d_i) -d_if(g_i) }{g_i  -d_i}
-\end{array}
-\right.
-$$ 
-
-On cherche alors  $c$ tel que $f(c)=0$, c'est-à-dire $0=ac+b \Longleftrightarrow c = -\dfrac{b}{a}$.
-
-On a donc : 
-$$
-c = -\dfrac{g_i f(d_i) -d_if(g_i) }{f(g_i)  - f(d_i) }
-$$
-
-L'algorithme est le suivant :
-
-\begin{pseudo}
-\begin{algorithm}[H]
-\Fonction{
-Données:$f$, $a$,$b$, $\varepsilon$ \\
-$g\gets a$\\
-$d \gets b$\\
-$f_g \gets f(g)$\\
-$f_d \gets f(d)$\\
-\Tq{$ (d-g) > 2\varepsilon$}{
-$m \gets  -\dfrac{g_i f(d_i) -d_if(g_i) }{f(g_i)  - f(d_i) }$ \\
-$f_m\gets f(m)$
-
-\eSi{$f_g\cdot f_m \leq 0$}{
-$d \gets m$\\
-$f_d \gets f_m$\\
-}{
-$g \gets m$\\
-$f_d \gets f_m$\\
-}
-}
-\Retour{$(g+d)/2$}
-}
-\end{algorithm}
-\end{pseudo}
-
-
-\section{Méthode de Newton}
-
-\subsection{Principe}
-\begin{theo}
-\textbf{Développement de Taylor à l'ordre 1}
-
-Soit $f$ une fonction $C^1$ sur un intervalle $I$ et $a\in I$. Le développement de Taylor à l'ordre 1 de $f$ est donné par 
-$$
-f(x)=f(a)+ f'(a)\cdot(x-a)+\mathit{o}(x-a)
-$$
-\end{theo}
-
-Géométriquement, lorsqu'on néglige le reste, le développement de Taylor donne l'équation de la tangente en $a$. Notons $\Delta(x)$ cette équation.
-
-L'abscisse $c$ de l'intersection de la tangente avec l'axe des abscisses est donné par la résolution de 
-$$
-\Delta(c)=0 
-\Longleftrightarrow f(a)+ f'(a)\cdot(c-a) = 0
-\Longleftrightarrow c = a-\dfrac{f(a)}{f'(a)}
-$$
-
-\begin{center}
-%\includegraphics[width=.7\textwidth]{images/interpretation_newton}
-\end{center}
- 
-\subsection{Algorithme de Newton}
-
-L'algorithme est le suivant :
-
-\begin{pseudo}
-\begin{algorithm}[H]
-\Fonction{
-Données:$f$, $f'$, $a$, $\varepsilon$ \\
-$g\gets a$\\
-$c \gets  g-\dfrac{f(g)}{f'(g)} $\\
-\Tq{$ |c-g|> \varepsilon$}{
-$g \gets  c$ \\
-$c \gets c-\dfrac{f(c)}{f'(c)}$
-}
-\Retour{$c$}
-}
-\end{algorithm}
-\end{pseudo}
-
-
-\subsection{Étude théorique de l'algorithme}
-
-Il n'est pas aisé de démontrer la terminaison de l'algorithme de Newton. Cela s'explique par le fait que si la dérivée s'annule en un point, la division $\dfrac{f(c)}{f'(c)}$ ne peut plus se calculer. Par ailleurs, suivant le profil de la courbe, il est possible de trouver une valeur de $c$ pour laquelle $|c-g|$ soit inférieure à $\varepsilon$ sans que $c$ soit une solution satisfaisante de l'équation $f(c)=0$. 
-
-
-Par ailleurs, dans le cadre cet algorithme, il est nécessaire d'initialiser la résolution du problème ce qui n'est pas toujours aisé.
-
-\subsection{Évaluation de la dérivée numérique}
-\subsubsection{Principe}
-L'algorithme de Newton fait apparaître le besoin de calculer la dérivée de la fonction en un point. Pour cela, deux cas de figures peuvent se présenter : 
-\begin{itemize}
-\item ou bien, il est possible de calculer la dérivée de la fonction analytiquement. Dans ce cas, il est possible de programmer directement une fonction permettant d'évaluer la dérivée d'une fonction;
-\item ou bien ce calcul de dérivée n'est pas possible. Dans ce cas on a recours à la dérivation numérique.
-\end{itemize}
-
-\begin{resultat}
-En première approximation, il est possible d'approximer la dérivée en approximant la tangente à la courbe par une droite passant par deux points successifs. Dans ces conditions, pour une valeur de $h$ suffisamment faible, on a : 
-$$
-f'(x_0)\simeq \dfrac{f(x+h)-f(x)}{h}	
-$$
-\end{resultat}
-
-
-%
-%\begin{resultat}
-%\textbf{Théorème de Taylor-Young}
-%Si $f$ est deux fois dérivable en $x_0$ et $f''(x_0)\neq 0$, 
-%$$
-% \dfrac{f(x_0+\varepsilon)-f(x_0)}{\varepsilon} - f'(x_0) \sim \dfrac{f''(x_0)}{2}h
-%$$
-%\end{resultat}%
-
-\subsubsection{Méthodes à un pas}
-
-\begin{minipage}[c]{.49\linewidth}
-\begin{resultat}
-\textbf{Différence avant -- Schéma d'Euler explicite}
-
-Dans ce cas, l'estimation de la dérivée au point $P_i$ s'appuie sur le point $P_{i+1}$ :
-$$
-f'(x_i)\simeq\dfrac{f(x_{i+1})-f(x_i)}{x_{i+1}-x_i}
-$$
-\end{resultat}
-
-\begin{resultat}
-\textbf{Différence arrière -- Schéma d'Euler implicite}
-
-Dans ce cas, l'estimation de la dérivée au point $P_i$ s'appuie sur le point $P_{i-1}$ :
-$$
-f'(x_i)\simeq\dfrac{f(x_{i})-f(x_{i-1})}{x_{i}-x_{i-1}}
-$$
-\end{resultat}
-\end{minipage}\hfill
-\begin{minipage}[c]{.49\linewidth}
-\begin{center}
-%\includegraphics[width=\textwidth]{images/derivation_1pas}
-\end{center}
-\end{minipage}
-
-\subsubsection{Méthodes à dux pas}
-
-\begin{minipage}[c]{.49\linewidth}
-\begin{resultat}
-
-On peut aussi utiliser les points $P_{i-1}$ et $P_{i+1}$ pour estimer la dérivée en $P_i$ :
-$$
-f'(x_i)\simeq\dfrac{f(x_{i+1})-f(x_{i-1})}{x_{i+1}-x_{i-1}}
-$$
-
-\end{resultat}
-\end{minipage}\hfill
-\begin{minipage}[c]{.49\linewidth}
-\begin{center}
-%\includegraphics[width=\textwidth]{images/derivation_2pas}
-\end{center}
-\end{minipage}
-
-\begin{rem}
-\begin{itemize}
-\item Lorsqu’il s’agit de dériver une fonction temporelle « en temps réel », le point suivant n’est pas encore connu donc seule la différence arrière peut être calculée.
-\item Le calcul de la dérivée conduit à un tableau de valeurs de dimension $n-1$.
-\end{itemize}
-\end{rem}
+\noindent
+\textbf{Démonstration :}\\
+Soit le schéma numérique et le schéma perturbé avec $  {\Phi}$ $k-$lipschitzienne. \\
+On a : $|  {Y}^*_{i}  -   {Y}_{i}| = |  {Y}^*_{i-1}  -   {Y}_{i-1} + h(  {\Phi}( t_j,  {Y^*}_j,h)-  {\Phi}( t_j,  {Y}_j,h)) + \zeta_{i-1}|$\\
+Or $  {\Phi}$ est $k-$lipschitzienne et par inégalité triangulaire, on obtient \\
+$ |  {Y}^*_{i}  -   {Y}_{i}|\leq (1+hk) |  {Y}^*_{i-1}  -   {Y}_{i-1}| + |\zeta_{i-1}|$\\
+Par récurrence simple, $ |  {Y}^*_{i}  -   {Y}_{i}|\leq (1+hk)^{i} |  {Y}^*_{0}  -   {Y}_{0}| +\sum_{k=0}^{i-1} |\zeta_{k}|$\\
+Comme $1+hk>1$, $1\leq (1+hk)^i \leq (1+hk)^N$, ainsi\\
+$\forall~ i,\qquad |  {Y}^*_{i}  -   {Y}_{i}| \leq M  \left(|  {Y}^*_0-  {Y_0} |+\sum_{i=0}^N |\zeta_i|\right) $\\
+Donc la borne supérieure est également majorée par ce terme, on en déduit que le schéma est stable.
 
 
 

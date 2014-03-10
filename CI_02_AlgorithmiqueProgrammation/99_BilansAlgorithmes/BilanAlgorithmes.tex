@@ -202,6 +202,30 @@ $f_d \gets f_m$\\
 \end{algorithm}
 \end{pseudo}
 
+
+\begin{py}
+\begin{python}
+def rechercheDichotomique(f,a,b,eps):
+    g = a
+    d = b
+    f_g = f(g)
+    f_d = f(d)
+    while (d-g) > 2*eps:
+        m = (g+d)/2 
+        f_m =f(m)
+        if f_g * f_m <= 0 :
+            d = m
+            f_d = f_m
+        else :
+            g  = m
+            f_d = f_m
+    return (g+d)/2
+\end{python}
+\end{py}
+
+
+
+
 \subsubsection*{Précision du calcul}
 \subsubsection*{Rapidité}
 \subsubsection*{Comparaison à zéro}
