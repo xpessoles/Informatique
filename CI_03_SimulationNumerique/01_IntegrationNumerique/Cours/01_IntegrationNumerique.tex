@@ -407,14 +407,14 @@ On a $\int\limits_{a_i}^{a_{i+1}}f(a_i)\mathrm{d}x=\left(a_{i+1}-a_{i}\right) f(
 & \leq & M_1   \left[ \dfrac{\left(x-a_i\right)^2}{2}\right]_{a_i}^{a_{i+1}} \leq M_1 \dfrac{\left(a_{i+1}-a_i\right)^2}{2}
 \end{eqnarray*}
 
-Dans le cas où $I$ est divisé en $n$ subdivisions régulières, $a_{i+1}-a_i = \dfrac{1}{n}$. On a a alors 
+Dans le cas où $I$ est divisé en $n$ subdivisions régulières, $a_{i+1}-a_i = \dfrac{b-a}{n}$. On a a alors 
 $$
-\varepsilon_k \leq \dfrac{M_1}{2n^2} \quad \text{sur}\quad [a_i,a_{i+1}]
+\varepsilon_k \leq \dfrac{M_1(b-a)}{2n^2} \quad \text{sur}\quad [a_i,a_{i+1}]
 $$
 
 On montre alors que sur $[a,b]$, on a donc :
 $$
-\varepsilon \leq n\dfrac{M_1}{2n^2} \leq \dfrac{M_1}{2n} 
+\varepsilon \leq n\dfrac{M_1(b-a)}{2n^2} \leq \dfrac{M_1(b-a)}{2n} 
 $$
 
 
@@ -424,6 +424,7 @@ $$
 Soit $f$ fonction dérivable sur $I=[a,b]$ et dont $f'$ est continue sur $I$. Soit $M_1$ un majorant de $f'$ sur $I$. En intégrant $f$ sur $n$ subdivisions régulières de $I$ par la méthode des rectangles à droite ou à gauche, l'erreur commise $\varepsilon$ est telle que : 
 $$ \varepsilon \leq \dfrac{M_1}{2n}$$ 
 
+($b-a$ est intégré dans $M_1$).
 \end{resultat}
 
 
@@ -471,16 +472,17 @@ f\left(\dfrac{a_i+a_{i+1}}{2} \right)
 \end{eqnarray*}
 
 
-Dans le cas où $I$ est divisé en $n$ subdivisions régulières, $a_{i+1}-a_i = \dfrac{1}{n}$. On a a alors 
+Dans le cas où $I$ est divisé en $n$ subdivisions régulières, $a_{i+1}-a_i = \dfrac{(b-a)}{n}$. On a a alors 
 $$
-\varepsilon_k \leq \dfrac{2M_2}{3}\dfrac{1}{8}\dfrac{1}{n^3} \quad \text{sur}\quad [a_i,a_{i+1}]
+\varepsilon_k \leq \dfrac{2M_2}{3}\dfrac{1}{8}\dfrac{(b-a)}{n^3} \quad \text{sur}\quad [a_i,a_{i+1}]
 $$
 
 On montre alors que sur $[a,b]$, on a donc :
 $$
-\varepsilon \leq n \dfrac{2M_2}{3}\dfrac{1}{8}\dfrac{1}{n^3} \leq \dfrac{M_2}{12 n^2}
+\varepsilon \leq n \dfrac{2M_2}{3}\dfrac{1}{8}\dfrac{(b-a)}{n^3} \leq \dfrac{M_2'}{12 n^2}
+\quad
+(M_2 ' = M_2 (b-a))
 $$
-
 
 \begin{resultat}
 \textbf{Erreur sur la méthode des rectangles -- point milieu}
