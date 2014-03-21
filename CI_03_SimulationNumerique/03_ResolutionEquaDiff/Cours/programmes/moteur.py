@@ -130,21 +130,22 @@ def figure_euler_explicite():
 
 
 def figure_euler_explicite_pas():
-    temps2,omegat=omega_t(ti,tf,0.1)
+    tau=0.2
+    temps2,omegat=omega_t(ti,tf,0.1,tau)
     plt.plot(temps2,omegat,linewidth=3)
     
     omega0 = 0
     omegac = 528
     pas=0.25
-    temps,omegan=omega_n_euler_explicite_recurrence(ti,tf,pas,omega0,omegac)
+    temps,omegan=omega_n_euler_explicite_recurrence(ti,tf,pas,omega0,omegac,tau)
     plt.plot(temps,omegan,linewidth=1,marker='v')
     
     pas=0.1
-    temps,omegan=omega_n_euler_explicite_recurrence(ti,tf,pas,omega0,omegac)
+    temps,omegan=omega_n_euler_explicite_recurrence(ti,tf,pas,omega0,omegac,tau)
     plt.plot(temps,omegan,linewidth=1,marker='x')
     
     pas=0.05
-    temps,omegan=omega_n_euler_explicite_recurrence(ti,tf,pas,omega0,omegac)
+    temps,omegan=omega_n_euler_explicite_recurrence(ti,tf,pas,omega0,omegac,tau)
     plt.plot(temps,omegan,linewidth=1,marker='.')
     
     plt.grid(True, which="both", linestyle="dotted")
@@ -155,8 +156,8 @@ def figure_euler_explicite_pas():
     ],loc='lower right', fancybox=True, shadow=True, prop=dict(size=10))
     plt.xlabel("Temps en $s$")
     plt.ylabel("Vitesse angulaire en $rad/s$")
-    #plt.title("Démarrage du moteur")
-    plt.title("Arrêt du moteur")
+    plt.title("Démarrage du moteur")
+    #plt.title("Arrêt du moteur")
     #plt.axis([0,xf,-1.2,1.2])
     plt.show()
     
@@ -197,13 +198,14 @@ def figure_euler_explicite_pas_tau():
     ],loc='lower right', fancybox=True, shadow=True, prop=dict(size=10))
     plt.xlabel("Temps en $s$")
     plt.ylabel("Vitesse angulaire en $rad/s$")
-    #plt.title("Démarrage du moteur")
-    plt.title("Arrêt du moteur")
+    plt.title("Démarrage du moteur")
+    #plt.title("Arrêt du moteur")
     #plt.axis([0,xf,-1.2,1.2])
     plt.show()
     
 # figure_premiere_approche()
 # figure_moteur_seul()
 #figure_euler_explicite()
-#figure_euler_explicite_pas()
-figure_euler_explicite_pas_tau()
+#
+figure_euler_explicite_pas()
+#figure_euler_explicite_pas_tau()
