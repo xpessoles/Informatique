@@ -465,10 +465,10 @@ $$y_{k+1}=y_k+hf(y_{k+1},t_k)$$
 \end{resultat}
 
 Appliquons cette méthode à notre étude de cas :
-$$\omega_{c_{k+1}}=\omega_{c_k}+h \dfrac{\omega_c-\omega_{c_{k+1}}}{\tau}$$
+$$\omega_{{k+1}}=\omega_{k}+h \dfrac{\omega_c-\omega_{{k+1}}}{\tau}$$
 
-Il faut donc résoudre une équation afin de déterminer $\omega_{c_{k+1}}$. Dans notre étude de cas, la résolution est aisée et on obtient :
-$$\omega_{c_{k+1}}=\dfrac{\omega_{c_k}}{1+\dfrac{h}{\tau}}+\omega_c \dfrac{\dfrac{h}{\tau}}{1+\dfrac{h}{\tau}}$$
+Il faut donc résoudre une équation afin de déterminer $\omega_{{k+1}}$. Dans notre étude de cas, la résolution est aisée et on obtient :
+$$\omega_{{k+1}}=\dfrac{\omega_{k}}{1+\dfrac{h}{\tau}}+\omega_c \dfrac{\dfrac{h}{\tau}}{1+\dfrac{h}{\tau}}$$
 
 D’où :
 
@@ -523,7 +523,7 @@ Seule la constante de temps change, sur le graphique,on remarque que le schéma 
 %$$ 
 %\omega_c{_{k+1}}=\dfrac{\omega_{c_k}+\omega_c \dfrac{h}{\tau}}{1+\dfrac{h}{\tau}}=\dfrac{\omega_{c_0}}{\left(1+\dfrac{h}{\tau}\right)^{k+1}} +\omega_c (h⁄\tau)/(1+h⁄\tau)  (1-(1/(1+h⁄\tau))^(k+1))/(1-1/(1+h⁄\tau))$$
 
-$$\omega_{c_k}=\dfrac{\omega_{c_0}}{\left(1+\dfrac{h}{\tau}\right)^k} +\omega_c\left[1-\dfrac{1}{\left(1+\dfrac{h}{\tau}\right)^k}\right]$$
+$$\omega_{k}=\dfrac{\omega_{0}}{\left(1+\dfrac{h}{\tau}\right)^k} +\omega_c\left[1-\dfrac{1}{\left(1+\dfrac{h}{\tau}\right)^k}\right]$$
 La suite $\omega_{c_k}$ converge quelques soit le pas de temps h choisi.Par contre, plus la constante de temps $\tau$ diminue, moins le schéma est précis. En effet, l’augmentation de la raideur (forte variation de la dérivée) engendre des erreurs importantes.
 En conclusion, le schéma implicite est beaucoup plus stable que le schéma explicite au détriment de la rapidité (résolution numérique d’une équation).
 
