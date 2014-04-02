@@ -81,12 +81,12 @@ On s'intéresse au mouvement de la cabine du véhicule à trois roues Clever don
 
 Pour piloter le mécanisme, il est nécessaire de connaître l'angle de la cabine en fonction de l'élongation des vérins. L'étude géométrique permet d'obtenir facilement l'élongation en fonction de l'angle :
 
-$$\lambda_1(\alpha) = \sqrt{\left(L\cos(\alpha-130\degres)  +a\right)^2+\left(\ln(\alpha-{130}{\degres})-b\right)^2} $$ 
+$$\lambda_1(\alpha) = \sqrt{\left(L\cos(\alpha-130\degres)  +a\right)^2+\left(L\sin(\alpha-{130}{\degres})-b\right)^2} $$ 
 
 avec $\alpha\in[{-50}{\degres}, {50}{\degres}]$, $a = {0,14}{\; m}$, $b = {0,046}{\; m}$ et $L = {0,49}{\; m}$.
-
+\begin{obj}
 L'objectif du TP est de déterminer l'angle $\alpha$ pour une valeur d'élongation $\lambda_1$ donnée.
-
+\end{obj}
 \subsection{Approche graphique}
 
 \subparagraph{}\textit{Définir la fonction $\texttt{lambda1(alpha)}$.}
@@ -117,7 +117,7 @@ opt.newton(f,5)  #la valeur initiale est 5
 \textit{Expliquer alors le but d'avoir une valeur initiale dans la fonction proposée par Scipy.}
 
 \subparagraph{}
-\textit{Déterminer numériquement l'angle $\alpha$ pour un allongement de $\lambda_1={0,4}\; m$. Comparer la valeur obtenue en fonction de la valeur initiale.}
+\textit{Déterminer numériquement l'angle $\alpha$ pour un allongement de $\lambda_1={0,4}\; m$. Comparer la valeur obtenue avec la valeur initiale.}
 
 
 \subsection{\'Etude de différents algorithmes de résolution}
