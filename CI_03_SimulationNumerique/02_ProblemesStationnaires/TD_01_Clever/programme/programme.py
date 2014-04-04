@@ -21,25 +21,25 @@ def lambda1 (x):
 
 
 # Question 2 et 3
-"""
+
 x = np.linspace(radians(-50),radians(50),1000)
 xx,yy=[],[]
 for i in range(len(x)):
     xx.append(x[i])
     yy.append(lambda1(x[i]))
 plot(xx,yy)
-"""
+
 #Solution : -0.401 rad
 
 # Question 4
-"""
+
 def f(x):
     return lambda1(x)-0.4
 
 import scipy.optimize as opt
 res=opt.newton(f,0)
 print(res)
-"""
+
 
 # Question 5
 def newton():

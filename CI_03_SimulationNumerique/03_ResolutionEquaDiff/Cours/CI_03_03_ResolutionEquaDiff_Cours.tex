@@ -258,7 +258,7 @@ On pose $y'(t)=\dfrac{dy}{dt}$.
 
 Pour résoudre l'équation sur $[0,T]$ on commence par discrétiser l'intervalle. Dans le cas d'une discrétisation en $n$ pas constants d'amplitude $h$ on a alors $t_0 = 0$, $t_1=h$, ... $t_n=n\cdot h$.
 
-En intégrant l'équation différentielles sur un intervalle $[t_i, t_{i+1}]$, on a : 
+En intégrant l'équation différentielle sur un intervalle $[t_i, t_{i+1}]$, on a : 
 $$
 \int\limits_{y_i}^{y_{i+1}} dy = \int\limits_{t_i}^{t_{i+1}} f(t,y(t)) dt 
 \Longleftrightarrow 
@@ -549,18 +549,18 @@ Où $J$ est un moment d’inertie, $a$ une longueur caractéristique et $C$ un c
 
 
 Cette équation dynamique est non linéaire, elle peut s’écrire sous la forme : $\ddot{\theta}=f(\dot{\theta},\theta,t)$. Posons alors le vecteur d’état $\vect{Y}$ tel que $\vect{Y}=\left(\begin{array}{c} \dot{\theta}\\ \theta \end{array}\right) =\left(\begin{array}{c} y_1 \\ y_2 \end{array}\right)$. 
-Le système d’équation devient alors :
+Le système d’équations devient alors :
 $$
 \left\{\begin{array}{l}
 \dfrac{d\theta}{dt} = \dot{\theta} \\
-\dfrac{d\dot{\theta}}{dt} = - \dfrac{((m_c a^2 \dot{\theta}^2+m_b L^2 \omega^2 ) \sin 2\theta +C(t)}{2(J+m_c a^2  \sin^2\theta}
+\dfrac{d\dot{\theta}}{dt} = - \dfrac{\left(m_c a^2 \dot{\theta}^2+m_b L^2 \omega^2 \right) \sin 2\theta +C(t)}{2\left(J+m_c a^2  \sin^2\theta\right)}
 \end{array}\right.
 $$
 
 $$
 \left\{\begin{array}{l}
 \dfrac{dy_2}{dt} = y_1 \\
-\dfrac{dy_1}{dt} = - \dfrac{((m_c a^2 y_1^2+m_b L^2 \omega^2 ) \sin 2 y_2 +C(t)}{2(J+m_c a^2  \sin^2y_2}
+\dfrac{dy_1}{dt} = - \dfrac{\left(m_c a^2 y_1^2+m_b L^2 \omega^2 \right) \sin 2 y_2 +C(t)}{2\left(J+m_c a^2  \sin^2y_2\right)}
 \end{array}\right.
 \quad
 \Longrightarrow
