@@ -1,0 +1,101 @@
+\documentclass[10pt]{article}
+\input{style/coursHeadings}
+\input{style/programHeadings}
+\input{style/macros_SII}
+\input{style/macros_Titres}
+\input{style/macros_Frames}
+
+%Si le boolen xp est vrai : compilation pour xabi
+%Sinon compilation Damien
+\newboolean{xp}
+\setboolean{xp}{true}
+
+\newboolean{prof}
+\setboolean{prof}{false}
+
+\usepackage[%
+    pdftitle={TD f(x)=0},
+    pdfauthor={Xavier Pessoles},
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=magenta]{hyperref}
+
+
+
+\def\discipline{Informatique}
+\def\xxtitre{\ifthenelse{\boolean{xp}}{
+CI 3 : Ingénierie Numérique \& Simulation}{
+Chapitre  -- }}
+
+\def\xxsoustitre{\ifthenelse{\boolean{xp}}{
+Chapitre 3 -- Résolution des équations différentielles}{
+Partie  -- }}
+
+\def\xxauteur{\ifthenelse{\boolean{xp}}{
+Xavier \textsc{Pessoles}}{
+Damien \textsc{Iceta} \\ Xavier \textsc{Pessoles}}}
+
+\def\xxpied{\ifthenelse{\boolean{xp}}{
+CI 3 : Ingénierie Numérique \& Simulation\\
+Ch. 2 : Problèmes stationnaires -- TD}{
+\xxtitre}}
+
+\def\xxcathegorie{\ifthenelse{\boolean{xp}}{
+2013 -- 2014 \\
+Xavier \textsc{Pessoles}}{
+Informatique - TD}}
+
+
+
+
+
+
+%---------------------------------------------------------------------------
+
+
+\begin{document}
+
+\ifthenelse{\boolean{xp}}{\input{style/enteteXP}}{\input{style/enteteDI}}
+
+
+
+
+
+ \renewcommand{\baselinestretch}{1}
+\setlength{\parskip}{0ex plus 0.5ex minus 0.2ex}
+
+
+
+\subsection*{Résolution numérique d'équations différentielles}
+
+Donner la méthode de résolution numérique des équations différentielles suivantes en utilisant le schéma d'Euler explicite :
+\begin{eqnarray}
+\left\{
+\begin{array}{l}
+y'(t) + \alpha y(t) = \beta \\
+y(0) = \gamma
+\end{array}
+\right. \\
+\left\{
+\begin{array}{l}
+\ddot{\theta}(t) + \dfrac{g}{l}\sin \theta = 0\\
+\theta(0) = 0 \quad \dot{\theta}(0) = 0 \\
+\end{array} 
+\right.\\
+\left\{
+\begin{array}{l}
+-y''(x) + \dfrac{g}{l}\sin \theta = 0\\
+\theta(0) = 0 \quad \dot{\theta}(0) = 0 \\
+\end{array} 
+\right.\\
+\left\{
+\begin{array}{l}
+y'(t) = -ty^2(t) \quad \text{si }t>0\\
+y(0) = \alpha  \\
+\end{array} 
+\right.
+\end{eqnarray}
+
+\end{document}
+
+
