@@ -1,0 +1,153 @@
+\documentclass[10pt,oneside]{article}
+\input{style/coursHeadings}
+\input{style/programHeadings}
+
+%Si le boolen xp est vrai : compilation pour xabi
+%Sinon compilation Damien
+\newboolean{xp}
+\setboolean{xp}{true}
+
+\newboolean{prof}
+\setboolean{prof}{false}
+
+\def\xxtitre{\ifthenelse{\boolean{xp}}{
+CI 3 : Ingénierie Numérique \& Simulation
+}}
+
+\def\xxsoustitre{\ifthenelse{\boolean{xp}}{
+TP -- Résolution d'équations différentielles}{
+}}
+
+
+\def\xxauteur{\ifthenelse{\boolean{xp}}{
+\noindent \textsl{Cédric Lopez} \\
+\textsl{Xavier Pessoles}
+}{
+}}
+
+
+\def\xxpied{\ifthenelse{\boolean{xp}}{
+CI 3 : Ingénierie Numérique \& Simulation -- TP \\
+Résolution d'équations différentielles -- \ifthenelse{\boolean{prof}}{P}{E}%
+}{
+}}
+
+\usepackage[%
+    pdftitle={Ingénierie Numérique et Simulation},
+    pdfauthor={Xavier Pessoles},
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=magenta]{hyperref}
+
+
+
+\usepackage{pifont}
+\sloppy
+\hyphenpenalty 10000
+
+
+\begin{document}
+
+
+\input{style/entete1}
+
+\begin{center}
+ \Large\textsc{\xxtitre}
+\end{center}
+
+\begin{center}
+ \large\textsc{\xxsoustitre}
+\end{center}
+
+
+%\begin{rem}
+%\textbf{Utilisation de Spyder}
+
+%Dans le cadre de ce TP, nous utiliserons l'environnement de programmation Spyder. Pour lancer cette application utiliser le raccourci sur le bureau.
+
+%\end{rem}
+%
+%\begin{objectif}
+%Les objectif de ce TP sont :
+%\begin{itemize}
+%\item d'acquérir les données provenant d'un fichier texte (au format \textsf{kml});
+%\item de réaliser des fonctions permettant d'analyser les données pour avoir accès à différentes statistiques.
+%\end{itemize}
+%\end{objectif}
+
+
+
+\subsection*{Exercice 1 -- Circuit RC}
+\begin{minipage}[c]{.47\linewidth}
+
+\end{minipage} \hfill
+\begin{minipage}[c]{.47\linewidth}
+\begin{center}
+\includegraphics[width=.95\textwidth]{images/RC}
+\end{center}
+\end{minipage}
+
+\subparagraph{}
+\textit{Montrer que l'équation différentielle régissant la tension aux bornes de lu condensateur peut se mettre sous la forme :
+$$
+\dfrac{\text{d}u_C(t)}{\text{d}t} + \dfrac{u_C(t)}{\tau} = \dfrac{e(t)}{\tau}
+$$
+avec $\tau$ une constante à déterminer.}
+
+
+Le circuit est commandé par un échelon de tension de la forme :
+$$
+\left\{
+\begin{array}{l}
+e(t) = E_0 \text{ si } $t>0$\\
+0 \text{ sinon}
+\end{array}
+\right.
+$$ 
+
+\subparagraph{}
+\textit{Montrer que l'équation différentielle de la charge d'un condensateur est de la forme :
+$$
+\forall t>0 \quad u_c(t) = E_0 \left( 1-e^{-\dfrac{t}{\tau}}\right)
+$$
+}
+
+\subparagraph{}
+\textit{En utilisant Spyder, tracer la courbe correspondant à la charge du condensateur.}
+
+\textbf{Connaissant la solution analytique de l'équation différentielle, on va maintenant chercher à tracer la solution numérique.}
+
+\subparagraph{}
+\textit{En utilisant le schéma d'Euler explicite, déterminer la suite $u_n$ définie par récurrence pour tout $n\in \mathbb{N}$.}
+
+\subparagraph{}
+\textit{On souhaite réaliser en Python la fonction \textsf{solveU} permettant de résoudre l'équation différentielle régissant la charge du condensateur. Quels paramètres la fonction doit-elle prendre comme argument ? Programmer la fonction.}
+
+\subparagraph{}
+\textit{Tracer sur un même graphe la solution analytique et la solution numérique.}
+
+Le circuit est maintenant commandé par une signal sinusoïdal de la forme :
+$$
+\left\{
+\begin{array}{l}
+e(t) = E_0 \sin \omega t \text{ si } $t>0$\\
+0 \text{ sinon}
+\end{array}
+\right.
+$$ 
+
+
+
+\subparagraph{}
+\textit{Tracer sur un même graphe la solution analytique et la solution numérique. Commenter l'allure de la courbe.}
+
+
+\subparagraph{}
+\textit{Réaliser un tracé pour $\omega = \{0,001;0,01;0,1; 1 \}$. Que peut-on en conclure ?}
+
+
+\subsection*{Exercice 2 -- Circuit RLC}
+
+
+\end{document}
+

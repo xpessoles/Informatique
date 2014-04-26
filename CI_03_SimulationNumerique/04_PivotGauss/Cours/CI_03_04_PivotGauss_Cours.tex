@@ -1,0 +1,217 @@
+\documentclass[10pt]{article}
+\input{style/coursHeadings}
+\input{style/programHeadings}
+\input{style/macros_SII}
+\input{style/macros_Titres}
+\input{style/macros_Frames}
+
+
+%Si le boolen xp est vrai : compilation pour xabi
+%Sinon compilation Damien
+\newboolean{xp}
+\setboolean{xp}{true}
+
+\newboolean{prof}
+\setboolean{prof}{true}
+
+\usepackage[%
+    pdftitle={Pivot de Gauss},
+    pdfauthor={Xavier Pessoles},
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=magenta]{hyperref}
+
+
+\def\discipline{Informatique}
+\def\xxtitre{\ifthenelse{\boolean{xp}}{
+CI 3 : Ingénierie Numérique \& Simulation}{
+Chapitre  -- }}
+
+\def\xxsoustitre{\ifthenelse{\boolean{xp}}{
+Chapitre 4 -- Résolution d'un système linéaire inversible par la méthode de Gauss}{
+Partie  -- }}
+
+\def\xxauteur{\ifthenelse{\boolean{xp}}{
+Xavier \textsc{Pessoles}}{
+Damien \textsc{Iceta} \\ Xavier \textsc{Pessoles}}}
+
+\def\xxpied{\ifthenelse{\boolean{xp}}{
+CI 3 : Ingénierie Numérique \& Simulation\\
+Ch. 4 : Pivot de Gauss -- Cours}{
+\xxtitre}}
+
+\def\xxcathegorie{\ifthenelse{\boolean{xp}}{
+2013 -- 2014 \\
+Xavier \textsc{Pessoles}}{
+Informatique - Cours}}
+
+
+
+
+
+%---------------------------------------------------------------------------
+
+
+\begin{document}
+
+\ifthenelse{\boolean{xp}}{\input{style/enteteXP}}{\input{style/enteteDI}}
+
+\begin{minipage}[c]{.2\linewidth}
+\begin{center}
+%\includegraphics[width=.95\textwidth]{images/swing}
+\end{center}
+\end{minipage}\hfill
+\begin{minipage}[c]{.33\linewidth}
+\begin{center}
+%\includegraphics[width=.9\textwidth]{images/situation}
+\end{center}
+\end{minipage}\hfill
+\begin{minipage}[c]{.45\linewidth}
+\begin{center}
+%\includegraphics[width=.95\textwidth]{images/tir_alpha}
+\end{center}
+\end{minipage}
+\vspace{.5cm}
+
+\begin{savoir}
+Problème discret multidimensionnel, linéaire, conduisant à la résolution d’un système linéaire inversible (ou de Cramer) par la méthode de Gauss avec recherche partielle du pivot.
+
+% l’exécuter pour étudier sa mise en oeuvre et les problèmes que pose cette démarche. On souligne la complexité de l’algorithme en fonction de la taille desmatrices et son impact sur le temps de calcul
+\end{savoir}
+
+
+
+\setlength{\parskip}{0ex plus 0.2ex minus 0ex}
+ \renewcommand{\contentsname}{}
+ \renewcommand{\baselinestretch}{1}
+
+\tableofcontents
+
+ \renewcommand{\baselinestretch}{1.2}
+\setlength{\parskip}{2ex plus 0.5ex minus 0.2ex}
+
+
+
+
+
+\section{Système linéaire}
+\begin{rem}
+Les résultats du cours sont écrits avec des coefficients réels mais restent vrais avec des coefficients complexes. 
+\end{rem}
+
+\subsection{Définitions}
+\begin{defi}
+On dit d'un système qu'il est linéaire s'il est de la forme :
+$$
+\left\{
+\begin{array}{l}
+a_{11}x_1 + a_{12}x_2 + ... + a_{1p}x_p = b_1 \\
+... \\ 
+a_{n1}x_1 + a_{n2}x_2 + ... + a_{np}x_p = b_n \\
+\end{array}
+\right.
+$$
+
+On note $n,p\in \mathbb{N}^*$ ($n$ équations et $p$ inconnues), $\forall i\in \{1,...,n\}$, $\forall j\in \{1,...,p\}$, $a_{ij} \in \mathbb{R}$. $i$ désigne l'indice de la ligne et $j$ l'indice de la colonne. 
+
+$b_1, ..., b_n \in \mathbb{R}$ est appelé second membre. 
+\end{defi}
+
+\begin{defi}
+On dit que le système est homogène su $b_1=b_2=...=b_n=0$.
+\end{defi}
+
+\begin{defi}
+Une solution d'un système linéaire est un p-uplet de réels, c'est-à-dire un élément de $(x_1,...,x_p)$ qui vérifie les $n$ équations. 
+\end{defi}
+
+
+\begin{defi}
+Si un système a au moins une solution, il est dit compatible (incompatible sinon).
+\end{defi}
+
+
+\subsection{Opérations élémentaires}
+On appelle opérations élémentaires toutes opérations de la forme :
+\begin{itemize}
+\item $(L_i)\leftarrow (L_i)+\lambda (L_j)$ où $i,j\in \{1,...,n\}$, $i\neq j$, $\lambda \in \mathbb{R}$;
+\item $(L_i)\leftarrow \alpha (L_i)$ où $i\in \{1,...,n\}$, $\alpha \in \mathbb{R}^*$;
+\item $(L_i)\leftrightarrow \alpha (L_j)$ où $i,j\in \{1,...,n\}$ échange de lignes. 
+\end{itemize}
+
+\begin{rem}
+Pour éviter les fractions on peut également utiliser $(L_i)\leftarrow \alpha (L_i) + \lambda L_j$ où $i,j\in \{1,...,n\}$, $\alpha \neq 0$, $\lambda \in \mathbb{R}$ qui est une combinaison des deux premiers items.
+\end{rem}
+
+\begin{prop}
+L'utilisation des opérations élémentaires sur un système ne change pas l'ensemble de ses solutions. Autrement dit, elles donnent des systèmes équivalents au premier.
+\end{prop}
+
+\subsection{Notation matricielle}
+\begin{rem}
+Les opérations élémentaires sur les lignes du système n'opèrent que sur les coefficients. 
+\end{rem}
+
+\begin{defi}
+Au système défini précédemment, on associe la matrice de ses coefficients :
+$$
+\begin{pmatrix}
+a_{11} & a_{12} & \ldots & a_{1(p-1)} & a_{1p} \\
+ & & a_{ij} & & \\
+a_{n1} & a_{n2} & \ldots & a_{n(p-1)} & a_{np} \\
+\end{pmatrix} \in \mathcal{M}_{n,p}(\mathbb{R})
+$$
+$\mathcal{M}_{n,p}(\mathbb{R})$ désigne l'ensemble des matrices à coefficients réels à $n$ lignes et $p$ colonnes. 
+\end{defi}
+
+\begin{defi}
+On note $B=\begin{pmatrix} b_1 \\ \vdots \\ b_n \end{pmatrix}$ la matrice de second memre et $(A|B)$ la matrice $A$ augmentée de $B$. 
+\end{defi}
+
+
+\begin{defi}
+Si deux matrices $M$ et $M'$ diffèrent d'un nombre fini d'opération sur les lignes, on duit qu'elles sont équivalentes en lignes et on note $M \underset{L}{\sim} M'$. 
+\end{defi}
+
+\begin{rem}
+Sous forme matricielle le système s'écrit $AX=B$ avec $X$ le vecteur inconnu. 
+\end{rem}
+
+
+\section{Pivot de Gauss}
+\subsection{Pivot d'une ligne}
+\begin{defi}
+On appelle pivot d'une ligne le premier nombre non nul de cette ligne. 
+\end{defi}
+
+\subsection{Algorithme du pivot}
+Premier cas, chacun des coefficients de la première colonne est nul. En conséquence, on note 
+$M = \begin{pmatrix} 0 & | &  \\ \vdots & | & M \\ 0 & | &  \end{pmatrix}$ 
+
+Dans un second cas, la première colonne contient au moins un nombre non nul.
+
+ Quitte à effectuer un changement de ligne, on se ramène au cas où $a_{11}\neq 0$ :
+ $$
+ \left(
+ \begin{array}{c|ccc}
+ a_{11} & \alpha & \alpha & \alpha \\
+\hline
+\alpha  & & & \\
+\alpha  & & \alpha & \\
+\alpha  & & & \\
+\end{array}
+ \right) \quad 
+ \text{Les } \alpha \text{ représentent des nombres possiblement nuls.}
+ $$ 
+ 
+
+\begin{thebibliography}{2}
+\bibitem{1}{Sylvie Delabriere, Équations différentielles, méthodes de résolution numérique -- Approximation numérique des fonctions, des intégrales, des solutions d'équations. Équations différentielles : approximation numérique des solutions.}
+\bibitem{2}{Wack et Al., L’informatique pour tous en classes préparatoires aux grandes écoles, Editions Eyrolles.}
+\bibitem{3}{Olivier Guindet, Résolution d'un problème dynamique par la méthode d'Euler, UPSTI.}
+\bibitem{4}{Alain Caignot, Marc Derumaux, Résolution des équations différentielles, UPSTI.}
+%\bibitem{1}{Adrien Petri, \textit{Analyse numérique : Intégration numérique}, Notes de cours de TSI 1, Lycée Rouvière, Toulon.}
+\end{thebibliography}
+\end{document}
+
+

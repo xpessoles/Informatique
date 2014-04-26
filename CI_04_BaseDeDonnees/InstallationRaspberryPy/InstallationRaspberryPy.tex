@@ -1,0 +1,198 @@
+\documentclass[10pt]{article}
+\input{style/coursHeadings}
+\input{style/programHeadings}
+\input{style/macros_SII}
+\input{style/macros_Titres}
+\input{style/macros_Frames}
+
+
+%Si le boolen xp est vrai : compilation pour xabi
+%Sinon compilation Damien
+\newboolean{xp}
+\setboolean{xp}{true}
+
+\newboolean{prof}
+\setboolean{prof}{true}
+
+\usepackage[%
+    pdftitle={Problèmes stationnaires},
+    pdfauthor={Xavier Pessoles},
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=magenta]{hyperref}
+
+
+\def\discipline{Informatique}
+\def\xxtitre{\ifthenelse{\boolean{xp}}{
+CI 4 : Ingénierie Numérique \& Simulation}{
+Chapitre  -- }}
+
+\def\xxsoustitre{\ifthenelse{\boolean{xp}}{
+Chapitre 1 -- Introduction aux bases de données}{
+Partie  -- }}
+
+\def\xxauteur{\ifthenelse{\boolean{xp}}{
+Xavier \textsc{Pessoles}}{
+Damien \textsc{Iceta} \\ Xavier \textsc{Pessoles}}}
+
+\def\xxpied{\ifthenelse{\boolean{xp}}{
+CI 3 : Ingénierie Numérique \& Simulation\\
+Ch. 3 : Résolution des équations différentielles -- Cours}{
+\xxtitre}}
+
+\def\xxcathegorie{\ifthenelse{\boolean{xp}}{
+2013 -- 2014 \\
+Xavier \textsc{Pessoles}}{
+Informatique - Cours}}
+
+
+
+
+
+%---------------------------------------------------------------------------
+
+
+\begin{document}
+
+\ifthenelse{\boolean{xp}}{\input{style/enteteXP}}{\input{style/enteteDI}}
+
+%\begin{minipage}[c]{.2\linewidth}
+%\begin{center}
+%%\includegraphics[width=.95\textwidth]{images/swing}
+%\end{center}
+%\end{minipage}\hfill
+%\begin{minipage}[c]{.33\linewidth}
+%\begin{center}
+%%\includegraphics[width=.9\textwidth]{images/situation}
+%\end{center}
+%\end{minipage}\hfill
+%\begin{minipage}[c]{.45\linewidth}
+%\begin{center}
+%%\includegraphics[width=.95\textwidth]{images/tir_alpha}
+%\end{center}
+%\end{minipage}
+\vspace{.5cm}
+
+\begin{savoir}
+
+\end{savoir}
+
+
+
+\setlength{\parskip}{0ex plus 0.2ex minus 0ex}
+ \renewcommand{\contentsname}{}
+ \renewcommand{\baselinestretch}{1}
+
+\tableofcontents
+
+ \renewcommand{\baselinestretch}{1.2}
+\setlength{\parskip}{2ex plus 0.5ex minus 0.2ex}
+
+
+\url{http://www.imdb.com/interfaces/#plain}
+
+Prérequis : 
+\begin{itemize}
+\item raspbian a déjà été installé
+\end{itemize}
+
+
+\section{Installation}
+\subsection{Changer le nom de la carte Raspberry}
+Pour cela utiliser raspi-config. 
+Les fichiers \textbackslash etc \textbackslash hostname et 
+\textbackslash etc \textbackslash hosts sont mis à jour. Redémarrer ensuite la carte.
+Ma carte s'appelle raspcpge.	 
+ 
+\subsection{Installation du serveur web}
+sudo aptitude install apache2 apache2-doc apache2-utils
+
+Pour tester la bonne installation du serveur apache, saisir l'adresse de la raspberypi dans un navigateur. 
+It works ! doit s'afficher. 
+
+\subsection{Installation de php}
+
+sudo aptitude install libapache2-mod-php5 php5 php-pear php5-xcache
+
+
+Il est possible qu'il vous soit demander d'accepter la suppression de apache2-mpm-worker. 
+
+
+Installation du support pour assurer la liaison php5 mysql. 
+sudo aptitude install php5-mysql
+
+\subsection{Installation du serveur Mysql}
+sudo aptitude install mysql-server mysql-client
+
+Mot de passe root MySQL
+rootSQL
+
+\subsection{Installation de php my admin}
+sudo aptitude install phpmyadmin
+
+Mot de passe connexion Mysql -- phpmyadmin
+
+myadmin	
+
+
+Reconfiguration possible avec dbconfig-common ?
+
+
+\subsubsection{Configuration apache phpmyadmin}
+sudo jed /etc/apache2/apache2.conf
+
+On rajoute en bas du fichier
+
+Include /etc/phpmyadmin/apache.conf
+
+Redémarrer apache2
+/etc/init.d/apache2 restart
+
+
+Pour vérifier le fonctionnement saisir l'adresse suivante. 
+Une fenetre de bienvenue doit s'afficher.  
+http://192.168.1.28/phpmyadmin/  
+
+Pour se connecter en root à la base sql : 
+user : root, mdp rootSQL
+
+
+\section{Installation de la base de données des films}
+sudo aptitude install python-imdbpy
+
+télécharger les fichiers : ftp://ftp.fu-berlin.de/pub/misc/movies/database/
+création de la base
+
+sudo mysqladmin -p create imdb
+
+(rootSQL)
+
+sudo aptitude install python-sqlobject python-sqlalchemy python-mysqldb
+./imdbpy2sql.py -d ./ -u 'mysql://root:rootSQL@localhost/imdb'
+
+
+
+\section{Freedb}
+Télécherger la base de musique
+ wget http://ftp.freedb.org/pub/freedb/freedb-complete-20140401.tar.bz2
+
+ 
+  Télécharger les scripts
+   wget http://starox.free.fr/www/freedb2mysql/freedb2mysql.tgz
+
+Creer la base dans mysql
+CREATE database freedb;
+
+gcc -o feed_freedb_mysql feed_freedb_mysql.c++
+
+ 
+\begin{thebibliography}{2}
+\bibitem{1}{\url{http://raspberrywebserver.com/sql-databases/using-mysql-on-a-raspberry-pi.html}}
+\bibitem{2}{http://www.dingleberrypi.com/2012/09/tutorial-install-apache-php-and-mysql-on-raspberry-pi/}
+%\bibitem{3}{Olivier Guindet, Résolution d'un problème dynamique par la méthode d'Euler, UPSTI.}
+%\bibitem{4}{Alain Caignot, Marc Derumaux, Résolution des équations différentielles, UPSTI.}
+%\bibitem{1}{Adrien Petri, \textit{Analyse numérique : Intégration numérique}, Notes de cours de TSI 1, Lycée Rouvière, Toulon.}
+\end{thebibliography}
+\end{document}
+
+
