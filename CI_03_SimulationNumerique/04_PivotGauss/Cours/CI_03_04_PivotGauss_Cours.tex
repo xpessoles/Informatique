@@ -165,7 +165,7 @@ $\mathcal{M}_{n,p}(\mathbb{R})$ désigne l'ensemble des matrices à coefficients
 \end{defi}
 
 \begin{defi}
-On note $B=\begin{pmatrix} b_1 \\ \vdots \\ b_n \end{pmatrix}$ la matrice de second memre et $(A|B)$ la matrice $A$ augmentée de $B$. 
+On note $B=\begin{pmatrix} b_1 \\ \vdots \\ b_n \end{pmatrix}$ la matrice de second membre et $(A|B)$ la matrice $A$ augmentée de $B$. 
 \end{defi}
 
 
@@ -203,14 +203,184 @@ Dans un second cas, la première colonne contient au moins un nombre non nul.
  \right) \quad 
  \text{Les } \alpha \text{ représentent des nombres possiblement nuls.}
  $$ 
+
+ On fait apparaître des zéros sous $a_{11}$ avec des opérations de la forme $(L_2)\leftarrow (L_1)-\dfrac{a_{21}}{a{11}}(L_1)$ 
+ $$
+ \left(
+ \begin{array}{c|ccc}
+ a_{11} & \alpha & \alpha & \alpha \\
+\hline
+0  & & & \\
+\vdots  & & M'& \\
+0  & & & \\
+\end{array}
+ \right) 
+ $$ 
+ On effectue le pivot  à nouveau sur la matrice $M'$.
+ \begin{rem}
+ Le nombre de colonnes diminue à chaque pivot.
  
+ L'algorithme se termine en un nombre fini d'étapes.
+ \end{rem}
+
+
+\begin{exemple}
+Soit le système suivant à résoudre ainsi que la matrice augmentée qui lui est associée : 
+$$
+\left\{
+\begin{array}{l}
+x   + y  -2 z +4t = 5 \\
+2x + 2y -3 z +t = 3 \\
+3x + 3y -4 z -2t = 1 \\
+1x + 2y +3 z +3t = -1 \\
+\end{array}
+\right.
+\quad\quad
+\begin{pmatrix}
+1 & 1 & -2 & 4 & | & 5 \\
+2 & 2 & -3 & 1 & | &  3 \\
+3 & 3 & -4 &  -2& | & 1 \\
+1 & 2 & 3 & 3 & | & -1 \\
+\end{pmatrix}
+$$
+
+$$
+\left\{
+\begin{array}{l}
+(L_2) \leftarrow (L_2) - 2 (L_1) \\ 
+(L_3) \leftarrow (L_3) - 3 (L_1) \\
+(L_4) \leftarrow (L_4) -  (L_1) \\
+\end{array}
+\right.
+\quad\Longrightarrow \quad
+\begin{pmatrix}
+1 & 1 & -2 & 4 & | & 5 \\
+0 & 0 & 1 & -7 & | &  -7 \\
+0 & 0 & 2 &  -14& | & -14 \\
+0 & 1 & 5 & -1 & | & -6 \\
+\end{pmatrix}
+$$
+
+$$
+%\left\{
+\begin{array}{l}
+(L_2) \leftrightarrow (L_4)  \\ 
+\end{array}
+%\right.
+\quad\Longrightarrow \quad
+\begin{pmatrix}
+1 & 1 & -2 & 4 & | & 5 \\
+0 & 1 & 5 & -1 & | & -6 \\
+0 & 0 & 2 &  -14& | & -14 \\
+0 & 0 & 1 & -7 & | &  -7 \\
+\end{pmatrix}
+$$
+
+$$
+%\left\{
+\begin{array}{l}
+(L_4) \leftarrow (L_4) - \dfrac{1}{2} (L_3)\\ 
+\end{array}
+%\right.
+\quad\Longrightarrow \quad
+\begin{pmatrix}
+1 & 1 & -2 & 4 & | & 5 \\
+0 & 1 & -1 & -7 & | & -6 \\
+0 & 0 & 2 &  -14& | & -14 \\
+0 & 0 & 0 & 0 & | &  0 \\
+\end{pmatrix}
+$$
+\end{exemple}
+
+\subsection{Matrice échelonnée}
+A la fin du pivot, on obtient une matrice de la forme :
+$$
+\begin{pmatrix}
+\alpha &\beta & \beta & \beta & \beta \\
+0 & 0 & \alpha & \beta  &  \beta \\
+0 & 0 & 0 &  \alpha& \beta \\
+0 & 0 & 0 & 0 &  0\\
+\end{pmatrix}
+\quad 
+\text{ avec }\alpha \text{ non nul et }\beta \text{ réel quelconque.}
+$$
+
+\begin{defi}
+On dit d'une matrice qu'elle est échelonnée en ligne si :
+\begin{enumerate}
+\item une ligne est nulle, les suivantes le sont aussi;
+\item $L_1$, ..., $L_r$ désignent les lignes non nulles, $j(L_1)$, ..., $j(L_r)$ désignent la position des pivots dans ces lignes et $j(L_1)<...<j(L_r)$. 
+\end{enumerate}
+\end{defi}
+
+\begin{exemple}
+Les matrices suivantes ne sont pas échelonnées : 
+$$
+\begin{pmatrix}
+1 & 0 & 2 & 3\\
+0 & 0 & 1 & 0\\
+0 & 1 & 0 & 2\\
+0 & 0 & 0 & 0\\
+\end{pmatrix}
+\quad
+\begin{pmatrix}
+1 & 0 & 2 & 3\\
+0 & 0 & 0 & 0\\
+0 & 0 & 0 & 1\\
+0 & 0 & 0 & 0\\
+\end{pmatrix}
+\quad
+\begin{pmatrix}
+1 & 0 & 2 & 3\\
+0 & 0 & 1 & 2\\
+0 & 0 & 1 & 5\\
+0 & 0 & 0 & 0\\
+\end{pmatrix}
+$$
+\end{exemple}
+
+\begin{prop}
+Le pivot de Gauss permet d'obtenir une matrice échelonnée en lignes. 
+\end{prop}
+
+\begin{defi}
+Le rang d'une matrice échelonnée désigne le nombre de ses pivots (ce qui correspond aussi au nombre de lignes non nulles). 
+\end{defi}
+
+\subsection{Matrices échelonnées réduites}
+On peut poursuivre le pivot en : 
+\begin{enumerate}
+\item divisant les lignes non nulles par leur pivot, les pivot deviennent alors 1;
+\item faisant apparaître des zéros au dessus des pivots. 
+\end{enumerate}
+
+\begin{prop}
+Toute matrice est équivalente en ligne à une et une seule matrice échelonnée réduite. 
+
+En conséquence, on peut définir le rang d'une matrice quelconque comme le rang de sa matrice échelonnée réduite en ligne. 
+
+On peut définir (le nombre) le rang d'un système comme le rang de la matrice de ses coefficients $(A)$. 
+\end{prop}
+
+\begin{rem}
+Deux matrices équivalentes en ligne ont le même rang. 
+\end{rem}
+
+\section{Résolution d'un système}
+\subsection{Inconnu principal, inconnu secondaire}
+\begin{defi}
+On dit d'une inconnue qu'elle est principale si dans une matrice échelonnée, sa colonne contient un pivot. Sinon on dit qu'elle est secondaire.
+\end{defi}
+
+\begin{exemple}
+
+\end{exemple}
+
+%\subsection{Substitution inverse}
+
 
 \begin{thebibliography}{2}
-\bibitem{1}{Sylvie Delabriere, Équations différentielles, méthodes de résolution numérique -- Approximation numérique des fonctions, des intégrales, des solutions d'équations. Équations différentielles : approximation numérique des solutions.}
-\bibitem{2}{Wack et Al., L’informatique pour tous en classes préparatoires aux grandes écoles, Editions Eyrolles.}
-\bibitem{3}{Olivier Guindet, Résolution d'un problème dynamique par la méthode d'Euler, UPSTI.}
-\bibitem{4}{Alain Caignot, Marc Derumaux, Résolution des équations différentielles, UPSTI.}
-%\bibitem{1}{Adrien Petri, \textit{Analyse numérique : Intégration numérique}, Notes de cours de TSI 1, Lycée Rouvière, Toulon.}
+\bibitem{1}{Adrien Petri, \textit{Pivot de Gauss -- Chap 1 : Systèmes linéaires}, Notes de cours de TSI 1, Lycée Rouvière, Toulon.}
 \end{thebibliography}
 \end{document}
 
