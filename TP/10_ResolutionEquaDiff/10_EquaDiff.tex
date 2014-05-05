@@ -1,6 +1,10 @@
-\documentclass[10pt,oneside]{article}
+\documentclass[10pt]{article}
 \input{style/coursHeadings}
 \input{style/programHeadings}
+\input{style/macros_SII}
+\input{style/macros_Titres}
+\input{style/macros_Frames}
+
 
 %Si le boolen xp est vrai : compilation pour xabi
 %Sinon compilation Damien
@@ -112,19 +116,45 @@ $$
 $$
 }
 
+\begin{rem}
+On prendra : 
+\begin{itemize}
+\item $R = 20\; k\Omega$;
+\item $C=10 \;nF$.
+\item $E=5\; V$;
+\item temps de calcul : $T = 5\;ms$;
+\item pas de calcul pour la solution théorique : $T/1000$;
+\item pas de calcul pour la solution numérique : de $T/10$ à $T/1000$.
+\end{itemize}
+\end{rem}
 \subparagraph{}
 \textit{En utilisant Spyder, tracer la courbe correspondant à la charge du condensateur.}
 
 \textbf{Connaissant la solution analytique de l'équation différentielle, on va maintenant chercher à tracer la solution numérique.}
 
-\subparagraph{}
+\subparagraph{} 
 \textit{En utilisant le schéma d'Euler explicite, déterminer la suite $u_n$ définie par récurrence pour tout $n\in \mathbb{N}$.}
+
+\ifthenelse{\boolean{prof}}{
+\begin{corrige}
+On approxime $\dfrac{du_C(t)}{dt}\simeq \dfrac{u_C(t+h)-u_C(t)}{h}$
+
+On pose $u_n=u_c(n\cdot h)$. On a alors 
+$$
+\dfrac{u_{n+1}-u_n}{h}  + \dfrac{u_n}{\tau} = \dfrac{e(t)}{\tau}
+\Longleftrightarrow
+u_{n+1}  = h\dfrac{e(t)}{\tau} - h\dfrac{u_n}{\tau} +u_n
+= h\dfrac{e(t)}{\tau}  +u_n\left( 1-\dfrac{h}{\tau}\right)
+$$
+\end{corrige}
+}{}
 
 \subparagraph{}
 \textit{On souhaite réaliser en Python la fonction \textsf{solveU} permettant de résoudre l'équation différentielle régissant la charge du condensateur. Quels paramètres la fonction doit-elle prendre comme argument ? Programmer la fonction.}
 
 \subparagraph{}
-\textit{Tracer sur un même graphe la solution analytique et la solution numérique.}
+\textit{Tracer sur un même graphe la solution analytique et la solution numérique pour des pas de résolution différents.}
+
 
 Le circuit est maintenant commandé par une signal sinusoïdal de la forme :
 $$
@@ -134,20 +164,98 @@ e(t) = E_0 \sin \omega t \text{ si } $t>0$\\
 0 \text{ sinon}
 \end{array}
 \right.
+\quad
+\text{ou}
+\quad
+\left\{
+\begin{array}{l}
+e(t) = E_0 \sin \left(2\pi f t\right) \text{ si } $t>0$\\
+0 \text{ sinon}
+\end{array}
+\right.
 $$ 
 
 
 
 \subparagraph{}
-\textit{Tracer sur un même graphe la solution analytique et la solution numérique. Commenter l'allure de la courbe.}
+\textit{Rechercher une solution numérique en tenant compte du nouveau signal d'entrée. Commenter l'allure de la courbe.}
 
 
 \subparagraph{}
-\textit{Réaliser un tracé pour $\omega = \{0,001;0,01;0,1; 1 \}$. Que peut-on en conclure ?}
+\textit{Réaliser un tracé pour $f = \{10;100;1\;000;10 \;000 \}$. Interpréter les résultats.}
 
 
-\subsection*{Exercice 2 -- Circuit RLC}
+\subparagraph{}
+\textit{Que se passe-il quand le pas de calcul diminue. Que peut-on en conclure ? (Vous pourrez commenter les influences entre la constante de temps, le temps de simulation, la constante de temps du circuit.)}
 
+
+\subsection*{Exercice 2 -- Axe Emericc}
+L'axe Emericc permet le déplacement de masses, grâce à un motoréducteur et un système pignon courroie.
+\begin{minipage}[c]{.4\linewidth}
+\begin{center}
+\includegraphics[width=.95\textwidth]{images/emericc}
+\end{center}
+
+\end{minipage} \hfill
+\begin{minipage}[c]{.55\linewidth}
+\begin{center}
+\includegraphics[width=\textwidth]{images/emericc_acausal}
+
+\textit{Modélisation causale de l'axe Emericc}
+\end{center}
+\end{minipage}
+
+Dans le circuit électrique, l'expression de la loi des mailles se traduit par :
+$$
+u(t)= Ri(t)+L\dfrac{di(t)}{dt}+ e(t)
+$$
+
+Dans un moteur à courant continu, le couple est lié au courant et la fréquence de rotation est liée à la force contre électro motrice :
+$$
+C_m(t)=K_t i(t) \quad e(t)=K_e \omega_m(t)
+$$
+
+En isolant l'arbre moteur, le réducteur, le système poulie-courroie on peut calculer l'énergie cinétique de l'ensemble : 
+$$
+T\left(E/\mathcal{R}\right)=\dfrac{1}{2}MV_{\text{chariot}/\mathcal{R}} ^2 + \dfrac{1}{2}J\omega_m^2
+$$
+
+D'après le théorème de l'énergie cinétique, en négligeant les frottements, on a :
+$$
+\dfrac{dT\left(E/\mathcal{R}\right)}{dt}= C_m (t) \omega_m(t)
+\Longleftrightarrow 
+MV_{\text{chariot}/\mathcal{R}} \dot{V}_{\text{chariot}/\mathcal{R}} + 
+J\dot{\omega}_m(t)\cdot\omega_m(t)= C_m (t) \omega_m(t)
+$$
+
+Par ailleurs, en utilisant le rapport de réduction ($k$) du réducteur et de la poulie courroie (diamètre $D$), on a $\dot{V}_{\text{chariot}/\mathcal{R}}(t) = \omega_m(t)\cdot k \dfrac{D}{2} $. 
+
+En conséquence, 
+$$
+M\omega_m(t)\cdot k \dfrac{D}{2} \dot{\omega}_m(t)\cdot k \dfrac{D}{2}  + 
+J\dot{\omega}_m(t)\cdot\omega_m(t)= C_m (t) \omega_m(t)
+\Longleftrightarrow 
+M  \dfrac{D^2 k^2}{4} \dot{\omega}_m(t)  + 
+J\dot{\omega}_m(t)= C_m (t)
+$$
+
+Au final, on peut donc écrire l'équation différentielle régissant le mouvement du chariot :
+$$
+u(t)= \dfrac{R}{K_t}C_m(t)+\dfrac{L}{K_t}\dot{C}_m(t)+ K_e\omega_m(t)
+\Longleftrightarrow
+u(t)= \dfrac{R}{K_t}\left( M  \dfrac{D^2 k^2}{4} \dot{\omega}_m(t)  + 
+J\dot{\omega}_m(t)\right)+\dfrac{L}{K_t}\left( M  \dfrac{D^2 k^2}{4} \ddot{\omega}_m(t)  + 
+J\ddot{\omega}_m(t)\right)+ K_e\omega_m(t)
+$$
+Soit :
+$$ 
+ \dfrac{R}{K_t}\left( M  \dfrac{D^2 k^2}{4}   + 
+J\right)\dot{\omega}_m(t)+\dfrac{L}{K_t}\left( M  \dfrac{D^2 k^2}{4}  + 
+J\right)\ddot{\omega}_m(t)+ K_e\omega_m(t)
+=u(t)
+\Longleftrightarrow
+\alpha \omega_m(t) + \beta \dot{\omega}_m(t)+ \gamma \ddot{\omega}_m(t)  = 0
+$$
 
 \end{document}
 
