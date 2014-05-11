@@ -80,6 +80,16 @@ Problème discret multidimensionnel, linéaire, conduisant à la résolution d�
 \end{savoir}
 
 
+Le pivot de Gauss est une méthode permettant de résoudre les systèmes linéaires. Sur l'idée du pivot de Gauss, il est alors possible de calculer l'inverse d'une matrice (lorsqu'elle est inversible), de calculer le déterminant d'une matrice $A\in\mathcal{M}_n(\mathbb{R})$ ou de calculer le rang de 
+$A\in\mathcal{M}_{n,p}(\mathbb{R})$.
+
+\begin{prob}
+Outre la compréhension et la mise en \oe{}uvre de l'algorithme, deux problèmes numérique peuvent se poser : 
+\begin{itemize}
+\item les erreurs d'arrondis peuvent provoquer des erreurs importantes selon la méthode choisie;
+\item des comparaisons d'un réel à zéro peuvent aussi engendrer des erreurs numériques.
+\end{itemize}
+\end{prob}
 
 \setlength{\parskip}{0ex plus 0.2ex minus 0ex}
  \renewcommand{\contentsname}{}
@@ -121,6 +131,40 @@ $b_1, ..., b_n \in \mathbb{R}$ est appelé second membre.
 On dit que le système est homogène su $b_1=b_2=...=b_n=0$.
 \end{defi}
 
+
+\begin{exemple}
+Exemple de système linéaire $(S)$ et son système homogène associé $(S_0)$ :
+$$
+(S) \left\{
+\begin{array}{l}
+x+y-2z + 4t = 5 \\
+2x+2y-3z+t=3 \\
+3x+3y-4z-2t=1
+\end{array}
+\right.
+\quad
+(S_0) \left\{
+\begin{array}{l}
+x+y-2z + 4t = 0 \\
+2x+2y-3z+t=0 \\
+3x+3y-4z-2t=0
+\end{array}
+\right.
+$$
+
+Exemple de système non linéaire :
+$$
+\left\{
+\begin{array}{l}
+x+\mathbf{\cos y} + \mathbf{xy} =2 \\
+x-\mathbf{y^2} = 4
+\end{array}
+\right.$$
+
+
+
+\end{exemple}
+
 \begin{defi}
 Une solution d'un système linéaire est un p-uplet de réels, c'est-à-dire un élément de $(x_1,...,x_p)$ qui vérifie les $n$ équations. 
 \end{defi}
@@ -132,12 +176,20 @@ Si un système a au moins une solution, il est dit compatible (incompatible sino
 
 
 \subsection{Opérations élémentaires}
-On appelle opérations élémentaires toutes opérations de la forme :
+\begin{defi}
+Les opérations élémentaires sont les suivantes :
+\begin{itemize}
+\item opération de transvection (\textit{Gaussian Elimination}): 
 \begin{itemize}
 \item $(L_i)\leftarrow (L_i)+\lambda (L_j)$ où $i,j\in \{1,...,n\}$, $i\neq j$, $\lambda \in \mathbb{R}$;
 \item $(L_i)\leftarrow \alpha (L_i)$ où $i\in \{1,...,n\}$, $\alpha \in \mathbb{R}^*$;
-\item $(L_i)\leftrightarrow \alpha (L_j)$ où $i,j\in \{1,...,n\}$ échange de lignes. 
 \end{itemize}
+\item opération d'échange de lignes : 
+\begin{itemize}
+\item $(L_i)\leftrightarrow  (L_j)$ où $i,j\in \{1,...,n\}$. 
+\end{itemize}
+\end{itemize}
+\end{defi}
 
 \begin{rem}
 Pour éviter les fractions on peut également utiliser $(L_i)\leftarrow \alpha (L_i) + \lambda L_j$ où $i,j\in \{1,...,n\}$, $\alpha \neq 0$, $\lambda \in \mathbb{R}$ qui est une combinaison des deux premiers items.
@@ -204,7 +256,7 @@ Dans un second cas, la première colonne contient au moins un nombre non nul.
  \text{Les } \alpha \text{ représentent des nombres possiblement nuls.}
  $$ 
 
- On fait apparaître des zéros sous $a_{11}$ avec des opérations de la forme $(L_2)\leftarrow (L_1)-\dfrac{a_{21}}{a{11}}(L_1)$ 
+ On fait apparaître des zéros sous $a_{11}$ avec des opérations de la forme $(L_2)\leftarrow (L_2)-\dfrac{a_{21}}{a_{11}}(L_1)$ 
  $$
  \left(
  \begin{array}{c|ccc}
@@ -216,7 +268,14 @@ Dans un second cas, la première colonne contient au moins un nombre non nul.
 \end{array}
  \right) 
  $$ 
+ 
  On effectue le pivot  à nouveau sur la matrice $M'$.
+ 
+ En généralisant, lorsqu'on en est à la ligne $i$, les lignes $i+1$ à $n$ subissent la transvection suivante : 
+ $$
+ \forall k \in[i+1,n] \quad L_{k}\leftarrow L_k - \dfrac{a_{k,i}}{a_{i,i}}L_i
+ $$
+ 
  \begin{rem}
  Le nombre de colonnes diminue à chaque pivot.
  
@@ -292,6 +351,11 @@ $$
 $$
 \end{exemple}
 
+
+\begin{rem}
+Numériquement, le codage du 0 posant des problèmes informatiques, il est difficile de s'assurer qu'un pivot est non nul. On utilisera donc la méthode du \textbf{pivot partiel}. Le pivot utilisé ne sera donc pas le premier nombre non nul d'une ligne, mais le plus grand élément d'une colonne (en valeur absolue). Si le pivot n'est pas sur la première ligne, on effectuera les échanges de lignes nécessaires. On s'affranchit ainsi de comparaisons à 0. 
+
+\end{rem}
 \subsection{Matrice échelonnée}
 A la fin du pivot, on obtient une matrice de la forme :
 $$
@@ -366,21 +430,136 @@ On peut définir (le nombre) le rang d'un système comme le rang de la matrice d
 Deux matrices équivalentes en ligne ont le même rang. 
 \end{rem}
 
-\section{Résolution d'un système}
-\subsection{Inconnu principal, inconnu secondaire}
-\begin{defi}
-On dit d'une inconnue qu'elle est principale si dans une matrice échelonnée, sa colonne contient un pivot. Sinon on dit qu'elle est secondaire.
-\end{defi}
+\section{Implémentation de l'algorithme}
+\subsection{Choix d'un type de données}
+On verra ultérieurement que la bibliothèque numpy permet de gérer plus aisément le calcul matriciel. Dans un premier temps, le système à résoudre sera mis sous forme matricielle afin que les valeurs puissent être stockées dans un tableau. 
+On cherchera donc à résoudre le système suivant :
+$$
+A\cdot X = B
+$$
+La matrice $A\in\mathcal{M}_{n,n}(\mathbb{R})$ sera stockée dans un tableau de $n$ lignes et $n$ colonnes. Le vecteur $B$, second membre de l'équation, sera stocké dans un tableau de $n$ lignes et une colonne. 
 
-\begin{exemple}
 
-\end{exemple}
+\subsection{Fonctions élémentaires}
+\subsubsection{Recherche du pivot}
+Dans le cadre d'une résolution numérique, on utilise un pivot partiel. 
+
+\begin{py}
+\begin{python}
+def recherche_pivot(A,i):
+    n = len(A) # le nombre de lignes
+    j = i # la ligne du maximum provisoire
+    for k in range(i+1, n):
+        if abs(A[k][i]) > abs(A[j][i]):
+            j = k # un nouveau maximum provisoire
+    return j
+\end{python}
+\end{py}
+
+On considère qu'on est à la ligne $i$. \`A la ligne $i$, les éléments compris entre les colonnes 0 et $i-1$ sont théoriquement nuls. Initialement, le plus grand élément de la ligne est a priori en position $i$. 
+
+On cherche alors le plus grand élément, en valeur absolu de la ligne $i+1$à la ligne $n$ ($n$ exclus en Python). 
+
+On renvoie enfin l'indice du pivot. 
+
+\subsubsection{Échange de lignes}
+
+L'échange de lignes peut être nécessaire pour réordonner les lignes de la matrice si le pivot de la ligne considéré est plus petit que le pivot d'une des lignes suivantes.  
+
+\begin{py}
+\begin{python}
+def echange_lignes(A,i,j):
+    # Li <-->Lj
+    A[i][:],A[j][:]=A[j][:],A[i][:]
+\end{python}
+\end{py}
+
+\begin{rem}
+En python, le passage des objets se faisant par référence, il n'est pas nécessaire de retourner une liste. 
+\end{rem}
+
+\subsubsection{Transvection de lignes}
+
+\begin{py}
+\begin{python}
+def transvection_ligne(A, i, j, mu):
+    # L_i <- L_i + mu.L_j 
+    nc = len(A[0]) # le nombre de colonnes
+    for k in range(nc):
+        A[i][k] = A[i][k] + mu * A[j][k]
+\end{python}
+\end{py}
+
+\subsubsection{Phase de remontée : résolution du système}
+Une fois toutes les transvections réalisées, on est en présence d'une matrice échelonnée $T$. Le système a donc été mis sous la forme $T\cdot X = Y$. On va donc résoudre le système en partant <<du bas>> :
+
+\begin{py}
+\begin{python}
+def resolution(A,B):
+n = len(A)
+X=n*[0]
+    for i in range(n-1,-1,-1):
+        xtmp = B[i]
+        for j in range(i+1,n):
+            xtmp=xtmp-A[i][j]*X[i]
+\end{python}
+\end{py}
+
+ 
+
+\subsection{Algorithme complet}
+
+\begin{py}
+\begin{python}
+def resolution(AA, BB):
+    """Résolution de AA.X=BB; AA doit etre inversible"""
+    A, B = AA.copy(), BB.copy()
+    n = len(A)
+    assert len(A[0]) == n
+    # Mise sous forme triangulaire
+    for i in range(n):
+        j = recherche_pivot(A, i)
+        if j > i:
+            echange_lignes(A, i, j)
+            echange_lignes(B, i, j)
+        for k in range(i+1, n):
+            mu = - A[k][i] / A[i][i]
+            transvection_ligne(A, k, i, mu)
+            transvection_ligne(B, k, i, mu)
+    # Phase de remontée
+    X = [0.] * n
+    for i in range(n-1, -1, -1):
+        X[i] = (Y[i][0]-sum(A[i][j]*X[j] for j in range(i+1,n))) / A[i][i]
+    return X
+\end{python}
+\end{py}
+%\section{Résolution d'un système}
+%\subsection{Inconnu principal, inconnu secondaire}
+%\begin{defi}
+%On dit d'une inconnue qu'elle est principale si dans une matrice échelonnée, sa colonne contient un pivot. Sinon on dit qu'elle est secondaire.
+%\end{defi}
+%
+%\begin{exemple}
+%
+%\end{exemple}
 
 %\subsection{Substitution inverse}
 
+\subsection{Résolution de systèmes linéaires avec Numpy}
+Il est possible d'utiliser le bibliothèque Numpy pour résoudre le système $A\cdot X = B$. 
+Pour cela, les matrice $A$ et $B$ peuvent être mises sous la forme d'une liste de liste. 
+
+\begin{py}
+\begin{python}
+A=[[],[],[]]
+B=[[],[],[]]
+numpy.linalg.solve
+\end{python}
+\end{py}
 
 \begin{thebibliography}{2}
-\bibitem{1}{Adrien Petri, \textit{Pivot de Gauss -- Chap 1 : Systèmes linéaires}, Notes de cours de TSI 1, Lycée Rouvière, Toulon.}
+\bibitem{1}{Adrien Petri, \textit{Pivot de Gauss -- Systèmes linéaires}, Notes de cours de TSI 1, Lycée Rouvière, Toulon.}
+\bibitem{2}{Wack et Al., \textit{Informatique pour tous en classes préparatoires aux grandes écoles}, Éditions Eyrolles.}
 \end{thebibliography}
 \end{document}
 
