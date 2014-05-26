@@ -1,0 +1,83 @@
+\documentclass[10pt]{article}
+\input{style/coursHeadings}
+\input{style/programHeadings}
+\input{style/macros_SII}
+\input{style/macros_Titres}
+\input{style/macros_Frames}
+
+
+%Si le boolen xp est vrai : compilation pour xabi
+%Sinon compilation Damien
+\newboolean{xp}
+\setboolean{xp}{true}
+
+\newboolean{prof}
+\setboolean{prof}{true}
+
+\usepackage[%
+    pdftitle={Pivot de Gauss},
+    pdfauthor={Xavier Pessoles},
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=magenta]{hyperref}
+
+
+\def\discipline{Informatique}
+\def\xxtitre{\ifthenelse{\boolean{xp}}{
+CI 3 : Ingénierie Numérique \& Simulation}{
+Chapitre  -- }}
+
+\def\xxsoustitre{\ifthenelse{\boolean{xp}}{
+Chapitre 4 -- Résolution d'un système linéaire inversible par la méthode de Gauss}{
+Partie  -- }}
+
+\def\xxauteur{\ifthenelse{\boolean{xp}}{
+Xavier \textsc{Pessoles}}{
+Damien \textsc{Iceta} \\ Xavier \textsc{Pessoles}}}
+
+\def\xxpied{\ifthenelse{\boolean{xp}}{
+CI 3 : Ingénierie Numérique \& Simulation\\
+Ch. 4 : Pivot de Gauss -- TD}{
+\xxtitre}}
+
+\def\xxcathegorie{\ifthenelse{\boolean{xp}}{
+2013 -- 2014 \\
+Xavier \textsc{Pessoles}}{
+Informatique - TP}}
+
+
+
+
+
+%---------------------------------------------------------------------------
+
+
+\begin{document}
+
+\ifthenelse{\boolean{xp}}{\input{style/enteteXP}}{\input{style/enteteDI}}
+
+\subsection*{Exercice 1}
+
+Soient deux matrices $A$ et $B$ de $\mathcal{M}_{n,p}(\mathbb{R})$. 
+
+\subparagraph{}
+\textit{Donner la condition pour pouvoir multiplier $A$ et $B$.}
+
+\subparagraph{}
+\textit{Réaliser l'algorithme permettant de multiplier $A$ et $B$.}
+
+\subparagraph{}
+\textit{Quelle est la complexité de cet algorithme ?}
+
+\subparagraph{}
+\textit{Soit $A$ une matrice carrée. Donner un algorithme permettant de calculer le déterminant de la matrice. }
+
+
+
+
+
+
+
+\end{document}
+
+

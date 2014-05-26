@@ -24,7 +24,7 @@
 
 \def\discipline{Informatique}
 \def\xxtitre{\ifthenelse{\boolean{xp}}{
-CI 4 : Ingénierie Numérique \& Simulation}{
+CI 4 : Bases de données}{
 Chapitre  -- }}
 
 \def\xxsoustitre{\ifthenelse{\boolean{xp}}{
@@ -36,8 +36,8 @@ Xavier \textsc{Pessoles}}{
 Damien \textsc{Iceta} \\ Xavier \textsc{Pessoles}}}
 
 \def\xxpied{\ifthenelse{\boolean{xp}}{
-CI 3 : Ingénierie Numérique \& Simulation\\
-Ch. 3 : Résolution des équations différentielles -- Cours}{
+CI 4 : Bases de données \\
+Ch. 1 : Introduction aux bases de données -- Cours}{
 \xxtitre}}
 
 \def\xxcathegorie{\ifthenelse{\boolean{xp}}{
@@ -89,10 +89,22 @@ Informatique - Cours}}
 \setlength{\parskip}{2ex plus 0.5ex minus 0.2ex}
 
 
-http://www.imdb.com/interfaces/#plain
+%http://www.imdb.com/interfaces/#plain
 
 
 \section{Présentation}
+Si on considère l'ensemble des données présentes sur un disque dur, semblent aisément gérées par un ordinateur. Le temps pour accéder et ouvrir un fichier semble en effet assez court. Mais qu'en est-il lorsqu'il s'agit de trouver un fichier sur le disque ? Qu'en est-il lorsqu'il s'agit de trouver une information dans chacun des fichiers du disque ?
+
+Lorsqu'il s'agit de faire de nombreuses recherche sur un grand nombre de fichiers, un stockage << à plat >> ne permet plus un temps d'accès satisfaisant. Il s'agit alors d'organiser les données sous une autre forme. On parle de base de données. 
+
+Les bases de données sont omniprésentes dans l'industrie en général et il s'agit de présenter comment ces données sont traitées. 
+
+On peut commencer par recenser des bases de données libres. Musicbrainz ou freedb sont par exemples des bases de données qui recensent des informations sur les disques de musiques (Auteurs, compositeurs, interprètes, titres des albums, titres des chansons, dates de sorties ...). IMDb est une base de donnée cinématographique. OpenStreetMap met à disposition des internautes des données cartographiques. 
+
+La FNAC, ou d'autres sites commerciaux disposent d'une base de données de leurs produits. Ainsi, grâce à un champ de recherche, l'internaute peut interroger la base. Il peut avoir des informations sur la disponibilité d'un produit, le délai de livraison ...
+
+Une organisation des données permet aux utilisateurs d'avoir un accès rapide à tout type d'informations. On appel requête la demande d'un utilisateur formulée auprès d'une base de donnée. 
+
 
 \section{Structure client -- serveur}
 

@@ -445,6 +445,7 @@ La matrice $A\in\mathcal{M}_{n,n}(\mathbb{R})$ sera stockée dans un tableau de 
 Dans le cadre d'une résolution numérique, on utilise un pivot partiel. 
 
 \begin{py}
+%\ifthenelse{\boolean{prof}}{
 \begin{python}
 def recherche_pivot(A,i):
     n = len(A) # le nombre de lignes
@@ -454,7 +455,9 @@ def recherche_pivot(A,i):
             j = k # un nouveau maximum provisoire
     return j
 \end{python}
+%}{\vspace{5cm}}
 \end{py}
+
 
 On considère qu'on est à la ligne $i$. \`A la ligne $i$, les éléments compris entre les colonnes 0 et $i-1$ sont théoriquement nuls. Initialement, le plus grand élément de la ligne est a priori en position $i$. 
 
@@ -467,11 +470,13 @@ On renvoie enfin l'indice du pivot.
 L'échange de lignes peut être nécessaire pour réordonner les lignes de la matrice si le pivot de la ligne considéré est plus petit que le pivot d'une des lignes suivantes.  
 
 \begin{py}
+%\ifthenelse{\boolean{prof}}{
 \begin{python}
 def echange_lignes(A,i,j):
     # Li <-->Lj
     A[i][:],A[j][:]=A[j][:],A[i][:]
 \end{python}
+%}{\vspace{5cm}}
 \end{py}
 
 \begin{rem}
@@ -481,6 +486,7 @@ En python, le passage des objets se faisant par référence, il n'est pas néces
 \subsubsection{Transvection de lignes}
 
 \begin{py}
+%\ifthenelse{\boolean{prof}}{
 \begin{python}
 def transvection_ligne(A, i, j, mu):
     # L_i <- L_i + mu.L_j 
@@ -488,21 +494,28 @@ def transvection_ligne(A, i, j, mu):
     for k in range(nc):
         A[i][k] = A[i][k] + mu * A[j][k]
 \end{python}
+%}{\vspace{5cm}}
 \end{py}
 
 \subsubsection{Phase de remontée : résolution du système}
-Une fois toutes les transvections réalisées, on est en présence d'une matrice échelonnée $T$. Le système a donc été mis sous la forme $T\cdot X = Y$. On va donc résoudre le système en partant <<du bas>> :
+Une fois toutes les transvections réalisées, on est en présence d'une matrice échelonnée $T$. Le système a donc été mis sous la forme $T\cdot X = Y$. On va donc résoudre le système en partant <<du bas>>.
 
 \begin{py}
+%\ifthenelse{\boolean{prof}}{
 \begin{python}
-def resolution(A,B):
-n = len(A)
-X=n*[0]
-    for i in range(n-1,-1,-1):
-        xtmp = B[i]
-        for j in range(i+1,n):
-            xtmp=xtmp-A[i][j]*X[i]
+def remontee(A,B):
+    n=len(A)
+    X = [0.] * n
+    for i in range(n-1, -1, -1):
+        somme=0
+        for j in range (i+1,n):
+            somme=somme+A[i][j]*X[j]
+        X[i]=(B[i][0]-somme)/A[i][i]
+        print(X[i])
+    return X
 \end{python}
+%}{\vspace{5cm}}
+
 \end{py}
 
  
@@ -510,6 +523,7 @@ X=n*[0]
 \subsection{Algorithme complet}
 
 \begin{py}
+%\ifthenelse{\boolean{prof}}{
 \begin{python}
 def resolution(AA, BB):
     """Résolution de AA.X=BB; AA doit etre inversible"""
@@ -527,11 +541,11 @@ def resolution(AA, BB):
             transvection_ligne(A, k, i, mu)
             transvection_ligne(B, k, i, mu)
     # Phase de remontée
-    X = [0.] * n
-    for i in range(n-1, -1, -1):
-        X[i] = (Y[i][0]-sum(A[i][j]*X[j] for j in range(i+1,n))) / A[i][i]
-    return X
+    return remontee(A,B)
 \end{python}
+%}{\vspace{10cm}}
+
+
 \end{py}
 %\section{Résolution d'un système}
 %\subsection{Inconnu principal, inconnu secondaire}
@@ -551,8 +565,8 @@ Pour cela, les matrice $A$ et $B$ peuvent être mises sous la forme d'une liste 
 
 \begin{py}
 \begin{python}
-A=[[],[],[]]
-B=[[],[],[]]
+A=[[1,2,3],[4,5,6],[7,8,9]]
+B=[[1],[2],[3]]
 numpy.linalg.solve
 \end{python}
 \end{py}

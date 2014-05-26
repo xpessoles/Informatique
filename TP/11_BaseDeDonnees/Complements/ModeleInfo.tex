@@ -1,0 +1,71 @@
+\documentclass[10pt]{article}
+\input{style/coursHeadings}
+\input{style/programHeadings}
+\input{style/macros_SII}
+\input{style/macros_Titres}
+\input{style/macros_Frames}
+
+%Si le boolen xp est vrai : compilation pour xabi
+%Sinon compilation Damien
+\newboolean{xp}
+\setboolean{xp}{true}
+
+\newboolean{prof}
+\setboolean{prof}{true}
+
+\usepackage[%
+    pdftitle={Base de données Compléments sur le TP},
+    pdfauthor={Xavier Pessoles},
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=magenta]{hyperref}
+
+\def\discipline{Informatique}
+\def\xxtitre{\ifthenelse{\boolean{xp}}{
+CI 4 : Bases de données}{
+Chapitre  -- }}
+
+\def\xxsoustitre{\ifthenelse{\boolean{xp}}{
+TP Aéroports -- Compléments}{
+Partie  -- }}
+
+\def\xxauteur{\ifthenelse{\boolean{xp}}{
+Xavier \textsc{Pessoles}}{
+Damien \textsc{Iceta} \\ Xavier \textsc{Pessoles}}}
+
+\def\xxpied{\ifthenelse{\boolean{xp}}{
+CI 4 : Bases de données \\
+Ch. 1 : Introduction aux bases de données -- TP}{
+\xxtitre}}
+
+\def\xxcathegorie{\ifthenelse{\boolean{xp}}{
+2013 -- 2014 \\
+Xavier \textsc{Pessoles}}{
+Informatique - Cours}}
+
+
+
+%---------------------------------------------------------------------------
+
+
+\begin{document}
+
+\ifthenelse{\boolean{xp}}{\input{style/enteteXP}}{\input{style/enteteDI}}
+
+
+
+
+ \renewcommand{\baselinestretch}{1.2}
+\setlength{\parskip}{2ex plus 0.5ex minus 0.2ex}
+
+
+
+Les données utilisées dans le cadre du TP sont tirées du site internet \url{http://ourairports.com/} qui recueille des informations sur les aéroports du monde. Il est possible de télécharger des fichiers << à plat >> au format csv contenant des informations diverses \url{http://ourairports.com/data/}.
+
+ Dans le cadre de ce TP, il a été choisi de convertir ces données au format SQLite en utilisant  SQLite Database Browser \url{http://sqlitebrowser.org/}. Pour cela, il suffit d'importer les fichiers CSV dans une base de donnée. 
+ 
+Dans le cadre de ce TP, pour m'affranchir de créer un serveur de base de données, j'ai choisi d'utiliser le format sqlite. Il est a noté qu'il est possible d'exporter la base en mySQL. 
+
+\end{document}
+
+

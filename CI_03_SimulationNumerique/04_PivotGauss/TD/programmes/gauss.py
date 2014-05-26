@@ -32,6 +32,8 @@ def resolution(AA, BB):
     assert len(A[0]) == n
     # Mise sous forme triangulaire
     for i in range(n):
+        print(id(A))
+        print(id(AA))
         j = recherche_pivot(A, i)
         if j > i:
             echange_lignes(A, i, j)
@@ -41,42 +43,23 @@ def resolution(AA, BB):
             transvection_ligne(A, k, i, -x)
             transvection_ligne(B, k, i, -x)
     # Phase de remontée
-    
-    return remontee(A,B)
-
-
-def remontee(A,B):
-    n=len(A)
     X = [0.] * n
     for i in range(n-1, -1, -1):
-        somme=0
-        for j in range (i+1,n):
-            somme=somme+A[i][j]*X[j]
-        X[i]=(B[i][0]-somme)/A[i][i]
-        print(X[i])
+        X[i] = (B[i][0]-sum(A[i][j]*X[j] for j in range(i+1,n))) / A[i][i]
     return X
-    
-AA = [[1,1,-2],[2,2,-3],[3,3,-4]]
-BB = [[5],[3],[1]]
-
 
 #AA = [[1,1,-2,4],[2,2,-3,1],[3,3,-4,-2],[1,2,3,3]]
 #BB = [[5],[3],[1],[-1]]
 
-#AA = [[-1,-2,-3],[0,-1,-4],[-3,-4,-1]]
-#BB = [[1],[1],[1]]
+AA = [[-1,-2,-3],[0,-1,-4],[-3,-4,-1]]
+BB = [[1],[1],[1]]
 
 def afficheMat(A):
     for i in range(len(A)):
         print(A[i][:])
     print()
         
-#res1 = resolution(AA,BB)
+res1 = resolution(AA,BB)
 res2 = numpy.linalg.solve(AA,BB)
-#print(res1)
+print(res1)
 print(res2)
-
-#AA = [[1,2,3],[0,4,5],[0,0,6]]
-#BB = [[7],[8],[9]]
-#a=remontee(AA,BB)
-#print(a)
