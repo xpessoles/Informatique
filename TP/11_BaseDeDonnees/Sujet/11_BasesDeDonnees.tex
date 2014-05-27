@@ -1,0 +1,124 @@
+\documentclass[10pt]{article}
+\input{style/coursHeadings}
+\input{style/programHeadings}
+\input{style/macros_SII}
+\input{style/macros_Titres}
+\input{style/macros_Frames}
+
+%Si le boolen xp est vrai : compilation pour xabi
+%Sinon compilation Damien
+\newboolean{xp}
+\setboolean{xp}{true}
+
+\newboolean{prof}
+\setboolean{prof}{true}
+
+\usepackage[%
+    pdftitle={Base de données},
+    pdfauthor={Xavier Pessoles},
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=magenta]{hyperref}
+
+\def\discipline{Informatique}
+\def\xxtitre{\ifthenelse{\boolean{xp}}{
+CI 4 : Bases de données}{
+Chapitre  -- }}
+
+\def\xxsoustitre{\ifthenelse{\boolean{xp}}{
+TP Aéroports -- Compléments}{
+Partie  -- }}
+
+\def\xxauteur{\ifthenelse{\boolean{xp}}{
+Xavier \textsc{Pessoles}}{
+Damien \textsc{Iceta} \\ Xavier \textsc{Pessoles}}}
+
+\def\xxpied{\ifthenelse{\boolean{xp}}{
+CI 4 : Bases de données \\
+Ch. 1 : Introduction aux bases de données -- TP}{
+\xxtitre}}
+
+\def\xxcathegorie{\ifthenelse{\boolean{xp}}{
+2013 -- 2014 \\
+Xavier \textsc{Pessoles}}{
+Informatique - Cours}}
+
+
+
+%---------------------------------------------------------------------------
+
+
+\begin{document}
+
+\ifthenelse{\boolean{xp}}{\input{style/enteteXP}}{\input{style/enteteDI}}
+
+
+
+
+\section*{Présentation}
+Le site internet \url{http://ourairports.com/} recueille des informations sur les aéroports du monde. Ces informations sont disponibles sous la forme d'une base de donnée SQLite. 
+L'utilitaire SQLite Database Browser permet de visualiser le contenu d'une base de données au format SQLite. 
+
+\begin{itemize}%[$\rightarrow$]
+\item Ouvrir l'utilitaire SQLite Database Browser.
+\item Ouvrir le fichier \textsf{Aeroports.sql3}.
+\end{itemize}
+
+En l'état, la base de données est constituée de 4 relations (appelées aussi tables): 
+\begin{itemize}
+\item \textsf{Airport\_Frequencies} recense les fréquences radio sur lesquelles les aéroports émettent;
+\item \textsf{Countries} recense la liste des pays;
+\item \textsf{Airports} recense la liste des aéroports;
+\item \textsf{Regions} recense une liste des régions.
+\end{itemize}
+
+La relation \textsf{Airports} est constituée des attributs suivants : 
+\begin{itemize}
+\item \textsf{id} : un identifiant
+\item \textsf{type} : un type (heliport, small\_airport, seaplane\_base ...)
+\item \textsf{name} : un nom
+\item des coordonnées géographiques(\textsf{latitude\_deg}, \textsf{latitude\_deg}, \textsf{elevation\_ft}, à savoir les latitudes et longitudes en degrés ainsi que l'altitude en pied);
+\item ...
+\end{itemize}
+
+\subsection*{Analyse de la base de données}
+\subparagraph{}
+\textit{Lors de la création de la base de données, le concepteur n'a pas pris garde au type de champ. Proposer un type de champ pour les attributs \textsf{latitude\_deg} et \textsf{municipality}. Dans la mesure du possible, modifier ces champs en éditant la table correspondante. Quel type de champ proposer pour l'attribut \textsf{id} ? D'après vous quelle précaution est-il nécessaire de prendre pour ce champ ?}
+
+\subparagraph{}
+\textit{Quels sont les attributs des relations \textsf{Countries}, \textsf{Regions} et \textsf{Airport\_Frequencies} ?}
+
+Dans le but d'optimiser la base de données (à savoir diminuer le temps d'accès aux données, diminuer l'espace mémoire utilisé et éviter la redondance d'informations) on souhaite disposer de la relation \textsf{Airport\_Type}. Cette relation aura pour attribut un identifiant, un attribut de type texte correspondant au type d'aéroport en anglais, un attribut de type texte correspondant au type d'aéroport en français. 
+
+\subparagraph{}
+\textit{Créer la relation précédente, dans la base de données. Quelles seraient les modifications à réaliser sur les données pour prendre en compte cette nouvelle relation ?}
+
+\subsection*{Consultation de la base de données -- Langage naturel}
+
+Il est possible d'interroger la base de données en utilisant Python. Pour cela, on utilise le formalisme suivant :
+
+\begin{py}
+\begin{python}
+import sqlite3 # Import des commandes permettant de manipuler la base de données
+basesql = u"airports.db3" # Base de données initiale
+savsql = u"airports_sav.db3" # Base de données modifiable
+\end{python}
+
+Le préfixe u permet d'importer les fichiers en utf-8 et, dans une certaine mesure, permet une meilleure prise en compte des caractères spéciaux.
+\end{py}
+
+\subparagraph{}
+\textit{On souhaite faire la liste des aéroports français. Pour cela, exécuter les lignes de code suivantes :}
+
+\begin{py}
+\begin{python}
+import sqlite3 # Import des commandes permettant de manipuler la base de données
+basesql = u"airports.db3" # Base de données initiale
+savsql = u"airports_sav.db3" # Base de données modifiable
+\end{python}
+
+Le préfixe u permet d'importer les fichiers en utf-8 et, dans une certaine mesure, permet une meilleure prise en compte des caractères spéciaux.
+\end{py}
+\end{document}
+
+
