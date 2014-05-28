@@ -57,11 +57,11 @@ Informatique - Cours}}
 
 \section*{Présentation}
 Le site internet \url{http://ourairports.com/} recueille des informations sur les aéroports du monde. Ces informations sont disponibles sous la forme d'une base de donnée SQLite. 
-L'utilitaire SQLite Database Browser permet de visualiser le contenu d'une base de données au format SQLite. 
+L'utilitaire SQLite Database Browser permet de visualiser le contenu d'une base de données au format SQLite. Pour consulter la base :
 
 \begin{itemize}%[$\rightarrow$]
-\item Ouvrir l'utilitaire SQLite Database Browser.
-\item Ouvrir le fichier \textsf{Aeroports.sql3}.
+\item ouvrir l'utilitaire SQLite Database Browser;
+\item ouvrir le fichier \textsf{Aeroports.sql3}.
 \end{itemize}
 
 En l'état, la base de données est constituée de 4 relations (appelées aussi tables): 
@@ -71,6 +71,8 @@ En l'état, la base de données est constituée de 4 relations (appelées aussi 
 \item \textsf{Airports} recense la liste des aéroports;
 \item \textsf{Regions} recense une liste des régions.
 \end{itemize}
+
+
 
 La relation \textsf{Airports} est constituée des attributs suivants : 
 \begin{itemize}
@@ -91,9 +93,9 @@ La relation \textsf{Airports} est constituée des attributs suivants :
 Dans le but d'optimiser la base de données (à savoir diminuer le temps d'accès aux données, diminuer l'espace mémoire utilisé et éviter la redondance d'informations) on souhaite disposer de la relation \textsf{Airport\_Type}. Cette relation aura pour attribut un identifiant, un attribut de type texte correspondant au type d'aéroport en anglais, un attribut de type texte correspondant au type d'aéroport en français. 
 
 \subparagraph{}
-\textit{Créer la relation précédente, dans la base de données. Quelles seraient les modifications à réaliser sur les données pour prendre en compte cette nouvelle relation ?}
+\textit{Créer la relation précédente dans la base de données. Quelles seraient les modifications à réaliser sur les données pour prendre en compte cette nouvelle relation ?}
 
-\subsection*{Consultation de la base de données -- Langage naturel}
+\subsection*{Consultation de la base de données}
 
 Il est possible d'interroger la base de données en utilisant Python. Pour cela, on utilise le formalisme suivant :
 
@@ -101,24 +103,65 @@ Il est possible d'interroger la base de données en utilisant Python. Pour cela,
 \begin{python}
 import sqlite3 # Import des commandes permettant de manipuler la base de données
 basesql = u"airports.db3" # Base de données initiale
-savsql = u"airports_sav.db3" # Base de données modifiable
+
+cnx = sqlite3.connect(basesql)
+curseur = cnx.cursor()
+
+requete = "SELECT * FROM airports"
+curseur.execute(requete)
 \end{python}
 
-Le préfixe u permet d'importer les fichiers en utf-8 et, dans une certaine mesure, permet une meilleure prise en compte des caractères spéciaux.
+Le préfixe u permet d'importer les fichiers encodés en UTF-8. Dans un certaine mesure, les caractères spéciaux sont alors pris en compte.\end{py}
+
+
+\begin{py}
+Le curseur est un objet contenant le résultat de la requête. Pour parcourir chacune des entités, on peut utiliser la syntaxe suivante : 
+\begin{python}
+for cur in curseur:
+    print(cur)
+\end{python}
+
+Attention, cette opération peut s'avérer maladroite si la requête a un grand nombre d'entités. 
 \end{py}
 
 \subparagraph{}
-\textit{On souhaite faire la liste des aéroports français. Pour cela, exécuter les lignes de code suivantes :}
+\textit{Que permettent les lignes de code suivantes :}
 
 \begin{py}
 \begin{python}
-import sqlite3 # Import des commandes permettant de manipuler la base de données
-basesql = u"airports.db3" # Base de données initiale
-savsql = u"airports_sav.db3" # Base de données modifiable
+requete = "SELECT * FROM airports"
+curseur.execute(requete)
+res = []
+for cur in curseur:
+    res.append(cur)
+print(len(res))
 \end{python}
-
-Le préfixe u permet d'importer les fichiers en utf-8 et, dans une certaine mesure, permet une meilleure prise en compte des caractères spéciaux.
 \end{py}
+
+\subparagraph{}
+\textit{Réaliser une sélection des bases d'hydravions (\textsf{seaplane\_base}) dans le monde ? Vous préciserez la requête SQL nécessaire ainsi que sa traduction dans l'algèbre relationnelle. }
+
+
+\subparagraph{}
+\textit{En utilisant les possibilités de Python, donner le nombre de bases d'hydravion existantes. En utilisant la documentation, quelle requête SQL permet de donner le résultat équivalent ?}
+
+\subparagraph{}
+\textit{Donner la liste des villes françaises (\textsl{iso\_country='FR'}) hébergeant de telles bases. Vous donnerez la requête SQL ainsi que son expression en algèbre relationnelle.}
+
+
+\subparagraph{}
+\textit{Donner la liste des villes européennes (\textsl{continent='EU'}) hébergeant de telles bases ainsi que leur nom. Vous donnerez la requête SQL ainsi que son expression en algèbre relationnelle. Est-on sûr d'avoir tous les éléments de la liste ?}
+
+
+\subparagraph{}
+\textit{Donner la liste des villes européennes (\textsl{continent='EU'}) hébergeant de telles bases ainsi que leur nom et leur pays. Vous donnerez la requête SQL ainsi que son expression en algèbre relationnelle. Est-on sûr d'avoir tous les éléments de la liste ?}
+
+
+\subsection*{Affichage des bases d'hydravion sur une carte}
+On souhaite afficher toutes les bases d'hydravion européennes sur une carte Google. 
+
+
+
 \end{document}
 
 

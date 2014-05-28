@@ -11,17 +11,53 @@ import sqlite3
 import matplotlib.pyplot as plt
 import numpy as np
 
-basesql = u"Aeroport.db3"
+basesql = u"Aeroports.db3"
 savsql = u"Aeroport_sav.db3"
 
 cnx = sqlite3.connect(basesql)
 curseur = cnx.cursor()
 
 # Nombre d'aeroports
-requete = "SELECT type FROM airports"
+requete = "SELECT * FROM airports WHERE type='seaplane_base'"
 curseur.execute(requete)
 
 type_air=[]
-print("Boucle")
+n=0
 for cur in curseur:
-        type_air.append(l[0])
+    #print(cur)
+    n+=1
+    if n>3:
+        break
+    
+requete = "SELECT * FROM airports WHERE type='seaplane_base'"
+curseur.execute(requete)
+res=[]
+for cur in curseur:
+    res.append(cur)
+#print(len(res))
+    
+
+requete = "SELECT name,municipality FROM airports WHERE type='seaplane_base' AND iso_country='FR'"
+curseur.execute(requete)
+res=[]
+for cur in curseur:
+    res.append(cur)
+    #print(cur)
+    
+        
+
+requete = "SELECT name,municipality FROM airports WHERE type='seaplane_base' AND continent='EU'"
+curseur.execute(requete)
+res=[]
+for cur in curseur:
+    res.append(cur)
+    #print(cur)
+
+
+requete = "SELECT name,longitude_deg,latitude_deg FROM airports WHERE type='seaplane_base' AND continent='EU'"
+curseur.execute(requete)
+res=[]
+for cur in curseur:
+    res.append(cur)
+    print(cur)
+    
