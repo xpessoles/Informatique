@@ -10,6 +10,7 @@ Created on Mon May 26 09:13:41 2014
 import sqlite3
 import matplotlib.pyplot as plt
 import numpy as np
+import generateKML
 
 basesql = u"Aeroports.db3"
 savsql = u"Aeroport_sav.db3"
@@ -36,6 +37,9 @@ for cur in curseur:
     res.append(cur)
 #print(len(res))
     
+requete = "SELECT COUNT(*) FROM airports WHERE type='seaplane_base'"
+curseur.execute(requete)
+
 
 requete = "SELECT name,municipality FROM airports WHERE type='seaplane_base' AND iso_country='FR'"
 curseur.execute(requete)
@@ -54,10 +58,15 @@ for cur in curseur:
     #print(cur)
 
 
-requete = "SELECT name,longitude_deg,latitude_deg FROM airports WHERE type='seaplane_base' AND continent='EU'"
+requete = "SELECT name,longitude_deg,latitude_deg,type FROM airports WHERE type='seaplane_base'" #AND continent='EU'"
 curseur.execute(requete)
 res=[]
+fichier=[]
 for cur in curseur:
     res.append(cur)
-    print(cur)
-    
+    if "&" in cur[0]:
+        print(cur[0])
+    else :
+        ligne = cur[0]+','+cur[1]+','+cur[2]+','+cur[3]+'\n' 
+        fichier.append(ligne)
+generateKML.GenFileKML(fichier,'testXP')

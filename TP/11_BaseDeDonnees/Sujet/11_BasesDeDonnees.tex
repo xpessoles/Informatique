@@ -26,7 +26,7 @@ CI 4 : Bases de données}{
 Chapitre  -- }}
 
 \def\xxsoustitre{\ifthenelse{\boolean{xp}}{
-TP Aéroports -- Compléments}{
+TP Base de données des aéroports du monde}{
 Partie  -- }}
 
 \def\xxauteur{\ifthenelse{\boolean{xp}}{
@@ -79,7 +79,7 @@ La relation \textsf{Airports} est constituée des attributs suivants :
 \item \textsf{id} : un identifiant
 \item \textsf{type} : un type (heliport, small\_airport, seaplane\_base ...)
 \item \textsf{name} : un nom
-\item des coordonnées géographiques(\textsf{latitude\_deg}, \textsf{latitude\_deg}, \textsf{elevation\_ft}, à savoir les latitudes et longitudes en degrés ainsi que l'altitude en pied);
+\item des coordonnées géographiques(\textsf{latitude\_deg}, \textsf{latitude\_deg}, \textsf{elevation\_ft}, à savoir les latitudes et longitudes en degrés ainsi que l'altitude en pieds);
 \item ...
 \end{itemize}
 
@@ -115,7 +115,13 @@ Le préfixe u permet d'importer les fichiers encodés en UTF-8. Dans un certaine
 
 
 \begin{py}
-Le curseur est un objet contenant le résultat de la requête. Pour parcourir chacune des entités, on peut utiliser la syntaxe suivante : 
+Le curseur est un objet contenant le résultat de la requête. Pour visualiser la première entité de la requête, la syntaxe est la suivante : 
+\begin{python}
+data = curseur.fetchone()
+print(data)
+\end{python}
+
+Attention, à chaque utilisation de \textsl{fetchone()}, l'entité est supprimée du curseur. Pour parcourir chacune des entités, on peut utiliser la syntaxe suivante : 
 \begin{python}
 for cur in curseur:
     print(cur)
@@ -158,9 +164,18 @@ print(len(res))
 
 
 \subsection*{Affichage des bases d'hydravion sur une carte}
-On souhaite afficher toutes les bases d'hydravion européennes sur une carte Google. 
+On souhaite afficher toutes les bases d'hydravion européennes sur une carte GoogleEarth. 
 
 
+\subparagraph{}
+\textit{A partir des résultats d'une requête, mettre dans un tableau les lignes constituées du nom de l'aéroport, de sa longitude, de sa latitude et de son type. Une ligne constituera une seule chaîne de caractère, chaque champ étant séparé par une virgule. La fin de la ligne sera terminée par un $\backslash$n. De plus, les chaînes de caractères ne devront pas contenir le caractère \&.}
+
+\begin{exemple}
+Exemple de ligne : 
+\begin{python}
+'Blinn Lake Seaplane Base,-162.753005981445,55.2515983581543,seaplane_base\n'
+\end{python}
+\end{exemple}
 
 \end{document}
 
