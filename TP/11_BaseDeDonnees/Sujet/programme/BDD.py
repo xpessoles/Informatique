@@ -58,6 +58,14 @@ for cur in curseur:
     #print(cur)
 
 
+requete = "SELECT municipality,name,type FROM airports WHERE municipality='Mandalay' ORDER BY municipality"
+curseur.execute(requete)
+for cur in curseur:
+    print(cur)
+
+"""
+import generateKML
+
 requete = "SELECT name,longitude_deg,latitude_deg,type FROM airports WHERE type='seaplane_base'" #AND continent='EU'"
 curseur.execute(requete)
 res=[]
@@ -70,3 +78,4 @@ for cur in curseur:
         ligne = cur[0]+','+cur[1]+','+cur[2]+','+cur[3]+'\n' 
         fichier.append(ligne)
 generateKML.GenFileKML(fichier,'testXP')
+"""

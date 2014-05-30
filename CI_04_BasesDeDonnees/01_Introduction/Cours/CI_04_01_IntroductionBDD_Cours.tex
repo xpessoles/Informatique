@@ -93,6 +93,7 @@ Informatique - Cours}}
 
 
 \section{Présentation}
+\subsection{Exemples de bases de données}
 Si on considère l'ensemble des données présentes sur un disque dur, semblent aisément gérées par un ordinateur. Le temps pour accéder et ouvrir un fichier semble en effet assez court. Mais qu'en est-il lorsqu'il s'agit de trouver un fichier sur le disque ? Qu'en est-il lorsqu'il s'agit de trouver une information dans chacun des fichiers du disque ?
 
 Lorsqu'il s'agit de faire de nombreuses recherche sur un grand nombre de fichiers, un stockage << à plat >> ne permet plus un temps d'accès satisfaisant. Il s'agit alors d'organiser les données sous une autre forme. On parle de base de données. 
@@ -103,16 +104,102 @@ On peut commencer par recenser des bases de données libres. Musicbrainz ou free
 
 La FNAC, ou d'autres sites commerciaux disposent d'une base de données de leurs produits. Ainsi, grâce à un champ de recherche, l'internaute peut interroger la base. Il peut avoir des informations sur la disponibilité d'un produit, le délai de livraison ...
 
-Une organisation des données permet aux utilisateurs d'avoir un accès rapide à tout type d'informations. On appel requête la demande d'un utilisateur formulée auprès d'une base de donnée. 
+Une organisation des données permet aux utilisateurs d'avoir un accès rapide à tout type d'informations. On appelle requête la demande d'un utilisateur formulée auprès d'une base de donnée. 
+
+\subsection{Bases de données à <<plat>>}
+Une première solution envisageable pour stocker des données est l'utilisation de bases de données dites plates. Les informations sont par exemple stockées dans un tableau. Prenons par exemple une base de données contenant la liste des aéroports du monde ainsi que diverses informations : 
+\begin{center}
+\begin{tabular}{p{4cm}llll}
+\hline
+Nom & Ville & Pays & Continent  & Type \\
+\hline
+\hline
+Biarritz-Anglet-Bayonne Airport & Biarritz/Anglet/Bayonne & France & Europe & medium\_airport \\
+Milhaud Heliport & Toulon & France & Europe & heliport \\
+Toulon-Hyères Airport & Toulon/Hyères/Le Palyvestre & France & Europe & medium\_airport \\
+Lake Hood Seaplane Base & Anchorage & États-Unis & Amérique du Nord & seaplane\_base\\
+Ted Stevens Anchorage International Airport & Anchorage & États-Unis & Amérique du Nord & large\_airport\\
+Mandalay International Airport & Mandalay & Myanmar & Asie & large\_airport\\
+\hline
+\end{tabular}
+\end{center}
+
+Plusieurs remarques peuvent déjà être formulées : 
+\begin{itemize}
+\item plusieurs informations sont stockées à plusieurs reprises : ainsi, l'information <<France>> est stockée à multiple reprise. Il en est de même pour le champ Continent;
+\item des couples d'informations sont redondants : le couple (Pays, Continent) sera toujours identique pour un pays donné. Ainsi, stocker une seule fois que les États-Unis sont en Amérique du Nord.
+\end{itemize}
+
+Dans le cas d'une telle table, des requêtes simples sont aisées. Ainsi, faire la liste de tous les aéroports français ne pose pas de problème. Faire la liste de tous les héliports français est un peu plus difficile. 
+
+Si maintenant une seconde table comprend l'ensemble des fréquences sur lesquelles chacun des aéroports peut communiquer, les tables à plat vont rapidement trouver leur limite. 
+
+Enfin, lorsque les bases de données deviennent importantes (on recense plus de 40 000 installations aéroportuaires), l'accès aux données situées dans un tableau peut devenir considérablement lent. 
+
+\subsection{Système de Gestion de Base de Données -- SGBD}
+Pour stocker les données, on utilise des systèmes de gestion de base de données (SGBD). Le marché des SGBD est dominé par les entreprises Oracle, IBM ou Microsoft. Il existe par ailleurs des solutions libres telles que PostgreSQL ou MySQL. 
+
+Une SGBD permettent d'assurer le stockage et l'organisation des informations ainsi que les gestions d'accès par des utilisateurs ayant des droits différents. La quantité de données peut dépasser plusieurs TéraOctets.
 
 
-\section{Structure client -- serveur}
+\subsection{Structure client -- serveur}
+
+
+Classiquement, les données ne sont pas stockées sur l'ordinateur de l'utilisateur (appelé client) utilisant la base de données mais sur un serveur, voire même un <<nuage>> (\textit{cloud computing}). 
+
+Pour simplifier, pour faire du (\textit{cloud computing}) les entreprises répartissent les informations sur plusieurs ordinateurs en réseau. Suivant les performances nécessaires ou suivant la quantité de stockage nécessaire, la base de donnée peur donc être répartie sur plusieurs ordinateurs physiques, la limite de répartition pouvant être modifié dynamiquement en fonction du besoin. 
 
 \section{Structure de base de données}
+\subsection{Tables}
+Dans une première approche, une base de données est constituée de tables. Une table est elle-même constituée de lignes rassemblant les informations (valeurs) que l'on désire stocker. On appellera entité chacune des lignes de cette table. Lorsque les valeurs d'une ligne ont les même propriétés, on les regroupe par colonnes. 
+
+Lors de la conception de la base de données, on définit, pour une table, chacune des colonnes. On peut alors renseigner chacune des lignes. 
+
+\begin{exemple}
+Base de données des installations aéroportuaires
+\begin{center}
+\begin{tabular}{lp{4cm}p{3cm}ll}
+\hline
+\multicolumn{5}{c}{Aéroports} \\
+\hline
+Identifiant & Nom & Ville & iso\_country & Type \\
+\hline
+\hline
+4077 &Biarritz-Anglet-Bayonne Airport & Biarritz / Anglet / Bayonne & FR &  medium\_airport \\
+43537 &Milhaud Heliport & Toulon & FR  & heliport \\
+4241 &Toulon-Hyères Airport & Toulon/Hyères/Le Palyvestre & FR &  medium\_airport \\
+21567 &Lake Hood Seaplane Base & Anchorage & US &   seaplane\_base\\
+5388 &Ted Stevens Anchorage International Airport & Anchorage & US & large\_airport\\
+26727 &Mandalay International Airport & Mandalay & MM  & large\_airport\\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{tabular}{lll}
+\hline
+\multicolumn{3}{c}{Pays} \\
+\hline
+Identifiant & Code & Nom \\
+\hline
+\hline
+302 687 & FR & France \\
+302 649 & MM & Myanmar \\
+302 755 & US & United States \\
+\hline
+\end{tabular}
+\end{center}
+\end{exemple}
+
+\begin{rem}
+Dans une table il n'y a pas de notion d'ordre a priori. Les données d'une ligne ne peuvent donc pas être désignées par un numéro de ligne.
+\end{rem}
+
 
 \begin{thebibliography}{2}
-%\bibitem{1}{Sylvie Delabriere, Équations différentielles, méthodes de résolution numérique -- Approximation numérique des fonctions, des intégrales, des solutions d'équations. Équations différentielles : approximation numérique des solutions.}
-%\bibitem{2}{Wack et Al., L’informatique pour tous en classes préparatoires aux grandes écoles, Editions Eyrolles.}
+\bibitem{1}{Serge Abiteboul, Benjamin Nguyen, Yannick Le Bras, \textit{Introduction aux Bases de Données Relationnelles Programme de Classes Préparatoires Scientifiques, Première année}.}
+\bibitem{2}{Wack et Al., \textit{L’informatique pour tous en classes préparatoires aux grandes écoles, Editions Eyrolles}.}
+\bibitem{3}{Christope Revy, \textit{Concepts des bases de données}, Cours de STS IRIS, Lycée Janot de SENS.}
 %\bibitem{3}{Olivier Guindet, Résolution d'un problème dynamique par la méthode d'Euler, UPSTI.}
 %\bibitem{4}{Alain Caignot, Marc Derumaux, Résolution des équations différentielles, UPSTI.}
 %\bibitem{1}{Adrien Petri, \textit{Analyse numérique : Intégration numérique}, Notes de cours de TSI 1, Lycée Rouvière, Toulon.}
