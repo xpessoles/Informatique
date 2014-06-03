@@ -44,7 +44,7 @@ plt.plot(xTrue,yTrue,'.g')
 plt.plot(xFalse,yFalse,'.r')
 
 xx = linspace(0,2*pi,200)
-plt.plot(cos(xx), sin(xx),'-k',linewidth=2)
+#plt.plot(cos(xx), sin(xx),'-k',linewidth=2)
 
 plt.xlim([-1.5,1.5])
 plt.ylim([-1.5,1.5])
