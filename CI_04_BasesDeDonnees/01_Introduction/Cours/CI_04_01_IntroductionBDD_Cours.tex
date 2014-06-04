@@ -149,7 +149,7 @@ Classiquement, les données ne sont pas stockées sur l'ordinateur de l'utilisat
 
 Pour simplifier, pour faire du (\textit{cloud computing}) les entreprises répartissent les informations sur plusieurs ordinateurs en réseau. Suivant les performances nécessaires ou suivant la quantité de stockage nécessaire, la base de donnée peur donc être répartie sur plusieurs ordinateurs physiques, la limite de répartition pouvant être modifié dynamiquement en fonction du besoin. 
 
-\section{Structure de base de données}
+\section{Structure des base de données : le modèle relationnel}
 \subsection{Tables}
 Dans une première approche, une base de données est constituée de tables. Une table est elle-même constituée de lignes rassemblant les informations (valeurs) que l'on désire stocker. On appellera entité chacune des lignes de cette table. Lorsque les valeurs d'une ligne ont les même propriétés, on les regroupe par colonnes. 
 
@@ -195,11 +195,171 @@ Identifiant & Code & Nom \\
 Dans une table il n'y a pas de notion d'ordre a priori. Les données d'une ligne ne peuvent donc pas être désignées par un numéro de ligne.
 \end{rem}
 
+\subsection{Définitions \cite{2}}
+
+\begin{defi}
+\textbf{Attributs -- Domaines}
+
+On considère donné un ensemble infini $\mathcal{A}$, dont les éléments sont appelés des attributs, un ensemble $D$, et une application dom de $\mathcal{A}$ dans les sous-ensembles de $D$. 
+
+Si $A\in \mathcal{A}$, $dom(A)$ est appelé domaine de $A$.
+
+\end{defi}
+
+\begin{exemple}
+Le type d'aéroport est un attribut. Son domaine est l'ensemble des types d'aéroport. 
+
+La ville est un attribut. Son domaine est l'ensemble des villes du monde muni d'un équipement aéroportuaire. 
+
+\end{exemple}
+
+\begin{defi}
+\textbf{Schéma relationnel}
+
+Un schéma relationnel est un $n$-uplet de la forme $S=(A_1,...,A_n) \in \mathcal{A}^n$ où les $A_i$ sont distincts deux à deux. 
+\end{defi}
+
+\begin{exemple}
+La table des aéroports est un schéma relationnel. 
+Sous une forme formelle, on pourrait noter :
+$$ \text{Aeroport} = \left(\left( \text{Identifiant}, \mathbb{N}\right),\left(\text{Ville}, \left( ...\right)\right), \left(\text{iso\_country},\left(\text{FR},\text{US},... \right)  \right),... \right)$$
+\end{exemple}
+
+\begin{defi}
+\textbf{Relation -- table}
+
+On appelle relation associé à un schéma relationnel $\left(A_i,...,A_n \right)$ est un ensemble fini de $n$-uplets de $dom(A_1)\times \cdot\cdot\cdot \times dom(A_n)$.
+
+On note $R(S)$ la relation $R$ pour signifier qu'elle est associée au schéma relationnel $S$. 
+
+Les éléments de $R$ sont appelés les \textit{valeurs}, ou encore les enregistrements, de la relation et leur nombre est appelé son \textit{cardinal} et est note \#R.
+\end{defi}
+
+\begin{exemple}
+Les tables présentées précédemment sont des relations. 
+\end{exemple}
+
+\begin{defi}
+\textbf{Valeurs}
+Si $e\in R(S)$ et $A\in S$, on note $e.A$ la composante du $n$-uplet $e$ associée à l'attribut $A$. 
+
+$R$ étant un ensemble, deux valeurs distinctes $e$ diffèrent forcément au moins sur un attribut.  Formellement, on a : 
+$$
+\forall e,e' \in R(S), \text{ si } e\neq e', \text{ alors } \exists A \in S, e.A \neq e'.A
+$$
+
+\end{defi}
+
+\subsection{Notion de clef}
+Afin de ne pas stocker des des doublons dans une base de donnée, on a recours au concept de clef primaire. 
+
+Dans certains cas, si on est certain que la valeur d'un attribut sera différent pour chaque ligne de la table, cet attribut peut tenir compte de clef primaire. Dans d'autres cas, si on est persuadé que pour une ligne donnée, la combinaison de $n$ attributs est unique, la combinaison de ces attributs peut constituer une clef primaire. 
+
+Enfin, dans certains cas, on définit un attribut de type <<identifiant>>. Lorsqu'on ajoute une ligne dans la table, on s'assure qu'un identifiant unique (un nombre entier par exemple) sera affecté.
+
+
+\section{Algèbre relationnelle}
+La raison d'être d'une base de données étant de disposer de données, il est nécessaire de disposer d'outils d'interrogation. 
+
+\begin{defi}
+\textbf{Requêtes -- Algèbre relationnelle}
+
+On entend par algèbre relationnelle, une collection d'opérations (requêtes=) formelles qui agissent sur des relations et produisent une relation en résultat : $R_3 \rightarrow R_2 Op R_1$.
+\end{defi}
+
+Ceci signifie que dans l'algèbre relationnelle, le résultat des requêtes effectuées sur les relations (tables) sera toujours une nouvelle relation. 
+
+\subsection{Opérations sur les ensembles}
+\begin{defi}
+\begin{minipage}[c]{.75\linewidth}
+\textbf{Union}
+
+L'union de deux relations $R_1(S)$ et $R_2(S)$ est l'ensemble des valeurs comprises dans $R_1$ ou $R_2$. 
+
+On peut donc noter la relation $R_3(S)$ définie par : $R_3(S)\leftarrow R_1(S)\cup R_2(S)$
+\end{minipage}\hfill
+\begin{minipage}[c]{.2\linewidth}
+\begin{center}
+\includegraphics[width=.95\textwidth]{images/union}
+\end{center}
+\end{minipage}
+\end{defi}
+
+\begin{defi}
+\begin{minipage}[c]{.75\linewidth}
+\textbf{Intersection}
+
+L'intersection de deux relations $R_1(S)$ et $R_2(S)$ est l'ensemble des valeurs comprises dans $R_1$ et dans $R_2$. 
+
+On peut donc noter la relation $R_3(S)$ définie par : $R_3(S)\leftarrow R_1(S)\cap R_2(S)$
+\end{minipage}\hfill
+\begin{minipage}[c]{.2\linewidth}
+\begin{center}
+\includegraphics[width=.95\textwidth]{images/inter}
+\end{center}
+\end{minipage}
+\end{defi}
+
+
+\begin{defi}
+\begin{minipage}[c]{.75\linewidth}
+\textbf{Différence}
+
+La différence de deux relations $R_1(S)$ et $R_2(S)$ est l'ensemble des valeurs comprises dans $R_1$ et qui ne sont pas comprises dans $R_2$. 
+
+On peut donc noter la relation $R_3(S)$ définie par : $R_3(S)\leftarrow R_1(S)-R_2(S)$
+\end{minipage}\hfill
+\begin{minipage}[c]{.2\linewidth}
+\begin{center}
+\includegraphics[width=.95\textwidth]{images/diff}
+\end{center}
+\end{minipage}
+\end{defi}
+
+
+\section{Opérations relationnelles}
+
+\begin{defi}
+
+\textbf{Projection}
+
+Opération notée $\pi$ au cours de laquelle on sélectionne des certaines colonnes (on élimine donc des attributs). 
+ $$
+ R_2 \leftarrow \pi_{\text{attribut 1, attribut 2, ...}}(R_1)
+ $$
+
+\end{defi}
+
+
+\begin{defi}
+\textbf{Sélection}
+
+On appelle sélection de $R_1$ selon $A=a$, et on note $\sigma_{A=a}(R_1)$, la relation obtenue en sélectionnant dans $R_1$ uniquement les valeurs $e$ telles que $e.A = a$.
+$$
+R_2 \leftarrow \sigma_{\text{attribut}=\text{condition}}(R_1)
+$$
+\end{defi}
+
+
+
+\begin{defi}
+\textbf{Renommage d'attribut}
+
+Cette opération est utilisée pour des raisons pratiques pour lever une ambigüité ou pour simplifier le nom d'un attribut de façon temporaire. 
+
+Soit $S = (A_1,... ,A_n)$ un schéma, $ i \in[1;n]$ et $B$ un attribut tel que
+$dom(B) = dom(A_i)$. On note :
+
+$$
+R_2 \leftarrow \rho_{\text{ancien attribut} \rightarrow \text{nouvel attribut}}
+$$
+\end{defi}
 
 \begin{thebibliography}{2}
 \bibitem{1}{Serge Abiteboul, Benjamin Nguyen, Yannick Le Bras, \textit{Introduction aux Bases de Données Relationnelles Programme de Classes Préparatoires Scientifiques, Première année}.}
 \bibitem{2}{Wack et Al., \textit{L’informatique pour tous en classes préparatoires aux grandes écoles, Editions Eyrolles}.}
 \bibitem{3}{Christope Revy, \textit{Concepts des bases de données}, Cours de STS IRIS, Lycée Janot de SENS.}
+\bibitem{4}{Patrick Beynet, \textit{Supports de cours de TSI 2}, Supports de cours de TSI 2, Lycée Rouvière, Toulon.}
 %\bibitem{3}{Olivier Guindet, Résolution d'un problème dynamique par la méthode d'Euler, UPSTI.}
 %\bibitem{4}{Alain Caignot, Marc Derumaux, Résolution des équations différentielles, UPSTI.}
 %\bibitem{1}{Adrien Petri, \textit{Analyse numérique : Intégration numérique}, Notes de cours de TSI 1, Lycée Rouvière, Toulon.}
