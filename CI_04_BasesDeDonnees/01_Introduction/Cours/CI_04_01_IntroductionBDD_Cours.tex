@@ -317,13 +317,13 @@ On peut donc noter la relation $R_3(S)$ définie par : $R_3(S)\leftarrow R_1(S)-
 \end{defi}
 
 
-\section{Opérations relationnelles}
+\subsection{Opérations relationnelles}
 
 \begin{defi}
 
 \textbf{Projection}
 
-Opération notée $\pi$ au cours de laquelle on sélectionne des certaines colonnes (on élimine donc des attributs). 
+Opération notée $\pi$ au cours de laquelle on sélectionne certaines des colonnes (on élimine donc des attributs). 
  $$
  R_2 \leftarrow \pi_{\text{attribut 1, attribut 2, ...}}(R_1)
  $$
@@ -354,6 +354,23 @@ $$
 R_2 \leftarrow \rho_{\text{ancien attribut} \rightarrow \text{nouvel attribut}}
 $$
 \end{defi}
+
+
+
+\begin{defi}
+
+\textbf{Produit cartésien}
+
+Soient $R_1(S_1)$ et $R_2(S_2)$ deux relations de schémas disjoints. L'opération produit cartésien est noté $\times$. 
+
+$$
+R_3 \leftarrow R_2 \times R_1
+$$
+
+La relation $R_3$ contient toutes les combinaisons d'association possibles entre les valeurs de $R_1$ et de $R_2$.
+
+\end{defi}
+
 
 \begin{thebibliography}{2}
 \bibitem{1}{Serge Abiteboul, Benjamin Nguyen, Yannick Le Bras, \textit{Introduction aux Bases de Données Relationnelles Programme de Classes Préparatoires Scientifiques, Première année}.}
