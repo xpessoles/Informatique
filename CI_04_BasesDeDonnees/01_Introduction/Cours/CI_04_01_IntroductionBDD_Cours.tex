@@ -257,17 +257,99 @@ Dans certains cas, si on est certain que la valeur d'un attribut sera différent
 
 Enfin, dans certains cas, on définit un attribut de type <<identifiant>>. Lorsqu'on ajoute une ligne dans la table, on s'assure qu'un identifiant unique (un nombre entier par exemple) sera affecté.
 
+\subsection{Création de base de données en langage SQL}
+Le SQL (\textit{Structured Query Language}) est un langage informatique permettant :
+\begin{itemize}
+\item de créer des bases de données;
+\item d'interroger des bases de données.
+\end{itemize}
 
+Il existe deux possibilités pour interroger une base de donnée au format SQL. Il est d'abord possible d'utiliser des interfaces graphiques qui vont permettre d'interroger une base de donnée avec le langage naturel. 
+\begin{exemple}
+
+\end{exemple}
+
+Il est aussi possible d'utiliser le langage SQL directement pour faire des opérations sur une base. 
+
+\begin{exemple}
+Ainsi, il existe des API (\textit{Application Programming Interface} -- Interface de programmation) dans de nombreux langages de programmation, dont le Python, qui permettent de se connecter à une base de données et à l'interroger. 
+
+\end{exemple}
+
+\begin{rem}
+De manière classique, les instructions SQL sont saisies en majuscules. Les requêtes se terminent par des points-virgules.
+\end{rem}
+
+\subsubsection{Création d'une base de données}
+
+Pour créer une base de données en langage SQL, la syntaxe est la suivante :
+
+\texttt{CREATE DATABASE Aeroports;}
+
+
+Il est à noter qu'il existe une gestion des utilisateurs et de leurs droits. La façon la plus aisée de les gérer est d'utiliser une interface graphique (par exemple phpmyadmin avec des bases de type mysql).
+
+\subsubsection{Création d'une table}
+Une fois la base de données crée, il est nécessaire de créer les tables. Chaque table dispose d'un ou de plusieurs attributs. Il existe plusieurs types d'attributs parmi lesquels : 
+\begin{itemize}
+ \item des entiers entiers. Il en existe plusieurs types selon les nombres à stocker (de \texttt{TINYINT} (codé sur un octet) et ayant une capacité de -128 à 127 à \texttt{BIGINT} (codé sur 8 octets));
+ \item la date et l'heure, permettant de stocker par exemple l'heure (\texttt{TIME} au format HH:MM:SS) ou l'année (\texttt{YEAR} au format AAAA).
+ \item du texte : \texttt{CHAR} permet de stocker jusqu'à 255 caractères.
+ \item \textit{etc}.
+\end{itemize}
+
+Ainsi, pour créer une table, on a recours à la syntaxe suivante :
+
+\texttt{CREATE TABLE nom\_table (nom\_attribut\_1 type\_attribut1, nom\_attribut\_2  type\_attribut\_2, ...);}
+
+\begin{exemple}
+\texttt{CREATE TABLE Pays (Identifiant INT, Code CHAR, Nom CHAR);}
+\end{exemple}
+
+Lors de la création des tables il est de plus possible de définir des contraintes :
+\begin{itemize}
+\item \texttt{NOT NULL} : empêche d'avoir un 0 dans un champ;
+\item \texttt{UNIQUE} : permet de n'avoir aucun doublon dans une colonne;
+\item \texttt{DEFAULT} permet d'attribuer une valeur par défaut lorsque le champ n'est pas défini lors de l'insertion d'un élément;
+\item \texttt{PRIMARY KEY} permet de définir un attribut comme clef primaire;
+\item \textit{etc}.
+\end{itemize}
+
+\begin{exemple}
+\texttt{CREATE TABLE Pays (Identifiant INT UNIQUE PRIMARY KEY , Code CHAR NOT NULL , Nom CHAR NOT NULL);}
+\end{exemple}
+
+\subsection{Suppléments}
+Il est possible de supprimer une table, une base de données, de modifier la structure d'une table...
 \section{Algèbre relationnelle}
-La raison d'être d'une base de données étant de disposer de données, il est nécessaire de disposer d'outils d'interrogation. 
+La raison d'être d'une base de données étant de disposer de données, il est nécessaire de disposer d'outils d'interrogation. Pour cela, il existe un mathématique formel appelé algèbre relationnelle. Chaque opération formelle est transposable dans un langage de programmation. 
+
+
+
+
 
 \begin{defi}
 \textbf{Requêtes -- Algèbre relationnelle}
 
-On entend par algèbre relationnelle, une collection d'opérations (requêtes=) formelles qui agissent sur des relations et produisent une relation en résultat : $R_3 \rightarrow R_2 Op R_1$.
+On entend par algèbre relationnelle, une collection d'opérations (requêtes) formelles qui agissent sur des relations et produisent une relation en résultat : $R_3 \leftarrow R_2 Op R_1$.
 \end{defi}
 
 Ceci signifie que dans l'algèbre relationnelle, le résultat des requêtes effectuées sur les relations (tables) sera toujours une nouvelle relation. 
+
+\begin{rem}
+\textit{Sélection des éléments d'une table}
+
+Pour sélectionner tous les éléments d'une table, on utilise la requête suivante : 
+
+\texttt{SELECT * FROM nom\_table}
+
+Pour sélectionner seulement certains attributs d'une table, on utilise la requête suivante : 
+
+\texttt{SELECT attribut\_1,attribut\_2 FROM nom\_table}
+
+\end{rem}
+
+
 
 \subsection{Opérations sur les ensembles}
 \begin{defi}
@@ -283,6 +365,8 @@ On peut donc noter la relation $R_3(S)$ définie par : $R_3(S)\leftarrow R_1(S)\
 \includegraphics[width=.95\textwidth]{images/union}
 \end{center}
 \end{minipage}
+
+
 \end{defi}
 
 \begin{defi}
@@ -292,6 +376,7 @@ On peut donc noter la relation $R_3(S)$ définie par : $R_3(S)\leftarrow R_1(S)\
 L'intersection de deux relations $R_1(S)$ et $R_2(S)$ est l'ensemble des valeurs comprises dans $R_1$ et dans $R_2$. 
 
 On peut donc noter la relation $R_3(S)$ définie par : $R_3(S)\leftarrow R_1(S)\cap R_2(S)$
+
 \end{minipage}\hfill
 \begin{minipage}[c]{.2\linewidth}
 \begin{center}
@@ -300,6 +385,20 @@ On peut donc noter la relation $R_3(S)$ définie par : $R_3(S)\leftarrow R_1(S)\
 \end{minipage}
 \end{defi}
 
+\begin{envsql}
+En langage SQL pour pouvoir faire l'union de deux relations, elles doivent avoir le même schéma (même nombre de colonne(s) et même type de colonnes). Il faut prêter attention à l'ordre des attributs dans la requête. 
+
+\begin{sql}
+SELECT  attribut_11, attribut_12 FROM table_1 UNION attribut_21, attribut_22 FROM table_2
+\end{sql}
+
+Ainsi, pour connaître les noms des régions et des pays associés à leur code, on utilise la requête suivante :
+\begin{sql}
+SELECT code,name FROM Countries UNION code,name FROM Regions
+\end{sql}
+
+La relation résultant contient donc l'ensemble des couples (code,name) des régions et des  
+\end{envsql}
 
 \begin{defi}
 \begin{minipage}[c]{.75\linewidth}
