@@ -241,6 +241,7 @@ Les tables présentées précédemment sont des relations.
 
 \begin{defi}
 \textbf{Valeurs}
+
 Si $e\in R(S)$ et $A\in S$, on note $e.A$ la composante du $n$-uplet $e$ associée à l'attribut $A$. 
 
 $R$ étant un ensemble, deux valeurs distinctes $e$ diffèrent forcément au moins sur un attribut.  Formellement, on a : 
@@ -264,12 +265,7 @@ Le SQL (\textit{Structured Query Language}) est un langage informatique permetta
 \item d'interroger des bases de données.
 \end{itemize}
 
-Il existe deux possibilités pour interroger une base de donnée au format SQL. Il est d'abord possible d'utiliser des interfaces graphiques qui vont permettre d'interroger une base de donnée avec le langage naturel. 
-\begin{exemple}
-
-\end{exemple}
-
-Il est aussi possible d'utiliser le langage SQL directement pour faire des opérations sur une base. 
+Parmi les possibilités pourinterroger une base de donnée au format SQL on peut citer les interfaces graphiques qui vont permettre d'interroger une base de donnée avec le langage naturel. Il est aussi possible d'utiliser le langage SQL directement pour faire des opérations sur une base. 
 
 \begin{exemple}
 Ainsi, il existe des API (\textit{Application Programming Interface} -- Interface de programmation) dans de nombreux langages de programmation, dont le Python, qui permettent de se connecter à une base de données et à l'interroger. 
@@ -282,10 +278,14 @@ De manière classique, les instructions SQL sont saisies en majuscules. Les requ
 
 \subsubsection{Création d'une base de données}
 
+
+\begin{envsql}
 Pour créer une base de données en langage SQL, la syntaxe est la suivante :
 
-\texttt{CREATE DATABASE Aeroports;}
-
+\begin{sql}
+CREATE DATABASE Aeroports;
+\end{sql}
+\end{envsql}
 
 Il est à noter qu'il existe une gestion des utilisateurs et de leurs droits. La façon la plus aisée de les gérer est d'utiliser une interface graphique (par exemple phpmyadmin avec des bases de type mysql).
 
@@ -298,12 +298,22 @@ Une fois la base de données crée, il est nécessaire de créer les tables. Cha
  \item \textit{etc}.
 \end{itemize}
 
-Ainsi, pour créer une table, on a recours à la syntaxe suivante :
+\begin{envsql}
 
-\texttt{CREATE TABLE nom\_table (nom\_attribut\_1 type\_attribut1, nom\_attribut\_2  type\_attribut\_2, ...);}
+Ainsi, pour créer une table, on a recours à la syntaxe suivante :
+\begin{sql}
+CREATE TABLE nom_table (nom_attribut_1 type_attribut1, nom_attribut_2  type_attribut_2, ...);
+\end{sql}
+\end{envsql}
 
 \begin{exemple}
-\texttt{CREATE TABLE Pays (Identifiant INT, Code CHAR, Nom CHAR);}
+Étant dans la base de données Aéroports, pour créer la table des pays avec comme attributs un identifiant (de type entier), un code (de type chaîne de caractères) un nom (de type chaîne de caractères), on a :
+\begin{envsql}
+\begin{sql}
+CREATE TABLE Pays (Identifiant INT, Code CHAR, Nom CHAR);
+\end{sql}
+\end{envsql}
+
 \end{exemple}
 
 Lors de la création des tables il est de plus possible de définir des contraintes :
@@ -316,7 +326,16 @@ Lors de la création des tables il est de plus possible de définir des contrain
 \end{itemize}
 
 \begin{exemple}
-\texttt{CREATE TABLE Pays (Identifiant INT UNIQUE PRIMARY KEY , Code CHAR NOT NULL , Nom CHAR NOT NULL);}
+Pour la même table que précédemment, il est possible de déclarer que l'identifiant est une clef unique primaire dont les occurrences sont uniques. On impose que le code et le nom des aéroports soient obligatoirement renseignés.
+
+
+\begin{envsql}
+\begin{sql}
+CREATE TABLE Pays (Identifiant INT UNIQUE PRIMARY KEY , Code CHAR NOT NULL , Nom CHAR NOT NULL);
+\end{sql}
+\end{envsql}
+\textit{Remarque : } Le code d'aéroport étant un code unique, il devrait normalement être inutile d'avoir un identifiant. La clef primaire pourrait alors être le code. 
+
 \end{exemple}
 
 \subsection{Suppléments}
@@ -335,23 +354,200 @@ On entend par algèbre relationnelle, une collection d'opérations (requêtes) f
 \end{defi}
 
 Ceci signifie que dans l'algèbre relationnelle, le résultat des requêtes effectuées sur les relations (tables) sera toujours une nouvelle relation. 
+%
+%\begin{rem}
+%\textit{Sélection des éléments d'une table}
+%
+%Pour sélectionner tous les éléments d'une table, on utilise la requête suivante : 
+%\begin{envsql}
+%\begin{sql}
+%SELECT * FROM nom_table;
+%\end{sql}
+%\end{envsql}
+%
+%Pour sélectionner seulement certains attributs d'une table, on utilise la requête suivante : 
+%\begin{envsql}
+%\begin{sql}
+%SELECT attribut_1,attribut_2 FROM nom_table;
+%\end{sql}
+%\end{envsql}
+%
+%\end{rem}
 
-\begin{rem}
-\textit{Sélection des éléments d'une table}
 
-Pour sélectionner tous les éléments d'une table, on utilise la requête suivante : 
+\subsection{Opérations relationnelles}
+\subsubsection{Projection}
 
-\texttt{SELECT * FROM nom\_table}
+\begin{defi}
 
-Pour sélectionner seulement certains attributs d'une table, on utilise la requête suivante : 
+\textbf{Projection}
 
-\texttt{SELECT attribut\_1,attribut\_2 FROM nom\_table}
+Opération notée $\pi$ au cours de laquelle on sélectionne certaines des colonnes (on élimine donc des attributs). 
+$$
+ R_2 \leftarrow \pi_{\text{attribut 1, attribut 2, ...}}(R_1)
+$$
 
-\end{rem}
+\begin{envsql}
+\begin{sql}
+SELECT attribut_1,attribut_2 FROM nom_table;
+
+SELECT * FROM nom_table;
+\end{sql}
+\end{envsql}
+\end{defi}
+
+\begin{exemple}
+Lister les noms d'aéroports ainsi que les codes IATA correspondant :
+$$
+\pi_{\text{name,iata\_code}}(\text{airports})
+$$
+
+\begin{envsql}
+\begin{sql}
+SELECT name,iata_code FROM airports
+\end{sql}
+\end{envsql}
+
+\end{exemple}
+
+\subsubsection{Sélection}
+\begin{defi}
+\textbf{Sélection}
+
+On appelle sélection de $R_1$ selon $A=a$, et on note $\sigma_{A=a}(R_1)$, la relation obtenue en sélectionnant dans $R_1$ uniquement les valeurs $e$ telles que $e.A = a$.
+$$
+R_2 \leftarrow \sigma_{\text{attribut}=\text{condition}}(R_1)
+$$
+
+Le schéma relationnel $R_2$ est identique au schéma $R_1$.  Les opérateurs permettant d'exprimer une condition sont $=$, $\neq$ (\texttt{!=} ou \texttt{<>}), $<$, $\leq$ (\texttt{<=}), $\geq$ (\texttt{>=}), $\neg$ (négation, \texttt{NOT}), $\vee$ (ou, \texttt{OR}), $\wedge$ (et, \texttt{AND}).
+
+\begin{envsql}
+\begin{sql}
+SELECT att_1,att_2 FROM nom_table WHERE att_3="xx" AND att_4=0 ...
+\end{sql}
+\end{envsql}
+
+\end{defi}
+
+\begin{exemple}
+Sélectionner le nom de tous les aéroports situés au niveau de la mer :
+$$
+\pi_{\text{name}}\left(\sigma_{\text{elevation\_ft = 0}}(\text{airports})\right)
+$$
+\begin{envsql}
+\begin{sql}
+SELECT * FROM airports WHERE elevation_ft=0
+\end{sql}
+
+
+\end{envsql}
+
+Sélectionner le nom et le code iata de tous aéroports situés en-dessous du niveau de la mer en Europe :
+$$
+\pi_{\text{name},\text{iata\_code}}\left(\sigma_{\text{elevation\_ft} < \text{0}\wedge \text{continent}=\text{EU})}(\text{airports} )\right)
+$$
+\begin{envsql}
+\begin{sql}
+SELECT name,iata_code FROM airports WHERE elevation_ft<0 AND continent="EU";
+\end{sql}
+\end{envsql}
+
+Cette requête laisse apparaître 2 fois la même ligne : 
+\begin{sql}
+Mashland Airfield   
+\end{sql}
+Cela s'explique par le fait que l'aéroport apparait 2 fois dans la table airports. Mais, pour la liste d'attributs sélectionnés, tous les champs sont les mêmes (l'identifiant est bien différent). En faisant apparaître l'id, on réaliserait que les deux champs sont différents. 
+Si on souhaite éliminer les doublons dans, la requête est la suivante : 
+
+\begin{envsql}
+\begin{sql}
+SELECT DISTINCT name,iata_code FROM airports WHERE elevation_ft<0 AND continent="EU";
+\end{sql}
+
+\end{envsql}
+
+\end{exemple}
+
+
+\subsubsection{Renommage}
+\begin{defi}
+\textbf{Renommage d'attribut}
+
+Cette opération est utilisée pour des raisons pratiques pour lever une ambigüité ou pour simplifier le nom d'un attribut de façon temporaire. 
+
+Soit $S = (A_1,... ,A_n)$ un schéma, $ i \in[1;n]$ et $B$ un attribut tel que
+$dom(B) = dom(A_i)$. On note :
+
+$$
+R_2 (S)\leftarrow \rho_{\text{ancien attribut} \rightarrow \text{nouvel attribut}}(R_1(S))
+$$
+
+\begin{envsql}
+\begin{sql}
+SELECT att_1,att_2 as att_3 FROM nom_table
+\end{sql}
+\end{envsql}
+
+\end{defi}
+
+
+\begin{exemple}
+On désire sélectionner le nom des aéroports et les altitudes et  renommer temporairement l'attribut \texttt{elevation\_ft} en \texttt{altitude} :
+$$
+\pi_{\text{elevation\_ft}}\left(\rho_{\text{elevation\_ft} \rightarrow \text{altitude}}(airports)\right)
+$$
+\begin{envsql}
+\begin{sql}
+SELECT name, elevation_ft AS altitude FROM airports;
+\end{sql}
+\end{envsql}
+
+\end{exemple}
+
 
 
 
 \subsection{Opérations sur les ensembles}
+\begin{rem}
+Les opérateurs ensemblistes sont dédiés à des relations de même schéma relationnel. 
+\end{rem}
+
+
+\subsubsection{Opérations cartésiennes}
+
+\begin{defi}
+
+\textbf{Produit cartésien}
+
+Soient $R_1(S_1)$ et $R_2(S_2)$ deux relations de schémas disjoints. L'opération produit cartésien est noté $\times$. 
+
+$$
+R_3 \leftarrow R_1 \times R_2
+$$
+
+La relation $R_3$ contient toutes les combinaisons d'association possibles entre les valeurs de $R_1$ et de $R_2$.
+
+\end{defi}
+
+
+
+\begin{defi}
+
+\textbf{Différence cartésienne}
+
+Soient $R_1(S_1)$ et $R_2(S_2)$ deux relations de schémas disjoints. L'opération produit cartésien est noté $\div$. 
+
+$$
+R_3 \leftarrow R_1 \div R_2
+$$
+
+Dans ce cas, toutes les combinaisons de chaque tuple de $R_3$ et de chaque tuple de $R_2$ est contenue dans $R_1$.
+
+\end{defi}
+
+
+\subsubsection{Union}
+
 \begin{defi}
 \begin{minipage}[c]{.75\linewidth}
 \textbf{Union}
@@ -366,9 +562,33 @@ On peut donc noter la relation $R_3(S)$ définie par : $R_3(S)\leftarrow R_1(S)\
 \end{center}
 \end{minipage}
 
-
 \end{defi}
 
+\begin{envsql}
+En langage SQL pour pouvoir faire l'union de deux relations, elles doivent avoir le même schéma (même nombre de colonne(s) et même type de colonnes). Il faut prêter attention à l'ordre des attributs dans la requête. 
+
+\begin{sql}
+SELECT  attribut_11, attribut_12 FROM table_1 UNION attribut_21, attribut_22 FROM table_2
+\end{sql}
+\end{envsql}
+
+\begin{exemple}
+Ainsi, pour connaître les noms des régions et des pays associés à leur code, on utilise la requête suivante :
+
+\begin{envsql}
+\begin{sql}
+SELECT code,name FROM Countries UNION SELECT code,name FROM Regions;
+\end{sql}
+\end{envsql}
+
+La relation résultant contient donc l'ensemble des couples (code,name) des régions et des  pays. 
+\end{exemple}
+
+\begin{rem}
+Cette opération est à utiliser avec parcimonie car la relation résultante peut avoir une forme absurde.
+\end{rem}
+
+\subsubsection{Intersection}
 \begin{defi}
 \begin{minipage}[c]{.75\linewidth}
 \textbf{Intersection}
@@ -385,21 +605,7 @@ On peut donc noter la relation $R_3(S)$ définie par : $R_3(S)\leftarrow R_1(S)\
 \end{minipage}
 \end{defi}
 
-\begin{envsql}
-En langage SQL pour pouvoir faire l'union de deux relations, elles doivent avoir le même schéma (même nombre de colonne(s) et même type de colonnes). Il faut prêter attention à l'ordre des attributs dans la requête. 
-
-\begin{sql}
-SELECT  attribut_11, attribut_12 FROM table_1 UNION attribut_21, attribut_22 FROM table_2
-\end{sql}
-
-Ainsi, pour connaître les noms des régions et des pays associés à leur code, on utilise la requête suivante :
-\begin{sql}
-SELECT code,name FROM Countries UNION code,name FROM Regions
-\end{sql}
-
-La relation résultant contient donc l'ensemble des couples (code,name) des régions et des  
-\end{envsql}
-
+\subsubsection{Différence}
 \begin{defi}
 \begin{minipage}[c]{.75\linewidth}
 \textbf{Différence}
@@ -415,60 +621,9 @@ On peut donc noter la relation $R_3(S)$ définie par : $R_3(S)\leftarrow R_1(S)-
 \end{minipage}
 \end{defi}
 
+\subsubsection{Jointures}
 
-\subsection{Opérations relationnelles}
-
-\begin{defi}
-
-\textbf{Projection}
-
-Opération notée $\pi$ au cours de laquelle on sélectionne certaines des colonnes (on élimine donc des attributs). 
- $$
- R_2 \leftarrow \pi_{\text{attribut 1, attribut 2, ...}}(R_1)
- $$
-
-\end{defi}
-
-
-\begin{defi}
-\textbf{Sélection}
-
-On appelle sélection de $R_1$ selon $A=a$, et on note $\sigma_{A=a}(R_1)$, la relation obtenue en sélectionnant dans $R_1$ uniquement les valeurs $e$ telles que $e.A = a$.
-$$
-R_2 \leftarrow \sigma_{\text{attribut}=\text{condition}}(R_1)
-$$
-\end{defi}
-
-
-
-\begin{defi}
-\textbf{Renommage d'attribut}
-
-Cette opération est utilisée pour des raisons pratiques pour lever une ambigüité ou pour simplifier le nom d'un attribut de façon temporaire. 
-
-Soit $S = (A_1,... ,A_n)$ un schéma, $ i \in[1;n]$ et $B$ un attribut tel que
-$dom(B) = dom(A_i)$. On note :
-
-$$
-R_2 \leftarrow \rho_{\text{ancien attribut} \rightarrow \text{nouvel attribut}}
-$$
-\end{defi}
-
-
-
-\begin{defi}
-
-\textbf{Produit cartésien}
-
-Soient $R_1(S_1)$ et $R_2(S_2)$ deux relations de schémas disjoints. L'opération produit cartésien est noté $\times$. 
-
-$$
-R_3 \leftarrow R_2 \times R_1
-$$
-
-La relation $R_3$ contient toutes les combinaisons d'association possibles entre les valeurs de $R_1$ et de $R_2$.
-
-\end{defi}
+\subsection{Fonctions d'agrégations}
 
 
 \begin{thebibliography}{2}
