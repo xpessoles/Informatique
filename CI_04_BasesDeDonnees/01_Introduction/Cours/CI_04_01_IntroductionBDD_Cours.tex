@@ -14,6 +14,10 @@
 \newboolean{prof}
 \setboolean{prof}{true}
 
+\newif\ifprofvar
+%\profvartrue
+\profvarfalse
+
 \usepackage[%
     pdftitle={Problèmes stationnaires},
     pdfauthor={Xavier Pessoles},
@@ -74,7 +78,13 @@ Informatique - Cours}}
 \vspace{.5cm}
 
 \begin{savoir}
-
+\begin{itemize}
+\item BDD -- C1 : utiliser une application offrant une interface graphique pour créer une base de données et l’alimenter;
+\item BDD -- C2 : utiliser une application offrant une interface graphique pour lancer des requêtes sur une base de données;
+\item BDD -- C3 : distinguer les rôles respectifs des machines client, serveur, et éventuellement serveur de données;
+\item BDD -- C4 : traduire dans le langage de l’algèbre relationnelle des requêtes écrites en langage courant;
+\item BDD -- C5 : concevoir une base constituée de plusieurs tables, et utiliser les jointures symétriques pour effectuer des requêtes croisées.
+\end{itemize}
 \end{savoir}
 
 
@@ -398,6 +408,8 @@ SELECT * FROM nom_table;
 
 \begin{exemple}
 Lister les noms d'aéroports ainsi que les codes IATA correspondant :
+
+\ifprofvar
 $$
 \pi_{\text{name,iata\_code}}(\text{airports})
 $$
@@ -407,7 +419,11 @@ $$
 SELECT name,iata_code FROM airports
 \end{sql}
 \end{envsql}
+\else
 
+\vspace{3cm}
+
+\fi
 \end{exemple}
 
 \subsubsection{Sélection}
@@ -431,6 +447,8 @@ SELECT att_1,att_2 FROM nom_table WHERE att_3="xx" AND att_4=0 ...
 
 \begin{exemple}
 Sélectionner le nom de tous les aéroports situés au niveau de la mer :
+
+\ifprofvar
 $$
 \pi_{\text{name}}\left(\sigma_{\text{elevation\_ft = 0}}(\text{airports})\right)
 $$
@@ -438,11 +456,13 @@ $$
 \begin{sql}
 SELECT * FROM airports WHERE elevation_ft=0
 \end{sql}
-
-
 \end{envsql}
+\else
+\vspace{3cm}
+\fi
 
 Sélectionner le nom et le code iata de tous aéroports situés en-dessous du niveau de la mer en Europe :
+\ifprofvar
 $$
 \pi_{\text{name},\text{iata\_code}}\left(\sigma_{\text{elevation\_ft} < \text{0}\wedge \text{continent}=\text{EU})}(\text{airports} )\right)
 $$
@@ -451,6 +471,10 @@ $$
 SELECT name,iata_code FROM airports WHERE elevation_ft<0 AND continent="EU";
 \end{sql}
 \end{envsql}
+\else
+\vspace{3cm}
+\fi
+
 
 Cette requête laisse apparaître 2 fois la même ligne : 
 \begin{sql}
@@ -493,14 +517,18 @@ SELECT att_1,att_2 as att_3 FROM nom_table
 
 \begin{exemple}
 On désire sélectionner le nom des aéroports et les altitudes et  renommer temporairement l'attribut \texttt{elevation\_ft} en \texttt{altitude} :
+\ifprofvar
 $$
-\pi_{\text{elevation\_ft}}\left(\rho_{\text{elevation\_ft} \rightarrow \text{altitude}}(airports)\right)
+\pi_{\text{elevation\_ft}}\left(\rho_{\text{elevation\_ft} \rightarrow \text{altitude}}(\text{airports})\right)
 $$
 \begin{envsql}
 \begin{sql}
 SELECT name, elevation_ft AS altitude FROM airports;
 \end{sql}
 \end{envsql}
+\else
+\vspace{3cm}
+\fi
 
 \end{exemple}
 
@@ -519,7 +547,7 @@ Les opérateurs ensemblistes sont dédiés à des relations de même schéma rel
 
 \textbf{Produit cartésien}
 
-Soient $R_1(S_1)$ et $R_2(S_2)$ deux relations de schémas disjoints. L'opération produit cartésien est noté $\times$. 
+Soient $R_1(S_1)$ et $R_2(S_2)$ deux relations de schémas disjoints. L'opération produit cartésien est notée $\times$. 
 
 $$
 R_3 \leftarrow R_1 \times R_2
@@ -527,15 +555,21 @@ $$
 
 La relation $R_3$ contient toutes les combinaisons d'association possibles entre les valeurs de $R_1$ et de $R_2$.
 
+\begin{envsql}
+\begin{sql}
+SELECT * FROM table_1,table_2
+\end{sql}
+\end{envsql}
+
 \end{defi}
 
 
 
 \begin{defi}
 
-\textbf{Différence cartésienne}
+\textbf{Division cartésienne}
 
-Soient $R_1(S_1)$ et $R_2(S_2)$ deux relations de schémas disjoints. L'opération produit cartésien est noté $\div$. 
+Soient $R_1(S_1)$ et $R_2(S_2)$ deux relations de schémas disjoints. L'opération division cartésienne est notée $\div$. 
 
 $$
 R_3 \leftarrow R_1 \div R_2
@@ -544,6 +578,17 @@ $$
 Dans ce cas, toutes les combinaisons de chaque tuple de $R_3$ et de chaque tuple de $R_2$ est contenue dans $R_1$.
 
 \end{defi}
+
+
+\begin{exemple}
+On désire sélectionner les continents qui ont tous types d'aéroports :
+$$
+\pi_{\text{name}}\left(\text{airports} \div \pi_{\text{type}}\left( \text{airports})\right)\right)
+$$
+
+Il n'y a pas de transcription en langage SQL.
+\end{exemple}
+
 
 
 \subsubsection{Union}
@@ -575,17 +620,21 @@ SELECT  attribut_11, attribut_12 FROM table_1 UNION attribut_21, attribut_22 FRO
 \begin{exemple}
 Ainsi, pour connaître les noms des régions et des pays associés à leur code, on utilise la requête suivante :
 
+\ifprofvar
 \begin{envsql}
 \begin{sql}
 SELECT code,name FROM Countries UNION SELECT code,name FROM Regions;
 \end{sql}
 \end{envsql}
+\else
+\vspace{3cm}
+\fi
 
 La relation résultant contient donc l'ensemble des couples (code,name) des régions et des  pays. 
 \end{exemple}
 
 \begin{rem}
-Cette opération est à utiliser avec parcimonie car la relation résultante peut avoir une forme absurde.
+Cette opération est à utiliser avec attention car la relation résultante peut avoir une forme absurde.
 \end{rem}
 
 \subsubsection{Intersection}
@@ -597,6 +646,11 @@ L'intersection de deux relations $R_1(S)$ et $R_2(S)$ est l'ensemble des valeurs
 
 On peut donc noter la relation $R_3(S)$ définie par : $R_3(S)\leftarrow R_1(S)\cap R_2(S)$
 
+\begin{envsql}
+\begin{sql}
+SELECT  (expression 1) INTERSECT SELECT (expression 2);
+\end{sql}
+\end{envsql}
 \end{minipage}\hfill
 \begin{minipage}[c]{.2\linewidth}
 \begin{center}
@@ -604,6 +658,25 @@ On peut donc noter la relation $R_3(S)$ définie par : $R_3(S)\leftarrow R_1(S)\
 \end{center}
 \end{minipage}
 \end{defi}
+
+\begin{exemple}
+Sélectionner le nom de l'ensemble des aéroports européens dont l'altitude est en dessous du niveau de la mer :
+\ifprofvar
+$$
+\pi_{\text{name}}\left(\sigma_{\text{continent}=''EU''}(\text{airports}) \cap \sigma_{\text{elevation\_ft}\leq0}(\text{airports}) \right)
+$$
+\begin{envsql}
+\begin{sql}
+SELECT name FROM airports WHERE continent=''EU''
+    INTERSECT SELECT name FROM airports WHERE elevation_ft<=0;
+\end{sql}
+\end{envsql}
+\else
+\vspace{4cm}
+\fi
+
+\end{exemple}
+
 
 \subsubsection{Différence}
 \begin{defi}
@@ -613,6 +686,13 @@ On peut donc noter la relation $R_3(S)$ définie par : $R_3(S)\leftarrow R_1(S)\
 La différence de deux relations $R_1(S)$ et $R_2(S)$ est l'ensemble des valeurs comprises dans $R_1$ et qui ne sont pas comprises dans $R_2$. 
 
 On peut donc noter la relation $R_3(S)$ définie par : $R_3(S)\leftarrow R_1(S)-R_2(S)$
+
+\begin{envsql}
+\begin{sql}
+SELECT  (expression 1) EXCEPT SELECT (expression 2);
+\end{sql}
+\end{envsql}
+
 \end{minipage}\hfill
 \begin{minipage}[c]{.2\linewidth}
 \begin{center}
@@ -623,8 +703,117 @@ On peut donc noter la relation $R_3(S)$ définie par : $R_3(S)\leftarrow R_1(S)-
 
 \subsubsection{Jointures}
 
-\subsection{Fonctions d'agrégations}
+\begin{defi}
 
+\textbf{Jointure}
+
+La jointure est une combinaison de de tuples de deux relations en un seul tuple. On ne s'intéresse ici qu'à la jointure symétrique simple qui permet de recoller deux relations ayant un attribut en commun. 
+
+$$ 
+R_3 \leftarrow \sigma_{\text{R1.attribut\_1=R2.attribut\_2}} (R_1\times R_2) \quad \quad 
+R_3 \leftarrow \underset{\text{R1.attribut\_1=R2.attribut\_2}}{R_1 \bowtie R_2}
+$$
+
+\begin{envsql}
+\begin{sql}
+SELECT att_1,... FROM table_1 JOIN table_2 ON attribut.R1=attribut.R2
+\end{sql}
+\end{envsql}
+
+\end{defi}
+
+\begin{exemple}
+Dans la table airrpots, les pays sont référencés par un attribut nommé iso\_country. La table Countries fait le lien entre l'attribut code et l'attribut name. 
+
+L'utilisateur ne connaissant pas le code pays, il souhaite en une seule requête connaître la liste de tous les aéroports français. 
+\ifprofvar
+%$$
+%\pi_{\text{name}}\left( 
+%\sigma_{\text{airports.iso\_country}=\text{Countries.code}}\left(
+%\text{Countries} \times \text{airports}
+%\right)
+%\right)
+%$$
+$$
+\pi_{\text{name}}\left( 
+\pi_{\text{name,code}}\left(\text{Countries}  \right)
+\underset{\text{airports.iso\_country}=\text{Countries.code}}{\bowtie }
+\pi_{\text{name,iso\_country}}\left( \text{airports}  \right)
+\right)
+$$
+
+\begin{envsql}
+\begin{sql}
+SELECT name FROM 
+    (SELECT name, iso_country FROM airports) AS aeroports
+    INNER JOIN 
+    (SELECT Countries.code from Countries WHERE name="France") AS pays     
+        ON aeroports.iso_country=pays.code
+\end{sql}
+\end{envsql}
+\else
+\vspace{6cm}
+\fi
+
+
+\end{exemple}
+
+\subsection{Fonctions d'agrégations}
+\begin{defi}
+Ces fonctions qui ne sont pas couvertes par l’algèbre relationnelle 
+classique, permettent d’effectuer des calculs statistiques basiques sur les valeurs : \texttt{MIN}, \texttt{MAX}, \texttt{SUM} 
+(somme), \texttt{AVG} (moyenne), \texttt{COUNT} (comptage du nombre de lignes). 
+
+\end{defi}
+
+
+\begin{exemple}
+\textit{Combien existe-t-il d'aéroports en France ?}
+
+\begin{envsql}
+\begin{sql}
+SELECT COUNT(airports.name) FROM airports INNER JOIN (SELECT Countries.code from Countries WHERE name="France") as pays ON airports.iso_country=pays.code
+\end{sql}
+\end{envsql}
+
+\textit{Quel est l'aéroport le plus élevé ?}
+\begin{envsql}
+\begin{sql}
+SELECT MAX(elevation_ft) FROM 
+    (SELECT elevation_ft, name, iso_country FROM airports WHERE elevation_ft!='''') AS aeroports
+    INNER JOIN 
+    (SELECT Countries.code from Countries WHERE name="France") AS pays     
+        ON aeroports.iso_country=pays.code
+\end{sql}
+\end{envsql}
+
+\textit{Quel est l'aéroport le plus élevé en mètres ?}
+\begin{envsql}
+\begin{sql}
+SELECT MAX(elevation_ft)*0.30478513 FROM 
+    (SELECT elevation_ft, name, iso_country FROM airports WHERE elevation_ft!='''') AS aeroports 
+    INNER JOIN 
+    (SELECT Countries.code from Countries WHERE name="France") as pays 
+        ON aeroports.iso_country=pays.code
+\end{sql}
+\end{envsql}
+
+\end{exemple}
+
+
+\begin{rem}
+Formalisme de générale l’instruction SQL « SELECT » :
+\begin{envsql}
+\begin{sql}
+SELECT <liste d expressions> 
+    FROM <liste de tables> 
+    WHERE <conditions> 
+    GROUP BY <liste d attributs> 
+    HAVING <conditions> 
+    ORDER BY <liste d attributs> 
+\end{sql}
+\end{envsql}
+\end{rem}
 
 \begin{thebibliography}{2}
 \bibitem{1}{Serge Abiteboul, Benjamin Nguyen, Yannick Le Bras, \textit{Introduction aux Bases de Données Relationnelles Programme de Classes Préparatoires Scientifiques, Première année}.}
@@ -634,6 +823,7 @@ On peut donc noter la relation $R_3(S)$ définie par : $R_3(S)\leftarrow R_1(S)-
 %\bibitem{3}{Olivier Guindet, Résolution d'un problème dynamique par la méthode d'Euler, UPSTI.}
 %\bibitem{4}{Alain Caignot, Marc Derumaux, Résolution des équations différentielles, UPSTI.}
 %\bibitem{1}{Adrien Petri, \textit{Analyse numérique : Intégration numérique}, Notes de cours de TSI 1, Lycée Rouvière, Toulon.}
+\bibitem{5}{\url{http://sqlpro.developpez.com/cours/divrelationnelle/}}
 \end{thebibliography}
 \end{document}
 
