@@ -15,8 +15,8 @@
 \setboolean{prof}{true}
 
 \newif\ifprofvar
-%\profvartrue
-\profvarfalse
+\profvartrue
+%\profvarfalse
 
 \usepackage[%
     pdftitle={Problèmes stationnaires},
@@ -772,7 +772,11 @@ classique, permettent d’effectuer des calculs statistiques basiques sur les va
 
 \begin{envsql}
 \begin{sql}
-SELECT COUNT(airports.name) FROM airports INNER JOIN (SELECT Countries.code from Countries WHERE name="France") as pays ON airports.iso_country=pays.code
+SELECT COUNT(airports.name) 
+        FROM airports 
+    INNER JOIN 
+        (SELECT Countries.code from Countries WHERE name="France") as pays 
+    ON airports.iso_country=pays.code
 \end{sql}
 \end{envsql}
 
