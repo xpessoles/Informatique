@@ -410,101 +410,125 @@ $$
 \textit{Écrire un programme Python permettant de calculer $n!$.}
 
 
+\subsection*{Exercice 6 : Jeu du plus ou moins}
+\setcounter{subparagraph}{0}
 
-\newpage
-\textbf{TODO : mettre en forme}
+\subparagraph*{}
+\textit{Écrire un programme Python permettant à l’utilisateur de trouver un nombre choisi au hasard par le programme en ayant comme unique indication « le nombre cherché est plus grand » ou « le nombre cherché est plus petit ». L’intervalle dans lequel se trouve le nombre cherché est précisé à l’utilisateur (entre 1 et 100 par exemple).}
 
-Jeu du plus ou moins
-	Écrire un programme Python permettant à l’utilisateur de trouver un nombre choisi au hasard par le programme en ayant comme unique indication « le nombre cherché est plus grand » ou « le nombre cherché est plus petit ». L’intervalle dans lequel se trouve le nombre cherché est précisé à l’utilisateur (entre 1 et 100 par exemple).
-
+\begin{py}
 Au cours de ce programme, l’ordinateur doit choisir un nombre au hasard. On va pour cela utiliser une fonction qui n’est pas présente par défaut dans Python, la fonction randrange appartenant à la bibliothèque random.
 
 Import de la fonction :
+\begin{python}
 from random import randrange
-
+\end{python}
 Utilisation de la fonction :
 \begin{python}
 randrange(n) # renvoie un nombre aléatoire compris entre 0 et n-1
 randrange(m,n) # renvoie un nombre aléatoire compris entre m et n-1
 \end{python}
+\end{py}
 
-Année bissextile
+
+
+\subsection*{Exercice 7 : Année bissextile}
+\setcounter{subparagraph}{0}
+
 Le système de date utilisé par Excel est basé sur le calendrier grégorien, établi en 1582 par le pape Grégoire XIII. Ce calendrier a été conçu pour corriger les erreurs introduites par le calendrier julien moins précis.
+
 Dans le calendrier grégorien, une année normale comprend 365 jours. Étant donné que la durée réelle d'une année est en fait de 365.242198 jours, une « année bissextile » de 366 jours est utilisée tous les quatre ans pour éliminer l'erreur provoquée par trois années consécutives de 365 jours. N'importe quelle année divisible par 4 est une année bissextile : par exemple, 1988, 1992 et 1996 sont des années bissextiles.
+
 Toutefois, il reste encore une petite erreur qui doit être prise en compte. Pour éliminer cette erreur, le calendrier grégorien prévoit qu'une année qui est divisible par 100 (par exemple, 1900) est une année bissextile uniquement si elle est également divisible par 400.
+
 Pour cette raison, les années suivantes ne sont pas des années bissextiles : 1700, 1800, 1900, 2100, 2200, 2300, 2500, 2600. C'est parce qu'elles sont également divisibles par 100, mais pas par 400. 
+
 Les années suivantes sont des années bissextiles : 1600, 2000, 2400. C'est parce qu'elles sont divisibles par 100 et 400.
 
-
-Remarque : 
-En Python, 5%4 affiche le reste de la division euclidienne de 5 par 4.
-
-
-	Écrire un programme capable de déterminer si l’année entrée par l’utilisateur est une année bissextile ou pas.
-
-Algorithmes de recherche élémentaires
-	Écrire un programme Python permettant à l’utilisateur de saisir deux entiers n et m tels que n<m et de rechercher parmi tous les entiers contenus dans l’intervalle [n,m]ceux qui : 
-	sont impairs ;
-	sont multiples de 5 ;
-	contiennent le chiffre 2. 
-
-La suite de Syracuse ou conjecture de Collatz
-
-On appelle fonction de Collatz la fonction $f:\mathbb{N}^* \to  \mathbb{N}^*$ qui à n associe n/2 si n est pair et 3n+1 sinon.
-On appelle la suite de Collatz une suite récurrente telle que $u_0\in \mathbb{N}^*$ et pour tout k, $u_(k+1)=f(u_k)$.
-
-	Pour $u_0=1$, $u_0=2$, $u_0=3$, calculer les premiers éléments de la suite. Que remarquez-vous ?
+\begin{rem}
+En Python, 5\%4 affiche le reste de la division euclidienne de 5 par 4.
+\end{rem}
 
 
-Remarque :
-	Vous devez constater que lorsqu’un terme de la suite vaut 4, la suite devient périodique : les termes de la suite valant successivement 4, 2, 1, 4, 2, 1, etc.
+\subparagraph*{}
+\textit{Écrire un programme capable de déterminer si l’année entrée par l’utilisateur est une année bissextile ou pas.}
+
+
+
+\subsection*{Exercice 8 : Algorithmes de recherche élémentaires}
+\setcounter{subparagraph}{0}
+
+
+
+\subparagraph*{}
+\textit{Écrire un programme Python permettant à l’utilisateur de saisir deux entiers $n$ et $m$ tels que $n<m$ et de rechercher parmi tous les entiers contenus dans l’intervalle $[n,m]$ ceux qui : 
+\begin{itemize}
+\item sont impairs;
+\item sont multiples de 5;
+\item contiennent le chiffre 2.
+\end{itemize}}
+	
+
+\subsection*{Exercice 9 : La suite de Syracuse ou conjecture de Collatz}
+\setcounter{subparagraph}{0}
+
+On appelle fonction de Collatz la fonction $f:\mathbb{N}^* \to  \mathbb{N}^*$ qui à $n$ associe $n/2$ si $n$ est pair et $3n+1$ sinon.
+On appelle la suite de Collatz une suite récurrente telle que $u_0\in \mathbb{N}^*$ et pour tout $k$, $u_(k+1)=f(u_k)$.
+
+\subparagraph{}
+\textit{Pour $u_0=1$, $u_0=2$, $u_0=3$, calculer les premiers éléments de la suite. Que remarquez-vous ?}
+
+\begin{rem}
+	Vous devez constater que lorsqu’un terme de la suite vaut 4, la suite devient périodique : les termes de la suite valant successivement 4, 2, 1, 4, 2, 1, \textit{etc}.
+	
 	La conjecture de Collatz est une hypothèse selon laquelle, toute suite de Collatz a un terme valant 4.
+	
 	Cette conjecture n’a jamais été démontrée ou infirmée. Elle est mise à prix à 1 millions de dollars.
+\end{rem}
 
-Écrire un programme permettant de calculer et d’afficher les termes de la suite. Les constats effectués précédemment sont-ils vérifiés ?
+\subparagraph{}
+\textit{Écrire un programme permettant de calculer et d’afficher les termes de la suite. Les constats effectués précédemment sont-ils vérifiés ?}
 
-On appelle vol de l’entier $n$ la liste des termes de la suite de Collatz initialisée $avec u_0=n$ jusqu’à l’apparition du premier 4. 
+On appelle vol de l’entier $n$ la liste des termes de la suite de Collatz initialisée avec $u_0=n$ jusqu’à l’apparition du premier 4. 
 
-Écrire un programme permettant de calculer le vol d’un entier.
-
-
-
-
-
+\subparagraph{}
+\textit{Écrire un programme permettant de calculer le vol d’un entier.}
 
 
 
-
-
-
-
-
-
-Triangle de Pascal
-
+\subsection*{Exercice 10 : Triangle de Pascal}
+\setcounter{subparagraph}{0}
 
 Le triangle de Pascal peut prendre la forme suivante :
+\begin{center}
+\begin{tabular}{c|c|c|c|c|c|c|c|c|c|}
+\multicolumn{1}{c}{}& \multicolumn{9}{c}{Colonne $p$} \\
+ \cline{2-10} 
+\multirow{9}*{Ligne $n$} & 1 & & & & & & & & \\\cline{2-10} 
+& 1 & 1& & & & & & & \\ \cline{2-10} 
+& 1 & 2& 1& & & & & & \\ \cline{2-10} 
+& 1 & 3& 3& 1& & & & & \\ \cline{2-10} 
+& 1 & 4& 6& 4& 1& & & & \\ \cline{2-10} 
+& 1 & 5& 10& 10& 5& 1& & & \\ \cline{2-10} 
+& 1 & 6& 15& 20& 15& 6& 1& & \\ \cline{2-10} 
+& 1 & 7& 21& 35& 35& 21& 7& 1& \\ \cline{2-10} 
+& 1 & 8& 28& 56& 70& 56& 28& 8& 1\\ \cline{2-10} 
+\end{tabular}
+\end{center}
 
-	Colonne p
-Ligne n	1								
-	1	1							
-	1	2	1						
-	1	3	3	1					
-	1	4	6	4	1				
-	1	5	10	10	5	1			
-	1	6	15	20	15	6	1		
-	1	7	21	35	35	21	7	1	
-	1	8	28	56	70	56	28	8	1
 
-On rappelle que le coefficient $C_n^p$ de la ligne n et de la colonne p s’obtient en ajoutant le coefficient de la ligne n-1 et de la colonne p au coefficient de la ligne n-1 et de la colonne p-1 :
-$C_n^p=C_(n-1)^p+C_(n-1)^(p-1)$
+On rappelle que le coefficient $\begin{pmatrix} n \\ p \end{pmatrix}$ de la ligne $n$ et de la colonne $p$ s’obtient en ajoutant le coefficient de la ligne $n-1$ et de la colonne $p$ au coefficient de la ligne $n-1$ et de la colonne $p-1$ :
+$\begin{pmatrix} n \\ p \end{pmatrix}
+= \begin{pmatrix} n-1 \\ p \end{pmatrix} 
+ + \begin{pmatrix} n-1 \\ p-1 \end{pmatrix} $
 
 Par exemple, le coefficient 10 (sixième ligne, troisième colonne) est la somme de 4 (cinquième ligne, deuxième colonne) et de 6 (cinquième ligne, troisième colonne).
 
-Le coefficient $C_n^p$ peut aussi se calculer à partir de la formule du binôme de Newton : 
-$C_n^p=n!/(n-p)!p!$
+Le coefficient $\begin{pmatrix} n \\ p \end{pmatrix}$ peut aussi se calculer à partir de la formule du binôme de Newton : 
+$\begin{pmatrix} n \\ p \end{pmatrix}=n!/(n-p)!p!$
 
-	Réaliser un programme permettant d’afficher les différents coefficients du triangle de Pascal.
+\subparagraph*{}
+\textit{Réaliser un programme permettant d’afficher les différents coefficients du triangle de Pascal.}
 
 \end{document}
 
