@@ -1,0 +1,37 @@
+
+> 
+> Variant et invariant :
+> * démo d'euclide ; pgcd(a,b) divise a et b donc aussi r=a-bq. D'où
+> pgcd(a,b) divise  b et r et est donc <= pgcd(b,r).
+> De même pgcd(b,r) divise b et r et donc aussi a=bq+r. D'où pgcd(b,r)
+> divise a et b et donc pgcd(b,r) et est donc <= pgcd(a,b).
+> D'où l'égalité.
+A revoir ensemble :)
+
+> BDD :
+> * page 4, schéma relationnel : le n est-il quelconque ? où est-il
+> maximal ie correspond au nombre d'attributs ?
+> * page 4, relation-table : la phrase n'a pas de sens ("est" à remplacer
+> par "tout").
+> * page 4, R étant un ensemble, deux valeurs distinctes e diffèrent
+> forcément d'un attribut : pas si on ne considère pas tous les
+> attributs... comme la sélection de la page 8 où la même ligne apparaît
+> deux fois... d'où la nécessité de préciser si on prend tous les
+> attributs ou non...
+> * beaucoup d'erreurs de français que tu corrigeras facilement en
+> relisant (ex p9  : tout type d'aéroport (ou tous LES types d'aéroports),
+> p10 la relation résultantE, p11 : "de deUX tuples"...)
+> * ça manque de schémas pour fixer le vocabulaire
+> *  dans ta définition d'une sélection tu fais à la fois une sélection et
+> une projection, je mettrai select * from ....
+> * dans la division cartésienne je ne pense pas que l'on puisse faire la
+> division de deux relations quelconques. Pour que R3 x R2 = R1 il faut
+> que R1 soit un "multiple" de R2 c'est à dire contienne déjà les tuples
+> de R2 complétés par d'autres valeurs d'attributs (qui deviendront les
+> tuples de R3)... non ?
+> * Dans l'union, l'intersection etc. : peut être insister sur le fait
+> qu'il n'y a qu'un seul schéma S dans lequel on fait les opérations
+>  * exemple p11-12 : il me semble que la requête ne répond pas à la
+> question "quel est l'aéroport le plus élevé" mais à "quelle est la plus
+> haute altitude des aéroports considérés".
+A REVOIR !!!

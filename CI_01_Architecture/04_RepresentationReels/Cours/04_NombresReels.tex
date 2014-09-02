@@ -213,10 +213,10 @@ Double précision :  	$2^{- 52} = 2,220 … * 10^{- 16}$
 \item Décaler la virgule vers la gauche pour le mettre sous la forme normalisée (IEEE 754).
 \item Codage du nombre réel avec les conventions suivantes : 
 \begin{itemize}
-\item Signe = 1 : Nombre négatif 	(Signe = 0 : Nombre positif)
-\item Le chiffre 1 avant la virgule étant invariant pour la forme normalisée, il n’est pas codé.
-\item On utilise un exposant décalé au lieu de l’exposant simple (complément sur octet). Ainsi, on ajoute à l’exposant simple la valeur 127 en simple précision et 1023 en double précision (c’est à dire $2^{n-1}-1$ où $n$ est le nombre de bits de l’exposant).
-\item La mantisse est complétée à droite avec des zéros.
+\item signe = 1 : Nombre négatif 	(Signe = 0 : Nombre positif);
+\item le chiffre 1 avant la virgule étant invariant pour la forme normalisée, il n’est pas codé;
+\item on utilise un exposant décalé au lieu de l’exposant simple (complément sur octet). Ainsi, on ajoute à l’exposant simple la valeur 127 en simple précision et 1023 en double précision (c’est à dire $2^{n-1}-1$ où $n$ est le nombre de bits de l’exposant);
+\item la mantisse est complétée à droite avec des zéros.
 \end{itemize}
 \end{enumerate}
 \end{methode}
