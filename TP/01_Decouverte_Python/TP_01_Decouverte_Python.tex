@@ -87,48 +87,63 @@ TP 1 : Découverte de Python
 
 
 \begin{rem}
-Suivant les goûts du programmeur, il existe plusieurs interpréteurs ou plusieurs éditeurs de texte. Dans le cadre de ce TP, nous proposons d'utiliser celui qui est directement installé avec Python : IDLE.
+Python est un langage de programmation dont nous découvrirons les possibilités en cours. 
+Pour exécuter un programme écrit en Python, il existe plusieurs \textit{<< interpréteurs >>}.
+
+Dans le cadre de ce TP, nous proposons d'utiliser Spyder qui intègre des bibliothèques scientifiques.
 \end{rem}
 
-Pour ouvrir Python :
+Commencer par copier-coller le Sujet de TP dans votre répertoire personnel.
+
+Pour ouvrir Spyder :
 \begin{enumerate}
-\item dans le menu démarrer;
-\item sélectionner Programmes;
-\item ...
+\item sur le bureau, aller dans le dossier Pédagogie;
+\item lancer Spyder.
 \end{enumerate}
 
-\vspace{.5cm}
-
-\begin{minipage}[c]{.45\linewidth}
 \begin{center}
-\includegraphics[width=.9\textwidth]{images/shell}
+\includegraphics[width=.9\textwidth]{images/Spyder}
 
-\textit{Shell Python -- Interpréteur de commande}
+\textit{Fenêtre Spyder}
 \end{center}
-\end{minipage} \hfill
-\begin{minipage}[c]{.45\linewidth}
-\begin{center}
-\includegraphics[width=.9\textwidth]{images/editeur}
 
-\textit{Éditeur de texte}
-\end{center}
-\end{minipage}
-
-
-\setlength{\parskip}{0ex plus 0.2ex minus 0ex}
- \renewcommand{\contentsname}{}
- \renewcommand{\baselinestretch}{1}
-
-\tableofcontents
-
- \renewcommand{\baselinestretch}{1.2}
-\setlength{\parskip}{2ex plus 0.5ex minus 0.2ex}
 
 
 % \vspace{1cm}
-\textit{Ce document évolue. Merci de signaler toutes erreurs ou coquilles.}
+\textit{Ce document évolue. Merci de signaler toutes les erreurs ou coquilles constatées.}
 
 
+La console (appelée aussi invite de commande, shell, interpréteur de commande ...) permet de tester des lignes de codes. Le résultat d'une commande s'affiche directement dans la console. 
+
+\begin{exemple}
+Saisir la ligne suivante dans la console :
+\begin{py}
+\begin{python}
+>>> print(''When Alexander Bell invented telephone he had 3 missed calls from Chuck Norris.'')
+\end{python}
+\end{py}
+
+Quel est le résultat ?
+\end{exemple}
+
+L'éditeur de texte permet d'écrire plusieurs instructions successives. Pour exécuter les instructions saisies, il faut sauver le fichier puis l'exécuter en utilisant le bouton prévu à cet effet (Triangle vert). Le résultat est affiché dans la console. 
+
+
+
+\begin{exemple}
+Saisir la ligne suivante dans l'éditeur de texte. :
+\begin{py}
+\begin{python}
+print(''When Alexander Bell invented telephone he had 3 missed calls from Chuck Norris.'')
+\end{python}
+\end{py}
+
+Quel est le résultat ?
+\end{exemple}
+
+Suivant les éditeurs de texte, de nombreuses fonctionnalités peuvent être intégrées (coloration syntaxique, proposition de méthodes, complétion ...).
+
+La programmation permet de stocker des variables. Ainsi, l'explorateur de variable peut être nécessaire pour visualiser leur contenu.
 
 \subsection*{Exercice 1 -- Découverte de l'interpréteur}
 \begin{obj}
@@ -282,19 +297,13 @@ Attention à bien manipuler des nombres.
 \setcounter{subparagraph}{0}
 Un des avantages d’utiliser un éditeur de texte est qu’il permet de corriger les erreurs de frappe ou de syntaxe. Il permet aussi de sauvegarder le code qui a été saisi. 
 
-\textbf{TODO Mettre des instructions pour l'éditeur de spyder.}
 
 \begin{py}
 Saisir l'instruction suivante dans le fichier.
 \begin{python}
-print(''Chuck Norris counted to infinity - twice'')
+print(''Chuck Norris counted to infinity - twice '')
 \end{python}
 \end{py}
-
-\textbf{TODO Mettre des instructions pour l'éditeur de spyder.}
-Pour l’exécuter dans le shell, après avoir sauvegardé votre programme, il existe deux méthodes : 
- 	Menu Run puis cliquer sur Run Module ;
- 	Touche F5 du clavier.
 
 \subparagraph{}
 \textit{Quel est le résultat lorsqu’on exécute le code ?}
@@ -307,7 +316,7 @@ Pour l’exécuter dans le shell, après avoir sauvegardé votre programme, il e
 \setcounter{subparagraph}{0}
 
 \begin{defi}
-Le mot algorithme vient du nom latinisé du mathématicien perse Al-Khawarizmi, surnommé « le père de l’algèbre ». Un algorithme est une suite finie et non ambigüe d’opérations ou d’instructions permettant de résoudre un problème.
+Le mot algorithme vient du nom latinisé du mathématicien perse Al-Khawarizmi, surnommé « le père de l’algèbre~». Un algorithme est une suite finie et non ambigüe d’opérations ou d’instructions permettant de résoudre un problème.
 \end{defi}
 
 \begin{obj}
@@ -315,18 +324,6 @@ Le mot algorithme vient du nom latinisé du mathématicien perse Al-Khawarizmi, 
 \item Découvrir la boucle \textsf{for}.
 \end{itemize}
 \end{obj}
-
-\subparagraph{}
-\textit{Expliquer le rôle des instructions suivantes à l’aide du shell:}
-
-\begin{py}
-\begin{python}
->>>range(5)
->>>range(0,6)
->>>range(0,10,2)
->>>range(10,2,-2)
-\end{python}
-\end{py}
 
 On donne la syntaxe d'une boucle \textsf{for} :
 
@@ -340,10 +337,25 @@ for i in range (0,10):
 \begin{itemize}
 \item La première ligne se termine par deux points.
 \item La seconde ligne est précédée d’une indentation. Une indentation est composée de 4 espaces. 
-\item Pour terminer une boucle \textsf{for}, il faut supprimer l’indentation.
+\item Pour terminer une boucle \textsf{for}, il faut supprimer l’indentation (c'est-à-dire revenir un début de ligne). 
 \end{itemize}
 \end{rem}
 
+\subparagraph{}
+\textit{Saisir le code ci-dessus. Quel est son but ?}
+
+
+\subparagraph{}
+\textit{En substituant les lignes suivantes dans le code saisi précédemment, expliquer le rôle de la fonction \textsf{range}. }
+
+\begin{py}
+\begin{python}
+>>>range(5)
+>>>range(0,6)
+>>>range(0,10,2)
+>>>range(10,2,-2)
+\end{python}
+\end{py}
 
 
 \subparagraph{}
