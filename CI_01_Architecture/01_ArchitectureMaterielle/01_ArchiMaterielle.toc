@@ -3,26 +3,26 @@
 \contentsline {subsection}{\numberline {1.1}Introduction}{1}{subsection.1.1}
 \contentsline {subsection}{\numberline {1.2}Constitution d\IeC {\textquoteright }un ordinateur du laboratoire}{2}{subsection.1.2}
 \contentsline {subsection}{\numberline {1.3}Mod\IeC {\`e}le de Von Neumann}{2}{subsection.1.3}
-\contentsline {section}{\numberline {2}La carte m\IeC {\`e}re}{3}{section.2}
+\contentsline {section}{\numberline {2}La carte m\IeC {\`e}re}{2}{section.2}
 \contentsline {subsection}{\numberline {2.1}Cartes m\IeC {\`e}res}{3}{subsection.2.1}
 \contentsline {subsection}{\numberline {2.2}CPU (\textit {Central Processing Unit})}{4}{subsection.2.2}
 \contentsline {subsection}{\numberline {2.3}Les bus}{6}{subsection.2.3}
-\contentsline {section}{\numberline {3}Les m\IeC {\'e}moires}{7}{section.3}
-\contentsline {subsection}{\numberline {3.1}M\IeC {\'e}moire de masse}{7}{subsection.3.1}
-\contentsline {subsubsection}{\numberline {3.1.1}Le disque-dur magn\IeC {\'e}tique}{7}{subsubsection.3.1.1}
+\contentsline {section}{\numberline {3}Les m\IeC {\'e}moires}{6}{section.3}
+\contentsline {subsection}{\numberline {3.1}M\IeC {\'e}moire de masse}{6}{subsection.3.1}
+\contentsline {subsubsection}{\numberline {3.1.1}Le disque-dur magn\IeC {\'e}tique}{6}{subsubsection.3.1.1}
 \contentsline {subsubsection}{\numberline {3.1.2}Disques dur SSD -- \textit {Solid State Drive}}{7}{subsubsection.3.1.2}
-\contentsline {subsubsection}{\numberline {3.1.3}Disques durs hybrides}{8}{subsubsection.3.1.3}
+\contentsline {subsubsection}{\numberline {3.1.3}Disques durs hybrides}{7}{subsubsection.3.1.3}
 \contentsline {subsection}{\numberline {3.2}La m\IeC {\'e}moire vive}{8}{subsection.3.2}
 \contentsline {subsection}{\numberline {3.3}La m\IeC {\'e}moire ROM (\IeC {\guillemotleft } m\IeC {\'e}moire morte \IeC {\guillemotright })}{8}{subsection.3.3}
-\contentsline {section}{\numberline {4}Communication}{9}{section.4}
-\contentsline {subsection}{\numberline {4.1}Connectique}{9}{subsection.4.1}
-\contentsline {subsubsection}{\numberline {4.1.1}Le port USB \cite {usb}}{9}{subsubsection.4.1.1}
+\contentsline {section}{\numberline {4}Communication}{8}{section.4}
+\contentsline {subsection}{\numberline {4.1}Connectique}{8}{subsection.4.1}
+\contentsline {subsubsection}{\numberline {4.1.1}Le port USB \cite {usb}}{8}{subsubsection.4.1.1}
 \contentsline {subsubsection}{\numberline {4.1.2}Le port s\IeC {\'e}rie}{9}{subsubsection.4.1.2}
-\contentsline {subsubsection}{\numberline {4.1.3}Le port parall\IeC {\`e}le}{10}{subsubsection.4.1.3}
-\contentsline {subsubsection}{\numberline {4.1.4}Port PS/2 -- \textit {Personal System/2}}{10}{subsubsection.4.1.4}
+\contentsline {subsubsection}{\numberline {4.1.3}Le port parall\IeC {\`e}le}{9}{subsubsection.4.1.3}
+\contentsline {subsubsection}{\numberline {4.1.4}Port PS/2 -- \textit {Personal System/2}}{9}{subsubsection.4.1.4}
 \contentsline {subsection}{\numberline {4.2}Communication r\IeC {\'e}seau}{10}{subsection.4.2}
 \contentsline {subsubsection}{\numberline {4.2.1}Port RJ45 -- \textit {Registered Jack}}{10}{subsubsection.4.2.1}
 \contentsline {subsubsection}{\numberline {4.2.2}Wi-Fi}{10}{subsubsection.4.2.2}
-\contentsline {subsubsection}{\numberline {4.2.3}3G -- 4G}{11}{subsubsection.4.2.3}
-\contentsline {subsection}{\numberline {4.3}Son et vid\IeC {\'e}o}{11}{subsection.4.3}
+\contentsline {subsubsection}{\numberline {4.2.3}3G -- 4G}{10}{subsubsection.4.2.3}
+\contentsline {subsection}{\numberline {4.3}Son et vid\IeC {\'e}o}{10}{subsection.4.3}
 \contentsfinish 

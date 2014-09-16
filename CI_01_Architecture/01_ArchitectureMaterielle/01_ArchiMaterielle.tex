@@ -1,10 +1,10 @@
-\documentclass[11pt,oneside]{article}
+\documentclass[10pt,oneside]{article}
 \input{style/coursHeadings}
 \input{style/programHeadings}
 
 \def\xxtitre{CI 1 : Architecture matérielle et logicielle}
 \def\xxsoustitre{Chapitre 1 -- Architecture matérielle}
-\def\xxauteur{Xavier Pessoles - Damien Iceta}
+\def\xxauteur{Xavier Pessoles -- Damien Iceta}
 \def\xxpiedd{Cours -- CI 1 : Architecture matérielle et logicielle}
 %\def\xavpiedg{}
 
@@ -117,7 +117,7 @@ en 1943.
 \begin{minipage}[c]{.49\linewidth}
 
 Son architecture a été décrite dans un rapport de John Von Neumann en 1945 et
-est depuis appelée « architecture de Von Neumann ». Depuis près de 70 ans, à quelques variations
+est depuis appelée «~architecture de Von Neumann~». Depuis près de 70 ans, à quelques variations
 près, cette  architecture sert de base à la plupart des systèmes à microprocesseur actuel. Elle est composée des éléments suivants :
 \begin{itemize}
 \item d'une mémoire vive ;
@@ -170,7 +170,7 @@ La plupart des cartes mères utilisées dans les ordinateurs de bureau sont au f
 \begin{figure}[H]
 \begin{minipage}[c]{.49\linewidth}
 
-Le fonctionnement de la carte mère est assuré par des chipsets (ensemble de composants électroniques) qui permettent l'échange des données entre les différents composants branchés. Le northbridge gère les composants branchés "rapides" (la mémoire cache par exemple). Le southbridge est le chipset permettant la gestion des composants "lents" (comme le disque dur). 
+Le fonctionnement de la carte mère est assuré par des chipsets (ensemble de composants électroniques) qui permettent l'échange des données entre les différents composants branchés. Le northbridge gère les composants branchés <<rapides>> (la mémoire cache par exemple). Le southbridge est le chipset permettant la gestion des composants <<lents>> (comme le disque dur). 
 
 Le flux des informations est cadencé par une horloge permettant leur synchronisation. Cette horloge est alimentée de façon permanente par une pile. 
 
@@ -239,7 +239,7 @@ Le CPU est constitué essentiellement de trois parties :
 \begin{itemize}
 \item l'unité de commande qui cherche les instructions en mémoire, les décode et coordonne le
 reste du processeur pour les exécuter. Une unité de commande élémentaire se compose
-essentiellement d'un registre d'instruction et d'une unité "décodeur / séquenceur";
+essentiellement d'un registre d'instruction et d'une unité <<décodeur / séquenceur>>;
 \item l'Unité Arithmétique et Logique (UAL) exécute les instructions arithmétiques et logiques
 demandées par l'unité de commande. Les instructions peuvent porter sur un ou plusieurs
 opérandes. La vitesse d'exécution est optimale quand les opérandes se situent dans les
@@ -339,7 +339,7 @@ Un disque dur est composé de disques rigides et paramagnétiques (en aluminium,
 \end{center}
 \end{minipage} 
 
-Les têtes de lecture -- écriture sont inductives et permettent de générer un champ magnétique dans deux sens opposés permettant de polariser la couche magnétique du disque. Ainsi, en mode lecture les changement de polarité sont transcrits par un convertisseur analogique numérique (CAN) en bits (0 ou 1).
+Les têtes de lecture -- écriture sont inductives et permettent de générer un champ magnétique dans deux sens opposés permettant de polariser la couche magnétique du disque. Ainsi, en mode lecture les changements de polarité sont transcrits par un convertisseur analogique numérique (CAN) en bits (0 ou 1).
 
 Les données sont organisées en pistes concentriques, les données les plus rapidement accessibles étant celles situées sur le disque extérieur. Chaque piste est divisée en secteurs (d'un minimum de 512 octets). Enfin, on appelle cylindre l'ensemble de données situé sur une même piste mais sur un plateau différent. 
 
@@ -543,8 +543,9 @@ Différentes normes physiques définissent le débit de la transmission en fonct
 \hline
 \textbf{Standard} & \textbf{Bande de fréquence} & \textbf{Débit} & \textbf{Portée} \\ \hline
 WiFi a (802.11a) & 5 GHz & 54 Mbit/s & 10 m \\ \hline
-WiFi B (802.11b) & 2,4 GHz & 11 Mbit/s & 100 m \\ \hline
-WiFi G (802.11g) & 2,4 GHz & 54 Mbit/s & 100 m \\ \hline
+WiFi B (802.11b) & 2,4 GHz -- 2,5 GHz& 11 Mbit/s & 100 m \\ \hline
+WiFi G (802.11g) & 2,4 GHz -- 2,5 GHz & 54 Mbit/s & 75 m \\ \hline
+WiFi N (802.11n) & 2,4 GHz ou 5 & 450 Mbit/s & 125 m \\ \hline
 \end{tabular}
 \end{center}
 
@@ -552,6 +553,19 @@ WiFi G (802.11g) & 2,4 GHz & 54 Mbit/s & 100 m \\ \hline
 \subsubsection{3G -- 4G}
 La 3G et la 4G sont les troisième et les quatrième générations de transmissions de données pour la téléphonie mobile. La 4G permet d'avoir accès à des débits théoriques très supérieurs à la 3G et possède un c\oe{}ur de réseau basé sur IP. 
 
+\textit{Tableau récapitulatif \url{http://www.commentcamarche.net/}}
+\begin{center}
+\begin{tabular}{|c|c|p{6cm}|c|c|}
+\hline
+Standard	& Génération	&Bande de fréquence	& Débit & \\
+\hline 
+GSM	& 2G & Permet le transfert de voix ou de données numériques de faible volume.&	9,6 kpbs	&9,6  kpbs \\ \hline
+GPRS &2.5G & Permet le transfert de voix ou de données numériques de volume modéré.&	21,4-171,2 kpbs	&48 kpbs \\ \hline
+EDGE & 2.75G & 	Permet le transfert simultanés de voix et de données numériques.&	43,2-345,6 kbps&	171 kbps \\ \hline
+UMTS & 3G &Permet le transfert simultanés de voix et de données numériques à haut débit.&	0.144-2 Mbps	&384 Kbps \\ \hline
+LTE & 4G	& Permet le transfert simultanés de voix et de données numériques à haut débit.&	10-300 Mbps	&5-75 Mbps \\ \hline
+\end{tabular}
+\end{center}
 
 \subsection{Son et vidéo}
 
