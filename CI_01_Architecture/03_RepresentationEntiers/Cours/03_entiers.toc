@@ -3,17 +3,22 @@
 \contentsline {subsection}{\numberline {1.1}Logique binaire}{1}{subsection.1.1}
 \contentsline {subsection}{\numberline {1.2}Notion de mot}{2}{subsection.1.2}
 \contentsline {subsection}{\numberline {1.3}Notion de pond\IeC {\'e}ration}{3}{subsection.1.3}
-\contentsline {section}{\numberline {2}Repr\IeC {\'e}sentation des nombres entiers naturels -- $\mdmathbb {N}$}{3}{section.2}
-\contentsline {subsection}{\numberline {2.1}De la base k \IeC {\`a} la base 10}{3}{subsection.2.1}
-\contentsline {subsection}{\numberline {2.2}De la base 10 vers la base k}{4}{subsection.2.2}
-\contentsline {subsubsection}{\numberline {2.2.1}M\IeC {\'e}thode des divisions successives}{4}{subsubsection.2.2.1}
-\contentsline {subsubsection}{\numberline {2.2.2}M\IeC {\'e}thode de la plus grande puissance}{4}{subsubsection.2.2.2}
-\contentsline {subsection}{\numberline {2.3}Capacit\IeC {\'e}s de la repr\IeC {\'e}sentation}{5}{subsection.2.3}
-\contentsline {section}{\numberline {3}Repr\IeC {\'e}sentation des entiers relatifs -- $\mdmathbb {Z}$}{6}{section.3}
-\contentsline {subsection}{\numberline {3.1}Premi\IeC {\`e}re approche}{6}{subsection.3.1}
-\contentsline {subsection}{\numberline {3.2}Repr\IeC {\'e}sentation en compl\IeC {\'e}ment}{7}{subsection.3.2}
-\contentsline {subsubsection}{\numberline {3.2.1}Premi\IeC {\`e}re m\IeC {\'e}thode pour l\IeC {\textquoteright }obtention du compl\IeC {\'e}ment \IeC {\`a} deux d\IeC {\textquoteright }un nombre n\IeC {\'e}gatif}{7}{subsubsection.3.2.1}
-\contentsline {subsubsection}{\numberline {3.2.2}Seconde m\IeC {\'e}thode pour l\IeC {\textquoteright }obtention du compl\IeC {\'e}ment \IeC {\`a} deux d\IeC {\textquoteright }un nombre n\IeC {\'e}gatif}{8}{subsubsection.3.2.2}
-\contentsline {subsection}{\numberline {3.3}Capacit\IeC {\'e} de repr\IeC {\'e}sentation}{9}{subsection.3.3}
-\contentsline {subsection}{\numberline {3.4}Notation hexad\IeC {\'e}cimale}{9}{subsection.3.4}
+\contentsline {subsection}{\numberline {1.4}Les syst\IeC {\`e}mes de num\IeC {\'e}ration}{3}{subsection.1.4}
+\contentsline {subsubsection}{\numberline {1.4.1}Syst\IeC {\`e}me d\IeC {\'e}cimal}{3}{subsubsection.1.4.1}
+\contentsline {subsubsection}{\numberline {1.4.2}Syst\IeC {\`e}me binaire}{4}{subsubsection.1.4.2}
+\contentsline {subsubsection}{\numberline {1.4.3}Syst\IeC {\`e}me hexad\IeC {\'e}cimal}{4}{subsubsection.1.4.3}
+\contentsline {section}{\numberline {2}Repr\IeC {\'e}sentation des nombres entiers naturels -- $\mdmathbb {N}$}{4}{section.2}
+\contentsline {subsection}{\numberline {2.1}De la base k \IeC {\`a} la base 10}{4}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}De la base 10 vers la base k}{5}{subsection.2.2}
+\contentsline {subsubsection}{\numberline {2.2.1}M\IeC {\'e}thode des divisions successives}{5}{subsubsection.2.2.1}
+\contentsline {subsubsection}{\numberline {2.2.2}M\IeC {\'e}thode de la plus grande puissance}{6}{subsubsection.2.2.2}
+\contentsline {subsection}{\numberline {2.3}Capacit\IeC {\'e}s de la repr\IeC {\'e}sentation}{7}{subsection.2.3}
+\contentsline {section}{\numberline {3}Codage pond\IeC {\'e}r\IeC {\'e} des entiers relatifs -- $\mdmathbb {Z}$}{8}{section.3}
+\contentsline {subsection}{\numberline {3.1}Premi\IeC {\`e}re approche}{8}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}Codage des entiers relatifs en compl\IeC {\'e}ment \IeC {\`a} deux}{9}{subsection.3.2}
+\contentsline {subsubsection}{\numberline {3.2.1}Premi\IeC {\`e}re m\IeC {\'e}thode pour l\IeC {\textquoteright }obtention du compl\IeC {\'e}ment \IeC {\`a} deux d\IeC {\textquoteright }un nombre n\IeC {\'e}gatif}{9}{subsubsection.3.2.1}
+\contentsline {subsubsection}{\numberline {3.2.2}Seconde m\IeC {\'e}thode pour l\IeC {\textquoteright }obtention du compl\IeC {\'e}ment \IeC {\`a} deux d\IeC {\textquoteright }un nombre n\IeC {\'e}gatif}{10}{subsubsection.3.2.2}
+\contentsline {subsection}{\numberline {3.3}Retour en d\IeC {\'e}cimal}{10}{subsection.3.3}
+\contentsline {subsection}{\numberline {3.4}Limites de la repr\IeC {\'e}sentation}{11}{subsection.3.4}
+\contentsline {subsection}{\numberline {3.5}Notation hexad\IeC {\'e}cimale}{11}{subsection.3.5}
 \contentsfinish 

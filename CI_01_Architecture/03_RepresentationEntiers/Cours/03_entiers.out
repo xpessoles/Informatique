@@ -2,12 +2,14 @@
 \BOOKMARK [2][-]{subsection.1.1}{Logique binaire}{section.1}% 2
 \BOOKMARK [2][-]{subsection.1.2}{Notion de mot}{section.1}% 3
 \BOOKMARK [2][-]{subsection.1.3}{Notion de pond\351ration}{section.1}% 4
-\BOOKMARK [1][-]{section.2}{Repr\351sentation des nombres entiers naturels \205 N}{}% 5
-\BOOKMARK [2][-]{subsection.2.1}{De la base k \340 la base 10}{section.2}% 6
-\BOOKMARK [2][-]{subsection.2.2}{De la base 10 vers la base k}{section.2}% 7
-\BOOKMARK [2][-]{subsection.2.3}{Capacit\351s de la repr\351sentation}{section.2}% 8
-\BOOKMARK [1][-]{section.3}{Repr\351sentation des entiers relatifs \205 Z}{}% 9
-\BOOKMARK [2][-]{subsection.3.1}{Premi\350re approche}{section.3}% 10
-\BOOKMARK [2][-]{subsection.3.2}{Repr\351sentation en compl\351ment}{section.3}% 11
-\BOOKMARK [2][-]{subsection.3.3}{Capacit\351 de repr\351sentation}{section.3}% 12
-\BOOKMARK [2][-]{subsection.3.4}{Notation hexad\351cimale}{section.3}% 13
+\BOOKMARK [2][-]{subsection.1.4}{Les syst\350mes de num\351ration}{section.1}% 5
+\BOOKMARK [1][-]{section.2}{Repr\351sentation des nombres entiers naturels \205 N}{}% 6
+\BOOKMARK [2][-]{subsection.2.1}{De la base k \340 la base 10}{section.2}% 7
+\BOOKMARK [2][-]{subsection.2.2}{De la base 10 vers la base k}{section.2}% 8
+\BOOKMARK [2][-]{subsection.2.3}{Capacit\351s de la repr\351sentation}{section.2}% 9
+\BOOKMARK [1][-]{section.3}{Codage pond\351r\351 des entiers relatifs \205 Z}{}% 10
+\BOOKMARK [2][-]{subsection.3.1}{Premi\350re approche}{section.3}% 11
+\BOOKMARK [2][-]{subsection.3.2}{Codage des entiers relatifs en compl\351ment \340 deux}{section.3}% 12
+\BOOKMARK [2][-]{subsection.3.3}{Retour en d\351cimal}{section.3}% 13
+\BOOKMARK [2][-]{subsection.3.4}{Limites de la repr\351sentation}{section.3}% 14
+\BOOKMARK [2][-]{subsection.3.5}{Notation hexad\351cimale}{section.3}% 15

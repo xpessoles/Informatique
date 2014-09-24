@@ -226,6 +226,65 @@ Par la suite, lorsque la base n'est pas précisée, on se considèrera dans le s
 
 \end{rem}
 
+\subsection{Les systèmes de numération}
+\subsubsection{Système décimal}
+Le système décimal est le système universellement utilisé. C'est la base de référence, ce qui signifie qu'un nombre est de manière implicite écrite en décimal, dès ors qu'il est écrit dans précision de base. 
+
+\subsubsection{Système binaire}
+
+C'est la base de numération couramment utilisée en électronique ou informatique. C'est un système en base 2, l'écriture des nombres est donc composée des caractères de 0 et 1. 
+
+\begin{exemple}
+
+\begin{minipage}[c]{.4\linewidth}
+En binaire on compte de la manière suivante : 
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+Base 10 & Base 2 \\
+\hline \hline
+0 & 0000 \\ \hline
+1 & 0001 \\ \hline
+2 & 0010 \\ \hline
+3 & 0011 \\ \hline
+4 & 0100 \\ \hline
+\end{tabular}
+\end{center}
+\end{minipage}% \hfill
+%\begin{minipage}{.57\linewidth}
+\textit{Convertir $\left(11011001\right)_2$ en base 10.}
+%\end{minipage}
+\end{exemple}
+
+\subsubsection{Système hexadécimal}
+Ce système à base 16 est le plus utilisé en électronique numérique car il permet une représentation compacte ce qui, dans les systèmes actuels à grande capacité mémoire, est un avantage non négligeable.
+
+\begin{exemple}
+\begin{minipage}[c]{.4\linewidth}
+En hexadécimal on compte de la manière suivante : 
+\begin{center}
+\begin{tabular}{|c|c||c|c|}
+\hline
+Base 10 & Base 16 & Base 10 & Base 16\\
+\hline \hline
+0 & 00 & 10 & 0A \\ \hline
+1 & 01 & 11 & 0B \\ \hline
+2 & 02 & 12 & 0C \\ \hline
+3 & 03 & 13 & 0D \\ \hline
+4 & 04 & 14 & 0E \\ \hline
+5 & 05 & 15 & 0F \\ \hline
+6 & 06 & 16 & 10\\ \hline
+7 & 07 & 17 & 11 \\ \hline
+8 & 08 & 18 & 12 \\ \hline
+9 & 09 & 19 & 13 \\ \hline
+\end{tabular}
+\end{center}
+\end{minipage}% \hfill
+\begin{minipage}{.57\linewidth}
+$$\left(2BC5 \right)_{16} = 11 205$$
+\end{minipage}
+\end{exemple}
+
 \section{Représentation des nombres entiers naturels -- $\mathbb{N}$}
 
 \subsection{De la base k à la base 10}
@@ -252,6 +311,10 @@ Conversion du nombre $\left(10101\right)_2$ :
 \end{eqnarray*}
 \end{exemple}
 
+\begin{exemple}
+Convertir $(100101)_2$ et $(2C5A)_{16}$ en base 10. 
+\vspace{5cm}
+\end{exemple}
 \subsection{De la base 10 vers la base k}
 
 \ifthenelse{\boolean{xp}}{
@@ -295,6 +358,10 @@ La division s'arrête lorsque le dividende est nul.
 \end{center}
 
 Ainsi $(247)_{(10)}=(11110111)_{(2)}$.
+
+\textit{Convertir 247 en base 16.}
+
+\vspace{4cm}
 \end{exemple}
 
 \subsubsection{Méthode de la plus grande puissance}
@@ -326,6 +393,11 @@ $\diamond$ : lors d'une conversion en base 2, on n'utilise dans cette colonne qu
 $\triangle$ : lors d'une conversion en base 2, on n'utilise dans cette colonne que des puissances de 2 ($2^n$).
 
 Les valeurs binaires sont lues de haut en bas. On obtient bien le même résultat : $(247)_{(10)}=(11110111)_{(2)}$.
+
+\textit{Convertir 247 en base 16.}
+
+\vspace{3cm}
+
 \end{exemple}
 
 \ifthenelse{\boolean{xp}}{
@@ -401,7 +473,7 @@ $$\left\{\begin{array}{l}
 \end{array}
 \right.$$
 
-On en déduit rapidement que l'addition en binaire s'effectuera sur le même "modèle" que l'addition en écriture décimale, à ceci près que la retenue se produit dès qu'on arrive à 2 (au lieu de 10).
+On en déduit rapidement que l'addition en binaire s'effectuera sur le même principe que l'addition en écriture décimale, à ceci près que la retenue se produit dès qu'on arrive à 2 (au lieu de 10).
 \end{resultat}
 \begin{exemple}
 \textit{Somme de deux nombres binaires}
@@ -434,17 +506,17 @@ On en déduit rapidement que l'addition en binaire s'effectuera sur le même "mo
 
 \end{exemple}
 
-\section{Représentation des entiers relatifs -- $\mathbb{Z}$}
+\section{Codage pondéré des entiers relatifs -- $\mathbb{Z}$}
 \ifthenelse{\boolean{prof}}{}{
 \begin{savoir}
-SAVOIR-FAIRE Représenter en binaire sur $n$ bits un entier relatif donné en décimal.
+Représenter en binaire sur $n$ bits un entier relatif donné en décimal.
 
 Si l’entier relatif $x$ est positif ou nul, on le représente comme l’entier naturel $x$. S’il est
 strictement négatif, on le représente comme l’entier naturel $x + 2^n$.
 \end{savoir}
 
 \begin{savoir}
-SAVOIR-FAIRE Trouver la représentation décimale d’un entier relatif donné en binaire sur n bits.
+Trouver la représentation décimale d’un entier relatif donné en binaire sur n bits.
 
 Si cet entier relatif est donné par le mot m, on commence par calculer l’entier naturel
 p représenté par ce mot. Si p est strictement inférieur à $2^n-1$, c’est l’entier relatif
@@ -481,7 +553,7 @@ Cet inconvénient est résolu par l’usage d’une autre forme de représentati
 
 \end{rem}
 
-\subsection{Représentation en complément}
+\subsection{Codage des entiers relatifs en complément à deux}
 Les règles suivantes sont adoptées par la majeure partie des constructeurs.
 
 
@@ -544,8 +616,16 @@ Exercice: Trouver les représentations binaires sur huit bits des entiers relati
 Exercice: Trouver les représentations décimales des entiers relatifs dont les représentations
 binaires sur huit bits sont 00010111 et 10001100.
 \end{exercice}
+\subsection{Retour en décimal}
 
-\subsection{Capacité de représentation}
+\begin{exemple}
+Trouver la représentation décimale des entiers relatifs dont les représentations binaires sur huit bits sont $01010101$ et $10101010$.
+
+\vspace{4cm}
+\end{exemple}
+
+
+\subsection{Limites de la représentation}
 \begin{center}
 \begin{tabular}{|c|c|c|}
 \hline
@@ -565,7 +645,7 @@ $32$ bits & 31 bits de valeur & -1 à -2 147 483 648 \\ \hline
 Les limites du codage des entiers relatifs sont principalement dus au dépassement de capacité (overflow) lors d’un calcul. Une addition de deux nombres positifs ou négatifs peut entraîner un dépassement de capacité, celui-ci peut être détecté en regardant le signe du résultat par rapport au signe des deux opérandes (deux nombres positifs donnent un résultat négatif et réciproquement).
 
 \begin{rem}
-EN PRATIQUE Dans les versions Python 2.x
+Dans les versions Python 2.x
 Lorsque la capacité des entiers machine (32 ou 64 bits) a été dépassée, les nombres sont
 suivis du marqueur L, qui explicite qu’on passe dans un autre type appelé long. La dernière
 ligne de l’exemple précédent affiche donc plutôt

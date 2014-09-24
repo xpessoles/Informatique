@@ -1,0 +1,144 @@
+\documentclass[10pt]{article}
+\input{style/coursHeadings}
+\input{style/programHeadings}
+\input{style/macros_SII}
+\input{style/macros_Titres}
+\input{style/macros_Frames}
+
+%Si le boolen xp est vrai : compilation pour xabi
+%Sinon compilation Damien
+\newif\ifprof
+%\proftrue
+\proffalse
+
+\newif\ifxp
+\xptrue
+%\xpfalse
+
+\newif\iftd
+\tdtrue
+%\tdfalse
+
+\usepackage[%
+    pdftitle={Architecture matérielle et logicielle - Représentation des entiers - Application},
+    pdfauthor={Xavier Pessoles},
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=magenta]{hyperref}
+
+\def\discipline{Informatique}
+\def\xxtitre{%
+\ifxp
+CI  : Architecture Matérielle et Logicielle
+\else
+\fi
+}
+
+\def\xxsoustitre{%
+\ifxp
+Chapitre 3 -- Principe de la représentation des nombres entiers en mémoire 
+\else
+\fi}
+
+\def\xxauteur{%
+\ifxp
+Xavier \textsc{Pessoles}
+\else
+\fi}
+
+\def\xxpied{%
+\ifxp
+CI 1 : Architecture Matérielle et Logicielle\\
+Ch. 1 : Représentation des entiers -- Application
+\else
+\fi}
+
+\def\xxpied{%
+\ifxp
+2013 -- 2014 \\
+Xavier \textsc{Pessoles}
+\else
+\fi}
+
+
+
+
+%---------------------------------------------------------------------------
+
+\usepackage{multicol}
+
+\begin{document}
+\ifxp
+\input{style/enteteXP}
+\else
+\input{style/enteteDI}
+\fi
+
+
+
+ \renewcommand{\baselinestretch}{1.2}
+\setlength{\parskip}{2ex plus 0.5ex minus 0.2ex}
+
+\vspace{3cm}
+
+\setlength{\columnsep}{1.5cm}
+\setlength{\columnseprule}{0.2pt}
+\begin{multicols}{2}
+
+\subsection*{Exercice 1}
+\subparagraph*{}
+\textit{Réalisez la conversion des nombres suivants dans les autres systèmes de numération :
+\begin{enumerate}
+\item $(10050)_{(10)}$
+\item $(1001 0001)_{(2)}$ 
+\item $(A3F)_{16}$\\
+\end{enumerate}}
+
+\subsection*{Exercice 2}
+On désire utiliser 12 bits pour comptabiliser des objets.
+\subparagraph{}
+\textit{Quel est le nombre maximum d'objets qu'il est possible de compter ?}
+\subparagraph{}
+\textit{Indiquer le numéro du premier et du dernier (dans les systèmes de numération décimale, binaire et hexadécimale).}
+
+
+\subsection*{Exercice 3}
+\setcounter{subparagraph}{0}
+
+On désire compter 65000 objets. 
+\subparagraph{}
+\textit{Sur combien de bit peut-on réaliser cette opération ?}
+\subparagraph{}
+\textit{Quel est le numéro du premier et du dernier (dans les systèmes de numération binaire et hexadécimale) ?}
+
+
+\subsection*{Exercice 4}
+Soit une machine où les nombres entiers sont codés sur 8 bits.
+\setcounter{subparagraph}{0}
+\subparagraph{}
+\textit{Donner le plus grand et le plus petit nombre représentable selon que le codage utilisé est non signé ou signé.}
+
+\subparagraph{}
+\textit{Écrire dans les différents formats signés les nombres décimaux 1, -1, 111 et 55.}
+\subparagraph{}
+\textit{Quelles sont inversement les valeurs décimales codées par $4C$ et $B4$ suivant les différents codages signés et celui non signé.}
+%\item Un périphérique de la machine lui délivre des données sur 8 bits dans le format signe et valeur absolue. Il transmet successivement $9A$ puis $3C$, quelles sont les valeurs signifiées ? 
+
+
+
+
+\subsection*{Exercice 5}
+\setcounter{subparagraph}{0}
+\subparagraph*{}
+\textit{Effectuez les opérations arithmétiques suivantes dans les systèmes de numération binaire (codé sur 8 bits) :
+\begin{enumerate}
+\item $71 + 35 =$
+\item $15 - 25 =$
+\item $121 - 75 =$
+\item $-51 - 77 =$
+\end{enumerate}}
+\end{multicols}
+
+\end{document}
+
+
