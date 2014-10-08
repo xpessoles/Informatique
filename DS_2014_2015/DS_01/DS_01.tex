@@ -1,0 +1,336 @@
+\documentclass[10pt]{article}
+\input{style/coursHeadings}
+\input{style/programHeadings}
+\input{style/macros_SII}
+\input{style/macros_Titres}
+\input{style/macros_Frames}
+
+%Si le boolen xp est vrai : compilation pour xabi
+%Sinon compilation Damien
+\newboolean{xp}
+\setboolean{xp}{true}
+
+\newboolean{prof}
+\setboolean{prof}{false}
+
+\newif\ifprof
+%\proftrue
+\proffalse
+
+\usepackage[%
+    pdftitle={Devoirs Surveillé 1},
+    pdfauthor={Xavier Pessoles},
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=magenta]{hyperref}
+
+
+\def\discipline{Informatique}
+\def\xxtitre{\ifthenelse{\boolean{xp}}{
+Devoir surveillé d'informatique 1}{
+Chapitre  -- }}
+
+\def\xxsoustitre{\ifthenelse{\boolean{xp}}{
+CI 1 : Architecture matérielle et logicielle \\
+CI 2 : Algorithmique et programmation  }{
+Partie  -- }}
+
+\def\xxauteur{\ifthenelse{\boolean{xp}}{
+Xavier \textsc{Pessoles}}{
+}}
+
+\def\xxpied{\ifthenelse{\boolean{xp}}{
+DS Informatique\\
+\ifthenelse{\boolean{prof}}{Sujet}{Corrige}}{
+\xxtitre}}
+
+\def\xxcathegorie{\ifthenelse{\boolean{xp}}{
+2013 -- 2014 \\
+Xavier \textsc{Pessoles}}{
+Informatique - Cours}}
+
+
+
+
+
+%---------------------------------------------------------------------------
+
+
+\begin{document}
+
+\ifthenelse{\boolean{xp}}{\input{style/enteteXP}}{\input{style/enteteDI}}
+
+
+\ifthenelse{\boolean{prof}}{
+\begin{center}
+\large{\textit{Éléments de corrigé}}
+\end{center}
+}{}
+
+
+\section{Codage des nombres}
+Pour tout ce devoir, on dispose d'une machine dont le codage est limité à 8 bits. 
+
+\subsection{Capacités de l'espace machine}
+\subparagraph{} \textit{Quel est le nombre maximum d'entiers qu'il est possible de coder ? Donner le nombre maximal et le nombre minimal dans les systèmes décimal, binaire et hexadacimal.}
+
+\subparagraph{} \textit{Quel est le nombre maximum d'entiers relatifs qu'il est possible de coder ? Donner le nombre minimal et le nombre maximal dans le système décimal.}
+
+
+\subsection{Conversions}
+Dans cette partie, les nombres sont tous des entiers relatifs codés en complément à 2.
+ 
+\subparagraph{} \textit{Convertir le nombre 83 dans le système binaire et dans le système hexadécimal.}
+
+
+\subparagraph{} \textit{Faire la somme 83 + 200. Donner le résultat en binaire.}
+
+
+\subparagraph{} \textit{Réaliser l'opération 24 - 83. Donner le résultat en binaire puis en décimal.}
+
+
+
+\subparagraph{} \textit{Convertir le nombre $(A3)_{16,\mathbb{Z}}$. Coder ce nombre dans le système décimal.}
+
+
+\subsection{Algorithmique et programmation}
+
+Le but de cette partie est de réaliser un programme permettant de réaliser le codage d'un nombre entier relatif en utilisant le codage en complément à 2. 
+
+\begin{py}
+Une chaîne de caractère se comporte comme un liste. En effet prenons par exemple la chaîne de caractères \textsf{exemple} :
+\begin{python}
+>>> chaine = ''exemple''
+>>> print(chaine)
+        exemple
+>>> len(chaine)  # Retourne le nombre de caractères de la chaine : il y a 7 caractères dans le mot exemple
+        7
+>>> print(chaine[0]) # Affiche le premier e
+        'e'
+>>> print(chaine[6]) # Affiche le dernier e
+        'e'
+>>> for i in range(0,2,1) : # Pour i allant de 0 (inclus) à 2 (exclus) par pas de 1, faire : 
+            print(str(i)+'' : ''+chaine[i])
+            
+        0 : e
+        1 : x
+>>> chaine = chaine+''s''
+>>> print(chaine)
+        exemples
+>>> chaine = ''Les ''+chaine
+>>> print(chaine)
+        Les exemples
+\end{python}
+\end{py}
+
+\subsubsection{Conversion d'un nombre décimal en binaire}
+On donne l'extrait de programme suivant permettant de convertir un nombre entier positif \textsf{nb} en chaine de caractères \textsf{res} dont le contenu est le nombre en binaire. 
+
+
+\begin{py}
+\begin{minipage}[c]{.5\linewidth}
+\begin{python}
+nb = 10
+dividende = nb
+diviseur = 2
+resultat = ""
+quotient = -nb
+    
+while quotient != 0 :
+    quotient = int(dividende/diviseur)
+    reste = dividende - diviseur * quotient
+    dividende = quotient
+    resultat = resultat + str(reste)
+    
+res=""
+for i in range(len(resultat)-1,-1,-1):
+    res=res+resultat[i]
+\end{python}
+\end{minipage}
+\end{py}
+
+\subparagraph{}\textit{Quel est le type des variables \textsf{dividende} et \textsf{resultat}.}
+
+\subparagraph{}\textit{Expliquer le ligne 7. Justifier ce choix.}
+
+\subparagraph{}\textit{On cherche à analyser l'évolution des variables lors du parcours de la boucle \textsf{while}. Remplir les champs suivants.}
+
+État des variables à la ligne 6 :
+\begin{itemize}
+\item \textsf{nb} : \dotfill
+\item \textsf{dividende} : \dotfill
+\item \textsf{diviseur} : \dotfill
+\item \textsf{resultat} : \dotfill
+\item \textsf{quotient} : \dotfill
+\end{itemize}
+
+\vspace{.5cm}
+\begin{itemize}
+\item Première itération de la boucle \textsl{while} -- État des variables après exécution de la ligne 11 :
+\begin{itemize}
+\item \textsf{quotient} : \dotfill
+\item \textsf{reste} : \dotfill
+\item \textsf{dividende} : \dotfill
+\item \textsf{resultat} : \dotfill
+\end{itemize}
+\end{itemize}
+
+\vspace{.5cm}
+\begin{itemize}
+\item Seconde itération de la boucle \textsl{while} -- État des variables après exécution de la ligne 11 :
+\begin{itemize}
+\item \textsf{quotient} : \dotfill
+\item \textsf{reste} : \dotfill
+\item \textsf{dividende} : \dotfill
+\item \textsf{resultat} : \dotfill
+\end{itemize}
+\end{itemize}
+
+
+\vspace{.5cm}
+\begin{itemize}
+\item Troisième itération de la boucle \textsl{while} -- État des variables après exécution de la ligne 11 :
+\begin{itemize}
+\item \textsf{quotient} : \dotfill
+\item \textsf{reste} : \dotfill
+\item \textsf{dividende} : \dotfill
+\item \textsf{resultat} : \dotfill
+\end{itemize}
+\end{itemize}
+
+
+\vspace{.5cm}
+\begin{itemize}
+\item Quatrième itération de la boucle \textsl{while} -- État des variables après exécution de la ligne 11 :
+\begin{itemize}
+\item \textsf{quotient} : \dotfill
+\item \textsf{reste} : \dotfill
+\item \textsf{dividende} : \dotfill
+\item \textsf{resultat} : \dotfill
+\end{itemize}
+\end{itemize}
+
+\subparagraph{}\textit{Parmi les lignes 8, 9 et 10, réaliser des modifications qui permettent de mieux utiliser les opérations disponibles en Pyhon. }
+
+\subparagraph{}\textit{Après exécution de la liste que contient la variable \textsf{resultat} ?
+ Combien vaut \textsf{len(resultat)} ?}
+ 
+ \subparagraph{}\textit{On cherche à analyser l'évolution des variables lors du parcours de la boucle \textsf{for}. Remplir les champs suivants.}
+
+\begin{center}
+\begin{tabular}{|p{.2\textwidth}|p{.6\textwidth}|}
+\hline
+\\
+Valeur de i : &  \\
+\\
+\hline
+\\
+Valeur de res : & \\
+\\
+\hline
+\hline
+\\
+Valeur de i : &  \\
+\\
+\hline
+\\
+Valeur de res : & \\
+\\
+\hline
+\hline
+\\
+Valeur de i : &  \\
+\\
+\hline
+\\
+Valeur de res : & \\
+\\
+\hline
+\hline
+\\
+Valeur de i : &  \\
+\\
+\hline
+\\
+Valeur de res : & \\
+\\
+\hline
+\hline
+\\
+Valeur de i : &  \\
+\\
+\hline
+\\
+Valeur de res : & \\
+\\
+\hline
+\end{tabular}
+\end{center}
+
+\subsubsection{Programme mystère}
+On cherche à convertir le nombre $(-10)_{10}$ en base 2. Le système utilisé utilise un codage sur 8 bits. La conversion du nombre $(10)_{10}$ en binaire est $(1010)_{2}$.
+
+On donne cette partie de programme. 
+\begin{py}
+\begin{python}
+res_cv = ''1010''
+nb_bits = 8
+while(len(res_cv)!=nb_bits):
+    res_cv = "0"+res_cv
+\end{python}
+\end{py}
+
+\subparagraph{}
+\textit{Quel est le but du programme précédent ? Que contient \textsf{res\_cv} après l'exécution du code ?}
+
+\subsubsection{Inversion des bits}
+On cherche maintenant à inverser les bits d'une séquence.
+
+\begin{py}
+\begin{python}
+res_cv = "1010"
+res_inv = ""
+for i in range(len(res_cv)):
+    if res_cv[i]=="0":
+        res_inv=res_inv+"0"
+    else :
+        res_inv=res_inv+"1"
+\end{python}
+\end{py}
+
+\subparagraph{}
+\textit{Que contient \textsf{res\_cv} après l'exécution de la boucle ?}
+
+\subparagraph{}
+\textit{Si le résultat obtenu n'est pas le résultat attendu, comment modifier la séquence précédente ?}
+
+\begin{center}
+\textbf{Fin des questions}
+\end{center}
+\subsubsection{Pour information}
+A titre d'information, voici une séquence de programme permettant d'ajouter 1 à un nombre codé en binaire.
+
+
+\begin{py}
+\begin{python}
+# On ajoute +1
+# Initialisation
+retenue="1"
+res=""
+for i in range(len(res_inv)-1,-1,-1):
+    if retenue=="0" and res_inv[i]=="0":
+        retenue=="0"
+        res = "0"+res
+    elif retenue=="0" and res_inv[i]=="1":
+        retenue ="0"
+        res = "1"+res
+    elif retenue=="1" and res_inv[i]=="0":
+        retenue ="0"
+        res = "1"+res
+    elif retenue=="1" and res_inv[i]=="1":
+        retenue ="1"
+        res = "0"+res
+\end{python}
+\end{py}
+  
+\end{document}
