@@ -4,6 +4,9 @@
 \input{style/macros_SII}
 \input{style/macros_Titres}
 \input{style/macros_Frames}
+\usepackage{fancybox}
+\newsavebox{\codebox}
+\newsavebox{\codeboxx}
 
 %Si le boolen xp est vrai : compilation pour xabi
 %Sinon compilation Damien
@@ -68,29 +71,149 @@ Informatique - Cours}}
 }{}
 
 
+\begin{center}
+\large{\textit{Nom : .......................................}}
+\end{center}
 \section{Codage des nombres}
 Pour tout ce devoir, on dispose d'une machine dont le codage est limité à 8 bits. 
 
 \subsection{Capacités de l'espace machine}
 \subparagraph{} \textit{Quel est le nombre maximum d'entiers qu'il est possible de coder ? Donner le nombre maximal et le nombre minimal dans les systèmes décimal, binaire et hexadacimal.}
 
+%%% Question 1
+\vspace{.3cm}
+\noindent\boxput*(-.85,1){
+\colorbox{white}{\textbf{Question 1}}}{
+\setlength{\fboxsep}{10pt}
+\fbox{\begin{minipage}{.95\linewidth}
+\usebox{\codebox}
+\ifprof
+\begin{corrige}
+\begin{itemize}
+\item Il est possible de coder $2^8=256$ entiers. 
+\item Le plus petit est nombre est $0$.
+\item Le plus grand est $(255)_{10}=(1111\; 1111)_2 = (FF)_{16}$
+\end{itemize}
+\end{corrige}
+\else
+\vspace{3cm}
+\fi
+\end{minipage}
+}}
+
+
+
 \subparagraph{} \textit{Quel est le nombre maximum d'entiers relatifs qu'il est possible de coder ? Donner le nombre minimal et le nombre maximal dans le système décimal.}
 
+%%% Question 2
+\vspace{.3cm}
+\noindent\boxput*(-.85,1){
+\colorbox{white}{\textbf{Question 2}}}{
+\setlength{\fboxsep}{10pt}
+\fbox{\begin{minipage}{.95\linewidth}
+\ifprof
+\begin{corrige}
+\begin{itemize}
+\item Il est possible de coder $2^8=256$ entiers relatifs. 
+\item Le plus petit est nombre est $-128$.
+\item Le plus grand est $127$.
+\end{itemize}
+\end{corrige}
+\else
+\usebox{\codebox}
+\vspace{3cm}
+\fi
+\end{minipage}
+}}
+
+\ifprof
+\else
+\newpage
+\fi
 
 \subsection{Conversions}
 Dans cette partie, les nombres sont tous des entiers relatifs codés en complément à 2.
  
 \subparagraph{} \textit{Convertir le nombre 83 dans le système binaire et dans le système hexadécimal.}
 
+%%% Question 3
+\vspace{.3cm}
+\noindent\boxput*(-.85,1){
+\colorbox{white}{\textbf{Question 3}}}{
+\setlength{\fboxsep}{10pt}
+\fbox{\begin{minipage}{.95\linewidth}
+\ifprof
+\begin{corrige}
+$$
+(83)_{10} = (0101\;0011)_2 = (53)_{16}
+$$
+\end{corrige}
+\else
+\usebox{\codebox}
+\vspace{5cm}
+\fi
+\end{minipage}
+}}
 
-\subparagraph{} \textit{Faire la somme 83 + 200. Donner le résultat en binaire.}
 
 
-\subparagraph{} \textit{Réaliser l'opération 24 - 83. Donner le résultat en binaire puis en décimal.}
+\subparagraph{} \textit{Peut-on réaliser la somme 83 + 200 ? Justifier.}
+
+%%% Question 4
+\vspace{.3cm}
+\noindent\boxput*(-.85,1){
+\colorbox{white}{\textbf{Question 4}}}{
+\setlength{\fboxsep}{10pt}
+\fbox{\begin{minipage}{.95\linewidth}
+\ifprof
+\begin{corrige}
+Il n'est pas possible de réaliser la somme $200+83$ car $283$ est en dehors des capacités du codage. 
+\end{corrige}
+\else
+\usebox{\codebox}
+\vspace{3cm}
+\fi
+\end{minipage}
+}}
+
+\ifprof
+\else
+\newpage
+\fi
+
+\subparagraph{} \textit{Réaliser l'opération 24 - 83. Donner le résultat en binaire.}
+
+%%% Question 5
+\vspace{.3cm}
+\noindent\boxput*(-.85,1){
+\colorbox{white}{\textbf{Question 5}}}{
+\setlength{\fboxsep}{10pt}
+\fbox{\begin{minipage}{.95\linewidth}
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\usebox{\codebox}
+\vspace{10cm}
+\fi
+\end{minipage}
+}}
 
 
+\setcounter{subparagraph}{6}
+%\subparagraph{} \textit{Convertir le nombre $(A3)_{16,\mathbb{Z}}$. Coder ce nombre dans le système décimal.}
+%
+%%%% Question 6
+%\vspace{.3cm}
+%\noindent\boxput*(-.85,1){
+%\colorbox{white}{\textbf{Question 6}}}{
+%\setlength{\fboxsep}{10pt}
+%\fbox{\begin{minipage}{.95\linewidth}
+%\usebox{\codebox}
+%\vspace{10cm}
+%\end{minipage}
+%}}
 
-\subparagraph{} \textit{Convertir le nombre $(A3)_{16,\mathbb{Z}}$. Coder ce nombre dans le système décimal.}
 
 
 \subsection{Algorithmique et programmation}
@@ -99,6 +222,8 @@ Le but de cette partie est de réaliser un programme permettant de réaliser le 
 
 \begin{py}
 Une chaîne de caractère se comporte comme un liste. En effet prenons par exemple la chaîne de caractères \textsf{exemple} :
+
+\begin{minipage}[c]{.95\linewidth}
 \begin{python}
 >>> chaine = ''exemple''
 >>> print(chaine)
@@ -121,6 +246,7 @@ Une chaîne de caractère se comporte comme un liste. En effet prenons par exemp
 >>> print(chaine)
         Les exemples
 \end{python}
+\end{minipage}
 \end{py}
 
 \subsubsection{Conversion d'un nombre décimal en binaire}
@@ -141,152 +267,168 @@ while quotient != 0 :
     reste = dividende - diviseur * quotient
     dividende = quotient
     resultat = resultat + str(reste)
-    
-res=""
-for i in range(len(resultat)-1,-1,-1):
-    res=res+resultat[i]
 \end{python}
 \end{minipage}
 \end{py}
 
 \subparagraph{}\textit{Quel est le type des variables \textsf{dividende} et \textsf{resultat}.}
 
+%%% Question 7
+\vspace{.3cm}
+\noindent\boxput*(-.85,1){
+\colorbox{white}{\textbf{Question 7}}}{
+\setlength{\fboxsep}{10pt}
+\fbox{\begin{minipage}{.95\linewidth}
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\usebox{\codebox}
+\vspace{3cm}
+\fi
+\end{minipage}}}
+
+
+
 \subparagraph{}\textit{Expliquer le ligne 7. Justifier ce choix.}
+
+%%% Question 8
+\vspace{.3cm}
+\noindent\boxput*(-.85,1){
+\colorbox{white}{\textbf{Question 8}}}{
+\setlength{\fboxsep}{10pt}
+\fbox{\begin{minipage}{.95\linewidth}
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\usebox{\codebox}
+\vspace{3cm}
+\fi
+\end{minipage}}}
+
+\newpage
 
 \subparagraph{}\textit{On cherche à analyser l'évolution des variables lors du parcours de la boucle \textsf{while}. Remplir les champs suivants.}
 
-État des variables à la ligne 6 :
-\begin{itemize}
-\item \textsf{nb} : \dotfill
-\item \textsf{dividende} : \dotfill
-\item \textsf{diviseur} : \dotfill
-\item \textsf{resultat} : \dotfill
-\item \textsf{quotient} : \dotfill
-\end{itemize}
+%%% Question 9
+\vspace{.3cm}
+\noindent\boxput*(-.85,1){
+\colorbox{white}{\textbf{Question 9}}}{
+\setlength{\fboxsep}{10pt}
+\fbox{\begin{minipage}{.95\linewidth}
+\textit{Remarque : le document réponse ne présume pas du nombre d'itérations de la boucle while.}
+\begin{center}
+\begin{tabular}{|p{6cm}|p{.3cm} c p{.3cm}|p{.3cm} c p{.3cm}|p{.3cm} c p{.3cm}|p{.3cm} c p{.3cm}|}
+\hline
+&&&&&&&&&&&& \\
+&& \rotatebox{90}{Dividende}&& 
+&\rotatebox{90}{Diviseur} &&
+&\rotatebox{90}{Résultat} &&
+&\rotatebox{90}{Quotient}&
+\\
+\hline \hline
+&&&&&&&&&&&& \\
+État des variables après la ligne 6 &&&&&&&&&&&& \\
+&&&&&&&&&&&& \\
+\hline
+&&&&&&&&&&&& \\
+État des variables après la ligne 11 - Première itération de la boucle while 
+&&&&&&&&&&&& \\
+\hline
+&&&&&&&&&&&& \\
+État des variables après la ligne 11 - Seconde itération de la boucle while 
+&&&&&&&&&&&& \\
+\hline
+&&&&&&&&&&&& \\
+État des variables après la ligne 11 - Troisième itération de la boucle while 
+&&&&&&&&&&&& \\
+\hline
+&&&&&&&&&&&& \\
+État des variables après la ligne 11 - Quatrième itération de la boucle while 
+&&&&&&&&&&&& \\
+\hline
+&&&&&&&&&&&& \\
+État des variables après la ligne 11 - Cinquième itération de la boucle while 
+&&&&&&&&&&&& \\
+\hline
+&&&&&&&&&&&& \\
+État des variables après la ligne 11 - Sixième itération de la boucle while 
+&&&&&&&&&&&& \\
+\hline
 
-\vspace{.5cm}
-\begin{itemize}
-\item Première itération de la boucle \textsl{while} -- État des variables après exécution de la ligne 11 :
-\begin{itemize}
-\item \textsf{quotient} : \dotfill
-\item \textsf{reste} : \dotfill
-\item \textsf{dividende} : \dotfill
-\item \textsf{resultat} : \dotfill
-\end{itemize}
-\end{itemize}
+\end{tabular}
+\end{center}
+\usebox{\codebox}
 
-\vspace{.5cm}
-\begin{itemize}
-\item Seconde itération de la boucle \textsl{while} -- État des variables après exécution de la ligne 11 :
-\begin{itemize}
-\item \textsf{quotient} : \dotfill
-\item \textsf{reste} : \dotfill
-\item \textsf{dividende} : \dotfill
-\item \textsf{resultat} : \dotfill
-\end{itemize}
-\end{itemize}
+\end{minipage}}}
 
-
-\vspace{.5cm}
-\begin{itemize}
-\item Troisième itération de la boucle \textsl{while} -- État des variables après exécution de la ligne 11 :
-\begin{itemize}
-\item \textsf{quotient} : \dotfill
-\item \textsf{reste} : \dotfill
-\item \textsf{dividende} : \dotfill
-\item \textsf{resultat} : \dotfill
-\end{itemize}
-\end{itemize}
-
-
-\vspace{.5cm}
-\begin{itemize}
-\item Quatrième itération de la boucle \textsl{while} -- État des variables après exécution de la ligne 11 :
-\begin{itemize}
-\item \textsf{quotient} : \dotfill
-\item \textsf{reste} : \dotfill
-\item \textsf{dividende} : \dotfill
-\item \textsf{resultat} : \dotfill
-\end{itemize}
-\end{itemize}
 
 \subparagraph{}\textit{Parmi les lignes 8, 9 et 10, réaliser des modifications qui permettent de mieux utiliser les opérations disponibles en Pyhon. }
 
-\subparagraph{}\textit{Après exécution de la liste que contient la variable \textsf{resultat} ?
- Combien vaut \textsf{len(resultat)} ?}
- 
- \subparagraph{}\textit{On cherche à analyser l'évolution des variables lors du parcours de la boucle \textsf{for}. Remplir les champs suivants.}
 
-\begin{center}
-\begin{tabular}{|p{.2\textwidth}|p{.6\textwidth}|}
-\hline
-\\
-Valeur de i : &  \\
-\\
-\hline
-\\
-Valeur de res : & \\
-\\
-\hline
-\hline
-\\
-Valeur de i : &  \\
-\\
-\hline
-\\
-Valeur de res : & \\
-\\
-\hline
-\hline
-\\
-Valeur de i : &  \\
-\\
-\hline
-\\
-Valeur de res : & \\
-\\
-\hline
-\hline
-\\
-Valeur de i : &  \\
-\\
-\hline
-\\
-Valeur de res : & \\
-\\
-\hline
-\hline
-\\
-Valeur de i : &  \\
-\\
-\hline
-\\
-Valeur de res : & \\
-\\
-\hline
-\end{tabular}
-\end{center}
+%%% Question 10
+\vspace{.3cm}
+\noindent\boxput*(-.85,1){
+\colorbox{white}{\textbf{Question 10}}}{
+\setlength{\fboxsep}{10pt}
+\fbox{\begin{minipage}{.95\linewidth}
+\usebox{\codebox}
+\vspace{3cm}
+\end{minipage}}}
+
+
+\newpage
+
+\subparagraph{}\textit{Après exécution de la liste que contient la variable \textsf{resultat} ?
+ Est-ce le résultat attendu ? Si ce n'est pas le résultat attendu, corriger l'algorithme en conséquence.} 
+ 
+ 
+%%% Question 11
+\vspace{.3cm}
+\noindent\boxput*(-.85,1){
+\colorbox{white}{\textbf{Question 11}}}{
+\setlength{\fboxsep}{10pt}
+\fbox{\begin{minipage}{.95\linewidth}
+\usebox{\codebox}
+\vspace{4cm}
+\end{minipage}}}
+
 
 \subsubsection{Programme mystère}
 On cherche à convertir le nombre $(-10)_{10}$ en base 2. Le système utilisé utilise un codage sur 8 bits. La conversion du nombre $(10)_{10}$ en binaire est $(1010)_{2}$.
 
 On donne cette partie de programme. 
 \begin{py}
+\begin{minipage}[c]{.75\linewidth}
 \begin{python}
 res_cv = ''1010''
 nb_bits = 8
 while(len(res_cv)!=nb_bits):
     res_cv = "0"+res_cv
 \end{python}
+\end{minipage}
 \end{py}
 
 \subparagraph{}
 \textit{Quel est le but du programme précédent ? Que contient \textsf{res\_cv} après l'exécution du code ?}
 
+%%% Question 12
+\vspace{.3cm}
+\noindent\boxput*(-.85,1){
+\colorbox{white}{\textbf{Question 12}}}{
+\setlength{\fboxsep}{10pt}
+\fbox{\begin{minipage}{.95\linewidth}
+\usebox{\codebox}
+\vspace{4cm}
+\end{minipage}}}
+
+
 \subsubsection{Inversion des bits}
 On cherche maintenant à inverser les bits d'une séquence.
 
 \begin{py}
+\begin{minipage}[c]{.75\linewidth}
 \begin{python}
 res_cv = "1010"
 res_inv = ""
@@ -296,22 +438,51 @@ for i in range(len(res_cv)):
     else :
         res_inv=res_inv+"1"
 \end{python}
+\end{minipage}
 \end{py}
 
+\newpage
+
 \subparagraph{}
-\textit{Que contient \textsf{res\_cv} après l'exécution de la boucle ?}
+\textit{Que contient \textsf{res\_inv} après l'exécution de la boucle ?}
+
+%%% Question 13
+\vspace{.3cm}
+\noindent\boxput*(-.85,1){
+\colorbox{white}{\textbf{Question 13}}}{
+\setlength{\fboxsep}{10pt}
+\fbox{\begin{minipage}{.95\linewidth}
+\ifprof
+\else
+\usebox{\codebox}
+\vspace{2cm}
+\fi
+\end{minipage}}}
+
 
 \subparagraph{}
 \textit{Si le résultat obtenu n'est pas le résultat attendu, comment modifier la séquence précédente ?}
 
-\begin{center}
-\textbf{Fin des questions}
-\end{center}
-\subsubsection{Pour information}
-A titre d'information, voici une séquence de programme permettant d'ajouter 1 à un nombre codé en binaire.
+%%% Question 14
+\vspace{.3cm}
+\noindent\boxput*(-.85,1){
+\colorbox{white}{\textbf{Question 14}}}{
+\setlength{\fboxsep}{10pt}
+\fbox{\begin{minipage}{.95\linewidth}
+\usebox{\codebox}
+\vspace{2cm}
+\end{minipage}}}
+
+
+%\begin{center}
+%\textbf{Fin des questions}
+%\end{center}
+\subsubsection{Additionner 1}
+Voici une séquence de programme permettant d'ajouter 1 à un nombre codé en binaire.
 
 
 \begin{py}
+\begin{minipage}[c]{.75\linewidth}
 \begin{python}
 # On ajoute +1
 # Initialisation
@@ -331,6 +502,28 @@ for i in range(len(res_inv)-1,-1,-1):
         retenue ="1"
         res = "0"+res
 \end{python}
+\end{minipage}
+
 \end{py}
   
+  \begin{lrbox}{\codebox}
+\begin{python}
+\end{python}
+\end{lrbox}
+
+  
+\subparagraph{}
+\textit{Quels sont les structures algorithmiques utilisées dans ce programme ? Explique l'existence des lignes 6, 9, 12 et 15.}
+
+%%% Question 15
+\vspace{.3cm}
+\noindent\boxput*(-.85,1){
+\colorbox{white}{\textbf{Question 15}}}{
+\setlength{\fboxsep}{10pt}
+\fbox{\begin{minipage}{.95\linewidth}
+\usebox{\codebox}
+\vspace{4cm}
+\end{minipage}}}
+  
+
 \end{document}
