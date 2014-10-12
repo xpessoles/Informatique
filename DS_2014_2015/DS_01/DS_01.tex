@@ -16,6 +16,8 @@
 \newboolean{prof}
 \setboolean{prof}{false}
 
+
+% Commenter \proffalse et décommenter \proftrue pour avoir le corrigé
 \newif\ifprof
 %\proftrue
 \proffalse
@@ -44,7 +46,7 @@ Xavier \textsc{Pessoles}}{
 
 \def\xxpied{\ifthenelse{\boolean{xp}}{
 DS Informatique\\
-\ifthenelse{\boolean{prof}}{Sujet}{Corrige}}{
+\ifprof Corrige \else Sujet \fi}{
 \xxtitre}}
 
 \def\xxcathegorie{\ifthenelse{\boolean{xp}}{
@@ -64,21 +66,21 @@ Informatique - Cours}}
 \ifthenelse{\boolean{xp}}{\input{style/enteteXP}}{\input{style/enteteDI}}
 
 
-\ifthenelse{\boolean{prof}}{
+\ifprof
 \begin{center}
 \large{\textit{Éléments de corrigé}}
 \end{center}
-}{}
-
-
+\else
 \begin{center}
 \large{\textit{Nom : .......................................}}
 \end{center}
+\fi
+
 \section{Codage des nombres}
 Pour tout ce devoir, on dispose d'une machine dont le codage est limité à 8 bits. 
 
 \subsection{Capacités de l'espace machine}
-\subparagraph{} \textit{Quel est le nombre maximum d'entiers qu'il est possible de coder ? Donner le nombre maximal et le nombre minimal dans les systèmes décimal, binaire et hexadacimal.}
+\subparagraph{} \textit{Combien d'entiers est-il possible de coder ? Donner le plus petit et le plus grand nombre qu'il est possible de coder dans les systèmes décimal, binaire et hexadacimal.}
 
 %%% Question 1
 \vspace{.3cm}
@@ -191,6 +193,14 @@ Il n'est pas possible de réaliser la somme $200+83$ car $283$ est en dehors des
 \fbox{\begin{minipage}{.95\linewidth}
 \ifprof
 \begin{corrige}
+\begin{enumerate}
+\item On a $24-83 =-59$. 
+\item Conversion de 59 en binaire : $(59)_{10}=(00111011)_2$.
+\item Inversion des bits : $(11000100)_2$.
+\item Ajout de 1 :$(11000101)_2$.
+\item Au final, $(-59)_{10}=(11000101)_2$.
+\end{enumerate}
+
 \end{corrige}
 \else
 \usebox{\codebox}
@@ -217,7 +227,8 @@ Il n'est pas possible de réaliser la somme $200+83$ car $283$ est en dehors des
 
 
 \subsection{Algorithmique et programmation}
-
+\ifprof
+\else
 Le but de cette partie est de réaliser un programme permettant de réaliser le codage d'un nombre entier relatif en utilisant le codage en complément à 2. 
 
 \begin{py}
@@ -248,8 +259,11 @@ Une chaîne de caractère se comporte comme un liste. En effet prenons par exemp
 \end{python}
 \end{minipage}
 \end{py}
-
+\fi
 \subsubsection{Conversion d'un nombre décimal en binaire}
+\ifprof
+\else
+
 On donne l'extrait de programme suivant permettant de convertir un nombre entier positif \textsf{nb} en chaine de caractères \textsf{res} dont le contenu est le nombre en binaire. 
 
 
@@ -270,6 +284,7 @@ while quotient != 0 :
 \end{python}
 \end{minipage}
 \end{py}
+\fi
 
 \subparagraph{}\textit{Quel est le type des variables \textsf{dividende} et \textsf{resultat}.}
 
@@ -281,6 +296,10 @@ while quotient != 0 :
 \fbox{\begin{minipage}{.95\linewidth}
 \ifprof
 \begin{corrige}
+\begin{itemize}
+\item \textsl{dividende} est de type int (\textsl{integer}, entier).
+\item \textsl{resultat} est de type str (\textsl{string}, chaîne de caractère).
+\end{itemize}
 \end{corrige}
 \else
 \usebox{\codebox}
@@ -300,6 +319,9 @@ while quotient != 0 :
 \fbox{\begin{minipage}{.95\linewidth}
 \ifprof
 \begin{corrige}
+L'objectif de cette boucle est de déterminer le codage d'un nombre en base 2. Selon la méthode <<naïve>> il faut réaliser des divisions successives par 2  jusqu'à ce que le quotient de la division soit nul. 
+
+La boucle se poursuit donc tant que le quotient est nul.
 \end{corrige}
 \else
 \usebox{\codebox}
@@ -307,9 +329,13 @@ while quotient != 0 :
 \fi
 \end{minipage}}}
 
+\ifprof
+\else
 \newpage
+\fi
 
 \subparagraph{}\textit{On cherche à analyser l'évolution des variables lors du parcours de la boucle \textsf{while}. Remplir les champs suivants.}
+
 
 %%% Question 9
 \vspace{.3cm}
@@ -317,6 +343,44 @@ while quotient != 0 :
 \colorbox{white}{\textbf{Question 9}}}{
 \setlength{\fboxsep}{10pt}
 \fbox{\begin{minipage}{.95\linewidth}
+
+\ifprof
+\begin{corrige}
+\begin{center}
+\begin{tabular}{|p{6cm}|p{.3cm} c p{.3cm}|p{.3cm} c p{.3cm}|p{.3cm} c p{.3cm}|p{.3cm} c p{.3cm}|}
+\hline
+&&&&&&&&&&&& \\
+&& \rotatebox{90}{Dividende}&& 
+&\rotatebox{90}{Diviseur} &&
+&\rotatebox{90}{Résultat} &&
+&\rotatebox{90}{Quotient}&
+\\
+\hline \hline
+&&&&&&&&&&&& \\
+État des variables après la ligne 6 
+&&10&&&2&&&'' ''&&&-10& \\
+&&&&&&&&&&&& \\
+\hline
+&&&&&&&&&&&& \\
+État des variables après la ligne 11 - Première itération de la boucle while 
+&&5&&&2&&&''0''&&&5& \\
+\hline
+&&&&&&&&&&&& \\
+État des variables après la ligne 11 - Seconde itération de la boucle while 
+&&2&&&2&&&''10''&&&2& \\
+\hline
+&&&&&&&&&&&& \\
+État des variables après la ligne 11 - Troisième itération de la boucle while 
+&&1&&&2&&&''010''&&&1& \\
+\hline
+&&&&&&&&&&&& \\
+État des variables après la ligne 11 - Quatrième itération de la boucle while 
+&&0&&&2&&&''1010''&&&0& \\
+\hline
+\end{tabular}
+\end{center}
+\end{corrige}
+\else
 \textit{Remarque : le document réponse ne présume pas du nombre d'itérations de la boucle while.}
 \begin{center}
 \begin{tabular}{|p{6cm}|p{.3cm} c p{.3cm}|p{.3cm} c p{.3cm}|p{.3cm} c p{.3cm}|p{.3cm} c p{.3cm}|}
@@ -356,12 +420,12 @@ while quotient != 0 :
 État des variables après la ligne 11 - Sixième itération de la boucle while 
 &&&&&&&&&&&& \\
 \hline
-
 \end{tabular}
 \end{center}
-\usebox{\codebox}
-
+%\usebox{\codebox}
+\fi
 \end{minipage}}}
+
 
 
 \subparagraph{}\textit{Parmi les lignes 8, 9 et 10, réaliser des modifications qui permettent de mieux utiliser les opérations disponibles en Pyhon. }
@@ -373,12 +437,23 @@ while quotient != 0 :
 \colorbox{white}{\textbf{Question 10}}}{
 \setlength{\fboxsep}{10pt}
 \fbox{\begin{minipage}{.95\linewidth}
+\ifprof
+\begin{corrige}
+\begin{itemize}
+\item quotient = dividende // diviseur
+\item reste = dividende \% diviseur
+\end{itemize}
+\end{corrige}
+\else
 \usebox{\codebox}
 \vspace{3cm}
+\fi
 \end{minipage}}}
 
-
+\ifprof
+\else
 \newpage
+\fi
 
 \subparagraph{}\textit{Après exécution de la liste que contient la variable \textsf{resultat} ?
  Est-ce le résultat attendu ? Si ce n'est pas le résultat attendu, corriger l'algorithme en conséquence.} 
@@ -390,14 +465,22 @@ while quotient != 0 :
 \colorbox{white}{\textbf{Question 11}}}{
 \setlength{\fboxsep}{10pt}
 \fbox{\begin{minipage}{.95\linewidth}
+\ifprof
+\begin{corrige}
+La variable \textsl{resultat} contient la chaîne de caractère \textsl{1010} ce qui est bien le résultat attendu. 
+\end{corrige}
+\else
 \usebox{\codebox}
 \vspace{4cm}
+\fi
 \end{minipage}}}
 
 
 \subsubsection{Programme mystère}
 On cherche à convertir le nombre $(-10)_{10}$ en base 2. Le système utilisé utilise un codage sur 8 bits. La conversion du nombre $(10)_{10}$ en binaire est $(1010)_{2}$.
 
+\ifprof
+\else
 On donne cette partie de programme. 
 \begin{py}
 \begin{minipage}[c]{.75\linewidth}
@@ -409,6 +492,7 @@ while(len(res_cv)!=nb_bits):
 \end{python}
 \end{minipage}
 \end{py}
+\fi
 
 \subparagraph{}
 \textit{Quel est le but du programme précédent ? Que contient \textsf{res\_cv} après l'exécution du code ?}
@@ -419,14 +503,23 @@ while(len(res_cv)!=nb_bits):
 \colorbox{white}{\textbf{Question 12}}}{
 \setlength{\fboxsep}{10pt}
 \fbox{\begin{minipage}{.95\linewidth}
+\ifprof
+\begin{corrige}
+Le programme précédent permet, lorsque les nombre sont codés sur $n$ bits, de compléter les 0 manquants. 
+
+\textsf{res\_cv} contient $0000\;1010$.
+\end{corrige}
+\else
 \usebox{\codebox}
 \vspace{4cm}
+\fi
 \end{minipage}}}
 
 
 \subsubsection{Inversion des bits}
 On cherche maintenant à inverser les bits d'une séquence.
-
+\ifprof
+\else
 \begin{py}
 \begin{minipage}[c]{.75\linewidth}
 \begin{python}
@@ -440,8 +533,12 @@ for i in range(len(res_cv)):
 \end{python}
 \end{minipage}
 \end{py}
+\fi
 
+\ifprof
+\else
 \newpage
+\fi
 
 \subparagraph{}
 \textit{Que contient \textsf{res\_inv} après l'exécution de la boucle ?}
@@ -453,6 +550,9 @@ for i in range(len(res_cv)):
 \setlength{\fboxsep}{10pt}
 \fbox{\begin{minipage}{.95\linewidth}
 \ifprof
+\begin{corrige}
+Après exécution de la boucle, \textsf{res\_inv} contient la séquence ''1010''.
+\end{corrige}
 \else
 \usebox{\codebox}
 \vspace{2cm}
@@ -469,8 +569,14 @@ for i in range(len(res_cv)):
 \colorbox{white}{\textbf{Question 14}}}{
 \setlength{\fboxsep}{10pt}
 \fbox{\begin{minipage}{.95\linewidth}
+\ifprof
+\begin{corrige}
+Le but de la séquence étant précédente étant d'inverser la séquence de bits, l'objectif n'est pas atteint. Il faudrait permuter les lignes 5 et 7. 
+\end{corrige}
+\else
 \usebox{\codebox}
 \vspace{2cm}
+\fi
 \end{minipage}}}
 
 
@@ -480,7 +586,8 @@ for i in range(len(res_cv)):
 \subsubsection{Additionner 1}
 Voici une séquence de programme permettant d'ajouter 1 à un nombre codé en binaire.
 
-
+\ifprof
+\else
 \begin{py}
 \begin{minipage}[c]{.75\linewidth}
 \begin{python}
@@ -505,7 +612,7 @@ for i in range(len(res_inv)-1,-1,-1):
 \end{minipage}
 
 \end{py}
-  
+\fi
   \begin{lrbox}{\codebox}
 \begin{python}
 \end{python}
@@ -513,7 +620,7 @@ for i in range(len(res_inv)-1,-1,-1):
 
   
 \subparagraph{}
-\textit{Quels sont les structures algorithmiques utilisées dans ce programme ? Explique l'existence des lignes 6, 9, 12 et 15.}
+\textit{Quelles sont les structures algorithmiques utilisées dans ce programme ? Expliquer l'existence des lignes 6, 9, 12 et 15.}
 
 %%% Question 15
 \vspace{.3cm}
@@ -521,8 +628,22 @@ for i in range(len(res_inv)-1,-1,-1):
 \colorbox{white}{\textbf{Question 15}}}{
 \setlength{\fboxsep}{10pt}
 \fbox{\begin{minipage}{.95\linewidth}
+\ifprof
+\begin{corrige}
+Les structures algorithmiques utilisées sont : la boucle pour et la structure conditionnelle si ... sinon.
+
+Les 4 combinaisons de si permettent de programme de façon naïve les règles de l'addition binaire : 
+\begin{itemize}
+\item le résultat de 0 + 0 est 0;
+\item le résultat de 0 + 1 est 1;
+\item le résultat de 1 + 1 est 0 et on retient 1. 
+\end{itemize}
+
+\end{corrige}
+\else
 \usebox{\codebox}
 \vspace{4cm}
+\fi
 \end{minipage}}}
   
 

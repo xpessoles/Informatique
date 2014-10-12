@@ -73,8 +73,10 @@ def conversionBinaireN(nb):
     quotient = -nb
     
     while quotient != 0 :
-        quotient = int(dividende/diviseur)
-        reste = dividende - diviseur * quotient        
+        # quotient = int(dividende/diviseur)
+        quotient = dividende // diviseur
+        #reste = dividende - diviseur * quotient
+        reste = dividende % diviseur
         dividende = quotient
         resultat = resultat + str(reste)
     
@@ -84,7 +86,7 @@ def conversionBinaireN(nb):
         
     return res
     
-    
+print(conversionBinaireN(30))    
 #print(conversionBinaireN(16))
 
 
@@ -111,9 +113,11 @@ res_cv = "1010"
 res_inv = ""
 for i in range(len(res_cv)):
     if res_cv[i]=="0":
-        res_inv=res_inv+"1"
-    else :
         res_inv=res_inv+"0"
+    else :
+        res_inv=res_inv+"1"
+print(">>>" + res_cv)
+print(">>>" + res_inv)
 #print(conversionBinaireZ(1,3))
 #print(decodageBinaireZ("0111"))
 #print(conversionBinaireZ(-3,3))
