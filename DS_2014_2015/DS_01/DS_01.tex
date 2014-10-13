@@ -264,7 +264,7 @@ Une chaîne de caractère se comporte comme un liste. En effet prenons par exemp
 \ifprof
 \else
 
-On donne l'extrait de programme suivant permettant de convertir un nombre entier positif \textsf{nb} en chaine de caractères \textsf{res} dont le contenu est le nombre en binaire. 
+On donne l'extrait de programme suivant permettant de convertir un nombre entier positif en nombre binaire binaire. 
 
 
 \begin{py}
@@ -280,7 +280,7 @@ while quotient != 0 :
     quotient = int(dividende/diviseur)
     reste = dividende - diviseur * quotient
     dividende = quotient
-    resultat = resultat + str(reste)
+    resultat = str(reste)+resultat
 \end{python}
 \end{minipage}
 \end{py}
@@ -309,7 +309,7 @@ while quotient != 0 :
 
 
 
-\subparagraph{}\textit{Expliquer le ligne 7. Justifier ce choix.}
+\subparagraph{}\textit{Expliquer la ligne 7. Justifier ce choix.}
 
 %%% Question 8
 \vspace{.3cm}
