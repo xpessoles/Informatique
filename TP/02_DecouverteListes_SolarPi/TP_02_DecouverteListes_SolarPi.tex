@@ -1,0 +1,397 @@
+\documentclass[10pt]{article}
+\input{style/coursHeadings}
+\input{style/programHeadings}
+\input{style/macros_SII}
+\input{style/macros_Titres}
+\input{style/macros_Frames}
+
+%Si le boolen xp est vrai : compilation pour xabi
+%Sinon compilation Damien
+\newif\ifprof
+%\proftrue
+\proffalse
+
+\newif\ifxp
+\xptrue
+%\xpfalse
+
+\newif\iftd
+\tdtrue
+%\tdfalse
+
+\usepackage[%
+    pdftitle={},
+    pdfauthor={Xavier Pessoles},
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=magenta]{hyperref}
+
+\def\discipline{Informatique}
+\def\xxtitre{%
+\ifxp
+Partie 2 : Algorithmique \& Programmation
+\else
+\fi
+}
+
+\def\xxsoustitre{%
+\ifxp
+TP 2 : Listes et tracés de graphiques
+\else
+\fi}
+
+\def\xxauteur{%
+\ifxp
+\textit{Xavier Pessoles} \\
+\textit{Gilles Himmeslpach}
+\else
+\fi}
+
+\def\xxpied{%
+\ifxp
+Partie 2 : Algorithmique \& Programmation\\
+TP 2 : Listes et tracés de graphiques
+\else
+\fi}
+
+
+
+
+
+
+%---------------------------------------------------------------------------
+
+
+\begin{document}
+\ifxp
+\input{style/enteteXP}
+\else
+\input{style/enteteDI}
+\fi
+
+
+
+ \renewcommand{\baselinestretch}{1.2}
+\setlength{\parskip}{2ex plus 0.5ex minus 0.2ex}
+
+
+\begin{obj}
+\begin{itemize}
+\item Découvrir et utiliser les listes.
+\item Découvrir les tracés de graphiques.
+\end{itemize}
+\end{obj}
+ 
+
+\section{Découverte des listes}
+
+Taper dans le shell les commandes suivantes :
+\begin{py}
+\begin{python}
+>>> t=[3,5,-4]
+>>> type(t)
+>>> t.append(7)
+>>> print(t)
+>>> print(t[1])
+>>> len(t)
+>>> t.append(-2)
+>>> print(t)
+>>> len(t)
+>>> 10 in t
+>>> t[2]=10
+>>> print(t)
+>>> 10 in t
+\end{python}
+\end{py}
+
+\subparagraph{}
+\textit{\begin{itemize}
+\item \`A quoi sert la méthode \texttt{.append} appliquée à une liste ? 
+\item \`A quoi sert la fonction \texttt{len()} ? 
+\item Que renvoie l'instruction \texttt{10 in t} ?
+\item Comment modifier le premier terme d'une liste ?
+\end{itemize}}
+
+\section{Courbe polaire d'un profil d'aile d'avion}
+\setcounter{subparagraph}{0}
+La figure \ref{fig:profil-aile} illustre une expérience aérodynamique réalisée en soufflerie, dont le but est d'évaluer les performances d'un profil d'aile d'avion. Des capteurs d'efforts mesurent la valeur de la portance et de la trainée pour différents angles d'incidence. Les valeurs mesurées sont données dans le tableau \ref{tab:mesures-aero}.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=.7\linewidth]{images/profil-aile.pdf}
+\caption{Essai aérodynamique en soufflerie}\label{fig:profil-aile}
+\end{figure}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|l|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+incidence (°) & -9 & -6 & -3 & 0 & 3 & 6 & 9 & 12 & 15 & 18 & 21 & 24 & 27 & 30 \\
+\hline
+trainée (N) & 7 &5&4&3&3&4&5&7&10&13&16&18&19&20 \\
+\hline
+portance (N) &-20&-18&0&13&37&47&60&74&83&90&87&80&75&52\\
+\hline
+\end{tabular}
+\caption{Résultats des mesures aérodynamiques}\label{tab:mesures-aero}
+\end{table}
+
+
+
+
+\subparagraph{}
+\textit{\'Ecrire un programme permettant de créer une liste notée \texttt{incidence}, formée par les 14 premiers termes d'une suite arithmétique de valeur initiale -9 et de raison 3. On utilisera pour cela une boucle. Vérifier ensuite que la liste \texttt{incidence} vaut bien [-9,-6,-3,\ldots{},27,30]}
+
+
+
+Taper le programme suivant :
+\begin{py}
+\begin{python}
+import matplotlib.pyplot as plt			#bibliothèque de tracés graphiques
+trainee=[7,5,4,3,3,4,5,7,10,13,16,18,19,20]
+portance=[-20,-18,0,13,37,47,60,74,83,90,87,80,75,52]
+plt.plot(trainee,portance)
+plt.show()
+\end{python}
+\end{py}
+
+\begin{rem}
+La courbe obtenu est appelée \emph{polaire} d'un profil. C'est une courbe paramétrique représentant l'évolution de la portance et de la trainée en fonction de l'angle d'incidence.
+\end{rem}
+
+\subparagraph{}
+\textit{En aérodynamique, la finesse $f$ est définie par le quotient $f=\dfrac{\text{portance}}{\text{trainée}}$. Construire une nouvelle liste notée \texttt{finesse} à partir des listes \texttt{portance} et \texttt{trainee}, donnant la valeur de la finesse pour chaque angle d'incidence.}
+
+\subparagraph{}
+\textit{Trouver, par un programme, l'incidence pour laquelle la finesse est maximale. C'est cet angle d'incidence qui permet de planer le plus loin possible, en cas de panne moteur sur un avion par exemple.}
+
+\subparagraph{}
+\textit{Justifier qu'au point de finesse maximale, la tangente à la polaire passe par l'origine du repère. Le vérifier graphiquement en rajoutant quelques lignes au programme précédent.}
+
+
+
+\section{Courbe représentative d'une fonction $y=f(x)$}
+\setcounter{subparagraph}{0}
+On souhaite à présent tracer la courbe $\mathcal{C}$ représentative de la fonction $f(x)=\sin x$ pour $x$ compris entre 0 et $4\pi$. Pour cela, nous allons créer deux listes notées \texttt{x} et \texttt{y}, comprenant respectivement les abscisses et ordonnées de points situés sur la courbe~$\mathcal{C}$.
+
+
+\subparagraph{}
+\textit{Taper les commandes suivantes dans le shell, et en déduire quel est le rôle de la commande \texttt{np.linspace}. Par quel séquence pourrait-on remplacer la commande \texttt{x=np.linspace(0,4*pi,10)} ?}
+\begin{py}
+\begin{python}
+>>> import numpy as np
+>>> x=np.linspace(0,4*pi,10)
+>>> print(x)
+\end{python}
+\end{py}
+
+A présent, taper dans le shell :
+\begin{py}
+\begin{python}
+>>> sin(2)
+>>> from math import sin
+>>> sin(2)
+\end{python}
+\end{py}
+
+\subparagraph{}
+\textit{Quel est le résultat ? Proposer un programme permettant de construire une liste \texttt{y} à partir de la liste \texttt{x} précédente, de telle sorte que \texttt{y[i]=sin(x[i])}}
+
+\begin{rem}
+la fonction \texttt{len(x)} renvoie le nombre de termes d'une  liste \texttt{x}
+\end{rem}
+
+Taper ensuite les commandes :
+\begin{py}
+\begin{python}
+>>> plt.plot(x,y)
+>>> plt.show()
+\end{python}
+\end{py}
+
+\subparagraph{}
+\textit{Quel problème constatez-vous sur la courbe obtenue ? Proposer une solution pour y remédier.}
+
+\subparagraph{}
+Nous allons à présent ajouter un titre au graphique, et des étiquettes sur les axes. Taper le programme suivant dans l'éditeur de texte et l'exécuter :
+\begin{py}
+\begin{python}
+import numpy as np
+import matplotlib.pyplot as plt
+from math import sin
+x=np.linspace(0,4*pi,100)
+y=[]
+for i in range(len(x)) :
+	y.append(sin(x[i]))
+plt.plot(x,y)
+plt.title("Evolution de la position en fonction du temps")
+plt.xlabel("temps (s)")
+plt.ylabel("position (rad)")
+plt.show()
+\end{python}
+\end{py}
+
+%\begin{center}
+%\includegraphics[width=7cm]{images/figure-sinus.pdf}
+%\end{center}
+
+
+\section{Courbe paramétrique}
+
+Tracer la courbe représentée par les équations paramétriques suivantes, pour $t \in [ 0,2 \pi ]$. De quel type de courbe s'agit-il ? 
+\[
+\left\lbrace
+\begin{aligned}
+x&=5 \cos t \\
+y&=\sin t
+\end{aligned}
+\right.
+\]
+
+Ajouter ensuite la commande suivante, juste avant \texttt{plt.show()} :
+\begin{py}
+\begin{python}
+plt.axis("equal")
+\end{python}
+\end{py}
+Quel est le rôle de cette commande ?
+
+
+
+\section{Le projet Solar-Pi}
+\setcounter{subparagraph}{0}
+\subsection{Présentation}
+
+Le projet Solar-Pi est développé au lycée Rouvière en BTS Systèmes numériques. C'est un ballon-sonde destiné à relever des informations sur la composition de l'atmosphère à très haute altitude (30 km), pouvant également transmettre des photos en temps réel par VHF. La nacelle est équipée d'un nano-ordinateur Raspberry Pi (Les détails du projet sont disponibles à l'adresse http://www.btssn.net/)
+
+\begin{center}
+\includegraphics[width=12cm]{images/solarpi3.jpg}\\
+\includegraphics[width=12cm]{images/solarpi1.png}
+\end{center}
+
+
+Dans le cadre de ce projet, les étudiants ont besoin de prévoir différents paramètres de l'atmosphère pour concevoir au mieux leur système, par exemple :
+\begin{itemize}
+\item la température et l'humidité à laquelle seront soumis les capteurs et les batteries
+\item le risque de givrage (objectif de l'appareil photo et des capteurs)
+\item la pression de l'air (choix d'un capteur qui puisse couvrir toute la plage de mesure)
+\item la masse volumique de l'air (influence sur la poussée d'Archimède et donc sur l'altitude maximale)
+\end{itemize}
+
+\subsection{But du TP}
+
+Le but de notre étude est de créer un programme en Python qui permette de prévoir la quantité d'hélium à introduire dans le ballon pour atteindre l'altitude de 30 km. Pour cela, nous utiliserons les données de l'atmosphère type Organisation de l'Aviation Civile Internationale (OACI) décrites ci-dessous.
+
+\subsection{Atmosphère type OACI}
+
+L'atmosphère standard est constitué de couches successives :
+\begin{itemize}
+\item entre 0 et 11 km : la troposphère. La température vaut 15°C au niveau de la mer, et baisse régulièrement de 6,5°C par km.
+\item entre 11 et 20 km : la tropopause. La température y reste constante.
+\item entre 20 et 32 km : la stratosphère inférieure. La température y augmente régulièrement de 1°C par km.
+\item entra 32 et 47 km : la stratosphère supérieure. La température y augmente régulièrement de 2,8°C par km.
+\item les étages supérieurs ne sont pas étudiés.
+\end{itemize}
+
+\begin{rem}
+La température augmente en fonction de l'altitude dans la stratosphère, en raison de la présence d'ozone qui filtre les rayons UV du soleil.
+\end{rem}
+
+\subsection{Travail demandé}
+\subsubsection*{\'Evolution de la température en fonction de l'altitude}
+\subparagraph{}
+\textit{Écrire un programme Python qui créé une liste notée \texttt{temperature}, contenant la température en kelvin pour chaque altitude entière (en mètre). Par exemple, \texttt{temperature[23500]} sera la température à l'altitude de 23500 mètres. Cette liste devra couvrir toutes les altitudes allant de 0 à 47000 m, elle contiendra donc 47001 termes.}
+
+\subparagraph{}
+\textit{Tracer la courbe de l'évolution de la température en fonction de l'altitude (en km). Quelles sont les valeurs extrêmes de la température entre 0 et 47 km d'altitude ?}
+
+\begin{rem}
+Toutes les courbes tracées doivent comporter un titre, et une étiquette sur chaque axe (abscisse et ordonnée) précisant les unités des grandeurs.
+\end{rem}
+
+\subsubsection*{\'Evolution de la pression et de la masse volumique de l'air}
+$\rho(z)$ représente la masse volumique de l'air. $g$ représente l'accélération de la pesanteur, supposée indépendante de l'altitude.
+
+\subparagraph{}
+\textit{Justifier que si la pression vaut $p(z)$ à l'altitude $z$, alors à l'altitude $z+\Delta z$ elle sera proche de :
+\[p(z+\Delta z)=p(z)-\rho(z) g \Delta z\] }
+
+\subparagraph{}\textit{
+La masse volumique de l'air, quant à elle, vérifie la loi des gaz parfaits : $p=\rho r T$ dans laquelle $r$ représente la constante spécifique de l'air ($r=287$ J.kg\up{-1}.K\up{-1}). Justifier que dans ces conditions, on peut construire deux listes, notées
+\texttt{pression} et \texttt{masseVolumique}, par le pseudo-code suivant :}
+
+\begin{pseudo}
+\begin{algorithm}[H]
+\KwData{$r=287 \qquad Z_{\text{max}}=47000 \qquad g=9.81$}
+$T\gets$ liste crée dans la question 1\\
+$P \gets [\text{pression atmosphérique au niveau de la mer}]$\\
+$\rho \gets [\text{masse volumique de l'air au niveau de la mer}]$\\
+$i\gets 0$\\
+\Tq{$i< Z_{\text{max}}$}{
+$P[i+1] \gets P[i]-\rho[i] g$\\
+$\rho[i+1] \gets \dfrac{P[i+1]}{rT[i+1]}$\\
+$i \gets i+1$
+}
+\end{algorithm}
+\end{pseudo}
+
+Ainsi, par exemple, le terme \texttt{pression[32800]} donnera la pression atmosphérique à l'altitude de 32800 m. Le terme \texttt{masseVolumique[12400]} donnera la masse volumique de l'air à l'atitude de 12400 m.
+
+
+\subparagraph{}
+\textit{Tracer l'évolution de la pression atmosphérique en fonction de l'altitude, pour une altitude comprise entre 0 et 47 km. Comparer vos résultats avec ceux fournis par Météo-France sur la figure \ref{fig:meteo-france}}
+
+\begin{rem}
+Voici comment créer plusieurs figures dans un même programme :
+\begin{py}
+\begin{python}
+plt.figure(1)
+plt.plot(x1,y1)		
+
+plt.figure(2)
+plt.plot(x2,y2)
+
+plt.figure(3)
+plt.plot(x3,y3)
+
+plt.show()
+\end{python}
+\end{py} 
+\end{rem}
+
+
+\subsubsection*{Exploitation des résultats}
+
+\subparagraph{}
+\textit{Le ballon sonde doit atteindre l'altitude de 30 km au minimum. Quelle est la pression, la température et la masse volumique de l'air à cette altitude ?}
+
+\begin{figure}
+\centering
+\includegraphics[width=10cm]{images/meteofrance.jpg}
+\caption{Données atmosphériques selon Météo-France}\label{fig:meteo-france}
+\end{figure} 
+
+\subparagraph{}
+\textit{Si la masse de l'ensemble volant est de $M=2,5$ kg, quel doit être le volume minimal du ballon pour pouvoir atteindre l'altitude de 30 km ? }
+
+\begin{rem}
+\begin{itemize}
+\item On supposera que le ballon n'est soumis qu'à deux forces : son poids et la poussée d'Archimède.
+\item Le ballon étant élastique, son volume change en fonction de la pression atmosphérique. Il s'agit dans cette question de son volume à l'altitude de 30 km.
+\end{itemize}
+\end{rem}
+
+\subparagraph{}
+\textit{L'hélium vérifie la loi des gaz parfaits : \[P=\rho r_{He} T \qquad \text{avec } r_{He}=2077\text{ J.kg\up{-1}.K\up{-1}}\]
+En déduire la masse d'hélium que doit contenir le ballon pour atteindre l'altitude de 30 km. \newline Quel volume cela représente-t-il au sol ?}
+
+\begin{rem}
+On supposera dans cette question que la pression et la température s'équilibrent à tout instant entre l'intérieur et l'extérieur du ballon. Cette hypothèse est pertinente au vu de la faible épaisseur de la paroi du ballon, et de la lenteur de son évolution dans l'atmosphère.
+\end{rem}
+
+
+
+
+\end{document}
+
+
