@@ -161,7 +161,8 @@ A la nième itération, on a la relation a $a_n=q_n\times b_n +r_n$ où $q_n$ es
 \begin{defi}
 \textbf{Variables}
 
-Une variable permet de stocker des informations. Une variable est définie par : 
+Une variable permet de stocker des informations. Une variable est définie par :
+ \begin{multicols}{2}
 \begin{itemize}
 \item un identificateur (nom de la variable);
 \item un type;
@@ -169,6 +170,7 @@ Une variable permet de stocker des informations. Une variable est définie par :
 \item une référence;
 \item des opérations. 
 \end{itemize}
+\end{multicols}
 \end{defi}
 
 
@@ -191,12 +193,11 @@ Le nom d'une variable commence par une lettre.
 En python, les noms de variables suivants sont interdits : 
 \begin{center}
 \textsf{
-\begin{tabular}{lllllll}
-and & as & assert & break & class & continue & def \\
-del & elif & else & except & False & finally & for \\
-from & global & if & import & in & is & lambda \\
-None & nonlocal & not & or & pass & raise & return \\
-True & try & while & with & yield \\
+\begin{tabular}{lllllllll}
+and & as & assert & break & class & continue & def & True & try \\
+del & elif & else & except & False & finally & for & while & \\
+from & global & if & import & in & is & lambda & with & \\
+None & nonlocal & not & or & pass & raise & return & yield& \\
 \end{tabular}}
 \end{center}
 \end{rem}
@@ -404,7 +405,7 @@ Une liste est une collection de plusieurs éléments qui peuvent avoir un type d
 
 \begin{exemple}
 
-\begin{minipage}[c]{.45\linewidth}
+\begin{minipage}[c]{.6\linewidth}
 \begin{py}
 \begin{python}
 >>> x=[1,"b",3,"coucou"] # Creer une liste
@@ -577,35 +578,32 @@ un espace mémoire est réservé dans la mémoire de l'ordinateur. Cet espace m�
 
 \textit{Affectation simple}
 
-Lorsqu'on copie une variable simple, un nouvel espace mémoire avec une nouvelle adresse est créé. La valeur est recopiée dans la nouvelle variable.
-
-\begin{minipage}[c]{.3\linewidth}
+Lorsqu'on copie une variable simple, un nouvel espace mémoire avec une nouvelle adresse est créé. 
+\begin{minipage}[c]{.45\linewidth}
 \begin{pseudo}
 \begin{algorithm}[H]
-$a \gets 1$
+$a \gets 1$ \\
+$b \gets a$ \\
 \end{algorithm}
 \end{pseudo}
 \end{minipage}\hfill
-\begin{minipage}[c]{.3\linewidth}
+\begin{minipage}[c]{.45\linewidth}
 \begin{py}
 \begin{python}
 >>> a=2
 >>> id(a) 
     15590464
->>> b=a
->>> id(b) 
-    505894320
 \end{python}
 \end{py}
-\end{minipage}\hfill
-\begin{minipage}[c]{.3\linewidth}
-\begin{sci}
-\begin{scilab}
---> a=2
-\end{scilab}
-\end{sci}
+\end{minipage}%\hfill
 %\begin{minipage}[c]{.3\linewidth}
-\end{minipage}
+%\begin{sci}
+%\begin{scilab}
+%--> a=2
+%\end{scilab}
+%\end{sci}
+%\begin{minipage}[c]{.3\linewidth}
+%\end{minipage}
 
 \end{exemple}
 
@@ -689,6 +687,11 @@ l
 
 \end{exemple}
 
+
+\begin{rem}
+En Python, le passage des éléments se fait toujours par référence. Il faudra donc prendre garde à la manipulation des variables, notamment lorsqu'on leur applique des fonctions. 
+ 
+\end{rem}
 
 \subsubsection{Affectation externe}
 
