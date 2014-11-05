@@ -133,6 +133,22 @@
 }%
 {\endMakeFramed}%
 
+
+
+\newenvironment{rappels}[1][\hsize]%
+{%
+    \def\FrameCommand
+    {%
+\rotatebox{90}{\textit{\textsf{Rappels}}} 
+        {\color{bleuf}\vrule width 3pt}%
+        \hspace{0pt}%must no space.
+        \fboxsep=\FrameSep\colorbox{bleuc}%
+    }%
+    \MakeFramed{\hsize#1\advance\hsize-\width\FrameRestore}%
+}%
+{\endMakeFramed}%
+
+
 \newenvironment{Objectif}[1][\hsize]%
 {%
     \def\FrameCommand

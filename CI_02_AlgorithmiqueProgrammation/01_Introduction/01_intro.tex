@@ -1,4 +1,4 @@
-\documentclass[11pt,oneside]{article}
+\documentclass[10pt,oneside]{article}
 \input{style/coursHeadings}
 \input{style/programHeadings}
 
@@ -20,7 +20,7 @@ Chapitre 1 -- Introduction à la programmation}{
 Partie  -- }}
 
 \def\xxauteur{\ifthenelse{\boolean{xp}}{
-Xavier \textsc{Pessoles} \\ Damien \textsc{Iceta}}{
+Xavier \textsc{Pessoles}}{
 Damien \textsc{Iceta} \\ Xavier \textsc{Pessoles}}}
 
 \def\xxpied{\ifthenelse{\boolean{xp}}{
@@ -71,14 +71,91 @@ Informatique - Cours}}
 
 \tableofcontents
 
- \renewcommand{\baselinestretch}{1.2}
-\setlength{\parskip}{2ex plus 0.5ex minus 0.2ex}
 
 % \vspace{1cm}
 \textit{Ce document évolue. Merci de signaler toutes les erreurs ou coquilles rencontrées.}
 
 
 \section{Variables}
+\subsection{Exemple d'algorithme : L'algorithme d'Euclide}
+\begin{rappels}
+\begin{enumerate}
+\item Pour $a,b$ deux entiers, on dit que $b$ divise $a$ si $a$ s'écrit $kb$ avec $k$ un \textbf{entier} (ex : $5$ divise $45$).
+\item Pour $a,b \in \mathbb{N}$, non tous deux nuls, on note $PGCD(a,b)$ le plus grand diviseur commun à $a$ et à $b$\\
+ (ex : $\text{PGCD(45,30)}=15$).
+\item Pour tout entier naturel $a$, $\text{PGCD(a,0)}=a$ (tout entier divise $0$).
+\end{enumerate}
+\end{rappels}
+
+\begin{prop}
+Soient $a,b$ deux entiers naturels. $b$ non nul. On note $r$ le reste dans la division euclidienne de $a$ par $b$.\\
+$$\text{ On a : }\text{PGCD(a,b)}=\text{PGCD(b,r)}$$
+\end{prop}
+\begin{exemple}
+\textit{Calcul de $\text{PGCD}(1525,755)$.}
+\begin{center}
+\includegraphics[width=0.7\textwidth]{images/euclide.png}
+\end{center}
+\end{exemple}
+
+\begin{rem}
+\begin{enumerate}
+\item Le procédé précédent est un algorithme : <<ensemble de règles opératoires dont l'application permet de résoudre un problème énoncé au moyen d'un nombre fini d'opérations>>.
+\item Pour coder des algorithmes nous utiliserons :
+\begin{enumerate}
+\item des variables (ici $a,b,r$) qui auront des valeurs assignées;
+\item des instructions : des affectations, des opérations,...;
+\item des expressions logiques : ici dire si le reste est nul ou non;
+\item des boucles : (ici une boucle Tant que) pour répéter des instructions;
+\item une rédaction sous forme de fonction : pour pouvoir appeler cet algorithme à d'autres endroits de notre programme.
+\end{enumerate}
+\end{enumerate}
+\end{rem}
+
+\begin{minipage}[c]{.48\linewidth}
+\begin{py}
+Codage en Pythonde l'algorithme d'Euclide :
+\begin{python}
+def Euclide_PGCD(a,b):	# on définit le nom de la 
+			# fonction et ses variables 
+			#d'entrées/d'appel
+    r=a%b		# on calcule le reste dans 
+			# la division de a par b
+    
+    while r!=0:		# tant que ce reste est non nul :
+        a=b		# b devient le nouveau a
+        b=r		# r devient le nouveau b
+        r=a%b		# on recalcule le reste
+        
+    return(b)		# une fois la boucle terminée, 
+			# on retourne le dernier b    
+print(pgcd(1525,755))	# on affiche le résultat 
+			# retourné par la fonction
+\end{python}
+\end{py}
+\end{minipage}\hfill
+\begin{minipage}[c]{.48\linewidth}
+\begin{pseudo}
+\begin{tabular}{p{.9\textwidth}}
+\hline
+Fonction PGCD : algorithme d’Euclide \\
+\hline
+\textbf{Données :} a et b : deux entiers naturels non nuls tels que a > b \\
+\textbf{Résultat :} le PGCD de a et b \\
+\\
+\textbf{Euclide\_PGCD}(a,b) \\
+\hspace{.5cm}\textbf{Répéter}\\
+\hspace{1cm}r $\leftarrow$ a mod b\\
+\hspace{1cm}a $\leftarrow$ b \\
+\hspace{1cm}b $\leftarrow$ r \\
+\hspace{.5cm}\textbf{Jusqu’à} r == 0 \\
+\hspace{.5cm}\textbf{Retourner} a\\
+\hline
+\end{tabular}
+\end{pseudo}
+\end{minipage}
+
+A la nième itération, on a la relation a $a_n=q_n\times b_n +r_n$ où $q_n$ est un entier. 
 
 \subsection{Définitions}
 \begin{defi}
@@ -86,7 +163,7 @@ Informatique - Cours}}
 
 Une variable permet de stocker des informations. Une variable est définie par : 
 \begin{itemize}
-\item un identificateur;
+\item un identificateur (nom de la variable);
 \item un type;
 \item une valeur;
 \item une référence;
@@ -123,6 +200,10 @@ True & try & while & with & yield \\
 \end{tabular}}
 \end{center}
 \end{rem}
+
+\begin{exemple}
+\textit{Lister les identificateurs utilisés dans l'algorithme d'Euclide.}
+\end{exemple}
 
 
 \begin{defi}
@@ -200,6 +281,7 @@ La référence permet de créer un alias pointant directement vers l'adresse mé
 Une opération est une combinaison arithmétique de deux ou plusieurs variables. Le résultat dépend du type de variable. 
 
 Les principales opérations sont les suivantes : 
+\begin{multicols}{2}
 \begin{itemize}
 \item l'addition : \textbf{+};
 \item la soustraction : \textbf{-};
@@ -210,6 +292,7 @@ Les principales opérations sont les suivantes :
 \item le modulo : \textbf{\%};
 \item la valeur absolue : \textbf{abs}.
 \end{itemize}
+\end{multicols}
 \end{defi}
 
 
@@ -469,11 +552,11 @@ En python, les expressions ou les instructions sont séparés par des \textbf{;}
 
 \subsubsection{L'affectation simple}
 On a vu précédemment, qu'il était possible d'affecter assez simplement une valeur à une variable. Lors d'une affectation, 
-un espace mémoire est réservé dans la mémoire vive \footnote{Est-ce vraiment dans la mémoire vive ?} de l'ordinateur. Cet espace mémoire est situé à une certaine adresse.
+un espace mémoire est réservé dans la mémoire de l'ordinateur. Cet espace mémoire est situé à une certaine adresse.
 
 À cette variable on fait correspondre un identificateur (nom de la variable), une valeur, un type (booléen, entier, flottant ...) et une adresse mémoire.
 
-Tant que la variable n'est pas réaffectée, l'adresse mémoire reste inchangée.
+\textbf{Tant que la variable n'est pas réaffectée, l'adresse mémoire reste inchangée.}
 
 \begin{rem}
 \begin{minipage}[c]{.55\linewidth}
@@ -836,8 +919,9 @@ class Point3d(object):
 \end{exemple}
 
 \begin{thebibliography}{2}
-\bibitem{gs}{\textit{Apprendre à programmer avec Python 3}, Gérard Swinnen.}
-\bibitem{rc}{\textit{Introduction à Python 3}, Robert Cordeau.}
-
+\bibitem{gs}{\textit{Gérard Swinnen}, Apprendre à programmer avec Python 3.}
+\bibitem{rc}{\textit{Robert Cordeau}, Introduction à Python 3.}
+\bibitem{pb}{\textit{Patrick Beynet}, Cours d'informatique en CPGE, Lycée Rouvière Toulon, UPSTI.}
+\bibitem{ap}{\textit{Adrien Petri et Laurent Deschamps}, Cours d'informatique en TSI 1, Lycée Rouvière Toulon.}
 \end{thebibliography}
 \end{document}

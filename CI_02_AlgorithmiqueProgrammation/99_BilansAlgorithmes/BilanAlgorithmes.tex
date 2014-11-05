@@ -293,7 +293,52 @@ Afficher $x$.
 \end{algorithm}
 \end{pseudo}
 
+\begin{minipage}[c]{.48\linewidth}
+\begin{py}
+Codage en Pythonde l'algorithme d'Euclide :
+\begin{python}
+def Euclide_PGCD(a,b):	# on définit le nom de la 
+			# fonction et ses variables 
+			#d'entrées/d'appel
+    r=a%b		# on calcule le reste dans 
+			# la division de a par b
+    
+    while r!=0:		# tant que ce reste est non nul :
+        a=b		# b devient le nouveau a
+        b=r		# r devient le nouveau b
+        r=a%b		# on recalcule le reste
+        
+    return(b)		# une fois la boucle terminée, 
+			# on retourne le dernier b    
+print(pgcd(1525,755))	# on affiche le résultat 
+			# retourné par la fonction
+\end{python}
+\end{py}
+\end{minipage}\hfill
+\begin{minipage}[c]{.48\linewidth}
+\begin{pseudo}
+\begin{tabular}{p{.9\textwidth}}
+\hline
+Fonction PGCD : algorithme d’Euclide \\
+\hline
+\textbf{Données :} a et b : deux entiers naturels non nuls tels que a > b \\
+\textbf{Résultat :} le PGCD de a et b \\
+\\
+\textbf{Euclide\_PGCD}(a,b) \\
+\hspace{.5cm}\textbf{Répéter}\\
+\hspace{1cm}r $\leftarrow$ a mod b\\
+\hspace{1cm}a $\leftarrow$ b \\
+\hspace{1cm}b $\leftarrow$ r \\
+\hspace{.5cm}\textbf{Jusqu’à} r == 0 \\
+\hspace{.5cm}\textbf{Retourner} a\\
+\hline
+\end{tabular}
+\end{pseudo}
+\end{minipage}
 
+\begin{center}
+\includegraphics[width=.45\textwidth]{images/algo_euclide}
+\end{center}
 \subsection{Recherche des nombres premiers -- Crible d'Ératosthène}
 \subsection{Calcul de puissance}
 \subsubsection{Algorithme naïf}
@@ -321,9 +366,11 @@ Afficher $x$.
 \subsection{Algorithme naïf}
 \subsection{Méthode de Horner}
 
-%\begin{thebibliography}{2}
-%\bibitem{xx}{xx}
-%\end{thebibliography}
+\begin{thebibliography}{2}
+\bibitem{pb}{Patrick Beynet, Cours d'informatique de CPGE, Lycée Rouvière de Toulon, UPSTI.}
+\bibitem{ap}{Adrien Petri et Laurent Deschamps, Cours d'informatique de CPGE, Lycée Rouvière de Toulon, UPSTI.}
+\bibitem{di}{Damien Iceta, Cours d'informatique de CPGE, Lycée Gustave Eiffel de Cachan, UPSTI.}
+\end{thebibliography}
 \end{document}
 
 
