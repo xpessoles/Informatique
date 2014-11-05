@@ -1,0 +1,318 @@
+\documentclass[10pt]{article}
+\input{style/coursHeadings}
+\input{style/programHeadings}
+\input{style/macros_SII}
+\input{style/macros_Titres}
+\input{style/macros_Frames}
+
+%Si le boolen xp est vrai : compilation pour xabi
+%Sinon compilation Damien
+\newif\ifprof
+%\proftrue
+\proffalse
+
+\newif\ifxp
+\xptrue
+%\xpfalse
+
+\newif\iftd
+\tdtrue
+%\tdfalse
+
+\usepackage[%
+    pdftitle={Introduction à la programmation},
+    pdfauthor={Xavier Pessoles},
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=magenta]{hyperref}
+
+\def\discipline{Informatique}
+\def\xxtitre{%
+\ifxp
+CI 2 : Algorithmique et Programmation
+\else
+\fi
+}
+
+\def\xxsoustitre{%
+\ifxp
+Chapitre 1 -- Introduction à la programmation \\
+TD 01 -- Les Tests
+\else
+\fi}
+
+\def\xxauteur{%
+\ifxp
+Adrien \textsc{Petri} \\
+\else
+\fi}
+
+\def\xxpied{%
+\ifxp
+CI 2 : Algorithmique et Programmation\\
+Ch.  1 -- Introduction à la programmation -- TD 01
+\else
+\fi}
+
+
+
+%---------------------------------------------------------------------------
+
+
+\begin{document}
+\ifxp
+\input{style/enteteXP}
+\else
+\input{style/enteteDI}
+\fi
+
+
+
+ \renewcommand{\baselinestretch}{1.2}
+\setlength{\parskip}{2ex plus 0.5ex minus 0.2ex}
+
+
+\subsection*{Exercice 1}
+\textit{Compléter le tableau suivant :}
+
+\ifprof
+\begin{corrige}
+\begin{tabular}{|p{0.3\textwidth}|p{0.5\textwidth}|}
+\hline
+En maths : & En Python : \\ \hline
+$a \geqslant 7$ & a>=7\\ \hline
+$-5 \leqslant a < 6$ & -5<=a<6 \\
+& (-5 <= a) and (a<6) \\ \hline
+$a \neq -2$ & a!=-2\\ \hline
+$a \not \in \{1,3,6,7\}$ & a not in [1,3,6,7]\\ \hline
+$a \leqslant 7 $& \texttt{not (a > 7)} \\ \hline
+$2 \leqslant a \leqslant 7$  & \texttt{not (a > 7 and a<2)} \\ \hline
+$a < 2$    & \texttt{(not (a > 7)) and a<2} \\ \hline
+\end{tabular} \\
+\end{corrige}
+\else
+\begin{tabular}{|p{0.3\textwidth}|p{0.5\textwidth}|}
+\hline
+En mathématiques : & En Python : \\ \hline
+$a \geqslant 7$ & \\ \hline
+$-5 \leqslant a < 6$ & \\ \hline
+$a \neq -2$ & \\ \hline
+$a \not \in \{1,3,6,7\}$ & \\ \hline
+ & \texttt{not (a > 7)} \\ \hline
+  & \texttt{not (a > 7 and a<2)} \\ \hline
+    & \texttt{(not (a > 7)) and a<2} \\ \hline
+\end{tabular} 
+\fi
+\subsection*{Exercice 2}
+\textit{Que fait la fonction suivante ?}
+\begin{python}
+def fonction(x):
+	if x>=0:
+		return(x)
+	else:
+		return(-x)
+\end{python}
+
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi
+
+\subsection*{Exercice 3}
+\textit{Compléter le test suivant :}
+\ifprof
+\begin{corrige}
+\begin{py}
+\begin{python}
+def f(x):
+    if (x==2 or x==3) # 2 et 3 sont les poles de cette fraction rationnelle. x ne peut pas prendre ces 2 valeurs.
+        print("Valeur interdite !")
+    else:
+        return(1/((x-2)*(x-3)))
+\end{python}
+\end{py}
+\end{corrige}
+\else
+\begin{py}
+\begin{python}
+def f(x):
+    if 
+        print("Valeur interdite !")
+    else:
+        return(1/((x-2)*(x-3)))
+\end{python}
+\end{py}
+\fi
+
+
+\subsection*{Exercice 4}
+\textit{Un élève peu rigoureux a codé la fonction suivante :}
+\begin{python}
+from numpy import sqrt # pour calculer une racine
+
+def degre2(a,b,c):
+	""" renvoie les solutions de ax**2+b*x+c """
+	Delta=b**2-4*a*c
+	z_1=(-b+sqrt(Delta))/(2*a)
+	z_2=(-b-sqrt(Delta))/(2*a)
+	
+	return(z_1,z_2)
+\end{python} 
+
+Lorsqu'il teste avec degre2(1,-3,2) le programme fonctionne, mais avec degre2(1,1,1) Python donne une erreur (invalid value encountered in sqrt). Pourquoi ? Comment améliorer son code ?
+
+
+
+\ifprof
+\begin{corrige}
+\begin{py}
+\begin{python}
+from math import sqrt # pour calculer une racine
+
+def degre2(a,b,c):
+   """ renvoie les solutions de ax**2+b*x+c """
+   Delta=b**2-4*a*c
+   if Delta>0:
+      z_1=(-b+sqrt(Delta))/(2*a)
+      z_2=(-b-sqrt(Delta))/(2*a)
+   elif Delta==0:
+      z_1=z_2=(-b)/(2*a)
+   else:
+      z_1=complex(-b/2*a,sqrt(-Delta)/(2*a))
+      z_2=complex(-b/2*a,-sqrt(-Delta)/(2*a))
+   return(z_1,z_2)
+   
+print(degre2(1,-3,2))
+print(degre2(1,1,1))
+\end{python}
+\end{py}
+\end{corrige}
+\else
+\fi
+
+
+\subsection*{Exercice 5}
+\textit{On considère l'algorithme suivant ($n$ étant une variable définie préalablement) :}
+\begin{py}
+\begin{python}
+if n<6:
+  print("Trop jeune")
+elif n<8:
+  print("Poussin") 
+elif n<10: 
+  print("Pupille") 
+elif n<12:
+  print("Minime") 
+else 
+  print("Cadet") 
+\end{python} 
+\end{py}
+
+
+\begin{enumerate}
+\item Si l'on a 11 ans, quel message s'affiche à l'écran ?
+\item A quel intervalle d'ages correspond Poussin ? Pupille ? Cadet ?
+\end{enumerate}
+
+
+\ifprof
+\begin{corrige}
+\begin{enumerate}
+\item Si l'on a 11 ans, quel message s'affiche à l'écran ?\\
+Il s'affiche "Minime".
+\item A quel intervalle d'ages correspondent Poussin, Pupille et Cadet ?\\ 
+Poussin : 6 $\leqslant$ age< 8\\
+Pupille : 8 $\leqslant$ age< 10\\
+Cadet : age $\geqslant$ 12\\
+\end{enumerate}
+
+\end{corrige}
+\else
+\fi
+
+
+
+
+
+
+\subsection*{Exercice 6}
+\textit{Écrire un algorithme qui affiche à l'écran la parité d'un entier donné.}
+
+
+\ifprof
+\begin{corrige}
+\begin{py}
+\begin{python}
+x=522
+if(x%2!=0):
+    print("Valeur impaire !")
+else:
+    print("Valeur paire !")
+\end{python}
+
+\end{py}
+\end{corrige}
+\else
+\fi
+
+
+\subsection*{Exercice 7}
+\textit{Écrire un programme qui, sans calcul, affiche à l'écran si le produit de deux nombres $x$ et $y$ donnés est positif ou négatif.}
+\ifprof
+\begin{corrige}
+\begin{py}
+\begin{python}
+x=5
+y=-2
+
+if x<0<y or y<0<x:
+    print("produit négatif !")
+else:
+    print("Produit positif !")
+
+\end{python}
+\end{py}
+\end{corrige}
+\else
+\fi
+
+
+
+\subsection*{Exercice 8}
+\textit{Écrire un programme qui à partir de trois nombres, affiche à l'écran celui encadré par les deux autres.}
+
+\ifprof
+\begin{corrige}
+\begin{py}
+\begin{python}
+x=-5
+y=7
+z=3
+
+if x<=y:
+    if y<=z:			# x <= y <= z 
+        resultat=y
+    elif z<=x:			# z <= x <=y
+        resultat=x
+    else:
+        resultat=z		# x <= y et z ni à gauche ni à droite donc au milieu
+else:  # y<x
+    if x<=z:			# y < x <= z
+        resultat=x		
+    elif z<=y:			# z <= y < x
+        resultat=y
+    else:			# y < x et z ni à gauche ni à droite donc au milieu
+        resultat=z
+        
+print(resultat)
+\end{python}
+\end{py}
+\end{corrige}
+\else
+\fi
+
+
+\end{document}
+
+
