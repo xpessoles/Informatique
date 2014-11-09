@@ -1,6 +1,21 @@
+# Courbe de de Bézier d'ordre 2 - Définition de la fonction
 def f(u,x0,x1,x2):
+    """ Calcule l'abscisse d'un point d'une courbe de Bézier d'ordre 2
+    * Entrées :
+      - u (float) : paramètre compris entre 0 et 1
+      - x0, x1, x2 (float): abscisses des poles
+    * Sorties : 
+      - val (float) : abscisse du point appartenant à la courbe
+    """
     val = (1-u)**2*x0 + 2*u*(1-u)*x1 + u**2*x2
     return val
+
+
+#f(1,0,1,2)
+#a=f(1,0,1,2)
+#print(a)
+
+
 #print(f(1,0,1,2))
 
 
