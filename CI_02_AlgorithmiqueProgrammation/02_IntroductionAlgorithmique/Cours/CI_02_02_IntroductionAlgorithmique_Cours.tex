@@ -185,6 +185,27 @@ En toutes circonstances, il faudra s'assurer que :
 \end{itemize}
 \end{warn}
 
+\begin{exemple}
+
+\textit{On demande de réaliser le calcul de $n!$. Un programmeur propose le code suivant. Le programme répond-il au cahier des charges ?}
+
+
+\begin{minipage}[c]{.35\linewidth}
+\begin{py}
+\begin{python}
+n=input("Saisir un nombre : ")
+n=int(n)
+res=0
+for i in range(1,n):
+    res = res*n
+print(res)
+\end{python}
+\end{py}
+\end{minipage} \hfill
+\begin{minipage}[c]{.62\linewidth}
+\end{minipage}
+\end{exemple}
+
 \subsection{Sémantique}
 
 \begin{defi}
@@ -388,6 +409,8 @@ b=f(a)
 \begin{minipage}[t]{.78\linewidth}
 Quel est le but de la fonction $f$ ? Que se passe-t-il à l'écran si elle est exécutée ? Après exécution du programme, que valent $a$, $b$ et $x$ ?
 \end{minipage}
+
+\vspace{2cm}
 
 \begin{minipage}[t]{.2\linewidth}
 \begin{py}

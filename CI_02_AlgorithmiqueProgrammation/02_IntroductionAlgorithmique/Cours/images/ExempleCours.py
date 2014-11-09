@@ -1,3 +1,34 @@
+# Exemple 1
+n=input("Saisir un nombre : ")
+n=int(n)
+res=1
+for i in range(1,n):
+    res = res*n
+print(res)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Exemple 1 - Corrigé
+n = input("Saisir un nombre : ")
+n = int(n)
+res = 1
+for i in range(1,n+1):
+    res = res*i
+print(res)
+
 # Courbe de de Bézier d'ordre 2 - Définition de la fonction
 def f(u,x0,x1,x2):
     """ Calcule l'abscisse d'un point d'une courbe de Bézier d'ordre 2
