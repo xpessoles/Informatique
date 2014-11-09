@@ -1,0 +1,1045 @@
+\documentclass[10pt,oneside]{article}
+\input{style/coursHeadings}
+\input{style/programHeadings}
+
+
+%Si le boolen xp est vrai : compilation pour xabi
+%Sinon compilation Damien
+\newboolean{xp}
+\setboolean{xp}{true}
+
+%\newboolean{prof}
+%\setboolean{prof}{true}
+
+\def\xxtitre{\ifthenelse{\boolean{xp}}{
+CI 2 : Algorithmique \& Programmation}{
+Chapitre  -- }}
+
+\def\xxsoustitre{\ifthenelse{\boolean{xp}}{
+Chapitre 2 -- Introduction à l'algorithmique}{
+Partie  -- }}
+
+\def\xxauteur{\ifthenelse{\boolean{xp}}{
+Xavier \textsc{Pessoles}}{% \\ Damien \textsc{Iceta}}{
+Damien \textsc{Iceta} \\ Xavier \textsc{Pessoles}}}
+
+\def\xxpied{\ifthenelse{\boolean{xp}}{
+Cours -- CI 2 : Algorithmique \& Programmation\\
+Ch. 2 : Introduction à l'algorithmique}{
+\xxtitre}}
+
+\def\xxcathegorie{\ifthenelse{\boolean{xp}}{
+2013 -- 2014 \\
+Xavier \textsc{Pessoles}}{
+Informatique - Cours}}
+
+\ifthenelse{\boolean{xp}}{\input{style/enteteXP}}{\input{style/enteteDI}}
+
+
+%---------------------------------------------------------------------------
+
+\begin{minipage}[c]{.15\linewidth}
+\begin{center}
+%\includegraphics[height=.6cm]{png/w8}
+\end{center}
+\end{minipage}
+
+\vspace{.5cm}
+
+Les courbes de Bézier sont des courbes paramétriques définies par $n$ points $P_i$ de coordonnées $\left(x_i,y_i\right)$ appelés pôles. Ainsi, les coordonnées d'un point $M(u)=\left(x(u),y(u)\right)$ appartenant à la courbe sont définies par : 
+
+\begin{minipage}[c]{.45\linewidth}
+
+$$
+\forall u \in [0,1] \quad 
+\left\{
+\begin{array}{l}
+x(u)=\sum\limits_{i=0}^{n}B_i^n(u)x_i\\
+y(u)=\sum\limits_{i=0}^{n}B_i^n(u)y_i
+\end{array}
+\right.
+$$
+Avec :
+$$
+B_i^n(u)=\left(
+\begin{array}{c}
+n\\
+i
+\end{array}\right)u^i\left(1-u \right)^{n-i}
+\text{, }
+\left(
+\begin{array}{c}
+n\\
+i
+\end{array}\right)=\dfrac{n!}{i!(n-i)!}$$
+$$
+ \forall n\in\mathbb{N^*}, n!=\prod\limits_{i=1}^{n}i \text{ et } 0!=1
+ $$
+
+
+\end{minipage} \hfill
+\begin{minipage}[c]{.45\linewidth}
+\begin{center}
+\includegraphics[width=.9\textwidth]{images/shark.png}
+\textit{Tracé d'une courbe de Bézier}
+\end{center}
+\end{minipage}
+
+\vspace{.5cm}
+
+
+%\begin{center}
+%\includegraphics[width=.9\textwidth]{png/cyclev.png}
+
+%\textit{Cycle de conception d'un produit}
+%\end{center}
+
+%\begin{prob}
+%\textsc{Problématique :}
+
+%En phase d'avant conception d'un produit, quels sont les critères qui vont permettre de choisir les matériaux à utiliser ?
+%\end{prob}
+
+Le tracé de ces courbes fait appel à la définition de fonctions, de boucles, d'instructions conditionnelles qui sont au c\oe{}ur du développement de programmes informatiques. 
+
+Le but de ce cours est de définir les instructions de base qui doivent permettre la réalisation d'algorithmes. 
+
+\begin{savoir}
+\textsc{Savoirs :}
+\begin{itemize}
+\item Instructions conditionnelles
+\item Instructions itératives
+\item Fonctions
+\end{itemize}
+\end{savoir}
+ 
+
+\setlength{\parskip}{0ex plus 0.2ex minus 0ex}
+ \renewcommand{\contentsname}{}
+ \renewcommand{\baselinestretch}{1}
+
+\tableofcontents
+
+ \renewcommand{\baselinestretch}{1.2}
+\setlength{\parskip}{2ex plus 0.5ex minus 0.2ex}
+
+% \vspace{1cm}
+\textit{Ce document évolue. Merci de signaler toutes erreurs ou coquilles.}
+
+
+\section{Syntaxe}
+
+\subsection{Sémantique}
+\begin{defi}
+Lors de l'exécution d'un programme, les instructions s'exécutent les unes après les autres dans leur ordre d'écriture.
+
+Une séquence d'instructions s'appelle un bloc d'instruction.
+\end{defi}
+
+
+
+\begin{exemple}
+
+\begin{minipage}[c]{.47\linewidth}
+Le pseudo-code (ou pseudo langage) est une représentation non normalisée d'un algorithme ou d'une fonction. Il permet d'écrire un algorithme en utilisant le langage naturel. 
+\end{minipage}\hfill
+\begin{minipage}[c]{.45\linewidth}
+\begin{pseudo}
+\begin{algorithm}[H]
+\Fonction{
+Instruction 1\\
+...\\
+Instruction 2\\
+}
+\end{algorithm}
+\end{pseudo}
+\end{minipage}
+
+%\vspace{.25cm}
+
+\begin{minipage}[c]{.47\linewidth}
+En python, les instructions peuvent être séparées par des retours à la ligne, des points-virgules. Dans le cas des blocs d'instructions, les instructions sont \textbf{indentées} (4 espaces). 
+
+\end{minipage}\hfill
+\begin{minipage}[c]{.47\linewidth}
+\begin{py}
+\begin{minipage}{.9\linewidth}
+\begin{python}[showspaces=true]
+Instruction1
+Instruction2
+Instruction1;Instruction2
+Bloc : 
+    Instruction 1
+    Instruction 2
+\end{python}
+\end{minipage}
+\end{py}
+\end{minipage}
+
+
+\begin{minipage}[c]{.47\linewidth}
+En Scilab : une virgule, un point virgule, un retour à la ligne peuvent séparer des instructions. (Lorsque les instructions sont terminées par un point virgule, les résultats des instructions ne sont pas affichées à l'écran.)
+
+Les blocs sont terminés par \textsf{end}.
+\end{minipage}\hfill
+\begin{minipage}[c]{.47\linewidth}
+\begin{sci}
+\begin{scilab}
+Instruction1
+Instruction2
+Instruction1,Instruction2
+Instruction1;Instruction2;
+Debut Bloc
+Instruction 1
+Instruction 2
+end
+\end{scilab}
+\end{sci}
+\end{minipage}
+
+
+\end{exemple}
+
+
+\subsection{Définition de fonctions}
+\subsubsection{Les fonctions}
+Lors de l'exécution d'un programme, il est très courant qu'une même séquence d'instruction soit répété un grand nombre de fois. Ainsi, il est courant de décomposer un problème sous forme de plusieurs sous programmes élémentaires. 
+
+%\begin{defi}
+
+%\end{defi}
+
+
+\begin{exemple}
+\textit{Courbes de Bézier d'ordre 2}
+
+Prenons le cas où nous souhaitons connaître les coordonnées d'un point appartenant à une courbe de Bézier définie par 3 points. 
+Dans ce cas,
+$$
+\forall u \in [0,1] \quad 
+\left\{
+\begin{array}{l}
+x(u)= \left(1-u\right)^2 x_0 + 2u\left(1-u\right)x_1 + u^2 x_2\\
+y(u)= \left(1-u\right)^2 y_0 + 2u\left(1-u\right)y_1 + u^2 y_2
+\end{array}
+\right.
+$$
+
+Écrivons la fonction permettant d'évaluer une coordonnée en un paramètre donné. Autrement dit :
+$$
+\forall u \in[0,1] f(u)= \left(1-u\right)^2 x_0 + 2u\left(1-u\right)x_1 + u^2 x_2
+$$
+
+
+\begin{pseudo}
+\begin{algorithm}[H]
+\Donnees{u,$x_0$,$x_1$,$x_2$}
+
+\Fonction{
+Fonction $f(u,x_0,x_1,x_2)$:\\
+$val \gets (1-u)^2x_0 + 2u(1-u)x_1 + u^2x_2$\\
+\Retour{val}
+}
+print $f(0.5,0,1,2)$  
+\end{algorithm}
+\end{pseudo}
+
+
+
+\begin{minipage}[c]{.48\linewidth}
+\begin{py}
+\begin{python}
+def f(u,x0,x1,x2):
+    val = (1-u)**2*x0 + 2*u*(1-u)*x1 + u**2*x2
+    return val
+
+print(f(0.5,0,1,2))    
+\end{python}
+\end{py}
+\end{minipage}\hfill
+\begin{minipage}[c]{.48\linewidth}
+\begin{sci}
+\begin{scilab}
+function [val]=f(u,x0,x1,x2)
+  val=(1-u)**2*x0+2*u*(1-u)*x1+u**2*x2;
+endfunction
+
+printf("%f",f(0.5,0,1,2))
+\end{scilab}
+\end{sci}
+\end{minipage}
+
+Dans ce cas, rien ne permet de contrôler que $u$ appartient bien à l'intervalle 
+$[0,1]$ et que les arguments $x0$, $x1$, et $x2$, sont bien des nombres réels.
+\end{exemple}
+
+
+\subsubsection{Variables locales -- Variables globales}
+\begin{defi}
+\textbf{Visibilité :} Une variable globale est définie en dehors de toute fonction, une variable locale est définie dans une fonction et masque toute autre variable portant le même nom.
+
+\textbf{Durée de vie :} Une variable globale existe durant l'exécution du programme, une variable locale existe durant l'exécution de la fonction.
+
+\textbf{Par défaut, dans un langage interprété, les variables sont locales à un bloc.}
+\end{defi}
+
+
+\begin{exemple}
+
+\textit{Comportement de Python lors de l'utilisation de variables}
+
+\begin{minipage}[t]{.2\linewidth}
+\begin{py}
+\begin{python}
+def f(x):
+    a=3
+    b=2
+    res = a*x+b
+    return res
+a=4
+b=f(a)
+\end{python}
+\end{py}
+\end{minipage} \hfill
+\begin{minipage}[t]{.78\linewidth}
+Quel est le but de la fonction $f$ ? Que se passe-t-il à l'écran si elle est exécutée ? Après exécution du programme, que valent $a$, $b$ et $x$ ?
+\end{minipage}
+
+\begin{minipage}[t]{.2\linewidth}
+\begin{py}
+\begin{python}
+def f(x):
+    x=x+2
+    return x
+x=4
+y=f(x)
+\end{python}
+\end{py}
+\end{minipage} \hfill
+\begin{minipage}[t]{.78\linewidth}
+Quel est le but de la fonction $f$ ? Que se passe-t-il à l'écran si elle est exécutée ? Après exécution du programme, que valent $x$ et $y$ ?
+\end{minipage}
+
+\begin{minipage}[t]{.2\linewidth}
+\begin{py}
+\begin{python}
+def f(x):
+    x[0]=0
+    return x
+x=[1,2,3]
+y=f(x)
+\end{python}
+\end{py}
+\end{minipage} \hfill
+\begin{minipage}[t]{.78\linewidth}
+Quel est le but de la fonction $f$ ? Que se passe-t-il à l'écran si elle est exécutée ? Après exécution du programme, que valent $a$, $b$ et $x$ ?
+\end{minipage}
+
+\end{exemple}
+
+
+\begin{exemple}
+\textit{Exemples de variables globales - Courbes de Bézier d'ordre 2}
+
+On reprend le cas précédent. On se place dans le cas où le programme n'utilise que des courbes Bézier d'ordre 2 et où les pôles restent inchangés. On souhaite alors définir la fonction $f$ sans avoir à rappeler les coordonnées de chacun des pôles.
+
+ 
+
+\begin{pseudo}
+\begin{algorithm}[H]
+\Donnees{u}
+\Donnees{Global : $x_0\gets 0$,$x_1\gets 1$,$x_2\gets 2$}
+\Fonction{
+Fonction $f(u)$:\\
+$val \gets (1-u)^2x_0 + 2u(1-u)x_1 + u^2x_2$\\
+\Retour{val}
+}
+print $f(0.5)$
+\end{algorithm}
+\end{pseudo}
+
+\begin{minipage}[c]{.48\linewidth}
+\begin{py}
+\begin{python}
+def fx(u):
+    val = (1-u)**2*x0 + 2*u*(1-u)*x1 + u**2*x2
+    return val
+    
+global x0,x1,x2
+x0,x1,x2=0,1,2
+
+print(fx(0.5))  
+\end{python}
+\end{py}
+\end{minipage}\hfill
+\begin{minipage}[c]{.48\linewidth}
+\begin{sci}
+\begin{scilab}
+function [val]=f(u)
+  val=(1-u)**2*x0+2*u*(1-u)*x1+u**2*x2;
+endfunction
+
+global x0 x1 x2
+x0=0;x1=1;x2=2;
+
+printf("%f",f(0.5))
+\end{scilab}
+\end{sci}
+\end{minipage}
+\end{exemple}
+
+\begin{rem}
+De manière générale, on essaiera d'utiliser le moins possible les variables globales.
+\end{rem}
+
+%\subsubsection{Attributs d'un objet}
+
+%Visibilité des attributs d'un objet : publique, protégée et privée selon la définition de l'objet.
+
+\subsubsection{Documentation des fonctions}
+En programmation, il est indispensable de documenter les fonctions. En effet, il n'est pas toujours facile de se replonger dans un algorithme qu'on a écrit et il est indispensable de le ponctuer de commentaires pour pouvoir bien comprendre le but d'une fonction, d'une boucle \textit{etc}.
+
+\begin{py}
+En python un commentaire court commence par le signe \#. Les commentaires longs sont encadrés par trois guillemets ".
+
+\begin{python}
+# ======= Debut de la definition des fonctions =======
+def f(u,x0,x1,x2):
+    """
+    Retourne la coordonnee d'un point pour une courbe de Bezier d'ordre 2
+    Keyword arguments:
+    u -- parametre de la courbe parametree (doit etre compris entre 0 et 1)
+    x0 -- coordonnee du pole 0 (sur x, y ou z)
+    x1 -- coordonnee du pole 1 (sur x, y ou z)
+    x2 -- coordonnee du pole 2 (sur x, y ou z)
+    """
+    val = (1-u)**2*x0 + 2*u*(1-u)*x1 + u**2*x2
+    return val
+# ======= Fin de la definition des fonctions =======
+\end{python}
+
+Lorsqu'une fonction est commentée comme dans l'exemple ci-dessus, on peut accéder à de la documentation sur la fonction en procédant ainsi :
+\begin{python}
+>>> help(f)
+>>> f.__doc__
+\end{python}
+
+Enfin, sous linux, il est possible de générer automatiquement de la documentation au format \textsf{html} :
+
+\textsf{pydoc -w ./ExempleCours.py} 
+\end{py}
+
+\begin{sci}
+
+En scilab un commentaire commence par un double slash : //. 
+
+\begin{scilab}
+// La fonction f etourne la coordonnee d'un point pour une courbe de Bezier d'ordre 2
+//     * u : parametre 
+//     * x0, x1, x2 coordonnees des poles 0 1 et 2
+function [val]=f(u,x0,x1,x2)
+  val=(1-u)**2*x0+2*u*(1-u)*x1+u**2*x2;
+endfunction
+\end{scilab}
+\end{sci}
+
+\subsection{Import de méthodes et de fonctions}
+
+Par défaut, Python ne permet que de réaliser des opérations élémentaires (opérations mathématiques élémentaires, comparaisons, boucles \textit{etc.}). 
+
+Il existe par ailleurs un grand nombre de bibliothèques permettant par exemple de manipuler des fonctions mathématiques ($\sin$, $\cos$, $\sqrt{\;}$ \textit{etc.}), des bibliothèques permettant de tracer des courbes, des bibliothèques permettant d'interroger des bases de données \textit{etc.}
+
+ 
+
+Pour utiliser les méthodes liées à ces bibliothèques, on procèdera ainsi :
+
+\begin{py}
+\begin{python}
+import math  # Import de toutes les methodes de la bibliotheque math
+math.sqrt(2) # Permet d'utiliser la methode sqrt de la bibliotheque math
+from math import sqrt # Import de la methode sqrt de la bibliotheque math
+
+import os # Import de la bibliotheque os permettant de realiser des operations systemes
+\end{python}
+\end{py} 
+
+\begin{warn}
+Il est déconseillé d'utiliser la méthode d'import suivante : 
+\begin{python}
+from os import *
+\end{python}
+
+En effet, si des méthodes ont le même nom, seules les méthodes de la dernière bibliothèque appelée ou de la dernière fonction nommée sont utilisables. 
+\end{warn}
+
+
+\begin{exemple}
+\textit{Fonction pow}
+
+\end{exemple}
+\section{Instructions conditionnelles}
+
+
+
+\subsection{Expressions booléennes}
+\begin{defi}
+Une expression booléenne est une instruction qui renvoie la valeur "vrai" ou "faux".
+\end{defi}
+
+\begin{defi}
+\textbf{Opérateurs de comparaison}
+
+
+\begin{minipage}[c]{.3\linewidth}
+
+\begin{pseudo}
+\begin{algorithm}[H]
+$2=8 $ \\
+$2\neq8 $\\
+$2\geq 8 $\\
+$2>8 $\\
+$2\leq 8$\\
+$2<8$\\
+\end{algorithm}
+\end{pseudo}
+
+\end{minipage} \hfill
+\begin{minipage}[c]{.3\linewidth}
+\begin{py}
+\begin{python}
+ >>> 2==8
+	False
+ >>> 2!=8
+	True
+ >>> 2>=8
+	False
+ >>> 2>8
+	False
+ >>> 2<=8
+	True
+ >>> 2<8
+	True
+\end{python}
+\end{py}
+\end{minipage} \hfill
+\begin{minipage}[c]{.3\linewidth}
+\begin{sci}
+\begin{scilab}
+ --> 2==8
+	F
+ --> 2!=8
+	T
+ --> 2>=8
+	F
+ --> 2>8
+	F
+ --> 2<=8
+	T
+ --> 2<8
+	T
+\end{scilab}
+\end{sci}
+\end{minipage}
+
+\end{defi}
+
+
+
+\subsection{Boucle \textsl{Tant que}}
+
+\begin{defi}
+La boucle \textsf{Tant que} appelée aussi boucle \textsf{while} permet de répéter une instruction tant qu'une condition reste vraie.
+\end{defi}
+
+\begin{rem}
+Les boucles ont la plupart du temps besoin d'être incrémentées. Pour cela plusieurs solutions sont possibles.
+
+\begin{minipage}[c]{.3\linewidth}
+\begin{pseudo}
+\begin{algorithm}[H]
+$i \gets 1$\\
+$i \gets i+1$\\
+\end{algorithm}
+\end{pseudo}
+\end{minipage} \hfill
+\begin{minipage}[c]{.3\linewidth}
+\begin{py}
+\begin{python}
+>>> i=1
+>>> i=i+1;print(i)
+    2
+>>> i+=1;print(i)
+    3
+>>> i+=2;print(i)
+    5
+\end{python}
+\end{py}
+\end{minipage} \hfill
+\begin{minipage}[c]{.3\linewidth}
+\begin{sci}
+\begin{scilab}
+--> i=1;
+--> i=i+1;
+\end{scilab}
+\end{sci}
+\end{minipage} 
+
+\end{rem}
+
+
+\begin{exemple}
+\textit{Implémentation de la fonction "factorielle"}
+
+On peut définir la fonction factorielle ainsi : 
+$$
+\forall  n\in \mathbb{N}
+\left\{
+\begin{array}{l}
+\text{si } n=0 \quad n!=1\\
+\text{sinon } n !=\prod\limits_{i=1}^n i
+\end{array}
+\right.
+$$
+ 
+On s'intéresse à la programmation du cas où $n$ est supérieur ou égal à 1.
+
+\begin{minipage}[c]{.3\linewidth}
+\begin{pseudo}
+\begin{algorithm}[H]
+\Fonction{
+factorielle($n$):\\
+$i\gets1$\\
+$res\gets1$\\
+\Tq{$i\leq n$}{
+$res \gets res \cdot i$ \\
+$i\gets i+1$}
+\Retour{res}
+}
+\end{algorithm}
+\end{pseudo}
+\end{minipage}\hfill
+\begin{minipage}[c]{.3\linewidth}
+\begin{py}
+\begin{python}
+def factorielle(n):
+        i=1    
+        res=1
+        while i<=n:
+            res=res*i
+            i+=1
+        return res
+\end{python}
+\end{py}
+\end{minipage}\hfill
+\begin{minipage}[c]{.3\linewidth}
+\begin{sci}
+\begin{scilab}
+function [res]=factorielle(n)
+  i=1;
+  res=1;
+  while i<=n
+    res = res*i
+    i=i+1
+  end
+endfunction
+\end{scilab}
+\end{sci}
+\end{minipage}
+
+\end{exemple}
+
+
+
+\begin{warn}
+Lors de la réalisation d'une boucle \textsl{while} il faut veiller à ce que l'instruction conditionnelle change d'état afin de sortir de la boucle et de ne pas provoquer une boucle sans fin...
+\end{warn}
+
+
+\subsection{Instruction \textsl{Si, Sinon}}
+
+\begin{defi}
+La boucle \textsf{Si} appelée aussi boucle \textsf{if} permet d'exécuter une instruction si une condition est vraie.
+\end{defi}
+
+
+\begin{exemple}
+\textit{Implémentation de la fonction "factorielle"}
+
+On souhaite maintenant gérer le cas où $n=0$. Dans ce cas, le calcul de $n!$ est différent du cas où $n>0$.
+
+\begin{minipage}[c]{.35\linewidth}
+\begin{pseudo}
+\begin{algorithm}[H]
+\Fonction{
+factorielle($n$):\\
+\eSi{n=0}{
+\Retour{1}
+}{
+$i\gets1$\\
+$res\gets1$\\
+\Tq{$i\leq n$}{
+$res \gets res \cdot i$ \\
+$i\gets i+1$}
+\Retour{res}
+}}
+\end{algorithm}
+\end{pseudo}
+\end{minipage}\hfill
+\begin{minipage}[c]{.3\linewidth}
+\begin{py}
+\begin{python}
+def factorielle(n):
+    if n==0:
+        return 1
+    else :
+        i=1    
+        res=1
+        while i<=n:
+            res=res*i
+            i+=1
+        return res
+\end{python}
+\end{py}
+\end{minipage}\hfill
+\begin{minipage}[c]{.3\linewidth}
+\begin{sci}
+\begin{scilab}
+function [res]=factorielle(n)
+  if n==0
+    res =1;
+  else
+    i=1;
+    res=1;
+    while i<=n
+      res = res*i
+      i=i+1
+    end
+  end  
+endfunction
+\end{scilab}
+\end{sci}
+\end{minipage}
+
+\textit{Remarque :} Il faudrait vérifier que $n$ est bien un \textbf{entier} \textbf{positif ou nul}.
+\end{exemple}
+
+
+\begin{exemple}
+\textit{Implémentation de la fonction "factorielle"}
+
+On souhaite maintenant s'assurer que $n$ est bien un \textbf{entier} \textbf{positif ou nul}.
+
+
+%\begin{pseudo}
+%En pseudo-code
+%\end{pseudo}
+
+\begin{py}
+\begin{python}
+def calc_factorielle(n):
+    if (type(n)==int) & (n>=0):
+        return factorielle(n) 
+    else :
+        print("Oooops... il faut saisir un nombre entier POSITIF ou nul")
+\end{python}
+\end{py}
+
+%\begin{sci}
+%\begin{scilab}
+%Scilab
+%\end{scilab}
+%\end{sci}
+
+\textit{Remarque :} Il faudrait vérifier que $n$ est du bon type.
+\end{exemple}
+
+
+\subsubsection*{La gestion des erreurs}
+
+
+\begin{exemple}
+\textit{Implémentation de la fonction "factorielle"}
+
+On souhaite maintenant s'assurer que $n$ est du bon type.
+
+%\begin{pseudo}
+%E pseudo-code
+%\end{pseudo}
+
+\begin{py}
+\begin{python}[moreemph={[4], 46, 48}]
+def calc_factorielle(n):
+    try:
+        if (type(n)==int) & (n>=0):
+            return(factorielle(n))
+        else :
+            print("Oooops... il faut saisir un nombre entier POSITIF ou nul")
+    except TypeError:
+        print("Oooops... le type de la variable n'est pas le bon")
+\end{python}
+\end{py}
+
+%\begin{sci}
+%\begin{scilab}
+%Scilab
+%\end{scilab}
+%\end{sci}
+
+\end{exemple}
+
+
+\begin{rem}
+Pour aller plus loin : on peut définir ses propres exceptions et gérer les messages d'erreur. 
+\begin{py}
+\begin{python}
+class MonException(Exception):
+    def __init__(self,raison):
+        self.raison = raison
+     
+    def __str__(self):
+        return self.raison
+ 
+def calc_factorielle(n):
+    if n > 20:
+        raise MonException("Il faut saisir un entier positif ou nul")
+    else:
+        return factorielle(n)
+\end{python}
+\end{py}
+\end{rem}
+
+
+
+%\begin{itemize}
+%\item Expressions booléennes et opérateurs logiques simples.
+%\item Sémantique (fond)
+%\item Syntaxe (forme) : instructions 	
+%\begin{itemize}
+%\item si, sinon (pseudo langage)
+%\item if, elif, else (python)
+%\item if, then, else, elseif, select, case, end (scilab)
+%\end{itemize}
+%\item Problème d’une comparaison avec un nombre réel. Le type float est le plus souvent une %approximation
+%\end{itemize}
+
+
+
+\section{Instructions itératives}
+
+\begin{defi}
+Une instruction itérative permet de répéter une suite d'instructions un nombre déterminé de fois. 
+On parle aussi de boucle \textsf{for}.
+\end{defi}
+
+%\begin{rem}
+%Incréments range...
+%\end{rem}
+
+\begin{exemple}
+\textit{Courbes de Bézier d'ordre 2}
+
+Nous avons précédemment étudié la fonction permettant de calculer l'abscisse ou l'ordonnée d'un point d'une courbe de Bézier. 
+
+Pour afficher une telle courbe une solution consiste en calculer les coordonnées d'un nombre $n$ de points et de relier ces points par des segments de droite. Plus le nombre de points sera élevé plus la courbe paraîtra lisse, mais le temps de calcul sera d'autant plus élevé. On rappelle qu'une courbe de Bézier est une courbe paramétrique définie pour $u\in[0;1]$ et que la fonction $f$ est définie par $f(u)=\left(1-u\right)^2x_0 + 2u\left(1-u\right)x_1+u^2x_2$.
+
+Il va falloir \textbf{discrétiser} l'intervalle $[1,0]$.
+
+\begin{minipage}[c]{.36\linewidth}
+\begin{pseudo}
+\begin{algorithm}[H]
+Tableau $x$;\\
+Tableau $y$;\\
+$x_0 \gets 0$; $y_0 \gets 0$\\
+$x_1 \gets 10$; $y_1 \gets 10$\\
+$x_2 \gets 20$; $y_2 \gets 0$\\
+$i \gets 0$; $n \gets 50$\\
+\Pour{i de 0 à $n$}{
+$u \gets i/(n-1)$\\
+$ x[i] \gets f(u,x_0,x_1,x_2)$\\
+$ y[i] \gets f(u,y_0,y_1,y_2)$\\
+$i \gets i+1$\\
+}
+Afficher($x$,$y$)
+\end{algorithm}
+\end{pseudo}
+\end{minipage}\hfill
+\begin{minipage}[c]{.3\linewidth}
+\begin{py}
+\begin{python}
+import numpy as np
+import pylab as pl
+
+x0=0;y0=0
+x1=10;y1=10
+x2=20;y2=0
+n=50
+x,y=[],[]
+for i in range(0,n):
+    u=i/(n-1)
+    x.append(f(u,x0,x1,x2))
+    y.append(f(u,y0,y1,y2))
+pl.plot(x,y)
+pl.axis('equal')
+pl.show()
+\end{python}
+\end{py}
+\end{minipage}\hfill
+\begin{minipage}[c]{.3\linewidth}
+\begin{sci}
+\begin{scilab}
+x0=0;y0=0;
+x1=10;y1=10;
+x2=20;y2=0;
+n=50;
+for i=1:n
+  u=i/n;
+  x(i)=f(u,x0,x1,x2);
+  y(i)=f(u,y0,y1,y2);
+end
+plot2d(x,y) // a verifier
+\end{scilab}
+\end{sci}
+\end{minipage}
+
+
+
+\begin{minipage}[c]{.22\linewidth}
+\begin{center}
+\includegraphics[width=\textwidth]{images/n3}
+
+$n=3$
+\end{center}
+\end{minipage}\hfill
+\begin{minipage}[c]{.22\linewidth}
+\begin{center}
+\includegraphics[width=\textwidth]{images/n5}
+
+$n=5$
+\end{center}
+\end{minipage}\hfill
+\begin{minipage}[c]{.22\linewidth}
+\begin{center}
+\includegraphics[width=\textwidth]{images/n10}
+
+$n=10$
+\end{center}
+\end{minipage}\hfill
+\begin{minipage}[c]{.22\linewidth}
+\begin{center}
+\includegraphics[width=\textwidth]{images/n50}
+
+$n=50$
+\end{center}
+\end{minipage}
+\end{exemple}
+
+
+\begin{rem}
+En python, \textsf{range} permet de définir la liste des valeurs qui vont être utilisées lors du parcours de la boucle \textsf{for}.  Cette fonction peut prendre jusqu'à 3 arguments : le premier argument désigne la valeur de départ, le second la valeur de fin (exclue), la troisième la valeur de l'incrément. 
+\end{rem}
+
+\begin{rem}
+La boucle \textsf{while} définie précédemment est aussi une instruction itérative. 
+\end{rem}
+
+
+\begin{exemple}
+\textit{Courbes de Bézier d'ordre 2}
+
+
+%\begin{pseudo}
+%En pseudo-code
+%\end{pseudo}
+
+\begin{py}
+\begin{python}
+inc = 0.1
+while u<=1 :
+    x.append(f(u,x0,x1,x2))
+    y.append(f(u,y0,y1,y2))
+    u += inc
+\end{python}
+\end{py}
+
+\begin{sci}
+\begin{scilab}
+inc = 0.1; i = 1;
+u=0;
+x = []; y = [];
+while u<=1
+    x(i)=f(u,x0,x1,x2);
+    y(i)=f(u,y0,y1,y2);
+    u=u+inc;
+    i=i+1;
+end
+\end{scilab}
+\end{sci}
+
+\end{exemple}
+
+
+
+
+%\section{Création de fonctions}
+
+%\subsection{Définition}
+
+%\subsection{Portée des variables}
+
+%Fonctions et procédures
+%
+%Nécessité de décomposer un problème an sous-problèmes élémentaires.
+%Fonctions
+%-	notion de fonction (au sens informatique),
+%-	définition dans le langage utilisé :
+%pseudo langage : type de retour fonction (types et arguments) { …. retourner valeur }
+%python : def, return 
+%scilab : function, endfunction
+%-	paramètres (ou arguments)
+%Une fonction a une liste de paramètres types.
+%Le passage de paramètres se fait par valeur pour les types simples.
+%Quand le type du paramètre est composite, les éléments du tableau ou les champs des structures sont par contre modifiés par le code de la fonction.
+%Valeurs par défaut
+%Arguments avec étiquettes
+%-	résultats
+%Une fonction a un type de retour (son prototype ou sa signature)
+
+
+
+
+%python
+%def produit_scalaire(u,v):
+%	r=0
+%	for i in range(1,3):
+%		r=r+u[i]*v[i]
+%	return r
+%x=produit_scalaire([1,2,3],[0,1,2])	scilab
+%function [r]=produidef f(u):
+% ????
+%r=0
+%for i=1:3, r=r+u(i)*v(i), end
+%endfunction
+%
+%x=produit_scalaire([1,2,3],[0,1,2])
+%Les fonctions doivent être largement documentées.
+%Modules de fonctions
+%Ensemble de fonctions regroupées dans un fichier
+%Python : from module import *, import module, from math import sqrt
+%
+%Fonctions et méthodes
+%Sensibilisation aux méthodes associées aux objets (python est naturellement orienté objet).
+%Cela sera largement utile dans l’utilisation de bibliothèques d’interfaces graphiques, dans la manipulation des fichiers. 
+%Le champ d’un objet peut être un attribut qui fait partie de sa structure (ex : eleve.nom=Dupont) ou une méthode (ex : eleve.ajouter(Dupont, Pierre)).
+%
+%Exemple :
+%>>> t=["2"]
+%>>> t.append("4") 	#« append » est une méthode (fonction) utilisable sur un objet de type liste.
+%>>> t
+%['2', '4']
+%>>> type (t)
+%<class 'list'> 
+
+\end{document}
+
+
+
