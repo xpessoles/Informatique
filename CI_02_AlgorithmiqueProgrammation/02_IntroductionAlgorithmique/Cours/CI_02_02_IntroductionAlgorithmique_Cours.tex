@@ -1,50 +1,79 @@
-\documentclass[10pt,oneside]{article}
+\documentclass[10pt]{article}
 \input{style/coursHeadings}
 \input{style/programHeadings}
-
+\input{style/macros_SII}
+\input{style/macros_Titres}
+\input{style/macros_Frames}
 
 %Si le boolen xp est vrai : compilation pour xabi
 %Sinon compilation Damien
-\newboolean{xp}
-\setboolean{xp}{true}
+\newif\ifprof
+%\proftrue
+\proffalse
 
-%\newboolean{prof}
-%\setboolean{prof}{true}
+\newif\ifxp
+\xptrue
+%\xpfalse
 
-\def\xxtitre{\ifthenelse{\boolean{xp}}{
-CI 2 : Algorithmique \& Programmation}{
-Chapitre  -- }}
+\newif\iftd
+%\tdtrue
+\tdfalse
 
-\def\xxsoustitre{\ifthenelse{\boolean{xp}}{
-Chapitre 2 -- Introduction à l'algorithmique}{
-Partie  -- }}
+\usepackage[%
+    pdftitle={Introduction à l'algorithmique},
+    pdfauthor={Xavier Pessoles},
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=magenta]{hyperref}
 
-\def\xxauteur{\ifthenelse{\boolean{xp}}{
-Xavier \textsc{Pessoles}}{% \\ Damien \textsc{Iceta}}{
-Damien \textsc{Iceta} \\ Xavier \textsc{Pessoles}}}
+\def\discipline{Informatique}
+\def\xxtitre{%
+\ifxp
+CI 2 : Algorithmique \& Programmation
+\else
+\fi
+}
 
-\def\xxpied{\ifthenelse{\boolean{xp}}{
+\def\xxsoustitre{%
+\ifxp
+Chapitre 2 -- Introduction à l'algorithmique
+\else
+\fi}
+
+\def\xxauteur{%
+\ifxp
+Xavier \textsc{Pessoles}
+\else
+\fi}
+
+\def\xxpied{%
+\ifxp
 CI 2 : Algorithmique \& Programmation\\
-Ch. 2 : Introduction à l'algorithmique -- Cours}{
-\xxtitre}}
+Ch. 2 : Introduction à l'algorithmique -- Cours
+\else
+\fi}
 
-\def\xxcathegorie{\ifthenelse{\boolean{xp}}{
+\def\xxpied{%
+\ifxp
 2013 -- 2014 \\
-Xavier \textsc{Pessoles}}{
-Informatique - Cours}}
+Xavier \textsc{Pessoles}
+\else
+\fi}
 
-\ifthenelse{\boolean{xp}}{\input{style/enteteXP}}{\input{style/enteteDI}}
+
 
 
 %---------------------------------------------------------------------------
 
-\begin{minipage}[c]{.15\linewidth}
-\begin{center}
-%\includegraphics[height=.6cm]{png/w8}
-\end{center}
-\end{minipage}
 
-\vspace{.5cm}
+\begin{document}
+\ifxp
+\input{style/enteteXP}
+\else
+\input{style/enteteDI}
+\fi
+
+
 
 Les courbes de Bézier sont des courbes paramétriques définies par $n$ points $P_i$ de coordonnées $\left(x_i,y_i\right)$ appelés pôles. Ainsi, les coordonnées d'un point $M(u)=\left(x(u),y(u)\right)$ appartenant à la courbe sont définies par : 
 
@@ -200,7 +229,7 @@ Instruction 2\\
 \end{pseudo}
 \end{minipage}
 
-%\vspace{.25cm}
+\vspace{.25cm}
 
 \begin{minipage}[c]{.47\linewidth}
 En python, les instructions peuvent être séparées par des retours à la ligne, des points-virgules. Dans le cas des blocs d'instructions, les instructions sont \textbf{indentées} (4 espaces). 
@@ -453,6 +482,8 @@ De manière générale, on essaiera d'utiliser le moins possible les variables g
 
 \subsubsection{Documentation des fonctions}
 En programmation, il est indispensable de documenter les fonctions. En effet, il n'est pas toujours facile de se replonger dans un algorithme qu'on a écrit et il est indispensable de le ponctuer de commentaires pour pouvoir bien comprendre le but d'une fonction, d'une boucle \textit{etc}.
+
+\newpage 
 
 \begin{py}
 En python un commentaire court commence par le signe \#. Les commentaires longs sont encadrés par trois guillemets ".
@@ -1039,7 +1070,8 @@ end
 \end{thebibliography}
 
 
-\end{document}
 
+
+\end{document}
 
 
