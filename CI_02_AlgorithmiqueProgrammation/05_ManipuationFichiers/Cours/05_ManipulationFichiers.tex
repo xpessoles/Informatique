@@ -1,0 +1,714 @@
+\documentclass[10pt,oneside]{article}
+\input{style/coursHeadings}
+\input{style/programHeadings}
+
+
+%Si le boolen xp est vrai : compilation pour xabi
+%Sinon compilation Damien
+\newboolean{xp}
+\setboolean{xp}{true}
+
+%\newboolean{prof}
+%\setboolean{prof}{true}
+
+\def\xxtitre{\ifthenelse{\boolean{xp}}{
+CI 2 : Algorithmique \& Programmation}{
+Chapitre  -- }}
+
+\def\xxsoustitre{\ifthenelse{\boolean{xp}}{
+Chapitre 5 -- Lecture et écriture des fichiers}{
+Partie  -- }}
+
+\def\xxauteur{\ifthenelse{\boolean{xp}}{
+Marc \textsc{Derumeaux} --  Damien \textsc{Iceta}\\
+Xavier \textsc{Pessoles} }{
+Damien \textsc{Iceta} \\ Xavier \textsc{Pessoles}}}
+
+\def\xxpied{\ifthenelse{\boolean{xp}}{
+Cours -- CI 2 : Algorithmique \& Programmation\\
+Ch. 5 : Lecture et écriture des fichiers}{
+\xxtitre}}
+
+\def\xxcathegorie{\ifthenelse{\boolean{xp}}{
+2013 -- 2014 \\
+Xavier \textsc{Pessoles}}{
+Informatique - Cours}}
+
+\ifthenelse{\boolean{xp}}{\input{style/enteteXP}}{\input{style/enteteDI}}
+
+
+%---------------------------------------------------------------------------
+
+
+
+\begin{savoir}
+\textbf{Savoirs :}
+\begin{itemize}
+\item Manipuler des structures de données : chaînes de caractères (création, accès à un caractère, concaténation).
+\item Gérer les fichiers : notion de chemin d'accès, lecture et écriture de données numériques ou de type de chaîne de caractère depuis ou vers un fichier.
+\end{itemize}
+\end{savoir}
+
+\setlength{\parskip}{0ex plus 0.2ex minus 0ex}
+ \renewcommand{\contentsname}{}
+ \renewcommand{\baselinestretch}{1}
+
+\tableofcontents
+
+ \renewcommand{\baselinestretch}{1.2}
+\setlength{\parskip}{2ex plus 0.5ex minus 0.2ex}
+
+%\vspace{1cm}
+
+
+
+
+%\newpage
+
+\begin{minipage}[c]{.79\linewidth}
+\section{Pourquoi utiliser des fichiers ?}
+
+L'ordinateur sert à traiter de l'information qui peut entrer et sortir de différentes façons :
+\begin{itemize}
+\item le clavier, la souris et l'écran, pour l'interface utilisateur du programme ou le shell;
+\item les fichiers, pour les supports mémoire;
+\item les interfaces de communication (réseau, port USB, port série, etc.).
+\end{itemize}
+
+Le clavier et la souris ne permettent pas d'entrer une grosse masse d'information. De même l'écran montre une petite partie de l'information.
+En revanche les fichiers permettent de décupler les possibilités de traitement d'information des programmes. Un roman de 200 pages contient environ 500 000 caractères, et donc tient en un fichier de 500 ko environ. 
+
+Le réseau permet d'échanger des informations sous deux formes :
+\begin{itemize}
+\item sous forme de fichiers échangés, qui sont ensuite stockés sur le disque dur;
+\item sous forme de flux de données. Ces données sont traitées par les cartes interfaces et mises à disposition des programmes par l'OS sous une forme proche des fichiers.
+\end{itemize}
+Il est donc intéressant de savoir lire et écrire sur les fichiers. 
+
+
+\end{minipage} \hfill
+\begin{minipage}[c]{.19\linewidth}
+\begin{center}
+\includegraphics[width=.9\textwidth]{images/image1.png}
+\includegraphics[width=.9\textwidth]{images/image2.png}
+\includegraphics[width=.9\textwidth]{images/image3.png}
+\end{center}
+\end{minipage}
+
+
+
+
+
+
+\subsection{Deux familles de fichiers}
+
+Les fichiers sont tous écrits en binaire. Il est néanmoins possible de les séparer en deux familles :
+\begin{minipage}[c]{.59\linewidth}
+
+\begin{itemize}
+\item les fichiers binaires qui nécessitent de connaître le format binaire d'écriture des données pour être lus;
+\item les fichiers texte qui contiennent des caractères uniquement, et qui peuvent s'ouvrir sur un éditeur de texte.
+\end{itemize}
+
+\begin{exemple}
+
+Les fichiers binaires :
+
+\begin{itemize}
+\item images et documents (bmp, png, jpg, pdf, doc, etc.);
+\item son et vidéo (wav, mp3, mp4, etc.);
+\item exécutables (.exe);
+\item archives compressées (zip, 7z, gz).
+\end{itemize}
+
+Les fichiers texte :
+
+\begin{itemize}
+\item pages Web (html, css, etc.);
+\item fichier journal (log), Script shell (bat);
+\item images vectorielles (svg);
+\item programmes Python ou Scilab (py, sce);
+\item les fichiers de données texte (txt, data, etc.);
+\item les fichiers texte formatés (xml).
+\end{itemize}
+
+Les fichiers texte compressés :
+\begin{itemize}
+\item les fichiers bureautique (odt, ods, docx, xlsx).
+\end{itemize}
+\end{exemple}
+
+\end{minipage} \hfill
+\begin{minipage}[c]{.39\linewidth}
+\begin{center}
+\includegraphics[width=.99\textwidth]{images/image4.png}
+\includegraphics[width=.99\textwidth]{images/image5.png}
+\end{center}
+\end{minipage}
+
+
+
+
+
+\subsection{Avantages et inconvénients}
+\begin{center}
+\begin{tabular}{|p{2.5cm}|p{6.5cm}|p{8cm}|}
+\hline
+ & Fichiers binaire& Fichiers texte\\
+ \hline
+Avantages &  Moins volumineux & Interprétable par l'homme\\
+
+		  & Indépendant des standards d'encodage des caractères dans les OS &Permet des d'échanges plus simples entre logiciels\\
+		  & & Ne nécessite généralement pas de bibliothèques\\
+\hline
+Inconvénients & Moins facile à lire & Plus volumineux\\
+
+			& Nécessite des bibliothèques pour les ouvrir &Dépendant du format d'encodage des caractères\\
+			\hline
+\end{tabular}
+\end{center}
+
+
+
+\section{Fichiers binaires}
+
+\subsection{Analyse d'un fichier binaire : BMP}
+
+\begin{minipage}[c]{.53\linewidth}
+
+On peut ouvrir un fichier binaire avec un éditeur héxadécimal.
+
+Les deux premiers caractères de cette exemple "42" représentent en hexadécimal le codage sur les 8 bits correspondants (celui-ci apparait en bas de la fenêtre quand on se place sur le "42").
+
+Un fichier BMP est un format très simple pour mémoriser les images:
+\begin{itemize}
+\item signature (BM, BA, CI, …);
+\item taille du fichier (4o);
+\item champ réservé (4o);
+\item offset de début données (4o);
+\item taille de l'entête (4o);
+\item largeur de l'image (4o);
+\item hauteur de l'image (4o);
+\item nombre de plans (2o);
+\item profondeur : 1 à 32 (2o);
+\item type compression (4o);
+\item etc.
+\end{itemize}
+
+
+Les couleurs commencent à l'octet 122=0x7A (octet en jaune) :
+\begin{itemize}
+\item blanc (ff ff ff);
+\item blanc (ff ff ff);
+\item blanc (ff ff ff);
+\item blanc (ff ff ff);
+\item gris clair (e9 ec ef);
+\item gris (ce cc c4);
+\item gris foncé (a0 97 7c)...
+\end{itemize}
+\begin{center}
+\includegraphics[width=.5\textwidth]{images/image8.png}
+\end{center}
+\end{minipage} \hfill
+\begin{minipage}[c]{.25\linewidth}
+\begin{center}
+\includegraphics[width=.5\textwidth]{images/image6.png}
+\end{center}
+\begin{center}
+\includegraphics[width=.99\textwidth]{images/image12.png}
+\includegraphics[width=.99\textwidth]{images/image13.png}
+\textit{Ouverture d'un fichier binaire avec un éditeur hexadécimal}
+\end{center}
+\end{minipage}
+
+
+
+
+
+
+
+\subsection{Ouvrir des fichiers binaires}
+Les formats étant généralement assez complexes et variés, les fichiers binaires sont ouverts via des \textbf{librairies}. Ces librairies proposent des commandes toutes prêtes. Par exemple pour les images :
+\begin{itemize}
+\item Python : librairie PIL (Python Imaging Library);
+\item Scilab inclut des commandes pour les images.
+\end{itemize}
+
+On code très rarement les commandes permettant d'ouvrir les fichiers binaires.
+Pour lire tout de même un fichier binaire on utilise la fonction \textsf{open}, disponible sans aucune bibliothèqye. Elle prend en paramètre :
+\begin{itemize}
+\item le chemin (absolu ou relatif) menant au fichier à ouvrir;
+\item le mode d'ouverture.
+\end{itemize}
+
+Le mode est donné sous la forme d'une chaîne de caractères. Voici les principaux modes :
+\begin{itemize}
+\item 'r' : ouverture en lecture (Read);
+\item 'w' : ouverture en écriture (Write). Le contenu du fichier est écrasé. Si le fichier n'existe pas, il est créé,
+\item 'a' : ouverture en écriture en mode ajout (Append). On écrit à la fin du fichier sans écraser l'ancien contenu du fichier. Si le fichier n'existe pas, il est créé.
+\end{itemize}
+
+On peut ajouter à tous ces modes le signe b pour ouvrir le fichier en mode binaire.
+
+La fonction open crée un objet de la classe \textsf{TextIoWrapper}. Par la suite, nous allons utiliser des méthodes de cette classe pour interagir avec le fichier.
+
+\begin{minipage}[c]{.49\linewidth}
+
+\begin{py}
+\begin{python}[H]
+# Lecture d'un fichier binaire
+f = open("tongue.bmp", "rb")
+
+while True:
+	bytes = f.read(1) # lecture d'un octet
+	if bytes == "":
+	    break;
+	# Affichage de l'octet lu en hexadécimal :
+	print "%02X " % ord(bytes[0]),
+
+f.close()
+\end{python}
+\end{py}
+
+
+
+\end{minipage} \hfill
+\begin{minipage}[c]{.49\linewidth}
+3 étapes:
+\begin{enumerate}
+\item Ouverture du fichier “tongue.bmp”, en lecture mode binaire (“rb”).
+\item Boucle sur chaque octet pour lire et afficher. La méthode read renvoie le contenu du fichier, que l'on capture dans bytes.
+\item Fermeture du fichier: n'oubliez pas de fermer un fichier après l'avoir ouvert. Si d'autres applications, ou d'autres morceaux de votre propre code, souhaitent accéder à ce fichier, ils ne pourront pas car le fichier sera déjà ouvert. C'est surtout vrai en écriture, mais prenez de bonnes habitudes. La méthode à utiliser est \textsf{close}.
+\end{enumerate} 
+\end{minipage}
+
+
+\subsection{Écrire dans des fichiers en binaire}
+
+
+\begin{minipage}[c]{.39\linewidth}
+
+\begin{py}
+\begin{python}[H]
+# Écriture d'un fichier binaire
+f=open("TP/monFichier.bin","wb")
+f.write("Du texte")
+f.write(int8(83))
+f.write(int8(76))
+f.write(float32(2.3))
+f.close()
+\end{python}
+\end{py}
+
+\end{minipage} \hfill
+\begin{minipage}[c]{.59\linewidth}
+3 étapes:
+\begin{enumerate}
+\item Il faut ouvrir le fichier avant tout. Ouverture du fichier “monFichier.bin”, en écriture mode binaire (“wb”).
+\item Écriture d'octets (caractères, nombres entiers ou flottants): On utilise la méthode write. Deux modes sont possibles: le mode w ou le mode a. Le premier écrase le contenu éventuel du fichier, alors que le second ajoute ce que l'on écrit à la fin du fichier. Ces deux modes créent le fichier s'il n'existe pas.
+\item Fermeture du fichier. 
+\end{enumerate}
+\end{minipage}
+
+
+
+
+
+\section{Fichiers texte}
+
+
+Un fichier texte brut ou fichier texte simple est un fichier dont le contenu représente uniquement une suite de caractères.
+Bien qu'on l'oppose ici aux fichiers binaires il est lui aussi codé en binaire sur l'ordinateur. Cependant ce codage est basé sur une norme connue de tous les éditeurs de texte afin de traduire le fichier en une suite de caractères "imprimables".
+Les caractères considérés sont généralement les caractères imprimables, d'espaces et de retours à la ligne. La notion de fichier texte est subjective et dépend notamment des systèmes de codage de caractère considérés. Ainsi si l'encodage est inconnu, un texte brut quelconque est inexploitable.
+
+ 
+
+
+
+
+
+\begin{minipage}[c]{.49\linewidth}
+Il existe de nombreux standards de codage, dont l'American Standard Code for Information Interchange   ASCII. Cette norme ancienne créée pour gérer des caractères latins non accentués (nécessaire pour écrire en anglais) est à la base de nombreux codages de caractères.
+\newline\newline 
+L'ASCII permet de coder 128 caractères numérotés de 0 à 127 et peut donc être codé sur 7 bits. Cependant, les ordinateurs travaillent la plupart du temps en multiple de 8 bits, le huitième bit est mis à 0. On a donc un octet par caractère.
+\newline\newline 
+L'absence d'accents rend cette norme insuffisante à elle seule,
+ce qui rend nécessaire l'utilisation d'autres encodages: UTF-8 par exemple (UCS transformation format 8 bits) dans lequel chaque caractère est représenté par un index et son codage binaire donné par une table. Les 128 premiers caractères ont un codage identique en ASCII et UTF8 (par exemple "A" a pour code ASCII 65 et se code en UTF-8 par l'octet 65) puis d'autres caractères sont ajoutés.
+
+
+\end{minipage} \hfill
+\begin{minipage}[c]{.49\linewidth}
+\begin{center}
+\includegraphics[width=.99\textwidth]{images/image14.png}
+\textit{Table des caractères ASCII}
+\end{center}
+\end{minipage}
+
+
+\subsection{Lecture d'un fichier sous Python}
+
+
+Les fichiers texte sont écrits (en binaire) de façon à respecter un des codes standards de caractères (utf8, iso-8859, ASCII...).
+Ils peuvent s'ouvrir sur un éditeur de texte, ce qui permet de lire ou modifier le contenu beaucoup plus facilement qu'en binaire.
+
+
+\newpage
+
+\begin{exemple}
+
+Exploitation d'un fichier de mesure sur l'axe Emericc: \textsf{Mesure\_axe\_Emericc.txt}.
+
+\textbf{Objectif} : Lire les données (paramètres et mesures) et tracer les courbes.
+
+\begin{itemize}
+\item 12 lignes de paramètres;
+\item 100 lignes de données;
+\item 9 lignes de paramètres.
+\end{itemize}
+
+\begin{minipage}[c]{.36\linewidth}
+\begin{center}
+\includegraphics[width=.99\textwidth]{images/image11.png}
+\end{center}
+\end{minipage} \hfill
+\begin{minipage}[c]{.6\linewidth}
+Lecture des noms:
+\begin{py}
+\begin{python}[H]
+# Lecture d'un fichier texte ligne à ligne
+# Ouverture fichier
+f=open("TP_Fichiers/Mesure_axe_Emericc.txt","r")
+ligne = f.readline()                  # lecture d'une ligne
+# Affichage pour vérification
+print "%s" % ligne
+ligne=ligne.rstrip("\n\r")            # suppression retour chariot
+noms_grandeurs=ligne.split("\t")      # découpage aux tabulations
+noms_grandeurs=noms_grandeurs[1:3]    # suppression de "noms"
+
+\end{python}
+\end{py}
+\end{minipage}
+
+
+Lecture du nombre de points:
+\begin{py}
+\begin{python}[H]
+for i in range(10):
+    ligne = f.readline()  # saut de 10 lignes
+
+ligne = f.readline()                  # lecture d'une ligne 
+print "%s" % ligne                    # affichage pour vérification
+ligne=ligne.rstrip("\n\r")            # suppression retour chariot
+ligne_nbpoints=ligne.split("\t")      # découpage aux tabulations
+nb_points=int(ligne_nbpoints[1])      # conversion en entier
+\end{python}
+\end{py}
+
+Lecture des données:
+\begin{py}
+\begin{python}[H]
+
+numero=[] ; position=[] ; consigne=[] # initialisation tableaux
+for i in range(nb_points):
+    ligne = f.readline()              # lecture d'une ligne 
+    ligne=ligne.rstrip("\n\r")        # suppression retour chariot
+    ligne=ligne.replace(",",".")      # changement , en .
+    ligne_data=ligne.split("\t")      # découpage aux tabulations
+    numero.append(int(ligne_data[0]))
+    position.append(float(ligne_data[1]))    # Ajout aux tableaux
+    consigne.append(float(ligne_data[2]))
+\end{python}
+\end{py}
+
+\begin{minipage}[c]{.49\linewidth}
+Fermeture du fichier et Tracé de la courbe
+\begin{py}
+\begin{python}[H]
+
+f.close()        # Fermeture fichier
+plot(position)   # Tracé de la courbe de position
+\end{python}
+\end{py}
+\end{minipage} \hfill
+\begin{minipage}[c]{.49\linewidth}
+\begin{center}
+\includegraphics[width=.99\textwidth]{images/image9.png}
+\end{center}
+\end{minipage}
+
+\end{exemple}
+
+
+
+
+
+
+
+
+
+
+\subsection{Lecture d'un fichier sous Scilab}
+
+De la même façon que Python, Scilab permet de lire des fichiers. La syntaxe est proche :
+
+\begin{sci}
+\begin{scilab}[H]
+// Ouverture du fichier et lecture ligne a ligne
+fic=mopen("Mesure_axe_Emericc.txt","r");
+ligne=mgetl(fic,1)
+// Decoupage a la tabulation = caractere ascii 9
+noms_grandeurs=strsplit(ligne,ascii(9))
+noms_grandeurs=noms_grandeurs(2:3)
+for i=1:10
+    ligne = mgetl(fic,1);
+end
+
+ligne = mgetl(fic,1)
+ligne_nbpoints=strsplit(ligne,ascii(9))
+nb_points=int(ligne_nbpoints(2))
+nb_points=msscanf(ligne_nbpoints(2),"%i")
+\end{scilab}
+\end{sci}
+
+
+Lecture des données et affichage de la courbe.
+
+\begin{sci}
+\begin{scilab}[H]
+numero=[];position=[];consigne=[];
+for i=1:nb_points
+    ligne = mgetl(fic,1);
+    ligne = strsubst(ligne,",",".");
+    [n,numero(i),position(i),consigne(i)]=msscanf(ligne,"%d\t%f\t%f");
+end
+mclose(fic);                    // Fermeture du fichier
+plot(position)
+\end{scilab}
+\end{sci}
+
+
+
+
+\begin{minipage}[c]{.69\linewidth}
+
+\subsection{Cas des données formatées}
+Le tableau de données est <<~formaté~>>, c'est-à-dire qu'il présente une structure identique à chaque ligne.
+
+Python possède des outils de lecture automatique de ce type de tableau : numpy.loadtxt()
+
+\begin{py}
+\begin{python}[H]
+a=loadtxt("Fichier.txt",
+		dtype={
+			'names': ('numero', 'position', 'consigne'),
+			'formats': ('i2', 'f4', 'f4')},
+		delimiter='\t')
+\end{python}
+\end{py}
+
+\end{minipage} \hfill
+\begin{minipage}[c]{.29\linewidth}
+\begin{tabular}{ccc}
+\hline
+Int	&float	&	float\\
+\hline
+0	&0,00		&8,00\\
+1	&0,06	&	127,00\\
+2&	0,23	&	127,00\\
+3&	0,51	&	127,00\\
+4&	0,88	&	119,00\\
+5&	1,34	&	107,00\\
+6&	1,91	&	92,00\\
+7&	2,52	&	76,00\\
+... &...  &...  \\
+97&	4,94	&	1,00\\
+98&	4,94	&	1,00\\
+99&	4,94	&	1,00\\
+\hline
+\end{tabular}
+
+
+\end{minipage}
+
+
+
+Pour récupérer les données :
+\begin{py}
+\begin{python}[H]
+a['numero']			#liste de valeurs de la colonne N
+a['numero'][10]			#11ème élément
+\end{python}
+\end{py}
+
+
+\begin{figure}[H]
+\begin{minipage}[c]{.59\linewidth}
+
+\begin{py}
+\begin{python}[H]
+a,b=loadtxt("Fichier.txt",
+		usecols = (0,2),
+		dtype={
+			'names': ('numero', 'consigne'),
+			'formats': ('i2', 'f4')},
+		delimiter='\t',
+		unpack=True)
+\end{python}
+\end{py}
+
+\end{minipage} \hfill
+\begin{minipage}[c]{.39\linewidth}
+\begin{itemize}
+\item usecols : colonnes à utiliser dans le fichier
+\item dtype : type de données à lire
+\item Names : nom
+\item format : entier sur 2o, flottant sur 4o, strings...
+\item délimiter : séparateur des données
+\item unpack : permet de séparer les colonnes → a,b=...
+\end{itemize}
+\end{minipage}
+\end{figure}
+
+
+\begin{figure}[H]
+\begin{minipage}[c]{.49\linewidth}
+
+\begin{py}
+\begin{python}[H]
+plot(a['numero'],a['position'],'b',
+		a['numero'],a['consigne']/10,'r')
+\end{python}
+\end{py}
+
+\end{minipage} \hfill
+\begin{minipage}[c]{.49\linewidth}
+\begin{center}
+\includegraphics[width=.99\textwidth]{images/image10.png}
+\end{center}
+\end{minipage}
+\end{figure}
+
+\subsection{Lecture d'un fichier texte formaté sous Scilab}
+
+\begin{figure}[H]
+\begin{minipage}[c]{.49\linewidth}
+
+
+De la même façon que Python, Scilab permet de lire des fichiers formatés.
+
+La synthaxe est proche (en plus simple quand même...).
+
+\end{minipage} \hfill
+\begin{minipage}[c]{.49\linewidth}
+\begin{sci}
+\begin{scilab}[H]
+// Lecture de donnees formatees
+fic=mopen("Mesure_axe_Emericc_formate.txt","r");
+T=mfscanf(-1,fic,'%d\t%f\t%f')  
+plot(T(:,1),[T(:,2),T(:,3)/10])
+mclose(fic);               // Fermeture du fichier
+\end{scilab}
+\end{sci}
+\end{minipage}
+\end{figure}
+
+
+
+
+\subsection{Écriture d'un fichier texte sous python}
+L'écriture d'un fichier texte est très simple sous python:
+\begin{py}
+\begin{python}[H]
+# Écriture d'un fichier texte ligne à ligne
+f=open("TP_Fichiers/monFichier.txt","w")  # Ouverture du fichier
+f.write("La température est froide l'hiver.\n")
+f.write("Il fait {:f} degrés.".format(10))
+f.close()        # Fermeture du fichier
+\end{python}
+\end{py}
+
+Et pour un fichier formaté :
+\begin{py}
+\begin{python}[H]
+# Écriture d'un fichier formaté
+f=open("TP/monFichier.txt","w")  # ouverture fichier
+x=linspace(-20,20,100)
+y=sin(x)/x
+for i in range(0,len(x)):
+    f.write("{:d} \t {:f} \t {:f}\n".format(i,x[i],y[i]))
+f.close()        # Fermeture du fichier
+\end{python}
+\end{py}
+
+\subsection{Écriture d'un fichier texte sous Scilab}
+L'écriture d'un fichier texte, formaté ou pas, est très simple :
+\begin{sci}
+\begin{scilab}[H]
+// Ecriture de donnees formatees ou non...
+fic=mopen("monFichier.txt","w");
+mfprintf(fic,"Voici mon fichier de point\n")
+mfprintf(fic,"Nombre de points : %d\n",100)
+x=-20:40/99:20;
+y=sin(x)./x;
+mfprintf(fic,'%d\t%f\t%f\n',[1:100]',x',y')  
+mclose(fic); // Fermeture du fichier
+\end{scilab}
+\end{sci}
+
+\section{Enregistrer un objet dans un fichier: Module Pickle}
+
+Dans Python comme dans beaucoup de langages de haut niveau, on peut enregistrer les objets dans un fichier. 
+Lorsque l'objectif est de sauver des objets python pour les récupérer plus tard sous python, il est pratique d'utiliser Pickle.
+
+Alors que les fonctions utilisées dans ce cours ne nécessitaient pas l'importation de bibliothèque, il faut penser ici à importer Pickle.
+
+Soit v une variable quelconque,
+
+\begin{minipage}[t]{.49\linewidth}
+
+Sauvegarde :
+
+
+\begin{py}
+\begin{python}[H]
+import pickle
+fic=open("nao.pick","wb")
+pickle.dump(v,fic)
+fic.close()
+\end{python}
+\end{py}
+
+On utilise la méthode dump pour enregistrer l'objet.
+
+Une fois ce code exécuté un fichier nao.pick aura été créé avec les données correspondantes à l'intérieur.
+
+Pour stocker plusieurs variables, il suffit d'appeler plusieurs fois la fonction pickle.dump() pour chaque variable.
+
+\end{minipage} \hfill
+\begin{minipage}[t]{.49\linewidth}
+
+Lecture :	
+
+\begin{py}
+\begin{python}[H]
+import pickle
+fic=open("nao.pick","rb"")
+v=pickle.load(fic)
+fic.close()
+\end{python}
+\end{py}
+
+
+
+Pour recharger ces variables, il faut appeler autant de fois la fonction pickle.load(). Les variables sont restituées dans le même ordre.
+
+\end{minipage}
+
+
+\begin{thebibliography}{2}
+\bibitem{upsti}{Marc Derumeaux et Damien Iceta, \textit{Les fichiers. Apprendre à lire et à écrire}, UPSTI.}
+%\bibitem{wack}{Wack et Al., \textit{L'informatique pour tous en classes préparatoires aux grandes écoles}, Editions Eyrolles.}
+\end{thebibliography}
+\end{document}
+
+

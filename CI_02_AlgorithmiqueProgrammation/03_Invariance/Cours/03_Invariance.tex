@@ -1,0 +1,346 @@
+\documentclass[10pt,oneside]{article}
+\input{style/coursHeadings}
+\input{style/programHeadings}
+
+
+%Si le boolen xp est vrai : compilation pour xabi
+%Sinon compilation Damien
+\newboolean{xp}
+\setboolean{xp}{true}
+
+%\newboolean{prof}
+%\setboolean{prof}{true}
+
+\def\xxtitre{\ifthenelse{\boolean{xp}}{
+CI 2 : Algorithmique \& Programmation}{
+Chapitre  -- }}
+
+\def\xxsoustitre{\ifthenelse{\boolean{xp}}{
+Chapitre 3 -- Variant et invariant de boucle}{
+Partie  -- }}
+
+\def\xxauteur{\ifthenelse{\boolean{xp}}{
+Xavier \textsc{Pessoles} \\ Damien \textsc{Iceta}}{
+Damien \textsc{Iceta} \\ Xavier \textsc{Pessoles}}}
+
+\def\xxpied{\ifthenelse{\boolean{xp}}{
+Cours -- CI 2 : Algorithmique \& Programmation\\
+Ch. 3 : Invariance de boucle}{
+\xxtitre}}
+
+\def\xxcathegorie{\ifthenelse{\boolean{xp}}{
+2013 -- 2014 \\
+Xavier \textsc{Pessoles}}{
+Informatique - Cours}}
+
+\ifthenelse{\boolean{xp}}{\input{style/enteteXP}}{\input{style/enteteDI}}
+
+
+%---------------------------------------------------------------------------
+
+
+
+\begin{savoir}
+\textsc{Savoirs :}
+\begin{itemize}
+\item justifier qu'une itération (ou boucle) produit l'effet attendu au moyen d'un invariant;
+\item démontrer qu'une boucle se termine effectivement.
+%\item s'interroger sur l'efficacité algorithmique temporelle.
+\end{itemize}
+\end{savoir}
+
+L'algorithme suivant permet de réaliser une division euclidienne : 
+\begin{pseudo}
+\begin{algorithm}[H]
+\KwData{$a,b \in\mathbb{N}^*$}
+reste $\gets$ a\\
+quotient $\gets$ 0\\
+\Tq{reste $\geq$ b}{
+reste $\gets$ reste $-$ b\\
+quotient $\gets$ quotient $+$ 1\\
+}
+Retourner quotient,reste
+\end{algorithm}
+\end{pseudo}
+ 
+\begin{prob}
+\begin{itemize}
+\item Comment s'assurer que l'algorithme en question réalise bien une division euclidienne ?
+\item Comment s'assurer que la boucle \textsf{while} se termine ?
+\end{itemize}
+\end{prob}
+\setlength{\parskip}{0ex plus 0.2ex minus 0ex}
+ \renewcommand{\contentsname}{}
+ \renewcommand{\baselinestretch}{1}
+
+\tableofcontents
+
+ \renewcommand{\baselinestretch}{1.2}
+\setlength{\parskip}{2ex plus 0.5ex minus 0.2ex}
+
+% \vspace{1cm}
+\textit{Ce document évolue. Merci de signaler toutes erreurs ou coquilles.}
+
+\section{Variant}
+\subsection{Définition}
+En utilisant l'exemple précédent de la division euclidienne, pour sortir de la boucle, il est nécessaire que le reste devienne, au cours de l'algorithme, inférieur à la valeur de $b$. Dans ce cas, on constate que $b$ étant un entier naturel, la valeur du reste va diminuer à chaque tour de boucle. Ainsi, on peut intuiter que cet algorithme se terminera. 
+
+\begin{defi}
+\textbf{Variant de boucle}
+
+Soit une condition booléenne permettant de sortir d'une boucle constituée d'une comparaison entre une variable et une constante de types entiers positifs. La variable est un variant de boucle si :
+\begin{itemize}
+\item elle reste positive tout au long de l'algorithme;
+\item elle décroit (ou croit) strictement à chaque itération de la boucle. 
+\end{itemize}
+
+Ainsi, après un nombre fini d'itérations, on est sûr que la boucle se terminera. 
+
+\end{defi}
+
+\begin{rem}
+Un variant de boucle \textbf{permet} de s'assurer qu'une boucle se terminera.
+
+Un variant de boucle \textbf{ne permet pas} de s'assurer qu'un algorithme fournit la réponse attendue.
+\end{rem}
+
+\subsection{Exemple -- L'algorithme d'Euclide.}
+
+
+Cet algorithme permet de calculer le PGCD de deux nombres entiers. Il se base sur le fait que si $a$ et $b$ sont deux entiers naturels non nuls, $pgcd(a,b)=pgcd(b, a \text{mod} b)$. 
+
+\begin{minipage}[c]{.47\linewidth}
+\begin{pseudo}
+\begin{algorithm}[H]
+\KwData{$a,b \in\mathbb{N}^*$}
+$x\gets a$\\
+$y\gets b$\\
+\Tq{$y\neq 0$}{
+$r\gets$ reste de la division euclidienne de $x$ par $y$\\
+$x\gets y$\\
+$y\gets r$}
+Afficher $x$.
+\end{algorithm}
+\end{pseudo}
+\end{minipage}
+\begin{minipage}[c]{.47\linewidth}\hfill
+\begin{exemple}
+Calculons le PGCD de 240 et 64 :
+\begin{eqnarray*}
+240 = 3\cdot 64 + 48 \\
+64 = 1\cdot 48 + 16 \\
+48 = 3\cdot 16 + 0 \\
+\end{eqnarray*}
+\end{exemple}
+\end{minipage}
+
+Dans cet exemple, la condition pour sortir de la boucle est que $y$ devienne nul. $y$ est un variant de boucle si $y$ est un entier positif qui qui décroit strictement à chaque itération de boucle. Dans ces conditions, on est sûr que la boucle se terminera. 
+
+Le reste de la division euclidienne de $x$ par $y$, $r$, est un entier positif strictement inférieur à $y$. De plus, à chaque itération, $y$ prend la valeur de $r$. $y$ décroit donc à chaque itération. 
+
+En conséquence, $y$ est un variant de boucle.
+
+
+\section{Invariant de boucle}
+\subsection{Problématique}
+Lors de la réalisation d'un algorithme, il est nécessaire
+\begin{itemize} 
+\item de vérifier que celui-ci permet bien de répondre au problème initial;
+\item de s'assurer que celui-ci se termine sans quoi le résultat du problème ne sera jamais délivré à l'utilisateur.
+\end{itemize}
+
+On s'intéresse ici uniquement aux structures itératives. (Les structures récursives seront traitées en seconde année.)
+
+\begin{defi}
+\textbf{Invariant de boucle \cite{denis}}
+
+Un invariant de boucle est une propriété ou une formule logique, 
+\begin{itemize}
+\item qui est vérifiée après la phase d'initialisation;
+\item qui reste vraie après l'exécution d'une itération;
+\item et qui, conjointement à la condition d'arrêt, permet de montrer que le résultat attendu et bien le résultat calculé. 
+\end{itemize}
+\end{defi}
+
+
+\begin{methode}
+\cite{soyeur}
+\begin{enumerate}
+\item Définir les préconditions (état des variables avant d’entrer dans la boucle).
+\item Définir un invariant de boucle.
+\item Prouver que l’invariant de boucle est vrai.% (correspond à $\mathcal{P}(n) \Longleftarrow \mathcal{P}(n + 1)$).
+\item Montrer la terminaison du programme.
+\item Montrer qu'en sortie de boucle, la condition reste vraie.%Condition de sortie de boucle + invariant de boucle $\Longleftarrow$ postcondition.
+\end{enumerate}
+\end{methode}
+
+\subsection{Exemple division euclidienne}
+Utilisons la méthode définie précédemment. 
+
+\textbf{1. }Initialement, l'utilisateur saisit les entiers $a$ et $b$. Le reste prend la valeur de $a$ et me quotient prend la valeur 0. 
+
+\textbf{2. }On postule que la quantité $b\cdot\text{quotient}+\text{reste}= a $ est un invariant de boucle.
+
+\textbf{3. } Démontrons par récurrence le postulat précédent.
+\begin{itemize}
+\item Avant d'entrer dans la boucle, on a bien $b\cdot\text{quotient}_0+\text{reste}_0= b\cdot 0 + a = a $. Le postulat est donc vrai.
+\item Admettons le postulat vrai au rang $n$ : $b\cdot\text{quotient}_n+\text{reste}_n = a$.
+\item Montrons que le postulat est vrai au rang $n+1$ :
+\begin{eqnarray*}
+b\cdot\text{quotient}_{n+1}+\text{reste}_{n+1} =  
+b\left(\text{quotient}_{n}+1\right)+\text{reste}_{n}-b=  
+b\text{quotient}_{n} +\text{reste}_{n}  +b-b = a
+\end{eqnarray*}
+La relation est donc vraie au rang $n+1$. 
+\end{itemize}
+
+\textbf{4. } On a montré la terminaison du programme grâce au variant de boucle. 
+
+\textbf{5. } En sortie de programme, l'invariant de boucle reste vérifié. 
+
+
+\subsection{Exemple -- L'algorithme d'Euclide.}
+
+
+Cet algorithme permet de calculer le PGCD de deux nombres entiers. Il se base sur le fait que si $a$ et $b$ sont deux entiers naturels non nuls, $pgcd(a,b)=pgcd(b, a \text{mod} b)$. 
+
+
+\begin{pseudo}
+\begin{algorithm}[H]
+\KwData{$a,b \in\mathbb{N}^*$}
+$x\gets a$\\
+$y\gets b$\\
+\Tq{$y\neq 0$}{
+$r\gets$ reste de la division euclidienne de $x$ par $y$\\
+$x\gets y$\\
+$y\gets r$}
+Afficher $x$.
+\end{algorithm}
+\end{pseudo}
+
+\begin{exemple}
+Calculons le PGCD de 240 et 64 :
+\begin{eqnarray*}
+240 = 3\cdot 64 + 48 \\
+64 = 1\cdot 48 + 16 \\
+48 = 3\cdot 16 + 0 \\
+\end{eqnarray*}
+
+$pgcd(240,64)$ est le dernier reste non nul à savoir 16.
+
+\end{exemple}
+
+\begin{demo}
+Soient $a$ et $b$, tels que $(a;b)\in \mathbb{N}^*$ tels que $a > b$. Soient $(q;r)\in \mathbb{N}$ tels que $a=b\cdot q+r$. Avec $r$ le reste de la division euclidienne de $a$ par $b$ et $q$ le quotient.
+
+\textbf{Montrons que $PGCD(a,b)=PGCD(b,r)$.}
+
+Soit $d\in\mathbb{N}$ un diviseur commun de $a$ et $b$. Dans ce cas, $d$ divise $a-b\cdot q$; donc $d$ divise $r$.
+
+En conclusion, si $d$ divise $a$ et $b$ alors $PGCD(a,b)=PGCD(b,r)$.
+
+Réciproquement, soit $d\in\mathbb{N}$ un diviseur commun de $b$ et $r$. Dans ce cas, $d$ divise $b\cdot q+r$; donc $d$ divise $a$.
+
+En conclusion, si $d$ divise $b$ et $r$ alors $PGCD(a,b)=PGCD(b,r)$.
+
+On a donc $PGCD(a,b)=PGCD(b,r)$.
+
+\end{demo}
+
+
+\begin{demo}
+\textbf{Preuve par invariant de boucle de l'algorithme d'Euclide}
+
+\begin{enumerate}
+\item Initialement, $a$ et $b$ sont des données saisies par l'utilisateur. On a $x_0 = a$ et $y_0 = b$. 
+\item On postule que l'invariant de boucle est donné par $x=y\cdot q + r \Longleftrightarrow r = x - y\cdot q$.
+\item 
+\begin{itemize}
+\item Lors de la première itération, $r_1$ est tel que $r_1 = x_1 - y_1\cdot q_1$.
+\item Lors de la nième itération, $r_n$ est tel que $r_n = x_n - y_n\cdot q_n$.
+\item \`A l'itération suivante, $x_{n+1}=y_n$ et $y_{n+1}=r_n$, on peut donc trouver $r_{n+1}$ tel que $r_{n+1} = x_{n+1} - y_{n+1}\cdot q_{n+1}$.
+\end{itemize}
+\item On a montré précédemment que l'itération se terminait. 
+\item En sortant de la boucle, l'invariant reste vrai.
+\end{enumerate}
+
+%Montrons que la propriété  $x=y\cdot q+r$ est un invariant de boucle :
+%\begin{itemize}
+%\item au premier incrément, $r$ étant le reste de la division euclidienne de $x$ par $y$, on a donc bien  $x=y\cdot q+r$;
+%\item à l'incrément suivant, $x'\gets y$ et $y' \gets r$. On peut donc trouver $r'$ tel que $x'=y'\cdot q'+r'$. La propriété reste donc vraie;
+%\item par définition de la division euclidienne, $r<y$; donc à chaque incrément la quantité $y$ diminue. La boucle pourra donc s'arrêter.
+%\end{itemize}
+\end{demo}
+
+%\subsection{Crible d'Ératosthène}
+%Cet algorithme permet de déterminer les nombre premiers d'une liste de $n$ nombre entiers.
+%
+%\begin{pseudo}
+%\begin{algorithm}[H]
+%\KwData{$n \in\mathbb{N}^*$}
+%$tab$ contient la liste des $n$ entiers\\
+%\For{$i=1$ \KwTo $n$}{
+%\For{$j=n$ \KwTo $i$}{
+%\If{$tab[j]$ modulo $tab[i] =0$}{
+%Supprimer $tab[j]$
+%}}
+%}
+%
+%\end{algorithm}
+%\end{pseudo}
+
+
+\subsection{Exemple}
+\begin{exemple}
+Écrire la fonction qui permet de calculer la valeur prise par $2^n$. On utilisera pour cela une boucle \textsl{while} qui sera mise en \oe{}uvre à l'aide d'un variant et d'un invariant de boucle qu'il faudra définir.
+\end{exemple}
+
+
+Intuitivement, le premier algorithme que l'on peut proposer est le suivant : 
+\begin{py}
+\begin{python}
+def fonction(n):
+    i=0
+    res=1
+    while i<n:
+        res = res*2
+        i=i+1
+    return res
+\end{python}
+\end{py}
+
+Prenons quelques exemples : 
+\begin{itemize}
+\item pour $n=0$ : on retourne directement 1;
+\item pour $n=1$ : on retourne 2 \textit{etc.}
+\end{itemize}
+
+Pour mettre en place le variant, on va commencer par mettre en place un variant qui doit décroître :
+\begin{py}
+\begin{python}
+def fonction(n):
+    i=n
+    res=1
+    while i!=0:
+        res = res*2
+        i=i-1
+    return res
+\end{python}
+\end{py}
+
+$i$ est donc un variant de boucle car : 
+\begin{itemize}
+\item $i$ est toujours un entier positif;
+\item $i$ décroît strictement à chaque itération.
+\end{itemize}
+
+Proposons l'invariant de boucle suivant :
+**
+
+\begin{thebibliography}{2}
+\bibitem{denis}{François Denis \url{http://pageperso.lif.univ-mrs.fr/~francois.denis/algoL2/chap1.pdf}}
+\bibitem{soyeur}{Alain Soyeur \url{http://asoyeur.free.fr/}}
+\bibitem{wack}{Wack et Al., \textit{L'informatique pour tous en classes préparatoires aux grandes écoles}, Editions Eyrolles.}
+\bibitem{yb}{Yves Benjamin, Vérification de la validité d'un programme.}
+\end{thebibliography}
+\end{document}
