@@ -133,6 +133,9 @@ inc = .001
 p,a=[],[]
 polx,poly=[],[]
 
+
+# SHARK 
+"""
 a=[0,0];p.append(a);polx.append(a[0]);poly.append(a[1])
 a=[40,0];p.append(a);polx.append(a[0]);poly.append(a[1])
 #a=[80,0];p.append(a);polx.append(a[0]);poly.append(a[1])
@@ -145,6 +148,15 @@ a=[80,60];p.append(a);polx.append(a[0]);poly.append(a[1])
 a=[80,60];p.append(a);polx.append(a[0]);poly.append(a[1])
 a=[0,0];p.append(a);polx.append(a[0]);poly.append(a[1])
 a=[80,0];p.append(a);polx.append(a[0]);poly.append(a[1])
+"""
+
+# Forme
+a=[5,5];p.append(a);polx.append(a[0]);poly.append(a[1])
+a=[15,45];p.append(a);polx.append(a[0]);poly.append(a[1])
+a=[35,5];p.append(a);polx.append(a[0]);poly.append(a[1])
+a=[45,45];p.append(a);polx.append(a[0]);poly.append(a[1])
+px=[5,15,35,45]
+py=[5,45,5,45]
 
 
 """
@@ -172,8 +184,18 @@ while u<=1:
     u += inc
 
 # Affichage avec matplotib
-pl.plot(x,y)
+#pl.plot(x,y)
 #Affichage du polynome caractéristique
 #pl.plot(polx,poly)
-pl.axis('equal')
+
+fig = plt.figure()
+ax = fig.gca()
+params = {'legend.fontsize': 8,'legend.linewidth': 1}
+plt.rcParams.update(params)
+plot(x,y,'r',linewidth=2, label='Courbe de Bézier')
+plot(px,py,'b',linewidth=2)
+plot(px,py,'bo',linewidth=4, label='Polygone de contrôle (Pôles)')
+axis([0,50,0,50])
+pl.grid()
+#pl.axis('equal')
 pl.show()
