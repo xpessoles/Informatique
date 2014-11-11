@@ -53,15 +53,6 @@ Ch. 2 : Introduction à l'algorithmique -- Cours
 \else
 \fi}
 
-\def\xxpied{%
-\ifxp
-2013 -- 2014 \\
-Xavier \textsc{Pessoles}
-\else
-\fi}
-
-
-
 
 %---------------------------------------------------------------------------
 
@@ -73,6 +64,14 @@ Xavier \textsc{Pessoles}
 \input{style/enteteDI}
 \fi
 
+
+Les courbes et les surfaces de Bézier (et NURBS) sont très utilisées en CAO lors de la conception de formes complexes (carrosserie, flacons de parfum, \textit{etc.}).
+
+\begin{center}
+\includegraphics[width=.8\textwidth]{images/surf.png}
+ 
+\textit{Courbes et surfaces obtenues en utilisant des logiciels de CAO }
+\end{center}
 
 
 Les courbes de Bézier sont des courbes paramétriques définies par $n$ points $P_i$ de coordonnées $\left(x_i,y_i\right)$ appelés pôles. Ainsi, les coordonnées d'un point $M(u)=\left(x(u),y(u)\right)$ appartenant à la courbe sont définies par : 
@@ -123,15 +122,17 @@ $$
 %\textit{Cycle de conception d'un produit}
 %\end{center}
 
-%\begin{prob}
-%\textsc{Problématique :}
-
-%En phase d'avant conception d'un produit, quels sont les critères qui vont permettre de choisir les matériaux à utiliser ?
-%\end{prob}
-
 Le tracé de ces courbes fait appel à la définition de fonctions, de boucles, d'instructions conditionnelles qui sont au c\oe{}ur du développement de programmes informatiques. 
 
 Le but de ce cours est de définir les instructions de base qui doivent permettre la réalisation d'algorithmes. 
+
+
+\begin{prob}
+\textsc{Problématique :}
+
+Connaissant la définition mathématique d'une courbe de Bézier, quels sont les algorithmes qui permettent de tracer une telle courbe ?
+\end{prob}
+
 
 \begin{comp}
 Vous devrez être capables d'\textbf{imaginer} et \textbf{concevoir} une solution algorithmique modulaire, utilisant des méthodes de programmation, des structures de données appropriées pour le problème étudié :
@@ -506,7 +507,6 @@ De manière générale, on essaiera d'utiliser le moins possible les variables g
 \subsubsection{Documentation des fonctions}
 En programmation, il est indispensable de documenter les fonctions. En effet, il n'est pas toujours facile de se replonger dans un algorithme qu'on a écrit et il est indispensable de le ponctuer de commentaires pour pouvoir bien comprendre le but d'une fonction, d'une boucle \textit{etc}.
 
-\newpage 
 
 \begin{py}
 En python un commentaire court commence par le signe \#. Les commentaires longs sont encadrés par trois guillemets ".
@@ -583,7 +583,7 @@ En effet, si des méthodes ont le même nom, seules les méthodes de la dernièr
 
 
 \begin{exemple}
-\textit{Fonction pow}
+\textit{Fonction pow : Calcul de $x^\alpha$.}
 
 \end{exemple}
 \section{Instructions conditionnelles}
@@ -1087,6 +1087,10 @@ end
 
 
 
+\begin{exemple}
+\textit{\'A partir des fonctions précédentes et de la définition mathématique d'une courbe de Bézier, donner la structure d'un programme permettant de tracer une courbe de Bézier à partir d'une liste de pôles.}
+
+\end{exemple}
 \begin{thebibliography}{2}
 \bibitem{wack}{\textit{Wack, Conchon, Courant, de Falco, Dowek, Filliatre, Gonnord}, Informatique pour tous en classes préparatoires aux grandes écoles, Éditions Eyrolles.}
 \bibitem{pb}{\textit{Patrick Beynet}, Cours d'informatique en CPGE, Lycée Rouvière Toulon, UPSTI.}
