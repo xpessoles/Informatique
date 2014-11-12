@@ -1,0 +1,473 @@
+\documentclass[10pt]{article}
+\input{style/coursHeadings}
+\input{style/programHeadings}
+\input{style/macros_SII}
+\input{style/macros_Titres}
+\input{style/macros_Frames}
+
+%Si le boolen xp est vrai : compilation pour xabi
+%Sinon compilation Damien
+\newif\ifprof
+%\proftrue
+\proffalse
+
+\newif\ifxp
+\xptrue
+%\xpfalse
+
+\newif\iftd
+\tdtrue
+%\tdfalse
+
+\usepackage[%
+    pdftitle={Introduction à l'algorithmique - Applications},
+    pdfauthor={Xavier Pessoles},
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=magenta]{hyperref}
+
+\def\discipline{Informatique}
+\def\xxtitre{%
+\ifxp
+CI 2 : Algorithmique \& Programmation
+\else
+\fi
+}
+
+\def\xxsoustitre{%
+\ifxp
+Chapitre 2 -- Introduction à l'algorithmique \\
+Exercices d'application 1
+\else
+\fi}
+
+\def\xxauteur{%
+\ifxp
+Patrick \textsc{Beynet}\\
+Xavier \textsc{Pessoles}
+\else
+\fi}
+
+\def\xxpied{%
+\ifxp
+CI 2 : Algorithmique \& Programmation\\
+Ch. 2 : Introduction à l'algorithmique -- Applications 01
+\else
+\fi}
+
+
+%---------------------------------------------------------------------------
+
+
+\begin{document}
+\ifxp
+\input{style/enteteXP}
+\else
+\input{style/enteteDI}
+\fi
+
+\begin{comp}
+\begin{itemize}
+\item \textit{Alg -- C1 :} comprendre un algorithme et expliquer ce qu’il fait;
+\item \textit{Alg -- C2 :} modifier un algorithme existant pour obtenir un résultat différent;
+\item \textit{Alg -- C4 :} expliquer le fonctionnement d’un algorithme;
+\item \textit{Alg -- C10 :} concevoir l’en-tête (ou la spécification) d’une fonction, puis la fonction elle-même;
+\item \textit{Alg -- C11 :} traduire un algorithme dans un langage de programmation;
+\item \textit{Alg -- C13 :} rechercher une information au sein d’une documentation en ligne, analyser des exemples fournis dans cette documentation;
+\item \textit{Alg -- C14 :} documenter une fonction, un programme plus complexe.
+\end{itemize}
+\end{comp}
+
+\subsection*{Exercice 1}
+\setcounter{subparagraph}{0}
+%\subparagraph{}\textit{En utilisant des exemples, expliquer le fonctionnement de l'algorithme 1.}
+
+\subparagraph{}\textit{Traduire cet algorithme en Python en implémentant le fonction \textsf{is\_even} renvoyant \textsf{True} si un entier est pair, \textsf{False} sinon. Vous n'oublierez pas de documenter la fonction.}
+
+
+\ifprof
+\begin{py}
+\begin{python}
+# Exercice 1
+def is_even(n):
+    """
+    Fonction permettant de savoir si un nombre est pair ou impair
+    Entrées : 
+     * n(int) : nombre entier
+    Sorties : 
+     * un booleén valant True si le nombre est pair, False sinon
+    """
+    return n%2==0
+\end{python}
+\end{py}
+\else
+\begin{pseudo}
+\begin{center}
+\begin{tabular}{p{.9\textwidth}}
+\hline
+\textbf{Algorithme 1 :} Pair ou impair ? \\
+\hline
+\textbf{Données :} $n$ : un entier \\
+\textbf{Résultat :} $r$ : un booléen vrai si $n$ est pair, faux si $n$ est impair. \\
+\\
+\textbf{Si} $n$ \textbf{mod} 2 == 0 \textbf{alors} \\
+\hspace{.4cm} $r$ $\leftarrow$ Vrai \\
+\textbf{Sinon} \\
+\hspace{.4cm} $r$ $\leftarrow$ Faux \\
+\textbf{Fin Si} \\
+\hline
+\end{tabular}
+\end{center}
+\end{pseudo}
+\fi
+
+\subsection*{Exercice 2}
+\setcounter{subparagraph}{0}
+\subparagraph{}\textit{Réaliser l'algorithme en utilisant une boucle \textsf{Pour} permettant de calculer la somme des $n$ premiers entiers. Vous utiliserez la syntaxe Python ou Pseudo code.}
+
+\subparagraph{}\textit{Réaliser l'algorithme en utilisant une boucle \textsf{Tant que} permettant de calculer la somme des $n$ premiers entiers. Vous utiliserez la syntaxe Python.}
+
+
+\ifprof
+\begin{pseudo}
+\begin{center}
+\begin{tabular}{p{.9\textwidth}}
+\hline
+\textbf{Algorithme 2 :} Somme des $n$ premiers entiers \\
+\hline
+\textbf{Données :} $n$ : un entier \\
+\textbf{Résultat :} $S$ : le résultat de la somme des $n$ premiers entiers. \\
+\\
+$S \leftarrow 0$ \\
+\textbf{Pour} $i=1$ \textbf{à} $n$ \textbf{faire} \\
+\hspace{.4cm} $S$ $\leftarrow$ $S+i$ \\
+\textbf{Fin Pour} \\
+\hline
+\end{tabular}
+\end{center}
+\end{pseudo}
+\begin{py}
+\begin{minipage}[c]{.47\linewidth}
+\begin{python}
+def somme_entiers_for(n):
+    """
+    Fonction permettant de calculer
+     la somme des n premiers entiers
+    Entrées : 
+     * n(int) : nombre entier
+    Sortie : 
+     * S (int) : résultat
+    """
+    S=0
+    for i in range(n+1):
+       S = S+i
+    return S
+\end{python}
+\end{minipage} \hfill
+\begin{minipage}[c]{.47\linewidth}
+\begin{python}    
+def somme_entiers_while(n):
+    """
+    Fonction permettant de calculer 
+     la somme des n premiers entiers
+    Entrées : 
+     * n(int) : nombre entier
+    Sortie : 
+     * S (int) : résultat
+    """
+    S=0
+    i=n
+    while i!=0: 
+       S = S+i
+       i=i-1
+    return S
+\end{python}
+\end{minipage}
+\end{py}
+\else
+\fi
+
+\subsection*{Exercice 3 -- Calcul de $2^n$}
+\setcounter{subparagraph}{0}
+\subparagraph{}\textit{Implémenter la fonction \textsf{P2\_explicite(n)} en utilisant la méthode $n$ disponible dans la bibliothèque de fonction \textsf{math}.}
+
+\ifprof
+\begin{pseudo}
+Évaluer le nombre 2 à la puissance $n$ de manière explicite avec $n\in \mathbb{N}$. On définit de manière explicite la suite $u_n =2^n$.
+\begin{center}
+\begin{tabular}{p{.9\textwidth}}
+\hline
+\textbf{Algorithme 3 :} Puissance de 2, méthode explicite\\
+\hline
+\textbf{Données :} $n$ : un nombre entier \\
+\textbf{Résultat :} un entier égal à la nième puissance de 2 \\
+\\
+\textbf{P2\_explicite}(n) \\
+\hspace{.4cm} \textbf{Retourner} $2\wedge n$ \\
+\hline
+\end{tabular}
+\end{center}
+\end{pseudo}
+\else
+\begin{py}
+\begin{python}
+>>> help(pow)
+Help on built-in function pow in module builtins:
+
+pow(...)
+    pow(x, y[, z]) -> number
+    
+    With two arguments, equivalent to x**y.  With three arguments,
+    equivalent to (x**y) % z, but may be more efficient (e.g. for ints).
+\end{python}
+\end{py}
+\fi
+
+
+\subparagraph{}\textit{Implémenter la fonction \textsf{P2\_iterative(n)} en utilisant une 
+boucle \textsf{Tant que}.}
+
+\ifprof
+\begin{pseudo}
+\begin{center}
+\begin{tabular}{p{.9\textwidth}}
+\hline
+\textbf{Algorithme 3 :} Puissance de 2, méthode itérative\\
+\hline
+\textbf{Données :} $n$ : un nombre entier \\
+\textbf{Résultat :} un entier égal à la nième puissance de 2 \\
+\\
+\textbf{P2\_itérative}(n) \\
+\hspace{.4cm} $x\leftarrow 1$ \\
+\hspace{.4cm} \textbf{Tant que } $n>0$ \textbf{faire} : \\
+\hspace{.8cm} $x\leftarrow 2 *x$ \\
+\hspace{.8cm} $n\leftarrow n-1$ \\
+\hspace{.4cm} \textbf{Fin Tant que}\\
+\hspace{.4cm} \textbf{Retourner} $x$ \\
+\hline
+\end{tabular}
+\end{center}
+\end{pseudo}
+
+\begin{py}
+\begin{minipage}[c]{.47\linewidth}
+\begin{python}
+def P2_explicite(n):
+    """
+    Calcul de 2^n
+    Entrée :
+     * n (int) : un nombre entier
+    Sortie :
+     * x (int) : nieme puissance de 2
+    """
+    return math.pow(2,n)
+\end{python}
+\end{minipage} \hfill
+\begin{minipage}[c]{.47\linewidth}
+\begin{python}
+def P2_iterative(n):
+    """
+    Calcul de 2^n
+    Entrée :
+     * n (int) : un nombre entier
+    Sortie :
+     * x (int) : nieme puissance de 2
+    """
+    x = 1
+    while n>0 :
+        x=2*x
+        n=n-1
+    return x
+\end{python}
+\end{minipage}
+\end{py}
+
+\else
+\fi
+
+\subsection*{Exercice 4}
+\setcounter{subparagraph}{0}
+L'algorithme suivant permet de calculer le nième terme de la suite de Syracuse. 
+\begin{pseudo}
+\begin{center}
+\begin{tabular}{p{.9\textwidth}}
+\hline
+\textbf{Algorithme 4 :} Suite de Syracuse\\
+\hline
+%\textbf{Données :} $n$ : un nombre entier \\
+%\textbf{Résultat :} $syr$  entier résultat du nième terme de la suite de Syracuse.  \\
+%\\
+\textbf{Syracuse}(n) \\
+\hspace{.4cm} $syr\leftarrow n$ \\
+\hspace{.4cm} \textbf{Tant que } $syr \neq 1$ \textbf{faire} : \\
+\hspace{.8cm} \textbf{Si } $syr$ \textbf{mod} 2 == 0 \textbf{alors} : \\
+\hspace{1.2cm} $syr\leftarrow syr/2$ \\
+\hspace{.8cm} \textbf{Sinon}\\
+\hspace{1.2cm} $syr\leftarrow 3 *syr+1$ \\
+\hspace{.8cm} \textbf{Fin si}\\
+\hspace{.4cm} \textbf{Fin Tant que}\\
+\hspace{.4cm} \textbf{Retourner} $syr$ \\
+\hline
+\end{tabular}
+\end{center}
+\end{pseudo}
+
+\subparagraph{}\textit{Calculer \textsf{Syracuse(10)} et \textsf{Syracuse(12)} et observer l'évolution de la variable \textsf{syr}. En déduire la conjecture de Syracuse. }
+
+\subparagraph{}\textit{Donner les spécifications de la fonction.}
+
+\subparagraph{}\textit{Donner l'énoncé mathématique de la suite de Syracuse.}
+
+\subparagraph{} \textit{On appelle \textbf{temps de vol} le plus petite indice $n$ tel que $u_n = 1$. Modifier l'algorithme pour le calculer.}
+
+\subparagraph{} \textit{On appelle \textbf{altitude} la valeur maximale de la suite. Modifier l'algorithme pour la calculer.}
+
+
+\subsection*{Exercice 5}
+On donne l'algorithme suivant. 
+
+\begin{pseudo}
+\begin{center}
+\begin{tabular}{p{.9\textwidth}}
+\hline
+\textbf{Algorithme 5 :} Insertion d'un élément dans une liste de nombres triés par ordre croissant\\
+\hline
+\textbf{Données :} 
+\begin{itemize}
+\item $T$ : une liste de nombres triés par ordre croissant $T[1..n]$;
+\item $x$ : un nombre.
+\end{itemize} \\
+
+\textbf{Résultat :} $T$ : une liste de nombre triés par ordre croissant  $T[1..n+1]$ \\
+\\
+\textbf{Insertion\_element}(T,x) \\
+\hspace{.4cm} $i \leftarrow n$\\
+\hspace{.4cm} \textbf{Tant que } $T[i]>x$ \textbf{ou} $i>0$ \textbf{faire} : \\
+\hspace{.8cm} $T[i+1] \leftarrow T[i]$ \\
+\hspace{.8cm} $i\leftarrow i-1$ \\
+\hspace{.4cm} \textbf{Fin Tant que}\\
+\hspace{.4cm} $T[i+1]\leftarrow x$ \\
+\hline
+\end{tabular}
+\end{center}
+\end{pseudo}
+
+\subparagraph*{}\textit{Expliquer le processus permettant d'insérer un élément dans un tableau. Vous pourrez sur les exemples suivants :
+\begin{itemize}
+\item $T=[1,2,4,5]$, \textsf{Insertion\_element(T,3)};
+\item $T=[1,2,4,5]$, \textsf{Insertion\_element(T,6)};
+\end{itemize}}
+
+
+\end{document}
+
+Conjecture de Syracuse : la suite de Syracuse d’un nombre entier $N$ est définie par
+récurrence de la manière suivante :
+
+$$
+\forall n \in \mathbb{N} : 
+\left\{
+\begin{array}{l}
+\text{si } n=0, u_0 = N \\
+\text{sinon, si  }u_n \text{ est pair, } u_{n+1} = \dfrac{u_n}{2} \\
+\text{sinon, si  }u_n \text{ est impair, } u_{n+1} = 3u_n+1 \\
+\end{array}
+\right.
+$$
+
+
+
+
+
+
+\begin{pseudo}
+On souhaite calculer le nombre réel $x^n$ où $n$ est un entier positif.
+\begin{center}
+\begin{tabular}{p{.9\textwidth}}
+\hline
+\textbf{Algorithme 8 :} Exponentiation <<naïve>>\\
+\hline
+\textbf{Données :} 
+\begin{itemize}
+\item $n$ : un entier positif;
+\item $x$ : un nombre réel.
+\end{itemize} 
+\textbf{Résultat :} $r$ : un nombre tel que $r=x^n$ \\
+\\
+\textbf{Exponentiation}(x,n) \\
+\hspace{.4cm} \textbf{Si } $n==0$ \textbf{alors} \\
+\hspace{.8cm} \textbf{Retourner } 1 \\
+\hspace{.4cm} \textbf{Sinon } \\
+\hspace{.8cm} $r\leftarrow x$ \\
+\hspace{.8cm} \textbf{Pour } $i$ \textbf{de} 2 \textbf{à} $n$ \textbf{faire} : \\
+\hspace{1.2cm} $r \leftarrow r*x$\\
+\hspace{.8cm} \textbf{Fin Pour}\\
+\hspace{.8cm} \textbf{Retourner r}\\
+\hspace{.4cm} \textbf{Fin Si} \\
+\hline
+\end{tabular}
+\end{center}
+\end{pseudo}
+
+
+
+\begin{pseudo}
+On souhaite calculer le nombre réel $x^n$ où $n$ est un entier positif.
+\begin{center}
+\begin{tabular}{p{.9\textwidth}}
+\hline
+\textbf{Algorithme 8 :} Exponentiation rapide itérative\\
+\hline
+\textbf{Données :} 
+\begin{itemize}
+\item $n$ : un entier positif;
+\item $x$ : un nombre réel.
+\end{itemize} 
+\textbf{Résultat :} $r$ : un nombre tel que $r=x^n$ \\
+\\
+\textbf{Exponentiation\_rapide\_iterative}(x,n) \\
+\hspace{.4cm} \textbf{Si } $n==0$ \textbf{alors} \\
+\hspace{.8cm} \textbf{Retourner } 1 \\
+\hspace{.4cm} \textbf{Sinon } \\
+\hspace{.8cm} $r\leftarrow 1$ \\
+\hspace{.8cm} \textbf{Tant que } $n>0$ \textbf{faire} : \\
+\hspace{1.2cm} \textbf{Si } $n$ \textbf{mod} 2==1 \textbf{alors} : \\
+\hspace{1.6cm} $r\leftarrow r*x$ \\
+\hspace{1.2cm} \textbf{Fin Si } \\
+\hspace{1.2cm} $x\leftarrow x*x$ \\
+\hspace{1.2cm} $n\leftarrow n$\textbf{div} 2 \\
+\hspace{0.8cm} \textbf{Fin Tant que } \\
+\hspace{0.8cm} \textbf{Retourner }$r$ \\
+\hspace{0.4cm} \textbf{Fin Si} \\
+\hline
+\end{tabular}
+\end{center}
+\end{pseudo}
+
+
+
+%\begin{pseudo}
+%\begin{center}
+%\begin{tabular}{p{.9\textwidth}}
+%\hline
+%\textbf{Algorithme 3 :} Devinette \\
+%\hline
+%\textbf{Données :} $n$ : un entier compris entre $1$ et $10$, généré aléatoirement \\
+%\\
+%$i \leftarrow 0$ \\
+%$k \leftarrow 0$ \\
+%\textbf{Tant que} $i\neq n$ \textbf{faire} \\
+%\hspace{.4cm} $i\leftarrow $\textbf{Entrer}(``\textit{Donner un nombre compris entre 1 et 10 :}'') \\
+%\hspace{.4cm} $k\leftarrow k+1$\\
+%\textbf{Fin Tant que} \\
+%\textbf{Afficher}(``\textit{Gagné en },$k$,\textit{coups !}'') \\
+%\hline
+%\end{tabular}
+%\end{center}
+%\end{pseudo}
+
+
+\end{document}
+
+
+
