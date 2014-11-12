@@ -99,46 +99,11 @@ def calcul_bezier_n(u,tab_p):
 
 
 
-p0=[0,0]
-p1=[0,10]
-p2=[50,10]
-p3=[50,0]
-p=[]
-p.append(p0)
-p.append(p1)
-p.append(p2)
-#p.append(p3)
-
-inc = .001
-
-
-
-
-# Exemple de courbe - Définition de points de controle sur un demi cercle
-# de rayon 50
-#deg =10
-#r=50
-#p=[]
-#polx=[]
-#poly=[]
-#for i in range(0,deg+1):
-#    theta=math.pi-i*(math.pi)/deg
-#    pp=[r*math.cos(theta),r*math.sin(theta)]
-#    p.append(pp)
-#    polx.append(pp[0])
-#    poly.append(pp[1])
-
-#Courbe "Curl"
-
-p,a=[],[]
-polx,poly=[],[]
-
 
 # SHARK 
 """
 a=[0,0];p.append(a);polx.append(a[0]);poly.append(a[1])
 a=[40,0];p.append(a);polx.append(a[0]);poly.append(a[1])
-#a=[80,0];p.append(a);polx.append(a[0]);poly.append(a[1])
 a=[0,60];p.append(a);polx.append(a[0]);poly.append(a[1])
 a=[80,60];p.append(a);polx.append(a[0]);poly.append(a[1])
 a=[80,60];p.append(a);polx.append(a[0]);poly.append(a[1])
@@ -148,28 +113,20 @@ a=[80,60];p.append(a);polx.append(a[0]);poly.append(a[1])
 a=[80,60];p.append(a);polx.append(a[0]);poly.append(a[1])
 a=[0,0];p.append(a);polx.append(a[0]);poly.append(a[1])
 a=[80,0];p.append(a);polx.append(a[0]);poly.append(a[1])
+#px=[0,40,0,80,0,80]
+#py=[0,0,60,60,0,0]
+inc = 0.001
 """
 
 # Forme
-a=[5,5];p.append(a);polx.append(a[0]);poly.append(a[1])
-a=[15,45];p.append(a);polx.append(a[0]);poly.append(a[1])
-a=[35,5];p.append(a);polx.append(a[0]);poly.append(a[1])
-a=[45,45];p.append(a);polx.append(a[0]);poly.append(a[1])
+p=[]
+a=[5,5];p.append(a)
+a=[15,45];p.append(a)
+a=[35,5];p.append(a)
+a=[45,45];p.append(a)
 px=[5,15,35,45]
 py=[5,45,5,45]
-
-
-"""
-u=0
-xx=[]
-yy=[]
-while u<=1:
-    courbe=[]
-    courbe.append(calcul_bezier_3(u,p0,p1,p2,p3))
-    xx.append(courbe[0][0])
-    yy.append(courbe[0][1])
-    u += inc
-"""
+inc = 0.001
 
 
 # Calcul des points de la courbe
@@ -199,3 +156,20 @@ axis([0,50,0,50])
 pl.grid()
 #pl.axis('equal')
 pl.show()
+
+
+
+
+
+"""
+u=0
+xx=[]
+yy=[]
+while u<=1:
+    courbe=[]
+    courbe.append(calcul_bezier_3(u,p0,p1,p2,p3))
+    xx.append(courbe[0][0])
+    yy.append(courbe[0][1])
+    u += inc
+"""
+
