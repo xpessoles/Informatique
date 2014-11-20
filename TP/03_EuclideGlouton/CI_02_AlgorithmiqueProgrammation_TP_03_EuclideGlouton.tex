@@ -1,0 +1,226 @@
+\documentclass[10pt]{article}
+\input{style/coursHeadings}
+\input{style/programHeadings}
+\input{style/macros_SII}
+\input{style/macros_Titres}
+\input{style/macros_Frames}
+
+%Si le boolen xp est vrai : compilation pour xabi
+%Sinon compilation Damien
+\newif\ifprof
+%\proftrue
+\proffalse
+
+\newif\ifxp
+\xptrue
+%\xpfalse
+
+\newif\iftd
+\tdtrue
+%\tdfalse
+
+\usepackage[%
+    pdftitle={},
+    pdfauthor={Xavier Pessoles},
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=magenta]{hyperref}
+
+\def\discipline{Informatique}
+\def\xxtitre{%
+\ifxp
+Partie 2 : Algorithmique \& Programmation
+\else
+\fi
+}
+
+\def\xxsoustitre{%
+\ifxp
+TP 3 -- Découverte de l'algorithmique
+\else
+\fi}
+
+\def\xxauteur{%
+\ifxp
+\textit{Xavier Pessoles} \\
+\textit{Gilles Himmeslpach}
+\else
+\fi}
+
+\def\xxpied{%
+\ifxp
+Partie 2 : Algorithmique \& Programmation\\
+TP 3 -- Découverte de l'algorithmique
+\else
+\fi}
+
+
+
+
+
+
+%---------------------------------------------------------------------------
+
+
+\begin{document}
+\ifxp
+\input{style/enteteXP}
+\else
+\input{style/enteteDI}
+\fi
+
+
+
+ \renewcommand{\baselinestretch}{1.2}
+\setlength{\parskip}{2ex plus 0.5ex minus 0.2ex}
+
+
+\begin{comp}
+\textbf{ANALYSER ET MODÉLISER} un problème, une situation :
+\begin{itemize}
+%\item \textit{Alg -- C2} : modifier un algorithme existant pour obtenir un résultat différent;
+%\item \textit{Alg -- C3} : concevoir un algorithme répondant à un problème précisément posé;
+%\item \textit{Ing -- C3} : utiliser les bibliothèques de calcul standard; 
+%\item \textit{Ing -- C4} : utiliser les bibliothèques standard pour afficher les résultats sous forme graphique.
+\item Comprendre un algorithme et expliquer ce qu'il fait.
+\item Traduire un algorithme dans un langage de programmation.
+\end{itemize}
+\end{comp}
+
+\subsection*{Exercice 1 -- Algorithme d'Euclide}
+%\cite{\url{http://perso.ens-lyon.fr/pierre.lescanne/PUBLICATIONS/euclide.pdf}
+L'algorithme d'Euclide permet de calculer le PGCD de deux entiers naturels. 
+
+
+
+\begin{defi}
+\textbf{PGCD - Plus Grand Commun Diviseur}
+
+Soient $m$ et $n$ deux entiers naturels (appartenant à $\mathbb{N}$). On note $pgcd(m,n)$ le plus grand entier qui divise $m$ et $n$.
+\end{defi}
+
+On donne l'algorithme permettant de calculer le PGCD .
+
+\begin{pseudo}
+\begin{algorithm}[H]
+\KwData{$a,b \in\mathbb{N}^*$, $a>b$}
+\KwResult{$x$}
+$x\gets a$\\
+$y\gets b$\\
+\Tq{$y\neq 0$}{
+$r\gets$ reste de la division euclidienne de $x$ par $y$\\
+$x\gets y$\\
+$y\gets r$
+}
+
+
+\end{algorithm}
+\end{pseudo}
+
+\subparagraph{}
+\textit{Expliquer le déroulement de cet algorithme en s'appuyant éventuellement sur plusieurs exemples.}
+
+\subparagraph{}
+\textit{Implémenter ce programme en Python.}
+
+\subparagraph{}
+\textit{Vérifier son fonctionnement sur plusieurs couples de nombres.}
+
+
+La méthode \textsf{gcd} de la bibliothèque \textsf{fractions} permet de calculer le pgcd de deux nombres.
+
+\subparagraph{}
+\textit{Rechercher le fichier \textsf{fractions.py} sur l'ordinateur et analyser la façon dont Python calcule un pgcd. Conclure.}
+
+
+
+\subsection*{Exercice 2 -- Algorithme glouton -- Problème du rendu de monnaie}
+\begin{minipage}[c]{.6\linewidth}
+La société Sharp commercialise des caisses automatiques utilisées par exemple dans des boulangeries. Le client glisse directement les billets ou les pièces dans la machine qui se charge de rendre automatiquement la monnaie. 
+\begin{obj}
+Afin de satisfaire les clients, on cherche à déterminer un algorithme qui va permettre de rendre le moins de monnaie possible. 
+\end{obj}
+\end{minipage}\hfill
+\begin{minipage}[c]{.37\linewidth}
+\begin{center}
+\includegraphics[width=.9\textwidth]{images/sharp.png}
+\end{center}
+\end{minipage}
+
+\setcounter{subparagraph}{0}
+
+La machine dispose de billets de 20€, 10€ et 5€ ainsi que des pièces de 2€, 1€, 50, 20, 10, 5, 2 et 1 centimes. 
+
+On se propose donc de concevoir un algorithme qui demande à l'utilisateur du programme la somme totale à payer ainsi que le montant donné par l'acheteur. L'algorithme doit alors afficher quels sont les billets et les pièces à rendre par le vendeur. 
+
+
+\subparagraph{}
+\textit{Pour un montant d'achat donné et pour une somme donnée par le client, proposer un algorithme en pseudo code permettant de rendre le minimum de monnaie au client. Cet algorithme devra détailler la somme à rendre (nombre de pièces et nombre de billets).}
+
+\subparagraph{}
+\textit{Quelle structure de donnée est-il possible d'utiliser pour gérer les valeurs des billets ou des pièces ?}
+
+\subparagraph{}
+\textit{Quel type de variable est il préférable d'utiliser pour décompter l'argent ? Pourquoi ?}
+
+\subparagraph{}
+\textit{Implémenter cet algorithme dans Python.}
+
+\subparagraph{}
+\textit{Vérifier sur plusieurs cas que l'algorithme fonctionne.}
+
+
+\subsubsection*{Quelques compléments sur Python}
+
+
+\begin{py}
+\textbf{Les Fonctions}
+
+Dans un programme, la création de fonction permet de rappeler une suite d'instruction à plusieurs reprises dans un même programme.
+
+La fonction carrée permet de calculer le carré d'une valeur. 
+
+\begin{python}
+def  carre(x):
+    val = x**2
+    return val
+\end{python}
+
+\textit{Remarque : ne pas oublier l'indentation dans les instructions de la fonction.}
+\end{py}
+
+
+\begin{py}
+\textbf{Les tableaux}
+
+Les tableaux sont des collections de plusieurs éléments. Si le tableau contient $n$ éléments, les éléments sont numérotés de 0 à $n-1$.
+
+\begin{python}
+>>>x=[1,"b",3,"coucou"] # Creer une liste
+>>>print(x[0]) # Affichage de la premiere valeur du tableau
+>>>print(x[0:2]) # Affichage des valeurs 0 a 2-1
+>>>x.append(5) # Ajouter un element en fin de liste
+>>>x.remove(2) # Supprime x[1]
+>>>len(x) # Renvoie la taille du tableau
+\end{python}
+\end{py}
+
+\begin{py}
+\textbf{Les dictionnaires}
+
+Les dictionnaires sont des collections de clés auxquelles sont associées des valeurs.
+
+\begin{python}
+>>>dep = {} # Creation d'une collection
+>>>dep ={"Ain":1} # On ajoute au dictionnaire la valeur 1 a la clef Ain 
+>>>dep["Aisne"]=2 # On ajoute au dictionnaire la valeurs 2 a la clef Aisne
+>>>print(dep) 
+>>>print(dep['Ain'])
+\end{python}
+\end{py}
+
+%\section*{Problème du sac à dos}
+
+%\section*{Problème du voyageur de commerce}
+
+\end{document}
