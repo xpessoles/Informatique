@@ -20,8 +20,10 @@ Chapitre 3 -- Variant et invariant de boucle}{
 Partie  -- }}
 
 \def\xxauteur{\ifthenelse{\boolean{xp}}{
-Xavier \textsc{Pessoles} \\ Damien \textsc{Iceta}}{
-Damien \textsc{Iceta} \\ Xavier \textsc{Pessoles}}}
+Xavier \textsc{Pessoles} %\\ Damien \textsc{Iceta}
+}{
+Damien \textsc{Iceta} \\ Xavier \textsc{Pessoles}
+}}
 
 \def\xxpied{\ifthenelse{\boolean{xp}}{
 Cours -- CI 2 : Algorithmique \& Programmation\\
@@ -318,12 +320,14 @@ Prenons quelques exemples :
 Pour mettre en place le variant, on va commencer par mettre en place un variant qui doit décroître :
 \begin{py}
 \begin{python}
-def fonction(n):
-    i=n
+def fonction(p):
+    i=p
     res=1
+    j = 0
     while i!=0:
         res = res*2
         i=i-1
+        j = j+1
     return res
 \end{python}
 \end{py}
@@ -334,7 +338,35 @@ $i$ est donc un variant de boucle car :
 \item $i$ décroît strictement à chaque itération.
 \end{itemize}
 
-Proposons l'invariant de boucle suivant : $res=2^n$.
+
+Proposons l'invariant de boucle suivant : $\text{res}_j=2^{p-i_n}$ 
+
+L'algorithme permet d'écrire les suites suivantes :
+\begin{itemize}
+\item  $i_n=i_{n-1}-1$ avec $i_0=p$;
+\item $res_n = 2\cdot res_{n-1}$ avec $res_0 = p$
+\end{itemize}
+
+Avant d'entrée dans la boucle, au rang $j=0$ : $i_0=p$, $res_0=1$. On a donc  $res_0 = 2^{p-i_0}=2^0 = 1$.
+
+On suppose la propriété vraie au rang $j=n$ et donc que  $\text{res}_j=2^{p-i_n}$.
+
+Au rang $j = n+1$, on a : $i_{n+1} = i_n +1$ et 
+$$res_{n+1}=2 \cdot 2^{p-i_n}  = $$. 
+
+On a donc  $res_{n+1} = 2\cdot res_n= 2 \cdot 2^{p-i_n}=2^{p-i_n+1}=2^{p-i_{n+1}}$ (CQFD).
+
+La propriété est donc vraie au rang $n+1$.
+
+Vérifions que la propriété est vraie en fin de boucle.
+
+ La boucle s'exécute $p$ fois. En conséquence, en fin de boucle,  $i_n=0$ et $j=n$. En conséquence, 
+$ res_p = 2^{p-0}=2^p$. 
+
+
+
+
+
 
 \begin{thebibliography}{2}
 \bibitem{denis}{François Denis \url{http://pageperso.lif.univ-mrs.fr/~francois.denis/algoL2/chap1.pdf}}
