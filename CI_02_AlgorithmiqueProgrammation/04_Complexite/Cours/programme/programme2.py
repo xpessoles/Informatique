@@ -68,22 +68,22 @@ def shellSort(array):
 def recherche_dichotomique(x, a):
     op=0
     g, d = 0, len(a)-1
-    op=op+1
+    #op=op+1
     while g <= d:
         m = (g + d) // 2
         op=op+1
         if a[m] == x:
             #return True
-            op=op+1
+            #op=op+1
             return op
         if a[m] < x:
-            op=op+1
+            #op=op+1
             g = m+1
         else:
             d = m-1
-            op=op+1
+            #op=op+1
     #return False
-    op=op+1
+    #op=op+1
     return op
 
 def recherche(x,tab):
@@ -92,10 +92,10 @@ def recherche(x,tab):
         op=op+1
         if tab[i]==x:
             #return True
-            op=op+1
+            #op=op+1
             return op
     #return False
-    op=op+1
+    #op=op+1
     return op
 
     
@@ -111,9 +111,9 @@ tabop3=[]
 
 def test_recherche():
     op1,op2=0,0
-    for i in range(0,1000,50):
-        tab = [randint(0,i) for j in range(2*i)]
-        print(i,op1,op2)
+    for i in range(0,1000,5):
+        tab = [randint(0,i) for j in range(i)]
+        #print(i,op1,op2,len(tab))
         tab.sort()
         x = randint(0,1000)
         t1=time.time()
@@ -124,14 +124,15 @@ def test_recherche():
         tabx.append(i)
         taby1.append(t2-t1)
         taby2.append(t3-t2)
+       
         tabop1.append(op1)
         tabop2.append(op2)
     
 test_recherche()
 
 
-plt.plot(tabx,tabop1,label='Recherche')
-plt.plot(tabx,tabop2,label='Dichotomie')
+plt.plot(tabx,tabop1,label='Recherche naïve')
+plt.plot(tabx,tabop2,label='Recherche par dichotomie')
 plt.legend(loc='upper center', shadow=True)
 plt.show()
 

@@ -59,101 +59,156 @@ Informatique - Cours}}
 
 \section{Mise en évidence du problème}
 
-\subsection{Premier exemple}
-On introduit les algorithmes de tri suivant : 
-\begin{py}
-\begin{python}
-#Tri par sélection
-def tri_selection(tab):
-    for i in range(0,len(tab)):
-        indice = i
-        for j in range(i+1,len(tab)):
-            if tab[j]<tab[indice]:
-               indice = j
-        tab[i],tab[indice]=tab[indice],tab[i]
-    return tab
-\end{python}
-\end{py}
+%\subsection{Premier exemple}
+%On introduit les algorithmes de tri suivant : 
+%\begin{py}
+%\begin{python}
+%#Tri par sélection
+%def tri_selection(tab):
+%    for i in range(0,len(tab)):
+%        indice = i
+%        for j in range(i+1,len(tab)):
+%            if tab[j]<tab[indice]:
+%               indice = j
+%        tab[i],tab[indice]=tab[indice],tab[i]
+%    return tab
+%\end{python}
+%\end{py}
+%
+%\begin{py}
+%\begin{python}    
+%#Tri par insertion
+%def tri_insertion(tab):
+%    for i in range(1,len(tab)):
+%        a=tab[i] 
+%        j=i-1    
+%        while j>=0 and tab[j]>a:
+%            tab[j+1]=tab[j]
+%            j=j-1
+%        tab[j+1]=a
+%    return tab
+%\end{python}
+%\end{py}
+%
+%\begin{py}
+%\begin{python}
+%def shellSort(array):
+%     "Shell sort using Shell's (original) gap sequence: n/2, n/4, ..., 1."
+%     "http://en.wikibooks.org/wiki/Algorithm_Implementation/Sorting/Shell_sort#Python"
+%     gap = len(array) // 2
+%     # loop over the gaps
+%     while gap > 0:
+%         # do the insertion sort
+%         for i in range(gap, len(array)):
+%             val = array[i]
+%             j = i
+%             while j >= gap and array[j - gap] > val:
+%                 array[j] = array[j - gap]
+%                 j -= gap
+%             array[j] = val
+%         gap //= 2
+%\end{python}
+%\end{py}
+%
+%La figure ci-dessous montre le temps en secondes pour trier des tableaux de 1 à 1000 éléments en utilisant les méthodes de tri suivant : 
+%\begin{itemize}
+%\item tri par sélection;
+%\item tri par insertion; 
+%\item tri shell;
+%\item méthode de tri utilisée par Python.
+%\end{itemize}
+%
+%Le premier graphe montre le temps de calcul et le second une estimation du nombre d'opérations. 
+%
+%\begin{minipage}[c]{.48\linewidth}
+%\begin{center}
+%\includegraphics[width=.95\textwidth]{images/figure_1}
+%\end{center}
+%\end{minipage}\hfill
+%\begin{minipage}[c]{.48\linewidth}
+%\begin{center}
+%\includegraphics[width=.95\textwidth]{images/figure_2}
+%\end{center}
+%\end{minipage}
 
-\begin{py}
-\begin{python}    
-#Tri par insertion
-def tri_insertion(tab):
-    for i in range(1,len(tab)):
-        a=tab[i] 
-        j=i-1    
-        while j>=0 and tab[j]>a:
-            tab[j+1]=tab[j]
-            j=j-1
-        tab[j+1]=a
-    return tab
-\end{python}
-\end{py}
+%\subsection{Deuxième exemple}
+On prend l'exemple de la recherche d'un élément dans une liste : 
 
-\begin{py}
-\begin{python}
-def shellSort(array):
-     "Shell sort using Shell's (original) gap sequence: n/2, n/4, ..., 1."
-     "http://en.wikibooks.org/wiki/Algorithm_Implementation/Sorting/Shell_sort#Python"
-     gap = len(array) // 2
-     # loop over the gaps
-     while gap > 0:
-         # do the insertion sort
-         for i in range(gap, len(array)):
-             val = array[i]
-             j = i
-             while j >= gap and array[j - gap] > val:
-                 array[j] = array[j - gap]
-                 j -= gap
-             array[j] = val
-         gap //= 2
-\end{python}
-\end{py}
 
-La figure ci-dessous montre le temps en secondes pour trier des tableaux de 1 à 1000 éléments en utilisant les méthodes de tri suivant : 
+
+\begin{minipage}[c]{.49\linewidth}
+
+\begin{pseudo}
+\begin{center}
+\begin{tabular}{p{.9\textwidth}}
+\hline
+\textbf{Algorithme :} Recherche d'un nombre dans une liste triée ou non \\
+\hline
+\textbf{Données :}
 \begin{itemize}
-\item tri par sélection;
-\item tri par insertion; 
-\item tri shell;
-\item méthode de tri utilisée par Python.
+\item \textsf{nb}, int : un entier 
+\item \textsf{tab}, liste : une liste d'entiers triés ou non triés
 \end{itemize}
-
-Le premier graphe montre le temps de calcul et le second une estimation du nombre d'opérations. 
-
-\begin{minipage}[c]{.48\linewidth}
-\begin{center}
-\includegraphics[width=.95\textwidth]{images/figure_1}
+\textbf{Résultat :} un booléen : \textsf{Vrai} si le nombre est dans la liste, \textsf{Faux} sinon. \\
+\\
+\textbf{is\_number\_in\_list}(\textsf{nb},\textsf{tab}) :\\
+\hspace{.4cm}\textsf{l} $\leftarrow$ \textbf{longueur}(\textsf{tab}) \\
+\hspace{.4cm}\textbf{Pour} \textsf{i} \textbf{allant de} 1 \textbf{à} \textsf{l} \textbf{faire} : \\
+\hspace{.8cm} \textbf{Si}  \textsf{tab[i] = nb} \textbf{alors} :\\
+\hspace{1.2cm}\textbf{Retourne} \textsf{Vrai} \\
+\hspace{.8cm} \textbf{Fin Si} \\
+\hspace{.4cm}\textbf{Fin Faire} \\
+\hspace{.4cm}\textbf{Retourne} \textsf{Faux} \\
+\textbf{Fin fonction} \\
+\hline
+\end{tabular}
 \end{center}
+\end{pseudo}
 \end{minipage}\hfill
-\begin{minipage}[c]{.48\linewidth}
-\begin{center}
-\includegraphics[width=.95\textwidth]{images/figure_2}
-\end{center}
-\end{minipage}
-
-\subsection{Deuxième exemple}
-On prend maintenant l'exemple de la recherche d'un élément dans une liste : 
-
+\begin{minipage}[c]{.49\linewidth}
 \begin{py}
 \begin{python}
-def recherche(x,tab):
+def is_number_in_list(nb,tab):
+    """Renvoie True si le nombre nb est dans la liste 
+    de nombres tab
+    Keyword arguments:
+      * nb, int -- nombre entier
+      * tab, list -- liste de nombres entiers    
+    """
     for i in range(len(tab)):
-        if tab[i]==x:
+        if tab[i]==nb:
             return True
     return False
 \end{python}
 \end{py}
+\end{minipage}
 
+
+\begin{exemple}
+\`A partir de l'algorithme précédent, évaluer : 
+\begin{itemize}
+\item le nombre de tour de boucles dans le pire des cas;
+\item le nombre de tour de boucles dans le meilleur des cas.
+\end{itemize}
+\end{exemple}
 
 \begin{py}
 \begin{python}
-def recherche_dichotomique(x, a):
-    g, d = 0, len(a)-1
+def is_number_in_list_dicho(nb,tab):
+    """ 
+    Recherche d'un nombre par dichotomie dans un tableau trié. 
+    Renvoie l'index si le nombre nb est dans la liste de nombres tab.
+    Renvoie None sinon.
+    Keyword arguments:
+    nb,int -- nombre entier
+    tab,list -- liste de nombres entiers triés
+    """
+    g, d = 0, len(tab)-1
     while g <= d:
         m = (g + d) // 2
-        if a[m] == x:
-            return True
-        if a[m] < x:
+        if tab[m] == nb:
+            return m
+        if tab[m] < nb:
             g = m+1
         else:
             d = m-1
@@ -162,16 +217,13 @@ def recherche_dichotomique(x, a):
 \end{py}
 
 
-\begin{minipage}[c]{.48\linewidth}
+
 \begin{center}
-\includegraphics[width=.95\textwidth]{images/figure_3}
+\includegraphics[width=.95\textwidth]{images/figure_5}
+
+\textit{Évolution du nombre d'opérations pour rechercher un nombre dans une liste de 1 à 1000 nombres}
 \end{center}
-\end{minipage}\hfill
-\begin{minipage}[c]{.48\linewidth}
-\begin{center}
-\includegraphics[width=.95\textwidth]{images/figure_4}
-\end{center}
-\end{minipage}
+
 
 
 \section{Complexité des algorithmes}
@@ -640,3 +692,4 @@ On alors le bilan du temps passé à effectuer chacune des opérations. Ainsi po
 \end{document}
 
 
+ 
