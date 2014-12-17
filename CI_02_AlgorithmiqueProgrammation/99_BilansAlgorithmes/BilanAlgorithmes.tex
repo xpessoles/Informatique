@@ -233,11 +233,10 @@ def is_number_in_list_dicho(nb,tab):
 \begin{py}
 \begin{python}
 def calcul_moyenne(tab):
-    """ Renvoie la moyenne des éléments d'un tableau.
-    
+    """ 
+    Renvoie la moyenne des valeurs d'une liste de nombres.
     Keyword arguments:
-    tab -- liste de nombres entiers triés
-    
+    tab -- liste de nombres
     """
     res = 0
     for i in range(len(tab)):
@@ -246,7 +245,28 @@ def calcul_moyenne(tab):
 \end{python}
 \end{py}    
 \subsection{Calcul de la variance}
+Soit une série statistique prenant les $n$ valeurs $x_1$, $x_2$, ..., $x_n$. Soit $m$ la moyenne de ces valeurs. La variance est définie par :
+$$
+v = \dfrac{1}{n} \sum\limits_{i=1}^n\left(x_i - m \right)^2
+$$
+\begin{py}
+\begin{python}
+def calcul_variance(tab,m):
+    """ 
+    Renvoie la variance des valeurs d'un tableau.
+    Keyword arguments:
+    tab -- liste de nombres
+    m -- moyenne des valeurs
+    """
+    res = 0
+    for i in range(len(tab)):
+        res = res+(tab[i]-m)**2
+    return res/(len(tab))
+\end{python}
+\end{py}
 \subsection{Calcul de la médiane} %Seconde année
+
+\subsubsection*{Estimation de la complexité}
 
 \section{Chaînes de caractères}
 \subsection{Recherche d'un mot dans une chaîne de caractères}
@@ -371,6 +391,84 @@ def tri_selection(tab):
 \end{python}
 \end{py}
 \subsection{Tri par insertion}
+
+\begin{pseudo}
+\begin{center}
+\begin{tabular}{p{.9\textwidth}}
+\hline
+\textbf{Algorithme :} Tri par insertion -- Méthode 1\\
+\hline
+\textbf{Données :}
+\begin{itemize}
+\item \textsf{tab}, liste : une liste de nombres
+\end{itemize}
+\textbf{Résultat :} 
+\begin{itemize}
+\item \textsf{tab}, liste : la liste de nombres triés
+\end{itemize}
+\\
+\textbf{tri\_insertion}(\textsf{tab}) :\\
+\hspace{.4cm} \textsf{n} $\leftarrow$ \textbf{longueur}(\textsf{tab}) \\
+\hspace{.4cm}\textbf{Pour} \textsf{i} \textbf{de} 2 \textbf{à} \textsf{n} : \\
+\hspace{.8cm} \textsf{x} $\leftarrow$ \textsf{tab[i]} \\
+\hspace{.8cm} \textsf{j} $\leftarrow$ \textsf{1} \\
+\hspace{.8cm}\textbf{Tant que} \textsf{j $\leq$ i-1} \textbf{et} \textsf{tab[j]<x}  : \\
+\hspace{1.2cm} \textsf{j} $\leftarrow$ \textsf{j+1} \\
+\hspace{.8cm}\textbf{Fin Tant que} \\
+\hspace{.8cm}\textbf{Pour} \textsf{k} \textbf{de} \textsf{i-1} \textbf{à} \textsf{j-1} \textbf{par pas de} \textsf{-1} \textbf{faire} : \\
+\hspace{1.2cm} \textsf{tab[k+1]} $\leftarrow$ \textsf{tab[k]} \\
+\hspace{.8cm}\textbf{Fin Pour} \\
+\hspace{.8cm} \textsf{tab[j]} $\leftarrow$ \textsf{x} \\
+\hspace{.4cm}\textbf{Fin Pour} \\
+\hline
+\end{tabular}
+\end{center}
+\end{pseudo}
+
+\subsubsection*{Estimation de la complexité}
+\begin{itemize}
+\item Meilleur des cas, le tableau est trié à l'envers, la complexité est linéaire : $\mathcal{O}(n)$.
+\item Pire des cas, le tableau est trié, la complexité est quadratique : $\mathcal{O}(n^2)$.
+\end{itemize}
+
+
+\begin{pseudo}
+\begin{center}
+\begin{tabular}{p{.9\textwidth}}
+\hline
+\textbf{Algorithme :} Tri par insertion -- Méthode 2\\
+\hline
+\textbf{Données :}
+\begin{itemize}
+\item \textsf{tab}, liste : une liste de nombres
+\end{itemize}
+\textbf{Résultat :} 
+\begin{itemize}
+\item \textsf{tab}, liste : la liste de nombres triés
+\end{itemize}
+\\
+\textbf{tri\_insertion}(\textsf{tab}) :\\
+\hspace{.4cm} \textsf{n} $\leftarrow$ \textbf{longueur}(\textsf{tab}) \\
+\hspace{.4cm}\textbf{Pour} \textsf{i} \textbf{de} 2 \textbf{à} \textsf{n} : \\
+\hspace{.8cm} \textsf{x} $\leftarrow$ \textsf{tab[i]} \\
+\hspace{.8cm} \textsf{j} $\leftarrow$ \textsf{1} \\
+\hspace{.8cm}\textbf{Tant que} \textsf{j >1} \textbf{et} \textsf{tab[j-1]>x}  : \\
+\hspace{1.2cm} \textsf{tab[j]} $\leftarrow$ \textsf{tab[j-1]} \\
+\hspace{1.2cm} \textsf{j} $\leftarrow$ \textsf{j-1} \\
+\hspace{.8cm}\textbf{Fin Tant que} \\
+\hspace{.8cm} \textsf{tab[j]} $\leftarrow$ \textsf{x} \\
+\hspace{.4cm}\textbf{Fin Pour} \\
+\hline
+\end{tabular}
+\end{center}
+\end{pseudo}
+
+\subsubsection*{Estimation de la complexité}
+\begin{itemize}
+\item Meilleur des cas, le tableau est trié, la complexité est linéaire : $\mathcal{O}(n)$.
+\item Pire des cas, le tableau est trié à l'envers, la complexité est quadratique : $\mathcal{O}(n^2)$.
+\end{itemize}
+
 
 
 \begin{py}
