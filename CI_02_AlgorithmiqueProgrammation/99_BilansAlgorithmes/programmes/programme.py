@@ -3,13 +3,13 @@
 
 
 def is_number_in_list(nb,tab):
-    """Renvoie True si le nombre nb est dans la liste de nombres tab.
-       Renvoie False sinon. 
+    """
+	Renvoie True si le nombre nb est dans la liste de nombres tab.
+    Renvoie False sinon. 
     
     Keyword arguments:
     nb -- nombre entier
     tab -- liste de nombre entiers
-    
     """
     i=0
     while i<len(tab) and tab[i]!=nb:
@@ -22,11 +22,11 @@ def is_number_in_list(nb,tab):
 
 
 def what_is_max(tab):
-    """ Renvoie le plus grand nombre d'une liste
+    """ 
+	Renvoie le plus grand nombre d'une liste
     
     Keyword arguments:
-    tab -- liste de nombres 
-    
+    tab -- liste de nombres
     """
     i=1
     maxi=tab[0]
@@ -41,13 +41,13 @@ def what_is_max(tab):
 
 
 def is_number_in_list_dicho(nb,tab):
-    """ Renvoie l'index si le nombre nb est dans la liste de nombres tab.
-        Renvoie None sinon.
+    """ 
+	Renvoie l'index si le nombre nb est dans la liste de nombres tab.
+    Renvoie None sinon.
     
     Keyword arguments:
     nb -- nombre entier
     tab -- liste de nombres entiers triés
-    
     """
     g, d = 0, len(tab)-1
     while g <= d:
@@ -66,11 +66,11 @@ def is_number_in_list_dicho(nb,tab):
 
 
 def calcul_moyenne(tab):
-    """ Renvoie la moyenne des éléments d'un tableau.
+    """ 
+	Renvoie la moyenne des éléments d'un tableau.
     
-    Keyword arguments:
-    tab -- liste de nombres entiers triés
-    
+	Keyword arguments:
+    tab -- liste de nombres entiers
     """
     res = 0
     for i in range(len(tab)):
@@ -82,13 +82,13 @@ def calcul_moyenne(tab):
 #print(calcul_moyenne(liste))
 
 def index_of_word_in_text(mot, texte):
-    """ Recherche si le mot est dans le texte.
+    """ 
+	Recherche si le mot est dans le texte.
     Renvoie l'index si le mot est présent, None sinon.
     
     Keyword arguments:
     mot -- mot recherché
     texte -- texte
-    
     """
     for i in range(1 + len(texte) - len(mot)):
         j = 0
@@ -105,12 +105,12 @@ def index_of_word_in_text(mot, texte):
 
 
 def exponentiation_naive(x,n):
-    """ Renvoie x**n par la méthode naïve.
+    """ 
+	Renvoie x**n par la méthode naïve.
     
     Keyword arguments:
     x -- un nombre réel
     n -- un nombre entier
-    
     """
     
     j=n
@@ -121,4 +121,4 @@ def exponentiation_naive(x,n):
     return res
 
 #print(exponentiation_naive(3,2))
-print(exponentiation_naive(3,0))
+#print(exponentiation_naive(3,0))
