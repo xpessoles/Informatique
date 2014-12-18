@@ -40,9 +40,27 @@ def what_is_max(tab):
 #print(what_is_max(liste))
 
 
+def what_is_max(tab):
+    """ 
+    Renvoie le plus grand nombre d'une liste.
+    Keyword arguments:
+    tab -- liste de nombres
+    """
+    i=1
+    maxi=tab[0]
+    while i<len(tab):
+        if tab[i]>maxi:
+            maxi=tab[i]
+        i+=1
+    return maxi
+# Exemple :
+#liste = [1,2,3,5,9,5,3,1,5]
+#print(what_is_max(liste))
+
+
 def is_number_in_list_dicho(nb,tab):
     """ 
-	Renvoie l'index si le nombre nb est dans la liste de nombres tab.
+    Renvoie l'index si le nombre nb est dans la liste de nombres tab.
     Renvoie None sinon.
     
     Keyword arguments:
@@ -65,6 +83,7 @@ def is_number_in_list_dicho(nb,tab):
 #print(is_number_in_list_dicho(nb2,liste))
 
 
+
 def calcul_moyenne(tab):
     """ 
 	Renvoie la moyenne des éléments d'un tableau.
@@ -80,6 +99,25 @@ def calcul_moyenne(tab):
 # Exemple :
 #liste = [1,2,3,5,9]
 #print(calcul_moyenne(liste))
+
+def calcul_variance(tab):
+    """ 
+	Calcule la variance des éléments d'un tableau.
+    
+	Keyword arguments:
+    tab -- liste de nombres entiers
+    """
+    m = calcul_moyenne(tab)
+    res = 0
+    for i in range(len(tab)):
+        res = res+(tab[i]-m)**2
+    
+    return res/(len(tab))
+# Exemple :
+#liste = [1,2,3,5,9]
+#print(calcul_moyenne(liste))
+#print(calcul_variance(liste))
+
 
 def index_of_word_in_text(mot, texte):
     """ 
