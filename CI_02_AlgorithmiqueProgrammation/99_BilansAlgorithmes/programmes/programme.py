@@ -141,7 +141,35 @@ def index_of_word_in_text(mot, texte):
 #Mot = "ove."
 #print(index_of_word_in_text(Mot,Texte))
 
+# ====================
+# Algorithmes de tris
+# ====================
 
+def tri_insertion_01(tab):
+    """ 
+    Trie une liste de nombre en utilisant la méthode du tri par insertion.
+    En Python, le passage se faisant par référence, il n'est pas indispensable
+    de retourner le tableau.
+    Keyword arguments:
+    tab -- liste de nombres
+    """
+    for i in range (0,len(tab)):
+        x=tab[i]
+        j=0
+        while j<=i-1 and tab[j]<x:
+            j = j+1
+        for k in range(i-1,j,-1):
+            print(i-1,j,k)
+            tab[k+1]=tab[k]
+        tab[j]=x
+
+# Exemple :
+liste = [9,8,7,6,5]
+print(liste)
+tri_insertion_01(liste)
+print(liste)
+
+        
 def exponentiation_naive(x,n):
     """ 
 	Renvoie x**n par la méthode naïve.
