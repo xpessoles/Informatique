@@ -84,7 +84,10 @@ Informatique - Cours}}
 \item \textsf{n}, int : un entier 
 \item \textsf{tab}, liste : une liste d'entiers triés ou non triés
 \end{itemize}
-\textbf{Résultat :} un booléen : \textsf{Vrai} si le nombre est dans la liste, \textsf{Faux} sinon. \\
+\textbf{Résultat :} 
+\begin{itemize}
+\item un booléen : \textsf{Vrai} si le nombre est dans la liste, \textsf{Faux} sinon.
+\end{itemize} \\
 \\
 \textbf{is\_number\_in\_list}(\textsf{n},\textsf{tab}) :\\
 \hspace{.4cm}\textsf{l} $\leftarrow$ \textbf{longueur}(\textsf{tab}) \\
@@ -145,6 +148,41 @@ Ces algorithmes sont modifiables aisément dans le cas où on souhaiterait conna
 
 
 \subsection{Recherche du maximum dans une liste de nombre}
+
+\begin{minipage}[c]{.48\linewidth}
+\begin{pseudo}
+\begin{center}
+\begin{tabular}{p{.9\textwidth}}
+\hline
+\textbf{Algorithme :} Recherche du maximum dans une liste de nombres\\
+\hline
+\textbf{Données :}
+\begin{itemize}
+\item \textsf{tab}, liste : une liste de nombres
+\end{itemize}
+\textbf{Résultat :} 
+\begin{itemize}
+\item \textsf{maxi}, réel : maximum de la liste
+\end{itemize} \\
+\\
+\textbf{what\_is\_max}(\textsf{tab}) :\\
+\hspace{.4cm}\textsf{n} $\leftarrow$ \textbf{longueur}(\textsf{tab}) \\
+\hspace{.4cm}\textsf{i  $\leftarrow$ 2} \\
+\hspace{.4cm}\textsf{maxi  $\leftarrow$ tab[1]} \\
+\hspace{.4cm}\textbf{Tant que} \textsf{i < n} \textbf{faire} : \\
+\hspace{.8cm}\textbf{Si} \textsf{tab[i]>maxi} \textbf{alors} : \\
+\hspace{1.2cm} \textsf{maxi  $\leftarrow$ tab[i]} \\
+\hspace{.8cm}\textbf{Fin si} \\
+\hspace{.8cm}\textsf{i  $\leftarrow$ i+1} \\
+\hspace{.4cm}\textbf{Fin tant que} \\
+\hspace{.4cm}\textbf{Retourner} \textsf{maxi}\\
+\textbf{Fin fonction} \\
+\hline
+\end{tabular}
+\end{center}
+\end{pseudo}
+\end{minipage} \hfill
+\begin{minipage}[c]{.48\linewidth}
 \begin{py}
 \begin{python}
 def what_is_max(tab):
@@ -162,8 +200,12 @@ def what_is_max(tab):
     return maxi
 \end{python}
 \end{py}
+\end{minipage}
+
 \subsection{Recherche par dichotomie dans un tableau trié}
 
+
+\begin{minipage}[c]{.48\linewidth}
 \begin{pseudo}
 \begin{center}
 \begin{tabular}{p{.9\textwidth}}
@@ -184,13 +226,13 @@ def what_is_max(tab):
 \textbf{is\_number\_in\_list\_dicho}(\textsf{nb},\textsf{tab}) :\\
 \hspace{.4cm}\textsf{g} $\leftarrow$ \textsf{0} \\
 \hspace{.4cm}\textsf{d} $\leftarrow$ \textbf{longueur}(\textsf{tab}) \\
-\hspace{.4cm}\textbf{Tant que} \textsf{g $<$ d} \textbf{Alors} : \\
-\hspace{.8cm} \textsf{m} $\leftarrow$ \textsf{(g+d)} \textbf{div} \textsf{2} \textbf{Alors} :\\
-\hspace{1.2cm}\textbf{Si} \textsf{tab[m]=nb} \textbf{Alors} :\\
+\hspace{.4cm}\textbf{Tant que} \textsf{g $<$ d} \textbf{alors} : \\
+\hspace{.8cm} \textsf{m} $\leftarrow$ \textsf{(g+d)} \textbf{div} \textsf{2} \textbf{alors} :\\
+\hspace{1.2cm}\textbf{Si} \textsf{tab[m]=nb} \textbf{alors} :\\
 \hspace{1.6cm}\textbf{Retourne} \textsf{m}\\
-\hspace{1.2cm}\textbf{Sinon si} \textsf{tab[m]<nb} \textbf{Alors} :\\
+\hspace{1.2cm}\textbf{Sinon si} \textsf{tab[m]<nb} \textbf{alors} :\\
 \hspace{1.6cm}\textsf{g} $\leftarrow$ \textsf{m+1}\\
-\hspace{1.2cm}\textbf{Sinon, Alors} :\\
+\hspace{1.2cm}\textbf{Sinon, alors} :\\
 \hspace{1.6cm}\textsf{d} $\leftarrow$ \textsf{m-1}\\
 \hspace{.8cm} \textbf{Fin Si} \\
 \hspace{.4cm}\textbf{Fin Tant que} \\
@@ -200,15 +242,16 @@ def what_is_max(tab):
 \end{tabular}
 \end{center}
 \end{pseudo}
-
-
-
+\end{minipage} \hfill
+\begin{minipage}[c]{.48\linewidth}
 \begin{py}
 \begin{python}
 def is_number_in_list_dicho(nb,tab):
     """ 
-    Recherche d'un nombre par dichotomie dans un tableau trié. 
-    Renvoie l'index si le nombre nb est dans la liste de nombres tab.
+    Recherche d'un nombre par dichotomie dans un 
+    tableau trié. 
+    Renvoie l'index si le nombre nb est dans la liste 
+    de nombres tab.
     Renvoie None sinon.
     Keyword arguments:
     nb,int -- nombre entier
@@ -226,13 +269,47 @@ def is_number_in_list_dicho(nb,tab):
     return None
 \end{python}
 \end{py}
+\end{minipage}
+
 \section{Gestion d'une liste de nombres}
 \subsection{Calcul de la moyenne}
+
+\begin{minipage}[c]{.48\linewidth}
+\begin{pseudo}
+\begin{center}
+\begin{tabular}{p{.9\textwidth}}
+\hline
+\textbf{Algorithme :} Calcul de la moyenne arithmétique des nombres d'une liste\\
+\hline
+\textbf{Données :}
+\begin{itemize}
+\item \textsf{tab}, liste : une liste de nombres
+\end{itemize}
+\textbf{Résultat :} 
+\begin{itemize}
+\item \textsf{res}, réel : moyenne des nombres
+\end{itemize} \\
+\\
+\textbf{calcul\_moyenne}(\textsf{tab}) :\\
+\hspace{.4cm}\textsf{n} $\leftarrow$ \textbf{longueur}(\textsf{tab}) \\
+\hspace{.4cm}\textsf{res} $\leftarrow$ \textsf{0} \\
+\hspace{.4cm}\textbf{Pour} \textsf{i} \textbf{allant de}\textsf{1} \textbf{à} \textsf{n} \textbf{faire}: \\
+\hspace{.8cm} \textsf{res  $\leftarrow$ res+tab[i]} \\
+\hspace{.4cm}\textbf{Fin faire} \\
+\hspace{.4cm}\textbf{Retourner} \textsf{res/n}\\
+\textbf{Fin fonction} \\
+\hline
+\end{tabular}
+\end{center}
+\end{pseudo}
+\end{minipage} \hfill
+\begin{minipage}[c]{.48\linewidth}
 \begin{py}
 \begin{python}
 def calcul_moyenne(tab):
     """ 
-    Renvoie la moyenne des valeurs d'une liste de nombres.
+    Renvoie la moyenne des valeurs d'une liste de 
+    nombres.
     Keyword arguments:
     tab -- liste de nombres
     """
@@ -242,11 +319,21 @@ def calcul_moyenne(tab):
     return res/(len(tab))
 \end{python}
 \end{py}    
+\end{minipage}
+
 \subsection{Calcul de la variance}
 Soit une série statistique prenant les $n$ valeurs $x_1$, $x_2$, ..., $x_n$. Soit $m$ la moyenne de ces valeurs. La variance est définie par :
 $$
 v = \dfrac{1}{n} \sum\limits_{i=1}^n\left(x_i - m \right)^2
 $$
+
+
+\begin{minipage}[c]{.48\linewidth}
+\begin{pseudo}
+
+\end{pseudo}
+\end{minipage} \hfill
+\begin{minipage}[c]{.48\linewidth}
 \begin{py}
 \begin{python}
 def calcul_variance(tab,m):
@@ -262,10 +349,12 @@ def calcul_variance(tab,m):
     return res/(len(tab))
 \end{python}
 \end{py}
+\end{minipage} 
+
 \subsection{Calcul de la médiane} %Seconde année
 
 
-
+\begin{minipage}[c]{.48\linewidth}
 \begin{pseudo}
 \begin{center}
 \begin{tabular}{p{.9\textwidth}}
@@ -294,12 +383,23 @@ def calcul_variance(tab,m):
 \end{tabular}
 \end{center}
 \end{pseudo}
-
+\end{minipage} \hfill
+\begin{minipage}[c]{.48\linewidth}
+\begin{py}
+\begin{python}
+\end{python}
+\end{py}
+\end{minipage}
 %\subsubsection*{Estimation de la complexité}
 
 \section{Chaînes de caractères}
 \subsection{Recherche d'un mot dans une chaîne de caractères}
 
+\begin{minipage}[c]{.48\linewidth}
+\begin{pseudo}
+\end{pseudo}
+\end{minipage} \hfill
+\begin{minipage}[c]{.48\linewidth}
 \begin{py}
 \begin{python}
 def index_of_word_in_text(mot, texte):
@@ -320,10 +420,15 @@ def index_of_word_in_text(mot, texte):
     return None
 \end{python}
 \end{py}
-\subsubsection*{Estimation de la complexité}
+\end{minipage}
+
+%\subsubsection*{Estimation de la complexité}
 
 \section{Calcul numérique}
 \subsection{Recherche du zéro d'une fonction continue monotone par la méthode de dichotomie}
+
+
+\begin{minipage}[c]{.48\linewidth}
 \begin{pseudo}
 \begin{algorithm}[H]
 \Fonction{
@@ -348,7 +453,8 @@ $f_d \gets f_m$\\
 }
 \end{algorithm}
 \end{pseudo}
-
+\end{minipage} \hfill
+\begin{minipage}[c]{.48\linewidth}
 \begin{py}
 \begin{python}
 def rechercheDichotomique(f,a,b,eps):
@@ -368,13 +474,16 @@ def rechercheDichotomique(f,a,b,eps):
     return (g+d)/2
 \end{python}
 \end{py}
+\end{minipage}
 
-\subsubsection*{Précision du calcul}
-\subsubsection*{Rapidité}
-\subsubsection*{Comparaison à zéro}
+%\subsubsection*{Précision du calcul}
+%\subsubsection*{Rapidité}
+%\subsubsection*{Comparaison à zéro}
 
 \subsection{Recherche du zéro d'une fonction continue monotone par la méthode de Newton}
 
+
+\begin{minipage}[c]{.48\linewidth}
 \begin{pseudo}
 \begin{algorithm}[H]
 \Fonction{
@@ -389,9 +498,16 @@ $c \gets c-\dfrac{f(c)}{f'(c)}$
 }
 \end{algorithm}
 \end{pseudo}
+\end{minipage} \hfill
+\begin{minipage}[c]{.48\linewidth}
+\begin{py}
+\begin{python}
+\end{python}
+\end{py}
+\end{minipage} 
 
-\subsubsection*{Précision du calcul}
-\subsubsection*{Rapidité}
+%\subsubsection*{Précision du calcul}
+%\subsubsection*{Rapidité}
 
 \subsection{Méthode des rectangles pour le calcul approché d'une intégrale sur un segment}
 \subsubsection{Méthode des rectangles à gauche}
@@ -706,6 +822,7 @@ def tri_selection(tab):
 \end{py}
 \subsection{Tri par insertion}
 \subsubsection{Méthode 1}
+\begin{minipage}[c]{.48\linewidth}
 \begin{pseudo}
 \begin{center}
 \begin{tabular}{p{.9\textwidth}}
@@ -738,13 +855,16 @@ def tri_selection(tab):
 \end{tabular}
 \end{center}
 \end{pseudo}
-
+\end{minipage} \hfill
+\begin{minipage}[c]{.48\linewidth}
 \begin{py}
 \begin{python}
 def tri_insertion_01(tab):
     """ 
-    Trie une liste de nombre en utilisant la méthode du tri par insertion.
-    En Python, le passage se faisant par référence, il n'est pas indispensable de retourner le tableau.
+    Trie une liste de nombre en utilisant la méthode 
+    du tri par insertion.
+    En Python, le passage se faisant par référence, il 
+    n'est pas indispensable de retourner le tableau.
     Keyword arguments:
     tab -- liste de nombres
     """
@@ -758,6 +878,7 @@ def tri_insertion_01(tab):
         tab[j]=x
 \end{python}
 \end{py}
+\end{minipage}
 
 \subsubsection*{Estimation de la complexité}
 \begin{itemize}
@@ -766,7 +887,7 @@ def tri_insertion_01(tab):
 \end{itemize}
 
 \subsubsection{Méthode 2}
-
+\begin{minipage}[c]{.48\linewidth}
 \begin{pseudo}
 \begin{center}
 \begin{tabular}{p{.9\textwidth}}
@@ -797,14 +918,16 @@ def tri_insertion_01(tab):
 \end{tabular}
 \end{center}
 \end{pseudo}
-
+\end{minipage} \hfill
+\begin{minipage}[c]{.48\linewidth}
 \begin{py}
 \begin{python}
 def tri_insertion_02(tab):
     """ 
-    Trie une liste de nombre en utilisant la méthode du tri par insertion.
-    En Python, le passage se faisant par référence, il n'est pas indispensable
-    de retourner le tableau.
+    Trie une liste de nombre en utilisant la méthode 
+    du tri par insertion.
+    En Python, le passage se faisant par référence, 
+    il n'est pas indispensable de retourner le tableau.
     Keyword arguments:
     tab -- liste de nombres
     """
@@ -817,7 +940,7 @@ def tri_insertion_02(tab):
         tab[j]=x
 \end{python}
 \end{py}
-
+\end{minipage}
 \subsubsection*{Estimation de la complexité}
 \begin{itemize}
 \item Meilleur des cas, le tableau est trié, la complexité est linéaire : $\mathcal{O}(n)$.
@@ -882,41 +1005,18 @@ Retourner quotient,reste
 \subsection{Algorithme d'Euclide}
 Cet algorithme permet de calculer le PGCD de deux nombres entiers. Il se base sur le fait que si $a$ et $b$ sont deux entiers naturels non nuls, $pgcd(a,b)=pgcd(b, a \text{mod} b)$. 
 
-\begin{pseudo}
-\begin{algorithm}[H]
-\KwData{$a,b \in\mathbb{N}^*$}
-$x\gets a$\\
-$y\gets b$\\
-\Tq{$y\neq 0$}{
-$r\gets$ reste de la division euclidienne de $x$ par $y$\\
-$x\gets y$\\
-$y\gets r$}
-Afficher $x$.
-\end{algorithm}
-\end{pseudo}
-
-\begin{minipage}[c]{.48\linewidth}
-\begin{py}
-Codage en Pythonde l'algorithme d'Euclide :
-\begin{python}
-def Euclide_PGCD(a,b):	# on définit le nom de la 
-			# fonction et ses variables 
-			#d'entrées/d'appel
-    r=a%b		# on calcule le reste dans 
-			# la division de a par b
-    
-    while r!=0:		# tant que ce reste est non nul :
-        a=b		# b devient le nouveau a
-        b=r		# r devient le nouveau b
-        r=a%b		# on recalcule le reste
-        
-    return(b)		# une fois la boucle terminée, 
-			# on retourne le dernier b    
-print(pgcd(1525,755))	# on affiche le résultat 
-			# retourné par la fonction
-\end{python}
-\end{py}
-\end{minipage}\hfill
+%\begin{pseudo}
+%\begin{algorithm}[H]
+%\KwData{$a,b \in\mathbb{N}^*$}
+%$x\gets a$\\
+%$y\gets b$\\
+%\Tq{$y\neq 0$}{
+%$r\gets$ reste de la division euclidienne de $x$ par $y$\\
+%$x\gets y$\\
+%$y\gets r$}
+%Afficher $x$.
+%\end{algorithm}
+%\end{pseudo}
 \begin{minipage}[c]{.48\linewidth}
 \begin{pseudo}
 \begin{tabular}{p{.9\textwidth}}
@@ -936,6 +1036,29 @@ Fonction PGCD : algorithme d’Euclide \\
 \hline
 \end{tabular}
 \end{pseudo}
+\end{minipage} \hfill
+\begin{minipage}[c]{.48\linewidth}
+\begin{py}
+Codage en Pythonde l'algorithme d'Euclide :
+\begin{python}
+def Euclide_PGCD(a,b):	# on définit le nom de la 
+			# fonction et ses variables 
+			# d'entrées/d'appel
+    r=a%b		# on calcule le reste dans 
+			# la division de a par b
+    
+    while r!=0:		# tant que r est non nul :
+        a=b		# b devient le nouveau a
+        b=r		# r devient le nouveau b
+        r=a%b		# on recalcule le reste
+        
+    return(b)		# une fois la boucle terminée, 
+			# on retourne le dernier b    
+print(Euclide_PGCDpgcd(1525,755))	
+			# on affiche le résultat 
+			# retourné par la fonction
+\end{python}
+\end{py}
 \end{minipage}
 
 \begin{center}
