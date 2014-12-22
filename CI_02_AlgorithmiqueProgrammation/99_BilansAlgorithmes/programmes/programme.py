@@ -163,11 +163,33 @@ def tri_insertion_01(tab):
         tab[j]=x
 
 # Exemple :
-liste = [1,9,7,6,5]
-print(liste)
-tri_insertion_01(liste)
-print(liste)
+#liste = [1,9,7,6,5]
+#print(liste)
+#tri_insertion_01(liste)
+#print(liste)
 
+
+def tri_insertion_02(tab):
+    """ 
+    Trie une liste de nombre en utilisant la méthode du tri par insertion.
+    En Python, le passage se faisant par référence, il n'est pas indispensable
+    de retourner le tableau.
+    Keyword arguments:
+    tab -- liste de nombres
+    """
+    for i in range (0,len(tab)):
+        x=tab[i]
+        j=0
+        while j>1 and tab[j-1]>x:
+            tab[j]=tab[j-1]
+            j = j-1
+        tab[j]=x
+
+# Exemple :
+liste = [10,9,7,6,5]
+print(liste)
+tri_insertion_02(liste)
+print(liste)
         
 def exponentiation_naive(x,n):
     """ 
