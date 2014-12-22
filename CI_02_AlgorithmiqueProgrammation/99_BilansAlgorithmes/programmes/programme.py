@@ -141,6 +141,74 @@ def index_of_word_in_text(mot, texte):
 #Mot = "ove."
 #print(index_of_word_in_text(Mot,Texte))
 
+# =================
+# Calcul numérique
+# =================
+
+def integrale_rectangles_gauche(f,a,b,nb):
+    """
+    Calcul de la valeur approchée de l'intégrale de f(x) entre a et b par la 
+    méthode des rectangles à gauche.
+    Keywords arguments :
+    f -- fonction à valeur dans IR
+    a -- flt, borne inférieure de l'intervalle d'intégration
+    b -- flt, borne supérieure de l'intervalle d'intégration
+    nb -- int, nombre d'échantillons pour le calcul
+    """
+    res = 0
+    pas = (b-a)/nb    
+    x = a
+    while x<b-pas:
+        res = res + pas *f(x)
+        x = x + pas
+    return res
+
+
+def integrale_rectangles_droite(f,a,b,nb):
+    """
+    Calcul de la valeur approchée de l'intégrale de f(x) entre a et b par la 
+    méthode des rectangles à droite.
+    Keywords arguments :
+    f -- fonction à valeur dans IR
+    a -- flt, borne inférieure de l'intervalle d'intégration
+    b -- flt, borne supérieure de l'intervalle d'intégration
+    nb -- int, nombre d'échantillons pour le calcul
+    """
+    res = 0
+    pas = (b-a)/nb
+    x = a+pas
+    while x<b-pas:
+        res = res + pas *f(x)
+        x = x + pas
+    return res
+
+def integrale_rectangles_milieu(f,a,b,nb):
+    """
+    Calcul de la valeur approchée de l'intégrale de f(x) entre a et b par la 
+    méthode du point milieu.
+    Keywords arguments :
+    f -- fonction à valeur dans IR
+    a -- flt, borne inférieure de l'intervalle d'intégration
+    b -- flt, borne supérieure de l'intervalle d'intégration
+    nb -- int, nombre d'échantillons pour le calcul
+    """
+    res = 0
+    pas = (b-a)/nb
+    x = a+pas
+    while x<b-pas:
+        res = res + pas *(f(x)+f(x+pas))/2
+        x = x + pas
+    return res
+
+# Exemple :    
+def ff(x):
+    return 2#x*x       
+print(integrale_rectangles_gauche(ff,0,1,10000))
+print(integrale_rectangles_droite(ff,0,1,10000))
+print(integrale_rectangles_milieu(ff,0,1,5000))
+
+print(1/3)
+
 # ====================
 # Algorithmes de tris
 # ====================
@@ -177,19 +245,19 @@ def tri_insertion_02(tab):
     Keyword arguments:
     tab -- liste de nombres
     """
-    for i in range (0,len(tab)):
+    for i in range (1,len(tab)):
         x=tab[i]
-        j=0
-        while j>1 and tab[j-1]>x:
+        j=i
+        while j>0 and tab[j-1]>x:
             tab[j]=tab[j-1]
             j = j-1
         tab[j]=x
 
 # Exemple :
-liste = [10,9,7,6,5]
-print(liste)
-tri_insertion_02(liste)
-print(liste)
+#liste = [1,8,7,6,5]
+#print(liste)
+#tri_insertion_02(liste)
+#print(liste)
         
 def exponentiation_naive(x,n):
     """ 

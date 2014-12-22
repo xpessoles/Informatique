@@ -319,7 +319,6 @@ $f_d \gets f_m$\\
 \end{algorithm}
 \end{pseudo}
 
-
 \begin{py}
 \begin{python}
 def rechercheDichotomique(f,a,b,eps):
@@ -339,9 +338,6 @@ def rechercheDichotomique(f,a,b,eps):
     return (g+d)/2
 \end{python}
 \end{py}
-
-
-
 
 \subsubsection*{Précision du calcul}
 \subsubsection*{Rapidité}
@@ -368,11 +364,220 @@ $c \gets c-\dfrac{f(c)}{f'(c)}$
 \subsubsection*{Rapidité}
 
 \subsection{Méthode des rectangles pour le calcul approché d'une intégrale sur un segment}
+\subsubsection{Méthode des rectangles à gauche}
+
+\begin{pseudo}
+\begin{center}
+\begin{tabular}{p{.9\textwidth}}
+\hline
+\textbf{Algorithme :} Calcul d'intégrale par la méthode des rectangles à gauche\\
+\hline
+\textbf{Données :}
+\begin{itemize}
+\item \textsf{f}, fonction : fonction définie sur $[a,b]$  
+\item \textsf{a}, réel : borne inférieure de l'intervalle de définition
+\item \textsf{b}, réel : borne supérieure de l'intervalle de définition, \textsf{b$\geq$a}
+\item \textsf{nb}, entiers : nombre d'échantillons pour calculer la dérivée
+\end{itemize}
+\textbf{Résultat :} 
+\begin{itemize}
+\item \textsf{res}, réel : valeur approchée de $\int\limits_a^b f(t)\text{d}t$
+\end{itemize}
+\\
+\textbf{integrale\_rectangles\_gauche}(\textsf{f,a,b,nb}) :\\
+\hspace{.4cm}\textsf{res} $\leftarrow$ \textsf{0}\\
+\hspace{.4cm}\textsf{pas} $\leftarrow$ \textsf{(b-a)/nb}\\
+\hspace{.4cm}\textsf{x} $\leftarrow$ \textsf{a}\\
+\hspace{.4cm}\textbf{Tant que} \textsf{x<b-pas} : \textbf{Faire}\\
+\hspace{.8cm}\textsf{res}$\leftarrow$ \textsf{res + pas *} \textbf{f(}\textsf{x}\textbf{)}\\
+\hspace{.8cm}\textsf{x} $\leftarrow$ \textsf{x+pas}\\
+\hspace{.4cm}\textbf{Fin Tant que} \\
+\hspace{.4cm}\textbf{Retourner} \textsf{res}\\
+\hline
+\end{tabular}
+\end{center}
+\end{pseudo}
+
+\begin{py}
+\begin{python}
+def integrale_rectangles_gauche(f,a,b,nb):
+    """
+    Calcul de la valeur approchée de l'intégrale de f(x) entre a et b par la 
+    méthode des rectangles à gauche.
+    Keywords arguments :
+    f -- fonction à valeur dans IR
+    a -- flt, borne inférieure de l'intervalle d'intégration
+    b -- flt, borne supérieure de l'intervalle d'intégration
+    nb -- int, nombre d'échantillons pour le calcul
+    """
+    res = 0
+    pas = (b-a)/nb
+    x = a
+    while x<b-pas:
+        res = res + pas *f(x)
+        x = x + pas
+    return res
+\end{python}
+\end{py}
+
+
+\subsubsection{Méthode des rectangles à droite}
+
+\begin{pseudo}
+\begin{center}
+\begin{tabular}{p{.9\textwidth}}
+\hline
+\textbf{Algorithme :} Calcul d'intégrale par la méthode des rectangles à droite\\
+\hline
+\textbf{Données :}
+\begin{itemize}
+\item \textsf{f}, fonction : fonction définie sur $[a,b]$  
+\item \textsf{a}, réel : borne inférieure de l'intervalle de définition
+\item \textsf{b}, réel : borne supérieure de l'intervalle de définition, \textsf{b$\geq$a}
+\item \textsf{nb}, entiers : nombre d'échantillons pour calculer la dérivée
+\end{itemize}
+\textbf{Résultat :} 
+\begin{itemize}
+\item \textsf{res}, réel : valeur approchée de $\int\limits_a^b f(t)\text{d}t$
+\end{itemize}
+\\
+\textbf{integrale\_rectangles\_droite}(\textsf{f,a,b,nb}) :\\
+\hspace{.4cm}\textsf{res} $\leftarrow$ \textsf{0}\\
+\hspace{.4cm}\textsf{pas} $\leftarrow$ \textsf{(b-a)/nb}\\
+\hspace{.4cm}\textsf{x} $\leftarrow$ \textsf{a+pas}\\
+\hspace{.4cm}\textbf{Tant que} \textsf{x<b-pas} : \textbf{Faire}\\
+\hspace{.8cm}\textsf{res}$\leftarrow$ \textsf{res + pas *} \textbf{f(}\textsf{x}\textbf{)}\\
+\hspace{.8cm}\textsf{x} $\leftarrow$ \textsf{x+pas}\\
+\hspace{.4cm}\textbf{Fin Tant que} \\
+\hspace{.4cm}\textbf{Retourner} \textsf{res}\\
+\hline
+\end{tabular}
+\end{center}
+\end{pseudo}
+
+\begin{py}
+\begin{python}
+def integrale_rectangles_droite(f,a,b,nb):
+    """
+    Calcul de la valeur approchée de l'intégrale de f(x) entre a et b par la 
+    méthode des rectangles à droite.
+    Keywords arguments :
+    f -- fonction à valeur dans IR
+    a -- flt, borne inférieure de l'intervalle d'intégration
+    b -- flt, borne supérieure de l'intervalle d'intégration
+    nb -- int, nombre d'échantillons pour le calcul
+    """
+    res = 0
+    pas = (b-a)/nb
+    x = a+pas
+    while x<b-pas:
+        res = res + pas *f(x)
+        x = x + pas
+    return res
+\end{python}
+\end{py}
+
+\subsubsection{Méthode des rectangles -- Point milieu}
+
+\begin{pseudo}
+\begin{center}
+\begin{tabular}{p{.9\textwidth}}
+\hline
+\textbf{Algorithme :} Calcul d'intégrale par la méthode des rectangles -- point milieu\\
+\hline
+\textbf{Données :}
+\begin{itemize}
+\item \textsf{f}, fonction : fonction définie sur $[a,b]$  
+\item \textsf{a}, réel : borne inférieure de l'intervalle de définition
+\item \textsf{b}, réel : borne supérieure de l'intervalle de définition, \textsf{b$\geq$a}
+\item \textsf{nb}, entiers : nombre d'échantillons pour calculer la dérivée
+\end{itemize}
+\textbf{Résultat :} 
+\begin{itemize}
+\item \textsf{res}, réel : valeur approchée de $\int\limits_a^b f(t)\text{d}t$
+\end{itemize}
+\\
+\textbf{integrale\_rectangles\_droite}(\textsf{f,a,b,nb}) :\\
+\hspace{.4cm}\textsf{res} $\leftarrow$ \textsf{0}\\
+\hspace{.4cm}\textsf{pas} $\leftarrow$ \textsf{(b-a)/nb}\\
+\hspace{.4cm}\textsf{x} $\leftarrow$ \textsf{a}\\
+\hspace{.4cm}\textbf{Tant que} \textsf{x<b-pas} : \textbf{Faire}\\
+\hspace{.8cm}\textsf{res}$\leftarrow$ \textsf{res + pas *(} 
+\textbf{f(}\textsf{x}\textbf{)}+\textbf{f(}\textsf{x+pas}\textbf{)}\textsf{)/2}\\
+\hspace{.8cm}\textsf{x} $\leftarrow$ \textsf{x+pas}\\
+\hspace{.4cm}\textbf{Fin Tant que} \\
+\hspace{.4cm}\textbf{Retourner} \textsf{res}\\
+\hline
+\end{tabular}
+\end{center}
+\end{pseudo}
+
+\begin{py}
+\begin{python}
+def integrale_rectangles_milieu(f,a,b,nb):
+    """
+    Calcul de la valeur approchée de l'intégrale de f(x) entre a et b par la 
+    méthode du point milieu.
+    Keywords arguments :
+    f -- fonction à valeur dans IR
+    a -- flt, borne inférieure de l'intervalle d'intégration
+    b -- flt, borne supérieure de l'intervalle d'intégration
+    nb -- int, nombre d'échantillons pour le calcul
+    """
+    res = 0
+    pas = (b-a)/nb
+    x = a+pas
+    while x<b-pas:
+        res = res + pas *(f(x)+f(x+pas))/2
+        x = x + pas
+    return res
+\end{python}
+\end{py}
+
 \subsection{Méthode des trapèzes pour le calcul approché d'une intégrale sur un segment}
+\textit{cf.} méthodes des rectangles par la méthode du point milieu.
 
 \subsection{Méthode d'Euler pour la résolution d'une équation différentielle}
-\subsubsection*{Complexité algorithmique}
 
+\subsubsection{Méthode d'Euler explicite}
+$$
+f(t) + \tau\dfrac{df(t)}{dt} = \omega_f
+$$
+
+
+\begin{pseudo}
+\begin{center}
+\begin{tabular}{p{.9\textwidth}}
+\hline
+\textbf{Algorithme :} Méthode d'Euler explicite\\
+\hline
+\textbf{Données :}
+\begin{itemize}
+\item \textsf{f}, fonction : fonction définie sur $[a,b]$  
+\item \textsf{a}, réel : borne inférieure de l'intervalle de définition
+\item \textsf{b}, réel : borne supérieure de l'intervalle de définition, \textsf{b$\geq$a}
+\item \textsf{nb}, entiers : nombre d'échantillons pour calculer la dérivée
+\end{itemize}
+\textbf{Résultat :} 
+\begin{itemize}
+\item \textsf{res}, réel : valeur approchée de $\int\limits_a^b f(t)\text{d}t$
+\end{itemize}
+\\
+\textbf{integrale\_rectangles\_droite}(\textsf{f,a,b,nb}) :\\
+\hspace{.4cm}\textsf{res} $\leftarrow$ \textsf{0}\\
+\hspace{.4cm}\textsf{pas} $\leftarrow$ \textsf{(b-a)/nb}\\
+\hspace{.4cm}\textsf{x} $\leftarrow$ \textsf{a}\\
+\hspace{.4cm}\textbf{Tant que} \textsf{x<b-pas} : \textbf{Faire}\\
+\hspace{.8cm}\textsf{res}$\leftarrow$ \textsf{res + pas *(} 
+\textbf{f(}\textsf{x}\textbf{)}+\textbf{f(}\textsf{x+pas}\textbf{)}\textsf{)/2}\\
+\hspace{.8cm}\textsf{x} $\leftarrow$ \textsf{x+pas}\\
+\hspace{.4cm}\textbf{Fin Tant que} \\
+\hspace{.4cm}\textbf{Retourner} \textsf{res}\\
+\hline
+\end{tabular}
+\end{center}
+\end{pseudo}
+%\subsubsection*{Complexité algorithmique}
 
 \section{Algorithmes de tris}%Seconde année
 \subsection{Tri par sélection}
@@ -471,7 +676,7 @@ def tri_insertion_01(tab):
 \hspace{.4cm} \textsf{n} $\leftarrow$ \textbf{longueur}(\textsf{tab}) \\
 \hspace{.4cm}\textbf{Pour} \textsf{i} \textbf{de} 2 \textbf{à} \textsf{n} : \\
 \hspace{.8cm} \textsf{x} $\leftarrow$ \textsf{tab[i]} \\
-\hspace{.8cm} \textsf{j} $\leftarrow$ \textsf{1} \\
+\hspace{.8cm} \textsf{j} $\leftarrow$ \textsf{i} \\
 \hspace{.8cm}\textbf{Tant que} \textsf{j >1} \textbf{et} \textsf{tab[j-1]>x}  : \\
 \hspace{1.2cm} \textsf{tab[j]} $\leftarrow$ \textsf{tab[j-1]} \\
 \hspace{1.2cm} \textsf{j} $\leftarrow$ \textsf{j-1} \\
@@ -483,6 +688,26 @@ def tri_insertion_01(tab):
 \end{center}
 \end{pseudo}
 
+\begin{py}
+\begin{python}
+def tri_insertion_02(tab):
+    """ 
+    Trie une liste de nombre en utilisant la méthode du tri par insertion.
+    En Python, le passage se faisant par référence, il n'est pas indispensable
+    de retourner le tableau.
+    Keyword arguments:
+    tab -- liste de nombres
+    """
+    for i in range (1,len(tab)):
+        x=tab[i]
+        j=i
+        while j>0 and tab[j-1]>x:
+            tab[j]=tab[j-1]
+            j = j-1
+        tab[j]=x
+\end{python}
+\end{py}
+
 \subsubsection*{Estimation de la complexité}
 \begin{itemize}
 \item Meilleur des cas, le tableau est trié, la complexité est linéaire : $\mathcal{O}(n)$.
@@ -490,21 +715,20 @@ def tri_insertion_01(tab):
 \end{itemize}
 
 
-
-\begin{py}
-\begin{python}    
-#Tri par insertion
-def tri_insertion(tab):
-    for i in range(1,len(tab)):
-        a=tab[i] 
-        j=i-1    
-        while j>=0 and tab[j]>a:
-            tab[j+1]=tab[j]
-            j=j-1
-        tab[j+1]=a
-    return tab
-\end{python}
-\end{py}
+%\begin{py}
+%\begin{python}    
+%#Tri par insertion
+%def tri_insertion(tab):
+%    for i in range(1,len(tab)):
+%        a=tab[i] 
+%        j=i-1    
+%        while j>=0 and tab[j]>a:
+%            tab[j+1]=tab[j]
+%            j=j-1
+%        tab[j+1]=a
+%    return tab
+%\end{python}
+%\end{py}
 
 \subsection{Tri shell}
 \begin{py}
