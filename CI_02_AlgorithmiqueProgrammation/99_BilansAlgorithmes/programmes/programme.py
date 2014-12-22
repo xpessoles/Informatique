@@ -153,18 +153,17 @@ def tri_insertion_01(tab):
     Keyword arguments:
     tab -- liste de nombres
     """
-    for i in range (0,len(tab)):
+    for i in range (1,len(tab)):
         x=tab[i]
         j=0
         while j<=i-1 and tab[j]<x:
             j = j+1
-        for k in range(i-1,j,-1):
-            print(i-1,j,k)
+        for k in range(i-1,j-1,-1):
             tab[k+1]=tab[k]
         tab[j]=x
 
 # Exemple :
-liste = [9,8,7,6,5]
+liste = [1,9,7,6,5]
 print(liste)
 tri_insertion_01(liste)
 print(liste)
