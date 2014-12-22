@@ -31,8 +31,7 @@ Algorithmes d'Informatique}{
 Partie  -- }}
 
 \def\xxauteur{\ifthenelse{\boolean{xp}}{
-Xavier \textsc{Pessoles}\\ 
-2013 -- 2014 }{
+Xavier \textsc{Pessoles} }{
 }}
 
 \def\xxpied{\ifthenelse{\boolean{xp}}{
@@ -265,7 +264,38 @@ def calcul_variance(tab,m):
 \end{py}
 \subsection{Calcul de la médiane} %Seconde année
 
-\subsubsection*{Estimation de la complexité}
+
+
+\begin{pseudo}
+\begin{center}
+\begin{tabular}{p{.9\textwidth}}
+\hline
+\textbf{Algorithme :} Recherche de la valeur médiane d'une liste de nombres triés \\
+\hline
+\textbf{Données :}
+\begin{itemize}
+\item \textsf{tab}, liste : liste de nombres triés
+\end{itemize}
+\textbf{Résultat :} 
+\begin{itemize}
+\item flt : valeur de la médiane
+\end{itemize}
+\\
+\textbf{mediane}(\textsf{tab}) :\\
+\hspace{.4cm}\textsf{n} $\leftarrow$ \textbf{Longueur}\textsf{(tab)} \\
+\hspace{.4cm}\textbf{Si} \textsf{n} \textbf{modulo} \textsf{2 = 0} \textbf{Alors} : \\
+\hspace{.8cm} \textsf{i $\leftarrow$ n/2} \\
+\hspace{.8cm} \textbf{Retourner} \textsf{(tab[i] +tab[i+1])/2} \\
+\hspace{.4cm}\textbf{Sinon} :\\
+\hspace{.8cm} \textsf{i $\leftarrow$ n}\textbf{div} \textsf{2+1} \\
+\hspace{.8cm} \textbf{Retourner} \textsf{(tab[i])} \\
+\textbf{Fin fonction} \\
+\hline
+\end{tabular}
+\end{center}
+\end{pseudo}
+
+%\subsubsection*{Estimation de la complexité}
 
 \section{Chaînes de caractères}
 \subsection{Recherche d'un mot dans une chaîne de caractères}
@@ -377,7 +407,7 @@ $c \gets c-\dfrac{f(c)}{f'(c)}$
 \item \textsf{f}, fonction : fonction définie sur $[a,b]$  
 \item \textsf{a}, réel : borne inférieure de l'intervalle de définition
 \item \textsf{b}, réel : borne supérieure de l'intervalle de définition, \textsf{b$\geq$a}
-\item \textsf{nb}, entiers : nombre d'échantillons pour calculer la dérivée
+\item \textsf{nb}, entiers : nombre d'échantillons pour calculer l'intégrale
 \end{itemize}
 \textbf{Résultat :} 
 \begin{itemize}
@@ -434,7 +464,7 @@ def integrale_rectangles_gauche(f,a,b,nb):
 \item \textsf{f}, fonction : fonction définie sur $[a,b]$  
 \item \textsf{a}, réel : borne inférieure de l'intervalle de définition
 \item \textsf{b}, réel : borne supérieure de l'intervalle de définition, \textsf{b$\geq$a}
-\item \textsf{nb}, entiers : nombre d'échantillons pour calculer la dérivée
+\item \textsf{nb}, entiers : nombre d'échantillons pour calculer l'intégrale
 \end{itemize}
 \textbf{Résultat :} 
 \begin{itemize}
@@ -490,7 +520,7 @@ def integrale_rectangles_droite(f,a,b,nb):
 \item \textsf{f}, fonction : fonction définie sur $[a,b]$  
 \item \textsf{a}, réel : borne inférieure de l'intervalle de définition
 \item \textsf{b}, réel : borne supérieure de l'intervalle de définition, \textsf{b$\geq$a}
-\item \textsf{nb}, entiers : nombre d'échantillons pour calculer la dérivée
+\item \textsf{nb}, entiers : nombre d'échantillons pour calculer l'intégrale
 \end{itemize}
 \textbf{Résultat :} 
 \begin{itemize}
@@ -540,8 +570,9 @@ def integrale_rectangles_milieu(f,a,b,nb):
 \subsection{Méthode d'Euler pour la résolution d'une équation différentielle}
 
 \subsubsection{Méthode d'Euler explicite}
+Résolution de l'équation différentielle :
 $$
-f(t) + \tau\dfrac{df(t)}{dt} = \omega_f
+y(t) + \tau\dfrac{dy(t)}{dt} = y_f
 $$
 
 
@@ -553,32 +584,111 @@ $$
 \hline
 \textbf{Données :}
 \begin{itemize}
-\item \textsf{f}, fonction : fonction définie sur $[a,b]$  
-\item \textsf{a}, réel : borne inférieure de l'intervalle de définition
-\item \textsf{b}, réel : borne supérieure de l'intervalle de définition, \textsf{b$\geq$a}
-\item \textsf{nb}, entiers : nombre d'échantillons pour calculer la dérivée
+\item \textsf{tau}, réel : constante de temps
+\item \textsf{y\_0}, réel : valeur initiale de y
+\item \textsf{y\_f}, réel : valeur finale y
+\item \textsf{t\_f}, réel : temps de la simulation numérique
+\item \textsf{nb}, entier : nombre d'échantillons pour calculer les valeurs de y
 \end{itemize}
 \textbf{Résultat :} 
 \begin{itemize}
-\item \textsf{res}, réel : valeur approchée de $\int\limits_a^b f(t)\text{d}t$
+\item \textsf{res}, liste : liste des couples (t,y(t)).
 \end{itemize}
 \\
-\textbf{integrale\_rectangles\_droite}(\textsf{f,a,b,nb}) :\\
-\hspace{.4cm}\textsf{res} $\leftarrow$ \textsf{0}\\
-\hspace{.4cm}\textsf{pas} $\leftarrow$ \textsf{(b-a)/nb}\\
-\hspace{.4cm}\textsf{x} $\leftarrow$ \textsf{a}\\
-\hspace{.4cm}\textbf{Tant que} \textsf{x<b-pas} : \textbf{Faire}\\
-\hspace{.8cm}\textsf{res}$\leftarrow$ \textsf{res + pas *(} 
-\textbf{f(}\textsf{x}\textbf{)}+\textbf{f(}\textsf{x+pas}\textbf{)}\textsf{)/2}\\
-\hspace{.8cm}\textsf{x} $\leftarrow$ \textsf{x+pas}\\
+\textbf{euler\_explicite}(\textsf{tau,y\_0,y\_f,t\_f,nb}) :\\
+\hspace{.4cm}\textbf{Initialiser} \textsf{res} \\
+\hspace{.4cm}\textsf{t} $\leftarrow$ \textsf{0}\\
+\hspace{.4cm}\textsf{y} $\leftarrow$ \textsf{y\_0}\\
+\hspace{.4cm}\textsf{pas} $\leftarrow$ \textsf{t\_f/nb}\\
+\hspace{.4cm}\textbf{Tant que} \textsf{t<t\_f} \textbf{Faire} :\\
+\hspace{.8cm}\textbf{Ajouter} \textsf{(t,y)}  \textbf{à} \textsf{res} \\
+\hspace{.8cm} \textsf{y $\leftarrow$ y + pas *(y\_f-y)/tau}\\
+\hspace{.8cm} \textsf{t $\leftarrow$ t + pas}\\
 \hspace{.4cm}\textbf{Fin Tant que} \\
 \hspace{.4cm}\textbf{Retourner} \textsf{res}\\
 \hline
 \end{tabular}
 \end{center}
 \end{pseudo}
+
+\begin{py}
+\begin{python}
+def euler_explicite(tau,y0,yf,tf,nb):
+    """
+    Résolution d'une équation différentielle d'ordre 1 en utilisant la méthode
+    d'Euler explicite.
+    Keywords arguments :
+    tau -- flt, constante de temps de l'équation différentielle 
+    y0 -- flt, valeur initiale de y(t)
+    yf -- flt valeur finale de y(t)
+    tf -- flt temps de fin de la simulation
+    nb -- int, nombre d'échantillons pour la simulation
+    """
+    t = 0
+    y = y0 
+    pas = tf / nb
+    res = []
+    while t < tf:
+        res.append((t,y))
+        y = y + pas*(yf-y)/tau
+        t = t + pas
+    return res
+\end{python}
+\end{py}
 %\subsubsection*{Complexité algorithmique}
 
+\subsection{Algorithme de Gauss -- Jordan}
+
+
+\begin{py}
+\begin{python}
+def recherche_pivot(A,i):
+    n = len(A) # le nombre de lignes
+    j = i # la ligne du maximum provisoire
+    for k in range(i+1, n):
+        if abs(A[k][i]) > abs(A[j][i]):
+            j = k # un nouveau maximum provisoire
+    return j
+\end{python}
+
+\begin{python}    
+def echange_lignes(A,i,j):
+    # Li <-->Lj
+    A[i][:],A[j][:]=A[j][:],A[i][:]
+\end{python}
+
+\begin{python}
+def transvection_ligne(A, i, j, mu):
+    # L_i <- L_i + mu.L_j """
+    nc = len(A[0]) # le nombre de colonnes
+    for k in range(nc):
+        A[i][k] = A[i][k] + mu * A[j][k]
+\end{python}
+
+\begin{python}
+def resolution(AA, BB):
+    """Résolution de AA.X=BB; AA doit etre inversible"""
+    A, B = AA.copy(), BB.copy()
+    n = len(A)
+    assert len(A[0]) == n
+    # Mise sous forme triangulaire
+    for i in range(n):
+        j = recherche_pivot(A, i)
+        if j > i:
+            echange_lignes(A, i, j)
+            echange_lignes(B, i, j)
+        for k in range(i+1, n):
+            x = A[k][i] / float(A[i][i])
+            transvection_ligne(A, k, i, -x)
+            transvection_ligne(B, k, i, -x)
+    # Phase de remontée
+    X = [0.] * n
+    for i in range(n-1, -1, -1):
+        X[i] = (B[i][0]-sum(A[i][j]*X[j] for j in range(i+1,n))) / A[i][i]
+    return X
+\end{python}
+\end{py}
+ 
 \section{Algorithmes de tris}%Seconde année
 \subsection{Tri par sélection}
 \begin{py}
