@@ -40,24 +40,6 @@ def what_is_max(tab):
 #print(what_is_max(liste))
 
 
-def what_is_max(tab):
-    """ 
-    Renvoie le plus grand nombre d'une liste.
-    Keyword arguments:
-    tab -- liste de nombres
-    """
-    i=1
-    maxi=tab[0]
-    while i<len(tab):
-        if tab[i]>maxi:
-            maxi=tab[i]
-        i+=1
-    return maxi
-# Exemple :
-#liste = [1,2,3,5,9,5,3,1,5]
-#print(what_is_max(liste))
-
-
 def is_number_in_list_dicho(nb,tab):
     """ 
     Renvoie l'index si le nombre nb est dans la liste de nombres tab.
@@ -102,21 +84,21 @@ def calcul_moyenne(tab):
 
 def calcul_variance(tab):
     """ 
-	Calcule la variance des éléments d'un tableau.
+	Calcule la variance des éléments d'un tableau trié.
     
 	Keyword arguments:
-    tab -- liste de nombres entiers
+    tab -- liste de nombres
     """
-    m = calcul_moyenne(tab)
-    res = 0
-    for i in range(len(tab)):
-        res = res+(tab[i]-m)**2
-    
-    return res/(len(tab))
+    if len(tab)%2 == 0 :
+        i=len(tab)//2
+        return (tab[i-1]+tab[i])/2
+    else :
+        i = len(tab)//2
+    return tab[i]
 # Exemple :
-#liste = [1,2,3,5,9]
-#print(calcul_moyenne(liste))
-#print(calcul_variance(liste))
+liste = [1,2,3,4,5,6]
+print(calcul_moyenne(liste))
+print(calcul_variance(liste))
 
 
 def index_of_word_in_text(mot, texte):
@@ -278,17 +260,14 @@ def resolution_gauss_jordan(AA, BB):
     return X
 
 
-
-AA = [[-1,-2,-3],[0,-1,-4],[-3,-4,-1]]
-BB = [[1],[3],[1]]
+# EXEMPLE
+#AA = [[-1,-2,-3],[0,-1,-4],[-3,-4,-1]]
+#BB = [[1],[3],[1]]
        
-res1 = resolution_gauss_jordan(AA,BB)
-res2 = np.linalg.solve(AA,BB)
-print(res1)
-print(res2)
-
-
-
+#res1 = resolution_gauss_jordan(AA,BB)
+#res2 = np.linalg.solve(AA,BB)
+#print(res1)
+#print(res2)
 
 
 # ====================
@@ -340,7 +319,47 @@ def tri_insertion_02(tab):
 #print(liste)
 #tri_insertion_02(liste)
 #print(liste)
-        
+
+def segmente(tab,i,j):
+    """
+    Segmentation d'un tableau par rapport à un pivot.
+    Keyword arguments: 
+    tab (list) -- liste de nombres
+    i,j (int) -- indices de fin et de début de la segmantation
+    Retour :    
+    tab (list) -- liste de nombres avec le pivot à sa place définitive
+    k (int) -- indice de la place du pivot
+    """
+    g =i+1
+    d=j
+    p=tab[i]
+    while g<=d :
+        while d>=0 and tab[d]>p:
+            d=d-1
+        while g<=j and tab[g]<=p:
+            g=g+1
+        if g<d :
+            tab[g],tab[d]=tab[d],tab[g]
+            d=d-1
+            g=g+1
+    k=d
+    tab[i],tab[d]=tab[d],tab[i]
+    return k
+def tri_quicksort(tab,i,j):
+    k = segmente(tab,i,j)
+    tri_quicksort(tab,i,k-1)
+    tri_quicksort(tab,k+1,j)
+#Exemple
+import random
+tab = [random.randint(0,10) for i in range(10)]
+print(tab)
+tri_quicksort(tab,0,9)
+print(tab)
+# ====================
+# Algorithmes divers
+# ====================
+
+
 def exponentiation_naive(x,n):
     """ 
 	Renvoie x**n par la méthode naïve.
