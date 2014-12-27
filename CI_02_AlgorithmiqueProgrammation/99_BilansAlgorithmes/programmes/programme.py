@@ -346,15 +346,20 @@ def segmente(tab,i,j):
     tab[i],tab[d]=tab[d],tab[i]
     return k
 def tri_quicksort(tab,i,j):
-    k = segmente(tab,i,j)
-    tri_quicksort(tab,i,k-1)
-    tri_quicksort(tab,k+1,j)
+    if i<j :
+        k = segmente(tab,i,j)
+        tri_quicksort(tab,i,k-1)
+        tri_quicksort(tab,k+1,j)
 #Exemple
 import random
-tab = [random.randint(0,10) for i in range(10)]
-print(tab)
-tri_quicksort(tab,0,9)
-print(tab)
+tab1 = [random.randint(0,100) for i in range(100)]
+tab2 = tab1[:]
+tab2.sort()
+tri_quicksort(tab1,0,99)
+for i in range(len(tab1)):
+    if tab1[i]!=tab2[i]:
+        print("Perdu")
+        break
 # ====================
 # Algorithmes divers
 # ====================
