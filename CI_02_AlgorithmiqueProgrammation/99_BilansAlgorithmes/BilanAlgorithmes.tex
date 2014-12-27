@@ -1023,6 +1023,51 @@ def shellSort(array):
 \end{py}
 
 \subsection{Tri rapide <<Quicksort>>}
+\begin{py}
+\begin{python}
+def segmente(tab,i,j):
+    """
+    Segmentation d'un tableau par rapport à un pivot.
+    Keyword arguments: 
+    tab (list) -- liste de nombres
+    i,j (int) -- indices de fin et de début de la segmantation
+    Retour :    
+    tab (list) -- liste de nombres avec le pivot à sa place définitive
+    k (int) -- indice de la place du pivot
+    """
+    g =i+1
+    d=j
+    p=tab[i]
+    while g<=d :
+        while d>=0 and tab[d]>p:
+            d=d-1
+        while g<=j and tab[g]<=p:
+            g=g+1
+        if g<d :
+            tab[g],tab[d]=tab[d],tab[g]
+            d=d-1
+            g=g+1
+    k=d
+    tab[i],tab[d]=tab[d],tab[i]
+    return k
+\end{python}
+
+\begin{python}
+def tri_quicksort(tab,i,j):
+    """
+    Tri d'une liste par l'utilisation du tri rapide (Quick sort).
+    Keyword arguments: 
+    tab (list) -- liste de nombres
+    i,j (int) -- indices de fin et de début de la zone de tri
+    Retour :    
+    tab (list) -- liste de nombres avec le pivot à sa place définitive
+    """
+    if i<j :
+        k = segmente(tab,i,j)
+        tri_quicksort(tab,i,k-1)
+        tri_quicksort(tab,k+1,j)
+\end{python}
+\end{py}
 
 \begin{pseudo}
 \begin{center}
@@ -1041,7 +1086,7 @@ def shellSort(array):
 \item \textsf{k} entier : l'indice de la place du pivot
 \end{itemize}
 \\
-\textbf{Segmente}(\textsf{tab,i,j}) :\\
+\textbf{segmente}(\textsf{tab,i,j}) :\\
 \hspace{.4cm} \textsf{g $\leftarrow$ i+1 }\\
 \hspace{.4cm} \textsf{d $\leftarrow$ j}\\
 \hspace{.4cm} \textsf{p $\leftarrow$ tab[i]}\\

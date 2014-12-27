@@ -345,7 +345,16 @@ def segmente(tab,i,j):
     k=d
     tab[i],tab[d]=tab[d],tab[i]
     return k
+    
 def tri_quicksort(tab,i,j):
+    """
+    Tri d'une liste par l'utilisation du tri rapide (Quick sort).
+    Keyword arguments: 
+    tab (list) -- liste de nombres
+    i,j (int) -- indices de fin et de début de la zone de tri
+    Retour :    
+    tab (list) -- liste de nombres avec le pivot à sa place définitive
+    """
     if i<j :
         k = segmente(tab,i,j)
         tri_quicksort(tab,i,k-1)
