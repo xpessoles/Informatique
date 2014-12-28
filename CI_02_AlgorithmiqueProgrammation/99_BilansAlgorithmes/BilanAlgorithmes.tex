@@ -1079,7 +1079,7 @@ def tri_quicksort(tab,i,j):
 \textbf{Données :}
 \begin{itemize}
 \item \textsf{tab}, liste : une liste de nombres
-\item \textsf{i,j}, entiers : indices de début et de fin de la segmentation à effectue
+\item \textsf{i,j}, entiers : indices de début et de fin de la segmentation à effectuer
 \end{itemize}
 \textbf{Résultats :} 
 \begin{itemize}
@@ -1120,7 +1120,7 @@ def tri_quicksort(tab,i,j):
 \textbf{Données :}
 \begin{itemize}
 \item \textsf{tab}, liste : une liste de nombres
-\item \textsf{i,j}, entiers : indices de début et de fin de la segmentation à effectue
+\item \textsf{i,j}, entiers : indices de début et de fin de la portion à trier
 \end{itemize}
 \textbf{Résultats :} 
 \begin{itemize}
@@ -1139,6 +1139,41 @@ def tri_quicksort(tab,i,j):
 \end{pseudo}
 
 \subsubsection{Tri rapide optimisé}
+
+\begin{pseudo}
+\begin{center}
+\begin{tabular}{p{.9\textwidth}}
+\hline
+\textbf{Algorithme :} Tri Quicksort -- Tri rapide optimisé\\
+\hline
+\textbf{Données :}
+\begin{itemize}
+\item \textsf{tab}, liste : une liste de nombres
+\item \textsf{i,j}, entiers : indices de début et de fin de la portion de liste à trier
+\end{itemize}
+\textbf{Résultats :} 
+\begin{itemize}
+\item \textsf{tab}, liste : liste triée entre les indices \textsf{i} et \textsf{j}
+\end{itemize}
+\\
+\textbf{tri\_quicksort\_optimized}(\textsf{tab,i,j}) :\\
+\hspace{.4cm} \textbf{Si} \textsf{i<j} \textbf{alors} \\
+\hspace{.8cm} \textsf{k$\leftarrow$} \textbf{segmente(}\textsf{tab,i,j} \textbf{)} \\
+\hspace{.8cm} \textbf{Si} \textsf{k-i>15} \textbf{alors} \\
+\hspace{1.2cm} \textbf{tri\_quicksort(}\textsf{tab,i,k-1} \textbf{)} \\
+\hspace{.8cm} \textbf{Sinon} \\
+\hspace{1.2cm} \textbf{tri\_insertion(}\textsf{tab,i,k-1} \textbf{)} \\
+\hspace{.8cm} \textbf{Fin Si} \\
+\hspace{.8cm} \textbf{Si} \textsf{j-k>15} \textbf{alors} \\
+\hspace{1.2cm} \textbf{tri\_quicksort(}\textsf{tab,k+1,j} \textbf{)} \\
+\hspace{.8cm} \textbf{Sinon} \\
+\hspace{1.2cm} \textbf{tri\_insertion(}\textsf{tab,k+1,j} \textbf{)} \\
+\hspace{.8cm} \textbf{Fin Si} \\
+\hspace{.4cm} \textbf{Fin Si} \\
+\hline
+\end{tabular}
+\end{center}
+\end{pseudo}
 \subsection{Tri fusion}
 
 \section{Algorithmes classiques}
