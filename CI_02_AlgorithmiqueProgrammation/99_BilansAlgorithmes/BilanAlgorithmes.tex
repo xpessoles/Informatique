@@ -1176,6 +1176,54 @@ def tri_quicksort(tab,i,j):
 \end{pseudo}
 \subsection{Tri fusion}
 
+
+\begin{pseudo}
+\begin{center}
+\begin{tabular}{p{.9\textwidth}}
+\hline
+\textbf{Algorithme :} Tri Fusion -- Fusion de deux listes\\
+\hline
+\textbf{Données :}
+\begin{itemize}
+\item \textsf{tab}, liste : une liste de nombres \textsf{tab[g:d]} avec \textsf{g} indice de la valeur de gauche, \textsf{d} indice de la valeur de droite
+\item \textsf{m}, entier : indice tel que \textsf{$g\leq$m<d} et tel que les sous-tableaux \textsf{tab[g:m]} et \textsf{tab[m+1:d]} soient ordonnés
+\end{itemize}
+\textbf{Résultats :} 
+\begin{itemize}
+\item \textsf{tab}, liste : liste triée entre les indices \textsf{g} et \textsf{d}
+\end{itemize}
+\\
+\textbf{fusion}(\textsf{tab,g,d,m}) :\\
+\hspace{.4cm} \textsf{n1$\leftarrow$ m-g+1}\\
+\hspace{.4cm} \textsf{n2$\leftarrow$ d-m}\\
+\hspace{.4cm} \textbf{Initialiser tableau} \textsf{G}  \\
+\hspace{.4cm} \textbf{Initialiser tableau} \textsf{D}  \\
+\hspace{.4cm} \textbf{Pour} \textsf{i} \textbf{allant de} \textsf{1} \textbf{à} \textsf{n1} \textbf{faire}\\
+\hspace{.8cm}  \textsf{G[i] $ \leftarrow$ tab[g+i-1]}\\
+\hspace{.4cm}  \textbf{Fin Pour}\\
+\hspace{.4cm} \textbf{Pour} \textsf{j} \textbf{allant de} \textsf{1} \textbf{à} \textsf{n2} \textbf{faire}\\
+\hspace{.8cm} \textsf{D[j] $ \leftarrow$ tab[m+j]}\\
+\hspace{.4cm} \textbf{Fin Pour}\\
+\hspace{.4cm} \textsf{i $\leftarrow$ 1}\\
+\hspace{.4cm} \textsf{j $\leftarrow$ 1}\\
+\hspace{.4cm} \textsf{G[n1+1] $\leftarrow$ $+\infty$}\\
+\hspace{.4cm} \textsf{D[n2+1] $\leftarrow$ $+\infty$}\\
+\hspace{.4cm} \textbf{Pour} \textsf{k} \textbf{allant de} \textsf{g} \textbf{à} \textsf{d} \textbf{faire}\\
+\hspace{.8cm} \textbf{Si} \textsf{i$\leq$n1} \textbf{et} \textsf{G[i]$\leq$D[j]} \textbf{alors} \\
+\hspace{1.2cm} \textsf{T[k]$\leftarrow$ G[i]} \\
+\hspace{1.2cm} \textsf{i$\leftarrow$ i+1} \\
+\hspace{.8cm} \textbf{Sinon} \\
+\hspace{1.2cm} \textbf{Si} \textsf{j$\leq$n2} \textbf{et} \textsf{G[i]>D[j]} \textbf{alors} \\
+\hspace{1.6cm} \textsf{T[k]$\leftarrow$ D[j]} \\
+\hspace{1.6cm} \textsf{j$\leftarrow$ j+1} \\
+\hspace{1.2cm} \textbf{Fin Si} \\
+\hspace{.8cm} \textbf{Fin Si} \\
+\hspace{.4cm}  \textbf{Fin Pour}\\
+\hline
+\end{tabular}
+\end{center}
+\end{pseudo}
+
 \section{Algorithmes classiques}
 \subsection{Division euclidienne}
 \begin{pseudo}
