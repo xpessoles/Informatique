@@ -405,6 +405,8 @@ tri_quicksort(tab1,0,9)
 tab2 = [random.randint(11,20) for i in range(10)]
 tri_quicksort(tab2,0,9)
 tab = tab1+tab2
+g=0
+d=len(tab-1)
 #tab2 = tab1[:]
 #tab2.sort()
 #tri_quicksort(tab1,0,99)
