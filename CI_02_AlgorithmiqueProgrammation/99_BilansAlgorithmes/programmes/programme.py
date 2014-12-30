@@ -360,15 +360,60 @@ def tri_quicksort(tab,i,j):
         tri_quicksort(tab,i,k-1)
         tri_quicksort(tab,k+1,j)
 #Exemple
+#import random
+#tab1 = [random.randint(0,100) for i in range(100)]
+#tab2 = tab1[:]
+#tab2.sort()
+#tri_quicksort(tab1,0,99)
+#for i in range(len(tab1)):
+#    if tab1[i]!=tab2[i]:
+#        print("Perdu")
+#        break
+
+def fusion_listes(tab,g,d,m):
+    """
+    Fusionne deux listes triées.
+    Keyword arguments:
+    tab (list) -- liste : une liste de nombres tab[g:d] avec g indice de la 
+    valeur de gauche, d indice de la valeur de droite
+    g,d,m (int) -- entiers : indices tels que g<=m<d et tel que les 
+    sous-tableaux tab[g:m] et tab[m+1:d] soient ordonnés
+    Résultats :
+    tab (lis) : liste triée entre les indices g et d
+    """
+    n1 = m-g+1
+    n2 = d-m
+    G,D = [],[]
+    for i in range (n1):
+        G.append(tab[g+i-1])
+    for j in range (n2):
+        D.append([m+j])
+    i,j=0,0
+    G.append(99999999999)
+    D.append(99999999999)
+    for k in range (g,d):
+        if i<=n1 and  G[i]<=D[j]:
+            tab[k]=G[i]
+            i=i+1
+        elif j<=n2 and G[i]>D[j]:
+            tab[k]=D[j]
+            j=j+1
+#Exemple
 import random
-tab1 = [random.randint(0,100) for i in range(100)]
-tab2 = tab1[:]
-tab2.sort()
-tri_quicksort(tab1,0,99)
-for i in range(len(tab1)):
-    if tab1[i]!=tab2[i]:
-        print("Perdu")
-        break
+tab1 = [random.randint(0,10) for i in range(10)]
+tri_quicksort(tab1,0,9)
+tab2 = [random.randint(11,20) for i in range(10)]
+tri_quicksort(tab2,0,9)
+tab = tab1+tab2
+#tab2 = tab1[:]
+#tab2.sort()
+#tri_quicksort(tab1,0,99)
+#for i in range(len(tab1)):
+#    if tab1[i]!=tab2[i]:
+#        print("Perdu")
+#        break
+
+            
 # ====================
 # Algorithmes divers
 # ====================

@@ -1193,7 +1193,7 @@ def tri_quicksort(tab,i,j):
 \item \textsf{tab}, liste : liste triée entre les indices \textsf{g} et \textsf{d}
 \end{itemize}
 \\
-\textbf{fusion}(\textsf{tab,g,d,m}) :\\
+\textbf{fusion\_liste}(\textsf{tab,g,d,m}) :\\
 \hspace{.4cm} \textsf{n1$\leftarrow$ m-g+1}\\
 \hspace{.4cm} \textsf{n2$\leftarrow$ d-m}\\
 \hspace{.4cm} \textbf{Initialiser tableau} \textsf{G}  \\
@@ -1210,11 +1210,11 @@ def tri_quicksort(tab,i,j):
 \hspace{.4cm} \textsf{D[n2+1] $\leftarrow$ $+\infty$}\\
 \hspace{.4cm} \textbf{Pour} \textsf{k} \textbf{allant de} \textsf{g} \textbf{à} \textsf{d} \textbf{faire}\\
 \hspace{.8cm} \textbf{Si} \textsf{i$\leq$n1} \textbf{et} \textsf{G[i]$\leq$D[j]} \textbf{alors} \\
-\hspace{1.2cm} \textsf{T[k]$\leftarrow$ G[i]} \\
+\hspace{1.2cm} \textsf{tab[k]$\leftarrow$ G[i]} \\
 \hspace{1.2cm} \textsf{i$\leftarrow$ i+1} \\
 \hspace{.8cm} \textbf{Sinon} \\
 \hspace{1.2cm} \textbf{Si} \textsf{j$\leq$n2} \textbf{et} \textsf{G[i]>D[j]} \textbf{alors} \\
-\hspace{1.6cm} \textsf{T[k]$\leftarrow$ D[j]} \\
+\hspace{1.6cm} \textsf{tab[k]$\leftarrow$ D[j]} \\
 \hspace{1.6cm} \textsf{j$\leftarrow$ j+1} \\
 \hspace{1.2cm} \textbf{Fin Si} \\
 \hspace{.8cm} \textbf{Fin Si} \\
