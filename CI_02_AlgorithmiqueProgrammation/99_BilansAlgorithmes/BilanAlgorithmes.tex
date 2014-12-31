@@ -1224,6 +1224,37 @@ def tri_quicksort(tab,i,j):
 \end{center}
 \end{pseudo}
 
+
+
+\begin{pseudo}
+\begin{center}
+\begin{tabular}{p{.9\textwidth}}
+\hline
+\textbf{Algorithme :} Tri Fusion \\
+\hline
+Algorithme récursif du table de tri. \\
+\textbf{Données :}
+\begin{itemize}
+\item \textsf{tab}, liste : une liste de nombres non triés \textsf{tab[g:d]} 
+\item \textsf{g,d}, entiers : indices de début et de fin de la liste
+\end{itemize}
+\textbf{Résultats :} 
+\begin{itemize}
+\item \textsf{tab}, liste : liste triée entre les indices \textsf{g} et \textsf{d}
+\end{itemize}
+\\
+\textbf{Tri\_fusion}(\textsf{tab,g,d}) :\\
+\hspace{.4cm} \textbf{Si} \textsf{g<d}  \textbf{alors} \\
+\hspace{.8cm} \textsf{m $\leftarrow$ (g+d)} \textbf{div} 2\\
+\hspace{.8cm} \textbf{Tri\_fusion}(tab,g,m) \\
+\hspace{.8cm} \textbf{Tri\_fusion}(tab,m+1,d) \\
+\hspace{.8cm} \textbf{Fusion}(tab,g,d,m) \\
+\hspace{.4cm}  \textbf{Fin Si}\\
+\hline
+\end{tabular}
+\end{center}
+\end{pseudo}
+
 \section{Algorithmes classiques}
 \subsection{Division euclidienne}
 \begin{pseudo}
