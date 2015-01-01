@@ -415,7 +415,8 @@ def tri_fusion(tab,g,d):
         fusion_listes(tab,g,d,m)
 #Exemple
 import random
-tab = [random.randint(0,10) for i in range(10)]
+tab1 = [random.randint(0,10) for i in range(10)]
+tri_quicksort(tab1,0,9)
 print(tab)
 tri_fusion(tab,0,9)
 print(tab)
