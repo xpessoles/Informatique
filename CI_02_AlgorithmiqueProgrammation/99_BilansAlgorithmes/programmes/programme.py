@@ -378,8 +378,8 @@ def fusion_listes(tab,g,d,m):
     valeur de gauche, d indice de la valeur de droite
     g,d,m (int) -- entiers : indices tels que g<=m<d et tel que les 
     sous-tableaux tab[g:m] et tab[m+1:d] soient ordonnés
-    Résultats :
-    tab (lis) : liste triée entre les indices g et d
+    Résultat :
+    tab (list) : liste triée entre les indices g et d
     """
     n1 = m-g+1
     n2 = d-m
@@ -398,22 +398,27 @@ def fusion_listes(tab,g,d,m):
         elif j<=n2 and G[i]>D[j]:
             tab[k]=D[j]
             j=j+1
+            
+def tri_fusion(tab,g,d):
+    """
+    Tri d'une liste par la métode du tri fusion
+    Keyword arguments:
+    tab (list) -- liste : une liste de nombres non triés tab[g:d]
+    g,d (int) -- entiers : indices de début et de fin de liste
+    Résultat :
+    tab (list) : liste triée entre les indices g et d
+    """
+    if g<d:
+        m=(g+d)//2
+        tri_fusion(tab,g,d)
+        tri_fusion(tab,m+1,d)
+        fusion_listes(tab,g,d,m)
 #Exemple
 import random
-tab1 = [random.randint(0,10) for i in range(10)]
-tri_quicksort(tab1,0,9)
-tab2 = [random.randint(11,20) for i in range(10)]
-tri_quicksort(tab2,0,9)
-tab = tab1+tab2
-g=0
-d=len(tab-1)
-#tab2 = tab1[:]
-#tab2.sort()
-#tri_quicksort(tab1,0,99)
-#for i in range(len(tab1)):
-#    if tab1[i]!=tab2[i]:
-#        print("Perdu")
-#        break
+tab = [random.randint(0,10) for i in range(10)]
+print(tab)
+tri_fusion(tab,0,9)
+print(tab)
 
             
 # ====================

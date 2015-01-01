@@ -1243,12 +1243,12 @@ Algorithme récursif du table de tri. \\
 \item \textsf{tab}, liste : liste triée entre les indices \textsf{g} et \textsf{d}
 \end{itemize}
 \\
-\textbf{Tri\_fusion}(\textsf{tab,g,d}) :\\
+\textbf{tri\_fusion}(\textsf{tab,g,d}) :\\
 \hspace{.4cm} \textbf{Si} \textsf{g<d}  \textbf{alors} \\
 \hspace{.8cm} \textsf{m $\leftarrow$ (g+d)} \textbf{div} 2\\
-\hspace{.8cm} \textbf{Tri\_fusion}(tab,g,m) \\
-\hspace{.8cm} \textbf{Tri\_fusion}(tab,m+1,d) \\
-\hspace{.8cm} \textbf{Fusion}(tab,g,d,m) \\
+\hspace{.8cm} \textbf{tri\_fusion}(tab,g,m) \\
+\hspace{.8cm} \textbf{tri\_fusion}(tab,m+1,d) \\
+\hspace{.8cm} \textbf{fusion\_liste}(tab,g,d,m) \\
 \hspace{.4cm}  \textbf{Fin Si}\\
 \hline
 \end{tabular}
