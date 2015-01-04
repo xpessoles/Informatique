@@ -1,0 +1,161 @@
+\documentclass[10pt]{article}
+\input{style/coursHeadings}
+\input{style/programHeadings}
+\input{style/macros_SII}
+\input{style/macros_Titres}
+\input{style/macros_Frames}
+
+%Si le boolen xp est vrai : compilation pour xabi
+%Sinon compilation Damien
+\newif\ifprof
+%\proftrue
+\proffalse
+
+\newif\ifxp
+\xptrue
+%\xpfalse
+
+\newif\iftd
+\tdtrue
+%\tdfalse
+
+\usepackage[%
+    pdftitle={DS Informatique - Concours Blanc},
+    pdfauthor={Xavier Pessoles},
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=magenta]{hyperref}
+
+\def\discipline{Informatique}
+\def\xxtitre{%
+\ifxp
+CI ** : 
+\else
+\fi
+}
+
+\def\xxsoustitre{%
+\ifxp
+Chapitre ** -- 
+\else
+\fi}
+
+\def\xxauteur{%
+\ifxp
+Xavier \textsc{Pessoles}
+\else
+\fi}
+
+\def\xxpied{%
+\ifxp
+CI ** : **\\
+Ch. ** : ** -- Cours TD
+\else
+\fi}
+
+\def\xxpied{%
+\ifxp
+2013 -- 2014 \\
+Xavier \textsc{Pessoles}
+\else
+\fi}
+
+
+
+
+%---------------------------------------------------------------------------
+
+
+\begin{document}
+\ifxp
+\input{style/enteteXP}
+\else
+\input{style/enteteDI}
+\fi
+
+
+
+ \renewcommand{\baselinestretch}{1.2}
+\setlength{\parskip}{2ex plus 0.5ex minus 0.2ex}
+
+
+
+\section{Préambule}
+Les logiciels d'acquisitions utilisés ici permettent d'obtenir un fichier texte de deux colonnes en codé en ASCII. La première colonne contient les temps de mesures en secondes. La seconde colonne contient les informations mesurées. 
+
+Pour un relevé courant, la fréquence d'échantillonage de la mesure est de $1 kHz$. La mesure est comprise entre -999 et 999 avec une précision au millième. (Par exemple, pour une mesure de déplacement en millimètres, on fait l'hypothèse que la mesure sera comprise entre -999 et 999 mm avec une précision de 1 micromètre.)
+
+
+\subparagraph{}
+\textit{Quel type de données est présent dans le fichier texte ? Quel type de données proposeriez vous pour stocker un élément de la première colonne ? un élément de la seconde colonne ?}
+
+\subparagraph{}
+\textit{Quel sera la taille d'un fichier de mesure courant dans le cas le plus défavorable ?}
+
+\subparagraph{}
+\textit{On donne la séquence d'instruction suivante. Expliquer le but de chacune des lignes.}
+\begin{py}
+\begin{python}
+\end{python}
+\end{py}
+
+Les temps de mesures sont stockés dans un tableau appelé \textsf{temps}. Les mesures sont stockées dans un tableau appelé \textsf{mesures}. On rappelle que dans le cas d'un système du premier ordre, la tangente à l'origine est non nulle. Dans le cas d'un système du second ordre la tangente à l'origine est nulle.
+
+
+\subparagraph{}
+\textit{Proposer en quelques lignes une méthode permettant d'estimer la tangente à l'origine.}
+ 
+ 
+ On donne la fonction \textsf{ordre}. 
+\begin{py}
+\begin{python}
+\end{python}
+\end{py}
+ 
+\subparagraph{}
+\textit{Quel est son but ? Expliquer précisément son déroulement.}
+
+\section{Identification d'un système d'ordre 1}
+On rappelle qu'un système d'ordre 1 est de la forme $H(p)=\dfrac{K}{1 + \tau p}$. Le programme doit d'une part permettre de déterminer le gain $K$ du système et d'autre part permettre de déterminer la constante de temps 3 suivant 3 méthodes : 
+\begin{itemize}
+\item l'utilisation de la tangente à l'origine;
+\item les 63\% de la valeur finale;
+\item les 95\% de la valeur finale. 
+\end{itemize}
+
+On rappelle que théoriquement, $K$ est déterminé en régime permanent. On a alors : 
+$$
+K = \dfrac{s(\infty)-s(0)}{e(\infty)-e(0)}
+$$
+
+En notant $T$ la durée des essais réalisés, on suppose que le régime permanent est atteint au moins avant 80\% T. 
+
+
+\subparagraph{}
+\textit{Réaliser une fonction simple appelée \textsl{calculGain} prenant (au moins) comme argument les tableaux \textsl{temps} et \textsl{mesures} et retournant la valeur du gain statique.}
+
+\subparagraph{}
+\textit{Pour une plus grande fiabilité des résultats pour le calcul de $K$, on désire utiliser une moyenne sur les 20 derniers pour cents d'une mesure. Quel en est l'intérêt ? Implémenter une fonction nommée \textsl{calculValeurFinale} permettant de déterminer la valeur finale. Implémenter alors une fonction nommée  \textsl{calculGainMoyen} permettant de déterminer $K$ en tenant compte de ces nouvelles contraintes.}
+
+\subparagraph{}
+\textit{En prenant comme critère le fait que le signal a atteint 63\% de sa valeur finale au bout d'un temps $\tau$, écrire une fonction permettant de déterminer la constante de temps du système.}
+
+
+\subparagraph{}
+\textit{Réaliser la fonction \textsf{identificationOrdre1} permettant de vérifier si le système étudié est bien d'ordre 1 et permettant de calculer le gain et la constante de temps. Cette fonction prendra comme argument une chaîne de caractère correspondant au nom du fichier de mesures. }
+
+
+
+\section{Identification d'un système d'ordre 2}
+\subparagraph{}
+\textit{Réaliser la fonction \textsf{premierDepassement} permettant de savoir quand a lieu le temps de premier dépassement et quelle en est sa valeur.}
+
+\subparagraph{}
+\textit{On souhaite savoir à quel moment a lieu l'intersection entre la mesure et l'asymptote horizontale lors de la première montée. En utilisant un algorithme de dichotomie déterminer ce temps.}
+
+
+
+
+\end{document}
+
+
