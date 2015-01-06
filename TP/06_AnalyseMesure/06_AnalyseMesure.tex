@@ -43,7 +43,7 @@ TP 6 : Analyse et traitement d'un fichier de mesure
 
 \def\xxauteur{%
 \ifxp
-\textit{Xavier \textsc{Pessoles}}
+Xavier \textsc{Pessoles}
 \else
 \fi}
 
@@ -129,7 +129,7 @@ def lireFichierMesure(file):
 
 
 \subparagraph{}
-\textit{Afficher les courbes correspondant à la colonne seconde et à la troisième colonne en fonction de le première colonne.}
+\textit{Afficher les courbes correspondant à la colonne seconde et à la troisième colonne en fonction de le première colonne. Qu'observez-vous ?}
 
 \subparagraph{}
 \textit{En déduire quelle est la courbe associée au maneton et quelle est la courbe associée à la croix de Malte. Indiquer le nom des courbes sur la légende.}
@@ -137,7 +137,7 @@ def lireFichierMesure(file):
 \subsection*{Filtrage des mesure}
 Comme constaté précédemment, les mesures effectuées sont fortement bruitées. On va donc chercher à les filtrer. 
 
-\subsubsection*{\normalsize Moyenne}
+\subsubsection*{\normalsize Filtrage par calcul de points moyens}
 
 \subparagraph{}
 \textit{Réaliser une fonction permettant de :
@@ -147,9 +147,18 @@ Comme constaté précédemment, les mesures effectuées sont fortement bruitées
 \end{itemize} }
 
 
-\subsubsection*{\normalsize Moyenne glissante}
+\subsubsection*{\normalsize Filtrage par utilisation d'une moyenne glissante}
+On souhaite maintenant réaliser un filtrage en réalisant une moyenne glissante sur $n$ échantillons. 
+
+Pour cela, on dispose d'une liste de valeurs de temps notée $t$ et d'une liste de valeurs mesurées notées $m$. Pour calculer la moyenne glissante sur $n$ échantillons, on va calculer au temps $t[i]$, la moyenne des mesures de l'échantillon $m[i]$ à l'échantillon $m[i+n]$.
 
 
+\subparagraph{}
+\textit{Réaliser une fonction permettant de :
+\begin{itemize}
+\item réaliser un filtrage en réalisant une moyenne glissante sur $n$ échantillons;
+\item tracer les courbes.
+\end{itemize} }
 \subsection*{Annexes -- Documentation de fonctions Python}
 
 \subsubsection*{Lire les lignes d'un fichier}
