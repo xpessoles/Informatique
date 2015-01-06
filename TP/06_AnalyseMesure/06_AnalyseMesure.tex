@@ -74,8 +74,14 @@ Ch. 5 : TP 06 Analyse d'un fichier de mesure
 \setlength{\parskip}{2ex plus 0.5ex minus 0.2ex}
 
 
+\begin{obj}
+Le but de ce TP est de traiter des données de mesure afin qu'elles soient exploitables par l'utilisateur. 
+\end{obj}
 
 \subsection*{Mise en situation}
+\begin{obj}
+Analyser un fichier de mesure.
+\end{obj}
 En utilisant la capsuleuse de bocaux du laboratoire de SII, on a réalisé une mesure de vitesse du maneton et de la croix de Malte. On donne ci-dessous un extrait de la chaîne fonctionnelle de la capsuleuse. Un fichier de mesure est enregistrable sur le PC grâce à une application réalisée avec le logiciel Labview.
 
 \begin{center}
@@ -136,7 +142,9 @@ def lireFichierMesure(file):
 
 \subsection*{Filtrage des mesure}
 Comme constaté précédemment, les mesures effectuées sont fortement bruitées. On va donc chercher à les filtrer. 
-
+\begin{obj}
+Filtrer les mesures dans le but de réduire le bruit.
+\end{obj}
 \subsubsection*{\normalsize Filtrage par calcul de points moyens}
 
 \subparagraph{}
@@ -159,6 +167,15 @@ Pour cela, on dispose d'une liste de valeurs de temps notée $t$ et d'une liste 
 \item réaliser un filtrage en réalisant une moyenne glissante sur $n$ échantillons;
 \item tracer les courbes.
 \end{itemize} }
+
+
+
+\subsection*{Analyse de la courbe}
+\subparagraph{}
+\textit{À l'aide de la courbe filtrée, vérifier que la croix de Malte réalise bien un quart de tour par période.}
+
+
+
 \subsection*{Annexes -- Documentation de fonctions Python}
 
 \subsubsection*{Lire les lignes d'un fichier}
