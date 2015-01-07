@@ -39,7 +39,27 @@ Informatique - Cours}}
 
 %---------------------------------------------------------------------------
 
+\begin{minipage}[c]{.3\linewidth}
+\begin{center}
+\includegraphics[height=2.5cm]{images/site_page}
 
+\textit{Fichiers interprétés par un navigateur}
+\end{center}
+\end{minipage} \hfill
+\begin{minipage}[c]{.33\linewidth}
+\begin{center}
+\includegraphics[height=2.5cm]{images/site_editeur}
+
+\textit{Fichier interprété par un éditeur de texte}
+\end{center}
+\end{minipage} \hfill
+\begin{minipage}[c]{.3\linewidth}
+\begin{center}
+\includegraphics[height=2.5cm]{images/site_hexa}
+
+\textit{Contenu du fichier (en hexadécimal)}
+\end{center}
+\end{minipage} 
 
 \begin{savoir}
 \textbf{Savoirs :}
@@ -59,7 +79,6 @@ Informatique - Cours}}
 \setlength{\parskip}{2ex plus 0.5ex minus 0.2ex}
 
 %\vspace{1cm}
-
 
 
 
@@ -102,9 +121,10 @@ Il est donc intéressant de savoir lire et écrire sur les fichiers.
 
 \subsection{Deux familles de fichiers}
 
-Les fichiers sont tous écrits en binaire. Il est néanmoins possible de les séparer en deux familles :
-\begin{minipage}[c]{.59\linewidth}
 
+\begin{minipage}[c]{.6\linewidth}
+
+Les fichiers sont tous écrits en binaire. Il est néanmoins possible de les séparer en deux familles :
 \begin{itemize}
 \item les fichiers binaires qui nécessitent de connaître le format binaire d'écriture des données pour être lus;
 \item les fichiers texte qui contiennent des caractères uniquement, et qui peuvent s'ouvrir sur un éditeur de texte.
@@ -139,10 +159,13 @@ Les fichiers texte compressés :
 \end{exemple}
 
 \end{minipage} \hfill
-\begin{minipage}[c]{.39\linewidth}
+\begin{minipage}[c]{.32\linewidth}
 \begin{center}
-\includegraphics[width=.99\textwidth]{images/image4.png}
-\includegraphics[width=.99\textwidth]{images/image5.png}
+\includegraphics[width=.9\textwidth]{images/image4_2.png}
+
+\vspace{1cm}
+ 
+\includegraphics[width=.9\textwidth]{images/image5_2.png}
 \end{center}
 \end{minipage}
 
@@ -153,8 +176,8 @@ Les fichiers texte compressés :
 \subsection{Avantages et inconvénients}
 \begin{center}
 \begin{tabular}{|p{2.5cm}|p{6.5cm}|p{8cm}|}
-\hline
- & Fichiers binaire& Fichiers texte\\
+\cline{2-3}
+\multicolumn{1}{c|}{} & Fichiers binaire& Fichiers texte\\
  \hline
 Avantages &  Moins volumineux & Interprétable par l'homme\\
 
@@ -168,185 +191,78 @@ Inconvénients & Moins facile à lire & Plus volumineux\\
 \end{tabular}
 \end{center}
 
+\subsection{Principe de manipulation d'un fichier}
 
-
-\section{Fichiers binaires}
-
-\subsection{Analyse d'un fichier binaire : BMP}
-
-\begin{minipage}[c]{.53\linewidth}
-
-On peut ouvrir un fichier binaire avec un éditeur héxadécimal.
-
-Les deux premiers caractères de cette exemple "42" représentent en hexadécimal le codage sur les 8 bits correspondants (celui-ci apparait en bas de la fenêtre quand on se place sur le "42").
-
-Un fichier BMP est un format très simple pour mémoriser les images:
-\begin{itemize}
-\item signature (BM, BA, CI, …);
-\item taille du fichier (4o);
-\item champ réservé (4o);
-\item offset de début données (4o);
-\item taille de l'entête (4o);
-\item largeur de l'image (4o);
-\item hauteur de l'image (4o);
-\item nombre de plans (2o);
-\item profondeur : 1 à 32 (2o);
-\item type compression (4o);
-\item etc.
-\end{itemize}
-
-
-Les couleurs commencent à l'octet 122=0x7A (octet en jaune) :
-\begin{itemize}
-\item blanc (ff ff ff);
-\item blanc (ff ff ff);
-\item blanc (ff ff ff);
-\item blanc (ff ff ff);
-\item gris clair (e9 ec ef);
-\item gris (ce cc c4);
-\item gris foncé (a0 97 7c)...
-\end{itemize}
-\begin{center}
-\includegraphics[width=.5\textwidth]{images/image8.png}
-\end{center}
-\end{minipage} \hfill
-\begin{minipage}[c]{.25\linewidth}
-\begin{center}
-\includegraphics[width=.5\textwidth]{images/image6.png}
-\end{center}
-\begin{center}
-\includegraphics[width=.99\textwidth]{images/image12.png}
-\includegraphics[width=.99\textwidth]{images/image13.png}
-\textit{Ouverture d'un fichier binaire avec un éditeur hexadécimal}
-\end{center}
-\end{minipage}
-
-
-
-
-
-
-
-\subsection{Ouvrir des fichiers binaires}
-Les formats étant généralement assez complexes et variés, les fichiers binaires sont ouverts via des \textbf{librairies}. Ces librairies proposent des commandes toutes prêtes. Par exemple pour les images :
-\begin{itemize}
-\item Python : librairie PIL (Python Imaging Library);
-\item Scilab inclut des commandes pour les images.
-\end{itemize}
-
-On code très rarement les commandes permettant d'ouvrir les fichiers binaires.
-Pour lire tout de même un fichier binaire on utilise la fonction \textsf{open}, disponible sans aucune bibliothèqye. Elle prend en paramètre :
-\begin{itemize}
-\item le chemin (absolu ou relatif) menant au fichier à ouvrir;
-\item le mode d'ouverture.
-\end{itemize}
-
-Le mode est donné sous la forme d'une chaîne de caractères. Voici les principaux modes :
-\begin{itemize}
-\item 'r' : ouverture en lecture (Read);
-\item 'w' : ouverture en écriture (Write). Le contenu du fichier est écrasé. Si le fichier n'existe pas, il est créé,
-\item 'a' : ouverture en écriture en mode ajout (Append). On écrit à la fin du fichier sans écraser l'ancien contenu du fichier. Si le fichier n'existe pas, il est créé.
-\end{itemize}
-
-On peut ajouter à tous ces modes le signe b pour ouvrir le fichier en mode binaire.
-
-La fonction open crée un objet de la classe \textsf{TextIoWrapper}. Par la suite, nous allons utiliser des méthodes de cette classe pour interagir avec le fichier.
-
-\begin{minipage}[c]{.49\linewidth}
-
-\begin{py}
-\begin{python}[H]
-# Lecture d'un fichier binaire
-f = open("tongue.bmp", "rb")
-
-while True:
-	bytes = f.read(1) # lecture d'un octet
-	if bytes == "":
-	    break;
-	# Affichage de l'octet lu en hexadécimal :
-	print "%02X " % ord(bytes[0]),
-
-f.close()
-\end{python}
-\end{py}
-
-
-
-\end{minipage} \hfill
-\begin{minipage}[c]{.49\linewidth}
-3 étapes:
+Quel que soit le principe de manipulation du fichier il est toujours réalisé en trois opérations :
 \begin{enumerate}
-\item Ouverture du fichier “tongue.bmp”, en lecture mode binaire (“rb”).
-\item Boucle sur chaque octet pour lire et afficher. La méthode read renvoie le contenu du fichier, que l'on capture dans bytes.
-\item Fermeture du fichier: n'oubliez pas de fermer un fichier après l'avoir ouvert. Si d'autres applications, ou d'autres morceaux de votre propre code, souhaitent accéder à ce fichier, ils ne pourront pas car le fichier sera déjà ouvert. C'est surtout vrai en écriture, mais prenez de bonnes habitudes. La méthode à utiliser est \textsf{close}.
-\end{enumerate} 
-\end{minipage}
-
-
-\subsection{Écrire dans des fichiers en binaire}
-
-
-\begin{minipage}[c]{.39\linewidth}
-
-\begin{py}
-\begin{python}[H]
-# Écriture d'un fichier binaire
-f=open("TP/monFichier.bin","wb")
-f.write("Du texte")
-f.write(int8(83))
-f.write(int8(76))
-f.write(float32(2.3))
-f.close()
-\end{python}
-\end{py}
-
-\end{minipage} \hfill
-\begin{minipage}[c]{.59\linewidth}
-3 étapes:
-\begin{enumerate}
-\item Il faut ouvrir le fichier avant tout. Ouverture du fichier “monFichier.bin”, en écriture mode binaire (“wb”).
-\item Écriture d'octets (caractères, nombres entiers ou flottants): On utilise la méthode write. Deux modes sont possibles: le mode w ou le mode a. Le premier écrase le contenu éventuel du fichier, alors que le second ajoute ce que l'on écrit à la fin du fichier. Ces deux modes créent le fichier s'il n'existe pas.
-\item Fermeture du fichier. 
+\item ouverture du fichier;
+\item traitement du fichier;
+\item fermeture du fichier.
 \end{enumerate}
-\end{minipage}
-
-
-
 
 
 \section{Fichiers texte}
 
 
 Un fichier texte brut ou fichier texte simple est un fichier dont le contenu représente uniquement une suite de caractères.
-Bien qu'on l'oppose ici aux fichiers binaires il est lui aussi codé en binaire sur l'ordinateur. Cependant ce codage est basé sur une norme connue de tous les éditeurs de texte afin de traduire le fichier en une suite de caractères "imprimables".
+Bien qu'on l'oppose ici aux fichiers binaires il est lui aussi codé en binaire sur l'ordinateur. Cependant ce codage est basé sur une norme connue de tous les éditeurs de texte afin de traduire le fichier en une suite de caractères <<imprimables>>.
 Les caractères considérés sont généralement les caractères imprimables, d'espaces et de retours à la ligne. La notion de fichier texte est subjective et dépend notamment des systèmes de codage de caractère considérés. Ainsi si l'encodage est inconnu, un texte brut quelconque est inexploitable.
 
  
-
-
-
-
-
-\begin{minipage}[c]{.49\linewidth}
 Il existe de nombreux standards de codage, dont l'American Standard Code for Information Interchange   ASCII. Cette norme ancienne créée pour gérer des caractères latins non accentués (nécessaire pour écrire en anglais) est à la base de nombreux codages de caractères.
-\newline\newline 
+
 L'ASCII permet de coder 128 caractères numérotés de 0 à 127 et peut donc être codé sur 7 bits. Cependant, les ordinateurs travaillent la plupart du temps en multiple de 8 bits, le huitième bit est mis à 0. On a donc un octet par caractère.
-\newline\newline 
-L'absence d'accents rend cette norme insuffisante à elle seule,
-ce qui rend nécessaire l'utilisation d'autres encodages: UTF-8 par exemple (UCS transformation format 8 bits) dans lequel chaque caractère est représenté par un index et son codage binaire donné par une table. Les 128 premiers caractères ont un codage identique en ASCII et UTF8 (par exemple "A" a pour code ASCII 65 et se code en UTF-8 par l'octet 65) puis d'autres caractères sont ajoutés.
 
 
-\end{minipage} \hfill
-\begin{minipage}[c]{.49\linewidth}
 \begin{center}
-\includegraphics[width=.99\textwidth]{images/image14.png}
+\footnotesize{\begin{tabular}{|ccc l||ccc||ccc||ccc|}
+\hline 
+\textbf{Décimal} & &\textbf{ASCII} & \textbf{Description} & \textbf{Décimal} && \textbf{ASCII} & \textbf{Décimal} && \textbf{ASCII} & \textbf{Décimal} && 
+\textbf{ASCII}\\
+\hline\hline
+0 &00&NUL & Null 					&32&20&Space &64 &40& @	& 96  &60& ` \\
+1 &01&SOH & Start of heading   		&33&21&! 	&65&41& A 	& 97 &61& a \\
+2 &02&STX & Start of text       		&34&22&'' 	&66&42& B 	& 98 &62& b \\
+3 &03&ETX & End of text       		&35&23&\# 	&67&43& C 	& 99 &63& c \\
+4 &04&EOT & End of transmission 	&36&24&\$ 	&68&44& D 	& 100 &64& d \\
+5 &05&ENQ & Enquiry 				&37&25&\% 	&69&45& E 	& 101&65& e \\
+6 &06&ACQ & Acknowledge 			&38&26&\& 	&70&46& F 	& 102 &66& f \\
+7 &07&BEL& Bell 					&39&27&' 	&71&47& G 	& 103 &67& g \\
+8 &08&BS&Backsapce 				&40&28&(	&72&48& H 	& 104 &68& h \\
+9 &09&TAB& horizontal tab 			&41&29&)	&73&49& I 	& 105 &69& i \\
+10&0A&LF&New line feed, new line	&42&2A&*	&74&4A& J 	& 106 &6A& j \\
+11&0B&VT& Vertical tab  			&43&2B&+	&75&4B& K 	& 107 &6B& k \\
+12&0C&FF& NP form feed, new page 	&44&2C&`	&76&4C& L 	& 108 &6C& l \\  
+13&0C&CR& Carriage return 			&45&2D&- 	&77&4D& M 	& 109 &6D& m \\
+14&0E&SO& Shift out 				&46&2E&. 	&78&4E& N 	& 110 &6E& n \\
+15&0F&SI& Shift in 				&47&2F&/ 	&79&4F& O 	& 111 &6F& o \\
+16&10&DLE& Data link espace 		&48&30&0 	&80&50& P 	& 112 &70& p \\
+17&11&DC1& Device control 1		&49&31&1 	&81&51& Q 	& 113 &71& q \\
+18&12&DC2 &Device control 2		&50&32&2 	&82&52& R 	& 114 &72& r \\
+19&13&DC3 &Device control 3		&51&33&3 	&83&53& S 	& 115 &73& s \\
+20&14&DC4 &Device control 4		&52&34&4 	&84&54& T 	& 116 &74& t \\
+21&15&NAK &Negative acknowledge	&53&35&5 	&85&55& U 	& 117 &75& u \\
+22&16&SYN &Synchronous idle 		&54&36&6 	&86&56& V 	& 118 &76& v \\
+23&17&ETB &End of trans. block 		&55&37&7 	&87&57& W 	& 119 &77& w \\
+24&18&CAN &Cancel 				&56&38&8 	&88&58& X 	& 120 &78& x \\
+25&19&EM &End of medium 			&57&39&9 	&89&59& Y 	& 121 &79& y \\
+26&1A&SUB &Substitute 			&58&3A&: 	&90&5A& Z 	& 122 &7A& z \\
+27&1B&ESC &Escape 				&59&3B&; 	&91&5B& [ 	& 123 &7B& \{ \\
+28&1C&FS &File separator 			&60&3C&< 	&92&5C& $\backslash$ & 124 &7C& |\\
+29&1D&GS &Group separator 		&61&3D&= 	&93&5D& ] 	& 125 &7D& \}\\
+30&1E&RS &Record separator 		&62&3E&> 	&94&5E& $\hat{}$& 126 &7E& $\tilde{}$ \\
+31&1F&US &Unit separator 			&63&3F&? 	&95&5F& \_ & 127 &7F& DEL\\
+\hline
+\end{tabular}}
+
 \textit{Table des caractères ASCII}
 \end{center}
-\end{minipage}
+
+L'absence d'accents rend cette norme insuffisante à elle seule,
+ce qui rend nécessaire l'utilisation d'autres encodages: UTF-8 par exemple (UCS transformation format 8 bits) dans lequel chaque caractère est représenté par un index et son codage binaire donné par une table. Les 128 premiers caractères ont un codage identique en ASCII et UTF8 (par exemple <<A>> a pour code ASCII 65 et se code en UTF-8 par l'octet 65) puis d'autres caractères sont ajoutés.
 
 
 \subsection{Lecture d'un fichier sous Python}
-
 
 Les fichiers texte sont écrits (en binaire) de façon à respecter un des codes standards de caractères (utf8, iso-8859, ASCII...).
 Ils peuvent s'ouvrir sur un éditeur de texte, ce qui permet de lire ou modifier le contenu beaucoup plus facilement qu'en binaire.
@@ -372,8 +288,37 @@ Exploitation d'un fichier de mesure sur l'axe Emericc: \textsf{Mesure\_axe\_Emer
 \end{center}
 \end{minipage} \hfill
 \begin{minipage}[c]{.6\linewidth}
-Lecture des noms:
+
+
 \begin{py}
+Lire la première ligne du fichier :
+\begin{python}[H]
+# Ouverture du fichier
+f=open("Mesure_axe_Emericc.txt","r")
+# lecture d'une ligne
+ligne = f.readline()                  
+# Affichage de la ligne
+print(ligne)
+# Fermeture du fichier
+f.close()
+\end{python}
+Lecture rapide des lignes d'un fichier : 
+\begin{python}[H]
+# Ouverture du fichier
+f=open("Mesure_axe_Emericc.txt","r")
+for ligne in f :
+    print(ligne)
+f.close()
+\end{python}
+\end{py}
+
+\end{minipage}
+
+
+
+
+\begin{py}
+Lecture des noms:
 \begin{python}[H]
 # Lecture d'un fichier texte ligne à ligne
 # Ouverture fichier
@@ -386,12 +331,12 @@ noms_grandeurs=ligne.split("\t")      # découpage aux tabulations
 noms_grandeurs=noms_grandeurs[1:3]    # suppression de "noms"
 
 \end{python}
-\end{py}
-\end{minipage}
+
+
 
 
 Lecture du nombre de points:
-\begin{py}
+
 \begin{python}[H]
 for i in range(10):
     ligne = f.readline()  # saut de 10 lignes
@@ -402,10 +347,9 @@ ligne=ligne.rstrip("\n\r")            # suppression retour chariot
 ligne_nbpoints=ligne.split("\t")      # découpage aux tabulations
 nb_points=int(ligne_nbpoints[1])      # conversion en entier
 \end{python}
-\end{py}
 
 Lecture des données:
-\begin{py}
+
 \begin{python}[H]
 
 numero=[] ; position=[] ; consigne=[] # initialisation tableaux
@@ -418,33 +362,22 @@ for i in range(nb_points):
     position.append(float(ligne_data[1]))    # Ajout aux tableaux
     consigne.append(float(ligne_data[2]))
 \end{python}
-\end{py}
 
-\begin{minipage}[c]{.49\linewidth}
+
 Fermeture du fichier et Tracé de la courbe
-\begin{py}
-\begin{python}[H]
 
+\begin{python}[H]
 f.close()        # Fermeture fichier
 plot(position)   # Tracé de la courbe de position
 \end{python}
 \end{py}
-\end{minipage} \hfill
-\begin{minipage}[c]{.49\linewidth}
+
 \begin{center}
-\includegraphics[width=.99\textwidth]{images/image9.png}
+\includegraphics[width=.5\textwidth]{images/image9.png}
 \end{center}
-\end{minipage}
+
 
 \end{exemple}
-
-
-
-
-
-
-
-
 
 
 \subsection{Lecture d'un fichier sous Scilab}
@@ -468,12 +401,12 @@ ligne_nbpoints=strsplit(ligne,ascii(9))
 nb_points=int(ligne_nbpoints(2))
 nb_points=msscanf(ligne_nbpoints(2),"%i")
 \end{scilab}
-\end{sci}
+
 
 
 Lecture des données et affichage de la courbe.
 
-\begin{sci}
+
 \begin{scilab}[H]
 numero=[];position=[];consigne=[];
 for i=1:nb_points
@@ -654,6 +587,150 @@ mfprintf(fic,'%d\t%f\t%f\n',[1:100]',x',y')
 mclose(fic); // Fermeture du fichier
 \end{scilab}
 \end{sci}
+
+
+\section{Fichiers binaires}
+
+\subsection{Analyse d'un fichier binaire : BMP}
+
+\begin{minipage}[c]{.53\linewidth}
+
+On peut ouvrir un fichier binaire avec un éditeur héxadécimal.
+
+Les deux premiers caractères de cette exemple "42" représentent en hexadécimal le codage sur les 8 bits correspondants (celui-ci apparait en bas de la fenêtre quand on se place sur le "42").
+
+Un fichier BMP est un format très simple pour mémoriser les images:
+\begin{itemize}
+\item signature (BM, BA, CI, …);
+\item taille du fichier (4o);
+\item champ réservé (4o);
+\item offset de début données (4o);
+\item taille de l'entête (4o);
+\item largeur de l'image (4o);
+\item hauteur de l'image (4o);
+\item nombre de plans (2o);
+\item profondeur : 1 à 32 (2o);
+\item type compression (4o);
+\item etc.
+\end{itemize}
+
+
+Les couleurs commencent à l'octet 122=0x7A (octet en jaune) :
+\begin{itemize}
+\item blanc (ff ff ff);
+\item blanc (ff ff ff);
+\item blanc (ff ff ff);
+\item blanc (ff ff ff);
+\item gris clair (e9 ec ef);
+\item gris (ce cc c4);
+\item gris foncé (a0 97 7c)...
+\end{itemize}
+\begin{center}
+\includegraphics[width=.5\textwidth]{images/image8.png}
+\end{center}
+\end{minipage} \hfill
+\begin{minipage}[c]{.25\linewidth}
+\begin{center}
+\includegraphics[width=.5\textwidth]{images/image6.png}
+\end{center}
+\begin{center}
+\includegraphics[width=.99\textwidth]{images/image12.png}
+\includegraphics[width=.99\textwidth]{images/image13.png}
+\textit{Ouverture d'un fichier binaire avec un éditeur hexadécimal}
+\end{center}
+\end{minipage}
+
+
+
+
+
+
+
+\subsection{Ouvrir des fichiers binaires}
+Les formats étant généralement assez complexes et variés, les fichiers binaires sont ouverts via des \textbf{librairies}. Ces librairies proposent des commandes toutes prêtes. Par exemple pour les images :
+\begin{itemize}
+\item Python : librairie PIL (Python Imaging Library);
+\item Scilab inclut des commandes pour les images.
+\end{itemize}
+
+On code très rarement les commandes permettant d'ouvrir les fichiers binaires.
+Pour lire tout de même un fichier binaire on utilise la fonction \textsf{open}, disponible sans aucune bibliothèqye. Elle prend en paramètre :
+\begin{itemize}
+\item le chemin (absolu ou relatif) menant au fichier à ouvrir;
+\item le mode d'ouverture.
+\end{itemize}
+
+Le mode est donné sous la forme d'une chaîne de caractères. Voici les principaux modes :
+\begin{itemize}
+\item 'r' : ouverture en lecture (Read);
+\item 'w' : ouverture en écriture (Write). Le contenu du fichier est écrasé. Si le fichier n'existe pas, il est créé,
+\item 'a' : ouverture en écriture en mode ajout (Append). On écrit à la fin du fichier sans écraser l'ancien contenu du fichier. Si le fichier n'existe pas, il est créé.
+\end{itemize}
+
+On peut ajouter à tous ces modes le signe b pour ouvrir le fichier en mode binaire.
+
+La fonction open crée un objet de la classe \textsf{TextIoWrapper}. Par la suite, nous allons utiliser des méthodes de cette classe pour interagir avec le fichier.
+
+\begin{minipage}[c]{.49\linewidth}
+
+\begin{py}
+\begin{python}[H]
+# Lecture d'un fichier binaire
+f = open("tongue.bmp", "rb")
+
+while True:
+	bytes = f.read(1) # lecture d'un octet
+	if bytes == "":
+	    break;
+	# Affichage de l'octet lu en hexadécimal :
+	print "%02X " % ord(bytes[0]),
+
+f.close()
+\end{python}
+\end{py}
+
+
+
+\end{minipage} \hfill
+\begin{minipage}[c]{.49\linewidth}
+3 étapes:
+\begin{enumerate}
+\item Ouverture du fichier “tongue.bmp”, en lecture mode binaire (“rb”).
+\item Boucle sur chaque octet pour lire et afficher. La méthode read renvoie le contenu du fichier, que l'on capture dans bytes.
+\item Fermeture du fichier: n'oubliez pas de fermer un fichier après l'avoir ouvert. Si d'autres applications, ou d'autres morceaux de votre propre code, souhaitent accéder à ce fichier, ils ne pourront pas car le fichier sera déjà ouvert. C'est surtout vrai en écriture, mais prenez de bonnes habitudes. La méthode à utiliser est \textsf{close}.
+\end{enumerate} 
+\end{minipage}
+
+
+\subsection{Écrire dans des fichiers en binaire}
+
+
+\begin{minipage}[c]{.39\linewidth}
+
+\begin{py}
+\begin{python}[H]
+# Écriture d'un fichier binaire
+f=open("TP/monFichier.bin","wb")
+f.write("Du texte")
+f.write(int8(83))
+f.write(int8(76))
+f.write(float32(2.3))
+f.close()
+\end{python}
+\end{py}
+
+\end{minipage} \hfill
+\begin{minipage}[c]{.59\linewidth}
+3 étapes:
+\begin{enumerate}
+\item Il faut ouvrir le fichier avant tout. Ouverture du fichier “monFichier.bin”, en écriture mode binaire (“wb”).
+\item Écriture d'octets (caractères, nombres entiers ou flottants): On utilise la méthode write. Deux modes sont possibles: le mode w ou le mode a. Le premier écrase le contenu éventuel du fichier, alors que le second ajoute ce que l'on écrit à la fin du fichier. Ces deux modes créent le fichier s'il n'existe pas.
+\item Fermeture du fichier. 
+\end{enumerate}
+\end{minipage}
+
+
+
 
 \section{Enregistrer un objet dans un fichier: Module Pickle}
 
