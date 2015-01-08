@@ -233,7 +233,7 @@ L'ASCII permet de coder 128 caractères numérotés de 0 à 127 et peut donc êt
 10&0A&LF&New line feed, new line	&42&2A&*	&74&4A& J 	& 106 &6A& j \\
 11&0B&VT& Vertical tab  			&43&2B&+	&75&4B& K 	& 107 &6B& k \\
 12&0C&FF& NP form feed, new page 	&44&2C&`	&76&4C& L 	& 108 &6C& l \\  
-13&0C&CR& Carriage return 			&45&2D&- 	&77&4D& M 	& 109 &6D& m \\
+13&0D&CR& Carriage return 			&45&2D&- 	&77&4D& M 	& 109 &6D& m \\
 14&0E&SO& Shift out 				&46&2E&. 	&78&4E& N 	& 110 &6E& n \\
 15&0F&SI& Shift in 				&47&2F&/ 	&79&4F& O 	& 111 &6F& o \\
 16&10&DLE& Data link espace 		&48&30&0 	&80&50& P 	& 112 &70& p \\
@@ -325,7 +325,7 @@ Lecture des noms:
 f=open("TP_Fichiers/Mesure_axe_Emericc.txt","r")
 ligne = f.readline()                  # lecture d'une ligne
 # Affichage pour vérification
-print "%s" % ligne
+print(ligne)
 ligne=ligne.rstrip("\n\r")            # suppression retour chariot
 noms_grandeurs=ligne.split("\t")      # découpage aux tabulations
 noms_grandeurs=noms_grandeurs[1:3]    # suppression de "noms"
