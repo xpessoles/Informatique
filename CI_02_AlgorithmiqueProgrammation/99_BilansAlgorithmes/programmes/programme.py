@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+# X. Pessoles
+# Algorithmes P. Beynet
 
 
 def is_number_in_list(nb,tab):
