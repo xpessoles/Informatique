@@ -8,8 +8,8 @@
 %Si le boolen xp est vrai : compilation pour xabi
 %Sinon compilation Damien
 \newif\ifprof
-%\proftrue
-\proffalse
+\proftrue
+%\proffalse
 
 \newif\ifxp
 \xptrue
@@ -82,6 +82,8 @@ Le but de ce TP est de traiter des données de mesure afin qu'elles soient explo
 \begin{obj}
 Analyser un fichier de mesure.
 \end{obj}
+\ifprof
+\else
 En utilisant la capsuleuse de bocaux du laboratoire de SII, on a réalisé une mesure de vitesse du maneton et de la croix de Malte. On donne ci-dessous un extrait de la chaîne fonctionnelle de la capsuleuse. Un fichier de mesure est enregistrable sur le PC grâce à une application réalisée avec le logiciel Labview.
 
 \begin{center}
@@ -90,16 +92,47 @@ En utilisant la capsuleuse de bocaux du laboratoire de SII, on a réalisé une m
 
 Ouvrir le fichier \textsf{MesureCapsuleuse.lvm} avec un éditeur de texte (Notepad ++ de préférence). La seule opération réalisée sur les données brutes est une conversion du signal électrique (en Volts) en une fréquence de rotation (en tours par minute).
 
+\fi
 
 \subparagraph{}
-\textit{Détailler la structure du fichier. Quelle est sa taille (en octets) ? Justifier la taille de ce fichier.}
+\textit{Détailler la structure du fichier. Quelle est sa taille (en octets) ? }
+\ifprof
+\begin{corrige}
+Le fichier contient 22 lignes de commentaires. Les informations sont ensuite stockées sous forme de colonne. 
 
+Sur une même ligne, les informations sont séparées par des tabulations.
+
+Si les informations sont codées en ASCII, un caractère est codé sur un octet. 
+Une ligne de mesure comprends 28 caractères :
+\begin{itemize}
+\item une mesure est constituée de 8 ou 9 caractères (signe -, 7 chiffres, 1 virgule);
+\item les mesures sont séparées par des tabulations (au nombre de 2);
+\item une ligne est suivie d'un saut de ligne. 
+\end{itemize}
+
+Il y a environ 100 000 lignes. Le fichier fait donc approximativement 2 800 000 octets soit 2,8 Mo. Cela est confirmé par le système d'exploitation.
+
+\end{corrige}
+\else
+\fi
 \subparagraph{}
 \textit{A partir de quelle ligne y-a-t il des informations utiles ? Combien y en a-t-il ? Comment ces lignes sont-elles formatées ?}
+\ifprof
+\begin{corrige}
+Il y a des informations utiles à partir de la 23ième ligne. Ces informations sont séparées par des tabulations. La virgule est utilisé comme séparateur des nombres décimaux. 
+
+\end{corrige}
+\else
+\fi
 
 \subparagraph{}
 \textit{Donner (en Hertz) la fréquence d'échantillonnage du signal mesuré.}
-
+\ifprof
+\begin{corrige}
+Une information est stockée tous les millièmes de secondes. L'échantillonnage est d'1kHz.
+\end{corrige}
+\else
+\fi
 
 \subsection*{Affichage des mesures}
 
@@ -127,18 +160,59 @@ def lireFichierMesure(file):
 \end{python}
 \end{py}
 
+\ifprof
+\begin{corrige}
+\begin{py}
+\begin{python}
+def lireFichierMesure(file):
+    fid = open(file,'r')
+    tab= []
+    cpt = 0
+    for ligne in fid :
+        cpt = cpt + 1
+        if cpt > 22 :
+            tab.append(ligne)       
+    fid.close()
+    return tab
+\end{python}
+\end{py}
+
+\end{corrige}
+\else
+\fi
+
 \subparagraph{}
 \textit{Modifier la fonction \textsf{lireFichierMesure()} afin d'obtenir une liste composée de sous-listes de la forme \textsf{[...,[0.009800,16.152722,0.426743],...]}.}
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi
 
 \subparagraph{}
 \textit{Modifier la fonction \textsf{lireFichierMesure()} afin qu'elle retourne trois listes correspondant à chacune des colonnes du fichier de mesure.}
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi
 
 
 \subparagraph{}
 \textit{Afficher les courbes correspondant à la colonne seconde et à la troisième colonne en fonction de le première colonne. Qu'observez-vous ?}
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi
 
 \subparagraph{}
 \textit{En déduire quelle est la courbe associée au maneton et quelle est la courbe associée à la croix de Malte. Indiquer le nom des courbes sur la légende.}
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi
 
 \subsection*{Filtrage des mesure}
 Comme constaté précédemment, les mesures effectuées sont fortement bruitées. On va donc chercher à les filtrer. 
@@ -153,6 +227,11 @@ Filtrer les mesures dans le but de réduire le bruit.
 \item réaliser un filtrage en réalisant une moyenne sur $n$ échantillons;
 \item tracer les courbes.
 \end{itemize} }
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi
 
 
 \subsubsection*{\normalsize Filtrage par utilisation d'une moyenne glissante}
@@ -167,13 +246,21 @@ Pour cela, on dispose d'une liste de valeurs de temps notée $t$ et d'une liste 
 \item réaliser un filtrage en réalisant une moyenne glissante sur $n$ échantillons;
 \item tracer les courbes.
 \end{itemize} }
-
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi
 
 
 \subsection*{Analyse de la courbe}
 \subparagraph{}
 \textit{À l'aide de la courbe filtrée, vérifier que la croix de Malte réalise bien un quart de tour par période.}
-
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi
 
 
 \subsection*{Annexes -- Documentation de fonctions Python}

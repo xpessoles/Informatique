@@ -96,9 +96,9 @@ def calcul_variance(tab):
         i = len(tab)//2
     return tab[i]
 # Exemple :
-liste = [1,2,3,4,5,6]
-print(calcul_moyenne(liste))
-print(calcul_variance(liste))
+#liste = [1,2,3,4,5,6]
+#print(calcul_moyenne(liste))
+#print(calcul_variance(liste))
 
 
 def index_of_word_in_text(mot, texte):
@@ -381,17 +381,17 @@ def fusion_listes(tab,g,d,m):
     Résultat :
     tab (list) : liste triée entre les indices g et d
     """
-    n1 = m-g+1
-    n2 = d-m
+    n1 = m-g
+    n2 = d-m+1
     G,D = [],[]
     for i in range (n1):
-        G.append(tab[g+i-1])
+        G.append(tab[g+i])
     for j in range (n2):
-        D.append([m+j])
+        D.append(tab[m+j])
     i,j=0,0
     G.append(99999999999)
     D.append(99999999999)
-    for k in range (g,d):
+    for k in range (g,d+1):
         if i<=n1 and  G[i]<=D[j]:
             tab[k]=G[i]
             i=i+1
@@ -410,18 +410,23 @@ def tri_fusion(tab,g,d):
     """
     if g<d:
         m=(g+d)//2
-        tri_fusion(tab,g,d)
+        tri_fusion(tab,g,m)
         tri_fusion(tab,m+1,d)
         fusion_listes(tab,g,d,m)
 #Exemple
 import random
-tab1 = [random.randint(0,10) for i in range(10)]
-tri_quicksort(tab1,0,9)
-print(tab)
-tri_fusion(tab,0,9)
-print(tab)
-
-            
+tab1 = [random.randint(0,9) for i in range(3)]
+tab2 = [random.randint(0,9) for i in range(3)]
+tab1.sort();tab2.sort()
+tab3 = tab1+tab2
+print(tab3)
+g = 0
+d = len(tab3)
+m =(g+d)//2-1
+print(m)
+#tri_fusion(tab3,0,len(tab3)-1)  
+print(tab3)
+        
 # ====================
 # Algorithmes divers
 # ====================
