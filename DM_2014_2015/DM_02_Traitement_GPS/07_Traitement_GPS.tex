@@ -12,26 +12,26 @@
 
 
 \newboolean{upsti}
-\setboolean{upsti}{true}
+\setboolean{upsti}{false}
 
 \def\xxtitre{\ifthenelse{\boolean{xp}}{
 CI 2 -- Algorithmique et Programmation
 }}
 
 \def\xxsoustitre{\ifthenelse{\boolean{xp}}{
-TP -- Traitement d'une trace GPS}{
+DM -- Traitement d'une trace GPS}{
 }}
 
 
 \def\xxauteur{\ifthenelse{\boolean{xp}}{
-%\noindent \textsl{Cédric Lopez} \\
+
 \textsl{Xavier Pessoles}\ifthenelse{\boolean{upsti}}{\\\includegraphics[width=1.5cm]{png/logoCC}}{}
 }{
 }}
 
 
 \def\xxpied{\ifthenelse{\boolean{xp}}{
-CI 2 : Algorithmique et Programmation -- TP \\
+CI 2 : Algorithmique et Programmation -- DM \\
 Traitement d'une trace GPS -- \ifthenelse{\boolean{prof}}{P}{E}%
 }{
 }}
@@ -135,6 +135,7 @@ On trouve à l'intérieur des balises \textsf{<when>} et \textsf{</when>} la dat
 \end{exemple}
 
 
+\subsection{Travail facultatif sur PC}
 
 \subparagraph{}
 \textit{Pour visualiser la trace GPS étudiée, aller sur le site  \url{https://www.google.fr/maps} dans sa \textbf{version classique}\footnote{Si vous êtes dans la nouvelle version, cliquer sur le point d'interrogation en bas à droite de la carte puis cliquer sur \textit{Retour à la version classique de Google Maps}.} et saisir dans la zone de recherche \url{http://perso.crans.org/~pessoles/OuCest.kml}.}
@@ -164,33 +165,20 @@ urlretrieve("http://perso.crans.org/~pessoles/OuCest.kml", "OuCest.kml")
 
 
 
+\subsection{Lecture du fichier}
+
 \subparagraph{}
-\textit{Réaliser la fonction \textsf{Affiche\_n} qui permet d'afficher les n premières lignes du fichier \textsf{OuCest.kml}. Expliquer pourquoi une ligne vide sépare chacune des lignes.}
-
-\begin{py}
-Une des procédures pour lire un fichier est la suivante :
-\begin{python}
-fid = open('fichier.txt','r') # Ouverture du fichier fichier.txt en lecture
-file = fid.readlines()        # file contient une liste ou chaque élément représente une ligne du fichier
-fid.close()
-\end{python}
-
-On rappelle qu'une chaîne de caractère peut se manipuler comme un liste. 
-\begin{python}
-chaine = "abcdefghi"
-for i in range(len(chaine)):
-    print(chaine[i])
-\end{python}
-
-\end{py}
+\textit{Réaliser la fonction \textsf{Affiche\_n()} qui permet d'afficher les n premières lignes du fichier \textsf{OuCest.kml}. Cette fonction prendra \textsf{fichier} comme argument, \textsf{fichier} étant une chaîne de caractère correspondant du nom d'un fichier. 
+Expliquer pourquoi une ligne vide sépare chacune des lignes.}
 
 
 \subparagraph{}
-\textit{Réaliser une fonction permettant de savoir si un caractère est compris dans une chaîne de caractères. On nommera la fonction \textsf{is\_char\_in\_string}. Elle prendra comme argument un caractère (le caractère à rechercher) et une chaîne de caractère. Elle renverra une valeur booléenne.}
+\textit{Réaliser une fonction permettant de savoir si un caractère est compris dans une chaîne de caractères. On nommera la fonction \textsf{is\_char\_in\_string()}. Elle prendra comme argument un caractère (le caractère à rechercher) et une chaîne de caractère. Elle renverra une valeur booléenne. Donner la complexité de cet algorithme dans le meilleur des cas, dans le pire des cas et dans le cas moyen.}
 
 
 \subparagraph{}
-\textit{Afin d'acquérir les données issues du fichier, il va falloir détecter certains mots clés (par exemple \textsf{<when>}). Réaliser la fonction permettant de savoir si  un mot est dans une chaîne de caractère. On nommera la fonction \textsf{is\_word\_in\_string}. On testera notre fonction en prenant une ligne du fichier ainsi que le mot \textsf{<when>}.}
+\textit{Afin d'acquérir les données issues du fichier, il va falloir détecter certains mots clés (par exemple \textsf{<when>}). Réaliser la fonction permettant de savoir si  un mot est dans une chaîne de caractère. On nommera la fonction \textsf{is\_word\_in\_string()}. Elle prendra comme argument un caractère (le caractère à rechercher) et une chaîne de caractère. Elle renverra une valeur booléenne.
+e. Donner la complexité de cet algorithme dans le pire des cas.}
 
 
 \subparagraph{}
@@ -231,12 +219,14 @@ def heure(ligne):
 
 
 \subparagraph{}
-\textit{En vous inspirant de la fonction précédente, créer une fonction \textsf{coordonnée}, prenant comme argument une chaîne de caractères et renvoyant un triplet constitué de la longitude, la latitude et de l'altitude d'un point mesuré.}
+\textit{En vous inspirant de la fonction précédente, créer une fonction \textsf{coordonnée()}, prenant comme argument une chaîne de caractères et renvoyant un triplet constitué de la longitude, la latitude et de l'altitude d'un point mesuré.}
 
 
 \subparagraph{}
-\textit{Réaliser la fonction permettant d'obtenir un tableau dont chaque élément est une liste \textsf{[heures,minutes,secondes,longitude,latitude,altitude]}.}
+\textit{Réaliser la fonction \textsf{coordonnée()}, prenant comme argument une chaîne de caractère correspondant au nom du fichier et permettant d'obtenir un tableau dont chaque élément est une liste \textsf{[heures,minutes,secondes,longitude,latitude,altitude]}.}
 
+
+\subsection{Analyse du fichier}
 La distance pour aller d'un point à un autre sur une sphère est appelée orthodromie. On note $(\text{lo}_A,\text{la}_A)$ la longitude et la latitude du point $A$ ainsi que $(\text{lo}_B,\text{la}_B)$ la longitude et la latitude du point $B$. L'orthodromie se calcule alors ainsi en kilomètres : 
 $$
 d = 2R\arcsin \sqrt{\sin^2\left( \dfrac{\text{la}_B-\text{la}_A}{2}\right) + \cos \text{la}_A \cos \text{la}_B \sin^2\left( \dfrac{\text{lo}_B-\text{lo}_A}{2}\right)}
@@ -248,6 +238,8 @@ Le profil du tracé s'obtient en traçant l'altitude en fonction de la distance 
 \subparagraph{}
 \textit{Écrire la fonction permettant d'obtenir un tableau \textsf{tab\_traite} contenant la liste des triplets \textsf{[temps écoulés (en s), distances cumulées (en km), altitude(en m)]}.}
 
+
+\subsection{Affichage du tracé}
 
 \subparagraph{}
 \textit{En utilisant le fichier \textsf{ressources.py}, afficher le profil du parcours.}
