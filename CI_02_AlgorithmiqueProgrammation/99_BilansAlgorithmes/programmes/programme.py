@@ -383,13 +383,13 @@ def fusion_listes(tab,g,d,m):
     Résultat :
     tab (list) : liste triée entre les indices g et d
     """
-    n1 = m-g
-    n2 = d-m+1
+    n1 = m-g+1
+    n2 = d-m
     G,D = [],[]
     for i in range (n1):
         G.append(tab[g+i])
     for j in range (n2):
-        D.append(tab[m+j])
+        D.append(tab[m+j+1])
     i,j=0,0
     G.append(99999999999)
     D.append(99999999999)
@@ -406,7 +406,8 @@ def tri_fusion(tab,g,d):
     Tri d'une liste par la métode du tri fusion
     Keyword arguments:
     tab (list) -- liste : une liste de nombres non triés tab[g:d]
-    g,d (int) -- entiers : indices de début et de fin de liste
+    g,d (int) -- entiers : indices de début et de fin de liste si on veut trier
+                           tout le tableau g=0, d=len(tab)-1
     Résultat :
     tab (list) : liste triée entre les indices g et d
     """
@@ -416,23 +417,15 @@ def tri_fusion(tab,g,d):
         tri_fusion(tab,m+1,d)
         fusion_listes(tab,g,d,m)
 #Exemple
-import random
-tab1 = [random.randint(0,9) for i in range(3)]
-tab2 = [random.randint(0,9) for i in range(3)]
-tab1.sort();tab2.sort()
-tab3 = tab1+tab2
-print(tab3)
-g = 0
-d = len(tab3)
-m =(g+d)//2-1
-print(m)
-#tri_fusion(tab3,0,len(tab3)-1)  
-print(tab3)
+#import random
+#tab = [random.randint(0,20) for i in range(20)]
+#print(tab)
+#tri_fusion(tab,0,len(tab)-1)  
+#print(tab)
         
 # ====================
 # Algorithmes divers
 # ====================
-
 
 def exponentiation_naive(x,n):
     """ 
