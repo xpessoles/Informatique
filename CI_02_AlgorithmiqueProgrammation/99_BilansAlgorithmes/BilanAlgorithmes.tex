@@ -433,11 +433,11 @@ def calcul_variance(tab):
 \section{Chaînes de caractères}
 \subsection{Recherche d'un mot dans une chaîne de caractères}
 
-\begin{minipage}[c]{.48\linewidth}
-\begin{pseudo}
-\end{pseudo}
-\end{minipage} \hfill
-\begin{minipage}[c]{.48\linewidth}
+%\begin{minipage}[c]{.48\linewidth}
+%\begin{pseudo}
+%\end{pseudo}
+%\end{minipage} \hfill
+%\begin{minipage}[c]{.48\linewidth}
 \begin{py}
 \begin{python}
 def index_of_word_in_text(mot, texte):
@@ -458,7 +458,7 @@ def index_of_word_in_text(mot, texte):
     return None
 \end{python}
 \end{py}
-\end{minipage}
+%\end{minipage}
 
 %\subsubsection*{Estimation de la complexité}
 
@@ -791,7 +791,7 @@ def euler_explicite(tau,y0,yf,tf,nb):
 \end{py}
 %\subsubsection*{Complexité algorithmique}
 
-\subsection{Algorithme de Gauss -- Jordan}
+\subsection{Algorithme de Gauss -- Jordan \cite{wack}}
 
 
 \begin{py}
@@ -1024,6 +1024,76 @@ def shellSort(array):
 
 \subsection{Tri rapide <<Quicksort>>}
 \subsubsection{Tri rapide}
+
+\begin{pseudo}
+\begin{center}
+\begin{tabular}{p{.9\textwidth}}
+\hline
+\textbf{Algorithme :} Tri Quicksort -- Segmentation\\
+\hline
+\textbf{Données :}
+\begin{itemize}
+\item \textsf{tab}, liste : une liste de nombres
+\item \textsf{i,j}, entiers : indices de début et de fin de la segmentation à effectuer
+\end{itemize}
+\textbf{Résultats :} 
+\begin{itemize}
+\item \textsf{tab}, liste : la liste de nombre segmenté avec le pivot à sa place définitive
+\item \textsf{k} entier : l'indice de la place du pivot
+\end{itemize}
+\\
+\textbf{segmente}(\textsf{tab,i,j}) :\\
+\hspace{.4cm} \textsf{g $\leftarrow$ i+1 }\\
+\hspace{.4cm} \textsf{d $\leftarrow$ j}\\
+\hspace{.4cm} \textsf{p $\leftarrow$ tab[i]}\\
+\hspace{.4cm} \textbf{Tant que} \textsf{g $\leq$ d} \textbf{Faire} \\
+\hspace{.8cm} \textbf{Tant que} \textsf{d$\geq$ 0} \textbf{et} \textsf{tab[d]>p} \textbf{Faire} \\
+\hspace{1.2cm} \textsf{d $\leftarrow$ d-1}\\  
+\hspace{.8cm} \textbf{Fin Tant que}  \\
+\hspace{.8cm} \textbf{Tant que} \textsf{g$\leq$ j} \textbf{et} \textsf{tab[g]$\leq$p} \textbf{Faire} \\
+\hspace{1.2cm} \textsf{g $\leftarrow$ g+1}\\  
+\hspace{.8cm} \textbf{Fin Tant que}  \\
+\hspace{.8cm} \textbf{Si} \textsf{g<d} \textbf{alors} \\
+\hspace{1.2cm} \textbf{Échange(} \textsf{tab,g,d} \textbf{)} \\
+\hspace{1.2cm} \textsf{d $\leftarrow$ d-1}\\  
+\hspace{1.2cm} \textsf{g $\leftarrow$ g+1}\\  
+\hspace{.8cm} \textbf{Fin Si} \\
+\hspace{.4cm} \textbf{Fin Tant que}  \\
+\hspace{.4cm} \textsf{k$\leftarrow$ d}  \\
+\hspace{.4cm} \textbf{Échange(} \textsf{tab,i,d} \textbf{)} \\
+\hspace{.4cm} \textbf{Retourner} \textsf{k}  \\
+\hline
+\end{tabular}
+\end{center}
+
+
+
+\begin{center}
+\begin{tabular}{p{.9\textwidth}}
+\hline
+\textbf{Algorithme :} Tri Quicksort -- Tri rapide\\
+\hline
+\textbf{Données :}
+\begin{itemize}
+\item \textsf{tab}, liste : une liste de nombres
+\item \textsf{i,j}, entiers : indices de début et de fin de la portion à trier
+\end{itemize}
+\textbf{Résultats :} 
+\begin{itemize}
+\item \textsf{tab}, liste : liste triée entre les indices \textsf{i} et \textsf{j}
+\end{itemize}
+\\
+\textbf{tri\_quicksort}(\textsf{tab,i,j}) :\\
+\hspace{.4cm} \textbf{Si} \textsf{g<d} \textbf{alors} \\
+\hspace{.8cm} \textsf{k$\leftarrow$} \textbf{segmente(}\textsf{tab,i,j} \textbf{)} \\
+\hspace{.8cm} \textbf{tri\_quicksort(}\textsf{tab,i,k-1} \textbf{)} \\
+\hspace{.8cm} \textbf{tri\_quicksort(}\textsf{tab,k+1,j} \textbf{)} \\
+\hspace{.4cm} \textbf{Fin Si} \\
+\hline
+\end{tabular}
+\end{center}
+\end{pseudo}
+
 \begin{py}
 \begin{python}
 def segmente(tab,i,j):
@@ -1070,73 +1140,6 @@ def tri_quicksort(tab,i,j):
 \end{python}
 \end{py}
 
-\begin{pseudo}
-\begin{center}
-\begin{tabular}{p{.9\textwidth}}
-\hline
-\textbf{Algorithme :} Tri Quicksort -- Segmentation\\
-\hline
-\textbf{Données :}
-\begin{itemize}
-\item \textsf{tab}, liste : une liste de nombres
-\item \textsf{i,j}, entiers : indices de début et de fin de la segmentation à effectuer
-\end{itemize}
-\textbf{Résultats :} 
-\begin{itemize}
-\item \textsf{tab}, liste : la liste de nombre segmenté avec le pivot à sa place définitive
-\item \textsf{k} entier : l'indice de la place du pivot
-\end{itemize}
-\\
-\textbf{segmente}(\textsf{tab,i,j}) :\\
-\hspace{.4cm} \textsf{g $\leftarrow$ i+1 }\\
-\hspace{.4cm} \textsf{d $\leftarrow$ j}\\
-\hspace{.4cm} \textsf{p $\leftarrow$ tab[i]}\\
-\hspace{.4cm} \textbf{Tant que} \textsf{g $\leq$ d} \textbf{Faire} \\
-\hspace{.8cm} \textbf{Tant que} \textsf{d$\geq$ 0} \textbf{et} \textsf{tab[d]>p} \textbf{Faire} \\
-\hspace{1.2cm} \textsf{d $\leftarrow$ d-1}\\  
-\hspace{.8cm} \textbf{Fin Tant que}  \\
-\hspace{.8cm} \textbf{Tant que} \textsf{g$\leq$ j} \textbf{et} \textsf{tab[g]$\leq$p} \textbf{Faire} \\
-\hspace{1.2cm} \textsf{g $\leftarrow$ g+1}\\  
-\hspace{.8cm} \textbf{Fin Tant que}  \\
-\hspace{.8cm} \textbf{Si} \textsf{g<d} \textbf{alors} \\
-\hspace{1.2cm} \textbf{Échange(} \textsf{tab,g,d} \textbf{)} \\
-\hspace{1.2cm} \textsf{d $\leftarrow$ d-1}\\  
-\hspace{1.2cm} \textsf{g $\leftarrow$ g+1}\\  
-\hspace{.8cm} \textbf{Fin Si} \\
-\hspace{.4cm} \textbf{Fin Tant que}  \\
-\hspace{.4cm} \textsf{k$\leftarrow$ d}  \\
-\hspace{.4cm} \textbf{Échange(} \textsf{tab,i,d} \textbf{)} \\
-\hspace{.4cm} \textbf{Retourner} \textsf{k}  \\
-\hline
-\end{tabular}
-\end{center}
-
-
-\begin{center}
-\begin{tabular}{p{.9\textwidth}}
-\hline
-\textbf{Algorithme :} Tri Quicksort -- Tri rapide\\
-\hline
-\textbf{Données :}
-\begin{itemize}
-\item \textsf{tab}, liste : une liste de nombres
-\item \textsf{i,j}, entiers : indices de début et de fin de la portion à trier
-\end{itemize}
-\textbf{Résultats :} 
-\begin{itemize}
-\item \textsf{tab}, liste : liste triée entre les indices \textsf{i} et \textsf{j}
-\end{itemize}
-\\
-\textbf{tri\_quicksort}(\textsf{tab,i,j}) :\\
-\hspace{.4cm} \textbf{Si} \textsf{g<d} \textbf{alors} \\
-\hspace{.8cm} \textsf{k$\leftarrow$} \textbf{segmente(}\textsf{tab,i,j} \textbf{)} \\
-\hspace{.8cm} \textbf{tri\_quicksort(}\textsf{tab,i,k-1} \textbf{)} \\
-\hspace{.8cm} \textbf{tri\_quicksort(}\textsf{tab,k+1,j} \textbf{)} \\
-\hspace{.4cm} \textbf{Fin Si} \\
-\hline
-\end{tabular}
-\end{center}
-\end{pseudo}
 
 \subsubsection{Tri rapide optimisé}
 
@@ -1254,6 +1257,55 @@ Algorithme récursif du table de tri. \\
 \end{tabular}
 \end{center}
 \end{pseudo}
+
+\begin{py}
+\begin{python}
+def fusion_listes(tab,g,d,m):
+    """
+    Fusionne deux listes triées.
+    Keyword arguments:
+    tab (list) -- liste : une liste de nombres tab[g:d] avec g indice de la 
+    valeur de gauche, d indice de la valeur de droite
+    g,d,m (int) -- entiers : indices tels que g<=m<d et tel que les 
+    sous-tableaux tab[g:m] et tab[m+1:d] soient ordonnés
+    Résultat :
+    tab (list) : liste triée entre les indices g et d
+    """
+    n1 = m-g+1
+    n2 = d-m
+    G,D = [],[]
+    for i in range (n1):
+        G.append(tab[g+i])
+    for j in range (n2):
+        D.append(tab[m+j+1])
+    i,j=0,0
+    G.append(99999999999)
+    D.append(99999999999)
+    for k in range (g,d+1):
+        if i<=n1 and  G[i]<=D[j]:
+            tab[k]=G[i]
+            i=i+1
+        elif j<=n2 and G[i]>D[j]:
+            tab[k]=D[j]
+            j=j+1
+            
+def tri_fusion(tab,g,d):
+    """
+    Tri d'une liste par la métode du tri fusion
+    Keyword arguments:
+    tab (list) -- liste : une liste de nombres non triés tab[g:d]
+    g,d (int) -- entiers : indices de début et de fin de liste si on veut trier
+                           tout le tableau g=0, d=len(tab)-1
+    Résultat :
+    tab (list) : liste triée entre les indices g et d
+    """
+    if g<d:
+        m=(g+d)//2
+        tri_fusion(tab,g,m)
+        tri_fusion(tab,m+1,d)
+        fusion_listes(tab,g,d,m)
+\end{python}
+\end{py}
 
 \section{Algorithmes classiques}
 \subsection{Division euclidienne}
