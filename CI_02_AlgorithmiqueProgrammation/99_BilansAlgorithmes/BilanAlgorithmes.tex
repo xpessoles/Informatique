@@ -413,7 +413,7 @@ def calcul_variance(tab,m):
 \begin{minipage}[c]{.48\linewidth}
 \begin{py}
 \begin{python}
-def calcul_variance(tab):
+def calcul_mediane(tab):
     """ 
     Calcule la variance des éléments d'un tableau trié.
     Keyword arguments:
@@ -468,47 +468,87 @@ def index_of_word_in_text(mot, texte):
 
 \begin{minipage}[c]{.48\linewidth}
 \begin{pseudo}
-\begin{algorithm}[H]
-\Fonction{
-Données:$f$, $a$,$b$, $\varepsilon$ \\
-$g\gets a$\\
-$d \gets b$\\
-$f_g \gets f(g)$\\
-$f_d \gets f(d)$\\
-\Tq{$ (d-g) > 2\varepsilon$}{
-$m \gets (g+d)/2$ \\
-$f_m\gets f(m)$
-
-\eSi{$f_g\cdot f_m \leq 0$}{
-$d \gets m$\\
-$f_d \gets f_m$\\
-}{
-$g \gets m$\\
-$f_d \gets f_m$\\
-}
-}
-\Retour{$(g+d)/2$}
-}
-\end{algorithm}
+\begin{center}
+\begin{tabular}{p{.9\textwidth}}
+\hline
+\textbf{Algorithme :} Recherche de la solution de $f(x)=0$ par dichotomie \\
+\hline
+\textbf{Données :}
+\begin{itemize}
+\item \textsf{f}, fonction : fonction continue et monotone sur $[a,b]$
+\item \textsf{a, b}, réels : nombre réels tels que $a<b$
+\item \textsf{$\varepsilon$}, réel : tolérance du calcul
+\end{itemize}
+\textbf{Résultat :} 
+\begin{itemize}
+\item flt : solution de l'équation
+\end{itemize}
+\\
+\textbf{rechercheDichotomique}(\textsf{f,a,b,$\varepsilon$}) :\\
+\hspace{.4cm}\textsf{g} $\leftarrow$ \textsf{a} \\
+\hspace{.4cm}\textsf{d} $\leftarrow$ \textsf{b} \\
+\hspace{.4cm}\textbf{Tant que} \textsf{d-g>$\varepsilon$} \textbf{Alors} : \\
+\hspace{.8cm}\textsf{m} $\leftarrow$ \textsf{(g+d)/2} \\
+\hspace{.8cm}\textbf{Si} \textsf{f(g)*f(m) $\leq$ 0} \textbf{Alors} : \\
+\hspace{1.2cm}\textsf{d $\leftarrow$  m} \\
+\hspace{.8cm} \textbf{Sinon :} \\
+\hspace{1.2cm}\textsf{g $\leftarrow$  m} \\
+\hspace{.8cm} \textbf{Fin Si}\\
+\hspace{.4cm} \textbf{Fin Tant que}\\
+\textbf{Fin fonction} \\
+\hline
+\end{tabular}
+\end{center}
 \end{pseudo}
+%\begin{pseudo}
+%\begin{algorithm}[H]
+%\Fonction{
+%Données:$f$, $a$,$b$, $\varepsilon$ \\
+%$g\gets a$\\
+%$d \gets b$\\
+%$f_g \gets f(g)$\\
+%$f_d \gets f(d)$\\
+%\Tq{$ (d-g) > \varepsilon$}{
+%$m \gets (g+d)/2$ \\
+%$f_m\gets f(m)$
+%
+%\eSi{$f_g\cdot f_m \leq 0$}{
+%$d \gets m$\\
+%$f_d \gets f_m$\\
+%}{
+%$g \gets m$\\
+%$f_d \gets f_m$\\
+%}
+%}
+%\Retour{$(g+d)/2$}
+%}
+%\end{algorithm}
+%\end{pseudo}
 \end{minipage} \hfill
 \begin{minipage}[c]{.48\linewidth}
 \begin{py}
 \begin{python}
 def rechercheDichotomique(f,a,b,eps):
+    """
+    Recherche par dichotomie de la solution de 
+    l'équation f(x)=0.
+    Keywords arguments :
+    Entrées : 
+        f, function : fonction continue et monotone 
+        sur [a,b]
+        a,b, flt : Nombre réels tels que a<b
+        eps,flt : tolérance de la résolution
+    Sortie : 
+        flt : solution de la fonction
+    """
     g = a
     d = b
-    f_g = f(g)
-    f_d = f(d)
-    while (d-g) > 2*eps:
+    while (d-g) > eps:
         m = (g+d)/2 
-        f_m =f(m)
-        if f_g * f_m <= 0 :
+        if f(g) * f(m) <= 0 :
             d = m
-            f_d = f_m
         else :
             g  = m
-            f_d = f_m
     return (g+d)/2
 \end{python}
 \end{py}
@@ -1384,7 +1424,7 @@ print(Euclide_PGCDpgcd(1525,755))
 \begin{center}
 \includegraphics[width=.45\textwidth]{images/algo_euclide}
 \end{center}
-\subsection{Recherche des nombres premiers -- Crible d'Ératosthène}
+%\subsection{Recherche des nombres premiers -- Crible d'Ératosthène}
 \subsection{Calcul de puissance}
 \subsubsection{Algorithme naïf}
 %\begin{py}

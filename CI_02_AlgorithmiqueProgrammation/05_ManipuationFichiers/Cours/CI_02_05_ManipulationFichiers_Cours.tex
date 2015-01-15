@@ -342,7 +342,7 @@ for i in range(10):
     ligne = f.readline()  # saut de 10 lignes
 
 ligne = f.readline()                  # lecture d'une ligne 
-print "%s" % ligne                    # affichage pour vérification
+print(ligne)                    # affichage pour vérification
 ligne=ligne.rstrip("\n\r")            # suppression retour chariot
 ligne_nbpoints=ligne.split("\t")      # découpage aux tabulations
 nb_points=int(ligne_nbpoints[1])      # conversion en entier
@@ -568,7 +568,7 @@ f=open("TP/monFichier.txt","w")  # ouverture fichier
 x=linspace(-20,20,100)
 y=sin(x)/x
 for i in range(0,len(x)):
-    f.write("{:d} \t {:f} \t {:f}\n".format(i,x[i],y[i]))
+    f.write(str(x[i])+"\t"+str(y[i])
 f.close()        # Fermeture du fichier
 \end{python}
 \end{py}

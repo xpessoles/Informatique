@@ -4,9 +4,13 @@
 # Algorithmes P. Beynet
 
 
+# =========================
+# Recherche dans une liste
+# =========================
+
 def is_number_in_list(nb,tab):
     """
-	Renvoie True si le nombre nb est dans la liste de nombres tab.
+    Renvoie True si le nombre nb est dans la liste de nombres tab.
     Renvoie False sinon. 
     
     Keyword arguments:
@@ -67,13 +71,15 @@ def is_number_in_list_dicho(nb,tab):
 #print(is_number_in_list_dicho(nb2,liste))
 
 
-
+# ===============================
+# Gestion d'une liste de nombres
+# ===============================
 def calcul_moyenne(tab):
     """ 
 	Renvoie la moyenne des éléments d'un tableau.
     
 	Keyword arguments:
-    tab -- liste de nombres entiers
+    tab,list -- liste de nombres entiers
     """
     res = 0
     for i in range(len(tab)):
@@ -84,12 +90,23 @@ def calcul_moyenne(tab):
 #liste = [1,2,3,5,9]
 #print(calcul_moyenne(liste))
 
-def calcul_variance(tab):
+def calcul_variance(tab,m):
     """ 
-	Calcule la variance des éléments d'un tableau trié.
-    
-	Keyword arguments:
+    Renvoie la variance des valeurs d'un tableau.
+    Keyword arguments:
     tab -- liste de nombres
+    m -- moyenne des valeurs
+    """
+    res = 0
+    for i in range(len(tab)):
+        res = res+(tab[i]-m)**2
+    return res/(len(tab))
+    
+def calcul_mediane(tab):
+    """ 
+	Calcule la médiane des éléments d'un tableau trié.
+	Keyword arguments:
+    tab,list -- liste de nombres triés
     """
     if len(tab)%2 == 0 :
         i=len(tab)//2
@@ -101,6 +118,10 @@ def calcul_variance(tab):
 #liste = [1,2,3,4,5,6]
 #print(calcul_moyenne(liste))
 #print(calcul_variance(liste))
+
+# ======================
+# Chaînes de caractères
+# ======================
 
 
 def index_of_word_in_text(mot, texte):
@@ -128,6 +149,32 @@ def index_of_word_in_text(mot, texte):
 # =================
 # Calcul numérique
 # =================
+
+def rechercheDichotomique(f,a,b,eps):
+    """
+    Recherche par dichotomie de la solution de l'équation f(x)=0.
+    Keywords arguments :
+    Entrées : 
+        a,b, flt : Nombre réels tels que a<b
+        f, function : fonction continue et monotone sur [a,b]
+        eps,flt : tolérance de la résolution
+    Sortie : 
+        flt : solution de la fonction
+    """
+    g = a
+    d = b
+    while (d-g) > eps:
+        m = (g+d)/2 
+        if f(g) * f(m) <= 0 :
+            d = m
+        else :
+            g  = m
+    return (g+d)/2
+
+def f_dicho(x):
+    return x*x*x-1
+
+print(rechercheDichotomique(f_dicho,0,10,0.00001))
 
 def integrale_rectangles_gauche(f,a,b,nb):
     """
@@ -429,19 +476,41 @@ def tri_fusion(tab,g,d):
 
 def exponentiation_naive(x,n):
     """ 
-	Renvoie x**n par la méthode naïve.
-    
+    Renvoie x**n par la méthode naïve.
     Keyword arguments:
-    x -- un nombre réel
-    n -- un nombre entier
+    Entrées : 
+        x, flt : un nombre réel
+        n, int : un nombre entier
+    Sortie : 
+        res,flt : resultat
     """
-    
-    j=n
     res = 1
-    while j>=1:
+    while n>=1:
         res = res * x
-        j=j-1
+        n=n-1
     return res
 
-#print(exponentiation_naive(3,2))
-#print(exponentiation_naive(3,0))
+def exponentiation_rapide(x,n):
+    """ 
+    Renvoie x**n par la méthode naïve.
+    Keyword arguments:
+    Entrées : 
+        x, flt : un nombre réel
+        n, int : un nombre entier
+    Sortie : 
+        res,flt : resultat
+    """
+    res = 1
+    while n>0:
+        print("n "+str(n))
+        if n%2 == 0:
+            res = res*res
+            n=int(n/2)
+        else : 
+            res = res*x
+            n=n-1
+    return res
+
+#x,n=2,5
+#print(exponentiation_rapide(x,n))
+#print(x**n)
