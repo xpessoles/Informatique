@@ -126,7 +126,7 @@ def calcul_mediane(tab):
 
 def index_of_word_in_text(mot, texte):
     """ 
-	Recherche si le mot est dans le texte.
+    Recherche si le mot est dans le texte.
     Renvoie l'index si le mot est présent, None sinon.
     
     Keyword arguments:
@@ -150,7 +150,7 @@ def index_of_word_in_text(mot, texte):
 # Calcul numérique
 # =================
 
-def rechercheDichotomique(f,a,b,eps):
+def solveDichotomie(f,a,b,eps):
     """
     Recherche par dichotomie de la solution de l'équation f(x)=0.
     Keywords arguments :
@@ -171,20 +171,53 @@ def rechercheDichotomique(f,a,b,eps):
             g  = m
     return (g+d)/2
 
-def f_dicho(x):
-    return x*x*x-1
+# Exemple
+#def f_dicho(x):
+#    return x*x*x-1
+#print(solveDichotomie(f_dicho,0,10,0.00001))
 
-print(rechercheDichotomique(f_dicho,0,10,0.00001))
+def solveNewton(f,df,a,eps):
+    """
+    Recherche par la méthode de Newton de la solution de l'équation f(x)=0.
+    Keywords arguments :
+    Entrées :
+        f, function : fonction à valeur de IR dans IR
+        df, function : dérivée de f à valeur de IR dans IR
+        a, flt : solution initiale
+        eps,flt : tolérance de la résolution
+    Sortie : 
+        flt : solution de la fonction    
+    """
+    c = a-f(a)/df(a)
+    while abs(c-a)>eps:
+        a = c
+        c = c-f(c)/df(c)
+    return c
+
+# Exemple
+def f_dicho(x):
+    from math import sqrt
+    return x*x-math.sqrt(2)
+def df_dicho(x):
+    return 2*x
+
+print(solveNewton(f_dicho,df_dicho,1,0.00001))
+    
+print(solveDichotomie(f_dicho,0,10,0.00001))
+
+
+
 
 def integrale_rectangles_gauche(f,a,b,nb):
     """
     Calcul de la valeur approchée de l'intégrale de f(x) entre a et b par la 
     méthode des rectangles à gauche.
     Keywords arguments :
-    f -- fonction à valeur dans IR
-    a -- flt, borne inférieure de l'intervalle d'intégration
-    b -- flt, borne supérieure de l'intervalle d'intégration
-    nb -- int, nombre d'échantillons pour le calcul
+    Entrées :     
+        f -- fonction à valeur dans IR
+        a -- flt, borne inférieure de l'intervalle d'intégration
+        b -- flt, borne supérieure de l'intervalle d'intégration
+        nb -- int, nombre d'échantillons pour le calcul
     """
     res = 0
     pas = (b-a)/nb    
@@ -200,10 +233,11 @@ def integrale_rectangles_droite(f,a,b,nb):
     Calcul de la valeur approchée de l'intégrale de f(x) entre a et b par la 
     méthode des rectangles à droite.
     Keywords arguments :
-    f -- fonction à valeur dans IR
-    a -- flt, borne inférieure de l'intervalle d'intégration
-    b -- flt, borne supérieure de l'intervalle d'intégration
-    nb -- int, nombre d'échantillons pour le calcul
+    Entrées :
+        f -- fonction à valeur dans IR
+        a -- flt, borne inférieure de l'intervalle d'intégration
+        b -- flt, borne supérieure de l'intervalle d'intégration
+        nb -- int, nombre d'échantillons pour le calcul
     """
     res = 0
     pas = (b-a)/nb
@@ -218,10 +252,11 @@ def integrale_rectangles_milieu(f,a,b,nb):
     Calcul de la valeur approchée de l'intégrale de f(x) entre a et b par la 
     méthode du point milieu.
     Keywords arguments :
-    f -- fonction à valeur dans IR
-    a -- flt, borne inférieure de l'intervalle d'intégration
-    b -- flt, borne supérieure de l'intervalle d'intégration
-    nb -- int, nombre d'échantillons pour le calcul
+    Entrées :
+        f -- fonction à valeur dans IR
+        a -- flt, borne inférieure de l'intervalle d'intégration
+        b -- flt, borne supérieure de l'intervalle d'intégration
+        nb -- int, nombre d'échantillons pour le calcul
     """
     res = 0
     pas = (b-a)/nb
@@ -329,7 +364,8 @@ def tri_insertion_01(tab):
     En Python, le passage se faisant par référence, il n'est pas indispensable
     de retourner le tableau.
     Keyword arguments:
-    tab -- liste de nombres
+    Entrées :
+        tab -- liste de nombres
     """
     for i in range (1,len(tab)):
         x=tab[i]
@@ -353,7 +389,8 @@ def tri_insertion_02(tab):
     En Python, le passage se faisant par référence, il n'est pas indispensable
     de retourner le tableau.
     Keyword arguments:
-    tab -- liste de nombres
+    Entrées :
+        tab -- liste de nombres
     """
     for i in range (1,len(tab)):
         x=tab[i]
@@ -373,11 +410,12 @@ def segmente(tab,i,j):
     """
     Segmentation d'un tableau par rapport à un pivot.
     Keyword arguments: 
-    tab (list) -- liste de nombres
-    i,j (int) -- indices de fin et de début de la segmantation
-    Retour :    
-    tab (list) -- liste de nombres avec le pivot à sa place définitive
-    k (int) -- indice de la place du pivot
+    Entrées :
+        tab (list) -- liste de nombres
+        i,j (int) -- indices de fin et de début de la segmantation
+    Sorties :    
+        tab (list) -- liste de nombres avec le pivot à sa place définitive
+        k (int) -- indice de la place du pivot
     """
     g =i+1
     d=j
@@ -398,11 +436,12 @@ def segmente(tab,i,j):
 def tri_quicksort(tab,i,j):
     """
     Tri d'une liste par l'utilisation du tri rapide (Quick sort).
-    Keyword arguments: 
-    tab (list) -- liste de nombres
-    i,j (int) -- indices de fin et de début de la zone de tri
-    Retour :    
-    tab (list) -- liste de nombres avec le pivot à sa place définitive
+    Keyword arguments:
+    Entrées :
+        tab (list) -- liste de nombres
+        i,j (int) -- indices de fin et de début de la zone de tri
+    Sorties :    
+        tab (list) -- liste de nombres avec le pivot à sa place définitive
     """
     if i<j :
         k = segmente(tab,i,j)
@@ -423,12 +462,13 @@ def fusion_listes(tab,g,d,m):
     """
     Fusionne deux listes triées.
     Keyword arguments:
-    tab (list) -- liste : une liste de nombres tab[g:d] avec g indice de la 
-    valeur de gauche, d indice de la valeur de droite
-    g,d,m (int) -- entiers : indices tels que g<=m<d et tel que les 
-    sous-tableaux tab[g:m] et tab[m+1:d] soient ordonnés
-    Résultat :
-    tab (list) : liste triée entre les indices g et d
+    Entrées :
+        tab (list) -- liste : une liste de nombres tab[g:d] avec g indice de la 
+            valeur de gauche, d indice de la valeur de droite
+        g,d,m (int) -- entiers : indices tels que g<=m<d et tel que les 
+            sous-tableaux tab[g:m] et tab[m+1:d] soient ordonnés
+    Sorties :
+        tab (list) : liste triée entre les indices g et d
     """
     n1 = m-g+1
     n2 = d-m
@@ -452,11 +492,12 @@ def tri_fusion(tab,g,d):
     """
     Tri d'une liste par la métode du tri fusion
     Keyword arguments:
-    tab (list) -- liste : une liste de nombres non triés tab[g:d]
-    g,d (int) -- entiers : indices de début et de fin de liste si on veut trier
+    Entrées : 
+        tab (list) -- liste : une liste de nombres non triés tab[g:d]
+        g,d (int) -- entiers : indices de début et de fin de liste si on veut trier
                            tout le tableau g=0, d=len(tab)-1
-    Résultat :
-    tab (list) : liste triée entre les indices g et d
+    Sortie :
+        tab (list) : liste triée entre les indices g et d
     """
     if g<d:
         m=(g+d)//2
