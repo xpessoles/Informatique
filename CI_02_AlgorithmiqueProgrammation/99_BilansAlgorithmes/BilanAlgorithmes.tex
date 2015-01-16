@@ -1488,26 +1488,55 @@ print(Euclide_PGCDpgcd(1525,755))
 %\subsection{Recherche des nombres premiers -- Crible d'Ératosthène}
 \subsection{Calcul de puissance}
 \subsubsection{Algorithme naïf}
-%\begin{py}
-%\begin{python}
-%def exponentiation_naive(x,n):
-%    """ Renvoie x**n par la méthode naïve.
-%    
-%    Keyword arguments:
-%    x -- un nombre réel
-%    n -- un nombre entier
-%    
-%    """
-%    
-%    j=n
-%    res = 1
-%    while j>=1:
-%        res = res * x
-%        j=j-1
-%    return res
-%\end{python}
-%\end{py}
-\subsubsection{Exponentiation rapide}
+
+\begin{py}
+\begin{python}
+def exponentiation_naive(x,n):
+    """
+    Renvoie x* *n par la methode naive.
+    Keyword arguments:
+    Entrées : 
+        x, flt : un nombre réel
+        n, int : un nombre entier
+    Sortie : 
+        res,flt : resultat
+    """
+    res = 1
+    while n>=1:
+        res = res * x
+        n=n-1
+    return res
+\end{python}
+\end{py}
+
+\subsubsection{Exponentiation rapide itérative}
+\begin{py}
+\begin{python}
+def exponentiation_rapide_iteratif(x,n):
+    """ 
+    Renvoie x**n par la methode d'exponentiation rapide.
+    Keyword arguments:
+    Entrées : 
+        x, flt : un nombre réel
+        n, int : un nombre entier
+    Sortie : 
+        res,flt : resultat
+    """
+    if n==0 :
+        return 1
+    else :
+        res = 1
+        a = x
+        while n>0:
+            if n%2 == 1:
+                res = res*a
+            a=a*a
+            n=int(n/2)
+        return res
+\end{python}
+\end{py}
+
+
 \section{Calcul d'un polynôme}
 \subsection{Algorithme naïf}
 \subsection{Méthode de Horner}

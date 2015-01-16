@@ -201,9 +201,9 @@ def f_dicho(x):
 def df_dicho(x):
     return 2*x
 
-print(solveNewton(f_dicho,df_dicho,1,0.00001))
+#print(solveNewton(f_dicho,df_dicho,1,0.00001))
     
-print(solveDichotomie(f_dicho,0,10,0.00001))
+#print(solveDichotomie(f_dicho,0,10,0.00001))
 
 
 
@@ -531,9 +531,9 @@ def exponentiation_naive(x,n):
         n=n-1
     return res
 
-def exponentiation_rapide(x,n):
+def exponentiation_rapide_iteratif(x,n):
     """ 
-    Renvoie x**n par la méthode naïve.
+        Renvoie x**n par la methode d'exponentiation rapide.
     Keyword arguments:
     Entrées : 
         x, flt : un nombre réel
@@ -541,17 +541,18 @@ def exponentiation_rapide(x,n):
     Sortie : 
         res,flt : resultat
     """
-    res = 1
-    while n>0:
-        print("n "+str(n))
-        if n%2 == 0:
-            res = res*res
+    if n==0 :
+        return 1
+    else :
+        res = 1
+        a = x
+        while n>0:
+            if n%2 == 1:
+                res = res*a
+            a=a*a
             n=int(n/2)
-        else : 
-            res = res*x
-            n=n-1
-    return res
+        return res
 
-#x,n=2,5
-#print(exponentiation_rapide(x,n))
-#print(x**n)
+x,n=1.12314123,40
+print(exponentiation_rapide(x,n))
+print(x**n)
