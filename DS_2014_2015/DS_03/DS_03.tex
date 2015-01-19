@@ -22,8 +22,12 @@
 %\proftrue
 \proffalse
 
+\newif\iftd
+\tdtrue
+%\tdfalse
+
 \usepackage[%
-    pdftitle={Devoirs Surveillé 1},
+    pdftitle={Devoirs Surveillé 3},
     pdfauthor={Xavier Pessoles},
     colorlinks=true,
     linkcolor=blue,
@@ -32,7 +36,7 @@
 
 \def\discipline{Informatique}
 \def\xxtitre{\ifthenelse{\boolean{xp}}{
-Devoir surveillé d'informatique 1}{
+Devoir surveillé d'informatique 3}{
 Chapitre  -- }}
 
 \def\xxsoustitre{\ifthenelse{\boolean{xp}}{
@@ -72,11 +76,166 @@ Informatique - Cours}}
 \end{center}
 \else
 \begin{center}
-\large{\textit{Nom : .......................................}}
+\large{\textsl{Nom : .......................................}}
 \end{center}
 \fi
 
-\section{Codage des nombres}
+\section{Réponse indicielle d'un SLCI d'ordre 2}
+
+L'équation différentielle d'un système du second ordre peut se mettre sous la forme :
+
+\vspace{.25cm}
+
+\begin{minipage}[c]{.48\linewidth}
+$$
+s(t)
++\dfrac{2\xi}{\omega_0}\cdot \dfrac{\text{d}s(t)}{\text{d}t}
++\dfrac{1}{\omega_0^2}\cdot \dfrac{\text{d}^2s(t)}{\text{d}t^2}
+= K\cdot e(t)
+$$
+\end{minipage}\hfill
+\begin{minipage}[c]{.48\linewidth}
+en notant :
+\begin{itemize}
+\item $K$ : le gain statique;
+\item $\xi$ : le coefficient d'amortissement;
+\item $e(t)$ : l'entrée et $s(t)$ la sortie. 
+\end{itemize}
+\end{minipage}
+
+\vspace{.5cm}
+
+On suppose que toutes les conditions initiales sont nulles. Pour une entrée unitaire de type échelon unitaire $e(t)=u(t)$, $K=1$ et $t\geq0$ on montre que : 
+\begin{itemize}
+\item si $\xi <1$, le régime est pseudo périodique et :
+$$
+s(t)=1-\dfrac{e^{-\xi\omega_0 t}}{\sqrt{1-\xi^2}}\sin\left(  \omega_0 t\sqrt{1-\xi^2}+\arcsin \sqrt{1-\xi^2} \right)
+$$
+\item si $\xi=1$, le régime est critique et : 
+$$
+s(t)=1-\left(1+\omega_0 t \right)e^{-\omega_0 t} 
+$$
+\item si $\xi>1$, le régime est apériodique et : 
+$$
+s(t)=1
++\dfrac{e^{- \omega_0 t\left( \xi + \sqrt{\xi^2-1}\right)}}{2\left(\xi\sqrt{\xi^2-1}+\xi^2-1 \right)}
+-\dfrac{e^{- \omega_0 t \left( \xi - \sqrt{\xi^2-1}\right)}}{2\left(\xi\sqrt{\xi^2-1}-\xi^2+1 \right)}
+$$
+\end{itemize} 
+
+\begin{center}
+\textbf{Dans l'ensemble de ce sujet, on considèrera que $s$ est une fonction du temps réduit $t\cdot\omega_0$.}
+\end{center}
+
+
+On dispose des fonctions Python \textbf{\textsf{f\_pseudo}} et \textbf{\textsf{f\_aperiodique}} permettant d'évaluer la fonction pour $s$ pour un couple $(t\omega_0,\xi)$.
+
+\subparagraph{} \textit{Donner, en Python, le contenu de la fonction \textsf{f\_critique} permettant de définir la fonction $(t\omega_0) \rightarrow s(t\omega_0)$ dans le cas où $\xi=1$.}
+
+
+\subparagraph{} \textit{Donner, en Python, le contenu de la fonction \textsf{f\_s} permettant de définir la fonction $(t\omega_0,\xi) \rightarrow s(t\omega_0\xi)$ dans le cas où $\xi\in \mathbb{R}_+^*$. On donne ci-dessous les spécifications de la fonction.}
+
+\begin{py}
+\begin{python}
+def f_s(tom0,z):
+    """
+    Fonction permettant de calculer la réponse indicielle d'un système du second ordre. 
+    Entrées : 
+        * tom0, flt : temps de réponse réduit
+        * z, flt : coefficient d'amortissement
+    Sortie : 
+        * s(tom0,z)
+    """
+\end{python}
+\end{py}
+
+
+La fonction \textbf{\textsf{trace\_s}} donnée ci-dessous permet de tracer $s(t\omega_0,\xi)$ pour $t\omega_0 \in [0,10]$ par pas de 1 et pour une valeur de $\xi$ déterminée. Les deux appels successifs de la fonction \textbf{\textsf{trace\_s}} permettent de réaliser le tracer les 2 courbes ci-dessous.
+
+
+\begin{minipage}[c]{.48\linewidth}
+\begin{py}
+\begin{python}
+# Définition de la fonction trace
+def trace_s(z):
+    x = []
+    y = []
+    for i in range(11):
+        t = i
+        x.append(t)
+        y.append(f_s(t,z))
+    plot(x,y)
+# Appels de la fonction trace
+trace_s(0.4)
+trace_s(0.7)
+
+\end{python}
+\end{py}
+\end{minipage} \hfill
+\begin{minipage}[c]{.48\linewidth}
+\begin{center}
+\includegraphics[width=\textwidth]{images/courbe}
+\end{center}
+\end{minipage}
+
+\subparagraph{}
+\textit{Expliquer l'objectif des lignes 2 à 9.}
+
+\vspace{.25cm}
+
+On observe que la courbe tracée n'est pas lissée. Pour avoir un meilleur rendu, il est nécessaire d'évaluer la fonction en davantage de points. 
+
+\subparagraph{}
+\textit{Modifier les lignes 5 et 6 pour que la courbe tracée soit réalisée en 1000 points sur un intervalle de $t \omega_0$ variant de 0 à 10. }
+
+\begin{corrige}
+\begin{py}
+\begin{python}
+def trace_s(z):
+    x = []
+    y = []
+    n = 1000
+    for i in range(n+1):
+        t = 10*i/n
+        x.append(t)
+        y.append(f_s(t,z))
+    plot(x,y)
+\end{python}
+\end{py}
+\end{corrige}
+
+\end{document}
+
+%\begin{corrige}
+%\begin{py}
+\begin{python}
+def trace_s(z):
+    x = []
+    y = []
+    n=1000
+    for i in range(n+1):
+        t = 10*i/n
+        x.append(t)
+        y.append(f_s(t,z))
+    plot(x,y)
+\end{pyhton}
+%\end{py}
+%\end{corrige}
+
+\end{document}
+
+\newpage
+
+
+
+
+
+
+
+
+
+  
+
 Pour tout ce devoir, on dispose d'une machine dont le codage est limité à 8 bits. 
 
 \subsection{Capacités de l'espace machine}

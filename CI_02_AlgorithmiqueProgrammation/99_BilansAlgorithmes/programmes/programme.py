@@ -533,7 +533,7 @@ def exponentiation_naive(x,n):
 
 def exponentiation_rapide_iteratif(x,n):
     """ 
-        Renvoie x**n par la methode d'exponentiation rapide.
+        Renvoie x**n par la methode d'exponentiation rapide.f
     Keyword arguments:
     Entrées : 
         x, flt : un nombre réel
