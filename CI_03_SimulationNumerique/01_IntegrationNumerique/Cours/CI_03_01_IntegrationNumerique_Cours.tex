@@ -136,7 +136,7 @@ En utilisant le théorème de Pythagore dans le triangle défini, on : $x^2 + f(
 
 L'aire d'un quart de disque est donc l'aire sous la courbe $f(x)$ quand $x$ varie de 0 à 1:
 $$
-\dfrac{\pi}{4}=\int\limits_{0}^1 f(x) =\int\limits_{0}^1\sqrt{1-x^2} \quad \mathrm{d} x
+\dfrac{\pi}{4}=\int\limits_{0}^1 f(x) \; \mathrm{d} x =\int\limits_{0}^1\sqrt{1-x^2} \; \mathrm{d} x
 $$
 
 Ainsi une valeur approchée de l'intégrale peut permettre d'approximer la valeur de $\pi$.
@@ -192,7 +192,7 @@ Les méthodes présentées s'appuient sur les formules de Newton -- Cotes, elles
 \begin{itemize}
 \item méthode des rectangles, lorsque les polynômes d'interpolation sont de degrés 0,
 \item méthode des trapèzes, lorsque les polynômes d'interpolation sont de degrés 1,
-\item méthode de Simpson, lorsque les polynômes d'interpolation sont de dégré 2 ou 3. 
+\item méthode de Simpson, lorsque les polynômes d'interpolation sont de degrés 2 ou 3. 
 \end{itemize}
 
 \section{Méthode des rectangles}
@@ -201,7 +201,7 @@ Les méthodes présentées s'appuient sur les formules de Newton -- Cotes, elles
 Dans cette méthode, la fonction à intégrer est interpolée par un polynôme de degré 0, à savoir une fonction constante. Géométriquement, l'aire sous la courbe est alors approximée par un rectangle. Plusieurs choix sont possibles.
 
 \begin{minipage}[c]{.3\linewidth}
-Rectangle à gauche :
+Rectangles à gauche :
 
 $$
 I = \int\limits_a^{b} f(x) \mathrm{d}x \simeq \left(b-a\right) f(a) 
@@ -215,7 +215,7 @@ I = \int\limits_a^{b} f(x) \mathrm{d}x \simeq \left(b-a\right) f\left(\dfrac{a+b
 $$
 \end{minipage}\hfill
 \begin{minipage}[c]{.3\linewidth}
-Rectangle à droite :
+Rectangles à droite :
 
 $$
 I = \int\limits_a^{b} f(x) \mathrm{d}x \simeq \left(b-a\right) f(b) 
@@ -381,7 +381,7 @@ Dans la majorité des cas, le calcul numérique d'une intégrale donne un résul
 
 
 \subsection{Majoration de l'erreur -- Rectangles à gauche (et à droite)}
-Soit $f$ une fonction $dérivable$ sur $I=[a,b]$ et dont $f'$ continue sur $I$. L'intervalle $I$ est fractionné en $n$ segments $[a_0, a_1, ..., a_n]$ avec $a_0 = a$ et $a_n=b$. On cherche à approximer :
+Soit $f$ une fonction dérivable sur $I=[a,b]$ et dont $f'$ continue sur $I$. L'intervalle $I$ est fractionné en $n$ segments $[a_0, a_1, ..., a_n]$ avec $a_0 = a$ et $a_n=b$. On cherche à approximer :
 $$
 \mathcal{A}=\int\limits_a^{b}f(x)\mathrm{d}x =  \sum\limits_{i=0}^{n-1} \left[\int\limits_{a_i}^{a_{i+1}}f(x)\mathrm{d}x \right]
 $$
