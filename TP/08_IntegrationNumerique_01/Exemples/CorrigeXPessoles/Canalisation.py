@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 #! /usr/bin/env python
+from math import *
 
 global D
 D=2.8*10**(-7)
