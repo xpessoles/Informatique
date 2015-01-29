@@ -1,0 +1,132 @@
+\documentclass[10pt,oneside]{article}
+\input{style/coursHeadings}
+\input{style/programHeadings}
+
+%Si le boolen xp est vrai : compilation pour xabi
+%Sinon compilation Damien
+\newboolean{xp}
+\setboolean{xp}{true}
+
+\newboolean{prof}
+\setboolean{prof}{false}
+
+\def\xxtitre{\ifthenelse{\boolean{xp}}{
+CI 3 : Ingénierie Numérique \& Simulation
+}}
+
+\def\xxsoustitre{\ifthenelse{\boolean{xp}}{
+TD -- Étude du gel d'une canalisation d'eau}{
+}}
+
+
+\def\xxauteur{\ifthenelse{\boolean{xp}}{
+\noindent \textsl{Cédric Lopez} \\
+\textsl{Xavier Pessoles}
+}{
+}}
+
+
+\def\xxpied{\ifthenelse{\boolean{xp}}{
+CI 3 : Ingénierie Numérique \& Simulation -- TP \\
+Intégration numérique -- \ifthenelse{\boolean{prof}}{P}{E}%
+}{
+}}
+
+\usepackage[%
+    pdftitle={Ingénierie Numérique et Simulation},
+    pdfauthor={Xavier Pessoles},
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=magenta]{hyperref}
+
+
+
+\usepackage{pifont}
+\sloppy
+\hyphenpenalty 10000
+
+
+\begin{document}
+
+
+\input{style/entete1}
+
+\begin{center}
+ \Large\textsc{\xxtitre}
+\end{center}
+
+\begin{center}
+ \large\textsc{\xxsoustitre}
+\end{center}
+
+
+%\begin{rem}
+%\textbf{Utilisation de Spyder}
+
+%Dans le cadre de ce TP, nous utiliserons l'environnement de programmation Spyder. Pour lancer cette application utiliser le raccourci sur le bureau.
+
+%\end{rem}
+%
+%\begin{objectif}
+%Les objectif de ce TP sont :
+%\begin{itemize}
+%\item d'acquérir les données provenant d'un fichier texte (au format \textsf{kml});
+%\item de réaliser des fonctions permettant d'analyser les données pour avoir accès à différentes statistiques.
+%\end{itemize}
+%\end{objectif}
+
+
+
+\subsection*{Exercice 1 : Mise hors gel des canalisations d'eau (temps : 45 min – difficulté : $\star\star $)}
+
+La température dans le sol terrestre étant initialement constante, égale à 5\textdegree C , on cherche à déterminer
+à quelle profondeur minimale il est nécessaire d’enterrer une canalisation d’eau pour qu’une brusque
+chute de la température de sa surface à -15\textdegree C n’entraine pas le gel de cette canalisation après 10 jours.
+
+
+
+\begin{minipage}[c]{.6\linewidth}
+Les hypothèses sont les suivantes :
+\begin{itemize}
+\item la température en un point quelconque du sol et de sa surface à tout instant $t < 0$ est constante et égale à $T_0=278\;K$ ( $\theta_0=5^oC$ ) ;
+\item la température à la surface du sol, confondue avec le plan d’équation $z = 0$, passe brutalement à l’instant $t = 0$ , de $T_0 = 278\;K$ à $T_1 =  258\; K$ ($\theta_1 = -15^o C$) et se maintient à cette valeur pendant
+$t_f= $10 jours.
+\end{itemize}
+\end{minipage}\hfill
+\begin{minipage}[c]{.35\linewidth}
+\begin{center}
+\includegraphics[width=.95\textwidth]{images/canalisation}
+\end{center}
+\end{minipage}
+
+On peut montrer que la température $T(z, t)$ à la profondeur $z$ et à l’instant $t$ est donnée par la relation suivante :
+
+$$
+T(z,t)=T_1 + (T_0-T_1) \text{erf}\left( \dfrac{z}{2\sqrt{Dt}} \right)
+$$
+où $\text{erf}(x)$ désigne la fonction définie par :
+$$
+\text{erf}(x) = \dfrac{2}{\pi}\int^x_0 e^{-u^2} \mathrm{d}u
+$$
+
+Données numériques : $D=2,8\cdot 10^{-7} \; m^2\cdot s^{-1}$ (diffusivité thermique du sol terrestre).
+
+\setcounter{subparagraph}{0}
+
+\subparagraph{}
+\textit{Écrire une fonction python, appelée \textsf{integrale}, permettant de réaliser d'intégrer une fonction sur un intervalle, en utilisant la méthode du point milieu.}
+
+\subparagraph{}
+\textit{Écrire une fonction Python, appelée \textsf{erf}, prenant en paramètre un nombre réel positif ou nul $x$ et retournant la valeur de \textsf{erf(x)}.}
+
+\subparagraph{}
+\textit{Écrire une fonction Python, appelée \textsf{Temperature}, prenant en paramètre la profondeur $z$ (exprimée en $m$) et le temps $t$ (exprimé en $s$) et retournant la valeur de la température $T(z, t)$.}
+
+\subparagraph{}
+\textit{Écrire un programme Python permettant de créer une liste, nommée \textsf{ListeErreur}, contenant les valeurs de la fonction \textsf{erf(x)} pour $x$ variant par pas de 0,05 dans l’intervalle $[0 ; 2]$.}
+
+\subparagraph{}
+\textit{En déduire, à 1 cm près, à quelle profondeur minimale $z_{min}$ il est nécessaire d'enterrer une canalisation d'eau pour qu'une brusque chute de la température de la surface du sol de 5\textdegree C à -15 \textdegree C n'entraine pas le gel de cette canalisation au bout de 10 jours.}
+
+\end{document}
+
