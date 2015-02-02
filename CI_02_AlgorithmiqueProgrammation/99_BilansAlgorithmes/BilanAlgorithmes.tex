@@ -782,7 +782,63 @@ def integrale_rectangles_droite(f,a,b,nb):
 \item \textsf{res}, réel : valeur approchée de $\int\limits_a^b f(t)\text{d}t$
 \end{itemize}
 \\
-\textbf{integrale\_rectangles\_droite}(\textsf{f,a,b,nb}) :\\
+\textbf{integrale\_rectangles\_milieu}(\textsf{f,a,b,nb}) :\\
+\hspace{.4cm}\textsf{res} $\leftarrow$ \textsf{0}\\
+\hspace{.4cm}\textsf{pas} $\leftarrow$ \textsf{(b-a)/nb}\\
+\hspace{.4cm}\textsf{x} $\leftarrow$ \textsf{a+pas/2}\\
+\hspace{.4cm}\textbf{Tant que} \textsf{x<b} : \textbf{Faire}\\
+\hspace{.8cm}\textsf{res}$\leftarrow$ \textsf{res + pas *} 
+\textbf{f(}\textsf{x}\textbf{)}\\
+\hspace{.8cm}\textsf{x} $\leftarrow$ \textsf{x+pas}\\
+\hspace{.4cm}\textbf{Fin Tant que} \\
+\hspace{.4cm}\textbf{Retourner} \textsf{res}\\
+\hline
+\end{tabular}
+\end{center}
+\end{pseudo}
+
+\begin{py}
+\begin{python}
+def integrale_rectangles_milieu(f,a,b,nb):
+    """
+    Calcul de la valeur approchée de l'intégrale de f(x) entre a et b par la méthode du point milieu.
+    Keywords arguments :
+    f -- fonction à valeur dans IR
+    a -- flt, borne inférieure de l'intervalle d'intégration
+    b -- flt, borne supérieure de l'intervalle d'intégration
+    nb -- int, nombre d'échantillons pour le calcul
+    """
+    res = 0
+    pas = (b-a)/nb
+    x = a+pas/2
+    while x<b:
+        res = res + pas *f(x)
+        x = x + pas
+    return res
+\end{python}
+\end{py}
+
+\subsection{Méthode des trapèzes pour le calcul approché d'une intégrale sur un segment}
+
+\begin{pseudo}
+\begin{center}
+\begin{tabular}{p{.9\textwidth}}
+\hline
+\textbf{Algorithme :} Calcul d'intégrale par la méthode des trapèzes\\
+\hline
+\textbf{Données :}
+\begin{itemize}
+\item \textsf{f}, fonction : fonction définie sur $[a,b]$  
+\item \textsf{a}, réel : borne inférieure de l'intervalle de définition
+\item \textsf{b}, réel : borne supérieure de l'intervalle de définition, \textsf{b$\geq$a}
+\item \textsf{nb}, entiers : nombre d'échantillons pour calculer l'intégrale
+\end{itemize}
+\textbf{Résultat :} 
+\begin{itemize}
+\item \textsf{res}, réel : valeur approchée de $\int\limits_a^b f(t)\text{d}t$
+\end{itemize}
+\\
+\textbf{integrale\_trapeze}(\textsf{f,a,b,nb}) :\\
 \hspace{.4cm}\textsf{res} $\leftarrow$ \textsf{0}\\
 \hspace{.4cm}\textsf{pas} $\leftarrow$ \textsf{(b-a)/nb}\\
 \hspace{.4cm}\textsf{x} $\leftarrow$ \textsf{a}\\
@@ -799,10 +855,9 @@ def integrale_rectangles_droite(f,a,b,nb):
 
 \begin{py}
 \begin{python}
-def integrale_rectangles_milieu(f,a,b,nb):
+def integrale_trapeze(f,a,b,nb):
     """
-    Calcul de la valeur approchée de l'intégrale de f(x) entre a et b par la 
-    méthode du point milieu.
+    Calcul de la valeur approchée de l'intégrale de f(x) entre a et b par la méthode des trapèzes.
     Keywords arguments :
     f -- fonction à valeur dans IR
     a -- flt, borne inférieure de l'intervalle d'intégration
@@ -811,7 +866,7 @@ def integrale_rectangles_milieu(f,a,b,nb):
     """
     res = 0
     pas = (b-a)/nb
-    x = a+pas
+    x = a
     while x<b-pas:
         res = res + pas *(f(x)+f(x+pas))/2
         x = x + pas
@@ -819,8 +874,9 @@ def integrale_rectangles_milieu(f,a,b,nb):
 \end{python}
 \end{py}
 
-\subsection{Méthode des trapèzes pour le calcul approché d'une intégrale sur un segment}
-\textit{cf.} méthodes des rectangles par la méthode du point milieu.
+\begin{rem}
+En raison de la comparaison de réels,  il pourrait être préférable de réaliser la boucle \textsf{while} sur un compteur d'échantillons.
+\end{rem}
 
 \subsection{Méthode d'Euler pour la résolution d'une équation différentielle}
 
@@ -1554,3 +1610,4 @@ Informatique pour tous en classes préparatoires aux grandes écoles,
 \end{document}
 
 
+ 
