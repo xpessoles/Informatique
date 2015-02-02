@@ -15,8 +15,8 @@
 
 % Commenter \proffalse et décommenter \proftrue pour avoir le corrigé
 \newif\ifprof
-\proftrue
-%\proffalse
+%\proftrue
+\proffalse
 
 \newif\iftd
 \tdtrue
@@ -77,12 +77,97 @@ Informatique - Cours}}
 \begin{flushright}
 \large{\textsl{Nom : .......................................}}
 \end{flushright}
-\fi
 
 \vspace{1cm}
+\fi
 
 
 \section*{Question de cours}
+\ifprof
+\else
+On donne le code de la fonction mystère.
+
+\begin{py}
+\begin{python}
+def mystere(nb,tab):
+    """ 
+    Entrées : 
+        * nb,int -- nombre entier
+        * tab,list -- liste de nombres entiers triés
+    Sorties : 
+        * 
+    """
+    g, d = 0, len(tab)-1
+    while g <= d:
+        m = (g + d) // 2
+        if tab[m] == nb:
+            return m
+        if tab[m] < nb:
+            g = m+1
+        else:
+            d = m-1
+    return None
+\end{python}
+\end{py}
+\fi
+
+\subparagraph{}
+\textit{Quel est le nom de cet algorithme ? Que renvoie-t-il ?}
+\ifprof
+\begin{corrige}
+Il s'agit de l'algorithme de recherche d'un nombre par dichotomie dans une liste triée. 
+Il renvoie l'index du nombre recherché si le nombre existe dans la liste. Il renvoie \textsf{None} si le nombre est absent.
+\end{corrige}
+\else
+
+\begin{tabular}{|p{.95\textwidth}|}
+\hline
+$$\quad$$
+\vspace{1cm}
+$$\quad$$ \\
+\hline
+\end{tabular}
+\fi
+
+\subparagraph{}
+\textit{Indiquer les valeurs successives prises par \textsf{m} dans le cas où \textsf{nb=4} et 
+\textsf{tab=[1,2,3,4,5,6,7,8,9]}.}
+\ifprof
+\begin{corrige}
+4, 1, 2, 3
+\end{corrige}
+\else
+
+\begin{tabular}{|p{.95\textwidth}|}
+\hline
+$$\quad$$
+%\vspace{1cm}
+$$\quad$$ \\
+\hline
+\end{tabular}
+\fi
+
+\subparagraph{}
+\textit{Quelle est la complexité de l'algorithme ? Expliquer brièvement pourquoi ? Quelle serait la complexité d'un algorithme naïf ayant le même objectif ?}
+\ifprof
+\begin{corrige}
+Cet algorithme est de complexité logarithmique: à chaque itération, la liste est divisée en 2 jusqu'à ne contenir qu'un élément. 
+
+L'algorithme naïf est de complexité linéaire.
+
+\end{corrige}
+\else
+
+\begin{tabular}{|p{.95\textwidth}|}
+\hline
+$$\quad$$
+\vspace{1cm}
+$$\quad$$ \\
+\hline
+\end{tabular}
+\fi
+
+
 
 \section*{Tracé de l'abaque de temps de réponse à 5 \%}
 
@@ -92,6 +177,8 @@ L'objectif de ces travaux est de construire le programme permettant de tracer l'
 \end{obj}
 
 \subsection*{Mise en situation}
+\ifprof
+\else
 
 L'équation différentielle d'un système du second ordre peut se mettre sous la forme :
 
@@ -135,13 +222,15 @@ $$
 \end{itemize} 
 
 \begin{center}
-\textbf{Dans l'ensemble de ce sujet, on considèrera que $s$ est une fonction du temps réduit $t\cdot\omega_0$.}
+\textbf{Dans l'ensemble de ce sujet, on considèrera que $s$ est une fonction du temps réduit $t\cdot\omega_0$. On notera indifféremment le coefficient d'amortissement $z$ ou $\xi$.}
 \end{center}
-
+\fi
 
 \subsection*{Tracé de la réponse indicielle}
-
+\ifprof
+\else
 On dispose des fonctions Python \textbf{\textsf{f\_pseudo}} et \textbf{\textsf{f\_aperiodique}} permettant d'évaluer la fonction pour $s$ pour un couple $(t\omega_0,\xi)$.
+\fi
 
 \subparagraph{} \textit{Donner, en Python, le contenu de la fonction \textsf{f\_critique} permettant de définir la fonction $(t\omega_0) \rightarrow s(t\omega_0)$ dans le cas où $\xi=1$. On respectera impérativement la syntaxe Python. Les spécifications de la fonction seront les suivantes : }
 \begin{py}
@@ -177,6 +266,13 @@ def f_critique(t,om0):
 \end{corrige}
 \else
 
+\begin{tabular}{|p{.95\textwidth}|}
+\hline
+$$\quad$$
+\vspace{1cm}
+$$\quad$$ \\
+\hline
+\end{tabular}
 \fi
 
 \subparagraph{} \textit{Donner, en Python, le contenu de la fonction \textsf{f\_s} permettant de définir la fonction $(t\omega_0,\xi) \rightarrow s(t\omega_0\xi)$ dans le cas où $\xi\in \mathbb{R}_+^*$. On donne ci-dessous les spécifications de la fonction.}
@@ -221,7 +317,19 @@ def f_s(tom0,z) :
 \end{corrige}
 \else
 
+\begin{tabular}{|p{.95\textwidth}|}
+\hline
+$$\quad$$
+\vspace{2cm}
+$$\quad$$ \\
+\hline
+\end{tabular}
 \fi
+
+\ifprof
+\else
+
+\vspace{1cm}
 
 La fonction \textbf{\textsf{trace\_s}} donnée ci-dessous permet de tracer $s(t\omega_0,\xi)$ pour $t\omega_0 \in [0,10]$ par pas de 1 et pour une valeur de $\xi$ déterminée. Les deux appels successifs de la fonction \textbf{\textsf{trace\_s}} permettent de réaliser le tracer les 2 courbes ci-dessous.
 
@@ -250,6 +358,7 @@ trace_s(0.7)
 \includegraphics[width=\textwidth]{images/courbe}
 \end{center}
 \end{minipage}
+\fi
 
 \subparagraph{}
 \textit{Expliquer l'objectif des lignes 2 à 9.}
@@ -265,7 +374,20 @@ trace_s(0.7)
 \vspace{.25cm}
 \fi
 
+\begin{tabular}{|p{.95\textwidth}|}
+\hline
+$$\quad$$
+\vspace{1cm}
+$$\quad$$ \\
+\hline
+\end{tabular}
+\ifprof
+\else
+
+\vspace{1cm}
+
 On observe que la courbe tracée n'est pas lissée. Pour avoir un meilleur rendu, il est nécessaire d'évaluer la fonction en davantage de points. 
+\fi
 
 \subparagraph{}
 \textit{Modifier les lignes 5 et 6 pour que la courbe tracée soit réalisée en 1000 points sur un intervalle de $t \omega_0$ variant de 0 à 10. }
@@ -287,6 +409,14 @@ def trace_s(z):
 \end{py}
 \end{corrige}
 \else
+
+\begin{tabular}{|p{.95\textwidth}|}
+\hline
+$$\quad$$
+\vspace{2cm}
+$$\quad$$ \\
+\hline
+\end{tabular}
 \fi
 
 \subsection*{Tracé de l'abaque}
@@ -300,6 +430,13 @@ On note $t_r$  le temps de réponse à 5\%. L'abaque du temps de réponse permet
 La valeur finale est 1. 
 \end{corrige}
 \else
+
+
+\begin{tabular}{|p{.95\textwidth}|}
+\hline
+$$\quad$$ \\
+\hline
+\end{tabular}
 \fi
 
 \subparagraph{}
@@ -336,8 +473,20 @@ def trace_s(z):
 \end{py}
 \end{corrige}
 \else
+
+
+\begin{tabular}{|p{.95\textwidth}|}
+\hline
+$$\quad$$
+\vspace{2cm}
+$$\quad$$ \\
+\hline
+\end{tabular}
 \fi
 
+\ifprof
+\else
+\vspace{1cm}
 
 On donne la fonction suivante permettant de connaître le temps de réponse réduit à partir duquel la réponse indicielle d'un système est dans la bande à plus ou moins 5\% pour un coefficient d'amortissement particulier.
 
@@ -370,22 +519,44 @@ def calcul_tom0(z,tom0=500):
 \end{python}
 \end{py}
 
+\fi
 
 \subparagraph{}
 \textit{Expliquer le mode de recherche du temps de réponse à 5\% dans le cas où $z<0,7$ puis dans le cas où $z\geq 0,7$. Pourquoi distingue-t-on ces 2 cas ? On pourra s'aider de l'abaque donné ci-dessous.}
 
+\ifprof
+\else
 \begin{rem}
 On pourra remarquer que dans un cas, la recherche se fait << en avançant >> et dans le second cas << en reculant >>. 
 \end{rem}
 
 
+\begin{tabular}{|p{.95\textwidth}|}
+\hline
+$$\quad$$
+\vspace{1cm}
+$$\quad$$ \\
+\hline
+\end{tabular}
+
+\vspace{1cm}
+
+\fi
+
 \ifprof
 \begin{corrige}
 Pour déterminer le temps de réponse à 5\%, on cherche le dernier temps pour lequel, le signal est dans la bande à plus ou moins 5\%. En régime permanent, le signal est dans la bande. En << remontant le temps >> la première valeur hors de la bande correspond donc au temps de réponse recherché. 
+
+Lorsque $\xi<0,7$, le système est oscillant, et le temps de réponse est mesuré lorsque les oscillations deviennent <<petites>>. Il est donc préférable de partir de la fin.
+
+Lorsque $\xi>0,7$, on sait que dès lors que le signal entre dans la bande, il n'en sortira plus. Il est donc plus rapide de commencer par le début. 
+
 \end{corrige}
 \else
 \fi
 
+\ifprof
+\else
 L'algorithme suivant permet de créer les listes \textsf{xx} et \textsf{yy} permettant de tracer l'abaque du temps de réponse réduit en fonction du coefficient d'amortissement. 
 
 \begin{py}
@@ -416,7 +587,7 @@ while z<=100:
     z=z+pasz
 \end{python}
 \end{py}
-
+\fi
 
 
 \subparagraph{}
@@ -427,9 +598,54 @@ while z<=100:
 \item Pourquoi ne pas conserver le même pas sur chacun de ces intervalles ?
 \item En vous aidant du tracé de l'abaque, expliquer pourquoi \textsf{tom0} est calculé différemment suivant la valeur de \textsf{z} ? Expliquer le choix des arguments de la fonction \textsf{calcul\_tom0} dans chacun des cas. 
 \end{enumerate}}
+\ifprof
+\begin{corrige}
+\begin{enumerate}
+\item $z$ variera de 0,01 à 100.
+\item On a : 
+\begin{itemize}
+\item si $0,01<z<0,1$ : $pasz = 0,001$;
+\item si $0,1<z<1$ : $pasz = 0,01$;
+\item si $1<z<10$ : $pasz = 0,1$;
+\item si $10<z<100$ : $pasz = 1$.
+\end{itemize}
+\item La courbe est tracée en diagramme log-log. On adopte donc un pas différent par décade. 
+\item Lorsque $\xi<0.7$, $tom0$ décroit lorsque $z$ croît. Pour trouver plus rapidement $tom0$ on peut donc utiliser la valeur prise précédemment (dans ce cas, la recherche de tom0 dans la fonction \textsf{calcul\_tom0} se fait à rebours). A l'inverse, lorsque $\xi>0.7$, $tom0$ croit lorsque $z$ croît. On choisit dans ce cas, de partir à chaque fois de 0 (en modifiant le code, il serait possible de partir du $tom0$ calculé précédemment, mais il faudrait réfléchir à la gestion de la bascule de $\xi<0,7$ à $\xi>0,7$).
+\end{enumerate}
+\end{corrige}
+\else
 
 
+\begin{tabular}{|p{.95\textwidth}|}
+\hline
+$$\quad$$
+\vspace{3cm}
+$$\quad$$ \\
+\hline
+\end{tabular}
 
+\fi
+
+\subparagraph{}
+\textit{On souhaite stocker les données des listes \textsf{xx} et \textsf{yy} dans un fichier texte encodé en ASCII. Chacun des nombres doit être stocké sur 17 caractères. Indiquer la taille du fichier ainsi créé.}
+\ifprof
+\begin{corrige}
+90 valeurs sont calculées pour chaque intervalles de $z$. $xx$ et $yy$ ont donc une taille de 360 éléments. 
+En prenant en compte les 34 caractères, l'espace et le retour à la ligne (2 caractères), une ligne a donc une taille de 37 octets. Le fichier sera donc d'approximativement de 13 320 octets.
+\end{corrige}
+\else
+
+\begin{tabular}{|p{.95\textwidth}|}
+\hline
+$$\quad$$
+\vspace{2cm}
+$$\quad$$ \\
+\hline
+\end{tabular}
+
+\fi
+\ifprof
+\else
 
 \begin{py}
 \begin{python}
@@ -452,5 +668,5 @@ plt.grid(which="minor",axis="y",linewidth=0.75, linestyle='-', color='0.75')
 \begin{center}
 \includegraphics[width=.8\linewidth]{images/figure_1}
 \end{center}
-
+\fi
 \end{document}

@@ -115,14 +115,36 @@ def calcul_tom0(z,tom0=500):
             x = f_s(tom0,z)
         tom0=tom0-pas_tom0
     return tom0
-    
+
+
+def mystere(nb,tab):
+    """ 
+    Entrées : 
+        * nb,int -- nombre entier
+        * tab,list -- liste de nombres entiers triés
+    Sorties : 
+        * 
+    """
+    g, d = 0, len(tab)-1
+    while g <= d:
+        m = (g + d) // 2
+        print(m)
+        if tab[m] == nb:
+            return m
+        if tab[m] < nb:
+            g = m+1
+        else:
+            d = m-1
+    return None
+#mystere(4,[1,2,3,4,5,6,7,8,9])
+
 xx,yy = [],[]
 n = 1000
 z = 0.01
 tom0 = 500
-pasz = 0.01
+pasz = 0.001
 while z<=100:
-    print(z)
+    #print(z)
     if z<0.7:
         tom0=calcul_tom0(z,tom0)
     else :
@@ -135,14 +157,14 @@ while z<=100:
     elif z<10:
         pasz = 0.1
     else :
-        paz = 1
-    
+        pasz = 1
+    print(z,pasz)
     xx.append(z)
     yy.append(tom0)
     z=z+pasz
 
 
-
+"""
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -156,4 +178,4 @@ plt.grid(which="major",axis="x",linewidth=1.5, linestyle='-')
 plt.grid(which="major",axis="y",linewidth=1.5, linestyle='-')
 plt.grid(which="minor",axis="x",linewidth=0.75, linestyle='-', color='0.75')
 plt.grid(which="minor",axis="y",linewidth=0.75, linestyle='-', color='0.75')
-
+"""
