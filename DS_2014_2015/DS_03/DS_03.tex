@@ -13,14 +13,10 @@
 \newboolean{xp}
 \setboolean{xp}{true}
 
-\newboolean{prof}
-\setboolean{prof}{false}
-
-
 % Commenter \proffalse et décommenter \proftrue pour avoir le corrigé
 \newif\ifprof
-%\proftrue
-\proffalse
+\proftrue
+%\proffalse
 
 \newif\iftd
 \tdtrue
@@ -85,6 +81,11 @@ Informatique - Cours}}
 
 \vspace{1cm}
 
+
+\section*{Question de cours}
+
+\section*{Tracé de l'abaque de temps de réponse à 5 \%}
+
 \begin{obj}
 
 L'objectif de ces travaux est de construire le programme permettant de tracer l'abaque du temps de réponse réduit utilisé en asservissement pour connaître le temps de réponse à 5\% des systèmes d'ordre 2. 
@@ -142,8 +143,41 @@ $$
 
 On dispose des fonctions Python \textbf{\textsf{f\_pseudo}} et \textbf{\textsf{f\_aperiodique}} permettant d'évaluer la fonction pour $s$ pour un couple $(t\omega_0,\xi)$.
 
-\subparagraph{} \textit{Donner, en Python, le contenu de la fonction \textsf{f\_critique} permettant de définir la fonction $(t\omega_0) \rightarrow s(t\omega_0)$ dans le cas où $\xi=1$.}
+\subparagraph{} \textit{Donner, en Python, le contenu de la fonction \textsf{f\_critique} permettant de définir la fonction $(t\omega_0) \rightarrow s(t\omega_0)$ dans le cas où $\xi=1$. On respectera impérativement la syntaxe Python. Les spécifications de la fonction seront les suivantes : }
+\begin{py}
+\begin{python}
+def f_critique(t,om0):
+    """
+    Fonction permettant de calculer s(t) dans le cas ou z>1. 
+    Entrées :
+        * t, flt : le temps en secondes
+        * om0, flt : la pulsation en rad.s-1
+    Sortie : 
+        * res, flt : s(t). Ici, sans unité.
+    """
+\end{python}
+\end{py}
 
+\ifprof
+\begin{corrige}
+\begin{py}
+\begin{python}
+def f_critique(t,om0):
+    """
+    Fonction permettant de calculer s(t) dans le cas ou z>1. 
+    Entrées :
+        * t, flt : le temps en secondes
+        * om0, flt : la pulsation en rad.s-1
+    Sortie : 
+        * res, flt : s(t). Ici, sans unité.
+    """
+    return 1-(1+t*om0)*math.exp(-om0*t) 
+\end{python}
+\end{py}
+\end{corrige}
+\else
+
+\fi
 
 \subparagraph{} \textit{Donner, en Python, le contenu de la fonction \textsf{f\_s} permettant de définir la fonction $(t\omega_0,\xi) \rightarrow s(t\omega_0\xi)$ dans le cas où $\xi\in \mathbb{R}_+^*$. On donne ci-dessous les spécifications de la fonction.}
 
@@ -156,11 +190,38 @@ def f_s(tom0,z):
         * tom0, flt : temps de réponse réduit
         * z, flt : coefficient d'amortissement
     Sortie : 
-        * s(tom0,z)
+        * s(tom0,z), flt
     """
 \end{python}
 \end{py}
 
+\ifprof
+\begin{corrige}
+\begin{py}
+\begin{python}
+def f_s(tom0,z) :
+    """
+    Fonction permettant de calculer la réponse indicielle d'un système du second ordre. 
+    Entrées : 
+        * tom0, flt : temps de réponse réduit
+        * z, flt : coefficient d'amortissement
+    Sortie : 
+        * s(tom0,z), flt
+    """
+    if z<0 :
+        return None
+    elif z<1 :
+        return f2_pseudo(tom0,z)
+    elif z==1:
+        return f2_critique(tom0)
+    else : 
+        return f2_aperiodique(tom0,z)
+\end{python}
+\end{py}
+\end{corrige}
+\else
+
+\fi
 
 La fonction \textbf{\textsf{trace\_s}} donnée ci-dessous permet de tracer $s(t\omega_0,\xi)$ pour $t\omega_0 \in [0,10]$ par pas de 1 et pour une valeur de $\xi$ déterminée. Les deux appels successifs de la fonction \textbf{\textsf{trace\_s}} permettent de réaliser le tracer les 2 courbes ci-dessous.
 
@@ -192,8 +253,17 @@ trace_s(0.7)
 
 \subparagraph{}
 \textit{Expliquer l'objectif des lignes 2 à 9.}
-
+\ifprof
+\begin{corrige}
+\begin{itemize}
+\item La ligne 2 permet de définir la fonction.
+\item Les lignes 3 et 4 permettent d'initialiser deux listes.
+\item Les lignes 5 à 8 vont permettre de créer deux listes de 11 éléments. Ainsi la liste x contiendra le temps réduit de 0 à 10 et la liste y contiendra les valeurs de s(x) pour chacune de ces 11 valeurs. 
+\end{itemize}
+\end{corrige}
+\else
 \vspace{.25cm}
+\fi
 
 On observe que la courbe tracée n'est pas lissée. Pour avoir un meilleur rendu, il est nécessaire d'évaluer la fonction en davantage de points. 
 
@@ -225,6 +295,12 @@ On note $t_r$  le temps de réponse à 5\%. L'abaque du temps de réponse permet
 
 \subparagraph{}
 \textit{Dans les conditions de la fonction $s$ définie dans la partie précédente, quelle est la valeur finale prise par $s(t)$ ?} 
+\ifprof
+\begin{corrige}
+La valeur finale est 1. 
+\end{corrige}
+\else
+\fi
 
 \subparagraph{}
 \textit{Écrire en Python la fonction \textsf{\textbf{is\_in\_strip}} ayant les spécifications suivantes : } 
@@ -243,19 +319,138 @@ def is_in_strip(x):
 \end{python}
 \end{py}
 
-On donne la fonction suivante permettant de connaître le temps de réponse réduit à partir duquel la réponse indicielle d'un système est dans la bande à plus ou moins 5\%.
+\ifprof
+\begin{corrige}
+\begin{py}
+\begin{python}
+def trace_s(z):
+    x = []
+    y = []
+    n = 1000
+    for i in range(n+1):
+        t = 10*i/n
+        x.append(t)
+        y.append(f_s(t,z))
+    plot(x,y)
+\end{python}
+\end{py}
+\end{corrige}
+\else
+\fi
+
+
+On donne la fonction suivante permettant de connaître le temps de réponse réduit à partir duquel la réponse indicielle d'un système est dans la bande à plus ou moins 5\% pour un coefficient d'amortissement particulier.
 
 \begin{py}
 \begin{python}
-def f(z):
-    tom0  = 500
-    pas_tom0  = 0.05
+def calcul_tom0(z,tom0=500):
+    """
+    Recherche du temps de réponse à 5%
+    Entrées : 
+       * z, flt : coefficient d'amortissement
+       * tom0 (flt, optionnel) : si non précisé, on calcule le temps de réponse en partant de tom0 = 500
+    Sortie : 
+       * tom0 (flt) : temps de réponse à 5%
+    """
+    pas_tom0=0.05
     x = f_s(tom0,z) 
-    while is_in_strip(x) :
-        x = f_s(tom0,z)
-        tom0  = tom0 - pas_tom0
+    if z<0.7:
+        # Dans cas, s'assurer que le tom0 initial est suffisamment grand
+        while is_in_strip(x) :
+            tom0  = tom0 - pas_tom0
+            x = f_s(tom0,z)
+        tom0=tom0+pas_tom0
+    else :
+        # Dans cas, s'assurer que le tom0 initial est suffisamment petit
+        while not is_in_strip(x) :
+            tom0  = tom0 + pas_tom0 
+            x = f_s(tom0,z)
+        tom0=tom0-pas_tom0
     return tom0
 \end{python}
 \end{py}
+
+
+\subparagraph{}
+\textit{Expliquer le mode de recherche du temps de réponse à 5\% dans le cas où $z<0,7$ puis dans le cas où $z\geq 0,7$. Pourquoi distingue-t-on ces 2 cas ? On pourra s'aider de l'abaque donné ci-dessous.}
+
+\begin{rem}
+On pourra remarquer que dans un cas, la recherche se fait << en avançant >> et dans le second cas << en reculant >>. 
+\end{rem}
+
+
+\ifprof
+\begin{corrige}
+Pour déterminer le temps de réponse à 5\%, on cherche le dernier temps pour lequel, le signal est dans la bande à plus ou moins 5\%. En régime permanent, le signal est dans la bande. En << remontant le temps >> la première valeur hors de la bande correspond donc au temps de réponse recherché. 
+\end{corrige}
+\else
+\fi
+
+L'algorithme suivant permet de créer les listes \textsf{xx} et \textsf{yy} permettant de tracer l'abaque du temps de réponse réduit en fonction du coefficient d'amortissement. 
+
+\begin{py}
+\begin{python}
+xx,yy = [],[]
+n = 1000
+z = 0.01
+tom0 = 500
+pasz = 0.01
+while z<=100:
+    print(z)
+    if z<0.7:
+        tom0=calcul_tom0(z,tom0)
+    else :
+        tom0=calcul_tom0(z,0)
+  
+    if z<0.1:
+        pasz = 0.001
+    elif z<1:
+        pasz = 0.01
+    elif z<10:
+        pasz = 0.1
+    else :
+        paz = 1
+    
+    xx.append(z)
+    yy.append(tom0)
+    z=z+pasz
+\end{python}
+\end{py}
+
+
+
+\subparagraph{}
+\textit{
+\begin{enumerate}
+\item Donner l'intervalle de variation de \textsf{z} pour le tracé demandé.
+\item Donner le pas de \textsf{z} sur chacun des intervalles.
+\item Pourquoi ne pas conserver le même pas sur chacun de ces intervalles ?
+\item En vous aidant du tracé de l'abaque, expliquer pourquoi \textsf{tom0} est calculé différemment suivant la valeur de \textsf{z} ? Expliquer le choix des arguments de la fonction \textsf{calcul\_tom0} dans chacun des cas. 
+\end{enumerate}}
+
+
+
+
+\begin{py}
+\begin{python}
+import matplotlib.pyplot as plt
+import numpy as np
+
+plt.plot(xx,yy,label="Temps de réponse réduit $tr \\omega_0$")
+plt.xlabel("Coefficient d'amortissement $\\xi$")
+plt.ylabel("Temps de réponse réduit $tr \\omega_0$")
+plt.title("Temps de réponse réduit d'un système du 2nd ordre")
+plt.legend()
+plt.loglog()
+plt.grid(which="major",axis="x",linewidth=1.5, linestyle='-')
+plt.grid(which="major",axis="y",linewidth=1.5, linestyle='-')
+plt.grid(which="minor",axis="x",linewidth=0.75, linestyle='-', color='0.75')
+plt.grid(which="minor",axis="y",linewidth=0.75, linestyle='-', color='0.75')
+\end{python}
+\end{py}
+
+\begin{center}
+\includegraphics[width=.8\linewidth]{images/figure_1}
+\end{center}
 
 \end{document}

@@ -47,7 +47,7 @@ except,exec,finally,for,from,global,if,import,in,i s,
 lambda,not,or,pass,print,raise,return,try,while},
 emphstyle=\color{black}\bfseries,
 emph={[2]True, False, None, self},
-emphstyle=[2]\color{olive},
+emphstyle=[2]\color{black},
 emph={[3]from, import, as},
 emphstyle=[3]\color{blue},
 upquote=true,
@@ -86,6 +86,8 @@ literate=%
             {À}{{\`{A}}}1
             {Â}{{\^{A}}}1
             {Î}{{\^{I}}}1, % pour regler les pb d accent utf8 dans les codes
+            numbers=right, % where to put the line-numbers; possible values are (none, left, right)
+           numbersep=-10pt,
 %framexleftmargin=1mm, framextopmargin=1mm, frame=shadowbox, rulesepcolor=\color{blue},#1
 %backgroundcolor=\color{SourceHintergrund}, 
 %framexleftmargin=1mm, framexrightmargin=1mm, framextopmargin=1mm, frame=single, framerule=1pt, rulecolor=\color{black},#1

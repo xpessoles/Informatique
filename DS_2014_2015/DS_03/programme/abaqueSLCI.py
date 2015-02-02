@@ -10,7 +10,17 @@ def f_pseudo(t,z,om0):
     return 1-((math.exp(-z*om0*t))/(math.sqrt(1-z*z)))*math.sin(t*om0*math.sqrt(1-z*z)+math.asin(math.sqrt(1-z*z)))
 
 def f_critique(t,om0):
-    return 1-(1+t*om0)*math.exp(-om0*t) 
+    """
+    Fonction permettant de calculer s(t) dans le cas ou z>1. 
+    Entrées :
+        * t, flt : le temps en secondes
+        * om0, flt : la pulsation en rad.s-1
+    Sortie : 
+        * res, flt : s(t). Ici, sans unité.
+    """
+    res = 1-(1+t*om0)*math.exp(-om0*t) 
+    return res
+
 
 def f_aperiodique(t,z,om0):
     return 1+(math.exp(-t*om0*(z+math.sqrt(z*z+1))))/(2*(z*math.sqrt(z*z-1)+z*z-1))-(math.exp(-t*om0*(z-math.sqrt(z*z+1))))/(2*(z*math.sqrt(z*z-1)-z*z+1))
@@ -27,6 +37,14 @@ def f2_aperiodique(tom0,z):
 
     
 def f_s(tom0,z) :
+    """
+    Fonction permettant de calculer la réponse indicielle d'un système du second ordre. 
+    Entrées : 
+        * tom0, flt : temps de réponse réduit
+        * z, flt : coefficient d'amortissement
+    Sortie : 
+        * s(tom0,z)
+    """
     if z<0 :
         return None
     elif z<1 :
@@ -57,5 +75,85 @@ def trace_s(z):
     plot(x,y)
 
 # Appels de la fonction trace
-trace_s(0.4)
-trace_s(0.7)
+#trace_s(0.4)
+#trace_s(0.7)
+
+
+def is_in_strip(x):
+    """
+    Fonction permettant de savoir si une valeur est dans la bande des + ou - 5% de la valeur finale.
+    Entrée : 
+        x, flt : réel
+    Sortie : 
+        True si la valeur est dans la bande à + ou - 5%
+        False si la valeur n'est pas dans la bande à + ou - 5%
+    """
+    if x>.95 and x<1.05:
+        return True
+    else:
+        return False
+
+def calcul_tom0(z,tom0=500):
+    """
+    Recherche du temps de réponse à 5%
+    Entrées : 
+       * z, flt : coefficient d'amortissement
+       * tom0 (flt, optionnel) : si non précisé, on calcule le temps de réponse en partant de tom0 = 500
+    Sortie : 
+       * tom0 (flt) : temps de réponse à 5%
+    """
+    pas_tom0=0.05
+    x = f_s(tom0,z) 
+    if z<0.7:
+        while is_in_strip(x) :
+            tom0  = tom0 - pas_tom0
+            x = f_s(tom0,z)
+        tom0=tom0+pas_tom0
+    else :
+        while not is_in_strip(x) :
+            tom0  = tom0 + pas_tom0 
+            x = f_s(tom0,z)
+        tom0=tom0-pas_tom0
+    return tom0
+    
+xx,yy = [],[]
+n = 1000
+z = 0.01
+tom0 = 500
+pasz = 0.01
+while z<=100:
+    print(z)
+    if z<0.7:
+        tom0=calcul_tom0(z,tom0)
+    else :
+        tom0=calcul_tom0(z,0)
+  
+    if z<0.1:
+        pasz = 0.001
+    elif z<1:
+        pasz = 0.01
+    elif z<10:
+        pasz = 0.1
+    else :
+        paz = 1
+    
+    xx.append(z)
+    yy.append(tom0)
+    z=z+pasz
+
+
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+plt.plot(xx,yy,label="Temps de réponse réduit $tr \\omega_0$")
+plt.xlabel("Coefficient d'amortissement $\\xi$")
+plt.ylabel("Temps de réponse réduit $tr \\omega_0$")
+plt.title("Temps de réponse réduit d'un système du 2nd ordre")
+plt.legend()
+plt.loglog()
+plt.grid(which="major",axis="x",linewidth=1.5, linestyle='-')
+plt.grid(which="major",axis="y",linewidth=1.5, linestyle='-')
+plt.grid(which="minor",axis="x",linewidth=0.75, linestyle='-', color='0.75')
+plt.grid(which="minor",axis="y",linewidth=0.75, linestyle='-', color='0.75')
+
