@@ -13,6 +13,10 @@
 \newboolean{prof}
 \setboolean{prof}{true}
 
+\newif\ifprof
+%\proftrue
+\proffalse
+
 \usepackage[%
     pdftitle={Problèmes stationnaires},
     pdfauthor={Xavier Pessoles},
@@ -75,10 +79,12 @@ Informatique - Cours}}
 En première approximation, sans prendre en compte le mouvement de rotation de la balle et les divers effets aérodynamiques, quel doit être l'angle à l'impact du club avec la balle et la vitesse initiale de la balle pour que le balle aille directement dans le trou (sans rebond) ?
 
 \begin{savoir}
-Problème stationnaire à une dimension, linéaire ou non conduisant à la résolution
+\begin{itemize}
+\item Problème stationnaire à une dimension, linéaire ou non conduisant à la résolution
 approchée d’une équation algébrique.% ou transcendante. 
-Méthode de dichotomie,
-méthode de Newton.
+\item Méthode de dichotomie.
+\item Méthode de Newton.
+\end{itemize}
 \end{savoir}
 
 
@@ -282,6 +288,7 @@ L'algorithme de dichotomie est le suivant :
  \textit{Implémenter cet algorithme en Python}
 
 On veillera à vérifier que l'équation comporte initialement au moins une solution. On étudiera, a posteriori, la possibilité d'existence de deux solutions. 
+\vspace{6cm}
  
 \end{exemple}
 
@@ -327,15 +334,17 @@ La complexité de l'algorithme de recherche dichotomique est donc en $\mathcal{O
 
 \subsection{Application sur l'exemple}
 
+
+\begin{minipage}[c]{.49\linewidth}
 Le trou étant d'un diamètre de $108\;mm$ et la balle ayant un diamètre de $42,67\; mm$. L'erreur admissible sur l'impact de la balle est donc de $((108-42,67)/2)/1000 \simeq 0,032\; m$. Dans ce cas, obtenir une erreur inférieure pourrait accroître les calculs sans pour autant apporter une réelle plus value du point de vue du golfeur.
 
 Cependant, on peut tout de même observer le nombre d'opérations en fonction de l'erreur demandée :
-
-
+\end{minipage}\hfill
+\begin{minipage}[c]{.49\linewidth} 
 \begin{center}
-\includegraphics[width=.6\textwidth]{images/courbe_erreur_dicho}
+\includegraphics[width=.9\textwidth]{images/courbe_erreur_dicho}
 \end{center}
-
+\end{minipage}
 
 \subsection{Méthode de Lagrange -- Méthode des cordes}
 
@@ -346,6 +355,7 @@ La méthode de Lagrange diffère de la méthode de dichotomie par le fait que l'
 \item Donner l'algorithme permettant de résoudre l'équation $f(x)=0$ en utilisant la cette méthode.
 \end{enumerate}
 
+\ifprof
 \begin{minipage}[c]{.49\linewidth}
 La droite $\Delta_i$ passe par les points $(g_i,f(g_i))$ et $(d_i,f(d_i))$, elle a pour équation $y=ax + b$, trouvons l'ordonnée à l'origine et la pente de la droite :
 $$
@@ -402,9 +412,11 @@ $$
 c = -\dfrac{g_i f(d_i) -d_if(g_i) }{f(g_i)  - f(d_i) }
 $$
 
-L'algorithme est le suivant :
+
 
 \begin{pseudo}
+L'algorithme est le suivant :
+
 \begin{algorithm}[H]
 \Fonction{
 Données:$f$, $a$,$b$, $\varepsilon$ \\
@@ -429,6 +441,12 @@ $f_d \gets f_m$\\
 \end{algorithm}
 \end{pseudo}
 
+\else
+$$ \quad $$
+\vspace{12cm}
+\newpage
+
+\fi
 
 \section{Méthode de Newton}
 
