@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""
+""" 
 @author: Xavier Pessoles
 """
 
@@ -57,7 +57,7 @@ def courbe_alpha():
 
 def tir_parabolique(alpha):
     # tir pour un aplha donne
-    t = np.linspace(0,4.2,200)
+    t = np.linspace(0,20,200)
     plt.plot(v0*np.cos(alpha)*t,
          -0.5*g*t*t+v0*np.sin(alpha)*t
       ,label="$\\alpha = 20^o$",linewidth=3)
@@ -168,7 +168,7 @@ print(res[0]*180/pi,res[1])
 
 #courbe_erreur_lagrange()
 #courbe_erreur()
-#tir_parabolique(1.3)
+tir_parabolique(1.3)
 #courbe_alpha()
 #tir_parabolique1()
 #res = dichotomie(0.0000000001,1.,0.01)[0]*180/pi

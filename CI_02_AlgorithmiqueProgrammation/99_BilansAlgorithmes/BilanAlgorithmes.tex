@@ -672,9 +672,10 @@ def derive_fonctions(f,x,eps):
 \hspace{.4cm}\textsf{pas} $\leftarrow$ \textsf{(b-a)/nb}\\
 \hspace{.4cm}\textsf{x} $\leftarrow$ \textsf{a}\\
 \hspace{.4cm}\textbf{Tant que} \textsf{x<b-pas} : \textbf{Faire}\\
-\hspace{.8cm}\textsf{res}$\leftarrow$ \textsf{res + pas *} \textbf{f(}\textsf{x}\textbf{)}\\
+\hspace{.8cm}\textsf{res}$\leftarrow$ \textsf{res + } \textbf{f(}\textsf{x}\textbf{)}\\
 \hspace{.8cm}\textsf{x} $\leftarrow$ \textsf{x+pas}\\
 \hspace{.4cm}\textbf{Fin Tant que} \\
+\hspace{.4cm} \textsf{res} $\leftarrow$ \textsf{res*pas}\\
 \hspace{.4cm}\textbf{Retourner} \textsf{res}\\
 \textbf{Fin Fonction} \\
 \hline
@@ -698,9 +699,9 @@ def integrale_rectangles_gauche(f,a,b,nb):
     pas = (b-a)/nb
     x = a
     while x<b-pas:
-        res = res + pas *f(x)
+        res = res + f(x)
         x = x + pas
-    return res
+    return res*pas
 \end{python}
 \end{py}
 
@@ -730,9 +731,10 @@ def integrale_rectangles_gauche(f,a,b,nb):
 \hspace{.4cm}\textsf{pas} $\leftarrow$ \textsf{(b-a)/nb}\\
 \hspace{.4cm}\textsf{x} $\leftarrow$ \textsf{a+pas}\\
 \hspace{.4cm}\textbf{Tant que} \textsf{x<b-pas} : \textbf{Faire}\\
-\hspace{.8cm}\textsf{res}$\leftarrow$ \textsf{res + pas *} \textbf{f(}\textsf{x}\textbf{)}\\
+\hspace{.8cm}\textsf{res}$\leftarrow$ \textsf{res +} \textbf{f(}\textsf{x}\textbf{)}\\
 \hspace{.8cm}\textsf{x} $\leftarrow$ \textsf{x+pas}\\
 \hspace{.4cm}\textbf{Fin Tant que} \\
+\hspace{.4cm} \textsf{res} $\leftarrow$ \textsf{res*pas}\\
 \hspace{.4cm}\textbf{Retourner} \textsf{res}\\
 \textbf{Fin Fonction} \\
 \hline
@@ -756,9 +758,9 @@ def integrale_rectangles_droite(f,a,b,nb):
     pas = (b-a)/nb
     x = a+pas
     while x<b-pas:
-        res = res + pas *f(x)
+        res = res + f(x)
         x = x + pas
-    return res
+    return res*pas
 \end{python}
 \end{py}
 
@@ -787,10 +789,11 @@ def integrale_rectangles_droite(f,a,b,nb):
 \hspace{.4cm}\textsf{pas} $\leftarrow$ \textsf{(b-a)/nb}\\
 \hspace{.4cm}\textsf{x} $\leftarrow$ \textsf{a+pas/2}\\
 \hspace{.4cm}\textbf{Tant que} \textsf{x<b} : \textbf{Faire}\\
-\hspace{.8cm}\textsf{res}$\leftarrow$ \textsf{res + pas *} 
+\hspace{.8cm}\textsf{res}$\leftarrow$ \textsf{res + } 
 \textbf{f(}\textsf{x}\textbf{)}\\
 \hspace{.8cm}\textsf{x} $\leftarrow$ \textsf{x+pas}\\
 \hspace{.4cm}\textbf{Fin Tant que} \\
+\hspace{.4cm}\textsf{res} $\leftarrow$ \textsf{res*pas}\\
 \hspace{.4cm}\textbf{Retourner} \textsf{res}\\
 \hline
 \end{tabular}
@@ -812,13 +815,13 @@ def integrale_rectangles_milieu(f,a,b,nb):
     pas = (b-a)/nb
     x = a+pas/2
     while x<b:
-        res = res + pas *f(x)
+        res = res + f(x)
         x = x + pas
-    return res
+    return res*pas
 \end{python}
 \end{py}
 
-\subsection{Méthode des trapèzes pour le calcul approché d'une intégrale sur un segment}
+\subsection{Méthode des trapèzes pour le calcul approché d'une intégrale sur un segment - A FACTORISER}
 
 \begin{pseudo}
 \begin{center}
@@ -1336,7 +1339,7 @@ def tri_quicksort(tab,i,j):
 \end{tabular}
 \end{center}
 \end{pseudo}
-\subsection{Tri fusion}
+\subsection{Tri fusion - A MODIFIER CF MAIL PAT}
 
 
 \begin{pseudo}
