@@ -821,7 +821,7 @@ def integrale_rectangles_milieu(f,a,b,nb):
 \end{python}
 \end{py}
 
-\subsection{Méthode des trapèzes pour le calcul approché d'une intégrale sur un segment - A FACTORISER}
+\subsection{Méthode des trapèzes pour le calcul approché d'une intégrale sur un segment}
 
 \begin{pseudo}
 \begin{center}
@@ -844,12 +844,12 @@ def integrale_rectangles_milieu(f,a,b,nb):
 \textbf{integrale\_trapeze}(\textsf{f,a,b,nb}) :\\
 \hspace{.4cm}\textsf{res} $\leftarrow$ \textsf{0}\\
 \hspace{.4cm}\textsf{pas} $\leftarrow$ \textsf{(b-a)/nb}\\
-\hspace{.4cm}\textsf{x} $\leftarrow$ \textsf{a}\\
-\hspace{.4cm}\textbf{Tant que} \textsf{x<b-pas} : \textbf{Faire}\\
-\hspace{.8cm}\textsf{res}$\leftarrow$ \textsf{res + pas *(} 
-\textbf{f(}\textsf{x}\textbf{)}+\textbf{f(}\textsf{x+pas}\textbf{)}\textsf{)/2}\\
+\hspace{.4cm}\textsf{x} $\leftarrow$ \textsf{a+pas}\\
+\hspace{.4cm}\textbf{Tant que} \textsf{x<b}, \textbf{Faire :}\\
+\hspace{.8cm}\textsf{res}$\leftarrow$ \textsf{res + }\textbf{f(}\textsf{x}\textbf{)}\\
 \hspace{.8cm}\textsf{x} $\leftarrow$ \textsf{x+pas}\\
 \hspace{.4cm}\textbf{Fin Tant que} \\
+\hspace{.8cm}\textsf{res}$\leftarrow$ \textsf{pas*(res + (}\textbf{f(}\textsf{a}\textbf{)} + \textbf{f(}\textsf{b}\textbf{)} \textsf{)/2 )}\\
 \hspace{.4cm}\textbf{Retourner} \textsf{res}\\
 \hline
 \end{tabular}
@@ -869,10 +869,11 @@ def integrale_trapeze(f,a,b,nb):
     """
     res = 0
     pas = (b-a)/nb
-    x = a
-    while x<b-pas:
-        res = res + pas *(f(x)+f(x+pas))/2
+    x = a+pas
+    while x<b:
+        res = res + f(x)
         x = x + pas
+    res = pas*(res+(f(a)+f(b))/2)
     return res
 \end{python}
 \end{py}
