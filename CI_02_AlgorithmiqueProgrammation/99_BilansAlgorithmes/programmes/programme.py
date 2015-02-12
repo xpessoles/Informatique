@@ -222,9 +222,10 @@ def integrale_rectangles_gauche(f,a,b,nb):
     res = 0
     pas = (b-a)/nb    
     x = a
-    while x<b-pas:
-        res = res + pas *f(x)
+    while x<b:
+        res = res + f(x)
         x = x + pas
+    res = res*pas
     return res
 
 
@@ -242,9 +243,10 @@ def integrale_rectangles_droite(f,a,b,nb):
     res = 0
     pas = (b-a)/nb
     x = a+pas
-    while x<b-pas:
-        res = res + pas *f(x)
+    while x<=b:
+        res = res + f(x)
         x = x + pas
+    res = res*pas
     return res
 
 def integrale_rectangles_milieu(f,a,b,nb):
@@ -260,12 +262,32 @@ def integrale_rectangles_milieu(f,a,b,nb):
     """
     res = 0
     pas = (b-a)/nb
-    x = a+pas
-    while x<b-pas:
-        res = res + pas *(f(x)+f(x+pas))/2
+    x = a+pas/2
+    while x<b :
+        res = res + f(x)
         x = x + pas
+    res = res*pas
     return res
 
+dzf integrale_trapezes()(f,a,b,nb):
+    """
+    Calcul de la valeur approchée de l'intégrale de f(x) entre a et b par la 
+    méthode des trapezes
+    Keywords arguments :
+    Entrées :
+        f -- fonction à valeur dans IR
+        a -- flt, borne inférieure de l'intervalle d'intégration
+        b -- flt, borne supérieure de l'intervalle d'intégration
+        nb -- int, nombre d'échantillons pour le calcul
+    """
+    res = 0
+    pas = (b-a)/nb
+    x = a+pas
+    while x<b :
+        res = res + f(x)
+        x = x + pas
+    res = pas*(res+(f(a)+f(b))/2)
+    return res
 # Exemple :    
 #def ff(x):
 #    return 2#x*x       
