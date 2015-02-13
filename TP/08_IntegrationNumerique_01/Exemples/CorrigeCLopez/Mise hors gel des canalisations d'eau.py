@@ -54,3 +54,4 @@ while T < Tf :
     T = Temperature (z, t)
     
 print ("La canalisation doit être enterrée à une profondeur minimale de", int (z * 100), "cm")
+print(Temperature(0.01,1))

@@ -37,8 +37,9 @@ def trapeze(f,a,b,nb):
 
 
 def temp(z,t):
-  
-    res = T1+(T0-T1)*erf(z/(math.sqrt(D*t)),1000)
+    print(z/(2*math.sqrt(D*t)))
+    
+    res = T1+(T0-T1)*erf(z/(2*math.sqrt(D*t)),1000)
     return res 
 z = 1 #m
 t = 10 * 24 * 3600
