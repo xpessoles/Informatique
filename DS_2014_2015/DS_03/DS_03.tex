@@ -15,8 +15,8 @@
 
 % Commenter \proffalse et décommenter \proftrue pour avoir le corrigé
 \newif\ifprof
-%\proftrue
-\proffalse
+\proftrue
+%\proffalse
 
 \newif\iftd
 \tdtrue
@@ -145,9 +145,11 @@ $$\quad$$
 $$\quad$$ \\
 \hline
 \end{tabular}
-\fi
 
 \newpage
+\fi
+
+
 
 \subparagraph{}
 \textit{Quelle est la complexité de l'algorithme ? Expliquer brièvement pourquoi ? Quelle serait la complexité d'un algorithme naïf ayant le même objectif ?}
@@ -224,12 +226,14 @@ $$
 \end{itemize} 
 
 \begin{center}
-\textbf{Dans l'ensemble de ce sujet, on considèrera que $s$ est une fonction du temps réduit $t\cdot\omega_0$. On notera indifféremment le coefficient d'amortissement $z$ ou $\xi$.}
+\textbf{Dans l'ensemble de ce sujet, on considèrera que $s$ est une fonction du temps réduit $t\cdot\omega_0$ que l'on notera $t\omega_0$ ou \textsf{tom0}. On notera indifféremment le coefficient d'amortissement $z$ ou $\xi$.}
 \end{center}
+
+\newpage
 \fi
 
 
-\newpage 
+ 
 
 \subsection*{Tracé de la réponse indicielle}
 \ifprof
@@ -244,14 +248,13 @@ On dispose des fonctions Python \textbf{\textsf{f\_pseudo}} et \textbf{\textsf{f
 \else
 \begin{py}
 \begin{python}
-def f_critique(t,om0):
+def f_critique(tom0):
     """
-    Fonction permettant de calculer s(t) dans le cas ou z>1. 
+    Fonction permettant de calculer s(tom0) dans le cas ou z>1. 
     Entrées :
-        * t, flt : le temps en secondes
-        * om0, flt : la pulsation en rad.s-1
+        * tom0, flt : le temps réduit - sans unité
     Sortie : 
-        * res, flt : s(t). Ici, sans unité.
+        * res, flt : s(tom0) - ici, sans unité.
     """
 \end{python}
 \end{py}
@@ -260,16 +263,15 @@ def f_critique(t,om0):
 \begin{corrige}
 \begin{py}
 \begin{python}
-def f_critique(t,om0):
+def f_critique(tom0):
     """
     Fonction permettant de calculer s(t) dans le cas ou z>1. 
     Entrées :
-        * t, flt : le temps en secondes
-        * om0, flt : la pulsation en rad.s-1
+        * tom0 flt : le temps réduit - sans unité
     Sortie : 
-        * res, flt : s(t). Ici, sans unité.
+        * res, flt : s(tom0) - ici, sans unité.
     """
-    return 1-(1+t*om0)*math.exp(-om0*t) 
+    return 1-(1+tom0)*math.exp(-tom0) 
 \end{python}
 \end{py}
 \end{corrige}
@@ -449,9 +451,8 @@ La valeur finale est 1.
 $$\quad$$ \\
 \hline
 \end{tabular}
-\fi
-
 \newpage
+\fi
 
 
 \subparagraph{}
@@ -478,15 +479,19 @@ def is_in_strip(x):
 \begin{corrige}
 \begin{py}
 \begin{python}
-def trace_s(z):
-    x = []
-    y = []
-    n = 1000
-    for i in range(n+1):
-        t = 10*i/n
-        x.append(t)
-        y.append(f_s(t,z))
-    plot(x,y)
+def is_in_strip(x):
+    """
+    Fonction permettant de savoir si une valeur est dans la bande des + ou - 5% de la valeur finale.
+    Entrée : 
+        x, flt : réel
+    Sortie : 
+        True si la valeur est dans la bande à + ou - 5%
+        False si la valeur n'est pas dans la bande à + ou - 5%
+    """
+    if x>.95 and x<1.05:
+        return True
+    else:
+        return False
 \end{python}
 \end{py}
 \end{corrige}
@@ -537,9 +542,10 @@ def calcul_tom0(z,tom0=500):
 \end{python}
 \end{py}
 
+\newpage
 \fi
 
-\newpage
+
 
 \subparagraph{}
 \textit{Expliquer le mode de recherche du temps de réponse à 5\% dans le cas où $z<0,7$ puis dans le cas où $z\geq 0,7$. Pourquoi distingue-t-on ces 2 cas ? On pourra s'aider de l'abaque donné ci-dessous.}
@@ -607,10 +613,12 @@ while z<=100:
     z=z+pasz
 \end{python}
 \end{py}
+
+\newpage
 \fi
 
 
-\newpage 
+ 
 
 \subparagraph{}
 \textit{

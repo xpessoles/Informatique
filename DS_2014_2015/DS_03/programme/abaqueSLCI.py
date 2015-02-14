@@ -34,7 +34,6 @@ def f2_critique(tom0):
     
 def f2_aperiodique(tom0,z):
     return 1+(math.exp(-tom0*(z+math.sqrt(z*z-1))))/(2*(z*math.sqrt(z*z-1)+z*z-1))-(math.exp(-tom0*(z-math.sqrt(z*z-1))))/(2*(z*math.sqrt(z*z-1)-z*z+1))
-
     
 def f_s(tom0,z) :
     """
