@@ -15,8 +15,8 @@
 
 % Commenter \proffalse et décommenter \proftrue pour avoir le corrigé
 \newif\ifprof
-\proftrue
-%\proffalse
+%\proftrue
+\proffalse
 
 \newif\iftd
 \tdtrue
@@ -165,7 +165,7 @@ L'algorithme naïf est de complexité linéaire.
 \begin{tabular}{|p{.95\textwidth}|}
 \hline
 $$\quad$$
-\vspace{1cm}
+\vspace{3cm}
 $$\quad$$ \\
 \hline
 \end{tabular}
@@ -333,7 +333,7 @@ def f_s(tom0,z) :
 \begin{tabular}{|p{.95\textwidth}|}
 \hline
 $$\quad$$
-\vspace{2cm}
+\vspace{4cm}
 $$\quad$$ \\
 \hline
 \end{tabular}
@@ -388,7 +388,7 @@ trace_s(0.7)
 \begin{tabular}{|p{.95\textwidth}|}
 \hline
 $$\quad$$
-\vspace{1cm}
+\vspace{3cm}
 $$\quad$$ \\
 \hline
 \end{tabular}
@@ -431,6 +431,7 @@ $$\quad$$
 $$\quad$$ \\
 \hline
 \end{tabular}
+\newpage
 \fi
 
 \subsection*{Tracé de l'abaque}
@@ -451,7 +452,7 @@ La valeur finale est 1.
 $$\quad$$ \\
 \hline
 \end{tabular}
-\newpage
+
 \fi
 
 
@@ -542,13 +543,13 @@ def calcul_tom0(z,tom0=500):
 \end{python}
 \end{py}
 
-\newpage
+
 \fi
 
 
 
 \subparagraph{}
-\textit{Expliquer le mode de recherche du temps de réponse à 5\% dans le cas où $z<0,7$ puis dans le cas où $z\geq 0,7$. Pourquoi distingue-t-on ces 2 cas ? On pourra s'aider de l'abaque donné ci-dessous.}
+\textit{Expliquer le mode de recherche du temps de réponse à 5\% dans le cas où $z<0,7$ puis dans le cas où $z\geq 0,7$. Pourquoi distingue-t-on ces 2 cas ? On pourra s'aider de l'abaque donné page \pageref{ref_aba}.}
 
 \ifprof
 \else
@@ -606,7 +607,7 @@ while z<=100:
     elif z<10:
         pasz = 0.1
     else :
-        paz = 1
+        pasz = 1
     
     xx.append(z)
     yy.append(tom0)
@@ -649,7 +650,7 @@ while z<=100:
 \begin{tabular}{|p{.95\textwidth}|}
 \hline
 $$\quad$$
-\vspace{3cm}
+\vspace{6cm}
 $$\quad$$ \\
 \hline
 \end{tabular}
@@ -677,6 +678,7 @@ $$\quad$$ \\
 \ifprof
 \else
 
+\newpage 
 \begin{py}
 \begin{python}
 import matplotlib.pyplot as plt
@@ -695,8 +697,12 @@ plt.grid(which="minor",axis="y",linewidth=0.75, linestyle='-', color='0.75')
 \end{python}
 \end{py}
 
+\begin{figure}[!ht]
 \begin{center}
 \includegraphics[width=.8\linewidth]{images/figure_1}
+
+Abaque du temps de réponse réduit pour un système du second ordre \label{ref_aba}
 \end{center}
+\end{figure}
 \fi
 \end{document}
