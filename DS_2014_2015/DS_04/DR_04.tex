@@ -35,11 +35,12 @@ Concours Blanc : Informatique
 }
 
 \def\xxsoustitre{%
-\ifxp
 Autour de données météorologiques 
 
-Document réponse
+\ifprof
+Corrigé
 \else
+Document réponse
 \fi}
 
 \def\xxauteur{%
@@ -69,10 +70,12 @@ Autour de données météorologiques -- \ifprof P \else E \fi
 \input{style/enteteDI}
 \fi
 
-
+\ifprof
+\else
 \begin{center}
 \Large Nom  : ...........................................
 \end{center}
+\fi
 
  \renewcommand{\baselinestretch}{1.2}
 \setlength{\parskip}{2ex plus 0.5ex minus 0.2ex}
@@ -153,9 +156,11 @@ Itération \textsf{i} & \textsf{t[i]} & \textsf{p} & \textsf{t<=p} ? & p \\
 \hline
 \end{tabular}
 \end{center}
-\fi
 
 \newpage
+\fi
+
+
 
 \subparagraph{}
 \textit{}%Prouver que lorsque \textsf{t} est une liste non vide d’entiers ou de flottants, \textsf{mini(t)} renvoie la valeur minimale des éléments de \textsf{t} . On pourra exhiber un invariant de boucle précis.}
@@ -219,9 +224,10 @@ Invariant de boucle proposé : à chaque itération de boucle \textsf{i}, \texts
 \end{tabular}
 \end{center}
 
+\newpage 
+
 \fi
 
-\newpage 
 \subparagraph{}
 \textit{}%Évaluer la complexité temporelle de l’appel \textsf{mini(t)} en fonction du nombre \textsf{n} d’éléments de \textsf{t}.}
 \ifprof
@@ -507,9 +513,12 @@ def majores_par(t,):
 \hline
 \end{tabular}
 \end{center}
-\fi
 
 \newpage
+
+\fi
+
+
 
 \section{Manipulation de données}
 
@@ -588,10 +597,9 @@ La ligne 6 permet de diviser une ligne en 3 chaînes de caractères. La ligne es
 \end{tabular}
 \end{center}
 
-
+\newpage
 \fi
 
-\newpage
 \subparagraph{}
 \textit{}%Expliquer pourquoi il est préférable d’utiliser \textsf{jours.append(int(t))} (ligne 7) plutôt qu’une concaténation du type \textsf{jours = jours + [int(t)]}.}
 \ifprof
@@ -662,11 +670,11 @@ def moyenne(a,b):
 \textit{}%En appliquant la fonction précédente, écrire l’instruction Python qui stocke dans la variable \textsf{Tmoy} la liste des températures moyennes journalières à partir des données stockées dans les listes \textsf{Tmin} et \textsf{Tmax}.}
 \ifprof
 \begin{corrige}
-\begin{py}
+%\begin{py}
 \begin{python}
 >>> Tmoy = moyenne(Tmin,Tmax)
 \end{python}
-\end{py}
+%\end{py}
 \end{corrige}
 \else
 \begin{center}
@@ -684,19 +692,18 @@ def moyenne(a,b):
 \end{tabular}
 \end{center}
 
-\fi
-
 \newpage
+\fi
 
 \subparagraph{} 
 \textit{}%On considère qu’il est nécessaire de couper les arrivées d’eau extérieures pour risque de gel quand la température moyenne sur la journée est strictement inférieure à 0\textdegree C. En utilisant une des fonctions programmées dans la première partie, stocker dans la variable \textsf{nb\_jours\_gel} le nombre de jours où il a fallu couper l’eau des conduites extérieures pour la ville de Besançon.}
 \ifprof
 \begin{corrige}
-\begin{py}
+%\begin{py}
 \begin{python}
 >>> nb_jours_gel=majores_par(Tmoy,0)
 \end{python}
-\end{py}
+%\end{py}
 \end{corrige}
 \else
 \begin{center}
@@ -718,7 +725,7 @@ def moyenne(a,b):
 \textit{}%Donner la suite d'instruction permettant de tracer sur un même graphe, la courbe des températures moyennes, minimales et maximales.}
 \ifprof
 \begin{corrige}
-\begin{py}
+%\begin{py}
 \begin{python}
 import numpy as np
 import matplotlib.pyplot as plt 
@@ -727,7 +734,7 @@ plt.plot(t,Tmax)
 plt.plot(t,Tmoy)
 plt.show()
 \end{python}
-\end{py}
+%\end{py}
 \end{corrige}
 \else
 \begin{center}
