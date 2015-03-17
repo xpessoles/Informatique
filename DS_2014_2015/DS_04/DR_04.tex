@@ -368,7 +368,7 @@ Si on souhaite retourner le premier indice, il faut utiliser une inégalité str
 \textit{}%Expliquer le principe d’une fonction réalisant ce travail.}
 \ifprof
 \begin{corrige}
-Pour rechercher un minimum dans une liste de liste, il faut rechercher le minimum dans chacune des sous-listes. Pour cela, on peut, par exemple, avoir recours à deux boucles imbriquées.
+Pour rechercher un minimum dans une liste de liste, il faut rechercher le minimum dans chacune des sous-listes. Pour cela, il faut donc avoir recours à deux boucles imbriquées.
 \end{corrige}
 \else
 \begin{center}
@@ -494,7 +494,7 @@ def chaine_mini(t):
 \begin{corrige}
 \begin{py}
 \begin{python}
-def majores_par(t,seuil):
+def majores_par(t,):
     cpt = 0
     for i in range(len(t)):
         if t[i]<seuil:
