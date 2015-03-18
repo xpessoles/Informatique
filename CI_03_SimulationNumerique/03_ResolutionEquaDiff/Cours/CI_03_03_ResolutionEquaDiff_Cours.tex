@@ -208,7 +208,7 @@ Par ailleurs, la solution exacte de l'équation différentielle est de la forme 
 \end{rem}
 
 
-\section{Contexte mathématique}
+%\section{Contexte mathématique}
 \subsection{Problème de Cauchy}
 
 \begin{prob}
@@ -226,8 +226,8 @@ y(t_0)=y_0 \quad \text{avec } t_0\in [0,T] \text{ et } y_0\in \mathbb{R}^n \text
  
 On verra que la plupart des systèmes d'équations différentielles peuvent se mettre sous la forme d'un système d'équations différentielles du premier ordre. 
 
-
-
+%
+%
 \subsection{Existence et unicité de la solution}
 
 \begin{defi}
@@ -253,61 +253,106 @@ On considèrera dans ce cours que $f$ est toujours lipschitzienne et que les con
 
 En d'autres termes, on peut dire que les variations de $f$ restent bornées par un réel strictement positif $k$.
 
-\subsection{Résolution numérique}
-On pose $y'(t)=\dfrac{dy}{dt}$.
+%\subsection{Résolution numérique}
+%On pose $y'(t)=\dfrac{dy}{dt}$.
+%
+%Pour résoudre l'équation sur $[0,T]$ on commence par discrétiser l'intervalle. Dans le cas d'une discrétisation en $n$ pas constants d'amplitude $h$ on a alors $t_0 = 0$, $t_1=h$, ... $t_n=n\cdot h$.
+%
+%En intégrant l'équation différentielle sur un intervalle $[t_i, t_{i+1}]$, on a : 
+%$$
+%\int\limits_{y_i}^{y_{i+1}} dy = \int\limits_{t_i}^{t_{i+1}} f(t,y(t)) dt 
+%\Longleftrightarrow 
+%y_{i+1} - y_1 = \int\limits_{t_i}^{t_{i+1}} f(t,y(t)) dt 
+%$$
+%
+%Cette relation de récurrence peut être écrite en connaissant un seul état du système. On parle de méthode à \textbf{pas séparé}.
+%
+%On note $\varphi (y,t_i,h)= \dfrac{1}{h} \int\limits_{t_i}^{t_{i+1}} f(t,y(t)) dt $.
+%
+%$y_n$ est une approximation de $y(t_n)$. Il faut donc s'assurer que l'approximation converge vers la solution. 
+%
+%\subsection{Convergence de la méthode à pas séparés}
+%
+%Pour s'assurer que $y_n$ converge vers $y(t_n)$ lorsque le pas d'intégration tend vers 0, il faut que la méthode numérique réunisse deux conditions :
+%\begin{itemize}
+%\item la condition de consistance;
+%\item la condition de stabilité. 
+%\end{itemize}
+%
+%Ces conditions seront ici considérées comme étant réalisées.
+%
+%\subsection{Notion d'erreur}
+%
+%La notion d'erreur étant étroitement liée à la notion d'approximation, on définit 2 types d'erreurs lorsqu'on approxime la solution d'une équation différentielle.
+%
+%\begin{defi}
+%
+%\textbf{Erreur locale -- } $e^{\text{loc}}=y(t+h)-y(t)-h\varphi(y,t,h)$ : erreur commise en faisant un pas de la méthode partant de la solution exacte.
+%
+%\textbf{Erreur cumulée -- } $e^{\text{cumu}} = y(t_n)-y_n$ : erreur commise par accumulation depuis l'abscisse initiale.
+%
+%\end{defi}
 
-Pour résoudre l'équation sur $[0,T]$ on commence par discrétiser l'intervalle. Dans le cas d'une discrétisation en $n$ pas constants d'amplitude $h$ on a alors $t_0 = 0$, $t_1=h$, ... $t_n=n\cdot h$.
+\section{Méthodes d'Euler}
+
+\subsection{Description}
+
+\subsubsection{Première approche}
+Dans un premier temps, le temps est discrétisé avec un pas constant et régulier. Ainsi, pour un temps de simulation compris entre $t_0$ et $t_1$, si on choisi un nombre $n$ d'échantillons, alors  $h=\dfrac{t_1-t_0}{n}$.
+
+ À la ième itération, on aura donc $t_i = t_0+h\cdot i$ avec $i\in[0,n]$.
+ 
+Par ailleurs, en intégrant le problème de Cauchy, on a : 
 
 En intégrant l'équation différentielle sur un intervalle $[t_i, t_{i+1}]$, on a : 
 $$
 \int\limits_{y_i}^{y_{i+1}} dy = \int\limits_{t_i}^{t_{i+1}} f(t,y(t)) dt 
 \Longleftrightarrow 
-y_{i+1} - y_1 = \int\limits_{t_i}^{t_{i+1}} f(t,y(t)) dt 
+y_{i+1} - y_i = \int\limits_{t_i}^{t_{i+1}} f(t,y(t)) dt 
 $$
 
-Cette relation de récurrence peut être écrite en connaissant un seul état du système. On parle de méthode à \textbf{pas séparé}.
-
-On note $\varphi (y,t_i,h)= \dfrac{1}{h} \int\limits_{t_i}^{t_{i+1}} f(t,y(t)) dt $.
-
-$y_n$ est une approximation de $y(t_n)$. Il faut donc s'assurer que l'approximation converge vers la solution. 
-
-\subsection{Convergence de la méthode à pas séparés}
-
-Pour s'assurer que $y_n$ converge vers $y(t_n)$ lorsque le pas d'intégration tend vers 0, il faut que la méthode numérique réunisse deux conditions :
-\begin{itemize}
-\item la condition de consistance;
-\item la condition de stabilité. 
-\end{itemize}
-
-Ces conditions seront ici considérées comme étant réalisées.
-
-\subsection{Notion d'erreur}
-
-La notion d'erreur étant étroitement liée à la notion d'approximation, on définit 2 types d'erreurs lorsqu'on approxime la solution d'une équation différentielle.
-
-\begin{defi}
-
-\textbf{Erreur locale -- } $e^{\text{loc}}=y(t+h)-y(t)-h\varphi(y,t,h)$ : erreur commise en faisant un pas de la méthode partant de la solution exacte.
-
-\textbf{Erreur cumulée -- } $e^{\text{cumu}} = y(t_n)-y_n$ : erreur commise par accumulation depuis l'abscisse initiale.
-
-\end{defi}
-
-\section{Méthodes d'Euler}
-
-\subsection{Description}
 \begin{resultat}
-Pour la méthode d’Euler, la fonction $\varphi$ équivaut à la fonction f : 	$$y_{k+1}=y_k+hf(y,t)$$.
-
-Comme $\varphi(y,t,h)=f(y,t)$, la condition de consistance est donc vérifiée. Le développement de Taylor à l’ordre1 de la fonction $y$ au temps $t_k$ donne :
-
-$$y(t_k+h)=y(t_k)+h \dfrac{dy(t_k)}{dt}+o(h)=y(t_k)+hf(y,t)+o(h)$$
-
-On approxime donc $\dfrac{dy(t_k)}{dt}$ par 
+Ainsi, connaissant, les conditions initiales du système, la solution numérique de l'équation à l'instant $i+1$ est donc : 
 $$
-\dfrac{dy(t_k)}{dt} \simeq \dfrac{y(t_k+h) - y(t_k)}{h}
+y_{i+1}= y_i + \int\limits_{t_i}^{t_{i+1}} f(t,y(t)) dt 
 $$
 \end{resultat}
+
+\subsubsection{Seconde approche -- Méthode d'Euler explicite}
+On cherche à résoudre l'équation suivante :
+$$
+\left\{
+\begin{array}{l}
+\dfrac{dy}{dt}=f(t,y) \\
+y(t_0)=y_0 \quad \text{avec } t_0\in [0,T] \text{ et } y_0\in \mathbb{R}^n \text{ donnés}
+\end{array}
+\right.
+ $$ 
+
+$\dfrac{dy}{dt}$ peut être approximé à l'instant $k$ par 
+$$
+\dfrac{dy(t_k)}{dt} \simeq \dfrac{y_{k+1}-y_k}{h}
+$$
+
+Ainsi,
+$$
+y_{k+1} = y_k +h  f(t_k,y_k)
+$$
+
+\subsection{Exemple}
+%
+%\begin{resultat}
+%Pour la méthode d’Euler, la fonction $\varphi$ équivaut à la fonction f : 	$$y_{k+1}=y_k+hf(y,t)$$.
+%
+%Comme $\varphi(y,t,h)=f(y,t)$, la condition de consistance est donc vérifiée. Le développement de Taylor à l’ordre1 de la fonction $y$ au temps $t_k$ donne :
+%
+%$$y(t_k+h)=y(t_k)+h \dfrac{dy(t_k)}{dt}+o(h)=y(t_k)+hf(y,t)+o(h)$$
+%
+%On approxime donc $\dfrac{dy(t_k)}{dt}$ par 
+%$$
+%\dfrac{dy(t_k)}{dt} \simeq \dfrac{y(t_k+h) - y(t_k)}{h}
+%$$
+%\end{resultat}
 
 La méthode d’Euler est une méthode d’ordre 1. Une interprétation graphique de cette méthode est de calculer la tangente de la courbe et d’avancer linéairement sur cette tangente. Il reste donc à choisir le couple $(y,t)$ pour déterminer si la méthode est explicite ou implicite.
 
@@ -318,6 +363,13 @@ On note $\omega_c = 528\; rad/s$ la vitesse angulaire de consigne proportionnell
 $$ \dfrac{d\omega(t)}{dt} = \dfrac{\omega_c-\omega(t)}{\tau} \quad \text{et} \quad \omega(0)=\omega_0
 $$
 On étudie le démarrage ($\omega_0=0$) et l'arrêt ($U=0$ et $\omega_0=\omega_c$).
+
+C’est une équation différentielle linéaire du premier ordre dont la solution analytique est connue, ce qui permet de comparer la solution approchée à la solution exacte :
+\begin{itemize}
+\item au démarrage : $\omega(t)=\omega_c\left(1-e^{-\dfrac{t}{\tau}}\right)$;
+\item à l'arrêt : $\omega(t)=\omega_c e^{-\dfrac{t}{\tau}}$.
+\end{itemize}
+
 
 \end{minipage} \hfill
 \begin{minipage}[c]{.3\linewidth}
@@ -337,12 +389,6 @@ On étudie le démarrage ($\omega_0=0$) et l'arrêt ($U=0$ et $\omega_0=\omega_c
 \includegraphics[height=5cm]{images/fig_03_bis}
 \end{center}
 \end{minipage}
-
-C’est une équation différentielle linéaire du premier ordre dont la solution analytique est connue, ce qui permet de comparer la solution approchée à la solution exacte :
-\begin{itemize}
-\item au démarrage : $\omega(t)=\omega_c\left(1-e^{-\dfrac{t}{\tau}}\right)$;
-\item à l'arrêt : $\omega(t)=\omega_c e^{-\dfrac{t}{\tau}}$.
-\end{itemize}
 
 \subsection{Méthode d'Euler explicite}
 \begin{resultat}
@@ -379,15 +425,15 @@ Donner la (ou les) fonctions python permettant de calculer un tableau contenant 
 
 \subsubsection{Rapidité}
 La rapidité de la méthode d’Euler explicite ne dépend que des opérations de l’équation de récurrence et du nombre d’itérations souhaitées $n$. Ainsi, nous aurons un temps de calcul directement proportionnel au facteur $n$ (et donc une complexité $\mathcal{O}(n)$).
-\subsubsection{Précison -- Calcul d'erreur}
+%\subsubsection{Précison -- Calcul d'erreur}
 
-\begin{center}
-\includegraphics[width=.8\textwidth]{images/fig_06}
-\end{center}
+%\begin{center}
+%\includegraphics[width=.8\textwidth]{images/fig_06}
+%\end{center}
 
-Pour cherchons l’erreur commise par la méthode d’Euler il faut effectuer le calcul suivant :
-$$e_{k+1}=|y(t_{k+1} )-y_{k+1} |<|y(t_{k+1} )-{y}_{k+1} |+|{y}_{k+1}-y_{k+1} |$$
-$$e_{k+1}<e_{k+1}^{\text{loc}}+e_{k+1}^{\text{cumu}}$$
+%Pour chercher l’erreur commise par la méthode d’Euler il faut effectuer le calcul suivant :
+%$$e_{k+1}=|y(t_{k+1} )-y_{k+1} |<|y(t_{k+1} )-{y}_{k+1} |+|{y}_{k+1}-y_{k+1} |$$
+%$$e_{k+1}<e_{k+1}^{\text{loc}}+e_{k+1}^{\text{cumu}}$$
 
 
 %\paragraph{Calcul de de l’erreur locale (ou erreur de consistance)}
@@ -436,10 +482,10 @@ $$e_{k+1}<e_{k+1}^{\text{loc}}+e_{k+1}^{\text{cumu}}$$
 %$$e_k=\left|\omega(t_k)-\omega_k \right|=\omega_c\left|e^{-\dfrac{t_k}{\tau}}-\left(1-\dfrac{h}{\tau}\right)^k \right|<\dfrac{\omega_c}{2n}  \dfrac{T^2}{\tau^2}  e^{-\dfrac{t_k}{\tau}}$$
 %
 %Pour notre exemple l’erreur maximale est de 62 rad/s en $t=\tau$ si l’on prend n=10.
-\paragraph*{Influence du pas de temps $h=T/n$ sur la précision}
+\subsubsection{Influence du pas de temps $h=T/n$ sur la précision}
 
 \begin{center}
-\includegraphics[width=.8\textwidth]{images/fig_07_bis}
+\includegraphics[width=.7\textwidth]{images/fig_07_bis}
 \end{center}
 
 On remarque dans cet exemple que l’erreur diminue avec l’augmentation du pas et que le schéma explicite donne une approximation plus grande que la réalité, pour le cas du démarrage (et plus petite dans le cas de l’arrêt du moteur).
@@ -448,7 +494,7 @@ On remarque dans cet exemple que l’erreur diminue avec l’augmentation du pas
 \subsubsection{Stabilité -- Influence du paramètre $\dfrac{h}{\tau}$}
 
 \begin{center}
-\includegraphics[width=.8\textwidth]{images/fig_08_bis}
+\includegraphics[width=.7\textwidth]{images/fig_08_bis}
 \end{center}
 
 On remarque que le pas de temps $h$ doit être en adéquation avec la constante de temps $\tau$. Pour la valeur de 0,07, le schéma d’intégration oscille autour de la solution exacte et pour une valeur de 0,05 le schéma n’est pas stable :
@@ -507,7 +553,7 @@ Dans notre cas, la résolution n’est pas faite par la machine ; la rapidité s
 
 
 \begin{center}
-\includegraphics[width=.8\textwidth]{images/fig_11}
+\includegraphics[width=.7\textwidth]{images/fig_11}
 \end{center}
 
 On note ici que le schéma implicite donne toujours une valeur plus petite que la valeur exacte dans le cas du démarrage.
@@ -515,7 +561,7 @@ On note ici que le schéma implicite donne toujours une valeur plus petite que l
 \subsubsection{Stabilité -- Influence du paramètre $\dfrac{h}{\tau}$}
 
 \begin{center}
-\includegraphics[width=.8\textwidth]{images/fig_12}
+\includegraphics[width=.7\textwidth]{images/fig_12}
 \end{center}
 
 Seule la constante de temps change, sur le graphique,on remarque que le schéma n’oscille pas autour de la solution exacte malgré $h>\tau$.
