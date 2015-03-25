@@ -7,44 +7,51 @@
 
 %Si le boolen xp est vrai : compilation pour xabi
 %Sinon compilation Damien
-\newboolean{xp}
-\setboolean{xp}{true}
+\newif\ifprof
+%\proftrue
+\proffalse
 
-\newboolean{prof}
-\setboolean{prof}{false}
+\newif\ifxp
+\xptrue
+%\xpfalse
+
+\newif\iftd
+\tdtrue
+%\tdfalse
 
 \usepackage[%
-    pdftitle={TD f(x)=0},
+    pdftitle={TD -- Résolution d'équation différentielle},
     pdfauthor={Xavier Pessoles},
     colorlinks=true,
     linkcolor=blue,
     citecolor=magenta]{hyperref}
 
-
-
 \def\discipline{Informatique}
-\def\xxtitre{\ifthenelse{\boolean{xp}}{
-CI 3 : Ingénierie Numérique \& Simulation}{
-Chapitre  -- }}
+\def\xxtitre{%
+\ifxp
+CI 3 : Ingénierie Numérique \& Simulation
+\else
+\fi
+}
 
-\def\xxsoustitre{\ifthenelse{\boolean{xp}}{
-Chapitre 3 -- Résolution des équations différentielles}{
-Partie  -- }}
+\def\xxsoustitre{%
+\ifxp
+Chapitre 3 -- Résolution des équations différentielles
+\else
+\fi}
 
-\def\xxauteur{\ifthenelse{\boolean{xp}}{
-Xavier \textsc{Pessoles}}{
-Damien \textsc{Iceta} \\ Xavier \textsc{Pessoles}}}
+\def\xxauteur{%
+\ifxp
+Xavier \textsc{Pessoles}
+\else
+\fi}
 
-\def\xxpied{\ifthenelse{\boolean{xp}}{
+\def\xxpied{%
+\ifxp
 CI 3 : Ingénierie Numérique \& Simulation\\
-Ch. 2 : Problèmes stationnaires -- TD}{
-\xxtitre}}
-
-\def\xxcathegorie{\ifthenelse{\boolean{xp}}{
-2013 -- 2014 \\
-Xavier \textsc{Pessoles}}{
-Informatique - TD}}
-
+Ch. 3 : Résolution des équations différentielles -- TD
+\else
+\fi}
 
 
 
@@ -54,15 +61,17 @@ Informatique - TD}}
 
 
 \begin{document}
+\ifxp
+\input{style/enteteXP}
+\else
+\input{style/enteteDI}
+\fi
 
-\ifthenelse{\boolean{xp}}{\input{style/enteteXP}}{\input{style/enteteDI}}
 
 
+ \renewcommand{\baselinestretch}{1.2}
+\setlength{\parskip}{2ex plus 0.5ex minus 0.2ex}
 
-
-
- \renewcommand{\baselinestretch}{1}
-\setlength{\parskip}{0ex plus 0.5ex minus 0.2ex}
 
 
 
@@ -84,17 +93,137 @@ y(0) = \gamma
 \right.\\
 \left\{
 \begin{array}{l}
--y''(x) + \dfrac{g}{l}\sin \theta = 0\\
-\theta(0) = 0 \quad \dot{\theta}(0) = 0 \\
-\end{array} 
-\right.\\
-\left\{
-\begin{array}{l}
 y'(t) = -ty^2(t) \quad \text{si }t>0\\
 y(0) = \alpha  \\
 \end{array} 
 \right.
 \end{eqnarray}
+
+\ifprof
+
+\subsection*{Équation 1}
+On a :
+$$
+y'(t) \simeq \dfrac{y(t+h)-y(h)}{h}
+$$
+En discrétisant le problème, on a $y_k=y(kh)=y(t)$; donc : 
+$$
+\dfrac{y(t+h)-y(h)}{h} + \alpha y(t) = \beta \Longrightarrow 
+\dfrac{y_{k+1}-y_k}{h} + \alpha y_k = \beta \Longleftrightarrow 
+y_{k+1}  = \beta h - \alpha y_k + y_k \Longleftrightarrow 
+y_{k+1}  = \beta h + y_k\left(1 - \alpha \right) 
+$$
+
+\subsection*{Équation 2}
+On pose $y_0(t) = \theta(t) $ et $y_1(t) = \dot{\theta}(t) = y'_0(t) $. On a donc 
+$$
+\left\{
+\begin{array}{l}
+y'_0(t) = y_1(t) \\
+y'_1(t) + \dfrac{g}{l} \sin y_0(t) = 0
+\end{array} 
+\right.
+$$
+
+Par ailleurs, $y_0(t) = 0 $ et $y_1(t) =0$.
+
+En discrétisant, on a donc :
+$$
+\left\{
+\begin{array}{l}
+\dfrac{y_{0,k+1}-y_{0,k}}{h} = y_{1,k} \\
+\dfrac{y_{1,k+1}-y_{1,k}}{h} + \dfrac{g}{l} \sin y_{0,k} = 0
+\end{array} 
+\right.
+\Longleftrightarrow
+\left\{
+\begin{array}{l}
+y_{0,k+1} = h y_{1,k} + y_{0,k}\\
+y_{1,k+1} = - h \dfrac{g}{l} \sin y_{0,k}  + y_{1,k}
+\end{array} 
+\right.
+$$
+\else
+
+\fi
+
+\subsection*{Résolution d'une équation du premier ordre \footnote{\url{http://python.physique.free.fr/outils_math.html}}}
+
+La population d’un corps radioactif évolue suivant la loi de désintégration $\dfrac{dN(t)}{dt}=-\dfrac{N(t)}{\tau}$, où $N(t)$ est le nombre d’atomes à l’instant $t$ et $\tau$ le temps caractéristique de désintégration du corps considéré. Résolvons numériquement cette équation avec $\tau =1$ et $N(t=0)=1$.
+
+\subparagraph{}
+\textit{Donner la solution analytique de cette équation.}
+\ifprof
+$$y(t)=e^{-t}$$
+\else
+\fi
+
+\subparagraph{}
+\textit{Donner la suite permettant de déterminer la solution numérique de cette équation en utilisant un schéma d'Euler explicite.}
+
+\ifprof
+On a $\dfrac{dN}{dt}\simeq \dfrac{N_{k+1}-N_{k}}{h}$. En conséquences, 
+$$
+\dfrac{N_{k+1}-N_{k}}{h} = -\dfrac{N_k}{\tau} \Longleftrightarrow 
+N_{k+1} = -\dfrac{h N_k}{\tau}  + N_{k} \Longleftrightarrow 
+N_{k+1} =   N_{k}\left(1-\dfrac{h}{\tau}\right)
+$$
+\else
+\fi
+
+
+\subparagraph{}
+\textit{Donner la suite permettant de déterminer la solution numérique de cette équation en utilisant un schéma d'Euler implicite.}
+
+\ifprof
+On a $\dfrac{dN}{dt}\simeq \dfrac{N_{k}-N_{k-1}}{h}$. En conséquences, 
+$$
+\dfrac{N_{k}-N_{k-1}}{h} = -\dfrac{N_k}{\tau} \Longleftrightarrow 
+N_{k}-N_{k-1} = -h \dfrac{N_k}{\tau} \Longleftrightarrow 
+N_{k}\left(1+\dfrac{h}{\tau} \right) = N_{k-1} \Longleftrightarrow 
+N_{k}\dfrac{\tau + h}{\tau}  = N_{k-1} \Longleftrightarrow 
+N_{k}  = N_{k-1}\dfrac{\tau}{\tau + h}
+$$
+\else
+\fi
+
+\subparagraph{}
+\textit{Donner le code Python permettant de tracer le solution analytique et la solution numérique.}
+
+\setcounter{subparagraph}{0}
+\subsection*{Résolution d'une équation du second ordre}
+On cherche à résoudre l'équation différentielle d'un oscillateur harmonique amorti : 
+$$
+\ddot{x}  + \dfrac{\omega_0}{Q}\dot{x} + \omega_0^2 x = 0
+$$
+ avec $x(0)=1$ et $\dot{x}(0)=0$.
+ 
+\subparagraph{}
+\textit{Donner la suite permettant de déterminer la solution numérique de cette équation en utilisant un schéma d'Euler explicite.}
+\ifprof
+On pose $x_0(t)=x(t)$ et $x_1(t)=\dot{x}(t)$. On a alors $\ddot{x}(t) \simeq \dfrac{x_{1,k+1}-x_{1,k}}{h}$. En conséquence, 
+$$
+\left\{
+\begin{array}{l}
+x_{1,k} = \dfrac{x_{0,k+1}-x_{0,k}}{h} \\
+\dfrac{x_{1,k+1}-x_{1,k}}{h} + \dfrac{\omega_0}{Q}x_{1,k}+\omega_0^2 x_{0,k} = 0 
+\end{array}
+\right.
+\Longleftrightarrow
+\left\{
+\begin{array}{l}
+x_{0,k+1} = k x_{1,k} + x_{0,k}  \\
+x_{1,k+1} =x_{1,k}- \dfrac{h \omega_0}{Q}x_{1,k}-h \omega_0^2 x_{0,k} 
+\end{array}
+\right.
+$$
+
+\else
+\fi
+\subparagraph{}
+\textit{Donner le code Python permettant de tracer la solution numérique.}
+
+
 
 \end{document}
 
