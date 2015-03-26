@@ -11,7 +11,7 @@ from scipy.integrate import odeint
 
 ti = 0
 tf = 5
-nb = 50
+nb = 10
 h = (tf-ti)/nb
 Q = 1
 om0 = 2*math.pi
@@ -32,7 +32,7 @@ def deriv(syst, t):
     return [dxdt,dvdt]                  # Dérivées des variables
 
 # Paramètres d'intégration
-t = np.linspace(ti,tf,nb)
+t = np.linspace(ti,tf,10)
 
 # Conditions initiales et résolution
 xi=1
@@ -45,6 +45,6 @@ x = Sols[:, 0]
 v = Sols[:, 1]
 
 plt.plot(tt,x0,'o',label="Euler explicite")
-plt.plot(t,x,'*',label="Solution SciPy")
-plt.legend()
+plt.plot(t,x,label="Solution SciPy")
+#plt.legend()
 plt.show()
