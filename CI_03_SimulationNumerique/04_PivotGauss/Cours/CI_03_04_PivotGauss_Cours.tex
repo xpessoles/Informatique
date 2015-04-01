@@ -14,6 +14,10 @@
 \newboolean{prof}
 \setboolean{prof}{true}
 
+\newif\ifprof
+\proftrue
+%\proffalse
+
 \usepackage[%
     pdftitle={Pivot de Gauss},
     pdfauthor={Xavier Pessoles},
@@ -222,7 +226,7 @@ On note $B=\begin{pmatrix} b_1 \\ \vdots \\ b_n \end{pmatrix}$ la matrice de sec
 
 
 \begin{defi}
-Si deux matrices $M$ et $M'$ diffèrent d'un nombre fini d'opération sur les lignes, on duit qu'elles sont équivalentes en lignes et on note $M \underset{L}{\sim} M'$. 
+Si deux matrices $M$ et $M'$ diffèrent d'un nombre fini d'opération sur les lignes, on dit qu'elles sont équivalentes en lignes et on note $M \underset{L}{\sim} M'$. 
 \end{defi}
 
 \begin{rem}
@@ -445,7 +449,7 @@ La matrice $A\in\mathcal{M}_{n,n}(\mathbb{R})$ sera stockée dans un tableau de 
 Dans le cadre d'une résolution numérique, on utilise un pivot partiel. 
 
 \begin{py}
-%\ifthenelse{\boolean{prof}}{
+\ifprof
 \begin{python}
 def recherche_pivot(A,i):
     n = len(A) # le nombre de lignes
@@ -455,7 +459,9 @@ def recherche_pivot(A,i):
             j = k # un nouveau maximum provisoire
     return j
 \end{python}
-%}{\vspace{5cm}}
+\else
+\vspace{5cm}
+\fi
 \end{py}
 
 
@@ -470,13 +476,15 @@ On renvoie enfin l'indice du pivot.
 L'échange de lignes peut être nécessaire pour réordonner les lignes de la matrice si le pivot de la ligne considéré est plus petit que le pivot d'une des lignes suivantes.  
 
 \begin{py}
-%\ifthenelse{\boolean{prof}}{
+\ifprof
 \begin{python}
 def echange_lignes(A,i,j):
     # Li <-->Lj
     A[i][:],A[j][:]=A[j][:],A[i][:]
 \end{python}
-%}{\vspace{5cm}}
+\else
+\vspace{5cm}
+\fi
 \end{py}
 
 \begin{rem}
@@ -486,7 +494,7 @@ En python, le passage des objets se faisant par référence, il n'est pas néces
 \subsubsection{Transvection de lignes}
 
 \begin{py}
-%\ifthenelse{\boolean{prof}}{
+\ifprof
 \begin{python}
 def transvection_ligne(A, i, j, mu):
     # L_i <- L_i + mu.L_j 
@@ -494,14 +502,16 @@ def transvection_ligne(A, i, j, mu):
     for k in range(nc):
         A[i][k] = A[i][k] + mu * A[j][k]
 \end{python}
-%}{\vspace{5cm}}
+\else
+\vspace{5cm}
+\fi
 \end{py}
 
 \subsubsection{Phase de remontée : résolution du système}
 Une fois toutes les transvections réalisées, on est en présence d'une matrice échelonnée $T$. Le système a donc été mis sous la forme $T\cdot X = Y$. On va donc résoudre le système en partant <<du bas>>.
 
 \begin{py}
-%\ifthenelse{\boolean{prof}}{
+\ifprof
 \begin{python}
 def remontee(A,B):
     n=len(A)
@@ -514,7 +524,10 @@ def remontee(A,B):
         print(X[i])
     return X
 \end{python}
-%}{\vspace{5cm}}
+\else
+\vspace{8cm}
+\fi
+
 
 \end{py}
 
@@ -523,7 +536,7 @@ def remontee(A,B):
 \subsection{Algorithme complet}
 
 \begin{py}
-%\ifthenelse{\boolean{prof}}{
+\ifprof
 \begin{python}
 def resolution(AA, BB):
     """Résolution de AA.X=BB; AA doit etre inversible"""
@@ -543,8 +556,9 @@ def resolution(AA, BB):
     # Phase de remontée
     return remontee(A,B)
 \end{python}
-%}{\vspace{10cm}}
-
+\else
+\vspace{10cm}
+\fi
 
 \end{py}
 %\section{Résolution d'un système}
