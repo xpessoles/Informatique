@@ -569,16 +569,20 @@ def solveDichotomie(f,a,b,eps):
 \textbf{Données :}
 \begin{itemize}
 \item \textsf{f}, fonction : fonction continue et monotone sur $[a,b]$
-\item \textsf{a, b}, réels : nombre réels tels que $a<b$
+\item \textsf{df}, fonction : fonction dérivée de $f$ sur $[a,b]$
+\item \textsf{a}, réel : nombre réel tel que
 \item \textsf{$\varepsilon$}, réel : tolérance du calcul
 \end{itemize}
 \textbf{Résultat :} 
 \begin{itemize}
-\item flt : solution de l'équation
+\item c: flt : solution de l'équation
 \end{itemize}
 \\
 \textbf{solveNewton}(\textsf{f,df,a,$\varepsilon$}) :\\
-\hspace{.4cm}
+\hspace{.4cm} $c \gets  a-\dfrac{f(a)}{df(a)} $\\ 
+\hspace{.4cm} \textbf{Tant que} $ |c-a|> \varepsilon$ \textbf{alors} \\
+\hspace{.8cm} $a \gets  c$\\
+\hspace{.8cm} $c \gets  c-\dfrac{f(c)}{df(c)} $\\ 
 \textbf{Fin fonction} \\
 \hline
 \end{tabular}
@@ -611,7 +615,7 @@ def solveNewton(f,df,a,eps):
         a, flt : solution initiale
         eps,flt : tolérance de la résolution
     Sortie : 
-        flt : solution de la fonction    
+        m : flt : solution de la fonction    
     """
     c = a-f(a)/df(a)
     while abs(c-a)>eps:
