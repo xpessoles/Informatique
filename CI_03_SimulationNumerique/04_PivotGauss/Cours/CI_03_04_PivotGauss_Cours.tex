@@ -435,6 +435,7 @@ Deux matrices équivalentes en ligne ont le même rang.
 \end{rem}
 
 \section{Implémentation de l'algorithme}
+
 \subsection{Choix d'un type de données}
 On verra ultérieurement que la bibliothèque numpy permet de gérer plus aisément le calcul matriciel. Dans un premier temps, le système à résoudre sera mis sous forme matricielle afin que les valeurs puissent être stockées dans un tableau. 
 On cherchera donc à résoudre le système suivant :
@@ -592,3 +593,26 @@ numpy.linalg.solve
 \end{document}
 
 
+\section*{Exemple de système à résoudre}
+$$
+\left\{
+\begin{array}{l}
+3x + 3y + 2z = 1 \\
+4x + 5y - z = 2 \\
+5x + 2y - 2z = 0 \\
+\end{array}
+\right.
+$$
+Il faut d'abord mettre le système sous forme triangulaire. 
+Pour cela, on commence à rechercher le premier pivot partiel. Il est ici sur la dernière ligne. On intervertit donc la première et la dernière ligne :
+$$
+\left\{
+\begin{array}{l}
+5x + 2y - 2z = 0 \\
+4x + 5y - z = 2 \\
+3x + 3y + 2z = 1 \\
+\end{array}
+\right.
+$$
+On réalise alors les opérations de transvection. Le coefficient est d'abord -A(1,0)/A(0,0) =-4/5
+\end{document}
