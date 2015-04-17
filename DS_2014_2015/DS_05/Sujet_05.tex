@@ -1,0 +1,125 @@
+\documentclass[10pt]{article}
+\input{style/coursHeadings}
+\input{style/programHeadings}
+\input{style/macros_SII}
+\input{style/macros_Titres}
+\input{style/macros_Frames}
+
+%Si le boolen xp est vrai : compilation pour xabi
+%Sinon compilation Damien
+\newif\ifprof
+%\proftrue
+\proffalse
+
+\newif\ifxp
+\xptrue
+%\xpfalse
+
+\newif\iftd
+\tdtrue
+%\tdfalse
+
+\usepackage[%
+    pdftitle={DS Informatique - Concours Blanc},
+    pdfauthor={Xavier Pessoles},
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=magenta]{hyperref}
+
+\def\discipline{Informatique}
+\def\xxtitre{%
+\ifxp
+Concours Blanc : Informatique
+\else
+\fi
+}
+
+\def\xxsoustitre{%
+\ifxp
+Autour de données météorologiques
+\else
+\fi}
+
+\def\xxauteur{%
+\ifxp
+Xavier \textsc{Pessoles} \\
+Adapté de sujet 0 -- CCP PSI
+\else
+\fi}
+
+\def\xxpied{%
+\ifxp
+Concours Blanc -- Informatique \\
+Simulation des vibrations -- \ifprof P \else E \fi
+\else
+\fi}
+
+
+
+
+%---------------------------------------------------------------------------
+
+
+\begin{document}
+\ifxp
+\input{style/enteteXP}
+\else
+\input{style/enteteDI}
+\fi
+
+
+
+ \renewcommand{\baselinestretch}{1.2}
+\setlength{\parskip}{2ex plus 0.5ex minus 0.2ex}
+
+
+
+\section{Mise en situation}
+La structure peut être modélisée par $n$ éléments de masse $m_i$ ($i$ variant de 1 à $n$) reliés  par des liaisons visco-élastiques eux-mêmes modélisés par des un ressort de raideur $k$ en parallèle d'un élément d'amortissement $c$. La structure est supposée unidimensionnelle de longueur $L$. Le nombre d'éléments peut être de l'ordre de plusieurs milliers. 
+
+Le déplacement au cours du temps de l'élément $i$ autour de sa position d'équlibre est noté $u_i(t)$. Une force $f_n(t)$ est appliquée sur l'élément $n$ uniquement. L'extrémité gauche de
+la structure est bloquée. Les effets de la pesanteur sont négligés.
+
+Le théorème de la résultante dynamique appliqué à un élément $i$ ($i$ variant de 2 à $n-1$ inclus) s'écrit sous la forme : 
+%$$
+%m_i\dfrac{\text{d}u_i(t)}{\text{d}t} = 
+%-k_i\left(u_i(t)-u_{i-1}(t) \right)   - k_{i+1}\left(u_i(t)-u_{i+1}(t) \right) 
+%-c_i\left(u_i(t)-u_{i-1}(t) \right)   - c_{i+1}\left(u_i(t)-u_{i+1}(t) \right) 
+%$$
+
+
+$$
+m\dfrac{\text{d}u_i(t)}{\text{d}t} = 
+-k\left(u_i(t)-u_{i-1}(t) \right)   - k\left(u_i(t)-u_{i+1}(t) \right) 
+-c\left(u_i(t)-u_{i-1}(t) \right)   - c\left(u_i(t)-u_{i+1}(t) \right) 
+$$
+
+Le théorème de la résultante dynamique appliqué aux éléments 1 et $n$ donne les équations suivantes : 
+%$$
+%m_1\dfrac{\text{d}u_1(t)}{\text{d}t} = 
+%-\left(k_1 + k_2\right) u_1(t) + k_2 u_2 (t) - \left(c_1 + c_2 \right)u_1(t) - c_2 u_2 (t)
+%$$
+%
+%$$
+%m_n\dfrac{\text{d}u_n(t)}{\text{d}t} = 
+%-k_n\left(u_n(t)-u_{n-1}(t) \right)   - c_n\left(u_n(t)-u_{n-1}(t) \right) +f_n(t)
+%$$
+
+
+$$
+m_1\dfrac{\text{d}u_1(t)}{\text{d}t} = 
+-\left(k_1 + k_2\right) u_1(t) + k_2 u_2 (t) - \left(c_1 + c_2 \right)u_1(t) - c_2 u_2 (t)
+$$
+
+$$
+m_n\dfrac{\text{d}u_n(t)}{\text{d}t} = 
+-k_n\left(u_n(t)-u_{n-1}(t) \right)   - c_n\left(u_n(t)-u_{n-1}(t) \right) +f_n(t)
+$$
+
+
+Dans toute la suite, on imposera $f_n(t)=f_{max} \sin \omega \left(t\right)$.
+
+
+\end{document}
+
+
