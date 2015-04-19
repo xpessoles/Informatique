@@ -8,8 +8,8 @@
 %Si le boolen xp est vrai : compilation pour xabi
 %Sinon compilation Damien
 \newif\ifprof
-%\proftrue
-\proffalse
+\proftrue
+%\proffalse
 
 \newif\ifxp
 \xptrue
@@ -87,11 +87,21 @@ Le théorème de la résultante dynamique appliqué à un élément $i$ ($i$ var
 %-c_i\left(u_i(t)-u_{i-1}(t) \right)   - c_{i+1}\left(u_i(t)-u_{i+1}(t) \right) 
 %$$
 
+%$$
+%m\dfrac{\text{d}^2u_i(t)}{\text{d}t^2} = 
+%- k\left(u_i(t)-u_{i-1}(t) \right)   
+%- k\left(u_i(t)-u_{i+1}(t) \right) 
+%- c\dfrac{\text{d}}{\text{d}t} \left[u_i(t)-u_{i-1}(t) \right]
+%- c\dfrac{\text{d}}{\text{d}t} \left[u_i(t)-u_{i+1}(t) \right]
+%$$
+
 
 $$
-m\dfrac{\text{d}u_i(t)}{\text{d}t} = 
--k\left(u_i(t)-u_{i-1}(t) \right)   - k\left(u_i(t)-u_{i+1}(t) \right) 
--c\left(u_i(t)-u_{i-1}(t) \right)   - c\left(u_i(t)-u_{i+1}(t) \right) 
+m\dfrac{\text{d}^2u_i(t)}{\text{d}t^2} = 
+- k\left(u_i(t)-u_{i-1}(t) \right)   
+- k\left(u_i(t)-u_{i+1}(t) \right) 
+- c\left(\dfrac{\text{d}u_i(t)}{\text{d}t}-\dfrac{\text{d}u_{i-1}}{\text{d}t} \right)   
+- c\left(\dfrac{\text{d}u_i(t)}{\text{d}t}-\dfrac{\text{d}u_{i+1}}{\text{d}t} \right) 
 $$
 
 Le théorème de la résultante dynamique appliqué aux éléments 1 et $n$ donne les équations suivantes : 
@@ -107,19 +117,88 @@ Le théorème de la résultante dynamique appliqué aux éléments 1 et $n$ donn
 
 
 $$
-m_1\dfrac{\text{d}u_1(t)}{\text{d}t} = 
--\left(k_1 + k_2\right) u_1(t) + k_2 u_2 (t) - \left(c_1 + c_2 \right)u_1(t) - c_2 u_2 (t)
+m\dfrac{\text{d}^2u_i(t)}{\text{d}t^2} = 
+- 2k u_1(t) + k u_2 (t) 
+-2c \dfrac{\text{d}u_1(t)}{\text{d}t} 
+- c \dfrac{\text{d}u_2(t)}{\text{d}t} 
 $$
 
 $$
-m_n\dfrac{\text{d}u_n(t)}{\text{d}t} = 
--k_n\left(u_n(t)-u_{n-1}(t) \right)   - c_n\left(u_n(t)-u_{n-1}(t) \right) +f_n(t)
+m\dfrac{\text{d}^2u_n(t)}{\text{d}t^2} = 
+-k\left(u_n(t)-u_{n-1}(t) \right)   - c\left(\dfrac{\text{d}u_{n}}{\text{d}t}-\dfrac{\text{d}u_{n-1}}{\text{d}t} \right) +f_n(t)
 $$
 
 
 Dans toute la suite, on imposera $f_n(t)=f_{max} \sin \omega \left(t\right)$.
 
+\section{Résolution d'une équation différentielle}
+On s'intéresse tout d'abord à un seul système masse ressort. L'application du théorème de la résultante dynamique en projection sur l'axe de déplacement s'écrit donc 
+de la manière suivante : 
+$$
+m\cdot\ddot{u}(t)+c\cdot \dot{u}(t) + k\cdot u(t) = f(t)
+$$
+
+On précise que pour $t\leq 0$, $u(t)=0$, $\dot{u}(t)=0$ et $\ddot{u}(t)=0$.
+
+On pose $\left\{ \begin{array}{l} x(t) = u(t) \\ v(t) = \dot{x}(t)\end{array} \right.$.
+
+\subparagraph{}
+\textit{Réécrire l'équation différentielle sous forme d'un système d'équation en fonction de $x(t)$,  $v(t)$, $\dot{x}(t)$ et $\dot{v}(t)$}
+\ifprof
+\begin{corrige}
+On a donc : 
+$$
+\left\{ 
+\begin{array}{l} 
+v(t) = \dot{x}(t) \\ 
+m\cdot\dot{v}(t)+c\cdot {v}(t) + k\cdot x(t) = f(t)
+\end{array} \right.
+$$
+\end{corrige}
+\else
+\fi
+
+\subparagraph{}
+\textit{En utilisant un schéma d'Euler explicite et l'équation $v(t) = \dot{x}(t)$ 
+exprimer la suite $x_{k+1}$ en fonction de $x_k$, $v_k$ et le pas de calcul noté noté $h$.}
+
+\ifprof
+\begin{corrige}
+On a $\dfrac{dx(t)}{dt} \simeq \dfrac{x_{k+1}-x_k}{h}$. On a donc 
+$v_k = \dfrac{x_{k+1}-x_k}{h} \Longleftrightarrow x_{k+1} = h\cdot v_k + x_k$.
+\end{corrige}
+\else
+\fi
+
+\subparagraph{}
+\textit{En utilisant un schéma d'Euler explicite exprimer alors la suite $v_{k+1}$}
+
+\ifprof
+\begin{corrige}
+On a $\dfrac{dv(t)}{dt} \simeq \dfrac{v_{k+1}-v_k}{h}$.  En conséquences, 
+$m\cdot\dot{v}(t)+c\cdot {v}(t) + k\cdot x(t) = f(t)$
+peut donc se mettre sous la forme suivante :
+
+$$
+m\cdot\dfrac{v_{k+1}-v_k}{h}+c\cdot {v_k} + k\cdot x_k = f_k
+\Longleftrightarrow 
+m\cdot {v_{k+1}}  = f_k h - kh\cdot x_k - c h\cdot {v_k}+v_k
+\Longleftrightarrow
+ {v_{k+1}}  = \dfrac{h}{m} f_k - \dfrac{kh}{m}x_k +\dfrac{1-ch}{m}v_k
+$$
+\end{corrige}
+\else
+\fi
+
+
+
+
 
 \end{document}
 
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi
 

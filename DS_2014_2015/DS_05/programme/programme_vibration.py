@@ -1,66 +1,56 @@
-def mini(t):
-    """Calcule le minimum d'un tableau d'entiers ou de flottants."""
-    if len(t) == 0:
-        return None
-    p = t[0]
-    for i in range(len(t)):
-        if t[i] <= p:
-            p = t[i]
-    return p
+# -*- coding: utf-8 -*-
+"""
+Created on Fri Apr 17 20:35:52 2015
 
-def maxi(t):
-    """Calcule le minimum d'un tableau d'entiers ou de flottants."""
-    if len(t) == 0:
-        return None
-    p = t[0]
-    for i in range(len(t)):
-        if t[i] >= p:
-            p = t[i]
-    return p
+@author: Xavier
+"""
+
+import numpy as np
+import matplotlib.pyplot as plt
+import math
+"""
+Dimensions de la poutre : L=1m, b=0,1m, e=0,02m
+Masse volumique :rho =7800 kg/m3
+Nombre d'éléments de poutres : 200
+"""
+L,b,e = 1,0.1,0.02
+rho = 7800
+E = 210 *10**9 #Pa
+E=200
+eta = 0.001
+# Nombre de poutres 
+n=200
+l = L/n
+M = L*b*e*rho
+m = M/n
+k = E*b*e/l 
+c= eta * m 
+c=0
+m=1
+k=1
+
+fmax = 10000 #N
+f = 1 #Hz
+om = 2*math.pi * f
+
+T=10 # Temps de simu : 0,3 s
+h = 10**(-1) # Pas de calcul : en ms 2*10**(-6)
+
+tt,x,v,t = 0,[0],[0],[0]
+i=0
+ff=[0]
+while tt<T:
+    tt=tt+h
+    x.append(h*v[i]+x[i])
+    #v.append((h/m)*fmax*math.sin(om*tt)-(k*h/m)*x[i]+((1-c*h)/m)*v[i])
+    v.append((h/m)*fmax-(k*h/m)*x[i]+((1-c*h)/m)*v[i])
+    t.append(tt)
+    ff.append(fmax*math.sin(om*tt))
+    i=i+1
+print(m,c,k)
+print(len(t),len(x),'.')
+plt.plot(t,v,'.')
+plt.show()
 
 
-def position_mini(t):
-    """Calcule l'indice du minimum d'un tableau d'entiers ou de flottants."""
-    if len(t) == 0:
-        return None
-    p = 0
-    for i in range(len(t)):
-        if t[i] <= t[p]:
-            p = i
-    return p
 
-def mini2D(t):
-    if len(t)==0:
-        return t
-    p = t[0][0]
-    for i in range(len(t)):
-        m = mini(t[i])
-        if m<p:
-            p=m
-    return p
-    
-def chaine_mini(t):
-    if len(t)==0:
-        return None
-    p = 0
-    for i in range(len(t)):
-        if t[i][1]<t[p][1]:
-            p=i
-    return t[p][0]
-
-def majores_par(t,nb):
-    cpt = 0
-    for i in range(len(t)):
-        if t[i]>nb:
-            cpt = cpt+1
-    return cpt
-
-print(majores_par([12,-5,10,9],10))
-
-print(chaine_mini([['Tokyo',7000],['Paris',6000],['Londres',8000]]))
-    
-    
-print(mini2D([[10,3,15],[5,13,10]]))
-
-#mm = position_mini([6,2,15,2,15])
-#print(mm)
