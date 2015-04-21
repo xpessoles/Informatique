@@ -96,13 +96,11 @@ Le théorème de la résultante dynamique appliqué à un élément $i$ ($i$ var
 %$$
 
 
-$$
+\begin{equation}
 m\dfrac{\text{d}^2u_i(t)}{\text{d}t^2} = 
-- k\left(u_i(t)-u_{i-1}(t) \right)   
-- k\left(u_i(t)-u_{i+1}(t) \right) 
-- c\left(\dfrac{\text{d}u_i(t)}{\text{d}t}-\dfrac{\text{d}u_{i-1}}{\text{d}t} \right)   
-- c\left(\dfrac{\text{d}u_i(t)}{\text{d}t}-\dfrac{\text{d}u_{i+1}}{\text{d}t} \right) 
-$$
+- 2 k u_i(t)  + k u_{i-1}(t) + k u_{i+1}(t)
+- 2c \dfrac{\text{d}u_i(t)}{\text{d}t}   +c \dfrac{\text{d}u_{i-1}(t)}{\text{d}t} +c \dfrac{\text{d}u_{i+1}(t)}{\text{d}t}
+\end{equation}
 
 Le théorème de la résultante dynamique appliqué aux éléments 1 et $n$ donne les équations suivantes : 
 %$$
@@ -116,20 +114,20 @@ Le théorème de la résultante dynamique appliqué aux éléments 1 et $n$ donn
 %$$
 
 
-$$
-m\dfrac{\text{d}^2u_i(t)}{\text{d}t^2} = 
+\begin{equation}
+m\dfrac{\text{d}^2u_1(t)}{\text{d}t^2} = 
 - 2k u_1(t) + k u_2 (t) 
 -2c \dfrac{\text{d}u_1(t)}{\text{d}t} 
 - c \dfrac{\text{d}u_2(t)}{\text{d}t} 
-$$
+\end{equation}
 
-$$
+\begin{equation}
 m\dfrac{\text{d}^2u_n(t)}{\text{d}t^2} = 
--k\left(u_n(t)-u_{n-1}(t) \right)   - c\left(\dfrac{\text{d}u_{n}}{\text{d}t}-\dfrac{\text{d}u_{n-1}}{\text{d}t} \right) +f_n(t)
-$$
+-k\left(u_n(t)-u_{n-1}(t) \right)   - c\left(\dfrac{\text{d}u_{n}(t)}{\text{d}t}-\dfrac{\text{d}u_{n-1}(t)}{\text{d}t} \right) +f_n(t)
+\end{equation}
 
 
-Dans toute la suite, on imposera $f_n(t)=f_{max} \sin \omega \left(t\right)$.
+Dans toute la suite, on imposera $f_n(t)=f_{max} \sin \left(\omega t\right)$.
 
 \section{Résolution d'une équation différentielle}
 On s'intéresse tout d'abord à un seul système masse ressort. L'application du théorème de la résultante dynamique en projection sur l'axe de déplacement s'écrit donc 
@@ -171,7 +169,21 @@ $v_k = \dfrac{x_{k+1}-x_k}{h} \Longleftrightarrow x_{k+1} = h\cdot v_k + x_k$.
 \fi
 
 \subparagraph{}
-\textit{En utilisant un schéma d'Euler explicite exprimer alors la suite $v_{k+1}$}
+\textit{En utilisant un schéma d'Euler implicite et l'équation $v(t) = \dot{x}(t)$ 
+exprimer la suite $x_{k+1}$ en fonction de $x_k$, $v_k$ et le pas de calcul noté noté $h$.}
+
+\ifprof
+\begin{corrige}
+On a $\dfrac{dx(t)}{dt} \simeq \dfrac{x_{k}-x_ {k-1}}{h}$. On a donc 
+$v_k = \dfrac{x_{k}-x_{k-1}}{h} \Longleftrightarrow x_{k} = h\cdot v_k + x_{k-1}$.
+\end{corrige}
+\else
+\fi
+
+
+
+\subparagraph{}
+\textit{En utilisant un schéma d'Euler explicite exprimer alors la suite $v_{k+1}$.}
 
 \ifprof
 \begin{corrige}
@@ -190,15 +202,219 @@ $$
 \else
 \fi
 
+\subparagraph{}
+\textit{En déduire que la solution de l'équation différentielle peut se mettre sous la forme :
+$$
+\left\{
+\begin{array}{l}
+x_{k+1} = \alpha \cdot v_k + \beta \cdot x_k \\
+v_{k+1} = \gamma \cdot f_k + \delta  \cdot x_k  + \lambda\cdot v_k \\
+\end{array}
+\right.
+\quad \text{où on explicitera $\alpha$, $\beta$, $\gamma$, $\delta$ et $\lambda$.}
+$$
+}
+
+\ifprof
+\begin{corrige}
+Dans ses conditions, on a : 
+$$
+\alpha  = h \quad \beta = 1 \quad \gamma =\dfrac{h}{m} \quad \delta = -\dfrac{kh}{m} \quad \lambda = \dfrac{1-ch}{m}
+$$
+\end{corrige}
+\else
+\fi
 
 
 
 
-\end{document}
+\subparagraph{}
+\textit{On note \textsf{Tsimu} le temps de simulation et \textsf{h} le pas de temps. Implémenter en Python le fonction \textsf{f\_omega} 
+permettant de créer une liste contenant l'ensemble des valeurs prises par la fonction $f_n$. On utilisera une boucle \textsf{while}. Les spécifications de la fonction sont les suivantes : }
 
+\begin{py}
+\begin{python}
+def f_omega(Tsimu,h,fmax,fsign):
+   """
+   Entrées :
+       * Tsimu (flt) : temps de la simulation en seconde
+       * h (flt) : pas de temps de a simulation
+       * fmax (flt) : amplitude du signal (en Newton)
+       * fsign (flt) : fréquence du signal (en Hertz)
+   Sortie : 
+       * F (list) : liste des valeurs de la fonction 
+          f_n (t)= fmax sin (omega *t)
+   """
+\end{python}
+\end{py}
+
+\ifprof
+\begin{corrige}
+\begin{py}
+\begin{python}
+def f_omega(Tsimu,h,fmax,fsign):
+   """
+   Entrées :
+       * Tsimu (flt) : temps de la simulation en seconde
+       * h (flt) : pas de temps de a simulation
+       * fmax (flt) : amplitude du signal (en Newton)
+       * fsign (flt) : fréquence du signal (en Hertz)
+   Sortie : 
+       * F (list) : liste des valeurs de la fonction 
+          f_n (t)= fmax sin (omega *t)
+   """
+    omega  = 2*math.pi*fsign
+    t=0 
+    F = []
+    while t<Tsimu :
+        F.append(fmax*math.sin(omega*t))
+        t=t+h
+    return F
+    
+\end{python}
+\end{py}
+
+\end{corrige}
+\else
+\fi
+
+
+\subparagraph{}
+\textit{En utilisant une boucle \textsf{while}, générer, en Python, les listes \textsf{X} et \textsf{V} contenant les termes des suites $x_k$ et $v_k$ ainsi que la liste \textsf{T} contenant le temps. On exprimera les lignes de codes en fonction de $\alpha$, $\beta$, $\gamma$, $\delta$ et $\lambda$.}
+\ifprof
+\begin{corrige}
+\begin{python}
+t = 0
+T,X,V = [t],[0],[0]
+F = f_omega(Tsimu,h,fmax,fsign)
+i=0
+while t<Tsimu:
+    t = t+h
+    T.append(t)
+    X.append(alpha*V[i]+beta*X[i])
+    V.append(gamma*F[i]+delta*X[i]+lambd*V[i])    
+    i=i+1
+
+\end{python}
+\end{corrige}
+\else
+\fi
+
+
+\section{Résolution du problème général}
+Le système d'équations différentielles défini dans la première partie peut s'écrire sous forme matricielle :
+$$
+M \ddot{X}(t) +C \dot{X}(t) +K {X}(t) = F(t) \quad \text{avec} \quad 
+X(t)=\left[
+\begin{array}{c} 
+u_1(t) \\ 
+... \\ 
+u_n(t) \\
+\end{array}\right]
+$$
+
+$M$, $C$ et $K$ des matrices carrées de taille $n\times n$.
+
+
+\subparagraph{}
+\textit{En reprenant les équations (1), (2) et (3) déterminer les matrices $M$, $C$, $K$ et $F$.}
+\ifprof
+\begin{corrige}
+\footnotesize{
+$$
+M =
+\begin{pmatrix}
+m  &  0 & 0 \\
+0  & \ddots &0 \\
+0 & 0 &  m \\
+ \end{pmatrix}
+ \quad
+C =
+\begin{pmatrix}
+2c  & -c &  0 & \cdots & \cdots & \cdots  & 0 \\
+-c  & 2c & -c & \ddots &  & 0& \vdots\\
+0 & -c  & 2c & \ddots & \ddots &  & \vdots\\
+\vdots & \ddots &\ddots & \ddots & \ddots & \ddots & \vdots\\
+\vdots &  & \ddots &\ddots& 2c & -c & 0 \\
+\vdots & 0 &  & \ddots & -c & 2c & -c\\
+0 & \cdots & \cdots & \cdots & 0 & -c & 2c\\
+ \end{pmatrix}
+ \quad
+K =
+\begin{pmatrix}
+2k  & -k &  0 & \cdots & \cdots & \cdots  & 0 \\
+-k & 2k & -k & \ddots &  & 0& \vdots\\
+0 & -k  & 2k & \ddots & \ddots &  & \vdots\\
+\vdots & \ddots &\ddots & \ddots & \ddots & \ddots & \vdots\\
+\vdots &  & \ddots &\ddots& 2k & -k & 0 \\
+\vdots & 0 &  & \ddots & -k & 2k & -k\\
+0 & \cdots & \cdots & \cdots & 0 & -k & 2k\\
+ \end{pmatrix}
+ \quad
+ F =
+ \begin{pmatrix}
+ 0 \\
+ \vdots \\
+ 0 \\
+ f_n(t) 
+ \end{pmatrix}
+$$}
+\end{corrige}
+\else
+\fi
+
+
+En appliquant le schéma d'Euler explicite à l'équation différentielle matricielle, on montre qu'à l'instant $k$, le système peut se mettre sous la forme $H\cdot X_k = G_k$, la matrice $H$ étant de la forme suivante (dite tridiagonale) :
+$$
+H =
+\begin{pmatrix}
+H_{00}  & H_{01} &  0 & 0 & 0 \\
+H_{10}  & H_{11} &  \ddots & 0 & 0 \\
+0 & \ddots & \ddots & \ddots & 0 \\
+0 & 0 & \ddots & H_{n-1,n-1} & H_{n-1,n} \\
+0 & 0 & 0 & H_{n-1,n} & H_{n,n} \\
+\end{pmatrix}
+ $$
+
+
+\subparagraph{}
+\textit{L'équation  $H\cdot X_k = G_k$ peut être résolue grâce à la méthode du pivot de Gauss. Donner les étapes de cette méthode ainsi que l'objectif ce chacune d'entre elles. }
 \ifprof
 \begin{corrige}
 \end{corrige}
 \else
 \fi
+
+\end{document}
+
+\subparagraph{}
+\textit{Au vue de la forme de la matrice, il est possible de simplifier l'étape visant à échelonner la matrice. }
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi
+
+
+
+
+
+ 
+$$
+m\ddot{x}_i -c \dot{x}_{i-1} + 2c \dot{x}_i   -c \dot{x}_{i+1}- k x_{i-1} + 2 k x_i   - k x_{i+1}=0
+$$
+
+
+$$
+\begin{array}{l}
+m\ddot{x}_1 -c \dot{x}_{1-1} + 2c \dot{x}_1   -c \dot{x}_{1+1}- k x_{1-1} + 2 k x_1   - k x_{1+1}=0 \\
+... \\
+m\ddot{x}_2 -c \dot{x}_{2-1} + 2c \dot{x}_2   -c \dot{x}_{2+1}- k x_{2-1} + 2 k x_2   - k x_{2+1}=0 \\
+m\ddot{x}_3 -c \dot{x}_{3-1} + 2c \dot{x}_3   -c \dot{x}_{3+1}- k x_{3-1} + 2 k x_3   - k x_{3+1}=0 \\
+m\ddot{x}_4 -c \dot{x}_{4-1} + 2c \dot{x}_4   -c \dot{x}_{4+1}- k x_{4-1} + 2 k x_4   - k x_{4+1}=0 \\
+... \\
+m\ddot{x}_n -c \dot{x}_{n-1} + 2c \dot{x}_n   -c \dot{x}_{n+1}- k x_{n-1} + 2 k x_n   - k x_{n+1}=f_n \\
+\end{array}
+$$
+
 

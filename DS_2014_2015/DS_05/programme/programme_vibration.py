@@ -16,7 +16,6 @@ Nombre d'éléments de poutres : 200
 L,b,e = 1,0.1,0.02
 rho = 7800
 E = 210 *10**9 #Pa
-E=200
 eta = 0.001
 # Nombre de poutres 
 n=200
@@ -25,31 +24,102 @@ M = L*b*e*rho
 m = M/n
 k = E*b*e/l 
 c= eta * m 
-c=0
-m=1
-k=1
 
-fmax = 10000 #N
+k=20000
+c = 10
+
+print(c,k,m)
+fmax = 1 #N
 f = 1 #Hz
 om = 2*math.pi * f
 
-T=10 # Temps de simu : 0,3 s
-h = 10**(-1) # Pas de calcul : en ms 2*10**(-6)
+T=0.1 # Temps de simu : 0,3 s
+#h = 10**(-3) # Pas de calcul : en ms 2*10**(-6)
+h=T/2000
 
-tt,x,v,t = 0,[0],[0],[0]
-i=0
-ff=[0]
-while tt<T:
-    tt=tt+h
-    x.append(h*v[i]+x[i])
-    #v.append((h/m)*fmax*math.sin(om*tt)-(k*h/m)*x[i]+((1-c*h)/m)*v[i])
-    v.append((h/m)*fmax-(k*h/m)*x[i]+((1-c*h)/m)*v[i])
-    t.append(tt)
-    ff.append(fmax*math.sin(om*tt))
-    i=i+1
-print(m,c,k)
-print(len(t),len(x),'.')
-plt.plot(t,v,'.')
+
+def euler_explicite():
+    # Solution explicite
+    tt_exp,x_exp,v_exp,t_exp = 0,[0],[0],[0]
+    i=0
+    ff_exp=[0]
+    print("Calcul explicite")
+    while tt_exp<T:
+        tt_exp=tt_exp+h
+        x_exp.append(h*v_exp[i]+x_exp[i])
+        #v.append((h/m)*fmax*math.sin(om*tt)-(k*h/m)*x[i]+((1-c*h)/m)*v[i])
+        v_exp.append((h/m)*fmax-(k*h/m)*x_exp[i]+(1-c*h/m)*v_exp[i])
+        t_exp.append(tt_exp)
+        ff_exp.append(fmax*math.sin(om*tt_exp))
+        i=i+1
+    print("Fin calcul explicite")
+    return t_expl,x_exp
+
+
+def euler_implicite():
+    # Solution implicite
+    tt_imp,x_imp,v_imp,t_imp = 0,[0],[0],[0]
+    i=0
+    ff_imp=[0]
+    print("Calcul implicite")
+    while tt_imp<T:
+        tt_imp=tt_imp+h
+        x_imp.append(((m+c*h)/(m+c*h+h*h+k))*(x_imp[i]+(h/(m+c*h))*(h*fmax-m*v_imp[i])))
+        v_imp.append((x_imp[i+1]-x_imp[i])/h)
+        t_imp.append(tt_imp)
+        ff_imp.append(fmax*math.sin(om*tt_exp))
+        i=i+1
+    print("Fin calcul implicite")
+    return t_imp,x_imp
+
+
+
+def f_omega(Tsimu,h,fmax,fsign):
+   """
+   Entrées :
+       * Tsimu (flt) : temps de la simulation en seconde
+       * h (flt) : pas de temps de a simulation
+       * fmax (flt) : amplitude du signal (en Newton)
+       * fsign (flt) : fréquence du signal (en Hertz)
+   Sortie : 
+       * F (list) : liste des valeurs de la fonction f_n (t)= fmax sin (omega *t)
+   """
+   omega  = 2*math.pi*fsign
+   t=0 
+   F = []
+   while t<Tsimu :
+       F.append(fmax*math.sin(omega*t))
+       t=t+h
+       #print(t)
+   return F
+    
+
+def generate_tridiagonale(n,c,k):
+    T=[]
+    for i in range (n):
+        ligne=[]
+        for j in range (n):
+            ligne.append(0)
+        T.append(ligne)
+    
+    for i in range(n):
+        T[i][i]=k
+    for i in range(n-1):
+        T[i][i+1]=c
+    for i in range(1,n):
+        T[i][i-1]=c
+    return T
+    
+T = generate_tridiagonale(5,1,2)
+print(T[0][:])
+print(T[1][:])
+print(T[2][:])
+print(T[3][:])
+print(T[4][:])
+# print(len(t),len(x),'.')
+# plt.plot(t_imp,x_imp,'.')
+# plt.plot(t_exp,x_exp,'.')
+#plt.plot(F)
 plt.show()
 
 
