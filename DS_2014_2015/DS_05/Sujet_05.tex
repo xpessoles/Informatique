@@ -168,17 +168,17 @@ $v_k = \dfrac{x_{k+1}-x_k}{h} \Longleftrightarrow x_{k+1} = h\cdot v_k + x_k$.
 \else
 \fi
 
-\subparagraph{}
-\textit{En utilisant un schéma d'Euler implicite et l'équation $v(t) = \dot{x}(t)$ 
-exprimer la suite $x_{k+1}$ en fonction de $x_k$, $v_k$ et le pas de calcul noté noté $h$.}
-
-\ifprof
-\begin{corrige}
-On a $\dfrac{dx(t)}{dt} \simeq \dfrac{x_{k}-x_ {k-1}}{h}$. On a donc 
-$v_k = \dfrac{x_{k}-x_{k-1}}{h} \Longleftrightarrow x_{k} = h\cdot v_k + x_{k-1}$.
-\end{corrige}
-\else
-\fi
+%\subparagraph{}
+%\textit{En utilisant un schéma d'Euler implicite et l'équation $v(t) = \dot{x}(t)$ 
+%exprimer la suite $x_{k+1}$ en fonction de $x_k$, $v_k$ et le pas de calcul noté noté $h$.}
+%
+%\ifprof
+%\begin{corrige}
+%On a $\dfrac{dx(t)}{dt} \simeq \dfrac{x_{k}-x_ {k-1}}{h}$. On a donc 
+%$v_k = \dfrac{x_{k}-x_{k-1}}{h} \Longleftrightarrow x_{k} = h\cdot v_k + x_{k-1}$.
+%\end{corrige}
+%\else
+%\fi
 
 
 
@@ -198,6 +198,57 @@ m\cdot {v_{k+1}}  = f_k h - kh\cdot x_k - c h\cdot {v_k}+v_k
 \Longleftrightarrow
  {v_{k+1}}  = \dfrac{h}{m} f_k - \dfrac{kh}{m}x_k +\dfrac{1-ch}{m}v_k
 $$
+
+\textit{Remarque :}
+$$ 
+x_{k+2} 
+= h\cdot v_{k+1} + x_{k+1} 
+= h \left( \dfrac{h}{m} f_k - \dfrac{kh}{m}x_k +\dfrac{1-ch}{m}v_k \right) + x_{k+1} 
+$$
+ 
+$$
+x_{k+2} - h \left( \dfrac{h}{m} f_k - \dfrac{kh}{m}x_k +\dfrac{1-ch}{m}v_k \right) - x_{k+1} =0
+$$
+
+$$
+mx_{k+2} - h^2 f_k +  kh^2 x_k - (1-ch) hv_k  - mx_{k+1} =0
+$$
+
+$$
+mx_{k+2} - mx_{k+1}   +  kh^2 x_k +(ch-1) hv_k  =h^2 f_k
+$$
+
+
+Par ailleurs, $v_k = \dfrac{x_{k+1}-x_{k}}{h}$
+
+$$
+mx_{k+2} - mx_{k+1}   +  kh^2 x_k +(ch-1) (x_{k+1}-x_{k})  =h^2 f_k
+$$
+
+$$
+mx_{k+2} + (ch-m-1)x_{k+1} +  (kh^2-ch-1) x_{k} = h^2 f_k 
+$$
+
+$$
+\dfrac{m}{h^2}x_{k+2}  =  f_k + 
+\left(\dfrac{1}{h^2}+\dfrac{m}{h^2} -\dfrac{c}{h}\right)x_{k+1} 
++ \left(\dfrac{1}{h^2}+\dfrac{c}{h}-k\right) x_{k}
+$$
+
+
+
+$$
+\dfrac{m}{h^2}x_{k}  =  f_k + 
+\left(\dfrac{1}{h^2}+\dfrac{m}{h^2} -\dfrac{c}{h}\right)x_{k-1} 
++ \left(\dfrac{1}{h^2}+\dfrac{c}{h}-k\right) x_{k-2}
+$$
+
+\begin{rem}
+On peut montrer que $G_k = \left(\dfrac{2M}{h^2}+\dfrac{C}{h} \right)X_{k-1} - \dfrac{M}{h^2} X_{k-2} + F_k $ et $H = \dfrac{M}{h^2} + \dfrac{C}{h} + K$.
+
+$$H\cdot X_k = G_k$$
+\end{rem}
+
 \end{corrige}
 \else
 \fi
@@ -376,6 +427,9 @@ H_{10}  & H_{11} &  \ddots & 0 & 0 \\
 \end{pmatrix}
  $$
 
+\begin{rem}
+On peut montrer que $G_k = \left(\dfrac{2M}{h^2}+\dfrac{C}{h} \right)X_{k-1} - \dfrac{M}{h^2} X_{k-2} + F_k $ et $H = \dfrac{M}{h^2} + \dfrac{C}{h} + K$.
+\end{rem}
 
 \subparagraph{}
 \textit{L'équation  $H\cdot X_k = G_k$ peut être résolue grâce à la méthode du pivot de Gauss. Donner les étapes de cette méthode ainsi que l'objectif ce chacune d'entre elles. }

@@ -99,7 +99,7 @@ def generate_tridiagonale(n,c,k):
     for i in range (n):
         ligne=[]
         for j in range (n):
-            ligne.append(0)
+            ligne.append(0.0)
         T.append(ligne)
     
     for i in range(n):
@@ -110,12 +110,25 @@ def generate_tridiagonale(n,c,k):
         T[i][i-1]=c
     return T
     
-T = generate_tridiagonale(5,1,2)
+T = generate_tridiagonale(4,1.0,2.0)
+D = generate_tridiagonale(4,0,0)
+for i in range(len(T)):
+    print(T[i][:])
+
+print()
 print(T[0][:])
-print(T[1][:])
-print(T[2][:])
-print(T[3][:])
-print(T[4][:])
+for i in range(len(T)):
+    D[0][i]=T[0][i]
+for i in range(1,len(T)):
+    coef = T[i][i-1]/T[i-1][i-1]
+    #print(coef)
+    for k in range(len(T)):
+        T[i][k]=T[i][k]-(coef)*T[i-1][k]
+    #print(T[i])
+    
+print()
+for i in range(len(T)):
+    print(T[i][:])
 # print(len(t),len(x),'.')
 # plt.plot(t_imp,x_imp,'.')
 # plt.plot(t_exp,x_exp,'.')
