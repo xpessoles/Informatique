@@ -156,126 +156,99 @@ $$
 \else
 \fi
 
-\subparagraph{}
-\textit{En utilisant un schéma d'Euler explicite et l'équation $v(t) = \dot{x}(t)$ 
-exprimer la suite $x_{k+1}$ en fonction de $x_k$, $v_k$ et le pas de calcul noté noté $h$.}
-
-\ifprof
-\begin{corrige}
-On a $\dfrac{dx(t)}{dt} \simeq \dfrac{x_{k+1}-x_k}{h}$. On a donc 
-$v_k = \dfrac{x_{k+1}-x_k}{h} \Longleftrightarrow x_{k+1} = h\cdot v_k + x_k$.
-\end{corrige}
-\else
-\fi
-
 %\subparagraph{}
-%\textit{En utilisant un schéma d'Euler implicite et l'équation $v(t) = \dot{x}(t)$ 
+%\textit{En utilisant un schéma d'Euler explicite et l'équation $v(t) = \dot{x}(t)$ 
 %exprimer la suite $x_{k+1}$ en fonction de $x_k$, $v_k$ et le pas de calcul noté noté $h$.}
 %
 %\ifprof
 %\begin{corrige}
-%On a $\dfrac{dx(t)}{dt} \simeq \dfrac{x_{k}-x_ {k-1}}{h}$. On a donc 
-%$v_k = \dfrac{x_{k}-x_{k-1}}{h} \Longleftrightarrow x_{k} = h\cdot v_k + x_{k-1}$.
+%On a $\dfrac{dx(t)}{dt} \simeq \dfrac{x_{k+1}-x_k}{h}$. On a donc 
+%$v_k = \dfrac{x_{k+1}-x_k}{h} \Longleftrightarrow x_{k+1} = h\cdot v_k + x_k$.
 %\end{corrige}
 %\else
 %\fi
 
-
-
 \subparagraph{}
-\textit{En utilisant un schéma d'Euler explicite exprimer alors la suite $v_{k+1}$.}
+\textit{En utilisant un schéma d'Euler implicite et l'équation $v(t) = \dot{x}(t)$ 
+exprimer la suite $x_{n}$ en fonction de $x_{n-1}$, $v_n$ et du pas de calcul noté noté $h$.}
 
 \ifprof
 \begin{corrige}
-On a $\dfrac{dv(t)}{dt} \simeq \dfrac{v_{k+1}-v_k}{h}$.  En conséquences, 
-$m\cdot\dot{v}(t)+c\cdot {v}(t) + k\cdot x(t) = f(t)$
-peut donc se mettre sous la forme suivante :
+On a $\dfrac{dx(t)}{dt} \simeq \dfrac{x_{n}-x_ {n-1}}{h}$. On a donc 
+$v_n = \dfrac{x_{n}-x_{n-1}}{h} \Longleftrightarrow x_{n} = h\cdot v_n + x_{n-1}$.
+
+\end{corrige}
+\else
+\fi
+
+
+\subparagraph{}
+\textit{En utilisant un schéma d'Euler implicite exprimer $v_n$ en fonction de $v_{n-1}$, $x_{n}$, $x_{n-1}$, $f_n$, $h$, $k$ et $c$.}
+
+\ifprof
+\begin{corrige}
+
+On a $\dfrac{dv(t)}{dt} \simeq \dfrac{v_{n}-v_ {n-1}}{h}$. On a donc 
+$\dot{v}_n = \dfrac{v_{n}-v_{n-1}}{h} \Longleftrightarrow v_{n} = h\cdot \dot{v}_n + v_{n-1}$.
+
 
 $$
-m\cdot\dfrac{v_{k+1}-v_k}{h}+c\cdot {v_k} + k\cdot x_k = f_k
-\Longleftrightarrow 
-m\cdot {v_{k+1}}  = f_k h - kh\cdot x_k - c h\cdot {v_k}+v_k
+m\cdot \dfrac{v_{n}-v_{n-1}}{h} +c\cdot \dfrac{x_{n}-x_{n-1}}{h} + k\cdot x_n = f_n
 \Longleftrightarrow
- {v_{k+1}}  = \dfrac{h}{m} f_k - \dfrac{kh}{m}x_k +\dfrac{1-ch}{m}v_k
-$$
-
-\textit{Remarque :}
-$$ 
-x_{k+2} 
-= h\cdot v_{k+1} + x_{k+1} 
-= h \left( \dfrac{h}{m} f_k - \dfrac{kh}{m}x_k +\dfrac{1-ch}{m}v_k \right) + x_{k+1} 
-$$
- 
-$$
-x_{k+2} - h \left( \dfrac{h}{m} f_k - \dfrac{kh}{m}x_k +\dfrac{1-ch}{m}v_k \right) - x_{k+1} =0
-$$
-
-$$
-mx_{k+2} - h^2 f_k +  kh^2 x_k - (1-ch) hv_k  - mx_{k+1} =0
-$$
-
-$$
-mx_{k+2} - mx_{k+1}   +  kh^2 x_k +(ch-1) hv_k  =h^2 f_k
+m\cdot (v_{n}-v_{n-1}) +c\cdot (x_{n}-x_{n-1}) + kh\cdot x_n = hf_n
 $$
 
 
-Par ailleurs, $v_k = \dfrac{x_{k+1}-x_{k}}{h}$
-
+On a donc :
 $$
-mx_{k+2} - mx_{k+1}   +  kh^2 x_k +(ch-1) (x_{k+1}-x_{k})  =h^2 f_k
+mv_{n}  = hf_n -  (kh+c) \cdot x_n + mv_{n-1}+cx_{n-1}
 $$
-
-$$
-mx_{k+2} + (ch-m-1)x_{k+1} +  (kh^2-ch-1) x_{k} = h^2 f_k 
-$$
-
-$$
-\dfrac{m}{h^2}x_{k+2}  =  f_k + 
-\left(\dfrac{1}{h^2}+\dfrac{m}{h^2} -\dfrac{c}{h}\right)x_{k+1} 
-+ \left(\dfrac{1}{h^2}+\dfrac{c}{h}-k\right) x_{k}
-$$
-
-
-
-$$
-\dfrac{m}{h^2}x_{k}  =  f_k + 
-\left(\dfrac{1}{h^2}+\dfrac{m}{h^2} -\dfrac{c}{h}\right)x_{k-1} 
-+ \left(\dfrac{1}{h^2}+\dfrac{c}{h}-k\right) x_{k-2}
-$$
-
-\begin{rem}
-On peut montrer que $G_k = \left(\dfrac{2M}{h^2}+\dfrac{C}{h} \right)X_{k-1} - \dfrac{M}{h^2} X_{k-2} + F_k $ et $H = \dfrac{M}{h^2} + \dfrac{C}{h} + K$.
-
-$$H\cdot X_k = G_k$$
-\end{rem}
 
 \end{corrige}
 \else
 \fi
 
 \subparagraph{}
-\textit{En déduire que la solution de l'équation différentielle peut se mettre sous la forme :
+\textit{En déduire que la suite $x_n$ peut se mettre sous la forme suivante :}
 $$
-\left\{
-\begin{array}{l}
-x_{k+1} = \alpha \cdot v_k + \beta \cdot x_k \\
-v_{k+1} = \gamma \cdot f_k + \delta  \cdot x_k  + \lambda\cdot v_k \\
-\end{array}
-\right.
-\quad \text{où on explicitera $\alpha$, $\beta$, $\gamma$, $\delta$ et $\lambda$.}
+x_{n}\left(m +ch+ kh^2\right)-x_{n-1}(2m+ch) +mx_{n-2}= h^2f_n
 $$
-}
 
 \ifprof
 \begin{corrige}
-Dans ses conditions, on a : 
+
+D'après la question 2 on a :
+$$v_n = \dfrac{x_{n}-x_{n-1}}{h} \quad \text{et} \quad v_{n-1} = \dfrac{x_{n-1}-x_{n-2}}{h}$$ 
+
+En utilisant le résultat de la question 3, on a :
 $$
-\alpha  = h \quad \beta = 1 \quad \gamma =\dfrac{h}{m} \quad \delta = -\dfrac{kh}{m} \quad \lambda = \dfrac{1-ch}{m}
+m\dfrac{x_{n}-x_{n-1}}{h}  = hf_n -  (kh+c) \cdot x_n + m\dfrac{x_{n-1}-x_{n-2}}{h}+cx_{n-1}
 $$
+
+$$
+\Longleftrightarrow 
+m(x_{n}-x_{n-1}) = h^2f_n -  h(kh+c) \cdot x_n + m(x_{n-1}-x_{n-2})+chx_{n-1}
+$$
+
+$$
+\Longleftrightarrow 
+m(x_{n}-x_{n-1}) +  h(kh+c) \cdot x_n - m(x_{n-1}-x_{n-2})-chx_{n-1} = h^2f_n 
+$$
+
+
+$$
+\Longleftrightarrow 
+x_{n}\left(m +kh^2+ch\right)-x_{n-1}(2m+ch) +mx_{n-2} = h^2f_n 
+$$
+
+$$
+\Longleftrightarrow 
+x_{n}= \dfrac{1}{m +kh^2+ch} \left(h^2f_n +x_{n-1}(2m+ch) -mx_{n-2} \right)
+$$
+
 \end{corrige}
 \else
 \fi
-
 
 
 
@@ -330,22 +303,23 @@ def f_omega(Tsimu,h,fmax,fsign):
 \fi
 
 
+Il est possible de mettre la suite déterminée à la question 4 sous la forme $x_n = \alpha f_n +\beta x_{n-1} + \gamma x_{n-2}$.
+
 \subparagraph{}
-\textit{En utilisant une boucle \textsf{while}, générer, en Python, les listes \textsf{X} et \textsf{V} contenant les termes des suites $x_k$ et $v_k$ ainsi que la liste \textsf{T} contenant le temps. On exprimera les lignes de codes en fonction de $\alpha$, $\beta$, $\gamma$, $\delta$ et $\lambda$.}
+\textit{En utilisant une boucle \textsf{while}, générer, en Python, les listes \textsf{T} et \textsf{X} contenant respectivement le temps de simulation et le déplacement de la masse mobile.}
 \ifprof
 \begin{corrige}
 \begin{python}
-t = 0
-T,X,V = [t],[0],[0]
-F = f_omega(Tsimu,h,fmax,fsign)
-i=0
-while t<Tsimu:
-    t = t+h
-    T.append(t)
-    X.append(alpha*V[i]+beta*X[i])
-    V.append(gamma*F[i]+delta*X[i]+lambd*V[i])    
-    i=i+1
 
+T=[0,h]
+X=[0,0]
+t=2*h
+i=2
+while t<Tsimu:
+    T.append(t)
+    X.append(alpha*F[i]+beta*X[i-1] +gamma*X(i-2))
+    i=i+1
+    t = t+h
 \end{python}
 \end{corrige}
 \else
@@ -415,7 +389,14 @@ $$}
 \fi
 
 
-En appliquant le schéma d'Euler explicite à l'équation différentielle matricielle, on montre qu'à l'instant $k$, le système peut se mettre sous la forme $H\cdot X_k = G_k$, la matrice $H$ étant de la forme suivante (dite tridiagonale) :
+
+En appliquant le schéma d'Euler explicite à l'équation différentielle matricielle, la solution reste identique à celle déterminée dans la partie précédente :
+
+$$
+\left(M +h^2K+hX\right)X_{n}= \left(h^2F_n +X_{n-1}(2M+hC) -MX_{n-2} \right)
+$$ 
+ 
+on montre qu'à l'instant $k$, le système peut se mettre sous la forme $H\cdot X_k = G_k$, la matrice $H$ étant de la forme suivante (dite tridiagonale) :
 $$
 H =
 \begin{pmatrix}
@@ -428,21 +409,74 @@ H_{10}  & H_{11} &  \ddots & 0 & 0 \\
  $$
 
 \begin{rem}
-On peut montrer que $G_k = \left(\dfrac{2M}{h^2}+\dfrac{C}{h} \right)X_{k-1} - \dfrac{M}{h^2} X_{k-2} + F_k $ et $H = \dfrac{M}{h^2} + \dfrac{C}{h} + K$.
+Dans ces conditions on a donc  $G_k = \left(\dfrac{2M}{h^2}+\dfrac{C}{h} \right)X_{k-1} - \dfrac{M}{h^2} X_{k-2} + F_k $ et $H = \dfrac{M}{h^2} + \dfrac{C}{h} + K$.
 \end{rem}
 
 \subparagraph{}
-\textit{L'équation  $H\cdot X_k = G_k$ peut être résolue grâce à la méthode du pivot de Gauss. Donner les étapes de cette méthode ainsi que l'objectif ce chacune d'entre elles. }
+\textit{L'équation  $H\cdot X_k = G_k$ peut être résolue grâce à la méthode du pivot de Gauss. Donner les étapes de cette méthode ainsi que l'objectif ce chacune d'entre elles. Quelle est la complexité algorithmique de la résolution d'une équation en utilisant le pivot de Gauss ?}
 \ifprof
 \begin{corrige}
 \end{corrige}
 \else
 \fi
 
+
+Plutôt que d'utiliser la méthode du pivot de Gauss classique, un programmateur utilise la méthode suivante pour résoudre le système d'équation : 
+\begin{py}
+\begin{python}
+def resoud(H,X,G):
+    """
+    Fonction permettant de résoudre H.X = G
+    Entrées : 
+        * H (list) : matrice de tridiagonale de taille nxn
+        * X (list) : vecteur de n lignes, 1 colonne dont toutes les valeurs sont nulles
+        * G (list) : second membre du système d'équation de taille nx1
+    Sortie : 
+        * X : solution du système
+    """
+    H2=copy(H)  # Copie de la matrice H
+    G2=copy(G)  # Copie du vecteur G
+    n=len(G2)
+    for i in range(1,n):
+        a=H2[i-1,i-1]
+        b=H2[i,i-1]
+        for k in range(n) :
+            H2[i][k]=H2[i][k]*a-H2[i-1][k]*b
+            G2[i][k]=G2[i][k]*a-G2[i-1][k]*b
+    for k in range(n) :
+        X[n-1][k]=G2[n-1][k]/H2[n-1][n-1]
+    for i in range(n-2,-1,-1):
+        for k in range(n) :
+            X[i][k]=(G2[i][k]-H2[i][i+1]*X[i+1][k])/H2[i][i]
+    return X
+
+\end{python}
+\end{py}
+
+\subparagraph{}
+\textit{Expliquer en quoi cet algorithme permet de résoudre le système $H\cdot X_n = G_n$ ? Quelle est la complexité de cet algorithme ?}
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi
+
+
+\section{Détermination de l'énergie dissipée}
+La puissance dissipée par la poutre est donnée par la relation suivante :
+$$
+P_{\text{diss}}(t) = \sum\limits_{i=2}^n c\left(u_i(t) - \dot{u}_i(t)\right)^2
+$$
+
+L'énergie imposée est donnée par la relation : 
+$$
+E_{\text{diss}}(t) = \int\limits_{0}^t P_{\text{diss}}(\tau) d\tau
+$$
+
 \end{document}
 
 \subparagraph{}
-\textit{Au vue de la forme de la matrice, il est possible de simplifier l'étape visant à échelonner la matrice. }
+\textit{}
 \ifprof
 \begin{corrige}
 \end{corrige}
