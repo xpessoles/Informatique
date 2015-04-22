@@ -80,6 +80,12 @@ La structure peut être modélisée par $n$ éléments de masse $m_i$ ($i$ varia
 Le déplacement au cours du temps de l'élément $i$ autour de sa position d'équlibre est noté $u_i(t)$. Une force $f_n(t)$ est appliquée sur l'élément $n$ uniquement. L'extrémité gauche de
 la structure est bloquée. Les effets de la pesanteur sont négligés.
 
+
+\begin{center}
+\includegraphics[width=.9\textwidth]{images/structure}
+\end{center}
+
+
 Le théorème de la résultante dynamique appliqué à un élément $i$ ($i$ variant de 2 à $n-1$ inclus) s'écrit sous la forme : 
 %$$
 %m_i\dfrac{\text{d}u_i(t)}{\text{d}t} = 
@@ -118,7 +124,7 @@ Le théorème de la résultante dynamique appliqué aux éléments 1 et $n$ donn
 m\dfrac{\text{d}^2u_1(t)}{\text{d}t^2} = 
 - 2k u_1(t) + k u_2 (t) 
 -2c \dfrac{\text{d}u_1(t)}{\text{d}t} 
-- c \dfrac{\text{d}u_2(t)}{\text{d}t} 
++ c \dfrac{\text{d}u_2(t)}{\text{d}t} 
 \end{equation}
 
 \begin{equation}
@@ -130,15 +136,24 @@ m\dfrac{\text{d}^2u_n(t)}{\text{d}t^2} =
 Dans toute la suite, on imposera $f_n(t)=f_{max} \sin \left(\omega t\right)$.
 
 \section{Résolution d'une équation différentielle}
-On s'intéresse tout d'abord à un seul système masse ressort. L'application du théorème de la résultante dynamique en projection sur l'axe de déplacement s'écrit donc 
+\begin{minipage}[c]{.6\linewidth}
+On s'intéresse tout d'abord à une seule cellule masse ressort amortisseur. L'application du théorème de la résultante dynamique en projection sur l'axe de déplacement s'écrit donc 
 de la manière suivante : 
 $$
 m\cdot\ddot{u}(t)+c\cdot \dot{u}(t) + k\cdot u(t) = f(t)
 $$
+\end{minipage}\hfill
+\begin{minipage}[c]{.37\linewidth}
+\begin{center}
+\includegraphics[width=.95\textwidth]{images/cellule}
+\end{center}
+\end{minipage}
 
 On précise que pour $t\leq 0$, $u(t)=0$, $\dot{u}(t)=0$ et $\ddot{u}(t)=0$.
 
 On pose $\left\{ \begin{array}{l} x(t) = u(t) \\ v(t) = \dot{x}(t)\end{array} \right.$.
+
+
 
 \subparagraph{}
 \textit{Réécrire l'équation différentielle sous forme d'un système d'équation en fonction de $x(t)$,  $v(t)$, $\dot{x}(t)$ et $\dot{v}(t)$}
