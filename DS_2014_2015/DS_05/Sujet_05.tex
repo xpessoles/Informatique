@@ -8,8 +8,8 @@
 %Si le boolen xp est vrai : compilation pour xabi
 %Sinon compilation Damien
 \newif\ifprof
-\proftrue
-%\proffalse
+%\proftrue
+\proffalse
 
 \newif\ifxp
 \xptrue
@@ -29,14 +29,14 @@
 \def\discipline{Informatique}
 \def\xxtitre{%
 \ifxp
-Concours Blanc : Informatique
+Devoir Surveillé d'informatique 5 -- 1 Heure
 \else
 \fi
 }
 
 \def\xxsoustitre{%
 \ifxp
-Autour de données météorologiques
+Simulation de vibrations -- CCP PSI -- Adapté du sujet 0
 \else
 \fi}
 
@@ -75,11 +75,17 @@ Simulation des vibrations -- \ifprof P \else E \fi
 
 
 \section{Mise en situation}
-La structure peut être modélisée par $n$ éléments de masse $m_i$ ($i$ variant de 1 à $n$) reliés  par des liaisons visco-élastiques eux-mêmes modélisés par des un ressort de raideur $k$ en parallèle d'un élément d'amortissement $c$. La structure est supposée unidimensionnelle de longueur $L$. Le nombre d'éléments peut être de l'ordre de plusieurs milliers. 
+\begin{minipage}[c]{.7\linewidth}
+Pour étudier une poutre soumises à des vibrations en traction compression, il est possible de la modéliser par $n$ éléments de masse $m_i$ ($i$ variant de 1 à $n$) reliés  par des liaisons visco-élastiques eux-mêmes modélisés par des un ressort de raideur $k$ ($k$ dépendant du module de Young du matériau et des dimensions de la poutre) en parallèle d'un élément d'amortissement $c$ (dépendant d'un coefficient d'amortissement visqueux entre les éléments, du nombre d'éléments et de la masse de la structure). La structure est supposée unidimensionnelle de longueur $L$. Le nombre d'éléments peut être de l'ordre de plusieurs milliers. 
 
-Le déplacement au cours du temps de l'élément $i$ autour de sa position d'équlibre est noté $u_i(t)$. Une force $f_n(t)$ est appliquée sur l'élément $n$ uniquement. L'extrémité gauche de
+Le déplacement au cours du temps de l'élément $i$ autour de sa position d'équilibre est noté $u_i(t)$. Une force $f_n(t)$ est appliquée sur l'élément $n$ uniquement. L'extrémité gauche de
 la structure est bloquée. Les effets de la pesanteur sont négligés.
-
+\end{minipage}
+\begin{minipage}[c]{.27\linewidth}
+\begin{center}
+\includegraphics[width=.95\textwidth]{images/vibrations}
+\end{center}
+\end{minipage}
 
 \begin{center}
 \includegraphics[width=.9\textwidth]{images/structure}
@@ -457,12 +463,10 @@ def resoud(H,X,G):
         b=H2[i,i-1]
         for k in range(n) :
             H2[i][k]=H2[i][k]*a-H2[i-1][k]*b
-            G2[i][k]=G2[i][k]*a-G2[i-1][k]*b
-    for k in range(n) :
-        X[n-1][k]=G2[n-1][k]/H2[n-1][n-1]
+        G2[i]=G2[i]*a-G2[i-1]*b
+    X[n-1]=G2[n-1]/H2[n-1][n-1]
     for i in range(n-2,-1,-1):
-        for k in range(n) :
-            X[i][k]=(G2[i][k]-H2[i][i+1]*X[i+1][k])/H2[i][i]
+        X[i]=(G2[i]-H2[i][i+1]*X[i+1])/H2[i][i]
     return X
 
 \end{python}
@@ -478,16 +482,55 @@ def resoud(H,X,G):
 
 
 \section{Détermination de l'énergie dissipée}
-La puissance dissipée par la poutre est donnée par la relation suivante :
-$$
-P_{\text{diss}}(t) = \sum\limits_{i=2}^n c\left(u_i(t) - \dot{u}_i(t)\right)^2
-$$
 
-L'énergie imposée est donnée par la relation : 
+Pour une poutre subdivisée en $n$ éléments sur laquelle on a réalisé une simulation de $p$ pas de temps, la résolution totale nous permet d'obtenir une matrice $U$ de $p$ lignes $n$ colonnes. Ainsi l'élément $U[i][j]$ nous permet d'avoir la valeur du déplacement du jième point à l'ième temps de calcul.
+
+La puissance et l'énergie dissipées par la poutre sont données par les relations suivantes :
 $$
+P_{\text{diss}}(t) = c(\dot{u}_i(t))^2 + \sum\limits_{i=2}^n c\left(\dot{u}_i(t) - \dot{u}_{i-1}(t)\right)^2
+\quad
 E_{\text{diss}}(t) = \int\limits_{0}^t P_{\text{diss}}(\tau) d\tau
 $$
 
+
+Un programmeur propose la fonction suivante pour traduire la fonction puissance donnée ci-dessus :
+\begin{py}
+\begin{python}
+def calcul_puissance(U,c,h):
+    p,n=len(X),len(X[0])
+    P,V=[],[]
+    for i in range(1,p):
+        T=[]
+        for j in range(n):
+            T.append((U[i][j]-U[i-1][j])/h)
+        V.append(T)
+    for i in range(1,p):
+        Ps=0
+        for j in range(0):
+            else:
+                Ps = Ps + c*(V[i][j]-V[i][j-1])**2
+        P.append(Ps)
+    return P
+\end{python}
+\end{py}
+
+
+\subparagraph{}
+\textit{Expliquez le but des blocs constitués des lignes 4 à 8 puis des lignes 9 à 14. La fonction proposée permet-elle de calculer la puissance ? Si non, que faudrait-il modifier ? }
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi
+
+
+\subparagraph{}
+\textit{La programme précédent retourne la liste des puissances dissipées à chaque temps de calcul. Calculer l'énergie dissipée en utilisant la méthode des rectangles à gauche. On rappelle que le pas de calcul est noté $h$.}
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi
 \end{document}
 
 \subparagraph{}
