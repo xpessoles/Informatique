@@ -8,8 +8,8 @@
 %Si le boolen xp est vrai : compilation pour xabi
 %Sinon compilation Damien
 \newif\ifprof
-%\proftrue
-\proffalse
+\proftrue
+%\proffalse
 
 \newif\ifxp
 \xptrue
@@ -49,7 +49,7 @@ Adapté de sujet 0 -- CCP PSI
 
 \def\xxpied{%
 \ifxp
-Concours Blanc -- Informatique \\
+DS 5 -- Informatique \\
 Simulation des vibrations -- \ifprof P \else E \fi
 \else
 \fi}
@@ -75,8 +75,10 @@ Simulation des vibrations -- \ifprof P \else E \fi
 
 
 \section{Mise en situation}
+\ifprof
+\else
 \begin{minipage}[c]{.7\linewidth}
-Pour étudier une poutre soumises à des vibrations en traction compression, il est possible de la modéliser par $n$ éléments de masse $m_i$ ($i$ variant de 1 à $n$) reliés  par des liaisons visco-élastiques eux-mêmes modélisés par des un ressort de raideur $k$ ($k$ dépendant du module de Young du matériau et des dimensions de la poutre) en parallèle d'un élément d'amortissement $c$ (dépendant d'un coefficient d'amortissement visqueux entre les éléments, du nombre d'éléments et de la masse de la structure). La structure est supposée unidimensionnelle de longueur $L$. Le nombre d'éléments peut être de l'ordre de plusieurs milliers. 
+Pour étudier une poutre soumises à des vibrations en traction compression, il est possible de la modéliser par $n$ éléments de masse $m_i$ ($i$ variant de 1 à $n$). Ces éleménts sont reliés par des liaisons visco-élastiques elles-mêmes modélisées par des un ressort de raideur $k$ ($k$ dépendant du module de Young du matériau et des dimensions de la poutre) en parallèle d'un élément d'amortissement $c$ (dépendant d'un coefficient d'amortissement visqueux entre les éléments, du nombre d'éléments et de la masse de la structure). La structure est supposée unidimensionnelle de longueur $L$. Le nombre d'éléments peut être de l'ordre de plusieurs milliers. 
 
 Le déplacement au cours du temps de l'élément $i$ autour de sa position d'équilibre est noté $u_i(t)$. Une force $f_n(t)$ est appliquée sur l'élément $n$ uniquement. L'extrémité gauche de
 la structure est bloquée. Les effets de la pesanteur sont négligés.
@@ -140,8 +142,12 @@ m\dfrac{\text{d}^2u_n(t)}{\text{d}t^2} =
 
 
 Dans toute la suite, on imposera $f_n(t)=f_{max} \sin \left(\omega t\right)$.
+\fi
 
 \section{Résolution d'une équation différentielle}
+\ifprof
+\else
+
 \begin{minipage}[c]{.6\linewidth}
 On s'intéresse tout d'abord à une seule cellule masse ressort amortisseur. L'application du théorème de la résultante dynamique en projection sur l'axe de déplacement s'écrit donc 
 de la manière suivante : 
@@ -155,14 +161,12 @@ $$
 \end{center}
 \end{minipage}
 
-On précise que pour $t\leq 0$, $u(t)=0$, $\dot{u}(t)=0$ et $\ddot{u}(t)=0$.
-
-On pose $\left\{ \begin{array}{l} x(t) = u(t) \\ v(t) = \dot{x}(t)\end{array} \right.$.
+On précise que pour $t\leq 0$, $u(t)=0$, $\dot{u}(t)=0$. On pose  $\left\{ \begin{array}{l} x(t) = u(t) \\ v(t) = \dot{x}(t)\end{array} \right.$.
 
 
-
+\fi
 \subparagraph{}
-\textit{Réécrire l'équation différentielle sous forme d'un système d'équation en fonction de $x(t)$,  $v(t)$, $\dot{x}(t)$ et $\dot{v}(t)$}
+\textit{Réécrire l'équation différentielle sous forme d'un système d'équations en fonction de $x(t)$,  $v(t)$, $\dot{x}(t)$ et $\dot{v}(t)$.}
 \ifprof
 \begin{corrige}
 On a donc : 
@@ -204,7 +208,7 @@ $v_n = \dfrac{x_{n}-x_{n-1}}{h} \Longleftrightarrow x_{n} = h\cdot v_n + x_{n-1}
 
 
 \subparagraph{}
-\textit{En utilisant un schéma d'Euler implicite exprimer $v_n$ en fonction de $v_{n-1}$, $x_{n}$, $x_{n-1}$, $f_n$, $h$, $k$ et $c$.}
+\textit{En utilisant un schéma d'Euler implicite exprimer $v_n$ en fonction de $v_{n-1}$, $x_{n}$, $x_{n-1}$, $f_n$, $h$, $k$, $c$ et $m$.}
 
 \ifprof
 \begin{corrige}
@@ -231,9 +235,7 @@ $$
 
 \subparagraph{}
 \textit{En déduire que la suite $x_n$ peut se mettre sous la forme suivante :}
-$$
-x_{n}\left(m +ch+ kh^2\right)-x_{n-1}(2m+ch) +mx_{n-2}= h^2f_n
-$$
+$x_{n}\left(m +ch+ kh^2\right)-x_{n-1}(2m+ch) +mx_{n-2}= h^2f_n$.
 
 \ifprof
 \begin{corrige}
@@ -271,11 +273,19 @@ $$
 \else
 \fi
 
+\ifprof
+\else
 
+\vspace{.5cm}
 
+On rappelle que $f(t)=f_{max} \sin \left(\omega t\right)$. On note \textsf{Tsimu} le temps de simulation et \textsf{h} le pas de temps. 
+
+\fi
 \subparagraph{}
-\textit{On note \textsf{Tsimu} le temps de simulation et \textsf{h} le pas de temps. Implémenter en Python le fonction \textsf{f\_omega} 
-permettant de créer une liste contenant l'ensemble des valeurs prises par la fonction $f_n$. On utilisera une boucle \textsf{while}. Les spécifications de la fonction sont les suivantes : }
+\textit{Implémenter en Python le fonction \textsf{f\_omega} permettant de créer une liste contenant l'ensemble des valeurs prises par la fonction $f_n$. On utilisera une boucle \textsf{while}. Les spécifications de la fonction sont les suivantes : }
+\ifprof
+\else
+
 
 \begin{py}
 \begin{python}
@@ -283,7 +293,7 @@ def f_omega(Tsimu,h,fmax,fsign):
    """
    Entrées :
        * Tsimu (flt) : temps de la simulation en seconde
-       * h (flt) : pas de temps de a simulation
+       * h (flt) : pas de temps de la simulation
        * fmax (flt) : amplitude du signal (en Newton)
        * fsign (flt) : fréquence du signal (en Hertz)
    Sortie : 
@@ -292,6 +302,8 @@ def f_omega(Tsimu,h,fmax,fsign):
    """
 \end{python}
 \end{py}
+
+\fi
 
 \ifprof
 \begin{corrige}
@@ -323,8 +335,12 @@ def f_omega(Tsimu,h,fmax,fsign):
 \else
 \fi
 
+\ifprof
+\else
 
 Il est possible de mettre la suite déterminée à la question 4 sous la forme $x_n = \alpha f_n +\beta x_{n-1} + \gamma x_{n-2}$.
+
+\fi
 
 \subparagraph{}
 \textit{En utilisant une boucle \textsf{while}, générer, en Python, les listes \textsf{T} et \textsf{X} contenant respectivement le temps de simulation et le déplacement de la masse mobile.}
@@ -348,6 +364,10 @@ while t<Tsimu:
 
 
 \section{Résolution du problème général}
+
+\ifprof
+\else
+
 Le système d'équations différentielles défini dans la première partie peut s'écrire sous forme matricielle :
 $$
 M \ddot{X}(t) +C \dot{X}(t) +K {X}(t) = F(t) \quad \text{avec} \quad 
@@ -356,11 +376,10 @@ X(t)=\left[
 u_1(t) \\ 
 ... \\ 
 u_n(t) \\
-\end{array}\right]
+\end{array}\right] \quad \text{et $M$, $C$ et $K$ des matrices carrées de taille $n\times n$.}
 $$
 
-$M$, $C$ et $K$ des matrices carrées de taille $n\times n$.
-
+\fi
 
 \subparagraph{}
 \textit{En reprenant les équations (1), (2) et (3) déterminer les matrices $M$, $C$, $K$ et $F$.}
@@ -409,15 +428,12 @@ $$}
 \else
 \fi
 
+\ifprof
+\else
 
 
-En appliquant le schéma d'Euler explicite à l'équation différentielle matricielle, la solution reste identique à celle déterminée dans la partie précédente :
-
-$$
-\left(M +h^2K+hX\right)X_{n}= \left(h^2F_n +X_{n-1}(2M+hC) -MX_{n-2} \right)
-$$ 
- 
-on montre qu'à l'instant $k$, le système peut se mettre sous la forme $H\cdot X_k = G_k$, la matrice $H$ étant de la forme suivante (dite tridiagonale) :
+En appliquant le schéma d'Euler implicite à l'équation différentielle matricielle, la solution reste identique à celle déterminée dans la partie précédente : $\left(M +h^2K+hX\right)X_{n}= \left(h^2F_n +X_{n-1}(2M+hC) -MX_{n-2} \right)$. On montre qu'à l'instant $k$, le système peut se mettre sous la forme $H\cdot X_k = G_k$, la matrice $H$ étant de la forme suivante (dite tridiagonale) :
+\begin{minipage}[c]{.4\linewidth}
 $$
 H =
 \begin{pmatrix}
@@ -428,10 +444,14 @@ H_{10}  & H_{11} &  \ddots & 0 & 0 \\
 0 & 0 & 0 & H_{n-1,n} & H_{n,n} \\
 \end{pmatrix}
  $$
-
+ \end{minipage} \hfill
+\begin{minipage}[c]{.57\linewidth}
 \begin{rem}
 Dans ces conditions on a donc  $G_k = \left(\dfrac{2M}{h^2}+\dfrac{C}{h} \right)X_{k-1} - \dfrac{M}{h^2} X_{k-2} + F_k $ et $H = \dfrac{M}{h^2} + \dfrac{C}{h} + K$.
 \end{rem}
+ \end{minipage} 
+
+\fi
 
 \subparagraph{}
 \textit{L'équation  $H\cdot X_k = G_k$ peut être résolue grâce à la méthode du pivot de Gauss. Donner les étapes de cette méthode ainsi que l'objectif ce chacune d'entre elles. Quelle est la complexité algorithmique de la résolution d'une équation en utilisant le pivot de Gauss ?}
@@ -441,8 +461,10 @@ Dans ces conditions on a donc  $G_k = \left(\dfrac{2M}{h^2}+\dfrac{C}{h} \right)
 \else
 \fi
 
+\ifprof
+\else
 
-Plutôt que d'utiliser la méthode du pivot de Gauss classique, un programmateur utilise la méthode suivante pour résoudre le système d'équation : 
+Plutôt que d'utiliser la méthode du pivot de Gauss classique, un programmeur utilise la méthode suivante pour résoudre le système d'équation : 
 \begin{py}
 \begin{python}
 def resoud(H,X,G):
@@ -459,8 +481,8 @@ def resoud(H,X,G):
     G2=copy(G)  # Copie du vecteur G
     n=len(G2)
     for i in range(1,n):
-        a=H2[i-1,i-1]
-        b=H2[i,i-1]
+        a=H2[i-1][i-1]
+        b=H2[i][i-1]
         for k in range(n) :
             H2[i][k]=H2[i][k]*a-H2[i-1][k]*b
         G2[i]=G2[i]*a-G2[i-1]*b
@@ -472,6 +494,8 @@ def resoud(H,X,G):
 \end{python}
 \end{py}
 
+\fi
+
 \subparagraph{}
 \textit{Expliquer en quoi cet algorithme permet de résoudre le système $H\cdot X_n = G_n$ ? Quelle est la complexité de cet algorithme ?}
 \ifprof
@@ -482,13 +506,15 @@ def resoud(H,X,G):
 
 
 \section{Détermination de l'énergie dissipée}
+\ifprof
+\else
 
 Pour une poutre subdivisée en $n$ éléments sur laquelle on a réalisé une simulation de $p$ pas de temps, la résolution totale nous permet d'obtenir une matrice $U$ de $p$ lignes $n$ colonnes. Ainsi l'élément $U[i][j]$ nous permet d'avoir la valeur du déplacement du jième point à l'ième temps de calcul.
 
 La puissance et l'énergie dissipées par la poutre sont données par les relations suivantes :
 $$
 P_{\text{diss}}(t) = c(\dot{u}_i(t))^2 + \sum\limits_{i=2}^n c\left(\dot{u}_i(t) - \dot{u}_{i-1}(t)\right)^2
-\quad
+\quad \text{et} \quad 
 E_{\text{diss}}(t) = \int\limits_{0}^t P_{\text{diss}}(\tau) d\tau
 $$
 
@@ -506,14 +532,14 @@ def calcul_puissance(U,c,h):
         V.append(T)
     for i in range(1,p):
         Ps=0
-        for j in range(0):
-            else:
+        for j in range(n):
                 Ps = Ps + c*(V[i][j]-V[i][j-1])**2
         P.append(Ps)
     return P
 \end{python}
 \end{py}
 
+\fi
 
 \subparagraph{}
 \textit{Expliquez le but des blocs constitués des lignes 4 à 8 puis des lignes 9 à 14. La fonction proposée permet-elle de calculer la puissance ? Si non, que faudrait-il modifier ? }
@@ -524,9 +550,9 @@ def calcul_puissance(U,c,h):
 \fi
 
 
-\subparagraph{}
-\textit{La programme précédent retourne la liste des puissances dissipées à chaque temps de calcul. Calculer l'énergie dissipée en utilisant la méthode des rectangles à gauche. On rappelle que le pas de calcul est noté $h$.}
+\subparagraph{}\textit{La programme précédent retourne la liste des puissances dissipées à chaque temps de calcul. Calculer l'énergie dissipée en utilisant la méthode des trapèzes. Vous réaliserez un schéma pour illustrer la méthdode. On rappelle que le pas de calcul est noté $h$.}
 \ifprof
+
 \begin{corrige}
 \end{corrige}
 \else
