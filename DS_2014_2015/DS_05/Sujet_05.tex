@@ -457,6 +457,7 @@ Dans ces conditions on a donc  $G_k = \left(\dfrac{2M}{h^2}+\dfrac{C}{h} \right)
 \textit{L'équation  $H\cdot X_k = G_k$ peut être résolue grâce à la méthode du pivot de Gauss. Donner les étapes de cette méthode ainsi que l'objectif ce chacune d'entre elles. Quelle est la complexité algorithmique de la résolution d'une équation en utilisant le pivot de Gauss ?}
 \ifprof
 \begin{corrige}
+Voir cours. Complexité cubique.
 \end{corrige}
 \else
 \fi
@@ -500,6 +501,7 @@ def resoud(H,X,G):
 \textit{Expliquer en quoi cet algorithme permet de résoudre le système $H\cdot X_n = G_n$ ? Quelle est la complexité de cet algorithme ?}
 \ifprof
 \begin{corrige}
+La matrice étant tridiagonale, la phase d'échelonnage et de remontée sont simplifiées. 
 \end{corrige}
 \else
 \fi
@@ -545,6 +547,9 @@ def calcul_puissance(U,c,h):
 \textit{Expliquez le but des blocs constitués des lignes 4 à 8 puis des lignes 9 à 14. La fonction proposée permet-elle de calculer la puissance ? Si non, que faudrait-il modifier ? }
 \ifprof
 \begin{corrige}
+La puissance devant être calculée à partir de la vitesse, les lignes 4 à 8 permettent de calculer la vitesse par différence de position sur un temps $h$. La vitesse d'un n\oe{}ud $j$ à l'instant $i$ est donc calculée par $\dfrac{U[i][j]-U[i-1][j])}{h}$.
+
+Les lignes 9 à 14 permettent de calculer la puissance, mais ne prennent pas en compte le cas où $i$ =0. Il faut donc que le range varie entre 0 et $p$ et traiter le cas où $p=0$ à l'aide d'un \textsf{if}. 
 \end{corrige}
 \else
 \fi
