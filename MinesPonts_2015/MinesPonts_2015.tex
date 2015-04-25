@@ -1,0 +1,631 @@
+\documentclass[10pt]{article}
+\input{style/coursHeadings}
+\input{style/programHeadings}
+\input{style/macros_SII}
+\input{style/macros_Titres}
+\input{style/macros_Frames}
+
+%Si le boolen xp est vrai : compilation pour xabi
+%Sinon compilation Damien
+\newif\ifprof
+\proftrue
+%\proffalse
+
+\newif\ifxp
+\xptrue
+%\xpfalse
+
+\newif\iftd
+\tdtrue
+%\tdfalse
+
+\usepackage[%
+    pdftitle={DS Informatique - Concours Blanc},
+    pdfauthor={Xavier Pessoles},
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=magenta]{hyperref}
+
+\def\discipline{Informatique}
+\def\xxtitre{%
+\ifxp
+Tests de validation d'une imprimante
+\else
+\fi
+}
+
+\def\xxsoustitre{%
+\ifxp
+Chapitre ** -- 
+\else
+\fi}
+
+\def\xxauteur{%
+\ifxp
+Xavier \textsc{Pessoles}
+\else
+\fi}
+
+\def\xxpied{%
+\ifxp
+CI ** : **\\
+Ch. ** : ** -- Cours TD
+\else
+\fi}
+
+
+
+
+
+%---------------------------------------------------------------------------
+
+
+\begin{document}
+\input{style/enteteXP}
+
+\begin{flushright}
+Sujet réécrit à partir d'un sujet PDF.
+\end{flushright}
+
+ \renewcommand{\baselinestretch}{1.2}
+\setlength{\parskip}{2ex plus 0.5ex minus 0.2ex}
+
+Le sujet comporte des questions de programmation. Le langage à utiliser est Python dans les
+parties I à IV. Dans la partie V, on demande d'utiliser Scilab.
+
+\section*{Introduction}
+
+Les imprimantes sont des systèmes mécatroniques fabriqués en grande série dans des usines
+robotisées. Pour améliorer la qualité des produits vendus, il a été mis en place différents tests
+de fin de chaîne pour valider l'assemblage des produits. Pour un de ces tests, un opérateur
+connecte l'outil de test sur la commande du moteur de déplacement de la tête d'impression
+et sur la commande du moteur d'avance papier. Une autre connexion permet de récupérer les
+signaux issus des capteurs de position.
+
+Différentes commandes et mesures sont alors exécutées. Ces mesures sont envoyées par
+liaison de données sous la forme d'une suite de caractères ASCII vers un ordinateur.
+Cet ordinateur va effectuer différentes mesures pour valider le fonctionnement de \textit{la partie \sout{l'} \footnote{Modification du texte original.}}  électromécanique de l'imprimante. L'ensemble des mesures et des analyses est sauvegardé dans un
+fichier texte. Cette sauvegarde s'exécute dans une base de données et, afin de minimiser l'espace occupé, les fichiers sont compressés. La base de données permet à l'entreprise d'améliorer la qualité de la production par diverses études statistiques.
+
+
+\subsection*{Rappels et définitions}
+
+\begin{itemize}
+\item Une liste commence par un crochet [ et se termine par un crochet ]. Les éléments d'une
+liste sont ordonnées (indexés).
+\item On pourra utiliser la surcharge de l'opérateur \textsf{+} : \textsf{['a']+['b']=['a','b']}.
+\item Un dictionnaire définit une relation une à une entre des clés et des valeurs. Celui-ci se
+note entre accolades \{\}.
+\item Un tuple est une collection d'éléments ordonnées comme dans une liste mais une fois le
+tuple créé, des éléments ne peuvent pas être modifiés indépendamment les uns des autres.
+Il se note entre parenthèses (). Exemple : \textsf{(4,'e',[1,3])}.
+\end{itemize}
+
+\begin{center}
+\includegraphics[width=.75\textwidth]{images/fig_01}
+\end{center}
+
+
+
+\section{Réception des données issues de la carte d'acquisition}
+
+Les mesures sont faites à l'aide de convertisseurs analogique/numérique (CAN). Le résultat
+de conversion est codé sur 10 bits signés en complément à 2.
+
+\subparagraph{}
+\textit{Quelle plage de valeurs entières pourra prendre le résultat de la conversion ?}
+\ifprof
+\begin{corrige}
+Dans le cas de 10 bits signés complémentés à 2, il y a un bit de signe et 9 bits de valeurs. On peut donc coder $2^{10} = 1024$  valeurs s'étendant de $-2^9 = -512$ à $2^9-1=511$.
+\end{corrige}
+
+\else
+\fi
+
+\subparagraph{}
+\textit{Si on considère que les valeurs analogiques converties s'étendent en pleine échelle de -5V à
+5V, quelle est la résolution de la mesure en volt ?}
+
+
+\ifprof
+\begin{corrige}
+Si on doit coder 1024 valeurs sur une échelle de -5 à 5V, la résolution est donc de $10/1024\simeq 9,76 \; \text{mV}$.
+\end{corrige}
+\else
+\fi
+
+Une liaison série asynchrone permet la communication entre la carte de commande/acquisition et le PC. Les échantillons correspondant à une mesure sont envoyés par la carte électronique
+sous la forme d'une trame (suite de caractères ASCII). Cette suite de caractères se présente
+sous la forme suivante :
+\begin{itemize}
+\item un entête qui permet d'identifier la mesure sur un caractère ('U' tension moteur, 'I 'courant
+moteur, 'P' position absolue),
+\item le nombre de données envoyées (3 caractères),
+\item les données constituées des mesures brutes issues de la conversion analogique-numérique,
+chaque mesure étant codée à l'aide du caractère '+' ou '-' suivi de 3 caractères pour la valeur absolue,
+\item un checksum, somme des valeurs absolues des données précédentes modulo 10000 sur 4
+caractères. Le nombre de données transmises n'est pas inclus dans le checksum.
+\end{itemize}
+
+\begin{exemple}
+Mesure de la tension sur 5 échantillons :
+\begin{center}
+\includegraphics[width=.75\textwidth]{images/fig_02}
+\end{center}
+\end{exemple}
+
+La commande \textsf{carac\_recus=com.read(nbre\_car)} permet de récupérer \textit{nbre\_car} caractères 
+reçus sous la forme d'une chaîne de caractères. En supposant que les caractères reçus correspondent à l'exemple précédent, après l'exécution de  \textsf{carac\_recus=com.read(5)}, la variable
+\textsf{carac\_recus} contiendra la chaîne "U005+".
+
+Après une nouvelle exécution de \textsf{carac\_recus=com.read(3)}, la variable \textsf{carac\_recus} contiendra la chaîne "012".
+
+
+\subparagraph{}
+\textit{Écrire une fonction \textsf{lect\_mesures()} en langage Python qui retourne une liste contenant :
+le type de la mesure ('U','I' ou 'P'), une liste contenant l'ensemble des valeurs des mesures
+reçues et le checksum. Exemple : ['U',[12,4,-23,-2,42],83]. Cette fonction doit attendre que le
+caractère d'entête reçu soit correct ('U','I' ou 'P') avant de réaliser le stockage des informations
+dans la liste qui sera retournée.}
+
+\ifprof
+\begin{corrige}
+Remarque : question qui manque de clarté : qu'attend-on en paramètre de la fonction ?
+\begin{python}
+def lect_mesures():
+    while True : 
+        carac_recu = com.read(1)
+        if  carc_recu=="U" or carc_recu=="I" or carc_recu=="P":
+            break
+    mesures=[]
+    mesures.append(carac_recu)
+    # On recherche le nombre de données 
+    nb_donnees=int(com.read(3))
+    data = []
+    for i in range(nb_donnnes):
+        # Ajout des données
+        data.append(int(com.read(4)))
+    mesures.append(data)
+    # Ajout de la checksum
+    mesures.append(int(com.read(4)))
+    return mesures
+\end{python}
+\end{corrige}
+
+\else
+\fi
+
+
+\subparagraph{}
+\textit{On suppose que toutes les mesures sont disponibles dans la liste mesures[], et le checksum reçu dans la variable \textsf{CheckSum}. Écrire une fonction \textsf{check(mesure,CheckSum)} en langage
+Python qui retourne \textsf{True} si la transmission présente un checksum valide et \textsf{False} sinon.}
+\ifprof
+\begin{corrige}
+\begin{python}
+def check(mesure,cs):
+    somme = 0
+    for i in range(len(mesure)):
+        somme = somme + abs(mesure[i])
+    somme = somme %10000
+    return somme == cs
+\end{python}
+
+\end{corrige}
+
+\else
+\fi
+
+
+\subparagraph{}
+\textit{Les mesures étant dans la liste mesures, écrire une fonction affichage(mesure) en langage Python qui produit un affichage graphique comme représenté en Figure 1, sachant que la résolution de la conversion analogique-numérique du courant est de 4 mA et que les mesures ont été exécutées toutes les 2 ms. On ne demande pas de légender les axes ni de donner un titre
+à la figure. On suppose que les bibliothèques nécessaires ont été importées.}
+\ifprof
+\begin{corrige}
+\begin{python}
+Temps,Intensite =[],[]
+tps=0
+for i in range(mesures):
+    Temps.append(tps)
+    Intensite.append(mesures[i]*0.004)
+    tps = tps+0.002
+plt.plot(Temps,Intensite)
+plt.show()
+\end{python}
+\end{corrige}
+
+\else
+\fi
+
+
+\begin{center}
+\includegraphics[width=.6\textwidth]{images/fig_03}
+\end{center}
+
+
+\section{Analyse des mesures}
+
+La suite des valeurs de mesure du courant en Ampère du moteur de la tête d'impression
+est contenue dans une liste. Les mesures ont été exécutées toutes les 2 ms. Ces mesures sont
+disponibles dans la liste mesure. Deux traitements permettent de valider le fonctionnement de
+l'imprimante :
+\begin{itemize}
+\item le calcul de la valeur moyenne $I_{\text{moy}}$ du signal $I(t)$ sur la durée d'acquisition : $I_{\text{moy}} = \dfrac{1}{t_\text{final}} \int\limits_0^{t_\text{final}} I(t) \text{d}t $;
+\item le calcul de l'écart type $I_{\text{ec}}$ du signal $I(t)$ sur la durée d'acquisition : $I_{\text{ec}} = 
+\sqrt{\dfrac{1}{t_\text{final}} \int\limits_0^{t_\text{final}} \left(I(t) -I_{\text{moy}}\right)^2\text{d}t }$.
+\end{itemize}
+
+
+
+\subparagraph{}
+\textit{Écrire une fonction en langage Python qui retourne $I_{\text{moy}}$ après l'avoir calculée par la méthode des trapèzes.}
+\ifprof
+\begin{corrige}
+\begin{python}
+def calcul_moyenne(mesures,h):
+    tfinal = h*len(mesures)-1
+    somme = 0.5*(mesures[0]+mesures[len(mesures)-1]
+    for i in range(1,len(mesures)-1):
+        somme = somme + mesures[i]
+    somme = (somme*h)/tfinal
+    return somme
+\end{python}
+\end{corrige}
+\else
+\fi
+
+
+
+
+\subparagraph{}
+\textit{Écrire une fonction en langage Python qui retourne $I_{\text{moy}}$ après l'avoir calculée en utilisant la fonction précédente.}
+\ifprof
+\begin{corrige}
+\begin{python}
+def calcul_ec_type(mesures,h):
+    Imoy = calcul_moyenne(mesures,h)
+    # On reconstruit une liste contenant (I(t)-Imoy)**2
+    for i in range(mesures):
+        mesures[i] = (mesures[i]-Imoy)**2
+    Iec = math.sqrt(calcul_moyenne(mesures,h))
+\end{python}
+\end{corrige}
+
+\else
+\fi
+
+
+\section{Base de données}
+Une représentation simplifiée de deux tables de la base de données qu'on souhaite utiliser
+est donnée ci-dessous :
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\multicolumn{5}{|c|}{\textbf{testfin}} \\
+\hline\hline
+\textbf{nSerie} & dateTest & Imoy & Iec & fichier Mes \\
+\hline
+230-588ZX2547 & 2012-04-22 14-25-45 & 0,45 & 0,11 & mesure41025.csv \\
+230-588ZX2548 & 2012-04-22 14-26-57 & 0,43 & 0,12 & mesure41026.csv \\ 
+...  & ...  & ...  & ...  & ...   \\
+\hline
+\end{tabular}
+\end{center}
+
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\multicolumn{4}{|c|}{\textbf{production}} \\
+\hline\hline
+\textbf{Nul} & nSerie & dateProd & type \\
+\hline
+20 & 230-588ZX2547 & 2012-04-22 15-52-12 & JETDESK-1050 \\
+21 & 230-588ZX2548 & 2012-04-22 15-53-21 & JETDESK-1050 \\ 
+...  & ...    & ...  & ...   \\
+\hline
+\end{tabular}
+\end{center}
+
+Après son assemblage et avant les différents tests de validation, un numéro de série unique est
+attribué à chaque imprimante. A la fin des tests de chaque imprimante, les résultats d'analyse
+ainsi que le fichier contenant l'ensemble des mesures réalises sur l'imprimante sont rangées dans
+la table \textbf{testfin}. Lorsqu'une imprimante satisfait les critères de validation, elle est enregistrée dans la table production avec son numéro de série, la date et l'heure de sortie de production ainsi que son type.
+
+
+
+\subparagraph{}
+\textit{Rédiger une requête SQL permettant d'obtenir les numéros de série des imprimantes ayant
+une valeur de Imoy comprise strictement entre deux bornes Imin et Imax.}
+\ifprof
+\begin{corrige}
+\begin{sql}
+SELECT nSerie FROM testfin WHERE Imoy>Imin and  Imoy < Imax ;
+\end{sql}
+\end{corrige}
+
+\else
+\fi
+
+
+
+\subparagraph{}
+\textit{Rédiger une requête SQL permettant d'obtenir les numéros de série, la valeur de l'écart
+type et le fichier de mesures des imprimantes ayant une valeur de Iec strictement inférieure à
+la valeur moyenne de la colonne Iec.}
+\ifprof
+\begin{corrige}
+\begin{sql}
+SELECT nSerie,Iec,fichierMes FROM testfin WHERE Iec < (SELECT AVG(Iec) FROM testfin);
+\end{sql}
+\end{corrige}
+
+\else
+\fi
+
+
+\subparagraph{}
+\textit{Rédiger une requête SQL qui permettra d'extraire à partir de la table \textbf{testfin} le numéro
+de série et le fichier de mesures correspondant aux imprimantes qui n'ont pas été validées en
+sortie de production.}
+\ifprof
+\begin{corrige}
+\textbf{Liste des numéros de série validés (non demandé) -- Je ne suis pas sur qu'un OUTER JOIN  suffise pour répondre à la question demandée.}
+\begin{sql}
+SELECT tab1.nSerie,fichierMes FROM 
+	(SELECT nSerie FROM production) as tab1
+	INNER JOIN 
+	(SELECT nSerie,fichierMes FROM  testfin) as tab2
+	ON tab1.nSerie = tab2.nSerie
+
+\end{sql}
+\end{corrige}
+
+
+
+\section{Préparation du fichier texte avant envoi : la compression}
+
+Le fichier de résultat va être stocké sous la forme d'un fichier binaire. Une des étapes de
+l'algorithme de compression utilise le codage de Huffman.
+
+\subsection{Présentation}
+Le codage de Huffman utilise un code à longueur variable pour représenter un symbole de la
+source (par exemple un caractère dans un fichier). Le code est dérerminé à partir d'une estimation des probabilités d'apparition des symboles de source, un code court étant associé aux symboles de source les plus fréquents. La première étape du codage de Huffman consiste à créer un dictionnaire contenant la liste des caractères présents dans le texte, associé à leur fréquence dans ce texte. Exemple : "AABCDCCEF" donnera \{'A':2,'B':1,'C':3,'D':1,'E':1,'F':1\}. La
+deuxiième étape consiste à construire un arbre de Huffman qui permet ensuite de coder chaque
+caractère.
+
+
+Notre texte "AABCDCCEF" de 9 caractères ASCII (72 bits) sera ainsi codé en binaire "10
+10 010 11 000 11 11 011 001" (22 bits).
+Chaque caractère constitue une des feuilles de l'arbre à laquelle on associe un poids valant
+son nombre d'occurrences. Puis l'arbre est créé suivant un principe simple : on associe à chaque
+fois les deux n\oe{}uds de plus faibles poids pour créer un n\oe{}ud dont le poids équivaut à la somme des poids de ses fils jusqu'à n'en avoir plus qu'un, la racine. On associe ensuite par exemple le code 0 à la branche de gauche et le code 1 à la branche de droite.
+
+Pour obtenir le code binaire de chaque caractère, on descend sur la Figure 2 de la racine
+jusqu'aux feuilles en ajoutant à chaque fois au code un 0 ou un 1 selon la branche suivie.
+
+Pour pouvoir être décodé par l'ordinateur, l'arbre doit aussi être transmis.
+
+Le code Python permettant de construire un arbre de Huffman et de coder chaque caractère
+est fourni en annexe.
+
+Les feuilles de l'arbre de Huffman (leaf) sont codées sous la forme de tuples avec comme premier élément le caractère et comme deuxième éléement le poids. Pour l'arbre donné en exemple en Figure 2, on aura 6 tuples : \textsf{('A',2)}, \textsf{('B',1)}, \textsf{('C',3)}, \textsf{('D',1)}, \textsf{('E',1)} et \textsf{('F',1)}.
+
+
+La documentation de l'instruction \textsf{isinstance(object,classinfo)} décrit le fonctionnement suivant : \textit{"Return True if the object is an instance of the classinfo argument. If object is
+not a class instance of the given type, the function returns False."}
+
+\subparagraph{}
+\textit{Décrire succinctement le rôle des fonctions suivantes et indiquer le type de la variable retournée : \textsf{test()}, \textsf{get1()}, \textsf{get2()}}.
+\ifprof
+\begin{corrige}
+La fonction \textsf{(test()}  permet de vérifier qu'un objet \textsf{x} est bien une feuille de l'arbre de Huffman. Elle renvoie donc True si l'objet est un tuple de taille 2 dont le premier élément est une chaîne de caractère et le second élément est un entier.
+
+Le fonction \textsf{get1()} permet de retourner la première valeur d'un tuple à savoir le caractère si c'est une feuille de l'abre de Huffman qui est passée en paramètre.  
+
+Le fonction \textsf{get2()} permet de retourner la seconde valeur d'un tuple à savoir le poids associé au caractère si c'est une feuille de l'abre de Huffman qui est passée en paramètre. 
+\end{corrige}
+
+\else
+\fi
+
+\subsection{Analyse des fonctions \textsf{make\_huffman\_tree()} et \textsf{freq\_table()}}
+
+\subparagraph{}
+\textit{Donner le contenu des variables \textsf{node1} et \textsf{node1} suite à l'exécution des commandes \textsf{node1=make\_huffman\_tree(('F',1),('E',1))} et \textsf{node2=make\_huffman\_tree(('D',1),('B',1))}.}
+\ifprof
+\begin{corrige}
+Avec l'algorithme donné, 
+\begin{itemize}
+\item \textsf{node1 : [('F', 1), ('E', 1), ['F', 'E'], 2]};
+\item \textsf{node2 : [('D', 1), ('B', 1), ['D', 'B'], 2]}.
+\end{itemize}
+\end{corrige}
+
+\else
+\fi
+
+
+\subparagraph{}
+\textit{De même, donner le contenu de la variable \textsf{node3} suite à l'exéction de la commande \textsf{node3=make\_huffman\_tree(node1,node2)}.}
+\ifprof
+\begin{corrige}
+Avec l'algorithme donné, 
+
+  \textsf{node3 : [[('F', 1), ('E', 1), ['F', 'E'], 2], [('D', 1), ('B', 1), ['D', 'B'], 2], ['F', 'E', 'D', 'B'], 4]}.
+\end{corrige}
+
+\else
+\fi
+
+
+\subparagraph{}
+\textit{Donner le contenu de la variable \textsf{f} suite à l'exécution de la commande
+\textsf{f=freq\_table('AABBCB')}.}
+\ifprof
+\begin{corrige}
+\textsf{f} contient \textsf{\{'A': 2, 'C': 1, 'B': 3\}}.
+\end{corrige}
+
+\else
+\fi
+
+\subsection{Analyse de la fonction \textsf{insert\_item()}}
+Cette fonction permet d'insérer un n\oe{}ud ou une feuille dans une liste de n\oe{}uds et de feuilles triés par poids croissant, en conservant l'ordre de tri.
+
+
+\subparagraph{}
+\textit{Quelle est la particularité de cette fonction ?}
+\ifprof
+\begin{corrige}
+La fonction proposée est récursive .
+\end{corrige}
+
+\else
+\fi
+
+
+
+\subparagraph{}
+\textit{Montrer qu'un invariant d'itération est "tous les éléments de la sous liste \textsf{lst[0 à pos-1]} ont un poids inférieur à celui de la variable item". On démontrera qu'il est vrai à l'initialisation, puis à chaque itération, sachant que cette fonction doit être appelée avec l'argument d'entrée \textsf{pos=0} produisant ainsi une liste vide.}
+\ifprof
+\begin{corrige}
+
+\end{corrige}
+
+\else
+\fi
+
+\subsection{Analyse de \textsf{build\_huffman\_tree()}}
+
+
+\subparagraph{}
+\textit{D'après la description précédente et le résultat de la question Q13, commenter la fonction
+de manière à expliquer comment l'arbre de Huffman est construit. On demande de proposer des
+rédactions pour les commentaires correspondant aux lignes \#\# 5, \#\# 6, \#\# 7, \#\# 8 dans la fonction \textsf{build\_huffman\_tree()}.}
+\ifprof
+\begin{corrige}
+
+\end{corrige}
+
+\else
+\fi
+
+\subparagraph{}
+\textit{Donner le nombre de tests dans le meilleur des cas et dans le pire des cas exécutés dans
+la fonction \textsf{insert\_item()} pour une liste \textsf{lst} contenant $n$ éléments. Les résultats devront être justifiés.}
+\ifprof
+\begin{corrige}
+Dans le meilleur des cas, la fonction réalise un seul test. 
+
+Dans le pire des cas, $n$ tests sont réalisés. 
+\end{corrige}
+
+\else
+\fi
+
+
+\subparagraph{}
+\textit{Donner la complexité en temps dans le meilleur des cas et dans le pire des cas de la
+fonction \textsf{build\_huffman\_tree} pour une liste \textsf{lst} contenant $n$ éléments en tenant compte de la fonction \textsf{insert\_item}. On négligera le coût en complexité de la fonction \textsf{lst.sort}. Les résultats devront être justifiés. (A reformuler ??)}
+\ifprof
+\begin{corrige}
+Complexité quadratique ?
+\end{corrige}
+
+\else
+\fi
+
+
+
+
+\subparagraph{}
+\textit{Donner le contenu de la variable \textsf{htree} après l'exécution de la commande
+\textsf{htree=build\_huffman\_tree("ZBBCB")}.}
+\ifprof
+\begin{corrige}
+\textsf{[[('C', 1), ('Z', 1), ['C', 'Z'], 2], ('B', 3), ['C', 'Z', 'B'], 5]}
+\end{corrige}
+
+\else
+\fi
+
+
+
+\subparagraph{}
+\textit{Dessiner l'arbre de Huffman correspondant à \textsf{htree} de la question précédente en vous inspirant de la Figure 2.}
+\ifprof
+\begin{corrige}
+
+\end{corrige}
+
+\else
+\fi
+
+\section{Simulation physique}
+Une possible source de pannes dans chaque imprimante est la défectuosité d'un moteur
+particulier. On suppose disposer d'enregistrements du signal d'entrée $e$ et du signal de sortie
+$s$ de cet élément. Ces variables sont supposées satisfaire une équation différentielle linéaire du
+premier ordre : $\dfrac{\text{d}s(t)}{\text{d}t} = -k \dfrac{s(t)-e(t)}{10}$ où $k$ est un paramètre réel strictement positif. On va chercher à vérifier le bon fonctionnement
+du moteur en analysant des simulations.
+
+\subparagraph{}
+\textit{Écrire en langage Scilab une fonction qui calcule de manière approchée la solution de
+l'équation différentielle précédente pour le signal $e(t) = \sin(t)$, avec $s(0) = 0$, sur l'intervalle
+$t \in [0;10]$ pour une valeur quelconque de $k$. La fonction doit retourner une estimation de $s(t)$ aux instants \textsf{[0; 0,1; 0,2; ...; 10]}.}
+
+\ifprof
+\begin{corrige}
+On pose $\dfrac{ds(t)}{dt}\simeq \dfrac{s(t+p)-s(t)}{p}$ en utilisant un schéma d'Euler explicite de pas $p$.
+
+On a alors : $\dfrac{s_{n+1}-s_n}{p}=-k\dfrac{s_{n}-e_n}{10} \Longleftrightarrow 
+s_{n+1}=-kp\dfrac{s_{n}-e_n}{10}+s_n$
+
+
+\begin{python}
+def solve(k,p):
+    res=[0]
+    e=[0]
+    t=[0]
+    i=1
+    while i<=100:
+        e.append(sin(i/10))
+        res.append(res[i-1]-k*p*(res[i-1]-e[i-1])/10)
+        t.append((i/10))
+        i=i+1
+    return t,res
+\end{python}
+\end{corrige}
+
+\else
+\fi
+
+
+
+\subparagraph{}
+\textit{Trois valeurs sont possibles pour le paramètre $k$ : 0,5, 1,1 et 2. On décide de déclarer
+le moteur défectueux si aucune de ces valeurs ne permet d'expliquer l'enregistrement $s$ réalisé 
+expérimentalement aux instants $[0; 0,1; 0,2;...; 10]$. Définir un code Scilab utilisant la fonction
+précédemment définie pour réaliser une validation ou une invalidation de la défectuosité du
+moteur suivant un critère à proposer.}
+\ifprof
+\begin{corrige}
+Je ne sais pas.
+\end{corrige}
+
+\else
+\fi
+
+
+\end{document}
+
+
+\subparagraph{}
+\textit{}
+\ifprof
+\begin{corrige}
+
+\end{corrige}
+
+\else
+\fi
