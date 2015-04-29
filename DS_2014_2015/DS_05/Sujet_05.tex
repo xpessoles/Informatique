@@ -8,8 +8,8 @@
 %Si le boolen xp est vrai : compilation pour xabi
 %Sinon compilation Damien
 \newif\ifprof
-\proftrue
-%\proffalse
+%\proftrue
+\proffalse
 
 \newif\ifxp
 \xptrue
@@ -457,7 +457,6 @@ Dans ces conditions on a donc  $G_k = \left(\dfrac{2M}{h^2}+\dfrac{C}{h} \right)
 \textit{L'équation  $H\cdot X_k = G_k$ peut être résolue grâce à la méthode du pivot de Gauss. Donner les étapes de cette méthode ainsi que l'objectif ce chacune d'entre elles. Quelle est la complexité algorithmique de la résolution d'une équation en utilisant le pivot de Gauss ?}
 \ifprof
 \begin{corrige}
-Voir cours. Complexité cubique.
 \end{corrige}
 \else
 \fi
@@ -501,7 +500,6 @@ def resoud(H,X,G):
 \textit{Expliquer en quoi cet algorithme permet de résoudre le système $H\cdot X_n = G_n$ ? Quelle est la complexité de cet algorithme ?}
 \ifprof
 \begin{corrige}
-La matrice étant tridiagonale, la phase d'échelonnage et de remontée sont simplifiées. 
 \end{corrige}
 \else
 \fi
@@ -524,7 +522,7 @@ $$
 Un programmeur propose la fonction suivante pour traduire la fonction puissance donnée ci-dessus :
 \begin{py}
 \begin{python}
-def calculPuissance(U,c,h):
+def calcul_puissance(U,c,h):
     p,n=len(X),len(X[0])
     P,V=[],[]
     for i in range(1,p):
@@ -544,30 +542,18 @@ def calculPuissance(U,c,h):
 \fi
 
 \subparagraph{}
-\textit{Expliquez le but des blocs constitués des lignes 4 à 8 puis des lignes 9 à 14. La fonction proposée permet-elle de calculer la puissance ? Si non, que faudrait-il modifier ? }
+\textit{Expliquez le but des blocs constitués des lignes 4 à 8 puis des lignes 9 à 13. La fonction proposée permet-elle de calculer la puissance ? Si non, que faudrait-il modifier ? }
 \ifprof
 \begin{corrige}
-La puissance devant être calculée à partir de la vitesse, les lignes 4 à 8 permettent de calculer la vitesse par différence de position sur un temps $h$. La vitesse d'un n\oe{}ud $j$ à l'instant $i$ est donc calculée par $\dfrac{U[i][j]-U[i-1][j])}{h}$.
-
-Les lignes 9 à 14 permettent de calculer la puissance, mais ne prennent pas en compte le cas où $i$ =0. Il faut donc que le range varie entre 0 et $p$ et traiter le cas où $p=0$ à l'aide d'un \textsf{if}. 
 \end{corrige}
 \else
 \fi
 
 
-\subparagraph{}\textit{La programme précédent retourne la liste des puissances dissipées à chaque temps de calcul. Calculer l'énergie dissipée en utilisant la méthode des trapèzes. Vous réaliserez un schéma pour illustrer la méthdode. On rappelle que le pas de calcul est noté $h$.}
+\subparagraph{}\textit{La programme précédent retourne la liste des puissances dissipées à chaque temps de calcul. En Python, programmer la fonction \textsf{calcul\_energie} permettant de calculer l'énergie dissipée en utilisant la méthode des trapèzes. Vous réaliserez un schéma pour illustrer la méthdode. On rappelle que le pas de calcul est noté $h$.}
 \ifprof
 
 \begin{corrige}
-
-\begin{python}
-P = calculPuissance(U,c,h)
-somme = 0
-for i in range(1,len(P)-1):
-    somme = somme + P[i]
-
-Energie = (somme + 0.5*(P[0]+P[len(P)-1]))*h
-\end{python}
 \end{corrige}
 \else
 \fi
