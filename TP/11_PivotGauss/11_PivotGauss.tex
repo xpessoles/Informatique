@@ -15,7 +15,7 @@ CI 3 : Ingénierie Numérique \& Simulation
 }}
 
 \def\xxsoustitre{\ifthenelse{\boolean{xp}}{
-TP -- Résolution de l'équation $f(x)=0$.}{
+TP -- Pivot de Gauss}{
 }}
 
 
@@ -75,7 +75,7 @@ alors : &  \texttt{M} est à 3 lignes et 2 colonnes,\\
 \end{tabular}
 
 
-\subsection*{Méthode de Gauss.}
+\subsection*{Méthode de Gauss}
 
 Remarque : si \texttt{M} est une telle liste alors :
 
@@ -83,13 +83,13 @@ Remarque : si \texttt{M} est une telle liste alors :
 
 sont, respectivement, le nombre de lignes et le nombre de colonnes de \texttt{M}.
 
-\subsubsection*{Combinaison de deux lignes.}
+\subsubsection*{Combinaison de deux lignes}
 
 
 \subparagraph{}
-\textit{Écrire une procédure \quad\texttt{transv(M,i,lambda,j)}\quad qui remplace  la ligne n°\texttt{i}, L$_{\texttt{i}}$, par :}
+\textit{Écrire une procédure \quad\texttt{transv(M,i,mu,j)}\quad qui remplace  la ligne n°\texttt{i}, L$_{\texttt{i}}$, par :}
 
-\hfil L$_{\texttt{i}}$ $\longleftarrow$\quad L$_{\texttt{i}}$ + \texttt{lambda}$\times$L$_{\texttt{j}}$
+\hfil L$_{\texttt{i}}$ $\longleftarrow$\quad L$_{\texttt{i}}$ + \texttt{mu}$\times$L$_{\texttt{j}}$
 
 \medskip
 
@@ -103,6 +103,7 @@ sont, respectivement, le nombre de lignes et le nombre de colonnes de \texttt{M}
 \setlength{\columnseprule}{.2pt}
 
 Soit la procédure :
+
 \begin{minipage}[c]{.47\linewidth}
 \begin{verbatim}
 def megalytero(M,i) :
