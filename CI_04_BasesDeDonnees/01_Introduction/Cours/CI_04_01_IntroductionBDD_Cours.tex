@@ -204,62 +204,62 @@ Identifiant & Code & Nom \\
 \begin{rem}
 Dans une table il n'y a pas de notion d'ordre a priori. Les données d'une ligne ne peuvent donc pas être désignées par un numéro de ligne.
 \end{rem}
-
-\subsection{Définitions \cite{2}}
-
-\begin{defi}
-\textbf{Attributs -- Domaines}
-
-On considère donné un ensemble infini $\mathcal{A}$, dont les éléments sont appelés des attributs, un ensemble $D$, et une application dom de $\mathcal{A}$ dans les sous-ensembles de $D$. 
-
-Si $A\in \mathcal{A}$, $dom(A)$ est appelé domaine de $A$.
-
-\end{defi}
-
-\begin{exemple}
-Le type d'aéroport est un attribut. Son domaine est l'ensemble des types d'aéroport. 
-
-La ville est un attribut. Son domaine est l'ensemble des villes du monde muni d'un équipement aéroportuaire. 
-
-\end{exemple}
-
-\begin{defi}
-\textbf{Schéma relationnel}
-
-Un schéma relationnel est un $n$-uplet de la forme $S=(A_1,...,A_n) \in \mathcal{A}^n$ où les $A_i$ sont distincts deux à deux. 
-\end{defi}
-
-\begin{exemple}
-La table des aéroports est un schéma relationnel. 
-Sous une forme formelle, on pourrait noter :
-$$ \text{Aeroport} = \left(\left( \text{Identifiant}, \mathbb{N}\right),\left(\text{Ville}, \left( ...\right)\right), \left(\text{iso\_country},\left(\text{FR},\text{US},... \right)  \right),... \right)$$
-\end{exemple}
-
-\begin{defi}
-\textbf{Relation -- table}
-
-On appelle relation associé à un schéma relationnel $\left(A_i,...,A_n \right)$ est un ensemble fini de $n$-uplets de $dom(A_1)\times \cdot\cdot\cdot \times dom(A_n)$.
-
-On note $R(S)$ la relation $R$ pour signifier qu'elle est associée au schéma relationnel $S$. 
-
-Les éléments de $R$ sont appelés les \textit{valeurs}, ou encore les enregistrements, de la relation et leur nombre est appelé son \textit{cardinal} et est note \#R.
-\end{defi}
-
-\begin{exemple}
-Les tables présentées précédemment sont des relations. 
-\end{exemple}
-
-\begin{defi}
-\textbf{Valeurs}
-
-Si $e\in R(S)$ et $A\in S$, on note $e.A$ la composante du $n$-uplet $e$ associée à l'attribut $A$. 
-
-$R$ étant un ensemble, deux valeurs distinctes $e$ diffèrent forcément au moins sur un attribut.  Formellement, on a : 
-$$
-\forall e,e' \in R(S), \text{ si } e\neq e', \text{ alors } \exists A \in S, e.A \neq e'.A
-$$
-
-\end{defi}
+%
+%\subsection{Définitions \cite{2}}
+%
+%\begin{defi}
+%\textbf{Attributs -- Domaines}
+%
+%On considère donné un ensemble infini $\mathcal{A}$, dont les éléments sont appelés des attributs, un ensemble $D$, et une application dom de $\mathcal{A}$ dans les sous-ensembles de $D$. 
+%
+%Si $A\in \mathcal{A}$, $dom(A)$ est appelé domaine de $A$.
+%
+%\end{defi}
+%
+%\begin{exemple}
+%Le type d'aéroport est un attribut. Son domaine est l'ensemble des types d'aéroport. 
+%
+%La ville est un attribut. Son domaine est l'ensemble des villes du monde muni d'un équipement aéroportuaire. 
+%
+%\end{exemple}
+%
+%\begin{defi}
+%\textbf{Schéma relationnel}
+%
+%Un schéma relationnel est un $n$-uplet de la forme $S=(A_1,...,A_n) \in \mathcal{A}^n$ où les $A_i$ sont distincts deux à deux. 
+%\end{defi}
+%
+%\begin{exemple}
+%La table des aéroports est un schéma relationnel. 
+%Sous une forme formelle, on pourrait noter :
+%$$ \text{Aeroport} = \left(\left( \text{Identifiant}, \mathbb{N}\right),\left(\text{Ville}, \left( ...\right)\right), \left(\text{iso\_country},\left(\text{FR},\text{US},... \right)  \right),... \right)$$
+%\end{exemple}
+%
+%\begin{defi}
+%\textbf{Relation -- table}
+%
+%On appelle relation associé à un schéma relationnel $\left(A_i,...,A_n \right)$ est un ensemble fini de $n$-uplets de $dom(A_1)\times \cdot\cdot\cdot \times dom(A_n)$.
+%
+%On note $R(S)$ la relation $R$ pour signifier qu'elle est associée au schéma relationnel $S$. 
+%
+%Les éléments de $R$ sont appelés les \textit{valeurs}, ou encore les enregistrements, de la relation et leur nombre est appelé son \textit{cardinal} et est note \#R.
+%\end{defi}
+%
+%\begin{exemple}
+%Les tables présentées précédemment sont des relations. 
+%\end{exemple}
+%
+%\begin{defi}
+%\textbf{Valeurs}
+%
+%Si $e\in R(S)$ et $A\in S$, on note $e.A$ la composante du $n$-uplet $e$ associée à l'attribut $A$. 
+%
+%$R$ étant un ensemble, deux valeurs distinctes $e$ diffèrent forcément au moins sur un attribut.  Formellement, on a : 
+%$$
+%\forall e,e' \in R(S), \text{ si } e\neq e', \text{ alors } \exists A \in S, e.A \neq e'.A
+%$$
+%
+%\end{defi}
 
 \subsection{Notion de clef}
 Afin de ne pas stocker des des doublons dans une base de donnée, on a recours au concept de clef primaire. 
@@ -821,12 +821,9 @@ SELECT <liste d expressions>
 
 \begin{thebibliography}{2}
 \bibitem{1}{Serge Abiteboul, Benjamin Nguyen, Yannick Le Bras, \textit{Introduction aux Bases de Données Relationnelles Programme de Classes Préparatoires Scientifiques, Première année}.}
-\bibitem{2}{Wack et Al., \textit{L’informatique pour tous en classes préparatoires aux grandes écoles, Editions Eyrolles}.}
+%\bibitem{2}{Wack et Al., \textit{L’informatique pour tous en classes préparatoires aux grandes écoles, Editions Eyrolles}.}
 \bibitem{3}{Christope Revy, \textit{Concepts des bases de données}, Cours de STS IRIS, Lycée Janot de SENS.}
 \bibitem{4}{Patrick Beynet, \textit{Supports de cours de TSI 2}, Supports de cours de TSI 2, Lycée Rouvière, Toulon.}
-%\bibitem{3}{Olivier Guindet, Résolution d'un problème dynamique par la méthode d'Euler, UPSTI.}
-%\bibitem{4}{Alain Caignot, Marc Derumaux, Résolution des équations différentielles, UPSTI.}
-%\bibitem{1}{Adrien Petri, \textit{Analyse numérique : Intégration numérique}, Notes de cours de TSI 1, Lycée Rouvière, Toulon.}
 \bibitem{5}{\url{http://sqlpro.developpez.com/cours/divrelationnelle/}}
 \end{thebibliography}
 \end{document}
