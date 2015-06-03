@@ -5,49 +5,53 @@
 \input{style/macros_Titres}
 \input{style/macros_Frames}
 
-
 %Si le boolen xp est vrai : compilation pour xabi
-%Sinon compilation Damien
-\newboolean{xp}
-\setboolean{xp}{true}
 
-\newboolean{prof}
-\setboolean{prof}{true}
+\newif\ifprof
+\proftrue
+%\proffalse
 
-\newif\ifprofvar
-\profvartrue
-%\profvarfalse
+\newif\ifxp
+\xptrue
+%\xpfalse
+
+\newif\iftd
+\tdtrue
+%\tdfalse
 
 \usepackage[%
-    pdftitle={Problèmes stationnaires},
+    pdftitle={Introduction aux bases de données},
     pdfauthor={Xavier Pessoles},
     colorlinks=true,
     linkcolor=blue,
     citecolor=magenta]{hyperref}
 
-
 \def\discipline{Informatique}
-\def\xxtitre{\ifthenelse{\boolean{xp}}{
-CI 4 : Bases de données}{
-Chapitre  -- }}
+\def\xxtitre{%
+\ifxp
+CI 4 : Bases de données
+\else
+\fi
+}
 
-\def\xxsoustitre{\ifthenelse{\boolean{xp}}{
-Chapitre 1 -- Introduction aux bases de données}{
-Partie  -- }}
+\def\xxsoustitre{%
+\ifxp
+Chapitre 1 -- Introduction aux bases de données
+\else
+\fi}
 
-\def\xxauteur{\ifthenelse{\boolean{xp}}{
-Xavier \textsc{Pessoles}}{
-Damien \textsc{Iceta} \\ Xavier \textsc{Pessoles}}}
+\def\xxauteur{%
+\ifxp
+Xavier \textsc{Pessoles}
+\else
+\fi}
 
-\def\xxpied{\ifthenelse{\boolean{xp}}{
-CI 4 : Bases de données \\
-Ch. 1 : Introduction aux bases de données -- Cours}{
-\xxtitre}}
-
-\def\xxcathegorie{\ifthenelse{\boolean{xp}}{
-2013 -- 2014 \\
-Xavier \textsc{Pessoles}}{
-Informatique - Cours}}
+\def\xxpied{%
+\ifxp
+CI 4 : Bases de données\\
+Ch. 1 : Introduction aux bases de données -- Cours
+\else
+\fi}
 
 
 
@@ -57,24 +61,17 @@ Informatique - Cours}}
 
 
 \begin{document}
+\ifxp
+\input{style/enteteXP}
+\else
+\input{style/enteteDI}
+\fi
 
-\ifthenelse{\boolean{xp}}{\input{style/enteteXP}}{\input{style/enteteDI}}
 
-%\begin{minipage}[c]{.2\linewidth}
-%\begin{center}
-%%\includegraphics[width=.95\textwidth]{images/swing}
-%\end{center}
-%\end{minipage}\hfill
-%\begin{minipage}[c]{.33\linewidth}
-%\begin{center}
-%%\includegraphics[width=.9\textwidth]{images/situation}
-%\end{center}
-%\end{minipage}\hfill
-%\begin{minipage}[c]{.45\linewidth}
-%\begin{center}
-%%\includegraphics[width=.95\textwidth]{images/tir_alpha}
-%\end{center}
-%\end{minipage}
+
+ \renewcommand{\baselinestretch}{1.2}
+\setlength{\parskip}{2ex plus 0.5ex minus 0.2ex}
+
 \vspace{.5cm}
 
 \begin{savoir}
@@ -163,6 +160,11 @@ Une SGBD permettent d'assurer le stockage et l'organisation des informations ain
 Classiquement, les données ne sont pas stockées sur l'ordinateur de l'utilisateur (appelé client) utilisant la base de données mais sur un serveur, voire même un <<nuage>> (\textit{cloud computing}). 
 
 Pour simplifier, pour faire du (\textit{cloud computing}) les entreprises répartissent les informations sur plusieurs ordinateurs en réseau. Suivant les performances nécessaires ou suivant la quantité de stockage nécessaire, la base de donnée peur donc être répartie sur plusieurs ordinateurs physiques, la limite de répartition pouvant être modifié dynamiquement en fonction du besoin. 
+
+L'architecture classique d'un site we est l'architecture trois tiers : 
+\begin{center}
+\includegraphics[width=.9\textwidth]{images/bdd}
+\end{center}
 
 \section{Structure des base de données : le modèle relationnel}
 \subsection{Tables}
@@ -398,10 +400,18 @@ Ceci signifie que dans l'algèbre relationnelle, le résultat des requêtes effe
 \textbf{Projection}
 
 Opération notée $\pi$ au cours de laquelle on sélectionne certaines des colonnes (on élimine donc des attributs). 
+\ifprof
+
 $$
  R_2 \leftarrow \pi_{\text{attribut 1, attribut 2, ...}}(R_1)
 $$
 
+\else
+$$ \quad $$
+$$ \quad $$
+\fi
+
+\ifprof
 \begin{envsql}
 \begin{sql}
 SELECT attribut_1,attribut_2 FROM nom_table;
@@ -409,12 +419,22 @@ SELECT attribut_1,attribut_2 FROM nom_table;
 SELECT * FROM nom_table;
 \end{sql}
 \end{envsql}
+\else
+\begin{envsql}
+\begin{sql}
+. 
+ 
+
+.
+\end{sql}
+\end{envsql}
+\fi
 \end{defi}
 
 \begin{exemple}
 Lister les noms d'aéroports ainsi que les codes IATA correspondant :
 
-\ifprofvar
+\ifprof
 $$
 \pi_{\text{name,iata\_code}}(\text{airports})
 $$
@@ -436,9 +456,20 @@ SELECT name,iata_code FROM airports
 \textbf{Sélection}
 
 On appelle sélection de $R_1$ selon $A=a$, et on note $\sigma_{A=a}(R_1)$, la relation obtenue en sélectionnant dans $R_1$ uniquement les valeurs $e$ telles que $e.A = a$.
+\ifprof
+
 $$
 R_2 \leftarrow \sigma_{\text{attribut}=\text{condition}}(R_1)
 $$
+
+\else
+$$
+\quad
+$$
+$$
+\quad
+$$
+\fi
 
 Le schéma relationnel $R_2$ est identique au schéma $R_1$.  Les opérateurs permettant d'exprimer une condition sont $=$, $\neq$ (\texttt{!=} ou \texttt{<>}), $<$, $\leq$ (\texttt{<=}), $\geq$ (\texttt{>=}), $\neg$ (négation, \texttt{NOT}), $\vee$ (ou, \texttt{OR}), $\wedge$ (et, \texttt{AND}).
 
@@ -453,7 +484,7 @@ SELECT att_1,att_2 FROM nom_table WHERE att_3="xx" AND att_4=0 ...
 \begin{exemple}
 Sélectionner le nom de tous les aéroports situés au niveau de la mer :
 
-\ifprofvar
+\ifprof
 $$
 \pi_{\text{name}}\left(\sigma_{\text{elevation\_ft = 0}}(\text{airports})\right)
 $$
@@ -467,7 +498,7 @@ SELECT * FROM airports WHERE elevation_ft=0
 \fi
 
 Sélectionner le nom et le code iata de tous aéroports situés en-dessous du niveau de la mer en Europe :
-\ifprofvar
+\ifprof
 $$
 \pi_{\text{name},\text{iata\_code}}\left(\sigma_{\text{elevation\_ft} < \text{0}\wedge \text{continent}=\text{EU})}(\text{airports} )\right)
 $$
@@ -522,7 +553,7 @@ SELECT att_1,att_2 as att_3 FROM nom_table
 
 \begin{exemple}
 On désire sélectionner le nom des aéroports et les altitudes et  renommer temporairement l'attribut \texttt{elevation\_ft} en \texttt{altitude} :
-\ifprofvar
+\ifprof
 $$
 \pi_{\text{elevation\_ft}}\left(\rho_{\text{elevation\_ft} \rightarrow \text{altitude}}(\text{airports})\right)
 $$
@@ -625,7 +656,7 @@ SELECT  attribut_11, attribut_12 FROM table_1 UNION attribut_21, attribut_22 FRO
 \begin{exemple}
 Ainsi, pour connaître les noms des régions et des pays associés à leur code, on utilise la requête suivante :
 
-\ifprofvar
+\ifprof
 \begin{envsql}
 \begin{sql}
 SELECT code,name FROM Countries UNION SELECT code,name FROM Regions;
@@ -666,7 +697,7 @@ SELECT  (expression 1) INTERSECT SELECT (expression 2);
 
 \begin{exemple}
 Sélectionner le nom de l'ensemble des aéroports européens dont l'altitude est en dessous du niveau de la mer :
-\ifprofvar
+\ifprof
 $$
 \pi_{\text{name}}\left(\sigma_{\text{continent}=''EU''}(\text{airports}) \cap \sigma_{\text{elevation\_ft}\leq0}(\text{airports}) \right)
 $$
@@ -731,7 +762,7 @@ SELECT att_1,... FROM table_1 JOIN table_2 ON attribut.R1=attribut.R2
 Dans la table airrpots, les pays sont référencés par un attribut nommé iso\_country. La table Countries fait le lien entre l'attribut code et l'attribut name. 
 
 L'utilisateur ne connaissant pas le code pays, il souhaite en une seule requête connaître la liste de tous les aéroports français. 
-\ifprofvar
+\ifprof
 %$$
 %\pi_{\text{name}}\left( 
 %\sigma_{\text{airports.iso\_country}=\text{Countries.code}}\left(
@@ -808,10 +839,11 @@ SELECT MAX(elevation_ft)*0.30478513 FROM
 \end{envsql}
 
 \end{exemple}
+\newpage
 
 
 \begin{rem}
-Formalisme de générale l’instruction SQL « SELECT » :
+Formalisme général de l’instruction SQL « SELECT » :
 \begin{envsql}
 \begin{sql}
 SELECT <liste d expressions> 

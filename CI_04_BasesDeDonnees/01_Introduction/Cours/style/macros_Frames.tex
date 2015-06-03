@@ -12,12 +12,40 @@
 \definecolor{violetc}{RGB}{230,224,236}
 \definecolor{jaunec}{RGB}{220,255,191}
 
+
+
+\newenvironment{corrige}[1][\hsize]%
+{%
+    \def\FrameCommand%
+    {%
+\rotatebox{90}{\textit{\textsf{Corrigé}}} 
+        {\color{violetf}\vrule width 3pt}%
+        \hspace{0pt}%must no space.
+        \fboxsep=\FrameSep\colorbox{violetc}%
+    }%
+    \MakeFramed{\hsize #1 \advance\hsize-\width\FrameRestore}%
+}%
+{\endMakeFramed}%
+
 \newenvironment{sci}[1][\hsize]%
 {%
     \def\FrameCommand%
     {%
 %\rotatebox{90}{\textit{\textsf{Scilab}}\includegraphics[height=.8cm]{png/logo_scilab}} 
 \rotatebox{90}{\includegraphics[height=.6cm]{png/logo_scilab}} 
+        {\color{violetf}\vrule width 3pt}%
+        \hspace{0pt}%must no space.
+        \fboxsep=\FrameSep\colorbox{violetc}%
+    }%
+    \MakeFramed{\hsize #1 \advance\hsize-\width\FrameRestore}%
+}%
+{\endMakeFramed}%
+
+\newenvironment{envsql}[1][\hsize]%
+{%
+    \def\FrameCommand%
+    {%
+\rotatebox{90}{\textit{\textsf{SQL}}} 
         {\color{violetf}\vrule width 3pt}%
         \hspace{0pt}%must no space.
         \fboxsep=\FrameSep\colorbox{violetc}%
@@ -54,20 +82,6 @@
 {\endMakeFramed}%
 
 
-\newenvironment{envsql}[1][\hsize]%
-{%
-    \def\FrameCommand%
-    {%
-\rotatebox{90}{\textit{\textsf{SQL}}} 
-        {\color{violetf}\vrule width 3pt}%
-        \hspace{0pt}%must no space.
-        \fboxsep=\FrameSep\colorbox{violetc}%
-    }%
-    \MakeFramed{\hsize #1 \advance\hsize-\width\FrameRestore}%
-}%
-{\endMakeFramed}%
-
-
 \newenvironment{term}[1][\hsize]%
 {%
     \def\FrameCommand%
@@ -81,6 +95,20 @@
 }%
 {\endMakeFramed}%
 
+
+
+\newenvironment{comp}[1][\hsize]%
+{%
+    \def\FrameCommand
+    {%
+\rotatebox{90}{\textit{\textsf{Compétences}}} 
+        {\color{bleuf}\vrule width 3pt}%
+        \hspace{0pt}%must no space.
+        \fboxsep=\FrameSep\colorbox{bleuc}%
+    }%
+    \MakeFramed{\hsize#1\advance\hsize-\width\FrameRestore}%
+}%
+{\endMakeFramed}%
 
 \newenvironment{rem}[1][\hsize]%
 {%
@@ -139,7 +167,7 @@
 {%
     \def\FrameCommand%
     {%
-\rotatebox{90}{\textit{\textsf{ $\;$}}} 
+\rotatebox{90}{\textit{\textsf{Objectifs}}} 
         {\color{rougef}\vrule width 3pt}%
         \hspace{0pt}%must no space.
         \fboxsep=\FrameSep\colorbox{rougec}%

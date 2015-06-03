@@ -102,31 +102,17 @@ the#1\endcsname}\hspace{0.5em}}}
 {\normalfont\sffamily\bfseries}}
 \makeatother
  
-\makeatletter
-\renewcommand{\subparagraph}{\@startsection{subparagraph}{5}{\z@}%
-                                       {-2ex \@plus-.1ex \@minus .2ex}%
-                                       {0.1ex}%
-				    {\normalfont\normalsize\sffamily\bfseries}}
-\makeatletter
-% \makeatletter
-% \renewcommand{\subsection}{\@startsection{subsection}{1}{2mm}%
-% {\baselineskip}{.3\baselineskip}%
-% {\normalfont\sffamily\large\textbf}}%
-% \makeatother
-% 
-% \makeatletter
-% \renewcommand{\subsubsection}{\@startsection{subsubsection}{2}{4mm}%
-% {\baselineskip}{.15\baselineskip}%
-% {\normalfont\sffamily\large\textbf}}%
-% \makeatother
-% 
-% \makeatletter
-% \renewcommand{\paragraph}{\@startsection{paragraph}{3}{6mm}%
-% {\baselineskip}{.15\baselineskip}%
-% {\normalfont\sffamily\large\textbf}}%
-% \makeatother
  
-\setcounter{secnumdepth}{4}
+\makeatletter             
+\renewcommand{\subparagraph}{\@startsection{subparagraph}{5}{\z@}%
+                                    {-2ex \@plus-.2ex \@minus .2ex}%
+                                    {0ex}%               
+{\normalfont\bfseries Question }}
+\makeatother
+\renewcommand{\thesubparagraph}{\arabic{subparagraph}} 
+\makeatletter
+
+\setcounter{secnumdepth}{5}
 
 
 
@@ -190,66 +176,3 @@ linecolor=gray!25,framesep=4pt]{\textcolor{white}{\thecontentslabel}}}]{2.5pc}}
       \@minipagerestore
       \@setminipage}
 \makeatother
-
-%Definition de la commande question
-\newcounter{Qu}
-\newcommand{\Question}[2][0]{
-\ifthenelse{\equal{#1}{0}}                      %demande-t-on une minipage ?
-{\medskip\noindent {\refstepcounter{Qu}\textbf{Q\theQu .\hspace{0,7mm}}#2}\ifshowanswers \else \smallskip \fi}  %non donc on balance le texte
-{\ifshowanswers                                 %oui minipage en mode problem
-\noindent {\refstepcounter{Qu}\textbf{Q\theQu .\hspace{0,7mm}}#2}    %mode solution
-\else                                           %mode problem
-\noindent\begin{minipage}{#1}\noindent {\refstepcounter{Qu}\textbf{Q\theQu .\hspace{0,7mm}}#2}\end{minipage}\smallskip
-\fi }
-}
-
-\newcommand{\Questionpb}[2][0]{%le premier argument entre [] est par défaut à 0
-\begin{onlyproblem}\Question[#1]{#2}\end{onlyproblem}
-}
-
-\newcommand{\Onlyproblem}[2][0]{%le premier argument entre [] est par défaut à 0
-%si le 2e arguement est 0
-\ifthenelse{\equal{#1}{0}}
-%on demande un environnement pb classique
-{\begin{onlyproblem}#2\end{onlyproblem}}
-%sinon on demande à faire une minipage
-{\begin{onlyproblem}\noindent\begin{minipage}{#1}\parskip2ex #2\end{minipage}\smallskip \end{onlyproblem} }
-}
-
-\newcounter{Sl}
-\addtocounter{Sl}{+1}
-\newcommand{\Solutioncnt}[1]{\bigskip\noindent \textbf{R\theSl .\hspace{0,7mm}}\addtocounter{Sl}{+1} #1}
-\newcommand{\Solutionnorm}[1]{#1}
-
-\newif\ifmixte
-\let\mixte\mixtetrue
-\let\nomix\mixtefalse
-\nomix
-
-\newcommand{\Solution}[1]{
-\noindent
-\ifmixte
-\noindent\rule[0.1cm]{17cm}{0.8pt}\\
-  \begin{solution}
-    \ifnum\theQu>0
-    \Solutionnorm{#1}
-    \else
-    \Solutioncnt{#1}
-    \fi
-    \smallskip
-  \end{solution}
-
-\noindent\rule[0.1cm]{17cm}{0.8pt}
-\else
-  \begin{onlysolution}
-\fbox{\parbox{\linewidth-2\fboxrule-2\fboxsep}{
-    \ifnum\theQu>0
-    \Solutionnorm{#1}
-    \else
-    \Solutioncnt{#1}
-    \fi
-    \smallskip
-}}
-  \end{onlysolution}
-\fi
-}
