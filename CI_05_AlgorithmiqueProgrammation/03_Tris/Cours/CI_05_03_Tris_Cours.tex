@@ -1,0 +1,82 @@
+\documentclass[10pt]{article}
+\input{style/coursHeadings}
+\input{style/programHeadings}
+\input{style/macros_SII}
+\input{style/macros_Titres}
+\input{style/macros_Frames}
+
+%Si le boolen xp est vrai : compilation pour xabi
+%Sinon compilation Damien
+\newif\ifprof
+%\proftrue
+\proffalse
+
+\newif\ifxp
+\xptrue
+%\xpfalse
+
+\newif\iftd
+%\tdtrue
+\tdfalse
+
+\usepackage[%
+    pdftitle={Algorithmique et Programmation - Tris},
+    pdfauthor={Xavier Pessoles},
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=magenta]{hyperref}
+
+\def\discipline{Informatique}
+\def\xxtitre{%
+\ifxp
+CI 5 : Algorithmique et Programmation 
+\else
+\fi
+}
+
+\def\xxsoustitre{%
+\ifxp
+Chapitre 3 -- Tris
+\else
+\fi}
+
+\def\xxauteur{%
+\ifxp
+Xavier \textsc{Pessoles}
+\else
+\fi}
+
+\def\xxpied{%
+\ifxp
+CI 5 : Algorithmique et Programmation\\
+Ch. 3 : Tris -- Cours
+\else
+\fi}
+
+
+
+
+
+%---------------------------------------------------------------------------
+
+
+\begin{document}
+\ifxp
+\input{style/enteteXP}
+\else
+\input{style/enteteDI}
+\fi
+
+
+
+ \renewcommand{\baselinestretch}{1.2}
+\setlength{\parskip}{2ex plus 0.5ex minus 0.2ex}
+
+
+
+\section{Préambule}
+Les logiciels d'acquisi
+
+\end{document}
+
+
