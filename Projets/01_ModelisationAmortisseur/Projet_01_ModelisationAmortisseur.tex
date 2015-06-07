@@ -8,8 +8,8 @@
 %Si le boolen xp est vrai : compilation pour xabi
 %Sinon compilation Damien
 \newif\ifprof
-%\proftrue
-\proffalse
+\proftrue
+%\proffalse
 
 \newif\ifxp
 \xptrue
@@ -107,6 +107,184 @@ L'évaluation se fera sous forme d'une présentation de 10 à 15 minutes (6 diap
 \item la structure du programme en Python;
 \item une démonstration de l'exécution du code Python.
 \end{itemize}
+
+\ifprof
+\newpage
+
+\setcounter{section}{0}
+\begin{center}
+\textsc\textbf{{Éléments de corrigé}}
+\end{center}
+
+\section{Mise en équation du problème}
+
+\begin{minipage}[c]{.77\linewidth}
+On isole la masse mobile et on applique le théorème de la résultante dynamique en projection suivant l'axe de déplacement. En négligeant l'accélération de la pesanteur, on a :
+
+\begin{equation}
+f(t)-kx(t)-\mu\dot{x}(t) = M\ddot{x}(t) 
+\end{equation}
+
+
+\end{minipage} \hfill
+\begin{minipage}[c]{.2\linewidth}
+\includegraphics[width=\textwidth]{images/cellule}
+\end{minipage}
+
+\section{Résolution numérique}
+On utilise le changement de variable suivant : $v(t) = \dot{x}(t)$. Résoudre l'équation différentielle précédent revient donc à résoudre le système suivant : 
+\begin{equation}
+\left\{ 
+\begin{array}{l} 
+v(t) = \dot{x}(t) \\ 
+m\cdot\dot{v}(t)+c\cdot {v}(t) + k\cdot x(t) = f(t)
+\end{array} \right.
+\end{equation}
+
+En utilisant un schéma d'Euler implicite et notant $h$ le pas de calcul, on a : 
+
+$$\dfrac{dx(t)}{dt} \simeq \dfrac{x_{n}-x_ {n-1}}{h}
+\Longrightarrow
+v_n = \dfrac{x_{n}-x_{n-1}}{h} \Longleftrightarrow x_{n} = h\cdot v_n + x_{n-1}$$
+
+En réutilisant un schéma d'Euler implicite, on a :
+$$\dfrac{dv(t)}{dt} \simeq \dfrac{v_{n}-v_ {n-1}}{h}
+\Longrightarrow
+\dot{v}_n = \dfrac{v_{n}-v_{n-1}}{h} $$
+%\Longleftrightarrow v_{n} = h\cdot \dot{v}_n + v_{n-1}$$
+
+En substituant les résultats précédents dans le système d'équation, on obtient :
+$$
+\begin{array}{c}
+m\cdot \dfrac{v_{n}-v_{n-1}}{h} +c\cdot \dfrac{x_{n}-x_{n-1}}{h} + k\cdot x_n = f_n
+\Longleftrightarrow
+m\cdot (v_{n}-v_{n-1}) +c\cdot (x_{n}-x_{n-1}) + kh\cdot x_n = hf_n  \\
+\Longleftrightarrow mv_{n}  = hf_n -  (kh+c) \cdot x_n + mv_{n-1}+cx_{n-1} 
+\end{array}
+$$
+
+Il est alors possible d'exprimer l'équation précédente en fonction de $x_n$ :
+%
+%\subparagraph{}
+%\textit{En déduire que la suite $x_n$ peut se mettre sous la forme suivante :}
+%$x_{n}\left(m +ch+ kh^2\right)-x_{n-1}(2m+ch) +mx_{n-2}= h^2f_n$.
+%
+%\ifprof
+%\begin{corrige}
+%
+%D'après la question 2 on a :
+%$$v_n = \dfrac{x_{n}-x_{n-1}}{h} \quad \text{et} \quad v_{n-1} = \dfrac{x_{n-1}-x_{n-2}}{h}$$ 
+%
+%En utilisant le résultat de la question 3, on a :
+$$
+\begin{array}{cl}
+&m\dfrac{x_{n}-x_{n-1}}{h}  = hf_n -  (kh+c) \cdot x_n + m\dfrac{x_{n-1}-x_{n-2}}{h}+cx_{n-1} \\
+\Longleftrightarrow& 
+m(x_{n}-x_{n-1}) = h^2f_n -  h(kh+c) \cdot x_n + m(x_{n-1}-x_{n-2})+chx_{n-1} \\
+\Longleftrightarrow& 
+m(x_{n}-x_{n-1}) +  h(kh+c) \cdot x_n - m(x_{n-1}-x_{n-2})-chx_{n-1} = h^2f_n \\
+\Longleftrightarrow &
+x_{n}\left(m +kh^2+ch\right)-x_{n-1}(2m+ch) +mx_{n-2} = h^2f_n  \\
+\Longleftrightarrow &
+x_{n}= \dfrac{1}{m +kh^2+ch} \left(h^2f_n +x_{n-1}(2m+ch) -mx_{n-2} \right)
+\end{array}
+$$
+
+
+\ifprof
+\else
+
+\vspace{.5cm}
+
+On rappelle que $f(t)=f_{max} \sin \left(\omega t\right)$. On note \textsf{Tsimu} le temps de simulation et \textsf{h} le pas de temps. 
+
+\fi
+\subparagraph{}
+\textit{Implémenter en Python le fonction \textsf{f\_omega} permettant de créer une liste contenant l'ensemble des valeurs prises par la fonction $f_n$. On utilisera une boucle \textsf{while}. Les spécifications de la fonction sont les suivantes : }
+\ifprof
+\else
+
+
+\begin{py}
+\begin{python}
+def f_omega(Tsimu,h,fmax,fsign):
+   """
+   Entrées :
+       * Tsimu (flt) : temps de la simulation en seconde
+       * h (flt) : pas de temps de la simulation
+       * fmax (flt) : amplitude du signal (en Newton)
+       * fsign (flt) : fréquence du signal (en Hertz)
+   Sortie : 
+       * F (list) : liste des valeurs de la fonction 
+          f_n (t)= fmax sin (omega *t)
+   """
+\end{python}
+\end{py}
+
+\fi
+
+\ifprof
+\begin{corrige}
+\begin{py}
+\begin{python}
+def f_omega(Tsimu,h,fmax,fsign):
+   """
+   Entrées :
+       * Tsimu (flt) : temps de la simulation en seconde
+       * h (flt) : pas de temps de a simulation
+       * fmax (flt) : amplitude du signal (en Newton)
+       * fsign (flt) : fréquence du signal (en Hertz)
+   Sortie : 
+       * F (list) : liste des valeurs de la fonction 
+          f_n (t)= fmax sin (omega *t)
+   """
+    omega  = 2*math.pi*fsign
+    t=0 
+    F = []
+    while t<Tsimu :
+        F.append(fmax*math.sin(omega*t))
+        t=t+h
+    return F
+    
+\end{python}
+\end{py}
+
+\end{corrige}
+\else
+\fi
+
+\ifprof
+\else
+
+Il est possible de mettre la suite déterminée à la question 4 sous la forme $x_n = \alpha f_n +\beta x_{n-1} + \gamma x_{n-2}$.
+
+\fi
+
+\subparagraph{}
+\textit{En utilisant une boucle \textsf{while}, générer, en Python, les listes \textsf{T} et \textsf{X} contenant respectivement le temps de simulation et le déplacement de la masse mobile.}
+\ifprof
+\begin{corrige}
+\begin{python}
+
+T=[0,h]
+X=[0,0]
+t=2*h
+i=2
+while t<Tsimu:
+    T.append(t)
+    X.append(alpha*F[i]+beta*X[i-1] +gamma*X(i-2))
+    i=i+1
+    t = t+h
+\end{python}
+\end{corrige}
+\else
+\fi
+
+
+\else
+\fi
+
 \end{document}
+
 
 
