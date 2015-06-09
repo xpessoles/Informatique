@@ -5,67 +5,73 @@ __email__ = "xpessoles.ptsi@free.fr"
 
 import matplotlib.pyplot as plt
 import numpy as np
-#from biblio import *
+import sys
+sys.path.append('C:\\Enseignement\\GitHub\\Informatique\\Projets\\01_ModelisationAmortisseur\\Programme')
+import math
+import biblio
 
+from scipy import *
+from scipy.integrate import odeint
+
+global k,c,m
 # Raideur du ressort en N/m
 k = 1000000
 # Coefficient d'amortissement en N.s/m
-c = 50
+c = 10000
 # Masse en kg
 m = 1000
 # Pas de temps en seconde
-h = 0.001
+h = 0.0001
 # Temps total en s
-T = 1
+T = 2*math.pi
 # Initialisation 
 x0,v0 = 0,0
 
-import math
+temps = [i*h for i in range(int(T/h)+1)]
+#ff = [biblio.f_sin(1,2*math.pi,x) for x in temps]
 
-def f_sin(A,omega,t):
-    """
-    Fonction retournant la valeur de a*sin(omega*t).
-    Entrées :
-     * A,flt : Amplitude du sinus
-     * omega,flt : pulsation du sinus
-    Sortie :
-     res,flt : résultat
-    """
-    return A*math.sin(omega*t)
-    
-    
-    
-def solve_eq(m,k,c,x0,v0,h,T,f):
-    """
-    Résolution de l'équation différentielle du second ordre pour un système
-    masse amortisseur.
-    Entrées : 
-     * m,flt : masse en kg
-     * k,flt : raideur du ressort en N/m
-     * c,flt : coefficient d'amortissement en N.s/m
-     * x0,flt : position initiale en m
-     * v0,flt : vitesse initiale en m/s
-     * h,flt : pas de temps de calcul
-     * T,flt ; temps de simulation
-     * f,lst : liste de valeurs prise par la fonction.
-    Sortie : 
-     * 
-    
-    """
-    res=[x0,v0]
-    t=h
-    temps = [0,t]
-    i=1
-    while t<=T:
-        t=t+h
-        i=i+1
-        res.append((1/(m+k*h*h+c*h))*(h*h*f[i]+res[-1]*(2*m+c*h)-m*res[-2]))
-        temps.append(t)
-        
-    return temps,res
 
-ff = [f_sin(1,1,x) for x in range(int(T/h)+1)]
 
-t,x = solve_eq(m,k,c,x0,v0,h,T,ff)
-plt.plot(t,t)
+""" 
+# ECHELON
+f_echelon = [biblio.echelon(10) for x in temps]
+x_newton_echelon = biblio.solve_eq(m,k,c,x0,v0,h,temps,f_echelon)
+
+conditions_ini=[x0,v0]
+solution=odeint(syst_diff_echelon,conditions_ini,temps)
+x_ode = solution[:,0]
+v_ode = solution[:,1]
+
+plt.plot(temps,x_newton_echelon)
+plt.plot(temps,x_ode)
+
 plt.show()
+"""
+
+# SINUS
+f_sinus = [biblio.f_sin(1,1,x) for x in temps]
+x_newton_sinus = biblio.solve_eq(m,k,c,x0,v0,h,temps,f_sinus)
+conditions_ini=[x0,v0]
+solution=odeint(syst_diff_sinus,conditions_ini,temps)
+x_ode = solution[:,0]
+v_ode = solution[:,1]
+#plt.plot(temps,f_sinus)
+plt.plot(temps,x_newton_sinus)
+plt.plot(temps,x_ode)
+
+plt.grid()
+plt.show()
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -139,6 +139,12 @@ On utilise le changement de variable suivant : $v(t) = \dot{x}(t)$. Résoudre l'
 v(t) = \dot{x}(t) \\ 
 m\cdot\dot{v}(t)+c\cdot {v}(t) + k\cdot x(t) = f(t)
 \end{array} \right.
+\Longleftrightarrow
+\left\{ 
+\begin{array}{l} 
+\dot{x}(t) = v(t)  \\ 
+\dot{v}(t)= \dfrac{1}{m}f(t)-\dfrac{c}{m}\cdot {v}(t)- \dfrac{k}{m}\cdot x(t) 
+\end{array} \right.
 \end{equation}
 
 En utilisant un schéma d'Euler implicite et notant $h$ le pas de calcul, on a : 
