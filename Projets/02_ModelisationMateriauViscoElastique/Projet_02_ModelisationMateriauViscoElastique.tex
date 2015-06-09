@@ -190,13 +190,12 @@ L'évaluation se fera sous forme d'une présentation de 10 à 15 minutes (6 diap
 $$
 \left\{
 \begin{array}{l}
-m\ddot{x}_1 -c \dot{x}_{1-1} + 2c \dot{x}_1   -c \dot{x}_{1+1}- k x_{1-1} + 2 k x_1   - k x_{1+1}=0 \\
-... \\
-m\ddot{x}_2 -c \dot{x}_{2-1} + 2c \dot{x}_2   -c \dot{x}_{2+1}- k x_{2-1} + 2 k x_2   - k x_{2+1}=0 \\
-m\ddot{x}_3 -c \dot{x}_{3-1} + 2c \dot{x}_3   -c \dot{x}_{3+1}- k x_{3-1} + 2 k x_3   - k x_{3+1}=0 \\
-m\ddot{x}_4 -c \dot{x}_{4-1} + 2c \dot{x}_4   -c \dot{x}_{4+1}- k x_{4-1} + 2 k x_4   - k x_{4+1}=0 \\
-... \\
-m\ddot{x}_n -c \dot{x}_{n-1} + 2c \dot{x}_n   -c \dot{x}_{n+1}- k x_{n-1} + 2 k x_n   - k x_{n+1}=f_n \\
+m\ddot{u}_1 + 2c \dot{u}_1-c \dot{u}_{2}  +2 k u_{1} - k u_{2} =0 \\
+m\ddot{u}_2 -c \dot{u}_{1} + 2c \dot{u}_2   -c \dot{u}_{3}- k u_{1} + 2 k u_2   - k u_{3}=0 \\
+m\ddot{u}_3 -c \dot{u}_{2} + 2c \dot{u}_3   -c \dot{u}_{4}- k u_{2} + 2 k u_3   - k u_{4}=0 \\
+m\ddot{u}_4 -c \dot{u}_{3} + 2c \dot{u}_4   -c \dot{u}_{5}- k u_{3} + 2 k u_4   - k u_{5}=0 \\
+\vdots \\
+m\ddot{u}_n +  k u_n - k u_{n-1} + c \dot{u}_n -c \dot{u}_{n-1} - f_n = 0
 \end{array}
 \right.
 $$
@@ -212,17 +211,91 @@ m & 0 & \ldots & \ldots & \ldots & 0\\
 0  & \ldots & \ldots & \ldots & 0 & m\\
 \end{bmatrix}
 \begin{bmatrix}
-\ddot{x}_1\\
-\ddot{x}_2\\
-\ddot{x}_3\\
-\ddot{x}_4\\
-\cdots\\
-\ddot{x}_n\\
+\ddot{u}_1\\
+\ddot{u}_2\\
+\ddot{u}_3\\
+\ddot{u}_4\\
+\vdots\\
+\ddot{u}_n\\
 \end{bmatrix}
++
+\begin{bmatrix}
+2c & -c & 0 & \ldots & \ldots & 0\\
+-c  & 2c & -c & \ddots &  & \vdots\\
+0  & -c & 2c & -c & \ddots & \vdots\\
+\vdots  & \ddots & \ddots & 2c &\ddots & 0\\
+\vdots  &  & \ddots &\ddots & \ddots & -c\\
+0  & \ldots & \ldots & 0 & -c & c\\
+\end{bmatrix}
+\begin{bmatrix}
+\dot{u}_1\\
+\dot{u}_2\\
+\dot{u}_3\\
+\dot{u}_4\\
+\vdots\\
+\dot{u}_n\\
+\end{bmatrix}
++
+\begin{bmatrix}
+2k & -k & 0 & \ldots & \ldots & 0\\
+-k  & 2k & -k & \ddots &  & \vdots\\
+0  & -k & 2k & -k & \ddots & \vdots\\
+\vdots  & \ddots & \ddots &  \ddots&\ddots & 0\\
+\vdots  &  & \ddots &\ddots & 2k & -k\\
+0  & \ldots & \ldots & 0 & -k & k\\
+\end{bmatrix}
+\begin{bmatrix}
+{u}_1\\
+{u}_2\\
+{u}_3\\
+{u}_4\\
+\vdots\\
+{u}_n\\
+\end{bmatrix} 
+=
+\begin{bmatrix}
+0\\
+0\\
+0\\
+0\\
+\vdots\\
+{f}_n\\
+\end{bmatrix} 
+$$
+
+L'équation peut donc se mettre sous la forme suivante :
+$$
+M \ddot{U} + C \dot{U}+ K U = F 
 $$
 
 \section{Résolution numérique}
 
+En utilisant un schéma d'Euler implicite, on a d'une part 
+$\dot{U} \simeq \dfrac{U_{m}-U_{m-1}}{h} $. D'autre part, 
+$\ddot{U} \simeq \dfrac{\dot{U}_{m}-\dot{U}_{m-1}}{h}$. Au final : 
+$$
+\ddot{U} \simeq \dfrac{\dot{U}_{m}-\dot{U}_{m-1}}{h}
+\simeq \dfrac{ \dfrac{U_{m}-U_{m-1}}{h}- \dfrac{U_{m-1}-U_{m-2}}{h}}{h}
+= \dfrac{ U_{m}-2U_{m-1}+U_{m-2}}{h^2}
+$$
+En substituant dans l'équation matricielle, on a donc : 
+\begin{eqnarray*}
+&M \dfrac{ U_{m}-2U_{m-1}+U_{m-2}}{h^2} + C \dfrac{U_{m}-U_{m-1}}{h} + K U_m = F _m \\
+\Longleftrightarrow & 
+M \left( U_{m}-2U_{m-1}+U_{m-2}\right) + Ch \left(U_{m}-U_{m-1}\right) 
++ K h^2 U_m = h^2 F_m \\
+\Longleftrightarrow & 
+M  U_{m}-2M U_{m-1}+M U_{m-2} + Ch U_{m}-Ch U_{m-1}
++ K h^2 U_m = h^2 F_m \\
+\Longleftrightarrow & 
+\left( M + Ch  + K h^2 \right)  U_m 
++ \left(-2M  -Ch  \right)U_{m-1}
++M U_{m-2} 
+= h^2 F_m \\
+\Longleftrightarrow & 
+\left( M + Ch  + K h^2 \right)  U_m 
+= h^2 F_m + \left(2M  +Ch  \right)U_{m-1} - M U_{m-2}  \\
+\end{eqnarray*}
 
 \else
 \fi
@@ -231,4 +304,3 @@ $$
 \end{document}
 
 
-0
