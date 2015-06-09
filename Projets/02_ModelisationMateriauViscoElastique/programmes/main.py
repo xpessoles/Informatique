@@ -26,9 +26,6 @@ h = 0.0001
 T = 2*math.pi
 # Initialisation 
 x0,v0 = 0,0
-# Nombre d'éléments viscoélastiques 
-n = 5
-
 
 temps = [i*h for i in range(int(T/h)+1)]
 #ff = [biblio.f_sin(1,2*math.pi,x) for x in temps]
