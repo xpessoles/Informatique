@@ -31,6 +31,11 @@ def generate_K(n,k):
     """
     # np.eye renvoie la matrice "vide" de taille nxn
     M = np.eye(n,n)
-    for i in range(1,n-2):
-        print(M[i][i-1,i+2])#=[-k,2*k,k]
+    M[0][0:2]=[2*k,-k]
+    M[n-1][n-2:n]=[-k,k]
+    for i in range(1,n-1):
+        M[i][i-1:i+2]=[-k,2*k,-k]
     return M
+    
+def generate_C(n,c):
+    return generate_K(n,c)
