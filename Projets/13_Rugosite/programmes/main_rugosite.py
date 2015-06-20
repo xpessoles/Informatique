@@ -14,10 +14,11 @@ import biblio_rugosite
 
 x,y = biblio_rugosite.generate_profil(0.01,5,100,500,0.5,2000)
 
-#fourier = fftpack.fft(y)/np.size(y)
-
-plt.plot(x,y)
-#plt.plot(x,np.abs(fourier),'x-')
+fourier = fftpack.fft(y)/np.size(y)
+freq = np.arange(0,2001)*4000/2000
+#plt.plot(x,y)
+plt.plot(freq,np.abs(fourier),'b')
+plt.plot(freq,np.abs(fourier),'r.')
 
 plt.grid()
 plt.show()
