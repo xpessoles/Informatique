@@ -6,9 +6,9 @@ __email__ = "xpessoles.ptsi@free.fr"
 import matplotlib.pyplot as plt
 import numpy as np
 import sys
-sys.path.append('C:\\Enseignement\\GitHub\\Informatique\\Projets\\01_ModelisationAmortisseur\\Programme')
+sys.path.append('C:\\Enseignement\\GitHub\\Informatique\\Projets\\02_ModelisationMateriauViscoElastique\\programmes')
 import math
-import biblio
+import biblio_visco
 
 from scipy import *
 from scipy.integrate import odeint
@@ -29,49 +29,4 @@ x0,v0 = 0,0
 
 temps = [i*h for i in range(int(T/h)+1)]
 #ff = [biblio.f_sin(1,2*math.pi,x) for x in temps]
-
-
-
-""" 
-# ECHELON
-f_echelon = [biblio.echelon(10) for x in temps]
-x_newton_echelon = biblio.solve_eq(m,k,c,x0,v0,h,temps,f_echelon)
-
-conditions_ini=[x0,v0]
-solution=odeint(syst_diff_echelon,conditions_ini,temps)
-x_ode = solution[:,0]
-v_ode = solution[:,1]
-
-plt.plot(temps,x_newton_echelon)
-plt.plot(temps,x_ode)
-
-plt.show()
-"""
-
-# SINUS
-f_sinus = [biblio.f_sin(1,1,x) for x in temps]
-x_newton_sinus = biblio.solve_eq(m,k,c,x0,v0,h,temps,f_sinus)
-conditions_ini=[x0,v0]
-solution=odeint(syst_diff_sinus,conditions_ini,temps)
-x_ode = solution[:,0]
-v_ode = solution[:,1]
-#plt.plot(temps,f_sinus)
-plt.plot(temps,x_newton_sinus)
-plt.plot(temps,x_ode)
-
-plt.grid()
-plt.show()
-
-
-
-
-
-
-
-
-
-
-
-
-
 
