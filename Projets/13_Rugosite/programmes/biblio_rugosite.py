@@ -7,7 +7,7 @@ __email__ = "xpessoles.ptsi@free.fr"
 import math
 from random import randint
 
-def generate_profil(f0,f1,f2,f3,L,nb):
+def generate_profil(f0,a0,df0,f1,a1,f2,a2,f3,a3,b,L,nb):
     """
     Génération d'un profil de rugosité
     Entrée :
@@ -16,6 +16,7 @@ def generate_profil(f0,f1,f2,f3,L,nb):
      * f2,flt : fréquence du profil d'ordre 2 (défaut d'ondulation)
      * f3,flt : fréquence du profil d'ordre 3 (défaut de rugosité)
      * L,flt : longueur du profil
+     * b, flt : amplitude du bruit
      * nb,int : nombre points
     """
     
@@ -25,8 +26,8 @@ def generate_profil(f0,f1,f2,f3,L,nb):
     profil=[]
     while i<=nb:
         t = i*L/nb
-        bruit = randint(-100,100)/1000
-        profil.append(math.sin(2*math.pi*f0*t)+math.sin(2*math.pi*f1*t)+.1*math.sin(2*math.pi*f2*t)+.04*math.sin(2*math.pi*f3*t)+bruit)
+        bruit = b*randint(-100,100)/1000
+        profil.append(a0*math.sin(2*math.pi*f0*t+df0)+a1*math.sin(2*math.pi*f1*t)+a2*math.sin(2*math.pi*f2*t)+.04*math.sin(2*math.pi*f3*t)+bruit)
         x.append(t)
         i=i+1
     
