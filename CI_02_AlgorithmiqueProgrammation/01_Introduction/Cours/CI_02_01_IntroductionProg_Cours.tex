@@ -1,0 +1,930 @@
+\documentclass[10pt,oneside]{article}
+\input{style/coursHeadings}
+\input{style/programHeadings}
+
+
+%Si le boolen xp est vrai : compilation pour xabi
+%Sinon compilation Damien
+\newboolean{xp}
+\setboolean{xp}{true}
+
+%\newboolean{prof}
+%\setboolean{prof}{true}
+
+\def\xxtitre{\ifthenelse{\boolean{xp}}{
+CI 2 : Algorithmique \& Programmation}{
+Chapitre  -- }}
+
+\def\xxsoustitre{\ifthenelse{\boolean{xp}}{
+Chapitre 1 -- Introduction à la programmation}{
+Partie  -- }}
+
+\def\xxauteur{\ifthenelse{\boolean{xp}}{
+Xavier \textsc{Pessoles}}{
+Damien \textsc{Iceta} \\ Xavier \textsc{Pessoles}}}
+
+\def\xxpied{\ifthenelse{\boolean{xp}}{
+Cours -- CI 2 : Algorithmique \& Programmation\\
+Ch. 1 : Introduction à la programmation}{
+\xxtitre}}
+
+\def\xxcathegorie{\ifthenelse{\boolean{xp}}{
+2013 -- 2014 \\
+Xavier \textsc{Pessoles}}{
+Informatique - Cours}}
+
+\ifthenelse{\boolean{xp}}{\input{style/enteteXP}}{\input{style/enteteDI}}
+
+
+%---------------------------------------------------------------------------
+
+\begin{minipage}[c]{.15\linewidth}
+\begin{center}
+%\includegraphics[height=.6cm]{png/w8}
+\end{center}
+\end{minipage}
+
+
+
+
+
+\vspace{.5cm}
+
+\ifthenelse{\boolean{xp}}{
+
+\begin{savoir}
+\textsc{Savoirs :}
+\begin{itemize}
+\item Variables : notion de type et de valeur d’une variable, types simples
+\item Expressions et instructions simples : affectation, opérateurs usuels, distinction entre expression et instruction
+\end{itemize}
+\end{savoir}
+ 
+}{}
+
+
+
+
+\setlength{\parskip}{0ex plus 0.2ex minus 0ex}
+ \renewcommand{\contentsname}{}
+ \renewcommand{\baselinestretch}{1}
+
+\tableofcontents
+
+
+% \vspace{1cm}
+\textit{Ce document évolue. Merci de signaler toutes les erreurs ou coquilles rencontrées.}
+
+
+\section{Variables}
+\subsection{Exemple d'algorithme : L'algorithme d'Euclide}
+\begin{rappels}
+\begin{enumerate}
+\item Pour $a,b$ deux entiers, on dit que $b$ divise $a$ si $a$ s'écrit $kb$ avec $k$ un \textbf{entier} (ex : $5$ divise $45$).
+\item Pour $a,b \in \mathbb{N}$, non tous deux nuls, on note $PGCD(a,b)$ le plus grand diviseur commun à $a$ et à $b$\\
+ (ex : $\text{PGCD(45,30)}=15$).
+\item Pour tout entier naturel $a$, $\text{PGCD(a,0)}=a$ (tout entier divise $0$).
+\end{enumerate}
+\end{rappels}
+
+\begin{prop}
+Soient $a,b$ deux entiers naturels. $b$ non nul. On note $r$ le reste dans la division euclidienne de $a$ par $b$.\\
+$$\text{ On a : }\text{PGCD(a,b)}=\text{PGCD(b,r)}$$
+\end{prop}
+\begin{exemple}
+\textit{Calcul de $\text{PGCD}(1525,755)$.}
+\begin{center}
+\includegraphics[width=0.7\textwidth]{images/euclide.png}
+\end{center}
+\end{exemple}
+
+\begin{rem}
+\begin{enumerate}
+\item Le procédé précédent est un algorithme : <<ensemble de règles opératoires dont l'application permet de résoudre un problème énoncé au moyen d'un nombre fini d'opérations>>.
+\item Pour coder des algorithmes nous utiliserons :
+\begin{enumerate}
+\item des variables (ici $a,b,r$) qui auront des valeurs assignées;
+\item des instructions : des affectations, des opérations,...;
+\item des expressions logiques : ici dire si le reste est nul ou non;
+\item des boucles : (ici une boucle Tant que) pour répéter des instructions;
+\item une rédaction sous forme de fonction : pour pouvoir appeler cet algorithme à d'autres endroits de notre programme.
+\end{enumerate}
+\end{enumerate}
+\end{rem}
+
+\begin{minipage}[c]{.48\linewidth}
+\begin{py}
+Codage en Pythonde l'algorithme d'Euclide :
+\begin{python}
+def Euclide_PGCD(a,b):	# on définit le nom de la 
+			# fonction et ses variables 
+			#d'entrées/d'appel
+    r=a%b		# on calcule le reste dans 
+			# la division de a par b
+    
+    while r!=0:		# tant que ce reste est non nul :
+        a=b		# b devient le nouveau a
+        b=r		# r devient le nouveau b
+        r=a%b		# on recalcule le reste
+        
+    return(b)		# une fois la boucle terminée, 
+			# on retourne le dernier b    
+print(pgcd(1525,755))	# on affiche le résultat 
+			# retourné par la fonction
+\end{python}
+\end{py}
+\end{minipage}\hfill
+\begin{minipage}[c]{.48\linewidth}
+\begin{pseudo}
+\begin{tabular}{p{.9\textwidth}}
+\hline
+Fonction PGCD : algorithme d’Euclide \\
+\hline
+\textbf{Données :} a et b : deux entiers naturels non nuls tels que a > b \\
+\textbf{Résultat :} le PGCD de a et b \\
+\\
+\textbf{Euclide\_PGCD}(a,b) \\
+\hspace{.5cm}\textbf{Répéter}\\
+\hspace{1cm}r $\leftarrow$ a mod b\\
+\hspace{1cm}a $\leftarrow$ b \\
+\hspace{1cm}b $\leftarrow$ r \\
+\hspace{.5cm}\textbf{Jusqu’à} r == 0 \\
+\hspace{.5cm}\textbf{Retourner} a\\
+\hline
+\end{tabular}
+\end{pseudo}
+\end{minipage}
+
+A la nième itération, on a la relation a $a_n=q_n\times b_n +r_n$ où $q_n$ est un entier. 
+
+\subsection{Définitions}
+\begin{defi}
+\textbf{Variables}
+
+Une variable permet de stocker des informations. Une variable est définie par :
+ \begin{multicols}{2}
+\begin{itemize}
+\item un identificateur (nom de la variable);
+\item un type;
+\item une valeur;
+\item une référence;
+\item des opérations. 
+\end{itemize}
+\end{multicols}
+\end{defi}
+
+
+
+\begin{defi}
+\textbf{Identificateur}
+
+L'identificateur correspond au nom de la variable. Il doit être explicite. Pour nommer une variable, il est possible d'utiliser :
+\begin{itemize}
+\item les lettres de l'alphabet en minuscules (\textbf{a $\rightarrow$ z}) ou en majuscules (\textbf{A $\rightarrow$ Z}) ;
+\item des chiffres (\textbf{0 $\rightarrow$ 10});
+\item l'underscore \textbf{\_}.
+\end{itemize}
+
+Le nom d'une variable commence par une lettre.
+
+\end{defi}
+
+\begin{rem}
+En python, les noms de variables suivants sont interdits : 
+\begin{center}
+\textsf{
+\begin{tabular}{lllllllll}
+and & as & assert & break & class & continue & def & True & try \\
+del & elif & else & except & False & finally & for & while & \\
+from & global & if & import & in & is & lambda & with & \\
+None & nonlocal & not & or & pass & raise & return & yield& \\
+\end{tabular}}
+\end{center}
+\end{rem}
+
+\begin{exemple}
+\textit{Lister les identificateurs utilisés dans l'algorithme d'Euclide.}
+\end{exemple}
+
+
+\begin{defi}
+\textbf{Affectation}
+
+L'affectation permet d'assigner une valeur à une variable.
+\end{defi}
+
+\begin{exemple}
+\begin{minipage}[c]{.35\linewidth}
+\begin{pseudo}
+\begin{algorithm}[H]
+nbBooleen $\gets$ True\\
+nbEntier $\gets$ 2\\
+nbReel $\gets$ 3.456\\
+chaine $\gets$ "coucou"\\
+\end{algorithm}
+\end{pseudo}
+\end{minipage}\hfill
+\begin{minipage}[c]{.3\linewidth}
+\begin{py}
+\begin{python}
+nbBooleen = True
+nbEntier = 2
+nbReel = 3.456
+chaine = "coucou"
+\end{python}
+\end{py}
+\end{minipage}\hfill
+\begin{minipage}[c]{.3\linewidth}
+\begin{sci}
+\begin{scilab}
+nbBooleen = %T
+nbEntier = 2
+nbReel = 3.456
+chaine = "coucou"
+\end{scilab}
+\end{sci}
+\end{minipage}
+\end{exemple}
+
+
+\begin{defi}
+\textbf{Typage}
+
+Le typage correspond à la nature de la variable (booléen, nombre entier, nombre réel \textit{etc}). 
+
+On parle de typage statique lorsqu'il est nécessaire de définir le type d'une variable lors de sa création. On parle de typage dynamique lorsque, par exemple, le type le mieux adapté est choisi automatiquement lors de l'assignation d'une variable.
+\end{defi}
+
+\begin{exemple}
+\begin{minipage}[c]{.9\linewidth}
+\begin{py}
+\begin{python}
+# type permet de determiner le type d'une variable
+>>> type(nbBooleen)
+        <class 'bool'>
+\end{python}
+\end{py}
+
+\end{minipage}\hfill
+\begin{minipage}[c]{.45\linewidth}
+\end{minipage}
+\end{exemple}
+
+\begin{defi}
+\textbf{Référence}
+
+La référence permet de créer un alias pointant directement vers l'adresse mémoire d'une variable.
+\end{defi}
+
+\begin{defi}
+\textbf{Opérations}
+
+Une opération est une combinaison arithmétique de deux ou plusieurs variables. Le résultat dépend du type de variable. 
+
+Les principales opérations sont les suivantes : 
+\begin{multicols}{2}
+\begin{itemize}
+\item l'addition : \textbf{+};
+\item la soustraction : \textbf{-};
+\item la multiplication : \textbf{*};
+\item l'exposant :\textbf{**};
+\item la division : \textbf{/};
+\item la division entière : \textbf{//};
+\item le modulo : \textbf{\%};
+\item la valeur absolue : \textbf{abs}.
+\end{itemize}
+\end{multicols}
+\end{defi}
+
+
+
+
+\subsection{Types de variables}
+
+\subsubsection{Types simples}
+\begin{defi}
+\begin{itemize}
+\item les entiers
+\item les réels
+\item les booléens
+\item les caractères
+\end{itemize}
+\end{defi}
+
+
+\begin{exemple}
+\begin{minipage}[c]{.45\linewidth}
+\begin{py}
+\begin{python}
+>>> a = 64 # affectation d'un entier
+>>> a = 64.64 # affectation d'un reel
+>>> a = True # affectation d'un booleen
+>>> a = "a" # affectation d'un caractere
+\end{python}
+\end{py}
+\end{minipage}\hfill
+\begin{minipage}[c]{.5\linewidth}
+\begin{sci}
+\begin{scilab}
+--> a = 64 // affectation d'une constante
+--> a = int8(64) // aff. un entier sur 8 bits
+--> a = int16(64) // aff. un entier sur 16 bits
+--> a = %T // affectation d'un booleen
+--> a = "a" // affectation d'un caractere
+\end{scilab}
+\end{sci}
+\end{minipage}
+\end{exemple}
+
+\begin{rem}
+En programmation, le type entier (\textsf{int} -- \textsf{integer}) désigne les entiers \textbf{relatifs}.
+\end{rem}
+
+\begin{exemple}
+Il est aisé de convertir des nombres depuis une base $n$ vers la base décimale : 
+
+\begin{minipage}[c]{.45\linewidth}
+\begin{py}
+\begin{python}
+>>> 0b1000000 # Conv. binaire>decimal
+	64
+>>> 0x40 # Conv. hexa. > decimal
+	64
+\end{python}
+\end{py}
+\end{minipage}\hfill
+\begin{minipage}[c]{.45\linewidth}
+\end{minipage}
+\end{exemple}
+
+
+
+
+\subsubsection{Les chaînes de caractères}
+\begin{defi}
+Les chaînes de caractères sont une succession de caractères. 
+\end{defi}
+
+\begin{rem}
+En raison des différences d'encodages entre les différents systèmes d'exploitation, des problèmes peuvent se poser lors de l'affichage des caractères spéciaux tels les accents, les cédilles ...
+\end{rem}
+
+\begin{rem}
+\textit{Séquences d'échappements}
+L'utilisation d'un antislash \\ dans une chaîne de caractère peut entraîner un comportement particulier de cette chaîne de caractère : 
+\begin{itemize}
+\item \textbf{\textbackslash n} provoque un retour à la ligne (retour chariot);
+\item \textbf{\textbackslash t}  provoque une tabulation;
+\item \textbf{\textbackslash a} provoque une bip système;
+\item \textbf{\textbackslash "} et \textbf{\textbackslash '} permettent d'écrire un guillemet sans ouvrir ou fermer une chaîne de caractère;
+\item \textbf{\textbackslash\textbackslash} permet d'écrire un antislash.
+\end{itemize}
+\end{rem}
+
+\begin{exemple}
+\begin{minipage}[c]{.45\linewidth}
+\begin{py}
+\begin{python}
+>>> a = 64 ; b = "Pyrenees Atlantiques"
+>>> print(a,": \t",b)
+	64 	 Pyrenees Atlantiques
+\end{python}
+\end{py}
+\end{minipage}\hfill
+\begin{minipage}[c]{.45\linewidth}
+\end{minipage}
+\end{exemple}
+
+\subsubsection{Les listes et les tableaux}
+
+\begin{defi}
+\textbf{Liste}
+
+Une liste est une collection de plusieurs éléments qui peuvent avoir un type différent. 
+\end{defi}
+
+\begin{exemple}
+
+\begin{minipage}[c]{.6\linewidth}
+\begin{py}
+\begin{python}
+>>> x=[1,"b",3,"coucou"] # Creer une liste
+>>> print(x[0]) # Acces a une variable
+>>> print(x[0:2]) # Acces de x[0] a x[1]
+>>> x.append(5) # Ajouter un element en fin de liste
+>>> del(x[2]) # Supprime x la valeur 3
+\end{python}
+\end{py}
+\end{minipage}\hfill
+\begin{minipage}[c]{.45\linewidth}
+\end{minipage}
+\end{exemple}
+%Listes en intension ? res =[x**2 for x in range (1,10)]
+
+\subsubsection{Les dictionnaires}
+\begin{defi}
+Les dictionnaires sont des collections de clés auxquelles sont associées des valeurs. 
+\end{defi}
+
+\begin{exemple}
+\begin{minipage}[c]{.45\linewidth}
+\begin{py}
+\begin{python}
+>>> dep = {"Ain":1}
+>>> dep["Aisne"]=2
+>>> print(dep)
+	{'Aisne': 2, 'Ain': 1}
+>>> print(dep['Ain'])
+	1
+\end{python}
+\end{py}
+\end{minipage}\hfill
+\begin{minipage}[c]{.45\linewidth}
+\end{minipage}
+\end{exemple}
+
+
+
+
+
+\section{Expressions et instructions simples}
+
+
+%Affection simple :
+%\begin{itemize}
+%\item variable = valeur
+%\item Création et mémorisation de l'identificateur de la variable
+%\item Attribution d'un type (typage dynamique)
+%\item Création et mémorisation de la valeur
+%\item Lien entre l'identificateur et l'emplacement mémoire correspondant (référence)
+%\end{itemize}
+
+
+
+\subsection{Expressions}
+
+\begin{defi}
+\textbf{Expression}
+
+Une expression est l'évaluation d'un calcul. Un résultat est retourné. 
+\end{defi}
+
+\begin{exemple}
+\begin{minipage}[c]{.45\linewidth}
+\begin{py}
+\begin{python}
+>>> 1+1
+	2
+>>> 'a'+'a'
+	'aa'
+>>> 1 == 1
+	True
+\end{python}
+\end{py}
+\end{minipage}\hfill
+\begin{minipage}[c]{.45\linewidth}
+\begin{sci}
+\begin{scilab}
+--> 1+1
+	ans = 2
+--> 'a'+'a'
+	ans = aa
+--> 1 == 1
+	ans = T
+\end{scilab}
+\end{sci}
+\end{minipage}
+\end{exemple}
+
+
+\subsection{Instructions}
+
+
+\begin{defi}
+\textbf{Instruction}
+
+Une instruction est une action utilisée dans un algorithme ou dans un programme. Une instruction peut inclure une expression.
+\end{defi}
+
+\begin{exemple}
+\begin{minipage}[c]{.3\linewidth}
+\begin{pseudo}
+\begin{algorithm}[H]
+$a\gets 1$\\
+Afficher(a)\\
+Type\_De(a)
+\end{algorithm}
+\end{pseudo}
+\end{minipage} \hfill
+\begin{minipage}[c]{.3\linewidth} 
+\begin{py}
+\begin{python}
+>>> a = 1
+	1
+>>> print(a)
+	1
+>>> type(a)
+	<class 'int'>
+\end{python}
+\end{py}
+\end{minipage}\hfill
+\begin{minipage}[c]{.3\linewidth}
+\begin{sci}
+\begin{scilab}
+--> a = 1
+	ans = 1.
+--> mprintf("%f",a)
+	1.0000
+--> typeof(a)
+	ans = constant
+\end{scilab}
+\end{sci}
+\end{minipage}
+\end{exemple}
+
+
+
+\begin{rem}
+En python, les expressions ou les instructions sont séparés par des \textbf{;} ou par des retours à la ligne.
+\end{rem}
+
+
+\subsection{L'affectation}
+
+\subsubsection{L'affectation simple}
+On a vu précédemment, qu'il était possible d'affecter assez simplement une valeur à une variable. Lors d'une affectation, 
+un espace mémoire est réservé dans la mémoire de l'ordinateur. Cet espace mémoire est situé à une certaine adresse.
+
+À cette variable on fait correspondre un identificateur (nom de la variable), une valeur, un type (booléen, entier, flottant ...) et une adresse mémoire.
+
+\textbf{Tant que la variable n'est pas réaffectée, l'adresse mémoire reste inchangée.}
+
+\begin{rem}
+\begin{minipage}[c]{.55\linewidth}
+\begin{py}
+\begin{python}
+>>> a=2
+>>> id(a) # Permet de connaitre l'adresse memoire
+    15590464
+\end{python}
+\end{py}
+\end{minipage}
+\end{rem}
+
+
+
+
+\begin{exemple}
+
+\textit{Affectation simple}
+
+Lorsqu'on copie une variable simple, un nouvel espace mémoire avec une nouvelle adresse est créé. 
+\begin{minipage}[c]{.45\linewidth}
+\begin{pseudo}
+\begin{algorithm}[H]
+$a \gets 1$ \\
+$b \gets a$ \\
+\end{algorithm}
+\end{pseudo}
+\end{minipage}\hfill
+\begin{minipage}[c]{.45\linewidth}
+\begin{py}
+\begin{python}
+>>> a=2
+>>> id(a) 
+    15590464
+\end{python}
+\end{py}
+\end{minipage}%\hfill
+%\begin{minipage}[c]{.3\linewidth}
+%\begin{sci}
+%\begin{scilab}
+%--> a=2
+%\end{scilab}
+%\end{sci}
+%\begin{minipage}[c]{.3\linewidth}
+%\end{minipage}
+
+\end{exemple}
+
+\subsubsection{L'affectation multiple}
+
+L'affectation multiple permet l'affectation simultanément plusieurs variables.
+
+\begin{exemple}
+\textit{Affectation multiple}
+
+
+\begin{minipage}[c]{.55\linewidth}
+\begin{py}
+\begin{python}
+>>> a,b=1,2
+>>> a
+    1
+>>> b
+    2
+\end{python}
+\end{py}
+\end{minipage}
+
+\end{exemple}
+
+
+\subsubsection{Problèmes liés à l'affectation de variables composites}
+
+\begin{exemple}
+\textit{Copie de variables composites}
+
+Les variables comme les tableaux ne peuvent pas être copiées aussi simplement que les variables simples :
+
+
+\begin{minipage}[c]{.55\linewidth}
+\begin{py}
+\begin{python}
+>>> a,b=1,2
+>>> tab1=[a,b]
+>>> tab2=tab1
+>>> id(tab1);id(tab2)
+    19282320
+    19282320
+\end{python}
+\end{py}
+\end{minipage}
+
+Lors de la création de tab2, python n'a pas créé un nouvel espace mémoire. Il a juste créé la variable tab2 et lui a adressé le même espace mémoire que tab1. En conséquence, si on change un champ de tab1, le même champ de tab2 sera modifié. En général, ce comportement n'est pas souhaité:
+
+\begin{minipage}[c]{.55\linewidth}
+\begin{py}
+\begin{python}
+>>> tab1;tab2
+    [1, 2]
+    [1, 2]
+>>> tab1[0]=0
+>>> tab1;tab2
+    [0, 2]
+    [0, 2]
+\end{python}
+\end{py}
+\end{minipage}
+
+Ainsi, pour copier un tableau, une liste ou un dictionnaire, il est nécessaire d'utiliser une méthode spéciale qui permettra de recréer une nouvelle variable avec une nouvelle adresse mémoire.
+l
+\begin{minipage}[c]{.55\linewidth}
+\begin{py}
+\begin{python}
+>>> tab2=tab1.copy()
+>>> id(tab1);id(tab2)
+    19282320
+    20335832
+>>> tab1[0]=4;tab1;tab2
+    [4, 2]
+    [0, 2]
+\end{python}
+\end{py}
+\end{minipage}\hfill
+\begin{minipage}[c]{.3\linewidth}
+\end{minipage}
+
+\end{exemple}
+
+
+\begin{rem}
+En Python, le passage des éléments se fait toujours par référence. Il faudra donc prendre garde à la manipulation des variables, notamment lorsqu'on leur applique des fonctions. 
+ 
+\end{rem}
+
+\subsubsection{Affectation externe}
+
+Lors de l'exécution d'un programme, il est possible de demander à l'utilisateur de saisir une donnée. Pour cela il existe des instructions permettant de communiquer avec l'utilisateur.
+
+\begin{exemple}
+\begin{minipage}[c]{.45\linewidth}
+Dans Python, en utilisant la fonction \textsf{input}, les données saisies par l'utilisateur sont converties en chaîne de caractère.
+\begin{py}
+\begin{python}
+>>>a=input()
+\end{python}
+\end{py}
+\end{minipage}\hfill
+\begin{minipage}[c]{.45\linewidth}
+\end{minipage}
+\begin{sci}
+\begin{scilab}
+-->a=input("Saisir un nombre : ")
+\end{scilab}
+\end{sci}
+\end{exemple}
+
+\subsection{Sorties à l'écran}
+Lors de l'exécution d'un programme il est souvent nécessaire que ce dernier renvoie des informations à l'utilisateur pour, par exemple, donner le résultat d'une opération ou encore donner l'avancement dans le programme.
+
+\begin{exemple}
+\begin{minipage}[c]{.95\linewidth}
+\begin{py}
+\begin{python}
+>>> print("Coucou") # Afficher une chaine de caract.
+    Coucou
+>>> i = 2
+>>> print("La valeur de i est '',i,''.'',sep='') # Afficher une phrase composee.
+    La valeur de i est 2. # sep='' permet de supprimer l espace entre 2 et le point
+\end{python}
+\end{py}
+\end{minipage}
+
+\begin{minipage}[c]{.95\linewidth}
+\begin{sci}
+\begin{scilab}
+print(%io(2),a)     // affiche le contenu de la variable a a l ecran
+write(%io(2),a)    // fonction similaire
+disp(a)               // affiche le contenu de a sans faire figurer a = 
+xinfo('message')  // affiche un message dans la barre d information
+\end{scilab}
+\end{sci}
+
+\end{minipage}
+\end{exemple}
+
+\subsection{Gestion des exceptions}
+%Gestion des exceptions : try, except (python), try, catch (scilab)
+
+
+Certaines parties de programmes sont susceptibles de produire des erreurs. C'est par exemple le cas d'une entrée-sortie hasardeuse (saisie au clavier, lecture d'un fichier volumineux) ou bien de l'utilisation d'une opération instable dont le résultat peut provoquer un dépassement…
+ 
+Pour gérer cette situation, on peut utiliser une structure : \textsf{try} -- \textsf{except} en Python ou \textsf{try} -- \textsf{catch} avec Scilab.
+
+\textsf{except} permet de spécifier une action de remplacement en cas d'erreur.
+
+\begin{minipage}[c]{.95\linewidth}
+
+\begin{py}
+\begin{python}
+try :
+    nombre = int(input("Sasir un nombre : "))
+    print ("Le carré de", nombre, "est égale à", nombre*nombre)
+except : 
+    print("Vous n'avez pas donné de nombre correct, nous ne pouvons donc pas donner le carré") 
+\end{python}
+\end{py}
+\end{minipage}
+
+\textsf{try} fonctionne toujours avec \textsf{except}.
+
+Ce programme demande donc un nombre et affiche son carré. Mais s'il y a eu une erreur lors de la récupération de ce nombre, il affiche qu'il est impossible de donner le carré.
+
+Une solution plus complète serait de redemander un nombre tant que la valeur saisie n'est pas un nombre. Pour cela on peut implémenter les lignes de code suivantes :
+\begin{py}
+\begin{python}
+nombreIncorrect = True
+while nombreIncorrect == True :
+    try :
+        nombre = int(input("Saisir un nombre : "))
+        nombreIncorrect = False
+    except :
+        print ("Vous n'avez pas donné de nombre correct, nous ne pouvons donc pas donner le carré")
+print ("Le carré de", nombre, "est égale à", nombre*nombre)
+\end{python}
+\end{py}
+
+
+On crée ici une variable ayant la valeur \textsf{True} pour indiquer que la proposition effectuée est incorrecte. Tant que l'utilisateur ne saisit pas de nombre, nombreIncorrect reste égal à \textsf{True}; on continue donc à demander un nombre et on spécifie l'erreur à l'utilisateur.
+
+Comme on a initialisé la variable à \textsf{True}, on entre dans la boucle. Si l'utilisateur saisi réellement un un nombre, on indique avec \textsf{"nombreIncorrect = False"} que l'on ne doit pas refaire un tour de boucle. La question n'est donc pas reposée. 
+
+On sort donc de la boucle lorsqu'on est sûr que la variable nombre contient un nombre. On peut donc afficher le carré.
+
+On peut aussi utiliser la méthode montrée en exemple dans la documentation de python : 
+\begin{py}
+\begin{python}
+while True :
+    try :
+        nombre = int(input("Un nombre s'il vous plait : "))
+        break
+    except :
+        print ("Vous n'avez pas donné de nombre correct, nous ne pouvons donc pas donner le carré")
+print ("Le carré de", nombre, "est égale à", nombre*nombre)
+\end{python}
+\end{py}
+
+\textsf{While True :} ne s'arrête jamais, c'est une boucle infinie. On demandera toujours un nombre, sauf si on arrête la boucle avec \textsf{break}. Comme le \textsf{break} est dans le \textsf{try}, la boucle s'arrêtera seulement s'il n'y a pas d'erreur, c'est-à-dire que le nombre n'est pas incorrect.
+	
+Les exceptions permettent donc de gérer, dans un certaine mesure, les erreurs.
+
+De la même manière, sous scilab :
+\begin{sci}
+\begin{scilab}
+try
+	<instructions "normales">
+catch
+	<instructions executees en cas d'erreur>
+end
+[message_erreur, numero_erreur] = lasterror(%t) // enregistrement de l erreur
+<suite du script>
+\end{scilab}
+\end{sci}
+
+Scilab exécute le code entre les commandes \textsf{try} et \textsf{catch}; si aucune erreur ne se produit, il va tout de suite après le \textsf{end}.
+
+Si une erreur se produit entre le \textsf{try} et le \textsf{catch}, il exécute directement les instructions entre le \textsf{catch}.
+
+
+
+\section{Notions de programmation orientée objets}
+%\subsubsection{Définitions}
+\begin{defi}
+\textbf{Classes, objets et méthodes}
+Une classe est une structure particulière de programmation. Par instanciation d'une classe, il est alors possible de créer des objets. 
+
+Une classe définit les attributs et des méthodes qui pourront être appliquées à l'objet.
+\end{defi}
+
+\begin{exemple}
+
+Nous allons créé une classe permettant de gérer des points dans $\mathbb{R}^3$.
+
+\begin{minipage}[c]{.9\linewidth}
+\begin{py}
+\begin{python}
+class Point3d(object):
+	"""Creation d'un point de l'espace"""
+
+p = Point3d()
+\end{python}
+\end{py}
+\end{minipage}
+\end{exemple}
+
+\begin{defi}
+Un attribut est une donnée propre à l'objet.
+\end{defi}
+
+\begin{exemple}
+
+Le point \texttt{p} a comme attribut ses 3 coordonnées. On pourrait donc créer un point à partir de ses coordonnées.
+
+\begin{minipage}[c]{.9\linewidth}
+\begin{py}
+\begin{python}
+class Point3d(object):
+    """ Point de l'espace $\mathbb{R}^3$"""
+    def __init__(self,coordx,coordy,coordz):
+        """Creer un point a partir de 3 coordonnees x, y et z"""
+        self.x = coordx
+        self.y = coordy
+        self.z = coordz
+
+>>> p = Point3d(1,2,3)
+>>> p.x
+	3
+\end{python}
+\end{py}
+\end{minipage}
+\end{exemple}
+
+\begin{defi}
+\textbf{Méthodes}
+
+
+\end{defi}
+
+
+\begin{exemple}
+
+Le point \texttt{p} a comme attribut ses 3 coordonnées. On pourrait donc créer un point à partir de ses coordonnées.
+
+\begin{minipage}[c]{.9\linewidth}
+\begin{py}
+\begin{python}
+import math
+
+class Point3d(object):
+    """ Creation d'un point de l'espace"""
+
+    def __init__(self,coordx,coordy,coordz):
+        """Creer un point a partir de 3 coordonnees x, y et z"""
+        self.x = coordx
+        self.y = coordy
+        self.z = coordz
+
+    def distance(self,pt):
+        """ Calcule la distance entre 2 points"""
+        dist = math.sqrt((self.x-pt.x)**2
+                         +(self.y-pt.y)**2
+                         +(self.z-pt.z)**2)
+        return dist
+    
+>>> p1=Point3d(0,0,0)
+>>> p2=Point3d(1,1,1)
+>>> p1.distance(p2)
+	1.7320508075688772
+\end{python}
+\end{py}
+\end{minipage}
+\end{exemple}
+
+\begin{thebibliography}{2}
+\bibitem{gs}{\textit{Gérard Swinnen}, Apprendre à programmer avec Python 3.}
+\bibitem{rc}{\textit{Robert Cordeau}, Introduction à Python 3.}
+\bibitem{pb}{\textit{Patrick Beynet}, Cours d'informatique en CPGE, Lycée Rouvière Toulon, UPSTI.}
+\bibitem{ap}{\textit{Adrien Petri et Laurent Deschamps}, Cours d'informatique en TSI 1, Lycée Rouvière Toulon.}
+\end{thebibliography}
+\end{document}

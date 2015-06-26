@@ -1,0 +1,89 @@
+\documentclass[10pt,oneside]{article}
+\input{style/coursHeadings}
+\input{style/programHeadings}
+
+
+%Si le boolen xp est vrai : compilation pour xabi
+%Sinon compilation Damien
+\newboolean{xp}
+\setboolean{xp}{true}
+
+%\newboolean{prof}
+%\setboolean{prof}{true}
+
+\def\xxtitre{\ifthenelse{\boolean{xp}}{
+CI 2 : Algorithmique \& Programmation}{
+Chapitre  -- }}
+
+\def\xxsoustitre{\ifthenelse{\boolean{xp}}{
+Chapitre 4 -- Introduction à la complexité -- Compléments}{
+Partie  -- }}
+
+\def\xxauteur{\ifthenelse{\boolean{xp}}{
+Xavier \textsc{Pessoles} \\ Damien \textsc{Iceta}}{
+Damien \textsc{Iceta} \\ Xavier \textsc{Pessoles}}}
+
+\def\xxpied{\ifthenelse{\boolean{xp}}{
+Cours -- CI 2 : Algorithmique \& Programmation\\
+Ch. 4 : Introduction à la complexité}{
+\xxtitre}}
+
+\def\xxcathegorie{\ifthenelse{\boolean{xp}}{
+2013 -- 2014 \\
+Xavier \textsc{Pessoles}}{
+Informatique - Cours}}
+
+\ifthenelse{\boolean{xp}}{\input{style/enteteXP}}{\input{style/enteteDI}}
+
+
+%---------------------------------------------------------------------------
+
+
+
+\begin{savoir}
+\textsc{Savoirs :}
+\begin{itemize}
+\item s'interroger sur l'efficacité algorithmique temporelle.
+\end{itemize}
+\end{savoir}
+
+
+
+\subsection*{Exponentiation rapide}
+
+
+\textbf{\textsf{Question 1 -- }}\textit{Écrire la fonction permettant de calculer $a^b$ avec $b\in\mathbb{N}$ en utilisant un algorithme naïf.}
+
+\textbf{\textsf{Question 2 -- }}\textit{Évaluer la complexité algorithmique de l'algorithme précédent.}
+
+\textbf{\textsf{Question 3 -- }}\textit{Combien faut-il d'opérations pour calculer $2^16$ et $2^15$. Combien d'opérations vous faudrait-il pour le calculer <<~à la main~>> ?}
+
+On donne les éléments suivants : 
+\begin{itemize}
+\item $x_0=1$;
+\item si $n$ est pair, $x^n=x^{\dfrac{n}{2}}\cdot x^{\dfrac{n}{2}}$;
+\item si $n$ est impair $x^n=x^{n-1}\cdot x$.
+\end{itemize}
+
+
+\textbf{\textsf{Question 4 -- }}\textit{Réécrire un algorithme permettant l'écriture d'une exponentielle.}
+
+\textbf{\textsf{Question 5 -- }}\textit{Expliquer son fonctionnement.}
+
+\textbf{\textsf{Question 6 -- }}\textit{A quelle famille appartient cet algorithme ?}
+
+\textbf{\textsf{Question 7 -- }}\textit{Montrer que sa complexité est en $\mathcal{O}(\log(n))$.}
+
+\textbf{\textsf{Question 8 -- }}\textit{Établir le <<~power tree~>>.}
+
+
+%\textbf{\textsf{Question 3 -- }}\textit{}
+
+
+\begin{thebibliography}{2}
+\bibitem{boudes}{Pierre Boudes \url{http://mindsized.org/IMG/pdf/td_02-2.pdf}.}
+\bibitem{jmv}{Jean-Marc Vincent \url{http://mescal.imag.fr/membres/jean-marc.vincent/JMV-homepage/ALGO5/ALGO5-Exponentiation.pdf}.}
+\end{thebibliography}
+\end{document}
+
+
