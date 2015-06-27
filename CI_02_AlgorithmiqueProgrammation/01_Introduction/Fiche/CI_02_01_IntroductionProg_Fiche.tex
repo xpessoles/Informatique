@@ -66,12 +66,38 @@ Ch. 1 \& 2 : Introduction à l'algorithmique et à la programmation -- Fiches
 
 \section{Typage des variables}
 \begin{defi}
-Typage
-Typage dynamique, types mutables et non mutables (immuable ?)
-Référence des variables
+\textbf{Variable :} une variable permet de stocker des informations. Elle est définie par un identifiant (un nom), un type, une valeur, une référence et des opérations.
+
+\textbf{Référence :} une référence est un alias pointant vers une adresse mémoire.
+
+\textbf{Type :} le typage correspond à la nature d'une variable (entier, chaîne de caractères, liste ...). En Python, le typage est \textbf{dynamique} ce qu'il signifie que Python reconnait le type de variable dès son affectation.
+
+\textbf{Valeur : } la valeur correspond à la donnée que l'utilisateur veut stocker en mémoire. 
 \end{defi}
 
 \begin{exemple}
+Les objets non mutables sont ceux que l'on ne peut modifier après leur création : les entier (int), les flottants (flt), les chaines de caractères (str), les booléens, les tuples etc... Si on modifie un de ces types, une nouvelle référence est crée.
+
+Les objets mutables peuvent être modifiés après leur création : les listes, les dictionnaires...
+
+\begin{py}
+\begin{minipage}[t]{.47\linewidth}
+On ne peut pas modifier la variable \textsf{ch} sans changer de référence. C'est un type non mutable.
+\begin{python}
+>>> ch = 'abcde'
+>>> ch[0] = 'a'
+            TypeError: 'str' object does not 
+            support item assignment
+\end{python}
+\end{minipage} \hfill
+\begin{minipage}[t]{.47\linewidth}
+On peut modifier des éléments variable \textsf{ch} sans changer de référence. C'est un type mutable.
+\begin{python}
+>>> ch = [a,b,c,d,e]
+>>> ch[0] = 'a'
+\end{python}
+\end{minipage}
+\end{py}
 \end{exemple}
 
 \section{Instructions et expressions}
