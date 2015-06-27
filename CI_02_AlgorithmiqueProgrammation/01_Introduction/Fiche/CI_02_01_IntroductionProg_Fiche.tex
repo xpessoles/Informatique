@@ -62,6 +62,10 @@ Ch. 1 \& 2 : Introduction à l'algorithmique et à la programmation -- Fiches
 
 \begin{document}
 
+% \renewcommand{\baselinestretch}{1.2}
+%\setlength{\parskip}{2ex plus 0.5ex minus 0.2ex}
+\setlength{\parskip}{1ex plus 0.2ex minus 0.2ex}
+
 \input{style/enteteXP}
 
 \section{Typage des variables}
@@ -100,6 +104,12 @@ On peut modifier des éléments variable \textsf{ch} sans changer de référence
 \end{py}
 \end{exemple}
 
+\begin{exemple}
+\textit{Modification des listes}
+
+\textit{Modification des chaînes de caractères}
+
+\end{exemple}
 \section{Instructions et expressions}
 
 \begin{defi}
@@ -110,16 +120,58 @@ On peut modifier des éléments variable \textsf{ch} sans changer de référence
 
 \begin{exemple}
 
+
 \end{exemple}
 
 \section{Structures algorithmiques}
+\begin{defi}
+\begin{minipage}[t]{.32\linewidth}
+\noindent \textbf{Structure Tant Que :} une suite d'instructions continue à être réalisée tant qu'une condition prédéfinie ne change pas.
+\end{minipage} \hfill
+\begin{minipage}[t]{.32\linewidth}
+\noindent \textbf{Structure conditionnelle Si, Alors, Sinon :} permet d'exécuter une suite d'instructions suivant une condition booléenne.
+\end{minipage} \hfill
+\begin{minipage}[t]{.32\linewidth}
+\noindent \textbf{Boucle Pour :}  boucle itérative qui se répète un nombre fini de fois.
+\end{minipage} 
+\end{defi}
 
+\begin{exemple}
+\textit{Implémentation de la fonction factorielle}
 
+\begin{py}
+\begin{minipage}[t]{.48\linewidth}
+\begin{python}
+n=4
+res=0
+if n==0:
+    res = 1
+else :
+    i=1    
+    res=1
+    while i<=n:
+        res=res*i
+        i+=1
+\end{python}
+\end{minipage} \hfill
+\begin{minipage}[t]{.48\linewidth}
+\begin{python}
+n=4
+res=0
+if n==0:
+    res = 1
+else :
+    res=1    
+    for i in range(0,n):
+        res=res*(i+1)
+\end{python}
+\end{minipage} 
+\end{py}
+\end{exemple}
 \section{Structure d'un programme}
-
- \renewcommand{\baselinestretch}{1.2}
-\setlength{\parskip}{2ex plus 0.5ex minus 0.2ex}
-
+\begin{center}
+\includegraphics[width=\textwidth]{images/fonctions}
+\end{center}
 
 
 
