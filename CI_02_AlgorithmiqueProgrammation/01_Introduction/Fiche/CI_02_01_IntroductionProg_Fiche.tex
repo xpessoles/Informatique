@@ -105,23 +105,49 @@ On peut modifier des éléments variable \textsf{ch} sans changer de référence
 \end{exemple}
 
 \begin{exemple}
-\textit{Modification des listes}
+En python, les listes et les chaînes de caractères commencent à l'indice 0. 
 
-\textit{Modification des chaînes de caractères}
-
+\begin{minipage}[t]{.23\linewidth}
+\noindent \textit{Modification des listes}
+\begin{python}
+>>> liste = [8,"a",[4,5]]
+>>> print(liste[0])
+            8
+>>> print(len(liste))
+            3
+>>> print(liste[-1])
+            [4,5]
+\end{python}
+\end{minipage} 
+\begin{minipage}[t]{.3\linewidth}
+\begin{python}
+>>> print(liste[2][1])
+            5
+>>> liste.append("bcde")
+>>> print(liste)
+            [8, 'a', [4, 5], 'bcde']
+\end{python}
+\end{minipage} \hfill
+\begin{minipage}[t]{.45\linewidth}
+\noindent \textit{Modification des chaînes de caractères}
+\begin{python}
+>>> ch = "PTSI"
+>>> print(ch[0:2])
+            PT
+>>> ch = ch.replace(SI,"")
+>>> print(ch)
+            PT
+\end{python}
+\end{minipage} 
 \end{exemple}
 \section{Instructions et expressions}
 
 \begin{defi}
-\textbf{Instruction}
+\textbf{Expression :} évaluation d’un calcul. Un résultat est retourné. \textit{(Exemple : 1+1)}
 
-\textbf{Expression}
+\textbf{Instruction :} action utilisée dans un algorithme ou dans un programme. Une instruction peut inclure une expression. \textit{(Exemple : a = 1+1)}
 \end{defi}
-
-\begin{exemple}
-
-
-\end{exemple}
+\newpage
 
 \section{Structures algorithmiques}
 \begin{defi}
@@ -137,7 +163,7 @@ On peut modifier des éléments variable \textsf{ch} sans changer de référence
 \end{defi}
 
 \begin{exemple}
-\textit{Implémentation de la fonction factorielle}
+\textit{Implémentation de $n!$.}
 
 \begin{py}
 \begin{minipage}[t]{.48\linewidth}
@@ -145,13 +171,13 @@ On peut modifier des éléments variable \textsf{ch} sans changer de référence
 n=4
 res=0
 if n==0:
-    res = 1
+    | res = 1
 else :
-    i=1    
-    res=1
-    while i<=n:
-        res=res*i
-        i+=1
+    | i=1    
+    | res=1
+    | while i<=n:
+    |     | res=res*i
+    |     | i+=1
 \end{python}
 \end{minipage} \hfill
 \begin{minipage}[t]{.48\linewidth}
@@ -159,11 +185,11 @@ else :
 n=4
 res=0
 if n==0:
-    res = 1
+    | res = 1
 else :
-    res=1    
-    for i in range(0,n):
-        res=res*(i+1)
+    | res=1    
+    | for i in range(0,n):
+    |     | res=res*(i+1)
 \end{python}
 \end{minipage} 
 \end{py}
