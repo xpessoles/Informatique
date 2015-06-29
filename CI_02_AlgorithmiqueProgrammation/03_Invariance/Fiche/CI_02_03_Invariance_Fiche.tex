@@ -1,0 +1,76 @@
+\documentclass[10pt]{article}
+\input{style/coursHeadings}
+\input{style/programHeadings}
+\input{style/macros_SII}
+\input{style/macros_Titres}
+\input{style/macros_Frames}
+
+%Si le boolen xp est vrai : compilation pour xabi
+%Sinon compilation Damien
+\newif\ifprof
+%\proftrue
+\proffalse
+
+\newif\ifxp
+\xptrue
+%\xpfalse
+
+\newif\iftd
+\tdtrue
+%\tdfalse
+
+\usepackage[%
+    pdftitle={Fiche - Variant et invariant de boucle},
+    pdfauthor={Xavier Pessoles},
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=magenta]{hyperref}
+
+\def\discipline{Informatique}
+\def\xxtitre{%
+\ifxp
+Partie 2 : Algorithmique \& Programmation
+\else
+\fi
+}
+
+\def\xxsoustitre{%
+\ifxp
+Chapitres 3 -- Variant et invariant de boucle
+\else
+\fi}
+
+\def\xxauteur{%
+\ifxp
+Xavier \textsc{Pessoles}
+\else
+\fi}
+
+\def\xxpied{%
+\ifxp
+Partie 2 : Algorithmique \& Programmation\\
+Ch. 3 : Variant et invariant de boucle -- Fiches
+\else
+\fi}
+
+
+
+
+
+%---------------------------------------------------------------------------
+
+
+\begin{document}
+
+% \renewcommand{\baselinestretch}{1.2}
+%\setlength{\parskip}{2ex plus 0.5ex minus 0.2ex}
+\setlength{\parskip}{1ex plus 0.2ex minus 0.2ex}
+
+\input{style/enteteXP}
+
+\section{}
+
+
+\end{document}
+
+
