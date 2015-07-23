@@ -1,90 +1,86 @@
-\documentclass[10pt,oneside]{article}
-\input{style/coursHeadings}
-\input{style/programHeadings}
+\documentclass[10pt,fleqn]{article} % Default font size and left-justified equations
+\usepackage[%
+    pdftitle={Informatique : Lecture et écriture des fichiers},
+    pdfauthor={Xavier Pessoles}]{hyperref}
 
+\input{style/new_style}
+\input{style/macros_SII}
 
-%Si le boolen xp est vrai : compilation pour xabi
-%Sinon compilation Damien
-\newboolean{xp}
-\setboolean{xp}{true}
+%\fichetrue
+\fichefalse
 
-%\newboolean{prof}
-%\setboolean{prof}{true}
+%\proftrue
+\proffalse
 
-\def\xxtitre{\ifthenelse{\boolean{xp}}{
-CI 2 : Algorithmique \& Programmation}{
-Chapitre  -- }}
+%\tdtrue
+\tdfalse
 
-\def\xxsoustitre{\ifthenelse{\boolean{xp}}{
-Chapitre 5 -- Lecture et écriture des fichiers}{
-Partie  -- }}
+\courstrue
+%\coursfalse
 
-\def\xxauteur{\ifthenelse{\boolean{xp}}{
-Marc \textsc{Derumeaux} --  Damien \textsc{Iceta}\\
-Xavier \textsc{Pessoles} }{
-Damien \textsc{Iceta} \\ Xavier \textsc{Pessoles}}}
+% -------------------------------------
+% Déclaration des titres
+% -------------------------------------
 
-\def\xxpied{\ifthenelse{\boolean{xp}}{
-Cours -- CI 2 : Algorithmique \& Programmation\\
-Ch. 5 : Lecture et écriture des fichiers}{
-\xxtitre}}
+\def\discipline{Informatique}
+\def\xxtete{Informatique}
 
-\def\xxcathegorie{\ifthenelse{\boolean{xp}}{
-2013 -- 2014 \\
-Xavier \textsc{Pessoles}}{
-Informatique - Cours}}
+\def\classe{PTSI}
+\def\xxnumpartie{Partie 2}
+\def\xxpartie{Algorithmique \& Programmation}
 
-\ifthenelse{\boolean{xp}}{\input{style/enteteXP}}{\input{style/enteteDI}}
+\def\xxnumchapitre{Chapitre 5}
+\def\xxchapitre{\hspace{.12cm} Lecture et écriture des fichiers}
 
+\def\xxposongletx{2}
+\def\xxposonglettext{1.45}
+\def\xxposonglety{22}%19
 
-%---------------------------------------------------------------------------
+\def\xxonglet{Part. 2 -- Ch. 5}
 
-\begin{minipage}[c]{.3\linewidth}
+\def\xxactivite{Cours}
+\def\xxauteur{\textsl{M. Derumaux, D. Iceta, X. Pessoles}}
+
+\def\xxcompetences{%
+\textsl{%
+\textbf{Savoirs et compétences :}
+\begin{itemize}[label=\ding{112},font=\color{ocre}] 
+\item Manipuler des structures de données : chaînes de caractères (création, accès à un caractère, concaténation).
+\item Gérer les fichiers : notion de chemin d'accès, lecture et écriture de données numériques ou de type de chaîne de caractère depuis ou vers un fichier.
+\end{itemize}
+}}
+
+\def\xxfigures{
 \begin{center}
 \includegraphics[height=2.5cm]{images/site_page}
 
 \textit{Fichiers interprétés par un navigateur}
 \end{center}
-\end{minipage} \hfill
-\begin{minipage}[c]{.33\linewidth}
+
 \begin{center}
 \includegraphics[height=2.5cm]{images/site_editeur}
 
 \textit{Fichier interprété par un éditeur de texte}
 \end{center}
-\end{minipage} \hfill
-\begin{minipage}[c]{.3\linewidth}
+
 \begin{center}
 \includegraphics[height=2.5cm]{images/site_hexa}
 
 \textit{Contenu du fichier (en hexadécimal)}
 \end{center}
-\end{minipage} 
+}%figues de la page de garde
 
-\begin{savoir}
-\textbf{Savoirs :}
-\begin{itemize}
-\item Manipuler des structures de données : chaînes de caractères (création, accès à un caractère, concaténation).
-\item Gérer les fichiers : notion de chemin d'accès, lecture et écriture de données numériques ou de type de chaîne de caractère depuis ou vers un fichier.
-\end{itemize}
-\end{savoir}
+\def\xxpied{%
+Partie 2 -- Algorithmique \& Programmation \\
+Ch 5 : Lecture et écriture des fichiers -- \xxactivite%
+}
 
-\setlength{\parskip}{0ex plus 0.2ex minus 0ex}
- \renewcommand{\contentsname}{}
- \renewcommand{\baselinestretch}{1}
+%---------------------------------------------------------------------------
+\begin{document}
+\chapterimage{png/Fond_ALG}
+\input{style/new_pagegarde}
+%---------------------------------------------------------------------------
 
-\tableofcontents
-
- \renewcommand{\baselinestretch}{1.2}
-\setlength{\parskip}{2ex plus 0.5ex minus 0.2ex}
-
-%\vspace{1cm}
-
-
-
-%\newpage
-
-\begin{minipage}[c]{.79\linewidth}
 \section{Pourquoi utiliser des fichiers ?}
 
 L'ordinateur sert à traiter de l'information qui peut entrer et sortir de différentes façons :
@@ -105,18 +101,11 @@ Le réseau permet d'échanger des informations sous deux formes :
 Il est donc intéressant de savoir lire et écrire sur les fichiers. 
 
 
-\end{minipage} \hfill
-\begin{minipage}[c]{.19\linewidth}
 \begin{center}
-\includegraphics[width=.9\textwidth]{images/image1.png}
-\includegraphics[width=.9\textwidth]{images/image2.png}
-\includegraphics[width=.9\textwidth]{images/image3.png}
+\includegraphics[width=.3\textwidth]{images/image1.png}
+\includegraphics[width=.3\textwidth]{images/image2.png}
+\includegraphics[width=.3\textwidth]{images/image3.png}
 \end{center}
-\end{minipage}
-
-
-
-
 
 
 \subsection{Deux familles de fichiers}
@@ -268,8 +257,6 @@ Les fichiers texte sont écrits (en binaire) de façon à respecter un des codes
 Ils peuvent s'ouvrir sur un éditeur de texte, ce qui permet de lire ou modifier le contenu beaucoup plus facilement qu'en binaire.
 
 
-\newpage
-
 \begin{exemple}
 
 Exploitation d'un fichier de mesure sur l'axe Emericc: \textsf{Mesure\_axe\_Emericc.txt}.
@@ -292,7 +279,7 @@ Exploitation d'un fichier de mesure sur l'axe Emericc: \textsf{Mesure\_axe\_Emer
 
 \begin{py}
 Lire la première ligne du fichier :
-\begin{python}[H]
+\begin{python}[h]
 # Ouverture du fichier
 f=open("Mesure_axe_Emericc.txt","r")
 # lecture d'une ligne
@@ -303,7 +290,7 @@ print(ligne)
 f.close()
 \end{python}
 Lecture rapide des lignes d'un fichier : 
-\begin{python}[H]
+\begin{python}[h]
 # Ouverture du fichier
 f=open("Mesure_axe_Emericc.txt","r")
 for ligne in f :
@@ -319,7 +306,7 @@ f.close()
 
 \begin{py}
 Lecture des noms:
-\begin{python}[H]
+\begin{python}[h]
 # Lecture d'un fichier texte ligne à ligne
 # Ouverture fichier
 f=open("TP_Fichiers/Mesure_axe_Emericc.txt","r")
@@ -337,7 +324,7 @@ noms_grandeurs=noms_grandeurs[1:3]    # suppression de "noms"
 
 Lecture du nombre de points:
 
-\begin{python}[H]
+\begin{python}[h]
 for i in range(10):
     ligne = f.readline()  # saut de 10 lignes
 
@@ -350,7 +337,7 @@ nb_points=int(ligne_nbpoints[1])      # conversion en entier
 
 Lecture des données:
 
-\begin{python}[H]
+\begin{python}[h]
 
 numero=[] ; position=[] ; consigne=[] # initialisation tableaux
 for i in range(nb_points):
@@ -366,7 +353,7 @@ for i in range(nb_points):
 
 Fermeture du fichier et Tracé de la courbe
 
-\begin{python}[H]
+\begin{python}[h]
 f.close()        # Fermeture fichier
 plot(position)   # Tracé de la courbe de position
 \end{python}
@@ -385,7 +372,7 @@ plot(position)   # Tracé de la courbe de position
 De la même façon que Python, Scilab permet de lire des fichiers. La syntaxe est proche :
 
 \begin{sci}
-\begin{scilab}[H]
+\begin{scilab}[h]
 // Ouverture du fichier et lecture ligne a ligne
 fic=mopen("Mesure_axe_Emericc.txt","r");
 ligne=mgetl(fic,1)
@@ -407,7 +394,7 @@ nb_points=msscanf(ligne_nbpoints(2),"%i")
 Lecture des données et affichage de la courbe.
 
 
-\begin{scilab}[H]
+\begin{scilab}[h]
 numero=[];position=[];consigne=[];
 for i=1:nb_points
     ligne = mgetl(fic,1);
@@ -430,7 +417,7 @@ Le tableau de données est <<~formaté~>>, c'est-à-dire qu'il présente une str
 Python possède des outils de lecture automatique de ce type de tableau : numpy.loadtxt()
 
 \begin{py}
-\begin{python}[H]
+\begin{python}[h]
 a=loadtxt("Fichier.txt",
 		dtype={
 			'names': ('numero', 'position', 'consigne'),
@@ -467,18 +454,18 @@ Int	&float	&	float\\
 
 Pour récupérer les données :
 \begin{py}
-\begin{python}[H]
+\begin{python}[h]
 a['numero']			#liste de valeurs de la colonne N
 a['numero'][10]			#11ème élément
 \end{python}
 \end{py}
 
 
-\begin{figure}[H]
+\begin{figure}[h]
 \begin{minipage}[c]{.59\linewidth}
 
 \begin{py}
-\begin{python}[H]
+\begin{python}[h]
 a,b=loadtxt("Fichier.txt",
 		usecols = (0,2),
 		dtype={
@@ -503,11 +490,11 @@ a,b=loadtxt("Fichier.txt",
 \end{figure}
 
 
-\begin{figure}[H]
+\begin{figure}[h]
 \begin{minipage}[c]{.49\linewidth}
 
 \begin{py}
-\begin{python}[H]
+\begin{python}[h]
 plot(a['numero'],a['position'],'b',
 		a['numero'],a['consigne']/10,'r')
 \end{python}
@@ -523,7 +510,7 @@ plot(a['numero'],a['position'],'b',
 
 \subsection{Lecture d'un fichier texte formaté sous Scilab}
 
-\begin{figure}[H]
+\begin{figure}[h]
 \begin{minipage}[c]{.49\linewidth}
 
 
@@ -534,7 +521,7 @@ La synthaxe est proche (en plus simple quand même...).
 \end{minipage} \hfill
 \begin{minipage}[c]{.49\linewidth}
 \begin{sci}
-\begin{scilab}[H]
+\begin{scilab}[h]
 // Lecture de donnees formatees
 fic=mopen("Mesure_axe_Emericc_formate.txt","r");
 T=mfscanf(-1,fic,'%d\t%f\t%f')  
@@ -551,7 +538,7 @@ mclose(fic);               // Fermeture du fichier
 \subsection{Écriture d'un fichier texte sous python}
 L'écriture d'un fichier texte est très simple sous python:
 \begin{py}
-\begin{python}[H]
+\begin{python}[h]
 # Écriture d'un fichier texte ligne à ligne
 f=open("TP_Fichiers/monFichier.txt","w")  # Ouverture du fichier
 f.write("La température est froide l'hiver.\n")
@@ -562,7 +549,7 @@ f.close()        # Fermeture du fichier
 
 Et pour un fichier formaté :
 \begin{py}
-\begin{python}[H]
+\begin{python}[h]
 # Écriture d'un fichier formaté
 f=open("TP/monFichier.txt","w")  # ouverture fichier
 x=linspace(-20,20,100)
@@ -576,7 +563,7 @@ f.close()        # Fermeture du fichier
 \subsection{Écriture d'un fichier texte sous Scilab}
 L'écriture d'un fichier texte, formaté ou pas, est très simple :
 \begin{sci}
-\begin{scilab}[H]
+\begin{scilab}[h]
 // Ecriture de donnees formatees ou non...
 fic=mopen("monFichier.txt","w");
 mfprintf(fic,"Voici mon fichier de point\n")
@@ -674,7 +661,7 @@ La fonction open crée un objet de la classe \textsf{TextIoWrapper}. Par la suit
 \begin{minipage}[c]{.49\linewidth}
 
 \begin{py}
-\begin{python}[H]
+\begin{python}[h]
 # Lecture d'un fichier binaire
 f = open("tongue.bmp", "rb")
 
@@ -708,7 +695,7 @@ f.close()
 \begin{minipage}[c]{.39\linewidth}
 
 \begin{py}
-\begin{python}[H]
+\begin{python}[h]
 # Écriture d'un fichier binaire
 f=open("TP/monFichier.bin","wb")
 f.write("Du texte")
@@ -747,7 +734,7 @@ Sauvegarde :
 
 
 \begin{py}
-\begin{python}[H]
+\begin{python}[h]
 import pickle
 fic=open("nao.pick","wb")
 pickle.dump(v,fic)
@@ -767,7 +754,7 @@ Pour stocker plusieurs variables, il suffit d'appeler plusieurs fois la fonction
 Lecture :	
 
 \begin{py}
-\begin{python}[H]
+\begin{python}[h]
 import pickle
 fic=open("nao.pick","rb")
 v=pickle.load(fic)
@@ -783,7 +770,7 @@ Pour recharger ces variables, il faut appeler autant de fois la fonction pickle.
 
 
 \begin{thebibliography}{2}
-\bibitem{upsti}{Marc Derumeaux et Damien Iceta, \textit{Les fichiers. Apprendre à lire et à écrire}, UPSTI.}
+\bibitem{upsti}{Marc Derumaux et Damien Iceta, \textit{Les fichiers. Apprendre à lire et à écrire}, UPSTI.}
 %\bibitem{wack}{Wack et Al., \textit{L'informatique pour tous en classes préparatoires aux grandes écoles}, Editions Eyrolles.}
 \end{thebibliography}
 \end{document}

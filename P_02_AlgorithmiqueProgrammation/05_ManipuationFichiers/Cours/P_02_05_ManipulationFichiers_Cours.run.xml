@@ -41,13 +41,13 @@
   >
 ]>
 <requests version="1.0">
-  <internal package="biblatex" priority="9" active="1">
+  <internal package="biblatex" priority="9" active="0">
     <generic>latex</generic>
     <provides type="dynamic">
-      <file>CI_02_04_Complexite_Cours.bcf</file>
+      <file>P_02_05_ManipulationFichiers_Cours.bcf</file>
     </provides>
     <requires type="dynamic">
-      <file>CI_02_04_Complexite_Cours.bbl</file>
+      <file>P_02_05_ManipulationFichiers_Cours.bbl</file>
     </requires>
     <requires type="static">
       <file>blx-dm.def</file>
@@ -60,23 +60,23 @@
       <file>french.lbx</file>
     </requires>
   </internal>
-  <external package="biblatex" priority="5" active="1">
+  <external package="biblatex" priority="5" active="0">
     <generic>biber</generic>
     <cmdline>
       <binary>biber</binary>
-      <infile>CI_02_04_Complexite_Cours</infile>
+      <infile>P_02_05_ManipulationFichiers_Cours</infile>
     </cmdline>
     <input>
-      <file>CI_02_04_Complexite_Cours.bcf</file>
+      <file>P_02_05_ManipulationFichiers_Cours.bcf</file>
     </input>
     <output>
-      <file>CI_02_04_Complexite_Cours.bbl</file>
+      <file>P_02_05_ManipulationFichiers_Cours.bbl</file>
     </output>
     <provides type="dynamic">
-      <file>CI_02_04_Complexite_Cours.bbl</file>
+      <file>P_02_05_ManipulationFichiers_Cours.bbl</file>
     </provides>
     <requires type="dynamic">
-      <file>CI_02_04_Complexite_Cours.bcf</file>
+      <file>P_02_05_ManipulationFichiers_Cours.bcf</file>
     </requires>
     <requires type="editable">
       <file>bibliography.bib</file>
