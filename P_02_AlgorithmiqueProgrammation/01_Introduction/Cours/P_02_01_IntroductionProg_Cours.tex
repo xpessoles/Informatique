@@ -1,96 +1,87 @@
-\documentclass[10pt,oneside]{article}
-\input{style/coursHeadings}
-\input{style/programHeadings}
+\documentclass[10pt,fleqn]{article} % Default font size and left-justified equations
+\usepackage[%
+    pdftitle={Informatique : Principe de la représentation des nombres entiers en mémoire},
+    pdfauthor={Xavier Pessoles}]{hyperref}
 
+\input{style/new_style}
+\input{style/macros_SII}
 
-%Si le boolen xp est vrai : compilation pour xabi
-%Sinon compilation Damien
-\newboolean{xp}
-\setboolean{xp}{true}
+%\fichetrue
+\fichefalse
 
-%\newboolean{prof}
-%\setboolean{prof}{true}
+%\proftrue
+\proffalse
 
-\def\xxtitre{\ifthenelse{\boolean{xp}}{
-CI 2 : Algorithmique \& Programmation}{
-Chapitre  -- }}
+%\tdtrue
+\tdfalse
 
-\def\xxsoustitre{\ifthenelse{\boolean{xp}}{
-Chapitre 1 -- Introduction à la programmation}{
-Partie  -- }}
+\courstrue
+%\coursfalse
 
-\def\xxauteur{\ifthenelse{\boolean{xp}}{
-Xavier \textsc{Pessoles}}{
-Damien \textsc{Iceta} \\ Xavier \textsc{Pessoles}}}
+% -------------------------------------
+% Déclaration des titres
+% -------------------------------------
 
-\def\xxpied{\ifthenelse{\boolean{xp}}{
-Cours -- CI 2 : Algorithmique \& Programmation\\
-Ch. 1 : Introduction à la programmation}{
-\xxtitre}}
+\def\discipline{Informatique}
+\def\xxtete{Informatique}
 
-\def\xxcathegorie{\ifthenelse{\boolean{xp}}{
-2013 -- 2014 \\
-Xavier \textsc{Pessoles}}{
-Informatique - Cours}}
+\def\classe{PTSI}
+\def\xxnumpartie{Partie 1}
+\def\xxpartie{Architecture matérielle et logicielle}
 
-\ifthenelse{\boolean{xp}}{\input{style/enteteXP}}{\input{style/enteteDI}}
+\def\xxnumchapitre{Chapitre 1}
+\def\xxchapitre{\hspace{.12cm} Introduction à la programmation}
 
+\def\xxposongletx{2}
+\def\xxposonglettext{1.45}
+\def\xxposonglety{22}%19
 
-%---------------------------------------------------------------------------
+\def\xxonglet{Part. 2 -- Ch. 1}
 
-\begin{minipage}[c]{.15\linewidth}
-\begin{center}
-%\includegraphics[height=.6cm]{png/w8}
-\end{center}
-\end{minipage}
+\def\xxactivite{Cours}
+\def\xxauteur{\textsl{Xavier Pessoles}}
 
-
-
-
-
-\vspace{.5cm}
-
-\ifthenelse{\boolean{xp}}{
-
-\begin{savoir}
-\textsc{Savoirs :}
-\begin{itemize}
+\def\xxcompetences{%
+\textsl{%
+\textbf{Savoirs et compétences :}
+\begin{itemize}[label=\ding{112},font=\color{ocre}] 
 \item Variables : notion de type et de valeur d’une variable, types simples
 \item Expressions et instructions simples : affectation, opérateurs usuels, distinction entre expression et instruction
 \end{itemize}
-\end{savoir}
- 
-}{}
+}}
 
+\def\xxfigures{
+}%figues de la page de garde
 
+\def\xxpied{%
+Partie 2 -- Algorithmique \& Programmation \\
+Ch 1 : Introduction à la programmation -- \xxactivite%
+}
 
+%---------------------------------------------------------------------------
+\begin{document}
+\chapterimage{png/Fond_ALG}
+\input{style/new_pagegarde}
+%---------------------------------------------------------------------------
 
-\setlength{\parskip}{0ex plus 0.2ex minus 0ex}
- \renewcommand{\contentsname}{}
- \renewcommand{\baselinestretch}{1}
-
-\tableofcontents
-
-
-% \vspace{1cm}
-\textit{Ce document évolue. Merci de signaler toutes les erreurs ou coquilles rencontrées.}
 
 
 \section{Variables}
 \subsection{Exemple d'algorithme : L'algorithme d'Euclide}
-\begin{rappels}
+
+L'algorithme d'Euclide peut être décrit de la façon suivante : 
 \begin{enumerate}
 \item Pour $a,b$ deux entiers, on dit que $b$ divise $a$ si $a$ s'écrit $kb$ avec $k$ un \textbf{entier} (ex : $5$ divise $45$).
 \item Pour $a,b \in \mathbb{N}$, non tous deux nuls, on note $PGCD(a,b)$ le plus grand diviseur commun à $a$ et à $b$\\
  (ex : $\text{PGCD(45,30)}=15$).
 \item Pour tout entier naturel $a$, $\text{PGCD(a,0)}=a$ (tout entier divise $0$).
 \end{enumerate}
-\end{rappels}
 
-\begin{prop}
+
+\begin{proposition}
 Soient $a,b$ deux entiers naturels. $b$ non nul. On note $r$ le reste dans la division euclidienne de $a$ par $b$.\\
 $$\text{ On a : }\text{PGCD(a,b)}=\text{PGCD(b,r)}$$
-\end{prop}
+\end{proposition}
 \begin{exemple}
 \textit{Calcul de $\text{PGCD}(1525,755)$.}
 \begin{center}
@@ -114,11 +105,11 @@ $$\text{ On a : }\text{PGCD(a,b)}=\text{PGCD(b,r)}$$
 
 \begin{minipage}[c]{.48\linewidth}
 \begin{py}
-Codage en Pythonde l'algorithme d'Euclide :
+Codage en Python de l'algorithme d'Euclide :
 \begin{python}
 def Euclide_PGCD(a,b):	# on définit le nom de la 
 			# fonction et ses variables 
-			#d'entrées/d'appel
+			#d entrees/d appel
     r=a%b		# on calcule le reste dans 
 			# la division de a par b
     
@@ -213,8 +204,14 @@ None & nonlocal & not & or & pass & raise & return & yield& \\
 L'affectation permet d'assigner une valeur à une variable.
 \end{defi}
 
+\begin{minipage}[c]{.1\linewidth}
 \begin{exemple}
-\begin{minipage}[c]{.35\linewidth}
+$\;$
+
+\vspace{1.5cm}
+\end{exemple}
+\end{minipage} \hfill
+\begin{minipage}[c]{.28\linewidth}
 \begin{pseudo}
 \begin{algorithm}[H]
 nbBooleen $\gets$ True\\
@@ -224,7 +221,7 @@ chaine $\gets$ "coucou"\\
 \end{algorithm}
 \end{pseudo}
 \end{minipage}\hfill
-\begin{minipage}[c]{.3\linewidth}
+\begin{minipage}[c]{.2\linewidth}
 \begin{py}
 \begin{python}
 nbBooleen = True
@@ -234,7 +231,7 @@ chaine = "coucou"
 \end{python}
 \end{py}
 \end{minipage}\hfill
-\begin{minipage}[c]{.3\linewidth}
+\begin{minipage}[c]{.2\linewidth}
 \begin{sci}
 \begin{scilab}
 nbBooleen = %T
@@ -244,7 +241,6 @@ chaine = "coucou"
 \end{scilab}
 \end{sci}
 \end{minipage}
-\end{exemple}
 
 
 \begin{defi}
@@ -259,9 +255,9 @@ On parle de typage statique lorsqu'il est nécessaire de définir le type d'une 
 \begin{minipage}[c]{.9\linewidth}
 \begin{py}
 \begin{python}
-# type permet de determiner le type d'une variable
+# type permet de déterminer le type d'une variable
 >>> type(nbBooleen)
-        <class 'bool'>
+        <class `bool'>
 \end{python}
 \end{py}
 
@@ -312,7 +308,7 @@ Les principales opérations sont les suivantes :
 \end{defi}
 
 
-\begin{exemple}
+%\begin{exemple}
 \begin{minipage}[c]{.45\linewidth}
 \begin{py}
 \begin{python}
@@ -334,7 +330,7 @@ Les principales opérations sont les suivantes :
 \end{scilab}
 \end{sci}
 \end{minipage}
-\end{exemple}
+%\end{exemple}
 
 \begin{rem}
 En programmation, le type entier (\textsf{int} -- \textsf{integer}) désigne les entiers \textbf{relatifs}.
@@ -469,7 +465,7 @@ Les dictionnaires sont des collections de clés auxquelles sont associées des v
 Une expression est l'évaluation d'un calcul. Un résultat est retourné. 
 \end{defi}
 
-\begin{exemple}
+%\begin{exemple}
 \begin{minipage}[c]{.45\linewidth}
 \begin{py}
 \begin{python}
@@ -494,7 +490,7 @@ Une expression est l'évaluation d'un calcul. Un résultat est retourné.
 \end{scilab}
 \end{sci}
 \end{minipage}
-\end{exemple}
+%\end{exemple}
 
 
 \subsection{Instructions}
@@ -506,7 +502,7 @@ Une expression est l'évaluation d'un calcul. Un résultat est retourné.
 Une instruction est une action utilisée dans un algorithme ou dans un programme. Une instruction peut inclure une expression.
 \end{defi}
 
-\begin{exemple}
+%\begin{exemple}
 \begin{minipage}[c]{.3\linewidth}
 \begin{pseudo}
 \begin{algorithm}[H]
@@ -540,7 +536,7 @@ Type\_De(a)
 \end{scilab}
 \end{sci}
 \end{minipage}
-\end{exemple}
+%\end{exemple}
 
 
 
@@ -668,7 +664,8 @@ Lors de la création de tab2, python n'a pas créé un nouvel espace mémoire. I
 \end{minipage}
 
 Ainsi, pour copier un tableau, une liste ou un dictionnaire, il est nécessaire d'utiliser une méthode spéciale qui permettra de recréer une nouvelle variable avec une nouvelle adresse mémoire.
-l
+
+
 \begin{minipage}[c]{.55\linewidth}
 \begin{py}
 \begin{python}
@@ -698,7 +695,11 @@ En Python, le passage des éléments se fait toujours par référence. Il faudra
 Lors de l'exécution d'un programme, il est possible de demander à l'utilisateur de saisir une donnée. Pour cela il existe des instructions permettant de communiquer avec l'utilisateur.
 
 \begin{exemple}
-\begin{minipage}[c]{.45\linewidth}
+\end{exemple}
+
+
+
+\begin{minipage}[c]{.4\linewidth}
 Dans Python, en utilisant la fonction \textsf{input}, les données saisies par l'utilisateur sont converties en chaîne de caractère.
 \begin{py}
 \begin{python}
@@ -706,19 +707,20 @@ Dans Python, en utilisant la fonction \textsf{input}, les données saisies par l
 \end{python}
 \end{py}
 \end{minipage}\hfill
-\begin{minipage}[c]{.45\linewidth}
-\end{minipage}
+\begin{minipage}[c]{.4\linewidth}
 \begin{sci}
 \begin{scilab}
 -->a=input("Saisir un nombre : ")
 \end{scilab}
 \end{sci}
-\end{exemple}
+\end{minipage}
 
 \subsection{Sorties à l'écran}
 Lors de l'exécution d'un programme il est souvent nécessaire que ce dernier renvoie des informations à l'utilisateur pour, par exemple, donner le résultat d'une opération ou encore donner l'avancement dans le programme.
 
 \begin{exemple}
+\end{exemple}
+
 \begin{minipage}[c]{.95\linewidth}
 \begin{py}
 \begin{python}
@@ -742,7 +744,7 @@ xinfo('message')  // affiche un message dans la barre d information
 \end{sci}
 
 \end{minipage}
-\end{exemple}
+
 
 \subsection{Gestion des exceptions}
 %Gestion des exceptions : try, except (python), try, catch (scilab)
