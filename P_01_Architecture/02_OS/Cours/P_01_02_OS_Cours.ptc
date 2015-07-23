@@ -1,0 +1,33 @@
+\boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
+\defcounter {refsection}{0}\relax 
+\select@language {french}
+\ttl@starttoc {default@1}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {1}Notion de syst\IeC {\`e}me d'exploitation}{2}{section.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {1.1}Introduction}{2}{subsection.1.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {1.2}Petit historique}{2}{subsection.1.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {1.3}\IeC {\`A} quoi ressemble Linux ?}{3}{subsection.1.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {1.4}Identification des utilisateurs}{4}{subsection.1.4}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {1.5}La structure des dossiers et fichiers}{4}{subsection.1.5}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{La racine}{4}{section*.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Architecture des dossiers}{5}{section*.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Quelques commandes classiques pour se d\IeC {\'e}placer dans l'arborescence:}{5}{section*.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {1.6}Droits d\IeC {\textquoteright }acc\IeC {\`e}s}{5}{subsection.1.6}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {2}Python}{6}{section.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.1}\IeC {\`A} quoi peut servir Python ?}{6}{subsection.2.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.2} Un langage de programmation interpr\IeC {\'e}t\IeC {\'e}}{6}{subsection.2.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.3}Diff\IeC {\'e}rentes versions de Python}{7}{subsection.2.3}
+\contentsfinish 

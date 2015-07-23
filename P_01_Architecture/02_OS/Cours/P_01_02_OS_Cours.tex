@@ -1,137 +1,87 @@
-\documentclass[11pt,oneside]{article}
-\input{style/coursHeadings}
-\input{style/programHeadings}
-
-
-%Si le boolen xp est vrai : compilation pour xabi
-%Sinon compilation Damien
-\newboolean{xp}
-\setboolean{xp}{true}
-
-\newboolean{prof}
-\setboolean{prof}{true}
-
-\def\xxtitre{\ifthenelse{\boolean{xp}}{
-CI 1 : Architecture matérielle et logicielle}{
-Chapitre 1 -- Le système informatique}}
-
-\def\xxsoustitre{\ifthenelse{\boolean{xp}}{
-Chapitre 2 -- Systèmes d'exploitation et environnement de développement}{
-Partie 2 -- Cours et TD Systèmes d'exploitation et manipulation d'un environnement de développement}}
-
-\def\xxauteur{\ifthenelse{\boolean{xp}}{
-%\noindent 2013 -- 2014 \\
-Damien \textsc{Iceta} \\  Xavier \textsc{Pessoles}}{
-Damien Iceta}}
-
-
-\def\xxpied{\ifthenelse{\boolean{xp}}{
-Cours -- CI 1 : Architecture matérielle et logicielle}{
-TD -- CI 3 : Ingénierie numérique et simulation}}
-
-
-\ifthenelse{\boolean{xp}}{
+\documentclass[10pt,fleqn]{article} % Default font size and left-justified equations
 \usepackage[%
-    pdftitle={OS et Environnement de développement},
-    pdfauthor={Damien Iceta Xavier Pessoles},
-    colorlinks=true,
-    linkcolor=blue,
-    citecolor=magenta]{hyperref}}{
-\usepackage[%
-    pdftitle={OS et Environnement de développement},
-    pdfauthor={Damien Iceta},
-    colorlinks=true,
-    linkcolor=blue,
-    citecolor=magenta]{hyperref}}
+    pdftitle={Informatique : Systèmes d'exploitation et environnement de développement},
+    pdfauthor={Xavier Pessoles}]{hyperref}
 
+\input{style/new_style}
+\input{style/macros_SII}
 
+%\fichetrue
+\fichefalse
 
-\usepackage{pifont}
-\sloppy
-\hyphenpenalty 10000
+%\proftrue
+\proffalse
+
+%\tdtrue
+\tdfalse
+
+\courstrue
+%\coursfalse
+
+% -------------------------------------
+% Déclaration des titres
+% -------------------------------------
+
+\def\discipline{Informatique}
+\def\xxtete{Informatique}
+
+\def\classe{PTSI}
+\def\xxnumpartie{Partie 1}
+\def\xxpartie{Architecture matérielle et logicielle}
+
+\def\xxnumchapitre{Chapitre 2}
+\def\xxchapitre{\hspace{.12cm} Systèmes d'exploitation et environnement de développement}
+
+\def\xxposongletx{2}
+\def\xxposonglettext{1.45}
+\def\xxposonglety{25}%22
+\def\xxonglet{Part. 1 -- Ch. 2}
+
+\def\xxactivite{Cours}
+\def\xxauteur{\textsl{Xavier Pessoles}}
+
+\def\xxcompetences{%
+\textsl{%
+\textbf{Savoirs et compétences :}
+\begin{itemize}[label=\ding{112},font=\color{ocre}] 
+\item Le but de ce cours est d'avoir un aperçu sur les systèmes d'exploitation disponibles sur les PC.
+\end{itemize}
+}}
+
+\def\xxfigures{
+\begin{center}
+\includegraphics[height=.6cm]{images/w8}
+\end{center}
+\begin{center}
+\includegraphics[height=.8cm]{images/ios7}
+\end{center}
+\begin{center}
+\includegraphics[height=1.4cm]{images/osx}
+\end{center}
+\begin{center}
+\includegraphics[height=2cm]{images/gentoo}
+\end{center}
+\begin{center}
+\includegraphics[height=2cm]{images/android}
+\end{center}
+\begin{center}
+\includegraphics[height=2cm]{images/debian}
+\end{center}
+}%figues de la page de garde
+
+\def\xxpied{%
+Partie 1 -- Architecture matérielle et logicielle \\
+Ch 2 : OS et Environnement de développement -- \xxactivite%
+}
+
+%---------------------------------------------------------------------------
+
 
 \begin{document}
+\chapterimage{png/Fond_Arch}
+\input{style/new_pagegarde}
 
 
-\input{style/entete1}
-
-\begin{center}
- \huge\textsc{\xxtitre}
-\end{center}
-
-\begin{center}
- \LARGE\textsc{\xxsoustitre}
-\end{center}
-
-\vspace{.5cm}
-
-\begin{minipage}[c]{.15\linewidth}
-\begin{center}
-\includegraphics[height=.6cm]{png/w8}
-\end{center}
-\end{minipage}\hfill
-\begin{minipage}[c]{.15\linewidth}
-\begin{center}
-\includegraphics[height=.8cm]{png/ios7}
-\end{center}
-\end{minipage}\hfill
-\begin{minipage}[c]{.15\linewidth}
-\begin{center}
-\includegraphics[height=1.4cm]{png/osx}
-\end{center}
-\end{minipage}\hfill
-\begin{minipage}[c]{.15\linewidth}
-\begin{center}
-\includegraphics[height=2cm]{png/gentoo}
-\end{center}
-\end{minipage}\hfill
-\begin{minipage}[c]{.15\linewidth}
-\begin{center}
-\includegraphics[height=2cm]{png/android}
-\end{center}
-\end{minipage}\hfill
-\begin{minipage}[c]{.15\linewidth}
-\begin{center}
-\includegraphics[height=2cm]{png/debian}
-\end{center}
-\end{minipage}
-
-
-
-
-\vspace{.5cm}
-
-
-%\begin{Objectif}
-%
-%\textsc{L'objectif est ici de se familiariser (Savoir Dec - C1):}
-%
-%\begin{itemize}
-%\item à la manipulation d’un système d’exploitation (gestion des ressources, essentiellement : organisation des fichiers, arborescence, droits d’accès, de modification, entrées/sorties);
-%\item à la manipulation d’un environnement de développement.
-%\end{itemize}
-%
-%\textsc{La principale capacité développée est :}
-%\begin{itemize}
-%\item manipuler en mode « utilisateur » les principales fonctions d’un système d’exploitation et d’un environnement de développement.
-%\end{itemize}
-%\end{Objectif}
-
-\begin{savoir}
-Le but de ce cours est d'avoir un aperçu sur les systèmes d'exploitation disponibles sur les PC.
-\end{savoir}
-
-
-\setlength{\parskip}{0ex plus 0.2ex minus 0ex}
- \renewcommand{\contentsname}{}
- \renewcommand{\baselinestretch}{1}
-
-\tableofcontents
-
- \renewcommand{\baselinestretch}{1.2}
-\setlength{\parskip}{2ex plus 0.5ex minus 0.2ex}
-
-% \vspace{1cm}
 
 \section{Notion de système d'exploitation}
 
@@ -160,7 +110,7 @@ Les systèmes d’exploitation de la famille Microsoft-Windows qui sont en situa
 \end{minipage} \hfill
 \begin{minipage}[c]{.25\linewidth}
 \begin{center}
-\includegraphics[width=.9\textwidth]{png/ms}
+\includegraphics[width=.9\textwidth]{images/ms}
 \end{center}
 \end{minipage} 
 
@@ -170,7 +120,7 @@ Les systèmes d’exploitation issus d’Unix (Mac OS X, iOS, GNU/Linux, Android
 \end{minipage} \hfill
 \begin{minipage}[c]{.25\linewidth}
 \begin{center}
-\includegraphics[width=.9\textwidth]{png/genlin}
+\includegraphics[width=.9\textwidth]{images/genlin}
 \end{center}
 \end{minipage} 
 
@@ -199,7 +149,7 @@ Sortie du premier OS de Microsoft : MS-DOS. &
 \textbf{1984} & 
 Richard Stallman\footnotemark[1] crée le projet GNU dans le but de développer un OS basé sur Unix, mais libre. & 
 \begin{center}
-\includegraphics[width=6cm]{png/richard.png}
+\includegraphics[width=6cm]{images/richard.png}
 \end{center}
 \end{tabular}
 
@@ -209,7 +159,7 @@ Richard Stallman\footnotemark[1] crée le projet GNU dans le but de développer 
 Linus Torvalds\footnotemark[2] entreprend de créer sur son temps libre son propre système d'exploitation. Ce système a pris le nom de Linux (contraction de Linus et Unix). Ce projet est complémentaire du projet GNU : tandis que Richard Stallman créait les programmes de base (programme de copie de fichier, de suppression de fichier, éditeur de texte), Linus s'est lancé dans la création du « cœur » d'un système d'exploitation : le noyau.
  & 
 \begin{center}
-\includegraphics[width=3cm]{png/linux.png}
+\includegraphics[width=3cm]{images/linux.png}
 \end{center}
 \end{tabular}
 
@@ -221,7 +171,7 @@ Linus Torvalds\footnotemark[2] entreprend de créer sur son temps libre son prop
 
 %
 %
-%\begin{figure}[H]
+%\begin{figure}[h]
 %\begin{minipage}[c]{.49\linewidth}
 %\begin{center}
 %\includegraphics[width=.99\textwidth]{images/origine.png}
@@ -281,7 +231,7 @@ Une distribution est un ensemble de logiciels articulés autour d'un noyau. GNU/
 %
 %
 %
-%\begin{figure}[H]
+%\begin{figure}[h]
 %
 %\begin{minipage}[c]{.49\linewidth}
 %Prenons l'exemple de la distribution Debian.
@@ -293,12 +243,12 @@ Une distribution est un ensemble de logiciels articulés autour d'un noyau. GNU/
 
 %\end{minipage}
 
-\begin{center}
-\includegraphics[width=.6\textwidth]{images/debian.png}
-
-\textit{Différentes distributions GNU/Linux}
-
-\end{center}
+%\begin{center}
+%\includegraphics[width=.6\textwidth]{images/archilin.png}
+%
+%\textit{Différentes distributions GNU/Linux}
+%
+%\end{center}
 
 \end{rem}
 
@@ -310,7 +260,7 @@ Une distribution est un ensemble de logiciels articulés autour d'un noyau. GNU/
 
 %\subsubsection{En mode console}
 
-%\begin{figure}[H]
+%\begin{figure}[h]
 \begin{minipage}[c]{.49\linewidth}
 Une des réticences à l'utilisation d'une distribution GNU/Linux est le mode console. 
 
@@ -340,7 +290,7 @@ Ce mode de fonctionnement peut paraître effrayant et peu accessible pour un uti
 Le mode graphique semble beaucoup plus accueillant pour quelqu'un venant de Windows. 
 Il y a plusieurs modes graphiques, tous les modes graphiques sont basés sur un programme appelé X. On parle aussi de serveur d'affichage.
 
-\begin{figure}[H]
+\begin{figure}[h]
 \begin{minipage}[c]{.33\linewidth}
 \begin{center}
 \includegraphics[height=3.5cm]{images/unity.jpg}
@@ -379,7 +329,7 @@ Il y a plusieurs modes graphiques, tous les modes graphiques sont basés sur un 
 Les systèmes d'exploitation Unix comme Microsoft sont multi-utilisateur : chaque utilisateur
 dispose d'un identifiant auprès du système (et en général, d’un mot de passe correspondant).
 
-\begin{figure}[H]
+\begin{figure}[h]
 \begin{minipage}[c]{.49\linewidth}
 \begin{center}
 \includegraphics[height=5cm]{images/loginWin.jpg}
@@ -431,7 +381,7 @@ dispose d'un identifiant auprès du système (et en général, d’un mot de pas
 %les systèmes Unix proposent des émulateurs de terminaux.
 %
 %
-%\begin{figure}[H]
+%\begin{figure}[h]
 %\begin{minipage}[c]{.49\linewidth}
 %
 %Un tel émulateur est présenté
@@ -514,7 +464,7 @@ Il n'y a pas de \textit{C:} sous Linux, la racine (le début) s'appelant juste /
 
 Le dossier de notre superprogramme ressemblerait plutôt à quelque chose comme cela : \textit{/usr/bin/}. On dit que \textit{bin} est un sous-dossier du dossier \textit{usr}, lui-même situé à la racine.
 
-\begin{figure}[H]
+\begin{figure}[h]
 \begin{minipage}[c]{.49\linewidth}
 \begin{center}
 \includegraphics[width=.9\textwidth]{images/archilin.png}
@@ -560,7 +510,7 @@ Le symbole * est appelé joker, ou encore wildcard en anglais sous Linux.
 \begin{term}
 
 Le joker vous permet de copier par exemple tous les fichiers image .jpg dans un sous-dossier :
-\begin{termi}[H]
+\begin{termi}[h]
 cp *.jpg mondossier/
 \end{termi}
 \end{term}
@@ -568,7 +518,7 @@ cp *.jpg mondossier/
 \begin{minipage}[c]{.46\linewidth}
 \begin{term}
 Vous pouvez aussi vous en servir pour copier tous les fichiers dont le nom commence par « so » :
-\begin{termi}[H]
+\begin{termi}[h]
 cp so* mondossier/
 \end{termi}
 \end{term}
@@ -589,12 +539,12 @@ Ainsi il est possible de distribuer des droits à un utilisateur, à un groupe d
 
 \begin{minipage}[c]{.45\linewidth}
 \begin{center}
-\includegraphics[width=.85\textwidth]{png/droits_win.png}
+\includegraphics[width=.85\textwidth]{images/droits_win.png}
 \end{center}
 \end{minipage}\hfill
 \begin{minipage}[c]{.45\linewidth}
 \begin{center}
-\includegraphics[width=.8\textwidth]{png/droits_lin.png}
+\includegraphics[width=.8\textwidth]{images/droits_lin.png}
 $$
 -\underbrace{rw-}_{1}\underbrace{r--}_{2}\underbrace{r--}_{3}
 $$
@@ -609,15 +559,11 @@ $$
 %Vous êtes inscrit dans un groupe associé à la classe dans laquelle vous êtes. Vous avez accès en lecture/écriture dans Poste de travail/groupes au répertoires d'échanges de la classe. C'est données son stockées sur un serveur distant est accessible sur tous les ordinateur du lycée.
 
 \begin{warn}
-%\textsc{ATTENTION} 
-
 Toutes les données que ce soit dans votre espace personnel ou sur les serveurs du lycée ne sont stockées qu'a titre provisoire. Il vous appartient de faire des sauvegardes régulières.
 \end{warn}
 
 
 \begin{warn}
-%\textsc{ATTENTION} 
-
 Tenter d'accéder aux données d'autrui est considéré comme une atteinte à la vie privée.
 \end{warn}
 
@@ -778,7 +724,7 @@ Lors de la création de la Python Software Foundation, en 2001, et durant les an
 
 
 
-\begin{figure}[H]
+\begin{figure}[h]
 \begin{minipage}[c]{.79\linewidth}
 Afin de faciliter la programmation on va utiliser un environnement de développement intégré.
 On appelle environnement de développement intégré (parfois abrégé IDE) un logiciel qui
@@ -809,7 +755,7 @@ Ports sous MacOS, et enfin il existe des paquets pour la plupart des distributio
 \end{minipage}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[h]
 \begin{minipage}[c]{.49\linewidth}
 
 La fenêtre de Spyder est divisée en trois parties :
@@ -831,7 +777,7 @@ La console interactive en bas à droite, dans laquelle s'exécuteront les progra
 \subsection{La console interactive}
 
 
-\begin{figure}[H]
+\begin{figure}[h]
 \begin{minipage}[c]{.69\linewidth}
 
 Aller dans "interpréteurs" puis démarrer un interpréteur Ipython (cf figure ci-contre).
@@ -852,7 +798,7 @@ exécutée. Ainsi, si l’on tape une expression, sa valeur s’affiche.
 
 
 \begin{py}
-\begin{python}[H]
+\begin{python}[h]
 In [1]: 2+2
 Out[1]: 4
 \end{python}
@@ -867,7 +813,7 @@ session de travail à l’aide de la commande Enregistrer l’historique... acce
 droit dans la console.
 
 
-\begin{figure}[H]
+\begin{figure}[h]
 \begin{minipage}[c]{.49\linewidth}
 Dans ce mode, on peut d’ores et déjà utiliser des variables pour stocker des valeurs. L’affectation
 s’écrit avec le symbole = et n’affiche aucune valeur ; mais la variable mémorise la
@@ -875,7 +821,7 @@ valeur qu’on lui a donnée et peut être utilisée dans la suite de la session
 \end{minipage} \hfill
 \begin{minipage}[c]{.49\linewidth}
 \begin{py}
-\begin{python}[H]
+\begin{python}[h]
 In [2]: a=2
 In [3]: a+a
 Out[3]: 4
@@ -892,14 +838,14 @@ Out[3]: 4
 
 
 
-\begin{figure}[H]
+\begin{figure}[h]
 \begin{minipage}[c]{.49\linewidth}
 Notons que si l’on utilise dans une expression une variable à laquelle on n'a jamais donné
 de valeur, une erreur se produit.
 \end{minipage} \hfill
 \begin{minipage}[c]{.49\linewidth}
 \begin{py}
-\begin{python}[H]
+\begin{python}[h]
 In [4]: b+1
 
 Traceback (most recent call last):
@@ -921,7 +867,7 @@ NameError: name 'b' is not defined
 IPython peut également être utilisé comme un terminal système de remplacement. Son comportement par défaut est très familier aux shell Unix.
 
 \begin{py}
-\begin{python}[H]
+\begin{python}[h]
 In [1]: pwd
 Out[1]: u'C:\\Python27\\lib\\site-packages\\xy'
 
@@ -958,7 +904,7 @@ l’on ne souhaite pas conserver par la suite.
 
 \subsection{L'éditeur}
 
-\begin{figure}[H]
+\begin{figure}[h]
 \begin{minipage}[c]{.49\linewidth}
 Dès que l’on veut écrire un programme, ou même tout simplement une suite d'instructions
 dont on veut garder une trace, on utilise l'éditeur.
@@ -966,7 +912,7 @@ dont on veut garder une trace, on utilise l'éditeur.
 \end{minipage} \hfill
 \begin{minipage}[c]{.49\linewidth}
 \begin{py}
-\begin{python}[H]
+\begin{python}[h]
 print("Bonjour !")
 x = 42
 print(x)
@@ -1013,7 +959,7 @@ La fenêtre située en haut à droite de Spyder possède plusieurs onglets :
 \end{itemize}
 
 
-\begin{figure}[H]
+\begin{figure}[h]
 \begin{minipage}[c]{.49\linewidth}
 Pour chercher une erreur dans un programme, ou tout simplement pour mieux comprendre
 son fonctionnement, il peut être utile de l'exécuter pas à pas. Si cela reste faisable de tête
@@ -1022,7 +968,7 @@ tâche à la machine. Voyons comment procéder sur l'exemple ci-contre.
 \end{minipage} \hfill
 \begin{minipage}[c]{.49\linewidth}
 \begin{py}
-\begin{python}[H]
+\begin{python}[h]
 x = 10
 y = 7
 x = x+y
@@ -1085,7 +1031,7 @@ intégré, il n'est pas nécessaire de savoir déjà programmer en Python pour l
 \begin{itemize}
 \item Taper le programme suivant dans l'éditeur et l'exécuter. Que se passe-t-il ?
 \begin{py}
-\begin{python}[H]
+\begin{python}[h]
 i = 10
 while i != 0 :
 i = 1-i
