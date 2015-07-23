@@ -1,68 +1,71 @@
-\documentclass[10pt]{article}
-\input{style/coursHeadings}
-\input{style/programHeadings}
-\input{style/macros_SII}
-\input{style/macros_Titres}
-\input{style/macros_Frames}
+\documentclass[10pt,fleqn]{article} % Default font size and left-justified equations
+\usepackage[%
+    pdftitle={Informatique : Introduction à l'algorithmique},
+    pdfauthor={Xavier Pessoles}]{hyperref}
 
-%Si le boolen xp est vrai : compilation pour xabi
-%Sinon compilation Damien
-\newif\ifprof
+\input{style/new_style}
+\input{style/macros_SII}
+
+%\fichetrue
+\fichefalse
+
 %\proftrue
 \proffalse
 
-\newif\ifxp
-\xptrue
-%\xpfalse
-
-\newif\iftd
 %\tdtrue
 \tdfalse
 
-\usepackage[%
-    pdftitle={Introduction à l'algorithmique},
-    pdfauthor={Xavier Pessoles},
-    colorlinks=true,
-    linkcolor=blue,
-    citecolor=magenta]{hyperref}
+\courstrue
+%\coursfalse
+
+% -------------------------------------
+% Déclaration des titres
+% -------------------------------------
 
 \def\discipline{Informatique}
-\def\xxtitre{%
-\ifxp
-CI 2 : Algorithmique \& Programmation
-\else
-\fi
-}
+\def\xxtete{Informatique}
 
-\def\xxsoustitre{%
-\ifxp
-Chapitre 2 -- Introduction à l'algorithmique
-\else
-\fi}
+\def\classe{PTSI}
+\def\xxnumpartie{Partie 2}
+\def\xxpartie{Algorithmique \& Programmation}
 
-\def\xxauteur{%
-\ifxp
-Xavier \textsc{Pessoles}
-\else
-\fi}
+\def\xxnumchapitre{Chapitre 2}
+\def\xxchapitre{\hspace{.12cm} Introduction à l'algorithmique}
+
+\def\xxposongletx{2}
+\def\xxposonglettext{1.45}
+\def\xxposonglety{22}%19
+
+\def\xxonglet{Part. 2 -- Ch. 2}
+
+\def\xxactivite{Cours}
+\def\xxauteur{\textsl{Xavier Pessoles}}
+
+\def\xxcompetences{%
+\textsl{%
+\textbf{Savoirs et compétences :}
+Vous devrez être capables d'\textbf{imaginer} et \textbf{concevoir} une solution algorithmique modulaire, utilisant des méthodes de programmation, des structures de données appropriées pour le problème étudié :
+\begin{itemize}[label=\ding{112},font=\color{ocre}] 
+\item \textit{Alg -- C1 :} comprendre un algorithme et expliquer ce qu’il fait;
+\item \textit{Alg -- C3 :} concevoir un algorithme répondant à un problème précisément posé;
+\item \textit{Alg -- C4 :} expliquer le fonctionnement d’un algorithme;
+\item \textit{Alg -- C5 :} écrire des instructions conditionnelles avec alternatives, éventuellement imbriquées.
+\end{itemize}
+}}
+
+\def\xxfigures{
+}%figues de la page de garde
 
 \def\xxpied{%
-\ifxp
-CI 2 : Algorithmique \& Programmation\\
-Ch. 2 : Introduction à l'algorithmique -- Cours
-\else
-\fi}
-
+Partie 2 -- Algorithmique \& Programmation \\
+Ch 2 : Introduction à l'algorithmique -- \xxactivite%
+}
 
 %---------------------------------------------------------------------------
-
-
 \begin{document}
-\ifxp
-\input{style/enteteXP}
-\else
-\input{style/enteteDI}
-\fi
+\chapterimage{png/Fond_ALG}
+\input{style/new_pagegarde}
+%---------------------------------------------------------------------------
 
 
 Les courbes et les surfaces de Bézier (et NURBS) sont très utilisées en CAO lors de la conception de formes complexes (carrosserie, flacons de parfum, \textit{etc.}).
@@ -127,35 +130,9 @@ Le tracé de ces courbes fait appel à la définition de fonctions, de boucles, 
 Le but de ce cours est de définir les instructions de base qui doivent permettre la réalisation d'algorithmes. 
 
 
-\begin{prob}
-\textsc{Problématique :}
-
 Connaissant la définition mathématique d'une courbe de Bézier, quels sont les algorithmes qui permettent de tracer une telle courbe ?
-\end{prob}
 
 
-\begin{comp}
-Vous devrez être capables d'\textbf{imaginer} et \textbf{concevoir} une solution algorithmique modulaire, utilisant des méthodes de programmation, des structures de données appropriées pour le problème étudié :
-\begin{itemize}
-\item \textit{Alg -- C1 :} comprendre un algorithme et expliquer ce qu’il fait;
-\item \textit{Alg -- C3 :} concevoir un algorithme répondant à un problème précisément posé;
-\item \textit{Alg -- C4 :} expliquer le fonctionnement d’un algorithme;
-\item \textit{Alg -- C5 :} écrire des instructions conditionnelles avec alternatives, éventuellement imbriquées.
-\end{itemize}
-\end{comp}
- 
-
-\setlength{\parskip}{0ex plus 0.2ex minus 0ex}
- \renewcommand{\contentsname}{}
- \renewcommand{\baselinestretch}{1}
-
-\tableofcontents
-
- \renewcommand{\baselinestretch}{1.2}
-\setlength{\parskip}{2ex plus 0.5ex minus 0.2ex}
-
-% \vspace{1cm}
-\textit{Ce document évolue. Merci de signaler toutes erreurs ou coquilles.}
 
 
 \section{Quelques rudiments}
@@ -235,11 +212,12 @@ Une séquence d'instructions est appelé bloc d'instructions. Lors de l'exécuti
 
 
 \begin{exemple}
+\end{exemple}
 
 \begin{minipage}[c]{.47\linewidth}
 Le pseudo-code (ou pseudo langage) est une représentation non normalisée d'un algorithme ou d'une fonction. Il permet d'écrire un algorithme en utilisant le langage naturel. 
 \end{minipage}\hfill
-\begin{minipage}[c]{.45\linewidth}
+\begin{minipage}[c]{.47\linewidth}
 \begin{pseudo}
 \begin{algorithm}[H]
 \Fonction{
@@ -251,7 +229,6 @@ Instruction 2\\
 \end{pseudo}
 \end{minipage}
 
-\vspace{.25cm}
 
 \begin{minipage}[c]{.47\linewidth}
 En python, les instructions peuvent être séparées par des retours à la ligne, des points-virgules. Dans le cas des blocs d'instructions, les instructions sont \textbf{indentées} (4 espaces). 
@@ -294,13 +271,11 @@ end
 \end{minipage}
 
 
-\end{exemple}
 
 
 \subsection{Définition de fonctions}
 \subsubsection{Les fonctions}
 \begin{defi}
-\textbf{Définitions}
 
 Les fonctions permettent :
 \begin{itemize}
@@ -595,7 +570,7 @@ En effet, si des méthodes ont le même nom, seules les méthodes de la dernièr
 Une expression booléenne est une instruction qui renvoie la valeur "vrai" ou "faux".
 \end{defi}
 
-\begin{defi}
+\begin{exemple}
 \textbf{Opérateurs de comparaison}
 
 
@@ -650,7 +625,7 @@ $2<8$\\
 \end{sci}
 \end{minipage}
 
-\end{defi}
+\end{exemple}
 
 
 

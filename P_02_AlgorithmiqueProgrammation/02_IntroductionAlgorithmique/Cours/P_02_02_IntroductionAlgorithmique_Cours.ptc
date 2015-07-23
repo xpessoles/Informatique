@@ -1,0 +1,31 @@
+\boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
+\defcounter {refsection}{0}\relax 
+\select@language {french}
+\ttl@starttoc {default@1}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {1}Quelques rudiments}{2}{section.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {1.1}Algorithmes et programmes \cite {wack}}{2}{subsection.1.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {1.2}S\IeC {\'e}mantique}{3}{subsection.1.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {1.3}D\IeC {\'e}finition de fonctions}{3}{subsection.1.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Les fonctions}{3}{section*.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Variables locales -- Variables globales}{4}{section*.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Documentation des fonctions}{5}{section*.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {1.4}Import de m\IeC {\'e}thodes et de fonctions}{6}{subsection.1.4}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {2}Instructions conditionnelles}{6}{section.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.1}Expressions bool\IeC {\'e}ennes}{6}{subsection.2.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.2}Boucle \textsl {Tant que}}{7}{subsection.2.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.3}Instruction \textsl {Si, Sinon}}{7}{subsection.2.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3}Instructions it\IeC {\'e}ratives}{9}{section.3}
+\contentsfinish 
