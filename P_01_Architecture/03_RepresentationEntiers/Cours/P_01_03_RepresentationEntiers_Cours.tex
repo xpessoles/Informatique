@@ -1,90 +1,77 @@
-\documentclass[10pt,oneside]{article}
-\input{style/coursHeadings}
-\input{style/programHeadings}
+\documentclass[10pt,fleqn]{article} % Default font size and left-justified equations
+\usepackage[%
+    pdftitle={Informatique : Principe de la représentation des nombres entiers en mémoire},
+    pdfauthor={Xavier Pessoles}]{hyperref}
+
+\input{style/new_style}
+\input{style/macros_SII}
+
+%\fichetrue
+\fichefalse
+
+%\proftrue
+\proffalse
+
+%\tdtrue
+\tdfalse
+
+\courstrue
+%\coursfalse
+
+% -------------------------------------
+% Déclaration des titres
+% -------------------------------------
+
+\def\discipline{Informatique}
+\def\xxtete{Informatique}
+
+\def\classe{PTSI}
+\def\xxnumpartie{Partie 1}
+\def\xxpartie{Architecture matérielle et logicielle}
+
+\def\xxnumchapitre{Chapitre 3}
+\def\xxchapitre{\hspace{.12cm} Principe de la représentation des nombres entiers en mémoire}
+
+\def\xxposongletx{2}
+\def\xxposonglettext{1.45}
+\def\xxposonglety{25}%22
+\def\xxonglet{Part. 1 -- Ch. 3}
+
+\def\xxactivite{Cours}
+\def\xxauteur{\textsl{Xavier Pessoles}}
+
+\def\xxcompetences{%
+\textsl{%
+\textbf{Savoirs et compétences :}
+\begin{itemize}[label=\ding{112},font=\color{ocre}] 
+\item Capacité Dec - C3 : Initier un sens critique au sujet de la qualité et de la précision des résultats de calculs numériques sur ordinateur
+\item Principe de la représentation des nombres entiers en mémoire
+\end{itemize}
+}}
+
+\def\xxfigures{
+
+}%figues de la page de garde
+
+\def\xxpied{%
+Partie 1 -- Architecture matérielle et logicielle \\
+Ch 3 : Représentation des entiers -- \xxactivite%
+}
+
+%---------------------------------------------------------------------------
 
 
-%Si le boolen xp est vrai : compilation pour xabi
-%Sinon compilation Damien
-\newboolean{xp}
-\setboolean{xp}{true}
+\begin{document}
+\chapterimage{png/Fond_Arch}
+\input{style/new_pagegarde}
 
-%Le booleen prof permet d'afficher ou non les corrigés
-\newboolean{prof}
-\setboolean{prof}{true}
-
-
-\def\xxtitre{\ifthenelse{\boolean{xp}}{
-CI 1 : Architecture matérielle et logicielle}{
-CI 2 -- Représentation des nombres et conséquences}}
-
-\def\xxsoustitre{\ifthenelse{\boolean{xp}}{
-Chapitre 3 -- Principe de la représentation des nombres entiers en mémoire}{
-Partie 1 -- Principe de la représentation des nombres entiers en mémoire}}
-
-\def\xxauteur{\ifthenelse{\boolean{xp}}{
-\noindent Damien \textsc{Iceta} \\  \noindent Xavier \textsc{Pessoles}}{
-Damien \textsc{Iceta} \\ Xavier \textsc{Pessoles}}}
-
-\def\xxpied{\ifthenelse{\boolean{xp}}{
-Cours -- CI 1 : Architecture matérielle et logicielle\\
-Représentation des entiers}{
-\xxtitre}}
-
-\def\xxcathegorie{\ifthenelse{\boolean{xp}}{
-2013 -- 2014 \\
-Xavier \textsc{Pessoles}}{
-Informatique - Cours}}
-
-\ifthenelse{\boolean{xp}}{\input{style/enteteXP}}{\input{style/enteteDI}}
 
 
 %---------------------------------------------------------------------------
 
 
 
-%\begin{flushright}
-%\textit{D'après ressources de Christophe François.}
-%\end{flushright}
-%
-%\begin{minipage}[c]{.15\linewidth}
-%\begin{center}
-%%\includegraphics[height=.6cm]{png/w8}
-%\end{center}
-%\end{minipage}
 
-
-
-
-
-\vspace{.5cm}
-
-\ifthenelse{\boolean{xp}}{
-\begin{savoir}
-
-\textbf{Savoirs}
-
-\begin{itemize}
-\item Capacité Dec - C3 : Initier un sens critique au sujet de la qualité et de la précision des résultats de calculs numériques sur ordinateur
-\begin{itemize}
-\item Principe de la représentation des nombres entiers en mémoire
-%\item Principe de la représentation des nombres réels en mémoire
-\end{itemize}
-\end{itemize}
-\end{savoir}
-}{}
-
-
-
-\setlength{\parskip}{0ex plus 0.2ex minus 0ex}
- \renewcommand{\contentsname}{}
- \renewcommand{\baselinestretch}{1}
-
-\tableofcontents
-
- \renewcommand{\baselinestretch}{1.2}
-\setlength{\parskip}{2ex plus 0.5ex minus 0.2ex}
-
-% \vspace{1cm}
 
 \section{Généralités \cite{cf}}
 
@@ -290,7 +277,7 @@ $$\left(2BC5 \right)_{16} = 11 205$$
 \subsection{De la base k à la base 10}
 %\ifthenelse{\boolean{xp}}{
 %}{
-\begin{savoir}
+\begin{resultat}
 \textbf{Savoir-Faire :}
 Représenter en base dix un entier naturel donné en base $k$.
 
@@ -298,7 +285,7 @@ Pour trouver la représentation en base dix d’un entier naturel donné en base
 utilise le fait qu’en base $k$, le chiffre le plus à droite représente les unités, le précédent
 les paquets de k, le précédent les paquets de $k \cdot k = k^2$, le précédent les paquets de
 $k \cdot k \cdot k = k^3$, \textit{etc}.
-\end{savoir}
+\end{resultat}
 %}
 
 
@@ -317,17 +304,15 @@ Convertir $(100101)_2$ et $(2C5A)_{16}$ en base 10.
 \end{exemple}
 \subsection{De la base 10 vers la base k}
 
-\ifthenelse{\boolean{xp}}{
-}{
-\begin{savoir}
+
+\begin{resultat}
 SAVOIR-FAIRE Représenter en base k un entier naturel donné en base dix.
 
 Pour écrire les entiers naturels en base k, on a besoin de k chiffres. Quand on a n
 objets, on les groupe par paquets de k, puis on groupe ces paquets en paquets de k
 paquets, etc. Autrement dit, on fait une succession de divisions par k, jusqu’à obtenir
 un quotient égal à 0.
-\end{savoir}
-}
+\end{resultat}
 
 \subsubsection{Méthode des divisions successives}
 \begin{methode}
@@ -400,19 +385,17 @@ Les valeurs binaires sont lues de haut en bas. On obtient bien le même résulta
 
 \end{exemple}
 
-\ifthenelse{\boolean{xp}}{
-}{
-\begin{exercice}
-Exercice: Trouver la représentation en base cinq de 58.
-\end{exercice}
-}
 
-\ifthenelse{\boolean{xp}}{
-}{
-\begin{exercice}
+\begin{exemple}
+Exercice: Trouver la représentation en base cinq de 58.
+\end{exemple}
+
+
+
+\begin{exemple}
 Exercice: Trouver la représentation en base seize du nombre 1207.
-\end{exercice}
-}
+\end{exemple}
+
 
 
 
@@ -507,7 +490,7 @@ On en déduit rapidement que l'addition en binaire s'effectuera sur le même pri
 \end{exemple}
 
 \section{Codage pondéré des entiers relatifs -- $\mathbb{Z}$}
-\ifthenelse{\boolean{prof}}{}{
+
 \begin{savoir}
 Représenter en binaire sur $n$ bits un entier relatif donné en décimal.
 
@@ -522,7 +505,7 @@ Si cet entier relatif est donné par le mot m, on commence par calculer l’enti
 p représenté par ce mot. Si p est strictement inférieur à $2^n-1$, c’est l’entier relatif
 représenté, s’il est supérieur ou égal à $2^n-1$, l’entier relatif représenté est $p-2^n$.
 \end{savoir}
-}
+
 
 \subsection{Première approche}
 La première solution envisageable pour représenter un entier relatif est de dédier un bit pour le codage du signe puis de représenter sur les autres bits la valeur absolue. La convention retenue impose de mettre le bit de poids fort à 0 pour repérer un nombre positif et à 1 pour un nombre négatif. 
@@ -650,6 +633,7 @@ Lorsque la capacité des entiers machine (32 ou 64 bits) a été dépassée, les
 suivis du marqueur L, qui explicite qu’on passe dans un autre type appelé long. La dernière
 ligne de l’exemple précédent affiche donc plutôt
 \begin{py}
+$\;$
 \begin{python}[H]
 In [4]: a*a*a*a
 Out[4]: 4569760000L
