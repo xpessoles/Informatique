@@ -1,0 +1,84 @@
+\documentclass[10pt,fleqn]{article} % Default font size and left-justified equations
+\usepackage[%
+    pdftitle={Informatique : Programmation récursive},
+    pdfauthor={Xavier Pessoles}]{hyperref}
+
+\input{style/new_style}
+\input{style/macros_SII}
+
+%\fichetrue
+\fichefalse
+
+%\proftrue
+\proffalse
+
+%\tdtrue
+\tdfalse
+
+\courstrue
+%\coursfalse
+
+% -------------------------------------
+% Déclaration des titres
+% -------------------------------------
+
+\def\discipline{Informatique}
+\def\xxtete{Informatique}
+\def\classe{PT}
+\def\xxnumpartie{Partie 5}
+\def\xxpartie{Algorithmique \& Programmation (Suite)}
+
+\def\xxnumchapitre{Chapitre 1}
+\def\xxchapitre{\hspace{.12cm} Programmation récursive}
+
+\def\xxposongletx{2}
+\def\xxposonglettext{1.45}
+\def\xxposonglety{13}%10
+
+\def\xxonglet{Part. 5 -- Ch. 1}
+
+\def\xxactivite{Cours}
+\def\xxauteur{\textsl{Patrick Beynet \\ Xavier Pessoles}}
+
+\def\xxcompetences{%
+\textsl{%
+\textbf{Savoirs et compétences :}
+\begin{itemize}[label=\ding{112},font=\color{ocre}] 
+\item Alg -- C15 : Récursivité : avantages et inconvénients.
+\end{itemize}
+}}
+
+\def\xxfigures{
+\includegraphics[width=\textwidth]{images/mandel}
+
+\textit{Courbe fractale de Mandelbrot [2]}
+}%figues de la page de garde
+
+\def\xxpied{%
+Partie 5 -- Algorithmique et Programmation\\
+Ch 1 : Programmation récursive -- \xxactivite%
+}
+
+%---------------------------------------------------------------------------
+\begin{document}
+\chapterimage{png/Fond_ALG}
+\input{style/new_pagegarde}
+%---------------------------------------------------------------------------
+
+\section*{Présentation}
+\section{Suites numériques}
+\subsection{Suites définies explicitement}
+
+\subsection{Suites définies par une relation de récurrence}
+
+\section{Diviser pour régner}
+\section{Courbes fractales}
+\subsection{La courbe de Peano}
+
+
+\begin{thebibliography}{2}
+\bibitem{1}{Patrick Beynet, \textit{Supports de cours de TSI 2}, Lycée Rouvière, Toulon.}
+\bibitem{2}{<< Mandel zool 08 satellite antenna >>. Sous licence CC BY-SA via Wikimedia Commons - \url{https://fr.wikipedia.org/wiki/Ensemble_de_Mandelbrot#/media/File:Mandel_zoom_08_satellite_antenna.jpg}}
+\end{thebibliography}
+\end{document}
+
