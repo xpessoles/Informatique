@@ -1,108 +1,80 @@
-\documentclass[10pt]{article}
-\input{style/coursHeadings}
-\input{style/programHeadings}
-\input{style/macros_SII}
-\input{style/macros_Titres}
-\input{style/macros_Frames}
-
-
-%Si le boolen xp est vrai : compilation pour xabi
-%Sinon compilation Damien
-\newboolean{xp}
-\setboolean{xp}{true}
-
-\newboolean{prof}
-\setboolean{prof}{true}
-
-\newif\ifprof
-\proftrue
-%\proffalse
-
+\documentclass[10pt,fleqn]{article} % Default font size and left-justified equations
 \usepackage[%
-    pdftitle={Pivot de Gauss},
-    pdfauthor={Xavier Pessoles},
-    colorlinks=true,
-    linkcolor=blue,
-    citecolor=magenta]{hyperref}
+    pdftitle={Informatique : Pivot de Gauss},
+    pdfauthor={Xavier Pessoles}]{hyperref}
 
+\input{style/new_style}
+\input{style/macros_SII}
+
+%\fichetrue
+\fichefalse
+
+%\proftrue
+\proffalse
+
+%\tdtrue
+\tdfalse
+
+\courstrue
+%\coursfalse
+
+% -------------------------------------
+% Déclaration des titres
+% -------------------------------------
 
 \def\discipline{Informatique}
-\def\xxtitre{\ifthenelse{\boolean{xp}}{
-CI 3 : Ingénierie Numérique \& Simulation}{
-Chapitre  -- }}
+\def\xxtete{Informatique}
 
-\def\xxsoustitre{\ifthenelse{\boolean{xp}}{
-Chapitre 4 -- Résolution d'un système linéaire inversible par la méthode de Gauss}{
-Partie  -- }}
+\def\classe{PTSI}
+\def\xxnumpartie{Partie 3}
+\def\xxpartie{Ingénierie Numérique \& Simulation}
 
-\def\xxauteur{\ifthenelse{\boolean{xp}}{
-Xavier \textsc{Pessoles}}{
-Damien \textsc{Iceta} \\ Xavier \textsc{Pessoles}}}
+\def\xxnumchapitre{Chapitre 4}
+\def\xxchapitre{\hspace{.12cm} Résolution d'un système linéaire inversible par la méthode de Gauss}
 
-\def\xxpied{\ifthenelse{\boolean{xp}}{
-CI 3 : Ingénierie Numérique \& Simulation\\
-Ch. 4 : Pivot de Gauss -- Cours}{
-\xxtitre}}
+\def\xxposongletx{2}
+\def\xxposonglettext{1.45}
+\def\xxposonglety{19}%16
 
-\def\xxcathegorie{\ifthenelse{\boolean{xp}}{
-2013 -- 2014 \\
-Xavier \textsc{Pessoles}}{
-Informatique - Cours}}
+\def\xxonglet{Part. 3 -- Ch. 4}
 
+\def\xxactivite{Cours}
+\def\xxauteur{\textsl{Xavier Pessoles}}
 
+\def\xxcompetences{%
+\textsl{%
+\textbf{Savoirs et compétences :}
+\begin{itemize}[label=\ding{112},font=\color{ocre}] 
+\item Problème discret multidimensionnel, linéaire, conduisant à la résolution d’un système linéaire inversible (ou de Cramer) par la méthode de Gauss avec recherche partielle du pivot.
+\end{itemize}
+}}
 
+\def\xxfigures{
 
+}%figues de la page de garde
+
+\def\xxpied{%
+Partie 3 -- Ingénierie Numérique \& Simulation \\
+Ch 4 : Pivot de Gauss -- \xxactivite%
+}
 
 %---------------------------------------------------------------------------
-
-
 \begin{document}
+\chapterimage{png/Fond_SIMU}
+\input{style/new_pagegarde}
+%---------------------------------------------------------------------------
 
-\ifthenelse{\boolean{xp}}{\input{style/enteteXP}}{\input{style/enteteDI}}
-
-\begin{minipage}[c]{.2\linewidth}
-\begin{center}
-%\includegraphics[width=.95\textwidth]{images/swing}
-\end{center}
-\end{minipage}\hfill
-\begin{minipage}[c]{.33\linewidth}
-\begin{center}
-%\includegraphics[width=.9\textwidth]{images/situation}
-\end{center}
-\end{minipage}\hfill
-\begin{minipage}[c]{.45\linewidth}
-\begin{center}
-%\includegraphics[width=.95\textwidth]{images/tir_alpha}
-\end{center}
-\end{minipage}
-\vspace{.5cm}
-
-\begin{savoir}
-Problème discret multidimensionnel, linéaire, conduisant à la résolution d’un système linéaire inversible (ou de Cramer) par la méthode de Gauss avec recherche partielle du pivot.
-
-% l’exécuter pour étudier sa mise en oeuvre et les problèmes que pose cette démarche. On souligne la complexité de l’algorithme en fonction de la taille desmatrices et son impact sur le temps de calcul
-\end{savoir}
 
 
 Le pivot de Gauss est une méthode permettant de résoudre les systèmes linéaires. Sur l'idée du pivot de Gauss, il est alors possible de calculer l'inverse d'une matrice (lorsqu'elle est inversible), de calculer le déterminant d'une matrice $A\in\mathcal{M}_n(\mathbb{R})$ ou de calculer le rang de 
 $A\in\mathcal{M}_{n,p}(\mathbb{R})$.
 
-\begin{prob}
 Outre la compréhension et la mise en \oe{}uvre de l'algorithme, deux problèmes numérique peuvent se poser : 
 \begin{itemize}
 \item les erreurs d'arrondis peuvent provoquer des erreurs importantes selon la méthode choisie;
 \item des comparaisons d'un réel à zéro peuvent aussi engendrer des erreurs numériques.
 \end{itemize}
-\end{prob}
 
-\setlength{\parskip}{0ex plus 0.2ex minus 0ex}
- \renewcommand{\contentsname}{}
- \renewcommand{\baselinestretch}{1}
-
-\tableofcontents
-
- \renewcommand{\baselinestretch}{1.2}
-\setlength{\parskip}{2ex plus 0.5ex minus 0.2ex}
 
 
 
@@ -199,9 +171,9 @@ Les opérations élémentaires sont les suivantes :
 Pour éviter les fractions on peut également utiliser $(L_i)\leftarrow \alpha (L_i) + \lambda L_j$ où $i,j\in \{1,...,n\}$, $\alpha \neq 0$, $\lambda \in \mathbb{R}$ qui est une combinaison des deux premiers items.
 \end{rem}
 
-\begin{prop}
+\begin{proposition}
 L'utilisation des opérations élémentaires sur un système ne change pas l'ensemble de ses solutions. Autrement dit, elles donnent des systèmes équivalents au premier.
-\end{prop}
+\end{proposition}
 
 \subsection{Notation matricielle}
 \begin{rem}
@@ -407,9 +379,9 @@ $$
 $$
 \end{exemple}
 
-\begin{prop}
+\begin{proposition}
 Le pivot de Gauss permet d'obtenir une matrice échelonnée en lignes. 
-\end{prop}
+\end{proposition}
 
 \begin{defi}
 Le rang d'une matrice échelonnée désigne le nombre de ses pivots (ce qui correspond aussi au nombre de lignes non nulles). 
@@ -422,13 +394,13 @@ On peut poursuivre le pivot en :
 \item faisant apparaître des zéros au dessus des pivots. 
 \end{enumerate}
 
-\begin{prop}
+\begin{proposition}
 Toute matrice est équivalente en ligne à une et une seule matrice échelonnée réduite. 
 
 En conséquence, on peut définir le rang d'une matrice quelconque comme le rang de sa matrice échelonnée réduite en ligne. 
 
 On peut définir (le nombre) le rang d'un système comme le rang de la matrice de ses coefficients $(A)$. 
-\end{prop}
+\end{proposition}
 
 \begin{rem}
 Deux matrices équivalentes en ligne ont le même rang. 

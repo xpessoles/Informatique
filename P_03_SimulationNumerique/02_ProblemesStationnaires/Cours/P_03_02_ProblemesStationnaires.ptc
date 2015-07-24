@@ -1,0 +1,49 @@
+\boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
+\defcounter {refsection}{0}\relax 
+\select@language {french}
+\ttl@starttoc {default@1}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {1}Introduction}{2}{section.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {1.1}Mise en situation}{2}{subsection.1.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {1.2}D\IeC {\'e}finitions}{2}{subsection.1.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {1.3}Repr\IeC {\'e}sentation graphique}{2}{subsection.1.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {1.4}Crit\IeC {\`e}res de convergence}{3}{subsection.1.4}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {2}M\IeC {\'e}thode de dichotomie}{3}{section.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.1}Principe}{3}{subsection.2.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.2}Algorithme de dichotomie}{4}{subsection.2.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.3}\IeC {\'E}tude th\IeC {\'e}orique de l'algorithme}{5}{subsection.2.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Variant de boucle}{5}{section*.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Invariant de boucle}{5}{section*.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Complexit\IeC {\'e} algorithmique}{5}{section*.4}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.4}Application sur l'exemple}{5}{subsection.2.4}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.5}M\IeC {\'e}thode de Lagrange -- M\IeC {\'e}thode des cordes}{5}{subsection.2.5}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3}M\IeC {\'e}thode de Newton}{6}{section.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.1}Principe}{6}{subsection.3.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.2}Algorithme de Newton}{6}{subsection.3.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.3}\IeC {\'E}tude th\IeC {\'e}orique de l'algorithme}{7}{subsection.3.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.4}\IeC {\'E}valuation de la d\IeC {\'e}riv\IeC {\'e}e num\IeC {\'e}rique}{7}{subsection.3.4}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Principe}{7}{section*.5}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{M\IeC {\'e}thodes \IeC {\`a} un pas}{8}{section*.6}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{M\IeC {\'e}thodes \IeC {\`a} deux pas}{8}{section*.7}
+\contentsfinish 
