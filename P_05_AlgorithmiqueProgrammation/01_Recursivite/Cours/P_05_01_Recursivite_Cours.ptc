@@ -3,15 +3,29 @@
 \select@language {french}
 \ttl@starttoc {default@1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {1}Suites num\IeC {\'e}riques}{2}{section.1}
+\contentsline {section}{\numberline {1}Pr\IeC {\'e}sentation}{2}{section.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {1.1}Suites d\IeC {\'e}finies explicitement}{2}{subsection.1.1}
+\contentsline {section}{\numberline {2}Exemple d'un algorithme r\IeC {\'e}cursif}{2}{section.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {1.2}Suites d\IeC {\'e}finies par une relation de r\IeC {\'e}currence}{2}{subsection.1.2}
+\contentsline {subsection}{\numberline {2.1}Calcul explicite des puissances de 2}{2}{subsection.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2}Diviser pour r\IeC {\'e}gner}{3}{section.2}
+\contentsline {subsection}{\numberline {2.2}Calcul r\IeC {\'e}cursif des puissances de 2}{2}{subsection.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3}Courbes fractales}{3}{section.3}
+\contentsline {section}{\numberline {3}Analyse des algorithmes r\IeC {\'e}cursifs}{3}{section.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.1}La courbe de Peano}{3}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.1}Avantages et inconv\IeC {\'e}nients}{3}{subsection.3.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.2}Terminaison des algorithmes r\IeC {\'e}cursifs -- Variant de boucle}{3}{subsection.3.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.3}Correction des algorithmes r\IeC {\'e}cursifs -- Invariant de boucle}{3}{subsection.3.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.4}Notions de piles d'ex\IeC {\'e}cution}{3}{subsection.3.4}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.5}Calcul des puissances de 2 -- Exponentiation rapide}{3}{subsection.3.5}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {4}Exemples d'utilisation de la r\IeC {\'e}cursivit\IeC {\'e}}{3}{section.4}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.1}Diviser pour r\IeC {\'e}gner}{3}{subsection.4.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.2}Courbes fractales -- Courbe de Peano}{3}{subsection.4.2}
 \contentsfinish 

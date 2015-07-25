@@ -101,6 +101,15 @@
 {\ \titlerule*[.5pc]{.}\;\thecontentspage} % Page number
 []
 
+
+% Subsection text styling
+\titlecontents{subsubsection}[1.25cm] % Indentation
+{\addvspace{1pt}\sffamily\small} % Spacing and font options for subsections
+{\contentslabel[\thecontentslabel]{1.25cm}} % Subsection number
+{}
+{\ \titlerule*[.5pc]{.}\;\thecontentspage} % Page number
+[]
+
 % List of figures
 \titlecontents{figure}[0em]
 {\addvspace{-5pt}\sffamily}
@@ -673,6 +682,10 @@ innerbottommargin=5pt]{sqlBox}
 %----------------------------------------------------------------------------------------
 %	SECTION NUMBERING IN THE MARGIN
 %----------------------------------------------------------------------------------------
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{2}
+
+
 
 \makeatletter
 \renewcommand{\@seccntformat}[1]{\llap{\textcolor{ocre}{\csname the#1\endcsname}\hspace{1em}}}                    

@@ -18,7 +18,7 @@
 \courstrue
 %\coursfalse
 
-\newcommand{\bfsf}[1]{\textbf{{#1}}}%{\textbf{\textsf{#1}}}
+\newcommand{\bfsf}[1]{\textbf{\textsl{#1}}}%{\textbf{\textsf{#1}}}
 
 % -------------------------------------
 % Déclaration des titres
@@ -54,6 +54,9 @@
 \includegraphics[width=\textwidth]{images/mandel}
 
 \textit{Courbe fractale de Mandelbrot [2]}
+
+\includegraphics[width=\textwidth]{images/matriochka}
+\textit{Poupées russes [3]}
 }%figues de la page de garde
 
 \def\xxpied{%
@@ -67,35 +70,52 @@ Ch 1 : Programmation récursive -- \xxactivite%
 \input{style/new_pagegarde}
 %---------------------------------------------------------------------------
 
-\section*{Présentation}
-\begin{minipage}[c]{.65\linewidth}
+\section{Présentation}
+\noindent\begin{minipage}[c]{.65\linewidth}
 En mathématiques, en informatique, en biologie, mais aussi dans notre quotidien, nous faisons souvent face à des situations où un problème doit être résolu en utilisant une méthode de résolution qui est répétée plusieurs fois. 
 
 Dans l'itération, cette méthode est appliquée par paliers de façon séquentielle. Dans la récursion, la méthode s’appelle elle-même. La récursion est si fondamentale qu’il n’est pas possible de l’éviter : l'auto-reproduction, qui constitue le fondement de toute vie, est un processus récursif.
-\end{minipage} \hfill
-\begin{minipage}[c]{.33\linewidth}
-\begin{center}
 
+\end{minipage} \hfill
+\begin{minipage}[c]{.3\linewidth}
+\begin{center}
+\includegraphics[width=\textwidth]{images/arbre}
+
+\textit{Arbre construit récursivement \cite{4}}
 \end{center}
 \end{minipage}
 
-\section{Suites numériques}
-\subsection{Suites définies explicitement}
+\begin{defi}
+\textbf{Fonction récursive : } fonction faisant appelle à elle-même.
+\end{defi}
 
-Une suite numérique peut dans certains cas être définie de manière explicite : $u_n = f(n)$.
+\begin{py}Exemple de boucle sans fin :
+\begin{python}
+def fonction_recursive():
+    return fonction_recursive()
+\end{python}
+\end{py}
 
+\section{Exemple d'un algorithme récursif}
+\subsection{Calcul explicite des puissances de 2}
+
+Dans certains cas une suite numérique peut être définie de manière explicite : $u_n = f(n)$. 
 La détermination du nième terme est alors aisée. Il suffit d’évaluer $f(n)$.
 
 \begin{exemple}
-Puissances de 2 : \textit{Comment évaluer le nombre 2 à la puissance $n$ de manière explicite, $n\in \mathbb{N}$ ?}
-On définit de manière explicite la suite :  $u_n=2^n$.
+$\;$
 
+\begin{minipage}[c]{.35\linewidth}
+Puissances de 2 : \textit{Comment évaluer le nombre 2 à la puissance $n$ de manière explicite, $n\in \mathbb{N}$ ?} On définit de manière explicite la suite :  $u_n=2^n$.
+\end{minipage}\hfill
+\begin{minipage}{.6\linewidth}
 \begin{pseudo}
-\begin{tabular}{p{.5cm}p{10cm}}
+\begin{tabular}{p{.5cm}p{6cm}}
 \hline
-\multicolumn{2}{l}{ \textbf{P2\_explicite} : Calcul de la nieme puissance de 2 -- Méthode explicite} \\
+\multicolumn{2}{l}{ \textbf{Algorithme 1 : P2\_explicite}}\\
+\multicolumn{2}{l}{Calcul explicite de la nième puissance de 2} \\
 \hline
-\multicolumn{2}{p{11cm}}{
+\multicolumn{2}{p{6.5cm}}{
 \textbf{Entrée} : 
 \begin{itemize}
 \item n, int  : un nombre entier
@@ -104,31 +124,46 @@ On définit de manière explicite la suite :  $u_n=2^n$.
 \begin{itemize}
 \item un nombre entier.
 \end{itemize}}\\
-\multicolumn{2}{l}{\bfsf{P2\_explicite(n)}} : \\
+\multicolumn{2}{l}{\bfsf{P2\_explicite(n)} :}  \\
 & \bfsf{Retourner} 2 $\wedge$ n\\
 \hline
 \end{tabular}
 \end{pseudo}
-\end{exemple}
-Malheureusement, toutes les suites numériques ne peuvent pas être définies de manière explicite.
+\end{minipage}
 
-\subsection{Suites définies par une relation de récurrence}
+\end{exemple}
+
+
+
+
+\begin{rem}
+\begin{itemize}
+\item Ici la complexité algorithmique dépend de l'implémentation de $\wedge$ dans le langage de programmation utilisé. 
+\item Malheureusement, toutes les suites numériques ne peuvent pas être définies de manière explicite.
+\end{itemize}
+\end{rem}
+
+\subsection{Calcul récursif des puissances de 2}
 Dans une suite définie de manière récurrente, il est possible de calculer le terme $u_n$ de la suite en connaissant les termes précédents.
 Les égalités de la forme $u_n = f (u_{n-1})$, $u_n = f (u_{n-1}, u_{n-2})$, \textit{etc.} s’appellent des relations de récurrence.
 Les égalités qui définissent les premiers termes d’une suite sont appelées des conditions de départ.
 Une suite recursive est donc définie par une relation de récurrence et une(des) condition(s) de départ.
-On reprend l’exemple 1 : puissances de 2.
-On définit de manière récursive la suite : $u_0=1$, $u_n = 2\cdot u_{n-1}$.
-On propose de manière proche de la définition, un algorithme récursif.
 
-On propose de manière proche de la définition, un algorithme récursif.
+
+\begin{exemple}
+On reprend l’exemple des puissances de 2. On définit de manière récursive la suite : $u_0=1$, $u_n = 2\cdot u_{n-1}$. On propose un algorithme récursif proche de la définition et un algorithme itératif correspondant.
+\end{exemple}
 
 \begin{pseudo}
-\begin{tabular}{p{.5cm}p{.5cm}p{10cm}}
+\noindent
+\begin{minipage}[c]{.4\linewidth}
+\begin{tabular}{p{.5cm}p{.5cm}p{5cm}}
 \hline
-\multicolumn{3}{l}{ \textbf{P2\_explicite} : Calcul de la nieme puissance de 2 -- Méthode récursive} \\
+\multicolumn{3}{p{6cm}}{ \textbf{Algorithme 2 : P2\_récursive} :
+
+Calcul récursif de la nième puissance de 2} \\
 \hline
-\multicolumn{3}{p{11cm}}{
+\multicolumn{3}{p{6cm}}{
 \textbf{Entrée} : 
 \begin{itemize}
 \item n, int  : un nombre entier
@@ -137,23 +172,22 @@ On propose de manière proche de la définition, un algorithme récursif.
 \begin{itemize}
 \item un nombre entier.
 \end{itemize}}\\
-\multicolumn{3}{l}{\bfsf{P2\_recursive}$(n)$} : \\
+\multicolumn{3}{p{6cm}}{\bfsf{P2\_recursive}$(n)$:}  \\
 & \multicolumn{2}{l}{\bfsf{Si} $n==0$  \bfsf{alors :}}\\
 & & \bfsf{Retourner} 1\\
 & \multicolumn{2}{l}{\bfsf{Sinon :}}\\
 & & \bfsf{Retourner} 2*\bfsf{P2\_recursive}$(n-1)$ \\
 \hline
 \end{tabular}
-\end{pseudo}
-
-Il est aussi possible de proposer un algorithme itératif permettant d’aboutir au même résultat.
-
-\begin{pseudo}
-\begin{tabular}{p{.5cm}p{.5cm}p{10cm}}
+\end{minipage}  \hfill%\hspace{.5cm}
+\begin{minipage}[c]{.4\linewidth}
+\begin{tabular}{p{.5cm}p{.5cm}p{5cm}}
 \hline
-\multicolumn{3}{l}{ \textbf{P2\_iterative} : Calcul de la nieme puissance de 2 -- Méthode récursive} \\
+\multicolumn{3}{p{6cm}}{ \textbf{Algorithme 3 : P2\_iterative} : 
+
+Calcul itératif de la nième puissance de 2} \\
 \hline
-\multicolumn{3}{p{11cm}}{
+\multicolumn{3}{p{6cm}}{
 \textbf{Entrée} : 
 \begin{itemize}
 \item n, int  : un nombre entier
@@ -162,7 +196,7 @@ Il est aussi possible de proposer un algorithme itératif permettant d’aboutir
 \begin{itemize}
 \item un nombre entier.
 \end{itemize}}\\
-\multicolumn{3}{l}{\bfsf{P2\_iterative}$(n)$} : \\
+\multicolumn{3}{p{6cm}}{\bfsf{P2\_iterative}$(n)$} \\
 & \multicolumn{2}{l}{$x \leftarrow 1$}\\
 & \multicolumn{2}{l}{\bfsf{tant que} $n>0$ \bfsf{faire :}}\\
 & & $x \leftarrow 2 * x$ \\
@@ -171,17 +205,52 @@ Il est aussi possible de proposer un algorithme itératif permettant d’aboutir
 & \multicolumn{2}{l}{\bfsf{Retourner} $x$}\\
 \hline
 \end{tabular}
+\end{minipage}
+\vspace{.1cm}
+
+Dans le premier cas, $2^4$ se calcule sous la forme suivante: 
+$$2^4 = 2\cdot P2(3) =2\cdot \left( 2\cdot P2(2)\right) 
+=2\cdot \left( 2\cdot \left( 2\cdot P2(1)\right)\right)
+=2\cdot \left( 2\cdot \left( 2\cdot \left( 2\cdot P2(0)\right) \right)\right)
+=2\cdot \left( 2\cdot \left( 2\cdot \left( 2\cdot 1\right) \right)\right)
+$$
+ 
+Dans le second cas, on calcule itérativement les puissances de 2. 
 \end{pseudo}
 
+\section{Analyse des algorithmes récursifs}
+\subsection{Avantages et inconvénients}
+Le principal avantage d'une programmation récursive est, dans certains cas, la simplicité de son écriture. Comme l'exemple précédent le montre, dans le cas du calcul des puissances de 2, l'écriture récursive est plus naturelle que l'écriture itérative.
 
-\section{Diviser pour régner}
-\section{Courbes fractales}
-\subsection{La courbe de Peano}
+L'algorithme peut sembler alors plus aisé lors de sa lecture.
+
+Par ailleurs, lors de l'écriture d'un programme récursif, il est nécessaire de porter attention à ce que l'algorithme se termine. Il pourra donc être nécessaire de vérifier la terminaison de l'algorithmique à l'aide d'un variant de boucle.
+
+Comme pour les algorithmes itératifs, il est aussi nécessaire de vérifier la correction de l'algorithme en utilisant un invariant de boucle.
+
+En outre, nous verrons de plus que la complexité algorithmique temporelle et spatiale d'un algorithme récursif peut être plus coûteuse qu'un algorithme itératif. 
+
+
+Enfin certains développeurs informatiques ont un avis tranché sur l'intérêt de la programmation récursive :
+\textit{<< (...) I don't believe in recursion as the basis of all programming. This is a fundamental belief of certain computer scientists, especially those who love Scheme and like to teach programming by starting with a "cons" cell and recursion. But to me, seeing recursion as the basis of everything else is just a nice theoretical approach to fundamental mathematics (turtles all the way down), not a day-to-day tool. (...)>>}\cite{5}
+\subsection{Terminaison des algorithmes récursifs -- Variant de boucle}
+\subsection{Correction des algorithmes récursifs -- Invariant de boucle}
+
+
+\subsection{Notions de piles d'exécution}
+\subsection{Calcul des puissances de 2 -- Exponentiation rapide}
+\section{Exemples d'utilisation de la récursivité}
+\subsection{Diviser pour régner}
+\subsection{Courbes fractales -- Courbe de Peano}
 
 
 \begin{thebibliography}{2}
 \bibitem{1}{Patrick Beynet, \textit{Supports de cours de TSI 2}, Lycée Rouvière, Toulon.}
 \bibitem{2}{<< Mandel zool 08 satellite antenna >>. Sous licence CC BY-SA via Wikimedia Commons - \url{https://fr.wikipedia.org/wiki/Ensemble_de_Mandelbrot#/media/File:Mandel_zoom_08_satellite_antenna.jpg}}
+\bibitem{4}{\url {http://lestorytelling.com/blog/wp-content/uploads/2013/08/707px-matriochka.jpg}}
+\bibitem{4}{\url{http://www.obside.fr/fractales/pages/Recursif/}}
+\bibitem{5}{Guido van Rossum, \url{http://neopythonic.blogspot.fr/2009/04/tail-recursion-elimination.html}.}
 \end{thebibliography}
 \end{document}
+
 
