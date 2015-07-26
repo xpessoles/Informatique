@@ -18,7 +18,7 @@
 \courstrue
 %\coursfalse
 
-\newcommand{\bfsf}[1]{\textbf{\textsl{#1}}}%{\textbf{\textsf{#1}}}
+\newcommand{\bfsf}[1]{\small\textbf{\textsf{#1}}}%{\textbf{\textsf{#1}}}
 
 % -------------------------------------
 % Déclaration des titres
@@ -40,7 +40,7 @@
 \def\xxonglet{Part. 5 -- Ch. 1}
 
 \def\xxactivite{Cours}
-\def\xxauteur{\textsl{Patrick Beynet \\ Xavier Pessoles}}
+\def\xxauteur{\textsl{Xavier Pessoles \\ Patrick Beynet}}
 
 \def\xxcompetences{%
 \textsl{%
@@ -106,7 +106,9 @@ La détermination du nième terme est alors aisée. Il suffit d’évaluer $f(n)
 $\;$
 
 \begin{minipage}[c]{.35\linewidth}
-Puissances de 2 : \textit{Comment évaluer le nombre 2 à la puissance $n$ de manière explicite, $n\in \mathbb{N}$ ?} On définit de manière explicite la suite :  $u_n=2^n$.
+Puissances de 2 : \textit{Comment évaluer le nombre 2 à la puissance $n$ de manière explicite, $n\in \mathbb{N}$ ?}
+
+On définit de manière explicite la suite :  $u_n=2^n$.
 \end{minipage}\hfill
 \begin{minipage}{.6\linewidth}
 \begin{pseudo}
@@ -156,9 +158,10 @@ On reprend l’exemple des puissances de 2. On définit de manière récursive l
 
 \begin{pseudo}
 \noindent
+
 \begin{minipage}[c]{.4\linewidth}
 \begin{tabular}{p{.5cm}p{.5cm}p{5cm}}
-\hline
+\hline %\rowcolor{black!5} 
 \multicolumn{3}{p{6cm}}{ \textbf{Algorithme 2 : P2\_récursive} :
 
 Calcul récursif de la nième puissance de 2} \\
@@ -232,11 +235,57 @@ En outre, nous verrons de plus que la complexité algorithmique temporelle et sp
 
 
 Enfin certains développeurs informatiques ont un avis tranché sur l'intérêt de la programmation récursive :
-\textit{<< (...) I don't believe in recursion as the basis of all programming. This is a fundamental belief of certain computer scientists, especially those who love Scheme and like to teach programming by starting with a "cons" cell and recursion. But to me, seeing recursion as the basis of everything else is just a nice theoretical approach to fundamental mathematics (turtles all the way down), not a day-to-day tool. (...)>>}\cite{5}
+\textit{<< (...) I don't believe in recursion as the basis of all programming. This is a fundamental belief of certain computer scientists, especially those who love Scheme and like to teach programming by starting with a "cons" cell and recursion. But to me, seeing recursion as the basis of everything else is just a nice theoretical approach to fundamental mathematics (turtles all the way down), not a day-to-day tool. (...)>>.}\cite{5}
 \subsection{Terminaison des algorithmes récursifs -- Variant de boucle}
+\begin{definition}
+\textbf{\bfsf{Rappel : Variant de boucle}}
+ 
+Soit une condition booléenne (appelée condition d'arrêt) permettant de sortir d’une boucle constituée d’une comparaison entre une variable et une constante de types entiers positifs.  La variable est un variant de boucle si :
+\begin{itemize}
+\item elle reste positive tout au long de l'algorithme ;
+\item elle décroît strictement à chaque itération de la boucle.
+\end{itemize}
+Ainsi, après un nombre fini d'itérations, on est sûr que la boucle se terminera.
+
+Dans un algorithme récursif, il est nécessaire d'implémenter un cas terminal qui ne contient pas de nouvel appel à la fonction et qui permet la sortie de l'algorithme.
+\end{definition}
+
+\begin{exemple}
+Dans le cas de l'algorithme \textsl{ P2\_récursive}, $n$ est un variant de boucle car :
+\begin{itemize}
+\item il est strictement positif en entrant dans la boucle;
+\item il décroît à chaque appel récursif. 
+\end{itemize}
+Le cas terminal a lieu lorsque $n=0$. Dans ce cas, on sort de l'algorithme. 
+
+La terminaison de l'algorithme est bien prouvée. 
+
+\end{exemple}
+
 \subsection{Correction des algorithmes récursifs -- Invariant de boucle}
+\begin{definition}
+\bfsf{Rappel -- Invariant de boucle}
+
+Un invariant de boucle est une propriété qui valider les points suivants :
+\begin{enumerate}
+\item la propriété doit être vraie en entrant dans la boucle;
+\item la propriété doit être vraie à chaque itération de la boucle;
+\item la propriété doit permettre de vérifier que que résultat donné est bien le résultat attendu.
+\end{enumerate}
+\end{definition}
 
 
+\begin{exemple}
+Dans le cas de l'algorithme \textsl{2\_récursive}, la propriété d'invariance peut être la suivante : $u_n = 2^n$ avec $u_0 = 1$. 
+
+La propriété est vrai au rang 0 : si $n=0$, l'algorithme retourne 1. et on a bien $2^0=1$.
+
+On suppose la propriété vraie au rang $n$. Au rang $n+1$, $n>0$; donc d'après l'algorithme, $u_{n+1}=2\cdot u_n =2\cdot 2^n = 2^{n+1}$. La propriété est vraie au rang n+1.
+
+Naturellement, on a donc au rang $n$, $u_n = 2^n$. 
+
+La propriété énoncée est donc un invariant de boucle.
+\end{exemple}
 \subsection{Notions de piles d'exécution}
 \subsection{Calcul des puissances de 2 -- Exponentiation rapide}
 \section{Exemples d'utilisation de la récursivité}
@@ -250,6 +299,7 @@ Enfin certains développeurs informatiques ont un avis tranché sur l'intérêt 
 \bibitem{4}{\url {http://lestorytelling.com/blog/wp-content/uploads/2013/08/707px-matriochka.jpg}}
 \bibitem{4}{\url{http://www.obside.fr/fractales/pages/Recursif/}}
 \bibitem{5}{Guido van Rossum, \url{http://neopythonic.blogspot.fr/2009/04/tail-recursion-elimination.html}.}
+\bibitem{6}{Jean-Pierre Becirspahic, Cours d'informatique du Lycée Louis le Grand, \url{http://info-llg.fr/}.}
 \end{thebibliography}
 \end{document}
 
