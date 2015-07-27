@@ -286,7 +286,18 @@ Naturellement, on a donc au rang $n$, $u_n = 2^n$.
 
 La propriété énoncée est donc un invariant de boucle.
 \end{exemple}
-\subsection{Notions de piles d'exécution}
+\subsection{Notions de pile d'exécution}
+En informatique, les fonctions appelées sont gérées par une structure de données appelée \textbf{pile d'exécution} (\textit{call stack}). Ainsi, lors de l'exécution d'un programme, les fonctions sont <<agglutinées>> sous forme de piles tant qu'elles ne fournissent pas de résultat.
+Dès qu'une fonction peut être exécutée, le résultat est stockée et elle sort de la pile. On parle de pile <<dernier arrivé, premier sorti>> (pile \textit{LIFO : Last In First Out}).
+
+\begin{exemple}
+Pour le calcul de $2^4$, la pile d'exécution est la suivante : 
+\begin{center}
+\includegraphics[width=.5\linewidth]{images/pile}
+\end{center} 
+\end{exemple}
+
+
 \subsection{Calcul des puissances de 2 -- Exponentiation rapide}
 \section{Exemples d'utilisation de la récursivité}
 \subsection{Diviser pour régner}
