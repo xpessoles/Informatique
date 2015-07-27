@@ -297,8 +297,58 @@ Pour le calcul de $2^4$, la pile d'exécution est la suivante :
 \end{center} 
 \end{exemple}
 
+\begin{rem}
+En python, la pile d'exécution limite à 1000 (988 ?) le nombre d'appels récursifs. En dépassant cette limite, l'exception \textsl{RuntimeError: maximum recursion depth exceeded in comparison
+} est levée.
+\end{rem}
 
 \subsection{Calcul des puissances de 2 -- Exponentiation rapide}
+
+Les algorithmes récursifs peuvent aussi être utilisés dans les algorithmes de type <<Diviser pour régner>> (\textit{Divide and conquer}).
+
+\begin{exemple}
+$\;$ \\
+
+\begin{minipage}[c]{.45\linewidth}
+Le calcul des puissances de 2 peut s'effectuer par la méthode <<d'exponentiation rapide>> :
+\begin{itemize}
+\item si $n$ est pair, $2^n = \left(2^2\right)^{\dfrac{n}{2}}$;
+\item si $n$ est impair et $n>1$, $2^n =2\cdot  \left(2^2\right)^{\dfrac{n-1}{2}}$.
+\end{itemize}
+
+En conséquence plutôt que de réaliser le calcul $ 2^7 = 2\cdot 2\cdot 2\cdot 2\cdot 2\cdot 2\cdot 2$, on a $ 2^7 = 2\cdot 2^6 =  2\cdot \left(2^2\right)^3=  2\cdot 2 \cdot \left(2^2\right)^2$. 
+\end{minipage}\hfill
+\begin{minipage}[c]{.45\linewidth}
+\begin{tabular}{p{.5cm}p{.5cm}p{5cm}}
+\hline
+\multicolumn{3}{p{6cm}}{ \textbf{Algorithme 4 : P2\_rapide} : 
+
+Calcul rapide de la nième puissance de 2} \\
+\hline
+\multicolumn{3}{p{6cm}}{
+\textbf{Entrée} : 
+\begin{itemize}
+\item n, int  : un nombre entier
+\end{itemize}
+\textbf{Sortie} : 
+\begin{itemize}
+\item un nombre entier.
+\end{itemize}}\\
+\multicolumn{3}{p{6cm}}{\bfsf{P2\_rapide}(n)} \\
+& \multicolumn{2}{l}{\bfsf{Si} n$>$0 \bfsf{faire :}}\\
+& & \bfsf{Retourner} 2\\
+& \multicolumn{2}{l}{\bfsf{Fin Si}}\\
+& \multicolumn{2}{l}{\bfsf{Si} n\%2==0 \bfsf{faire :}}\\
+&& tmp = \bfsf{P2\_rapide}(n/2) \\
+&& \bfsf{Retourner} tmp*tmp\\
+& \multicolumn{2}{l}{\bfsf{Sinon} \bfsf{faire :}}\\
+&& \bfsf{Retourner} 2*\bfsf{P2\_rapide}(n-1)\\
+& \multicolumn{2}{l}{\bfsf{Fin Si Sinon}}\\
+\hline
+\end{tabular}
+\end{minipage}
+\end{exemple}
+
 \section{Exemples d'utilisation de la récursivité}
 \subsection{Diviser pour régner}
 \subsection{Courbes fractales -- Courbe de Peano}
