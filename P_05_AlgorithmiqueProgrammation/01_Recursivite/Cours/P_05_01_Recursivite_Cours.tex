@@ -19,6 +19,7 @@
 %\coursfalse
 
 \newcommand{\bfsf}[1]{\small\textbf{\textsf{#1}}}%{\textbf{\textsf{#1}}}
+\newcommand{\tsf}[1]{\small{\textsf{#1}}}
 
 % -------------------------------------
 % Déclaration des titres
@@ -354,6 +355,112 @@ Suivant la puissance de 2 à calculer il est possible de représenter les étape
 \section{Exemples d'utilisation de la récursivité}
 \subsection{Diviser pour régner}
 On rappelle l'algorithme itératif permettant de rechercher un nombre dans une liste triée. 
+
+\begin{exemple}
+~\\
+\begin{minipage}[c]{.48\linewidth}
+%\begin{pseudo}
+%~\\
+\begin{center}
+\begin{tabular}{p{.9\textwidth}}
+\hline
+\textbf{Algorithme :} Recherche par dichotomie d'un nombre dans une liste triée\\
+\hline
+\textbf{Données :}
+\begin{itemize}
+\item \tsf{nb}, int : un entier 
+\item \tsf{tab}, liste : une liste d'entiers triés
+\end{itemize}
+\textbf{Résultat :} 
+\begin{itemize}
+\item \tsf{m}, int : l'index du nombre recherché
+\item \tsf{None} : cas où \tsf{nb} n'est pas dans \tsf{tab}
+\end{itemize}
+\\
+\bfsf{is\_number\_in\_list\_dicho}(\tsf{nb},\tsf{tab}) :\\
+\hspace{.4cm}\tsf{g} $\leftarrow$ \tsf{0} \\
+\hspace{.4cm}\tsf{d} $\leftarrow$ \bfsf{longueur}(\bfsf{tab}) \\
+\hspace{.4cm}\bfsf{Tant que} \tsf{g $<$ d} \bfsf{alors} : \\
+\hspace{.8cm} \tsf{m} $\leftarrow$ \textsf{(g+d)} \bfsf{div} \textsf{2}\\
+\hspace{1.2cm}\bfsf{Si} \tsf{tab[m]=nb} \bfsf{alors} :\\
+\hspace{1.6cm}\bfsf{Retourne} \tsf{m}\\
+\hspace{1.2cm}\bfsf{Sinon si} \tsf{tab[m]<nb} \bfsf{alors} :\\
+\hspace{1.6cm}\tsf{g} $\leftarrow$ \tsf{m+1}\\
+\hspace{1.2cm}\bfsf{Sinon, alors} :\\
+\hspace{1.6cm}\tsf{d} $\leftarrow$ \tsf{m-1}\\
+\hspace{.8cm} \bfsf{Fin Si} \\
+\hspace{.4cm}\bfsf{Fin Tant que} \\
+\hspace{.4cm}\bfsf{Retourne} \tsf{None} \\
+\bfsf{Fin fonction} \\
+\hline
+\end{tabular}
+\end{center}
+%\end{pseudo}
+\end{minipage} \hfill
+\begin{minipage}[c]{.48\linewidth}
+%\begin{py}
+\begin{python}
+def is_number_in_list_dicho(nb,tab):
+    """ 
+    Recherche d'un nombre par dichotomie dans un 
+    tableau trié. 
+    Renvoie l'index si le nombre nb est dans la liste 
+    de nombres tab.
+    Renvoie None sinon.
+    Keyword arguments:
+    nb,int -- nombre entier
+    tab,list -- liste de nombres entiers triés
+    """
+    g, d = 0, len(tab)-1
+    while g <= d:
+        m = (g + d) // 2
+        if tab[m] == nb:
+            return m
+        if tab[m] < nb:
+            g = m+1
+        else:
+            d = m-1
+    return None
+\end{python}
+%\end{py}
+\end{minipage}
+\end{exemple}
+
+Ce type d'algorithme peut être traité récursivement. En effet, la recherche du nombre se fait en divisant une liste en deux en regardant si le nombre recherché et dans une des deux parties du tableau. Ainsi à chaque itération, le recherche se réitère dans un des demi tableau.
+
+L'algorithme récursif de la recherche d'un nombre dans une liste triée peut donc s'écrire ainsi :
+
+
+\begin{center}
+\begin{tabular}{p{.9\textwidth}}
+\hline
+\textbf{Algorithme :} Recherche par dichotomie d'un nombre dans une liste triée -- méthode récursive\\
+\hline
+\textbf{Données :}
+\begin{itemize}
+\item \tsf{nb}, int : le nombre entier recherché 
+\item \tsf{tab}, liste : une liste d'entiers triés, tab[0..max]
+\item \tsf{m,n}, int : deux entiers positifs tels que $0\leq n\leq m \leq max$.
+\end{itemize}
+\textbf{Résultat :} 
+\begin{itemize}
+\item \tsf{m}, int : l'index du nombre recherché
+\item \tsf{None} : cas où \tsf{nb} n'est pas dans \tsf{tab}
+\end{itemize}
+\\
+\bfsf{is\_number\_in\_list\_dicho\_recursive}(\tsf{nb},\tsf{tab},\tsf{tab},\tsf{tab}) :\\
+\hspace{.4cm} \bfsf{Si} m==n \bfsf{alors :}\\
+\hspace{.8cm} \bfsf{Si} tab[m]==x \bfsf{alors :}\\
+\hspace{1.2cm} \bfsf{Retourner} \tsf{m}\\
+\hspace{.8cm} \bfsf{Sinon :}\\
+\hspace{1.2cm} \bfsf{Retourner} \tsf{None}\\
+\hspace{.8cm} \bfsf{Fin Si}\\
+\hspace{.4cm} \bfsf{Sinon}\\
+\hspace{.8cm} \tsf{k} $\leftarrow$ \tsf{m+n} \bfsf{div}2\\
+\hspace{.8cm} \bfsf{Si} \\
+\hline
+\end{tabular}
+\end{center}
 
 \subsection{Courbes fractales -- Courbe de Peano}
 
