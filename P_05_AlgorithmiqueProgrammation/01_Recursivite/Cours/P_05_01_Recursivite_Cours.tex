@@ -448,16 +448,21 @@ L'algorithme récursif de la recherche d'un nombre dans une liste triée peut do
 \item \tsf{None} : cas où \tsf{nb} n'est pas dans \tsf{tab}
 \end{itemize}
 \\
-\bfsf{is\_number\_in\_list\_dicho\_recursive}(\tsf{nb},\tsf{tab},\tsf{tab},\tsf{tab}) :\\
-\hspace{.4cm} \bfsf{Si} m==n \bfsf{alors :}\\
-\hspace{.8cm} \bfsf{Si} tab[m]==x \bfsf{alors :}\\
+\bfsf{is\_number\_in\_list\_dicho\_recursive}(\tsf{nb},\tsf{tab},\tsf{m},\tsf{n}) :\\
+\hspace{.4cm} \bfsf{Si} \tsf{m==n} \bfsf{alors :}\\
+\hspace{.8cm} \bfsf{Si} \tsf{tab[m]==x} \bfsf{alors :}\\
 \hspace{1.2cm} \bfsf{Retourner} \tsf{m}\\
 \hspace{.8cm} \bfsf{Sinon :}\\
 \hspace{1.2cm} \bfsf{Retourner} \tsf{None}\\
 \hspace{.8cm} \bfsf{Fin Si}\\
 \hspace{.4cm} \bfsf{Sinon}\\
-\hspace{.8cm} \tsf{k} $\leftarrow$ \tsf{m+n} \bfsf{div}2\\
-\hspace{.8cm} \bfsf{Si} \\
+\hspace{.8cm} \tsf{k} $\leftarrow$ \tsf{m+n} \bfsf{div} 2\\
+\hspace{.8cm} \bfsf{Si} \tsf{tab[k]<x} \bfsf{alors :}\\
+\hspace{1.2cm} \bfsf{is\_number\_in\_list\_dicho\_recursive}(\tsf{nb},\tsf{tab},\tsf{k+1},\tsf{n}) \\ 
+\hspace{.8cm} \bfsf{Sinon :}\\
+\hspace{1.2cm} \bfsf{is\_number\_in\_list\_dicho\_recursive}(\tsf{nb},\tsf{tab},\tsf{m},\tsf{k}) \\ 
+\hspace{.8cm} \bfsf{Fin Si}\\
+\hspace{.4cm} \bfsf{Fin Si}\\
 \hline
 \end{tabular}
 \end{center}
