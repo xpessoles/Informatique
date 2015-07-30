@@ -292,16 +292,22 @@ En informatique, les fonctions appelées sont gérées par une structure de donn
 Dès qu'une fonction peut être exécutée, le résultat est stockée et elle sort de la pile. On parle de pile <<dernier arrivé, premier sorti>> (pile \textit{LIFO : Last In First Out}).
 
 \begin{exemple}
-Pour le calcul de $2^4$, la pile d'exécution est la suivante : 
-\begin{center}
-\includegraphics[width=.5\linewidth]{images/pile}
-\end{center} 
-\end{exemple}
+~\\
 
+\begin{minipage}[c]{.57\linewidth}
+Pour le calcul de $2^4$, la pile d'exécution est donnée ci-contre. 
 \begin{rem}
 En python, la pile d'exécution limite à 1000 (988 ?) le nombre d'appels récursifs. En dépassant cette limite, l'exception \textsl{RuntimeError: maximum recursion depth exceeded in comparison
 } est levée.
 \end{rem}
+\end{minipage} \hfill
+\begin{minipage}[c]{.4\linewidth}
+\begin{center}
+\includegraphics[width=\linewidth]{images/pile}
+\end{center} 
+\end{minipage}
+\end{exemple}
+
 
 \subsection{Calcul des puissances de 2 -- Exponentiation rapide}
 
@@ -335,15 +341,15 @@ Calcul rapide de la nième puissance de 2} \\
 \begin{itemize}
 \item un nombre entier.
 \end{itemize}}\\
-\multicolumn{3}{p{6cm}}{\bfsf{P2\_rapide}(n)} \\
-& \multicolumn{2}{l}{\bfsf{Si} n$>$0 \bfsf{faire :}}\\
+\multicolumn{3}{p{6cm}}{\bfsf{P2\_rapide}\tsf{(n)}} \\
+& \multicolumn{2}{l}{\bfsf{Si} \tsf{n$>$0} \bfsf{faire :}}\\
 & & \bfsf{Retourner} 2\\
 & \multicolumn{2}{l}{\bfsf{Fin Si}}\\
-& \multicolumn{2}{l}{\bfsf{Si} n\%2==0 \bfsf{faire :}}\\
-&& tmp = \bfsf{P2\_rapide}(n/2) \\
+& \multicolumn{2}{l}{\bfsf{Si} \tsf{n\%2==0} \bfsf{faire :}}\\
+&& \tsf{tmp} = \bfsf{P2\_rapide}\tsf{(n/2)}\\
 && \bfsf{Retourner} tmp*tmp\\
 & \multicolumn{2}{l}{\bfsf{Sinon} \bfsf{faire :}}\\
-&& \bfsf{Retourner} 2*\bfsf{P2\_rapide}(n-1)\\
+&& \bfsf{Retourner} \tsf{2*}\bfsf{P2\_rapide}\tsf{(n-1)}\\
 & \multicolumn{2}{l}{\bfsf{Fin Si Sinon}}\\
 \hline
 \end{tabular}
