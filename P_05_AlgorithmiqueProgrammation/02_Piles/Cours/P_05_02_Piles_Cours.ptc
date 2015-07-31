@@ -3,15 +3,9 @@
 \select@language {french}
 \ttl@starttoc {default@1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {1}Suites num\IeC {\'e}riques}{2}{section.1}
+\contentsline {section}{\numberline {1}Pr\IeC {\'e}sentation}{2}{section.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {1.1}Suites d\IeC {\'e}finies explicitement}{2}{subsection.1.1}
+\contentsline {section}{\numberline {2}Les piles}{2}{section.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {1.2}Suites d\IeC {\'e}finies par une relation de r\IeC {\'e}currence}{2}{subsection.1.2}
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2}Diviser pour r\IeC {\'e}gner}{2}{section.2}
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3}Courbes fractales}{2}{section.3}
-\defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.1}La courbe de Peano}{2}{subsection.3.1}
+\contentsline {section}{\numberline {3}Les files}{2}{section.3}
 \contentsfinish 
