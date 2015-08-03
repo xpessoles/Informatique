@@ -5,7 +5,7 @@
 
 \input{style/new_style}
 \input{style/macros_SII}
-
+\usepackage{colortbl}
 %\fichetrue
 \fichefalse
 
@@ -74,7 +74,56 @@ Pour trier des chaînes de caractères (mots), il suffit d’associer une valeur
 On se limite dans le cadre du programme aux cas détaillés du tri par insertion, du tri rapide et du tri fusion.
 \end{rem}
 
-\section{Le tri par insertion}
+\section{Tri par insertion}
+\subsection{Exemple du tri de carte}
+
+Soit un paquet de « $n$ » cartes. On prend la première dans une main.
+On saisie la seconde carte et on l’insère avant ou après la première selon le cas.
+A l’étape « $i$ », la ième carte est insérée à sa place dans le paquet déjà trié. 
+Pour cela, on peut :
+\begin{itemize}
+\item soit partir du début du tas déjà trié et s’arrêter lorsqu'on rencontre une carte plus grande que la ième (méthode 1);
+\item soit partir de la fin du tas déjà trié, et s’arrêter si on rencontre une carte plus petite que la ième (méthode 2).
+\end{itemize}
+Le paquet contient alors « $i$ » cartes triées. On procède ainsi de suite jusqu’à la dernière carte.
+
+\subsection{Application à une liste de nombres}
+
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+5 & 8 & 3 & 2 & 9 \\
+\hline
+\end{tabular}
+
+\begin{minipage}[b]{.1\linewidth}
+Étape 1 
+\end{minipage}\hfill
+\begin{minipage}[b]{.2\linewidth}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\cellcolor{black!10}5 & \cellcolor{black!30}8 & 3 & 2 & 9 \\
+\hline
+\end{tabular}
+\end{minipage}\hfill
+\begin{minipage}[b]{.1\linewidth}
+$$
+\Longrightarrow
+$$
+\end{minipage}\hfill
+\begin{minipage}[b]{.2\linewidth}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\cellcolor{black!10}5 & \cellcolor{black!30}8 & 3 & 2 & 9 \\
+\hline
+\end{tabular}
+\end{minipage}\hfill
+\begin{minipage}[b]{.2\linewidth}
+\begin{tabular}{ll}
+1 comparaison & 1 comparaison \\
+0 affectation & 0 affectation \\
+\end{tabular}
+\end{minipage}\hfill
+
 \begin{exemple}
 Le tri de cartes.
 \end{exemple}
