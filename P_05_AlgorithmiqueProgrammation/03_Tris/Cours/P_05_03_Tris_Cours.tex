@@ -122,7 +122,115 @@ $$
 1 comparaison & 1 comparaison \\
 0 affectation & 0 affectation \\
 \end{tabular}
+\end{minipage}
+
+
+\begin{minipage}[b]{.1\linewidth}
+Étape 2
 \end{minipage}\hfill
+\begin{minipage}[b]{.2\linewidth}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\cellcolor{black!10}5 & \cellcolor{black!10}8 & \cellcolor{black!30}3 & 2 & 9 \\
+\hline
+\end{tabular}
+\end{minipage}\hfill
+\begin{minipage}[b]{.1\linewidth}
+$$
+\Longrightarrow
+$$
+\end{minipage}\hfill
+\begin{minipage}[b]{.2\linewidth}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\cellcolor{black!30} 3 & \cellcolor{black!10}5 & \cellcolor{black!10}8 & 2 & 9 \\
+\hline
+\end{tabular}
+\end{minipage}\hfill
+\begin{minipage}[b]{.2\linewidth}
+\begin{tabular}{ll}
+1 comparaison & 2 comparaisons \\
+3 affectations & 3 affectations \\
+\end{tabular}
+\end{minipage}
+
+
+\begin{minipage}[b]{.1\linewidth}
+Étape 3
+\end{minipage}\hfill
+\begin{minipage}[b]{.2\linewidth}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\cellcolor{black!10}3 & \cellcolor{black!10}5 & \cellcolor{black!10}8 & \cellcolor{black!30}2 & 9 \\
+\hline
+\end{tabular}
+\end{minipage}\hfill
+\begin{minipage}[b]{.1\linewidth}
+$$
+\Longrightarrow
+$$
+\end{minipage}\hfill
+\begin{minipage}[b]{.2\linewidth}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\cellcolor{black!30}2 & \cellcolor{black!10}3 & \cellcolor{black!10}5 & \cellcolor{black!10}8 & 9 \\
+\hline
+\end{tabular}
+\end{minipage}\hfill
+\begin{minipage}[b]{.2\linewidth}
+\begin{tabular}{ll}
+1 comparaison & 3 comparaisons \\
+4 affectations & 4 affectations \\
+\end{tabular}
+\end{minipage}
+
+
+\begin{minipage}[b]{.1\linewidth}
+Étape 4
+\end{minipage}\hfill
+\begin{minipage}[b]{.2\linewidth}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\cellcolor{black!10}2 & \cellcolor{black!10}3 & \cellcolor{black!10}5 & \cellcolor{black!10}8 & \cellcolor{black!30}9 \\
+\hline
+\end{tabular}
+\end{minipage}\hfill
+\begin{minipage}[b]{.1\linewidth}
+$$
+\Longrightarrow
+$$
+\end{minipage}\hfill
+\begin{minipage}[b]{.2\linewidth}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\cellcolor{black!10}2 & \cellcolor{black!10}3 & \cellcolor{black!10}5 & \cellcolor{black!10}8 & \cellcolor{black!30}9 \\
+\hline
+\end{tabular}
+\end{minipage}\hfill
+\begin{minipage}[b]{.2\linewidth}
+\begin{tabular}{ll}
+4 comparaisons & 1 comparaison \\
+0 affectation & 0 affectation \\
+\end{tabular}
+\end{minipage}
+
+
+L’analyse de la complexité de l’algorithme peut se faire par l’étude du nombre de comparaisons à effectuer.
+
+Dans le cas de la méthode 1 : 
+\begin{itemize}
+\item meilleur des cas : le tableau est trié à l’envers. Il y a donc $n - 1$ comparaisons à effectuer. La complexité est donc de classe linéaire : $C(n)=\mathcal{O}(n)$;
+\item pire des cas, le tableau est déjà trié. Il y a alors une comparaison à effectuer à la première étape, puis deux, … puis $n-1$. On en déduit donc un nombre total de $\dfrac{n\left(n-1\right)}{2}$ comparaisons. La complexité est donc de classe quadratique : $C(n)=\mathcal{O}\left(n^2\right)$.
+\end{itemize}
+
+Dans le cas de la méthode 2 : 
+\begin{itemize}
+\item meilleur des cas : le tableau est déjà trié. Il y a donc $n - 1$ comparaisons à effectuer. La complexité est donc de classe linéaire : $C(n)=\mathcal{O}(n)$;
+\item pire des cas, le tableau est trié à l’envers. Il y a alors une comparaison à effectuer à la première étape, puis deux, … puis $n-1$. On en déduit donc un nombre total de $\dfrac{n\left(n-1\right)}{2}$  comparaisons. La complexité est donc de classe quadratique : $C(n)=\mathcal{O}\left(n^2\right)$.
+
+
+\end{itemize}
+
 
 \begin{exemple}
 Le tri de cartes.
