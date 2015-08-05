@@ -236,7 +236,52 @@ Dans le cas de la méthode 2 :
 Le tri de cartes.
 \end{exemple}
 
+\begin{rem}
+On peut aussi montrer que la complexité en moyenne est de classe quadratique lorsque les permutations sont équiprobables. L’efficacité du tri par insertion est excellente lorsque le tableau est déjà trié ou « presque trié » ($C(n)=\mathcal{O}\left(n\right)$). Il surpasse alors toutes les autres méthodes de tri qui sont au mieux en $\mathcal{O}\left(n ln(n)\right)$.
+\end{rem}
+
 \section{Le tri rapide (\textit{Quicksort})}
+
+
+\begin{exemple}
+Tri de valeurs numériques
+Problème : Comment trier une liste de nombres par la méthode de « tri rapide » ?
+\end{exemple}
+L’algorithme fait parti de la catégorie des algorithmes « diviser pour régner ».
+À chaque appel de la fonction de tri, le nombre de données à traiter est diminué de un. C'est-à-dire que l’on ne traite plus l’élément appelé « pivot » dans les appels de fonction ultérieurs, il est placé à sa place définitive dans le tableau.
+Le tableau de valeurs est ensuite segmenté en deux parties :
+\begin{itemize}
+\item dans un premier tableau, toutes les valeurs numériques sont inférieures au « pivot »;
+\item dans un second tableau, toutes valeurs numériques sont supérieures au « pivot ».
+\end{itemize}
+
+L’appel de la fonction de tri est récursif sur les tableaux segmentés.
+On peut par exemple choisir le premier élément du tableau comme « pivot » :
+
+
+
+
+Le « coût » temporel de l’algorithme de tri est principalement donné par des opérations de comparaison sur les éléments à trier. On raisonne donc sur le nombre de données à traiter pour l’analyse de la complexité de l’algorithme.
+
+Dans le pire des cas, un des deux segments est vide à chaque appel de la fonction de tri. Cela arrive lorsque le tableau est déjà trié. Le nombre de données à traiter  pour le ième appel, est $n - i + 1$.
+Le nombre total pour n appels de fonction est donc $\dfrac{n(n+1)}{2}$. On peut aussi écrire une relation de récurrence du type $C(n) = C(n-1) + n - 1$
+La complexité est donc de classe quadratique $C(n) = \mathcal{O}\left(n^2\right)$.
+
+Dans le meilleur des cas, les deux segments sont de taille égale. Pour un nombre de données à traiter $n$, chacun des segments suivant a donc au plus $\dfrac{n-1}{2}$ éléments (on retire le pivot). On répète ainsi la segmentation des tableaux jusqu’à arriver au plus à un seul élément. 
+On peut écrire une relation de récurrence du type $C(n) = 2 C\left(\dfrac{n - 1}{ 2} \right)  +  n - 1$.
+ 
+La complexité est donc de classe quasi linéaire $C(n)=\mathcal{O}\left(n ln(n)\right)$.
+
+\begin{rem}
+Certains algorithmes de tri rapide prennent pour « pivot » le dernier élément, la valeur moyenne du premier et du dernier, ou un positionnement aléatoire dans le tableau. Pour se placer dans le meilleur des cas pour chaque segment de tableau, il faut prendre pour pivot la valeur médiane du tableau de valeurs. Le problème est que cette recherche de pivot idéal a aussi un « coût ».
+\end{rem}
+
+On écrit tout d’abord l’algorithme effectuant la segmentation du tableau :
+\begin{itemize}
+\item le pivot (1er élément du tableau) est mis à sa place définitive;
+\item pour des indices inférieurs, toutes les valeurs sont plus petites ou égales;
+\item pour des indices supérieurs, toutes les valeurs sont plus grandes.
+\end{itemize}
 
 \section{Le tri fusion}
 
