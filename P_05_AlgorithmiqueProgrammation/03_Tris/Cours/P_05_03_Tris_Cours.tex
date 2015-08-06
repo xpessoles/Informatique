@@ -82,8 +82,8 @@ On saisie la seconde carte et on l’insère avant ou après la première selon 
 A l’étape « $i$ », la ième carte est insérée à sa place dans le paquet déjà trié. 
 Pour cela, on peut :
 \begin{itemize}
-\item soit partir du début du tas déjà trié et s’arrêter lorsqu'on rencontre une carte plus grande que la ième (méthode 1);
-\item soit partir de la fin du tas déjà trié, et s’arrêter si on rencontre une carte plus petite que la ième (méthode 2).
+\item soit partir du début du tas déjà trié et s’arrêter lorsqu'on rencontre une carte plus grande que la i\ieme (méthode 1);
+\item soit partir de la fin du tas déjà trié, et s’arrêter si on rencontre une carte plus petite que la i\ieme (méthode 2).
 \end{itemize}
 Le paquet contient alors « $i$ » cartes triées. On procède ainsi de suite jusqu’à la dernière carte.
 
@@ -263,7 +263,7 @@ On peut par exemple choisir le premier élément du tableau comme « pivot » :
 
 Le « coût » temporel de l’algorithme de tri est principalement donné par des opérations de comparaison sur les éléments à trier. On raisonne donc sur le nombre de données à traiter pour l’analyse de la complexité de l’algorithme.
 
-Dans le pire des cas, un des deux segments est vide à chaque appel de la fonction de tri. Cela arrive lorsque le tableau est déjà trié. Le nombre de données à traiter  pour le ième appel, est $n - i + 1$.
+Dans le pire des cas, un des deux segments est vide à chaque appel de la fonction de tri. Cela arrive lorsque le tableau est déjà trié. Le nombre de données à traiter  pour le i\ieme appel, est $n - i + 1$.
 Le nombre total pour n appels de fonction est donc $\dfrac{n(n+1)}{2}$. On peut aussi écrire une relation de récurrence du type $C(n) = C(n-1) + n - 1$
 La complexité est donc de classe quadratique $C(n) = \mathcal{O}\left(n^2\right)$.
 
@@ -278,12 +278,29 @@ Certains algorithmes de tri rapide prennent pour « pivot » le dernier élémen
 
 On écrit tout d’abord l’algorithme effectuant la segmentation du tableau :
 \begin{itemize}
-\item le pivot (1er élément du tableau) est mis à sa place définitive;
+\item le pivot (1\ier élément du tableau) est mis à sa place définitive;
 \item pour des indices inférieurs, toutes les valeurs sont plus petites ou égales;
 \item pour des indices supérieurs, toutes les valeurs sont plus grandes.
 \end{itemize}
 
 \section{Le tri fusion}
+
+La méthode de tri fusion pour un tableau de données est la suivante :
+\begin{enumerate}
+\item on coupe en deux parties à peu près égales les données à trier;
+\item on trie les données de chaque partie par la méthode de tri fusion;
+\item on fusionne les deux parties en interclassant les données.
+\end{enumerate}
+
+L’algorithme est donc récursif. Il fait parti des algorithmes « diviser pour régner ». La récursivité s'arrête car on finit par arriver à des listes composées d'un seul élément et le tri est alors trivial. 
+
+Si l’on s’intéresse au nombre de données à traiter à chaque appel de fonction, la relation de récurrence est du type :
+$C(n) = 2 C\left(\dfrac{n}{2}\right)  +  n$.
+La méthode de tri fusion a donc une efficacité temporelle comparable au tri rapide en $\mathcal{O}\left(n \ln(n)\right)$. Par contre, elle n'opère pas en place : une zone temporaire de données supplémentaire de taille égale à celle de l'entrée est nécessaire. Des versions plus complexes peuvent être effectuées sur place mais sont moins rapides.
+
+\begin{rem}
+D’autres méthodes de tri existent : tri par sélection $\mathcal{O}\left(n^2\right)$, tri à bulles  $\mathcal{O}\left(n^2\right)$, \textit{etc}.
+\end{rem}
 
 \section{Synthèse}
 
