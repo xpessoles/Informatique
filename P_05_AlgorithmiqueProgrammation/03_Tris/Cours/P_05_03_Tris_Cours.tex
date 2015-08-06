@@ -66,11 +66,11 @@ Ch 3 : Tri d'une liste de valeurs numériques -- \xxactivite%
 %---------------------------------------------------------------------------
 
 \section{Présentation}
-Un algorithme de tri est un algorithme qui permet d'organiser une collection d'objets selon un ordre déterminé. Le tri permet notamment de faciliter les recherches ultérieures d’un élément dans une liste (recherche dichotomique).
-On s’intéresse ici à des méthodes de tri d’une liste de valeurs numériques. Celle-ci est implémentée sous la forme d’un tableau à une dimension.
+Un algorithme de tri est un algorithme qui permet d'organiser une collection d'objets selon un ordre déterminé. Le tri permet notamment de faciliter les recherches ultérieures d'un élément dans une liste (recherche dichotomique).
+On s'intéresse ici à des méthodes de tri d'une liste de valeurs numériques. Celle-ci est implémentée sous la forme d'un tableau à une dimension.
 
 \begin{rem}
-Pour trier des chaînes de caractères (mots), il suffit d’associer une valeur numérique à chaque caractère (code ASCII par exemple). 
+Pour trier des chaînes de caractères (mots), il suffit d'associer une valeur numérique à chaque caractère (code ASCII par exemple). 
 On se limite dans le cadre du programme aux cas détaillés du tri par insertion, du tri rapide et du tri fusion.
 \end{rem}
 
@@ -78,14 +78,14 @@ On se limite dans le cadre du programme aux cas détaillés du tri par insertion
 \subsection{Exemple du tri de carte}
 
 Soit un paquet de « $n$ » cartes. On prend la première dans une main.
-On saisie la seconde carte et on l’insère avant ou après la première selon le cas.
-A l’étape « $i$ », la ième carte est insérée à sa place dans le paquet déjà trié. 
+On saisie la seconde carte et on l'insère avant ou après la première selon le cas.
+A l'étape « $i$ », la ième carte est insérée à sa place dans le paquet déjà trié. 
 Pour cela, on peut :
 \begin{itemize}
-\item soit partir du début du tas déjà trié et s’arrêter lorsqu'on rencontre une carte plus grande que la i\ieme (méthode 1);
-\item soit partir de la fin du tas déjà trié, et s’arrêter si on rencontre une carte plus petite que la i\ieme (méthode 2).
+\item soit partir du début du tas déjà trié et s'arrêter lorsqu'on rencontre une carte plus grande que la i\ieme (méthode 1);
+\item soit partir de la fin du tas déjà trié, et s'arrêter si on rencontre une carte plus petite que la i\ieme (méthode 2).
 \end{itemize}
-Le paquet contient alors « $i$ » cartes triées. On procède ainsi de suite jusqu’à la dernière carte.
+Le paquet contient alors « $i$ » cartes triées. On procède ainsi de suite jusqu'à la dernière carte.
 
 \subsection{Application à une liste de nombres}
 
@@ -215,19 +215,142 @@ $$
 \end{minipage}
 
 
-L’analyse de la complexité de l’algorithme peut se faire par l’étude du nombre de comparaisons à effectuer.
+L'analyse de la complexité de l'algorithme peut se faire par l'étude du nombre de comparaisons à effectuer.
+\subsection{Méthode 1}
 
-Dans le cas de la méthode 1 : 
+\begin{pseudo}
+~\\
+\begin{minipage}[c]{.48\linewidth}
+\begin{tabular}{p{.9\textwidth}}
+\hline
+\textbf{Algorithme :} Tri par insertion -- Méthode 1\\
+\hline
+\textbf{Données :}
 \begin{itemize}
-\item meilleur des cas : le tableau est trié à l’envers. Il y a donc $n - 1$ comparaisons à effectuer. La complexité est donc de classe linéaire : $C(n)=\mathcal{O}(n)$;
+\item \textsf{tab}, liste : une liste de nombres
+\end{itemize}
+\textbf{Résultat :} 
+\begin{itemize}
+\item \textsf{tab}, liste : la liste de nombres triés
+\end{itemize}
+\\
+\textbf{tri\_insertion}(\textsf{tab}) :\\
+\hspace{.4cm} \textsf{n} $\leftarrow$ \textbf{longueur}(\textsf{tab}) \\
+\hspace{.4cm}\textbf{Pour} \textsf{i} \textbf{de} 2 \textbf{à} \textsf{n} : \\
+\hspace{.8cm} \textsf{x} $\leftarrow$ \textsf{tab[i]} \\
+\hspace{.8cm} \textsf{j} $\leftarrow$ \textsf{1} \\
+\hspace{.8cm}\textbf{Tant que} \textsf{j $\leq$ i-1} \textbf{et} \textsf{tab[j]<x}  : \\
+\hspace{1.2cm} \textsf{j} $\leftarrow$ \textsf{j+1} \\
+\hspace{.8cm}\textbf{Fin Tant que} \\
+\hspace{.8cm}\textbf{Pour} \textsf{k} \textbf{de} \textsf{i-1} \textbf{à} \textsf{j-1} \textbf{par pas de} \textsf{-1} \textbf{faire} : \\
+\hspace{1.2cm} \textsf{tab[k+1]} $\leftarrow$ \textsf{tab[k]} \\
+\hspace{.8cm}\textbf{Fin Pour} \\
+\hspace{.8cm} \textsf{tab[j]} $\leftarrow$ \textsf{x} \\
+\hspace{.4cm}\textbf{Fin Pour} \\
+\hline
+\end{tabular}
+\end{minipage}\hfill
+\begin{minipage}[c]{.48\linewidth}
+%\begin{py}
+\begin{python}
+def tri_insertion_01(tab):
+    """ 
+    Trie une liste de nombre en utilisant la méthode 
+    du tri par insertion.
+    En Python, le passage se faisant par référence, il 
+    n'est pas indispensable de retourner le tableau.
+    Keyword arguments:
+    tab -- liste de nombres
+    """
+    for i in range (1,len(tab)):
+        x=tab[i]
+        j=0
+        while j<=i-1 and tab[j]<x:
+            j = j+1
+        for k in range(i-1,j-1,-1):
+            tab[k+1]=tab[k]
+        tab[j]=x
+\end{python}
+%\end{py}
+\end{minipage}
+
+\end{pseudo}
+ 
+
+Dans le cas de la méthode 1, la complexité algorithmique peut se déterminer ainsi : 
+\begin{itemize}
+\item meilleur des cas : le tableau est trié à l'envers. Il y a donc $n - 1$ comparaisons à effectuer. La complexité est donc de classe linéaire : $C(n)=\mathcal{O}(n)$;
 \item pire des cas, le tableau est déjà trié. Il y a alors une comparaison à effectuer à la première étape, puis deux, … puis $n-1$. On en déduit donc un nombre total de $\dfrac{n\left(n-1\right)}{2}$ comparaisons. La complexité est donc de classe quadratique : $C(n)=\mathcal{O}\left(n^2\right)$.
 \end{itemize}
 
-Dans le cas de la méthode 2 : 
+
+\subsection{Méthode 2}
+
+\begin{pseudo}
+~\\
+\begin{minipage}[c]{.48\linewidth}
+\begin{tabular}{p{.9\textwidth}}
+\hline
+\textbf{Algorithme :} Tri par insertion -- Méthode 2\\
+\hline
+\textbf{Données :}
+\begin{itemize}
+\item \textsf{tab}, liste : une liste de nombres
+\end{itemize}
+\textbf{Résultat :} 
+\begin{itemize}
+\item \textsf{tab}, liste : la liste de nombres triés
+\end{itemize}
+\\
+\textbf{tri\_insertion}(\textsf{tab}) :\\
+\hspace{.4cm} \textsf{n} $\leftarrow$ \textbf{longueur}(\textsf{tab}) \\
+\hspace{.4cm}\textbf{Pour} \textsf{i} \textbf{de} 2 \textbf{à} \textsf{n} : \\
+\hspace{.8cm} \textsf{x} $\leftarrow$ \textsf{tab[i]} \\
+\hspace{.8cm} \textsf{j} $\leftarrow$ \textsf{i} \\
+\hspace{.8cm}\textbf{Tant que} \textsf{j >1} \textbf{et} \textsf{tab[j-1]>x}  : \\
+\hspace{1.2cm} \textsf{tab[j]} $\leftarrow$ \textsf{tab[j-1]} \\
+\hspace{1.2cm} \textsf{j} $\leftarrow$ \textsf{j-1} \\
+\hspace{.8cm}\textbf{Fin Tant que} \\
+\hspace{.8cm} \textsf{tab[j]} $\leftarrow$ \textsf{x} \\
+\hspace{.4cm}\textbf{Fin Pour} \\
+\hline
+\end{tabular}
+\end{minipage} \hfill
+\begin{minipage}[c]{.48\linewidth}
+%\begin{py}
+\begin{python}
+def tri_insertion_02(tab):
+    """ 
+    Trie une liste de nombre en utilisant la méthode 
+    du tri par insertion.
+    En Python, le passage se faisant par référence, 
+    il n'est pas indispensable de retourner le tableau.
+    Keyword arguments:
+    tab -- liste de nombres
+    """
+    for i in range (1,len(tab)):
+        x=tab[i]
+        j=i
+        while j>0 and tab[j-1]>x:
+            tab[j]=tab[j-1]
+            j = j-1
+        tab[j]=x
+\end{python}
+%\end{py}
+\end{minipage}
+\end{pseudo}
+
+\subsubsection*{Estimation de la complexité}
+\begin{itemize}
+\item Meilleur des cas, le tableau est trié, la complexité est linéaire : $\mathcal{O}(n)$.
+\item Pire des cas, le tableau est trié à l'envers, la complexité est quadratique : $\mathcal{O}(n^2)$.
+\end{itemize}
+
+
+Dans le cas de la méthode 2 la complexité algorithmique peut se déterminer ainisi: 
 \begin{itemize}
 \item meilleur des cas : le tableau est déjà trié. Il y a donc $n - 1$ comparaisons à effectuer. La complexité est donc de classe linéaire : $C(n)=\mathcal{O}(n)$;
-\item pire des cas, le tableau est trié à l’envers. Il y a alors une comparaison à effectuer à la première étape, puis deux, … puis $n-1$. On en déduit donc un nombre total de $\dfrac{n\left(n-1\right)}{2}$  comparaisons. La complexité est donc de classe quadratique : $C(n)=\mathcal{O}\left(n^2\right)$.
-
+\item pire des cas, le tableau est trié à l'envers. Il y a alors une comparaison à effectuer à la première étape, puis deux, … puis $n-1$. On en déduit donc un nombre total de $\dfrac{n\left(n-1\right)}{2}$  comparaisons. La complexité est donc de classe quadratique : $C(n)=\mathcal{O}\left(n^2\right)$.
 
 \end{itemize}
 
@@ -237,8 +360,21 @@ Le tri de cartes.
 \end{exemple}
 
 \begin{rem}
-On peut aussi montrer que la complexité en moyenne est de classe quadratique lorsque les permutations sont équiprobables. L’efficacité du tri par insertion est excellente lorsque le tableau est déjà trié ou « presque trié » ($C(n)=\mathcal{O}\left(n\right)$). Il surpasse alors toutes les autres méthodes de tri qui sont au mieux en $\mathcal{O}\left(n ln(n)\right)$.
+On peut aussi montrer que la complexité en moyenne est de classe quadratique lorsque les permutations sont équiprobables. L'efficacité du tri par insertion est excellente lorsque le tableau est déjà trié ou « presque trié » ($C(n)=\mathcal{O}\left(n\right)$). Il surpasse alors toutes les autres méthodes de tri qui sont au mieux en $\mathcal{O}\left(n ln(n)\right)$.
 \end{rem}
+
+
+
+
+\subsubsection{Méthode 1}
+
+\subsubsection*{Estimation de la complexité}
+\begin{itemize}
+\item Meilleur des cas, le tableau est trié à l'envers, la complexité est linéaire : $\mathcal{O}(n)$.
+\item Pire des cas, le tableau est trié, la complexité est quadratique : $\mathcal{O}(n^2)$.
+\end{itemize}
+
+\subsubsection{Méthode 2}
 
 \section{Le tri rapide (\textit{Quicksort})}
 
@@ -247,27 +383,27 @@ On peut aussi montrer que la complexité en moyenne est de classe quadratique lo
 Tri de valeurs numériques
 Problème : Comment trier une liste de nombres par la méthode de « tri rapide » ?
 \end{exemple}
-L’algorithme fait parti de la catégorie des algorithmes « diviser pour régner ».
-À chaque appel de la fonction de tri, le nombre de données à traiter est diminué de un. C'est-à-dire que l’on ne traite plus l’élément appelé « pivot » dans les appels de fonction ultérieurs, il est placé à sa place définitive dans le tableau.
+L'algorithme fait parti de la catégorie des algorithmes « diviser pour régner ».
+À chaque appel de la fonction de tri, le nombre de données à traiter est diminué de un. C'est-à-dire que l'on ne traite plus l'élément appelé « pivot » dans les appels de fonction ultérieurs, il est placé à sa place définitive dans le tableau.
 Le tableau de valeurs est ensuite segmenté en deux parties :
 \begin{itemize}
 \item dans un premier tableau, toutes les valeurs numériques sont inférieures au « pivot »;
 \item dans un second tableau, toutes valeurs numériques sont supérieures au « pivot ».
 \end{itemize}
 
-L’appel de la fonction de tri est récursif sur les tableaux segmentés.
+L'appel de la fonction de tri est récursif sur les tableaux segmentés.
 On peut par exemple choisir le premier élément du tableau comme « pivot » :
 
 
 
 
-Le « coût » temporel de l’algorithme de tri est principalement donné par des opérations de comparaison sur les éléments à trier. On raisonne donc sur le nombre de données à traiter pour l’analyse de la complexité de l’algorithme.
+Le « coût » temporel de l'algorithme de tri est principalement donné par des opérations de comparaison sur les éléments à trier. On raisonne donc sur le nombre de données à traiter pour l'analyse de la complexité de l'algorithme.
 
 Dans le pire des cas, un des deux segments est vide à chaque appel de la fonction de tri. Cela arrive lorsque le tableau est déjà trié. Le nombre de données à traiter  pour le i\ieme appel, est $n - i + 1$.
 Le nombre total pour n appels de fonction est donc $\dfrac{n(n+1)}{2}$. On peut aussi écrire une relation de récurrence du type $C(n) = C(n-1) + n - 1$
 La complexité est donc de classe quadratique $C(n) = \mathcal{O}\left(n^2\right)$.
 
-Dans le meilleur des cas, les deux segments sont de taille égale. Pour un nombre de données à traiter $n$, chacun des segments suivant a donc au plus $\dfrac{n-1}{2}$ éléments (on retire le pivot). On répète ainsi la segmentation des tableaux jusqu’à arriver au plus à un seul élément. 
+Dans le meilleur des cas, les deux segments sont de taille égale. Pour un nombre de données à traiter $n$, chacun des segments suivant a donc au plus $\dfrac{n-1}{2}$ éléments (on retire le pivot). On répète ainsi la segmentation des tableaux jusqu'à arriver au plus à un seul élément. 
 On peut écrire une relation de récurrence du type $C(n) = 2 C\left(\dfrac{n - 1}{ 2} \right)  +  n - 1$.
  
 La complexité est donc de classe quasi linéaire $C(n)=\mathcal{O}\left(n ln(n)\right)$.
@@ -276,7 +412,7 @@ La complexité est donc de classe quasi linéaire $C(n)=\mathcal{O}\left(n ln(n)
 Certains algorithmes de tri rapide prennent pour « pivot » le dernier élément, la valeur moyenne du premier et du dernier, ou un positionnement aléatoire dans le tableau. Pour se placer dans le meilleur des cas pour chaque segment de tableau, il faut prendre pour pivot la valeur médiane du tableau de valeurs. Le problème est que cette recherche de pivot idéal a aussi un « coût ».
 \end{rem}
 
-On écrit tout d’abord l’algorithme effectuant la segmentation du tableau :
+On écrit tout d'abord l'algorithme effectuant la segmentation du tableau :
 \begin{itemize}
 \item le pivot (1\ier élément du tableau) est mis à sa place définitive;
 \item pour des indices inférieurs, toutes les valeurs sont plus petites ou égales;
@@ -292,14 +428,14 @@ La méthode de tri fusion pour un tableau de données est la suivante :
 \item on fusionne les deux parties en interclassant les données.
 \end{enumerate}
 
-L’algorithme est donc récursif. Il fait parti des algorithmes « diviser pour régner ». La récursivité s'arrête car on finit par arriver à des listes composées d'un seul élément et le tri est alors trivial. 
+L'algorithme est donc récursif. Il fait parti des algorithmes « diviser pour régner ». La récursivité s'arrête car on finit par arriver à des listes composées d'un seul élément et le tri est alors trivial. 
 
-Si l’on s’intéresse au nombre de données à traiter à chaque appel de fonction, la relation de récurrence est du type :
+Si l'on s'intéresse au nombre de données à traiter à chaque appel de fonction, la relation de récurrence est du type :
 $C(n) = 2 C\left(\dfrac{n}{2}\right)  +  n$.
 La méthode de tri fusion a donc une efficacité temporelle comparable au tri rapide en $\mathcal{O}\left(n \ln(n)\right)$. Par contre, elle n'opère pas en place : une zone temporaire de données supplémentaire de taille égale à celle de l'entrée est nécessaire. Des versions plus complexes peuvent être effectuées sur place mais sont moins rapides.
 
 \begin{rem}
-D’autres méthodes de tri existent : tri par sélection $\mathcal{O}\left(n^2\right)$, tri à bulles  $\mathcal{O}\left(n^2\right)$, \textit{etc}.
+D'autres méthodes de tri existent : tri par sélection $\mathcal{O}\left(n^2\right)$, tri à bulles  $\mathcal{O}\left(n^2\right)$, \textit{etc}.
 \end{rem}
 
 \section{Synthèse}
