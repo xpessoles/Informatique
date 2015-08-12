@@ -98,29 +98,29 @@ Le paquet contient alors « $i$ » cartes triées. On procède ainsi de suite ju
 \hline
 \end{tabular}
 
-\begin{minipage}[b]{.1\linewidth}
+\begin{minipage}[b]{.07\linewidth}
 Étape 1 
 \end{minipage}\hfill
-\begin{minipage}[b]{.2\linewidth}
+\begin{minipage}[b]{.15\linewidth}
 \begin{tabular}{|c|c|c|c|c|}
 \hline
 \cellcolor{black!10}5 & \cellcolor{black!30}8 & 3 & 2 & 9 \\
 \hline
 \end{tabular}
 \end{minipage}\hfill
-\begin{minipage}[b]{.1\linewidth}
+\begin{minipage}[b]{.05\linewidth}
 $$
 \Longrightarrow
 $$
 \end{minipage}\hfill
-\begin{minipage}[b]{.2\linewidth}
+\begin{minipage}[b]{.15\linewidth}
 \begin{tabular}{|c|c|c|c|c|}
 \hline
 \cellcolor{black!10}5 & \cellcolor{black!30}8 & 3 & 2 & 9 \\
 \hline
 \end{tabular}
 \end{minipage}\hfill
-\begin{minipage}[b]{.2\linewidth}
+\begin{minipage}[b]{.3\linewidth}
 \begin{tabular}{ll}
 1 comparaison & 1 comparaison \\
 0 affectation & 0 affectation \\
@@ -128,29 +128,29 @@ $$
 \end{minipage}
 
 
-\begin{minipage}[b]{.1\linewidth}
+\begin{minipage}[b]{.07\linewidth}
 Étape 2
 \end{minipage}\hfill
-\begin{minipage}[b]{.2\linewidth}
+\begin{minipage}[b]{.15\linewidth}
 \begin{tabular}{|c|c|c|c|c|}
 \hline
 \cellcolor{black!10}5 & \cellcolor{black!10}8 & \cellcolor{black!30}3 & 2 & 9 \\
 \hline
 \end{tabular}
 \end{minipage}\hfill
-\begin{minipage}[b]{.1\linewidth}
+\begin{minipage}[b]{.05\linewidth}
 $$
 \Longrightarrow
 $$
 \end{minipage}\hfill
-\begin{minipage}[b]{.2\linewidth}
+\begin{minipage}[b]{.15\linewidth}
 \begin{tabular}{|c|c|c|c|c|}
 \hline
 \cellcolor{black!30} 3 & \cellcolor{black!10}5 & \cellcolor{black!10}8 & 2 & 9 \\
 \hline
 \end{tabular}
 \end{minipage}\hfill
-\begin{minipage}[b]{.2\linewidth}
+\begin{minipage}[b]{.3\linewidth}
 \begin{tabular}{ll}
 1 comparaison & 2 comparaisons \\
 3 affectations & 3 affectations \\
@@ -158,29 +158,29 @@ $$
 \end{minipage}
 
 
-\begin{minipage}[b]{.1\linewidth}
+\begin{minipage}[b]{.07\linewidth}
 Étape 3
 \end{minipage}\hfill
-\begin{minipage}[b]{.2\linewidth}
+\begin{minipage}[b]{.15\linewidth}
 \begin{tabular}{|c|c|c|c|c|}
 \hline
 \cellcolor{black!10}3 & \cellcolor{black!10}5 & \cellcolor{black!10}8 & \cellcolor{black!30}2 & 9 \\
 \hline
 \end{tabular}
 \end{minipage}\hfill
-\begin{minipage}[b]{.1\linewidth}
+\begin{minipage}[b]{.05\linewidth}
 $$
 \Longrightarrow
 $$
 \end{minipage}\hfill
-\begin{minipage}[b]{.2\linewidth}
+\begin{minipage}[b]{.15\linewidth}
 \begin{tabular}{|c|c|c|c|c|}
 \hline
 \cellcolor{black!30}2 & \cellcolor{black!10}3 & \cellcolor{black!10}5 & \cellcolor{black!10}8 & 9 \\
 \hline
 \end{tabular}
 \end{minipage}\hfill
-\begin{minipage}[b]{.2\linewidth}
+\begin{minipage}[b]{.3\linewidth}
 \begin{tabular}{ll}
 1 comparaison & 3 comparaisons \\
 4 affectations & 4 affectations \\
@@ -188,29 +188,29 @@ $$
 \end{minipage}
 
 
-\begin{minipage}[b]{.1\linewidth}
+\begin{minipage}[b]{.07\linewidth}
 Étape 4
 \end{minipage}\hfill
-\begin{minipage}[b]{.2\linewidth}
+\begin{minipage}[b]{.15\linewidth}
 \begin{tabular}{|c|c|c|c|c|}
 \hline
 \cellcolor{black!10}2 & \cellcolor{black!10}3 & \cellcolor{black!10}5 & \cellcolor{black!10}8 & \cellcolor{black!30}9 \\
 \hline
 \end{tabular}
 \end{minipage}\hfill
-\begin{minipage}[b]{.1\linewidth}
+\begin{minipage}[b]{.05\linewidth}
 $$
 \Longrightarrow
 $$
 \end{minipage}\hfill
-\begin{minipage}[b]{.2\linewidth}
+\begin{minipage}[b]{.15\linewidth}
 \begin{tabular}{|c|c|c|c|c|}
 \hline
 \cellcolor{black!10}2 & \cellcolor{black!10}3 & \cellcolor{black!10}5 & \cellcolor{black!10}8 & \cellcolor{black!30}9 \\
 \hline
 \end{tabular}
 \end{minipage}\hfill
-\begin{minipage}[b]{.2\linewidth}
+\begin{minipage}[b]{.3\linewidth}
 \begin{tabular}{ll}
 4 comparaisons & 1 comparaison \\
 0 affectation & 0 affectation \\
@@ -422,6 +422,36 @@ On écrit tout d'abord l'algorithme effectuant la segmentation du tableau :
 \item pour des indices supérieurs, toutes les valeurs sont plus grandes.
 \end{itemize}
 
+\begin{center}
+\begin{tabular}{rc|c|c|c|c|c|}
+&& $p=5$ & $g$ & & & $d$ \\
+\cline{3-7}
+$T[g]>p$ et $T[d]>p$&&\cellcolor{black!30}5 & \cellcolor{black!10}8 & 3 & 2 & \cellcolor{black!10}9 \\
+\cline{3-7}
+&& & $g$ &  & $d$ &  \\
+\cline{3-7}
+$T[g]>p$ et $T[d]<p$, $d>g$ &&\cellcolor{black!30}5 & \cellcolor{black!10}8 & 3 & \cellcolor{black!10}2 & \cellcolor{black!10}9 \\
+\cline{3-7}
+&& &  & $g=d$ & &  \\
+\cline{3-7}
+Échange de $T[g]$ et $T[d]$ &&\cellcolor{black!30}5 & \cellcolor{black!10}2 & 
+\cellcolor{black!10}3 & \cellcolor{black!10}8 & \cellcolor{black!10}9 \\
+\cline{3-7}
+&& &  & $d$ & $g$ &  \\
+\cline{3-7}
+$g>d$ &&\cellcolor{black!30}5 & \cellcolor{black!10}2 & 
+\cellcolor{black!10}3 & \cellcolor{black!10}8 & \cellcolor{black!10}9 \\
+\cline{3-7}
+&& &  & & &  \\
+\cline{3-7}
+Échange de $p$ et $T[d]$ &&\cellcolor{black!10}3 & \cellcolor{black!10}2 & 
+\cellcolor{black!30}5 & \cellcolor{black!10}8 & \cellcolor{black!10}9 \\
+\cline{3-7}
+\end{tabular}
+\end{center}
+
+Le pivot a sa place définitive. Les éléments à sa gauche sont plus petits ou égaux.
+Les éléments à sa droite sont plus grands
 
 \subsection{Algorithmes du tri rapide}
 
