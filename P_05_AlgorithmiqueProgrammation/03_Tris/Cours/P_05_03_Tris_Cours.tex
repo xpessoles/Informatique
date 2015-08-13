@@ -464,35 +464,35 @@ Les éléments à sa droite sont plus grands
 \hline
 \textbf{Données :}
 \begin{itemize}
-\item \textsf{tab}, liste : une liste de nombres
-\item \textsf{i,j}, entiers : indices de début et de fin de la segmentation à effectuer
+\item \tsf{tab}, liste : une liste de nombres
+\item \tsf{i,j}, entiers : indices de début et de fin de la segmentation à effectuer
 \end{itemize}
 \textbf{Résultats :} 
 \begin{itemize}
-\item \textsf{tab}, liste : la liste de nombre segmenté avec le pivot à sa place définitive
-\item \textsf{k} entier : l'indice de la place du pivot
+\item \tsf{tab}, liste : la liste de nombre segmenté avec le pivot à sa place définitive
+\item \tsf{k} entier : l'indice de la place du pivot
 \end{itemize}
 \\
-\textbf{segmente}(\textsf{tab,i,j}) :\\
-\hspace{.4cm} \textsf{g $\leftarrow$ i+1 }\\
-\hspace{.4cm} \textsf{d $\leftarrow$ j}\\
-\hspace{.4cm} \textsf{p $\leftarrow$ tab[i]}\\
-\hspace{.4cm} \textbf{Tant que} \textsf{g $\leq$ d} \textbf{Faire} \\
-\hspace{.8cm} \textbf{Tant que} \textsf{d$\geq$ 0} \textbf{et} \textsf{tab[d]>p} \textbf{Faire} \\
-\hspace{1.2cm} \textsf{d $\leftarrow$ d-1}\\  
+\textbf{segmente}(\tsf{tab,i,j}) :\\
+\hspace{.4cm} \tsf{g $\leftarrow$ i+1 }\\
+\hspace{.4cm} \tsf{d $\leftarrow$ j}\\
+\hspace{.4cm} \tsf{p $\leftarrow$ tab[i]}\\
+\hspace{.4cm} \textbf{Tant que} \tsf{g $\leq$ d} \textbf{Faire} \\
+\hspace{.8cm} \textbf{Tant que} \tsf{d$\geq$ 0} \textbf{et} \tsf{tab[d]>p} \textbf{Faire} \\
+\hspace{1.2cm} \tsf{d $\leftarrow$ d-1}\\  
 \hspace{.8cm} \textbf{Fin Tant que}  \\
-\hspace{.8cm} \textbf{Tant que} \textsf{g$\leq$ j} \textbf{et} \textsf{tab[g]$\leq$p} \textbf{Faire} \\
-\hspace{1.2cm} \textsf{g $\leftarrow$ g+1}\\  
+\hspace{.8cm} \textbf{Tant que} \tsf{g$\leq$ j} \textbf{et} \tsf{tab[g]$\leq$p} \textbf{Faire} \\
+\hspace{1.2cm} \tsf{g $\leftarrow$ g+1}\\  
 \hspace{.8cm} \textbf{Fin Tant que}  \\
-\hspace{.8cm} \textbf{Si} \textsf{g<d} \textbf{alors} \\
-\hspace{1.2cm} \textbf{Échange(} \textsf{tab,g,d} \textbf{)} \\
-\hspace{1.2cm} \textsf{d $\leftarrow$ d-1}\\  
-\hspace{1.2cm} \textsf{g $\leftarrow$ g+1}\\  
+\hspace{.8cm} \textbf{Si} \tsf{g<d} \textbf{alors} \\
+\hspace{1.2cm} \textbf{Échange(} \tsf{tab,g,d} \textbf{)} \\
+\hspace{1.2cm} \tsf{d $\leftarrow$ d-1}\\  
+\hspace{1.2cm} \tsf{g $\leftarrow$ g+1}\\  
 \hspace{.8cm} \textbf{Fin Si} \\
 \hspace{.4cm} \textbf{Fin Tant que}  \\
-\hspace{.4cm} \textsf{k$\leftarrow$ d}  \\
-\hspace{.4cm} \textbf{Échange(} \textsf{tab,i,d} \textbf{)} \\
-\hspace{.4cm} \textbf{Retourner} \textsf{k}  \\
+\hspace{.4cm} \tsf{k$\leftarrow$ d}  \\
+\hspace{.4cm} \textbf{Échange(} \tsf{tab,i,d} \textbf{)} \\
+\hspace{.4cm} \textbf{Retourner} \tsf{k}  \\
 \hline
 \end{tabular}
 
@@ -503,19 +503,19 @@ Les éléments à sa droite sont plus grands
 \hline
 \textbf{Données :}
 \begin{itemize}
-\item \textsf{tab}, liste : une liste de nombres
-\item \textsf{i,j}, entiers : indices de début et de fin de la portion à trier
+\item \tsf{tab}, liste : une liste de nombres
+\item \tsf{i,j}, entiers : indices de début et de fin de la portion à trier
 \end{itemize}
 \textbf{Résultats :} 
 \begin{itemize}
-\item \textsf{tab}, liste : liste triée entre les indices \textsf{i} et \textsf{j}
+\item \tsf{tab}, liste : liste triée entre les indices \tsf{i} et \tsf{j}
 \end{itemize}
 \\
-\textbf{tri\_quicksort}(\textsf{tab,i,j}) :\\
-\hspace{.4cm} \textbf{Si} \textsf{g<d} \textbf{alors} \\
-\hspace{.8cm} \textsf{k$\leftarrow$} \textbf{segmente(}\textsf{tab,i,j} \textbf{)} \\
-\hspace{.8cm} \textbf{tri\_quicksort(}\textsf{tab,i,k-1} \textbf{)} \\
-\hspace{.8cm} \textbf{tri\_quicksort(}\textsf{tab,k+1,j} \textbf{)} \\
+\textbf{tri\_quicksort}(\tsf{tab,i,j}) :\\
+\hspace{.4cm} \textbf{Si} \tsf{g<d} \textbf{alors} \\
+\hspace{.8cm} \tsf{k$\leftarrow$} \textbf{segmente(}\tsf{tab,i,j} \textbf{)} \\
+\hspace{.8cm} \textbf{tri\_quicksort(}\tsf{tab,i,k-1} \textbf{)} \\
+\hspace{.8cm} \textbf{tri\_quicksort(}\tsf{tab,k+1,j} \textbf{)} \\
 \hspace{.4cm} \textbf{Fin Si} \\
 \hline
 \end{tabular}
@@ -582,26 +582,26 @@ def tri_quicksort(tab,i,j):
 \hline
 \textbf{Données :}
 \begin{itemize}
-\item \textsf{tab}, liste : une liste de nombres
-\item \textsf{i,j}, entiers : indices de début et de fin de la portion de liste à trier
+\item \tsf{tab}, liste : une liste de nombres
+\item \tsf{i,j}, entiers : indices de début et de fin de la portion de liste à trier
 \end{itemize}
 \textbf{Résultats :} 
 \begin{itemize}
-\item \textsf{tab}, liste : liste triée entre les indices \textsf{i} et \textsf{j}
+\item \tsf{tab}, liste : liste triée entre les indices \tsf{i} et \tsf{j}
 \end{itemize}
 \\
-\textbf{tri\_quicksort\_optimized}(\textsf{tab,i,j}) :\\
-\hspace{.4cm} \textbf{Si} \textsf{i<j} \textbf{alors} \\
-\hspace{.8cm} \textsf{k$\leftarrow$} \textbf{segmente(}\textsf{tab,i,j} \textbf{)} \\
-\hspace{.8cm} \textbf{Si} \textsf{k-i>15} \textbf{alors} \\
-\hspace{1.2cm} \textbf{tri\_quicksort(}\textsf{tab,i,k-1} \textbf{)} \\
+\textbf{tri\_quicksort\_optimized}(\tsf{tab,i,j}) :\\
+\hspace{.4cm} \textbf{Si} \tsf{i<j} \textbf{alors} \\
+\hspace{.8cm} \tsf{k$\leftarrow$} \textbf{segmente(}\tsf{tab,i,j} \textbf{)} \\
+\hspace{.8cm} \textbf{Si} \tsf{k-i>15} \textbf{alors} \\
+\hspace{1.2cm} \textbf{tri\_quicksort(}\tsf{tab,i,k-1} \textbf{)} \\
 \hspace{.8cm} \textbf{Sinon} \\
-\hspace{1.2cm} \textbf{tri\_insertion(}\textsf{tab,i,k-1} \textbf{)} \\
+\hspace{1.2cm} \textbf{tri\_insertion(}\tsf{tab,i,k-1} \textbf{)} \\
 \hspace{.8cm} \textbf{Fin Si} \\
-\hspace{.8cm} \textbf{Si} \textsf{j-k>15} \textbf{alors} \\
-\hspace{1.2cm} \textbf{tri\_quicksort(}\textsf{tab,k+1,j} \textbf{)} \\
+\hspace{.8cm} \textbf{Si} \tsf{j-k>15} \textbf{alors} \\
+\hspace{1.2cm} \textbf{tri\_quicksort(}\tsf{tab,k+1,j} \textbf{)} \\
 \hspace{.8cm} \textbf{Sinon} \\
-\hspace{1.2cm} \textbf{tri\_insertion(}\textsf{tab,k+1,j} \textbf{)} \\
+\hspace{1.2cm} \textbf{tri\_insertion(}\tsf{tab,k+1,j} \textbf{)} \\
 \hspace{.8cm} \textbf{Fin Si} \\
 \hspace{.4cm} \textbf{Fin Si} \\
 \hline
@@ -636,39 +636,39 @@ D'autres méthodes de tri existent : tri par sélection $\mathcal{O}\left(n^2\ri
 \hline
 \textbf{Données :}
 \begin{itemize}
-\item \textsf{tab}, liste : une liste de nombres \textsf{tab[g:d]} avec \textsf{g} indice de la valeur de gauche, \textsf{d} indice de la valeur de droite
-\item \textsf{m}, entier : indice tel que \textsf{$g\leq$m<d} et tel que les sous-tableaux \textsf{tab[g:m]} et \textsf{tab[m+1:d]} soient ordonnés
+\item \tsf{tab}, liste : une liste de nombres \tsf{tab[g:d]} avec \tsf{g} indice de la valeur de gauche, \tsf{d} indice de la valeur de droite
+\item \tsf{m}, entier : indice tel que \tsf{$g\leq$m<d} et tel que les sous-tableaux \tsf{tab[g:m]} et \tsf{tab[m+1:d]} soient ordonnés
 \end{itemize}
 \textbf{Résultats :} 
 \begin{itemize}
-\item \textsf{tab}, liste : liste triée entre les indices \textsf{g} et \textsf{d}
+\item \tsf{tab}, liste : liste triée entre les indices \tsf{g} et \tsf{d}
 \end{itemize}
 \\
-\textbf{fusion\_listes}(\textsf{tab,g,d,m}) :\\
-\hspace{.4cm} \textsf{n1$\leftarrow$ m-g+1}\\
-\hspace{.4cm} \textsf{n2$\leftarrow$ d-m}\\
-\hspace{.4cm} \textbf{Initialiser tableau} \textsf{G}  \\
-\hspace{.4cm} \textbf{Initialiser tableau} \textsf{D}  \\
-\hspace{.4cm} \textbf{Pour} \textsf{i} \textbf{allant de} \textsf{1} \textbf{à} \textsf{n1} \textbf{faire}\\
-\hspace{.8cm}  \textsf{G[i] $ \leftarrow$ tab[g+i-1]}\\
+\textbf{fusion\_listes}(\tsf{tab,g,d,m}) :\\
+\hspace{.4cm} \tsf{n1$\leftarrow$ m-g+1}\\
+\hspace{.4cm} \tsf{n2$\leftarrow$ d-m}\\
+\hspace{.4cm} \textbf{Initialiser tableau} \tsf{G}  \\
+\hspace{.4cm} \textbf{Initialiser tableau} \tsf{D}  \\
+\hspace{.4cm} \textbf{Pour} \tsf{i} \textbf{allant de} \tsf{1} \textbf{à} \tsf{n1} \textbf{faire}\\
+\hspace{.8cm}  \tsf{G[i] $ \leftarrow$ tab[g+i-1]}\\
 \hspace{.4cm}  \textbf{Fin Pour}\\
-\hspace{.4cm} \textbf{Pour} \textsf{j} \textbf{allant de} \textsf{1} \textbf{à} \textsf{n2} \textbf{faire}\\
-\hspace{.8cm} \textsf{D[j] $ \leftarrow$ tab[m+j]}\\
-\hspace{.4cm} \textbf{Fin Pour}\\
-\hspace{.4cm} \textsf{i $\leftarrow$ 1}\\
-\hspace{.4cm} \textsf{j $\leftarrow$ 1}\\
-\hspace{.4cm} \textsf{G[n1+1] $\leftarrow$ $+\infty$}\\
-\hspace{.4cm} \textsf{D[n2+1] $\leftarrow$ $+\infty$}\\
-\hspace{.4cm} \textbf{Pour} \textsf{k} \textbf{allant de} \textsf{g} \textbf{à} \textsf{d} \textbf{faire}\\
+\hspace{.4cm} \textbf{Pour} \tsf{j} \textbf{allant de} \tsf{1} \textbf{à} \tsf{n2} \textbf{faire}\\
+\hspace{.8cm} \tsf{D[j] $ \leftarrow$ tab[m+j]}\\
+\hspace{.4cm} \tsf{Fin Pour}\\
+\hspace{.4cm} \tsf{i $\leftarrow$ 1}\\
+\hspace{.4cm} \tsf{j $\leftarrow$ 1}\\
+\hspace{.4cm} \tsf{G[n1+1] $\leftarrow$ $+\infty$}\\
+\hspace{.4cm} \tsf{D[n2+1] $\leftarrow$ $+\infty$}\\
+\hspace{.4cm} \textbf{Pour} \tsf{k} \textbf{allant de} \tsf{g} \textbf{à} \tsf{d} \textbf{faire}\\
 %\hspace{.8cm} \textbf{Si} \textsf{i$\leq$n1} \textbf{et} \textsf{G[i]$\leq$D[j]} \textbf{alors} \\
-\hspace{.8cm} \textbf{Si}  \textsf{G[i]$\leq$D[j]} \textbf{alors} \\
-\hspace{1.2cm} \textsf{tab[k]$\leftarrow$ G[i]} \\
-\hspace{1.2cm} \textsf{i$\leftarrow$ i+1} \\
+\hspace{.8cm} \textbf{Si}  \tsf{G[i]$\leq$D[j]} \textbf{alors} \\
+\hspace{1.2cm} \tsf{tab[k]$\leftarrow$ G[i]} \\
+\hspace{1.2cm} \tsf{i$\leftarrow$ i+1} \\
 \hspace{.8cm} \textbf{Sinon} \\
 %\hspace{1.2cm} \textbf{Si} \textsf{j$\leq$n2} \textbf{et} \textsf{G[i]>D[j]} \textbf{alors} \\
-\hspace{1.2cm} \textbf{Si} \textsf{G[i]>D[j]} \textbf{alors} \\
-\hspace{1.6cm} \textsf{tab[k]$\leftarrow$ D[j]} \\
-\hspace{1.6cm} \textsf{j$\leftarrow$ j+1} \\
+\hspace{1.2cm} \textbf{Si} \tsf{G[i]>D[j]} \textbf{alors} \\
+\hspace{1.6cm} \tsf{tab[k]$\leftarrow$ D[j]} \\
+\hspace{1.6cm} \tsf{j$\leftarrow$ j+1} \\
 \hspace{1.2cm} \textbf{Fin Si} \\
 \hspace{.8cm} \textbf{Fin Si} \\
 \hspace{.4cm}  \textbf{Fin Pour}\\
@@ -688,17 +688,17 @@ D'autres méthodes de tri existent : tri par sélection $\mathcal{O}\left(n^2\ri
 Algorithme récursif du table de tri. \\
 \textbf{Données :}
 \begin{itemize}
-\item \textsf{tab}, liste : une liste de nombres non triés \textsf{tab[g:d]} 
-\item \textsf{g,d}, entiers : indices de début et de fin de la liste
+\item \tsf{tab}, liste : une liste de nombres non triés \tsf{tab[g:d]} 
+\item \tsf{g,d}, entiers : indices de début et de fin de la liste
 \end{itemize}
 \textbf{Résultats :} 
 \begin{itemize}
-\item \textsf{tab}, liste : liste triée entre les indices \textsf{g} et \textsf{d}
+\item \tsf{tab}, liste : liste triée entre les indices \tsf{g} et \tsf{d}
 \end{itemize}
 \\
-\textbf{tri\_fusion}(\textsf{tab,g,d}) :\\
-\hspace{.4cm} \textbf{Si} \textsf{g<d}  \textbf{alors} \\
-\hspace{.8cm} \textsf{m $\leftarrow$ (g+d)} \textbf{div} 2\\
+\textbf{tri\_fusion}(\tsf{tab,g,d}) :\\
+\hspace{.4cm} \textbf{Si} \tsf{g<d}  \textbf{alors} \\
+\hspace{.8cm} \tsf{m $\leftarrow$ (g+d)} \textbf{div} 2\\
 \hspace{.8cm} \textbf{tri\_fusion}(tab,g,m) \\
 \hspace{.8cm} \textbf{tri\_fusion}(tab,m+1,d) \\
 \hspace{.8cm} \textbf{fusion\_listes}(tab,g,d,m) \\
