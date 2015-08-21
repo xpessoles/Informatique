@@ -1,106 +1,166 @@
-\documentclass[10pt]{article}
-\input{style/coursHeadings}
-\input{style/programHeadings}
+\documentclass[10pt,fleqn]{article} % Default font size and left-justified equations
+\usepackage[%
+    pdftitle={Projet Informatique : Analyse des images},
+    pdfauthor={Xavier Pessoles}]{hyperref}
+    
+\input{style/new_style}
 \input{style/macros_SII}
-\input{style/macros_Titres}
-\input{style/macros_Frames}
 
-\newif\ifprof
+\usepackage{multicol}
+%\fichetrue
+\fichefalse
+
 \proftrue
 %\proffalse
 
-\newif\ifxp
-\xptrue
-%\xpfalse
-
-\newif\iftd
 \tdtrue
 %\tdfalse
 
-\usepackage[%
-    pdftitle={Projet - Modélisation du comportement cinématique d'un axe linéaire},
-    pdfauthor={Xavier Pessoles},
-    colorlinks=true,
-    linkcolor=blue,
-    citecolor=magenta]{hyperref}
+%\courstrue
+\coursfalse
 
 \def\discipline{Informatique}
-\def\xxtitre{%
-\ifxp
-Projet d'informatique
-\else
-\fi
-}
+\def\xxtete{Informatique}
 
-\def\xxsoustitre{%
-\ifxp
-Modélisation du comportement cinématique d'un axe linéaire
-\else
-\fi}
+\def\classe{PT -- PT $\star$}
+\def\xxnumpartie{Projet}
+\def\xxpartie{%Étude cinématique des systèmes de solides de la chaîne d'énergie  \\
+Analyser, Modéliser, Résoudre}
 
-\def\xxauteur{%
-\ifxp
-Xavier \textsc{Pessoles}
-\else
-\fi}
+\def\xxnumchapitre{~}
+\def\xxchapitre{~}
+
+\def\xxtitreexo{Analyse des images}
+\def\xxsourceexo{}%\hspace{.2cm} D'après concours Mines-Ponts -- 2013.}
+
+
+\def\xxposongletx{2}
+\def\xxposonglettext{1.45}
+\def\xxposonglety{20}
+\def\xxonglet{}%Part. 1 -- Ch. 3}
+
+\def\xxactivite{Projet 4}
+\def\xxauteur{\textsl{Xavier Pessoles}}
+
+\def\xxcompetences{%
+\textsl{%
+\textbf{Savoirs et compétences :}\\
+%\noindent \textbf{Résoudre :} à partir des modèles retenus :
+%\begin{itemize}[label=\ding{112},font=\color{ocre}] 
+%\item choisir une méthode de résolution analytique, graphique, numérique;
+%\end{itemize}
+}}
+
+\def\xxfigures{
+%\includegraphics[width=.8\textwidth]{images/vibrations}
+}%figues de la page de garde
 
 \def\xxpied{%
-\ifxp
-Projet d'informatique\\
-Modélisation du comportement cinématique d'un axe linéaire
-\else
-\fi}
+\xxactivite -- \xxtitreexo  \\
+%Ch 5 : Cinématique du solide -- \xxactivite%
+}
 
 
-
-
-
+\setcounter{secnumdepth}{5}
 %---------------------------------------------------------------------------
 
 
 \begin{document}
-\ifxp
-\input{style/enteteXP}
-\else
-\input{style/enteteDI}
-\fi
+%\chapterimage{png/Fond_Cin}
+\input{style/new_pagegarde}
+\vspace{10cm}
+\pagestyle{fancy}
+\thispagestyle{plain}
+
+
+\def\columnseprulecolor{\color{ocre}}
+\setlength{\columnseprule}{0.4pt} 
+\begin{multicols}{2}
+
+\section*{Mise en situation}
+
+Pour étudier une poutre soumises à des vibrations en traction compression, il est possible de la modéliser par $n$ éléments de masse $m_i$ ($i$ variant de 1 à $n$). Ces éleménts sont reliés par des liaisons visco-élastiques elles-mêmes modélisées par des un ressort de raideur $k$ ($k$ dépendant du module de Young du matériau et des dimensions de la poutre) en parallèle d'un élément d'amortissement $c$ (dépendant d'un coefficient d'amortissement visqueux entre les éléments, du nombre d'éléments et de la masse de la structure). La structure est supposée unidimensionnelle de longueur $L$. Le nombre d'éléments peut être de l'ordre de plusieurs milliers. 
+
+Le déplacement au cours du temps de l'élément $i$ autour de sa position d'équilibre est noté $u_i(t)$. Une force $f_n(t)$ est appliquée sur l'élément $n$ uniquement. L'extrémité gauche de
+la structure est bloquée. Les effets de la pesanteur sont négligés.
+\begin{center}
+%\includegraphics[width=.49\textwidth]{images/structure}
+\end{center}
 
 
 
- \renewcommand{\baselinestretch}{1.2}
-\setlength{\parskip}{2ex plus 0.5ex minus 0.2ex}
+Le théorème de la résultante dynamique appliqué à un élément $i$ ($i$ variant de 2 à $n-1$ inclus) s'écrit sous la forme : 
+%$$
+%m_i\dfrac{\text{d}u_i(t)}{\text{d}t} = 
+%-k_i\left(u_i(t)-u_{i-1}(t) \right)   - k_{i+1}\left(u_i(t)-u_{i+1}(t) \right) 
+%-c_i\left(u_i(t)-u_{i-1}(t) \right)   - c_{i+1}\left(u_i(t)-u_{i+1}(t) \right) 
+%$$
+
+%$$
+%m\dfrac{\text{d}^2u_i(t)}{\text{d}t^2} = 
+%- k\left(u_i(t)-u_{i-1}(t) \right)   
+%- k\left(u_i(t)-u_{i+1}(t) \right) 
+%- c\dfrac{\text{d}}{\text{d}t} \left[u_i(t)-u_{i-1}(t) \right]
+%- c\dfrac{\text{d}}{\text{d}t} \left[u_i(t)-u_{i+1}(t) \right]
+%$$
 
 
+\begin{equation}
+m\dfrac{\text{d}^2u_i(t)}{\text{d}t^2} = 
+- 2 k u_i(t)  + k u_{i-1}(t) + k u_{i+1}(t)
+- 2c \dfrac{\text{d}u_i(t)}{\text{d}t}   +c \dfrac{\text{d}u_{i-1}(t)}{\text{d}t} +c \dfrac{\text{d}u_{i+1}(t)}{\text{d}t}
+\end{equation}
 
-\section{Mise en situation}
-\begin{minipage}[c]{.53\linewidth}
-Une grande partie des systèmes mécaniques rencontrés vise à déplacer un solide. Si on ne considère que des mouvements simple, le solide tournera autour d'un axe fixe ou se déplacera en translation rectiligne.
+Le théorème de la résultante dynamique appliqué aux éléments 1 et $n$ donne les équations suivantes : 
+%$$
+%m_1\dfrac{\text{d}u_1(t)}{\text{d}t} = 
+%-\left(k_1 + k_2\right) u_1(t) + k_2 u_2 (t) - \left(c_1 + c_2 \right)u_1(t) - c_2 u_2 (t)
+%$$
+%
+%$$
+%m_n\dfrac{\text{d}u_n(t)}{\text{d}t} = 
+%-k_n\left(u_n(t)-u_{n-1}(t) \right)   - c_n\left(u_n(t)-u_{n-1}(t) \right) +f_n(t)
+%$$
+
+
+\begin{equation}
+m\dfrac{\text{d}^2u_1(t)}{\text{d}t^2} = 
+- 2k u_1(t) + k u_2 (t) 
+-2c \dfrac{\text{d}u_1(t)}{\text{d}t} 
++ c \dfrac{\text{d}u_2(t)}{\text{d}t} 
+\end{equation}
+
+\begin{equation}
+m\dfrac{\text{d}^2u_n(t)}{\text{d}t^2} = 
+-k\left(u_n(t)-u_{n-1}(t) \right)   - c\left(\dfrac{\text{d}u_{n}(t)}{\text{d}t}-\dfrac{\text{d}u_{n-1}(t)}{\text{d}t} \right) +f_n(t)
+\end{equation}
+
+
+\begin{minipage}[c]{.77\linewidth}
+
 
 \begin{obj}
-L'objectif de se projet est de disposer d'un programme permettant de tracer, pour un déplacement donné, dans des conditions initiales données, les courbes de position, vitesse et accélération théorique pour une loi de commande en <<bang-bang>> de jerk. Selon cette loi de commande, la loi de commande est une accélération en trapèze.
-\end{obj}
 
-Cette loi de commande est par exemple utilisée sur les centre d'usinage à grande vitesse. Elle permet d'éviter les à-coups lors de l'usinage d'une pièce.
+\end{obj}
 \end{minipage} \hfill
-\begin{minipage}[c]{.45\linewidth}
-\begin{center}
-\includegraphics[width=\textwidth]{images/bang}
-\textit{Exemple du déplacement d'un solide en cours d'accélération}
-\end{center}
+\begin{minipage}[c]{.2\linewidth}
+
 \end{minipage}
 
 \section{Travail demandé}
 Pour mener à bien ce projet il est demandé de réaliser un certain nombre d'activités (non exhaustives).
 \begin{enumerate}
-\item Réaliser une courte recherche sur les lois de commandes. 
-\item Déterminer les lois mathématiques de déplacement.
-\item Implémenter ces lois de commande en Python en prenant en compte différents paramètres (vitesse, accélération maximale et jerk maximal d'une machine).
+\item Réaliser une recherche sur les domaines d'application du modèle visco-élastique et trouver des triplets \textit{(masse, raideur, coefficient d'amortissement)}
+\item Modéliser le problème et déterminer la (ou les) équation(s) différentielle(s) liant le déplacement de la masse et de la sollicitation mécanique du système.
+\item Résoudre le problème en utilisant plusieurs méthode : 
+\begin{itemize}
+\item résolution numérique de l'équation différentielle (en Python);
+\item résolution analytique de l'équation différentielle;
+\item résolution de l'équation en utilisant le formalisme de Laplace (et éventuellement le module Xcos de Scilab ou Matlab-Simulink);
+\item résolution de l'équation en utilisant la modélisation multiphysique (Scilab-Xcos-SIMM ou Matlab-Simulink).
+\end{itemize}
+\item Comparer les résultats des simulations et commenter les paramètres des solver.
 \end{enumerate}
-
-Le programme devra permettre de tracer les différentes lois en fonction des paramètres précédent ainsi qu'une position initiale et finale et qu'une vitesse initiale et finale. Il devra prendre en compte un déplacement vers la gauche ou vers la droite, prendre en compte les cas où le solide n'a pas le temps d'atteindre sa vitesse maximale, \textit{etc.}
-
-
-
 
 \section{Évaluation}
 L'évaluation se fera sous forme d'une présentation de 10 à 15 minutes (6 diapositives au maximum). Les élèves devront présenter au minimum : 
@@ -110,14 +170,134 @@ L'évaluation se fera sous forme d'une présentation de 10 à 15 minutes (6 diap
 \item une démonstration de l'exécution du code Python.
 \end{itemize}
 
+\end{multicols}
+
 
 \ifprof
-\section{Éléments de corrigé}
+\newpage
 
+\setcounter{section}{0}
+\begin{center}
+\textsc\textbf{{Éléments de corrigé}}
+\end{center}
+
+\section{Mise en équation du problème}
+
+
+Écrivons les équations aux rangs 1, 2, 3, 4 et $n$ :
+
+$$
+\left\{
+\begin{array}{l}
+m\ddot{u}_1 + 2c \dot{u}_1-c \dot{u}_{2}  +2 k u_{1} - k u_{2} =0 \\
+m\ddot{u}_2 -c \dot{u}_{1} + 2c \dot{u}_2   -c \dot{u}_{3}- k u_{1} + 2 k u_2   - k u_{3}=0 \\
+m\ddot{u}_3 -c \dot{u}_{2} + 2c \dot{u}_3   -c \dot{u}_{4}- k u_{2} + 2 k u_3   - k u_{4}=0 \\
+m\ddot{u}_4 -c \dot{u}_{3} + 2c \dot{u}_4   -c \dot{u}_{5}- k u_{3} + 2 k u_4   - k u_{5}=0 \\
+\vdots \\
+m\ddot{u}_n +  k u_n - k u_{n-1} + c \dot{u}_n -c \dot{u}_{n-1} - f_n = 0
+\end{array}
+\right.
+$$
+
+On observe que ce système semble pouvoir se mettre sous la forme :
+$$
+\begin{bmatrix}
+m & 0 & \ldots & \ldots & \ldots & 0\\
+0  & m & 0 & \ddots & 0 & \vdots\\
+\vdots  & 0 & m & 0 & \ddots & \vdots\\
+\vdots  & \ddots & 0 & m & 0 & \vdots\\
+\vdots  & 0 & \ddots & 0 & \ddots & 0\\
+0  & \ldots & \ldots & \ldots & 0 & m\\
+\end{bmatrix}
+\begin{bmatrix}
+\ddot{u}_1\\
+\ddot{u}_2\\
+\ddot{u}_3\\
+\ddot{u}_4\\
+\vdots\\
+\ddot{u}_n\\
+\end{bmatrix}
++
+\begin{bmatrix}
+2c & -c & 0 & \ldots & \ldots & 0\\
+-c  & 2c & -c & \ddots &  & \vdots\\
+0  & -c & 2c & -c & \ddots & \vdots\\
+\vdots  & \ddots & \ddots & 2c &\ddots & 0\\
+\vdots  &  & \ddots &\ddots & \ddots & -c\\
+0  & \ldots & \ldots & 0 & -c & c\\
+\end{bmatrix}
+\begin{bmatrix}
+\dot{u}_1\\
+\dot{u}_2\\
+\dot{u}_3\\
+\dot{u}_4\\
+\vdots\\
+\dot{u}_n\\
+\end{bmatrix}
++
+\begin{bmatrix}
+2k & -k & 0 & \ldots & \ldots & 0\\
+-k  & 2k & -k & \ddots &  & \vdots\\
+0  & -k & 2k & -k & \ddots & \vdots\\
+\vdots  & \ddots & \ddots &  \ddots&\ddots & 0\\
+\vdots  &  & \ddots &\ddots & 2k & -k\\
+0  & \ldots & \ldots & 0 & -k & k\\
+\end{bmatrix}
+\begin{bmatrix}
+{u}_1\\
+{u}_2\\
+{u}_3\\
+{u}_4\\
+\vdots\\
+{u}_n\\
+\end{bmatrix} 
+=
+\begin{bmatrix}
+0\\
+0\\
+0\\
+0\\
+\vdots\\
+{f}_n\\
+\end{bmatrix} 
+$$
+
+L'équation peut donc se mettre sous la forme suivante :
+$$
+M \ddot{U} + C \dot{U}+ K U = F 
+$$
+
+\section{Résolution numérique}
+
+En utilisant un schéma d'Euler implicite, on a d'une part 
+$\dot{U} \simeq \dfrac{U_{m}-U_{m-1}}{h} $. D'autre part, 
+$\ddot{U} \simeq \dfrac{\dot{U}_{m}-\dot{U}_{m-1}}{h}$. Au final : 
+$$
+\ddot{U} \simeq \dfrac{\dot{U}_{m}-\dot{U}_{m-1}}{h}
+\simeq \dfrac{ \dfrac{U_{m}-U_{m-1}}{h}- \dfrac{U_{m-1}-U_{m-2}}{h}}{h}
+= \dfrac{ U_{m}-2U_{m-1}+U_{m-2}}{h^2}
+$$
+En substituant dans l'équation matricielle, on a donc : 
+\begin{eqnarray*}
+&M \dfrac{ U_{m}-2U_{m-1}+U_{m-2}}{h^2} + C \dfrac{U_{m}-U_{m-1}}{h} + K U_m = F _m \\
+\Longleftrightarrow & 
+M \left( U_{m}-2U_{m-1}+U_{m-2}\right) + Ch \left(U_{m}-U_{m-1}\right) 
++ K h^2 U_m = h^2 F_m \\
+\Longleftrightarrow & 
+M  U_{m}-2M U_{m-1}+M U_{m-2} + Ch U_{m}-Ch U_{m-1}
++ K h^2 U_m = h^2 F_m \\
+\Longleftrightarrow & 
+\left( M + Ch  + K h^2 \right)  U_m 
++ \left(-2M  -Ch  \right)U_{m-1}
++M U_{m-2} 
+= h^2 F_m \\
+\Longleftrightarrow & 
+\left( M + Ch  + K h^2 \right)  U_m 
+= h^2 F_m + \left(2M  +Ch  \right)U_{m-1} - M U_{m-2}  \\
+\end{eqnarray*}
 
 \else
-
 \fi
+
+
 \end{document}
-
-
