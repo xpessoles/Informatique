@@ -4,6 +4,9 @@
 *.aux
 *.toc
 *.out
+*.bcf
+*.idx
+*.xml
 *.log
 *.ptc
 *.synctex.gz
