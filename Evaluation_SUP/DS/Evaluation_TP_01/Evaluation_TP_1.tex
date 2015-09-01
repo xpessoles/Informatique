@@ -1,0 +1,221 @@
+\documentclass[10pt,oneside]{article}
+\input{style/coursHeadings}
+\input{style/programHeadings}
+
+
+%Si le boolen xp est vrai : compilation pour xabi
+%Sinon compilation Damien
+\newboolean{xp}
+\setboolean{xp}{true}
+
+\newboolean{prof}
+\setboolean{prof}{false}
+
+\def\xxtitre{\ifthenelse{\boolean{xp}}{
+Évaluation de TP }{
+}}
+
+
+\def\xxsoustitre{\ifthenelse{\boolean{xp}}{
+CI 2 : Algorithmique et programmation}{
+}}
+
+\def\xxauteur{\ifthenelse{\boolean{xp}}{
+Cédric \textsc{Lopez} \\ Xavier \textsc{Pessoles} }{% \\ Damien \textsc{Iceta}}{
+Damien \textsc{Iceta} \\ Xavier \textsc{Pessoles}}}
+
+\def\xxpied{\ifthenelse{\boolean{xp}}{
+Évaluation TP  -- CI 2}{
+\xxtitre}}
+
+\def\xxcathegorie{\ifthenelse{\boolean{xp}}{
+2013 -- 2014 \\
+Xavier \textsc{Pessoles}\\Informatique -- DS 2}{
+Informatique -- DS 2}}
+
+\ifthenelse{\boolean{xp}}{\input{style/enteteXP}}{\input{style/enteteDI}}
+
+
+%---------------------------------------------------------------------------
+
+
+\ifthenelse{\boolean{prof}}{
+\begin{center}
+ \large\textsc{Éléments de corrigés}
+\end{center}
+}{
+%\begin{center}
+% \large\textsc{CI 2 : Algorithmique et programmation}
+%\end{center}
+}
+\vspace{.5cm}
+
+
+\begin{obj}
+\textbf{Consignes : 
+\begin{itemize}
+\item tous les programmes réalisés seront enregistrés sous la forme \textsf{Nom.Prenom.py};
+\item ces programmes seront envoyés par mail lors des 5 dernières minutes de la séance;
+\item les sujets seront restitués à la fin de la séance.
+\end{itemize}}
+\end{obj}
+
+
+
+
+\begin{obj}
+\textbf{Objectifs des exercices 1 et 2 : }
+\begin{itemize}
+\item Alg -- C1 : comprendre un algorithme et expliquer ce qu’il fait;
+\item Alg -- C2 : modifier un algorithme existant pour obtenir un résultat différent (ici modifier un algorithme pour obtenir un résultat similaire;
+\item Alg -- C4 : expliquer le fonctionnement d’un algorithme.
+\end{itemize}
+\end{obj}
+
+\subsection*{Exercice 1 -- Déchiffrer un programme Python -- Sur feuille}
+
+On donne le programme suivant en Python :
+\begin{py}
+\begin{minipage}[c]{.05\linewidth}
+$\quad$
+\end{minipage} \hfill
+\begin{minipage}[c]{.75\linewidth}
+\begin{python}
+tab = [17, 38, 10, 25, 72, 4, 98, 32, 11]
+N = len (tab)
+tampon = tab [N - 1]
+for i in range (0, N - 1, 1) :
+    tab [N - 1 - i] = tab [N - 2 - i]
+tab [0] = tampon
+print (tab)
+\end{python}
+\end{minipage}
+\end{py}
+
+
+\subparagraph{}
+\textit{Expliquer ce que fait le programme précédent. Pour cela : 
+\begin{itemize}
+\item décrire les instructions de chacune des lignes;
+\item en utilisant un exemple simple, vous expliquerez comment évoluent chacune des variables;
+\item vous donnerez l'objectif du programme.
+\end{itemize}}
+
+\subparagraph{}
+\textit{Sur feuille, proposer un programme Python réalisant la même tâche avec une boucle \textsf{while} à la place de la boucle \textsl{for}.}
+
+
+\setcounter{subparagraph}{0}
+\subsection*{Exercice 2 -- Déchiffrer un programme Python -- Sur feuille}
+
+On donne le programme suivant en Python :
+\begin{py}
+\begin{minipage}[c]{.05\linewidth}
+$\quad$
+\end{minipage} \hfill
+\begin{minipage}[c]{.75\linewidth}
+\begin{python}
+tab = [17, 38, 10, 25, 72, 4, 98, 32, 11]
+N = len (tab)
+tampon = tab [0]
+for i in range (1, N) :
+    if tab [i] > tampon :
+        tampon=tab[i]
+print (tampon)
+\end{python}
+\end{minipage}
+\end{py}
+
+
+\subparagraph{}
+\textit{Expliquer ce que fait le programme précédent. Pour cela : 
+\begin{itemize}
+\item décrire les instructions de chacune des lignes;
+\item en utilisant un exemple simple, vous expliquerez comment évoluent chacune des variables;
+\item vous donnerez l'objectif du programme.
+\end{itemize}}
+
+
+\setcounter{subparagraph}{0}
+\subsection*{Exercice 3 -- Suite de Fibonacci -- Sur PC}
+
+\begin{obj}
+Objectifs : 
+\begin{itemize}
+\item Alg -- C3 : concevoir un algorithme répondant à un problème précisément posé;
+\item Alg -- C5 : écrire des instructions conditionnelles avec alternatives, éventuellement imbriquées;
+\item Alg -- C9 : choisir un type de données en fonction d’un problème à résoudre;
+\item Alg -- C10 : concevoir l’en-tête (ou la spécification) d’une fonction, puis la fonction elle-même;
+\item Alg -- C14 : documenter une fonction, un programme plus complexe.
+\end{itemize}
+\end{obj}
+
+On considère la suite $(U_n)$ définie par : 
+$$
+U_0 = 0 \quad U_1 =1 \quad U_n = U_{n-1} + U_{n-2} \quad (n\geq 2)
+$$
+appelée suite de Fibonacci.
+
+\subparagraph{}
+\textit{Écrire une fonction Python appelée \textbf{fibonacci}, prenant en paramètre un entier $n$ et retournant le $n^{\text{ième}}$ terme de la suite de Fibonacci.}
+
+\subparagraph{}
+\textit{Déterminer, en utilisant la fonction fibonacci, les termes $U_5$, $U_{11}$, $U_{17}$ de la suite.}
+
+\subparagraph{}
+\textit{Écrire une fonction Python appelée \textbf{fibonacci\_liste}, prenant en paramètre un entier $n$ et retournant une liste contenant les $n$ premiers termes de la suite de Fibonacci.}
+
+\subparagraph{}
+\textit{Vérifier que vos fonctions répondent aux objectifs Alg -- C14.}
+
+
+\setcounter{subparagraph}{0}
+\subsection*{Exercice 4 -- Sur PC}
+\subparagraph{}
+\textit{Écrire deux fonctions Python, appelées \textsf{somme\_for} et \textsf{somme\_while}, prenant en paramètre un
+entier $n$ et retournant la somme des n premiers entiers compris entre 1 (inclus) et $n$ (inclus). La
+fonction \textsf{somme\_for} utilisera une boucle for tandis que la fonction \textsf{somme\_while} utilisera une boucle \textsf{while}.}
+
+\subparagraph{}
+\textit{Déterminer, en utilisant les fonctions \textsf{somme\_for} et \textsf{somme\_while}, la somme des entiers compris entre 1 et 10, entre 1 et 67 et entre 1 et 128.}
+
+\setcounter{subparagraph}{0}
+\subsection*{Exercice 5 - Recherche d'un mot dans une chaîne de caractère  -- Sur PC}
+
+\begin{obj}
+Objectifs : 
+\begin{itemize}
+\item Alg -- C11 : traduire un algorithme dans un langage de programmation.
+\end{itemize}
+\end{obj}
+
+Le but de la fonction suivante est de savoir combien de fois un mot apparaît dans une chaîne :
+\begin{pseudo}
+\begin{algorithm}[H]
+\Donnees{texte (String), mot(String)}
+
+\Fonction{
+Recherche (mot,texte):\\
+nb\_mot $\gets$ 0\\
+\Pour{i de 0 à longueur(texte)}{
+\If{texte[i]=mot[0]}{
+j$\gets$0\\
+\While{j$\neq$longueur(mot)}{
+\If{(i+j)$\geq$ longueur(texte)}{
+\Retour{nb\_mot}}
+\ElseIf{texte[i+j]!=mot[j]}{break}
+j$\gets$ j+1
+}
+\If{j=longueur(mot)}{
+nb\_mot $\gets$ nb\_mot+1}}}
+\Retour{nb\_mot}}
+\end{algorithm}
+\end{pseudo}
+
+\subparagraph{}
+\textit{Retranscrire l'algorithme dans Python.}
+
+\subparagraph{}
+\textit{Tester son bon fonctionnement.}
+
+\end{document}

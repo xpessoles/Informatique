@@ -1,0 +1,459 @@
+\documentclass[10pt]{article}
+\input{style/coursHeadings}
+\input{style/programHeadings}
+\input{style/macros_SII}
+\input{style/macros_Titres}
+\input{style/macros_Frames}
+
+%Si le boolen xp est vrai : compilation pour xabi
+%Sinon compilation Damien
+\newboolean{xp}
+\setboolean{xp}{true}
+
+\newboolean{prof}
+\setboolean{prof}{false}
+
+\newif\ifprof
+%\proftrue
+\proffalse
+
+\usepackage[%
+    pdftitle={DS Informatique - Concours Blanc},
+    pdfauthor={Xavier Pessoles},
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=magenta]{hyperref}
+
+
+\def\discipline{Informatique}
+\def\xxtitre{\ifthenelse{\boolean{xp}}{
+Devoir surveillé d'informatique}{
+Chapitre  -- }}
+
+\def\xxsoustitre{\ifthenelse{\boolean{xp}}{
+  }{
+Partie  -- }}
+
+\def\xxauteur{\ifthenelse{\boolean{xp}}{
+Xavier \textsc{Pessoles}}{
+Damien \textsc{Iceta} \\ Xavier \textsc{Pessoles}}}
+
+\def\xxpied{\ifthenelse{\boolean{xp}}{
+DS Informatique\\
+\ifthenelse{\boolean{prof}}{Sujet}{Corrige}}{
+\xxtitre}}
+
+\def\xxcathegorie{\ifthenelse{\boolean{xp}}{
+2013 -- 2014 \\
+Xavier \textsc{Pessoles}}{
+Informatique - Cours}}
+
+
+
+
+
+%---------------------------------------------------------------------------
+
+
+\begin{document}
+
+\ifthenelse{\boolean{xp}}{\input{style/enteteXP}}{\input{style/enteteDI}}
+
+
+\ifthenelse{\boolean{prof}}{
+\begin{center}
+\large{\textit{Éléments de corrigé}}
+\end{center}
+}{}
+
+
+\section{Proies -- Prédateurs}
+Les équations de Lotka-Volterra permettent de modéliser le comportement de la reproduction et de la mortalité de proies et de prédateurs sur un territoire. Ce modèle est aussi appelé << proie - prédateur >>. Selon ce modèle, les proies se reproduisent. Les prédateurs mangent les proies. Plus il y a de proies, plus les prédateurs se reproduisent et donc le nombre de proies diminue.  Lorsque le nombre de proies diminue, le nombre de prédateur diminue, provoquant alors une augmentation de l'effectif des proies ...
+
+Les équations régissant ce modèle sont les suivantes :
+
+$$
+\left\{
+\begin{array}{l}
+u'(t)=u(t)\left(a-b\cdot v(t) \right)\\
+v'(t)=-v(t)\left(c-d\cdot u(t) \right)
+\end{array}
+\right.
+\quad
+\text{avec}
+\quad
+\left\{
+\begin{array}{l}
+u(0) = u_0\\
+v(0) = v_0
+\end{array}
+\right.$$
+Avec : 
+\begin{itemize}
+\item $u(t)$ désigne l'effectif de la population des proies;
+\item $v(t)$ désigne l'effectif de la population des prédateurs;
+\item $a$ : taux de reproduction des proies;
+\item $b$ : taux de mortalité des proies;
+\item $c$ : taux de mortalité des prédateurs; 
+\item $d$ : taux de reproduction des prédateurs.
+\end{itemize}
+
+On note $h$ le pas de calcul. 
+
+\subparagraph{}
+\textit{Mettre le système différentiel sous la forme d'un schéma d'Euler explicite. On explicitera donc $u_{n+1}$ en fonction de $h$, $u_n$, $v_n$, $a$ et $b$ et $v_{n+1}$ en fonction de $h$, $u_n$, $v_n$, $c$ et $d$.}
+
+\ifprof
+\begin{corrige}
+On a $\dfrac{du(t)}{dt} \simeq \dfrac{u(t+h)-u(t)}{h}$; donc : 
+$$
+\left\{
+\begin{array}{l}
+\dfrac{u(t+h)-u(t)}{h}=u(t)\left(a-b\cdot v(t) \right)\\
+\dfrac{v(t+h)-v(t)}{h}=-v(t)\left(c-d\cdot u(t) \right)
+\end{array}
+\right.
+\Leftarrow 
+\left\{
+\begin{array}{l}
+\dfrac{u(n+1)-u(n)}{h}=u(n)\left(a-b\cdot v(n) \right)\\
+\dfrac{v(n+1)-v(n)}{h}=-v(n)\left(c-d\cdot u(n) \right)
+\end{array}
+\right.
+$$
+
+Au final : 
+$$
+\left\{
+\begin{array}{l}
+u(n+1)=u(n)h\left(a-b\cdot v(n) \right)+u(n)\\
+v(n+1)=-v(n)h\left(c-d\cdot u(n) \right)+v(n)
+\end{array}
+\right.
+$$
+\end{corrige}
+\else
+\fi
+
+\vspace{.25cm}
+
+On donne une suite $f_n$ définie par récurrence. La fonction Python \textsf{fonc\_f(n)} permet de calculer le nième terme de la suite. On donne la suite $g_n$ définie par récurrence ainsi :
+$$
+g_{n+1}=  g_n + h\cdot g_n \left(a - b\cdot f_n\right) \quad \text{avec} \quad g_0\quad \text{la condition initiale.} \quad a=0,1 \quad b=0,01
+$$
+
+
+\subparagraph{}
+\textit{Écrire la fonction python \textsf{fonc\_g} qui permet de calculer le nième terme de la suite $g_n$.}
+
+\ifprof 
+\begin{corrige}
+\begin{py}
+\begin{python}
+def fonc_g(n,g0,h): 
+    a=0.1
+    b=0.01
+    i=0
+    res=g0
+    while i<n:
+        res =  res + h * res (a - b * fonc_f(i))
+    return res
+\end{python}
+\end{py}
+\end{corrige}
+\else
+\fi
+On donne les fonctions \textsf{fonc\_u(n)} et \textsf{fonc\_v(n)} permettant de calculer le nième terme des suites précédemment définies. 
+
+Sur une durée de 365 jours, on souhaite avoir chaque jour le nombre de proies et de prédateurs. 
+
+\subparagraph{}
+\textit{Réaliser en Python la fonction \textsf{run\_modele} qui permet de renvoyer 3 tableaux : 
+\begin{itemize}
+\item \textsf{tab\_j} retourne le tableau contenant le numéro du jour;
+\item \textsf{tab\_u} retourne le tableau contenant le nombre de proies chaque jour;
+\item \textsf{tab\_v} retourne le tableau contenant le numéro de prédateurs  chaque jour.
+\end{itemize}}
+
+
+\ifprof 
+\begin{corrige}
+\begin{py}
+\begin{python}
+def run_modele()
+    tab_j,tab_u,tab_v=[],[],[]
+    nb_jour = 365,i=0
+    h=1
+    while i<=365:
+        tab_j.append(i)
+        tab_u.append(fonc_u(i))
+        tab_v.append(fonc_v(i))
+    return tab_j, tab_u, tab_v
+\end{python}
+\end{py}
+\end{corrige}
+\else
+\fi
+
+\ifprof
+\else
+
+\begin{minipage}[c]{.3\linewidth}
+La figure ci-contre montre l'évolution du nombre de proies et de prédateurs au cours du temps sur une année dans les conditions suivantes : 
+
+\begin{itemize}
+\item $a=0,1$;
+\item $b=0,01$;
+\item $c=0,03$;
+\item $d=0,001$.
+\end{itemize}
+\end{minipage} \hfill
+\begin{minipage}[c]{.6\linewidth}
+\begin{center}
+\includegraphics[width=.95\textwidth]{images/figure_1.png}
+\end{center}
+\end{minipage}
+\fi
+
+\section{Un peu de statique}
+
+\setcounter{subparagraph}{0}
+\begin{minipage}[c]{.47\linewidth}
+Pour terminer son TIPE, un binôme de PTSI doit déterminer les actions mécaniques dans les liaisons en $B$ et $C$. Une étude préliminaire leur a déjà permis de déterminer les actions mécaniques en $A$ : 
+$$
+\torseurstat{T}{\text{ext}}{1} = 
+\torseurcol{0}{F_y}{F_z}{0}{0}{0}{A}
+$$
+
+On donne $\vect{AB}=l\vect{z}+R\vect{y}$ et  $\vect{BC}=L\vect{z}$.
+\end{minipage} \hfill
+\begin{minipage}[c]{.47\linewidth}
+\begin{center}
+\includegraphics[width=.95\textwidth]{images/Schema}
+\end{center}
+\end{minipage} 
+
+\vspace{.25cm}
+Les deux acolytes décident (à raison) de se répartir le travail. M. X, décide de se consacrer à l'étude des actions mécaniques. Mlle Y décide de programmer la démarche de résolution en Python. (On remarquera la non galanterie de M. X, se réservant la partie la moins longue du travail). 
+
+\subparagraph{-- Question Bonus}
+\textit{Êtes-vous d'accord avec M. X qui a mis en évidence que $Y_B$, $Z_B$ et $Y_C$ sont solutions du système suivant ?
+}
+$$
+ \left(
+ \begin{array}{ccc}
+ 0 & 1 & 0 \\
+ 1 & 0 & 1 \\
+ 0 & 0 & 1
+ \end{array}
+ \right)
+ \left(
+ \begin{array}{c}
+ Y_B \\ Z_B \\ Y_C \\ 
+ \end{array}
+ \right)
+ = 
+ \left(
+ \begin{array}{c}
+ -F_z \\
+ -F_y \\
+ - R  F_z  - l F_y 
+ \end{array}
+ \right)
+ \Longleftrightarrow 
+ A\cdot X = B
+$$
+
+\ifprof
+\begin{corrige}
+On isole 3, qui est soumis à 3 actions mécaniques et applique le PFS en B : 
+ $$
+ \left\{
+ \begin{array}{l}
+  F_z + Z_B = 0 \\
+ F_y + Y_B + Y_C = 0 \\
+R  F_z  - l F_y + L Y_C = 0 
+ \end{array}
+ \right.
+ \Longleftrightarrow
+ \left\{
+ \begin{array}{l}
+ Z_B = -F_z \\
+  Y_B + Y_C = -F_y \\
+  L Y_C = - R  F_z  - l F_y 
+ \end{array}
+ \right.
+ \Longleftrightarrow 
+ \left(
+ \begin{array}{ccc}
+ 0 & 1 & 0 \\
+ 1 & 0 & 1 \\
+ 0 & 0 & 1
+ \end{array}
+ \right)
+ \left(
+ \begin{array}{c}
+ Y_B \\ Z_B \\ Y_C \\ 
+ \end{array}
+ \right)
+ = 
+ \left(
+ \begin{array}{c}
+ -F_z \\
+ -F_y \\
+ - R  F_z  - l F_y 
+ \end{array}
+ \right)
+ $$
+
+\end{corrige}
+\else
+
+\fi
+
+	
+Pour résoudre ce système, la vaillante informaticienne a décidé d'implémenter la méthode de résolution du pivot de Gauss en Python.
+
+\subparagraph{}
+\textit{Quelles sont les étapes majeures de la méthode du pivot de Gauss ? Comment un pivot est-il défini ?}
+
+Les fonctions programmées par Mlle Y sont données ci-dessous.
+
+\begin{py}
+%\ifthenelse{\boolean{prof}}{
+\begin{python}
+
+def fonction1(A,B):
+    n=len(A)
+    X = [0.] * n
+    for i in range(n-1, -1, -1):
+        somme=0
+        for j in range (i+1,n):
+            somme=somme+A[i][j]*X[j]
+        X[i]=(B[i][0]-somme)/A[i][i]
+        print(X[i])
+    return X
+    
+def fonction2(A,i):
+    n = len(A)
+    j = i 
+    for k in range(i+1, n):
+        if abs(A[k][i]) > abs(A[j][i]):
+            j = k 
+    return j
+    
+def fonction3(A, i, j, mu):
+    nc = len(A[0]) 
+    for k in range(nc):
+        A[i][k] = A[i][k] + mu * A[j][k]
+    return A
+    
+def fonction4(A,i,j):
+    A[i][:],A[j][:]=A[j][:],A[i][:]
+    return A
+
+def resolution(A, B):
+    n = len(A)
+    for i in range(n):
+        j = ??
+        if j > i:
+            ??
+            ??
+        for k in range(i+1, n):
+            mu = - A[k][i] / A[i][i]
+            ??
+            ??
+    ??
+    return ??
+    
+\end{python}
+%}{\vspace{5cm}}
+\end{py}
+
+
+
+Malheureusement, harassée par la fatigue, l'informaticienne en herbe s'endort en n'ayant pas commenté son programme. M. X récupère le programme le lendemain et doit le commenter. 
+
+
+\subparagraph{}
+\textit{Afin de connaître le comportement du programme, utiliser les matrices $A$ et $B$ précédemment définies et donner le résultat des fonctions suivantes :
+\begin{itemize}
+\item fonction4(A,1,2);
+\item fonction3(A,1,2,1);
+\item fonction2(A,1).
+\end{itemize}
+}
+
+\ifprof
+\begin{corrige}
+\begin{itemize}
+\item fonction4(A,1,2) :
+$$ \left(
+ \begin{array}{ccc}
+ 0 & 1 & 0 \\
+ 0 & 0 & 1 \\
+  1 & 0 & 1 \\
+ \end{array}
+ \right)
+$$
+\item fonction3(A,1,2,1);
+$$ \left(
+ \begin{array}{ccc}
+ 0 & 1 & 0 \\
+  1 & 0 & 2 \\
+ 0 & 0 & 1 \\
+ \end{array}
+ \right)
+$$
+\item fonction2(A,1) : 1
+\end{itemize}\end{corrige}
+\else
+\fi
+
+
+\subparagraph{}
+\textit{Aidez M. X à préciser l'objectif les fonctions 1 à 4.}
+\ifprof
+\begin{corrige}
+\begin{itemize}
+\item Fonction 1 : Phase de remontée
+\item Fonction 2 : Détermination de la ligne du pivot sur la colonne i
+\item Fonction 3 : Transvection
+\item Fonction 4 : Inversion
+\end{itemize}
+\end{corrige}
+\else
+\fi
+
+\subparagraph{}
+\textit{Aidez M. X à compléter les lignes 33, 35, 36, 39, 40, 41 et 42. }
+\ifprof
+\begin{corrige}
+\begin{py}
+%\ifthenelse{\boolean{prof}}{
+\begin{python}
+def resolution(A, B):
+    # Mise sous forme triangulaire
+    for i in range(n):
+        j = recherche_pivot(A, i)
+        if j > i:
+            echange_lignes(A, i, j)
+            echange_lignes(B, i, j)
+        for k in range(i+1, n):
+            mu = - A[k][i] / A[i][i]
+            transvection_ligne(A, k, i, mu)
+            transvection_ligne(B, k, i, mu)
+    # Phase de remontée
+    X = remontee(A,B)
+    return X 
+\end{python}
+\end{py}
+\end{corrige}
+\else
+\fi
+
+
+\end{document}
+
+
+
