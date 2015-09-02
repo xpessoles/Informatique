@@ -1,0 +1,336 @@
+\documentclass[11pt,oneside]{article}
+\input{coursHeadings}
+\input{programHeadings}
+\usepackage[%
+    pdftitle={Complexité des algorithmes},
+    pdfauthor={Xavier Pessoles},
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=magenta]{hyperref}
+
+\usepackage{pifont}
+
+
+% \makeatletter \let\ps@plain\ps@empty \makeatother
+%% DEBUT DU DOCUMENT
+%% =================
+\sloppy
+\hyphenpenalty 10000
+
+\newcommand{\Pointilles}[1][3]{%
+\multido{}{#1}{\makebox[\linewidth]{\dotfill}\\[\parskip]
+}}
+
+
+\colorlet{shadecolor}{orange!15}
+
+\newtheorem{theorem}{Theorem}
+
+
+\begin{document}
+
+
+\newboolean{prof}
+\setboolean{prof}{true}
+%------------- En tetes et Pieds de Pages ------------
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}
+
+\fancyhead{}
+\fancyhead[L]{%
+\noindent\noindent\begin{minipage}[c]{2.6cm}
+%Lycée Rouvière PTSI
+\includegraphics[width=2cm]{png/logo_ptsi.png}%
+\end{minipage}
+}
+
+\fancyhead[C]{\rule{12cm}{.5pt}}
+
+\fancyhead[R]{%
+\noindent\begin{minipage}[c]{3cm}
+\begin{flushright}
+\footnotesize{\textit{\textsf{Informatique}}}%
+\end{flushright}
+\end{minipage}
+}
+
+\renewcommand{\footrulewidth}{0.2pt}
+
+\fancyfoot[C]{\footnotesize{\bfseries \thepage}}
+\fancyfoot[L]{\footnotesize{2012 -- 2013} \\ X. \textsc{Pessoles}}
+\ifthenelse{\boolean{prof}}{%
+\fancyfoot[R]{\footnotesize{TP 1 -- CI 2 : Algorithmique \& Programmation}}
+}{%
+\fancyfoot[R]{\footnotesize{TP 1 -- CI 2 : Algorithmique \& Programmation}}
+}
+
+
+
+\begin{center}
+ \huge\textsc{CI 2 -- Algorithmique et Programmation}
+
+% \large\textsc{Introduction à la programmation}
+\end{center}
+
+\begin{center}
+ \LARGE\textsc{TP 1 -- Découverte de Python}
+\end{center}
+
+\vspace{.5cm}
+
+
+
+\begin{minipage}[c]{.3\linewidth}
+\begin{center}
+
+\end{center}
+\end{minipage} \hfill
+\begin{minipage}[c]{.3\linewidth}
+\begin{center}
+
+\end{center}
+\end{minipage} \hfill
+\begin{minipage}[c]{.3\linewidth}
+\begin{center}
+
+\end{center}
+\end{minipage}
+
+\vspace{.5cm}
+
+
+%\begin{center}
+%\includegraphics[width=.9\textwidth]{png/cyclev.png}
+
+%\textit{Cycle de conception d'un produit}
+%\end{center}
+
+%\begin{prob}
+%\textsc{Problématique :}
+
+%En phase d'avant conception d'un produit, quels sont les critères qui vont permettre de choisir les matériaux à utiliser ?
+%\end{prob}
+
+
+
+\begin{savoir}
+\textsc{Objectifs :}
+\begin{itemize}
+\item découvrir l'environnement Python;
+\item découvrir les limites de Python;
+\item manipuler différents types.
+\end{itemize}
+\end{savoir}
+ 
+
+
+
+\begin{rem}
+Suivant les goûts du programmeur, il existe plusieurs interpréteurs ou plusieurs éditeurs de texte. Dans le cadre de ce TP, nous proposons d'utiliser celui qui est directement installé avec Python : IDLE.
+\end{rem}
+
+Pour ouvrir Python :
+\begin{enumerate}
+\item dans le menu démarrer;
+\item sélectionner Programmes;
+\item ...
+\end{enumerate}
+
+\vspace{.5cm}
+
+\begin{minipage}[c]{.45\linewidth}
+\begin{center}
+\includegraphics[width=.9\textwidth]{png/shell}
+
+\textit{Shell Python -- Interpréteur de commande}
+\end{center}
+\end{minipage} \hfill
+\begin{minipage}[c]{.45\linewidth}
+\begin{center}
+\includegraphics[width=.9\textwidth]{png/editeur}
+
+\textit{Éditeur de texte}
+\end{center}
+\end{minipage}
+
+
+\setlength{\parskip}{0ex plus 0.2ex minus 0ex}
+ \renewcommand{\contentsname}{}
+ \renewcommand{\baselinestretch}{1}
+
+\tableofcontents
+
+ \renewcommand{\baselinestretch}{1.2}
+\setlength{\parskip}{2ex plus 0.5ex minus 0.2ex}
+
+
+% \vspace{1cm}
+\textit{Ce document évolue. Merci de signaler toutes erreurs ou coquilles.}
+
+
+
+\subsection*{Exercice 1 -- Premiers pas avec Python}
+\begin{obj}
+\begin{itemize}
+\item Découvrir l'interpréteur (\textsf{shell})
+\item Découvrir l'éditeur de texte
+\end{itemize}
+\end{obj}
+
+
+
+Dans l'interpréteur python, saisir les instructions suivantes :
+\begin{py}
+\begin{python}
+>>> 4+3
+>>> 4*3
+>>> 7/2
+>>> 7/2.
+>>> 7//2
+>>> 7//2.
+>>> 7**2
+>>> 7\%2
+\end{python}
+\end{py}
+
+\paragraph{}
+\textit{Quel est le but de chacune de ces instructions ? Quelle est la différence entre \textsf{7//2} et \textsf{7//2.} ?}
+
+Dans l'interpréteur python, saisir les instructions suivantes :
+\begin{py}
+\begin{python}
+>>> "Abracadabra"
+>>> Abracadabra
+\end{python}
+\end{py}
+
+\paragraph{}
+\textit{Quelle est la différence entre les 2 instructions ? Expliquez ?}
+
+
+Dans l'interpréteur python, saisir l'instruction suivante.
+\begin{py}
+\begin{python}
+>>> "Abrac"+"adabra"
+\end{python}
+\end{py}
+
+
+\paragraph{}
+\textit{Quelle est la différence entre les 2 instructions ? Expliquez ?}
+
+De manière générale pour afficher du texte, on utiliser l'instruction \textsl{print}.
+
+On va maintenant affecter des variables. Dans l'interpréteur python, saisir les instructions suivantes :
+
+\begin{py}
+\begin{python}
+>>> a=1
+>>> b=2
+>>> a=b
+>>> b=a
+\end{python}
+\end{py}
+
+\paragraph{} 
+\textit{Pour chacune des instructions précédentes, quelles sont les valeurs de a et de b ?}
+
+
+Dans l'interpréteur python, saisir les instructions suivantes :
+\begin{py}
+\begin{python}
+>>> a=1
+>>> b=2
+>>> a<b
+>>> a>b
+>>> a==b
+>>> a=!b
+\end{python}
+\end{py}
+
+
+\paragraph{} 
+\textit{Quel est le résultat de ces opérations ? Quel est leur but ?}
+
+
+On va maintenant utiliser l'éditeur de texte d'IDLE pour saisir des lignes de programmation. Chacune des lignes d'instruction sera exécutée une par une jusqu'à la fin du programme (ou jusqu'à ce qu'il y ait une erreur sur une ligne). Pour cela :
+\begin{itemize}
+\item aller dans le menu Fichier;
+\item ouvrir une nouvelle fenêtre;
+\item sauvegarder votre fichier : dans le noms de fichiers ne pas utiliser d'accent, d'espace, d'apostrophe. Si nécessaire utiliser le caractère \_.
+\end{itemize}
+
+Saisir les instructions suivantes :
+\begin{py}
+\begin{python}
+print("Chuck Norris counted to infinty - twice")
+\end{python}
+\end{py}
+
+Pour l'exécuter :
+\begin{itemize}
+\item sauvegarder votre programme;
+\item dans le menu Run, Cliquer sur Run Module (ou sur F5).
+\end{itemize}
+
+\paragraph{} 
+\textit{Quel est le résultat ?}
+
+
+
+La commande \textsf{input()} permet à l'utilisateur de saisir une chaîne de caractère. La méthode \textsf{float(str)} permet de convertir une chaîne de caractère en nombre flottant.
+La méthode \textsf{float(str)} permet de convertir un nombre en chaîne de caractère.
+
+\paragraph{}
+\textit{Écrire un programme qui permet à l'utilisateur de saisir un nombre, de calculer le carré de ce nombre et d'afficher la phrase suivante (si le nombre saisi est 8):}
+
+\texttt{Le carré de 8 vaut 64}.
+
+\subsection*{Exercice 2 -- Un peu d'algorithmique}
+
+\begin{defi}
+\textbf{Algorithme\footnote{\url{https://fr.wikipedia.org/wiki/Algorithme}}}
+
+Le mot algorithme vient du nom latinisé du mathématicien perse Al-Khawarizmi, surnommé « le père de l'algèbre ». Un algorithme est une suite finie et non-ambiguë d’opérations ou d'instructions permettant de résoudre un problème.
+\end{defi}
+
+\begin{obj}
+\begin{itemize}
+\item Découvrir la boucle \textsf{for}
+\item Identifier quelques limites de Python
+\end{itemize}
+
+\end{obj}
+
+
+\setcounter{paragraph}{0}
+\paragraph{}
+\textit{Expliquer le rôle des instructions suivantes :}
+
+\begin{py}
+\begin{python}
+>>> range(5) 
+>>> range(0,6)
+>>> range(0,10,2)
+>>> range(10,2,-2)
+\end{python}
+\end{py}
+
+On donne la structure d'une boucle \textsf{for} :
+\begin{py}
+\begin{python}
+for i in range (0,10): # il est indispensable de finir l'instruction for par :
+    print(i)           # il est indispensable que chaque instruction dans la boucle for soit precedee de 4 espaces
+
+                       # une boucle for se termine par un retour a la ligne sans indentation
+\end{python}
+\end{py}
+
+\paragraph{}
+\textit{Tester la boucle précédente.}
+
+
+\subsubsection*{La légende de l'échiquier \footnote{\url{http://www.ac-paris.fr/portail/jcms/d_5773/tableur-en-3eme-la-legende-de-l-echiquier}}}
+
+
+\end{document}

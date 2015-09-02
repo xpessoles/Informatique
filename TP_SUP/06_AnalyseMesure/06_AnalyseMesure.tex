@@ -1,0 +1,324 @@
+\documentclass[10pt]{article}
+\input{style/coursHeadings}
+\input{style/programHeadings}
+\input{style/macros_SII}
+\input{style/macros_Titres}
+\input{style/macros_Frames}
+
+%Si le boolen xp est vrai : compilation pour xabi
+%Sinon compilation Damien
+\newif\ifprof
+\proftrue
+\proffalse
+
+\newif\ifxp
+\xptrue
+%\xpfalse
+
+\newif\iftd
+\tdtrue
+%\tdfalse
+
+\usepackage[%
+    pdftitle={TD Informatique - 06},
+    pdfauthor={Xavier Pessoles},
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=magenta]{hyperref}
+
+\def\discipline{Informatique}
+\def\xxtitre{%
+\ifxp
+CI 2 : Algorithmique et Programmation
+\else
+\fi
+}
+
+\def\xxsoustitre{%
+\ifxp
+Chapitre 5 -- Manipulation des fichiers \\
+TP 6 : Analyse et traitement d'un fichier de mesure
+\else
+\fi}
+
+\def\xxauteur{%
+\ifxp
+Xavier \textsc{Pessoles}
+\else
+\fi}
+
+\def\xxpied{%
+\ifxp
+CI 2 : Algorithmique et Programmation\\
+Ch. 5 : TP 06 Analyse d'un fichier de mesure
+\else
+\fi}
+
+
+
+
+
+%---------------------------------------------------------------------------
+
+
+\begin{document}
+\ifxp
+\input{style/enteteXP}
+\else
+\input{style/enteteDI}
+\fi
+
+
+
+ \renewcommand{\baselinestretch}{1.2}
+\setlength{\parskip}{2ex plus 0.5ex minus 0.2ex}
+
+
+\begin{obj}
+Le but de ce TP est de traiter des données de mesure afin qu'elles soient exploitables par l'utilisateur. 
+\end{obj}
+
+\subsection*{Mise en situation}
+\begin{obj}
+Analyser un fichier de mesure.
+\end{obj}
+\ifprof
+\else
+En utilisant la capsuleuse de bocaux du laboratoire de SII, on a réalisé une mesure de vitesse du maneton et de la croix de Malte. On donne ci-dessous un extrait de la chaîne fonctionnelle de la capsuleuse. Un fichier de mesure est enregistrable sur le PC grâce à une application réalisée avec le logiciel Labview.
+
+\begin{center}
+\includegraphics[width=.8\textwidth]{images/CE_CI}
+\end{center}
+
+Ouvrir le fichier \textsf{MesureCapsuleuse.lvm} avec un éditeur de texte (Notepad ++ de préférence). La seule opération réalisée sur les données brutes est une conversion du signal électrique (en Volts) en une fréquence de rotation (en tours par minute).
+
+\fi
+
+\subparagraph{}
+\textit{Détailler la structure du fichier. Quelle est sa taille (en octets) ? }
+\ifprof
+\begin{corrige}
+Le fichier contient 22 lignes de commentaires. Les informations sont ensuite stockées sous forme de colonne. 
+
+Sur une même ligne, les informations sont séparées par des tabulations.
+
+Si les informations sont codées en ASCII, un caractère est codé sur un octet. 
+Une ligne de mesure comprends 28 caractères :
+\begin{itemize}
+\item une mesure est constituée de 8 ou 9 caractères (signe -, 7 chiffres, 1 virgule);
+\item les mesures sont séparées par des tabulations (au nombre de 2);
+\item une ligne est suivie d'un saut de ligne. 
+\end{itemize}
+
+Il y a environ 100 000 lignes. Le fichier fait donc approximativement 2 800 000 octets soit 2,8 Mo. Cela est confirmé par le système d'exploitation.
+
+\end{corrige}
+\else
+\fi
+\subparagraph{}
+\textit{A partir de quelle ligne y-a-t il des informations utiles ? Combien y en a-t-il ? Comment ces lignes sont-elles formatées ?}
+\ifprof
+\begin{corrige}
+Il y a des informations utiles à partir de la 23ième ligne. Ces informations sont séparées par des tabulations. La virgule est utilisé comme séparateur des nombres décimaux. 
+
+\end{corrige}
+\else
+\fi
+
+\subparagraph{}
+\textit{Donner (en Hertz) la fréquence d'échantillonnage du signal mesuré.}
+\ifprof
+\begin{corrige}
+Une information est stockée tous les millièmes de secondes. L'échantillonnage est d'1kHz.
+\end{corrige}
+\else
+\fi
+
+\subsection*{Affichage des mesures}
+
+\begin{obj}
+L'objectif est d'afficher les mesures contenues dans le fichier \textsf{MesureCapsuleuse.lvm}.
+\end{obj}
+
+
+
+
+\subparagraph{}
+\textit{Réaliser une fonction en Python permettant de lire un fichier et de stocker les informations utiles dans une liste de chaîne de caractères. Les spécifications de la fonction sont les suivantes :}
+
+\begin{py}
+\begin{python}
+def lireFichierMesure(file):
+    """
+    Permet de lire un fichier de mesure et de stocker les lignes utiles dans une liste.
+    Entrées : 
+      * file : str, nom du fichier
+    Sortie :
+      * tab : list, liste des lignes utiles
+          (Exemple de ligne utile : '0,009800\t16,152722\t0,426743\n')
+    """
+\end{python}
+\end{py}
+
+\ifprof
+\begin{corrige}
+\begin{py}
+\begin{python}
+def lireFichierMesure(file):
+    fid = open(file,'r')
+    tab= []
+    cpt = 0
+    for ligne in fid :
+        cpt = cpt + 1
+        if cpt > 22 :
+            tab.append(ligne)       
+    fid.close()
+    return tab
+\end{python}
+\end{py}
+
+\end{corrige}
+\else
+\fi
+
+\subparagraph{}
+\textit{Modifier la fonction \textsf{lireFichierMesure()} afin d'obtenir une liste composée de sous-listes de la forme \textsf{[...,[0.009800,16.152722,0.426743],...]}.}
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi
+
+\subparagraph{}
+\textit{Modifier la fonction \textsf{lireFichierMesure()} afin qu'elle retourne trois listes correspondant à chacune des colonnes du fichier de mesure.}
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi
+
+
+\subparagraph{}
+\textit{Afficher les courbes correspondant à la colonne seconde et à la troisième colonne en fonction de le première colonne. Qu'observez-vous ?}
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi
+
+\subparagraph{}
+\textit{En déduire quelle est la courbe associée au maneton et quelle est la courbe associée à la croix de Malte. Indiquer le nom des courbes sur la légende.}
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi
+
+\subsection*{Filtrage des mesure}
+Comme constaté précédemment, les mesures effectuées sont fortement bruitées. On va donc chercher à les filtrer. 
+\begin{obj}
+Filtrer les mesures dans le but de réduire le bruit.
+\end{obj}
+\subsubsection*{\normalsize Filtrage par calcul de points moyens}
+
+\subparagraph{}
+\textit{Réaliser une fonction permettant de :
+\begin{itemize}
+\item réaliser un filtrage en réalisant une moyenne sur $n$ échantillons;
+\item tracer les courbes.
+\end{itemize} }
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi
+
+
+\subsubsection*{\normalsize Filtrage par utilisation d'une moyenne glissante}
+On souhaite maintenant réaliser un filtrage en réalisant une moyenne glissante sur $n$ échantillons. 
+
+Pour cela, on dispose d'une liste de valeurs de temps notée $t$ et d'une liste de valeurs mesurées notées $m$. Pour calculer la moyenne glissante sur $n$ échantillons, on va calculer au temps $t[i]$, la moyenne des mesures de l'échantillon $m[i]$ à l'échantillon $m[i+n]$.
+
+
+\subparagraph{}
+\textit{Réaliser une fonction permettant de :
+\begin{itemize}
+\item réaliser un filtrage en réalisant une moyenne glissante sur $n$ échantillons;
+\item tracer les courbes.
+\end{itemize} }
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi
+
+
+\subsection*{Analyse de la courbe}
+\subparagraph{}
+\textit{À l'aide de la courbe filtrée, vérifier que la croix de Malte réalise bien un quart de tour par période.}
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi
+
+
+\subsection*{Annexes -- Documentation de fonctions Python}
+
+\subsubsection*{Lire les lignes d'un fichier}
+\begin{py}
+\begin{python}
+def lireFichierMesure(file):
+    # Ouverture du fichier en lecture seule
+    fid = open(file,'r')
+    # Lecture de chacune des lignes
+    for ligne in fid:
+        print(ligne)
+    # Fermeture du fichier        
+    fid.close()
+\end{python}
+\end{py}
+
+
+\subsubsection*{Supprimer ou remplacer un caractère dans une chaîne de caractères}
+\begin{py}
+\begin{python}
+chaine = 'Chuckxstartsxthzxnzwxyzarxbyxroundhouszxkickingxthzxoldxonz.'
+chaine.replace('x',' ')
+chaine.replace('z','e')
+\end{python}
+\end{py}
+
+
+\subsubsection*{Séparer les éléments d'une chaîne de caractère}
+\begin{py}
+\begin{python}
+chaine = 'abracadabra'
+print(chaine.split('a'))
+    ['', 'br', 'c', 'd', 'br', '']
+\end{python}
+\end{py}
+
+\subsubsection*{Afficher des courbes}
+\begin{py}
+\begin{python}
+import numpy as np
+import matplotlib.pyplot as plt
+
+# t correspond à une liste de valeurs d'abscisses
+# c1 et c2 correspondent à une liste de valeurs d'ordonnées
+# t, c1 et c2 doivent avoir la même taille
+plt.plot(t,c1,label="Légende courbe 1")
+plt.plot(t,c2,label="Légende courbe 2")
+plt.legend(loc='lower center')
+plt.xlabel("Abscisse")
+plt.ylabel("Ordonnée")
+plt.show()
+
+\end{python}
+\end{py}
+
+
+\end{document}
+
+

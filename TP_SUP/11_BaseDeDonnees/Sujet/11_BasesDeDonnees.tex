@@ -1,0 +1,428 @@
+\documentclass[10pt]{article}
+\input{style/coursHeadings}
+\input{style/programHeadings}
+\input{style/macros_SII}
+\input{style/macros_Titres}
+\input{style/macros_Frames}
+
+%Si le boolen xp est vrai : compilation pour xabi
+%Sinon compilation Damien
+\newboolean{xp}
+\setboolean{xp}{true}
+
+\newif\ifprof
+%\proftrue
+\proffalse
+
+\usepackage[%
+    pdftitle={Base de données},
+    pdfauthor={Xavier Pessoles},
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=magenta]{hyperref}
+
+\def\discipline{Informatique}
+\def\xxtitre{\ifthenelse{\boolean{xp}}{
+CI 4 : Bases de données}{
+Chapitre  -- }}
+
+\def\xxsoustitre{\ifthenelse{\boolean{xp}}{
+TP Base de données des aéroports du monde}{
+Partie  -- }}
+
+\def\xxauteur{\ifthenelse{\boolean{xp}}{
+Xavier \textsc{Pessoles}}{
+Damien \textsc{Iceta} \\ Xavier \textsc{Pessoles}}}
+
+\def\xxpied{\ifthenelse{\boolean{xp}}{
+CI 4 : Bases de données \\
+Ch. 1 : Introduction aux bases de données -- TP}{
+\xxtitre}}
+
+\def\xxcathegorie{\ifthenelse{\boolean{xp}}{
+2013 -- 2014 \\
+Xavier \textsc{Pessoles}}{
+Informatique - Cours}}
+
+
+
+%---------------------------------------------------------------------------
+
+
+\begin{document}
+
+\ifthenelse{\boolean{xp}}{\input{style/enteteXP}}{\input{style/enteteDI}}
+
+
+
+
+\subsection*{Présentation}
+\ifprof
+\else
+
+\begin{minipage}[c]{.5\linewidth}
+Le site internet \url{http://ourairports.com/} recueille des informations sur les aéroports du monde. Ces informations sont disponibles sous la forme d'une base de donnée SQLite. 
+
+
+\end{minipage} \hfill
+\begin{minipage}[c]{.5\linewidth}
+\begin{center}
+\includegraphics[width=.97\linewidth]{images/image}
+
+\textit{Vu Google Earth de la base d'hydravion de Lake Brooks -- Alaska}
+\end{center}
+\end{minipage}
+
+\vspace{.5cm}
+
+\textbf{Copier le dossier \textsl{Informatique/TP\_11\_BDD/} dans votre répertoire personnel.}
+
+\vspace{.5cm}
+
+\begin{minipage}[c]{.5\linewidth}
+L'utilitaire SQLite Database Browser permet de visualiser le contenu d'une base de données au format SQLite. Pour consulter la base :
+
+\begin{itemize}%[$\rightarrow$]
+\item ouvrir l'utilitaire SQLite Database Browser;
+\item ouvrir le fichier \textsf{Aeroports.sql3}.
+\end{itemize}
+
+
+
+En l'état, la base de données est constituée de 4 relations : 
+\begin{itemize}
+\item \textsf{Airport\_Frequencies} recense les fréquences radio sur lesquelles les aéroports émettent;
+\item \textsf{Countries} recense la liste des pays;
+\item \textsf{Airports} recense la liste des aéroports;
+\item \textsf{Regions} recense une liste des régions.
+\end{itemize}
+\end{minipage} \hfill
+\begin{minipage}[c]{.5\linewidth}
+\begin{center}
+\includegraphics[width=.97\linewidth]{images/SQLBrowser}
+\end{center}
+\end{minipage}
+
+La relation \textsf{Airports} est constituée des attributs suivants : 
+\begin{itemize}
+\item \textsf{id} : un identifiant
+\item \textsf{type} : un type (heliport, small\_airport, seaplane\_base ...)
+\item \textsf{name} : un nom
+\item des coordonnées géographiques(\textsf{latitude\_deg}, \textsf{latitude\_deg}, \textsf{elevation\_ft}, à savoir les latitudes et longitudes en degrés ainsi que l'altitude en pieds);
+\item ...
+\end{itemize}
+\fi
+
+\subsection*{Analyse de la base de données}
+\subparagraph{}
+\textit{Lors de la création de la base de données, le concepteur n'a pas pris garde au type des atrributs. Proposer un type pour les attributs \textsf{latitude\_deg} et \textsf{municipality}. Dans la mesure du possible, modifier ces champs en éditant la table correspondante. Quel type de champ proposer pour l'attribut \textsf{id} ? D'après vous quelle précaution est-il nécessaire de prendre pour ce champ ?}
+
+\ifprof
+\begin{corrige}
+Pour les attributs longitude\_deg et latitude\_deg, il serait préférable d'utiliser le type REAL. 
+
+Pour l'attribut municipality, on peut laisser le type TEXTE. 
+
+Pour l'attribut id, il serait préférable d'utiliser un entier (INT) en imposant une valeur non nulle (NOT NULL) et éventuellement un incrément automatique. . On peut envisager de déclarer cet attribut en clef primaire. 
+\end{corrige}
+\else
+\fi
+
+\subparagraph{}
+\textit{Quels sont les attributs des relations \textsf{Countries}, \textsf{Regions} et \textsf{Airport\_Frequencies} ?}
+
+
+\ifprof
+\begin{corrige}
+\begin{itemize}
+\item  Countries :
+\begin{itemize}
+\item id;
+\item code;
+\item name;
+\item continent;
+\item wikipedia\_link;
+\item keywords.
+\end{itemize}
+\item Regions :
+\begin{itemize}
+\item id;
+\item code;
+\item local\_code;
+\item name;
+\item continent;	
+\item iso\_country;
+\item wikipedia\_link;
+\item keywords.
+\end{itemize}
+\item Regions :
+\begin{itemize}
+\item id;
+\item code;
+\item local\_code;
+\item name;
+\item continent;	
+\item iso\_country;
+\item wikipedia\_link;
+\item keywords.
+\end{itemize}
+\end{itemize}
+\end{corrige}
+\else
+
+Dans le but d'optimiser la base de données (à savoir diminuer le temps d'accès aux données, diminuer l'espace mémoire utilisé et éviter la redondance d'informations) on souhaite disposer de la relation \textsf{Airport\_Type}. Cette relation aura pour attribut un identifiant, un attribut de type texte correspondant au type d'aéroport en anglais, un attribut de type texte correspondant au type d'aéroport en français. 
+
+\fi
+
+
+\subparagraph{}
+\textit{Créer la relation précédente dans la base de données. Quelles seraient les modifications à réaliser sur les données pour prendre en compte cette nouvelle relation ?}
+
+\ifprof
+\begin{corrige}
+Manipulation à faire avec le logiciel. 
+\end{corrige}
+\else
+\fi
+
+\subsection*{Consultation de la base de données en utilisant SQLite Database Browser}
+
+Nous allons travailler dans l'onglet \textsf{Execute SQL}.
+\subparagraph{}
+\textit{Que permet la requête suivante :}
+\begin{envsql}
+\begin{sql}
+SELECT name FROM Countries;
+\end{sql}
+\end{envsql}
+
+\textit{Quelle est sa traduction en algèbre relationnelle ?}
+
+\ifprof
+\begin{corrige}
+Il s'agit d'une projection permettant de sélectionner le nom de tous les pays de la table Countries. 
+
+Elle se traduit par :
+$$
+\pi_{\text{name}}\left(\text{Countries}\right)
+$$
+\end{corrige}
+\else
+\fi
+
+\subparagraph{}
+\textit{On souhaite sélectionner tous les noms de pays européens de la relation Countries.
+ Exprimer la requête dans l'algèbre relationnelle puis en langage SQL. Tester la requête. L'attribut des pays européens est désigné par ''EU''.}
+
+\ifprof
+\begin{corrige}
+$$
+\pi_{\text{name}}\left(\sigma_{\text{continent=''EU''}}\left(\text{Countries}\right)\right)
+$$
+\begin{envsql}
+\begin{sql}
+SELECT name FROM Countries WHERE continent=''EU'';
+\end{sql}
+\end{envsql}
+\end{corrige}
+
+
+
+\else
+\fi
+
+\subparagraph{}
+\textit{On donne la requête suivante : 
+$$\pi_{\text{name}}\left(\sigma_{\text{iso\_country=''FR''}} (\text{Regions})\right) $$
+Que signifie-t-elle ? La traduire en langage SQL puis tester le résultat. }
+
+
+\ifprof
+\begin{corrige}
+Le but de cette requête est de déterminer la liste des régions de France.
+
+\begin{envsql}
+\begin{sql}
+SELECT name FROM Regions WHERE iso_country=''FR'';
+\end{sql}
+\end{envsql}
+\end{corrige}
+\else
+\fi
+
+\subsection*{Consultation de la base de données en Python}
+
+\ifprof
+\else
+\begin{rem}
+Ouvrir Spyder et le fichier \textsf{BDD\_eleve.py}.
+
+\end{rem}
+Il est possible d'interroger la base de données en utilisant Python. Pour cela, on utilise le formalisme suivant :
+
+\begin{py}
+\begin{python}
+import sqlite3 # Import des commandes permettant de manipuler la base de données
+basesql = u"airports.db3" # Base de données initiale
+
+cnx = sqlite3.connect(basesql)
+curseur = cnx.cursor()
+
+requete = "SELECT * FROM airports"
+curseur.execute(requete)
+\end{python}
+
+Le préfixe u permet d'importer les fichiers encodés en UTF-8. Dans un certaine mesure, les caractères spéciaux sont alors pris en compte.\end{py}
+
+
+\begin{py}
+Le curseur est un objet contenant le résultat de la requête. Pour visualiser la première entité de la requête, la syntaxe est la suivante : 
+\begin{python}
+data = curseur.fetchone()
+print(data)
+\end{python}
+
+Attention, à chaque utilisation de \textsl{fetchone()}, l'entité est supprimée du curseur. Pour parcourir chacune des entités, on peut utiliser la syntaxe suivante : 
+\begin{python}
+for cur in curseur:
+    print(cur)
+\end{python}
+
+Attention, cette opération peut s'avérer maladroite si la requête a un grand nombre d'entités. 
+\end{py}
+
+\fi
+
+\subparagraph{}
+\textit{Remplir les champs nécessaires dans le fichier \textsf{BDD\_eleve.py}. Exécuter le code et expliquer les résultats.}
+\ifprof
+\begin{corrige}
+Il suffit de donner le nom du fichier correspondant à la base. 
+
+Les lignes permettent de donner tous les attributs de 3 bases d'hydravions (au <<hasard>>).
+
+\end{corrige}
+\else
+\fi
+
+\subparagraph{}
+\textit{Que permettent les lignes de code suivantes :}
+
+\begin{py}
+\begin{python}
+requete = "SELECT * FROM airports"
+curseur.execute(requete)
+res = []
+for cur in curseur:
+    res.append(cur)
+print(len(res))
+\end{python}
+\end{py}
+\ifprof
+\begin{corrige}
+Ces lignes permettent de donner le nombre d'aéroports présents dans la base. 
+\end{corrige}
+\else
+\fi
+
+
+\subparagraph{}
+\textit{En utilisant les possibilités de Python, donner le nombre de bases d'hydravion existantes. En utilisant la documentation ou le cours, comment utiliser la fonction d'agrégation COUNT pour obtenir un résultat équivalent ?}
+\ifprof
+\begin{corrige}
+Voir Fichier.py.
+\begin{envsql}
+\begin{sql}
+SELECT COUNT(*) FROM airports WHERE type='seaplane_base'
+\end{sql}
+\end{envsql}
+
+Il y a 899 bases. 
+
+\end{corrige}
+\else
+\fi
+
+\subparagraph{}
+\textit{Donner la liste des villes françaises (\textsl{iso\_country='FR'}) hébergeant de telles bases. Vous donnerez la requête SQL ainsi que son expression en algèbre relationnelle.}
+\ifprof
+\begin{corrige}
+\begin{envsql}
+\begin{sql}
+SELECT municipality FROM airports WHERE type='seaplane_base' AND iso_country='FR'
+\end{sql}
+\end{envsql}
+$$
+\pi_{\text{municipality}}\left(\sigma_{\text{iso\_country='FR'} \wedge \text{type='seaplane\_base'} }\left(\text{airports}\right)\right)
+$$
+La seule infrastructure présente dans la base est celle de Marseillle (Marignanne).
+\end{corrige}
+\else
+\fi
+
+
+
+\subparagraph{}
+\textit{Donner la liste des villes européennes (\textsl{continent='EU'}) hébergeant de telles bases ainsi que leur nom et leur pays. Vous donnerez la requête SQL ainsi que son expression en algèbre relationnelle.}% Est-on sûr d'avoir tous les éléments de la liste ?}
+\ifprof
+\begin{corrige}
+\begin{envsql}
+\begin{sql}
+SELECT name,municipality FROM airports WHERE type='seaplane_base' AND continent='EU'
+\end{sql}
+\end{envsql}
+$$
+\pi_{\text{municipality}}\left(\sigma_{\text{type='seaplane\_base'} \wedge \text{continent='EU'} }\left(\text{airports}\right)\right)
+$$
+\end{corrige}\else
+\fi
+
+
+\subparagraph{}
+\textit{En utilisant une jointure entre les relations Coutries et airports, donner la liste des bases d'hydravion américains (United States). }
+
+\ifprof
+\begin{corrige}
+\begin{envsql}
+\begin{sql}
+SELECT name FROM 
+	(SELECT name,iso_country FROM airports WHERE type='seaplane_base') as aeroports
+	JOIN
+	(SELECT Countries.code FROM Countries WHERE name=''United States'') as pays 
+	ON pays.code = aeroports.iso_country
+\end{sql}
+\end{envsql}
+$$
+\pi_{\text{name}}\left(
+	\pi_{\text{name,iso\_country}} \left(
+		\sigma_{\text{type=''seaplane\_base''}}\left( \text{airports}\right)\right)
+	\underset{\text{airports.iso\_country}=\text{Countries.code}}{\bowtie }		
+	\pi_{\text{code}} \left(
+		\sigma_{\text{name=''United States''}}\left( \text{Countries}\right)\right)\right)
+$$
+\end{corrige}\else
+\fi
+
+\subsection*{Affichage des bases d'hydravion sur une carte}
+On souhaite afficher toutes les bases d'hydravion européennes sur une carte GoogleEarth. 
+
+
+\subparagraph{}
+\textit{A partir des résultats d'une requête, mettre dans un tableau les lignes constituées du nom de l'aéroport, de sa longitude, de sa latitude et de son type. Une ligne constituera une seule chaîne de caractère, chaque champ étant séparé par une virgule. La fin de la ligne sera terminée par un $\backslash$n. De plus, les chaînes de caractères ne devront pas contenir le caractère \&.}
+
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi
+
+\begin{exemple}
+Exemple de ligne : 
+\begin{python}
+'Blinn Lake Seaplane Base,-162.753005981445,55.2515983581543,seaplane_base\n'
+\end{python}
+\end{exemple}
+
+\end{document}
+
+
