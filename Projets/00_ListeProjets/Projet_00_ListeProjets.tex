@@ -1,0 +1,100 @@
+\documentclass[10pt,fleqn]{article} % Default font size and left-justified equations
+\usepackage[%
+    pdftitle={Projet Informatique : Modélisation d'un amortisseur},
+    pdfauthor={Xavier Pessoles}]{hyperref}
+    
+\input{style/new_style}
+\input{style/macros_SII}
+
+\usepackage{multicol}
+%\fichetrue
+%\fichefalse
+
+\proftrue
+%\proffalse
+
+\tdtrue
+%\tdfalse
+
+%\courstrue
+\coursfalse
+
+\def\discipline{Informatique}
+\def\xxtete{Informatique}
+
+\def\classe{PT -- PT $\star$}
+\def\xxnumpartie{Projet}
+\def\xxpartie{%Étude cinématique des systèmes de solides de la chaîne d'énergie  \\
+Analyser, Modéliser, Résoudre}
+
+\def\xxnumchapitre{~}
+\def\xxchapitre{~}
+
+\def\xxtitreexo{Liste des projets}
+\def\xxsourceexo{}%\hspace{.2cm} D'après concours Mines-Ponts -- 2013.}
+
+
+\def\xxposongletx{2}
+\def\xxposonglettext{1.45}
+\def\xxposonglety{20}
+\def\xxonglet{}%Part. 1 -- Ch. 3}
+
+\def\xxactivite{Projets}
+\def\xxauteur{\textsl{Xavier Pessoles}}
+
+\def\xxcompetences{}
+
+\def\xxfigures{
+%\includegraphics[width=.8\textwidth]{images/schema}
+}%figues de la page de garde
+
+\def\xxpied{%
+\xxactivite -- \xxtitreexo  \\
+%Ch 5 : Cinématique du solide -- \xxactivite%
+}
+
+
+\setcounter{secnumdepth}{5}
+%---------------------------------------------------------------------------
+
+
+\begin{document}
+%\chapterimage{png/Fond_Cin}
+\input{style/new_pagegarde}
+\vspace{10cm}
+\pagestyle{fancy}
+\thispagestyle{plain}
+
+
+\def\columnseprulecolor{\color{ocre}}
+\setlength{\columnseprule}{0.4pt} 
+
+
+
+\begin{enumerate}
+\item Modélisation d'un amortisseur
+\item Modélisation d'un système visco élastique
+\item Modélisation d'un systèe par un treillis
+\item Analyse des images
+\item Modélisation du déplacement d'un axe
+\item Modélisation du déplacement des axes d'un chariot croisé
+\item Modélisation d'un tas binaire
+\item Codage de Huffman
+\item Calcul de Checksum
+\item Analyse de trame
+\item Traitement du signal
+\item Dynamique gravitationnelle
+\item Détermination des paramètres de rugosité
+\item ...
+\end{enumerate}
+
+\begin{itemize}
+\item Les projets sont à réaliser par groupe de 6 élèves au maximu
+\item Des présentations sont réalisées tout au long de l'année :
+\begin{itemize}
+\item Présentation de la problématique et du contexte
+\item ...
+\end{itemize}
+\end{itemize}
+
+\end{document}
