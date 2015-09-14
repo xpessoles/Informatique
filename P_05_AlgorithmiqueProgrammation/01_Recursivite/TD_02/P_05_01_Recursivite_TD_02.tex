@@ -1,0 +1,210 @@
+\documentclass[10pt,fleqn]{article} % Default font size and left-justified equations
+\usepackage[%
+    pdftitle={Informatique : Programmation récursive},
+    pdfauthor={Xavier Pessoles}]{hyperref}
+
+\input{style/new_style}
+\input{style/macros_SII}
+
+%\fichetrue
+\fichefalse
+
+\proftrue
+\proffalse
+
+\tdtrue
+%\tdfalse
+
+%\courstrue
+\coursfalse
+
+\newcommand{\bfsf}[1]{\textbf{\textsl{#1}}}%{\textbf{\textsf{#1}}}
+
+% -------------------------------------
+% Déclaration des titres
+% -------------------------------------
+
+\def\discipline{Informatique}
+\def\xxtete{Informatique}
+\def\classe{PT}
+\def\xxnumpartie{Partie 5}
+\def\xxpartie{Algorithmique \& Programmation II}
+
+\def\xxnumchapitre{Chapitre 1}
+\def\xxchapitre{\hspace{.12cm} Programmation récursive}
+
+\def\xxposongletx{2}
+\def\xxposonglettext{1.45}
+\def\xxposonglety{13}%10
+
+\def\xxonglet{Part. 5 -- Ch. 1}
+
+\def\xxactivite{TD 2}
+\def\xxauteur{\textsl{Xavier Pessoles}}
+
+\def\xxcompetences{%
+\textsl{%
+\textbf{Savoirs et compétences :}
+\begin{itemize}[label=\ding{112},font=\color{ocre}] 
+\item Alg -- C15 : Récursivité : avantages et inconvénients.
+\end{itemize}
+}}
+
+\def\xxfigures{
+}%figues de la page de garde
+
+\def\xxpied{%
+Partie 5 -- Algorithmique et Programmation II\\
+Ch 1 : Programmation récursive -- \xxactivite%
+}
+
+\def\xxtitreexo{Exercices d'application}
+\def\xxsourceexo{}
+
+\setcounter{secnumdepth}{5}
+%---------------------------------------------------------------------------
+\begin{document}
+\input{style/new_pagegarde}
+\vspace{10cm}
+\pagestyle{fancy}
+\thispagestyle{plain}
+
+
+\def\columnseprulecolor{\color{ocre}}
+\setlength{\columnseprule}{0.4pt} 
+\begin{multicols}{2}
+%---------------------------------------------------------------------------
+
+\subsection*{Exercice 1 -- Calcul de $n!$}
+
+\noindent 
+On rappelle la définition de $n!$ :
+$$
+\forall n\in \mathbb{N} : \left\{ \begin{array}{ll}
+n!= \prod_{k=1}^n k & \text{si } n\leq1 \\
+n!= 1 & \text{si } n=0 \\
+\end{array} \right.
+$$
+
+\begin{rem}
+Pour vérifier vos résultats, vous pouvez utiliser la fonction disponible dans la bibliothèque \textsf{math} : 
+\begin{python}
+>>> from math import factorial
+>>> print(factorial(4)) 
+       24
+\end{python}
+\end{rem}
+\subparagraph{}
+\textit{Définir la fonction \textsf{fact\_it} permettant de calculer $n!$ de façon itérative.}
+\ifprof
+\begin{corrige}
+\begin{python}
+def fact_it(n):
+    """
+    Calcul de n! de manière itérative
+    Entrée : 
+     * n(int) : nombre entier naturel
+    Sortie 
+     * res (int): résultat, nombre entier naturel
+    """
+    # Vérifie que n est bien positif ou nul
+    # On pourrait aussi vérifier que n est bien un integer
+    assert (n >= 0),"Nombre négatif" 
+    if n==0:
+        return 1
+    else :
+        res = 1
+        k=n
+        while k>0:
+            res=res * k
+            k=k-1
+        return res
+\end{python}
+\end{corrige}
+\else
+\fi
+
+
+\subparagraph{}
+\textit{Donner alors la complexité algorithmique de votre algorithme.}
+\ifprof
+\begin{corrige}
+Il y a $n$ opérations dans le pire des cas. En conséquence, $C(n)=\mathcal{O}(n)$.
+\end{corrige}
+\else
+\fi
+
+\subparagraph{}
+\textit{Définir la fonction \textsf{fact\_rec} permettant de calculer $n!$ de façon récursive.}
+\ifprof
+\begin{corrige}
+\begin{python}
+def fact_rec(n):
+    """
+    Calcul de n! de manière récursive
+    Entrée : 
+     * n(int) : nombre entier naturel
+    Sortie 
+     * (int): résultat, nombre entier naturel
+    """
+    if n<2:
+        return 1
+    else:
+        return n*fact_rec(n-1)
+\end{python}
+\end{corrige}
+\else
+\fi
+
+
+\subparagraph{}
+\textit{Évaluer $1010!$ dans les trois cas. Expliquer ce qu'il se passe ?}
+\ifprof
+\begin{corrige}
+Dans le cas de l'appel récursif, on réalise que Python limite à 1000 le nombre d'appels. 
+\end{corrige}
+\else
+\fi
+
+\subsection*{Exercice 2 -- Suite de Fibonacci}
+\setcounter{subparagraph}{0}
+
+\subsection*{Exercice 3 -- Exponentiation rapide}
+\setcounter{subparagraph}{0}
+
+\subsection*{Exercice 4 -- Calcul de déterminant}
+\setcounter{subparagraph}{0}
+
+\textit{D'après ressources de David Prévost -- UPSTI}
+
+On souhaite calculer le déterminant d’une matrice (carrée) A par la formule de développement
+sur la première ligne (ou sur la première colonne) mais pas une autre (par exemple si on le
+faisait sur la troisième, la fonction ne conviendrait pas pour un déterminant 2x2).
+\subparagraph{}
+\textit{Écrire une fonction \textsl{extraire(A,lig,col)} qui permet de fabriquer la matrice
+extraite de \textsl{A} en rayant la ligne \textsl{lig} et la colonne \textsl{col} (dans l’optique d’obtenir son
+déterminant).}
+
+\subparagraph{}
+\textit{Écrire une fonction récursive \textsl{determinant(A)} retournant le déterminant de \textsl{A}.}
+
+\subparagraph{}
+\textit{Tester l’algorithme sur une matrice (de taille au moins 3,3) et comparer le résultat à ce
+que retourne la fonction \textsl{det} du module \textsl{linalg} de la bibliothèque \textsl{numpy}.}
+
+\section*{Exercice 1 -- Suite de Fibonacci}
+
+\section*{Exercice 2 -- Recherche dichotomique}
+\section*{Exercice 3 -- Courbe du Dragon}
+
+
+
+\end{multicols}
+
+%\begin{thebibliography}{2}
+%\bibitem{1}{Patrick Beynet, \textit{Supports de cours de TSI 2}, Lycée Rouvière, Toulon.}
+%\bibitem{2}{<< Mandel zool 08 satellite antenna >>. Sous licence CC BY-SA via Wikimedia Commons - \url{https://fr.wikipedia.org/wiki/Ensemble_de_Mandelbrot#/media/File:Mandel_zoom_08_satellite_antenna.jpg}}
+%\bibitem{3}{\url{http://www.obside.fr/fractales/pages/Recursif/}}
+%\end{thebibliography}
+\end{document}
+
