@@ -127,7 +127,7 @@ def mystere(nb,tab):
     g, d = 0, len(tab)-1
     while g <= d:
         m = (g + d) // 2
-        print(m)
+        #print(m)
         if tab[m] == nb:
             return m
         if tab[m] < nb:
@@ -157,15 +157,16 @@ while z<=100:
         pasz = 0.1
     else :
         pasz = 1
-    print(z,pasz)
+    #print(z,pasz)
     xx.append(z)
     yy.append(tom0)
     z=z+pasz
 
 
-"""
+
 import matplotlib.pyplot as plt
 import numpy as np
+
 
 plt.plot(xx,yy,label="Temps de réponse réduit $tr \\omega_0$")
 plt.xlabel("Coefficient d'amortissement $\\xi$")
@@ -177,4 +178,4 @@ plt.grid(which="major",axis="x",linewidth=1.5, linestyle='-')
 plt.grid(which="major",axis="y",linewidth=1.5, linestyle='-')
 plt.grid(which="minor",axis="x",linewidth=0.75, linestyle='-', color='0.75')
 plt.grid(which="minor",axis="y",linewidth=0.75, linestyle='-', color='0.75')
-"""
+
