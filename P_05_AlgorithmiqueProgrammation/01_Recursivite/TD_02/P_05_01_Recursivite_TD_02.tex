@@ -26,7 +26,7 @@
 
 \def\discipline{Informatique}
 \def\xxtete{Informatique}
-\def\classe{PT}
+\def\classe{PT -- PT$\star$}
 \def\xxnumpartie{Partie 5}
 \def\xxpartie{Algorithmique \& Programmation II}
 
@@ -40,7 +40,7 @@
 \def\xxonglet{Part. 5 -- Ch. 1}
 
 \def\xxactivite{TD 2}
-\def\xxauteur{\textsl{Xavier Pessoles}}
+\def\xxauteur{\textsl{Équipe pédagogique La Martinière}}
 
 \def\xxcompetences{%
 \textsl{%
@@ -75,7 +75,77 @@ Ch 1 : Programmation récursive -- \xxactivite%
 \begin{multicols}{2}
 %---------------------------------------------------------------------------
 
-\subsection*{Exercice 1 -- Calcul de $n!$}
+\subsection*{Exercice 1 -- Fonction mystère}
+\textit{D'après ressources de C. Lambert.}
+On donne la fonction suivante : 
+\begin{py}
+\begin{python}
+def mystere(L):
+    """
+    Ceci est la fonction mystère, saurez-vous trouver 
+    son but ?
+    Entrée : 
+        * L(list) : liste de nombres entiers ou réels
+    Sortie : 
+        * ??? 
+    """
+    n = len(L)
+    if n==0 :
+        return (none)
+    elif n==1 :
+        return (L[0])
+    else :
+        x = mystere(L[0:n-1])
+        if x<=L[-1] :
+            return (x)
+        else : 
+            return (L[-1])
+\end{python}
+\end{py}
+
+\subparagraph{}
+\textit{Sans coder la fonction, déterminer le résultat de l'instruction \textbf{print(mystere([14, 20, 3, 16]))} ? Vous pourrez représenter de façon graphique l'empilement et le dépilement de la pile d'exécution.}
+
+\subparagraph{}
+\textit{D'après vous quel est le but de cette fonction ?}
+
+\subparagraph{}
+\textit{Programmer la fonction et tester l'instruction précédente. Sur plusieurs exemples, vérifiez la conjecture faite à la question précédente.}
+
+
+\subparagraph{}
+\textit{Question subsidiaire. -- Montrer que la propriété suivante est une propriété d'invariance :\\
+$\mathcal{P}$ : l'algorithme retourne le plus petit élément de la liste de taille $k$, s'il existe.}
+
+\begin{rem}
+\begin{itemize}
+\item Il faudra montrer que l'algorithme se termine au moyen d'un variant de boucle. 
+\item Il faudra montrer que $\mathcal{P}$ est une propriété d'invariance. 
+\end{itemize}
+\end{rem}
+
+\subsection*{Exercice 2 -- Palindrome...}
+\textit{D'après ressources de C. Lambert.}
+\setcounter{subparagraph}{0}
+On souhaite réaliser une fonction $\textsl{miroir}$ dont le but est de retourner le <<miroir>> d'une chaîne de caractères. Par exemple le résultat de \textsl{miroir("miroir'')} serait \textsl{''riorim''}.
+
+\subparagraph{}
+\textit{Programmer la fonction $\textsl{miroir\_it}$ permettant de répondre au problème de manière itérative.}
+
+
+\subparagraph{}
+\textit{Programmer la fonction $\textsl{miroir\_rec}$ permettant de répondre au problème de manière récursive.}
+
+
+\subparagraph{}
+\textit{Que renvoie la fonction si la chaîne de caractère est "Eh ! ça va la vache" ?}
+ 
+ \subparagraph{}
+\textit{Évaluer la complexité algorithmique de chacune de deux fonctions.}
+
+ 
+\subsection*{Exercice 3 -- Calcul de $n!$}
+\setcounter{subparagraph}{0}
 
 \noindent 
 On rappelle la définition de $n!$ :
@@ -95,7 +165,7 @@ Pour vérifier vos résultats, vous pouvez utiliser la fonction disponible dans 
 \end{python}
 \end{rem}
 \subparagraph{}
-\textit{Définir la fonction \textsf{fact\_it} permettant de calculer $n!$ de façon itérative.}
+\textit{Définir la fonction \textsl{fact\_it} permettant de calculer $n!$ de façon itérative.}
 \ifprof
 \begin{corrige}
 \begin{python}
@@ -135,7 +205,7 @@ Il y a $n$ opérations dans le pire des cas. En conséquence, $C(n)=\mathcal{O}(
 \fi
 
 \subparagraph{}
-\textit{Définir la fonction \textsf{fact\_rec} permettant de calculer $n!$ de façon récursive.}
+\textit{Définir la fonction \textsl{fact\_rec} permettant de calculer $n!$ de façon récursive.}
 \ifprof
 \begin{corrige}
 \begin{python}
@@ -158,7 +228,7 @@ def fact_rec(n):
 
 
 \subparagraph{}
-\textit{Évaluer $1010!$ dans les trois cas. Expliquer ce qu'il se passe ?}
+\textit{Évaluer $1010!$ dans les trois cas (itératif, récursif et fonction native de Python). Expliquer ce qu'il se passe ?}
 \ifprof
 \begin{corrige}
 Dans le cas de l'appel récursif, on réalise que Python limite à 1000 le nombre d'appels. 
@@ -166,24 +236,39 @@ Dans le cas de l'appel récursif, on réalise que Python limite à 1000 le nombr
 \else
 \fi
 
-\subsection*{Exercice 2 -- Suite de Fibonacci}
-\setcounter{subparagraph}{0}
+\subsection*{Exercice 4 -- Suite de Fibonacci}
+\textit{D'après ressources de C. Lambert.}
 
-\subsection*{Exercice 3 -- Exponentiation rapide}
 \setcounter{subparagraph}{0}
+On définit la suite de Fibonacci de la façon suivante : 
+$$
+\forall n\in \mathbb{N}, \left\{ \begin{array}{l}
+u_0 = 0, u_1 = 1 \\
+u_{n+2} = u_{n} + u_{n+1}
+\end{array}\right.
+$$
 
-\subsection*{Exercice 4 -- Calcul de déterminant}
+\subparagraph{}
+\textit{Définir la fonction \textsl{fibonacci\_it} permettant de calculer $u_n$ par une méthode itérative. Évaluer la complexité algorithmique de l'algorithme.}
+
+\subparagraph{}
+\textit{Définir la fonction \textsl{fibonacci\_rec} permettant de calculer $u_n$ par une méthode récursive << intuitive>>. Évaluer la complexité algorithmique de l'algorithme.}
+
+
+\subparagraph{}
+\textit{Observer comment passer du couple $(u_n,u_{n+1})$ au couple $(u_{n+1},u_{n+2})$. En déduire une autre méthode récursive pour calculer le n\ieme terme de la suite de Fibonacci. Évaluer la complexité algorithmique de l'algorithme.}
+
+\subsection*{Exercice 5 -- Calcul de déterminant}
 \setcounter{subparagraph}{0}
 
 \textit{D'après ressources de David Prévost -- UPSTI}
 
-On souhaite calculer le déterminant d’une matrice (carrée) A par la formule de développement
+On souhaite calculer le déterminant d’une matrice (carrée) $A$ par la formule de développement
 sur la première ligne (ou sur la première colonne) mais pas une autre (par exemple si on le
 faisait sur la troisième, la fonction ne conviendrait pas pour un déterminant 2x2).
 \subparagraph{}
 \textit{Écrire une fonction \textsl{extraire(A,lig,col)} qui permet de fabriquer la matrice
-extraite de \textsl{A} en rayant la ligne \textsl{lig} et la colonne \textsl{col} (dans l’optique d’obtenir son
-déterminant).}
+extraite de \textsl{A} en rayant la ligne \textsl{lig} et la colonne \textsl{col} (dans l’optique d’obtenir son déterminant).}
 
 \subparagraph{}
 \textit{Écrire une fonction récursive \textsl{determinant(A)} retournant le déterminant de \textsl{A}.}
@@ -192,13 +277,48 @@ déterminant).}
 \textit{Tester l’algorithme sur une matrice (de taille au moins 3,3) et comparer le résultat à ce
 que retourne la fonction \textsl{det} du module \textsl{linalg} de la bibliothèque \textsl{numpy}.}
 
-\section*{Exercice 1 -- Suite de Fibonacci}
 
-\section*{Exercice 2 -- Recherche dichotomique}
-\section*{Exercice 3 -- Courbe du Dragon}
+\section*{Exercice 6 -- Bubble bobble}
+\textit{ D'après ressources de Jean-Pierre Becirspahic   \\ \indent \url{http://info-llg.fr/}.}
+\setcounter{subparagraph}{0}
 
+On suppose disposer d’une fonction \textsl{circle([x, y], r)} qui trace à l’écran un cercle de centre
+$(x;y)$ de rayon $r$. 
+\subparagraph*{}
+\textit{Définir deux fonctions récursives permettant de tracer les dessins présentés figure suivante (chaque cercle est de rayon moitié moindre qu’à la génération précédente).}
 
+\begin{center}
+\includegraphics[width=.95\linewidth]{images/fig_03}
+% Le résultat des fonctions bubble1(4) et de bubble2(4).
+\end{center}
 
+\ifprof
+\begin{corrige}
+\begin{python}
+import matplotlib.pyplot as plt
+import numpy as np
+
+def cercle(coord, r):
+    x,y=[],[]
+    for t in range (101):
+        x.append(coord[0]+r*np.cos(t*np.pi/50))
+        y.append(coord[1]+r*np.sin(t*np.pi/50))
+    plt.plot(x,y)
+    
+    
+def bulle1(n,x=0,y=0,r=8):
+    cercle([x,y],r)
+    if n>1 :
+        bulle1(n-1,x+3*r/2,y,r/2)
+        bulle1(n-1,x,y-3*r/2,r/2)
+
+bulle1(6)
+plt.axis('equal')
+plt.show()
+\end{python}
+\end{corrige}
+\else
+\fi
 \end{multicols}
 
 %\begin{thebibliography}{2}

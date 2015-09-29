@@ -179,3 +179,7 @@ plt.grid(which="major",axis="y",linewidth=1.5, linestyle='-')
 plt.grid(which="minor",axis="x",linewidth=0.75, linestyle='-', color='0.75')
 plt.grid(which="minor",axis="y",linewidth=0.75, linestyle='-', color='0.75')
 
+fid = open("abaque_01.txt",'w')
+for i in range(len(xx)):
+    fid.write(str(xx[i])+" "+str(yy[i])+"\n")
+fid.close()
