@@ -26,7 +26,7 @@
 
 \def\discipline{Informatique}
 \def\xxtete{Informatique}
-\def\classe{PT}
+\def\classe{PT -- PT$\star$}
 \def\xxnumpartie{Partie 5}
 \def\xxpartie{Algorithmique \& Programmation II}
 
@@ -68,13 +68,13 @@ Ch 1 : Programmation récursive -- \xxactivite%
 \pagestyle{fancy}
 \thispagestyle{plain}
 
-
+\setcounter{secnumdepth}{5}
 \def\columnseprulecolor{\color{ocre}}
 \setlength{\columnseprule}{0.4pt} 
 \begin{multicols}{2}
 %---------------------------------------------------------------------------
 
-\section*{Exercice 1}
+\section*{Exercice 1 -- Fonction 91 de McCarthy}
 On considère la fonction récursive suivante : 
 \begin{py}
 \begin{python}
@@ -84,20 +84,21 @@ def f(n) :
     return f(f(n+11))
 \end{python}
 \end{py}
+
 \subparagraph*{} \textit{Prouver sa terminaison lorsque $n\in\mathbb{N}$ et déterminer ce qu'elle calcule (sans utiliser l'interpréteur de commande).}
 
-\section*{Exercice 2}
-\subparagraph*{}\textit{Prouver la terminaison de la fonction $G$ de Hofstadter, définie sur $\mathbb{N}$ de la façon suivante :}
-\begin{py}
-\begin{python}
-def g(n) :
-    if n== 0 : 
-        return 0
-    return n-g(g(n-1))
-\end{python}
-\end{py}
+%\section*{Exercice 2}
+%\subparagraph*{}\textit{Prouver la terminaison de la fonction $G$ de Hofstadter, définie sur $\mathbb{N}$ de la façon suivante :}
+%\begin{py}
+%\begin{python}
+%def g(n) :
+%    if n== 0 : 
+%        return 0
+%    return n-g(g(n-1))
+%\end{python}
+%\end{py}
 
-\section*{Exercice 3}
+\section*{Exercice 2}
 \setcounter{subparagraph}{0}
 \subparagraph{}
 \textit{Écrire une fonction récursive qui calcule $a^n$ en exploitant la relation : $a^n=a^{n/2}\times a^{n/2}$.}
@@ -114,7 +115,7 @@ $.
 \textit{Effectuer le nombre de multiplications effectuées dans les deux cas.}
 
 
-\section*{Exercice 4}
+\section*{Exercice 3}
 \setcounter{subparagraph}{0}
 On démontre que sur l'ensemble $\mathbb{N}\times \mathbb{N}$ est dénombrable en numérotant chaque couple $(x,y)\in\mathbb{N}^2$ suivant le procédé suggéré par la figure ci-dessous.
 \begin{center}
@@ -124,15 +125,15 @@ On démontre que sur l'ensemble $\mathbb{N}\times \mathbb{N}$ est dénombrable e
 \subparagraph{}\textit{Rédiger une fonction récursive qui retourne le numéro du point de coordonnées $(x,y)$.}
 
 \subparagraph{}\textit{Rédiger la fonction réciproque, là encore de façon récursive.}
+%
+%\section*{Exercice 4}
+%\setcounter{subparagraph}{0}
+%On suppose donné un tableau $t[0,.., n-1]$ (contenant au moins trois éléments) qui possède la propriété suivante : $t_0\geq t_1$ et $t_{n-2}\leq t_{n-1}$. Soit $k\in[|1,n-2|]$; on dit que $t_k$ est un minimum local lorsque $t_k\leq t_{k-1}$ et $t_k\leq t_{k+1}$.
+%
+%\subparagraph{}\textit{Justifier l'existence d'un minimum local dans $t$.}
+%\subparagraph{}\textit{Il est facile de déterminer un minimum local en coût linéaire : il suffit de procéder à un parcours de tableau. Pourriez-vous trouver un algorithme récursif qui en trouve un en réduisant le coût logarithmique?}
 
-\section*{Exercice 5}
-\setcounter{subparagraph}{0}
-On suppose donné un tableau $t[0,.., n-1]$ (contenant au moins trois éléments) qui possède la propriété suivante : $t_0\geq t_1$ et $t_{n-2}\leq t_{n-1}$. Soit $k\in[|1,n-2|]$; on dit que $t_k$ est un minimum local lorsque $t_k\leq t_{k-1}$ et $t_k\leq t_{k+1}$.
-
-\subparagraph{}\textit{Justifier l'existence d'un minimum local dans $t$.}
-\subparagraph{}\textit{Il est facile de déterminer un minimum local en coût linéaire : il suffit de procéder à un parcours de tableau. Pourriez-vous trouver un algorithme récursif qui en trouve un en réduisant le coût logarithmique?}
-
-\section*{Exercice 6}
+\section*{Exercice 4}
 \setcounter{subparagraph}{0}
 
 Les processeurs graphiques possèdent en général une fonction de bas niveau appelée \textit{blit} (ou transfert de bloc) qui copie rapidement un bloc rectangulaire d’une image d’un endroit à un autre.
@@ -159,7 +160,7 @@ $n \times n$, rédiger une fonction qui adopte cette
 démarche pour effectuer une rotation de 90\textdegree dans le sens direct (on simulera un blit par la copie d’une partie de la matrice vers une autre en décrivant ces parties par le slicing).}
 
 
-\section*{Exercice 7}
+\section*{Exercice 5}
 \setcounter{subparagraph}{0}
 
 On suppose disposer d’une fonction \textsl{circle([x, y], r)} qui trace à l’écran un cercle de centre
@@ -173,11 +174,13 @@ $(x;y)$ de rayon $r$.
 \end{center}
 
 
+\section*{Exercice 5}
+\setcounter{subparagraph}{0}
 
-\subparagraph{}\textit{}
+%\subparagraph{}\textit{}
 On suppose disposer d’une fonction \textsf{polygon([xa, ya], [xb, yb], [xc, yc])} qui trace le
-triangle plein dont les sommets ont pour coordonnées $(xa;ya)$, $(xb;yb)$, $(xc;yc)$. 
-\subparagraph*{}
+triangle plein dont les sommets ont pour coordonnées $(x_a;y_a)$, $(x_b;y_b)$, $(x_c;y_c)$. 
+\subparagraph{}
 \textit{Définir une fonction récursive permettant le tracé présenté figure suivante (tous les triangles sont équilatéraux).}
 
 \begin{center}
