@@ -133,48 +133,48 @@ On démontre que sur l'ensemble $\mathbb{N}\times \mathbb{N}$ est dénombrable e
 %\subparagraph{}\textit{Justifier l'existence d'un minimum local dans $t$.}
 %\subparagraph{}\textit{Il est facile de déterminer un minimum local en coût linéaire : il suffit de procéder à un parcours de tableau. Pourriez-vous trouver un algorithme récursif qui en trouve un en réduisant le coût logarithmique?}
 
+%\section*{Exercice 4}
+%\setcounter{subparagraph}{0}
+%
+%Les processeurs graphiques possèdent en général une fonction de bas niveau appelée \textit{blit} (ou transfert de bloc) qui copie rapidement un bloc rectangulaire d’une image d’un endroit à un autre.
+%
+%L’objectif de cet exercice est de faire tourner une image carrée de $n\times n$ pixels de 90\textdegree dans le sens direct en
+%adoptant une stratégie récursive : découper l’image en quatre blocs de tailles $n/2 \times n/2$, déplacer chacun des ces
+%blocs à sa position finale à l’aide de 5 \textit{blits}, puis faire tourner récursivement chacun de ces blocs.
+%
+%\begin{center}
+%\includegraphics[width=.95\linewidth]{images/fig_02}
+%\end{center}
+%
+%On supposera dans tout l’exercice que n est une puissance de 2.
+%
+%\subparagraph{}\textit{Exprimer en fonction de n le nombre de fois que la fonction blit est utilisée.}
+%
+%\subparagraph{}\textit{Quel est le coût total de cet algorithme lorsque le coût d’un blit d’un bloc 
+%$k \times k$ est en $\mathcal{O}(n^2)$ ?}
+%
+%\subparagraph{}\textit{Et lorsque ce coût est en $\mathcal{O}(n)$  ?}
+%
+%\subparagraph{}\textit{En supposant qu’une image est représentée par une matrice numpy 
+%$n \times n$, rédiger une fonction qui adopte cette
+%démarche pour effectuer une rotation de 90\textdegree dans le sens direct (on simulera un blit par la copie d’une partie de la matrice vers une autre en décrivant ces parties par le slicing).}
+
+%
+%\section*{Exercice 5}
+%\setcounter{subparagraph}{0}
+%
+%On suppose disposer d’une fonction \textsl{circle([x, y], r)} qui trace à l’écran un cercle de centre
+%$(x;y)$ de rayon $r$. 
+%\subparagraph*{}
+%\textit{Définir deux fonctions récursives permettant de tracer les dessins présentés figure suivante (chaque cercle est de rayon moitié moindre qu’à la génération précédente).}
+%
+%\begin{center}
+%\includegraphics[width=.95\linewidth]{images/fig_03}
+%% Le résultat des fonctions bubble1(4) et de bubble2(4).
+%\end{center}
+
+
 \section*{Exercice 4}
-\setcounter{subparagraph}{0}
-
-Les processeurs graphiques possèdent en général une fonction de bas niveau appelée \textit{blit} (ou transfert de bloc) qui copie rapidement un bloc rectangulaire d’une image d’un endroit à un autre.
-
-L’objectif de cet exercice est de faire tourner une image carrée de $n\times n$ pixels de 90\textdegree dans le sens direct en
-adoptant une stratégie récursive : découper l’image en quatre blocs de tailles $n/2 \times n/2$, déplacer chacun des ces
-blocs à sa position finale à l’aide de 5 \textit{blits}, puis faire tourner récursivement chacun de ces blocs.
-
-\begin{center}
-\includegraphics[width=.95\linewidth]{images/fig_02}
-\end{center}
-
-On supposera dans tout l’exercice que n est une puissance de 2.
-
-\subparagraph{}\textit{Exprimer en fonction de n le nombre de fois que la fonction blit est utilisée.}
-
-\subparagraph{}\textit{Quel est le coût total de cet algorithme lorsque le coût d’un blit d’un bloc 
-$k \times k$ est en $\mathcal{O}(n^2)$ ?}
-
-\subparagraph{}\textit{Et lorsque ce coût est en $\mathcal{O}(n)$  ?}
-
-\subparagraph{}\textit{En supposant qu’une image est représentée par une matrice numpy 
-$n \times n$, rédiger une fonction qui adopte cette
-démarche pour effectuer une rotation de 90\textdegree dans le sens direct (on simulera un blit par la copie d’une partie de la matrice vers une autre en décrivant ces parties par le slicing).}
-
-
-\section*{Exercice 5}
-\setcounter{subparagraph}{0}
-
-On suppose disposer d’une fonction \textsl{circle([x, y], r)} qui trace à l’écran un cercle de centre
-$(x;y)$ de rayon $r$. 
-\subparagraph*{}
-\textit{Définir deux fonctions récursives permettant de tracer les dessins présentés figure suivante (chaque cercle est de rayon moitié moindre qu’à la génération précédente).}
-
-\begin{center}
-\includegraphics[width=.95\linewidth]{images/fig_03}
-% Le résultat des fonctions bubble1(4) et de bubble2(4).
-\end{center}
-
-
-\section*{Exercice 5}
 \setcounter{subparagraph}{0}
 
 %\subparagraph{}\textit{}
