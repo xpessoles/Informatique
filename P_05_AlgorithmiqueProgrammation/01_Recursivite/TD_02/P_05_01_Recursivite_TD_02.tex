@@ -6,10 +6,10 @@
 \input{style/new_style}
 \input{style/macros_SII}
 
-%\fichetrue
-\fichefalse
+\fichetrue
+%\fichefalse
 
-\proftrue
+%\proftrue
 \proffalse
 
 \tdtrue
@@ -72,7 +72,10 @@ Ch 1 : Programmation récursive -- \xxactivite%
 
 \def\columnseprulecolor{\color{ocre}}
 \setlength{\columnseprule}{0.4pt} 
+\ifprof
+\else
 \begin{multicols}{2}
+\fi
 %---------------------------------------------------------------------------
 
 \subsection*{Exercice 1 -- Fonction mystère}
@@ -123,10 +126,31 @@ $\mathcal{P}$ : l'algorithme retourne le plus petit élément de la liste de tai
 \item Il faudra montrer que $\mathcal{P}$ est une propriété d'invariance. 
 \end{itemize}
 \end{rem}
+\ifprof
+\begin{corrige}
+$n$ est un variant de boucle car : 
+\begin{itemize}
+\item si $n=1$ ou $n=0$, l'algorithme se termine;
+\item si $n>1$ chaque appel récursif est réalisé avec l'argument $n-1$. $n$ décrit donc une suite strictement décroissante, jusqu'à ce que $n=1$ (terminaison de l'algorithme). 
+\end{itemize}
+
+\vspace{.25cm}
+
+Soit la propriété suivante : soit une liste de taille $k$. L'appel à la fonction mystère retourne le plus petit élément à chaque itération. 
+
+Soit une liste de 2 éléments. $x$ reçoit le premier élément de la liste. $x$ est comparé au second élément. Si $x$ est inférieur au second élément, c'est donc le plus petit élément. $x$ est bien retourné. Sinon c'est bien le second élément qui est retourné. 
+
+
+Soit une liste de taille $k+1$.  $x$ reçoit le résultat de \texttt{mystere(L[0:k])}. D'après la propriété, $x$ contient donc le plus petit élément de la liste \texttt{[0:k]}. $x$ est comparé à l'élément $k+1$. Si $x$ est inférieur à cet élément, c'est donc le plus petit élément. $x$ est bien retourné. Sinon c'est que l'élément $k+1$ est le plus petit de la liste. C'est bien celui qui est retourné. 
+
+La propriété énoncée est donc un invariant de boucle.
+\end{corrige}
+\else
+\fi
 
 \subsection*{Exercice 2 -- Palindrome...}
 \textit{D'après ressources de C. Lambert.}
-\setcounter{subparagraph}{0}
+\setcounter{exo}{0}
 On souhaite réaliser une fonction $\textsl{miroir}$ dont le but est de retourner le <<miroir>> d'une chaîne de caractères. Par exemple le résultat de \textsl{miroir("miroir'')} serait \textsl{''riorim''}.
 
 \subparagraph{}
@@ -141,11 +165,11 @@ On souhaite réaliser une fonction $\textsl{miroir}$ dont le but est de retourne
 \textit{Que renvoie la fonction si la chaîne de caractère est "Eh ! ça va la vache" ?}
  
  \subparagraph{}
-\textit{Évaluer la complexité algorithmique de chacune de deux fonctions.}
+\textit{Évaluer la complexité algorithmique de chacune des deux fonctions.}
 
  
 \subsection*{Exercice 3 -- Calcul de $n!$}
-\setcounter{subparagraph}{0}
+\setcounter{exo}{0}
 
 \noindent 
 On rappelle la définition de $n!$ :
@@ -178,7 +202,8 @@ def fact_it(n):
      * res (int): résultat, nombre entier naturel
     """
     # Vérifie que n est bien positif ou nul
-    # On pourrait aussi vérifier que n est bien un integer
+    # On pourrait aussi vérifier que n est bien un 
+    # integer
     assert (n >= 0),"Nombre négatif" 
     if n==0:
         return 1
@@ -239,7 +264,7 @@ Dans le cas de l'appel récursif, on réalise que Python limite à 1000 le nombr
 \subsection*{Exercice 4 -- Suite de Fibonacci}
 \textit{D'après ressources de C. Lambert.}
 
-\setcounter{subparagraph}{0}
+\setcounter{exo}{0}
 On définit la suite de Fibonacci de la façon suivante : 
 $$
 \forall n\in \mathbb{N}, \left\{ \begin{array}{l}
@@ -259,7 +284,7 @@ $$
 \textit{Observer comment passer du couple $(u_n,u_{n+1})$ au couple $(u_{n+1},u_{n+2})$. En déduire une autre méthode récursive pour calculer le n\ieme terme de la suite de Fibonacci. Évaluer la complexité algorithmique de l'algorithme.}
 
 \subsection*{Exercice 5 -- Calcul de déterminant}
-\setcounter{subparagraph}{0}
+\setcounter{exo}{0}
 
 \textit{D'après ressources de David Prévost -- UPSTI}
 
@@ -269,18 +294,108 @@ faisait sur la troisième, la fonction ne conviendrait pas pour un déterminant 
 \subparagraph{}
 \textit{Écrire une fonction \textsl{extraire(A,lig,col)} qui permet de fabriquer la matrice
 extraite de \textsl{A} en rayant la ligne \textsl{lig} et la colonne \textsl{col} (dans l’optique d’obtenir son déterminant).}
+\ifprof
+\begin{corrige}
+~\\
+\begin{python}
+def zeros(n):
+    """
+    Crée une matrice de zéros de taille nxn
+    Entrée : 
+     * n(int) : nombre entier positif
+    Sortie :
+     * m(list) : liste de taille nxn de zéros
+    """
+    # En utilisant une liste de compréhension, 
+    # on pourrait procéder ainsi :
+    # return [[0 for j in range(n)] for i in range(n)]
+    m = []
+    for i in range(n):
+        mm = []
+        for k in range(n):
+            mm.append(0)
+        m.append(mm)
+    return m
+\end{python}
+\end{corrige}
 
+\begin{corrige}
+~\\
+\begin{python}
+def extraire(M,l,c):
+    """
+    Supprime la ligne l et la colonne c de 
+    la matrice M
+    Entrées :
+     * M(list(list)) : matrice de taille nxn
+     * l(int) : numéro de ligne à supprimer
+     * c(int) : numéro de colonne à supprimer
+    Sortie : 
+     * MM(list(list)) : matrice de taille n-1 x n-1 
+     en ayant supprimer la ligne l et la colonne c
+    """
+    n = len(M)
+    MM = zeros(n-1)
+    p=-1
+    for i in range(n):
+        if i!= l:
+            p=p+1
+            q=-1
+            for j in range(n):
+                if j!= c:
+                    q=q+1
+                    MM[p][q]=M[i][j]
+    
+    return MM
+\end{python}
+\end{corrige}
+\else
+\fi
 \subparagraph{}
 \textit{Écrire une fonction récursive \textsl{determinant(A)} retournant le déterminant de \textsl{A}.}
+\ifprof
+\begin{corrige}
+~\\
+\begin{python}
+def determinant(M):
+    """
+    Calcule le déterminant de la matrice M.
+    Entrée : 
+     * M(list) : matrice de taille nxn
+    Sortie : 
+     * d(flt) : déterminant de la matrice
+    """
+    n = len(M)
+    if len(M)==1:
+        return M[0][0]
+    else :
+        d=0
+        for i in range(n):
+            d = d+(-1)**i * M[i][0]*determinant(extraire(M,i,0))
+    return d
+\end{python}
+\end{corrige}
+\else
+\fi
 
 \subparagraph{}
 \textit{Tester l’algorithme sur une matrice (de taille au moins 3,3) et comparer le résultat à ce
 que retourne la fonction \textsl{det} du module \textsl{linalg} de la bibliothèque \textsl{numpy}.}
+\ifprof
+\begin{corrige}
+~\\
+\begin{python}
+from numpy import linalg
+print(linalg.det(MM))
+\end{python}
+\end{corrige}
+\else
+\fi
 
 
 \section*{Exercice 6 -- Bubble bobble}
 \textit{ D'après ressources de Jean-Pierre Becirspahic   \\ \indent \url{http://info-llg.fr/}.}
-\setcounter{subparagraph}{0}
+\setcounter{exo}{0}
 
 On suppose disposer d’une fonction \textsl{circle([x, y], r)} qui trace à l’écran un cercle de centre
 $(x;y)$ de rayon $r$. 
@@ -319,8 +434,10 @@ plt.show()
 \end{corrige}
 \else
 \fi
+\ifprof
+\else
 \end{multicols}
-
+\fi
 %\begin{thebibliography}{2}
 %\bibitem{1}{Patrick Beynet, \textit{Supports de cours de TSI 2}, Lycée Rouvière, Toulon.}
 %\bibitem{2}{<< Mandel zool 08 satellite antenna >>. Sous licence CC BY-SA via Wikimedia Commons - \url{https://fr.wikipedia.org/wiki/Ensemble_de_Mandelbrot#/media/File:Mandel_zoom_08_satellite_antenna.jpg}}
