@@ -1,0 +1,600 @@
+\documentclass[10pt,fleqn]{article} % Default font size and left-justified equations
+\usepackage[%
+    pdftitle={CIN : Cinématique du solide},
+    pdfauthor={Xavier Pessoles}]{hyperref}
+
+\input{style/new_style}
+\input{style/macros_SII}
+
+\fichetrue
+%\fichefalse
+
+%\proftrue
+\proffalse
+
+%\tdtrue
+\tdfalse
+
+%\courstrue
+\coursfalse
+
+% -------------------------------------
+% Déclaration des titres
+% -------------------------------------
+
+\def\discipline{Informatique}
+\def\xxtete{Informatique}
+
+\def\classe{PT -- PT $\star$}
+\def\xxnumpartie{DS 1}
+\def\xxpartie{Devoir Surveillé 1}
+
+\def\xxnumchapitre{}
+\def\xxchapitre{Construction d'une référence spécifiée}
+
+\def\xxtitreexo{Prothèse Active Transtibiale}
+\def\xxsourceexo{\hspace{.2cm} D'après concours Mines-Ponts -- 2013.}
+
+\def\xxposongletx{2}
+\def\xxposonglettext{1.45}
+\def\xxposonglety{20}
+\def\xxonglet{\textsf{DS 1}}
+
+\def\xxactivite{TD 1}
+\def\xxauteur{\textsl{Xavier Pessoles -- D'après ressouces de P. Beynet.}}
+
+\def\xxcompetences{%
+\texttt{%
+\textbf{Savoirs et compétences :}\\
+\noindent \textbf{Résoudre :} à partir des modèles retenus :
+\begin{itemize}[label=\ding{112},font=\color{ocre}] 
+\item choisir une méthode de résolution analytique, graphique, numérique;
+\item mettre en \oe{}uvre une méthode de résolution.
+\end{itemize}
+\begin{itemize}[label=\ding{112},font=\color{ocre}] 
+\item \textit{Rés -- C1.1 :} Loi entrée sortie géométrique et cinématique -- Fermeture géométrique.
+\end{itemize}
+%
+%\noindent \textit{Mod2 -- C4.1 :} Représentation par schéma bloc.
+}}
+
+\def\xxfigures{
+%\includegraphics[width=.8\textwidth]{images/prot_01}
+}%figues de la page de garde
+
+\def\xxpied{%
+DS 1 : Construction d'une référence spécifiée
+}
+
+
+\setcounter{secnumdepth}{5}
+%---------------------------------------------------------------------------
+
+
+\begin{document}
+%\chapterimage{png/Fond_Cin}
+\input{style/new_pagegarde}
+\vspace{2cm}
+\pagestyle{fancy}
+\thispagestyle{plain}
+
+\section{Présentation}
+\subsection{Mise en situation}
+\ifprof
+\else
+En métrologie, il est nécessaire de construire une référence spécifiée plane à partir d'un nuage de points extraits d'une surface nominalement (réputée) plane. Ces points sont souvent mesurés à partir d'une machine à mesurer tridimensionnelle.
+
+D'après la norme, la critère d'association choisi est de construire un <<plan tangent extérieur à la matière qui minimise l'écart maximum. Dans la pratique, il est assez difficile de déterminer le plan optimal. 
+
+\begin{obj}
+L'objectif de ce travail est de déterminer algorithmiquement, de manière approchée, le plan tangent extérieur matière qui minimise l'écart maximum. 
+\end{obj}
+\fi
+
+
+
+
+\subsection{Mise en équation de détermination du plan des moindre carrés}
+\ifprof
+\else
+\noindent\begin{minipage}[c]{.75\linewidth}
+On suppose que la direction de mesure $\vect{z}$ est verticale ascendante pour la machine à mesurer tridimensionnelle. En conséquence, on traitera les plans qui ne contiennent pas le vecteur $\vect{z}$.
+
+\begin{rappel}
+$\quad$\\
+
+Dans un repère orthonormé direct, l'équation d'un plan $\left( \mathcal{P}\right)$ est donnée par $z=ax+by+c$.
+
+Le vecteur $\vect{n}(a,b,1)$ définit une normale au plan $\left( \mathcal{P}\right)$.
+
+Le point de coordonnées $(0,0,c)$ appartient au plan $\left( \mathcal{P}\right)$.
+
+\end{rappel}
+\end{minipage} \hfill
+\begin{minipage}[c]{.2\linewidth}
+\begin{center}
+\includegraphics[width=.95\textwidth]{images/MMT}
+\end{center}
+\end{minipage}
+L'écart $e_i$ d'un point  $M_i$ suivant $\vect{z}$ de coordonnées $\left(x_i,y_i,z_i\right)$ au plan $\left( \mathcal{P}\right)$ est donné par 
+$e_i = z_i -ac_i -by_i -c$.
+
+
+\begin{defi}\textbf{Écarts}
+La fonction écart $E$ est définie de la manière suivante : 
+$$
+E:(a,b,c)\rightarrow \sum\limits_{i=1}^{n} e_i^2 = \sum\limits_{i=1}^{n} \left(z_i -ax_i -by_i -c\right)^2
+$$
+\end{defi}
+
+
+\begin{defi}\textbf{Minimisation des écarts}
+
+Pour minimiser la fonction $E$, il faut résoudre le système d'équations suivant :
+
+\begin{tabular}{p{4cm}p{4cm}p{4cm}}
+\begin{eqnarray}\label{eq1}
+\dfrac{\partial E(a,b,c)}{\partial a} = 0 
+\end{eqnarray}
+&
+\begin{eqnarray}\label{eq2}
+\dfrac{\partial E(a,b,c)}{\partial b} = 0 
+\end{eqnarray}
+&
+\begin{eqnarray}\label{eq3}
+\dfrac{\partial E(a,b,c)}{\partial c} = 0 
+\end{eqnarray}% \\
+\end{tabular}
+
+\end{defi}
+
+
+\begin{rem}
+On remarque que la méthode des moindres carrés ne minimise pas la somme des écarts $e_i$ mais celle de leur carré. On pourrait vérifier que minimiser la fonction $E':(a,b,c)\rightarrow \sum\limits_{i=1}^{n} e_i$ à l’aide des relations obtenues par dérivations partielles, ne permettrait pas de déterminer les valeurs de $a$, $b$ et $c$.
+\end{rem}
+
+
+\fi
+\section{Détermination du défaut de planéité}
+
+\begin{obj}
+L'objectif de cette partie est de rechercher le plan des moindres carrés c'est à dire de trouver les valeurs $a$, $b$ et $c$ qui minimisent les écarts entre le plan $\mathcal{P}$ et un nuage de points. 
+
+Le plan des moindre carrés permettra de déterminer le défaut de planéité.
+\end{obj}
+
+\subsection{Conditionnement du problème}
+
+\subparagraph{}
+\textit{Montrer que la méthode des moindres carrés permet d'aboutir aux 3 équations suivantes :}
+
+$$
+\sum\limits_{i=1}^n \left(ax_i^2 + bx_i y_i  +c x_i -x_i z_i  \right) = 0 \quad 
+\sum\limits_{i=1}^n  \left(ax_iy_i  + by_i^2 +cy_i -y_i z_i  \right) = 0 \quad 
+\sum\limits_{i=1}^n  \left(ax_i +  by_i+c -z_i  \right) = 0
+$$
+
+\ifprof
+\begin{corrige}
+
+On a : 
+
+$\dfrac{\partial E(a,b,c)}{\partial a} = 0 
+\Leftrightarrow  \sum\limits_{i=1}^{n} \dfrac{\partial \left(z_i -ax_i -by_i -c\right)^2}{\partial a}  = 0
+\Leftrightarrow   \sum\limits_{i=1}^{n} -2x_i  \left(z_i -ax_i -by_i -c\right)  = 0
+$
+
+Au final:  $\dfrac{\partial E(a,b,c)}{\partial a} = 0 
+\Leftrightarrow   \sum\limits_{i=1}^{n}   \left(-x_iz_i +ax_i^2 +bx_i y_i +cx_i\right) = 0$
+
+On a :
+
+$\dfrac{\partial E(a,b,c)}{\partial b} = 0
+\Leftrightarrow \sum\limits_{i=1}^{n} \dfrac{\partial \left(z_i -ax_i -by_i -c\right)^2}{\partial b}  =0 
+\Leftrightarrow \sum\limits_{i=1}^{n} -2y_i  \left(z_i -ax_i -by_i -c\right) = 0
+$
+
+Au final : $\dfrac{\partial E(a,b,c)}{\partial b} = 0 
+\Leftrightarrow   \sum\limits_{i=1}^{n}     \left(-y_iz_i + ax_i y_i  +by_i^2 +cy_i\right)  = 0$
+
+
+On a :
+
+$\dfrac{\partial E(a,b,c)}{\partial c} = 0
+\Leftrightarrow \sum\limits_{i=1}^{n} \dfrac{\partial \left(z_i -ax_i -by_i -c\right)^2}{\partial c}  =0 
+\Leftrightarrow \sum\limits_{i=1}^{n} -2  \left(z_i -ax_i -by_i -c\right) = 0
+$
+
+Au final : $\dfrac{\partial E(a,b,c)}{\partial b} = 0 
+\Leftrightarrow   \sum\limits_{i=1}^{n}  \left(-z_i +ax_i +by_i +c\right) = 0$
+
+\end{corrige}
+
+\else
+\fi
+
+\vspace{.5cm}
+On définit les grandeurs suivantes : 
+
+$S_{xx} = \sum\limits_{i=1}^n x_i^2$, $S_{yy} = \sum\limits_{i=1}^n y_i^2$, $S_{xy} = \sum\limits_{i=1}^n x_i y_i$, $S_{xz} = \sum\limits_{i=1}^n x_i z_i$, $S_{yz} = \sum\limits_{i=1}^n y_i z_i$, 
+$S_x  = \sum\limits_{i=1}^n  x_i$, $S_y  = \sum\limits_{i=1}^n  y_i$ et $S_z  = \sum\limits_{i=1}^n  z_i $.
+
+%\begin{center}
+%\begin{tabular}{ccc}
+%$S_{xx} = \sum\limits_{i=1}^n x_i^2$ && $S_{yy} = \sum\limits_{i=1}^n y_i^2$  \\
+%$S_{xy} = \sum\limits_{i=1}^n x_i y_i$ & $S_{xz} = \sum\limits_{i=1}^n x_i z_i$ & $S_{yz} = \sum\limits_{i=1}^n y_i z_i$  \\
+%$S_x  = \sum\limits_{i=1}^n  x_i$ & $S_y  = \sum\limits_{i=1}^n  y_i$ & $S_y  = \sum\limits_{i=1}^n  x_i $\\
+%\end{tabular}
+%\end{center}
+
+On note $X=(a,b,c)$ le vecteur solution du problème avec $X\in \mathcal{M}_{1,3} \left(\mathbb{R} \right)$.
+
+
+\subparagraph{}
+\textit{Montrer que le problème peut se mettre sous la forme du système linéaire suivant : $AX + B = 0$  où $A \in \mathcal{M}_{3,3} \left(\mathbb{R} \right)$ et  $B \in \mathcal{M}_{1,3} \left(\mathbb{R} \right)$. On donnera les expressions de $A$ et de $B$.}
+
+\ifprof
+\begin{corrige}
+On a : 
+$$
+\sum\limits_{i=1}^{n}   \left(-x_iz_i +ax_i^2 +bx_i y_i +cx_i\right) = 0 
+\Leftrightarrow    - \sum\limits_{i=1}^{n} x_iz_i +\sum\limits_{i=1}^{n}ax_i^2 +\sum\limits_{i=1}^{n}bx_i y_i +\sum\limits_{i=1}^{n}cx_i  = 0 
+$$
+$$
+\Leftrightarrow    a\sum\limits_{i=1}^{n}x_i^2 +b\sum\limits_{i=1}^{n}x_i y_i +c\sum\limits_{i=1}^{n}x_i  = \sum\limits_{i=1}^{n} x_iz_i
+\Leftrightarrow    aS_{xx} +bS_{xy} +cS_x  =S_{xz}
+$$
+De même, on détermine que : 
+$$
+\sum\limits_{i=1}^{n}     \left(-y_iz_i + ax_i y_i  +by_i^2 +cy_i\right)  = 0
+\Leftrightarrow aS_{xy} + bS_{yy}+cS_y = S_{yz}
+$$
+
+$$
+\sum\limits_{i=1}^{n}  \left(-z_i +ax_i +by_i +c\right) = 0
+\Leftrightarrow aS_{x} + bS_{y}+cn = S_{z}
+$$
+On a donc : 
+$$
+\left\{
+\begin{array}{l}
+aS_{xx} +bS_{xy} +cS_x  =S_{xz} \\
+aS_{xy} + bS_{yy}+cS_y = S_{yz} \\
+aS_{x} + bS_{y}+cn = S_{z}
+\end{array}
+\right.
+\Leftrightarrow
+\left[ 
+\begin{array}{ccc}
+S_{xx} & S_{xy} & S_x \\
+S_{xy} & S_{yy} & S_y \\
+S_{x} & S_{y} & n \\
+\end{array}
+\right]
+\cdot 
+\left[ 
+\begin{array}{c}
+a \\b \\ c\end{array}
+\right]
+=
+\left[ 
+\begin{array}{c}
+S_{xz} \\
+S_{yz} \\ 
+S_{z}\end{array}
+\right]
+\Leftrightarrow
+AX = -B
+$$
+
+Le signe négatif provient de la formulation du problème dans la question. 
+
+\end{corrige}
+
+\else
+\fi
+
+
+\subsection{Résolution du problème}
+\ifprof
+\else
+\begin{methode}
+Au final, pour déterminer le plan des moindres carrés, la démarche est la suivante :
+\begin{itemize}
+\item mesurer les points$(x_i,y_i,z_i)$ grâce à la MMT et exporter les données dans un fichier (ici un fichier texte);
+\item importer le fichier de points avec Python;
+\item résoudre le système linéaire $AX+B=0$ pour déterminer $a$, $b$ et $c$ permettant d'obtenir l'équation du plan. 
+\end{itemize}
+\end{methode}
+\fi
+
+\subparagraph{}
+\textit{Donner une méthode (ou le nom d'un algorithme) permettant de résoudre le système linéaire ci-dessus. Préciser les différentes étapes de cet algorithme ainsi que sa complexité.}
+
+
+\ifprof
+\begin{corrige}
+Pour résoudre ce problème, il est possible d'utiliser l'algorithme du pivot de Gauss. Cet algorithme se déroule en deux phases majeures : 
+\begin{enumerate}
+\item la phase de la triangularisation de la matrice $A$ (en phase avec les transformations nécessaires sur la matrice $B$);
+\item la phase de remontée permettant de déterminer $X$. 
+\end{enumerate}
+
+On peut montrer que la complexité algorithmique du pivot de Gauss est en $\mathcal{O}\left(n^3\right)$.
+\end{corrige}
+\else
+\fi
+\vspace{.5cm}
+
+Les points mesurés par une machine à mesurer tridimensionnelle sont stockés dans un fichier texte. Dans ce fichier sont inscrits successivement les coordonnés des points puis les coordonnées de la normale de contact entre le palpeur et la surface mesurée. Le fichier est de la forme suivante : 
+
+\begin{tabular}{l}
+\texttt{-101.88340,-155.21568,-50.30434,0,0,1}\\
+\texttt{-99.21040,-145.54768,-50.304844,0,0,1}\\
+\texttt{-82.43090,-129.69318,-50.292844,0,0,1}\\
+\texttt{-59.72540,-134.12818,-50.301844,0,0,1}\\
+\texttt{...} \\
+\end{tabular}
+
+\begin{rappel}
+La fonction \texttt{split} permet de séparer les éléments d'une chaîne de caractère suivant un motif et de les stocker dans une liste :
+\begin{python}
+>>> a = "-101.88340,-155.21568,-50.30434,0,0,1"
+>>> a = a.split(",")
+           ['-59.72540', '-134.12818', '-50.301844', '0', '0', '1']
+\end{python}
+\end{rappel}
+
+\subparagraph{}
+\textit{Donner l'implémentation de la fonction \texttt{read\_file} permettant de lire un fichier de mesures formaté comme indiqué ci-dessus et permettant de retourner la liste des points mesurés.}
+\vspace{.5cm}
+
+\ifprof
+\begin{corrige}
+~\\
+\begin{python}
+def read_file(file):
+    fid = open(file,'r')
+    pts=[]
+    for ligne in fid:
+        ligne = ligne.split(",")
+        print(ligne)
+        pts.append([float(ligne[0]),float(ligne[1]),float(ligne[2])])
+    return pts
+\end{python}
+\end{corrige}
+\else
+\fi
+
+\ifprof
+\else
+
+On appelle \texttt{plan\_moindres\_carres} la fonction permettant de trouver la solution du système linéaire à partir d'une liste de points. Ces spécifications sont les suivantes :
+\begin{py}
+\begin{python}
+def plan_moindres_carres(liste_pts):
+    """
+    Permet de déterminer les caractéristiques du plan des moindres carrés.
+    Entrée : 
+        * liste_pts (list) : liste de points de la forme [[x1,y1,z1],[x2,y2,z2],...]
+    Sortie : 
+        * pl(list) : solution du problème d'optimisation : retourne [a,b,c]
+    """
+\end{python}
+\end{py}
+\fi
+
+\subparagraph{}
+\textit{Donner l'implémentation du programme principal (main) permettant de lire le fichier de mesure appelé \texttt{mesures.txt} et de déterminer la liste des paramètres \texttt{[a,b,c]} correspondant aux paramètres du plan des moindres carrés. Vous utiliserez les fonctions précédemment définies.}
+\ifprof
+\begin{corrige}~\\
+\begin{python}
+liste_pts=read_file("mesures.txt")
+plan = plan_moindres_carres(liste_pts)
+\end{python}
+\end{corrige}
+\else
+\fi
+
+
+\subsection{Application -- Détermination du défaut de planéité}
+
+\ifprof
+\else
+
+Pour déterminer le défaut de planéité d'une forme, il est nécessaire de déterminer la distance maximale entre les points les plus éloignés de part et d'autre du plan des moindres carrés.
+
+On définit la distance algébrique $d$ d'un point $M$ de coordonnées $\left(x,y,z\right)$ au plan $\left( \mathcal{P}\right)$ par l'expression suivante :
+$d = \dfrac{z - a x -b y -c}{\sqrt{a^2+b^2+1}}$.
+
+On notera \texttt{pt} la liste contenant les coordonnées d'un point et \texttt{pl} la liste contenant le triplet \texttt{(a,b,c)}.
+
+\fi 
+
+\subparagraph{}
+\textit{Donner l'implémentation de la fonction  \texttt{dist\_pt\_plan} en Python permettant de retourner la distance algébrique entre un point et un plan. Les spécifications de la fonction sont les suivantes :}
+\begin{py}
+\begin{python}
+def dist_pt_plan(pt,plan):
+    """
+    Permet de calculer une distance point - plan
+    Entrées : 
+        * pt(list) : point de coordonnées [x,y,z]
+        * plan(list) : caractéristiques du plan [a,b,c]
+    Sortie : 
+        * d(flt) : distance
+    """
+\end{python}
+\end{py}
+\ifprof
+\begin{corrige}~\\
+\begin{python}
+def dist_pt_plan(pt,pl):
+    return (pt[2]-pl[0]*pt[0]-pl[1]*pt[1]-pl[2])/(sqrt(pl[0]**2+pl[1]**2+1))
+\end{python}
+\end{corrige}
+\else
+\fi
+
+\subparagraph{}
+\textit{Donner l'implémentation de la fonction \texttt{defaut\_planeite} en Python permettant de retourner le défaut de planéité. On donne les spécifications de la fonction : }
+\begin{py}
+\begin{python} 
+def defaut_planeite(pl,liste_pt):
+    """
+    Permet de calculer une distance point - plan
+    Entrées : 
+        * pl(list) : caractéristiques du plan [a,b,c]
+        * liste_pts (list) : liste de points de la forme [[x1,y1,z1],[x2,y2,z2],...]
+        
+    Sortie : 
+        * d(flt) : distance
+    """
+\end{python}
+\end{py}
+\ifprof
+\begin{corrige}~\\
+\begin{python}
+def defaut_planeite(pl,liste_pt):
+    dist_p=0
+    dist_n=0
+    for i in range(len(liste_pt)):
+        dist=dist_pt_plan(liste_pt[i],pl)
+        if dist_p<dist and dist>0 :
+            dist_p=dist
+        elif dist_n>dist and dist<0 :
+            dist_n=dist
+    return dist_p-dist_n
+\end{python}
+\end{corrige}
+\else
+\fi
+
+\section{Construction d'une référence spécifiée associée à une surface nominalement plane}
+
+\ifprof
+\else
+
+Pour associer un plan idéal à un nuage de points, la norme prévoit de lui associé un plan tangent extérieur matière minimisant les écarts. Mathématiquement, ce problème n'est pas simple à résoudre. Afin d'approcher la solution, on se propose d'utiliser, dans le cadre ce travail,  la méthode suivante : 
+
+\begin{methode}
+~\\
+\begin{enumerate}
+\item Détermination du plan par la méthode des moindres carrés.
+\item Translation du plan au point le plus éloigné côté libre de la matière.
+\item Balancement du plan afin de minimiser les défauts : on fait varier son orientation.
+\item Vérification que tous les points sont situés sous le plan.
+\item Changement au point le plus éloigné situé côté libre de la matière s'il y en a.
+\end{enumerate}
+Les étapes 4 et 5 peuvent être itératives.
+\begin{warn}
+\textbf{\textsf{Attention :}} les points 3, 4 et 5 ne sont qu'une piste envisagée dans le cadre de ce travail et ne constituent pas un algorithme utilisé dans les logiciels de mesure.
+\end{warn}
+\end{methode}
+
+\newpage 
+
+On donne la fonction suivante :
+
+\begin{py}
+\begin{python}
+def mystere(pl,liste_pt):
+    ind=0
+    d=dist_pt_plan(liste_pt[ind],pl)
+    for i in range(1,len(liste_pt)):
+        temp=dist_pt_plan(liste_pt[i],pl)
+        print(temp)
+        if temp>d :
+            ind=i
+            d=dist_pt_plan(liste_pt[ind],pl)
+    return ind
+\end{python}
+\end{py}
+
+\fi 
+
+\subparagraph{}
+\textit{Quel est l'objectif de cette fonction ? En déduire le triplet correspondant à l'équation du plan répondant au point \textbf{2} de la méthode. }
+\ifprof
+\begin{corrige}
+Cette fonction a pour but de retrouver l'indice du point étant le plus éloigné du plan des moindres carrés. Ce point est aussi du coté libre de la matière.
+
+Le nouveau plan a donc pour caractéristiques : 
+
+\texttt{[a,b,liste\_pt[ind][2]-X[0]*liste\_pt[ind][0]-X[1]*liste\_pt[ind][1]}.
+\end{corrige}
+\else
+\fi
+
+\ifprof
+\else
+Le balançage du plan par rapport à un point est réalisé grâce à la fonction suivante. 
+
+\begin{py}
+\begin{python}
+def balancage(pl, pt):
+    npt=25
+    pas=0.000003
+    dist=100000
+    pl2=[None,None,None]
+    for k in range(-npt,npt):
+        pl2[0]=pl[0]+k*pas
+        for j in range(-npt,npt):
+            pl2[1]=pl[1]+j*pas
+            pl2[2]=pt[2]-pl2[0]*pt[0]-pl2[1]*pt[1]
+            temp=defaut_planeite(pl2,liste_pt)	
+            if temp<dist :
+                dist=temp
+                f=pl2[0]
+                g=pl2[1]
+                h=pl2[2]
+    pl2=[f,g,h]    
+    return [pl2,dist]	
+\end{python}
+\end{py}
+
+\fi
+
+\subparagraph{}
+\textit{Quel est l'objectif de cette fonction ? Que retourne-t-elle ? Donner un commentaire pour chacune des instructions.}
+\ifprof
+\begin{corrige}
+L'objectif de cette fonction est de déterminer une référence spécifie en faisant varier l'orientation du plan des moindres carrés. Elle retourne le plan optimal ainsi que le défaut de planéité de la surface.
+
+\begin{python}
+def balancage(pl, pt):
+    npt=25                            #
+    pas=0.000003                      #
+    dist=100000                       #
+    pl2=[None,None,None]              #
+    for k in range(-npt,npt):         #
+        pl2[0]=pl[0]+k*pas            #
+        for j in range(-npt,npt):     #
+            pl2[1]=pl[1]+j*pas        #
+            pl2[2]=pt[2]-pl2[0]*pt[0]-pl2[1]*pt[1]   #
+            temp=defaut_planeite(pl2,liste_pt)	       #
+            if temp<dist :         #
+                dist=temp          #
+                f=pl2[0]           #
+                g=pl2[1]           #
+                h=pl2[2]           #
+    pl2=[f,g,h]                    #    
+    return [pl2,dist]	           #
+\end{python}
+\end{corrige}
+\else
+\fi
+
+\subparagraph{}
+\textit{Quelle est la complexité de cet algorithme si on cherche à améliorer le choix du plan optimal par rapport à un seul des points du nuage de points ? Comment évolue la complexité de ce programme si on cherche à réaliser le balançage en utilisant chacun des points mesurés ?}
+\ifprof
+\begin{corrige}
+Pour avoir une <<meilleure>> solution du problème, on peut augmenter le nombre de pas de calcul. Les deux boucles imbriquées dépendant du nombre de points, on a une complexité en $\mathcal{O}(npt^2)$.
+
+On note $n$ le nombre points palpés. Si on réalise un balançage sur chacun des points du nuage, la complexité sera en $\mathcal{O}(n\cdot npt^2)$
+\end{corrige}
+\else
+\fi
+
+
+\end{document}
