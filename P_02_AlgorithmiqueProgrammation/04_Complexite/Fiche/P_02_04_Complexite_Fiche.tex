@@ -1,0 +1,115 @@
+\documentclass[10pt,fleqn]{article} % Default font size and left-justified equations
+\usepackage[%
+    pdftitle={Informatique : Introduction à la complexité},
+    pdfauthor={Xavier Pessoles}]{hyperref}
+
+\input{style/new_style}
+\input{style/macros_SII}
+
+\fichetrue
+%\fichefalse
+
+%\proftrue
+\proffalse
+
+%\tdtrue
+\tdfalse
+
+%\courstrue
+\coursfalse
+
+% -------------------------------------
+% Déclaration des titres
+% -------------------------------------
+
+\def\discipline{Informatique}
+\def\xxtete{Informatique}
+
+\def\classe{Fiche PT}
+\def\xxnumpartie{Partie 2}
+\def\xxpartie{Algorithmique \& Programmation}
+
+\def\xxnumchapitre{Chapitre 4 }
+\def\xxchapitre{\hspace{.12cm} Introduction à la complexité}
+
+\def\xxtitreexo{Prothèse Active Transtibiale}
+\def\xxsourceexo{\hspace{.2cm} D'après concours Mines-Ponts -- 2013.}
+
+\def\xxposongletx{2}
+\def\xxposonglettext{1.45}
+\def\xxposonglety{20}
+\def\xxonglet{Part. 2 -- Ch. 4}
+
+\def\xxactivite{TD 1}
+\def\xxauteur{\textsl{Xavier Pessoles}}
+
+\def\xxcompetences{%
+\textsl{%
+\textbf{Savoirs et compétences :}\\
+\noindent \textbf{Résoudre :} à partir des modèles retenus :
+\begin{itemize}[label=\ding{112},font=\color{ocre}] 
+\item choisir une méthode de résolution analytique, graphique, numérique;
+\item mettre en \oe{}uvre une méthode de résolution.
+\end{itemize}
+\begin{itemize}[label=\ding{112},font=\color{ocre}] 
+\item \textit{Rés -- C1.1 :} Loi entrée sortie géométrique et cinématique -- Fermeture géométrique.
+\end{itemize}
+%
+%\noindent \textit{Mod2 -- C4.1 :} Représentation par schéma bloc.
+}}
+
+\def\xxfigures{
+%incgraphics[width=.8\textwidth]{}%images/prot_01}
+}%figues de la page de garde
+
+\def\xxpied{%
+Partie 2 -- Algorithmique \& Programmation \\
+Ch 4 : Introduction à la complexité -- \xxactivite%
+}
+
+
+\setcounter{secnumdepth}{5}
+%---------------------------------------------------------------------------
+
+
+\begin{document}
+%\chapterimage{png/Fond_Cin}
+\input{style/new_pagegarde}
+\vspace{2cm}
+\pagestyle{fancy}
+\thispagestyle{plain}
+
+
+\begin{defi}
+~\\
+Complexité spatiale
+
+\noindent Complexité dans le meilleur des cas
+
+\noindent Complexité dans le pire des cas
+
+\noindent Complexité en moyenne
+\end{defi}
+
+\begin{defi}
+Complexité temporelle
+\end{defi}
+
+\begin{defi}
+Notation de Landau
+\end{defi}
+
+\begin{exemple}
+On recense différents types de complexité :
+\begin{itemize}[label=\ding{112},font=\color{ocre}] 
+\item $\mathcal{O}(1)$ : complexité constante;
+\item $\mathcal{O}(n)$ : complexité linéaire;
+\item $\mathcal{O}(n^2)$ : complexité quadratique;
+\item $\mathcal{O}(2^n)$ : complexité exponentielle;
+\item $\mathcal{O}(\log n)$ : complexité logarithmique;
+\item $\mathcal{O}(n \log n)$ : complexité semi linéaire.
+\end{itemize}
+\end{exemple}
+\end{document}
+
+
