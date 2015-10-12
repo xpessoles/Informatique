@@ -118,6 +118,20 @@ Si $n\in\left[90, 100\right]$, l'algorithme appelle $f(n+11)$.  $n+11$ sera sup�
 \setcounter{subparagraph}{0}
 \subparagraph{}
 \textit{Écrire une fonction récursive qui calcule $a^n$ en exploitant la relation : $a^n=a^{n/2}\times a^{n/2}$.}
+\ifprof
+\begin{corrige}
+\begin{python}
+def power(a, n):
+    if n == 0:
+        return 1
+    elif n == 1:
+        return a
+    return power(a, n//2) * power(a, n-n//2)
+\end{python}
+\end{corrige}
+\else
+\fi
+
 \subparagraph{}
 \textit{Écrire une fonction qui utilise de plus la remarque suivante :}
 $n/2 = \left\{ 
@@ -127,8 +141,37 @@ n/2+1 & \text{sinon}\\
 \end{array}
 \right.
 $.
+\ifprof
+\begin{corrige}
+\begin{python}
+def power(a, n):
+    if n == 0:
+        return 1
+    elif n == 1:
+        return a
+    x = power(a, n//2)
+    if n % 2 == 0:
+        return x * x
+    else:
+        return x * x * a
+\end{python}
+\end{corrige}
+\else
+\fi
+
+
 \subparagraph{}
-\textit{Effectuer le nombre de multiplications effectuées dans les deux cas.}
+\textit{Déterminer le nombre de multiplications effectuées dans chacun des deux cas.}
+\ifprof
+\begin{corrige}
+On note $C(n)$ le nombre multiplications.
+
+Dans le premier cas, on conjecture que $\forall n>2, C(n)=n-1$ et on raisonne par récurrence
+
+Dans le second cas, on conjecture que $\forall n>2, C(n)\leq 2n$ et on raisonne par récurrence.
+\end{corrige}
+\else
+\fi
 
 
 \section*{Exercice 3}
