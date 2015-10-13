@@ -9,8 +9,8 @@
 \fichetrue
 %\fichefalse
 
-%\proftrue
-\proffalse
+\proftrue
+%\proffalse
 
 %\tdtrue
 \tdfalse
@@ -324,6 +324,8 @@ On peut montrer que la complexité algorithmique du pivot de Gauss est en $\math
 \end{corrige}
 \else
 \fi
+\ifprof
+\else
 \vspace{.5cm}
 
 Les points mesurés par une machine à mesurer tridimensionnelle sont stockés dans un fichier texte. Dans ce fichier sont inscrits successivement les coordonnés des points puis les coordonnées de la normale de contact entre le palpeur et la surface mesurée. Le fichier est de la forme suivante : 
@@ -344,6 +346,7 @@ La fonction \texttt{split} permet de séparer les éléments d'une chaîne de ca
            ['-59.72540', '-134.12818', '-50.301844', '0', '0', '1']
 \end{python}
 \end{rappel}
+\fi
 
 \subparagraph{}
 \textit{Donner l'implémentation de la fonction \texttt{read\_file} permettant de lire un fichier de mesures formaté comme indiqué ci-dessus et permettant de retourner la liste des points mesurés.}
@@ -559,28 +562,39 @@ def balancage(pl, pt):
 \textit{Quel est l'objectif de cette fonction ? Que retourne-t-elle ? Donner un commentaire pour chacune des instructions.}
 \ifprof
 \begin{corrige}
-L'objectif de cette fonction est de déterminer une référence spécifie en faisant varier l'orientation du plan des moindres carrés. Elle retourne le plan optimal ainsi que le défaut de planéité de la surface.
-
+~\\
+\begin{minipage}[c]{.57\linewidth}
 \begin{python}
-def balancage(pl, pt):
-    npt=25                            #
-    pas=0.000003                      #
-    dist=100000                       #
-    pl2=[None,None,None]              #
-    for k in range(-npt,npt):         #
-        pl2[0]=pl[0]+k*pas            #
-        for j in range(-npt,npt):     #
-            pl2[1]=pl[1]+j*pas        #
-            pl2[2]=pt[2]-pl2[0]*pt[0]-pl2[1]*pt[1]   #
-            temp=defaut_planeite(pl2,liste_pt)	       #
-            if temp<dist :         #
-                dist=temp          #
-                f=pl2[0]           #
-                g=pl2[1]           #
-                h=pl2[2]           #
-    pl2=[f,g,h]                    #    
-    return [pl2,dist]	           #
+ 1. def balancage(pl, pt):
+ 2.    npt=25                            #
+ 3.    pas=0.000003                      #
+ 4.    dist=100000                       #
+ 5.    pl2=[None,None,None]              #
+ 6.    for k in range(-npt,npt):         #
+ 7.        pl2[0]=pl[0]+k*pas            #
+ 8.        for j in range(-npt,npt):     #
+ 9.            pl2[1]=pl[1]+j*pas        #
+10.            pl2[2]=pt[2]-pl2[0]*pt[0]-pl2[1]*pt[1]  #
+11.            temp=defaut_planeite(pl2,liste_pt)	   #
+12.            if temp<dist :         #
+13.                dist=temp          #
+14.                f=pl2[0]           #
+15.                g=pl2[1]           #
+16.                h=pl2[2]           #
+17.    pl2=[f,g,h]                    #    
+18.    return [pl2,dist]	      #
 \end{python}
+\end{minipage}\hfill
+\begin{minipage}[c]{.43\linewidth}
+L'objectif de cette fonction est de déterminer une référence spécifiée en faisant varier l'orientation du plan des moindres carrés. Elle retourne le plan optimal ainsi que le défaut de planéité lié au nuage de point.
+
+Les boucles \textsl{for} lignes 6 et 8 permettent de réaliser des petite variation autour d'un point \textsl{pt} prédéterminé. 
+Ligne 10 on dispose alors des caractéristiques d'un plan ayant subi deux petites rotations. 
+On détermine alors le défaut de planéité lié à ce nouveau plan. 
+
+On cherche alors le nouveau plan << minimisant le défaut de planéité >> (en fait on ne minimise pas le défaut mais l'écart...).
+
+\end{minipage}
 \end{corrige}
 \else
 \fi
