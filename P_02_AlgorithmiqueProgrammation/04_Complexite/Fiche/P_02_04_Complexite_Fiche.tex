@@ -82,33 +82,65 @@ Ch 4 : Introduction à la complexité -- \xxactivite%
 
 \begin{defi}
 ~\\
-Complexité spatiale
+\textbf{Complexité spatiale :} nombre d'emplacements mémoire occupés lors de l'exécution d'un programme.
 
-\noindent Complexité dans le meilleur des cas
+\noindent\textbf{Complexité temporelle :} nombre d'opérations effectuées lors de l'exécution d'un programme (on compte en général le nombre d'occurrences de l'opération la plus longue à exécuter).
 
-\noindent Complexité dans le pire des cas
-
-\noindent Complexité en moyenne
 \end{defi}
 
 \begin{defi}
-Complexité temporelle
+~\\
+\begin{itemize}[label=\ding{112},font=\color{ocre}] 
+\item Complexité dans le meilleur des cas : majoration du temps d'exécution pour toutes les entrées possibles d'une même taille.
+
+\item Complexité dans le pire des cas : minoration du temps d'exécution pour toutes les entrées possibles d'une même taille.
+
+\item Complexité en moyenne : temps moyen d'exécution pour toutes les entrées possibles d'une même taille.
+\end{itemize}
 \end{defi}
 
 \begin{defi}
-Notation de Landau
+\textbf{Notation de Landau}
+
+Soient $C$ et $f$ deux fonctions $C,f : \mathbb{N} \rightarrow \mathbb{R}^{+}_{*}$. On note $C(n)=\mathcal{O}(f(n))$ lorsqu'il existe $c\in\mathbb{R}^+$ et $n_0\in\mathbb{N}$ tels que pour tout $n\geq n_0$,  $ C(n) \leq c\cdot f(n)$.
 \end{defi}
 
 \begin{exemple}
 On recense différents types de complexité :
 \begin{itemize}[label=\ding{112},font=\color{ocre}] 
-\item $\mathcal{O}(1)$ : complexité constante;
-\item $\mathcal{O}(n)$ : complexité linéaire;
-\item $\mathcal{O}(n^2)$ : complexité quadratique;
-\item $\mathcal{O}(2^n)$ : complexité exponentielle;
-\item $\mathcal{O}(\log n)$ : complexité logarithmique;
+\item $\mathcal{O}(1)$ : complexité constante \textit{(recherche du maximum dans une liste triée)};
+\item $\mathcal{O}(n)$ : complexité linéaire \textit{(recherche d'un nombre dans une liste)};
+\item $\mathcal{O}(n^2)$ : complexité quadratique \textit{(recherche d'un nombre dans un tableau à deux dimensions)};
+\item $\mathcal{O}(2^n)$ : complexité exponentielle \textit{(recherche du plus court chemin passant par n points)};
+\item $\mathcal{O}(\log n)$ : complexité logarithmique \textit{(recherche dichotomique dans une liste triée)};
 \item $\mathcal{O}(n \log n)$ : complexité semi linéaire.
 \end{itemize}
+\end{exemple}
+\begin{methode}
+~\\
+Dans le cas général il est probable que l'on vous demande d'intuiter la complexité temporelle d'un algorithme. 
+
+Si on vous demande de la démontrer, il faudra raisonner par récurrence (vérifier que la complexité est vraie au rang initial, admettre qu'elle est vraie jusqu'au rang $n$ puis vérifier qu'elle est vraie au rang $n+1$). 
+\end{methode}
+
+\begin{methode}
+\textbf{Décomptage du temps de temps d'exécution :}
+\begin{itemize}[label=\ding{112},font=\color{ocre}] 
+\item Le coût de deux instructions consécutives est égal à la somme des coût des deux instructions. 
+\item Le coût d'une instruction conditionnelle, dans le pire des cas, est égale au maximum des coûts de chacun des blocs d'instructions.
+\item Le coût d'une instruction itérative est proportionnel au nombre d'itérations du bloc d'instructions.
+\end{itemize}
+\end{methode}
+
+\begin{exemple}
+Complexité de l'algorithme de recherche dichotomique d'un nombre dans une liste triée. Pour cela appelons $C(n)$ le nombre de divisions euclidienne par 2 réalisées. 
+
+ Soit $n$ la taille de la liste. On peut donc la diviser $k$ fois par 2, jusqu'à ce que n soit strictement inférieur à 2 (quand la zone de recherche sera de taille 1, on ne pourra plus diviser le problème).
+ 
+ On cherche donc $n$ tel que $n/2^k<2 \Leftrightarrow n< 2^{k+1} \Rightarrow \ln n < \left( k+1\right) \ln 2 \Leftrightarrow k > \dfrac{\ln n}{\ln 2}  - 1$.
+ 
+ Le nombre de divisions est donc proportionnel à $\ln n$. On a donc $C(n)=\mathcal{O}(n)$.
+
 \end{exemple}
 \end{document}
 
