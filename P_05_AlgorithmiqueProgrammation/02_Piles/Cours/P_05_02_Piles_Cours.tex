@@ -44,7 +44,7 @@
 \textsl{%
 \textbf{Savoirs et compétences :}
 \begin{itemize}[label=\ding{112},font=\color{ocre}] 
-\item Alg -- C16 : Piles - Algorithmes de manipulation : fonctions «push» et «pop.
+\item Alg -- C16 : Piles - Algorithmes de manipulation : fonctions «push» et «pop».
 \end{itemize}
 }}
 
@@ -66,14 +66,35 @@ Ch 2 : Piles et files-- \xxactivite%
 %---------------------------------------------------------------------------
 
 \section{Présentation}
+\subsection{Qu'est ce qu'une pile ? une file ?}
 Les piles et les files sont des listes particulières : on accède aux éléments par les extrémités, c'est-à-dire au début ou à la fin.
 Elles sont utilisées par exemple pour des programmes qui doivent traiter des données qui arrivent au fur et à mesure.
 On distingue :
-\begin{itemize}
-\item les piles (« stacks ») : le premier empilé est le dernier à être dépilé, « LIFO » (Last In first Out),
+\begin{itemize}[label=\ding{112},font=\color{ocre}] 
+\item les piles (« stacks ») : le premier empilé est le dernier à être dépilé, « LIFO » (Last In first Out);
 \item les files : le premier entré est le premier à sortir, « FIFO » (First In First Out).
 \end{itemize}
-L’implémentation des piles et des files peut se faire avec des listes chaînées ou des tableaux.
+
+
+Ainsi, ces structures de données nécessitent la réalisation de fonctions spécifiques :
+\begin{itemize}[label=\ding{112},font=\color{ocre}] 
+\item pour les piles :
+\begin{itemize}[label=\ding{112},font=\color{ocre}] 
+\item ajouter au sommet : empiler (« push »),
+\item supprimer du sommet : dépiler (« pop »),
+\item est\_vide,est\_pleine;
+\end{itemize} 
+\item pour les files 
+\begin{itemize}[label=\ding{112},font=\color{ocre}] 
+\item ajouter en queue : enfiler (« enqueue »);
+\item supprimer tête : défiler (« dequeue »);
+\item est\_vide, est\_pleine.
+\end{itemize}
+\end{itemize}
+
+\subsection{Gestion des piles et des files en Python}
+L’implémentation des piles et des files peut se faire à l'aide d'une liste.
+
 
 \section{Les piles}
 \begin{exemple}
@@ -88,7 +109,7 @@ L’implémentation des piles et des files peut se faire avec des listes chaîn�
 
 \begin{rem}
 Les principales fonctions associées aux piles sont : 
-\begin{itemize}
+\begin{itemize}[label=\ding{112},font=\color{ocre}] 
 \item ajouter au sommet : empiler (« push »);
 \item supprimer du sommet : dépiler (« pop »);
 \item est\_vide,est\_pleine.
