@@ -314,10 +314,11 @@ Au final, pour déterminer le plan des moindres carrés, la démarche est la sui
 
 \ifprof
 \begin{corrige}
-Pour résoudre ce problème, il est possible d'utiliser l'algorithme du pivot de Gauss. Cet algorithme se déroule en deux phases majeures : 
+Pour résoudre ce problème, il est possible d'utiliser l'algorithme du pivot de Gauss. Cet algorithme se déroule en trois phases majeures : 
 \begin{enumerate}
-\item la phase de la triangularisation de la matrice $A$ (en phase avec les transformations nécessaires sur la matrice $B$);
-\item la phase de remontée permettant de déterminer $X$. 
+\item recherche du pivot;
+\item triangularisation de la matrice $A$ (en phase avec les transformations nécessaires sur la matrice $B$);
+\item phase de remontée permettant de déterminer $X$. 
 \end{enumerate}
 
 On peut montrer que la complexité algorithmique du pivot de Gauss est en $\mathcal{O}\left(n^3\right)$.
@@ -506,7 +507,6 @@ def mystere(pl,liste_pt):
     d=dist_pt_plan(liste_pt[ind],pl)
     for i in range(1,len(liste_pt)):
         temp=dist_pt_plan(liste_pt[i],pl)
-        print(temp)
         if temp>d :
             ind=i
             d=dist_pt_plan(liste_pt[ind],pl)
