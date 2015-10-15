@@ -87,7 +87,7 @@ Dans l'itération, cette méthode est appliquée par paliers de façon séquenti
 \end{minipage}
 
 \begin{defi}
-\textbf{Fonction récursive : } fonction faisant appelle à elle-même.
+\textbf{Fonction récursive : } fonction faisant appel à elle-même.
 \end{defi}
 
 \begin{py}Exemple de boucle sans fin :
@@ -323,7 +323,7 @@ Le calcul des puissances de 2 peut s'effectuer par la méthode <<d'exponentiatio
 \item si $n$ est impair et $n>1$, $2^n =2\cdot  \left(2^2\right)^{\dfrac{n-1}{2}}$.
 \end{itemize}
 
-En conséquence plutôt que de réaliser le calcul $ 2^7 = 2\cdot 2\cdot 2\cdot 2\cdot 2\cdot 2\cdot 2$, on a $ 2^7 = 2\cdot 2^6 =  2\cdot \left(2^2\right)^3=  2\cdot 2 \cdot \left(2^2\right)^2$. 
+En conséquence plutôt que de réaliser le calcul $ 2^7 = 2\cdot 2\cdot 2\cdot 2\cdot 2\cdot 2\cdot 2$, on a $ 2^7 = 2\cdot 2^6 =  2\cdot \left(2^2\right)^3=  2\cdot 2^2 \cdot \left(2^2\right)^2$. 
 \end{minipage}\hfill
 \begin{minipage}[c]{.45\linewidth}
 \begin{tabular}{p{.5cm}p{.5cm}p{5cm}}
@@ -356,7 +356,7 @@ Calcul rapide de la nième puissance de 2} \\
 \end{minipage}
 \end{exemple}
 
-Suivant la puissance de 2 à calculer il est possible de représenter les étapes sous formes arborescente. On peut ainsi constater que, dans certain cas, des puissances <<élevées>> sont plus rapides à calculer que des puissances <<moins élevées>>.
+Suivant la puissance de 2 à calculer il est possible de représenter les étapes sous forme arborescente. On peut ainsi constater que, dans certain cas, des puissances <<élevées>> sont plus rapides à calculer que des puissances <<moins élevées>>.
 
 \section{Exemples d'utilisation de la récursivité}
 \subsection{Diviser pour régner}
