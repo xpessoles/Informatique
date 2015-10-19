@@ -104,6 +104,23 @@ L’implémentation des piles et des files peut se faire à l'aide d'une liste. 
 \item supprimer la première occurrence de l'élément \texttt{el} : \texttt{l.remove(el)}.
 \end{itemize}
 
+En Python, les listes sont des objets dynamiques mutables. Cela signifie que d'une part il n'y a pas besoin de connaître a priori la taille d'une liste en la déclarant : elle va être redimensionnée à mesure que des éléments sont ajoutés ou supprimés. D'autre part, on peut modifier un élément de la liste sans recréer cette liste. 
+\begin{exemple}
+Les chaînes de caractères ou les tuples sont des objets non mutables. On ne peut pas les modifier sans créer de nouvelle instance de l'objet.
+
+Modification d'un élément d'une liste :
+\begin{python}
+>>> l = ["k","a","m","a","t","e"]
+>>> l[0]="!"
+\end{python}
+
+Modification d'un caractère d'une chaîne de caractères :
+\begin{python}
+>>> ch = "kamate"
+>>> ch = "!"+ch[1:len(ch)]
+\end{python}
+
+\end{exemple}
 
 \section{Les piles}
 \begin{exemple}
