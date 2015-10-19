@@ -73,10 +73,9 @@ On distingue :
 \begin{itemize}[label=\ding{112},font=\color{ocre}] 
 \item les piles (« stacks ») : le premier empilé est le dernier à être dépilé, « LIFO » (Last In first Out);
 \item les files : le premier entré est le premier à sortir, « FIFO » (First In First Out).
-\end{itemize}
-
-
-Ainsi, ces structures de données nécessitent la réalisation de fonctions spécifiques :
+\end{itemize}\vspace{.25cm}
+\noindent\begin{minipage}[c]{.53\linewidth}
+\indent Ainsi, ces structures de données nécessitent la réalisation de fonctions spécifiques :
 \begin{itemize}[label=\ding{112},font=\color{ocre}] 
 \item pour les piles :
 \begin{itemize}[label=\ding{112},font=\color{ocre}] 
@@ -84,16 +83,26 @@ Ainsi, ces structures de données nécessitent la réalisation de fonctions spé
 \item supprimer du sommet : dépiler (« pop »),
 \item est\_vide,est\_pleine;
 \end{itemize} 
-\item pour les files 
+\item pour les files :
 \begin{itemize}[label=\ding{112},font=\color{ocre}] 
 \item ajouter en queue : enfiler (« enqueue »);
 \item supprimer tête : défiler (« dequeue »);
 \item est\_vide, est\_pleine.
 \end{itemize}
 \end{itemize}
-
+\end{minipage} \hfill
+\begin{minipage}[c]{.45\linewidth}
+\includegraphics[width=\linewidth]{images/fifo_lifo}
+\end{minipage}
 \subsection{Gestion des piles et des files en Python}
-L’implémentation des piles et des files peut se faire à l'aide d'une liste.
+L’implémentation des piles et des files peut se faire à l'aide d'une liste. Les opérations élémentaires permettant de manipuler une liste sont les suivantes :
+\begin{itemize}[label=\ding{112},font=\color{ocre}] 
+\item ajouter en élément \texttt{el} de n'importe quel type : \texttt{l.append(el)};
+\item modifier un élément à l'indice \texttt{i}: \texttt{l[i]=el};
+\item supprimer un élément à l'indice \texttt{i} et le retourner : \texttt{l.pop(i)};
+\item insérer un élément \texttt{el} à l'indice \texttt{i}: \texttt{l.insert(i,el)};
+\item supprimer la première occurrence de l'élément \texttt{el} : \texttt{l.remove(el)}.
+\end{itemize}
 
 
 \section{Les piles}
