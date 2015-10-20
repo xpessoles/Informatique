@@ -79,9 +79,10 @@ On distingue :
 \begin{itemize}[label=\ding{112},font=\color{ocre}] 
 \item pour les piles :
 \begin{itemize}[label=\ding{112},font=\color{ocre}] 
+\item créer une pile,
 \item ajouter au sommet : empiler (« push »),
 \item supprimer du sommet : dépiler (« pop »),
-\item est\_vide,est\_pleine;
+\item est\_vide,est\_pleine, taille, sommet;
 \end{itemize} 
 \item pour les files :
 \begin{itemize}[label=\ding{112},font=\color{ocre}] 
@@ -123,15 +124,16 @@ Modification d'un caractère d'une chaîne de caractères :
 \end{exemple}
 
 \section{Les piles}
-\begin{exemple}
-~\\
+\subsection{Quelques exemples d'applications}
+
 \begin{enumerate}
 \item Empilement de dossiers : dans une pile de dossiers, le dernier arrivé est le premier traité.
 
 \item Gestion de processus par un système d’exploitation : dans un ordinateur, lorsqu’un « processus 1 » fait appel à un « processus 2 » qui fait lui-même appel à un « processus 3 », l’ensemble est stocké dans une table des processus, propre au noyau du système d’exploitation. Lorsque le « processus 3 » se termine, le système sait qu’il doit revenir au « processus 2 », puis au « processus 1 ». 
 \item Dans un navigateur web, une pile sert à mémoriser les pages Web visitées. L'adresse de chaque nouvelle page visitée est empilée et l'utilisateur désempile l'adresse de la page précédente en cliquant le bouton « Afficher la page précédente ».
 \end{enumerate}
-\end{exemple}
+
+\subsection{Implémentation d'une pile}
 
 \begin{rem}
 Les principales fonctions associées aux piles sont : 
