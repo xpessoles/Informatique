@@ -130,19 +130,69 @@ Modification d'un caractère d'une chaîne de caractères :
 \item Empilement de dossiers : dans une pile de dossiers, le dernier arrivé est le premier traité.
 
 \item Gestion de processus par un système d’exploitation : dans un ordinateur, lorsqu’un « processus 1 » fait appel à un « processus 2 » qui fait lui-même appel à un « processus 3 », l’ensemble est stocké dans une table des processus, propre au noyau du système d’exploitation. Lorsque le « processus 3 » se termine, le système sait qu’il doit revenir au « processus 2 », puis au « processus 1 ». 
-\item Dans un navigateur web, une pile sert à mémoriser les pages Web visitées. L'adresse de chaque nouvelle page visitée est empilée et l'utilisateur désempile l'adresse de la page précédente en cliquant le bouton « Afficher la page précédente ».
+\item Dans un navigateur web, une pile sert à mémoriser les pages Web visitées. L'adresse de chaque nouvelle page visitée est empilée et l'utilisateur dépile l'adresse de la page précédente en cliquant le bouton « Afficher la page précédente ».
 \end{enumerate}
 
 \subsection{Implémentation d'une pile}
+Dans cette section, nous allons considérer simultanément qu'une pile est implémentée sous forme d'une liste ou sous forme de tuple.
 
-\begin{rem}
-Les principales fonctions associées aux piles sont : 
-\begin{itemize}[label=\ding{112},font=\color{ocre}] 
-\item ajouter au sommet : empiler (« push »);
-\item supprimer du sommet : dépiler (« pop »);
-\item est\_vide,est\_pleine.
+Dans le premier cas, créer une pile revient à créer une liste vide. Dans le second cas, créer une pile revient à créer un tuple vide.
+\begin{rappel}
+Déclaration d'une liste ou d'un tuple en Python :
+\begin{python}
+pile_liste = []
+pile_tuple = ()
+\end{python}
+\end{rappel}
+
+\subsubsection{Ajouter un élément au sommet de la pile -- \textbf{empiler}}
+Les spécifications de la fonction \textbf{empiler} sont les suivantes :
+
+\begin{tabular}{p{\linewidth}}
+\hline
+\textbf{Algorithme : empiler} \\
+Ajouter un élément au sommet de la pile \\
+\hline
+\textbf{Entrée} : 
+\begin{itemize}
+\item pile : une pile
+\item el : un élément à empiler
 \end{itemize}
-\end{rem}
+\textbf{Sortie} : 
+\begin{itemize}
+\item pile  : une pile composée de de la pile initiale et de l'élément à empiler.
+\end{itemize} \\
+\hline 
+\end{tabular}
+
+\noindent \begin{minipage}[c]{.31\linewidth}
+\begin{pseudo}
+\begin{tabular}{p{.5cm}p{5cm}}
+\multicolumn{2}{p{\linewidth}}{\textbf{empiler(pile,el)} :}  \\
+& pile $\leftarrow$ pile+[el] \\
+& \textbf{retourner} pile \\
+\end{tabular}
+\end{pseudo}
+\end{minipage}\hfill
+\begin{minipage}[c]{.31\linewidth}
+\begin{py}
+\begin{python}
+def empiler(pile,el):
+    pile = pile+[el]    
+\end{python}
+\end{py}
+\end{minipage}
+\begin{minipage}[c]{.31\linewidth}
+\begin{py}
+\begin{python}
+pile = ()
+\end{python}
+\end{py}
+\end{minipage}
+
+\subsubsection{Ajouter un élément au sommet de la pile}
+\subsubsection{Supprimer l'élément au sommet de la pile}
+
 
 \section{Les files}
 \begin{exemple}
