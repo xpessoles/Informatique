@@ -98,11 +98,22 @@ On distingue :
 \subsection{Gestion des piles et des files en Python}
 L’implémentation des piles et des files peut se faire à l'aide d'une liste. Les opérations élémentaires permettant de manipuler une liste sont les suivantes :
 \begin{itemize}[label=\ding{112},font=\color{ocre}] 
+\item méthodes de base :
+\begin{itemize}
 \item ajouter en élément \texttt{el} de n'importe quel type : \texttt{l.append(el)};
-\item modifier un élément à l'indice \texttt{i}: \texttt{l[i]=el};
 \item supprimer un élément à l'indice \texttt{i} et le retourner : \texttt{l.pop(i)};
 \item insérer un élément \texttt{el} à l'indice \texttt{i}: \texttt{l.insert(i,el)};
-\item supprimer la première occurrence de l'élément \texttt{el} : \texttt{l.remove(el)}.
+\item supprimer la première occurrence de l'élément \texttt{el} : \texttt{l.remove(el)};
+\item supprimer un élément sans le retourner : \texttt{del a[i]};
+\end{itemize}
+\item modification d'une liste : 
+\begin{itemize}
+\item modifier un élément à l'indice \texttt{i}: \texttt{l[i]=el};
+\item concaténation d'éléments : \texttt{l+[el]};
+\end{itemize}
+\item accès au premier élément : \texttt{l[0]};
+\item accès au dernier élément : \texttt{l[-1]};
+\item 
 \end{itemize}
 
 En Python, les listes sont des objets dynamiques mutables. Cela signifie que d'une part il n'y a pas besoin de connaître a priori la taille d'une liste en la déclarant : elle va être redimensionnée à mesure que des éléments sont ajoutés ou supprimés. D'autre part, on peut modifier un élément de la liste sans recréer cette liste. 
@@ -134,14 +145,12 @@ Modification d'un caractère d'une chaîne de caractères :
 \end{enumerate}
 
 \subsection{Implémentation d'une pile}
-Dans cette section, nous allons considérer simultanément qu'une pile est implémentée sous forme d'une liste ou sous forme de tuple.
+Dans cette section, nous allons considérer simultanément qu'une pile est implémentée sous forme d'une liste. Une autre méthode (qui n'est pas au programme serait de créer une nouvelle classe d'objets Python).
 
-Dans le premier cas, créer une pile revient à créer une liste vide. Dans le second cas, créer une pile revient à créer un tuple vide.
 \begin{rappel}
-Déclaration d'une liste ou d'un tuple en Python :
+Ainsi, pour déclarer une pile, on utilise la méthode usuelle pour d'initialisation d'une liste. 
 \begin{python}
 pile_liste = []
-pile_tuple = ()
 \end{python}
 \end{rappel}
 
@@ -165,43 +174,98 @@ Ajouter un élément au sommet de la pile \\
 \hline 
 \end{tabular}
 
-\noindent \begin{minipage}[c]{.31\linewidth}
+\vspace{.5cm}
+
+\noindent \begin{minipage}[c]{.48\linewidth}
 \begin{pseudo}
 \begin{tabular}{p{.5cm}p{5cm}}
+\hline
 \multicolumn{2}{p{\linewidth}}{\textbf{empiler(pile,el)} :}  \\
 & pile $\leftarrow$ pile+[el] \\
 & \textbf{retourner} pile \\
+\hline
 \end{tabular}
 \end{pseudo}
 \end{minipage}\hfill
-\begin{minipage}[c]{.31\linewidth}
+\begin{minipage}[c]{.48\linewidth}
 \begin{py}
 \begin{python}
 def empiler(pile,el):
-    pile = pile+[el]    
+    pile.append(el)
 \end{python}
 \end{py}
 \end{minipage}
-\begin{minipage}[c]{.31\linewidth}
+
+
+\begin{rem}
+En python le passage des arguments se faisant par référence, retourner la pile n'est pas indispensable car dans ce cas l'adresse de la liste n'a pas été changée.
+Le \texttt{append} est équivalent à l'opération de concaténation suivante :
+\begin{python}
+pile = pile+[el]
+\end{python}
+\end{rem}
+
+\subsubsection{Supprimer l'élément au sommet de la pile}
+Les spécifications de la fonction \textbf{empiler} sont les suivantes :
+
+\begin{tabular}{p{\linewidth}}
+\hline
+\textbf{Algorithme : depiler} \\
+Supprimer le dernier élément de la pile et retourner cet élément\\
+\hline
+\textbf{Entrée} : 
+\begin{itemize}
+\item pile : une pile
+\end{itemize}
+\textbf{Sortie} : 
+\begin{itemize}
+\item el : élément qui était au sommet de la pile.
+\end{itemize} \\
+\hline 
+\end{tabular}
+
+\vspace{.5cm}
+
+\noindent \begin{minipage}[c]{.48\linewidth}
+\begin{pseudo}
+\begin{tabular}{p{.5cm}p{.5cm}p{5cm}}
+\hline
+\multicolumn{3}{p{\linewidth}}{\textbf{depiler(pile)} :}  \\
+& \multicolumn{2}{l}{n$\leftarrow$ \textbf{Taille(}pile\textbf{)}}\\
+& \multicolumn{2}{l}{el$\leftarrow$ pile[n]}\\
+& \multicolumn{2}{l}{pile\_s $\leftarrow$ []}\\
+& \multicolumn{2}{l}{\textbf{Pour} i \textbf{allant de} 1 \textbf{à} n-1 \textbf{faire}}\\
+& & pile\_s[i]$\leftarrow$ pile[i]\\
+& \multicolumn{2}{l}{\textbf{Fin Pour}}\\
+& \multicolumn{2}{l}{pile $\leftarrow$ pile\_s}\\
+& \multicolumn{2}{l}{\textbf{Retourner} el}\\
+
+\hline
+\end{tabular}
+\end{pseudo}
+\end{minipage}\hfill
+\begin{minipage}[c]{.48\linewidth}
 \begin{py}
 \begin{python}
-pile = ()
+def depiler(pile):
+    assert len(pile)>0
+    return pile.pop()
 \end{python}
 \end{py}
 \end{minipage}
-
-\subsubsection{Ajouter un élément au sommet de la pile}
-\subsubsection{Supprimer l'élément au sommet de la pile}
-
+\begin{rem}
+En Pyhton, la méthode $\texttt{pop}$ retourne automatiquement le dernier élément d'une liste et le supprimer de celle-ci.
+\end{rem}
 
 \section{Les files}
-\begin{exemple}
-~\\
+\subsection{Quelques exemples d'application}
+
 \begin{enumerate}
 \item File d’attente : dans une file d’attente, le premier arrivé est le premier servi.
 \item Gestion de processus par un système d’exploitation : dans un ordinateur, lorsque des appels aux processus « 1 », « 2 », puis « 3 » se succèdent, l’ensemble est stocké dans une table des processus, propre au noyau du système d’exploitation. Lorsque le « processus 1 » se termine, le système sait qu’il doit passer au « processus 2 », puis au « processus 3 ».
+\item Gestion des travaux d'impression.
 \end{enumerate}
-\end{exemple}
+
 
 \begin{rem}
 Les principales fonctions associées aux files sont : 
@@ -210,6 +274,113 @@ Les principales fonctions associées aux files sont :
 \item supprimer tête : défiler (« dequeue »);
 \item est\_vide, est\_pleine.
 \end{itemize}
+\end{rem}
+
+
+\subsection{Implémentation d'une file}
+Dans cette section, nous allons considérer simultanément qu'une file est implémentée sous forme d'une liste. 
+
+\subsubsection{Ajouter un élément en queue de file -- \textbf{enfiler}}
+Les spécifications de la fonction \textbf{enfiler} sont les suivantes :
+
+\begin{tabular}{p{\linewidth}}
+\hline
+\textbf{Algorithme : enfiler} \\
+Ajouter un élément en queue de file \\
+\hline
+\textbf{Entrée} : 
+\begin{itemize}
+\item file : une file
+\item el : un élément à ajouter en queue de file
+\end{itemize}
+\textbf{Sortie} : 
+\begin{itemize}
+\item file  : une file composée de de la file initiale et de l'élément en queue.
+\end{itemize} \\
+\hline 
+\end{tabular}
+
+\vspace{.5cm}
+
+\noindent \begin{minipage}[c]{.48\linewidth}
+\begin{pseudo}
+\begin{tabular}{p{.5cm}p{5cm}}
+\hline
+\multicolumn{2}{p{\linewidth}}{\textbf{enfiler(file,el)} :}  \\
+& file $\leftarrow$ file+[el] \\
+& \textbf{retourner} file \\
+\hline
+\end{tabular}
+\end{pseudo}
+\end{minipage}\hfill
+\begin{minipage}[c]{.48\linewidth}
+\begin{py}
+\begin{python}
+def enfiler(file,el):
+    file.append(el)
+\end{python}
+\end{py}
+\end{minipage}
+
+\subsubsection{Supprimer l'élément en tête de la file}
+Les spécifications de la fonction \textbf{défiler} sont les suivantes :
+
+\begin{tabular}{p{\linewidth}}
+\hline
+\textbf{Algorithme : defiler} \\
+Supprimer le premier élément de la file et retourner cet élément\\
+\hline
+\textbf{Entrée} : 
+\begin{itemize}
+\item file : une file
+\end{itemize}
+\textbf{Sortie} : 
+\begin{itemize}
+\item el : élément qui était en tête de la file.
+\end{itemize} \\
+\hline 
+\end{tabular}
+
+\vspace{.5cm}
+
+\noindent \begin{minipage}[c]{.48\linewidth}
+\begin{pseudo}
+\begin{tabular}{p{.5cm}p{.5cm}p{5cm}}
+\hline
+\multicolumn{3}{p{\linewidth}}{\textbf{defiler(file)} :}  \\
+& \multicolumn{2}{l}{n$\leftarrow$ \textbf{Taille(}file\textbf{)}}\\
+& \multicolumn{2}{l}{el$\leftarrow$ file[1]}\\
+& \multicolumn{2}{l}{file\_s $\leftarrow$ []}\\
+& \multicolumn{2}{l}{\textbf{Pour} i \textbf{allant de} 2 \textbf{à} n \textbf{faire}}\\
+& & file\_s[i-1]$\leftarrow$ file[i]\\
+& \multicolumn{2}{l}{\textbf{Fin Pour}}\\
+& \multicolumn{2}{l}{file $\leftarrow$ file\_s}\\
+& \multicolumn{2}{l}{\textbf{Retourner} el}\\
+
+\hline
+\end{tabular}
+\end{pseudo}
+\end{minipage}\hfill
+\begin{minipage}[c]{.48\linewidth}
+\begin{py}
+\begin{python}
+def defiler(file):
+    assert len(file)>0
+    el = file[0]
+    del file[0]
+    return el
+\end{python}
+\end{py}
+\end{minipage}
+\begin{rem}
+Pourquoi le code suivant ne fonctionne pas ?
+\begin{python}
+def defiler(file):
+    assert len(file)>0
+    el = pile[0]
+    pile=pile[1:len(file)]
+    return el
+\end{python}
 \end{rem}
 
 
