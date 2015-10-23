@@ -1,0 +1,163 @@
+\documentclass[10pt,fleqn]{article} % Default font size and left-justified equations
+\usepackage[%
+    pdftitle={Informatique : Piles et files},
+    pdfauthor={Xavier Pessoles}]{hyperref}
+    
+\input{style/new_style}
+\input{style/macros_SII}
+
+\usepackage{multicol}
+\fichetrue
+%\fichefalse
+
+\proftrue
+%\proffalse
+
+\tdtrue
+%\tdfalse
+
+%\courstrue
+\coursfalse
+
+% -------------------------------------
+% Déclaration des titres
+% -------------------------------------
+
+\def\discipline{Informatique}
+\def\xxtete{Informatique}
+\def\classe{PT -- PT$\star$}
+\def\xxnumpartie{Partie 5}
+\def\xxpartie{Algorithmique \& Programmation (Suite)}
+
+\def\xxnumchapitre{Chapitre 2}
+\def\xxchapitre{\hspace{.12cm} Piles et files}
+
+\def\xxtitreexo{Exercices d'applications}
+\def\xxsourceexo{\hspace{.2cm} }
+
+\def\xxposongletx{2}
+\def\xxposonglettext{1.45}
+\def\xxposonglety{13}%10
+
+\def\xxonglet{Part. 5 -- Ch. 2}
+
+\def\xxactivite{TD - 02}
+\def\xxauteur{\textsl{Xavier Pessoles}}
+
+\def\xxcompetences{%
+\textsl{%
+\textbf{Savoirs et compétences :}
+\begin{itemize}[label=\ding{112},font=\color{ocre}] 
+\item Alg -- C16 : Piles - Algorithmes de manipulation : fonctions «push» et «pop».
+\end{itemize}
+}}
+
+\def\xxfigures{}%figues de la page de garde
+
+\def\xxpied{%
+Partie 5 -- Algorithmique et Programmation\\
+Ch 2 : Piles et files-- \xxactivite%
+}
+
+
+
+\setcounter{secnumdepth}{5}
+%---------------------------------------------------------------------------
+
+
+\begin{document}
+%\chapterimage{png/Fond_Cin}
+\input{style/new_pagegarde}
+\vspace{10cm}
+\pagestyle{fancy}
+\thispagestyle{plain}
+
+
+\def\columnseprulecolor{\color{ocre}}
+\setlength{\columnseprule}{0.4pt} 
+\begin{multicols}{2}
+\section*{Exercice 1 - Construction d'une pile}
+On souhaite réaliser les fonctions de base permettant la gestion d'une pile. On souhaite que celle-ci soit implémentée sous la forme d'un tuple. La taille de la pile doit être limitée à 100 données. 
+\begin{rappel}
+Affectation d'un tuple : 
+\begin{python}
+>>> t = (1,2,3)
+\end{python}
+\end{rappel}
+\subparagraph{}\textit{Implémenter la fonction \texttt{est\_vide} permettant de vérifier qu'une pile est vide. Les spécifications de la fonction seront les suivantes : }
+\begin{py}
+\begin{python}
+def est_vide(pile):
+    """
+    Vérifie si la pile est vide.
+    Entrée : 
+     * pile(tuple)
+    Sortie : 
+     * retourne True si la pile est vide, False 
+     sinon
+    """
+\end{python}
+\end{py}
+\subparagraph{}\textit{Implémenter la fonction \texttt{est\_pleine} permettant de vérifier qu'une pile est pleine. Les spécifications de la fonction seront les suivantes :}
+\begin{py}
+\begin{python}
+def est_vide(pile,nb):
+    """
+    Vérifie si la pile est pleine.
+    Entrée : 
+     * pile(tuple)
+     * nb(int) : nombre d'éléments maximum dans une pile
+    Sortie : 
+     * retourne True si la pile est pleine, False 
+     sinon
+    """
+\end{python}
+\end{py}
+\subparagraph{}\textit{Créer la fonction \texttt{push} permettant d'ajouter un élément au sommet de la pile. Les spécifications de la fonction devront être indiquées.}
+
+\subparagraph{}\textit{Créer la fonction \texttt{pop} permettant de supprimer l'élément au sommet de la pile et de le renvoyer. Les spécifications de la fonction devront être indiquées.}
+
+\setcounter{subparagraph}{0}
+\section*{Exercice 2 -- Notation polonaise inversée}
+La notation polonaise inversée permet de réaliser des opérations arithmétiques sans utiliser de parenthèses. On parle aussi d'expressions \textbf{postfixées}. Dans cette notation, l'opérateur (+, -, *, /) suit toujours l'opérande (nombres).
+
+Dans cette notation, on doit évaluer une expression composée d'opérateurs et d'opérandes. L'expression est lue de gauche à droite en suivant les règles suivantes :
+\begin{itemize}
+\item si on lit une opérande, on l'empile;
+\item si on lit un opérateur, on dépile deux opérandes, on réalise le calcul et on empile le résultat. 
+\end{itemize}
+\begin{exemple}
+Pour calculer $7\cdot 2$, on évalue l'expression $7\;2\; *$.
+
+Pour calculer $((1 + 2) \cdot 4) + 3$, on évalue l'expression $1\;2\;+\;4\;*\;3\;+$.
+\end{exemple} 
+
+
+\begin{rem}
+Le principal avantage de cette méthode est la suppression totale des parenthèses. En contrepartie, elle nécessite une petite gymnastique intellectuelle pour les néophytes que nous sommes.
+
+Cette notation est utilisée dans certaines calculatrices HP et dans certains utilitaires (programme calc d'Emacs, description des bibliographies dans LaTeX \textit{etc.}).
+\end{rem}
+
+Dans cet exercice, la pile sera implémentée sous forme d'une liste d'opérande et d'opérateurs. On disposera donc des méthodes associées à la gestion des listes. 
+\subparagraph{}\textit{Créer la fonction \texttt{est\_nombre} permettant de savoir si un élément de la pile est un nombre ou non.}
+\subparagraph{}\textit{Créer la fonction \texttt{est\_operation} permettant de savoir si un élément de la pile est une opération ou non.}
+\subparagraph{}\textit{Créer la fonction \texttt{evaluer} permettant d'évaluer une expression postfixée. Les spécifications sont les suivantes :}
+\begin{py}
+\begin{python}
+def evaluer(exp):
+    """
+    Évaluer le résultat d'une opération post-fixée.
+    Entrée : 
+     * ex(lst) : liste d'opérateurs et d'opérandes
+    Sortie : 
+     * res(flt) : résultat du calcul de l'expression.
+    """
+\end{python}
+\end{py}
+
+
+\end{multicols}
+\end{document}
+
+
