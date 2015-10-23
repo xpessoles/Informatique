@@ -38,7 +38,7 @@
 \def\xxonglet{Part. 5 -- Ch. 2}
 
 \def\xxactivite{Cours}
-\def\xxauteur{\textsl{Patrick Beynet \\ Xavier Pessoles}}
+\def\xxauteur{\textsl{Xavier Pessoles}}
 
 \def\xxcompetences{%
 \textsl{%
@@ -131,8 +131,27 @@ Modification d'un caractère d'une chaîne de caractères :
 >>> ch = "kamate"
 >>> ch = "!"+ch[1:len(ch)]
 \end{python}
-
 \end{exemple}
+
+\subsection{Généralités sur les structures de données}
+Les données sont stockées de façon structurée dans la mémoire de l'ordinateur. Les objets de types <<simples>> (non mutables) sont stockés dans des variables ayant les caractéristiques suivantes : un identificateur (nom), un type, une valeur, une référence et des opérations associées. La référence constitue l'adresse de l'objet dans la mémoire de l'ordinateur. 
+
+Ainsi, si on représentait la mémoire de façon linéaire (ce qui est le cas sur un disque dur non SSD), on pourrait procéder ainsi :
+\begin{center}
+\includegraphics[width=.4\linewidth]{images/memoire_01}
+\end{center}
+Suivant la valeur, le cadre peut s'étendre sur un grand nombre de bits. Pour les types Python non mutables (int, flt, str, tuple) il est possible de considérer que les données sont juxtaposées car il est possible de connaître la taille de chaque variable lors de l'affectation. 
+
+Pour les types mutables (comme les listes), on ne sait pas à l'avance combien d'emplacements mémoire vont être nécessaires car on peut ajouter des données à une même liste de façon indéfinie. 
+
+Dans beaucoup de langages de programmation, les listes ont :
+\begin{itemize}
+\item un nombre de cases fixées à l'avance par l'utilisateur;
+\item des cases qui sont toutes du même type;
+\item un accès aux cases se faisant à coût constant ($\mathcal{O}(1))$.
+\end{itemize}
+
+En Python, ce n'est pas le cas ce qui rend très aisé la gestion des piles et des files. 
 
 \section{Les piles}
 \subsection{Quelques exemples d'applications}
@@ -387,6 +406,7 @@ def defiler(file):
 \begin{thebibliography}{2}
 \bibitem{1}{Patrick Beynet, \textit{Supports de cours de TSI 2}, Lycée Rouvière, Toulon.}
 \bibitem{2}{<< Tower of Hanoi >>. Sous licence CC BY-SA via Wikimedia Commons - \url{https://fr.wikipedia.org/wiki/Tower_of_Hanoi.jpeg#/media/File:Tower_of_Hanoi.jpeg}}
+\bibitem{3}{Christophe Lambert, \textit{Supports de cours de PT -- PT$\star$}, Lycée La Martinère Monplaisir, Lyon.}
 \end{thebibliography}
 \end{document}
 
