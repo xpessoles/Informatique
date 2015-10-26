@@ -68,7 +68,7 @@ Ch 2 : Piles et files-- \xxactivite%
 \begin{document}
 %\chapterimage{png/Fond_Cin}
 \input{style/new_pagegarde}
-\vspace{10cm}
+\vspace{8cm}
 \pagestyle{fancy}
 \thispagestyle{plain}
 
@@ -117,8 +117,8 @@ def est_vide(pile,nb):
 
 \subparagraph{}\textit{Créer la fonction \texttt{pop} permettant de supprimer l'élément au sommet de la pile et de le renvoyer. Les spécifications de la fonction devront être indiquées.}
 
-\setcounter{subparagraph}{0}
 \section*{Exercice 2 -- Notation polonaise inversée}
+\setcounter{subparagraph}{0}
 La notation polonaise inversée permet de réaliser des opérations arithmétiques sans utiliser de parenthèses. On parle aussi d'expressions \textbf{postfixées}. Dans cette notation, l'opérateur (+, -, *, /) suit toujours l'opérande (nombres).
 
 Dans cette notation, on doit évaluer une expression composée d'opérateurs et d'opérandes. L'expression est lue de gauche à droite en suivant les règles suivantes :
@@ -156,6 +156,26 @@ def evaluer(exp):
 \end{python}
 \end{py}
 
+\subparagraph{}
+\textit{Transcrire l'expression suivante en NPI puis l'évaluer : $5+\left(\left( 1+2\right)\times4 \right)-3$.}
+
+\section*{Exercice 3 -- Croisement routier}
+\setcounter{subparagraph}{0}
+\textit{D'après P. Beynet}
+
+Pour simuler un croisement routier, à sens unique, on utilise 3 files \texttt{f1}, \texttt{f2} et \texttt{f3} représentant respectivement les voitures arrivant sur des routes \texttt{f1} et \texttt{R2}, et les voitures partant sur la route \texttt{R3}.
+La route \texttt{R2} a un STOP. Les voitures de la file \texttt{f2} ne peuvent avancer que s’il n’y a aucune voiture sur la route \texttt{R1}, donc dans la file \texttt{f1}. On souhaite écrire un algorithme qui simule le départ des voitures sur la route \texttt{R3}, modélisée par la file \texttt{f3}.
+\begin{center}
+\includegraphics[width=.8\linewidth]{images/file_01}
+\end{center}
+On utilise trois files \texttt{f1}, \texttt{f2} et \texttt{f3} de valeurs booléennes :
+\begin{itemize}
+\item  « 1 » symbolise la présence d’une voiture;
+\item  « 0 » l’absence de véhicule.
+\end{itemize}
+
+\subparagraph{}
+\textit{Réaliser l'algorithme de croisement routier permettant de simuler la composition de la file \texttt{f3} en fonction de la composition des files \texttt{f1} et \texttt{f2}. Les files seront modélisées par des listes de booléens.}
 
 \end{multicols}
 \end{document}
