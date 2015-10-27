@@ -26,7 +26,12 @@ class Labyrinthe:
         self.p = p
         self.q = q
         self.tab = [[Case() for j in range(q)] for i in range(p)]
-
+    def __init__(self,tab)
+        self.p = len(tab)
+        self.q = len(tab[0])
+        self.tab = [[Case() for j in range(q)] for i in range(p)]
+        
+    
     def show(self):
         plt.plot([0, 0, self.p, self.p, 0], [0, self.q, self.q, 0, 0], linewidth=2)
         for i in range(self.p-1):
@@ -39,7 +44,7 @@ class Labyrinthe:
                     plt.plot([i, i+1], [j+1, j+1], 'b')
         plt.axis([-1, self.p+1, -1, self.q+1])
         plt.show()
-
+    
 
 def creation(p, q):
     laby = Labyrinthe(p, q)
@@ -111,5 +116,8 @@ def explorer(laby):
         return pile.lst
         
 #laby = creation(60, 30)
-laby = creation(3, 1)
+laby = creation(3, 3)
+for i in range(3):
+    for j in range(3):
+        print(laby.tab[i][j].show())
 laby.show()
