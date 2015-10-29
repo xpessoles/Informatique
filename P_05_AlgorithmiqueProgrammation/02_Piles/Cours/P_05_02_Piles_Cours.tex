@@ -152,6 +152,12 @@ Dans beaucoup de langages de programmation, les listes ont :
 
 En Python, ce n'est pas le cas ce qui rend très aisé la gestion des piles et des files. 
 
+\begin{rem}
+ Suivant les, on peut avoir à gérer des piles bornées (à capacité finie) ou non bornées. Dans le cadre de ce cours, on traitera des piles non bornées. Dans l'exercice 1 du TD 2 on traitera des piles bornées. 
+
+La différence majeure est  que dans le premier cas, il faut vérifier qu'une pile n'est pas pleine avant d'y ajouter des éléments. 
+\end{rem}
+
 \section{Les piles}
 \subsection{Quelques exemples d'applications}
 
@@ -166,7 +172,7 @@ En Python, ce n'est pas le cas ce qui rend très aisé la gestion des piles et d
 Dans cette section, nous allons considérer simultanément qu'une pile est implémentée sous forme d'une liste. Une autre méthode (qui n'est pas au programme serait de créer une nouvelle classe d'objets Python).
 
 \begin{rappel}
-Ainsi, pour déclarer une pile, on utilise la méthode usuelle pour d'initialisation d'une liste. 
+Ainsi, pour déclarer une pile, on utilise la méthode usuelle pour l'initialisation d'une liste. 
 \begin{python}
 pile_liste = []
 \end{python}
@@ -187,7 +193,7 @@ Ajouter un élément au sommet de la pile \\
 \end{itemize}
 \textbf{Sortie} : 
 \begin{itemize}
-\item pile  : une pile composée de de la pile initiale et de l'élément à empiler.
+\item pile  : une pile composée de la pile initiale et de l'élément à empiler.
 \end{itemize} \\
 \hline 
 \end{tabular}
@@ -224,7 +230,7 @@ pile = pile+[el]
 \end{rem}
 
 \subsubsection{Supprimer l'élément au sommet de la pile}
-Les spécifications de la fonction \textbf{empiler} sont les suivantes :
+Les spécifications de la fonction \textbf{dépiler} sont les suivantes :
 
 \begin{tabular}{p{\linewidth}}
 \hline
@@ -272,7 +278,7 @@ def depiler(pile):
 \end{py}
 \end{minipage}
 \begin{rem}
-En Pyhton, la méthode $\texttt{pop}$ retourne automatiquement le dernier élément d'une liste et le supprimer de celle-ci.
+En Python, la méthode $\texttt{pop}$ retourne automatiquement le dernier élément d'une liste et le supprime de celle-ci.
 \end{rem}
 
 \section{Les files}
@@ -296,7 +302,7 @@ Les principales fonctions associées aux files sont :
 
 
 \subsection{Implémentation d'une file}
-Dans cette section, nous allons considérer simultanément qu'une file est implémentée sous forme d'une liste. 
+%Dans cette section, nous allons considérer simultanément qu'une file est implémentée sous forme d'une liste. 
 
 \subsubsection{Ajouter un élément en queue de file -- \textbf{enfiler}}
 Les spécifications de la fonction \textbf{enfiler} sont les suivantes :
@@ -313,7 +319,7 @@ Ajouter un élément en queue de file \\
 \end{itemize}
 \textbf{Sortie} : 
 \begin{itemize}
-\item file  : une file composée de de la file initiale et de l'élément en queue.
+\item file  : une file composée de la file initiale et de l'élément en queue.
 \end{itemize} \\
 \hline 
 \end{tabular}
@@ -395,8 +401,8 @@ Pourquoi le code suivant ne fonctionne pas ?
 \begin{python}
 def defiler(file):
     assert len(file)>0
-    el = pile[0]
-    pile=pile[1:len(file)]
+    el = file[0]
+    file=file[1:len(file)]
     return el
 \end{python}
 \end{rem}
