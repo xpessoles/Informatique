@@ -76,14 +76,26 @@ Ch 2 : Piles et files-- \xxactivite%
 \def\columnseprulecolor{\color{ocre}}
 \setlength{\columnseprule}{0.4pt} 
 \begin{multicols}{2}
-\section*{Exercice 1 - Construction d'une pile}
-On souhaite réaliser les fonctions de base permettant la gestion d'une pile. On souhaite que celle-ci soit implémentée sous la forme d'un tuple. La taille de la pile doit être limitée à 100 données. 
-\begin{rappel}
-Affectation d'un tuple : 
+\section*{Exercice 1 -- Construction d'une pile}
+On souhaite réaliser les fonctions de base permettant la gestion d'une pile. On souhaite que celle-ci soit implémentée sous la forme d'une liste. La taille de la pile doit être limitée à \texttt{n} données.
+
+Ainsi, une pile de taille 5 avec 4 éléments sera de la forme suivante : \texttt{[1,2,3,4,None]}.
+
+\subparagraph{}\textit{Implémenter la fonction \texttt{creer\_pile(n)} permettant de créer une pile de taille n.  Les spécifications seront les suivantes :}
+\begin{py}
 \begin{python}
->>> t = (1,2,3)
+def creer_pile(n):
+    """
+    Créer une pile de taille n.
+    Entrée : 
+     * n(int) : taille souhaitée de la pile
+    Sortie : 
+     * pile(list) : pile de taille n.
+     sinon
+    """
 \end{python}
-\end{rappel}
+\end{py}
+
 \subparagraph{}\textit{Implémenter la fonction \texttt{est\_vide} permettant de vérifier qu'une pile est vide. Les spécifications de la fonction seront les suivantes : }
 \begin{py}
 \begin{python}
@@ -91,7 +103,7 @@ def est_vide(pile):
     """
     Vérifie si la pile est vide.
     Entrée : 
-     * pile(tuple)
+     * pile(list)
     Sortie : 
      * retourne True si la pile est vide, False 
      sinon
@@ -105,7 +117,7 @@ def est_pleine(pile,nb):
     """
     Vérifie si la pile est pleine.
     Entrée : 
-     * pile(tuple)
+     * pile(list)
      * nb(int) : nombre d'éléments maximum dans une pile
     Sortie : 
      * retourne True si la pile est pleine, False 
@@ -117,11 +129,14 @@ def est_pleine(pile,nb):
 
 \subparagraph{}\textit{Créer la fonction \texttt{depiler} permettant de supprimer l'élément au sommet de la pile et de le renvoyer. Les spécifications de la fonction devront être indiquées.}
 
+\subparagraph{}\textit{Créer la fonction \texttt{taille\_pile} permettant de donner la longueur de la pile.}
+
+
 \section*{Exercice 2 -- Notation polonaise inversée}
 \setcounter{exo}{0}
-La notation polonaise inversée permet de réaliser des opérations arithmétiques sans utiliser de parenthèses. On parle aussi d'expressions \textbf{postfixées}. Dans cette notation, l'opérateur (+, -, *, /) suit toujours l'opérande (nombres).
+La notation polonaise inversée permet de réaliser des opérations arithmétiques sans utiliser de parenthèses. On parle aussi d'expressions \textbf{postfixées}. Dans cette notation, l'opérateur (+, -, *, /) suit toujours l'opérande (nombres). Ici, l'opération suit le deuxième opérande.
 
-Dans cette notation, on doit évaluer une expression composée d'opérateurs et d'opérandes. L'expression est lue de gauche à droite en suivant les règles suivantes :
+On doit évaluer une expression composée d'opérateurs et d'opérandes. L'expression est lue de gauche à droite en suivant les règles suivantes :
 \begin{itemize}
 \item si on lit une opérande, on l'empile;
 \item si on lit un opérateur, on dépile deux opérandes, on réalise le calcul et on empile le résultat. 
@@ -139,10 +154,19 @@ Le principal avantage de cette méthode est la suppression totale des parenthès
 Cette notation est utilisée dans certaines calculatrices HP et dans certains utilitaires (programme calc d'Emacs, description des bibliographies dans LaTeX \textit{etc.}).
 \end{rem}
 
-Dans cet exercice, la pile sera implémentée sous forme d'une liste d'opérande et d'opérateurs. On disposera donc des méthodes associées à la gestion des listes. 
+Dans cet exercice, la pile sera implémentée sous forme d'une liste d'opérande et d'opérateurs. 
+
+\textbf{On utilisera les fonctions définies à l'exercice précédent.}
+ 
 \subparagraph{}\textit{Créer la fonction \texttt{est\_nombre} permettant de savoir si un élément de la pile est un nombre ou non.}
+
 \subparagraph{}\textit{Créer la fonction \texttt{est\_operation} permettant de savoir si un élément de la pile est une opération ou non.}
+
+\subparagraph{}\textit{L'expression postfixée se lisant de gauche à droite et les outils permettant de traiter la pile traitant cette dernière de droite à gauche, réaliser la fonction \texttt{inversion} permettant d'inverser les éléments de la pile.}
+
+
 \subparagraph{}\textit{Créer la fonction \texttt{evaluer} permettant d'évaluer une expression postfixée. Les spécifications sont les suivantes :}
+
 \begin{py}
 \begin{python}
 def evaluer(exp):
@@ -161,7 +185,7 @@ def evaluer(exp):
 
 \section*{Exercice 3 -- Croisement routier}
 \setcounter{exo}{0}
-\textit{D'après P. Beynet}
+\textit{D'après P. Beynet.}
 
 Pour simuler un croisement routier, à sens unique, on utilise 3 files \texttt{f1}, \texttt{f2} et \texttt{f3} représentant respectivement les voitures arrivant sur des routes \texttt{f1} et \texttt{R2}, et les voitures partant sur la route \texttt{R3}.
 La route \texttt{R2} a un STOP. Les voitures de la file \texttt{f2} ne peuvent avancer que s’il n’y a aucune voiture sur la route \texttt{R1}, donc dans la file \texttt{f1}. On souhaite écrire un algorithme qui simule le départ des voitures sur la route \texttt{R3}, modélisée par la file \texttt{f3}.
