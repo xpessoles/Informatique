@@ -97,7 +97,69 @@ def depile_n(pile,n):
         empiler(pile,depiler(pile2))
     return el
 
+# Exercice 4 : Lire le nième
+# ==========================
+def lire_n(pile,n):
+    taille = long_pile(pile)
+    pile2 = creer_pile(taille-n)
+    i=0
+    while i<=taille-n:
+        empiler(pile2,depiler(pile))
+        i=i+1
+    el=depiler(pile2)
+    empiler(pile,el)
+    while not est_vide(pile2):
+        empiler(pile,depiler(pile2))
+    print(el)
+
+# Exercice 5 : Inversion des extrêmes
+# ===================================
+def inversion_ext(pile):
+    pile2 = creer_pile(long_pile(pile))
+    el_fin = depiler(pile)
+    while not est_vide(pile):
+        empiler(pile2,depiler(pile))
+    el_deb = depiler(pile2)
+    
+    empiler(pile,el_fin)
+    while not est_vide(pile2):
+        empiler(pile,depiler(pile2))
+    empiler(pile,el_deb)
+
+# Exercice 7 :
+# ============
+
+### exercice 7 - Tu coupes ?
+import random as rd
+def couper(p):
+    n=rd.randint(1,len(p))
+    mem=[]
+    for i in range(n):
+        mem.append(depiler(p))
+    return mem
+
+# >>> couper([1,3,9,5,1,6,7])
+# [7, 6, 1]
+
+### exercice 8 - Mélange de cartes
+def melange(p,q):
+    mem=[]
+    while est_vide(p)==False and est_vide(q)==False:
+        if rd.randint(0,1)==1:
+            mem.append(depiler(p))
+        else:
+            mem.append(depiler(q))
+    if est_vide(p)==False:
+        for i in range(len(p)):
+            mem.append(depiler(p))
+    else:
+        for i in range(len(q)):
+            mem.append(depiler(q))
+    return mem
+    
+        
+
 pile=[0,1,2,3,4,5,6,7,8]
 print(pile)
-print(depile_n(pile,3))
+inversion_ext(pile)
 print(pile)
