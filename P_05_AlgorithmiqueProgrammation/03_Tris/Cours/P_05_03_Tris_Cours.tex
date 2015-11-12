@@ -38,7 +38,7 @@
 \def\xxonglet{Part. 5 -- Ch. 3}
 
 \def\xxactivite{Cours}
-\def\xxauteur{\textsl{Patrick Beynet \\ Xavier Pessoles}}
+\def\xxauteur{\textsl{Patrick Beynet }}%\\ Xavier Pessoles}}
 
 \def\xxcompetences{%
 \textsl{%
@@ -60,8 +60,8 @@ Ch 3 : Tri d'une liste de valeurs numériques -- \xxactivite%
 }
 
 
-\newcommand{\bfsf}[1]{\small\textbf{\textsf{#1}}}
-\newcommand{\tsf}[1]{\small{\textsf{#1}}}
+\newcommand{\bfsf}[1]{\small\textbf{\texttt{#1}}}
+\newcommand{\tsf}[1]{\small{\texttt{#1}}}
 %---------------------------------------------------------------------------
 \begin{document}
 \chapterimage{png/Fond_ALG}
@@ -254,14 +254,14 @@ L'analyse de la complexité de l'algorithme peut se faire par l'étude du nombre
 \end{tabular}
 \end{minipage}\hfill
 \begin{minipage}[c]{.48\linewidth}
-%\begin{py}
+\begin{py}
 \begin{python}
 def tri_insertion_01(tab):
     """ 
-    Trie une liste de nombre en utilisant la méthode 
-    du tri par insertion.
-    En Python, le passage se faisant par référence, il 
-    n'est pas indispensable de retourner le tableau.
+    Trie une liste de nombre en utilisant la 
+    méthode du tri par insertion.
+    En Python, le passage se faisant par référence, 
+    il n'est pas indispensable de retourner le tableau.
     Keyword arguments:
     tab -- liste de nombres
     """
@@ -274,7 +274,7 @@ def tri_insertion_01(tab):
             tab[k+1]=tab[k]
         tab[j]=x
 \end{python}
-%\end{py}
+\end{py}
 \end{minipage}
 
 \end{pseudo}
@@ -386,6 +386,7 @@ On peut aussi montrer que la complexité en moyenne est de classe quadratique lo
 Tri de valeurs numériques
 Problème : Comment trier une liste de nombres par la méthode de « tri rapide » ?
 \end{exemple}
+\begin{minipage}[c]{.48\linewidth}
 L'algorithme fait parti de la catégorie des algorithmes « diviser pour régner ».
 À chaque appel de la fonction de tri, le nombre de données à traiter est diminué de un. C'est-à-dire que l'on ne traite plus l'élément appelé « pivot » dans les appels de fonction ultérieurs, il est placé à sa place définitive dans le tableau.
 Le tableau de valeurs est ensuite segmenté en deux parties :
@@ -396,8 +397,12 @@ Le tableau de valeurs est ensuite segmenté en deux parties :
 
 L'appel de la fonction de tri est récursif sur les tableaux segmentés.
 On peut par exemple choisir le premier élément du tableau comme « pivot » :
-
-
+\end{minipage} \hfill
+\begin{minipage}[c]{.48\linewidth}
+\begin{center}
+\includegraphics[width=\linewidth]{images/graphe_1}
+\end{center}
+\end{minipage}
 
 
 Le « coût » temporel de l'algorithme de tri est principalement donné par des opérations de comparaison sur les éléments à trier. On raisonne donc sur le nombre de données à traiter pour l'analyse de la complexité de l'algorithme.
@@ -409,7 +414,7 @@ La complexité est donc de classe quadratique $C(n) = \mathcal{O}\left(n^2\right
 Dans le meilleur des cas, les deux segments sont de taille égale. Pour un nombre de données à traiter $n$, chacun des segments suivant a donc au plus $\dfrac{n-1}{2}$ éléments (on retire le pivot). On répète ainsi la segmentation des tableaux jusqu'à arriver au plus à un seul élément. 
 On peut écrire une relation de récurrence du type $C(n) = 2 C\left(\dfrac{n - 1}{ 2} \right)  +  n - 1$.
  
-La complexité est donc de classe quasi linéaire $C(n)=\mathcal{O}\left(n ln(n)\right)$.
+La complexité est donc de classe quasi linéaire $C(n)=\mathcal{O}\left(n \ln(n)\right)$.
 
 \begin{rem}
 Certains algorithmes de tri rapide prennent pour « pivot » le dernier élément, la valeur moyenne du premier et du dernier, ou un positionnement aléatoire dans le tableau. Pour se placer dans le meilleur des cas pour chaque segment de tableau, il faut prendre pour pivot la valeur médiane du tableau de valeurs. Le problème est que cette recherche de pivot idéal a aussi un « coût ».
@@ -424,25 +429,55 @@ On écrit tout d'abord l'algorithme effectuant la segmentation du tableau :
 
 \begin{center}
 \begin{tabular}{rc|c|c|c|c|c|}
-&& $p=5$ & $g$ & & & $d$ \\
+\multicolumn{2}{c}{} & \multicolumn{1}{c}{$p=5$} & \multicolumn{1}{c}{$g$} & \multicolumn{2}{c}{}&  \multicolumn{1}{c}{$d$} \\
 \cline{3-7}
 $T[g]>p$ et $T[d]>p$&&\cellcolor{black!30}5 & \cellcolor{black!10}8 & 3 & 2 & \cellcolor{black!10}9 \\
 \cline{3-7}
-&& & $g$ &  & $d$ &  \\
+\multicolumn{2}{c}{} & 
+\multicolumn{1}{c}{} & 
+\multicolumn{1}{c}{$g$} & 
+\multicolumn{1}{c}{}&  
+\multicolumn{1}{c}{$d$}&  
+\multicolumn{1}{c}{} \\
 \cline{3-7}
 $T[g]>p$ et $T[d]<p$, $d>g$ &&\cellcolor{black!30}5 & \cellcolor{black!10}8 & 3 & \cellcolor{black!10}2 & \cellcolor{black!10}9 \\
 \cline{3-7}
-&& &  & $g=d$ & &  \\
+\multicolumn{2}{c}{} & 
+\multicolumn{1}{c}{} & 
+\multicolumn{1}{c}{$g$} & 
+\multicolumn{1}{c}{}&  
+\multicolumn{1}{c}{$d$}&  
+\multicolumn{1}{c}{} \\
 \cline{3-7}
 Échange de $T[g]$ et $T[d]$ &&\cellcolor{black!30}5 & \cellcolor{black!10}2 & 
+3 & \cellcolor{black!10}8 & \cellcolor{black!10}9 \\
+\cline{3-7}
+\multicolumn{2}{c}{} & 
+\multicolumn{1}{c}{} & 
+\multicolumn{1}{c}{} & 
+\multicolumn{1}{c}{$g=d$}&  
+\multicolumn{1}{c}{}&  
+\multicolumn{1}{c}{} \\
+\cline{3-7}
+$T[g]<p$ et $T[d]<p$, $g=d$ &&\cellcolor{black!30}5 & \cellcolor{black!10}2 & 
 \cellcolor{black!10}3 & \cellcolor{black!10}8 & \cellcolor{black!10}9 \\
 \cline{3-7}
-&& &  & $d$ & $g$ &  \\
+\multicolumn{2}{c}{} & 
+\multicolumn{1}{c}{} & 
+\multicolumn{1}{c}{} & 
+\multicolumn{1}{c}{$d$}&  
+\multicolumn{1}{c}{$g$}&  
+\multicolumn{1}{c}{} \\
 \cline{3-7}
 $g>d$ &&\cellcolor{black!30}5 & \cellcolor{black!10}2 & 
 \cellcolor{black!10}3 & \cellcolor{black!10}8 & \cellcolor{black!10}9 \\
 \cline{3-7}
-&& &  & & &  \\
+\multicolumn{2}{c}{} & 
+\multicolumn{1}{c}{} & 
+\multicolumn{1}{c}{} & 
+\multicolumn{1}{c}{}&  
+\multicolumn{1}{c}{}&  
+\multicolumn{1}{c}{} \\
 \cline{3-7}
 Échange de $p$ et $T[d]$ &&\cellcolor{black!10}3 & \cellcolor{black!10}2 & 
 \cellcolor{black!30}5 & \cellcolor{black!10}8 & \cellcolor{black!10}9 \\
@@ -455,10 +490,10 @@ Les éléments à sa droite sont plus grands
 
 \subsection{Algorithmes du tri rapide}
 
-
+\begin{minipage}[c]{.48\linewidth}
 \begin{pseudo}
 ~\\
-\begin{tabular}{p{.9\textwidth}}
+\begin{tabular}{p{.98\textwidth}}
 \hline
 \textbf{Algorithme :} Tri Quicksort -- Segmentation\\
 \hline
@@ -495,9 +530,51 @@ Les éléments à sa droite sont plus grands
 \hspace{.4cm} \textbf{Retourner} \tsf{k}  \\
 \hline
 \end{tabular}
+\end{pseudo}
+\end{minipage}\hfill
+\begin{minipage}[c]{.48\linewidth} 
+\begin{py}
+\begin{python}
+def segmente(tab,i,j):
+    """
+    Segmentation d'un tableau par rapport à
+    un pivot.
+    Keyword arguments: 
+    tab (list) -- liste de nombres
+    i,j (int) -- indices de fin et de début de la 
+    segmentation
+    Retour :    
+    tab (list) -- liste de nombres avec le pivot 
+    à sa place définitive
+    k (int) -- indice de la place du pivot
+    """
+    g =i+1
+    d=j
+    p=tab[i]
+    while g<=d :
+        while d>=0 and tab[d]>p:
+            d=d-1
+        while g<=j and tab[g]<=p:
+            g=g+1
+        if g<d :
+            tab[g],tab[d]=tab[d],tab[g]
+            d=d-1
+            g=g+1
+    k=d
+    tab[i],tab[d]=tab[d],tab[i]
+    return k
+\end{python}
+\end{py}
+\end{minipage}
 
+\begin{resultat}
+Le nombre de comparaisons du type $T[d]>p$ et $T[g]\leq p$ est égal à $n-1$.
+La complexité de cet algorithme est donc de classe linéaire : $C(n)=\mathcal{O}(n)$.
+\end{resultat}
 
-\begin{tabular}{p{.9\textwidth}}
+\begin{minipage}[c]{.48\linewidth}
+\begin{pseudo}
+\begin{tabular}{p{.9\linewidth}}
 \hline
 \textbf{Algorithme :} Tri Quicksort -- Tri rapide\\
 \hline
@@ -519,47 +596,22 @@ Les éléments à sa droite sont plus grands
 \hspace{.4cm} \textbf{Fin Si} \\
 \hline
 \end{tabular}
-
 \end{pseudo}
-
+\end{minipage}\hfill
+\begin{minipage}[c]{.48\linewidth} 
 \begin{py}
-\begin{python}
-def segmente(tab,i,j):
-    """
-    Segmentation d'un tableau par rapport à un pivot.
-    Keyword arguments: 
-    tab (list) -- liste de nombres
-    i,j (int) -- indices de fin et de début de la segmentation
-    Retour :    
-    tab (list) -- liste de nombres avec le pivot à sa place définitive
-    k (int) -- indice de la place du pivot
-    """
-    g =i+1
-    d=j
-    p=tab[i]
-    while g<=d :
-        while d>=0 and tab[d]>p:
-            d=d-1
-        while g<=j and tab[g]<=p:
-            g=g+1
-        if g<d :
-            tab[g],tab[d]=tab[d],tab[g]
-            d=d-1
-            g=g+1
-    k=d
-    tab[i],tab[d]=tab[d],tab[i]
-    return k
-\end{python}
-
 \begin{python}
 def tri_quicksort(tab,i,j):
     """
-    Tri d'une liste par l'utilisation du tri rapide (Quick sort).
+    Tri d'une liste par l'utilisation du 
+    tri rapide (Quick sort).
     Keyword arguments: 
     tab (list) -- liste de nombres
-    i,j (int) -- indices de fin et de début de la zone de tri
+    i,j (int) -- indices de fin et de 
+    début de la zone de tri
     Retour :    
-    tab (list) -- liste de nombres avec le pivot à sa place définitive
+    tab (list) -- liste de nombres avec 
+    le pivot à sa place définitive
     """
     if i<j :
         k = segmente(tab,i,j)
@@ -567,8 +619,12 @@ def tri_quicksort(tab,i,j):
         tri_quicksort(tab,k+1,j)
 \end{python}
 \end{py}
+\end{minipage}
 
 
+\begin{rem}
+Cette méthode de tri est très efficace lorsque les données sont distinctes et non ordonnées. La complexité est alors globalement en $\mathcal{O}\left(n \ln(n))\right)$. Lorsque le nombre de données devient petit ($<15$) lors des appels récursifs de la fonction de tri, on peut avantageusement le remplacer par un tri par insertion dont la complexité est linéaire lorsque les données sont triées ou presque.
+\end{rem}
 
 \subsection{Tri rapide optimisé}
 
@@ -610,6 +666,7 @@ def tri_quicksort(tab,i,j):
 
 \section{Le tri fusion}
 
+\begin{minipage}[c]{.48\linewidth}
 La méthode de tri fusion pour un tableau de données est la suivante :
 \begin{enumerate}
 \item on coupe en deux parties à peu près égales les données à trier;
@@ -617,17 +674,17 @@ La méthode de tri fusion pour un tableau de données est la suivante :
 \item on fusionne les deux parties en interclassant les données.
 \end{enumerate}
 
-L'algorithme est donc récursif. Il fait parti des algorithmes « diviser pour régner ». La récursivité s'arrête car on finit par arriver à des listes composées d'un seul élément et le tri est alors trivial. 
+L'algorithme est donc récursif. Il fait partie des algorithmes « diviser pour régner ». La récursivité s'arrête car on finit par arriver à des listes composées d'un seul élément et le tri est alors trivial. 
 
-Si l'on s'intéresse au nombre de données à traiter à chaque appel de fonction, la relation de récurrence est du type :
-$C(n) = 2 C\left(\dfrac{n}{2}\right)  +  n$.
-La méthode de tri fusion a donc une efficacité temporelle comparable au tri rapide en $\mathcal{O}\left(n \ln(n)\right)$. Par contre, elle n'opère pas en place : une zone temporaire de données supplémentaire de taille égale à celle de l'entrée est nécessaire. Des versions plus complexes peuvent être effectuées sur place mais sont moins rapides.
+\end{minipage} \hfill
+\begin{minipage}[c]{.48\linewidth}
+\begin{center}
+\includegraphics[width=\linewidth]{images/graphe_2}
+\end{center}
+\end{minipage}
 
-\begin{rem}
-D'autres méthodes de tri existent : tri par sélection $\mathcal{O}\left(n^2\right)$, tri à bulles  $\mathcal{O}\left(n^2\right)$, \textit{etc}.
-\end{rem}
 
-
+\begin{minipage}[c]{.48\linewidth}
 \begin{pseudo}
 ~\\
 \begin{tabular}{p{.9\textwidth}}
@@ -650,8 +707,8 @@ D'autres méthodes de tri existent : tri par sélection $\mathcal{O}\left(n^2\ri
 \hspace{.4cm} \textbf{Initialiser tableau} \tsf{G}  \\
 \hspace{.4cm} \textbf{Initialiser tableau} \tsf{D}  \\
 \hspace{.4cm} \textbf{Pour} \tsf{i} \textbf{allant de} \tsf{1} \textbf{à} \tsf{n1} \textbf{faire}\\
-\hspace{.8cm}  \tsf{G[i] $ \leftarrow$ tab[g+i-1]}\\
-\hspace{.4cm}  \textbf{Fin Pour}\\
+\hspace{.8cm} \tsf{G[i] $ \leftarrow$ tab[g+i-1]}\\
+\hspace{.4cm} \textbf{Fin Pour}\\
 \hspace{.4cm} \textbf{Pour} \tsf{j} \textbf{allant de} \tsf{1} \textbf{à} \tsf{n2} \textbf{faire}\\
 \hspace{.8cm} \tsf{D[j] $ \leftarrow$ tab[m+j]}\\
 \hspace{.4cm} \tsf{Fin Pour}\\
@@ -674,11 +731,52 @@ D'autres méthodes de tri existent : tri par sélection $\mathcal{O}\left(n^2\ri
 \hspace{.4cm}  \textbf{Fin Pour}\\
 \hline
 \end{tabular}
-
 \end{pseudo}
+\end{minipage} \hfill
+\begin{minipage}[c]{.48\linewidth}
+\begin{py}
+\begin{python}
+def fusion_listes(tab,g,d,m):
+    """
+    Fusionne deux listes triées.
+    Keyword arguments:
+     * tab (list) -- liste : une liste de nombres 
+        tab[g:d] avec g indice de la valeur de 
+        gauche, d indice de la valeur de droite
+     * g,d,m (int) -- entiers : indices tels que 
+        g<=m<d et tel que les sous-tableaux
+        tab[g:m] et tab[m+1:d] soient ordonnés
+    Résultat :
+     * tab (list) : liste triée entre les indices 
+       g et d
+    """
+    n1 = m-g+1
+    n2 = d-m
+    G,D = [],[]
+    for i in range (n1):
+        G.append(tab[g+i])
+    for j in range (n2):
+        D.append(tab[m+j+1])
+    i,j=0,0
+    G.append(99999999999)
+    D.append(99999999999)
+    for k in range (g,d+1):
+        if G[i]<=D[j]: # and i<=n1 
+            tab[k]=G[i]
+            i=i+1
+        elif G[i]>D[j]: # and j<=n2
+            tab[k]=D[j]
+            j=j+1
+\end{python}
+\end{py}
+\end{minipage} 
 
+\begin{resultat}
+Cet algorithme a une complexité en temps de classe linéaire : $C(n)=\mathcal{O}(n)$.
+Par contre, il oblige à utiliser un espace supplémentaire égal à la taille du tableau original \texttt{tab}.
+\end{resultat}
 
-
+\begin{minipage}[c]{.48\linewidth}
 \begin{pseudo}
 ~\\
 \begin{tabular}{p{.9\textwidth}}
@@ -706,47 +804,22 @@ Algorithme récursif du table de tri. \\
 \hline
 \end{tabular}
 \end{pseudo}
-
+\end{minipage}\hfill
+\begin{minipage}[c]{.48\linewidth}
 \begin{py}
-\begin{python}
-def fusion_listes(tab,g,d,m):
-    """
-    Fusionne deux listes triées.
-    Keyword arguments:
-    tab (list) -- liste : une liste de nombres tab[g:d] avec g indice de la 
-    valeur de gauche, d indice de la valeur de droite
-    g,d,m (int) -- entiers : indices tels que g<=m<d et tel que les 
-    sous-tableaux tab[g:m] et tab[m+1:d] soient ordonnés
-    Résultat :
-    tab (list) : liste triée entre les indices g et d
-    """
-    n1 = m-g+1
-    n2 = d-m
-    G,D = [],[]
-    for i in range (n1):
-        G.append(tab[g+i])
-    for j in range (n2):
-        D.append(tab[m+j+1])
-    i,j=0,0
-    G.append(99999999999)
-    D.append(99999999999)
-    for k in range (g,d+1):
-        if G[i]<=D[j]: # and i<=n1 
-            tab[k]=G[i]
-            i=i+1
-        elif G[i]>D[j]: # and j<=n2
-            tab[k]=D[j]
-            j=j+1
-            
+\begin{python}        
 def tri_fusion(tab,g,d):
     """
     Tri d'une liste par la métode du tri fusion
     Keyword arguments:
-    tab (list) -- liste : une liste de nombres non triés tab[g:d]
-    g,d (int) -- entiers : indices de début et de fin de liste si on veut trier
-                           tout le tableau g=0, d=len(tab)-1
+    tab (list) -- liste : une liste de nombres non 
+      triés tab[g:d]
+    g,d (int) -- entiers : indices de début et 
+      de fin de liste si on veut trier
+      tout le tableau g=0, d=len(tab)-1
     Résultat :
-    tab (list) : liste triée entre les indices g et d
+    tab (list) : liste triée entre les indices 
+      g et d
     """
     if g<d:
         m=(g+d)//2
@@ -755,6 +828,18 @@ def tri_fusion(tab,g,d):
         fusion_listes(tab,g,d,m)
 \end{python}
 \end{py}
+\end{minipage}
+
+Si l'on s'intéresse au nombre de données à traiter à chaque appel de fonction, la relation de récurrence est du type :
+$C(n) = 2 C\left(\dfrac{n}{2}\right)  +  n$.
+La méthode de tri fusion a donc une efficacité temporelle comparable au tri rapide en $\mathcal{O}\left(n \ln(n)\right)$. Par contre, elle n'opère pas en place : une zone temporaire de données supplémentaire de taille égale à celle de l'entrée est nécessaire. Des versions plus complexes peuvent être effectuées sur place mais sont moins rapides.
+
+
+
+
+
+
+
 
 
 
