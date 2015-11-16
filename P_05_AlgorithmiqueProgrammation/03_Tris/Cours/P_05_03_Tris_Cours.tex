@@ -49,9 +49,8 @@
 }}
 
 \def\xxfigures{
-%\includegraphics[width=\textwidth]{images/hanoi}
-
-\textit{Tour de Hanoi [2]}
+\includegraphics[width=\textwidth]{images/cartes}
+%\textit{Tour de Hanoi [2]}
 }%figues de la page de garde
 
 \def\xxpied{%
@@ -363,7 +362,7 @@ Dans le cas de la méthode 2 la complexité algorithmique peut se déterminer ai
 %\end{exemple}
 
 \begin{rem}
-On peut aussi montrer que la complexité en moyenne est de classe quadratique lorsque les permutations sont équiprobables. L'efficacité du tri par insertion est excellente lorsque le tableau est déjà trié ou « presque trié » ($C(n)=\mathcal{O}\left(n\right)$). Il surpasse alors toutes les autres méthodes de tri qui sont au mieux en $\mathcal{O}\left(n ln(n)\right)$.
+On peut aussi montrer que la complexité en moyenne est de classe quadratique lorsque les permutations sont équiprobables. L'efficacité du tri par insertion est excellente lorsque le tableau est déjà trié ou « presque trié » ($C(n)=\mathcal{O}\left(n\right)$). Il surpasse alors toutes les autres méthodes de tri qui sont au mieux en $\mathcal{O}\left(n \ln(n)\right)$.
 \end{rem}
 
 
@@ -381,6 +380,7 @@ On peut aussi montrer que la complexité en moyenne est de classe quadratique lo
 
 \section{Le tri rapide (\textit{Quicksort})}
 
+\subsection{Méthode}
 
 \begin{exemple}
 Tri de valeurs numériques
@@ -665,7 +665,7 @@ Cette méthode de tri est très efficace lorsque les données sont distinctes et
 \end{pseudo}
 
 \section{Le tri fusion}
-
+\subsection{Méthode}
 \begin{minipage}[c]{.48\linewidth}
 La méthode de tri fusion pour un tableau de données est la suivante :
 \begin{enumerate}
@@ -676,6 +676,7 @@ La méthode de tri fusion pour un tableau de données est la suivante :
 
 L'algorithme est donc récursif. Il fait partie des algorithmes « diviser pour régner ». La récursivité s'arrête car on finit par arriver à des listes composées d'un seul élément et le tri est alors trivial. 
 
+
 \end{minipage} \hfill
 \begin{minipage}[c]{.48\linewidth}
 \begin{center}
@@ -683,6 +684,9 @@ L'algorithme est donc récursif. Il fait partie des algorithmes « diviser pour 
 \end{center}
 \end{minipage}
 
+
+
+\subsection{Algorithme de tri fusion}
 
 \begin{minipage}[c]{.48\linewidth}
 \begin{pseudo}
