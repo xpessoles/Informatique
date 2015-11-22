@@ -1,0 +1,134 @@
+\documentclass[10pt,fleqn]{article} % Default font size and left-justified equations
+\usepackage[%
+    pdftitle={Informatique : Tris},
+    pdfauthor={Xavier Pessoles}]{hyperref}
+    
+\input{style/new_style}
+\input{style/macros_SII}
+
+\usepackage{multicol}
+\fichetrue
+%\fichefalse
+
+\proftrue
+\proffalse
+
+\tdtrue
+%\tdfalse
+
+%\courstrue
+\coursfalse
+
+% -------------------------------------
+% Déclaration des titres
+% -------------------------------------
+
+\def\discipline{Informatique}
+\def\xxtete{Informatique}
+\def\classe{PT -- PT$\star$}
+\def\xxnumpartie{Partie 5}
+\def\xxpartie{Algorithmique \& Programmation (Suite)}
+
+\def\xxnumchapitre{Chapitre 3}
+\def\xxchapitre{\hspace{.12cm} Tri d'une liste de valeurs numériques}
+
+\def\xxtitreexo{Exercices d'applications}
+\def\xxsourceexo{}%\hspace{.2cm} Informatique pour tous en CPGE -- \textit{Wack \& al.}}
+
+\def\xxposongletx{2}
+\def\xxposonglettext{1.45}
+\def\xxposonglety{13}%10
+
+\def\xxonglet{Part. 5 -- Ch. 3}
+
+\def\xxactivite{TD -- 01}
+\def\xxauteur{\textsl{Xavier Pessoles}}
+
+\def\xxcompetences{%
+\textsl{%
+\textbf{Savoirs et compétences :}
+\begin{itemize}[label=\ding{112},font=\color{ocre}] 
+\item Alg -- C17 : tris d’un tableau à une dimension de valeurs numériques (tri par insertion, tri rapide, tri fusion).
+\end{itemize}
+}}
+
+\def\xxfigures{}%figues de la page de garde
+
+\def\xxpied{%
+Partie 5 -- Algorithmique et Programmation\\
+Ch 3 : Tri d'une liste de valeurs numériques -- \xxactivite%
+}
+
+
+
+\setcounter{secnumdepth}{5}
+%---------------------------------------------------------------------------
+
+
+\begin{document}
+%\chapterimage{png/Fond_Cin}
+\input{style/new_pagegarde}
+\vspace{8cm}
+\pagestyle{fancy}
+\thispagestyle{plain}
+
+
+\def\columnseprulecolor{\color{ocre}}
+\setlength{\columnseprule}{0.4pt} 
+\begin{multicols}{2}
+
+\section*{Exercice 1 -- Représentation graphique}
+Soit la liste de nombres suivante : \texttt{[3,6,9,1,2]}.
+
+\subparagraph{}
+\textit{Pour le tri par insertion, le tri rapide et le tri fusion, représenter graphiquement l'évolution de la liste de nombres.}
+
+\subparagraph{}
+\textit{Donner, pour chacun des cas, la complexité dans le meilleur des cas, le pire des cas et le cas moyen.}
+
+\section*{Exercice 2 -- Tri à bulles}
+\setcounter{exo}{0}
+\subparagraph{}
+\textit{Donner l'algorithme permettant de trier un algorithme selon la méthode du tri à bulles.}
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi
+
+\subparagraph{}
+\textit{Dans quel cas est-on dans le meilleur des cas ? Quelle alors la complexité de l'algorithme ?.}
+
+\subparagraph{}
+\textit{Dans quel cas est-on dans le pire des cas ? Quelle alors la complexité de l'algorithme ?.}
+
+
+\section*{Exercice 3 -- Tri cocktail}
+\setcounter{exo}{0}
+\subparagraph*{}
+\textit{Donner l'algorithme permettant de trier un algorithme selon la méthode du tri cocktail.}
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi
+
+\subparagraph{}
+\textit{Dans quel cas est-on dans le meilleur des cas ? Quelle alors la complexité de l'algorithme ?.}
+
+\subparagraph{}
+\textit{Dans quel cas est-on dans le pire des cas ? Quelle alors la complexité de l'algorithme ?.}
+
+\end{multicols}
+\end{document}
+
+
+\section*{Exercice}
+\setcounter{exo}{0}
+\subparagraph{}
+\textit{}
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi

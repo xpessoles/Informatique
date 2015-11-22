@@ -1,0 +1,148 @@
+\documentclass[10pt,fleqn]{article} % Default font size and left-justified equations
+\usepackage[%
+    pdftitle={Informatique : Tris},
+    pdfauthor={Xavier Pessoles}]{hyperref}
+    
+\input{style/new_style}
+\input{style/macros_SII}
+
+\usepackage{multicol}
+\fichetrue
+%\fichefalse
+
+\proftrue
+\proffalse
+
+\tdtrue
+%\tdfalse
+
+%\courstrue
+\coursfalse
+
+% -------------------------------------
+% Déclaration des titres
+% -------------------------------------
+
+\def\discipline{Informatique}
+\def\xxtete{Informatique}
+\def\classe{PT -- PT$\star$}
+\def\xxnumpartie{Partie 5}
+\def\xxpartie{Algorithmique \& Programmation (Suite)}
+
+\def\xxnumchapitre{Chapitre 3}
+\def\xxchapitre{\hspace{.12cm} Tri d'une liste de valeurs numériques}
+
+\def\xxtitreexo{Exercices d'applications}
+\def\xxsourceexo{}%\hspace{.2cm} Informatique pour tous en CPGE -- \textit{Wack \& al.}}
+
+\def\xxposongletx{2}
+\def\xxposonglettext{1.45}
+\def\xxposonglety{13}%10
+
+\def\xxonglet{Part. 5 -- Ch. 3}
+
+\def\xxactivite{TD -- 01}
+\def\xxauteur{\textsl{Xavier Pessoles}}
+
+\def\xxcompetences{%
+\textsl{%
+\textbf{Savoirs et compétences :}
+\begin{itemize}[label=\ding{112},font=\color{ocre}] 
+\item Alg -- C17 : tris d’un tableau à une dimension de valeurs numériques (tri par insertion, tri rapide, tri fusion).
+\end{itemize}
+}}
+
+\def\xxfigures{}%figues de la page de garde
+
+\def\xxpied{%
+Partie 5 -- Algorithmique et Programmation\\
+Ch 3 : Tri d'une liste de valeurs numériques -- \xxactivite%
+}
+
+
+
+\setcounter{secnumdepth}{5}
+%---------------------------------------------------------------------------
+
+
+\begin{document}
+%\chapterimage{png/Fond_Cin}
+\input{style/new_pagegarde}
+\vspace{8cm}
+\pagestyle{fancy}
+\thispagestyle{plain}
+
+
+\def\columnseprulecolor{\color{ocre}}
+\setlength{\columnseprule}{0.4pt} 
+\begin{multicols}{2}
+
+\section*{Exercice 1 -- Représentation du coût temporel des tris}
+
+\begin{obj}
+Représenter pour chacun des tris les courbes indiquant le temps d'exécution en fonction du nombre d'éléments à trier.
+\end{obj}
+On donne la bibliothèque de tri \texttt{tris.py} dans laquelle différents tris ont été implémentés.
+On dispose ainsi des fonctions : 
+\begin{itemize}
+\item \texttt{tri\_insertion};
+\item \texttt{tri\_rapide};
+\item \texttt{tri\_fusion}.
+\end{itemize}
+On dispose aussi de la méthode \texttt{sort} disponible en Python.
+
+On pourra importer le module ** de la bibliothèque \texttt{} et le module \texttt{randint} de la bibliothèque \texttt{random}.
+
+
+\subparagraph{}
+\textit{Tracer, dans chacun des 4 cas, le temps de tri d'une liste en fonction du nombre d'éléments de la liste. Le nombre d'éléments variera de 0 à $100\,000$. Une liste de $n$ éléments sera composée de nombres choisis aléatoirement entre 0 et $n$. Ce réseau de courbes représentera le cas moyen.}
+
+\subparagraph{}
+\textit{Tracer, si cela est possible, le réseau de courbes du meilleur des cas et du pire des cas. .}
+
+\section*{Exercice 2 -- Tri à bulles}
+\setcounter{exo}{0}
+\subparagraph{}
+\textit{Donner l'algorithme permettant de trier un algorithme selon la méthode du tri à bulles.}
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi
+
+\subparagraph{}
+\textit{Dans quel cas est-on dans le meilleur des cas ? Quelle alors la complexité de l'algorithme ?.}
+
+\subparagraph{}
+\textit{Dans quel cas est-on dans le pire des cas ? Quelle alors la complexité de l'algorithme ?.}
+
+
+\section*{Exercice 3 -- Tri cocktail}
+\setcounter{exo}{0}
+\subparagraph*{}
+\textit{Donner l'algorithme permettant de trier un algorithme selon la méthode du tri cocktail.}
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi
+
+\subparagraph{}
+\textit{Dans quel cas est-on dans le meilleur des cas ? Quelle alors la complexité de l'algorithme ?.}
+
+\subparagraph{}
+\textit{Dans quel cas est-on dans le pire des cas ? Quelle alors la complexité de l'algorithme ?.}
+
+\end{multicols}
+\end{document}
+
+
+\section*{Exercice}
+\setcounter{exo}{0}
+\subparagraph{}
+\textit{}
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi
