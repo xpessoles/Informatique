@@ -87,9 +87,42 @@ Soit la liste de nombres suivante : \texttt{[3,6,9,1,2]}.
 \textit{Donner, pour chacun des cas, la complexité dans le meilleur des cas, le pire des cas et le cas moyen.}
 
 \section*{Exercice 2 -- Tri à bulles}
+Pour trier une liste selon la méthode du tri à bulles, on réalise des balayages successifs : à chaque balayage, on compare les éléments du tableau 2 à 2 et on les réordonne. 
+\setcounter{exo}{0}
+
+\subparagraph{}
+\textit{En utilisant la liste donnée dans l'exercice 1, donne la séquence d'échanges permettant d'arriver à la liste triée.}
+
+\subparagraph{}
+\textit{Donner un algorithme naïf permettant de trier un algorithme selon la méthode du tri à bulles.}
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi
+
+
+\subparagraph{}
+\textit{Dans quel cas est-on dans le meilleur des cas ? Quelle alors la complexité de l'algorithme ?}
+
+\subparagraph{}
+\textit{Dans quel cas est-on dans le pire des cas ? Quelle alors la complexité de l'algorithme ?}
+
+
+\subparagraph{}
+\textit{En remarquant qu'à l'étape $i$, les $i$ derniers éléments sont triés, proposer un nouvel algorithme du tri à bulles.}
+
+\subparagraph{}
+\textit{En remarquant qu'à l'itération $i$, il est possible d'arrêter le tri là où la dernière inversion a eu lieu à l'étape $i-1$, proposer un nouvel algorithme du tri à bulles.}
+
+\section*{Exercice 3 -- Tri cocktail, tri shaker}
+On remarque dans le tri à bulles qu'un balayage permet de faire remonter directement la bulle la plus grosse, cependant, les plus petites bulles ne descendent que d'un indice par balayage. Le tri cocktail propose donc de réaliser, à chaque itération, un balayage dans les deux sens. 
 \setcounter{exo}{0}
 \subparagraph{}
-\textit{Donner l'algorithme permettant de trier un algorithme selon la méthode du tri à bulles.}
+\textit{En utilisant la liste donnée dans l'exercice 1, donne la séquence d'échanges permettant d'arriver à la liste triée.}
+
+\subparagraph{}
+\textit{Donner l'algorithme naïf permettant de trier une liste selon la méthode du tri cocktail.}
 \ifprof
 \begin{corrige}
 \end{corrige}
@@ -97,27 +130,24 @@ Soit la liste de nombres suivante : \texttt{[3,6,9,1,2]}.
 \fi
 
 \subparagraph{}
-\textit{Dans quel cas est-on dans le meilleur des cas ? Quelle alors la complexité de l'algorithme ?.}
+\textit{Partant des remarques du tri à bulles, proposer une amélioration du tri cocktail.}
 
 \subparagraph{}
-\textit{Dans quel cas est-on dans le pire des cas ? Quelle alors la complexité de l'algorithme ?.}
+\textit{Donner la complexité de l'algorithme.}
 
 
-\section*{Exercice 3 -- Tri cocktail}
+
+\section*{Exercice 4 -- Tri par sélection}
+Le tri par sélection consiste en rechercher le plus petit élément d'une liste, puis en le positionner en première place. Dans la liste non triée restante, on cherche le plus petit élément, puis on le positionne en première place \textit{etc.}
 \setcounter{exo}{0}
-\subparagraph*{}
-\textit{Donner l'algorithme permettant de trier un algorithme selon la méthode du tri cocktail.}
-\ifprof
-\begin{corrige}
-\end{corrige}
-\else
-\fi
+\subparagraph{}
+\textit{En utilisant la liste donnée dans l'exercice 1, donne la séquence de listes permettant d'arriver à la liste triée.}
 
 \subparagraph{}
-\textit{Dans quel cas est-on dans le meilleur des cas ? Quelle alors la complexité de l'algorithme ?.}
+\textit{Donner l'algorithme naïf permettant de trier une liste selon la méthode du tri par sélection.}
 
 \subparagraph{}
-\textit{Dans quel cas est-on dans le pire des cas ? Quelle alors la complexité de l'algorithme ?.}
+\textit{Proposer un algorithme récursif.}
 
 \end{multicols}
 \end{document}

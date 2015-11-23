@@ -849,6 +849,23 @@ La méthode de tri fusion a donc une efficacité temporelle comparable au tri ra
 
 \section{Synthèse}
 
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+& Tri par insertion & Tri rapide & Tri fusion \\
+\hline 
+{Pire des cas} &  Liste triée à l'envers & Liste triée$^1$ & \\ 
+&  $ C(n)=\mathcal{O}\left(n^2 \right)$ & $ C(n)=\mathcal{O}\left(n^2 \right)$ & $ C(n)=\mathcal{O}\left(n \log n\right)$ \\ \hline
+Cas moyen & $ C(n)=\mathcal{O}\left(n^2 \right)$ &$ C(n)=\mathcal{O}\left(n \log n\right)$  & $ C(n)=\mathcal{O}\left(n \log n\right)$ \\ \hline
+Meilleur des cas  & Liste triée & Liste triée$^2$ & \\ 
+  & $ C(n)=\mathcal{O}\left(n \right)$ & $ C(n)=\mathcal{O}\left(n \right)$ & $ C(n)=\mathcal{O}\left(n \log n\right)$ \\ \hline
+\end{tabular}
+\end{center}
+
+\footnotesize{1 : lorsque le pivot est la dernière valeur des listes.}
+
+\footnotesize{2 : lorsque le pivot est pris au milieu des listes.}
+
 \begin{thebibliography}{2}
 \bibitem{1}{Patrick Beynet, \textit{Supports de cours de TSI 2}, Lycée Rouvière, Toulon.}
 
