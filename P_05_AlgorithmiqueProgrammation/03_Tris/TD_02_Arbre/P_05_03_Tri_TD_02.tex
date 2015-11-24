@@ -41,7 +41,7 @@
 
 \def\xxonglet{Part. 5 -- Ch. 3}
 
-\def\xxactivite{TD -- 01}
+\def\xxactivite{TD -- 02}
 \def\xxauteur{\textsl{Xavier Pessoles}}
 
 \def\xxcompetences{%
@@ -91,47 +91,134 @@ On dispose ainsi des fonctions :
 \end{itemize}
 On dispose aussi de la méthode \texttt{sort} disponible en Python.
 
-On pourra importer le module ** de la bibliothèque \texttt{} et le module \texttt{randint} de la bibliothèque \texttt{random}.
+On utilisera de plus le module \texttt{time()} de la bibliothèque \texttt{time} pour créer un chronomètre et le module \texttt{randint} de la bibliothèque \texttt{random}.
 
 
 \subparagraph{}
-\textit{Tracer, dans chacun des 4 cas, le temps de tri d'une liste en fonction du nombre d'éléments de la liste. Le nombre d'éléments variera de 0 à $100\,000$. Une liste de $n$ éléments sera composée de nombres choisis aléatoirement entre 0 et $n$. Ce réseau de courbes représentera le cas moyen.}
+\textit{Tracer, dans chacun des 4 cas, le temps de tri d'une liste en fonction du nombre d'éléments de la liste. Le nombre d'éléments variera de 0 à $2\, 000\,000$. Une liste de $n$ éléments sera composée de nombres choisis aléatoirement entre 0 et $n$. Ce réseau de courbes représentera le cas moyen.}
+
 
 \subparagraph{}
-\textit{Tracer, si cela est possible, le réseau de courbes du meilleur des cas et du pire des cas. .}
+\textit{Conclure sur l'efficacité algorithme de chacun des tris dans le cas moyen.}
 
-\section*{Exercice 2 -- Tri à bulles}
+
+\section*{Exercice 2 -- Classement de l'étape Bourg-de-Péage -- Gap}
+Les coureurs du tour de France sont en train de terminer la seizième étape du Tour de France qui séparait Bourg-de-Péage et Gap d'une distance de 201 km. 
+
+Le fichier \texttt{classement\_général} rassemble le classement général à l'issue de l'étape 15. 
+Le fichier \texttt{etape\_16} contient le classement de l'étape 16 uniquement.
+
+
+\begin{obj}
+L'objectif est de réaliser le classement général après la seizième étape. 
+\end{obj}
+
+\subsection*{Préambule}
 \setcounter{exo}{0}
 \subparagraph{}
-\textit{Donner l'algorithme permettant de trier un algorithme selon la méthode du tri à bulles.}
-\ifprof
-\begin{corrige}
-\end{corrige}
-\else
-\fi
+\textit{Réaliser la fonction \texttt{charge\_classement} permettant de lire un fichier de classement 
+et de retourner une liste de la forme \texttt{[[Nom\_1, Dossard\_1, Temps\_1], [Nom\_2, Dossard\_2, Temps\_2], ...]}. Le temps devra être exprimé en secondes.}
+
+
+
+\subsection*{Classement en fin d'étape}
+Dans une première approche, on souhaite réaliser le classement général après la fin de l'étape. 
 
 \subparagraph{}
-\textit{Dans quel cas est-on dans le meilleur des cas ? Quelle alors la complexité de l'algorithme ?.}
+\textit{Réaliser la fonction permettant d'ajouter les temps de l'étape 16 aux temps du classement général.}
 
 \subparagraph{}
-\textit{Dans quel cas est-on dans le pire des cas ? Quelle alors la complexité de l'algorithme ?.}
+\textit{Quel méthode de tri vous semble la mieux adaptée au tri du classement général ?}
 
-
-\section*{Exercice 3 -- Tri cocktail}
-\setcounter{exo}{0}
-\subparagraph*{}
-\textit{Donner l'algorithme permettant de trier un algorithme selon la méthode du tri cocktail.}
-\ifprof
-\begin{corrige}
-\end{corrige}
-\else
-\fi
 
 \subparagraph{}
-\textit{Dans quel cas est-on dans le meilleur des cas ? Quelle alors la complexité de l'algorithme ?.}
+\textit{Modifier les algorithmes de tris pour pouvoir trier la liste donnée suivant le temps de course d'un coureur. Le classement général a-t-il changé à l'issue de la seizième étape ?}
 
+
+\subsection*{Classement en cours d'étape -- solution intuitive}
+On cherche à reconstituer le classement général au fur et à mesure que les coureurs arrivent. 
 \subparagraph{}
-\textit{Dans quel cas est-on dans le pire des cas ? Quelle alors la complexité de l'algorithme ?.}
+\textit{Implémenter la fonction \texttt{ajout} ayant pour but d'intégrer le temps de l'étape d'un coureur et de mettre à jour le classement.}
+
+\subsection*{Classement en cours d'étape -- arbre binaire}
+
+\subsubsection*{Présentation des arbres}
+Un tas binaire est une structure de données informatiques qui permet d'accéder
+au maximum (respectivement minimum) d'un ensemble de données en temps
+constant. On peut la représenter par un arbre binaire vérifiant
+deux contraintes :
+\begin{itemize}
+\item c'est un arbre binaire parfait : tous les niveaux de l'arbre
+(excepté le niveau le plus bas) sont totalement remplis. Si le dernier n'est pas totalement rempli alors il doit l'être de gauche à droite;
+\item c'est un tas : une clé est associée à chaque nœud de l'arbre. Cette dernière doit être supérieure ou égale aux clés de chacun de ses fils.
+\end{itemize}
+
+Ainsi, lorsque les clés sont des nombres (valeurs) et quand la relation d'ordre choisie est l'ordre naturel, on parle alors de tas-max (ou max-heap). %Si l'on remplace <<supérieure ou égal>> par <<inférieure ou égal>> on parle alors de tas-min (ou min-heap).
+
+
+Un tas binaire étant un arbre binaire complet, on peut l'implémenter à l'aide d'un tableau tel que :
+\begin{itemize}
+\item la racine de l'arbre (niveau le plus haut) se trouve à l'index absolu 1;
+\item en considérant un nœud à l'index absolu $i$ :
+\begin{itemize}
+\item[$\bullet$] son fils gauche se trouve à l'index absolu $2i$;
+\item[$\bullet$] son fils droit se trouve à l'index absolu $2i + 1$;
+\end{itemize}
+\item en considérant un nœud à l'index absolu $i > 1$ :
+\begin{itemize}
+\item [$\bullet$]son père se trouve à l'index absolu $i/2$, le symbole / désignant ici la division entière.
+\end{itemize}
+\end{itemize}
+
+La figure suivante illustre un arbre binaire (trié) et le tableau qu'on peut lui associer avec les index associés (index absolu, index en langage Python).%, index en langage Scilab).
+
+%\begin{figure}[!ht]
+%\begin{minipage}[c]{.3\linewidth}
+\begin{center}
+\begin{tikzpicture}[level/.style={sibling distance=30mm/#1},level distance = 1cm ]
+\node [circle,draw] (z){\textsf{62}}
+  child {
+    node [circle,draw] (a) {\textsf{35}}
+    child {
+      node [circle,draw] (b) {\textsf{13}}
+      child {node [circle,draw] (c) {\textsf{5}}}
+      child {node [circle,draw] (d) {\textsf{6}}}
+      }
+    child {node [circle,draw] (g) {\textsf{3}}}
+  }
+  child {node [circle,draw] (j) {\textsf{23}}
+    child {node [circle,draw] (k) {\textsf{17}}}
+    child {node [circle,draw] (l) {\textsf{12}}}
+  };
+\end{tikzpicture}
+\end{center}
+%\begin{figure}
+%[!ht]
+%\end{minipage}\hspace{1cm}
+%\begin{minipage}[c]{.45\linewidth}
+
+\footnotesize{
+\begin{center}
+\begin{tabular}{|p{2cm}|c|c|c|c|c|c|c|c|c|}
+\hline
+Valeur dans l'arbre (clé) & 62 & 35 & 23 & 13 & 3 & 17 & 12 & 5 & 6 \\
+\hline \hline
+Index absolu dans l'arbre & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 \\ \hline
+%Index du tableau en Python & 0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 \\ \hline
+%Index du tableau en Scilab & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 \\ \hline
+\end{tabular}
+\end{center}
+}
+\vspace{.5cm}
+
+\textit{Le nœud ayant la valeur 62 est la racine de l'arbre (niveau le plus haut). Les nœuds ayant les clefs 5 et 6 sont au niveau le plus bas.}
+%\end{minipage}
+\vspace{.25cm}
+
+%\caption{\label{arbre} Arbre binaire et son implémentation en tableau}
+%\end{figure}
+
+
 
 \end{multicols}
 \end{document}
