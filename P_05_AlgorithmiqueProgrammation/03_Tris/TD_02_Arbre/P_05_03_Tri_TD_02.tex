@@ -68,7 +68,7 @@ Ch 3 : Tri d'une liste de valeurs numériques -- \xxactivite%
 \begin{document}
 %\chapterimage{png/Fond_Cin}
 \input{style/new_pagegarde}
-\vspace{8cm}
+\vspace{5cm}
 \pagestyle{fancy}
 \thispagestyle{plain}
 
@@ -102,18 +102,18 @@ On utilisera de plus le module \texttt{time()} de la bibliothèque \texttt{time}
 \textit{Conclure sur l'efficacité algorithme de chacun des tris dans le cas moyen.}
 
 
-\section*{Exercice 2 -- Classement de l'étape Bourg-de-Péage -- Gap}
-Les coureurs du tour de France sont en train de terminer la seizième étape du Tour de France qui séparait Bourg-de-Péage et Gap d'une distance de 201 km. 
+\section*{Exercice 2 -- Classement de l'étape Tarbes -- La Pierre-Saint-Martin -- 167 km}
+Les coureurs du tour de France sont en train de terminer la seizième étape du Tour de France qui sépare Tarbes et La Pierre-Saint-Martin. 
 
-Le fichier \texttt{classement\_général} rassemble le classement général à l'issue de l'étape 15. 
-Le fichier \texttt{etape\_16} contient le classement de l'étape 16 uniquement.
+Le fichier \texttt{classement\_général} rassemble le classement général à l'issue de l'étape 9. 
+Le fichier \texttt{etape\_16} contient le classement de l'étape 10 uniquement.
 
 
 \begin{obj}
 L'objectif est de réaliser le classement général après la seizième étape. 
 \end{obj}
 
-\subsection*{Préambule}
+\subsection*{Lecture des fichiers de résultat}
 \setcounter{exo}{0}
 \subparagraph{}
 \textit{Réaliser la fonction \texttt{charge\_classement} permettant de lire un fichier de classement 
@@ -125,7 +125,7 @@ et de retourner une liste de la forme \texttt{[[Nom\_1, Dossard\_1, Temps\_1], [
 Dans une première approche, on souhaite réaliser le classement général après la fin de l'étape. 
 
 \subparagraph{}
-\textit{Réaliser la fonction permettant d'ajouter les temps de l'étape 16 aux temps du classement général.}
+\textit{Réaliser la fonction permettant d'ajouter les temps de l'étape 10 aux temps du classement général.}
 
 \subparagraph{}
 \textit{Quel méthode de tri vous semble la mieux adaptée au tri du classement général ?}
@@ -135,12 +135,19 @@ Dans une première approche, on souhaite réaliser le classement général aprè
 \textit{Modifier les algorithmes de tris pour pouvoir trier la liste donnée suivant le temps de course d'un coureur. Le classement général a-t-il changé à l'issue de la seizième étape ?}
 
 
-\subsection*{Classement en cours d'étape -- solution intuitive}
-On cherche à reconstituer le classement général au fur et à mesure que les coureurs arrivent. 
+\subsection*{Classement en cours d'étape -- Implémentation d'une file}
+On cherche à reconstituer le classement général au fur et à mesure que les coureurs arrivent. Dans cette partie le classement de l'étape (liste de liste) sera vu comme une \textbf{file} FIFO (First In First Out) ou le premier élément est le premier coureur arrivé et le dernier élément est le dernier coureur à avoir passé la ligne d'arrivée.  
+
+\subparagraph{}\textit{Implémenter les fonctions élémentaires liées à la gestion des files : \texttt{enfiler}, \texttt{defiler}, \texttt{est\_vide}. À l'intérieur de ces fonctions, on s'autorise les méthodes liées au listes (\texttt{append}, \texttt{pop}, ...).}
+
+
 \subparagraph{}
-\textit{Implémenter la fonction \texttt{ajout} ayant pour but d'intégrer le temps de l'étape d'un coureur et de mettre à jour le classement.}
+\textit{Implémenter la fonction \texttt{ajout} ayant pour but d'ajouter le temps de l'étape d'un coureur dans le classement général et de mettre à jour ce classement. La gestion du classement de l'étape devra être réalisé grâce à une liste.}
+
+\newpage
 
 \subsection*{Classement en cours d'étape -- arbre binaire}
+Dans cette partie, on se propose d'étudier une nouvelle structure de donnée : les arbres binaires. L'objectif sera de représenter le classement non plus sous forme d'une liste ordonnée, mais sous la forme d'un arbre. 
 
 \subsubsection*{Présentation des arbres}
 Un tas binaire est une structure de données informatiques qui permet d'accéder
@@ -153,8 +160,7 @@ deux contraintes :
 \item c'est un tas : une clé est associée à chaque nœud de l'arbre. Cette dernière doit être supérieure ou égale aux clés de chacun de ses fils.
 \end{itemize}
 
-Ainsi, lorsque les clés sont des nombres (valeurs) et quand la relation d'ordre choisie est l'ordre naturel, on parle alors de tas-max (ou max-heap). %Si l'on remplace <<supérieure ou égal>> par <<inférieure ou égal>> on parle alors de tas-min (ou min-heap).
-
+Ainsi, lorsque les clés sont des nombres (valeurs) et quand la relation d'ordre choisie est l'ordre naturel, on parle alors de tas-max (ou max-heap). 
 
 Un tas binaire étant un arbre binaire complet, on peut l'implémenter à l'aide d'un tableau tel que :
 \begin{itemize}
@@ -174,8 +180,9 @@ La figure suivante illustre un arbre binaire (trié) et le tableau qu'on peut lu
 
 %\begin{figure}[!ht]
 %\begin{minipage}[c]{.3\linewidth}
+\footnotesize{
 \begin{center}
-\begin{tikzpicture}[level/.style={sibling distance=30mm/#1},level distance = 1cm ]
+\begin{tikzpicture}[level/.style={sibling distance=20mm/#1},level distance = .8cm ]
 \node [circle,draw] (z){\textsf{62}}
   child {
     node [circle,draw] (a) {\textsf{35}}
@@ -191,7 +198,9 @@ La figure suivante illustre un arbre binaire (trié) et le tableau qu'on peut lu
     child {node [circle,draw] (l) {\textsf{12}}}
   };
 \end{tikzpicture}
-\end{center}
+\end{center}}
+
+
 %\begin{figure}
 %[!ht]
 %\end{minipage}\hspace{1cm}
@@ -199,7 +208,7 @@ La figure suivante illustre un arbre binaire (trié) et le tableau qu'on peut lu
 
 \footnotesize{
 \begin{center}
-\begin{tabular}{|p{2cm}|c|c|c|c|c|c|c|c|c|}
+\begin{tabular}{|m{1.75cm}|c|c|c|c|c|c|c|c|c|}
 \hline
 Valeur dans l'arbre (clé) & 62 & 35 & 23 & 13 & 3 & 17 & 12 & 5 & 6 \\
 \hline \hline
@@ -209,12 +218,163 @@ Index absolu dans l'arbre & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 \\ \hline
 \end{tabular}
 \end{center}
 }
-\vspace{.5cm}
-
+%\vspace{.5cm}
 \textit{Le nœud ayant la valeur 62 est la racine de l'arbre (niveau le plus haut). Les nœuds ayant les clefs 5 et 6 sont au niveau le plus bas.}
-%\end{minipage}
-\vspace{.25cm}
 
+\normalsize
+
+\subsubsection*{Construction de l'arbre}
+On souhaite construire l'arbre représentatif du classement des coureurs. Les valeurs de l'arbre seront le temps de course.
+
+Dans un tas binaire, on insère l'élément à la prochaine position libre (la position libre la plus
+à gauche possible sur le dernier niveau) puis on effectue l'opération suivante (nommée \texttt{percolateUp}) pour rétablir si nécessaire la propriété d'ordre du tas binaire : tant que l'élément n'est pas la racine de l'arbre et que la clé de l'élément est strictement supérieure à son père on échange les positions entre l'élément et son père. L'exemple de la figure suivante montre l'insertion d'un élément ayant une clé de valeur 72.
+
+
+%\begin{figure}[!ht]
+\begin{minipage}[c]{.45\linewidth}
+\begin{tikzpicture}[level/.style={sibling distance=20mm/#1},level distance = .8cm ]
+\node [scale=.7,circle,draw] (z){\textsf{62}}
+  child {
+    node [scale=.7,circle,draw] (a) {\textsf{35}}
+    child {
+      node [scale=.7,circle,draw] (b) {13}
+      child {node [scale=.7,circle,draw] (c) {\textsf{8}}}
+      child {node [scale=.7,circle,draw] (d) {\textsf{9}}}
+      }
+    child {
+    node [scale=.7,circle,draw] (g) {\textsf{3}}
+    child {node [scale=.8,circle,draw,fill={rgb:black,1;white,6}] (e) {\textbf{\textsf{72}}}}
+    }
+  }
+  child {node [scale=.7,circle,draw] (j) {\textsf{23}}
+    child {node [scale=.7,circle,draw] (k) {\textsf{17}}}
+    child {node [scale=.7,circle,draw] (l) {\textsf{12}}}
+  };
+%  \draw (0,-3.5) node[below]{Insertion de la clef 72} ;
+\end{tikzpicture}
+
+\begin{center}
+Insertion de la clef 72
+\end{center}
+\end{minipage} %\hspace{2.7cm}
+\begin{minipage}[c]{.45\linewidth}
+\begin{tikzpicture}[level/.style={sibling distance=20mm/#1},level distance = .8cm ]
+\node [scale=.7,circle,draw] (z){\textsf{62}}
+  child {
+    node [scale=.7,circle,draw] (a) {\textsf{35}}
+    child {
+      node [scale=.7,circle,draw] (b) {13}
+      child {node [scale=.7,circle,draw] (c) {\textsf{8}}}
+      child {node [scale=.7,circle,draw] (d) {\textsf{9}}}
+      }
+    child {
+    node [scale=.8,circle,draw,fill={rgb:black,1;white,6}] (g) {\textbf{\textsf{72}}}
+    child {node [scale=.7,circle,draw] (e) {\textsf{3}}}
+    }
+  }
+  child {node [scale=.7,circle,draw] (j) {\textsf{23}}
+    child {node [scale=.7,circle,draw] (k) {\textsf{17}}}
+    child {node [scale=.7,circle,draw] (l) {\textsf{12}}}
+  };
+%    \draw (0,-3.5) node[below]{Échange de la clef 72} ;
+ %   \draw (0,-4) node[below]{avec son père (clef 3)} ;
+\end{tikzpicture}
+
+\begin{center}
+Échange de la clef 72 avec son père (clef 3)
+\end{center}
+\end{minipage} 
+
+%\hspace{2.5cm}
+
+\begin{minipage}[c]{.45\linewidth}
+\begin{tikzpicture}[level/.style={sibling distance=20mm/#1},level distance = .8cm ]
+\node [scale=.7,circle,draw] (z){\textsf{62}}
+  child {
+    node [scale=.8,circle,draw,fill={rgb:black,1;white,6}] (a) {\textsf{\textbf{72}}}
+    child {
+      node [scale=.7,circle,draw] (b) {13}
+      child {node [scale=.7,circle,draw] (c) {\textsf{8}}}
+      child {node [scale=.7,circle,draw] (d) {\textsf{9}}}
+      }
+    child {
+    node [scale=.7,circle,draw] (g) {\textsf{35}}
+    child {node [scale=.7,circle,draw] (e) {3}}
+    }
+  }
+  child {node [scale=.7,circle,draw] (j) {\textsf{23}}
+    child {node [scale=.7,circle,draw] (k) {\textsf{17}}}
+    child {node [scale=.7,circle,draw] (l) {\textsf{12}}}
+  };
+    %\draw (0,-3.5) node[below]{Échange de la clef 72} ;
+    %\draw (0,-4) node[below]{avec son père (clef 35)} ;
+\end{tikzpicture}
+\begin{center}
+Échange de la clef 72 avec son père (clef 35)
+\end{center}
+\end{minipage} 
+\begin{minipage}[c]{.45\linewidth}
+\begin{tikzpicture}[level/.style={sibling distance=20mm/#1},level distance = .8cm ]
+\node [scale=.8,circle,draw,fill={rgb:black,1;white,6}] (z){\textsf{\textbf{72}}}
+  child {
+    node [scale=.7,circle,draw] (a) {\textsf{62}}
+    child {
+      node [scale=.7,circle,draw] (b) {13}
+      child {node [scale=.7,circle,draw] (c) {\textsf{8}}}
+      child {node [scale=.7,circle,draw] (d) {\textsf{9}}}
+      }
+    child {
+    node [scale=.7,circle,draw] (g) {\textsf{35}}
+    child {node [scale=.7,circle,draw] (e) {3}}
+    }
+  }
+  child {node [scale=.7,circle,draw] (j) {\textsf{23}}
+    child {node [scale=.7,circle,draw] (k) {\textsf{17}}}
+    child {node [scale=.7,circle,draw] (l) {\textsf{12}}}
+  };
+   % \draw (0,-3.5) node[below]{Échange de la clef 72} ;
+   % \draw (0,-4) node[below]{avec son père (clef 62)} ;
+\end{tikzpicture}
+\begin{center}
+Échange de la clef 72 avec son père (clef 62)
+\end{center}
+\end{minipage}
+
+
+\subparagraph{}
+\textit{En utilisant la fonction \texttt{percolateUp} construire l'arbre correspondant à l'arbre présenté dans l'exemple.}
+
+\subparagraph{}
+\textit{Modifier la fonction \texttt{percolateUp} pour pouvoir réorganiser le classement général.}
+
+
+\subsubsection*{Extraction du premier du classement}
+
+
+On souhaite extraire le premier du classement de l'arbre. Pour cela, il faut retirer la racine de notre tas
+binaire (c'est-à-dire le maximum de notre tas). Cependant il faut pouvoir conserver la structure
+de tas binaire après cette suppression. Pour cela, on procède donc de la manière suivante :
+\begin{itemize}
+\item on supprime la racine et on met à sa place l’élément qui était en dernière position de l’arbre
+(c'est-à-dire le plus à droite sur le dernier niveau);% que l’on notera $x$;
+\item puis on exécute l’opération nommée \texttt{percolateDown} dont l’implémentation est donnée dans le fichier ressource.
+\end{itemize}
+
+
+\subparagraph{}
+\textit{On cherche à analyser les évolutions de la fonction \texttt{percolateDown}. Appliquer l'opération d'extraction sur l'exemple du tas binaire modélisé dans le paragraphe précédent. On donnera la liste de départ, un schéma du tas binaire à chaque étape ainsi que la liste finale.}
+
+
+\subparagraph{}
+\textit{Modifier la fonction \texttt{percolateDown} pour qu'elle puisse s'appliquer au classement général.}
+
+%\caption{\label{ex_arbre} Insertion d'un élément de clef 72}
+%\end{figure}
+
+
+
+%\end{minipage}
+%\vspace{.25cm}
 %\caption{\label{arbre} Arbre binaire et son implémentation en tableau}
 %\end{figure}
 
