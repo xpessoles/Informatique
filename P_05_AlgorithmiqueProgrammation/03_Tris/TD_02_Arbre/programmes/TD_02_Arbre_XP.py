@@ -3,7 +3,7 @@ os.chdir("C:\\Enseignement\\GitHub\\Informatique\\P_05_AlgorithmiqueProgrammatio
 print(os.getcwd())
 from tris import *
 import random
-n = 2000000
+#n = 2000000
 tab = [random.randint(0,n) for i in range(n)]
 #print(tab)
 #tri_fusion(tab,0,len(tab)-1)  

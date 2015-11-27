@@ -44,8 +44,11 @@ def segmente(tab,i,j):
             tab[g],tab[d]=tab[d],tab[g]
             d=d-1
             g=g+1
+        print(d)
     k=d
     tab[i],tab[d]=tab[d],tab[i]
+    print()
+    print(d)
     return k
     
 def tri_quicksort(tab,i,j):
