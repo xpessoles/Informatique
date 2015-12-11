@@ -103,8 +103,9 @@ def chute(tas,indice,sens):
             return None
     return None
     
-    
-nb_grains = 9
+import time 
+
+nb_grains = 20
 taille_tas = 7
 tas = creer_tas(taille_tas)
 for i in range(nb_grains):
