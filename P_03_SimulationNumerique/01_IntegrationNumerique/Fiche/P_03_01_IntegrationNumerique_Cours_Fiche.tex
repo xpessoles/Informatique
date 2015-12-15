@@ -1,0 +1,178 @@
+\documentclass[10pt,fleqn]{article} % Default font size and left-justified equations
+\usepackage[%
+    pdftitle={Informatique : Introduction à la complexité},
+    pdfauthor={Xavier Pessoles}]{hyperref}
+
+\input{style/new_style}
+\input{style/macros_SII}
+
+\fichetrue
+%\fichefalse
+
+%\proftrue
+\proffalse
+
+%\tdtrue
+\tdfalse
+
+%\courstrue
+\coursfalse
+
+% -------------------------------------
+% Déclaration des titres
+% -------------------------------------
+
+\def\discipline{Informatique}
+\def\xxtete{Informatique}
+
+\def\classe{Fiche PT}
+\def\xxnumpartie{Partie 3}
+\def\xxpartie{Ingénierie Numérique \& Simulation}
+
+\def\xxnumchapitre{Chapitre 1}
+\def\xxchapitre{\hspace{.12cm} Intégration numérique}
+
+\def\xxposongletx{2}
+\def\xxposonglettext{1.45}
+\def\xxposonglety{19}%16
+
+\def\xxonglet{Part. 3 -- Ch. 1}
+
+\def\xxactivite{Fiche}
+\def\xxauteur{\textsl{Xavier Pessoles}}
+
+\def\xxcompetences{%
+\textsl{%
+\textbf{Savoirs et compétences :}\\
+\noindent \textbf{Résoudre :} à partir des modèles retenus :
+\begin{itemize}[label=\ding{112},font=\color{ocre}] 
+\item choisir une méthode de résolution analytique, graphique, numérique;
+\item mettre en \oe{}uvre une méthode de résolution.
+\end{itemize}
+\begin{itemize}[label=\ding{112},font=\color{ocre}] 
+\item \textit{Rés -- C1.1 :} Loi entrée sortie géométrique et cinématique -- Fermeture géométrique.
+\end{itemize}
+%
+%\noindent \textit{Mod2 -- C4.1 :} Représentation par schéma bloc.
+}}
+
+\def\xxfigures{
+%incgraphics[width=.8\textwidth]{}%images/prot_01}
+}%figues de la page de garde
+
+\def\xxpied{%
+Partie 3 -- Ingénierie Numérique \& Simulation \\
+Ch 1 : Intégration numérique -- \xxactivite%
+}
+
+\setcounter{secnumdepth}{5}
+%---------------------------------------------------------------------------
+
+
+\begin{document}
+%\chapterimage{png/Fond_Cin}
+\input{style/new_pagegarde}
+\vspace{2cm}
+\pagestyle{fancy}
+\thispagestyle{plain}
+
+\begin{hypo}  $f:[a,b]\rightarrow \mathbb{R}$ est une fonction continue sur $[a,b]$. On note $I = \int\limits_a^{b} f(x) \mathrm{d}x $.
+\end{hypo}
+
+\subsection*{Principe des méthodes des rectangles}
+%\subsection{Principe}
+\begin{defi}
+Dans cette méthode, la fonction à intégrer est interpolée par un polynôme de degré 0, à savoir une fonction constante. Géométriquement, l'aire sous la courbe est alors approximée par un rectangle. Plusieurs choix sont possibles.
+
+\begin{minipage}[c]{.3\linewidth}
+Rectangles à gauche :
+
+$$
+I = \int\limits_a^{b} f(x) \mathrm{d}x \simeq \left(b-a\right) f(a) 
+$$
+\end{minipage}\hfill
+\begin{minipage}[c]{.3\linewidth}
+Point milieu :
+
+$$
+I = \int\limits_a^{b} f(x) \mathrm{d}x \simeq \left(b-a\right) f\left(\dfrac{a+b}{2}\right) 
+$$
+\end{minipage}\hfill
+\begin{minipage}[c]{.3\linewidth}
+Rectangles à droite :
+
+$$
+I = \int\limits_a^{b} f(x) \mathrm{d}x \simeq \left(b-a\right) f(b) 
+$$
+\end{minipage}
+\end{defi}
+
+\subsection*{Interprétation graphique}
+
+\begin{minipage}[c]{.24\linewidth}
+\begin{center}
+\includegraphics[width=.99\textwidth]{images/pi_courbe}
+
+\textit{Calcul intégral}
+\end{center}
+\end{minipage}\hfill
+\begin{minipage}[c]{.24\linewidth}
+\begin{center}
+\includegraphics[width=.99\textwidth]{images/pi_rect_g}
+
+\textit{Rectangles à gauche}
+\end{center}
+\end{minipage}\hfill
+\begin{minipage}[c]{.24\linewidth}
+\begin{center}
+\includegraphics[width=.99\textwidth]{images/pi_rect_m}
+
+\textit{Point milieu}
+\end{center}
+\end{minipage}\hfill
+\begin{minipage}[c]{.24\linewidth}
+\begin{center}
+\includegraphics[width=.99\textwidth]{images/pi_rect_d}
+
+\textit{Rectangles à droite}
+\end{center}
+\end{minipage}
+
+
+\subsection*{Principe des méthodes des trapèzes}
+\begin{minipage}[c]{.7\linewidth}
+\begin{defi}
+Dans cette méthode, la fonction à intégrer est interpolée par un polynôme de degré 1, à savoir une fonction affine. Géométriquement, l'aire sous la courbe est alors approximée par un trapèze :
+
+$$
+I = \int\limits_a^{b} f(x) \mathrm{d}x \simeq \left(b-a\right) \dfrac{f(a)+f(b)}{2} 
+$$
+\end{defi}
+\end{minipage}\hfill
+\begin{minipage}[c]{.24\linewidth}
+\begin{center}
+\includegraphics[width=.99\textwidth]{images/pi_trap}
+\end{center}
+\end{minipage}
+
+\subsection*{Notion d'erreur d'intégration}
+\begin{resultat}
+Dans chaque cas,  on intègre $f$ sur $n$ subdivisions régulières de $I$. 
+
+\textbf{Erreur sur la méthode des rectangles à gauche et à droite}
+
+Soit $f$ fonction dérivable sur $I=[a,b]$ et dont $f'$ est continue sur $I$. Soit $M_1$ un majorant de $f'$ sur $I$. L'erreur $\varepsilon$ commise lors de l'intégration par la méthode des rectangles à droite ou à gauche
+ est telle que $ \varepsilon \leq \dfrac{M_1}{2n}$.
+
+\textbf{Erreur sur la méthode des rectangles -- point milieu}
+
+Si de plus $f$ est deux fois dérivables sur $I=[a,b]$ et $f''$ est continue sur $I$, on note $M_2$ un majorant de $f''$ sur $I$.L'erreur $\varepsilon$ commise lors de l'intégration par la méthode des rectangles -- point milieu est telle que $ \varepsilon \leq \dfrac{M_2}{12n^2}$.
+
+\textbf{Erreur sur la méthode des trapèzes}
+
+L'erreur commise$\varepsilon$ est telle qu'il existe un entier $M$ tel que $ \varepsilon \leq \dfrac{M}{12n^2}$.
+
+\end{resultat}
+\end{document}
+
+
