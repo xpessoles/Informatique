@@ -1,0 +1,100 @@
+\documentclass[10pt,fleqn]{article} % Default font size and left-justified equations
+\usepackage[%
+    pdftitle={Informatique : Traitement signal},
+    pdfauthor={Xavier Pessoles}]{hyperref}
+
+\input{style/new_style}
+\input{style/macros_SII}
+
+%\fichetrue
+\fichefalse
+
+%\proftrue
+\proffalse
+
+%\tdtrue
+\tdfalse
+
+\courstrue
+%\coursfalse
+
+\newcommand{\bfsf}[1]{\small\textbf{\textsf{#1}}}%{\textbf{\textsf{#1}}}
+\newcommand{\tsf}[1]{\small{\textsf{#1}}}
+
+% -------------------------------------
+% Déclaration des titres
+% -------------------------------------
+
+\def\discipline{Informatique}
+\def\xxtete{Informatique}
+\def\classe{PT -- PT $\star$}
+\def\xxnumpartie{Partie 6}
+\def\xxpartie{Informatique}
+
+\def\xxnumchapitre{Chapitre 1}
+\def\xxchapitre{\hspace{.12cm} Traitement du signal}
+
+\def\xxposongletx{2}
+\def\xxposonglettext{1.45}
+\def\xxposonglety{13}%10
+
+\def\xxonglet{Part. 5 -- Ch. 1}
+
+\def\xxactivite{Cours}
+\def\xxauteur{\textsl{Xavier Pessoles \\ Patrick Beynet}}
+
+\def\xxcompetences{%
+\textsl{%
+\textbf{Savoirs et compétences :}
+\begin{itemize}[label=\ding{112},font=\color{ocre}] 
+\item Alg -- C15 :% Récursivité : avantages et inconvénients.
+\end{itemize}
+}}
+
+\def\xxfigures{
+\includegraphics[width=\textwidth]{images/mandel}
+
+\textit{Courbe fractale de Mandelbrot [2]}
+
+\includegraphics[width=\textwidth]{images/matriochka}
+\textit{Poupées russes [3]}
+}%figues de la page de garde
+
+\def\xxpied{%
+Partie 6 -- Informatique\\
+Ch. 1 : Traitement du signal -- \xxactivite%
+}
+
+%---------------------------------------------------------------------------
+\begin{document}
+\chapterimage{png/Fond_ALG}
+\input{style/new_pagegarde}
+%---------------------------------------------------------------------------
+
+\section{Présentation}
+
+\section{Exemple d'un algorithme récursif}
+\subsection{Calcul explicite des puissances de 2}
+
+
+
+\subsection{Calcul récursif des puissances de 2}
+
+\section{Analyse des algorithmes récursifs}
+\subsection{Avantages et inconvénients}
+
+\subsection{Notions de pile d'exécution}
+
+\subsection{Calcul des puissances de 2 -- Exponentiation rapide}
+\section{Exemples d'utilisation de la récursivité}
+\subsection{Diviser pour régner}
+
+\subsection{Courbes fractales -- Courbe de Peano}
+
+
+\begin{thebibliography}{2}
+\bibitem{1}{Patrick Beynet, \textit{Supports de cours de TSI 2}, Lycée Rouvière, Toulon.}
+\end{thebibliography}
+\end{document}
+
+
