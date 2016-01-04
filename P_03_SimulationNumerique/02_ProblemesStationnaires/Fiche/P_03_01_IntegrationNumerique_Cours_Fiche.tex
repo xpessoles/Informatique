@@ -1,0 +1,209 @@
+\documentclass[10pt,fleqn]{article} % Default font size and left-justified equations
+\usepackage[%
+    pdftitle={Informatique : Introduction à la complexité},
+    pdfauthor={Xavier Pessoles}]{hyperref}
+
+\input{style/new_style}
+\input{style/macros_SII}
+
+\fichetrue
+%\fichefalse
+
+%\proftrue
+\proffalse
+
+%\tdtrue
+\tdfalse
+
+%\courstrue
+\coursfalse
+
+% -------------------------------------
+% Déclaration des titres
+% -------------------------------------
+
+\def\discipline{Informatique}
+\def\xxtete{Informatique}
+
+\def\classe{Fiche PT}
+\def\xxnumpartie{Partie 3}
+\def\xxpartie{Ingénierie Numérique \& Simulation}
+
+\def\xxnumchapitre{Chapitre 2}
+\def\xxchapitre{\hspace{.12cm} Problèmes stationnaires -- Résolution numérique de l'équation $f(x)=0$}
+
+\def\xxposongletx{2}
+\def\xxposonglettext{1.45}
+\def\xxposonglety{19}%16
+
+\def\xxonglet{Part. 3 -- Ch. 2}
+
+\def\xxactivite{Fiche}
+\def\xxauteur{\textsl{Xavier Pessoles}}
+
+\def\xxcompetences{%
+\textsl{%
+\textbf{Savoirs et compétences :}\\
+
+\begin{itemize}[label=\ding{112},font=\color{ocre}] 
+\item Problème stationnaire à une dimension, linéaire ou non conduisant à la résolution
+approchée d’une équation algébrique.% ou transcendante. 
+\item Méthode de dichotomie.
+\item Méthode de Newton.
+\end{itemize}
+%
+%\noindent \textit{Mod2 -- C4.1 :} Représentation par schéma bloc.
+}}
+
+\def\xxfigures{
+%incgraphics[width=.8\textwidth]{}%images/prot_01}
+}%figues de la page de garde
+
+\def\xxpied{%
+Partie 3 -- Ingénierie Numérique \& Simulation \\
+Ch. 2 : Problèmes stationnaires -- \xxactivite%
+}
+
+\setcounter{secnumdepth}{5}
+%---------------------------------------------------------------------------
+
+
+\begin{document}
+%\chapterimage{png/Fond_Cin}
+\input{style/new_pagegarde}
+\vspace{2cm}
+\pagestyle{fancy}
+\thispagestyle{plain}
+
+
+\subsection*{Principe de la méthode de dichotomie}
+
+\begin{theorem}
+\textbf{Théorème des valeurs intermédiaires}
+
+Soit $f$ une fonction définie et continue sur l'intervalle $[a,b]$ à valeur dans $\mathbb{R}$. Pour tout $u\in[f(a),f(b)]$, il existe au moins un réel $c\in [a,b]$  tel que $f(c)=u$.
+
+ En particulier (Théorème de Bolzano), si $f(a)$ et $f(b)$ sont de signes différents, il existe au moins un réel $c$ tel que $f(c)=0$. 
+\end{theorem}
+
+\begin{minipage}[c]{.6\linewidth}
+Ainsi, pour une fonction donnée définie sur un intervalle donné, le but de l'algorithme de dichotomie va être de découper en 2 l'intervalle [a,b] en deux, afin d'y trouver la solution. Par divisions successives de l'intervalle, on convergera vers la solution.
+
+\begin{rem}
+\textbf{Tester le signe de $f(a)$ et $f(b)$.}
+
+Il existe plusieurs méthodes pour tester si $f(a)$ et $f(b)$ sont de signes différents. Si on ne se préoccupe pas de savoir la relation d'ordre entre $f(a)$ et $f(b)$, un test efficace consiste en un test du signe de $f(a)\cdot f(b)$. 
+\end{rem}
+
+\end{minipage} \hfill
+\begin{minipage}[c]{.35\linewidth}
+\begin{center}
+\includegraphics[width=\linewidth]{images/InterpretationG}
+\end{center}
+\end{minipage}
+
+\subsection*{Principe de la méthode de Newton}
+\begin{theorem}
+\textbf{Développement de Taylor à l'ordre 1}
+
+Soit $f$ une fonction $C^1$ sur un intervalle $I$ et $a\in I$. Le développement de Taylor à l'ordre 1 de $f$ est donné par 
+$$
+f(x)=f(a)+ f'(a)\cdot(x-a)+\mathit{o}(x-a)
+$$
+\end{theorem}
+
+
+\begin{minipage}[c]{.6\linewidth}
+Géométriquement, lorsqu'on néglige le reste, le développement de Taylor donne l'équation de la tangente en $a$. Notons $\Delta(x)$ cette équation.
+
+L'abscisse $c$ de l'intersection de la tangente avec l'axe des abscisses est donnée par la résolution de 
+$$
+\Delta(c)=0 
+\Longleftrightarrow f(a)+ f'(a)\cdot(c-a) = 0
+\Longleftrightarrow c = a-\dfrac{f(a)}{f'(a)}
+$$
+\end{minipage} \hfill
+\begin{minipage}[c]{.35\linewidth}
+\begin{center}
+\includegraphics[width=\linewidth]{images/interpretation_newton}
+\end{center}
+\end{minipage}
+
+\subsection*{Évaluation de la dérivée numérique}
+
+\begin{resultat}
+En première approximation, il est possible d'approximer la dérivée en approximant la tangente à la courbe par une droite passant par deux points successifs. Dans ces conditions, pour une valeur de $h$ suffisamment faible, on a : 
+$$
+f'(x_0)\simeq \dfrac{f(x+h)-f(x)}{h}	
+$$
+\end{resultat}
+
+
+%
+%\begin{resultat}
+%\textbf{Théorème de Taylor-Young}
+%Si $f$ est deux fois dérivable en $x_0$ et $f''(x_0)\neq 0$, 
+%$$
+% \dfrac{f(x_0+\varepsilon)-f(x_0)}{\varepsilon} - f'(x_0) \sim \dfrac{f''(x_0)}{2}h
+%$$
+%\end{resultat}%
+
+\subsubsection*{Méthodes à un pas}
+
+\begin{minipage}[c]{.6\linewidth}
+\begin{resultat}
+\textbf{Différence avant -- Schéma d'Euler explicite}
+
+Dans ce cas, l'estimation de la dérivée au point $P_i$ s'appuie sur le point $P_{i+1}$ :
+$$
+f'(x_i)\simeq\dfrac{f(x_{i+1})-f(x_i)}{x_{i+1}-x_i}
+$$
+\end{resultat}
+
+\begin{resultat}
+\textbf{Différence arrière -- Schéma d'Euler implicite}
+
+Dans ce cas, l'estimation de la dérivée au point $P_i$ s'appuie sur le point $P_{i-1}$ :
+$$
+f'(x_i)\simeq\dfrac{f(x_{i})-f(x_{i-1})}{x_{i}-x_{i-1}}
+$$
+\end{resultat}
+\end{minipage}\hfill
+\begin{minipage}[c]{.35\linewidth}
+\begin{center}
+\includegraphics[width=\textwidth]{images/derivation_1pas}
+\end{center}
+\end{minipage}
+
+\subsubsection*{Méthode à deux pas}
+
+\begin{minipage}[c]{.6\linewidth}
+\begin{resultat}
+
+On peut aussi utiliser les points $P_{i-1}$ et $P_{i+1}$ pour estimer la dérivée en $P_i$ :
+$$
+f'(x_i)\simeq\dfrac{f(x_{i+1})-f(x_{i-1})}{x_{i+1}-x_{i-1}}
+$$
+
+\end{resultat}
+
+\begin{rem}
+\begin{itemize}
+\item Lorsqu'il s'agit de dériver une fonction temporelle « en temps réel », le point suivant n’est pas encore connu donc seule la différence arrière peut être calculée.
+\item Le calcul de la dérivée conduit à un tableau de valeurs de dimension $n-1$.
+\end{itemize}
+\end{rem}
+\end{minipage}\hfill
+\begin{minipage}[c]{.35\linewidth}
+\begin{center}
+\includegraphics[width=\textwidth]{images/derivation_2pas}
+\end{center}
+\end{minipage}
+
+
+
+
+
+\end{document}
+
+
