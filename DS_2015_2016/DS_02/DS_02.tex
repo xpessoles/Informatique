@@ -151,11 +151,9 @@ def taille(pile):
     pile_tmp=creer_pile()
     while not est_vide(pile):
         i=i+1
-        empiler(pile_tmp)
-        depiler(pile)
+        empiler(pile_tmp,depiler(pile))
     while not est_vide(pile_tmp):
-        depiler(pile_tmp)
-        empiler(pile)
+        empiler(pile,depiler(pile_tmp))
     return i
 \end{python}
 La complexité de l'opération est une $\mathcal{O}(n)$.
@@ -226,6 +224,7 @@ On identifie les 3 cas suivants pour déterminer le sens de chute d'un grain :
 \begin{python}
 (taille(tas[indice_m-1])==hauteur_tas-2 and taille(tas[indice_m+1])==hauteur_tas-1)
 \end{python}
+Remarque : \texttt{hauteur\_tas} désigne la hauteur de la pile dans laquelle tombe le grain.
 \end{corrige}
 \else
 \fi
@@ -245,7 +244,10 @@ On identifie les 3 cas suivants pour déterminer le sens de chute d'un grain :
 \textit{En réalisant un schéma donner un cas de figure pour lequel il n'y a pas d'écoulement de grain. Traduire la condition booléenne correspondante.}
 \ifprof
 \begin{corrige}
-On ne fait rien si on n'est pas dans les cas précédents ...
+On ne fait rien si on n'est pas dans les cas précédents ... Sinon : 
+\begin{python}
+(taille(tas[indice_m-1])>=hauteur_tas-1 and taille(tas[indice_m+1])>=hauteur_tas-1)
+\end{python}
 \end{corrige}
 \else
 \fi
@@ -336,7 +338,7 @@ _*****_
 ~\\
 \begin{python}
 def affichage_tas(tas,hauteur_tas):
-
+    # hauteur_tas désigne la taille du tas
     for i in range(hauteur_tas,0,-1):
         ch=""
         for pile in tas :
