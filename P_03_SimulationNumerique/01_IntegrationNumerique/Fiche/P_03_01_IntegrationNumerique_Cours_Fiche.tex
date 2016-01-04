@@ -173,6 +173,23 @@ Si de plus $f$ est deux fois dérivables sur $I=[a,b]$ et $f''$ est continue sur
 L'erreur commise$\varepsilon$ est telle qu'il existe un entier $M$ tel que $ \varepsilon \leq \dfrac{M}{12n^2}$.
 
 \end{resultat}
+\newpage
+
+\subsection*{Bibliothèque Python}
+Il est possible d'intégrer une fonction en utilisant les modules de la bibliothèque \texttt{scipy} :
+\begin{py}
+\begin{python}
+from scipy.integrate import quad
+from math import sin
+# Définition des bornes de gauche et de droite
+g,d = -1,1 
+def f(x):
+    return sin(x)
+   
+I,erreur = quad(f,g,d)
+print(I,erreur)
+\end{python}
+\end{py}
 \end{document}
 
 

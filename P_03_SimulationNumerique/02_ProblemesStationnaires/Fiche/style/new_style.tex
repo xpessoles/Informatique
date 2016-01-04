@@ -273,8 +273,8 @@
 
 
 \newtheoremstyle{blacknumex}% Theorem style name
-{0pt}% Space above
-{0pt}% Space below
+{5pt}% Space above
+{5pt}% Space below
 {\normalfont}% Body font
 {} % Indent amount
 {\small\bf\sffamily}% Theorem head font
@@ -350,6 +350,7 @@
 \newtheorem{vocabulary}{Vocabulaire}[section]
 %\newtheorem{definitionT}{Definition}[section]
 \newtheorem{definitionT}{Définition}[section]
+\newtheorem{rappelT}{Rappel}[section]
 \newtheorem{demoT}{Démonstration}[section]
 \newtheorem{corollaryT}[dummy]{Corollaire}
 \newtheorem{hypoT}{Hypothèse(s)}
@@ -533,7 +534,7 @@ innertopmargin=5pt,
 leftmargin=0cm,
 rightmargin=0cm,
 linewidth=4pt,
-innerbottommargin=0pt]{exBox}
+innerbottommargin=5pt]{exBox}
 
 % Boite pour le terminal
 \newmdenv[skipabove=7pt,
@@ -634,6 +635,7 @@ innerbottommargin=5pt]{sqlBox}
 \newenvironment{exercice}{\begin{eBox}\begin{exerciseT}}{\hfill{\color{ocre}\tiny\ensuremath{\blacksquare}}\end{exerciseT}\end{eBox}}				  
 
 \newenvironment{definition}{\begin{dBox}\begin{definitionT}}{\end{definitionT}\end{dBox}}	
+\newenvironment{rappel}{\begin{dBox}\begin{rappelT}}{\end{rappelT}\end{dBox}}	
 \newenvironment{defi}{\begin{dBox}\begin{definitionT}}{\end{definitionT}\end{dBox}}	
 \newenvironment{demo}{\begin{demoBox}\begin{demoT}}{\end{demoT}\end{demoBox}}	
 %\newenvironment{exemple}{\begin{exempleT}}{\hfill{\tiny\ensuremath{\blacksquare}}\end{exempleT}}		
@@ -793,11 +795,11 @@ addtohook={%
 \par\vspace*{270\p@}
 }}
 
-
+ \newcounter{exo}
 
 
 \makeatletter             
-\renewcommand{\subparagraph}{\@startsection{subparagraph}{5}{\z@}%
+\renewcommand{\subparagraph}{\@startsection{exo}{5}{\z@}%
                                     {-2ex \@plus-.2ex \@minus .2ex}%
                                     {0ex}%               
 {\normalfont\bfseries Question \hspace{.7cm} }}
@@ -835,7 +837,7 @@ addtohook={%
 inputencoding=utf8,   % pour regler les pb d accent utf8 dans les codes
 extendedchars=true,   % pour regler les pb d accent utf8 dans les codes
 language=python,
-basicstyle=\sffamily\footnotesize, 	
+basicstyle=\ttfamily\footnotesize, 	
 stringstyle=\color{red}, 
 showstringspaces=false, 
 alsoletter={1234567890},
