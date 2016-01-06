@@ -1,0 +1,135 @@
+\documentclass[10pt,fleqn]{article} % Default font size and left-justified equations
+\usepackage[%
+    pdftitle={Informatique : Introduction à la complexité},
+    pdfauthor={Xavier Pessoles}]{hyperref}
+
+\input{style/new_style}
+\input{style/macros_SII}
+
+\fichetrue
+%\fichefalse
+
+%\proftrue
+\proffalse
+
+%\tdtrue
+\tdfalse
+
+%\courstrue
+\coursfalse
+
+% -------------------------------------
+% Déclaration des titres
+% -------------------------------------
+
+\def\discipline{Informatique}
+\def\xxtete{Informatique}
+
+\def\classe{Fiche PT}
+\def\xxnumpartie{Partie 3}
+\def\xxpartie{Ingénierie Numérique \& Simulation}
+
+\def\xxnumchapitre{Chapitre 3}
+\def\xxchapitre{\hspace{.12cm} Résolution des équations différentielles}
+
+\def\xxposongletx{2}
+\def\xxposonglettext{1.45}
+\def\xxposonglety{19}%16
+
+\def\xxonglet{Part. 3 -- Ch. 3}
+
+\def\xxactivite{Fiche}
+\def\xxauteur{\textsl{Xavier Pessoles}}
+
+\def\xxcompetences{%
+\textsl{%
+\textbf{Savoirs et compétences :}\\
+
+\begin{itemize}[label=\ding{112},font=\color{ocre}] 
+\item Problème dynamique à une dimension, linéaire ou non, conduisant à la résolution approchée
+d’une équation différentielle ordinaire par la méthode d’Euler.
+\end{itemize}
+%
+%\noindent \textit{Mod2 -- C4.1 :} Représentation par schéma bloc.
+}}
+
+\def\xxfigures{
+%incgraphics[width=.8\textwidth]{}%images/prot_01}
+}%figues de la page de garde
+
+\def\xxpied{%
+Partie 3 -- Ingénierie Numérique \& Simulation \\
+Ch. 3 : Résolution des équations différentielles -- \xxactivite%
+}
+
+\setcounter{secnumdepth}{5}
+%---------------------------------------------------------------------------
+
+
+\begin{document}
+%\chapterimage{png/Fond_Cin}
+\input{style/new_pagegarde}
+\vspace{2cm}
+\pagestyle{fancy}
+\thispagestyle{plain}
+
+
+\subsection*{Problème de Cauchy}
+
+\subsection*{Méthode d'Euler}
+
+\subsection*{Méthode d'Euler explicite}
+
+
+\subsection*{Bibliothèque Python}
+Il est possible de résoudre l'équation $f(x)=0$ en utilisant les modules de la bibliothèque \texttt{scipy} :
+\begin{py}
+\begin{minipage}[c]{.45\linewidth}
+Résolution de $\sin(x)=0$ avec 0,5 comme valeur d'initialisation.
+\begin{python}
+def f(x):
+    return sin(x)
+   
+sol = newton(f,0.5)
+print(sol)
+print(f(sol))
+\end{python}
+
+Résolution du système : 
+$$
+\left\{\begin{array}{l} 
+x+10y-3z-5 = 0 \\ 
+2x-y+2z-2 = 0\\
+ -x+y+z+3 = 0\end{array}\right.
+ $$
+
+\end{minipage}
+\hfill
+\begin{minipage}[c]{.45\linewidth}
+\begin{python}
+from scipy.optimize import fsolve
+# définition du système
+def syst(var): 
+    # définition des variables
+    x, y, z = var[0], var[1], var[2] 
+    eq1 = x +10*y-3*z-5
+    eq2 = 2*x-y+2*z-2
+    eq3 = -x+y+z+3
+    res = [eq1, eq2, eq3]
+    return res
+    # Initialisation de la recherche 
+    # des solutions numériques
+x0, y0, z0 = 0, 0, 0 
+sol_ini = [x0, y0, z0]
+sol = fsolve(syst, sol_ini)
+sol = newton(f,0.5)
+print(sol)
+\end{python}
+\end{minipage}
+
+\end{py}
+
+
+\end{document}
+
+
