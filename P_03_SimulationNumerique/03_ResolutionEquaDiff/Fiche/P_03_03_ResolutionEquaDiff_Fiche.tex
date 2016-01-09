@@ -75,59 +75,131 @@ Ch. 3 : Résolution des équations différentielles -- \xxactivite%
 
 
 \subsection*{Problème de Cauchy}
+\begin{rappel} [Problème de Cauchy]
+Le problème consiste à trouver les fonctions $y$ de $[0,T]\rightarrow \mathbb{R}^n$ telles que
+$$
+\left\{
+\begin{array}{l}
+\dfrac{\text{d} y(t)}{\text{d} t}=f(t,y(t)) \\
+y(t_0)=y_0 \quad \text{avec } t_0\in [0,T] \text{ et } y_0\in \mathbb{R}^n \text{ donnés}
+\end{array}
+\quad \text{avec } t_0\in [0,T] \text{ et } y_0\in \mathbb{R}^n \text{ donnés.}
+\right.
+ $$ 
+\end{rappel}
+L'existence et l'unicité de la solution peut se démontrer en utilisant le théorème de Cauchy-Lipschitz.
+
+
+\begin{defi}
+\textbf{Fonction lipschitzienne}
+
+$f$ est lipschitzienne en $y$ s'il existe un réel $k>0$ tel que $\forall y(t)\in\mathbb{R}^n$, $\forall z(t)\in\mathbb{R}^n$, $\forall t\in[0,T]$, alors 
+$$
+||f(t,y(t))-f(t,z(t))||\leq k||y(t)-z(t)||
+$$
+
+\end{defi}
+
+\begin{theorem}
+\textbf{Théorème de Cauchy -- Lipschitz}
+
+Soit $f$ une fonction de $[0,T] \times \mathbb{R}^n \rightarrow \mathbb{R}^n$ continue et lipschitzienne en $y$. 
+
+Alors, $\forall t_0 \in [0,T]$ et $\forall y_0 \in \mathbb{R}^n$, le problème de Cauchy admet une unique solution définie sur $[0,T]$.
+
+\end{theorem}
 
 \subsection*{Méthode d'Euler}
+Pour un temps de simulation compris entre $t_0$ et $t_1$, si on choisi un nombre $n$ d'échantillons, alors le pas d'intégration est défini par  $h=\dfrac{t_1-t_0}{n}$. (On a donc $t_i = t_0+h\cdot i$ avec $i\in[0,n]$.)
+
+\begin{resultat}
+En intégrant l'équation du problème de Cauchy sur un intervalle $[t_i, t_{i+1}]$, on a : 
+$$
+\int\limits_{y_i}^{y_{i+1}} \text{d}y = \int\limits_{t_i}^{t_{i+1}} f(t,y(t)) \text{d}t 
+\Longleftrightarrow 
+y_{i+1} - y_i = \int\limits_{t_i}^{t_{i+1}} f(t,y(t)) \text{d}t  \text{ et donc : }  y_{i+1}= y_i + \int\limits_{t_i}^{t_{i+1}} f(t,y(t)) \text{d}t 
+$$
+
+\makebox[0pt]{\begin{tikzpicture}[overlay]
+\node[draw=ocre!60,line width=1pt,circle,fill=ocre!25,font=\sffamily\bfseries,inner sep=2pt,outer sep=0pt] at (-7pt,2pt){\textcolor{ocre}{R}};\end{tikzpicture}} En utilisant la méthode des rectangles à gauche, $\int\limits_{t_i}^{t_{i+1}} f(t,y(t)) \text{d}t  \simeq h \cdot f(t_i,y(t_i)) $.
+
+\end{resultat}
+
 
 \subsection*{Méthode d'Euler explicite}
 
+À l'instant $i$, $\dfrac{\text{d}y(t)}{\text{d}t}$ peut être approximé par 
+$\dfrac{\text{d}y(t_i)}{\text{d}t} \simeq \dfrac{y_{i+1}-y_i}{h}$.
+Ainsi, $y_{i+1} = y_i +h  f(t_i,y_i)$.
 
-\subsection*{Bibliothèque Python}
-Il est possible de résoudre l'équation $f(x)=0$ en utilisant les modules de la bibliothèque \texttt{scipy} :
-\begin{py}
-\begin{minipage}[c]{.45\linewidth}
-Résolution de $\sin(x)=0$ avec 0,5 comme valeur d'initialisation.
-\begin{python}
-def f(x):
-    return sin(x)
-   
-sol = newton(f,0.5)
-print(sol)
-print(f(sol))
-\end{python}
+\subsection*{Méthode d'Euler implicite}
+À l'instant $i$, $\dfrac{\text{d}y(t)}{\text{d}t}$ peut être approximé par 
+$\dfrac{\text{d}y(t_{i})}{\text{d}t} \simeq \dfrac{y_{i}-y_{i-1}}{h}$.
+Ainsi, $y_{i} = y_{i-1} +h  f(t_{i-1},y_{i})$ ou encore $y_{i+1} = y_{i} +h  f(t_{i},y_{i+1})$.
 
-Résolution du système : 
-$$
-\left\{\begin{array}{l} 
-x+10y-3z-5 = 0 \\ 
-2x-y+2z-2 = 0\\
- -x+y+z+3 = 0\end{array}\right.
- $$
+\subsection*{Exemples}
+\textit{Reformulation d'équations différentielles en vue de leur résolution numérique.}
 
-\end{minipage}
-\hfill
-\begin{minipage}[c]{.45\linewidth}
-\begin{python}
-from scipy.optimize import fsolve
-# définition du système
-def syst(var): 
-    # définition des variables
-    x, y, z = var[0], var[1], var[2] 
-    eq1 = x +10*y-3*z-5
-    eq2 = 2*x-y+2*z-2
-    eq3 = -x+y+z+3
-    res = [eq1, eq2, eq3]
-    return res
-    # Initialisation de la recherche 
-    # des solutions numériques
-x0, y0, z0 = 0, 0, 0 
-sol_ini = [x0, y0, z0]
-sol = fsolve(syst, sol_ini)
-sol = newton(f,0.5)
-print(sol)
-\end{python}
-\end{minipage}
 
-\end{py}
+Équation différentielle du premier ordre à coefficients constants : $\omega(t) + \tau \dfrac{\text{d} \omega(t)}{\text{d}t} = \omega_c $ :
+\begin{itemize}
+\item schéma d'Euler explicite : on a $\dfrac{\text{d} \omega(t)}{\text{d}t}\simeq \dfrac{\omega_{k+1}-\omega_k}{h} \Rightarrow  \omega_k + \tau  \dfrac{\omega_{k+1}-\omega_k}{h} = \omega_c  \Leftrightarrow \omega_{k+1} =\dfrac{h}{\tau} \left(\omega_c - \omega_k\right)+\omega_k$;
+\item schéma d'Euler implicite: on a $\dfrac{\text{d} \omega(t)}{\text{d}t}\simeq \dfrac{\omega_{k}-\omega_{k-1}}{h} \Rightarrow  \omega_k + \tau  \dfrac{\omega_{k}-\omega_{k-1}}{h} = \omega_c  \Leftrightarrow   \omega_k = \dfrac{h\omega_c + \tau\omega_{k-1}}{h+\tau} $.
+
+\end{itemize}
+
+Reformulation de $\omega(t) f(t) + \tau \dfrac{\text{d} \omega(t)}{\text{d}t} g(t)  = \omega_c h(t)$ :
+\begin{itemize}
+\item Euler explicite : $\dfrac{\text{d} \omega(t)}{\text{d}t}\simeq \dfrac{\omega_{k+1}-\omega_k}{h} \Rightarrow  \omega_k f_k+ \tau  \dfrac{\omega_{k+1}-\omega_k}{h} g_k= \omega_c h_k  \Leftrightarrow \omega_{k+1} =\dfrac{h}{\tau g_k} \left(\omega_c h_k - \omega_k f_k \right)+\omega_k$;
+%\item schéma d'Euler implicite: on a $\dfrac{\text{d} \omega(t)}{\text{d}t}\simeq \dfrac{\omega_{k}-\omega_{k-1}}{h} \Rightarrow  \omega_k + \tau  \dfrac{\omega_{k}-\omega_{k-1}}{h} = \omega_c  \Leftrightarrow   \omega_k = \dfrac{h\omega_c + \tau\omega_{k-1}}{h+\tau} $.
+\end{itemize}
+%\subsection*{Bibliothèque Python}
+%Il est possible de résoudre l'équation $f(x)=0$ en utilisant les modules de la bibliothèque \texttt{scipy} :
+%\begin{py}
+%\begin{minipage}[c]{.45\linewidth}
+%Résolution de $\sin(x)=0$ avec 0,5 comme valeur d'initialisation.
+%\begin{python}
+%def f(x):
+%    return sin(x)
+%   
+%sol = newton(f,0.5)
+%print(sol)
+%print(f(sol))
+%\end{python}
+%
+%Résolution du système : 
+%$$
+%\left\{\begin{array}{l} 
+%x+10y-3z-5 = 0 \\ 
+%2x-y+2z-2 = 0\\
+% -x+y+z+3 = 0\end{array}\right.
+% $$
+%
+%\end{minipage}
+%\hfill
+%\begin{minipage}[c]{.45\linewidth}
+%\begin{python}
+%from scipy.optimize import fsolve
+%# définition du système
+%def syst(var): 
+%    # définition des variables
+%    x, y, z = var[0], var[1], var[2] 
+%    eq1 = x +10*y-3*z-5
+%    eq2 = 2*x-y+2*z-2
+%    eq3 = -x+y+z+3
+%    res = [eq1, eq2, eq3]
+%    return res
+%    # Initialisation de la recherche 
+%    # des solutions numériques
+%x0, y0, z0 = 0, 0, 0 
+%sol_ini = [x0, y0, z0]
+%sol = fsolve(syst, sol_ini)
+%sol = newton(f,0.5)
+%print(sol)
+%\end{python}
+%\end{minipage}
+%
+%\end{py}
 
 
 \end{document}
