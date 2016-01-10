@@ -136,22 +136,159 @@ Ainsi, $y_{i+1} = y_i +h  f(t_i,y_i)$.
 À l'instant $i$, $\dfrac{\text{d}y(t)}{\text{d}t}$ peut être approximé par 
 $\dfrac{\text{d}y(t_{i})}{\text{d}t} \simeq \dfrac{y_{i}-y_{i-1}}{h}$.
 Ainsi, $y_{i} = y_{i-1} +h  f(t_{i-1},y_{i})$ ou encore $y_{i+1} = y_{i} +h  f(t_{i},y_{i+1})$.
+\subsection*{Bibliothèque Python}
+
+\newpage
 
 \subsection*{Exemples}
 \textit{Reformulation d'équations différentielles en vue de leur résolution numérique.}
-
-
-Équation différentielle du premier ordre à coefficients constants : $\omega(t) + \tau \dfrac{\text{d} \omega(t)}{\text{d}t} = \omega_c $ :
+\begin{itemize}[label=\ding{112},font=\color{ocre}] 
+\item Équation différentielle du premier ordre à coefficients constants : $\omega(t) + \tau \dfrac{\text{d} \omega(t)}{\text{d}t} = \omega_c $ :
 \begin{itemize}
 \item schéma d'Euler explicite : on a $\dfrac{\text{d} \omega(t)}{\text{d}t}\simeq \dfrac{\omega_{k+1}-\omega_k}{h} \Rightarrow  \omega_k + \tau  \dfrac{\omega_{k+1}-\omega_k}{h} = \omega_c  \Leftrightarrow \omega_{k+1} =\dfrac{h}{\tau} \left(\omega_c - \omega_k\right)+\omega_k$;
 \item schéma d'Euler implicite: on a $\dfrac{\text{d} \omega(t)}{\text{d}t}\simeq \dfrac{\omega_{k}-\omega_{k-1}}{h} \Rightarrow  \omega_k + \tau  \dfrac{\omega_{k}-\omega_{k-1}}{h} = \omega_c  \Leftrightarrow   \omega_k = \dfrac{h\omega_c + \tau\omega_{k-1}}{h+\tau} $.
-
 \end{itemize}
-
-Reformulation de $\omega(t) f(t) + \tau \dfrac{\text{d} \omega(t)}{\text{d}t} g(t)  = \omega_c h(t)$ :
+\item Équation différentielle du premier ordre à coefficients non constants :  $\omega(t) f(t) + \tau \dfrac{\text{d} \omega(t)}{\text{d}t} g(t)  = \omega_c h(t)$ :
 \begin{itemize}
 \item Euler explicite : $\dfrac{\text{d} \omega(t)}{\text{d}t}\simeq \dfrac{\omega_{k+1}-\omega_k}{h} \Rightarrow  \omega_k f_k+ \tau  \dfrac{\omega_{k+1}-\omega_k}{h} g_k= \omega_c h_k  \Leftrightarrow \omega_{k+1} =\dfrac{h}{\tau g_k} \left(\omega_c h_k - \omega_k f_k \right)+\omega_k$;
-%\item schéma d'Euler implicite: on a $\dfrac{\text{d} \omega(t)}{\text{d}t}\simeq \dfrac{\omega_{k}-\omega_{k-1}}{h} \Rightarrow  \omega_k + \tau  \dfrac{\omega_{k}-\omega_{k-1}}{h} = \omega_c  \Leftrightarrow   \omega_k = \dfrac{h\omega_c + \tau\omega_{k-1}}{h+\tau} $.
+\item Euler implicite : $\dfrac{\text{d} \omega(t)}{\text{d}t}\simeq \dfrac{\omega_{k}-\omega_{k-1}}{h} \Rightarrow  \omega_k f_k+ \tau \dfrac{\omega_{k}-\omega_{k-1}}{h} g_k= \omega_c h_k  \Leftrightarrow \omega_k =  \dfrac{h\omega_c h_k +\tau g_k\omega_{k-1}}{f_k h+   \tau g_k}  $.
+\end{itemize}
+\item Équation différentielle du premier ordre  $\sin \left(\omega(t)\right) + \dfrac{\text{d}\omega(t)}{\text{d}t}=K$ :
+\begin{itemize}
+\item Euler explicite : $\dfrac{\text{d} \omega(t)}{\text{d}t}\simeq \dfrac{\omega_{k+1}-\omega_k}{h} \Rightarrow  \sin \omega_k +  \dfrac{\omega_{k+1}-\omega_k}{h}=K \Leftrightarrow  \omega_{k+1}=h\left( K - \sin \omega_k\right)+\omega_k$;
+\item Euler implicite : $\dfrac{\text{d} \omega(t)}{\text{d}t}\simeq \dfrac{\omega_{k}-\omega_{k-1}}{h} \Rightarrow \sin \omega_k +  \dfrac{\omega_{k}-\omega_{k-1}}{h}=K \Leftrightarrow h\sin \omega_k +  \omega_{k}-\omega_{k-1}=hK$. Dans ce cas, il faut utiliser la méthode de Newton ou de dichotomie pour déterminer $\omega_k$.
+\end{itemize}
+\item Équation différentielle du second ordre : $\ddot{s}(t) + \dfrac{2\xi}{\omega_0} \dot{s}(t) + \omega_0^2 s(t) = Ke(t)$.
+On pose : 
+$$
+\left\{
+\begin{array}{l}
+y_1(t) = s(t) \\
+y_2(t) = \dot{s}(t) \\
+\end{array}
+\right. 
+\Rightarrow 
+\left\{
+\begin{array}{l}
+\dot{y_1}(t) = \dot{s}(t) = y_2(t) \\
+\dot{y_2}(t) = \ddot{s}(t) \\
+\end{array}
+\right.
+\Rightarrow 
+\left\{
+\begin{array}{l}
+\dot{y_1}(t) = y_2(t) \\
+\dot{y_2}(t) + \dfrac{2\xi}{\omega_0} y_2(t)+ \omega_0^2 y_1(t) = Ke(t) \\
+\end{array}
+\right.
+$$
+
+\footnotesize{
+\begin{center}
+\begin{tabular}{p{.47\linewidth} | p{.47\linewidth}}
+Schéma d'Euler explicite :   $\dfrac{\text{d} y(t)}{\text{d}t}\simeq \dfrac{y_{k+1}-y_k}{h}$. On a donc :
+$$
+\left\{
+\begin{array}{l}
+\dfrac{y_{1,k+1}-y_{1,k}}{h} = y_{2,k} \\
+\dfrac{y_{2,k+1}-y_{2,k}}{h} + \dfrac{2\xi}{\omega_0} y_{2,k}+ \omega_0^2 y_{1,k} = Ke_k \\
+\end{array}
+\right.
+$$ 
+&
+Schéma d'Euler implicite: $\dfrac{\text{d} y(t)}{\text{d}t}\simeq \dfrac{y_{k}-y_{k-1}}{h}$. On a donc :
+$$
+\left\{
+\begin{array}{l}
+\dfrac{y_{1,k}-y_{1,k-1}}{h} = y_{2,k} \\
+\dfrac{y_{2,k}-y_{2,k-1}}{h} + \dfrac{2\xi}{\omega_0} y_{2,k}+ \omega_0^2 y_{1,k} = Ke_k \\
+\end{array}
+\right.
+\Leftrightarrow 
+\left\{
+\begin{array}{l}
+y_{1,k} = hy_{2,k}+y_{1,k-1} \\
+y_{2,k} =\dfrac{h Ke_k+y_{2,k-1} - h\omega_0^2 y_{1,k-1}}{1+  h \dfrac{2\xi}{\omega_0} +  \omega_0^2 h^2 } \\
+\end{array}
+\right.$$ \\
+$$\Leftrightarrow 
+\left\{
+\begin{array}{l}
+y_{1,k+1} = h y_{2,k} +y_{1,k} \\
+y_{2,k+1}  = hKe_k - \dfrac{2\xi h}{\omega_0} y_{2,k}- h\omega_0^2 y_{1,k} + y_{2,k}\\
+\end{array}
+\right.
+$$ & \\
+\end{tabular}
+\end{center}}
+\normalsize
+
+\item Équation différentielle du second ordre : $\ddot{\theta}(t) + k \sin \theta(t) = 0$.
+On pose : 
+$$
+\left\{
+\begin{array}{l}
+y_0(t) = \theta(t) \\
+y_1(t) = \dot{\theta}(t) \\
+\end{array}
+\right. 
+\Rightarrow 
+\left\{
+\begin{array}{l}
+\dot{y_0}(t) = \dot{\theta}(t) = y_1(t) \\
+\dot{y_1}(t) = \ddot{\theta}(t) \\
+\end{array}
+\right.
+\Rightarrow 
+\left\{
+\begin{array}{l}
+\dot{y_0}(t) = y_1(t) \\
+\dot{y_1}(t) + k \sin y_0 (t) = 0 \\
+\end{array}
+\right.
+$$
+
+\footnotesize{
+\begin{center}
+\begin{tabular}{p{.47\linewidth}|p{.47\linewidth}}
+Schéma d'Euler explicite :   
+$$
+\left\{
+\begin{array}{l}
+\dfrac{y_{0,k+1}-y_{0,k}}{h} = y_{1,k} \\
+\dfrac{y_{1,k+1}-y_{1,k}}{h} + k \sin y_{0,k} = 0 \\
+\end{array}
+\right.
+\Leftrightarrow 
+\left\{
+\begin{array}{l}
+y_{0,k+1} = h y_{1,k} +y_{0,k} \\
+y_{1,k+1} = y_{1,k} - kh \sin y_{0,k} \\
+\end{array}
+\right.
+$$
+&
+Schéma d'Euler implicite : 
+$$
+\left\{
+\begin{array}{l}
+\dfrac{y_{0,k}-y_{0,k-1}}{h} = y_{1,k} \\
+\dfrac{y_{1,k}-y_{1,k-1}}{h} + k \sin y_{0,k} = 0 \\
+\end{array}
+\right.
+\Leftrightarrow 
+\left\{
+\begin{array}{l}
+y_{0,k} = h y_{1,k}+y_{0,k-1} \\
+y_{1,k} = y_{1,k-1} - kh \sin y_{0,k} \\
+\end{array}
+\right.$$
+\end{tabular}
+\end{center}}
+\normalsize
+
+\item Équation différentielle du second ordre : $(k_1+k_2  \sin^2 \theta(t) ) \ddot{\theta}(t)+ (k_3 \dot{\theta}(t)^2+k_4) \sin 2\theta(t) +C(t)=0$.
+
 \end{itemize}
 %\subsection*{Bibliothèque Python}
 %Il est possible de résoudre l'équation $f(x)=0$ en utilisant les modules de la bibliothèque \texttt{scipy} :
