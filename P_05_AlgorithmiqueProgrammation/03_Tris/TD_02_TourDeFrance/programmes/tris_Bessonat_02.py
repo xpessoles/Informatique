@@ -1,117 +1,138 @@
-### si les élèves travaillent sous pyzo il faut définir le chemin d'acces aux différents fichiers
+# ### si les élèves travaillent sous pyzo il faut définir le chemin d'acces aux différents fichiers
 import os
-os.chdir(r'E:\annee 2015 2016\PT\IPT\03_Tris')
-
-### algorithme de tri
-
-from tris import *
-import random as rd
-import time
-import matplotlib.pyplot as plt
-import sys
-sys.setrecursionlimit(1000000) # cette ligne permet de modifier le nombre de boucles récursives autorisées (normalement de 1000)
-
-### exercice 1 - cout temporel des algorithmes de tris : Question 1
-L_insert=[]
-L_rapide=[]
-L_fusion=[]
-L_sort=[]
-L=[i for i in range(0,10001,1000)] # dépend de la vitesse de calcul de l'ordinateur de l'élève
-# pour des listes allant jusqu'à 1000 éléments mon ordi met 1 minute à faire tous les tris - image illisible
-# pour les listes allant jusqu'à 10000 éléments avec des sauts de 500 éléments mon ordi met 1 minute à faire tous les calculs
-# pour les listes allant jusqu'à 100000 éléments avec des sauts de 10000 éléments mon ordi met trop de minutes à faire tous les calculs
-# pour les listes allant jusqu'à 20000 éléments avec des sauts de 2000 éléments mon ordi met 104 secondes à faire tous les calculs
-for i in L:
-    L1=[]
-    for j in range(i):
-        L1.append(rd.randint(0,i))
-    L_i=L1[:] # bien copier les listes autrement à la seconde fonction on trie une liste triée (voir algorithmes dans le fichier tris.py qui ne renvoient rien, la liste est modifiée sur place
-    L_f=L1[:]
-    L_q=L1[:]
-    td=time.time()
-    tri_insertion(L_i)
-    tf=time.time()-td
-    L_insert.append(tf)
-    td=time.time()
-    tri_fusion(L_f,0,len(L_f)-1)
-    tf=time.time()-td
-    L_fusion.append(tf)
-    td=time.time()
-    tri_quicksort(L_q,0,len(L_f)-1)
-    tf=time.time()-td
-    L_rapide.append(tf)
-    td=time.time()
-    L1.sort()
-    tf=time.time()-td
-    L_sort.append(tf)
-
-plt.figure()
-plt.grid()
-plt.xlabel('taille de la liste')
-plt.ylabel('temps de tri en seconde')
-plt.plot(L,L_insert,label='insertion')
-plt.plot(L,L_fusion,label='fusion')
-plt.plot(L,L_rapide,label='rapide')
-plt.plot(L,L_sort,label='sort')
-plt.legend(loc='upper left') # place la légende à haut à gauche si pas cette ligne la légende ne s'affiche pas
-plt.show()
+os.chdir(r'I:\PT-PTstar 2015-2016\Informatique\P_05_AlgorithmiqueProgrammation\03_Tris\TD_02_TourDeFrance\programmes')
 
 
-### exercice 1 - cout temporel des algorithmes de tris les plus rapide : Question 2
-# le tri insertion est supprimé du test
 
 
-L_rapide2=[]
-L_fusion2=[]
-L_sort2=[]
-L=[i for i in range(0,20000,500)] # bien garder des sauts autrement trop long
-
-for i in L:
-    L1=[]
-    for j in range(i):
-        L1.append(rd.randint(0,i)) #certains ont creer une fonction pour générer (ou engendrer) la liste aléatoire
-    # bien copier les listes autrement à la seconde fonction on trie une liste triée (voir algorithmes dans le fichier tris.py qui ne renvoient rien, la liste est modifiée sur place
-    L_f=L1[:]
-    L_q=L1[:]
-    td=time.time()
-    tri_fusion(L_f,0,len(L_f)-1)
-    tf=time.time()-td
-    L_fusion2.append(tf)
-    td=time.time()
-    tri_quicksort(L_q,0,len(L_f)-1)
-    tf=time.time()-td
-    L_rapide2.append(tf)
-    td=time.time()
-    L1.sort()
-    tf=time.time()-td
-    L_sort2.append(tf)
-
-plt.figure()
-plt.grid()
-plt.xlabel('taille de la liste')
-plt.ylabel('temps de tri en seconde')
-plt.plot(L,L_fusion2,label='fusion')
-plt.plot(L,L_rapide2,label='rapide')
-plt.plot(L,L_sort2,label='sort')
-plt.legend(loc='upper left') # place la légende à haut à gauche si pas cette ligne la légende ne s'affiche pas
-plt.show()
-
-### exercice 1 - Question 3 : la complexite
-# en n², nlog(n) faire les calculs
 
 
-### exercice 1 - Question 4 : une liste déjà triée essai sur tous les algorithmes
-liste_triee=[i for i in range(1000000)]
-tinit=time.time()
-tri_insertion(liste_triee)
-print ('temps de tri d\'une liste triée',time.time()-tinit)
-tinit=time.time()
-liste_triee.sort()
-print ('temps de tri d\'une liste triée par sort',time.time()-tinit)
 
-# ça bloque pour tri_quicksort et tri fusion, il faudra alors interrompre le processus pour les élèves, sur pyzo c'est l'icône 'eclair', sous linux : ouvrir un terminal, ecrire xkill à l'invite et avec précaution cliquer sur la fenetre de l'IDLE
 
-### je me suis arretee ici avec les PT
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# ### algorithme de tri
+# 
+# from tris import *
+# import random as rd
+# import time
+# import matplotlib.pyplot as plt
+# import sys
+# sys.setrecursionlimit(1000000) # cette ligne permet de modifier le nombre de boucles récursives autorisées (normalement de 1000)
+# 
+# ### exercice 1 - cout temporel des algorithmes de tris : Question 1
+# L_insert=[]
+# L_rapide=[]
+# L_fusion=[]
+# L_sort=[]
+# L=[i for i in range(0,10001,1000)] # dépend de la vitesse de calcul de l'ordinateur de l'élève
+# # pour des listes allant jusqu'à 1000 éléments mon ordi met 1 minute à faire tous les tris - image illisible
+# # pour les listes allant jusqu'à 10000 éléments avec des sauts de 500 éléments mon ordi met 1 minute à faire tous les calculs
+# # pour les listes allant jusqu'à 100000 éléments avec des sauts de 10000 éléments mon ordi met trop de minutes à faire tous les calculs
+# # pour les listes allant jusqu'à 20000 éléments avec des sauts de 2000 éléments mon ordi met 104 secondes à faire tous les calculs
+# for i in L:
+#     L1=[]
+#     for j in range(i):
+#         L1.append(rd.randint(0,i))
+#     L_i=L1[:] # bien copier les listes autrement à la seconde fonction on trie une liste triée (voir algorithmes dans le fichier tris.py qui ne renvoient rien, la liste est modifiée sur place
+#     L_f=L1[:]
+#     L_q=L1[:]
+#     td=time.time()
+#     tri_insertion(L_i)
+#     tf=time.time()-td
+#     L_insert.append(tf)
+#     td=time.time()
+#     tri_fusion(L_f,0,len(L_f)-1)
+#     tf=time.time()-td
+#     L_fusion.append(tf)
+#     td=time.time()
+#     tri_quicksort(L_q,0,len(L_f)-1)
+#     tf=time.time()-td
+#     L_rapide.append(tf)
+#     td=time.time()
+#     L1.sort()
+#     tf=time.time()-td
+#     L_sort.append(tf)
+# 
+# plt.figure()
+# plt.grid()
+# plt.xlabel('taille de la liste')
+# plt.ylabel('temps de tri en seconde')
+# plt.plot(L,L_insert,label='insertion')
+# plt.plot(L,L_fusion,label='fusion')
+# plt.plot(L,L_rapide,label='rapide')
+# plt.plot(L,L_sort,label='sort')
+# plt.legend(loc='upper left') # place la légende à haut à gauche si pas cette ligne la légende ne s'affiche pas
+# plt.show()
+# 
+# 
+# ### exercice 1 - cout temporel des algorithmes de tris les plus rapide : Question 2
+# # le tri insertion est supprimé du test
+# 
+# 
+# L_rapide2=[]
+# L_fusion2=[]
+# L_sort2=[]
+# L=[i for i in range(0,20000,500)] # bien garder des sauts autrement trop long
+# 
+# for i in L:
+#     L1=[]
+#     for j in range(i):
+#         L1.append(rd.randint(0,i)) #certains ont creer une fonction pour générer (ou engendrer) la liste aléatoire
+#     # bien copier les listes autrement à la seconde fonction on trie une liste triée (voir algorithmes dans le fichier tris.py qui ne renvoient rien, la liste est modifiée sur place
+#     L_f=L1[:]
+#     L_q=L1[:]
+#     td=time.time()
+#     tri_fusion(L_f,0,len(L_f)-1)
+#     tf=time.time()-td
+#     L_fusion2.append(tf)
+#     td=time.time()
+#     tri_quicksort(L_q,0,len(L_f)-1)
+#     tf=time.time()-td
+#     L_rapide2.append(tf)
+#     td=time.time()
+#     L1.sort()
+#     tf=time.time()-td
+#     L_sort2.append(tf)
+# 
+# plt.figure()
+# plt.grid()
+# plt.xlabel('taille de la liste')
+# plt.ylabel('temps de tri en seconde')
+# plt.plot(L,L_fusion2,label='fusion')
+# plt.plot(L,L_rapide2,label='rapide')
+# plt.plot(L,L_sort2,label='sort')
+# plt.legend(loc='upper left') # place la légende à haut à gauche si pas cette ligne la légende ne s'affiche pas
+# plt.show()
+# 
+# ### exercice 1 - Question 3 : la complexite
+# # en n², nlog(n) faire les calculs
+# 
+# 
+# ### exercice 1 - Question 4 : une liste déjà triée essai sur tous les algorithmes
+# liste_triee=[i for i in range(1000000)]
+# tinit=time.time()
+# tri_insertion(liste_triee)
+# print ('temps de tri d\'une liste triée',time.time()-tinit)
+# tinit=time.time()
+# liste_triee.sort()
+# print ('temps de tri d\'une liste triée par sort',time.time()-tinit)
+# 
+# # ça bloque pour tri_quicksort et tri fusion, il faudra alors interrompre le processus pour les élèves, sur pyzo c'est l'icône 'eclair', sous linux : ouvrir un terminal, ecrire xkill à l'invite et avec précaution cliquer sur la fenetre de l'IDLE
+# 
+# ### je me suis arretee ici avec les PT
 
 
 
@@ -149,7 +170,7 @@ def charge_classement1(fichier): #un peu lourd car le split n'est pas complet
     return L
     
 def charge_classement(fichier):
-    f=open(fichier,'r')
+    f=open(fichier,'r',encoding="utf-8")
     fichier=f.readlines()
     f.close() #ne pas oublier de fermer le fichier...
     L=[]
@@ -159,7 +180,9 @@ def charge_classement(fichier):
         L1.append(ligne[1])
         L1.append(ligne[2])
         t_course=ligne[4].split()
+        
         temps=int(t_course[2][0:2])+60*int(t_course[1][0:2])+3600*int(t_course[0][0:2])
+        
         L1.append(temps)
         L.append(L1)
     return L
@@ -173,6 +196,7 @@ def charge_classement(fichier):
 # 764], ['COLQUINTANA ROJAS Nairo Alexander', '51', 113771], ['CZESTYBAR Zdenek', 
 # '116', 113771], ['FRAGALLOPIN Tony', '71', 113773], ['CZEKREUZIGER Roman', '44',
 #  113790], ['ITANIBALI Vincenzo', '1', 113794], ['FRABARGUIL WARREN', '82', 11381
+
 
 
 
