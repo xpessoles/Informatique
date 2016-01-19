@@ -36,36 +36,13 @@ def solve_euler_implicite(ti,tf,nb):
         res_v.append(-h*om_0*om_0*res_x[-1]+res_v[-1]) 
         tps.append(t)
     return tps,res_x
-"""
-nb,ti,tf = 1000,0,20
-temps,res_x = solve_euler_explicite(ti,tf,nb)
-plot(temps,res_x,label="N=1000,20s")
+    
 
-nb,ti,tf = 2000,0,20
-temps,res_x = solve_euler_explicite(ti,tf,nb)
-plot(temps,res_x,label="N=2000,20s")
-
-nb,ti,tf = 50000,0,20
-temps,res_x = solve_euler_explicite(ti,tf,nb)
-plot(temps,res_x,label="N=50000,20s")
-"""
-
-"""
 nb,ti,tf = 1000,0,20
 temps,res_x = solve_euler_implicite(ti,tf,nb)
-plot(temps,res_x,label="N=1000,20s")
-
-nb,ti,tf = 2000,0,20
-temps,res_x = solve_euler_implicite(ti,tf,nb)
-plot(temps,res_x,label="N=2000,20s")
-
-nb,ti,tf = 50000,0,20
-temps,res_x = solve_euler_implicite(ti,tf,nb)
-plot(temps,res_x,label="N=50000,20s")
-"""
+plot(temps,res_x,label="N=10000,20s")
 
 
-"""
 def deriv(syst, t):
     x = syst[0]                         # Variable1 x
     v = syst[1]                         # Variable2 v
@@ -87,11 +64,34 @@ plot(t,x,label="Odeint")
 
 legend()
 show()
+
+"""
+nb,ti,tf = 2000,0,20
+temps,res_x = solve_euler_explicite(ti,tf,nb)
+plot(temps,res_x,label="N=2000,20s")
+
+nb,ti,tf = 50000,0,20
+temps,res_x = solve_euler_explicite(ti,tf,nb)
+plot(temps,res_x,label="N=50000,20s")
 """
 
-E = [0.5*om_0*om_0*0.5]
-pas = 5/1000
-t = [0]
-for i in range(1000):
+"""
+nb,ti,tf = 1000,0,20
+temps,res_x = solve_euler_implicite(ti,tf,nb)
+plot(temps,res_x,label="N=1000,20s")
+
+nb,ti,tf = 2000,0,20
+temps,res_x = solve_euler_implicite(ti,tf,nb)
+plot(temps,res_x,label="N=2000,20s")
+
+nb,ti,tf = 50000,0,20
+temps,res_x = solve_euler_implicite(ti,tf,nb)
+plot(temps,res_x,label="N=50000,20s")
+"""
+
+
+"""
+"""
+
     
     
