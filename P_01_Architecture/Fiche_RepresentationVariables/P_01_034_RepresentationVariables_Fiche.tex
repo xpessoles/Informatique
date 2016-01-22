@@ -1,0 +1,108 @@
+\documentclass[10pt,fleqn]{article} % Default font size and left-justified equations
+\usepackage[%
+    pdftitle={Informatique : Principe de la représentation des variables en mémoire},
+    pdfauthor={Xavier Pessoles}]{hyperref}
+
+\input{style/new_style}
+\input{style/macros_SII}
+
+\fichetrue
+%\fichefalse
+
+%\proftrue
+\proffalse
+
+%\tdtrue
+\tdfalse
+
+%\courstrue
+\coursfalse
+
+% -------------------------------------
+% Déclaration des titres
+% -------------------------------------
+
+\def\discipline{Informatique}
+\def\xxtete{Informatique}
+
+\def\classe{Fiche PT}
+\def\xxnumpartie{Partie 1}
+\def\xxpartie{Architecture matérielle \& logicielle}
+
+\def\xxnumchapitre{Chapitres 3 et 4}
+\def\xxchapitre{\hspace{.12cm} Représentation des variables dans la mémoire}
+
+\def\xxposongletx{2}
+\def\xxposonglettext{1.45}
+\def\xxposonglety{19}%16
+
+\def\xxonglet{Part. 1 -- Ch. 3 et 4}
+
+\def\xxactivite{Fiche}
+\def\xxauteur{\textsl{Xavier Pessoles}}
+
+\def\xxcompetences{%
+\textsl{%
+%\textbf{Savoirs et compétences :}\\
+%\noindent \textbf{Résoudre :} à partir des modèles retenus :
+%\begin{itemize}[label=\ding{112},font=\color{ocre}] 
+%\item choisir une méthode de résolution analytique, graphique, numérique;
+%\item mettre en \oe{}uvre une méthode de résolution.
+%\end{itemize}
+%\begin{itemize}[label=\ding{112},font=\color{ocre}] 
+%\item \textit{Rés -- C1.1 :} Loi entrée sortie géométrique et cinématique -- Fermeture géométrique.
+%\end{itemize}
+%
+%\noindent \textit{Mod2 -- C4.1 :} Représentation par schéma bloc.
+}}
+
+\def\xxfigures{
+%incgraphics[width=.8\textwidth]{}%images/prot_01}
+}%figues de la page de garde
+
+\def\xxpied{%
+Partie 1 -- Architecture matérielle \& logicielle \\
+Ch. 3 et 4 : Représentation des variables dans la mémoire -- \xxactivite%
+}
+
+\setcounter{secnumdepth}{5}
+%---------------------------------------------------------------------------
+
+
+\begin{document}
+%\chapterimage{png/Fond_Cin}
+\input{style/new_pagegarde}
+\vspace{2cm}
+\pagestyle{fancy}
+\thispagestyle{plain}
+
+\subsection*{Représentation des nombres entiers}
+\begin{defi}\textbf{Écriture d'un nombre dans une base}
+
+Dans un système de numération en base $B$, un nombre noté $N_B$ peut s'écrire sous la forme : $N_B = \sum\limits_{k=0}^{n} a_k \cdot B^k $
+s'écrit symboliquement sous la forme : 
+$
+N_B = \underbrace{\left(a_n a_{n-1} \cdot \cdot \cdot a_2 a_1 a_0\right)_B}_{n+1 \text{ chiffres}}
+$
+On note : 
+\begin{itemize}
+\item $B$ : la base ou nombre de chiffres différents qu'utilise le système de numération;
+\item $a_k$ : chiffre de rang $k$;
+\item $B^k$ la pondération associée à $a_k$.
+\end{itemize}
+
+\end{defi}
+
+\subsection*{Représentation des nombres entiers relatifs}
+
+\begin{methode} 
+Pour représenter l’opposé d’un nombre positif par son complément à deux, on inverse les bits 0 et 1 et on ajoute 1 au mot binaire obtenu.
+\end{methode}
+
+\subsection*{Représentation des nombres réels}
+
+\subsection*{Représentation chaînes de caractères}
+
+\end{document}
+
+
