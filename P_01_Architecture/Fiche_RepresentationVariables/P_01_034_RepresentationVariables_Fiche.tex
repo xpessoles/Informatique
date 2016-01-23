@@ -158,6 +158,8 @@ Le tableau décrit la répartition des bits selon le type de précision : la tai
 \end{minipage}
 
 
+\vspace{.25cm}
+
 Ainsi : 
 \begin{itemize}
 \item erreur relative : $2^{-m}$ (poids du dernier bit)
@@ -185,7 +187,12 @@ Double précision :  	$2^{- 52} = 2,220 … * 10^{- 16}$
 \end{methode}
 
 \subsection*{Représentation chaînes de caractères}
+Les fichiers texte stockés sur un périphérique de stockage sont encodés avec un encodage particulier (ANSI, UTF-8, ASCII...). L'encodage est une table de correspondance entre une séquence de bits et un caractère (visible -- une lettre -- ou non -- une tabulation--).
 
+Par exemple, l'ASCII est un encodage fréquemment utilisé où les caractères sont codés sur 7 bits et permet donc d'encoder 127 caractères. Cependant, les informations étant très souvent regroupées par octets, un caractère ASCII occupe donc 8 bits. 
+\begin{center}
+\includegraphics[width=\linewidth]{images/ascii}
+\end{center}
 \end{document}
 
 
