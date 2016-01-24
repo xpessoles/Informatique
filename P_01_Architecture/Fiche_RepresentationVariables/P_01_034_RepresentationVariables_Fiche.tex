@@ -36,7 +36,7 @@
 \def\xxposonglettext{1.45}
 \def\xxposonglety{19}%16
 
-\def\xxonglet{Part. 1 -- Ch. 3 et 4}
+\def\xxonglet{P. 1 -- Ch. 3 \& 4}
 
 \def\xxactivite{Fiche}
 \def\xxauteur{\textsl{Xavier Pessoles}}
@@ -193,6 +193,99 @@ Par exemple, l'ASCII est un encodage fréquemment utilisé où les caractères s
 \begin{center}
 \includegraphics[width=\linewidth]{images/ascii}
 \end{center}
+
+\newpage
+\def\columnseprulecolor{\color{ocre}}
+\setlength{\columnseprule}{0.4pt} 
+
+\begin{multicols}{2}
+\footnotesize
+\subsection*{Exercice 1}
+\subparagraph*{}
+\textit{Réalisez la conversion des nombres suivants dans les autres systèmes de numération :
+$(10050)_{(10)}$,
+$(1001 0001)_{(2)}$ et 
+$(A3F)_{16}$.}
+
+\subsection*{Exercice 2}
+On désire utiliser 12 bits pour comptabiliser des objets.
+\subparagraph{}
+\textit{Quel est le nombre maximum d'objets qu'il est possible de compter ?}
+\subparagraph{}
+\textit{Indiquer le numéro du premier et du dernier (dans les systèmes de numération décimale, binaire et hexadécimale).}
+
+
+\subsection*{Exercice 3}
+\setcounter{subparagraph}{0}
+
+On désire compter 65000 objets. 
+\subparagraph{}
+\textit{Sur combien de bit peut-on réaliser cette opération ?}
+\subparagraph{}
+\textit{Quel est le numéro du premier et du dernier (dans les systèmes de numération binaire et hexadécimale) ?}
+
+
+\subsection*{Exercice 4}
+Soit une machine où les nombres entiers sont codés sur 8 bits.
+\setcounter{subparagraph}{0}
+\subparagraph{}
+\textit{Donner le plus grand et le plus petit nombre représentable selon que le codage utilisé est non signé ou signé.}
+
+\subparagraph{}
+\textit{Écrire dans les différents formats signés les nombres décimaux 1, -1, 111 et 55.}
+\subparagraph{}
+\textit{Quelles sont inversement les valeurs décimales codées par $4C$ et $B4$ suivant les différents codages signés et celui non signé.}
+%\item Un périphérique de la machine lui délivre des données sur 8 bits dans le format signe et valeur absolue. Il transmet successivement $9A$ puis $3C$, quelles sont les valeurs signifiées ? 
+
+
+
+
+\subsection*{Exercice 5}
+\setcounter{subparagraph}{0}
+\subparagraph*{}
+\textit{Effectuez les opérations arithmétiques suivantes dans les systèmes de numération binaire (codé sur 8 bits) : $71 + 35 =$, $15 - 25 =$, $121 - 75 =$, $-51 - 77 =$.}
+
+
+\subsection*{Exercice 6}
+\setcounter{subparagraph}{0}
+\subparagraph{}\textit{Réaliser la conversion des nombres suivants dans les autres systèmes de numération : $(10050)_{10}$, $(343,56)_{10}$, $(1001 0001)_{2}$, $(A3F)_{16}$ et $(1C2A)_{16}$}
+
+\subsection*{Exercice 7}
+\setcounter{subparagraph}{0}
+On désire utiliser 12 bits pour comptabiliser des objets.
+\subparagraph{}\textit{Quel est le nombre maximum d’objets qu’il est possible de compter ?}
+\subparagraph{}\textit{Indiquer le numéro du premier et du dernier (dans les systèmes de numération décimale, binaire et hexadécimale).}
+
+\subsection*{Exercice 8}
+\setcounter{subparagraph}{0}
+On désire compter 65 000 objets.
+\subparagraph{}\textit{Sur combien de bit peut-on réaliser cette opération ? }
+\subparagraph{}\textit{Quel est le numéro du premier et du dernier (dans les systèmes de numération binaire et hexadécimale) ?}
+
+\subsection*{Exercice 9}
+\setcounter{subparagraph}{0}
+\subparagraph{}\textit{Effectuez les opérations arithmétiques suivantes dans les systèmes de numération binaire (codé sur 8 bits) : $71+35$, $121-75$, $15-25$ et $- 51 - 77$.}
+
+\subsection*{Exercice 10}
+\setcounter{subparagraph}{0}
+Soit une machine où les nombres sont codés sur 8 bits.
+\subparagraph{}\textit{Donner le nombre le plus grand et le plus petit nombre représentable selon que le codage utilisé est non signé ou signé. }
+\subparagraph{}\textit{Écrire dans le format signé les nombres décimaux 1, -1, 111 et 55.}
+\subparagraph{}\textit{Quelles sont  les valeurs décimales codées par $4C_{16}$ et $B4_{16}$ si le codage est signé ou non ?}
+\subparagraph{}\textit{Un périphérique de la machine lui délivre des données sur 8 bits dans le format valeur absolue + signe, la valeur absolue sur 7 bits est précédée d’un bit de signe valant 1 si positif ou nul, 0 sinon. Il transmet successivement $9A_{16}$ puis $3C_{16}$, quelles sont les valeurs signifiées ? }
+
+\subsection*{Exercice 11}
+\setcounter{subparagraph}{0}
+\subparagraph*{}\textit{Écrire dans le format flottant simple précision (IEEE 754) les nombres 
+1,0,  	–1,0,  	15,25  et –3,26. Les résultats seront donnés en hexadécimal.}
+
+
+\subsection*{Exercice 12}
+\setcounter{subparagraph}{0}
+Une mesure est réalisée grâce à un capteur tachymétrique pendant 10 secondes. L'échantillonnage est de 1 kHz. Les données sont écrites dans un fichier texte de deux colonnes (temps et mesure) séparées par des espaces. Les temps mesurés sont compris entre \texttt{0} et {99.9999} s. La vitesse mesurée peut être comprise entre \texttt{-999,9999} et \texttt{999,9999} $\text{rad s}^{-1}$.
+\subparagraph*{}\textit{}{Quelle sera la taille maximale du fichier texte obtenu ?}
+
+\end{multicols}
 \end{document}
 
 
