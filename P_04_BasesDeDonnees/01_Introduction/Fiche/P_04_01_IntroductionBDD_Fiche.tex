@@ -1,0 +1,335 @@
+\documentclass[10pt,fleqn]{article} % Default font size and left-justified equations
+\usepackage[%
+    pdftitle={Informatique : Bases de données},
+    pdfauthor={Xavier Pessoles}]{hyperref}
+
+\input{style/new_style}
+\input{style/macros_SII}
+
+\fichetrue
+%\fichefalse
+
+\proftrue
+%\proffalse
+
+%\tdtrue
+\tdfalse
+
+%\courstrue
+\coursfalse
+
+% -------------------------------------
+% Déclaration des titres
+% -------------------------------------
+
+\def\discipline{Informatique}
+\def\xxtete{Informatique}
+
+\def\classe{Fiche PT}
+\def\xxnumpartie{Partie 4}
+\def\xxpartie{Base de données}
+
+\def\xxnumchapitre{Chapitre 1}
+\def\xxchapitre{\hspace{.12cm} Introduction aux bases de données}
+
+\def\xxposongletx{2}
+\def\xxposonglettext{1.45}
+\def\xxposonglety{19}%16
+
+\def\xxonglet{Part. 4 -- Ch. 1}
+
+\def\xxactivite{Fiche}
+\def\xxauteur{\textsl{Xavier Pessoles}}
+
+\def\xxcompetences{%
+\textsl{%
+\textbf{Savoirs et compétences :}\\
+}}
+
+\def\xxfigures{
+%incgraphics[width=.8\textwidth]{}%images/prot_01}
+}%figues de la page de garde
+
+\def\xxpied{%
+Partie 4 -- Bases de données \\
+Ch 1 : Introduction aux bases de données -- \xxactivite%
+}
+
+\setcounter{secnumdepth}{5}
+%---------------------------------------------------------------------------
+
+
+\begin{document}
+%\chapterimage{png/Fond_Cin}
+\input{style/new_pagegarde}
+\vspace{2cm}
+\pagestyle{fancy}
+\thispagestyle{plain}
+
+
+\subsection*{Structure client -- serveur et Système de Gestion des Bases de Données}
+
+Architecture trois tiers : 
+\begin{center}
+\includegraphics[width=.9\textwidth]{images/bdd}
+\end{center}
+Pour stocker les données, on utilise des systèmes de gestion de base de données (SGBD). Le marché des SGBD est dominé par les entreprises Oracle, IBM ou Microsoft. Il existe par ailleurs des solutions libres telles que PostgreSQL ou MySQL. 
+
+Une SGBD permettent d'assurer le stockage et l'organisation des informations ainsi que les gestions d'accès par des utilisateurs ayant des droits différents
+
+\subsection*{Structure d'une BDD}
+\begin{defi}
+\textbf{Table (ou schéma relationnel ou relation)}
+
+\textbf{Champ (ou attributs)}
+
+\textbf{Contraintes sur les attributs}
+\end{defi}
+
+
+\subsection*{Algèbre relationnelle}
+
+
+\begin{defi}
+\textbf{Requêtes -- Algèbre relationnelle}
+
+On entend par algèbre relationnelle, une collection d'opérations (requêtes) formelles qui agissent sur des relations et produisent une relation en résultat : $R_3 \leftarrow R_2 \;  \text{Op} \;  R_1$.
+\end{defi}
+
+Ceci signifie que dans l'algèbre relationnelle, le résultat des requêtes effectuées sur les relations (tables) sera toujours une nouvelle relation. 
+
+%\end{rem}
+
+
+\subsection*{Opérations relationnelles}
+
+\begin{defi}
+\textbf{Projection}
+
+Opération notée $\pi$ au cours de laquelle on sélectionne certaines des colonnes (on élimine donc des attributs). 
+\begin{tabular}{ccc}
+$
+ R_2 \leftarrow \pi_{\text{attribut 1, attribut 2, ...}}(R_1)
+$
+& 
+\textsl{\textbf{SELECT} attribut\_1,attribut\_2 \textbf{FROM} nom\_table;}
+&
+\textsl{\textbf{SELECT} * \textbf{FROM} nom\_table;}
+\end{tabular}
+\end{defi}
+
+
+
+
+\begin{defi}
+\textbf{Sélection}
+
+On appelle sélection de $R_1$ selon $A=a$, et on note $\sigma_{A=a}(R_1)$, la relation obtenue en sélectionnant dans $R_1$ uniquement les valeurs $e$ telles que $e.A = a$.
+
+
+$$
+R_2 \leftarrow \sigma_{\text{attribut}=\text{condition}}(R_1)
+$$
+
+
+Le schéma relationnel $R_2$ est identique au schéma $R_1$.  Les opérateurs permettant d'exprimer une condition sont $=$, $\neq$ (\texttt{!=} ou \texttt{<>}), $<$, $\leq$ (\texttt{<=}), $\geq$ (\texttt{>=}), $\neg$ (négation, \texttt{NOT}), $\vee$ (ou, \texttt{OR}), $\wedge$ (et, \texttt{AND}).
+
+
+\end{defi}
+
+\begin{envsql}
+\begin{sql}
+SELECT att_1,att_2 FROM nom_table WHERE att_3="xx" AND att_4=0 ...
+\end{sql}
+\end{envsql}
+
+
+\begin{envsql}
+\begin{sql}
+SELECT DISTINCT name,iata_code FROM airports WHERE elevation_ft<0 AND continent="EU";
+\end{sql}
+\end{envsql}
+
+
+
+
+\begin{defi}
+\textbf{Renommage d'attribut}
+
+Cette opération est utilisée pour des raisons pratiques pour lever une ambigüité ou pour simplifier le nom d'un attribut de façon temporaire. 
+
+Soit $S = (A_1,... ,A_n)$ un schéma, $ i \in[1;n]$ et $B$ un attribut tel que
+$dom(B) = dom(A_i)$. On note :
+
+\vspace{1cm}
+\begin{minipage}[c]{.47\linewidth}
+$$
+R_2 (S)\leftarrow \rho_{\text{ancien attribut} \rightarrow \text{nouvel attribut}}(R_1(S))
+$$
+\end{minipage}\hfill
+\begin{minipage}[c]{.47\linewidth}
+\textbf{SQL -- } \textsl{\textbf{SELECT} att\_1,att\_2 \textbf{AS} att\_3 \textbf{FROM} nom\_table}
+\begin{sql}
+SELECT att_1,att_2 as att_3 FROM nom_table
+\end{sql}
+\end{minipage}
+
+\end{defi}
+
+
+
+
+
+
+\subsection*{Opérations sur les ensembles}
+\begin{rem}
+Les opérateurs ensemblistes sont dédiés à des relations de même schéma relationnel. 
+\end{rem}
+
+
+\begin{defi}
+
+\textbf{Produit cartésien}
+
+Soient $R_1(S_1)$ et $R_2(S_2)$ deux relations de schémas disjoints. L'opération produit cartésien est notée $\times$. 
+
+$$
+R_3 \leftarrow R_1 \times R_2
+$$
+
+La relation $R_3$ contient toutes les combinaisons d'association possibles entre les valeurs de $R_1$ et de $R_2$.
+
+\end{defi}
+\begin{envsql}
+\begin{sql}
+SELECT * FROM table_1,table_2
+\end{sql}
+\end{envsql}
+
+
+
+
+\begin{defi}
+
+\textbf{Division cartésienne}
+
+Soient $R_1(S_1)$ et $R_2(S_2)$ deux relations de schémas disjoints. L'opération division cartésienne est notée $\div$. 
+
+$$
+R_3 \leftarrow R_1 \div R_2
+$$
+
+Dans ce cas, toutes les combinaisons de chaque tuple de $R_3$ et de chaque tuple de $R_2$ est contenue dans $R_1$.
+
+\end{defi}
+
+
+\begin{defi}
+
+\textbf{Union}
+
+L'union de deux relations $R_1(S)$ et $R_2(S)$ est l'ensemble des valeurs comprises dans $R_1$ ou $R_2$. 
+
+On peut donc noter la relation $R_3(S)$ définie par : $R_3(S)\leftarrow R_1(S)\cup R_2(S)$
+\end{defi}
+
+\begin{envsql}
+En langage SQL pour pouvoir faire l'union de deux relations, elles doivent avoir le même schéma (même nombre de colonne(s) et même type de colonnes). Il faut prêter attention à l'ordre des attributs dans la requête. 
+
+\begin{sql}
+SELECT  attribut_11, attribut_12 FROM table_1 UNION attribut_21, attribut_22 FROM table_2
+\end{sql}
+\end{envsql}
+
+
+\begin{rem}
+Cette opération est à utiliser avec attention car la relation résultante peut avoir une forme absurde.
+\end{rem}
+
+
+\begin{defi}
+
+\textbf{Intersection}
+
+L'intersection de deux relations $R_1(S)$ et $R_2(S)$ est l'ensemble des valeurs comprises dans $R_1$ et dans $R_2$. 
+
+On peut donc noter la relation $R_3(S)$ définie par : $R_3(S)\leftarrow R_1(S)\cap R_2(S)$
+\end{defi}
+
+\begin{envsql}
+\begin{sql}
+SELECT  (expression 1) INTERSECT SELECT (expression 2);
+\end{sql}
+\end{envsql}
+
+
+
+
+\subsubsection{Différence}
+\begin{defi}
+
+\textbf{Différence}
+
+La différence de deux relations $R_1(S)$ et $R_2(S)$ est l'ensemble des valeurs comprises dans $R_1$ et qui ne sont pas comprises dans $R_2$. 
+
+On peut donc noter la relation $R_3(S)$ définie par : $R_3(S)\leftarrow R_1(S)-R_2(S)$
+
+
+\end{defi}
+
+\begin{envsql}
+\begin{sql}
+SELECT  (expression 1) EXCEPT SELECT (expression 2);
+\end{sql}
+\end{envsql}
+
+
+
+\begin{defi}
+
+\textbf{Jointure}
+
+La jointure est une combinaison de de tuples de deux relations en un seul tuple. On ne s'intéresse ici qu'à la jointure symétrique simple qui permet de recoller deux relations ayant un attribut en commun. 
+
+$$ 
+R_3 \leftarrow \sigma_{\text{R1.attribut\_1=R2.attribut\_2}} (R_1\times R_2) \quad \quad 
+R_3 \leftarrow \underset{\text{R1.attribut\_1=R2.attribut\_2}}{R_1 \bowtie R_2}
+$$
+
+\end{defi}
+
+\begin{envsql}
+\begin{sql}
+SELECT att_1,... FROM table_1 JOIN table_2 ON attribut.R1=attribut.R2
+\end{sql}
+\end{envsql}
+
+
+\subsection{Fonctions d'agrégations}
+\begin{defi}
+Ces fonctions qui ne sont pas couvertes par l’algèbre relationnelle 
+classique, permettent d’effectuer des calculs statistiques basiques sur les valeurs : \texttt{MIN}, \texttt{MAX}, \texttt{SUM} 
+(somme), \texttt{AVG} (moyenne), \texttt{COUNT} (comptage du nombre de lignes). 
+
+\end{defi}
+
+
+\begin{rem}
+Formalisme général de l’instruction SQL « SELECT » :
+\begin{envsql}
+\begin{sql}
+SELECT <liste d expressions> 
+    FROM <liste de tables> 
+    WHERE <conditions> 
+    GROUP BY <liste d attributs> 
+    HAVING <conditions> 
+    ORDER BY <liste d attributs> 
+\end{sql}
+\end{envsql}
+\end{rem}
+
+
+
+\end{document}
+
+
