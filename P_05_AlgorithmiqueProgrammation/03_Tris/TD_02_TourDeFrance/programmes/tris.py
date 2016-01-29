@@ -62,6 +62,7 @@ def tri_quicksort(tab,i,j):
         k = segmente(tab,i,j)
         tri_quicksort(tab,i,k-1)
         tri_quicksort(tab,k+1,j)
+
 #Exemple
 #import random
 #tab1 = [random.randint(0,100) for i in range(100)]
