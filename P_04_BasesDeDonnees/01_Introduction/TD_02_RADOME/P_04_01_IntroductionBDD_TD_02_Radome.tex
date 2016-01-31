@@ -1,0 +1,248 @@
+\documentclass[10pt,fleqn]{article} % Default font size and left-justified equations
+\usepackage[%
+    pdftitle={Informatique : Bases de données},
+    pdfauthor={Xavier Pessoles}]{hyperref}
+
+\input{style/new_style}
+\input{style/macros_SII}
+
+\fichetrue
+%\fichefalse
+
+\proftrue
+%\proffalse
+
+%\tdtrue
+\tdfalse
+
+%\courstrue
+\coursfalse
+
+% -------------------------------------
+% Déclaration des titres
+% -------------------------------------
+
+\def\discipline{Informatique}
+\def\xxtete{Informatique}
+
+\def\classe{Fiche PT}
+\def\xxnumpartie{Partie 4}
+\def\xxpartie{Base de données}
+
+\def\xxnumchapitre{Chapitre 1}
+\def\xxchapitre{\hspace{.12cm} Introduction aux bases de données}
+
+\def\xxposongletx{2}
+\def\xxposonglettext{1.45}
+\def\xxposonglety{19}%16
+
+\def\xxonglet{Part. 4 -- Ch. 1}
+
+\def\xxactivite{TD 2}
+\def\xxauteur{\textsl{Patrick Beynet}}
+
+\def\xxcompetences{%
+\textsl{%
+\textbf{Savoirs et compétences :}\\
+}}
+
+\def\xxfigures{
+%incgraphics[width=.8\textwidth]{}%images/prot_01}
+}%figues de la page de garde
+
+\def\xxpied{%
+Partie 4 -- Bases de données \\
+Ch 1 : Introduction aux bases de données -- \xxactivite%
+}
+
+%\def\xxtitreexo{Coucou}
+%\def\sourceexo{Coucou}
+\setcounter{secnumdepth}{5}
+%---------------------------------------------------------------------------
+
+\usepackage{picins}
+\begin{document}
+%\chapterimage{png/Fond_Cin}
+\input{style/new_pagegarde}
+\vspace{2cm}
+\pagestyle{fancy}
+\thispagestyle{plain}
+
+%\begin{multicols}{2}
+\parpic{\includegraphics[width=5cm]{images/radome}}
+Météo France publie et stocke chaque jour des informations météorologiques issues de ses stations (réseau RADOME).
+
+Ces données d'observations peuvent par exemple être destinées à des messages internationaux d’observation en surface (SYNOP) qui circulent sur le système mondial de télécommunication (SMT) de l’Organisation Météorologique Mondiale (OMM). Elles contiennent des paramètres atmosphériques mesurés (température, humidité, direction et force du vent, pression atmosphérique, hauteur de précipitations) ou observés (temps sensible, description des nuages, visibilité) depuis la surface terrestre. Selon l’instrumentation et des spécificités locales, d'autres paramètres peuvent être disponibles (hauteur de neige, état du sol, \textit{etc}.).
+
+Le schéma de la relation \texttt{RADOME} est le suivant : 
+\texttt{RADOME = \{ num\_sta, nom\_usuel, département, commune, altitude, latitude, longitude\}}. On a donc par exemple :
+\begin{center}
+\begin{tabular}{ccccccc}
+\hline
+\texttt{num\_sta} & \texttt{nom\_usuel} & \texttt{département} & \texttt{commune} & \texttt{altitude	} & \texttt{latitude} & \texttt{longitude} \\
+\hline\hline
+7005&	ABBEVILLE&	80&	ABBEVILLE&	70&	50.135833&	1.834667 \\
+7015&	LILLE-LESQUIN&	59&	LESQUIN&	47&	50.570000&	3.097500\\
+7020&	PTE DE LA HAGUE&	50&	AUDERVILLE	&6&	49.725167&	-1.939833\\
+…&	…&	…&	…&	…&	…&	… \\
+\hline
+\end{tabular}
+\end{center}
+
+Le schéma de la relation \texttt{SYNOP} est le suivant : \texttt{SYNOP = {num\_sta, date, pmer, tend, etc.}}. Les caractéristiques des attributs sont les suivants :
+\begin{center}
+\begin{tabular}{llll}
+\hline
+Descriptif&	Attribut&	Type&	 Unité\\
+\hline
+\hline
+Indicatif OMM station&	num\_sta& car&	\\
+Date&	Date	&car&	\\
+Pression au niveau mer&	pmer&	int&	Pa\\
+Variation de pression en 3 heures&	tend&	int&	Pa\\
+Type de tendance barométrique&	cod\_tend&	int&	code\\
+Direction du vent moyen 10 mn&	dd&	 int&	degré\\
+Vitesse du vent moyen 10 mn&	ff&	réel& 	m/s \\
+\hline
+\end{tabular}
+\end{center}
+
+\subparagraph{}
+\textit{Quels sont les numéros de station et les villes correspondantes ? }
+\ifprof
+\begin{corrige}
+$$ \pi_{\text{num},\text{sta\_commune}}\left( \text{RADOME} \right) $$
+
+\begin{center}
+\texttt{SELECT num\_sta, commune FROM RADOME}
+\end{center}
+\end{corrige}
+\else
+\fi
+
+\subparagraph{}
+\textit{Quels sont les numéros de station et les villes correspondantes situées dans le var ? }
+\ifprof
+\begin{corrige}
+$$ \pi_{\text{num},\text{sta\_commune}}\left(\sigma_{\text{departement = 83}} \left(\text{RADOME} \right)\right) $$
+
+\begin{center}
+\texttt{SELECT num\_sta, commune FROM RADOME WHERE département = 83}
+\end{center}
+\end{corrige}
+\else
+\fi
+
+
+\subparagraph{}
+\textit{Quelles sont les villes où la vitesse du vent moyen a dépassé les 20 m/s ? }
+\ifprof
+\begin{corrige}
+$$ \pi_{\text{commune}}\left(\sigma_{\text{RADOME.num\_sta=SYNOP.num\_sta}} \left(\text{RADOME} \times \sigma_{\text{ff}>20}\left(\text{SYNOP} \right) \right)\right) $$
+
+\hspace{1cm} \texttt{SELECT RADOME.commune}
+
+\hspace{2cm} \texttt{FROM RADOME JOIN SYNOP ON RADOME.num\_sta=SYNOP.num\_sta}
+
+\hspace{2cm} \texttt{WHERE SYNOP.ff>20}
+
+\end{corrige}
+\else
+\fi
+\subparagraph{}
+\textit{Quelle est la plus haute valeur de pression mesurée ?}
+\ifprof
+\begin{corrige}
+$$ \pi_{\gamma \text{MAX(pmer)}}\left(\text{SYNOP}\right) $$
+
+\begin{center}
+\texttt{SELECT MAX(pmer) FROM SYNOP}
+\end{center}
+
+\end{corrige}
+\else
+\fi
+\subparagraph{Quels sont les numéros de station situés dans le var et celles situées dans les bouches du rhône ? }
+\textit{}
+\ifprof
+\begin{corrige}
+$$ \pi_{\text{num\_sta}}\left(\sigma_{\text{departement = 83}} \left(\text{RADOME}\right) \cup \sigma_{\text{departement = 13}} \left(\text{RADOME}\right) \right) $$
+
+\hspace{1cm} \texttt{SELECT num\_sta FROM RADOME WHERE departement=83}
+
+\hspace{2cm} \texttt{UNION SELECT num\_sta FROM RADOME WHERE departement = 13}
+
+\end{corrige}
+\else
+\fi
+\subparagraph{}
+\textit{Quels sont les numéros de station situés dans le var et à une altitude supérieure à 70 m ? }
+\ifprof
+\begin{corrige}
+$$ \pi_{\text{num\_sta}}\left(\sigma_{\text{departement = 83}} \left(\text{RADOME}\right) \cap \sigma_{\text{altitude>70}} \left(\text{RADOME}\right) \right) $$
+
+\hspace{1cm} \texttt{SELECT num\_sta FROM RADOME WHERE departement=83}
+
+\hspace{2cm} \texttt{INTERSECT SELECT num\_sta FROM RADOME WHERE altitude>70}
+\end{corrige}
+\else
+\fi
+\subparagraph{}
+\textit{Quels sont les numéros de station situés dans le var et qui ne sont pas à une altitude supérieure à 70 m ?}
+\ifprof
+\begin{corrige}
+$$ \pi_{\text{num\_sta}}\left(\sigma_{\text{departement = 83}} \left(\text{RADOME}\right) - \sigma_{\text{altitude>70}} \left(\text{RADOME}\right) \right) $$
+
+\hspace{1cm} \texttt{SELECT num\_sta FROM RADOME WHERE departement=83}
+
+\hspace{2cm} \texttt{EXCEPT SELECT num\_sta FROM RADOME WHERE altitude>70}
+\end{corrige}
+\else
+\fi
+
+\subparagraph{}
+\textit{Quels sont les numéros de station qui ont rencontré tous les types de tendance barométrique ? }
+\ifprof
+\begin{corrige}
+$$ \pi_{\text{num\_sta}}\left(\text{SYNOP} \div \pi_{\text{cod\_tend}}\left(
+\text{SYNOP} \right)\right) $$
+
+\hspace{1cm} \texttt{SELECT num\_sta FROM SYNOP GROUP BY num\_sta}
+
+\hspace{2cm} \texttt{HAVING COUNT(cod\_tend) = nombre\_types\_tendances}
+\end{corrige}
+\else
+\fi
+\end{document}
+\subparagraph{}
+\textit{}
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi
+\subparagraph{}
+\textit{}
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi
+\subparagraph{}
+\textit{}
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi
+
+%\begin{exemple}
+%Exemple de ligne : 
+%\begin{python}
+%'Blinn Lake Seaplane Base,-162.753005981445,55.2515983581543,seaplane_base\n'
+%\end{python}
+%\end{exemple}
+
+\end{document}
+
+
