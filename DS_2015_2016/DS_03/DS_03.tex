@@ -1,0 +1,404 @@
+\documentclass[10pt,fleqn]{article} % Default font size and left-justified equations
+\usepackage[%
+    pdftitle={Informatique : Enveloppe convexe},
+    pdfauthor={Xavier Pessoles}]{hyperref}
+
+\input{style/new_style}
+\input{style/macros_SII}
+
+\fichetrue
+%\fichefalse
+
+%\proftrue
+\proffalse
+
+%\tdtrue
+\tdfalse
+
+%\courstrue
+\coursfalse
+
+% -------------------------------------
+% Déclaration des titres
+% -------------------------------------
+
+\def\discipline{Informatique \ifprof \\ Corrigé \else \fi}
+\def\xxtete{Informatique}
+
+\def\classe{PT -- PT $\star$}
+\def\xxnumpartie{DS 3}
+\def\xxpartie{Devoir Surveillé 3}
+
+\def\xxnumchapitre{Enveloppe convexe$\;$ }
+\def\xxchapitre{\textit{D'après Concours X -- ENS MP/PC}}
+
+\def\xxtitreexo{Prothèse Active Transtibiale}
+\def\xxsourceexo{\hspace{.2cm} D'après X 2015 -- MP/PC.}
+
+\def\xxposongletx{2}
+\def\xxposonglettext{1.45}
+\def\xxposonglety{20}
+\def\xxonglet{\textsf{DS 3}}
+
+\def\xxactivite{}
+\def\xxauteur{\textsl{Xavier Pessoles -- Patricia Bessonnat}}
+
+\def\xxcompetences{%
+\texttt{%
+\textbf{Savoirs et compétences :}\\
+\noindent \textbf{Résoudre :} à partir des modèles retenus :
+\begin{itemize}[label=\ding{112},font=\color{ocre}] 
+\item choisir une méthode de résolution analytique, graphique, numérique;
+\item mettre en \oe{}uvre une méthode de résolution.
+\end{itemize}
+\begin{itemize}[label=\ding{112},font=\color{ocre}] 
+\item \textit{Rés -- C1.1 :} Loi entrée sortie géométrique et cinématique -- Fermeture géométrique.
+\end{itemize}
+%
+%\noindent \textit{Mod2 -- C4.1 :} Représentation par schéma bloc.
+}}
+
+\def\xxfigures{
+%\includegraphics[width=.8\textwidth]{images/prot_01}
+}%figues de la page de garde
+
+\def\xxpied{%
+DS 3 : Enveloppe convexe}
+
+
+\setcounter{secnumdepth}{5}
+%---------------------------------------------------------------------------
+
+
+\begin{document}
+%\chapterimage{png/Fond_Cin}
+\input{style/new_pagegarde}
+\vspace{1cm}
+\pagestyle{fancy}
+\thispagestyle{plain}
+
+\section{Présentation}
+
+\ifprof
+\else
+\noindent
+\begin{minipage}[c]{.7\linewidth}
+La recherche de l'enveloppe convexe d'un nuage de points est un problème fréquemment rencontré par les industriels ou les chercheurs. En robotique par exemple, cette recherche permet d'éviter les collisions entre l'effecteur et des obstacles, en traitement des images, elle permet de détecter des contours de formes et reconnaitre des caractères ...
+
+Dans le cadre de ce sujet, on cherche à trouver l'enveloppe d'un nuage de points dans le plan par une méthode de balayage. 
+\begin{defi}
+On appelle $\mathcal{E}$ l'enveloppe convexe d'un ensemble $\mathcal{P}$ de points $P_i\in \mathbb{R}^2$ et $C$ l'ensemble de points constituant cette enveloppe. 
+$\mathcal{E}$ est convexe si pour tous couples de points  $(P_i,P_j) \in {C}^2$, le segment $[P_i,P_j]$ est inclus dans $\mathcal{E}$.
+\end{defi}
+
+\textit{Remarque :} $\mathcal{P}=\left\{P_0,P_1,P_2, ..., P_{10} \right\}$, $\mathcal{E}=\left\{P_0, P_2, P_4, P_5, P_9, P_{10} \right\}$.
+
+\end{minipage} \hfill
+\begin{minipage}[c]{.28\linewidth}
+\begin{center}
+\includegraphics[width=.95\textwidth]{images/enveloppe}
+
+\textit{Nuage de points et enveloppe convexe}
+\end{center}
+\end{minipage} 
+
+Afin de déterminer l'enveloppe convexe à partir d'un nuage de points quelconques, on commence par trier les points par ordre croissant des abscisses. Quand deux (ou plus) points ont la même abscisse, leur ordre est choisi arbitrairement.
+
+Pour déterminer l'enveloppe, on procède par balayage de gauche à droite : 
+\begin{enumerate}
+\item chaque point $P_i$ appartenant à $\mathcal{P}$ est <<visité>> une fois par ordre croissant;
+\item pour chaque $P_i$ on met à jour l'ensemble $\mathcal{E}$ contenant l'enveloppe convexe des points situés à gauche de $P_i$. Pour cela : 
+\begin{itemize}
+\item on crée deux sous parties de $\mathcal{P}$, $\mathcal{E}_s$ (contenant les points au dessus de la droite $(P_0;P_i)$) et $\mathcal{E}_i$ (contenant les points au dessous de la droite $(P_0;P_i)$). Pour la quatrième figure, on obtiendrait donc $\mathcal{E}_s = \{P_0, P_2, P_4, P_6 \}$, $\mathcal{E}_s = \{P_0, P_5, P_6 \}$. L'enveloppe est donc déterminée par l'union de 
+$\mathcal{E}_s$ et $\mathcal{E}_i$ après suppression des doublons $P_0$ et $P_6$.
+\item on donnera ultérieurement la méthode permettant d'obtenir $\mathcal{E}_s$ et $\mathcal{E}_i$.
+\end{itemize}
+
+\end{enumerate}
+
+%\begin{minipage}[c]{.22\linewidth}
+%\begin{center}
+%\includegraphics[width=.95\textwidth]{images/balayage_1}
+%\end{center}
+%\end{minipage} \hfill
+%\begin{minipage}[c]{.22\linewidth}
+%\begin{center}
+%\includegraphics[width=.95\textwidth]{images/balayage_2}
+%\end{center}
+%\end{minipage} \hfill
+%\begin{minipage}[c]{.22\linewidth}
+%\begin{center}
+%\includegraphics[width=.95\textwidth]{images/balayage_3}
+%\end{center}
+%\end{minipage} \hfill
+%\begin{minipage}[c]{.22\linewidth}
+%\begin{center}
+%\includegraphics[width=.95\textwidth]{images/balayage_4}
+%\end{center}
+%\end{minipage} 
+
+\begin{minipage}[c]{.22\linewidth}
+\begin{center}
+\includegraphics[width=.95\textwidth]{images/orientation_1}
+\end{center}
+\end{minipage} \hfill
+\begin{minipage}[c]{.22\linewidth}
+\begin{center}
+\includegraphics[width=.95\textwidth]{images/orientation_2}
+\end{center}
+\end{minipage} \hfill
+\begin{minipage}[c]{.22\linewidth}
+\begin{center}
+\includegraphics[width=.95\textwidth]{images/orientation_3}
+\end{center}
+\end{minipage} \hfill
+\begin{minipage}[c]{.22\linewidth}
+\begin{center}
+\includegraphics[width=.95\textwidth]{images/orientation_4}
+\end{center}
+\end{minipage} 
+
+\begin{center}
+\begin{tabular}{|c||c|c|c|c|c|c|c|c|c|c|c|c|}
+\hline 
+Indice & 0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10  \\
+\hline\hline
+$x$ & 0 & 2 & 2 & 4 & 5 & 7 & 7 & 9 & 10 & 11 & 12 \\
+\hline 
+$y$ & 2 & 3 & 8 & 6 & 10 & 0 & 3 & 7 & 4 & 2 & 8 \\
+\hline
+\end{tabular}
+\end{center}
+
+Les points seront gérés sous formes de piles d'entiers. On considère donc que les fonctions ci-dessous ont déjà été définies : 
+\begin{itemize}
+\item \texttt{creer\_pile()} : fonction retournant une pile vide;
+\item \texttt{est\_vide(p)} : fonction prenant comme argument une pile \texttt{p} et retournant \texttt{True} si la pile est vide \texttt{False} sinon;
+\item \texttt{push(p,i)} : fonction prenant comme argument une pile \texttt{p} et un entier \texttt{i},  ne retournant rien mais ajoutant \texttt{i} au sommet de la pile;
+\item \texttt{top(p)} :  fonction prenant comme argument une pile \texttt{p} (supposée non vide) et retournant la valeur de l'entier au sommet de la pile;
+\item \texttt{pop(o)} :  fonction prenant comme argument une pile \texttt{p} (supposée non vide) et retournant et supprimant la valeur de l'entier au sommet de la pile.
+\end{itemize}
+
+\fi
+
+
+\section{Réalisation de l'algorithme}
+\subsection{Tri des points}
+\ifprof
+\else
+Les points mesurés et non triés sont stockés dans une liste \texttt{P} contenant la liste \texttt{[abscisse\_i,ordonnée\_i]} de chacun des points. Ainsi, \texttt{P} est de la forme \texttt{[[x\_0,y\_0],[x\_1,y\_1],[x\_2,y\_2],...,[x\_n,y\_n])}.
+\fi
+\subparagraph{}
+\textit{Citer 3 algorithmes de tris et donner leur complexité dans le meilleur des cas, le pire des cas et le cas moyen.} ~\\
+\ifprof
+\begin{corrige} ~\\
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+& Tri par insertion & Tri rapide & Tri fusion \\
+\hline 
+
+{Pire des cas}&  $ C(n)=\mathcal{O}\left(n^2 \right)$ & $ C(n)=\mathcal{O}\left(n^2 \right)$ & $ C(n)=\mathcal{O}\left(n^2\right)$ \\ \hline
+Cas moyen & $ C(n)=\mathcal{O}\left(n^2 \right)$ &$ C(n)=\mathcal{O}\left(n \log n\right)$  & $ C(n)=\mathcal{O}\left(n \log n\right)$ \\ \hline
+Meilleur des cas   & $ C(n)=\mathcal{O}\left(n \right)$ & $ C(n)=\mathcal{O}\left(n \log n \right)$ & $ C(n)=\mathcal{O}\left(n \log n\right)$ \\ \hline
+\end{tabular}
+\end{center}
+\end{corrige}
+\else
+\fi
+
+\subparagraph{}
+\textit{On donne l'algorithme d'un tri dans le document réponse (à la question suivante). Donner son nom et remplacer les fonctions <<mystere>> par un nom plus adéquat.}
+\subparagraph{}
+\textit{Modifier l'algorithme de tri donné pour qu'il prenne en argument la liste des points \texttt{P}. Pour cela vous barrerez et réécrirez les lignes à modifier. }
+
+\ifprof
+\begin{corrige} ~\\
+Il s'agit du tri rapide.
+
+\begin{py}
+\begin{python}
+def segmente(tab,i,j):
+    g =i+1
+    d=j
+    p=tab[i][0]
+    while g<=d :
+        while d>=0 and tab[d][0]>p:
+            d=d-1
+        while g<=j and tab[g][0]<=p:
+            g=g+1
+        if g<d :
+            tab[g],tab[d]=tab[d],tab[g]
+            d=d-1
+            g=g+1
+    k=d
+    tab[i],tab[d]=tab[d],tab[i]
+    return k
+    
+def tri_quicksort(tab,i,j):
+    if i<j :
+        k = segmente(tab,i,j)
+        tri_quicksort(tab,i,k-1)
+        tri_quicksort(tab,k+1,j)
+
+\end{python}
+\end{py}
+\end{corrige}
+\else
+\fi
+
+\subsection{Fonction orientation}
+\ifprof
+\else
+\begin{defi}
+Étant donnés trois points $p_i,p_j,p_k$ du nuage $P$, distincts ou non, le test d'orientation renvoie +1 si la séquence $\left(p_i,p_j,p_k\right)$ est orientée positivement, -1 si elle est orientée négativement et 0 si les trois points sont alignés (c'est-à-dire deux au moins sont égaux). 
+\end{defi}
+
+
+Pour déterminer l'orientation de $\left(p_i,p_j,p_k\right)$, il suffit de calculer l'aire signée du triangle. Cette aire est la moitié du déterminant de la matrice $2\times 2$ formée par les vecteurs $\vect{p_i p_j}$ et $\vect{p_i p_k}$.
+
+\begin{center}
+\includegraphics[width=.7\textwidth]{images/orientation}
+\end{center}
+
+\fi
+
+\subparagraph{}
+\textit{En utilisant les points dans le tableau de la page précédente, donner le résultat du test d'orientation pour les points d'indices suivants : 
+\begin{itemize}
+\item $i=0$, $j=1$, $k=2$;
+\item $i=6$, $j=7$, $k=8$.
+\end{itemize}}
+\ifprof
+\begin{corrige} ~\\
+Les points $P_0$, $P_3$ et $P_4$ les points sont orientés positivement. On peut le voir graphiquement. Sinon, on a : $\vect{P_0 P_1} = (2,1) $ et $\vect{P_0 P_2} = (2,6)$. $\begin{vmatrix} 2 & 2 \\ 1 & 6\end{vmatrix}=12-2 = 10$.
+
+Mes points $P_6$, $P_7$ et $P_8$ les points sont orientés négativement. On peut le voir graphiquement. Sinon, on a : $\vect{P_6 P_7} = (2,4) $ et $\vect{P_6 P_8} = (3,1)$. $\begin{vmatrix} 2 & 3 \\ 4 & 1\end{vmatrix}=2-12 = -10$.
+\end{corrige}
+\else
+\fi
+
+\subparagraph{}
+\textit{Écrire une fonction $\texttt{orientation(tab,i,j,k)}$ prenant comme paramètres la liste des points ainsi que l'indice des points à tester. Cette fonction renverra $-1$, $0$ ou $1$ suivant le résultat du test d'orientation des points d'indices $i$, $j$ et $k$. }
+\ifprof
+\begin{corrige}~\\
+\begin{py}
+\begin{python}
+def orientation(tab,i,j,k):
+    p1, p2, p3 = tab[i], tab[j], tab[k]
+    p12 = [p2[0]-p1[0],p2[1]-p1[1]]
+    p13 = [p3[0]-p1[0],p3[1]-p1[1]]
+    det = p12[0]*p13[1]-p12[1]*p13[0]
+    if det <0 :
+        return -1
+    elif det >0 :
+        return 1
+    else :
+        return 0
+\end{python}
+\end{py}
+\end{corrige}
+\else
+\fi
+
+\subsection{Création de l'enveloppe supérieure}
+\ifprof
+\else
+La liste des points triés sont contenus dans la liste \texttt{[tab]}. Les \textbf{indices} des points constituants l'enveloppe supérieure sont stockés dans la  \textbf{pile} \texttt{Es}. Pour créer l'enveloppe à partir du point $P_i$ et de l'enveloppe supérieure $\mathcal{E}_s$ à l'étape $i-1$, on procède ainsi : 
+\begin{itemize}
+\item on considère le point $P_i$ ainsi que les deux points au sommet de la pile \texttt{Es};
+\item si l'orientation des trois points précédents est négative, on dépile l'élément au sommet de \texttt{Es} (élimination du sommet de \texttt{Es});
+\item on continue ce processus d'élimination jusqu'à ce que l'orientation devienne positive ou jusqu'à ce qu'on ait atteint le dernier élément de la pile $\mathcal{E}_s$;
+\item l'indice du point visité est alors ajouté au sommet de \texttt{Es}.
+\end{itemize}
+
+On remarque qu'à la fin du traitement de $P_i$, les points $P_i$ et $P_0$ appartiennent aux bords de l'enveloppe.
+
+\begin{obj}
+L'objectif est d'écrire une fonction $\texttt{enveloppe\_Sup(tab,Es,i)}$ qui prend en paramètre la liste des points, la pile \texttt{Es} contenant les indices des points de l'enveloppe supérieure, et le l'indice \texttt{i} considéré.
+\end{obj}
+\fi
+
+\subparagraph{}
+\textit{À l'instant $0$, quelle instruction permet de tester si \texttt{Es} est vide ? Que faut-il alors faire pour initialiser \texttt{Es} ? À l'instant $i$, que faire si \texttt{Es} ne contient qu'un seul élément ?}
+\ifprof
+\begin{corrige}
+À l'instant $0$, \texttt{Es} est vide. On peut le tester avec la fonction \texttt{est\_vide}. On empile donc l'élément $0$. 
+
+À l'instant $i$, si \texttt{Es} est vide, on empile l'élément $i$. 
+
+À l'instant $i$, si \texttt{Es} ne contient qu'un seul élément, on empile l'élément $i$. 
+
+
+\end{corrige}
+\else
+\fi
+
+\subparagraph{}
+\textit{Écrire la fonction $\texttt{enveloppe\_Sup(tab,Es,i)}$.}
+\ifprof
+\begin{corrige}~\\
+
+\begin{py}
+\begin{python}
+def enveloppe_Sup_rec(tab,Es,i):
+    if est_vide(Es):
+        push(Es,i)
+    else :
+        p1 = i
+        p2 = pop(Es)
+        if est_vide(Es):
+            push(Es,p2)
+            push(Es,p1)
+        else :
+            p3 = top(Es)
+            if orientation(tab,p1,p2,p3)>0:
+                push(Es,p2)
+                push(Es,p1)
+            else :
+                enveloppe_Sup_rec(tab,Es,i)
+\end{python}
+\end{py}
+\end{corrige}             
+\else
+\fi
+
+\ifprof
+\else
+
+\vspace{.5cm}
+\textsl{Il resterait à réaliser l'algorithme permettant de déterminer l'enveloppe supérieure (même procédure que pour l'enveloppe supérieure) mais en raisonnant de manière symétrique.}
+\fi
+
+\subsection{Analyse de l'algorithme final}
+
+\subparagraph{}
+\textit{On donne dans le document réponse l'algorithme permettant de retourner la pile contenant les indices des sommets de l'enveloppe convexe à partir d'un nuage de points. Commenter les blocs d'instructions de ce programme. Donner la complexité de l'algorithme dans le pire des cas. }
+\ifprof
+\begin{corrige}~\\
+\begin{py}
+\begin{python}
+def enveloppe_convexe(tab):
+    tri(tab)                         # Tri de la liste des points
+    es = creer_pile()                # Initialisation de l'enveloppe supérieure
+    ei = creer_pile()                # Initialisation de l'enveloppe inférieure
+    for i in range (len(tab)):       # On balaye les points et on crée les enveloppes inf et sup
+        enveloppe_Inf(tab,ei,i)
+        enveloppe_Sup(tab,es,i)
+    pop(es)                          # Tous les points vont être transférés dans l'enveloppe inf pour 
+                                     # créer l'enveloppe finale. Le dernier point de la liste initiale 
+                                     # est dans les deux enveloppes. On supprime donc le doublon.
+
+    while (not(est_vide(es))):       # On dépile l'enveloppe sup dans l'enveloppe inf
+        push(pop(es),ei)             # 
+    pop(ei)                          # Le point 0 étant un doublons on le supprime.
+    return (ei)                      # 
+\end{python}
+\end{py}
+\end{corrige}
+\else
+\fi
+
+
+
+\end{document}
