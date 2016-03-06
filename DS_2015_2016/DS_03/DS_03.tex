@@ -9,8 +9,8 @@
 \fichetrue
 %\fichefalse
 
-%\proftrue
-\proffalse
+\proftrue
+%\proffalse
 
 %\tdtrue
 \tdfalse
@@ -176,7 +176,7 @@ Les points seront gérés sous formes de piles d'entiers. On considère donc que
 \item \texttt{est\_vide(p)} : fonction prenant comme argument une pile \texttt{p} et retournant \texttt{True} si la pile est vide \texttt{False} sinon;
 \item \texttt{push(p,i)} : fonction prenant comme argument une pile \texttt{p} et un entier \texttt{i},  ne retournant rien mais ajoutant \texttt{i} au sommet de la pile;
 \item \texttt{top(p)} :  fonction prenant comme argument une pile \texttt{p} (supposée non vide) et retournant la valeur de l'entier au sommet de la pile;
-\item \texttt{pop(o)} :  fonction prenant comme argument une pile \texttt{p} (supposée non vide) et retournant et supprimant la valeur de l'entier au sommet de la pile.
+\item \texttt{pop(p)} :  fonction prenant comme argument une pile \texttt{p} (supposée non vide) et retournant et supprimant la valeur de l'entier au sommet de la pile.
 \end{itemize}
 
 \fi
@@ -367,7 +367,7 @@ def enveloppe_Sup_rec(tab,Es,i):
 \else
 
 \vspace{.5cm}
-\textsl{Il resterait à réaliser l'algorithme permettant de déterminer l'enveloppe supérieure (même procédure que pour l'enveloppe supérieure) mais en raisonnant de manière symétrique.}
+\textsl{Il resterait à réaliser l'algorithme permettant de déterminer l'enveloppe inférieure (même procédure que pour l'enveloppe supérieure mais en raisonnant de manière symétrique).}
 \fi
 
 \subsection{Analyse de l'algorithme final}
@@ -390,7 +390,7 @@ def enveloppe_convexe(tab):
                                      # est dans les deux enveloppes. On supprime donc le doublon.
 
     while (not(est_vide(es))):       # On dépile l'enveloppe sup dans l'enveloppe inf
-        push(pop(es),ei)             # 
+        push(ei,pop(es))             # 
     pop(ei)                          # Le point 0 étant un doublons on le supprime.
     return (ei)                      # 
 \end{python}

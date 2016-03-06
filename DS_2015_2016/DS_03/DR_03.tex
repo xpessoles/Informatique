@@ -282,7 +282,8 @@ $$\quad$$
 \hline
 \begin{python}
 def enveloppe_convexe(tab):
-
+    tri(tab)
+    
     es = creer_pile()
     
     ei = creer_pile()
@@ -304,6 +305,10 @@ def enveloppe_convexe(tab):
     return (ei)
 \end{python}
 
+Dans le pire des cas, le tri est en $\mathcal{O}\left(n^2\right)$. 
+Les algorithmes de recherche d'enveloppe ont une complexité linéaire. Ceux-ci étant eux-mêmes dans une boucle parcourant toute la liste de points, on a une coût de $(n+n)^2$.
+Enfin, dans le pire des cas, la dernière boucle while a une complexité linéaire. Le coût temporel de l'algorithme est donc $n^2+ (n+n)^2 + n$. 
+La fonction est donc en $\mathcal{O}\left(n^2\right)$. 
 \\
 \hline
 \end{tabular}
