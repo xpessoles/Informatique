@@ -69,7 +69,76 @@ Ch. 1 : Traitement du signal -- \xxactivite%
 %---------------------------------------------------------------------------
 
 \section{La conversion analogique numérique}
+\subsection{Chaîne de mesure}
+
+Malgré l'hypothèse de continuité faite dans le cours d'asservissement sur la continuité des systèmes, les systèmes rencontrés sont dans une grande majorité numériques. Cela signifie que les signaux mesurés ne sont pas analogiques, mais numériques.
+
+Ainsi, il est possible de décomposer les fonctions acquérir et coder de la chaîne d'information de la manière suivante : 
+\begin{center}
+\includegraphics[width=.8\textwidth]{images/ch_acq}
+\end{center}
+
+Par exemple si on prends le cas d'un capteur d'effort (jauge extensométrique) qui peut être présent dans un système, le chaîne générique peut être adaptée comme cela :
+
+\begin{center}
+\includegraphics[width=\textwidth]{images/capteur_effort}
+\end{center}
+
+Le filtrage peut être réalisé analogiquement et/ou numériquement. Le codage de l'information fait apparaître trois  étapes : 
+\begin{itemize}
+\item \textbf{l'échantillonnage} noté $f_e$ : cela correspond au nombre de mesures prises pendant 1 seconde;
+\item \textbf{le blocage} : cela correspond au temps $\dfrac{1}{f_e}$ pendant lequel on laisse l'unité de traitement traiter l'information; 
+\item \textbf{le codage} : cela correspond au codage d'une information analogique en information numérique. La précision du codage entrainera nécessairement entre la valeur mesurée et la valeur traitée numériquement par le système.
+\end{itemize}
+
 \subsection{L'échantillonnage}
+
+\begin{minipage}[c]{.45\linewidth}
+L'échantillonnage est donné en Hertz. Cette valeur donne le nombre d'échantillons par seconde.
+
+Prenons le signal suivant ci - contre et réalisons 4 échantillonnages différents.
+\end{minipage} \hfill
+\begin{minipage}[c]{.5\linewidth}
+\begin{center}
+\includegraphics[width=\textwidth]{images/ech_0.pdf}
+\end{center}
+\end{minipage}
+
+\begin{minipage}[c]{.43\linewidth}
+\begin{center}
+\includegraphics[width=\textwidth]{images/ech_1}
+\end{center}
+\end{minipage} \hfill
+\begin{minipage}[c]{.43\linewidth}
+\begin{center}
+\includegraphics[width=\textwidth]{images/ech_2}
+\end{center}
+\end{minipage} 
+
+\begin{minipage}[c]{.43\linewidth}
+\begin{center}
+\includegraphics[width=\textwidth]{images/ech_3}
+\end{center}
+\end{minipage} \hfill
+\begin{minipage}[c]{.43\linewidth}
+\begin{center}
+\includegraphics[width=\textwidth]{images/ech_4}
+\end{center}
+\end{minipage} \hfill
+
+
+Suivant l'échantillonnage du signal différents cas peuvent apparaître : 
+\begin{itemize}
+\item si la fréquence d'échantillonnage est trop faible, de l'information est perdue;
+\item si la fréquence d'échantillonnage est grande, il est possible de récupérer la quasi intégralité du système, cependant l'unité de traitement devra traiter les informations avec une grande rapidité. 
+\end{itemize}
+
+\begin{theorem}[Théorème de Shannon (-- Nyquist)]
+On considère un signal périodique décomposable en signaux périodiques dont la fréquence maximale présente est largement supérieure à celle minimale présente.
+La représentation discrète d’un signal par des échantillons régulièrement espacés exige une fréquence d’échantillonnage supérieure au double de la fréquence maximale présente dans ce signal.
+\end{theorem}
+
+
 \subsection{Erreur de quantification}
 \section{Filtrage numérique}
 
