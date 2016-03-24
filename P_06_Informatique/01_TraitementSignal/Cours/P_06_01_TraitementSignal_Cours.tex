@@ -153,8 +153,50 @@ Une fois que le signal a été mesuré, on bloque alors la valeur de la fonction
 \includegraphics[width=\textwidth]{images/bloc_2}
 \end{center}
 \end{minipage} \hfill
-\subsection{Erreur de quantification}
+\subsection{Codage et erreur de quantification}
+La quantification du signal détermine le nombre de bits sur lequel est codé l'information. Ainsi, pour une plage de mesure donnée et un nombre de bits donnés, le codage de l'information sera plus ou moins précis.
+
+\begin{defi}[Erreur et pas de quantification]
+On note $q$ le pas de quantification (ou erreur de quantification), $V_{\text{min}}$ la tension minimale mesurée par le système de mesure, $V_{\text{max}}$ la tension maximale mesurée. On note $N$ le nombre de bits codant l'information. On a alors :
+$$
+q = \dfrac{V_{\text{max}}-V_{\text{min}}}{2^N -1}
+$$
+\end{defi}
+
+Ci-dessous, les deux premières figures montrent l'échantillonnage, le blocage et la quantification d'un signal lissé avec différentes valeurs de la quantification. La troisième figure montre la même opération sur un signal bruité.
+
+\begin{minipage}[c]{.32\linewidth}
+\begin{center}
+\includegraphics[width=\textwidth]{images/quan_1}
+\end{center}
+\end{minipage} \hfill
+\begin{minipage}[c]{.32\linewidth}
+\begin{center}
+\includegraphics[width=\textwidth]{images/quan_2}
+\end{center}
+\end{minipage} \hfill
+\begin{minipage}[c]{.32\linewidth}
+\begin{center}
+\includegraphics[width=\textwidth]{images/quan_3}
+\end{center}
+\end{minipage}
+
+Plus le nombre de bits sur lequel est codé l'information est élevé, plus le signal numérique sera de bonne qualité. En revanche, les informations numériques seront plus longues à traitées par l'unité de traitement.
+
 \section{Filtrage numérique}
+
+Soit un filtre linéaire du premier ordre. Son équation différentielle est de la forme :
+$$
+s(t)+\tau \dfrac{\text{d} s(t) }{\text{d}t} = K e(t)
+$$
+
+En utilisant un schéma d'Euler implicite, on a l'approximation suivante : $\dfrac{\text{d} s(t) }{\text{d}t} = \dfrac{s_{k}-s_{k-1}}{h}$. En conséquences, 
+
+$$
+s_k+\tau \dfrac{s_{k}-s_{k-1}}{h} = K e_k \Leftrightarrow 
+s_k = \dfrac{h K e_k+\tau s_{k-1}}{h+\tau}
+$$
+
 
 \subsection{Relation de récurrence}
 \subsection{Filtrage numérique passe bas du premier ordre}
