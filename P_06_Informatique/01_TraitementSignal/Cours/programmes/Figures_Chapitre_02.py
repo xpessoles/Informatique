@@ -20,6 +20,7 @@ ech_blo = [signal[0]]
 ech = [signal[0]]
 tps_ech = [temps[0]]
 
+
 for i in range(1,len(temps)):
     tps = temps[i]
     if tps<TT:
@@ -60,16 +61,24 @@ for i in range(len(ech)):
       
 
 # Filtrage du signal
-tau = 1/freq
+tau = 1000*1/freq
+print(1/tau)
 h = 1/freq
+K=1
 """
 filtrage=[quan[0]]
 for i in range(
 """
+res=[quan[0]]
+for i in range(1,len(quan)):
+    res.append((h*K*quan[i]+tau*res[-1])/(h+tau))
+    
 
 plt.grid()
-#plt.plot(temps,signal,label = "Signal")
-plt.plot(tps_ech,quan,label="Echantillonage "+str(freq)+ "Hz - Quantification "+str(Nq)+" bits")
+plt.plot(temps,signal,label = "Signal")
+#plt.plot(tps_ech,quan,label="Echantillonage "+str(freq)+ "Hz - Quantification "+str(Nq)+" bits")
+
+plt.plot(tps_ech,res,linewidth=2,label="Filtrage "+str(1/tau)+" Hz")
 
 #plt.plot(temps,ech,linewidth=2,label = "Frequence 1000 Hz")
 plt.legend()

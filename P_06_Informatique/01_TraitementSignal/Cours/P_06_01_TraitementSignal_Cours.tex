@@ -184,7 +184,7 @@ Ci-dessous, les deux premières figures montrent l'échantillonnage, le blocage 
 Plus le nombre de bits sur lequel est codé l'information est élevé, plus le signal numérique sera de bonne qualité. En revanche, les informations numériques seront plus longues à traitées par l'unité de traitement.
 
 \section{Filtrage numérique}
-
+\subsection{Filtre numérique passe bas du premier ordre}
 Soit un filtre linéaire du premier ordre. Son équation différentielle est de la forme :
 $$
 s(t)+\tau \dfrac{\text{d} s(t) }{\text{d}t} = K e(t)
@@ -197,10 +197,10 @@ s_k+\tau \dfrac{s_{k}-s_{k-1}}{h} = K e_k \Leftrightarrow
 s_k = \dfrac{h K e_k+\tau s_{k-1}}{h+\tau}
 $$
 
-
-\subsection{Relation de récurrence}
+Pulsation de coupures : $10^{-3}\; \text{rad/s}$, $10^{-2}\; \text{rad/s}$, $10^{-2}\; \text{rad/s}$
+%\subsection{Relation de récurrence}
 \subsection{Filtrage numérique passe bas du premier ordre}
-\subsection{Filtrage numérique à réponse impulsionnelle finie}
+%\subsection{Filtrage numérique à réponse impulsionnelle finie}
 \begin{thebibliography}{2}
 \bibitem{1}{Patrick Beynet, \textit{Supports de cours de TSI 2}, Lycée Rouvière, Toulon.}
 \bibitem{1}{David Crochet (créer à partir de KmPlot), CC-BY-SA-3.0, via Wikimedia Commons \url{https://upload.wikimedia.org/wikipedia/commons/6/6f/Fourier_d\%27un_carr\%C3\%A9.svg}.}
