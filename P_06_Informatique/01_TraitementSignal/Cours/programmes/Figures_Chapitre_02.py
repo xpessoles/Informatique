@@ -61,7 +61,7 @@ for i in range(len(ech)):
       
 
 # Filtrage du signal
-tau = 1000*1/freq
+tau = 1*1/freq
 print(1/tau)
 h = 1/freq
 K=1
@@ -72,14 +72,33 @@ for i in range(
 res=[quan[0]]
 for i in range(1,len(quan)):
     res.append((h*K*quan[i]+tau*res[-1])/(h+tau))
-    
+
+#Moyenne glissante
+filtrageg =[]
+
+fenetre = 1000
+for i in range(fenetre-1,len(quan)):
+        s = sum(quan[i-fenetre+1:i+1])/fenetre
+        filtrageg.append(s)
+
 
 plt.grid()
 plt.plot(temps,signal,label = "Signal")
 #plt.plot(tps_ech,quan,label="Echantillonage "+str(freq)+ "Hz - Quantification "+str(Nq)+" bits")
 
-plt.plot(tps_ech,res,linewidth=2,label="Filtrage "+str(1/tau)+" Hz")
+#plt.plot(tps_ech,res,linewidth=2,label="Pulsation de coupure "+str(1/tau)+" rad/s")
+
+#plt.plot(tps_ech[fenetre-1:len(tps_ech)],filtrageg,linewidth=2,label="Moyenne sur "+str(fenetre)+" points")
+
 
 #plt.plot(temps,ech,linewidth=2,label = "Frequence 1000 Hz")
+
+import scipy.fftpack
+
+N = len(quan)
+T = 1/freq
+yf = scipy.fftpack.fft(quan)
+plt.plot(tps_ech,np.abs(yf)*2/N)
+
 plt.legend()
 plt.show()

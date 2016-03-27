@@ -197,10 +197,61 @@ s_k+\tau \dfrac{s_{k}-s_{k-1}}{h} = K e_k \Leftrightarrow
 s_k = \dfrac{h K e_k+\tau s_{k-1}}{h+\tau}
 $$
 
-Pulsation de coupures : $10^{-3}\; \text{rad/s}$, $10^{-2}\; \text{rad/s}$, $10^{-2}\; \text{rad/s}$
+La fréquence d'échantillonnage est ici de 1 KHz. Le pas de dérivation est de 0,001 s. On réalise alors différents filtrages en faisant varier la pulsation de coupure du filtre. 
+
+\begin{minipage}[c]{.43\linewidth}
+\begin{center}
+\includegraphics[width=\textwidth]{images/ordre1_1}
+\end{center}
+\end{minipage} \hfill
+\begin{minipage}[c]{.43\linewidth}
+\begin{center}
+\includegraphics[width=\textwidth]{images/ordre1_2}
+\end{center}
+\end{minipage} 
+
+\begin{minipage}[c]{.43\linewidth}
+\begin{center}
+\includegraphics[width=\textwidth]{images/ordre1_3}
+\end{center}
+\end{minipage} \hfill
+\begin{minipage}[c]{.43\linewidth}
+\begin{center}
+\includegraphics[width=\textwidth]{images/ordre1_4}
+\end{center}
+\end{minipage}
+
+On observe que lorsque la pulsation de coupure diminue, le signal est de plus en plus lissé, limitant ainsi le bruit. En revanche, le signal est atténue et déphasé. 
 %\subsection{Relation de récurrence}
-\subsection{Filtrage numérique passe bas du premier ordre}
 %\subsection{Filtrage numérique à réponse impulsionnelle finie}
+
+\subsection{Filtrage numérique par moyenne glissante}
+Une autre solution pour lisser une courbe est de réaliser une moyenne glissante. Si on réalise ce filtrage en temps réel, cela signifie qu'un point lissé à l'échantillon $n$ est la moyenne des $n-1$ échantillons précédents et de l'élément en cours. 
+
+Il faut donc attendre l'acquisition de $n-1$ échantillons avant de disposer de la courbe.
+
+
+\begin{minipage}[c]{.43\linewidth}
+\begin{center}
+\includegraphics[width=\textwidth]{images/moyenne_1}
+\end{center}
+\end{minipage} \hfill
+\begin{minipage}[c]{.43\linewidth}
+\begin{center}
+\includegraphics[width=\textwidth]{images/moyenne_2}
+\end{center}
+\end{minipage} 
+
+\begin{minipage}[c]{.43\linewidth}
+\begin{center}
+\includegraphics[width=\textwidth]{images/moyenne_3}
+\end{center}
+\end{minipage} \hfill
+\begin{minipage}[c]{.43\linewidth}
+\begin{center}
+\includegraphics[width=\textwidth]{images/moyenne_4}
+\end{center}
+\end{minipage}
 \begin{thebibliography}{2}
 \bibitem{1}{Patrick Beynet, \textit{Supports de cours de TSI 2}, Lycée Rouvière, Toulon.}
 \bibitem{1}{David Crochet (créer à partir de KmPlot), CC-BY-SA-3.0, via Wikimedia Commons \url{https://upload.wikimedia.org/wikipedia/commons/6/6f/Fourier_d\%27un_carr\%C3\%A9.svg}.}
