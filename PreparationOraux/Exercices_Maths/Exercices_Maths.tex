@@ -1,0 +1,98 @@
+\documentclass[10pt,fleqn]{article} % Default font size and left-justified equations
+\usepackage[%
+    pdftitle={CIN : Cinématique du solide},
+    pdfauthor={Xavier Pessoles}]{hyperref}
+
+\input{style/new_style}
+\input{style/macros_SII}
+
+%\fichetrue
+\fichefalse
+
+%\proftrue
+\proffalse
+
+%\tdtrue
+\tdfalse
+
+\courstrue
+%\coursfalse
+
+% -------------------------------------
+% Déclaration des titres
+% -------------------------------------
+
+\def\discipline{Informatique}
+\def\xxtete{Informatique}
+
+\def\classe{\textsf{PT -- PT} $\star$}
+\def\xxnumpartie{Oral}
+\def\xxpartie{Préparation aux oraux de la banque PT}
+
+\def\xxnumchapitre{Préparation aux oraux de la banque PT}
+\def\xxchapitre{\hspace{.12cm} Épreuve de Mathématique et Algorithmique}
+
+\def\xxposongletx{2}
+\def\xxposonglettext{1.45}
+\def\xxposonglety{20}
+\def\xxonglet{Oral}
+
+\def\xxactivite{Exercices}
+\def\xxauteur{\textsl{Xavier Pessoles}}
+
+\def\xxcompetences{%
+%\textsl{%
+%\textbf{Savoirs et compétences :}
+%\begin{itemize}[label=\ding{112},font=\color{ocre}] 
+%\item Mod-C11 : Modélisation géométrique et cinématique des mouvements entre solides indéformables 
+%\begin{itemize}[label=\ding{112},font=\color{ocre}] 
+%\item Mod-C11.2 : Champ des vecteurs vitesses des points d'un solide
+%\item Mod-C11.4 : Composition des vitesses
+%\item Mod-C11.6 : Champ des vecteurs accélérations des points d'un solide
+%\item Mod-C11.6 : Composition des accélérations
+%\item Mod-C11-S5 : Déterminer la trajectoire d’un point d’un solide
+%\item Mod-C11-S8 : Écrire le vecteur accélération d’un point d’un solide
+%\end{itemize}
+%\end{itemize}
+%%}
+}
+
+\def\xxfigures{
+}%figues de la page de garde
+\def\xxpied{%
+Préparation aux oraux de la banque PT \\
+Préparation à l'épreuve de TP de SII%
+}
+
+%---------------------------------------------------------------------------
+
+
+\begin{document}
+\chapterimage{png/Fond_ALG}
+\input{style/new_pagegarde}
+
+%\newpage
+\def\columnseprulecolor{\color{ocre}}
+\setlength{\columnseprule}{0.4pt} 
+
+\begin{multicols}{2}
+%\addcontentsline{toc}{section}{Traitement du signal d'un capteur}
+\section*{Exercice}
+\begin{enumerate}
+\item Soit l’entier $n = 1234$. Quel est le quotient, noté $q$, dans la division euclidienne de $n$ par $10$ ? Quel est
+le reste ? Que se passe-t-il si on recommence la division par 10 à partir de $q$ ?
+\item Écrire la suite d’instructions calculant la somme des cubes des chiffres de l’entier 1234.
+\item Écrire une fonction \texttt{somcube}, d’argument \texttt{n}, renvoyant la somme des cubes des chiffres du nombre
+entier \texttt{n}.
+\item Trouver tous les nombres entiers inférieurs à 1000 égaux à la somme des cubes de leurs chiffres.
+\item En modifiant les instructions de la fonction \texttt{somcube}, écrire une fonction \texttt{somcube2} qui convertit
+l’entier \texttt{n} en une chaîne de caractères permettant ainsi la récupération de ses chiffres sous forme de
+caractères. Cette nouvelle fonction renvoie toujours la somme des cubes des chiffres de l’entier \texttt{n}.
+\end{enumerate}
+
+\end{multicols}
+
+
+
+\end{document}
+
