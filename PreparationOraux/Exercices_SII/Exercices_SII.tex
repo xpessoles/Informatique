@@ -1,0 +1,103 @@
+\documentclass[10pt,fleqn]{article} % Default font size and left-justified equations
+\usepackage[%
+    pdftitle={CIN : Cinématique du solide},
+    pdfauthor={Xavier Pessoles}]{hyperref}
+
+\input{style/new_style}
+\input{style/macros_SII}
+
+%\fichetrue
+\fichefalse
+
+%\proftrue
+\proffalse
+
+%\tdtrue
+\tdfalse
+
+\courstrue
+%\coursfalse
+
+% -------------------------------------
+% Déclaration des titres
+% -------------------------------------
+
+\def\discipline{Informatique}
+\def\xxtete{Informatique}
+
+\def\classe{\textsf{PT -- PT} $\star$}
+\def\xxnumpartie{Oral}
+\def\xxpartie{Préparation aux oraux de la banque PT}
+
+\def\xxnumchapitre{Préparation aux oraux de la banque PT}
+\def\xxchapitre{\hspace{.12cm} Épreuve de TP de SII}
+
+\def\xxposongletx{2}
+\def\xxposonglettext{1.45}
+\def\xxposonglety{20}
+\def\xxonglet{Oral}
+
+\def\xxactivite{Exercices}
+\def\xxauteur{\textsl{Xavier Pessoles}}
+
+\def\xxcompetences{%
+%\textsl{%
+%\textbf{Savoirs et compétences :}
+%\begin{itemize}[label=\ding{112},font=\color{ocre}] 
+%\item Mod-C11 : Modélisation géométrique et cinématique des mouvements entre solides indéformables 
+%\begin{itemize}[label=\ding{112},font=\color{ocre}] 
+%\item Mod-C11.2 : Champ des vecteurs vitesses des points d'un solide
+%\item Mod-C11.4 : Composition des vitesses
+%\item Mod-C11.6 : Champ des vecteurs accélérations des points d'un solide
+%\item Mod-C11.6 : Composition des accélérations
+%\item Mod-C11-S5 : Déterminer la trajectoire d’un point d’un solide
+%\item Mod-C11-S8 : Écrire le vecteur accélération d’un point d’un solide
+%\end{itemize}
+%\end{itemize}
+%%}
+}
+
+\def\xxfigures{
+}%figues de la page de garde
+\def\xxpied{%
+Préparation aux oraux de la banque PT \\
+Préparation à l'épreuve de TP de SII%
+}
+
+%---------------------------------------------------------------------------
+
+
+\begin{document}
+\chapterimage{png/Fond_ALG}
+\input{style/new_pagegarde}
+
+%\newpage
+\def\columnseprulecolor{\color{ocre}}
+\setlength{\columnseprule}{0.4pt} 
+
+\begin{multicols}{2}
+\addcontentsline{toc}{section}{Traitement du signal d'un capteur}
+\section*{Traitement du signal d'un capteur}
+
+\addcontentsline{toc}{section}{Simulation du comportement d'un onduleur}
+\section*{Simulation du comportement d'un onduleur}
+
+\addcontentsline{toc}{section}{Valeur moyenne, valeur efficace}
+\section*{Valeur moyenne, valeur efficace}
+
+\addcontentsline{toc}{section}{Rugosité d'un profil}
+\section*{Détermination des paramètres de rugosité d'un profil}
+
+\addcontentsline{toc}{section}{Analyse d'image}
+\section*{Analyse d'image}
+
+
+\addcontentsline{toc}{section}{Petits déplacements}
+\section*{Calcul des petits déplacements d'une pièce}
+
+\end{multicols}
+
+
+
+\end{document}
+
