@@ -77,7 +77,7 @@ Préparation à l'épreuve de TP de SII%
 
 \begin{multicols}{2}
 %\addcontentsline{toc}{section}{Traitement du signal d'un capteur}
-\section*{Exercice}
+\subsection*{Exercice 1}
 \begin{enumerate}
 \item Soit l’entier $n = 1234$. Quel est le quotient, noté $q$, dans la division euclidienne de $n$ par $10$ ? Quel est
 le reste ? Que se passe-t-il si on recommence la division par 10 à partir de $q$ ?
@@ -90,6 +90,36 @@ l’entier \texttt{n} en une chaîne de caractères permettant ainsi la récupé
 caractères. Cette nouvelle fonction renvoie toujours la somme des cubes des chiffres de l’entier \texttt{n}.
 \end{enumerate}
 
+
+\subsection*{Exercice 2}
+
+
+
+On cherche à calculer une valeur approchée de l’intégrale d’une fonction donnée par des points dont les coordonnées sont situées dans un fichier.
+\begin{enumerate}
+\item Le fichier \texttt{ex\_001.csv}, situé dans le sous-répertoire \texttt{data} du répertoire de travail, contient une quinzaine de lignes selon le modèle suivant :
+
+\begin{center}
+
+\texttt{0.0;1.00988282142}
+
+\texttt{0.1;1.07221264497}
+
+\end{center}
+
+Chaque ligne contient deux valeurs flottantes séparées par un point-virgule, représentant respective-
+ment l’abscisse et l’ordonnée d’un point. Les points sont ordonnés par abscisses croissantes.
+Ouvrir le fichier en lecture, le lire et construire la liste \texttt{LX} des abscisses et la liste \texttt{LY} des ordonnées contenues dans ce fichier.
+\item Représenter les points sur une figure.
+\item Les points précédents sont situés sur la courbe représentative d’une fonction \texttt{f}. On souhaite déterminer une valeur approchée de l’intégrale \texttt{I} de cette fonction sur le segment où elle est définie. Écrire une fonction \texttt{trapeze}, d’arguments deux listes \texttt{y} et \texttt{x} de même longueur \texttt{n}, renvoyant :
+
+$$
+\sum\limits_{i=1}^{n-1} \left(x_i - x_{i-1} \right) \dfrac{y_i +y_{i-1}}{2}.
+$$
+
+\texttt{trapeze(LY,LX)} renvoie donc une valeur approchée de l’intégrale $I$ par la méthode des trapèzes.
+\item En utilisant la m'éthode d’intégration numérique trapz de la sous-bibliothèque \texttt{scipy.integrate} du langage Python ou la méthode \texttt{inttrap} du logiciel Scilab, retrouver la valeur approchée de l’intégrale I.
+\end{enumerate}
 \end{multicols}
 
 
