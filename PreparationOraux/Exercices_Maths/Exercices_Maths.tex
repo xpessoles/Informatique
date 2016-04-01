@@ -35,10 +35,10 @@
 \def\xxposongletx{2}
 \def\xxposonglettext{1.45}
 \def\xxposonglety{20}
-\def\xxonglet{Oral}
+\def\xxonglet{\textsf{Oral}}
 
 \def\xxactivite{Exercices}
-\def\xxauteur{\textsl{Xavier Pessoles}}
+\def\xxauteur{\textsl{Xavier Pessoles} \\ D'après Banque PT}
 
 \def\xxcompetences{%
 %\textsl{%
@@ -198,6 +198,55 @@ petit entier $n$ tel que \texttt{Ecart(n, p)} soit inférieur ou égal à $e$.
 \end{itemize}
 \end{enumerate}
 
+
+
+\subsection*{Exercice 6}
+On considère la fonction $g$ définie sur $[0 , 2[$ par :
+$$ g(x) =
+\left\{
+\begin{array}{ll}
+x &\text{ pour } 0\leq x < 1 \\
+1 &\text{ pour } 1\leq x < 2 
+\end{array}
+\right.
+$$
+\begin{enumerate}
+\item Définir la fonction $g$. Tracer sa courbe représentative sur $[0 , 2[$, c’est-à-dire la ligne brisée reliant les points $(x, g(x))$ pour $x$ variant de 0 à 1,99 avec un pas de 0,01.
+\item Définir une fonction $f$ donnée de manière récursive sur $[0 , +\infty[$ par
+$$ g(x) =
+\left\{
+\begin{array}{ll}
+g(x) &\text{ pour } 0\leq x < 2 \\
+\sqrt{x} f(x-2) &\text{ pour } x \geq 2
+\end{array}
+\right.
+$$
+\item Tracer la courbe représentative de $f$ sur $[0,6]$.
+\item Écrire les instructions permettant de calculer, à $10^{-2}$ près, la plus petite valeur $\alpha > 0$ telle que $f(\alpha) > 4$.
+\end{enumerate}
+
+\subsection*{Exercice 7}
+
+On considère le code Python de la fonction \texttt{d} suivante :
+
+\begin{py}
+\begin{python}
+def d(n):
+    L =[1]
+    for nombre in range(2,n +1):
+    if n%nombre == 0:
+        L. append(nombre)
+    return L
+\end{python}
+\end{py}
+
+\begin{enumerate}
+\item Quel est le résultat de l’appel \texttt{d(4)} ? Puis de l’appel \texttt{d(10)} ?
+Que fait la fonction \texttt{d} ?
+\item Un diviseur non-trivial d’un entier \texttt{n} est un diviseur de \texttt{n} différent de 1 et de \texttt{n}. Écrire une fonction \texttt{DNT}, d’argument \texttt{n}, renvoyant la liste des diviseurs non-triviaux de l’entier \texttt{n}.
+\item Écrire une fonction \texttt{sommeCarresDNT}, d’argument \texttt{n}, renvoyant la somme des carrés des diviseurs non-triviaux de l’entier \texttt{n}.
+\item Écrire la suite des instructions permettant d’afficher tous les nombres entiers inférieurs à 1000 et égaux à la somme des carrés de leurs diviseurs non-triviaux. Que peut-on conjecturer ?
+\end{enumerate}
 
 
 \end{multicols}
