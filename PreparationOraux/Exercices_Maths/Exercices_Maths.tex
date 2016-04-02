@@ -30,7 +30,7 @@
 \def\xxpartie{Préparation aux oraux de la banque PT}
 
 \def\xxnumchapitre{Préparation aux oraux de la banque PT}
-\def\xxchapitre{\hspace{.12cm} Épreuve de Mathématique et Algorithmique}
+\def\xxchapitre{\hspace{.12cm} Épreuve de << Mathématique et Algorithmique >>}
 
 \def\xxposongletx{2}
 \def\xxposonglettext{1.45}
@@ -61,7 +61,7 @@
 }%figues de la page de garde
 \def\xxpied{%
 Préparation aux oraux de la banque PT \\
-Préparation à l'épreuve de TP de SII%
+Préparation à l'épreuve de << Mathématique et Algorithmique >>%
 }
 
 %---------------------------------------------------------------------------
@@ -246,6 +246,61 @@ Que fait la fonction \texttt{d} ?
 \item Un diviseur non-trivial d’un entier \texttt{n} est un diviseur de \texttt{n} différent de 1 et de \texttt{n}. Écrire une fonction \texttt{DNT}, d’argument \texttt{n}, renvoyant la liste des diviseurs non-triviaux de l’entier \texttt{n}.
 \item Écrire une fonction \texttt{sommeCarresDNT}, d’argument \texttt{n}, renvoyant la somme des carrés des diviseurs non-triviaux de l’entier \texttt{n}.
 \item Écrire la suite des instructions permettant d’afficher tous les nombres entiers inférieurs à 1000 et égaux à la somme des carrés de leurs diviseurs non-triviaux. Que peut-on conjecturer ?
+\end{enumerate}
+
+\subsection*{Exercice 8}
+Soit n un entier vérifiant $n \leq 26$. On souhaite écrire un programme qui code un mot en décalant chaque lettre de l'alphabet de $n$ lettres.
+Par exemple pour $n = 3$, le décalage sera le suivant :
+\begin{center}
+\begin{tabular}{|l|c|c|c|c|c|c|c|c|c|}
+\hline
+Avant décalage & a & b & c & ... & x & y & z \\
+\hline
+Après décalage & d & e & f & ... & a & b & c \\
+\hline
+\end{tabular}
+\end{center}
+Le mot \texttt{oralensam} devient ainsi \texttt{rudohqvdp}.
+\begin{enumerate}
+\item Définir une chaîne de caractères contenant toutes les lettres dans l’ordre alphabétique (caractères en
+minuscule).
+\item Écrire une fonction \texttt{decalage}, d’argument un entier \texttt{n}, renvoyant une chaîne de caractères contenant
+toutes les lettres dans l’ordre alphabétique, décalées de \texttt{n}, comme indiqué ci-dessus.
+\item Écrire une fonction \texttt{indices}, d’arguments un caractère \texttt{x} et une chaîne de caractères \texttt{phrase}, renvoyant
+une liste contenant les indices de \texttt{x} dans \texttt{phrase} si \texttt{x} est une lettre de phrase et une liste vide sinon.
+\item Écrire une fonction codage d’arguments un entier \texttt{n} et une chaîne de caractères \texttt{phrase}, renvoyant
+\texttt{phrase} codé avec un décalage de \texttt{n} lettres.
+\item Comment peut-on décoder un mot codé ?
+\end{enumerate}
+
+
+
+
+\subsection*{Exercice 9}
+
+On pose $M = 20$ et $m = 10$. À un nombre $c$ quelconque, on associe la suite $(u_n)_n\geq 0$ définie par $u_0 = 0$ et $u_{n+1} = u_n^2 + c$ pour $n \geq 0$.
+
+S’il existe, on note $k$ le plus petit entier tel que l’on ait $0 \leq k \leq m$ et $|u_k| > M$.
+On définit alors la fonction $f$ par 
+$$
+f : c \mapsto 
+\left\{
+\begin{array}{l}
+k \text{ s'il existe} \\
+m+1  \text{ sinon.}
+\end{array}
+\right.
+$$
+
+\begin{enumerate}
+\item  Donner le code définissant la fonction $f$.
+\item  Tracer l’allure de la courbe représentative de la fonction $f$ sur $[-2; 2]$, en créant une liste \texttt{LX} de 401 valeurs équiréparties entre -2 et 2 inclus et en utilisant les fonctions \texttt{plot} et show de la sous-
+bibliothèque \texttt{matplotlib.pyplot}.
+\item  Construire le tableau des valeurs $f(x+i y)$ où $x$ prend 101 valeurs comprises entre -2 et 0,5 et $y$ prend
+101 valeurs entre -1,1 et 1,1. \textit{On rappelle que le nombre complexe $i$ est représenté par $1j$. Par exemple,
+le complexe $1 + 2 i$ est représenté par $1+2j$.}
+\item  Tracer l’image que code ce tableau. On pourra utiliser les fonctions \texttt{imshow} et \texttt{show} de la sous-
+bibliothèque \texttt{matplotlib.pyplot}. Quels paramètres peut-on modifier pour obtenir une meilleure résolution ?
 \end{enumerate}
 
 
