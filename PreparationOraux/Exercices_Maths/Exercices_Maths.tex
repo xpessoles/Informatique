@@ -76,8 +76,8 @@ Préparation à l'épreuve de << Mathématique et Algorithmique >>%
 \setlength{\columnseprule}{0.4pt} 
 
 \begin{multicols}{2}
-%\addcontentsline{toc}{section}{Traitement du signal d'un capteur}
-\subsection*{Exercice 1}
+\addcontentsline{toc}{subsection}{Exercice 1 -- Arithmétique}
+\subsection*{Exercice 1 -- Arithmétique}
 \begin{enumerate}
 \item Soit l’entier $n = 1234$. Quel est le quotient, noté $q$, dans la division euclidienne de $n$ par $10$ ? Quel est
 le reste ? Que se passe-t-il si on recommence la division par 10 à partir de $q$ ?
@@ -91,8 +91,8 @@ caractères. Cette nouvelle fonction renvoie toujours la somme des cubes des chi
 \end{enumerate}
 
 
-\subsection*{Exercice 2}
-
+\addcontentsline{toc}{subsection}{Exercice 2 -- Intégration}
+\subsection*{Exercice 2 -- Intégration}
 On cherche à calculer une valeur approchée de l’intégrale d’une fonction donnée par des points dont les coordonnées sont situées dans un fichier.
 \begin{enumerate}
 \item Le fichier \texttt{ex\_001.csv}, situé dans le sous-répertoire \texttt{data} du répertoire de travail, contient une quinzaine de lignes selon le modèle suivant :
@@ -119,6 +119,7 @@ $$
 \item En utilisant la méthode d’intégration numérique \texttt{trapz} de la sous-bibliothèque \texttt{scipy.integrate} du langage Python ou la méthode \texttt{inttrap} du logiciel Scilab, retrouver la valeur approchée de l'intégrale $I$.
 \end{enumerate}
 
+\addcontentsline{toc}{subsection}{Exercice 3 -- Graphe}
 \subsection*{Exercice 3}
 On considère le graphe \texttt{G} suivant, où le nombre situé sur l’arête joignant deux sommets est leur distance, supposée entière :
 \begin{center}
@@ -140,8 +141,8 @@ sommet $i$ à lui-même est, bien sûr, égale à 0.
 \end{enumerate}
 
 
-
-\subsection*{Exercice 4}
+\addcontentsline{toc}{subsection}{Exercice 4 -- Gestion de liste}
+\subsection*{Exercice 4 -- Gestion de liste}
 Soit un entier naturel $n$ non nul et une liste \texttt{t} de longueur $n$ dont les termes valent 0 ou 1. Le but de cet exercice est de trouver le nombre maximal de 0 contigus dans \texttt{t} (c’est-à-dire figurant dans des cases consécutives). Par exemple, le nombre maximal de zéros contigus de la liste \texttt{t1} suivante vaut 4 :
 \begin{center}
 \begin{tabular}{|c|c|c|c|c|c|c|c|c|}
@@ -174,7 +175,8 @@ En déduire une fonction \texttt{nombreZerosMax(t)}, de paramètre \texttt{t}, r
 \item Trouver un moyen simple, toujours en utilisant la fonction \texttt{nombreZeros}, d’obtenir un algorithme plus performant.
 \end{enumerate}
 
-\subsection*{Exercice 5}
+\addcontentsline{toc}{subsection}{Exercice 5 -- Probabilités}
+\subsection*{Exercice 5 -- Probabilités}
 Soient $n$ un entier naturel strictement positif et $p$ un réel compris entre 0 et 1.
 On considère $X$ et $Y$ deux variables aléatoires à valeurs dans $\mathbb{N}$ sur un espace probabilisé donné. $X$ suit une
 loi de Poisson de paramètre $\lambda = np$ et $Y$ suit une loi binomiale de paramètres $(n, p)$.
@@ -199,8 +201,8 @@ petit entier $n$ tel que \texttt{Ecart(n, p)} soit inférieur ou égal à $e$.
 \end{enumerate}
 
 
-
-\subsection*{Exercice 6}
+\addcontentsline{toc}{subsection}{Exercice 6 -- Tracer de fonction -- $f(x)=0$}
+\subsection*{Exercice 6 -- $f(x)=0$}
 On considère la fonction $g$ définie sur $[0 , 2[$ par :
 $$ g(x) =
 \left\{
@@ -225,7 +227,8 @@ $$
 \item Écrire les instructions permettant de calculer, à $10^{-2}$ près, la plus petite valeur $\alpha > 0$ telle que $f(\alpha) > 4$.
 \end{enumerate}
 
-\subsection*{Exercice 7}
+\addcontentsline{toc}{subsection}{Exercice 7 -- Algorithmique }
+\subsection*{Exercice 7 -- Algorithmique }
 
 On considère le code Python de la fonction \texttt{d} suivante :
 
@@ -248,7 +251,8 @@ Que fait la fonction \texttt{d} ?
 \item Écrire la suite des instructions permettant d’afficher tous les nombres entiers inférieurs à 1000 et égaux à la somme des carrés de leurs diviseurs non-triviaux. Que peut-on conjecturer ?
 \end{enumerate}
 
-\subsection*{Exercice 8}
+\addcontentsline{toc}{subsection}{Exercice 8 -- Chiffrer -- déchiffrer}
+\subsection*{Exercice 8 -- Chiffrer -- déchiffrer}
 Soit n un entier vérifiant $n \leq 26$. On souhaite écrire un programme qui code un mot en décalant chaque lettre de l'alphabet de $n$ lettres.
 Par exemple pour $n = 3$, le décalage sera le suivant :
 \begin{center}
@@ -275,8 +279,8 @@ une liste contenant les indices de \texttt{x} dans \texttt{phrase} si \texttt{x}
 
 
 
-
-\subsection*{Exercice 9}
+\addcontentsline{toc}{subsection}{Exercice 9 -- Suite}
+\subsection*{Exercice 9 -- Suite}
 
 On pose $M = 20$ et $m = 10$. À un nombre $c$ quelconque, on associe la suite $(u_n)_n\geq 0$ définie par $u_0 = 0$ et $u_{n+1} = u_n^2 + c$ pour $n \geq 0$.
 
@@ -304,7 +308,66 @@ bibliothèque \texttt{matplotlib.pyplot}. Quels paramètres peut-on modifier pou
 \end{enumerate}
 
 
+\addcontentsline{toc}{subsection}{Exercice 10 -- Calcul matriciel}
+\subsection*{Exercice 10 -- Calcul matriciel}
+\textit{Dans cet exercice, avec Python on pourra utiliser la fonction \texttt{array} de la bibliothèque \texttt{numpy}, ainsi que la
+fonction \texttt{eig} de la sous-bibliothèque \texttt{numpy.linalg}. Avec Scilab, on utilisera \texttt{spec}.}
+
+\begin{enumerate}
+\item Créer deux matrices $R=\begin{pmatrix} 1 & 2 & 3 \\ 4 & 5 & 6  \end{pmatrix}$ et 
+$S =\begin{pmatrix} 1 & 2 & 3 \\ 4 & 5 & 6\\ 7 & 8 & 9  \end{pmatrix}$ et les faire afficher.
+\item Créer une fonction \texttt{test}, d’argument $M$, renvoyant la valeur \texttt{n} si $M$ est une matrice carrée d’ordre \texttt{n} (entier naturel non nul) et zéro dans tous les autres cas.
+Vérifier la fonction test sur $R$ et sur $S$.
+\item Le fichier \texttt{ex\_006.txt}, situé dans le sous-répertoire \texttt{data} du répertoire de travail, contient un tableau de valeurs flottantes. Lire ce tableau dans le fichier et vérifier qu’il correspond bien à une matrice carrée d’ordre 5 que l’on désignera par \texttt{M1}. 
+\item Déterminer les valeurs propres de la matrice \texttt{M1}.
+\item Créer une fonction \texttt{dansIntervalle}, d’arguments une liste $L$ et deux réels $a$ et $b$, renvoyant la valeur \texttt{True} si tous les éléments de la liste $L$ sont dans l’intervalle $[a, b]$ et \texttt{False} sinon. Vérifier que toutes les valeurs propres de la matrice \texttt{M1} sont dans l’intervalle $[0, 1]$.
+\end{enumerate}
+
+
+\addcontentsline{toc}{subsection}{Exercice 11 -- Tri de liste}
+\subsection*{Exercice 11 -- Tri de liste}
+Soit $N$ un entier naturel non nul. On cherche à trier une liste L d’entiers naturels strictement inférieurs à $N$.
+\begin{enumerate}
+\item Écrire une fonction comptage, d’arguments $L$ et $N$, renvoyant une liste $P$ dont le $k$-ième élément désigne le nombre d’occurences de l’entier $k$ dans la liste $L$.
+\item Utiliser la liste $P$ pour en déduire une fonction \texttt{tri}, d’arguments $L$ et $N$, renvoyant la liste $L$ triée dans l’ordre croissant.
+\item Tester la fonction \texttt{tri} sur une liste de 20 entiers inférieurs ou égaux à 5, tirés aléatoirement.
+\item Quelle est la complexité temporelle de cet algorithme ? La comparer à la complexité d’un tri par insertion ou d’un tri fusion.
+\end{enumerate}
+
+\addcontentsline{toc}{subsection}{Exercice 12 -- Courbes paramétrées}
+\subsection*{Exercice 12 -- Courbes paramétrées}
+\begin{enumerate}
+\item Deux paramètres $b$ et $w$ valant respectivement 0,5 et 6,0, définir trois fonctions d’une variable $t$ renvoyant des couples :
+$$
+\left\{
+\begin{array}{ll}
+p : t \mapsto &\left(\cos(t) +b \cos(wt),      \sin(t) + b \sin (wt) \right) \\
+v : t \mapsto &\left(-\sin(t)  -bw \sin(wt),\right. \\     
+& \quad \left. \cos(t) + b w\cos (wt) \right) \\
+a : t \mapsto &\left(-\cos(t)-bw^2 \cos(wt),\right. \\ 
+& \quad \left.-\sin(t) - b w^2 \sin (wt) \right) \\
+\end{array}
+\right.
+$$
+Vérifier ces fonctions sur un exemple.
+
+$p(t)=(x(t),y(t))$ désigne la position dans le plan d'une masse ponctuelle mobile au cours du temps, $v(t)=(x'(t),y'(t))$, sa vitesse, et $a(t)=(x''(t),y''(t))$, son accélération.
+\item Construire la liste \texttt{L} des points $p(t)$, pour $t$ variant de $-\pi$ à $\pi$ avec un pas de discrétisation $\delta t$ vérifiant $\delta t = 0,01 \; \pi$.
+\item Faire tracer dans le plan muni d’un repère orthonormal la ligne polygonale reliant les points $p(t)$ de la liste \texttt{L}.
+\item Définir puis tester la fonction $c$ d’une variable $t$ qui renvoie le couple des coordonnées du centre de courbure donnée par :
+$$
+c(t)=\left(x(t)-dy'(t),y(t)+dx'(t)\right) $$ 
+où
+$$
+d= \dfrac{x'(t)^2+y'(t)^2}{x'(t)y''(t)-y'(t)x''(t)}.
+$$
+\item Rajouter sur le graphique précédent la ligne décrite par les centres de courbure, avec la même
+discrétisation en temps.
+\item Calculer la longueur de la ligne polygonale reliant les points $p(t)$, pour différents pas de discrétisation $\delta t$. Observer l'évolution de cette longueur lorsque $\delta t$ diminue.
+\end{enumerate}
+
 \end{multicols}
+
 \end{document}
 
 \subsection*{Exercice 3}
