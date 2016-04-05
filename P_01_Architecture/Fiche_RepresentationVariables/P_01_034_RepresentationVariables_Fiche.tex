@@ -96,8 +96,11 @@ On note :
 \subsection*{Représentation des nombres entiers relatifs}
 
 \begin{methode} 
-Pour représenter l’opposé d’un nombre positif par son complément à deux, on inverse les bits 0 et 1 et on ajoute 1 au mot binaire obtenu.
+Pour représenter l’opposé d’un nombre positif par son complément à deux, on commence par le coder le nombre en binaire. On inverse les bits 0 et 1 et on ajoute 1 au mot binaire obtenu.
 \end{methode}
+\begin{rem}
+Lorsqu'on travaille sur un système $n$ bits, on peut coder les nombres allant de $-2^{n-1}$ à $-2^{n-1}-1$.
+\end{rem}
 
 \subsection*{Représentation des nombres réels}
 \begin{methode}
