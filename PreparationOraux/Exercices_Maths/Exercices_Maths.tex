@@ -95,7 +95,7 @@ caractères. Cette nouvelle fonction renvoie toujours la somme des cubes des chi
 \subsection*{Exercice 2 -- Intégration}
 On cherche à calculer une valeur approchée de l’intégrale d’une fonction donnée par des points dont les coordonnées sont situées dans un fichier.
 \begin{enumerate}
-\item Le fichier \texttt{ex\_001.csv}, situé dans le sous-répertoire \texttt{data} du répertoire de travail, contient une quinzaine de lignes selon le modèle suivant :
+\item Le fichier \texttt{ex\_01.txt}, situé dans le sous-répertoire \texttt{data} du répertoire de travail, contient une quinzaine de lignes selon le modèle suivant :
 
 \begin{center}
 
@@ -368,8 +368,9 @@ discrétisation en temps.
 
 \newpage
 
-\addcontentsline{toc}{subsection}{Exercice 1 -- Arithmétique}
-\subsection*{Exercice 1 -- Arithmétique}
+
+\addcontentsline{toc}{subsection}{Exercice 1 -- Arithmétique -- Corrigé}
+\subsection*{Exercice 1 -- Arithmétique -- Corrigé}
 
 \begin{corrige}
 $\quad$
@@ -449,6 +450,81 @@ def somcube2(n):
 print(somcube2(1234))
 \end{python}
 \end{corrige}
+
+\addcontentsline{toc}{subsection}{Exercice 2 -- Intégration -- Corrigé}
+\subsection*{Exercice 2 -- Intégration -- Corrigé}
+
+\begin{corrige}
+$\quad$
+\begin{python}
+# Question 1
+# ==========
+# Le répertoire courant est Exercice_02.
+# Le sous-répertoire data contient le
+# fichier ex_01.txt.
+
+# On ouvre le fichier en lecture)
+fid = open("data\ex_01.txt")
+
+# On charge le fichier dans une liste.
+# Chaque élément de la liste correspond à 
+# chaque ligne sous forme de chaîne de caractère.
+file = fid.readlines()
+# On ferme le fichier
+fid.close()
+
+LX=[]
+LY=[]
+for ligne in file :
+    ligne = ligne.split(';')
+    LX.append(float(ligne[0]))
+    LY.append(float(ligne[1]))
+\end{python}
+\end{corrige}
+
+\begin{corrige}
+$\quad$
+\begin{python}
+# Question 2
+# ==========
+# Ne pas oublier de charger préalablement 
+# import matplotlib.pyplot as plt
+
+plt.plot(LX,LY)
+plt.show()
+\end{python}
+\end{corrige}
+
+
+
+\begin{corrige}
+$\quad$
+\begin{python}
+# Question 3
+# ==========
+def trapeze(x,y):
+    res = 0 
+    for i in range(1,len(LX)):
+        res = res + (LX[i]-LX[i-1])*0.5*(LY[i]+LY[i-1])
+    return res
+print(trapeze(LX,LY))
+\end{python}
+\end{corrige}
+
+\begin{corrige}
+$\quad$
+\begin{python}
+# Question 4
+# ==========
+from scipy.integrate import trapz
+# Attention à l'ordre des arguments dans 
+# la fonction trapz : les_y puis les_x
+# Après l'import, help(trapz) permet d'avoir 
+# de l'aide sur la fonction.
+print(trapz(LY,LX))
+\end{python}
+\end{corrige}
+
 \end{multicols}
 
 \end{document}
