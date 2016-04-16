@@ -2,9 +2,6 @@
 # -*- coding: utf-8 -*-
 __author__ = "Xavier PESSOLES"
 
-# Import des bibliothèques
-import matplotlib.pyplot as plt
-
 # Question 1
 # ==========
 # Matrices avec des listes
@@ -48,3 +45,18 @@ def degre(M,i):
 
 # Question 5
 # ==========
+
+def longueur(M,chemin):
+    l = 0
+    for i in range(len(chemin)-1):
+        if M[chemin[i]][chemin[i+1]]<0:
+            return -1
+        else :
+            l=l+M[chemin[i]][chemin[i+1]]
+    return l
+    
+chemin = [1,2,3,1,4]
+print(longueur(M,chemin))
+        
+chemin = [0,4,2,1,0]
+print(longueur(M,chemin))
