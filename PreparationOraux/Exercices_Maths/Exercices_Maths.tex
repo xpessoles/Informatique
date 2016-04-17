@@ -215,8 +215,8 @@ x &\text{ pour } 0\leq x < 1 \\
 $$
 \begin{enumerate}
 \item Définir la fonction $g$. Tracer sa courbe représentative sur $[0 , 2[$, c’est-à-dire la ligne brisée reliant les points $(x, g(x))$ pour $x$ variant de 0 à 1,99 avec un pas de 0,01.
-\item Définir une fonction $f$ donnée de manière récursive sur $[0 , +\infty[$ par
-$$ g(x) =
+\item Définir une fonction $f$ donnée de manière récursive sur $[0 , +\infty[$ par :
+$$ f(x) =
 \left\{
 \begin{array}{ll}
 g(x) &\text{ pour } 0\leq x < 2 \\
@@ -654,11 +654,97 @@ $\quad$
 \end{python}
 \end{corrige}
 
+\addcontentsline{toc}{subsection}{Exercice 6 -- Corrigé}
+\subsection*{Exercice 6 -- Corrigé}
+\begin{corrige}
+$\quad$
+\begin{python}
+# Import de fonctions
+import matplotlib.pyplot as plt
+from math import sqrt
 
+# Question 1 
+# ==========
+def g(x):
+    if x>= 0 and x<1 :
+        return x
+    elif x>1 and x<2 :
+        return 1
+xx = [0]
+t=0
+while t<=1.99:
+    t=t+0.01
+    xx.append(t)
+yy = [g(x) for x in xx]
+
+plt.plot(xx,yy)
+plt.show()
+\end{python}
+\end{corrige}
+
+\begin{corrige}
+$\quad$
+\begin{python}
+# Question 2
+# ==========
+def f(x):
+    if x>=0 and x<2 :
+        return g(x)
+    else : # x>=2
+        return sqrt(x)*f(x-2)
+\end{python}
+\end{corrige}
+
+\begin{corrige}
+$\quad$
+\begin{python}
+# Question 3
+# ==========
+xxx = [0]
+t=0
+while t<=6:
+    t=t+0.01
+    xxx.append(t)
+yyy = [f(x) for x in xxx]
+
+plt.plot(xxx,yyy)
+plt.show()
+\end{python}
+\end{corrige}
+
+\begin{corrige}
+$\quad$
+\begin{python}
+# Question 4
+# ==========
+# On cherche à résoudre f(x)-4 = 0 sur
+# l'intervalle [5,6]
+def h(x):
+    res = f(x)-4
+    return res
+
+a = 5.
+b = 6.
+
+while (b-a)>0.01:
+    m=(a+b)/2
+    if h(m)>0:
+        b=m
+    else :
+        a=m
+m=(a+b)/2
+
+if h(m)<0:
+    m= m+ abs(b-a)
+print(m,h(m))
+
+\end{python}
+\end{corrige}
 
 \end{multicols}
 
 \end{document}
+
 \addcontentsline{toc}{subsection}{Exercice 4}
 \subsection*{Exercice 4}
 \begin{corrige}
