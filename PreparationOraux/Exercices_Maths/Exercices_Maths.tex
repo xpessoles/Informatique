@@ -451,6 +451,10 @@ print(somcube2(1234))
 \end{python}
 \end{corrige}
 
+\vfill
+
+\columnbreak
+
 \addcontentsline{toc}{subsection}{Exercice 2 -- Intégration -- Corrigé}
 \subsection*{Exercice 2 -- Intégration -- Corrigé}
 
@@ -525,6 +529,8 @@ print(trapz(LY,LX))
 \end{python}
 \end{corrige}
 
+\newpage
+
 \addcontentsline{toc}{subsection}{Exercice 3 -- Graphe -- Corrigé}
 \subsection*{Exercice 3 -- Graphe -- Corrigé}
 
@@ -541,7 +547,7 @@ M=[[0,9,3,-1,7],
       [7,-1,2,-1,0]]
 \end{python}
 \end{corrige}
-\newpage
+%\newpage
 
 \begin{corrige}
 $\quad$
@@ -567,6 +573,7 @@ def voisins(M,i):
 # print(voisins(M,0))
 \end{python}
 \end{corrige}
+
 
 \begin{corrige}
 $\quad$
@@ -605,6 +612,10 @@ chemin = [0,4,2,1,0]
 print(longueur(M,chemin))
 \end{python}
 \end{corrige}
+
+\vfill
+
+\columnbreak
 
 \subsection*{Exercice 4}
 \begin{corrige}
@@ -652,6 +663,12 @@ $\quad$
 # ================
 \end{python}
 \end{corrige}
+\newpage
+
+\addcontentsline{toc}{subsection}{Exercice 5 -- Corrigé}
+\subsection*{Exercice 5 -- Corrigé}
+
+\columnbreak 
 
 \addcontentsline{toc}{subsection}{Exercice 6 -- Corrigé}
 \subsection*{Exercice 6 -- Corrigé}
@@ -661,7 +678,6 @@ $\quad$
 # Import de fonctions
 import matplotlib.pyplot as plt
 from math import sqrt
-
 # Question 1 
 # ==========
 def g(x):
@@ -675,7 +691,6 @@ while t<=1.99:
     t=t+0.01
     xx.append(t)
 yy = [g(x) for x in xx]
-
 plt.plot(xx,yy)
 plt.show()
 \end{python}
@@ -705,7 +720,6 @@ while t<=6:
     t=t+0.01
     xxx.append(t)
 yyy = [f(x) for x in xxx]
-
 plt.plot(xxx,yyy)
 plt.show()
 \end{python}
@@ -724,7 +738,6 @@ def h(x):
 
 a = 5.
 b = 6.
-
 while (b-a)>0.01:
     m=(a+b)/2
     if h(m)>0:
@@ -736,9 +749,10 @@ m=(a+b)/2
 if h(m)<0:
     m= m+ abs(b-a)
 print(m,h(m))
-
 \end{python}
 \end{corrige}
+
+\newpage 
 
 \addcontentsline{toc}{subsection}{Exercice 7 -- Corrigé}
 \subsection*{Exercice 7 -- Corrigé}
@@ -761,9 +775,7 @@ def d(n):
         if n%nombre == 0:
             L.append(nombre)
     return L
-
-print(d(4))
-print(d(10))
+print(d(4),d(10))
 \end{python}
 \end{corrige}
 
@@ -774,14 +786,12 @@ $\quad$
 # ==========
 def DNT_01(n):
     return d(n)[1:-1]
-
 def DNT_02(n):
     L =[]
     for nombre in range(2,n):
         if n%nombre == 0:
             L.append(nombre)
     return L
-    
 print(DNT_01(4),DNT_02(4))
 print(DNT_01(10),DNT_02(10))
 \end{python}
@@ -797,21 +807,18 @@ def sommeCarresDNT_01(n):
     L = DNT_01(n)
     res = [x**2 for x in L]
     return sum(res)
-
 def sommeCarresDNT_02(n):
     L = DNT_01(n)
     res = 0
     for x in L:
         res = res + x*x
     return res
-    
 def sommeCarresDNT_03(n):
     L = DNT_01(n)
     res = 0
     for i in range(len(L)):
         res = res + L[i]**2
     return res
-    
 print(sommeCarresDNT_01(15),sommeCarresDNT_02(15),
     sommeCarresDNT_03(15))
 \end{python}
@@ -827,7 +834,6 @@ from math import sqrt
 for i in range(1001):
     if i == sommeCarresDNT_01(i) :
         print(str(i)+"\t"+str(sqrt(i)))
-
 # Conjecture les nombres recherchés sont 
 # les carrés des nombres premiers. 
 \end{python}
@@ -916,6 +922,7 @@ $\quad$
 \end{python}
 \end{corrige}
 
+\newpage
 
 
 \addcontentsline{toc}{subsection}{Exercice 9 -- Fractale de Mandelbrot -- Corrigé}
@@ -1062,6 +1069,8 @@ def affichage(m,M,res):
 \textit{$m=20$, $M=40$, 500 points par 500 points}
 \end{center}
 
+\columnbreak 
+
 \addcontentsline{toc}{subsection}{Exercice 10 -- Corrigé}
 \subsection*{Exercice 10 -- Corrigé}
 \begin{corrige}
@@ -1069,18 +1078,15 @@ $\quad$
 \begin{python}
 import numpy as np
 # Question 1
-# ==========
 R = np.array([[1,2,3],[4,5,6]])
 S = np.array([[1,2,3],[4,5,6],[7,8,9]])
 \end{python}
-
 \end{corrige}
 
 \begin{corrige}
 $\quad$
 \begin{python}
 # Question 2
-# ==========
 def test(M):
     """
     Fonction permettant de tester si la
@@ -1097,9 +1103,7 @@ def test(M):
         return l
     else : 
         return 0
-
-print(test(R))
-print(test(S))
+print(test(R),test(S))
 \end{python}
 \end{corrige}
 
@@ -1107,7 +1111,6 @@ print(test(S))
 $\quad$
 \begin{python}
 # Question 3
-# ==========
 fid = open("data/ex_006.txt",'r')
 M1 = []
 for ligne in fid :
@@ -1123,7 +1126,6 @@ M1 = np.array(M1)
 $\quad$
 \begin{python}
 # Question 4
-# ==========
 if test(M1)>0:
     valeurs_propres = np.linalg.eig(M1)[0]
     print(valeurs_propres)
@@ -1134,7 +1136,6 @@ if test(M1)>0:
 $\quad$
 \begin{python}
 # Question 5
-# ==========
 def dansIntervalle(L,a,b):
     """
     Vérifier que chaque élément de L est dans 
@@ -1154,6 +1155,7 @@ print(dansIntervalle(valeurs_propres,0,1))
 \end{python}
 \end{corrige}
 
+\newpage
 
 \addcontentsline{toc}{subsection}{Exercice 11 -- Tri de liste -- Corrigé}
 \subsection*{Exercice 11 -- Tri de liste -- Corrigé}
@@ -1236,9 +1238,149 @@ $\quad$
 # Dans le cas moyen : tri insertion O(n^2)
 \end{python}
 \end{corrige}
+ 
+\columnbreak
 
 \addcontentsline{toc}{subsection}{Exercice 12 -- Corrigé}
 \subsection*{Exercice 12 -- Corrigé}
+
+\begin{corrige}
+$\quad$
+\begin{python}
+b,w = 0.5,6
+# Question 1 
+# ==========
+import numpy as np
+def fonc_p(t):
+    return [np.cos(t)+b*np.cos(w*t),np.sin(t)
+    			+b*np.sin(w*t)]
+\end{python}
+\end{corrige}
+
+\begin{corrige}
+$\quad$
+\begin{python}
+def fonc_v(t):
+    return [-np.sin(t)-b*w*np.sin(w*t),np.cos(t)
+    			+b*w*np.cos(w*t)]
+\end{python}
+\end{corrige}
+
+\begin{corrige}
+$\quad$
+\begin{python}
+def fonc_a(t):
+    return [-np.cos(t)-b*w*w*np.cos(w*t),
+    		 -np.sin(t)-b*w*w*np.sin(w*t)]
+\end{python}
+\end{corrige}
+
+\begin{corrige}
+$\quad$
+\begin{python}
+# Question 2
+# ==========
+L=np.linspace(-np.pi,np.pi,200)
+\end{python}
+\end{corrige}
+
+\begin{corrige}
+$\quad$
+\begin{python}
+# Question 3
+# ==========
+import matplotlib.pyplot as plt
+p = fonc_p(L)
+#plt.plot(p[0],p[1])
+#plt.axis("equal")
+#plt.show()
+\end{python}
+\end{corrige}
+
+\begin{center}
+\includegraphics[width=.8\linewidth]{programmes/Exercice_12/figure_1}
+\end{center}
+
+\columnbreak
+
+\begin{corrige}
+$\quad$
+\begin{python}
+# Question 4
+# ==========
+def fonc_d(t):
+    xp,yp = fonc_v(t)
+    xpp,ypp = fonc_a(t)
+    return (xp**2 + yp**2)/(xp*ypp-yp*xpp)
+def fonc_c(t):
+    fd = fonc_d(t)
+    x,y = fonc_p(t)
+    xp,yp = fonc_v(t)
+    return [x-fd*yp,y+fd*xp]
+\end{python}
+\end{corrige}
+
+\begin{corrige}
+$\quad$
+\begin{python}
+# Question 5
+# ==========
+les_xc  = []
+les_yc  = []
+c = fonc_c(L)
+#plt.plot(c[0],c[1])
+\end{python}
+\end{corrige}
+
+\begin{corrige}
+$\quad$
+\begin{python}
+# Question 6
+# ==========
+from math import sqrt
+def distance(p):
+    """
+    Calcule la longueur du profil p.
+    Entrée : 
+     * p(lst) : liste [les_x,les_y]
+    Sortie : 
+     * L(flt) : longueur du profil.
+    """
+    L=0
+    for i in range(len(p[0])-1):
+        x0 = p[0][i]
+        y0 = p[1][i]
+        x1 = p[0][i+1]
+        y1 = p[1][i+1]
+        L = L+ sqrt((x1-x0)**2+(y1-y0)**2)
+    return L
+\end{python}
+\end{corrige}
+
+\begin{corrige}
+$\quad$
+\begin{python}
+les_dt = []
+les_dist = []
+for i in range(10,2000,1) :
+    dt = 2*np.pi/i
+    L=np.linspace(-np.pi,np.pi,i)
+    p = fonc_p(L)
+    d = distance(p)
+    les_dt.append(dt)
+    les_dist.append(d)
+plt.plot(les_dt,les_dist)
+plt.show()       
+\end{python}
+\end{corrige}
+
+
+\begin{center}
+\includegraphics[width=.8\linewidth]{programmes/Exercice_12/figure_2}
+
+\textit{Évolution de la longueur du polynôme en fonction de $\delta t$.}
+\end{center}
+
 
 \end{multicols}
 \end{document}
@@ -1257,7 +1399,6 @@ $\quad$
 \begin{python}
 
 \end{python}
-
 \end{corrige}
 
 \begin{corrige}
@@ -1289,8 +1430,5 @@ $\quad$
 \end{corrige}
 
 
-\begin{enumerate}
-\item 
-\end{enumerate}
 
 
