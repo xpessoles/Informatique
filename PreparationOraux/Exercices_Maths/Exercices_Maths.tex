@@ -1155,8 +1155,87 @@ print(dansIntervalle(valeurs_propres,0,1))
 \end{corrige}
 
 
-\addcontentsline{toc}{subsection}{Exercice 11 -- Corrigé}
-\subsection*{Exercice 11 -- Corrigé}
+\addcontentsline{toc}{subsection}{Exercice 11 -- Tri de liste -- Corrigé}
+\subsection*{Exercice 11 -- Tri de liste -- Corrigé}
+
+\begin{corrige}
+$\quad$
+\begin{python}
+# Question 1 
+# ==========
+def comptage(L,n):
+    """
+    Comptage des éléments de L.
+    Entrées :
+     * n(int) : entier
+     * L(lst) : liste d'éléments inférieurs à n
+    """
+    P = [0 for i in range(n+1)]
+    # P = [0]*(n+1)
+    for e in L:
+        P[e]=P[e]+1
+    return P
+from random import randint
+maxi = 5
+LL = [randint(0,maxi) for x in range(20)]
+P = comptage(LL,maxi)
+# print(LL)
+# print(P)
+\end{python}
+
+\end{corrige}
+
+\begin{corrige}
+$\quad$
+\begin{python}
+# Question 2
+# ==========
+def tri(L,n):
+    """
+    Tri une liste.
+    Entrées :
+     * n(int) : entier
+     * L(lst) : liste d'éléments inférieurs à n
+    Sortie : 
+     * T(lst) : liste triée.
+    """
+    P = comptage(L,n)
+    T = []
+    for i in range(len(P)):
+        for j in range(P[i]):
+            T.append(i)
+    return T
+\end{python}
+\end{corrige}
+
+\begin{corrige}
+$\quad$
+\begin{python}
+# Question 3
+# ==========
+from random import randint
+maxi = 5
+LL = [randint(0,maxi) for x in range(20)]
+T = tri(LL,maxi)
+print(LL)
+print(T)
+\end{python}
+\end{corrige}
+
+\begin{corrige}
+$\quad$
+\begin{python}
+# Question 4
+# ==========
+# Complexité quadratique : C(n)=O(n+n^2)=O(n^2)
+# n : complexité de comptage
+# n^2 : complexité des deux boucles imbriquées du 
+# tri
+# Ce tri s'exécutera toujours dans le pire des cas.
+# Dans le cas moyen : tri fusion O(nlogn)
+# Dans le cas moyen : tri insertion O(n^2)
+\end{python}
+\end{corrige}
 
 \addcontentsline{toc}{subsection}{Exercice 12 -- Corrigé}
 \subsection*{Exercice 12 -- Corrigé}
