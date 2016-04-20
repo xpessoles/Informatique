@@ -3,8 +3,8 @@
 __author__ = "Xavier PESSOLES"
 
 # EXERCICE 12
-b,w = 0.5,6
 
+b,w = 0.5,6
 # Question 1 
 # ==========
 import numpy as np

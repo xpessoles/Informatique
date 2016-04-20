@@ -55,7 +55,7 @@ print(T)
 
 # Question 4
 # ==========
-# Complexité quadratique : C(n)=O(n+n²)=0(n²)
+# Complexité quadratique : C(n)=O(n+n²)=O(n²)
 # n : complexité de comptage
 # n² : complexité des deux boucles imbriquées du tri
 # Ce tri s'exéctuera toujours dans le pire des cas.
