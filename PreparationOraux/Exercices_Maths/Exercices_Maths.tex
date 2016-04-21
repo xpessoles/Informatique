@@ -366,6 +366,42 @@ discrétisation en temps.
 \item Calculer la longueur de la ligne polygonale reliant les points $p(t)$, pour différents pas de discrétisation $\delta t$. Observer l'évolution de cette longueur lorsque $\delta t$ diminue.
 \end{enumerate}
 
+
+\addcontentsline{toc}{subsection}{Exercice 13 -- Opérations sur les polynômes}
+\subsection*{Exercice 13 -- Opérations sur les polynômes -- 2.11.3 p.50}
+\begin{flushright}
+\textit{D'après Frédéric Butin, l'informatique pas à pas en prépa, éditions ellipse.}
+\end{flushright}
+Un polynôme $P=\sum\limits_{j=0}^{n}a_j X^j \in \mathbb{R}[X]$ de degré $n$ est représenté dans cet exercice par le tableau $P=[a_0,...,a_n]$.
+
+\begin{enumerate}
+\item Créer une fonction \texttt{affiche\_poly} qui permet d'afficher un polynôme sous la forme $P=\sum\limits_{j=0}^{n}a_j X^j$.
+\item Créer une fonction \texttt{degre\_poly} qui calcule le degré d'un polynôme.
+\item Implémenter la somme, le produit et la multiplication par un scalaire comme des fonctions notées \texttt{add\_poly}, \texttt{mul\_poly} et \texttt{mul\_sca\_poly}.
+\item Créer une fonction \texttt{prsc\_poly} qui calcule le prduit scalaire canonique de deux polynômes.
+\item Créer une fonction \texttt{deriv\_poly} qui calcule la dérivée d'un polynôme.
+\end{enumerate}
+
+\subsection*{Exercice 14 -- Produits polynômes -- 2.11.20 p.65}
+\begin{flushright}
+\textit{D'après Frédéric Butin, l'informatique pas à pas en prépa, éditions ellipse.}
+\end{flushright}
+Un polynôme $P=\sum\limits_{j=0}^{n}a_j X^j \in \mathbb{R}[X]$ de degré $n$ est représenté dans cet exercice par le tableau $P=[a_0,...,a_n]$.
+
+\begin{enumerate}
+\item Créer une fonction \texttt{affiche\_poly} qui permet d'afficher un polynôme sous la forme $P=\sum\limits_{j=0}^{n}a_j X^j$.
+\item Créer une fonction \texttt{degre\_poly} qui calcule le degré d'un polynôme.
+\item Implémenter le produit de deux polynômes. On notera \texttt{mul\_poly} cette fonction. Donner sa complexité.
+\end{enumerate}
+On suppose désormais que $n=2^k=2m$. La méthode qui suit permet de calculer le produit de deux polynômes en utilisant le principe <<diviser pour régner>>. 
+
+On pose $P=P_1+X^m P_2$ et $Q=Q_1+X^mQ_2$, où $P_1$ et $Q_1$ sont de degré strictement inférieur à $m$. Ainsi, $PQ=P_1Q_1+X^m\left(P_1Q_2 + Q_1P_2\right)+X^n P_2 Q_2$. 
+
+\begin{enumerate}
+\item Calculer le produit de deux polynômes de degré strictement inférieur à $n$ revient donc à calculer 4 produits de deux polynômes de degré inférieur à $\dfrac{n}{2}$. Implémenter cet algorithme en une fonction \texttt{mul\_poly\_div}. Quelle est sa complexité ? Qu'en conclure ?
+\item Une autre méthode de calcul consiste à poser $R_1=P_1Q_1$, $R_2=P_2Q_2$ et $R_3=\left(P_1+P_2 \right)\left(Q_1+Q_2 \right)$. Expliciter $PQ$ en fonction des polynômes $R_1$, $R_2$, $R_3$. En déduire un algorithme (appelé algorithme de Karatsuba) permettant le calcul de $PQ$ que l'on implémentera en une fonction \texttt{mul\_poly\_kara}. Comparer la complexité de cet algorithme à celle des algorithmes des questions précédentes. 
+\item Que faire quand $n$ n'est pas de la forme $2^k$.
+\end{enumerate}
 \newpage
 
 
