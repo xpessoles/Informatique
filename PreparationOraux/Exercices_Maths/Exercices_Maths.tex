@@ -423,12 +423,103 @@ $$
 
 \addcontentsline{toc}{subsection}{Exercice 16 -- Fonction de Takagi}
 \subsection*{Exercice 16 -- Fonction de Takagi -- 4.6.26 p.112}
+\begin{flushright}
+\textit{D'après Frédéric Butin, l'informatique pas à pas en prépa, éditions ellipse.}
+\end{flushright}
+
 La fonction de Takagi est définie sur $[0,1]$ par $T:x\mapsto \sum\limits_{k=0}^{\infty} \dfrac{d\left( 2^k x \right)}{2^k}$, où $d(y)$ représente la distance de $y$ à l'entier le plus proche. On peut montrer que cette fonction est continue sur $[0,1]$ mais nulle part dérivable.
 \begin{enumerate}
 \item Pour tout entier $n\in \mathbb{N}$, majorer $||T-T_n||_{\infty}=\sup\limits_{x\in[0,1]} |T(x)-T_n(x)|$ où $T_n:x \mapsto \sum\limits_{k=0}^{n} \dfrac{d\left( 2^k x \right)}{2^k}$.
 \item Représenter le graphe de cette fonction, appelé la courbe du blanc-manger.
 \end{enumerate}
 
+\addcontentsline{toc}{subsection}{Exercice 16 -- Modèle logistique}
+\subsection*{Exercice 16 -- Modèle logistique -- 4.6.27 p.113}
+\begin{flushright}
+\textit{D'après Frédéric Butin, l'informatique pas à pas en prépa, éditions ellipse.}
+\end{flushright}
+
+Pour tout $a\in]0,3]$,  on considère la suite récurrente $(u_n)_{n\in\mathbb{N}}$ définie par $u_0 \in \left[ 0,1+\dfrac{1}{a}\right]$ et pour tout $n\in\mathbb{N}^*$, $u_{n+1}=\left(1+a\left(1-u_n \right) \right)u_n$. Cette suite représente, à un facteur près, la population d'une espèce.
+
+\begin{enumerate}
+\item Pour $a=1$ et $u_0=0,5$, représenter graphiquement les 10 premiers termes de la suite.
+\item On fixe $u_0=0,5$. Créer une procédure qui reçoit en arguments $a_1$, $c$, $a_2$ et permet de représenter les termes $u_n$ pour $n\in \llbracket 100,200 \rrbracket$ et $a=a_1+jc$, $j\in\llbracket 0,\lfloor \dfrac{a_2-a_1}{c}\rfloor \rrbracket$ (les points sont à tracer sont des points de coordonnées $(a,u_n)$.
+\item Exécuter cette procédure avec $a_1=2$, $c=0,005$, $a_2=3$ puis avec $a_1=2.84$, $c=0,0001$, $a_2=2,86$.
+\end{enumerate}
+
+
+\addcontentsline{toc}{subsection}{Exercice 17 -- Enveloppe d'une famille de droites}
+\subsection*{Exercice 17 -- Enveloppe d'une famille de droites -- 4.6.28 p.115}
+\begin{flushright}
+\textit{D'après Frédéric Butin, l'informatique pas à pas en prépa, éditions ellipse.}
+\end{flushright}
+
+Doit $\left(D_t\right)_{t\in I}$ une famille de droites du plan affine, où $I$ est un intervalle de $\mathbb{R}$. On munit le plan d'un repère, de sorte que la droite $D_t$ a pour équation :
+$$
+u(t) x+v(t) y + w(t) = 0.
+$$
+
+On suppose que les applications $u$, $v$, $w$ sont de classe $\mathcal{C}^1$ sur $I$ et qu'elles ne s'annulent pas en même temps. 
+
+On cherche une courbe paramétrée $f:I \to \mathbb{R}^2$ telle que pour tout $t\in I$, 
+\begin{itemize}
+\item $f(t)\in D_t$;
+\item $D_t$ est tangente à la courbe en $f(t)$.
+\end{itemize}
+Quand elle existe, cette courbe est appelée l'enveloppe de la famille de droits $\left(D_t\right)_{t\in I}$. 
+\begin{enumerate}
+\item On note $f(t)=\left(x(t),y(t)\right)$. Montrer que $\left(x(t),y(t)\right)$ est solution du système :
+$$
+\left\{
+\begin{array}{l}
+u(t) x(t) + v(t) y(t)= -w(t) \\
+u'(t) x(t) + v'(t) y(t)= -w'(t) \\
+\end{array}
+\right. .
+$$
+En déduire qu'au voisinage de tout point $t_0 \in I$ tel que :
+$$
+\left| 
+\begin{array}{cc}
+u(t_0) & v(t_0) \\
+u'(t_0) & v'(t_0)
+\end{array}
+\right|
+\neq 0
+$$,
+le système précédent a une unique solution, donnée par :
+$$
+x(t)=\dfrac{\left| 
+\begin{array}{cc}
+-w(t) & v(t) \\
+-w'(t) & v'(t)
+\end{array}
+\right|
+}{\left| 
+\begin{array}{cc}
+u(t) & v(t) \\
+u'(t) & v'(t)
+\end{array}
+\right|},
+y(t)=\dfrac{\left| 
+\begin{array}{cc}
+u(t) & -w(t) \\
+u'(t) & -w'(t)
+\end{array}
+\right|
+}{\left| 
+\begin{array}{cc}
+u(t) & v(t) \\
+u'(t) & v'(t)
+\end{array}
+\right|}.
+$$
+\item Déterminer une paramétrisation de l'enveloppe $E$ de la famille des droites $\left(D_t\right)_{t\in \mathbb{R}}$ d'équation :
+$$
+\sin(t) x - \cos(t) y -\sin^2(t)=0.
+$$
+\item Représenter, sur un même graphique, $E$ et plusieurs droites $D_t$.
+\end{enumerate}
 \newpage
 
 
