@@ -382,6 +382,7 @@ Un polynôme $P=\sum\limits_{j=0}^{n}a_j X^j \in \mathbb{R}[X]$ de degré $n$ es
 \item Créer une fonction \texttt{deriv\_poly} qui calcule la dérivée d'un polynôme.
 \end{enumerate}
 
+\addcontentsline{toc}{subsection}{Exercice 14 -- Produits polynômes}
 \subsection*{Exercice 14 -- Produits polynômes -- 2.11.20 p.65}
 \begin{flushright}
 \textit{D'après Frédéric Butin, l'informatique pas à pas en prépa, éditions ellipse.}
@@ -402,6 +403,32 @@ On pose $P=P_1+X^m P_2$ et $Q=Q_1+X^mQ_2$, où $P_1$ et $Q_1$ sont de degré str
 \item Une autre méthode de calcul consiste à poser $R_1=P_1Q_1$, $R_2=P_2Q_2$ et $R_3=\left(P_1+P_2 \right)\left(Q_1+Q_2 \right)$. Expliciter $PQ$ en fonction des polynômes $R_1$, $R_2$, $R_3$. En déduire un algorithme (appelé algorithme de Karatsuba) permettant le calcul de $PQ$ que l'on implémentera en une fonction \texttt{mul\_poly\_kara}. Comparer la complexité de cet algorithme à celle des algorithmes des questions précédentes. 
 \item Que faire quand $n$ n'est pas de la forme $2^k$.
 \end{enumerate}
+
+
+\addcontentsline{toc}{subsection}{Exercice 15 -- Courbes en polaires}
+\subsection*{Exercice 15 -- Courbes en polaires -- 4.6.25 p.111}
+\begin{flushright}
+\textit{D'après Frédéric Butin, l'informatique pas à pas en prépa, éditions ellipse.}
+\end{flushright}
+
+Pour tout $n \in \mathbb{N}^*$, on considère $\Gamma_n$ en coordonnées polaires définie par :
+$$
+\sigma_n(\theta) = \cos^3 \left( n\theta\right) - \sin^3 \left( n\theta\right).
+$$
+\begin{enumerate}
+\item Représenter la courbe $\Gamma_0$.
+\item Représenter sur un même graphique les courbes $\Gamma_j$, pour $j \in \llbracket 0,3\rrbracket $.
+\end{enumerate}
+
+
+\addcontentsline{toc}{subsection}{Exercice 16 -- Fonction de Takagi}
+\subsection*{Exercice 16 -- Fonction de Takagi -- 4.6.26 p.112}
+La fonction de Takagi est définie sur $[0,1]$ par $T:x\mapsto \sum\limits_{k=0}^{\infty} \dfrac{d\left( 2^k x \right)}{2^k}$, où $d(y)$ représente la distance de $y$ à l'entier le plus proche. On peut montrer que cette fonction est continue sur $[0,1]$ mais nulle part dérivable.
+\begin{enumerate}
+\item Pour tout entier $n\in \mathbb{N}$, majorer $||T-T_n||_{\infty}=\sup\limits_{x\in[0,1]} |T(x)-T_n(x)|$ où $T_n:x \mapsto \sum\limits_{k=0}^{n} \dfrac{d\left( 2^k x \right)}{2^k}$.
+\item Représenter le graphe de cette fonction, appelé la courbe du blanc-manger.
+\end{enumerate}
+
 \newpage
 
 
