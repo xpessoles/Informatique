@@ -523,7 +523,6 @@ $$
 
 
 
-
 \addcontentsline{toc}{subsection}{Exercice 18 -- Hypocycloïde}
 \subsection*{Exercice 18 -- Hypocycloïde -- 4.6.29 p.117}
 \begin{flushright}
@@ -563,6 +562,24 @@ $$
 \item Vérifier que ces points sont effectivement des points de rebroussement.
 \end{enumerate}
 
+
+\addcontentsline{toc}{subsection}{Exercice 19 -- Ensembles de Mandelbrot et de Julia}
+\subsection*{Exercice 19 -- Ensembles de Mandelbrot et de Julia -- 4.6.30 p.119}
+\begin{flushright}
+\textit{D'après Frédéric Butin, l'informatique pas à pas en prépa, éditions ellipses.}
+\end{flushright}
+
+L'ensemble de Mandelbrot est la partie $M$ du plan complexe définie par $M=\left\{c \in \mathbb{C} / \right.$ la suite $\left(z_n \right)_{n\in\mathbb{N}}$ définie par $z_0=0$ et $z_{n+1}=z_n^2+c$ est bornée \}.
+
+De même, pour tout $c \in \mathbb{C}$, l'ensemble de Julia de paramètre $c$ est défini par 
+$J_c=\left\{z \in \mathbb{C} / \right.$ la suite $\left(z_n \right)_{n\in\mathbb{N}}$ définie par $z_0=z$ et $z_{n+1}=z_n^2+c$ est bornée \}.
+
+On souhaite représenter l'ensemble de Mandelbrot. On fixe un entier $p$ assez grand, et pour chaque point $c\in\mathbb{C}$, on s'intéresse à la suite $\left(z_n \right)_{n\in\mathbb{N}}$ définie par $z_0=0$ et pour tout $n\in\mathbb{N}$, $z_{n+1}=z_n^2+c$. On considère que cette suite n'est pas bornée s'il existe $k\leq p$ tel que $|z_k| \geq 4$.
+
+\begin{enumerate} 
+\item Représenter l'ensemble de Mandelbrot. On pourra utiliser la fonction \texttt{imshow} qui permet de représenter, par une couleur différente, chaque valeur de $k_0$, où $k_0$ est le plus petit entier tel que $|z_{k0}|\geq 4$.
+\item En procédant de même, représenter l'ensemble de Julia $J_c$ pour différentes valeur de $c$.
+\end{enumerate}
 \newpage
 
 
