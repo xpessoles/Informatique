@@ -38,7 +38,7 @@
 \def\xxonglet{\textsf{Oral}}
 
 \def\xxactivite{Exercices}
-\def\xxauteur{\textsl{Xavier Pessoles} \\ D'après Banque PT}
+\def\xxauteur{\textsl{Xavier Pessoles} \\ D'après Banque PT et L'informatique pas à pas en prépa.}
 
 \def\xxcompetences{%
 %\textsl{%
@@ -593,7 +593,6 @@ On souhaite représenter l'ensemble de Mandelbrot. On fixe un entier $p$ assez g
 \textit{D'après Frédéric Butin, l'informatique pas à pas en prépa, éditions ellipses.}
 \end{flushright}
 
-
 \addcontentsline{toc}{subsection}{Exercice 22 -- Intégration numérique}
 \subsection*{Exercice 22 -- Intégration numérique -- 4.6.33 p.124}
 \begin{flushright}
@@ -605,6 +604,97 @@ On considère la fonction $f:x \mapsto \ln x$.
 \item Calculer $I=\int\limits_1^4 f(x) \text{d}x$.
 \item Comparer l'erreur entre $I$ et la valeur approchée de $I$ obtenue par les méthodes des rectangles et des trapèzes en approchant un nombre de points $n$ où $n$ parcourt la suite $[10,20,40,100,200, 400, 500, 600, 700, 800, 900, 1000,$ $5000, 10000, 20000, 100000]$.
 \item Représenter graphiquement cette erreur en prenant une échelle $\log$ -- $\log$. Expliquer les graphes obtenus.
+\end{enumerate}
+
+
+\addcontentsline{toc}{subsection}{Exercice 23 -- Équation différentielle}
+\subsection*{Exercice 23 -- Équation différentielle -- 4.6.34 p.125}
+\begin{flushright}
+\textit{D'après Frédéric Butin, l'informatique pas à pas en prépa, éditions ellipses.}
+\end{flushright}
+
+Pour $n \in \mathbb{N}$, on considère l'équation différentielle : 
+$$
+x''(t) +10 x'(t) - x(t)=\sin \left( nt \right).
+$$
+\begin{enumerate}
+\item Résoudre cette équation différentielle avec les conditions initiales $x(0)=0$ et $x'(0)=1$.
+\item Représenter le graphe des solutions pour $n\in \llbracket 0,10 \rrbracket$ et $t \in[0,7]$.
+\end{enumerate}
+
+\addcontentsline{toc}{subsection}{Exercice 23 -- Suite de Fibonacci}
+\subsection*{Exercice 23 -- Suite de Fibonacci -- 4.6.41 p.135}
+\begin{flushright}
+\textit{D'après Frédéric Butin, l'informatique pas à pas en prépa, éditions ellipses.}
+\end{flushright}
+
+La suite de Fibonacci est la suite $\left( F_n \right)_{n \in \mathbb{N}}$ définie par $F_0=1$, $F_1=1$ et pour tout $n\in \mathbb{N}$, $F_{n+2}=F_{n+1}+F_{n}$.
+
+\begin{enumerate}
+\item Écrire une fonction qui calcule $F_n$ à l'aide de produits de matrice.
+\item Déterminer la complexité de la procédure de la question précédente en nombre d'additions et en nombre de multiplications. On distinguera les cas où :
+\begin{itemize}
+\item la méthode d'exponentiation naïve est utilisée;
+\item la méthode d'exponentiation rapide est utilisée.
+\end{itemize}
+\end{enumerate}
+
+
+\addcontentsline{toc}{subsection}{Exercice 24 -- Produits de matrices}
+\subsection*{Exercice 24 -- Produits de matrices -- 4.6.42 p.136}
+\begin{flushright}
+\textit{D'après Frédéric Butin, l'informatique pas à pas en prépa, éditions ellipses.}
+\end{flushright}
+\begin{enumerate}
+\item Calculer la complexité, en termes d'opérations sur les coefficients, de l'addition et de la multiplication de deux matrices de $M_n\mathbb{R}$ par la méthode naïve qui consiste à utiliser la définition du produit.
+
+On suppose désormais que $n=2^k=2m$.
+\item Une méthode de calcul de produit de deux matrices qui repose sur le principe << diviser pour régner >> est la suivante. On pose : 
+$$
+M=
+\begin{bmatrix}
+M_{11} & M_{12} \\
+M_{21} & M_{22}
+\end{bmatrix} 
+\quad
+\text{et}
+\quad
+N=
+\begin{bmatrix}
+N_{11} & N_{12} \\
+N_{21} & N_{22}
+\end{bmatrix} .
+$$
+On a donc :
+$$
+P=MN = 
+\begin{bmatrix}
+P_{11} & P_{12} \\
+P_{21} & P_{22}
+\end{bmatrix}
+$$
+avec :
+$$
+\begin{array}{ll}
+P_{11} = M_{11}N_{11} + M_{12}N_{21} & 
+P_{12} = M_{11}N_{12} + M_{12}N_{22} \\
+P_{21} = M_{21}N_{11} + M_{22}N_{21} & 
+P_{22} = M_{21}N_{12} + M_{12}N_{22}.
+\end{array}
+$$
+Ainsi calculer le produit de deux matrices $M_n\mathbb{R}$ revient à calculer 8 produits de deux matrices de $M_{n/2}\mathbb{R}$.
+
+Implémenter cet algorithme en une fonction \texttt{prod\_div}. Quelle est sa complexité ? Qu'en conclure ?
+\item Une autre méthode de calcul consiste à poser 
+$C_1 =M_{11}\left(N_{12} - N_{22} \right)$, 
+$C_2 =N_{22}\left(M_{11} + M_{12} \right)$, 
+$C_3 =N_{11}\left(M_{21} + M_{22}\right)$, 
+$C_4 =M_{22}\left(N_{21} - N_{11} \right)$, 
+$C_5 =\left(M_{11} + M_{22} \right) \left(N_{11} + N_{22} \right)$, 
+$C_6 =\left(M_{12} - M_{22} \right)\left(N_{21} + N_{22} \right)$
+et
+$C_7 =\left(M_{11} - M_{21} \right)\left(N_{11} + N_{12} \right)$. Expliciter $P_{11}$, $P_{12}$, $P_{21}$ et $P_{22}$ en fonction des matrices $C_1$, ..., $C_7$. En déduire un algorithme (appelé algorithme de Strassen) permettant le calcul de $P=MN$ que l'on implémentera en une fonction \texttt{prod\_strassen}. Comparer la complexité de cet algorithme à celle des algorithmes des questions précédentes. 
+\item Que faire quand $n$ n'est pas de la forme $2^k$ ?
 \end{enumerate}
 \newpage
 
