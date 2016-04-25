@@ -587,11 +587,38 @@ On souhaite représenter l'ensemble de Mandelbrot. On fixe un entier $p$ assez g
 \textit{D'après Frédéric Butin, l'informatique pas à pas en prépa, éditions ellipses.}
 \end{flushright}
 
+La courbe de Peano est construite à partir d'un motif de base dans le lequel on remplace chacun des 9 segments par le motif complet auquel on a appliqué une homothétie de rapport $\dfrac{1}{3}$. 
+
+\begin{enumerate}
+\item S'approprier le module \texttt{turtle} en réalisant un cercle avec la tortue.
+\item En utilisant la tortue de Python, écrire une procédure récursive qui reçoit un entier $n$ et trace la courbe obtenue en itérant $n$ fois le procédé décrit ci-dessus.
+\end{enumerate}
+\begin{rem}
+Pour utiliser le module \texttt{turtle} :
+\begin{itemize}
+\item importer le module : \texttt{import turtle};
+\item cacher la tortue : \texttt{turtle.hideturtle()};
+\item choisir la vitesse de la tortue : \texttt{turtle.speed(10)};
+\item faire en sorte que la tortue laisse un trait sur son chemin : \texttt{tortue = turtle.Pen()};
+\item faire avancer la tortue de 5 : \texttt{tortue.forward(5)};
+\item faire tourner la tortue de 90 degrés vers la gauche : \texttt{tortue.left(90)}.
+\end{itemize}
+\end{rem}
+
 \addcontentsline{toc}{subsection}{Exercice 21 -- Flocon de Koch}
 \subsection*{Exercice 21 -- Flocon de Koch -- 4.6.32 p.123}
 \begin{flushright}
 \textit{D'après Frédéric Butin, l'informatique pas à pas en prépa, éditions ellipses.}
 \end{flushright}
+Le flocon de Koch est construit à partir d'un triangle équilatéral sur chacun des trois côtés duquel on applique les transformations suivantes : 
+\begin{itemize}
+\item on divise le côté en trois segments de même longueur;
+\item on construit un triangle équilatéral ayant pour base le segment du milieu dont on supprime la base.
+\end{itemize}
+\begin{enumerate}
+\item Si cela n'a pas été fait, s'approprier le module \texttt{turtle} en réalisant un cercle avec la tortue.
+\item En utilisant la tortue de Python, écrire une procédure récursive qui reçoit un entier $n$ et trace le flocon de Koch en itérant $n$ fois le procédé décrit ci-dessus.
+\end{enumerate}
 
 \addcontentsline{toc}{subsection}{Exercice 22 -- Intégration numérique}
 \subsection*{Exercice 22 -- Intégration numérique -- 4.6.33 p.124}
@@ -696,6 +723,95 @@ et
 $C_7 =\left(M_{11} - M_{21} \right)\left(N_{11} + N_{12} \right)$. Expliciter $P_{11}$, $P_{12}$, $P_{21}$ et $P_{22}$ en fonction des matrices $C_1$, ..., $C_7$. En déduire un algorithme (appelé algorithme de Strassen) permettant le calcul de $P=MN$ que l'on implémentera en une fonction \texttt{prod\_strassen}. Comparer la complexité de cet algorithme à celle des algorithmes des questions précédentes. 
 \item Que faire quand $n$ n'est pas de la forme $2^k$ ?
 \end{enumerate}
+
+
+\addcontentsline{toc}{subsection}{Exercice 25 -- Équations différentielles}
+\subsection*{Exercice 25 -- Équations différentielles -- 4.6.46 p.144}
+\begin{flushright}
+\textit{D'après Frédéric Butin, l'informatique pas à pas en prépa, éditions ellipses.}
+\end{flushright}
+On souhaite résoudre par différences finies l'équation :
+$$
+u''(x)+2u(x) = 2 \cos x + \sin^2 x
+$$
+sur $[0,\pi]$ avec les conditions aux limites $u(0)=0$ et $u(\pi)=0$.
+
+On considère la subdivision $0=x_0<x_1<...<x_n<x_{n+1} = \pi$ de l'intervalle $[0,\pi]$ où $x_i=ih$ et $h=\dfrac{\pi}{n+1}$. Pour tout $i$, on note $u_i$ la valeur approchée cherchée de $u(x_i)$ et on approche la dérivée seconde $u''(x)$ par :
+$$
+\dfrac{u_{i-1}-2u_i+u_{i+1}}{h^2}.
+$$
+
+\begin{enumerate}
+\item Montrer que le système d'équation obtenu s'écrit matriciellement $AU=F$, où 
+$$
+A= 
+\begin{bmatrix}
+2h^2 - 2 & 1        & & & \\
+1           & \ddots & \ddots & &  \\
+& \ddots & \ddots &\ddots  & \\
+& & \ddots & \ddots &1\\  
+&& & 1 & 2h^2-2 \\
+\end{bmatrix}
+$$
+
+$$
+F=
+\begin{bmatrix}
+h^2 f(x_1) \\
+\vdots \\
+h^2 f(x_n)
+\end{bmatrix}
+\quad
+U=
+\begin{bmatrix}
+u_1 \\
+\vdots \\
+u_n
+\end{bmatrix}
+$$
+avec $f:x\mapsto 2 \cos x + \sin^2 x$.
+\item Résoudre le système linéaire et représenter graphiquement la solution. 
+\item La solution exacte de l'équation est :
+$$
+\begin{array}{lcl}
+u(x)&=&\dfrac{\sin \left(\sqrt{2} x\right)  \left( 3+5 \cos \left(\sqrt 2 \pi \right)\right)}{2\sin \left(\sqrt{2} \pi\right)} \\
+&&- \dfrac{5\cos \left(\sqrt{2} x\right)}{2}
++ \dfrac{\cos x}{2} \left( 4+\cos x\right)
+\end{array}.
+$$
+Superposer le graphe de la solution exacte au graphe de la solution approchée.
+\end{enumerate}
+
+
+\addcontentsline{toc}{subsection}{Exercice 27 -- Équations des ondes}
+\subsection*{Exercice 27 -- Équations des ondes -- 4.6.47 p.146}
+\begin{flushright}
+\textit{D'après Frédéric Butin, l'informatique pas à pas en prépa, éditions ellipses.}
+\end{flushright}
+On souhaite résoudre par différences finies l'équation des ondes : 
+$$
+\partial_{tt} u(x,t) - c^2 \partial_{xx} u(x,t) = 0
+$$
+
+sur $[-5,5] \times [0,0.1]$ avec les conditions initiales $u(x,0)=\exp\left( {-10 x^2}\right)$ et 
+$\partial_t u(x,0)=0$, et les conditions aux limites $u(-5,t)=u(5,t)=0$. 
+
+On considère la subdivision $-5=x_0<x_1<\ldots <x_n <  x_{n+1} =5$ (resp. 
+$0=t_0<t_i<\ldots<t_{m-1}<t_m=0,1$) de l'intervalle $[-5,5]$ (resp. $[0,0.1]$) où 
+$x_i=-5+ih$ (resp. $t_k=kl$) et $h=\dfrac{10}{n+1}$ (resp. $l=\dfrac{0,1}{m}$).
+
+Pour tout $(i,k) \in \llbracket 0,n+1 \rrbracket \times\llbracket 0,m \rrbracket $, on note $z_{i,k}$ la valeur approchée cherchée de $u\left(x_i,t_k\right)$ et l'on approche la dérivée première 
+$\partial_{t} u(x_i,t_k)$ par $\dfrac{z_{i,k+1}-z_{i,k}}{l}$ et la dérivée seconde $\partial_{tt} u(x_i,t_k)$ par $\dfrac{z_{i,k+1}-2z_{i,k}+z_{i,k-1}}{l^2}$. On choisit $n=m=100$ et $c=31,6$.
+
+\begin{enumerate}
+\item Résoudre l'équation par différences finies en utilisant le schéma explicite, qui consiste à approcher la dérivée seconde $\partial_{xx} u(x_i,t_k)$ par l'expression $\dfrac{z_{i-1,k}-2z_{i,k}+z_{i+1,k}}{h^2}$.
+\item Créer une animation permettant de visualiser la solution obtenue quand $t$ varie. 
+\item Résoudre l'équation par différences finies en utilisant le schéma implicite, qui consiste à approcher la dérivée seconde $\partial_{xx} u(x_i,t_k)$ par l'expression :
+$\dfrac{z_{i-1,k+1}-2z_{i,k+1}+z_{i+1,k+1}}{h^2}$.
+\item Créer une animation permettant de visualiser la solution obtenue quand $t$ varie. 
+\end{enumerate}
+
+
 \newpage
 
 
