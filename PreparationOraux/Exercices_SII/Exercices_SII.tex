@@ -75,8 +75,62 @@ Préparation à l'épreuve de TP de SII%
 
 %\begin{multicols}{2}
 \section{Loi entrée-sortie du portail ABB}
+On donne le schéma cinématique et le paramétrage de la loi Entrée-Sortie du portail ABB.
 
-%\subparagraph{} \textit{Commenter les fonctions ...}
+\begin{center}
+\includegraphics[width=.7\linewidth]{images/Schema}
+
+\includegraphics[width=\linewidth]{images/Parametrage}
+\end{center}
+
+Un moteur à courant continu commande la liaison pivot entre \textbf{0} et \textbf{3}.  
+
+
+On a : 
+\begin{multicols}{2}
+\begin{itemize}
+\item $\vect{OA} = a \vx{1}-f \vy{1}$;
+\item $\vect{AB} = b \vx{2}$;
+\item $\vect{BC} = -c \vx{3}$;
+\item $\vect{OC} = -d \vx{0}-e\vy{0}$;
+\end{itemize}
+\end{multicols}
+ 
+Les équations régissant la loi entre l'angle d'entrée $\theta_4$ et l'angle de sortie $\theta_1$ sont donnés par les équations suivantes : 
+
+$$
+\left\{
+\begin{array}{l}
+a \cos \theta_1 + b\cos \theta_2 \cos \theta_1 
+-b \sin\theta_2 \sin\theta_1 - c \cos \theta_4  
++d 
++f\sin \theta_1 
+ =0  \\
+a \sin\theta_1 + b\cos \theta_2 \sin\theta_1 + b\sin\theta_2 \cos \theta_1  
+- c \sin\theta_4 +e 
+-f\cos \theta_1 = 0  \\
+\theta_1 +\theta_2 + \theta_3 - \theta_4 = 0
+\end{array}
+\right.
+$$
+
+
+On donne le programme \texttt{01\_LoisESABB.py} permettant de tracer $\theta_2$, $\theta_3$ et $\theta_4$ en fonction de $\theta_1$.
+\begin{enumerate}
+\item Exécuter le programme. Quelle phase de vie du portail est simulée ?
+\item Quel est le domaine de variation angulaire du moteur pour un cycle d'ouverture ou de fermeture ?
+\item Modifier le programme pour avoir une plus grande précision angulaire sur les différentes positions.
+\item Expliquer comment a été rédigée la fonction \texttt{systeme}. Vous préciserez la nature et le type des données d'entrées et de sorties. 
+\item Quel est l'objectif de la fonction \texttt{resoudre} ? Commenter les différents blocs d'instruction. Vous préciserez en particulier le rôle de la fonction \texttt{fsolve} et vous justifierez le rôle de la variable \texttt{sol\_ini}.
+\item Le fichier \texttt{mesure.txt} situé dans le répertoire \texttt{data} contient les mesures des angles $\theta_1$ et $\theta_4$ en fonction du temps. Afficher $\theta_4$ en fonction de $\theta_1$ (angles mesurés). (Dans le fichier texte, la première colonne correspond au temps, la seconde à $\theta_4$ et la dernière à $\theta_1$.)
+\item Afficher sur un même graphe la courbe mesurée et la courbe simulée.  
+\item On souhaite que le ventail portail s'ouvre en 10 secondes. Le temps d'accélération est de 0,5 secondes. Déterminer l'accélération maximale du portail ainsi que sa fréquence de rotation lorsqu'il évolue à fréquence de rotation constante. Modifier la fonction trapèze pour afficher le trapèze de vitesse. 
+\item Modifier le programme pour connaître la loi de commande du moteur pour que le ventail ait une loi de vitesse en trapèze. 
+
+
+\end{enumerate}
+
+
 
 
 %\newpage
