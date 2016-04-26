@@ -65,7 +65,7 @@ Préparation à l'épreuve de TP de SII%
 }
 
 %---------------------------------------------------------------------------
-
+\usepackage{wrapfig}
 
 \begin{document}
 \chapterimage{png/Fond_ALG}
@@ -80,7 +80,7 @@ On donne le schéma cinématique et le paramétrage de la loi Entrée-Sortie du 
 \begin{center}
 \includegraphics[width=.7\linewidth]{images/Schema}
 
-\includegraphics[width=\linewidth]{images/Parametrage}
+\includegraphics[width=.8\linewidth]{images/Parametrage}
 \end{center}
 
 Un moteur à courant continu commande la liaison pivot entre \textbf{0} et \textbf{3}.  
@@ -124,28 +124,60 @@ On donne le programme \texttt{01\_LoisESABB.py} permettant de tracer $\theta_2$,
 \item Quel est l'objectif de la fonction \texttt{resoudre} ? Commenter les différents blocs d'instruction. Vous préciserez en particulier le rôle de la fonction \texttt{fsolve} et vous justifierez le rôle de la variable \texttt{sol\_ini}.
 \item Le fichier \texttt{mesure.txt} situé dans le répertoire \texttt{data} contient les mesures des angles $\theta_1$ et $\theta_4$ en fonction du temps. Afficher $\theta_4$ en fonction de $\theta_1$ (angles mesurés). (Dans le fichier texte, la première colonne correspond au temps, la seconde à $\theta_4$ et la dernière à $\theta_1$.)
 \item Afficher sur un même graphe la courbe mesurée et la courbe simulée.  
-\item On souhaite que le ventail portail s'ouvre en 10 secondes. Le temps d'accélération est de 0,5 secondes. Déterminer l'accélération maximale du portail ainsi que sa fréquence de rotation lorsqu'il évolue à fréquence de rotation constante. Modifier la fonction trapèze pour afficher le trapèze de vitesse. 
-\item Modifier le programme pour connaître la loi de commande du moteur pour que le ventail ait une loi de vitesse en trapèze. 
-
-
+\item On souhaite que la vitesse du portail soit de $6,59\degres.\text{min}^{-1}$. On néglige le temps d'accélération. Modifier le programme en conséquence et afficher $\theta_1$ et $\theta_4$ en fonction du temps.
+\item Tracer $\dot{\theta_4}(t)$ en fonction du temps.
+\item Tracer $\dot{\theta_4}(t)$ pour les courbes mesurées et simulées.
 \end{enumerate}
 
+\newpage
 
-
-
-%\newpage
 \section{Traitement du signal }% des génératrices tachymétriques de la capsuleuse}
+La vitesse du maneton et de la croix Malte de la capsuleuse est mesurée grâce à deux génératrices tachymétriques.
+
+\begin{center}
+\includegraphics[width=.7\linewidth]{images/CE_CI}
+\end{center}
+Le fichier \texttt{mesure.txt} contenu dans le dossier \texttt{data} contient les mesures réalisées par chacune des deux génératrices.
 
 
-%\newpage
+\begin{enumerate}
+\item Ouvrir le fichier \texttt{02\_FiltrageCapsuleuse.py} et l'exécuter. Commenter l'allure des courbes.
+\item Déterminer la fréquence d'échantillonnage du signal mesuré. 
+\item Commenter les 3 fonctions \texttt{lireFichierMesure}, \texttt{filtrageMoyenne} et \texttt{filtrageMoyenneGlissante}. Pour cela vous préciserez la nature des variables d'entrée et de sortie. Vous commenterez ensuite les blocs d'instruction. 
+\item Modifier les valeurs du filtre et observer leur effet. Quelles valeurs permettent d'avoir une courbe lissée. 
+\item On souhaite filtrer le signal grâce à un filtre passe-bas. L'équation différentielle est la suivante : $s(t)+\tau \dfrac{\text{d} s(t)}{\text{d}t} = e(t)$. $e(t)$ désigne le signal non filtré et $s(t)$ désigne le signal filtré. Exprimer la suite $s_k$ correspondant au signal filtré en fonction du pas de calcul $k$, de $\tau$ et des échantillons $s_k$ et $e_k$ nécessaires. 
+\item Implémenter la fonction \texttt{filtrePB} prenant comme arguments la liste des échantillons $e_k$, le pas de calcul $p$ et la pulsation de coupure du filtre $1/\tau$.
+\item Tracer le signal non filtré ainsi que le signal filtré avec différentes pulsations de coupure.
+\end{enumerate}
+
+\newpage
 \section{Détermination des paramètres de rugosité}
+
+\begin{wrapfigure}{r}{4cm}
+\includegraphics[width=4cm]{images/rugosimetre}
+\includegraphics[width=5cm]{images/profil}
+\end{wrapfigure}
+Un rugosimètre est un appareil permettant de mesurer une le profil d'une ligne sur une surface fabriquée. On peut donc mesurer une altitude ($y$) en fonction d'une position longitudinale $(x)$. Une fois le profil mesuré, il est possible de calculer un certain nombre de paramètres sur le profil mesuré : 
+$$
+R_y = y_{\text{max}} - y_{\text{min}}  \quad  Ra = \dfrac{1}{l}\int\limits_0^l |f(x)| \text{d} x .
+$$
+
+\begin{enumerate}
+\item Exécuter le programme et identifier les différents profils.
+\item Analyser l'influence de \texttt{tau} sur les profils. 
+\item Commenter les programmes \texttt{filtrePB}, \texttt{calculAire} et \texttt{rechercheh}. Vous expliciterez quelles sont les données d'entrées et de sorties de ces programmes et vous expliquerez quelles sont les méthodes numériques utilisées.
+\item Déterminer le paramètre \texttt{tau} qui permet de déterminer la porteuse du profil. 
+\item Calculer le paramètre $R_y$.
+\item Calculer le paramètre $R_a$.
+\end{enumerate}
+
 
 \newpage
 \section{Mesure au marbre d'un défaut de planéité}
 
 \end{document}
 \newpage
-\section{Traitement du signal issu de la capsuleuse}
+
 
 
 \newpage
@@ -155,9 +187,7 @@ On donne le programme \texttt{01\_LoisESABB.py} permettant de tracer $\theta_2$,
 \newpage
 \addcontentsline{toc}{section}{Valeur moyenne, valeur efficace}
 \section*{Valeur moyenne, valeur efficace}
-\newpage
-\addcontentsline{toc}{section}{Rugosité d'un profil}
-\section*{Détermination des paramètres de rugosité d'un profil}
+
 \newpage
 \addcontentsline{toc}{section}{Analyse d'image}
 \section*{Analyse d'image}

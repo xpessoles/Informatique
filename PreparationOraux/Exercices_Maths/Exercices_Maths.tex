@@ -783,8 +783,8 @@ Superposer le graphe de la solution exacte au graphe de la solution approchée.
 \end{enumerate}
 
 
-\addcontentsline{toc}{subsection}{Exercice 27 -- Équations des ondes}
-\subsection*{Exercice 27 -- Équations des ondes -- 4.6.47 p.146}
+\addcontentsline{toc}{subsection}{Exercice 26 -- Équations des ondes}
+\subsection*{Exercice 26 -- Équations des ondes -- 4.6.47 p.146}
 \begin{flushright}
 \textit{D'après Frédéric Butin, l'informatique pas à pas en prépa, éditions ellipses.}
 \end{flushright}
@@ -811,8 +811,169 @@ $\dfrac{z_{i-1,k+1}-2z_{i,k+1}+z_{i+1,k+1}}{h^2}$.
 \item Créer une animation permettant de visualiser la solution obtenue quand $t$ varie. 
 \end{enumerate}
 
+\addcontentsline{toc}{subsection}{Exercice 27 -- Position d'une membrane}
+\subsection*{Exercice 27 -- Position d'une membrane -- 4.6.49 p.153}
+\begin{flushright}
+\textit{D'après Frédéric Butin, l'informatique pas à pas en prépa, éditions ellipses.}
+\end{flushright}
+
+On considère une membrane élastique dont le bord est fixé à un cadre carré horizontal. La membrane est soumise à une force verticale $f$. On peut montrer que l'altitude$z(x,y)$ de la membrane en un point du carré de coordonnées $(x,y)$ vérifie l'équation de Laplace :
+$$
+\Delta z\left( x,y\right) = f(x,y)
+$$
+ avec les conditions aux limites $z(x,y)=0$ sur le bord du carré. 
+ 
+ On se place dans le cas où le cadre est le carré $[0,1]^2$ et où$f$ est constante, par exemple $f(x,y)=-4$ pour tout $(x,y)\in[0,1]^2$. 
+ 
+ Pour résoudre cette équation par la discrétisation, on pose $h=\dfrac{1}{n+1}$ et pour tout $(i,j)\in \llbracket 0,n+4 \rrbracket^2$, $x_i=ih$ et $y_j=jh$: on obtient ainsi un quadrillage du carré $[0,1]^2$. On a déjà $z\left(x_i,y_j\right)=0$  si $i\in \{0,n+1\}$ ou $j \in \{0,n+1\}$ par hypothèse. On note $z_{i,j}$ l'approximation cherchée de $z\left(x_i,y_j\right)$ par $z_{i,j}$ et le laplacien $\Delta z\left(x_i,y_j\right)$ par son approximation à 5 points : 
+ 
+ $$
+ \dfrac{1}{h^2}\left( z_{i-1,j}+z_{i+1,j}+z_{i,j-1}+z_{i,j+1}-4z_{i,j}\right).
+ $$
+ 
+ On résout alors le système formé par les équations obtenues, qui est un système linéaire dont les inconnues sont les $z_{i,j}$ pour $(i,j)\in 
+  \llbracket 0,1 \rrbracket^2$.
+\begin{enumerate}
+\item Étant donné $A=\left(a_{i,j}\right)_{(i,j)\in\llbracket 1,n \rrbracket^2 }$ et $B=\left(b_{i,j}\right)_{(i,j)\in\llbracket 1,n \rrbracket^2 }$ deux matrices de $M_n\mathbb{R}$, le produit de Kronecker $de$ A par $B$ est la matrice de $M_{n^2}\mathbb{R}$ définie par :
+$$
+A\otimes B = 
+\begin{bmatrix}
+a_{1,1}B & a_{1,2}B & \ldots & a_{1,n}B \\
+a_{2,1}B & a_{2,2}B & \ldots & a_{2,n}B \\
+\vdots  & & & \vdots  \\
+a_{n,1}B & a_{n,2}B & \ldots & a_{n,n}B \\
+\end{bmatrix} .
+$$
+La commande \texttt{kron} de numpy permet de calculer le produit de Kronecker. Observer que le système linéaire peut se mettre sous la forme $\left(A_n\otimes I_n+ I_n\otimes A_n\right)Z=F$ où $A_n$ est la matrice du laplacien de taille $n$, c'est à dire : 
+$$
+A_n = 
+\begin{bmatrix}
+2  & -1 & & \\
+-1 & \ddots & \ddots & \\
+   & \ddots &\ddots & -1\\
+   &  & -1& 2\\
+\end{bmatrix} .
+$$
+\item Résoudre l'équation par discrétisation, comme expliqué ci-dessus.
+\item Représenter la membrane en 3d.
+\end{enumerate}  
+
+
+\addcontentsline{toc}{subsection}{Exercice 28 -- Polygones orthogonaux}
+\subsection*{Exercice 28 -- Polygones orthogonaux -- 4.6.50 p.155}
+\begin{flushright}
+\textit{D'après Frédéric Butin, l'informatique pas à pas en prépa, éditions ellipses.}
+\end{flushright}
+\begin{enumerate}
+\item Pour $n=16$, créer en Python la base canonique de $\mathbb{R}_n[X]$. 
+\item Définir le produit scalaire $\varphi : \left( P,Q\right) \mapsto \iint\limits_{-1}^{1} P(t) Q(t) \text{d}t$ et la norme euclidienne associée sur $\mathbb{R}_n[X]$. 
+\item En utilisant le procédé de Gram-Schmidt, orthonormaliser la  base canonique pour le produit scalaire $\varphi$.
+\item Calculer la projection orthogonale de $h:x\mapsto \cos \left( 4\pi x\right)$ sur $\mathbb{R}_n[X]$ (approximation de $h$ au sens des moindres carrés).
+\end{enumerate}
+
+
+\addcontentsline{toc}{subsection}{Exercice 29 -- Système proies -- prédateurs}
+\subsection*{Exercice 29 -- Système proies -- prédateurs -- 4.6.37 p.129}
+\begin{flushright}
+\textit{D'après Frédéric Butin, l'informatique pas à pas en prépa, éditions ellipses.}
+\end{flushright}
+Le système proies-prédateurs est régit par les équations de Volterra qui forment le système non linéaire :
+$$
+\left\{
+\begin{array}{l}
+x'(t)=ax(t)-bx(t)y(t) \\
+y'(t)=-cy(t)+dx(t)y(t) \\
+\end{array}
+\right. ,
+$$
+où $a$, $b$, $c$ et $d$ sont des réels strictement positifs. 
+\begin{enumerate}
+\item On pose $X=(x,y)^t$. Créer une fonction $f$ qui à $(X,t,a,b,c,d)$ fait correspondre $(ax-bxy,-cy+dxy)$.
+\item Résoudre le système.
+\item Représenter $x$ et $y$ sur un même graphique. 
+\item Représenter les courbes paramétrées par $x$ et $y$, qui donne l'évolution des deux populations.
+\end{enumerate}
+
+\addcontentsline{toc}{subsection}{Exercice 30 -- Transformée de Fourier}
+\subsection*{Exercice 30 -- Transformée de Fourier -- 4.6.65 p.241.}
+\begin{flushright}
+\textit{D'après Frédéric Butin, l'informatique pas à pas en prépa, éditions ellipses.}
+\end{flushright}
+Implémenter en Python l'algorithme naïf de calcul de la transformée de Fourier d'un vecteur de $\mathbb{C}^N$.
+
+\addcontentsline{toc}{subsection}{Exercice 31}
+\subsection*{Exercice 31 -- 6.5.66 p.242.}
+\begin{flushright}
+\textit{D'après Frédéric Butin, l'informatique pas à pas en prépa, éditions ellipses.}
+\end{flushright}
+Soit $f:\mathbb{R} \to \mathbb{R}$ l'application $2\pi$-périodique définie par :
+$$
+f(x)=\left\{
+\begin{array}{l}
+1  \quad \text{si} \quad x\in[0,\pi[ \\
+10  \quad \text{si} \quad x\in[\pi,2\pi[
+\end{array}
+\right. .
+$$
+\begin{enumerate}
+\item En utilisant la FFT, calculer des valeurs approchées des coefficients de Fourier de $f$. 
+\item Représenter sur un même graphique $f$ et la somme approchée de sa série de Fourier.
+\end{enumerate}
+
+\addcontentsline{toc}{subsection}{Exercice 32 -- Débruitage d'un signal}
+\subsection*{Exercice 32 -- Débruitage d'un signal -- 6.5.65 p.243.}
+\begin{flushright}
+\textit{D'après Frédéric Butin, l'informatique pas à pas en prépa, éditions ellipses.}
+\end{flushright}
+On considère un signal donné par l'application :
+$$
+f:t \mapsto 3 \cos \left( 3t\right)+2\sin \left( 2t\right)-\dfrac{1}{2}\cos t
+$$
+échantillonné sur $n=100$  points équidistants $(t_k)_{k\in \llbracket 1,n\rrbracket}$ du segment $[0,2\pi]$. On introduit sur ce signal un bruit donné par une loi uniforme sur $[-1,1]$ : ainsi pour tout point $t_k$ d'échantillonnage, la valeur du signal n'est pas $f(t_k)$, mais $g(t_k) = f(t_k) + b_k$, où $b_k$ est une réalisation d'une loi uniforme sur $[-1,1]$.
+
+\begin{enumerate}
+\item Représenter sur un même graphique le signal $f$ et le signal bruité $g$.
+\item Appliquer la FFT au signal bruité. Construire alors un nouveau signal débruité $h$ en supprimant les fréquences d'indices trop grands (on peut par exemple ne garder qu'un quart des fréquences).
+\item Représenter $h$ sur le même graphique que $f$ et $g$.
+\end{enumerate}
+\addcontentsline{toc}{subsection}{Exercice 33 -- Taches solaires}
+\subsection*{Exercice 33 -- Taches solaires -- 4.6.65 p.244.}
+\begin{flushright}
+\textit{D'après Frédéric Butin, l'informatique pas à pas en prépa, éditions ellipses.}
+\end{flushright}
+Nous nous intéressons ici aux mesures de l'activité des taches solaires de l'année 1700 à l'année 2004. On appelle nombre de Wolf le nombre de taches solaires observées en une année. %Les données, écrites sous la forme [année, nombre Wolf], sont regrou
+
+La transformée de Fourier, qui permet de passer du domaine temporel au domaine fréquentiel, donne la possibilité de savoir s'il existe une fréquence prédominante, c'est-à-dire si les données sont périodiques.
+
+\begin{enumerate}
+\item Représenter graphiquement le nombre Wolf en fonction de l'année. 
+\item Effectuer la FFT de la liste des nombres de Wolf. On la note $Y$.Représenter alors $\mathfrak{I}\left(Y\right)$ en fonction de $\mathfrak{R}\left(Y\right)$.
+\item On souhaite construire un chronogramme, c'est-à-dire une graphe de la puissance du signal en fonction de la fréquence (la puissance de la FFT étant égale au carré du signal de la FFT). 
+
+Tracer ce chronogramme en utilisant uniquement les coefficients de $Y$ compris entre 1 et $E\left(\dfrac{n}{2}\right)$, où $n$ est le nombre de relevés (les coefficients situés au-delà de $E\left(\dfrac{n}{2}\right)$ correspondant à des coefficients de Fourier d'indices négatifs) : la plage de fréquences est donc :
+
+$$
+\left( \dfrac{k}{n} \right)_{k\in \llbracket 1, E\left(\dfrac{n}{2}\right) \rrbracket} = \left[ \dfrac{1}{n},\dfrac{2}{n},\ldots E\left(\dfrac{n}{2}\right) \dfrac{1}{n}\right].
+$$
+
+Tracer le graphe de la puissance du signal en fonction de la période. Que constate-t-on ?
+\end{enumerate}
+
+\addcontentsline{toc}{subsection}{Exercice 34 -- Traitement d'image -- Filtre}
+\subsection*{Exercice 34 -- Traitement d'image -- Filtre -- 6.5.69 p.247.}
+\begin{flushright}
+\textit{D'après Frédéric Butin, l'informatique pas à pas en prépa, éditions ellipses.}
+\end{flushright}
+
+\begin{enumerate}
+\item Créer une fonction qui permet d'afficher la composante rouge d'une image. 
+\item Créer une fonction qui permet d'afficher la composante cyan.
+\end{enumerate}
 
 \newpage
+
+
+
 
 
 \addcontentsline{toc}{subsection}{Exercice 1 -- Arithmétique -- Corrigé}
