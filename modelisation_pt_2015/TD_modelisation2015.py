@@ -286,24 +286,24 @@ def decode_hamming2(message):
 # 
 # 
 # #Q17: stockage des données dans une liste de liste
-# passages=[]
-# for i in range(2,5):
-#     data = lignes[i] # doit aller de 2 à 4 inclus
-#     data = data.rstrip('\n').split(',')
-#     liste=[]
-#     [liste.append(data[0].split('-')[j]) for j in range (3)]
-#     [liste.append(data[1].split(':')[k]) for k in range (3)]
-#     liste.append(data[2])
-#     passages.append(liste)
+passages=[]
+for i in range(2,5):
+    data = lignes[i] # doit aller de 2 à 4 inclus
+    data = data.rstrip('\n').split(',')
+    liste=[]
+    [liste.append(data[0].split('-')[j]) for j in range (3)]
+    [liste.append(data[1].split(':')[k]) for k in range (3)]
+    liste.append(data[2])
+    passages.append(liste)
     
 
 #Q17bis: stockage des données dans une liste de tuples (correspond moins à l'esprit du sujet)
-#passages=[]
-#for i in range(2,5):
-#    data = lignes[i] # doit aller de 2 à 4 inclus
-#    data = data.rstrip('\n').split(',')
-#    data = data[0].split('-') , data[1].split(':') , data[2] 
-#    passages.append (data)
+passages=[]
+for i in range(2,5):
+   data = lignes[i] # doit aller de 2 à 4 inclus
+   data = data.rstrip('\n').split(',')
+   data = data[0].split('-') , data[1].split(':') , data[2] 
+   passages.append (data)
 
 #Q18
 def estAvant(date1,date2):
@@ -323,25 +323,25 @@ def nbSecondesEntre(heure1, heure2):
     return (heure1[0]-heure2[0])*3600 + (heure1[1]-heure2[1])*60 + (heure1[2]-heure2[2])
 
 #Q20
-#def testPassage(id_titre):
-#    passage = 0 # 0 pas d'erreur, ok pour passer
-#    if id_titre in Liste_noire :
-#        print ("Titre refusé") #test liste noire
-#        passage +=1
-#    if Zone not in zones : #zone ok
-#        print("Non valide dans cette zone")
-#        passage +=1
-#    date = maintenant[:,3]
-#    if estAvant( date_fin, date) : #date ok
-#        print ("Titre expiré")
-#        passage +=1
-#    if Id_Point == passages[0,6]: #pas validé ici depuis 450s
-#        if nbSecondesEntre( Mainteant , passages[0, 5 premiers élèments !]) > 450
-#            print("Titre déjà validé") # A COMPLETER (extract propre, et faire pour les 3 lignes de passages)
-#    if passage = 0:
-#        return True
-#    else:
-#        return False
+def testPassage(id_titre):
+   passage = 0 # 0 pas d'erreur, ok pour passer
+   if id_titre in Liste_noire :
+       print ("Titre refusé") #test liste noire
+       passage +=1
+   if Zone not in zones : #zone ok
+       print("Non valide dans cette zone")
+       passage +=1
+   date = maintenant[:,3]
+   if estAvant( date_fin, date) : #date ok
+       print ("Titre expiré")
+       passage +=1
+   if Id_Point == passages[0,6]: #pas validé ici depuis 450s
+       if nbSecondesEntre( Mainteant , passages[0, 5 premiers élèments !]) > 450
+           print("Titre déjà validé") # A COMPLETER (extract propre, et faire pour les 3 lignes de passages)
+   if passage = 0:
+       return True
+   else:
+       return False
 
 
 def testPassage(id_titre, zones, date_fin,passages) :
