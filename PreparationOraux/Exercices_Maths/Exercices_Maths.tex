@@ -529,7 +529,7 @@ $$
 \textit{D'après Frédéric Butin, l'informatique pas à pas en prépa, éditions ellipses.}
 \end{flushright}
 
-Un cercle $ \Gamma\left(\Omega,r\right)$ roule sans glisser à l'intérieur du cercle $C\left(O,R\right)$ (où $R>r$). On note $M=M(\theta)$ un point de $\Gamma$ dont étudie la trajectoire. On note $\theta$ l'angle $\left( \hat{\vect{i},\vect{O\Omega}}\right)$ et $\varphi$ l'angle $\left( \hat{\vect{\Omega I},\vect{\Omega M}}\right)$. Initialement, $\Omega$ est situé sur l'axe horizontal et $M$ est situé en $I_0$.
+Un cercle $ \Gamma\left(\Omega,r\right)$ roule sans glisser à l'intérieur du cercle $C\left(O,R\right)$ (où $R>r$). On note $M=M(\theta)$ un point de $\Gamma$ dont étudie la trajectoire. On note $\theta$ l'angle $\left( \widehat{\vect{i},\vect{O\Omega}}\right)$ et $\varphi$ l'angle $\left( \widehat{\vect{\Omega I},\vect{\Omega M}}\right)$. Initialement, $\Omega$ est situé sur l'axe horizontal et $M$ est situé en $I_0$.
 
 \begin{center}
 \begin{tikzpicture}
@@ -2195,6 +2195,148 @@ plt.show()
 \end{center}
 
 
+
+
+\columnbreak
+\addcontentsline{toc}{subsection}{Exercice 18 -- Corrigé}
+\subsection*{Exercice 22 -- Corrigé}
+
+\begin{corrige}
+$\quad$
+\begin{python}
+# Question 2
+# ==========
+R=4
+r=R/4
+m = 1-R/r
+theta = np.linspace(0,2*np.pi,1000)
+x=(R-r)*np.cos(theta)+r*np.cos(m*theta)
+y=(R-r)*np.sin(theta)+r*np.sin(m*theta)
+plt.plot(x,y,label="R=4, r=1, m=-3")
+\end{python}
+\end{corrige}
+
+\begin{center}
+\includegraphics[width=.9\linewidth]{images/exo_18_1}
+\end{center}
+
+\begin{corrige}
+$\quad$
+\begin{python}
+# Question 3
+# ==========
+for p in [1, 5, 10, 100]:
+    r=R/p
+    m = 1-R/r
+    theta = np.linspace(0,2*np.pi,1000)
+    x=(R-r)*np.cos(theta)+r*np.cos(m*theta)
+    y=(R-r)*np.sin(theta)+r*np.sin(m*theta)
+    titre = "R="+str(R)+", r = "+str(r)+ ",m="+str(m)
+    plt.plot(x,y,label=titre)
+
+x=R*np.cos(m*theta)
+y=R*np.sin(m*theta)
+#plt.plot(x,y)
+
+plt.axis("equal")
+#plt.legend()
+plt.show()
+\end{python}
+\end{corrige}
+
+\begin{center}
+\includegraphics[width=.9\linewidth]{images/exo_18_2}
+\end{center}
+
+
+
+\columnbreak
+\addcontentsline{toc}{subsection}{Exercice 22 -- Corrigé}
+\subsection*{Exercice 22 -- Corrigé}
+
+\begin{corrige}
+$\quad$
+\begin{python}
+# EXERCICE 22
+# Question 1 
+# ==========
+import matplotlib.pyplot as plt
+import math
+
+I_th = 8*math.log(2)-3
+\end{python}
+\end{corrige}
+
+\begin{corrige}
+$\quad$
+\begin{python}
+# Question 2
+# ==========
+def fonc(x):
+    return math.log(x)
+\end{python}
+\end{corrige}
+
+
+\begin{corrige}
+$\quad$
+\begin{python}    
+def calc_int_trap(a,b,n):
+    res = 0
+    pas = (b-a)/n
+    x = a+pas
+    i=1
+    while i<n:
+        res = res + fonc(x)
+        x = x + pas
+        i=i+1
+    res = pas*(res+(fonc(a)+fonc(b))/2)
+    return res
+\end{python}
+\end{corrige}
+
+
+\begin{corrige}
+$\quad$
+\begin{python}    
+def calc_int_rect_g(a,b,n):
+    res = 0
+    pas = (b-a)/n
+    x = a
+    i=0
+    while i<n:
+        res = res + fonc(x)
+        x = x + pas
+        i=i+1
+    return res*pas
+\end{python}
+\end{corrige}
+
+
+\begin{corrige}
+$\quad$
+\begin{python}
+N = [10,20,40,100,200, 400, 500, 600, 700, 800, 
+        900, 1000, 5000, 10000, 20000, 100000]
+
+calc_int_trap(1,4,10)
+err_trap = [abs(I_th-calc_int_trap(1,4,n)) 
+                                           for n in N]
+err_rect = [abs(I_th-calc_int_rect_g(1,4,n)) 
+                                           for n in N]
+
+plt.loglog(N,err_trap,label = "Erreur trapèze")
+plt.loglog(N,err_rect,label = "Erreur rectangle")
+plt.legend()
+plt.grid()
+plt.show()
+
+\end{python}
+\end{corrige}
+
+\begin{center}
+\includegraphics[width=.9\linewidth]{images/exo_22}
+\end{center}
 
 \end{multicols}
 \end{document}
