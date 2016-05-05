@@ -2506,6 +2506,74 @@ plt.show()
 \includegraphics[width=.9\linewidth]{images/exo_FB_12}
 \end{center}
 
+
+\columnbreak
+\addcontentsline{toc}{subsection}{Exercice 13 -- Corrigé en cours}
+\subsection*{Exercice 13 -- Corrigé}
+
+\begin{corrige}
+On pose : 
+$$
+X_i =\begin{bmatrix}
+F_{i+1} \\
+F_{i}
+\end{bmatrix} 
+$$
+
+Le problème peut être mis sous la forme matricielle suivante : 
+$$
+X_{i+1} =
+\begin{bmatrix}
+F_{i+2} \\
+F_{i+1}
+\end{bmatrix} 
+=
+\begin{bmatrix}
+1 & 1  \\
+1 & 0 
+\end{bmatrix} 
+\begin{bmatrix}
+F_{i+1} \\
+F_{i}
+\end{bmatrix} 
+\Leftrightarrow X_{i+1} = M X_{i}
+$$
+
+On  peut donc écrire que  :
+$$
+X_{i+1} =
+\begin{bmatrix}
+1 & 1  \\
+1 & 0 
+\end{bmatrix} 
+\begin{bmatrix}
+F_{i+1} \\
+F_{i}
+\end{bmatrix} 
+=
+\begin{bmatrix}
+1 & 1  \\
+1 & 0 
+\end{bmatrix} 
+\begin{bmatrix}
+1 & 1  \\
+1 & 0 
+\end{bmatrix} 
+\begin{bmatrix}
+F_{i} \\
+F_{i-1}
+\end{bmatrix} 
+$$
+ On a donc :
+ $$
+X_{n} = M^n X_{0}
+$$
+\begin{python}
+
+\end{python}
+\end{corrige}
+
+
 \end{multicols}
 \end{document}
 
