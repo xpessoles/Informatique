@@ -12,9 +12,9 @@ import numpy as np
 def fibo(n):
     M = np.array([[1,1],[1,0]])
     X0 = np.array([1,1])
-    M = np.linalg.matrix_power(M,n)
+    M = np.linalg.matrix_power(M,n-1)
     X = np.dot(M,X0)
     return X[1]
 
 for i in range(20):
-    print(fibo(i))
+    print(i,fibo(i))    
