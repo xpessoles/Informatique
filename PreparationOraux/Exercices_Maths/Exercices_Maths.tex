@@ -608,6 +608,10 @@ Pour utiliser le module \texttt{turtle} :
 \end{itemize}
 \end{rem}
 
+\begin{center}
+\includegraphics[width=.55\linewidth]{images/peano}
+\end{center}
+
 \addcontentsline{toc}{subsection}{Exercice 10 -- Flocon de Koch}
 \subsection*{Exercice 10 -- Flocon de Koch -- 4.6.32 p.123}
 \begin{flushright}
@@ -2259,8 +2263,88 @@ plt.show()
 \end{center}
 
 
+\end{multicols}
 
-\columnbreak
+
+\begin{multicols}{2}
+
+\addcontentsline{toc}{subsection}{Exercice 9 -- Corrigé}
+\subsection*{Exercice 9 -- Corrigé}
+
+
+
+\begin{corrige}
+$\quad$
+\begin{python}
+# EXERCICE 9
+import numpy as np
+import matplotlib.pyplot as plt
+import turtle
+
+# Question 1 
+#============
+turtle.hideturtle()
+turtle.goto(100,0)
+turtle.speed(1)
+tortue = turtle.Pen()
+
+t = np.linspace(0,2*np.pi,1000)
+x=100*np.cos(t)
+y=100*np.sin(t)
+for i in range(len(x)):
+    tortue.goto(x[i],y[i])
+\end{python}
+\end{corrige}
+
+
+\begin{center}
+\begin{tabular}{cc}
+\includegraphics[width=.4\linewidth]{images/exo_FB_09_01}&
+\includegraphics[width=.4\linewidth]{images/exo_FB_09_02}
+\end{tabular}
+\end{center}
+
+
+
+\begin{corrige}
+$\quad$
+\begin{python}
+# Question 2 
+# ==========
+def peano(n) : 
+    if n==1 :
+        tortue.forward(10)
+    else : 
+        peano(n-1)
+        tortue.left(90)
+        peano(n-1)
+        tortue.left(-90)
+        peano(n-1)
+        tortue.left(-90)
+        peano(n-1)
+        tortue.left(-90)
+        peano(n-1)
+        tortue.left(90)
+        peano(n-1)
+        tortue.left(90)
+        peano(n-1)
+        tortue.left(90)
+        peano(n-1)
+        tortue.left(-90)
+        peano(n-1)
+        
+peano(4)
+turtle.hideturtle()
+\end{python}
+\end{corrige}
+
+\end{multicols}
+
+
+
+
+\begin{multicols}{2}
+
 \addcontentsline{toc}{subsection}{Exercice 11 -- Corrigé}
 \subsection*{Exercice 11 -- Corrigé}
 
