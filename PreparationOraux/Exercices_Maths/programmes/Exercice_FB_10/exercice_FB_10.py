@@ -7,6 +7,7 @@ __author__ = "Frederic Butin"
 import numpy as np
 import matplotlib.pyplot as plt
 import turtle
+__author__ = "Frederic Butin"
 
 # Question 1 
 # ==========
@@ -16,7 +17,7 @@ tortue = turtle.Pen()
 
 def koch (n):
     if n==1 : 
-        tortue.forward(5)
+        tortue.forward(3)
     else : 
         koch(n-1);
         tortue.left(60)
@@ -36,4 +37,4 @@ def flocon(n):
     koch(n)
     tortue.hideturtle()
 
-flocon(2)
+flocon(5)
