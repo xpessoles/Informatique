@@ -627,6 +627,18 @@ Le flocon de Koch est construit à partir d'un triangle équilatéral sur chacun
 \item En utilisant la tortue de Python, écrire une procédure récursive qui reçoit un entier $n$ et trace le flocon de Koch en itérant $n$ fois le procédé décrit ci-dessus.
 \end{enumerate}
 
+\begin{center}
+\begin{tabular}{ccc}
+\includegraphics[width=.25\linewidth]{images/exo_FB_10_K1} &
+\includegraphics[width=.25\linewidth]{images/exo_FB_10_K2} & 
+\includegraphics[width=.25\linewidth]{images/exo_FB_10_K3} \\
+\end{tabular}
+\begin{tabular}{ccc}
+\includegraphics[width=.4\linewidth]{images/exo_FB_10_K4} & 
+\includegraphics[width=.4\linewidth]{images/exo_FB_10_K5}
+\end{tabular}
+\end{center}
+
 \addcontentsline{toc}{subsection}{Exercice 11 -- Intégration numérique}
 \subsection*{Exercice 11 -- Intégration numérique -- 4.6.33 p.124}
 \begin{flushright}
@@ -2208,8 +2220,10 @@ plt.show()
 \includegraphics[width=.9\linewidth]{images/exo_FB_03}
 \end{center}
 
+\end{multicols}
 
 
+\begin{multicols}{2}
 
 \columnbreak
 \addcontentsline{toc}{subsection}{Exercice 7 -- Corrigé}
@@ -2263,15 +2277,11 @@ plt.show()
 \end{center}
 
 
-\end{multicols}
 
 
-\begin{multicols}{2}
-
+\columnbreak 
 \addcontentsline{toc}{subsection}{Exercice 9 -- Corrigé}
 \subsection*{Exercice 9 -- Corrigé}
-
-
 
 \begin{corrige}
 $\quad$
@@ -2338,12 +2348,55 @@ turtle.hideturtle()
 \end{python}
 \end{corrige}
 
-\end{multicols}
+
+\columnbreak 
+
+\addcontentsline{toc}{subsection}{Exercice 10 -- Corrigé}
+\subsection*{Exercice 10 -- Corrigé}
 
 
+\begin{corrige}
+$\quad$
+\begin{python}
+# EXERCICE 10 FB
+import numpy as np
+import matplotlib.pyplot as plt
+import turtle
+__author__ = "Frederic Butin"
+
+# Question 1 
+# ==========
+turtle.hideturtle()
+turtle.speed(10);
+tortue = turtle.Pen()
+
+def koch (n):
+    if n==1 : 
+        tortue.forward(3)
+    else : 
+        koch(n-1);
+        tortue.left(60)
+        koch(n-1);
+        tortue.left(-120)
+        koch(n-1);
+        tortue.left(60)
+        koch(n-1)
+        
+
+def flocon(n):
+    tortue.clear()
+    koch(n)
+    tortue.left(-120)
+    koch(n)
+    tortue.left(-120)
+    koch(n)
+    tortue.hideturtle()
+
+flocon(5)
+\end{python}
+\end{corrige}
 
 
-\begin{multicols}{2}
 
 \addcontentsline{toc}{subsection}{Exercice 11 -- Corrigé}
 \subsection*{Exercice 11 -- Corrigé}
