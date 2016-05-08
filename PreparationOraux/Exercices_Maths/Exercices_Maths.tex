@@ -913,7 +913,7 @@ $$
 où $a$, $b$, $c$ et $d$ sont des réels strictement positifs. 
 \begin{enumerate}
 \item On pose $X=(x,y)^t$. Créer une fonction $f$ qui à $(X,t,a,b,c,d)$ fait correspondre $(ax-bxy,-cy+dxy)$.
-\item Résoudre le système.
+\item Résoudre le système dans les conditions suivantes : $X=(1,2)$ et $a,b,c,d=1,1,1,1$. 
 \item Représenter $x$ et $y$ sur un même graphique. 
 \item Représenter les courbes paramétrées par $x$ et $y$, qui donne l'évolution des deux populations.
 \end{enumerate}
@@ -2711,6 +2711,71 @@ $$
 \end{corrige}
 
 
+\columnbreak
+\addcontentsline{toc}{subsection}{Exercice 19}
+\subsection*{Exercice 19}
+
+\begin{corrige}
+$\quad$
+\begin{python}
+# EXERCICE 19
+# Question 1 
+# ==========
+import numpy as np
+import scipy.integrate as sci
+import matplotlib.pyplot as plt
+
+def fonction_PP(X,t,a,b,c,d):
+    return [a*X[0]-b*X[0]*X[1],-c*X[1]+d*X[0]*X[1]]
+
+def fonction_PP2(X,t):
+    a,b,c,d = 1,1,1,1
+    return [a*X[0]-b*X[0]*X[1],-c*X[1]+d*X[0]*X[1]]
+\end{python}
+\end{corrige}
+
+\begin{corrige}
+$\quad$
+\begin{python}
+# Question 2 
+# ==========
+# Conditions initiale : 
+X0=[1,2]
+t = np.linspace(0,20,1000)
+res = sci.odeint(fonction_PP2,X0,t)
+\end{python}
+\end{corrige}
+
+\begin{corrige}
+$\quad$
+\begin{python}
+# Question 3 
+# ==========
+plt.figure()
+plt.plot(t,res[:,0])
+plt.plot(t,res[:,1])
+\end{python}
+\end{corrige}
+
+\begin{corrige}
+$\quad$
+\begin{python}
+# Question 4 
+# ==========
+plt.figure()
+plt.plot(res[:,0],res[:,1])
+plt.axis("equal")
+\end{python}
+\end{corrige}
+
+\begin{center}
+\includegraphics[width=.8\linewidth]{exo_fb_19_01.png}
+\end{center}
+
+\begin{center}
+\includegraphics[width=.8\linewidth]{exo_fb_19_02.png}
+\end{center}
+
 \end{multicols}
 \end{document}
 
@@ -2719,7 +2784,7 @@ $$
 
 
 
-
+\columnbreak
 \addcontentsline{toc}{subsection}{Exercice 4}
 \subsection*{Exercice 4}
 
