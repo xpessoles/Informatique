@@ -123,7 +123,7 @@ $$
 
 \addcontentsline{toc}{subsection}{Exercice 3 -- Graphe}
 \subsection*{Exercice 3}
-On considère le graphe \texttt{G} suivant, où le nombre situé sur l’arête joignant deux sommets est leur distance, supposée entière :
+On considère le graphe \texttt{G} suivant, où le nombre situé sur l'arête joignant deux sommets est leur distance, supposée entière :
 \begin{center}
 \includegraphics[width=.75\linewidth]{images/exo_3}
 \end{center}
@@ -132,14 +132,14 @@ On considère le graphe \texttt{G} suivant, où le nombre situé sur l’arête 
 \item Construire la matrice $\left( M_{ij}\right)_{0\leq i,j\leq 4}$, matrice de distances du graphe \texttt{G}, définie par :
 
 << pour tous les indices $i$, $j$, $M_{ij}$ représente la distance entre les sommets $i$ et $j$,
-ou encore la longueur de l’arête reliant les sommets $i$ et $j$ >>.
+ou encore la longueur de l'arête reliant les sommets $i$ et $j$ >>.
 
 On convient que, lorsque les sommets ne sont pas reliés, cette distance vaut -1. La distance du
 sommet $i$ à lui-même est, bien sûr, égale à 0.
 \item Écrire une suite d'instructions permettant de dresser à partir de la matrice \texttt{M} la liste des voisins du sommet 4.
-\item Écrire une fonction \texttt{voisins}, d’argument un sommet $i$, renvoyant la liste des voisins du sommet $i$.
-\item Écrire une fonction \texttt{degre}, d’argument un sommet $i$, renvoyant le nombre des voisins du sommet $i$, c’est-à-dire le nombre d’arêtes issues de $i$.
-\item Écrire une fonction \texttt{longueur}, d’argument une liste \texttt{L} de sommets de \texttt{G}, renvoyant la longueur du trajet d'écrit par cette liste \texttt{L}, c’est-à-dire la somme des longueurs des arêtes empruntées. Si le trajet n’est pas possible, la fonction renverra -1.
+\item Écrire une fonction \texttt{voisins}, d'argument un sommet $i$, renvoyant la liste des voisins du sommet $i$.
+\item Écrire une fonction \texttt{degre}, d'argument un sommet $i$, renvoyant le nombre des voisins du sommet $i$, c'est-à-dire le nombre d’arêtes issues de $i$.
+\item Écrire une fonction \texttt{longueur}, d’argument une liste \texttt{L} de sommets de \texttt{G}, renvoyant la longueur du trajet d'écrit par cette liste \texttt{L}, c’est-à-dire la somme des longueurs des arêtes empruntées. Si le trajet n'est pas possible, la fonction renverra $-1$.
 \end{enumerate}
 
 
@@ -1248,8 +1248,8 @@ print(longueur(M,chemin))
 \vfill
 
 \columnbreak
-
-\subsection*{Exercice 4}
+\addcontentsline{toc}{subsection}{Exercice 4 -- Corrigé}
+\subsection*{Exercice 4 -- Corrigé}
 \begin{corrige}
 $\quad$
 \begin{python}
@@ -1289,16 +1289,122 @@ print(nombreZerosMax(t1))
 \end{corrige}
 
 \begin{corrige}
-$\quad$
-\begin{python}
-# Question 3 et 4
-# ================
-\end{python}
+La complexité est quadratique ($\mathcal{O}^2$)  du fait de la boucle \texttt{for} et de la boucle \texttt{while} imbriquée.
+
+Pour diminuer la complexité, il est possible de parcourir une seule fois la liste. On lit alors les termes un à un. Quand on détecte un zéro, on compte alors le nombre de zéros consécutifs et on poursuit jusqu'à la fin...
+
 \end{corrige}
 \newpage
 
 \addcontentsline{toc}{subsection}{Exercice 5 -- Corrigé}
 \subsection*{Exercice 5 -- Corrigé}
+D'après Mme Barré \url{http://www.lycee-lesage.net/}.
+
+
+\begin{corrige}
+$\quad$
+\begin{python}
+import math
+import scipy.misc as scim
+# Question 1 
+# ==========
+def Px_poisson(k, n, p):
+    """
+    Entrée : 
+     * k(int)
+     * n(int) : strictement positif
+     * p(flt) : réel compris entre ]0, 1[
+    X suit une loi de Poisson P(n*p)
+    Sortie : 
+     * flt : (np)^k exp(-np)/k!
+    """
+    np = n * p
+    return (np)**k * math.exp(- np) / math.factorial(k)
+
+n, p = 30, 0.1
+lst_px = [Px_poisson(k, n, p) for k in range(n + 1)]
+\end{python}
+\end{corrige}
+
+\begin{corrige}
+$\quad$
+\begin{python}
+# Question 2
+# ==========
+def Py_binomiale(k, n, p):
+    """
+    Entrée : 
+     * k(int)
+     * n(int) : strictement positif
+     * p(flt) : réel compris entre ]0, 1[
+    Y suit une loi binomiale B(n,k)
+    Sortie : 
+     * int : B(n,k)*p^k *(1-p)^(n-k)
+    """
+    return scim.comb(n,k)*p**k*(1-p)**(n-k)
+
+n, p = 30, 0.1
+lst_py = [Py_binomiale(k, n, p) for k in range(n + 1)]
+\end{python}
+\end{corrige}
+
+\begin{corrige}
+$\quad$
+\begin{python}
+# Question 3
+# ==========
+def ecarts(n,p):
+	"""
+	Entrée :
+     * n(int) : strictement positif
+     * p(flt) : réel compris entre ]0, 1[
+    Sortie : 
+     * maxi(flt) écart maxi entre P(Y=k) et P(X=k)
+    """
+     
+	lst_px = [Px_poisson(k, n, p) for k in range(n + 1)]
+    lst_py = [Py_binomiale(k, n, p) for k in range(n + 1)]
+    maxi = max([abs(lst_py[i]-lst_px[i]) for i in range(len(lst_px))])
+    return maxi
+    
+#print(ecarts(n,p))
+\end{python}
+\end{corrige}
+
+\begin{corrige}
+$\quad$
+\begin{python}
+# Question 4
+# ==========
+def E(e,p):
+	"""
+	Retourne le plus petit entier naturel n tq ecart(n,p)<=e
+	Entrée : 
+	 * e(flt) : >0
+	 * p(flt) : réel compris entre ]0, 1[
+    Sortie :
+     n(int)
+	"""
+	n=1
+	while (ecarts(n,p))>e :
+		n=n+1
+	return n
+\end{python}
+\end{corrige}
+
+\begin{corrige}
+$\quad$
+\begin{python}
+# Question 5
+# ==========
+print(E(0.008,0.075))
+print(E(0.005,0.075))
+print(E(0.008,0.1))
+#print(E(0.005,0.1))
+\end{python}
+\end{corrige}
+
+
 
 \columnbreak 
 
