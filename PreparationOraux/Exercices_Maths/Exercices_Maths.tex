@@ -2,6 +2,7 @@
 \usepackage[%
     pdftitle={CIN : Cinématique du solide},
     pdfauthor={Xavier Pessoles}]{hyperref}
+\usepackage{pdfpages}
 
 \input{style/new_style}
 \input{style/macros_SII}
@@ -74,6 +75,70 @@ Préparation à l'épreuve de << Mathématique et Algorithmique >>%
 %\newpage
 \def\columnseprulecolor{\color{ocre}}
 \setlength{\columnseprule}{0.4pt} 
+
+\section{Avant-propos}
+Ce recueil d'exercices est réalisé à partir de 3 sources : 
+\begin{itemize}
+\item des exercices <<zeros>> de la banque PT; 
+\item d'exercices retranscrits par vos prédécesseurs en 2015 (Lycée Mimard de Saint-Étienne et Lycée La Martinière Monplaisir);
+\item d'exercices tirés du livre de Frédéric Butin : \textit{L'informatique pas à pas en prépa. Cours et exercices corrigés. Éditions ellipses.}
+\end{itemize}
+
+Ces exercices ont pour but de vous entrainer à la partie <<Informatique>> de l'épreuve de <<Mathématiques et d'algorithmique>> de la banque PT, anciennement << Maths II>>. Cette épreuve se déroule à l'école Arts et Métiers ParitTech de Paris.
+
+
+\begin{warn}
+\large{\textbf{
+Afin de vous mettre dans les conditions de l'épreuve, je vous encourage très très très vivement à utiliser IDLE. IDLE est disponible avec toute installation de Python, Pyzo ou WinPython. 
+Pour cela, aller dans le dossier contenant Pyzo puis dans le répertoire \texttt{Lib$\backslash$idlelib} et lancer le programme \texttt{idle.bat}.}
+
+\textbf{Pour réaliser les exercices vous aurez accès à un aide-mémoire des fonctions Python  (qui devrait être agrafé à ce document si je n'oublie pas !}}
+\end{warn}
+
+\subsection*{Notes pour les PT $\star$ (et les autres)}
+
+L'objectif pour vous est de réaliser le maximum d'exercices afin de vous entraîner afin que vous puissiez <<parler python couramment>>.  Vous aurez deux créneaux pour vous entrainer (ce qui ne vous dispense pas de vous entrainer chez vous). Un créneau en parallèle du TD de maths avec Mme Gaggioli. Pendant ce créneau vous travaillerez en autonomie. Un créneau le vendredi matin où je serai là pour vous aider ou pour répondre à vos questions. 
+
+
+\subsection*{Remarques concernant les corrigés}
+Je n'ai pas eu le temps de réaliser les corrigés de chacun des exercices. Concernant les corrigés des exercices de F. Butin, or mention spéciale, les corrigés sont ceux que je propose. Pour les exercices sans corrigé, on peut donc les retrouver dans le bouquin. 
+
+Pour les exercices retranscrits, il se peut qu'il y ait des erreurs de texte (de ma part ou de la part des anciens élèves). Merci de me les rapporter à l'adresse \textbf{\url{xpessoles.ptsi@free.fr}}. 
+
+Par ailleurs, vous pouvez proposer des corrigés que j'ajouterai à ce document ce qui vous vaudra d'avoir votre non cité dans ce recueil ainsi que mon entière considération !
+
+\subsection*{Remarques concernant les exercices retranscrits}
+
+Comme vous le voyez, cette préparation repose en partie sur le retranscription des exercices de vos prédécesseurs. Afin d'améliorer la préparation des futurs élèves, je vous demande donc, à votre tour, à la fin de l'épreuve, de noter immédiatement le texte des exercices et de me les envoyer (ainsi qu'à Madame Gaggioli !). 
+
+\subsection*{Conseils divers et variés}
+\begin{itemize}
+\item Exercez-vous !
+\item Pratiquez du Python !!
+\item Ne vous jetez pas sur les corrigés, mais réfléchissez !
+\item Réfléchissez encore un peu !!
+\item Variez les plaisirs en faisant un peu d'arithmétique, un peu d'équa diff, un peu de courbes ...
+\item Exercez-vous à utilise les bibliothèques de \texttt{numpy} pour manipuler les vecteurs et les matrices.
+\item Exercez-vous à utilise les bibliothèques de \texttt{scipy} pour résoudre les équations différentielles.
+\end{itemize}
+
+\subsection*{Liens...}
+
+Le PDF à jour des différentes modifications est disponible ici : \url{https://goo.gl/8mK4tx}
+
+Les différents corrigés Python ou fichiers nécessaires à certains exercices sont disponibles ici : \url{https://goo.gl/XiIWH7}
+
+
+\begin{flushright}
+\textbf{Pour finir, à la fin des épreuves, n'oubliez pas de m'envoyer vos exercices, impressions \textit{etc.}}
+
+\textbf{Et surtout... m**** pour vos épreuves !}
+
+\textbf{Xavier Pessoles}
+\end{flushright}
+
+\newpage
+
 
 \begin{multicols}{2}
 \section{Recueil d'exercices issus de la banque PT}
@@ -367,11 +432,16 @@ $$
 discrétisation en temps.
 \item Calculer la longueur de la ligne polygonale reliant les points $p(t)$, pour différents pas de discrétisation $\delta t$. Observer l'évolution de cette longueur lorsque $\delta t$ diminue.
 \end{enumerate}
+\end{multicols}
+
+
 
 \newpage 
-
+\begin{multicols}{2}
 \section{Exercices de la banque PT retranscrits par vos prédécesseurs -- 2015}
-
+\begin{rem}
+Les exercices vous sont retranscrits tels que vos prédécesseurs nous les ont retranscrits. 
+\end{rem}
 \addcontentsline{toc}{subsection}{Exercice 1}
 \subsection*{Exercice 1}
 Nombre de manières de payer $n$ euros avec des pièces de \texttt{L} (liste de valeurs).  
@@ -424,6 +494,10 @@ On a par exemple, $TP(4)=[[1],[1,1],[1,2,1],[1,3,3,1],[1,4,6,4,1]$.
 
 \addcontentsline{toc}{subsection}{Exercice 8}
 \subsection*{Exercice 8}
+\begin{rem}
+Exercice tombé au moins deux fois.
+\end{rem}
+
 Un segment $[a,b]$ est noté comme une liste \texttt{[a,b]}. Soient $I_1$ et $I_2$ deux segments. Ils sont disjoints si leur intersection est vide. 
 
 \begin{enumerate}
@@ -432,7 +506,7 @@ Un segment $[a,b]$ est noté comme une liste \texttt{[a,b]}. Soient $I_1$ et $I_
 \item On dit qu'une liste de segments est bien fondée si les segments de cette liste sont disjoints et rangés dans l'ordre croissant. (On dit que $I_1=[a,b]$ est inférieur à $I_2=[c,d]$ si $b<c$.)
 \begin{enumerate}
 \item Les listes suivantes sont-elles bien fondées : $L=[[0,3],[6,7],[2,5]]$ et $L=[[0,1],[2,3],[4,5]]$ ?
-\item Écrire une fonction \texttt{verif} qui dit si une liste est bien fondée ou non.
+\item Écrire une fonction récursive \texttt{verif} qui dit si une liste est bien fondée ou non.
 \end{enumerate}
 \end{enumerate}
 
@@ -510,6 +584,160 @@ Ainsi si \texttt{E=[2,4,6,7]} et \texttt{C=[0,1,1,0]} alors \texttt{A=[4,6]}.
 \end{enumerate}
 
 
+%\addcontentsline{toc}{subsection}{Exercice 15}
+%\subsection*{Exercice 15}
+%\textit{NDLR : Je ne sais pas si c'était un exo de maths ou de Python.}
+%<< J'ai eu un exercice de proba: 
+%un ordinateur et deux réseau dont le choix est indépendant 
+%on choisi a 70\% le $A$ et proba d'avoir une erreur avec $A$ $e=0,1$ avec $B$ $e=0.05$.
+%\begin{enumerate}
+%\item Calculer la proba d'avoir une erreur.
+%\item On a une erreur. Calculer la proba d'avoir choisi A. \\
+%
+%On considère une liste par exemple AAAABBA..., L1 liste d'avoir 4 fois le réseau A, L2, 2fois le réseau B.
+%
+%\item Montrer que la série des L1 (pour $k\geq 1$) est égale à 1.
+%\item L1 admet-elle une espérance ? Si oui la calculer.
+%\item Calculer la proba de (L1,L2).
+%\item ???
+%\end{enumerate}
+
+\addcontentsline{toc}{subsection}{Exercice 15}
+\subsection*{Exercice 15}
+Soit $T_n$, le reste de la division euclidienne par 2 de la somme des chiffres représentant $n$ en base 2.
+(exemple : 13 s'écrit 1101 donc on regarde le reste de la division de 1+1+0+1 par 2, donc $T(13)=1$). 
+
+\begin{enumerate} 
+\item \begin{enumerate}
+\item Trouver une relation entre $T_{2n}$ et $T_n$.
+\item De-même, trouver une relation entre $T_{2n+1}$ et $T_n$.
+\item Créer une fonction récursive pour calculer $T_n$
+\end{enumerate}
+\item Afficher les lignes suivantes: 
+\begin{itemize}
+\item $T_0$, $T_1$
+\item $T_0$  $T_1$ ; $T_2$ $T_3$;
+\item $T_0$ $T_1$ $T_2$    ; $T_3$ $T_4$ $T_5$.
+\end{itemize} 
+Remarquer une particularité et en déduire une manière simple de calculer les $2^p$ premiers termes de la suite $T_n$.
+\item Montrer que : $\sum\limits_{n=0}^{+\infty} = \dfrac{T_n}{2^{n+1}}$ converge.
+\item Calculer numériquement une valeur approchée de la somme à $10^(-6)$ près.
+\end{enumerate}
+
+\addcontentsline{toc}{subsection}{Exercice 16}
+\subsection*{Exercice 16}
+\begin{enumerate}
+\item Créer une fonction qui compte le nombre d'éléments pairs d'une liste. 
+\item Créer une fonction qui crée la liste des éléments pairs d'une liste. 
+\item Créer une fonction qui renvoie le booléen \texttt{True} si la liste ne contient que des chiffres pairs, \texttt{False} sinon. 
+\item Créer une fonction qui donne la position du maximum dans la liste. 
+\item Créer une fonction qui donne la médiane de la liste. 
+\item Créer une liste de 20 nombres aléatoires entre 0 et 100. Tester les fonctions. 
+\end{enumerate}
+
+\addcontentsline{toc}{subsection}{Exercice 17}
+\subsection*{Exercice 17}
+\begin{enumerate}
+\item Écrire une fonction \texttt{binaire} d'argument $n\in\mathbb{n}$, renvoyant sous forme de liste l'écriture binaire de $n$/
+\item Écrire une fonction \texttt{nombreDeUn} d'argument $n\in \mathbb{N}$, renvoyant le nombre de 1 dans \texttt{binaire(n)}. 
+\item La définition du <<n-palindrome>> était donnée dans l'énoncé.
+\begin{enumerate}
+\item Écrire une fonction \texttt{Palindrome} d'argument $n\in \mathbb{N}$ permettant de déterminer si n est un 2-palindrome.
+\item Donner les 2-palindromes entre 0 et 100.
+\end{enumerate}
+\end{enumerate}
+
+
+
+\addcontentsline{toc}{subsection}{Exercice 18}
+\subsection*{Exercice 18}
+Les nombres sont écrits sous forme de chaîne de caractères.
+\begin{enumerate}
+\item Déterminer tous les entiers inférieurs à 10000 égaux à la puissance 4 de la somme de leurs chiffres.
+\item Écrire une fonction \texttt{DixVersDeux} qui prend comme argument un nombre en base 10 (chaine de caractères) et envoie le nombre en base 2. 
+\item Écrire une fonction \texttt{DeuxVersDix} réciproque de la fonction précédente. 
+\item Déterminer tous les entiers inférieurs à 10 000 égaux à la puissance 4 de la somme de leurs chiffres en base 2.
+\item Écrire une fonction  \texttt{DixVersBase(chaine,base)}. 
+\item Refaire la question 4 avec les bases 3 à 9.
+\end{enumerate}
+
+\addcontentsline{toc}{subsection}{Exercice 18 -- Bis}
+\subsection*{Exercice 18 -- Bis}
+On écrit 18 par une chaine de caractères : \texttt{'18'} en base 10 et \texttt{'10010'} en base 2. 
+\begin{enumerate}
+\item Écrire une fonction \texttt{somchi} d'argument une chaine de caractères et retournant la somme de ses chiffres  (exemple \texttt{somchi('18')} retourne 9).
+\item Donner la liste des nombres entiers égaux à la somme de leurs chiffres à la puissance 4. 
+\item Écrire la fonction \texttt{DixVersDeux}, d'argument une chaine de caractère d'un nombre en en base 10 et retournant le nombre en base 2. 
+\item Écrire la fonction réciproque \texttt{DeuxVersDix}.
+\item Donner la liste des nombres entiers en base 2 égaux à la puissance 4 de la somme de leur chiffre.
+\end{enumerate}
+
+
+\addcontentsline{toc}{subsection}{Exercice 19}
+\subsection*{Exercice 19}
+
+\begin{itemize}
+\item Deux algorithmes à expliquer (l’un transforme un nombre en une liste de ses chiffres et
+l’autre est la fonction inverse) exemple : 2015 : alg1 $\rightarrow$  [2, 0, 1, 5] --  alg2  $\rightarrow$ 2015.
+\item Écrire la fonction récursive \texttt{perm} d’argument une liste \texttt{L} qui renvoi toute les permutations
+de cette liste.
+\item 2 autres questions non traitées.
+\end{itemize}
+
+\addcontentsline{toc}{subsection}{Exercice 20}
+\subsection*{Exercice 20}
+Soit $x$ un réel, $v_0=x$, $a_n = \lfloor v_n \rfloor$, $v_{n+1} = \left\{ \begin{array}{l} 0 \\ \dfrac{1}{a_n -1} \end{array} \right.$ si $a_n>1$.
+\begin{enumerate}
+\item Calculer les 10 premiers termes de la suite pour $x=\sqrt{3}$. 
+\item Définir $A(x)$, la fonction qui définit la suite et renvoie les 10 premiers termes de la suite. La tester avec $\sqrt{2}$, $\dfrac{1+\sqrt{5}}{2}$, $\sqrt{5}$. 
+\item Définir la fonction $Nb(x)$ qui renvoie le numérateur et le dénominateur de $a+\dfrac{b}{n}$. 
+\item Définir le quotient de la fonction $Q(x)$ qui renvoie le quotient $a_0+\dfrac{1}{a_1+\dfrac{1}{a_2+\dfrac{1}{a_3+...\dfrac{1}{a_r}}}}$ avec $r$ le plus petit entier tel que $a_r<1$.
+\end{enumerate}
+
+
+\addcontentsline{toc}{subsection}{Exercice 21}
+\subsection*{Exercice 21}
+\begin{center}
+\includegraphics[width=.8\linewidth]{images/exo_21_pt_el.png}
+\end{center}
+Une carte numérotant des pays est numérotée de 0 à $i$.  Chaque pays se voit attribuer une couleur. Le but est que des pays voisins n'aient pas la même couleur. 
+
+\begin{enumerate}
+\item Écrire la liste carte constituée elle-même de liste donnant pour chaque pays le numéro des pays dont le numéro est supérieur à ce pays et ayant une frontière commune avec ce pays. Exemple : \texttt{carte[3]=[6]}, \texttt{carte[5]=[6,7]}.
+\item Définir une fonction \texttt{voisins} de paramètres \texttt{(i,j,carte)} avec $i\neq j$. Cette fonction doit renvoyer un booléen \texttt{True} ou \texttt{False} si les pays $i$ et $j$ ont une frontière commune.
+\item On attribue une couleur à chaque pays. Les couleurs sont représentées par des entiers naturels. On définit la liste \texttt{color} qui attribue pour chaque pays un numéro correspondant à sa couleur. Si le pays n'a pas de couleur, son numéro est $-1$. 
+
+Définir la fonction \texttt{donnecouleur} de paramètre \texttt{p} pour le numéro de pays, \texttt{carte} et \texttt{color}. La fonction doit changer la liste couleur de façon à attribuer au pays \texttt{p} la couleur la plus petite tel qu'il ait une couleur différente de ses voisins. 
+
+Exemple avec 3 : le pays 3 correspond à \texttt{p=2}. Admettons que les pays 2 et 4 aient respectivement les couleurs 1 et 2, on attribue à 4 la couleur 2. 
+\end{enumerate}
+
+\addcontentsline{toc}{subsection}{Exercice 22}
+\subsection*{Exercice 22}
+Soit \texttt{L} une liste triée et \texttt{a} un réel. 
+\begin{enumerate}
+\item Écrire la fonction \texttt{ajout(L,a)} qui insère \texttt{a} dans \texttt{L} au bon endroit. 
+\item Écrire la fonction \texttt{fusion(L1,L2)} qui classe en une liste triée la somme de \texttt{L1} et \texttt{L2}.
+\end{enumerate}
+
+
+
+\addcontentsline{toc}{subsection}{Exercice 23}
+\subsection*{Exercice 23}
+On étudie les entiers tels que $n=a^3+b^3$. 
+\begin{enumerate}
+\item Montrer que $3$ ne s'écrit pas comme la somme de 2 cubes.
+\item Écrire un programme afin de déterminer la liste des entiers $n$ tels que $n=a^3+b^3$ avec $n<100$.
+\item Écrire une fonction renvoyant un booléen nous indiquant si $n$ est la somme de deux cubes. 
+\item Écrire une fonction qui indique si $n$ est la somme de 2 cubes et l'ensemble des couples \texttt{(a,b)} tels que $n=a^3+b^3$.
+\end{enumerate}
+
+
+\end{multicols}
+\newpage 
+
+
+\begin{multicols}{2}
 
 \section{Exercices issus de <<L'informatique pas à pas en prépa, éditions ellipses>>, Frédéric Butin}
 
@@ -1138,10 +1366,12 @@ Tracer le graphe de la puissance du signal en fonction de la période. Que const
 \item Créer une fonction qui permet d'afficher la composante cyan.
 \end{enumerate}
 
-\newpage
+\end{multicols}
 
 
 
+\newpage 
+%\begin{multicols}{2}
 
 \section{Corrigés -- Banque PT}
 \addcontentsline{toc}{subsection}{Exercice 1 -- Arithmétique -- Corrigé}
@@ -1226,9 +1456,9 @@ print(somcube2(1234))
 \end{python}
 \end{corrige}
 
-\vfill
+%\vfill
 
-\columnbreak
+%%\columnbreak
 
 \addcontentsline{toc}{subsection}{Exercice 2 -- Intégration -- Corrigé}
 \subsection*{Exercice 2 -- Intégration -- Corrigé}
@@ -1303,8 +1533,6 @@ from scipy.integrate import trapz
 print(trapz(LY,LX))
 \end{python}
 \end{corrige}
-
-\newpage
 
 \addcontentsline{toc}{subsection}{Exercice 3 -- Graphe -- Corrigé}
 \subsection*{Exercice 3 -- Graphe -- Corrigé}
@@ -1390,7 +1618,7 @@ print(longueur(M,chemin))
 
 \vfill
 
-\columnbreak
+%\columnbreak
 \addcontentsline{toc}{subsection}{Exercice 4 -- Corrigé}
 \subsection*{Exercice 4 -- Corrigé}
 \begin{corrige}
@@ -1437,7 +1665,6 @@ La complexité est quadratique ($\mathcal{O}^2$)  du fait de la boucle \texttt{f
 Pour diminuer la complexité, il est possible de parcourir une seule fois la liste. On lit alors les termes un à un. Quand on détecte un zéro, on compte alors le nombre de zéros consécutifs et on poursuit jusqu'à la fin...
 
 \end{corrige}
-\newpage
 
 \addcontentsline{toc}{subsection}{Exercice 5 -- Corrigé}
 \subsection*{Exercice 5 -- Corrigé}
@@ -1549,7 +1776,7 @@ print(E(0.008,0.1))
 
 
 
-\columnbreak 
+%\columnbreak 
 
 \addcontentsline{toc}{subsection}{Exercice 6 -- Corrigé}
 \subsection*{Exercice 6 -- Corrigé}
@@ -1606,6 +1833,8 @@ plt.show()
 \end{python}
 \end{corrige}
 
+%\columnbreak 
+
 \begin{corrige}
 $\quad$
 \begin{python}
@@ -1632,8 +1861,7 @@ if h(m)<0:
 print(m,h(m))
 \end{python}
 \end{corrige}
-
-\newpage 
+ 
 
 \addcontentsline{toc}{subsection}{Exercice 7 -- Corrigé}
 \subsection*{Exercice 7 -- Corrigé}
@@ -1803,9 +2031,6 @@ $\quad$
 \end{python}
 \end{corrige}
 
-\newpage
-
-
 \addcontentsline{toc}{subsection}{Exercice 9 -- Fractale de Mandelbrot -- Corrigé}
 \subsection*{Exercice 9 -- Fractale de Mandelbrot -- Corrigé}
 \begin{corrige}
@@ -1872,7 +2097,7 @@ plt.show()
 \end{python}
 \end{corrige}
 \begin{center}
-\includegraphics[width=.8\linewidth]{programmes/Exercice_09/figure_1}
+\includegraphics[width=.4\linewidth]{programmes/Exercice_09/figure_1}
 \end{center}
 \begin{corrige}
 $\quad$
@@ -1933,24 +2158,21 @@ def affichage(m,M,res):
 \end{corrige}
 
 \begin{center}
-\includegraphics[width=.8\linewidth]{programmes/Exercice_09/10_20_100}
-
-\textit{$m=10$, $M=20$, 100 points par 100 points}
+\begin{tabular}{ccc}
+\includegraphics[width=.3\linewidth]{programmes/Exercice_09/10_20_100} &
+\includegraphics[width=.3\linewidth]{programmes/Exercice_09/10_20_500} & 
+\includegraphics[width=.3\linewidth]{programmes/Exercice_09/20_40_500} \\
+\textit{$m=10$, $M=20$} &
+\textit{$m=10$, $M=20$} &
+\textit{$m=20$, $M=40$} \\
+\textit{100 points par 100 points} & 
+\textit{500 points par 500 points} & 
+\textit{500 points par 500 points} \\
+\end{tabular}
 \end{center}
 
-\begin{center}
-\includegraphics[width=.8\linewidth]{programmes/Exercice_09/10_20_500}
 
-\textit{$m=10$, $M=20$, 500 points par 500 points}
-\end{center}
-
-\begin{center}
-\includegraphics[width=.8\linewidth]{programmes/Exercice_09/20_40_500}
-
-\textit{$m=20$, $M=40$, 500 points par 500 points}
-\end{center}
-
-\columnbreak 
+%\columnbreak 
 
 \addcontentsline{toc}{subsection}{Exercice 10 -- Corrigé}
 \subsection*{Exercice 10 -- Corrigé}
@@ -2036,8 +2258,6 @@ print(dansIntervalle(valeurs_propres,0,1))
 \end{python}
 \end{corrige}
 
-\newpage
-
 \addcontentsline{toc}{subsection}{Exercice 11 -- Tri de liste -- Corrigé}
 \subsection*{Exercice 11 -- Tri de liste -- Corrigé}
 
@@ -2120,7 +2340,7 @@ $\quad$
 \end{python}
 \end{corrige}
  
-\columnbreak
+%\columnbreak
 
 \addcontentsline{toc}{subsection}{Exercice 12 -- Corrigé}
 \subsection*{Exercice 12 -- Corrigé}
@@ -2179,10 +2399,8 @@ p = fonc_p(L)
 \end{corrige}
 
 \begin{center}
-\includegraphics[width=.8\linewidth]{programmes/Exercice_12/figure_1}
+\includegraphics[width=.4\linewidth]{programmes/Exercice_12/figure_1}
 \end{center}
-
-\columnbreak
 
 \begin{corrige}
 $\quad$
@@ -2257,14 +2475,18 @@ plt.show()
 
 
 \begin{center}
-\includegraphics[width=.8\linewidth]{programmes/Exercice_12/figure_2}
+\includegraphics[width=.4\linewidth]{programmes/Exercice_12/figure_2}
 
 \textit{Évolution de la longueur du polynôme en fonction de $\delta t$.}
 \end{center}
 
 
+%\end{multicols}
 
-\newpage
+\newpage 
+
+
+%\begin{multicols}{2}
 
 \section{Correction -- Adaptés des exercices de F. Butin}
 \addcontentsline{toc}{subsection}{Exercice 1 -- Corrigé}
@@ -2343,8 +2565,6 @@ def add_poly(P1,P2):
     return P
 \end{python}
 \end{corrige}
-
-\newpage
 
 \begin{corrige}
 $\quad$
@@ -2438,7 +2658,7 @@ def deriv_poly(P):
 
 
 
-\columnbreak
+%\columnbreak
 \addcontentsline{toc}{subsection}{Exercice 3 -- Corrigé}
 \subsection*{Exercice 3 -- Corrigé}
 
@@ -2466,15 +2686,10 @@ plt.show()
 \end{python}
 \end{corrige}
 \begin{center}
-\includegraphics[width=.9\linewidth]{images/exo_FB_03}
+\includegraphics[width=.4\linewidth]{images/exo_FB_03}
 \end{center}
 
-\end{multicols}
-
-
-\begin{multicols}{2}
-
-\columnbreak
+%\columnbreak
 \addcontentsline{toc}{subsection}{Exercice 7 -- Corrigé}
 \subsection*{Exercice 7 -- Corrigé}
 
@@ -2494,7 +2709,7 @@ plt.plot(x,y,label="R=4, r=1, m=-3")
 \end{corrige}
 
 \begin{center}
-\includegraphics[width=.9\linewidth]{images/exo_FB_07_1}
+\includegraphics[width=.4\linewidth]{images/exo_FB_07_1}
 \end{center}
 
 \begin{corrige}
@@ -2522,13 +2737,13 @@ plt.show()
 \end{corrige}
 
 \begin{center}
-\includegraphics[width=.9\linewidth]{images/exo_FB_07_2}
+\includegraphics[width=.4\linewidth]{images/exo_FB_07_2}
 \end{center}
 
 
 
 
-\columnbreak 
+%\columnbreak 
 \addcontentsline{toc}{subsection}{Exercice 9 -- Corrigé}
 \subsection*{Exercice 9 -- Corrigé}
 
@@ -2558,8 +2773,8 @@ for i in range(len(x)):
 
 \begin{center}
 \begin{tabular}{cc}
-\includegraphics[width=.4\linewidth]{images/exo_FB_09_01}&
-\includegraphics[width=.4\linewidth]{images/exo_FB_09_02}
+\includegraphics[width=.3\linewidth]{images/exo_FB_09_01}&
+\includegraphics[width=.3\linewidth]{images/exo_FB_09_02}
 \end{tabular}
 \end{center}
 
@@ -2598,7 +2813,7 @@ turtle.hideturtle()
 \end{corrige}
 
 
-\columnbreak 
+%\columnbreak 
 
 \addcontentsline{toc}{subsection}{Exercice 10 -- Corrigé}
 \subsection*{Exercice 10 -- Corrigé}
@@ -2731,11 +2946,11 @@ plt.show()
 \end{corrige}
 
 \begin{center}
-\includegraphics[width=.9\linewidth]{images/exo_FB_11}
+\includegraphics[width=.4\linewidth]{images/exo_FB_11}
 \end{center}
 
 
-\columnbreak
+%\columnbreak
 
 \addcontentsline{toc}{subsection}{Exercice 12 -- Corrigé}
 \subsection*{Exercice 12 -- Corrigé}
@@ -2859,8 +3074,8 @@ X_{k+1} = (hA +1) X_k + hB_k
 $$
 \end{corrige}
 
-%\columnbreak
-\newpage
+%%\columnbreak
+
 
 \begin{corrige}
 Mise en forme du problème de Cauchy : 
@@ -2889,11 +3104,11 @@ plt.show()
 \end{corrige}
 
 \begin{center}
-\includegraphics[width=.9\linewidth]{images/exo_FB_12}
+\includegraphics[width=.4\linewidth]{images/exo_FB_12}
 \end{center}
 
 
-\columnbreak
+%\columnbreak
 \addcontentsline{toc}{subsection}{Exercice 13 -- Corrigé en cours}
 \subsection*{Exercice 13 -- Corrigé}
 
@@ -2954,13 +3169,11 @@ $$
  $$
 X_{n} = M^n X_{0}
 $$
-\begin{python}
 
-\end{python}
 \end{corrige}
 
 
-\columnbreak
+
 \addcontentsline{toc}{subsection}{Exercice 19}
 \subsection*{Exercice 19}
 
@@ -2982,6 +3195,7 @@ def fonction_PP2(X,t):
     return [a*X[0]-b*X[0]*X[1],-c*X[1]+d*X[0]*X[1]]
 \end{python}
 \end{corrige}
+
 
 \begin{corrige}
 $\quad$
@@ -3017,23 +3231,21 @@ plt.axis("equal")
 \end{python}
 \end{corrige}
 
-\begin{center}
-\includegraphics[width=.8\linewidth]{exo_fb_19_01.png}
-\end{center}
+
 
 \begin{center}
-\includegraphics[width=.8\linewidth]{exo_fb_19_02.png}
+\includegraphics[width=.45\linewidth]{exo_fb_19_01.png}
+\includegraphics[width=.45\linewidth]{exo_fb_19_02.png}
 \end{center}
+%\end{multicols}
 
-\end{multicols}
+\includepdf[pages={1-4},]{images/MementoPythonScilab}
 \end{document}
 
 
 
 
-
-
-\columnbreak
+%\columnbreak
 \addcontentsline{toc}{subsection}{Exercice 4}
 \subsection*{Exercice 4}
 
