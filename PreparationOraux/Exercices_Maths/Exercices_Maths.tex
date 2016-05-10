@@ -404,20 +404,110 @@ Dans un ensemble $E=\left\{ a_1, a_2, ..., a_n\right\}$, $A_i$ représente une p
 \item Écrire la fonction \texttt{estRecMin} d'argument \texttt{L} une liste de codes représentant $R$, qui retourne le booléen \texttt{True} si $R$ est un recouvrement minimal de $E$ \texttt{False} sinon. 
 \end{enumerate}
 
-\addcontentsline{toc}{subsection}{Exercice 2}
-\subsection*{Exercice 2}
-\addcontentsline{toc}{subsection}{Exercice 2}
-\subsection*{Exercice 2}
-\addcontentsline{toc}{subsection}{Exercice 2}
-\subsection*{Exercice 2}
-\addcontentsline{toc}{subsection}{Exercice 2}
-\subsection*{Exercice 2}
-\addcontentsline{toc}{subsection}{Exercice 2}
-\subsection*{Exercice 2}
-\addcontentsline{toc}{subsection}{Exercice 2}
-\subsection*{Exercice 2}
-\addcontentsline{toc}{subsection}{Exercice 2}
-\subsection*{Exercice 2}
+\addcontentsline{toc}{subsection}{Exercice 6}
+\subsection*{Exercice 6}
+Soit $s$ définie par $s_0=1$,  $s_1=1$, et pour tout $n$, $s_{2n}s_n+s_{n+1}$. 
+\begin{enumerate}
+\item Calculer les 8 premiers termes de la suite.
+\item Écrire la fonction \texttt{LS} d'argument $N$ et renvoyant les $N+1$ premiers éléments de la suite $s$. Calculer $L_{128}=LS(128)$. 
+\item On sépare la liste $L_{128}$ de 1 à 2, de 2 à 4, de 4 à 8... Quelle symétrie y a-t-il pour chaque paquet ? Extraire ces paquets.
+\item Écrire la fonction \texttt{LP} d'argument $N$ et renvoyant les $N+1$ premières lignes du triangle de Pascal. On rappelle que $\begin{pmatrix}n+1 \\ p \end{pmatrix}=\begin{pmatrix}n \\ p-1 \end{pmatrix}+\begin{pmatrix}n \\ p \end{pmatrix}$ et $\begin{pmatrix}n \\ 0 \end{pmatrix} = \begin{pmatrix}n \\ n \end{pmatrix}=1$.
+On a par exemple, $TP(4)=[[1],[1,1],[1,2,1],[1,3,3,1],[1,4,6,4,1]$.
+\item ...
+\end{enumerate} 
+
+
+\addcontentsline{toc}{subsection}{Exercice 7}
+\subsection*{Exercice 7}
+<< Il m'était demandé de créer une liste regroupant les abscisses et ordonnées pour $k$ allant de 1 à 12, des points complexes de module variant entre 0 et 1, d'angle $\dfrac{k\pi}{6}$ et ensuite de tracer ces points. Je suis arrivé à le faire mais j'ai été obligé de me faire confirmer par l'examinateur ce qu'il fallait faire car l'énoncé me bloquait.
+>>
+
+\addcontentsline{toc}{subsection}{Exercice 8}
+\subsection*{Exercice 8}
+Un segment $[a,b]$ est noté comme une liste \texttt{[a,b]}. Soient $I_1$ et $I_2$ deux segments. Ils sont disjoints si leur intersection est vide. 
+
+\begin{enumerate}
+\item Écrire une fonction \texttt{disjoint} d'arguments $i_1$ et $i_2$ (deux listes représentant des segments) et retournant \texttt{True} s'ils sont disjoints, \texttt{False} sinon. 
+\item La fusion de deux segments correspond à un segment qui a pour min le plus petit des deux min et pour max le plus grand des deux max. Écrire une fonction \texttt{fusion} d'arguments $i_1$ et $i_2$ et qui retourne la liste correspondant à la fusion de ces deux segments. 
+\item On dit qu'une liste de segments est bien fondée si les segments de cette liste sont disjoints et rangés dans l'ordre croissant. (On dit que $I_1=[a,b]$ est inférieur à $I_2=[c,d]$ si $b<c$.)
+\begin{enumerate}
+\item Les listes suivantes sont-elles bien fondées : $L=[[0,3],[6,7],[2,5]]$ et $L=[[0,1],[2,3],[4,5]]$ ?
+\item Écrire une fonction \texttt{verif} qui dit si une liste est bien fondée ou non.
+\end{enumerate}
+\end{enumerate}
+
+
+
+\addcontentsline{toc}{subsection}{Exercice 9}
+\subsection*{Exercice 9}
+Voici un théorème d'arithmétique : tous les nombres entiers sont au plus décomposables en une somme de 9 cubes. 
+\begin{enumerate}
+\item Définir une fonction \texttt{estcube(n)} qui retourne \texttt{True} si $n$ est un cube, \texttt{False} sinon. Afficher tous les cubes inférieurs ou égaux à 250.
+\item Définir une fonction \texttt{S2cube(n)} qui retourne \texttt{True} si $n$ est la somme de deux cubes, \texttt{False} sinon. Afficher tous les entiers inférieurs ou égaux à 250 qui sont somme de deux cubes.
+\item Définir une fonction \texttt{S4cube(n)} qui retourne \texttt{True} si $n$ est la somme de quatre cubes, \texttt{False} sinon. Afficher tous les entiers inférieurs ou égaux à 250 qui ne sont pas somme de deux cubes.
+\item Définir une fonction \texttt{S8cube(n)} qui retourne \texttt{True} si $n$ est la somme de huit cubes, \texttt{False} sinon. Afficher tous les entiers inférieurs ou égaux à 250 qui ne sont pas somme de deux cubes.
+\item Expliquer pourquoi les nombres qui ne sont pas somme de 8 cubes sont sommes de 9 cubes. 
+\item Conclure.
+\end{enumerate}
+
+\addcontentsline{toc}{subsection}{Exercice 10}
+\subsection*{Exercice 10}
+On dit qu'un mot est un palindrome s'il est le même lorsqu'on le dit à l'envers. Par exemple le mot <<radar>> est un palindrome. Le mot <<nul>> donne <<lun>> à l'nvers et n'est pas un palindrome. 
+\begin{enumerate}
+\item Écrire une fonction \texttt{inverse} d'argument une chaine de caractères \texttt{mot} et renvoyant la chaîne écrite à l'envers. 
+\item Écrire une fonction \texttt{palindrome} d'argument une chaine de caractères \texttt{mot} et renvoyant le booléen \texttt{True} si le mot est un palindrome, \texttt{False} sinon.
+\item Par extension on dit qu'un nombre est un palindrome s'il est égal au nombre obtenu en écrivant les chiffres en ordre inverse. Écrire une fonction \texttt{pat\_nombre} d'argument $N$ et renvoyant la liste des nombres palindromes inférieurs ou égaux à $N$.
+\end{enumerate}
+
+
+\addcontentsline{toc}{subsection}{Exercice 11}
+\subsection*{Exercice 11}
+\begin{enumerate}
+\item Créer une fonction \texttt{partage} prenant en argument une liste $L$ et un entier $a$ retournant 2 listes $Linf$ et $Lsup$ respectivement les listes des éléments de $L$ inférieurs à $a$ et et ceux supérieurs à $a$.
+\item Créer une fonction \texttt{trirapide} utilisant la précédente. 
+\item Modifier les deux fonctions précédentes afin de connaître le nombre de comparaisons effectuées. 
+\item Tester votre fonction avec une liste de 4000 valeurs entre -999 et 999. Utiliser \texttt{randint(p,q)} pour créer cette liste.
+\end{enumerate}
+
+\addcontentsline{toc}{subsection}{Exercice 12}
+\subsection*{Exercice 12}
+On qualifie un vecteur de creux lorsque le nombre de zéros qu'il contient est au moins supérieur à la moitié de son nombre de coordonnées. Par exemple $v=\left(1,2,0,4,7,0,0,0,0\right)$ est creux (5 zéros et 9 coordonnées). Son codage est creux est $v=\left[9,[1,2,4,5],[0,1,3,4]\right]$ (nombre de coordonnées, liste des éléments non nuls, liste des indices de ces éléments).
+\begin{enumerate}
+\item Définir la fonction \texttt{creux} d'argument une liste $v$ représentant un vecteur et retournant un booléen indiquant si le vecteur est creux ou non.
+\item Définir la fonction \texttt{coder} d'argument une liste $v$ représentant un vecteur et retournant le codage creux du vecteur.
+\item Définir une fonction \texttt{decoder}.
+\item Définir une fonction \texttt{simul} d'argument le codage \texttt{C} d'un vecteur $v$ et un scalaire $a$ retournant le cordage creux du vecteur $av$.
+\item Définir une fonction \texttt{coefficient(j,C)} qui renvoie la coordonnée $j$ du vecteur creux associé au code $C$.
+\end{enumerate}
+
+\addcontentsline{toc}{subsection}{Exercice 13}
+\subsection*{Exercice 13}
+\begin{enumerate}
+\item Créer une fonction $\texttt{C}$ d'argument un entier $d$ et qui renvoie un entier formé par les chiffres de $d$ dans l'ordre croissant. Par exemple, $C(1542)=1245$.
+\item Créer une fonction $\texttt{D}$ qui fait la même chose que $\texttt{C}$ mais dans l'ordre décroissant. 
+\item On définit une suite $u_n$ par $u_0=a \in \mathbb{N}$ et $u_{n+1}=D(u_n)-C(u_n)$. Écrire une fonction qui calcule les termes de cette suite.
+\item ...
+\end{enumerate}
+
+\addcontentsline{toc}{subsection}{Exercice 14}
+\subsection*{Exercice 14}
+\begin{enumerate}
+\item Créer une fonction \texttt{nbits} d'argument un entier \texttt{n} qui renvoie le plus petit entier $i$ tel que $n \leq 2^i$. 
+\item Créer une fonction \texttt{sansrep} d'argument une liste $L$ d'entiers et qui retourne la liste des éléments de $L$ en unique exemplaire. Exemple : \texttt{sansrep([5,0,0,0,3,3,5])=[5,0,5]}. On utilisera la fonction \texttt{in}.
+\item Créer une fonction \texttt{position} d'argument une liste $L$ d'entiers et $e$ un entier, retournant la première position de $e$ dans $L$ (en supposant que $e$ est dans $L$).
+\item Retourner l'écriture binaire de la position de $e$ dans la liste. On utilisera \texttt{nb.format(i)}.
+
+\end{enumerate}
+
+\addcontentsline{toc}{subsection}{Exercice 15}
+\subsection*{Exercice 15}
+Soit $n$ un entier fixé. On étudie le codage de listes d'entiers de longueur.  On dispose d'une liste représentant le codage $\texttt{C}$ de longueur $n$ contenant des 0 et des 1.  Une liste $\texttt{E}$ d'entiers de longueurs $n$ est la liste codée d'une liste $A$ telle que $A$ contient les éléments de la liste $E$ dont les indices sont ceux pour lesquels $\texttt{C}$ contient 1. 
+Ainsi si \texttt{E=[2,4,6,7]} et \texttt{C=[0,1,1,0]} alors \texttt{A=[4,6]}.
+\begin{enumerate}
+\item Créer une fonction \texttt{decoder} d'arguments deux listes \texttt{E} et \texttt{C} qui renvoie la liste \texttt{A}.
+\item Créer une fonction \texttt{coder} d'arguments \texttt{E} et \texttt{A} retournant \texttt{C}.
+\item Créer une fonction \texttt{incrementer} d'argument \texttt{C} et retournant une liste \texttt{C'} contenant l'écriture binaire du nombre $N+1$ avec $N$ nombres dont l'écriture binaire est $C$ (si \texttt{C=[0,1,1,0]}, \texttt{N=6} donc \texttt{N+1=7} et \texttt{C'=[0,1,1,1]}.
+\end{enumerate}
 
 
 
