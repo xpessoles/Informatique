@@ -10,8 +10,9 @@ import matplotlib.pyplot as plt
 # Le répertoire courant est Exercice_02.
 # Le sous-répertoire data contient le fichier ex_01.txt.
 
-# On ouvre le fichier en lecture)
-fid = open("data\ex_01.txt")
+# On ouvre le fichier en lecture
+fid = open("C:\Enseignement\GitHub\Informatique\PreparationOraux\Exercices_Maths\programmes\Exercice_02\data\ex_01.txt")
+#fid = open("data\ex_01.txt")
 
 # On charge le fichier dans une liste.
 # Chaque élément de la liste correspond à chaque ligne sous forme de chaîne de caractère.

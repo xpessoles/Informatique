@@ -76,17 +76,17 @@ for i in range(1,len(quan)):
 #Moyenne glissante
 filtrageg =[]
 
-fenetre = 1000
+fenetre = 100
 for i in range(fenetre-1,len(quan)):
         s = sum(quan[i-fenetre+1:i+1])/fenetre
         filtrageg.append(s)
 
 
 plt.grid()
-plt.plot(temps,signal,label = "Signal")
+#plt.plot(temps,signal,label = "Signal")
 #plt.plot(tps_ech,quan,label="Echantillonage "+str(freq)+ "Hz - Quantification "+str(Nq)+" bits")
 
-#plt.plot(tps_ech,res,linewidth=2,label="Pulsation de coupure "+str(1/tau)+" rad/s")
+plt.plot(tps_ech,res,linewidth=2,label="Pulsation de coupure "+str(1/tau)+" rad/s")
 
 #plt.plot(tps_ech[fenetre-1:len(tps_ech)],filtrageg,linewidth=2,label="Moyenne sur "+str(fenetre)+" points")
 

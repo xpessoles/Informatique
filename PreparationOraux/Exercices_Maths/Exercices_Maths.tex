@@ -2,7 +2,7 @@
 \usepackage[%
     pdftitle={CIN : Cinématique du solide},
     pdfauthor={Xavier Pessoles}]{hyperref}
-\usepackage{pdfpages}
+%\usepackage{pdfpages}
 
 \input{style/new_style}
 \input{style/macros_SII}
@@ -1470,10 +1470,10 @@ $\quad$
 # ==========
 # Le répertoire courant est Exercice_02.
 # Le sous-répertoire data contient le
-# fichier ex_01.txt.
+# fichier ex_02.txt.
 
 # On ouvre le fichier en lecture)
-fid = open("data\ex_01.txt")
+fid = open("data\ex_02.txt")
 
 # On charge le fichier dans une liste.
 # Chaque élément de la liste correspond à 
@@ -1503,7 +1503,9 @@ plt.plot(LX,LY)
 plt.show()
 \end{python}
 \end{corrige}
-
+\begin{center}
+\includegraphics[width=6cm] {images/exo_02}
+\end{center}
 
 
 \begin{corrige}
@@ -1517,6 +1519,8 @@ def trapeze(x,y):
         res = res+(LX[i]-LX[i-1])*0.5*(LY[i]+LY[i-1])
     return res
 print(trapeze(LX,LY))
+
+>>> 75.13635
 \end{python}
 \end{corrige}
 
@@ -1531,6 +1535,8 @@ from scipy.integrate import trapz
 # Après l'import, help(trapz) permet d'avoir 
 # de l'aide sur la fonction.
 print(trapz(LY,LX))
+
+>>> 75.13635
 \end{python}
 \end{corrige}
 
@@ -3239,7 +3245,7 @@ plt.axis("equal")
 \end{center}
 %\end{multicols}
 
-\includepdf[pages={1-4},]{images/MementoPythonScilab}
+%\includepdf[pages={1-4},]{images/MementoPythonScilab}
 \end{document}
 
 
