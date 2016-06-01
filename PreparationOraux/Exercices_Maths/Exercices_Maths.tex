@@ -62,7 +62,7 @@
 }%figues de la page de garde
 \def\xxpied{%
 Préparation aux oraux de la banque PT \\
-Préparation à l'épreuve de << Mathématique et Algorithmique >>%
+Préparation à l'épreuve de << Mathématiques et Algorithmique >>%
 }
 
 %---------------------------------------------------------------------------
@@ -545,7 +545,7 @@ On dit qu'un mot est un palindrome s'il est le même lorsqu'on le dit à l'enver
 
 \addcontentsline{toc}{subsection}{Exercice 12}
 \subsection*{Exercice 12}
-On qualifie un vecteur de creux lorsque le nombre de zéros qu'il contient est au moins supérieur à la moitié de son nombre de coordonnées. Par exemple $v=\left(1,2,0,4,7,0,0,0,0\right)$ est creux (5 zéros et 9 coordonnées). Son codage est creux est $v=\left[9,[1,2,4,5],[0,1,3,4]\right]$ (nombre de coordonnées, liste des éléments non nuls, liste des indices de ces éléments).
+On qualifie un vecteur de creux lorsque le nombre de zéros qu'il contient est au moins supérieur à la moitié de son nombre de coordonnées. Par exemple $v=\left(1,2,0,4,7,0,0,0,0\right)$ est creux (5 zéros et 9 coordonnées). Son codage est creux est $v=\left[9,[1,2,4,7],[0,1,3,4]\right]$ (nombre de coordonnées, liste des éléments non nuls, liste des indices de ces éléments).
 \begin{enumerate}
 \item Définir la fonction \texttt{creux} d'argument une liste $v$ représentant un vecteur et retournant un booléen indiquant si le vecteur est creux ou non.
 \item Définir la fonction \texttt{coder} d'argument une liste $v$ représentant un vecteur et retournant le codage creux du vecteur.
@@ -2491,9 +2491,166 @@ plt.show()
 
 \newpage 
 
+\section{Correction -- Adaptés des exercices de F. Butin}
 
-%\begin{multicols}{2}
+\begin{multicols}{2}
+\addcontentsline{toc}{subsection}{Exercice 10 -- Corrigé}
+\subsection*{Exercice 10 -- Corrigé}
+\textit{D'après Lucie Bathie, PT$\star$ 2015--2016.}
 
+
+\begin{corrige}
+$\quad$
+\begin{python}
+##Exo 10: palindrome
+#1.
+def inverse(mot):
+    """renvoie la chaine de caractères écrite à l'envers"""
+    liste = []
+    for k in range(len(mot)):
+        liste.append(mot[k])
+    inverse = ''
+    for i in range(1,len(liste)+1):
+        inverse = inverse + liste[-i]
+    return(inverse)
+#print(inverse('bonjour'))
+#ruojnob
+\end{python}
+\end{corrige}
+
+\begin{corrige}
+$\quad$
+\begin{python}
+#2.
+def palindrome(mot):
+    return(inverse(mot)==mot)
+#print(palindrome('kayak'))
+#True
+#print(palindrome('bonjour'))
+#False
+\end{python}
+\end{corrige}
+
+
+\begin{corrige}
+$\quad$
+\begin{python}
+#3.
+def pat_nombre(N):
+    """renvoie la liste de palindromes 
+    inférieurs ou égaux à N"""
+    L =[]
+    for n in range(N+1):
+        if palindrome(str(n)) == True:
+            L.append(n)
+    return(L)
+
+#print(pat_nombre(100))
+#[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 22, 
+#   33, 44, 55, 66, 77, 88, 99]
+\end{python}
+\end{corrige}
+
+
+\end{multicols}
+
+
+\addcontentsline{toc}{subsection}{Exercice 12 -- Corrigé}
+\subsection*{Exercice 12 -- Corrigé}
+\textit{D'après Lucie Bathie, PT$\star$ 2015--2016.}
+
+\begin{multicols}{2}
+
+\begin{corrige}
+$\quad$
+\begin{python}
+#1.
+v = [1,2,0,4,7,0,0,0,0]
+
+def creux(v):
+    """renvoie True si le vecteur est creux, 
+    false sinon"""
+    nombre_zeros = 0
+    for k in range(len(v)):
+        if v[k] == 0:
+            nombre_zeros +=1
+    return(nombre_zeros >= (len(v)-nombre_zeros)/2)
+
+#print(creux(v))
+#True
+\end{python}
+\end{corrige}
+
+\begin{corrige}
+$\quad$
+\begin{python}
+#2.
+def coder(v):
+    code = [len(v)]
+    indices = []
+    valeurs = []
+    for k in range(len(v)):
+        if v[k] != 0:
+            indices.append(k)
+            valeurs.append(v[k])
+    code.append(valeurs)
+    code.append(indices)
+    return(code)
+    
+#print(coder(v))
+#[9, [1, 2, 4, 7], [0, 1, 3, 4]]    
+\end{python}
+\end{corrige}
+
+\begin{corrige}
+$\quad$
+\begin{python}
+#3. 
+def decoder(code):
+    """permet de décoder un codage creux"""
+    v=[0]*code[0]
+    for k in range(len(code[2])):
+        v[code[2][k]] = code[1][k]
+    return(v)
+
+code1=[9,[1,2,4,7],[0,1,3,4]]
+##print(decoder(code1))
+##[1,
+\end{python}
+\end{corrige}
+
+\begin{corrige}
+$\quad$
+\begin{python}
+#4.
+def simul(C,a):
+    """C  codage de v
+renvoie le codage de av"""
+    v = decoder (C)
+    for k in range(len(v)):
+        v[k] = a*v[k]
+    return(coder(v))
+
+#print(simul(code1,2))
+#[9, [2, 4, 8, 14], [0, 1, 3, 4]]
+\end{python}
+\end{corrige}
+
+\begin{corrige}
+$\quad$
+\begin{python}
+#5
+def coefficient(j,C):
+    vecteur = decoder(C)
+    return(vecteur[j])
+
+#print(coefficient(1,code1))
+#2
+\end{python}
+\end{corrige}
+
+\end{multicols}
+\newpage
 \section{Correction -- Adaptés des exercices de F. Butin}
 \addcontentsline{toc}{subsection}{Exercice 1 -- Corrigé}
 \subsection*{Exercice 1 -- Corrigé}
