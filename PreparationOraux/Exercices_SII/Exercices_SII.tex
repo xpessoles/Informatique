@@ -38,7 +38,7 @@
 \def\xxonglet{Oral}
 
 \def\xxactivite{Exercices}
-\def\xxauteur{\textsl{Équipe pédagogique La Martinière Monplaisir}}
+\def\xxauteur{\textsl{Patricia Bessonnat \\  Xavier Pessoles }}
 
 \def\xxcompetences{%
 %\textsl{%
@@ -65,7 +65,7 @@ Préparation à l'épreuve de TP de SII%
 }
 
 %---------------------------------------------------------------------------
-\usepackage{wrapfig}
+
 
 \begin{document}
 \chapterimage{png/Fond_ALG}
@@ -153,10 +153,10 @@ Le fichier \texttt{mesure.txt} contenu dans le dossier \texttt{data} contient le
 \newpage
 \section{Détermination des paramètres de rugosité}
 
-\begin{wrapfigure}{r}{4cm}
+\begin{center}
 \includegraphics[width=4cm]{images/rugosimetre}
 \includegraphics[width=5cm]{images/profil}
-\end{wrapfigure}
+\end{center}
 Un rugosimètre est un appareil permettant de mesurer une le profil d'une ligne sur une surface fabriquée. On peut donc mesurer une altitude ($y$) en fonction d'une position longitudinale $(x)$. Une fois le profil mesuré, il est possible de calculer un certain nombre de paramètres sur le profil mesuré : 
 $$
 R_y = y_{\text{max}} - y_{\text{min}}  \quad  Ra = \dfrac{1}{l}\int\limits_0^l |f(x)| \text{d} x .
@@ -174,6 +174,100 @@ $$
 
 \newpage
 \section{Mesure au marbre d'un défaut de planéité}
+\indent
+\begin{minipage}[c]{.7\linewidth}
+\indent Le bras de mesure est utilisé en métrologie afin de contrôler les spécifications inscrites sur le dessin de définition d'une pièce fabriquée.
+Nous allons nous intéresser ici à l'algorithme de calcul du défaut de planéité à partir d'un nuage de points mesurés à l'aide du palpeur du bras. Les mesures sont réalisées dans un repère machine $\mathcal{R}(O,\vx,\vy,\vz)$. Les coordonnées des points sont stockées dans un fichier \textbf{plan.csv} sous forme de tableau à trois colonnes $x$, $y$ et $z$ (contient 350 points).
+
+\vspace{.5cm}
+
+Le défaut de planéité est défini comme étant la distance $d$ la plus petite entre deux plans parallèles $P_1$ et $P_2$ tels que tous les points mesurés soient positionnés entre ces deux plans.
+\end{minipage}\hfill
+\begin{minipage}[c]{.35\linewidth}
+\begin{center}
+\includegraphics[width=4cm]{images/bras}
+\end{center}
+\end{minipage}
+
+
+En pratique, on associe aux nuages de points $M_i$ un plan $\Pi$. Ce plan $\Pi$ d'équation $ax+by+cz+d=0$ est construit suivant le critère des moindres carrés :
+
+$$S=\sum\limits_{i=0}^{n-1} (e_{i})^{2} \text{doit être minimale}$$
+
+
+
+Les distances $e_{i}$ sont définies comme les distances des points $M_i$ au plan $\Pi$.
+
+Pour $c\ne0$, l'équation du plan devient $Ax+By+z+D=0$.
+On rappelle que si une fonction admet un extremum en un point alors toutes ses dérivées partielles seront forcément nulles en ce point. On va donc calculer les trois dérivées partielles de $S$ : $S'(A)$, $S'(B)$ et $S'(D)$ et définir $A$, $B$, $D$ pour :
+$$
+\frac{\partial S}{\partial A}=0, \frac{\partial S}{\partial B}=0, \frac{\partial S}{\partial D}=0
+$$
+
+L'équation du plan $\Pi$ obtenue, le défaut de planéité calculé est $d$ la somme entre la distance du point $M_i$ le plus éloigné au dessus du plan et la distance du point $M_j$ le plus éloigné en dessous du plan.
+\\
+ 
+\begin{enumerate}
+\item A partir du fichier \textbf{plan.csv} fourni, créer la liste des listes de coordonnées des points mesurées. On appellera cette liste \texttt{pointMesure}.
+\item Montrer que la minimisation de $S$ permet de définir 3 équations faisant intervenir les paramètres $(A,B,D)$ du plan. Mettre ce système sous forme matricielle.
+$$
+\underbrace{\left[
+\begin{tabular}{cccc} 
+& & & \\
+& & & \\
+& & & \\
+\end{tabular}
+\right]}_{M}
+\cdot 
+\underbrace{
+\left[
+\begin{tabular}{cccc} 
+A \\
+B \\
+D \\
+\end{tabular}
+\right]}_{P}
+=
+\underbrace{
+\left[
+\begin{tabular}{cccc} 
+ \\
+ \\
+ \\
+\end{tabular}
+\right]}_{V}
+$$
+%\begin{center}
+%\includegraphics[width=4.5cm]{images/matrice}
+%\end{center}
+\item Définir une fonction \textbf{matriceM} d'argument une liste de listes des coordonnées de points et qui renvoie la matrice $M$.
+On notera dans le script python :
+$$
+\begin{array}{|c|c|c|c|c|c|c|c|}
+\hline
+ & & & & & & & \\
+\sum\limits_i x_{pi} & 
+\sum\limits_i y_{pi} & 
+\sum\limits_i z_{pi} & 
+\sum\limits_i x_{pi}\cdot y_{pi}  & 
+\sum\limits_i x_{pi}\cdot z_{pi}  & 
+\sum\limits_i y_{pi}\cdot z_{pi}  & 
+\sum\limits_i x_{pi}^2 & 
+\sum\limits_i y_{pi}^2 \\
+ & & & & & & & \\
+\hline 
+Sx_i & Sy_i & Sz_i&  Sx_iy_i & Sx_iz_i & Sy_i z_i  & Sx_{i^2}& Sy_{i^2} \\
+\hline
+\end{array}
+$$
+
+%\includegraphics[width=15cm]{images/tableau}
+
+\item Définir une fonction \textbf{vecteurV} d'argument une liste de listes des coordonnées de points et qui renvoie le vecteur $V$. 
+\item Définir une fonction \textbf{vecteurP} d'argument une liste de listes des coordonnées de points et qui renvoie le vecteur $P$.
+\item Définir la fonction \textbf{defautPlaneite} qui a pour argument un vecteur et une liste de listes des coordonnées de points et renvoie la valeur calculée du défaut de planéité. Afficher à l'écran cette valeur.
+\end{enumerate}
+
 
 \end{document}
 \newpage
