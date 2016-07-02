@@ -448,7 +448,7 @@ Un pays ne produit que des billets de 57 62 et 72 unités.
 \item Un enfant achète un croissant qui coûte 4 unités il utilise deux valeurs de billets le boulanger lui rend que des billets combien l'enfant a-t-il donné au boulanger (le détail) ?
 \end{enumerate}
 
-\end{multicols}
+
 
 \addcontentsline{toc}{subsection}{Exercice 2}
 \subsection*{Exercice 2}
@@ -462,6 +462,40 @@ On donnait un programme (utilisant des nombres complexes, \texttt{numpy} et \tex
 On va procéder à des rotations d'angle $-a$ du repère, pour $a$ entre 0 inclus et $2\pi$ exclus, avec un pas de $\dfrac{2\pi}{n}$. À chaque étape on trace le rectangle qui colle au mieux, puis on garde celui d'aire minimale. Ensuite, tracer ce rectangle.
 \item La même question mais en traçant un rectangle (je ne l'ai pas faite).
 \end{enumerate}
+
+
+\addcontentsline{toc}{subsection}{Exercice 3}
+\subsection*{Exercice 3}
+
+\begin{py}
+\begin{python}
+def ordonner(L):
+    if len(L)<= 1:
+        n=1
+        e0=L[0]
+        Linf,Lsup = [],[]
+        for ei in L[1:]:
+            if ei == e:0
+                n+=1
+            elif ei<e0:
+                Linf.append(ei)
+            else :
+                Lsup.append(ei)
+    return (ordonner(Linf)+n*[e0]+orodnner(Lsup))
+\end{python}
+\end{py}
+
+
+\begin{enumerate}
+\item Que fait le programme ordonner ? Quelle est sa particularité ? 
+\item Écrire la fonction \texttt{less(z1,z2)}, \texttt{(z1,z2)} des complexes qui renvoie \texttt{True} si : 
+« Re(z1)<Re(z2) ou (Re(z1)=Re(z2) et Im(z1)<Im(z2)) ».
+\item Écrire en s’inspirant de \texttt{ordonner} la fonction \texttt{ordonnerdansc(L)} qui classe une liste de complexes.
+\item Tester \texttt{ordonnerdansc} avec une liste de complexes dont les parties réelles et imaginaires ont été choisies aléatoirement dans $[-10,10]$.
+\item Créer la liste des $(20+\cos(10a))e^{ia}$ avec $a$ allant de $-\pi$ à $\pi$ avec un pas de $\dfrac{pi}{100}$. On importera \texttt{cmath} pour l’exponentielle complexe. Tracer dans le plan complexe la liste ordonnée avec les fonctions \texttt{plot} et \texttt{show}.
+\end{enumerate}
+
+\end{multicols}
 \newpage 
 \begin{multicols}{2}
 \section{Exercices de la banque PT retranscrits par vos prédécesseurs -- 2015}
