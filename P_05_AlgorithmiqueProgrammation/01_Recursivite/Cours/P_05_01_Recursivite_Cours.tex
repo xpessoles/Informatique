@@ -224,19 +224,23 @@ Dans le second cas, on calcule itérativement les puissances de 2.
 
 \section{Analyse des algorithmes récursifs}
 \subsection{Avantages et inconvénients}
-Le principal avantage d'une programmation récursive est, dans certains cas, la simplicité de son écriture. Comme l'exemple précédent le montre, dans le cas du calcul des puissances de 2, l'écriture récursive est plus naturelle que l'écriture itérative.
 
-L'algorithme peut sembler alors plus aisé lors de sa lecture.
+\begin{itemize}[font = \color{ocre}, label=\ding{52}]
+\item Simplicité de l'écriture récursive dans certains cas : comme l'exemple précédent le montre, dans le cas du calcul des puissances de 2, l'écriture récursive est plus naturelle que l'écriture itérative.
+\item L'algorithme peut sembler alors plus aisé lors de sa lecture.
+\end{itemize}
 
-Par ailleurs, lors de l'écriture d'un programme récursif, il est nécessaire de porter attention à ce que l'algorithme se termine. Il pourra donc être nécessaire de vérifier la terminaison de l'algorithmique à l'aide d'un variant de boucle.
 
-Comme pour les algorithmes itératifs, il est aussi nécessaire de vérifier la correction de l'algorithme en utilisant un invariant de boucle.
-
-En outre, nous verrons de plus que la complexité algorithmique temporelle et spatiale d'un algorithme récursif peut être plus coûteuse qu'un algorithme itératif. 
+\begin{itemize}[font = \color{ocre}, label=\ding{55}]
+\item Comme pour les algorithmes itératifs, il faut prêter attention à sa terminaison en utilisant un variant de boucle.
+\item Comme pour les algorithmes itératifs, il est aussi nécessaire de vérifier la correction de l'algorithme en utilisant un invariant de boucle.
+\item La complexité algorithmique temporelle et spatiale d'un algorithme récursif peut être plus coûteuse qu'un algorithme itératif. 
+\end{itemize}
 
 
 Enfin certains développeurs informatiques ont un avis tranché sur l'intérêt de la programmation récursive :
 \textit{<< (...) I don't believe in recursion as the basis of all programming. This is a fundamental belief of certain computer scientists, especially those who love Scheme and like to teach programming by starting with a "cons" cell and recursion. But to me, seeing recursion as the basis of everything else is just a nice theoretical approach to fundamental mathematics (turtles all the way down), not a day-to-day tool. (...)>>.}\cite{5}
+
 \subsection{Terminaison des algorithmes récursifs -- Variant de boucle}
 \begin{definition}
 \textbf{\bfsf{Rappel : Variant de boucle}}
