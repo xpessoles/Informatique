@@ -1,0 +1,512 @@
+\documentclass[10pt,fleqn]{article} % Default font size and left-justified equations
+\usepackage[%
+    pdftitle={Informatique : Transfert thermique},
+    pdfauthor={Xavier Pessoles}]{hyperref}
+
+\input{style/new_style}
+\input{style/macros_SII}
+
+\fichetrue
+%\fichefalse
+
+\proftrue
+%\proffalse
+
+%\tdtrue
+\tdfalse
+
+%\courstrue
+\coursfalse
+
+% -------------------------------------
+% Déclaration des titres
+% -------------------------------------
+
+\def\discipline{Informatique \ifprof \\ Corrigé \else \fi}
+\def\xxtete{Informatique}
+
+\def\classe{PT -- PT $\star$}
+\def\xxnumpartie{DM 01}
+\def\xxpartie{Devoir maison 01}
+
+\def\xxnumchapitre{Étude d'un tensiomètre électronique$\;$ }
+\def\xxchapitre{\textit{$\;$ \\  D'après Banque PT 2016.}}
+
+\def\xxtitreexo{Étude d'un tensiomètre électronique}
+\def\xxsourceexo{\hspace{.2cm} D'après Banque PT 2016.}
+
+\def\xxposongletx{2}
+\def\xxposonglettext{1.45}
+\def\xxposonglety{20}
+\def\xxonglet{\textsf{DM 01}}
+
+\def\xxactivite{}
+\def\xxauteur{\textsl{La Martinière Monplaisir}}
+
+\def\xxcompetences{%
+\texttt{%
+\textbf{Savoirs et compétences :}\\
+\noindent \textbf{Résoudre :} à partir des modèles retenus :
+\begin{itemize}[label=\ding{112},font=\color{ocre}] 
+\item choisir une méthode de résolution analytique, graphique, numérique;
+\item mettre en \oe{}uvre une méthode de résolution.
+\end{itemize}
+\begin{itemize}[label=\ding{112},font=\color{ocre}] 
+\item \textit{Rés -- C1.1 :} Loi entrée sortie géométrique et cinématique -- Fermeture géométrique.
+\end{itemize}
+%
+%\noindent \textit{Mod2 -- C4.1 :} Représentation par schéma bloc.
+}}
+
+\def\xxfigures{
+%\includegraphics[width=.8\textwidth]{images/prot_01}
+}%figues de la page de garde
+
+\def\xxpied{%
+Concours Blanc 2016}
+
+
+\setcounter{secnumdepth}{5}
+%---------------------------------------------------------------------------
+
+
+\begin{document}
+
+%\chapterimage{png/Fond_Cin}
+\input{style/new_pagegarde}
+\vspace{1cm}
+\pagestyle{fancy}
+\thispagestyle{plain}
+
+\section{Présentation}
+Dans le domaine médical, la pression artérielle est l'un des paramètres
+les plus surveillés dans le cadre des maladies cardio-vasculaires. En effet,
+quand la pression artérielle est trop élevée, pendant des durées très longues,
+le muscle cardiaque finit par se fatiguer jusqu'à atteindre des insuffisances
+cardiaques sévères ; on parle d'hypertension.
+
+À l'inverse, une tension trop basse conduit à sous-alimenter les organes
+et peut conduire à des étourdissements ou évanouissements. L'hypotension
+n'est généralement pas considérée comme une maladie.
+Communément, la mesure de la pression artérielle se fait par la détermination
+de deux valeurs classiques : la pression systolique (pression la plus
+élevée suite à la contraction du cœur) et la pression diastolique (pression
+la moins élevée après le relâchement du cœur quand celui-ci se remplit de
+sang).
+
+Pour mesurer ces pressions, le médecin utilise classiquement la méthode
+du brassard associé à son stéthoscope. Le médecin gonfle le brassard jusqu'à
+couper la circulation sanguine dans le bras. Le médecin pose ensuite
+le stéthoscope sur l'artère et dégonfle progressivement le brassard. Dès qu'il
+écoute le sang passer à nouveau dans l'artère, il mesure la pression systolique
+sur le manomètre associé au brassard. Puis il continue à dégonfler le
+brassard jusqu'à ne plus écouter aucun bruit, là il lit la pression diastolique.
+On peut également mesurer ces pressions avec un tensiomètre électronique (voir figure 1).
+Il existe des modèles simples pour les particuliers et des modèles beaucoup plus complets dans
+le cadre des milieux médicaux.
+
+Les applications numériques seront données avec 1 chiffre significatif, sauf contre-ordre.
+
+\section{Étude du capteur de pression}
+\subsection{Étude du capteur : modélisation de la déformation de la membrane}
+Le principe du capteur de pression repose sur l'effet piézorésistif (voir figure 2). La cellule
+sensible du capteur est constituée d'une membrane se déformant sous l'effet de la force appliquée
+par un micro-vérin. Le micro-vérin applique une force F proportionnelle à la pression du
+brassard. Sur la membrane sont fixées 4 jauges de déformation. Les résistances électriques de ces
+jauges varient sous l'effet d'une déformation. Puis cette variation de résistance est transformée
+en tension électrique Vp au moyen d'un circuit de conditionnement.
+
+L'objectif de cette partie est de relier la pression du brassard à la tension mesurée dans le
+circuit de conditionnement en fonction des différents paramètres caractéristiques du capteur. On cherchera également à montrer que le capteur permet d'avoir une précision de moins d'un
+mmHg.
+
+En première approximation, la membrane peut être modélisée par une poutre de longueur
+$2L$ encastrée à chacune de ses extrémités soumise à un effort d'intensité $2F$ en son milieu (figure
+3(a)).
+Les caractéristiques de la poutre sont :
+\begin{itemize}
+\item $E$ : le module d'Young;
+\item $S$ : la surface de la section droite de la poutre;
+\item $I$ : le moment d'inertie de la section autour de l'axe $(G,\vect{z})$;
+\item $e$ : l'épaisseur de la membrane.
+\end{itemize}
+
+$G$ est le centre d'inertie de la section droite de la poutre.
+On note $\vect{AG}=x\vect{x}$. On suppose que le déplacement de la section droite est $\vect{u}\left( G\right) = u_y(x) \vect{y}$.
+La force appliquée par le vérin est notée $\vect{F}=-F\vect{y}$. 
+Les effets de la pesanteur sont négligées.
+Le modèle est considéré comme plan.
+
+
+Pour simplifier le calcul de la déformée de la membrane, on adopte le modèle donné sur la figure 3(b). On supposera que la liaison en $B$ bloque la translation suivant $\vect{x}$ et la rotation suivant $(B,\vect{z})$.
+
+\subparagraph{}
+\textit{Justifier pourquoi le modèle de la figure 3(b) est équivalent à celui de la figure 3(a). Justifier
+l'intérêt de cette simplification en déterminant le degré d'hyperstatisme des deux modèles.}
+
+On notera les torseurs des actions mécaniques au niveau des liaisons sous la forme :
+
+$\torseurstat{T}{i}{j}=\torseurcol{X_M}{Y_M}{-}{-}{-}{M_M}{M,R}$, le torseur de cohésion est noté $\left\{\mathcal{T}(coh) \right\}=\torseurcol{T_X}{T_Y}{-}{-}{-}{M_Z}{G,R}$ (action de la partie droite sur la partie gauche).
+
+
+\subparagraph{}
+\textit{Isoler le tronçon de poutre compris entre l'abscisse $[0, x]$. Écrire l'équation issue du principe
+fondamental de la statique permettant d'obtenir la relation entre le moment fléchissant $M_Z$,
+l'effort tranchant $T_Y$ et une (ou des) inconnue(s) de la liaison en $A$.
+Effectuer un second isolement et écrire l'équation nécessaire permettant d'exprimer l'effort
+tranchant $T_Y$ en fonction de $F$.
+En déduire la relation entre le moment fléchissant $M_Z$, l'effort $F$ et une (ou des) inconnue(s)
+de la liaison en $A$.}
+
+
+On rappelle que la relation de comportement reliant le moment de flexion au déplacement $u_y$
+est $M_z = EI \dfrac{d^2 u_y}{d x^2}$. On se place dans les hypothèses de Navier-Bernoulli en petits déplacements,
+on a ainsi $\theta = \dfrac{du_y}{dx}$, $\theta$ la rotation de la section droite autour de l'axe $(G,\vect{z})$. 
+
+
+
+\subparagraph{}
+\textit{Après intégration, montrer que le déplacement se met sous la forme $u_y(x) = A_1x^3 + A_2x^2$
+où vous préciserez les expressions des constantes $A_1$ et $A_2$ en fonction des paramètres du modèle
+en éliminant les inconnues de la liaison en $A$.}
+
+On rappelle que le problème étant hyperstatique, le moment de flexion est exprimé en fonction
+d'inconnues de liaisons qui seront déterminées en appliquant les conditions limites.
+
+On rappelle que la déformation dans une section droite de la poutre est donnée par 
+$\varepsilon(x) = -y \dfrac{d\theta}{ d x}=-y\dfrac{d^2 u_y} {dx^2}$.
+
+\subparagraph{}
+\textit{Montrer que la déformation sur la peau supérieure de la membrane ($y = e/2$) se met sous
+forme $\varepsilon = A_3 +A_4x$, où vous préciserez les expressions des constantes $A_3$ et $A_4$ en fonction des
+paramètres du modèle.}
+
+Quatre jauges de déformation sont disposées sur la peau extérieure de la membrane (voir
+figure 4).
+
+
+\subparagraph{}
+
+\textit{Quelle serait la position idéale des jauges de déformation ? En pratique elles sont placées
+en $x = \dfrac{L}{4}$ et en $x = \dfrac{3L}{4}$, donner la valeur des déformations de ces jauges et montrer que
+$\varepsilon_1 = -\varepsilon_2 = -\varepsilon_3 = \varepsilon_4 = kF$ 
+où vous donnerez l'expression de $k$ 
+en fonction des paramètres du modèle.}
+
+\subsection{Choix des jauges de déformations}
+
+
+Les jauges de déformation disposées sur la membrane (voir figure 4) subissent une déformation
+proportionnelle à l'intensité de la force F appliquée par le piston :
+$\varepsilon_1 = -\varepsilon_2 = -\varepsilon_3 = \varepsilon_4 = kF$.
+
+On cherche maintenant à déterminer la relation entre la variation de la résistance de la jauge
+de déformation et l'effort presseur $F$.
+Considérons une jauge de déformation de forme parallélépipédique constituée d'un matériau
+homogène de résistivité $\rho$ (s'exprimant en $\Omega\cdot m$). On note $\ell$ sa longueur, $a$ et $b$ ses dimensions
+transversales, $s$ sa section droite (voir figure 5).
+
+
+La résistance électrique $R$ de ce corps d'épreuve s'exprime au moyen de la relation $R = \rho \dfrac{\ell}{s}$.
+
+
+\subparagraph{}
+\textit{Lorsque la jauge d'épreuve est soumise à une force $\vect{F}$ appliquée parallèlement à $\ell$, elle se
+déforme : $\ell$, $s$ et $\rho$ subissent de petites variations valant respectivement $\delta \ell$, $\delta s$ et $\delta \rho$. Exprimer
+la variation relative de résistance électrique $\dfrac{\delta R}{R}$.}
+
+Les variations de $\ell$, de $a$ et $b$ ne sont pas indépendantes : $\dfrac{\delta a}{a}=\dfrac{\delta b}{b}=-\nu \dfrac{\delta \ell}{\ell}$ avec $\nu$ une constante dépendant du matériau, appelée coefficient de Poisson.
+
+\subparagraph{}
+\textit{Exprimer $\dfrac{\delta R}{R}$ en fonction de $\dfrac{\delta \ell}{\ell}$, $\nu$, $\dfrac{\delta \rho}{\rho}$.}
+
+
+
+Dans le cas d'un métal, $\delta \rho$ est lié à la variation $\delta V$ du volume $V$ selon la loi $\dfrac{\delta \rho}{\rho}=c \dfrac{\delta V}{V}$ avec $c$ une constante appelée constante de Bridgman.
+
+\subparagraph{}
+\textit{Montrer que $\dfrac{\delta R}{R}$  peut s'écrire sous la forme : $\dfrac{\delta R}{R}=K\dfrac{\delta \ell }{\ell}$
+avec $K$ une constante appelée facteur de jauge.}
+
+Dans le cas d'un semi-conducteur, $\delta \rho$ est lié à la contrainte $\sigma = \dfrac{||\vect{F}||}{s}$
+selon la loi $\dfrac{\delta \rho}{\rho}=\Pi \sigma$, avec $\Pi$ une constante appelée constante de piézorésistivité; de plus, le module de
+ Young $E$ du matériau lie la contrainte $\sigma$ et la déformation $\dfrac{\delta \ell}{\ell}$ : $\dfrac{\delta \ell}{\ell} = \dfrac{\sigma}{E}$.
+
+
+\subparagraph{}
+\textit{Exprimer le facteur de jauge dans le cas d'un semi-conducteur.}
+On donne : 
+\begin{itemize}
+\item pour le cuivre : $\nu =0,3$, $c = 1$;
+\item pour le silicium : $\nu =0,4$, $E = 1011 Pa$, $\Pi= 10^{-9}Pa^{-1}$.
+\end{itemize}
+
+\subparagraph{}
+\textit{Évaluer le facteur de jauge dans le cas du cuivre et dans le cas du silicium. Commenter.}
+\subparagraph{}
+\textit{Quel phénomène peut induire une erreur sur la mesure de la contrainte ?}
+
+\subparagraph{Circuit de conditionnement : pont de Wheatstone}
+
+\end{document}
+
+Les 4 jauges semi-conductrices identiques, de résistance
+R0 à l'équilibre, sont fixées sur la membrane
+(voir figure 4). La déformation 
+ de la jauge placée
+en x vaut donc (x).
+La déformation des jauges conduit à une variation
+Ri (i = a, b, c ou d) de leur résistance. Les 4 jauges
+sont branchées en pont de Wheatstone, alimenté sous
+une tension Valim = 16 V. Les bornes A et B sont
+branchées à un amplificateur de résistance d'entrée
+très grande.
+
+
+Q12. Déterminer l'expression de la tension Vp en fonction des paramètres du pont.
+
+
+A l'équilibre le pont est réglé de manière à avoir Vp = 0.
+Q13. Déterminer la variation de tension Vp = Vp lorsque les résistances subissent des variations
+Ri en fonction des variations Ri, Valim, R0.
+Q14. La jauge 1 correspond à la résistance Rb. Déterminer la position qu'il convient de donner
+aux autres jauges dans le pont de Wheatstone (autrement dit faire le lien entre les jauges 2, 3
+et 4 avec les résistances Ra, Rc, et Rd du pont).
+Q15. Exprimer la tension Vp en fonction de Valim, 1 et du facteur de jauge K.
+On considère un capteur de pression constitué d'une membrane en silicium ayant les caractéristiques
+suivantes :
+– surface Sm = 4 mm2
+– longueur 2L = 4 mm;
+– épaisseur e = 0,1 mm;
+– module d'Young E = 1011 Pa ;
+– moment d'inertie de la section I = 2.10−4 mm4.
+Q16. Etablir la relation entre la tension Vp et la pression P = F
+Sm
+, puis définir et exprimer la
+sensibilité de ce capteur de pression en fonction de K, e, L, E, I, Sm et Valim.
+Q17. Quelle est la tension Vp obtenue pour une pression de 50 kPa ?
+
+III Traitement numérique des informations
+
+
+
+Le capteur fournit une tension u(t) qui va subir un traitement informatique par une carte de
+commande. L'objectif de cette partie est de mettre en place les différents algorithmes permettant
+de déterminer les pressions diastolique et systolique ainsi que le pouls du patient après avoir
+filtré numériquement le signal. L'utilisation en milieu hospitalier nécessite la sauvegarde des
+différentes données dans une base de données afin de réaliser un meilleur suivi du patient.
+Les algorithmes demandés au candidat peuvent être réalisés dans le langage Python ou
+dans le langage Scilab ; toutes les questions seront traitées dans le même langage.
+Veillez à apporter les commentaires suffisants à la compréhension de votre programme et à
+utiliser des noms de variables explicites.
+
+III.1 Numérisation du signal
+Le signal Vp(t) issu du conditionnement est amplifié pour donner la tension u(t) fournie par
+le capteur ; cette tension u(t) est numérisé par un convertisseur analogique-numérique.
+La tension u(t) mesurée appartient à [0, 5V] pour une pression comprise entre [0, 1350HPa].
+La pression affichée est en mmHg, on rappelle que 1013HPa = 750 mmHg.
+La résolution de l'affichage de la pression est de 1 mmHg, cependant la numérisation du
+signal nécessite une précision plus importante de l'ordre de 0,02mmHg maximum.
+Le constructeur a, à sa disposition, des convertisseurs analogique-numérique (CAN) dotés
+d'une résolution de 10 bits, 12 bits et 16 bits.
+Q18. Déterminer en justifiant votre réponse la résolution du (ou des) CAN permettant de
+respecter le critère de précision.
+On cherche à déterminer la quantité de mémoire nécessaire pour stocker une mesure.
+Une mesure peut durer jusqu'à 60 s. La fréquence d'échantillonnage est de 1000 Hz.
+L'ensemble des valeurs de la mesure va être stocké dans un tableau.
+
+
+
+Q19. Choisir un type de stockage pour les valeurs parmi les types suivants : entier relatif codé
+sur 8, 16, 32 ou 64 bits, entier non signé codé sur 8, 16, 32 ou 64 bits, réel codé sur 32 ou 64
+bits. En déduire la quantité de mémoire nécessaire pour stocker le tableau, exprimée en octets
+(1 octet = 8 bits).
+
+III.2 Filtrage numérique du signal
+La fréquence d'échantillonnage est notée fe, la période d'échantillonnage est notée Te. Le
+signal numérisé est stocké dans une liste de taille N, notée Ue, contenant l'ensemble des valeurs
+Ue(nTe) accessible par la commande Ue[n] avec n  0,N −1 en Python et par la commande
+Ue(n) avec n  1,N en Scilab.
+Pour simplifier les notations, toute fonction du temps Ug(t) évaluée au temps iTe sera notée
+Ug,i au lieu de Ug(iTe).
+Le signal numérisé est filtré pour supprimer les bruits de mesure et permet d'obtenir le
+signal filtré numérique Uf sous forme d'une nouvelle liste Uf.
+Le filtre numérique retenu est un filtre du 2nd ordre modélisé par l'équation différentielle
+1
+2
+¨U
+f (t) + 2z
+
+˙U
+f (t) + Uf (t) = Ue(t)
+On choisit  = 20 rad/s et z = 0,7.
+Q20. Justifier succinctement le choix de ces valeurs sachant que la fréquence cardiaque est au
+maximum de 190 pulsations par minute.
+Pour résoudre cette équation différentielle, on utilise le schéma numérique d'intégration de
+Newmark :
+˙U
+f,i+1 = ˙Uf,i + (1 − )Te¨Uf,i + Te¨Uf,i+1
+Uf,i+1 = Uf,i + Te˙Uf,i + T2
+e (1/2 − )¨Uf,i + T2
+e ¨Uf,i+1
+où  et  sont des paramètres de la méthode.
+
+
+Q21. En introduisant les relations du schéma de Newmark dans l'équation différentielle exprimée
+au pas de temps (i+1)Te, montrer que la relation de récurrence peut se mettre sous la forme
+suivante : ¨Uf,i+1 = B1
+
+Ue,i+1 + B2¨Uf,i + B3˙Uf,i + B4Uf,i
+
+avec B1 = 1
+1/2 + 2z
+
+Te + T2
+e 
+.
+Vous exprimerez B2, B3 et B4 en fonction de z, , , .
+Afin d'analyser les propriétés de la méthode de Newmark, on résout l'équation différentielle
+pour un second membre simple avec différents pas de temps, pour un réglage des paramètres 
+et  fixé. Les résultats sont synthétisés sur la figure 7.
+Q22. Qualifier la stabilité du schéma d'intégration en fonction du pas de temps.
+On définit l'erreur du schéma d'intégration par  = max
+i0,N |Uf,i − Uf,exacte,i|. Le tableau
+suivant donne l'évolution de l'erreur en fonction du pas de temps.
+
+
+Te 0,01 0,001 0,0001
+ 0,05 0,005 0,0005
+Q23. Etant donné l'évolution de l'erreur, proposer un ordre de convergence associé à la méthode
+de Newmark dans la configuration donnée.
+
+
+Dans le cadre de l'acquisition numérique, la période d'échantillonnage est fixée, donc le pas
+de temps d'intégration aussi. On rappelle que la fréquence d'échantillonnage est de 1000 Hz.
+Q24. Conclure quant à la qualité du calcul du signal filtré.
+Q25. Ecrire une fonction newmark(gamma,beta,omega,z,e,Te) qui prend en argument les paramètres
+ et  de la méthode, les paramètres  et z du filtre, le signal à filtrer e et la période
+d'échantillonnage Te. Cette fonction retourne le signal filtré sous la forme d'une liste de même
+taille que la variable e. On supposera les conditions initiales nulles. On pourra utiliser directement
+les constantes B1, B2, B3 et B4 en les supposant définies comme variables globales.
+Q26. Proposer une amélioration de la fonction newmark afin de minimiser la taille des variables
+intermédiaires, donner la nouvelle fonction. Si vous pensez avoir déjà un algorithme optimal,
+précisez-le sur votre copie en justifiant.
+
+III.3 Détermination des pressions systolique, diastolique
+
+
+Les courbes de la pression mesurée brute et filtrée sont données sur la figure 8. L'objectif
+de cette partie est d'analyser la courbe afin d'extraire les données recherchées. On dispose de
+deux tableaux : data contenant la pression mesurée filtrée et t contenant le temps associé à
+chaque mesure (les données sont rangées par temps croissant).
+Pour déterminer la pression systolique, il faut parcourir la courbe ; celle-ci présente des
+successions de bosses et de creux qui seront respectivement nommés maximum local et minimun
+local. La pression systolique correspond à la valeur du maximum local où le critère
+maximum_local − minimum_local
+minimum_local > 4 × 10−5 est vérifié pour la première fois en parcourant
+les données par temps croissant.
+Q27. Ecrire une fonction pression_systolique(data) qui prend en argument les données
+mesurées filtrées et qui retourne la pression systolique. On supposera qu'il est toujours possible
+de trouver la pression systolique dans le tableau data.
+
+La pression diastolique correspond à la valeur du maximum local où le critère
+maximum_local − minimum_local
+minimum_local > 4 × 10−3 est vérifié pour la dernière fois en parcourant
+les données par temps croissant et que le maximum local reste supérieur à 40 mmHg pour éviter
+de détecter un bruit numérique.
+Q28. Ecrire une fonction pression_diastolique(data) qui prend en argument les données
+mesurées filtrées et qui retourne la pression diastolique. On supposera qu'il est toujours possible
+de trouver la pression diastolique parmi dans le tableau data.
+
+IV Stockage et analyse des résultats
+
+Le tensiomètre est utilisé dans le domaine hospitalier lors des visites régulières des infirmières
+dans les chambres des patients. Le tensiomètre doit permettre d'enregistrer les différentes
+constantes pour chaque patient. Après utilisation, le tensiomètre est connecté au réseau
+de l'hôpital et synchronise ses mesures avec la base de données des patients.
+La base de données est composée de plusieurs tables dont :
+– patients avec les attributs :
+• id : identifiant associé à un patient, clé primaire
+• numero_secu : le numéro de sécurité sociale du patient
+• nom : le nom du patient
+• prenom : le prénom (ou les prénoms) du patient
+• adresse1 : adresse du patient
+• adresse2 : complément d'adresse du patient
+• code_postal : code postal de la ville du patient
+• ville : ville du patient
+• date_de_naissance : date de naissance du patient
+• telephone : numéro de téléphone
+• ...
+– mesures avec les attributs :
+• id : identifiant associé à une mesure, clé primaire
+
+• type : le type de mesure stockée : résultat d'analyse sanguine, pression artérielle, radio...
+• datetime : la date et l'heure de l'examen sous la forme '2016-01-01 00 :00 :00'
+• pid : identifiant du patient associé à la mesure
+• pdias : pression diastolique en mmHg.
+• psyst : pression systolique en mmHg.
+• pouls : pouls en pulsations par minute.
+• ...
+Remarque : Les tables contiennent bien d'autres attributs, la base de données d'autres
+tables, seuls les éléments nécessaires à la suite ont été mis en place.
+Q29. Rappeler en quelques lignes l'utilité d'une clé primaire dans chacune des tables et dire si
+un autre attribut des tables aurait pu servir de clé primaire.
+
+
+Pour le besoin du suivi médical des patients, les médecins doivent pouvoir avoir accès à
+l'évolution des constantes en fonction du temps lors d'une hospitalisation.
+A l'aide d'une interface graphique non étudiée ici, le médecin peut sélectionner les données
+à extraire entre deux dates qui seront stockées dans les variables time1 et time2 stockées dans
+le format de datetime. Il souhaite tracer les évolutions des pressions systolique, diastolique et
+le pouls entre ces deux dates.
+Q30. Donner la requête SQL à envoyer au serveur de gestion de la base de données permettant
+de récupérer la valeur des champs datetime, pdias, psyst et pouls entre les deux dates time1
+et time2 (stockées dans le format de datetime).
+La requête précédente renvoie toutes les mesures sans distinction de type de mesures et sans
+que ce soit lié à un unique patient.
+Le médecin a sélectionné un patient avec son identifiant unique id, cette valeur est stockée
+dans la variable id_patient.
+Q31. Donner la requête SQL à envoyer au serveur de gestion de la base de données permettant
+de récupérer la valeur des champs précédents entre les deux mêmes dates, pour le patient
+id_patient et pour un type de mesures 'tension'.
+
+La requête est envoyée et traitée à l'aide d'une fonction traitement_requete(requete)
+qui retourne un tableau resultat_requete dont la première colonne est le champ datetime,
+la deuxième le champ psyst, la troisième le champ pdias et la dernière pouls.
+On supposera pour simplifier que la valeur de la colonne datetime est comprise comme un
+entier par le langage de programmation retenu et qu'il peut être utilisé directement comme
+abscisse des graphiques à produire dans la question suivante.
+Q32. Donner la séquence d'instructions permettant de tracer un graphique comportant l'évolution
+des pressions diastolique et systolique ainsi que le pouls en fonction du temps. Vous
+veillerez à mettre des titres et légendes sur le graphique. Vous utiliserez des styles de lignes
+différents pour chaque ligne dont vous expliciterez en commentaire le résultat visuel (couleur,
+type de trait : continu, pointillé...). Des éléments de documentation sont donnés en annexe page
+11.
+
+
+A coté du graphique, le médecin souhaite avoir les valeurs minimale, maximale, moyenne et
+médiane de chacune des constantes.
+Q33. Ecrire une fonction analyse(valeurs) qui prend en argument une liste de valeurs et qui
+retourne le minimum, le maximum et la moyenne.
+Q34. Déterminer la complexité de votre fonction analyse(valeurs) en fonction de la taille de
+la liste de valeurs notée n dans le meilleur et le pire des cas. Vous calculerez pour cela le nombre
+de comparaisons et d'opérations (addition, soustraction, division, multiplication) réalisées.
+
+
+
+Q35.A l'aide d'une méthode de tri de votre choix que vous expliciterez, écrire une fonction
+mediane(valeurs) qui prend en argument une liste de valeurs et qui renvoie la valeur de la
+médiane.
+Q36. Déterminer la complexité de votre fonction dans le meilleur et dans le pire des cas en
+comptant le nombre de comparaisons effectuées. Votre méthode est-elle efficace ? Justifier.
+Le médecin souhaite obtenir les nom, prénom et le numéro de téléphone des patients qui
+ont eu une pression systolique supérieure strictement à 160 mmHg, une pression diastolique
+supérieure strictement à 110 mmHg, avec un pouls compris strictement entre 100 et 150.
+Q37. Ecrire la requête SQL à envoyer au serveur de gestion de la base de données permettant
+de répondre à la demande du médecin.
+
+
+
+
+
+\end{document}

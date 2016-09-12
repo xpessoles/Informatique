@@ -1,0 +1,160 @@
+\documentclass[10pt,fleqn]{article} % Default font size and left-justified equations
+\usepackage[%
+    pdftitle={Informatique : Sujet 0 CCP},
+    pdfauthor={Xavier Pessoles}]{hyperref}
+
+\input{style/new_style}
+\input{style/macros_SII}
+
+\fichetrue
+%\fichefalse
+
+\proftrue
+%\proffalse
+
+%\tdtrue
+\tdfalse
+
+%\courstrue
+\coursfalse
+
+% -------------------------------------
+% Déclaration des titres
+% -------------------------------------
+
+\def\discipline{Informatique \ifprof \\ Remarques \else \fi}
+\def\xxtete{Informatique}
+
+\def\classe{PT -- PT $\star$}
+\def\xxnumpartie{DM 01}
+\def\xxpartie{Devoir maison 01}
+
+\def\xxnumchapitre{Simulation des vibrations en automobile$\;$ }
+\def\xxchapitre{\textit{$\;$ \\  D'après sujet 0 CCP PSI.}}
+
+\def\xxtitreexo{Simulation des vibrations en automobile}
+\def\xxsourceexo{\hspace{.2cm}D'après sujet 0 CCP PSI.}
+
+\def\xxposongletx{2}
+\def\xxposonglettext{1.45}
+\def\xxposonglety{20}
+\def\xxonglet{\textsf{DM 01}}
+
+\def\xxactivite{}
+\def\xxauteur{\textsl{P. Beynet}}
+
+\def\xxcompetences{%
+\texttt{%
+\textbf{Savoirs et compétences :}\\
+\noindent \textbf{Résoudre :} à partir des modèles retenus :
+\begin{itemize}[label=\ding{112},font=\color{ocre}] 
+\item choisir une méthode de résolution analytique, graphique, numérique;
+\item mettre en \oe{}uvre une méthode de résolution.
+\end{itemize}
+\begin{itemize}[label=\ding{112},font=\color{ocre}] 
+\item \textit{Rés -- C1.1 :} Loi entrée sortie géométrique et cinématique -- Fermeture géométrique.
+\end{itemize}
+%
+%\noindent \textit{Mod2 -- C4.1 :} Représentation par schéma bloc.
+}}
+
+\def\xxfigures{
+%\includegraphics[width=.8\textwidth]{images/prot_01}
+}%figues de la page de garde
+
+\def\xxpied{%
+DM 1}
+
+
+\setcounter{secnumdepth}{5}
+%---------------------------------------------------------------------------
+
+
+\begin{document}
+
+%\chapterimage{png/Fond_Cin}
+\input{style/new_pagegarde}
+\vspace{1cm}
+\pagestyle{fancy}
+\thispagestyle{plain}
+
+\section*{Erreurs et remarques}
+Ce sujet 0 est a été publié sur le site du concours CCP. Il comporte quelques erreurs et manques, sans conséquences sur la compréhension et la notation de l’épreuve.
+
+\textbf{Page 3/11} : erreurs dans les équations, sans conséquences pour la suite du sujet
+$$
+m_i \dfrac{d^2 u_i (t)}{dt^2} = 
+-k_i \left( u_i(t)-u_{i-1}(t) \right)
+-k_{i+1}\left( u_i(t)-u_{i+1}(t) \right)
+-c_i \left(\dot{u}_i(t)  - \dot{u}_{i-1}(t)  \right)
+-c_{i+1} \left(\dot{u}_i(t)  - \dot{u}_{i+1}(t)  \right)
+$$
+
+$$
+m_1 \dfrac{d^2 u_1 (t)}{dt^2} = 
+-\left( k_1+k_2\right) u_1(t)
++k_2 u_2(t)
+-\left( c_1+c_2\right)\dot{u}_{1}(t)
++c_2 \dot{u}_{2}(t)
+$$
+
+$$
+m_n \dfrac{d^2 u_n (t)}{dt^2} = 
+- k_n \left( u_n(t) - u_{n-1}(t) \right)
+-c_n \left(\dot{u}_n(t)  - \dot{u}_{n-1}(t)  \right)
++f_n(t)
+$$
+
+
+\textbf{Page 4/11}  : programme en Python.
+Il manque quelques arguments aux fonctions, sans conséquences pour la suite du sujet.
+\begin{py}
+\begin{python}
+X=calcul(n,M,K,C,npts,dt,fmax,omega)
+posttraitement(X,L,n,c,dt)
+\end{python}
+\end{py}
+
+
+\textbf{Page 9/11} : erreur dans la formule de la puissance dissipée :
+ $$
+ P_{\text{diss}}=C_1 \left( \dot{u}_1(t)\right)^2 + \sum\limits_{i=2}^{n} c_i \left( \dot{u}_i (t) -\dot{u}_{i-1}(t)\right)^2 
+ $$
+ 
+
+ 
+\textbf{Q15}, un argument supplémentaire est nécessaire : \texttt{Ediss=calcul\_energie(X,c,dt)}.
+
+\textbf{Page 10/11} : méthode \texttt{readline()}
+
+Une ligne est une chaîne de caractères qui se termine par le caractère ASCII « retour ligne » (Line Feed : ‘$\backslash$ n’).
+La méthode \texttt{readline()} lit et retourne une ligne. 
+\texttt{float(‘12$\backslash$n’)} retourne le réel \texttt{12.0}.
+
+
+ 
+ 
+\textbf{Page 11/11} : Python et \texttt{numpy} : on suppose que pour tout le sujet, la bibliothèque \texttt{numpy} a été importée.
+\begin{itemize}
+\item La définition d’un tableau peut se faire de plusieurs manières :
+\begin{itemize}
+\item	Python : \texttt{T=[[1,2,3],[2,1,5],[4,5,8]]};
+\item	Numpy : \texttt{T=array(([1,2,3],[2,1,5],[4,5,8]))}.
+\end{itemize}
+On peut alors accéder à des fonctionnalités supplémentaires. Par exemple :
+\texttt{T[i,j]} identique à \texttt{T[i][j]}. \texttt{T[:,0:3]} : extrait les trois premières colonnes.
+\texttt{T=zeros((3,3),float)} : \texttt{T} est de type ’array’.
+\item	Le produit matriciel n’est pas « * » pour les tableaux. Il existe pour cela la fonction numpy « dot ».
+Par exemple : \texttt{B = dot(A,X)} (\texttt{B=AX} où \texttt{A} est une matrice, \texttt{X} un vecteur)
+\item	Il est possible avec numpy de créer une variable de type ‘matrix’ (matrice) qui admet alors l’opérateur « * » pour produit, à la manière de Scilab ou Matlab. Il existe alors aussi un certain nombre d’opérateurs et de méthodes associés au calcul matriciel.
+Par exemple :  \texttt{M=matrix(([1,2,3],[2,1,5],[4,5,8]))}
+		\texttt{M.T} : transposée de la matrice M
+		\texttt{M**2} : M*M.
+\item	Pour effectuer une copie par valeurs et non par référence d’un tableau, il existe la fonction numpy « copy ». Par exemple : \texttt{A = copy(B)}. La modification de \texttt{A}, n’aura alors aucune conséquence sur \texttt{B}.
+Cela n’est pas le cas si l’instruction « \texttt{A = B} » a été tapée.
+
+Bibliothèque « matplotlib.pyplot » :On suppose que pour tout le sujet, la bibliothèque matplotlib.pyplot a été importée.
+\end{itemize}
+
+
+\end{document}
