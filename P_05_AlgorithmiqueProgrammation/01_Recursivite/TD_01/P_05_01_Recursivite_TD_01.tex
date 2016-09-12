@@ -78,41 +78,46 @@ Ch 1 : Programmation récursive -- \xxactivite%
 \fi
 %---------------------------------------------------------------------------
 
-\section*{Exercice 1 -- Fonction 91 de McCarthy}
-On considère la fonction récursive suivante : 
-\begin{py}
-\begin{python}
-def f(n) :
-    if n>100 : 
-        return n-10
-    return f(f(n+11))
-\end{python}
-\end{py}
 
-\subparagraph*{} \textit{Prouver sa terminaison lorsque $n\in\mathbb{N}$ et déterminer ce qu'elle calcule (sans utiliser l'interpréteur de commande).}
+\section*{Exercice 1}
+\setcounter{subparagraph}{0}
+On démontre que sur l'ensemble $\mathbb{N}\times \mathbb{N}$ est dénombrable en numérotant chaque couple $(x,y)\in\mathbb{N}^2$ suivant le procédé suggéré par la figure ci-dessous.
+\begin{center}
+\includegraphics[width=.45\linewidth]{images/fig_01}
+\end{center}
+
+\subparagraph{}\textit{Rédiger une fonction récursive qui retourne le numéro du point de coordonnées $(x,y)$.}
 \ifprof
 \begin{corrige}
-Montrons que $n$ est un variant de boucle.
-
-Si $n\geq 101$, l'algorithme se termine. 
-
-Si $n\in\left[90, 100\right]$, l'algorithme appelle $f(n+11)$.  $n+11$ sera supérieur à 101. 
- et  $f(n+11)$ retournera donc un nombre $a$ compris entre $\left[91, 101\right]$. 
-
-
+\begin{python}
+def numerote(x, y):
+    if x == 0 and y == 0:
+        return 0
+    if y > 0:
+        return 1 + numerote(x+1, y-1)
+    return 1 + numerote(0, x-1)
+\end{python}
 \end{corrige}
 \else
 \fi
-%\section*{Exercice 2}
-%\subparagraph*{}\textit{Prouver la terminaison de la fonction $G$ de Hofstadter, définie sur $\mathbb{N}$ de la façon suivante :}
-%\begin{py}
-%\begin{python}
-%def g(n) :
-%    if n== 0 : 
-%        return 0
-%    return n-g(g(n-1))
-%\end{python}
-%\end{py}
+
+\subparagraph{}\textit{Rédiger la fonction réciproque, là encore de façon récursive.}
+\ifprof
+\begin{corrige}
+\begin{python}
+def reciproque(n):
+    if n == 0:
+        return (0, 0)
+    (x, y) = reciproque(n-1)
+    if x > 0:
+        return (x-1, y+1)
+    return (y+1, 0)
+\end{python}
+\end{corrige}
+\else
+\fi
+
+
 
 \section*{Exercice 2}
 \setcounter{subparagraph}{0}
@@ -174,43 +179,42 @@ Dans le second cas, on conjecture que $\forall n>2, C(n)\leq 2n$ et on raisonne 
 \fi
 
 
-\section*{Exercice 3}
-\setcounter{subparagraph}{0}
-On démontre que sur l'ensemble $\mathbb{N}\times \mathbb{N}$ est dénombrable en numérotant chaque couple $(x,y)\in\mathbb{N}^2$ suivant le procédé suggéré par la figure ci-dessous.
-\begin{center}
-\includegraphics[width=.45\linewidth]{images/fig_01}
-\end{center}
 
-\subparagraph{}\textit{Rédiger une fonction récursive qui retourne le numéro du point de coordonnées $(x,y)$.}
+\section*{Exercice 3 -- Fonction 91 de McCarthy}
+On considère la fonction récursive suivante : 
+\begin{py}
+\begin{python}
+def f(n) :
+    if n>100 : 
+        return n-10
+    return f(f(n+11))
+\end{python}
+\end{py}
+
+\subparagraph*{} \textit{Prouver sa terminaison lorsque $n\in\mathbb{N}$ et déterminer ce qu'elle calcule (sans utiliser l'interpréteur de commande).}
 \ifprof
 \begin{corrige}
-\begin{python}
-def numerote(x, y):
-    if x == 0 and y == 0:
-        return 0
-    if y > 0:
-        return 1 + numerote(x+1, y-1)
-    return 1 + numerote(0, x-1)
-\end{python}
+Montrons que $n$ est un variant de boucle.
+
+Si $n\geq 101$, l'algorithme se termine. 
+
+Si $n\in\left[90, 100\right]$, l'algorithme appelle $f(n+11)$.  $n+11$ sera supérieur à 101. 
+ et  $f(n+11)$ retournera donc un nombre $a$ compris entre $\left[91, 101\right]$. 
+
+
 \end{corrige}
 \else
 \fi
-
-\subparagraph{}\textit{Rédiger la fonction réciproque, là encore de façon récursive.}
-\ifprof
-\begin{corrige}
-\begin{python}
-def reciproque(n):
-    if n == 0:
-        return (0, 0)
-    (x, y) = reciproque(n-1)
-    if x > 0:
-        return (x-1, y+1)
-    return (y+1, 0)
-\end{python}
-\end{corrige}
-\else
-\fi
+%\section*{Exercice 2}
+%\subparagraph*{}\textit{Prouver la terminaison de la fonction $G$ de Hofstadter, définie sur $\mathbb{N}$ de la façon suivante :}
+%\begin{py}
+%\begin{python}
+%def g(n) :
+%    if n== 0 : 
+%        return 0
+%    return n-g(g(n-1))
+%\end{python}
+%\end{py}
 
 %
 %\section*{Exercice 4}
