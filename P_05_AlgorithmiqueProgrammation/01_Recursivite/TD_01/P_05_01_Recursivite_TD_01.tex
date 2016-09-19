@@ -6,11 +6,11 @@
 \input{style/new_style}
 \input{style/macros_SII}
 
-%\fichetrue
-\fichefalse
+\fichetrue
+%\fichefalse
 
-%\proftrue
-\proffalse
+\proftrue
+%\proffalse
 
 \tdtrue
 %\tdfalse
@@ -64,7 +64,7 @@ Ch 1 : Programmation récursive -- \xxactivite%
 %---------------------------------------------------------------------------
 \begin{document}
 \input{style/new_pagegarde}
-\vspace{10cm}
+\vspace{7cm}
 \pagestyle{fancy}
 \thispagestyle{plain}
 
@@ -82,9 +82,15 @@ Ch 1 : Programmation récursive -- \xxactivite%
 \section*{Exercice 1}
 \setcounter{subparagraph}{0}
 On démontre que sur l'ensemble $\mathbb{N}\times \mathbb{N}$ est dénombrable en numérotant chaque couple $(x,y)\in\mathbb{N}^2$ suivant le procédé suggéré par la figure ci-dessous.
+\ifprof
+\begin{center}
+\includegraphics[width=.2\linewidth]{images/fig_01}
+\end{center}
+\else
 \begin{center}
 \includegraphics[width=.45\linewidth]{images/fig_01}
 \end{center}
+\fi
 
 \subparagraph{}\textit{Rédiger une fonction récursive qui retourne le numéro du point de coordonnées $(x,y)$.}
 \ifprof
@@ -282,24 +288,39 @@ triangle plein dont les sommets ont pour coordonnées $(x_a;y_a)$, $(x_b;y_b)$, 
 \ifprof
 \begin{corrige}
 \begin{python}
-def polygon(*args):
-    X, Y = [], []
-    for arg in args:
-        X.append(arg[0])
-        Y.append(arg[1])
-    plt.fill(X, Y, 'b')
-    
-from numpy import sqrt
-def sierpinski(n, a=[0, 0], b=[1, 0], c=[.5, sqrt(3)/2]):
-    if n == 1:
-        polygon(a, b, c)
-    else:
-        u = [(b[0]+c[0])/2, (b[1]+c[1])/2]
-        v = [(c[0]+a[0])/2, (c[1]+a[1])/2]
-        w = [(a[0]+b[0])/2, (a[1]+b[1])/2]
-        sierpinski(n-1, a, w, v)
-        sierpinski(n-1, w, b, u)
-        sierpinski(n-1, v, u, c)
+import numpy as np
+import matplotlib.pyplot as plt
+
+def triangle(A,B,C):
+    """
+    Entrées :
+     * A,B,C : couples de coordonnées des points A B et C
+    Sortie : 
+     * Rien (plot) 
+    """
+    X,Y = [],[]
+    X.append(A[0])
+    X.append(B[0])
+    X.append(C[0])
+    Y.append(A[1])
+    Y.append(B[1])
+    Y.append(C[1])
+    plt.fill(X,Y,'b')
+
+#triangle((0,0),(1,0),(.5,np.sqrt(3)/2))
+
+def trace(n,A,B,C):
+    if n==1:
+        triangle(A,B,C)
+    else :
+        a = (.5*(B[0]+C[0]),.5*(B[1]+C[1]))
+        b = (.5*(C[0]+A[0]),.5*(C[1]+A[1]))
+        c = (.5*(A[0]+B[0]),.5*(A[1]+B[1]))
+        trace(n-1,A,c,b)
+        trace(n-1,c,B,a)
+        trace(n-1,b,a,C)
+        
+trace(4,(0,0),(1,0),(.5,np.sqrt(3)/2))        
 \end{python}
 \end{corrige}
 \else

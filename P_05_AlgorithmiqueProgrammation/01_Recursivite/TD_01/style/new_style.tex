@@ -164,7 +164,7 @@
  \fancyhead{}
  \fancyhead[L]{%
  \noindent\begin{minipage}[c]{2.6cm}%
- \includegraphics[width=2cm]{png/logo_lycee.png}%
+ \includegraphics[width=4cm]{png/logo_lycee.png}%
  \end{minipage}}
 
 \fancyhead[C]{\rule{8cm}{.5pt}}
@@ -182,7 +182,7 @@
 \renewcommand{\footrulewidth}{0.2pt}
 \fancyfoot[C]{\footnotesize{\bfseries \thepage}}
 \fancyfoot[L]{ 
-\begin{minipage}[c]{.2\linewidth}
+\begin{minipage}[c]{.4\linewidth}
 \noindent\footnotesize{{\xxauteur}}
 \end{minipage}}
 
@@ -223,7 +223,7 @@
 \renewcommand{\footrulewidth}{0.2pt}
 \fancyfoot[C]{\footnotesize{\bfseries \thepage}}
 \fancyfoot[L]{ 
-\begin{minipage}[c]{.2\linewidth}
+\begin{minipage}[c]{.4\linewidth}
 \noindent\footnotesize{{\xxauteur}}
 \end{minipage}}}
 
@@ -350,6 +350,7 @@
 \newtheorem{vocabulary}{Vocabulaire}[section]
 %\newtheorem{definitionT}{Definition}[section]
 \newtheorem{definitionT}{Définition}[section]
+\newtheorem{rappelT}{Rappel}[section]
 \newtheorem{demoT}{Démonstration}[section]
 \newtheorem{corollaryT}[dummy]{Corollaire}
 \newtheorem{hypoT}{Hypothèse(s)}
@@ -564,7 +565,7 @@ linecolor=gray,
 backgroundcolor=white,
 innerleftmargin=5pt,
 innerrightmargin=5pt,
-innertopmargin=5pt,
+innertopmargin=0pt,
 leftmargin=0cm,
 rightmargin=0cm,
 linewidth=4pt,
@@ -634,6 +635,7 @@ innerbottommargin=5pt]{sqlBox}
 \newenvironment{exercice}{\begin{eBox}\begin{exerciseT}}{\hfill{\color{ocre}\tiny\ensuremath{\blacksquare}}\end{exerciseT}\end{eBox}}				  
 
 \newenvironment{definition}{\begin{dBox}\begin{definitionT}}{\end{definitionT}\end{dBox}}	
+\newenvironment{rappel}{\begin{dBox}\begin{rappelT}}{\end{rappelT}\end{dBox}}	
 \newenvironment{defi}{\begin{dBox}\begin{definitionT}}{\end{definitionT}\end{dBox}}	
 \newenvironment{demo}{\begin{demoBox}\begin{demoT}}{\end{demoT}\end{demoBox}}	
 %\newenvironment{exemple}{\begin{exempleT}}{\hfill{\tiny\ensuremath{\blacksquare}}\end{exempleT}}		
@@ -793,11 +795,11 @@ addtohook={%
 \par\vspace*{270\p@}
 }}
 
-
+ \newcounter{exo}
 
 
 \makeatletter             
-\renewcommand{\subparagraph}{\@startsection{subparagraph}{5}{\z@}%
+\renewcommand{\subparagraph}{\@startsection{exo}{5}{\z@}%
                                     {-2ex \@plus-.2ex \@minus .2ex}%
                                     {0ex}%               
 {\normalfont\bfseries Question \hspace{.7cm} }}
@@ -835,7 +837,7 @@ addtohook={%
 inputencoding=utf8,   % pour regler les pb d accent utf8 dans les codes
 extendedchars=true,   % pour regler les pb d accent utf8 dans les codes
 language=python,
-basicstyle=\sffamily\footnotesize, 	
+basicstyle=\ttfamily\footnotesize, 	
 stringstyle=\color{red}, 
 showstringspaces=false, 
 alsoletter={1234567890},
