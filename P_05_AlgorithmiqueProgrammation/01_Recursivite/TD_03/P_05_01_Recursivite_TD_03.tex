@@ -1,0 +1,242 @@
+\documentclass[10pt,fleqn]{book} % Default font size and left-justified equations
+\usepackage[%
+    pdftitle={Informatique : Programmation récursive},
+    pdfauthor={Xavier Pessoles}]{hyperref}
+
+\input{style/new_style}
+\input{style/macros_SII}
+
+\fichetrue
+%\fichefalse
+
+\proftrue
+%\proffalse
+
+\tdtrue
+%\tdfalse
+
+%\courstrue
+\coursfalse
+
+\newcommand{\bfsf}[1]{\textbf{\textsl{#1}}}%{\textbf{\textsf{#1}}}
+
+% -------------------------------------
+% Déclaration des titres
+% -------------------------------------
+
+\def\discipline{Informatique}
+\def\xxtete{Informatique}
+\def\classe{PT -- PT$\star$}
+\def\xxnumpartie{Partie 5}
+\def\xxpartie{Algorithmique \& Programmation II}
+
+\def\xxnumchapitre{Chapitre 1}
+\def\xxchapitre{\hspace{.12cm} Programmation récursive}
+
+\def\xxposongletx{2}
+\def\xxposonglettext{1.45}
+\def\xxposonglety{13}%10
+
+\def\xxonglet{Part. 5 -- Ch. 1}
+
+\def\xxactivite{TD 3}
+\def\xxauteur{D'après IPT, Éditions Vuibert.}%\textsl{Jean-Pierre Becirspahic}}
+
+\def\xxcompetences{%
+\textsl{%
+\textbf{Savoirs et compétences :}
+\begin{itemize}[label=\ding{112},font=\color{ocre}] 
+\item Alg -- C15 : Récursivité : avantages et inconvénients.
+\end{itemize}
+}}
+
+\def\xxfigures{
+}%figues de la page de garde
+
+\def\xxpied{%
+Partie 5 -- Algorithmique et Programmation II\\
+Ch 1 : Programmation récursive -- \xxactivite%
+}
+
+\def\xxtitreexo{Exercices d'application}
+\def\xxsourceexo{D'après IPT, Éditions Vuibert.}
+%---------------------------------------------------------------------------
+\begin{document}
+\input{style/new_pagegarde}
+\vspace{7cm}
+\pagestyle{fancy}
+\thispagestyle{plain}
+
+\setcounter{secnumdepth}{5}
+\def\columnseprulecolor{\color{ocre}}
+\setlength{\columnseprule}{0.4pt} 
+
+\ifprof
+\else
+\begin{multicols}{2}
+\fi
+%---------------------------------------------------------------------------
+
+
+\section*{Exercice 1}
+\setcounter{subparagraph}{0}
+
+Soit l'algorithme suivant : 
+
+\begin{py}
+\begin{python}
+def mult(n, p):
+    if p == 0:
+        return 0
+    else :
+        return n+mult(n,p-1)
+\end{python}
+\end{py}
+
+\subparagraph{}
+\textit{Énoncer un variant de boucle et montrer la terminaison de l'algorithme.}
+
+\subparagraph{}
+\textit{Énoncer un invariant de boucle et montrer la correction de l'algorithme.}
+\ifprof
+\begin{corrige}
+\begin{itemize}
+\item Soit $\mathcal{P}$ la propriété d'invariance: à l'itération $p$, on a $mult(n,p)=n\cdot p$. 
+\item À l'instant 0, on a : d'une part : $\forall n$, $n\cdot 0 = 0$. D'autre part, \texttt{mult(n,0)} renvoie 0. La propriété de récurrence est vraie. 
+\item À l'instant $p$, on considère la propriété de récurrence est vraie à l'instant $p$ : $mult(n,p)=n\cdot p$.
+\item À l'instant $p+1$, on applique l'algorithme : $p$ étant différent de 0, l'algorithme retourne $mult(n,p+1)=n+mult(n,p)$. D'après la propriété de récurrence, on a donc $mult(n,p+1)=n+ n\cdot p =n(p+1) $. La propriété est donc vraie au rang $p+1$.
+\item L'algorithme calcule donc le produit $np$.
+\end{itemize}
+\end{corrige}
+\else
+\fi
+
+\subparagraph{}
+\textit{Donner et justifier la complexité temporelle de la fonction \texttt{mult}.}
+\ifprof
+\begin{corrige}
+On note $C(p)$ le nombre d'appels récursifs : $C(p) = 1+C(p-1) = 1+1+C(p-2)=p+T(0)$. On a donc $C(p)=\mathcal{O}(p)$. La complexité temporelle est linéaire.
+\end{corrige}
+\else
+\fi
+
+\subparagraph{}
+\textit{Donner et justifier la complexité spatiale de la fonction \texttt{mult}.}
+\ifprof
+\begin{corrige}
+On stocke une valeur à chaque appel récursif. Si ce stockage est à coût constant, étant donné qu'il y a $n$ appels récursifs, la complexité spatiale est en $\mathcal{O}(n)$.
+\end{corrige}
+\else
+\fi
+
+\section*{Exercice 2}
+\setcounter{exo}{0}
+
+Soit l'algorithme suivant : 
+
+\begin{py}
+\begin{python}
+def puiss(x, n):
+    if n == 0:
+        return 1
+    else :
+        return x*puiss(x,n-1)
+\end{python}
+\end{py}
+
+\subparagraph{}
+\textit{Énoncer un variant de boucle et montrer la terminaison de l'algorithme.}
+
+\subparagraph{}
+\textit{Énoncer un invariant de boucle et montrer la correction de l'algorithme.}
+\ifprof
+\begin{corrige}
+\begin{itemize}
+\item Soit $\mathcal{P}$ la propriété d'invariance: à l'itération $p$, on a $puiss(x,n)=x^n$. 
+\item À l'instant 0, on a : d'une part : $\forall x>0$, $x^0 = 1$. D'autre part, \texttt{puiss(x,0)} renvoie 1. La propriété de récurrence est vraie. 
+\item À l'instant $n$, on considère la propriété de récurrence est vraie et à l'instant $p$ : $puiss(x,n)=x^n$.
+\item À l'instant $n+1$, on applique l'algorithme : $n$ étant différent de 0, l'algorithme retourne $puiss(x,n+1)=x*mult(x,n)$. D'après la propriété de récurrence, on a donc $puiss(x,n+1)=x*x^n=x^{n+1} $. La propriété est donc vraie au rang $n+1$.
+\item L'algorithme calcule donc le produit $x^n$.
+\end{itemize}   
+\end{corrige}
+\else
+\fi
+\subparagraph{}
+\textit{Donner et justifier la complexité temporelle de la fonction \texttt{puiss}.}
+\ifprof
+\begin{corrige}
+On note $C(p)$ le nombre d'appels récursifs : $C(p) = 1+C(p-1) = 1+1+C(p-2)=p+T(0)$. On a donc $C(p)=\mathcal{O}(p)$. La complexité temporelle est linéaire.
+\end{corrige}
+\else
+\fi
+
+\subparagraph{}
+\textit{Donner et justifier la complexité spatiale de la fonction \texttt{puiss}.}
+\ifprof
+\begin{corrige}
+On stocke une valeur à chaque appel récursif. Si ce stockage est à coût constant, étant donné qu'il y a $n$ appels récursifs, la complexité spatiale est en $\mathcal{O}(n)$.
+\end{corrige}
+\else
+\fi
+
+
+
+\section*{Exercice 3}
+\setcounter{exo}{0}
+
+Soit l'algorithme suivant : 
+
+\begin{py}
+\begin{python}
+def rechecheDichoRec(x, l):
+    n=len(l)
+    if n == 0:
+        return False
+    elif x<l[n//2] :
+        return rechecheDichoRec(x, l[0:n//2])
+    elif :
+        return rechecheDichoRec(x, l[n//2:n])
+    else :
+        return True
+\end{python}
+\end{py}
+
+\subparagraph{}
+\textit{Donner et justifier la complexité temporelle de la fonction \texttt{rechecheDichoRec}.}
+\ifprof
+\begin{corrige}
+Définissons le coût temporel comme le nombre d'appel récursif. Dans le pire des cas, l'élément n'est pas dans la liste. 
+ On cherche $p$ le nombre de fois que $n$ est divisible par 2. On cherche donc $p$ tel que $n\left(\dfrac{1}{2}\right)^p>1 \Leftrightarrow p\ln \left(\dfrac{1}{2}\right)>\ln\left(\dfrac{1}{n}\right) \Leftrightarrow  p>\dfrac{\ln\left(\dfrac{1}{n}\right)}{\ln\left(\dfrac{1}{2}\right)} =\dfrac{-\ln\left(n\right)}{-\ln\left(2 \right)}   =\dfrac{\ln\left(n\right)}{\ln\left(2 \right)}$. La complexité est logarithmique. 
+\end{corrige}
+\else
+\fi
+
+\subparagraph{}
+\textit{Donner et justifier la complexité spatiale de la fonction \texttt{rechecheDichoRec}.}
+\ifprof
+\begin{corrige}
+On stocke une liste à chaque appel récursif. On note $n$ le coût de stockage d'une liste de taille $n$. Soit une liste \texttt{l} de taille $n=2^k$ avec $k\in \mathbb{N}$. 
+À chaque itération, on stocke une liste de taille $n/2$.
+On a donc $C(n)=n+\dfrac{n}{2}+\dfrac{n}{4}+...+1$. 
+
+Par conséquent, $C(n)=2^k+\dfrac{2^k}{2}+\dfrac{2^k}{4}+...+1=2^k+2^{k-1}+2^{k-2}+...+1$. S'agissant de la somme des termes d'une suite géométrique :
+$C(n)=1+2^1+...+2^k =\dfrac{1-2^{k+1}}{1-2} =2n+1$. La complexité spatiale est donc linéaire. 
+\end{corrige}
+\else
+\fi
+
+
+
+\ifprof
+\else
+\end{multicols}
+\fi
+
+
+%\begin{thebibliography}{2}
+%\bibitem{1}{Patrick Beynet, \textit{Supports de cours de TSI 2}, Lycée Rouvière, Toulon.}
+%\bibitem{2}{<< Mandel zool 08 satellite antenna >>. Sous licence CC BY-SA via Wikimedia Commons - \url{https://fr.wikipedia.org/wiki/Ensemble_de_Mandelbrot#/media/File:Mandel_zoom_08_satellite_antenna.jpg}}
+%\bibitem{3}{\url{http://www.obside.fr/fractales/pages/Recursif/}}
+%\end{thebibliography}
+\end{document}
+

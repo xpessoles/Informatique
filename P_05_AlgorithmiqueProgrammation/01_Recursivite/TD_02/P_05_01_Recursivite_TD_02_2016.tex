@@ -1,0 +1,368 @@
+\documentclass[10pt,fleqn]{article} % Default font size and left-justified equations
+\usepackage[%
+    pdftitle={Informatique : Programmation récursive},
+    pdfauthor={Xavier Pessoles}]{hyperref}
+
+\input{style/new_style}
+\input{style/macros_SII}
+
+\fichetrue
+%\fichefalse
+
+%\proftrue
+\proffalse
+
+\tdtrue
+%\tdfalse
+
+%\courstrue
+\coursfalse
+
+\newcommand{\bfsf}[1]{\textbf{\textsl{#1}}}%{\textbf{\textsf{#1}}}
+
+% -------------------------------------
+% Déclaration des titres
+% -------------------------------------
+
+\def\discipline{Informatique}
+\def\xxtete{Informatique}
+\def\classe{PT -- PT$\star$}
+\def\xxnumpartie{Partie 5}
+\def\xxpartie{Algorithmique \& Programmation II}
+
+\def\xxnumchapitre{Chapitre 1}
+\def\xxchapitre{\hspace{.12cm} Programmation récursive}
+
+\def\xxposongletx{2}
+\def\xxposonglettext{1.45}
+\def\xxposonglety{13}%10
+
+\def\xxonglet{Part. 5 -- Ch. 1}
+
+\def\xxactivite{TD 2}
+\def\xxauteur{\textsl{Équipe pédagogique La Martinière}}
+
+\def\xxcompetences{%
+\textsl{%
+\textbf{Savoirs et compétences :}
+\begin{itemize}[label=\ding{112},font=\color{ocre}] 
+\item Alg -- C15 : Récursivité : avantages et inconvénients.
+\end{itemize}
+}}
+
+\def\xxfigures{
+}%figues de la page de garde
+
+\def\xxpied{%
+Partie 5 -- Algorithmique et Programmation II\\
+Ch 1 : Programmation récursive -- \xxactivite%
+}
+
+\def\xxtitreexo{Exercices d'application}
+\def\xxsourceexo{}
+
+\setcounter{secnumdepth}{5}
+%---------------------------------------------------------------------------
+\begin{document}
+\input{style/new_pagegarde}
+\vspace{8cm}
+\pagestyle{fancy}
+\thispagestyle{plain}
+
+
+\def\columnseprulecolor{\color{ocre}}
+\setlength{\columnseprule}{0.4pt} 
+\ifprof
+\else
+\begin{multicols}{2}
+\fi
+%---------------------------------------------------------------------------
+
+\subsection*{Exercice 1 -- Fonction mystère}
+\textit{D'après ressources de C. Lambert.}
+On donne la fonction suivante : 
+\begin{py}
+\begin{python}
+def mystere(L):
+    """
+    Ceci est la fonction mystère, saurez-vous trouver 
+    son but ?
+    Entrée : 
+        * L(list) : liste de nombres entiers ou réels
+    Sortie : 
+        * ??? 
+    """
+    n = len(L)
+    if n==0 :
+        return (None)
+    elif n==1 :
+        return (L[0])
+    else :
+        x = mystere(L[0:n-1])
+        if x<=L[-1] :
+            return (x)
+        else : 
+            return (L[-1])
+\end{python}
+\end{py}
+
+\subparagraph{}
+\textit{Sans coder la fonction, déterminer le résultat de l'instruction \textbf{print(mystere([14, 20, 3, 16]))} ? Vous pourrez représenter de façon graphique l'empilement et le dépilement de la pile d'exécution.}
+
+\subparagraph{}
+\textit{D'après vous quel est le but de cette fonction ?}
+
+\subparagraph{}
+\textit{Programmer la fonction et tester l'instruction précédente. Sur plusieurs exemples, vérifiez la conjecture faite à la question précédente.}
+
+
+\subparagraph{}
+\textit{Question subsidiaire. -- Montrer que la propriété suivante est une propriété d'invariance :\\
+$\mathcal{P}$ : l'algorithme retourne le plus petit élément de la liste de taille $k$, s'il existe.}
+
+\begin{rem}
+\begin{itemize}
+\item Il faudra montrer que l'algorithme se termine au moyen d'un variant de boucle. 
+\item Il faudra montrer que $\mathcal{P}$ est une propriété d'invariance. 
+\end{itemize}
+\end{rem}
+\ifprof
+\begin{corrige}
+$n$ est un variant de boucle car : 
+\begin{itemize}
+\item si $n=1$ ou $n=0$, l'algorithme se termine;
+\item si $n>1$ chaque appel récursif est réalisé avec l'argument $n-1$. $n$ décrit donc une suite strictement décroissante, jusqu'à ce que $n=1$ (terminaison de l'algorithme). 
+\end{itemize}
+
+\vspace{.25cm}
+
+Soit la propriété suivante : soit une liste de taille $k$. L'appel à la fonction mystère retourne le plus petit élément à chaque itération. 
+
+Soit une liste de 2 éléments. $x$ reçoit le premier élément de la liste. $x$ est comparé au second élément. Si $x$ est inférieur au second élément, c'est donc le plus petit élément. $x$ est bien retourné. Sinon c'est bien le second élément qui est retourné. 
+
+
+Soit une liste de taille $k+1$.  $x$ reçoit le résultat de \texttt{mystere(L[0:k])}. D'après la propriété, $x$ contient donc le plus petit élément de la liste \texttt{[0:k]}. $x$ est comparé à l'élément $k+1$. Si $x$ est inférieur à cet élément, c'est donc le plus petit élément. $x$ est bien retourné. Sinon c'est que l'élément $k+1$ est le plus petit de la liste. C'est bien celui qui est retourné. 
+
+La propriété énoncée est donc un invariant de boucle.
+\end{corrige}
+\else
+\fi
+
+\subsection*{Exercice 2 -- Palindrome...}
+\textit{D'après ressources de C. Lambert.}
+\setcounter{exo}{0}
+On souhaite réaliser une fonction \texttt{miroir} dont le but est de retourner le <<miroir>> d'une chaîne de caractères. Par exemple le résultat de \texttt{miroir("miroir")} serait \textsl{''riorim''}.
+
+\subparagraph{}
+\textit{Programmer la fonction \texttt{miroir\_it} permettant de répondre au problème de manière itérative.}
+
+
+\subparagraph{}
+\textit{Programmer la fonction \texttt{miroir\_rec} permettant de répondre au problème de manière récursive.}
+
+
+\subparagraph{}
+\textit{Que renvoie la fonction si la chaîne de caractère est "Eh ! ça va la vache" ?}
+ 
+ \subparagraph{}
+\textit{Évaluer la complexité algorithmique de chacune des deux fonctions.}
+
+ 
+\subsection*{Exercice 3 -- Suite de Fibonacci}
+\textit{D'après ressources de C. Lambert.}
+
+\setcounter{exo}{0}
+On définit la suite de Fibonacci de la façon suivante : 
+$$
+\forall n\in \mathbb{N}, \left\{ \begin{array}{l}
+u_0 = 0, u_1 = 1 \\
+u_{n+2} = u_{n} + u_{n+1}
+\end{array}\right.
+$$
+
+\subparagraph{}
+\textit{Définir la fonction \texttt{fibonacci\_it} permettant de calculer $u_n$ par une méthode itérative. Évaluer la complexité algorithmique de l'algorithme.}
+
+\subparagraph{}
+\textit{Définir la fonction \texttt{fibonacci\_rec} permettant de calculer $u_n$ par une méthode récursive << intuitive>>. Évaluer la complexité algorithmique de l'algorithme.}
+
+
+\subparagraph{}
+\textit{Observer comment passer du couple $(u_n,u_{n+1})$ au couple $(u_{n+1},u_{n+2})$. En déduire une autre méthode récursive pour calculer le n\ieme terme de la suite de Fibonacci. Évaluer la complexité algorithmique de l'algorithme.}
+
+\section*{Exercice 4 -- Faisons des Bulles}
+\textit{ D'après les ressources de Mmes SEMBELY et VERDIER}
+\setcounter{exo}{0}
+
+Les fractales sont des objets mathématiques fondés sur des figures géométriques se répétant à l'infini via un processus itératif.
+\begin{center}
+\textit{ "Une fractale est un objet irrégulier, dont l'irrégularité est la même à toutes les échelles et en tous les points"
+\\
+Adrien DOUADY - mathématicien français}
+\end{center}
+Ce type de structure se retrouve également dans la nature : architecture des côtes maritimes, ramifications nerveuses, nuages, galaxies ...
+\\
+Etant donné leur structure, il est très intéressant d'utiliser la récursivité pour visualiser des ensembles fractals.
+\\
+\subparagraph{}
+\textit{Ecrire une fonction \texttt{cercle} d'arguments \texttt{x}, \texttt{y} et \texttt{r} qui trace le cercle de centre le point $A(x, y)$ et de rayon $r$ (supposé strictement positif).}
+
+\subparagraph{}
+\textit{Ecrire une fonction récursive \texttt{bubble} d'arguments \texttt{x}, \texttt{y}, \texttt{r} et \texttt{n}. Elle effectuera la construction pour un nombre \texttt{n} d'étapes en ayant pour figure de base le cercle de centre $A(x, y)$ et de rayon \texttt{r} (supposé strictement positif).}
+\textit{A chaque étape, le rayon du cercle est divisé par 2.}
+\begin{center}
+\includegraphics[width=.65\linewidth]{images/fig_03}
+% Le résultat des fonctions bubble1(4) et de bubble2(4).
+\end{center}
+
+\subparagraph{}
+\textit{Ecrire une fonction récursive \texttt{bubbleComplet} d'arguments \texttt{x}, \texttt{y}, \texttt{r}, \texttt{n} et une chaîne de caractères \texttt{position}. Elle effectuera la construction ci-dessous pour un nombre \texttt{n} d'étapes en ayant pour figure de base le cercle de centre $A(x, y)$ et de rayon \texttt{r} (supposé strictement positif).}
+\begin{center}
+\includegraphics[width=.65\linewidth]{images/bulles}
+% Le résultat des fonctions bubble1(4) et de bubble2(4).
+\end{center}
+
+\ifprof
+\begin{corrige}
+\begin{python}
+### tracé d'un cercle
+import matplotlib.pyplot as plt
+import numpy as np
+
+def cercle(x,y,r):
+    """tracé d'un cercle de centre A(x,y) et de rayon r"""
+    angles=np.linspace(0,2*np.pi,500)
+    les_X=[x+r*np.cos(angle) for angle in angles]
+    les_Y=[y+r*np.sin(angle) for angle in angles]
+    plt.plot(les_X,les_Y)
+    plt.axis("equal")
+    plt.show()
+    
+def cerclesRec(x,y,r,n):
+    """tracé des cercles à droite et en bas du cercle de centre A(x,y) et de rayon r"""
+    cercle(x,y,r)
+    if n>0:
+        cerclesRec(x+1.5*r,y,r/2,n-1)
+        cerclesRec(x,y-1.5*r,r/2,n-1)
+        
+def cerclesRec_2(x,y,r,n,position):
+    """tracé des cercles autour du cercle de centre A(x,y) et de rayon r"""
+    cercle(x,y,r)
+    if n>0:
+        if position=='centre':
+            cerclesRec_2(x,y+1.5*r,r/2,n-1,'haut')
+            cerclesRec_2(x-1.5*r,y,r/2,n-1,'gauche')
+            cerclesRec_2(x+1.5*r,y,r/2,n-1,'droite')
+            cerclesRec_2(x,y-1.5*r,r/2,n-1,'bas')
+        if position=='droite':
+            cerclesRec_2(x,y+1.5*r,r/2,n-1,'haut')
+            cerclesRec_2(x+1.5*r,y,r/2,n-1,'droite')
+            cerclesRec_2(x,y-1.5*r,r/2,n-1,'bas')
+        if position=='bas':
+            cerclesRec_2(x-1.5*r,y,r/2,n-1,'gauche')
+            cerclesRec_2(x+1.5*r,y,r/2,n-1,'droite')
+            cerclesRec_2(x,y-1.5*r,r/2,n-1,'bas')
+        if position=='gauche':
+            cerclesRec_2(x-1.5*r,y,r/2,n-1,'gauche')
+            cerclesRec_2(x,y+1.5*r,r/2,n-1,'haut')
+            cerclesRec_2(x,y-1.5*r,r/2,n-1,'bas')
+        if position=='haut':
+            cerclesRec_2(x-1.5*r,y,r/2,n-1,'gauche')
+            cerclesRec_2(x+1.5*r,y,r/2,n-1,'droite')
+            cerclesRec_2(x,y+1.5*r,r/2,n-1,'haut')
+\end{python}
+\end{corrige}
+\else
+\fi
+
+\section*{Exercice 5 -- Flocon de Von Koch}
+\setcounter{exo}{0}
+
+
+Dans cet exercice, vous utiliserez des tableaux \textbf{numpy} pour représenter les points. C'est plus pratique que les listes python pour faire les calculs vectoriels.
+
+\begin{itemize}
+\item Si $a$ et $b$ représentent respectivement les points $(x,y)$ et $(x',y')$ alors $a+b$ représente le point $(x+x',y+y')$.
+\item Si $r$ est un réel et $a$ représente le point de coordonnées $(x,y)$ alors $r*a$ représente le point $(rx,ry)$.
+\item Si $a$ et $b$ sont des tableaux \textbf{numpy} alors $dot(a,b)$ représente le produit matriciel $a\times b$ (si ce produit est possible). La fonction \textbf{dot} est une fonction \textbf{numpy}.
+\end{itemize}
+
+Le mathématicien suédois Von Koch a défini la courbe du même nom dont voici les premières itérations.
+
+\begin{center}
+\includegraphics[width=.95\linewidth]{images/etapes_flocon}
+\end{center}
+
+\subparagraph{}
+\textit{Ecrire une fonction \texttt{rotation} d'argument un réel \texttt{alpha} qui renvoie le tableau \textbf{numpy} correspondant à la matrice de rotation d'angle \texttt{alpha}.}
+
+\subparagraph{}
+\textit{Pour l'étape $n=1$, exprimer les points $C$ et $D$ en fonction de $A$ et $B$.}
+En utilisant une matrice de rotation, exprimer $E$ en fonction de $C$ et $D$.
+
+\subparagraph{}
+\textit{En déduire une fonction récursive \texttt{koch} d'arguments les points \texttt{A} et \texttt{B} et un entier \texttt{n}. Cette fonction tracera la courbe de Von Koch pour l'itération $n$ à partir des points $A$ et $B$.}
+
+\subparagraph{}
+\textit{Ecrire une fonction \texttt{flocon} d'arguments les points $A$ et $B$ et un entier $n$. Cette fonction tracera le flocon de Von Koch pour l'itération $n$ à partir des points $A$ et $B$.}
+
+\begin{center}
+\includegraphics[width=.95\linewidth]{images/flocon_von_koch}
+\end{center}
+
+\ifprof
+\begin{corrige}
+\begin{python}
+#matrice rotation d'angle pi/3
+def rotation(angle):
+    return np.array([[np.cos(angle),-np.sin(angle)],[np.sin(angle),np.cos(angle)]])
+
+# angle=np.pi/3    
+# print (rotation(angle))
+
+def koch(a, b, n):
+    R = rotation(np.pi/3)
+    if n == 0:
+        plt.plot([a[0], b[0]], [a[1], b[1]],'b')
+    else:
+        c=np.array([(b[0]-a[0])/3+a[0],(b[1]-a[1])/3+a[1]])
+        d=np.array([2*(b[0]-a[0])/3+a[0],2*(b[1]-a[1])/3+a[1]])
+        vecteur=d-c
+        e=np.dot(rotation(np.pi/3),vecteur)+c
+        koch(a, c, n - 1)
+        koch(c, e, n - 1)
+        koch(e, d, n - 1)
+        koch(d, b, n - 1)
+        
+def flocon(a,b,n):
+    koch(a,b,n)
+    vecteur=b-a
+    c=np.dot(rotation(-2*np.pi/3),vecteur)+b
+    koch(b,c,n)
+    koch(c,a,n)
+
+n = 5
+a = np.array([0,0])
+b = np.array([1,0])
+flocon(a, b, n)
+plt.axis('equal')
+plt.show()
+\end{python}
+\end{corrige}
+\else
+\fi
+
+\ifprof
+\else
+\end{multicols}
+\fi
+%\begin{thebibliography}{2}
+%\bibitem{1}{Patrick Beynet, \textit{Supports de cours de TSI 2}, Lycée Rouvière, Toulon.}
+%\bibitem{2}{<< Mandel zool 08 satellite antenna >>. Sous licence CC BY-SA via Wikimedia Commons - \url{https://fr.wikipedia.org/wiki/Ensemble_de_Mandelbrot#/media/File:Mandel_zoom_08_satellite_antenna.jpg}}
+%\bibitem{3}{\url{http://www.obside.fr/fractales/pages/Recursif/}}
+%\end{thebibliography}
+\end{document}
+
+
+
+
