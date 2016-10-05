@@ -29,10 +29,10 @@
 \def\xxnumpartie{DS 1}
 \def\xxpartie{Devoir Surveillé 1}
 
-\def\xxnumchapitre{Définition des courbes de Bézier par l'algorithme de Casteljau$\;$ }
+\def\xxnumchapitre{Tracer des courbes de Bézier$\;$ }
 \def\xxchapitre{\textit{$\;$ \\ }}
 
-\def\xxtitreexo{Définition des courbes de Bézier par l'algorithme de Casteljau}
+\def\xxtitreexo{Tracer des courbes de Bézier}
 \def\xxsourceexo{\hspace{.2cm} }
 
 \def\xxposongletx{2}
@@ -63,7 +63,7 @@
 }%figues de la page de garde
 
 \def\xxpied{%
-DS 1 -- Algorithme de Casteljau}
+DS 1 -- Courbes de Bézier}
 
 
 \setcounter{secnumdepth}{5}
@@ -81,7 +81,7 @@ DS 1 -- Algorithme de Casteljau}
 \section{Présentation}
 
 \begin{minipage}[c]{0.5\linewidth}
-Les courbes de Bézier ont été inventées par l'ingénieur Pierre Bézier (ingénieur Arts et Métiers (Pa. 1927) et Renault). Il s'agit de courbes paramétrées utilisées dans les logiciels de dessin, en conception assistée par ordinateur ou encore pour définir certaines polices de caractères. Même si ces courbes sont remplacées par des des courbes de types << NURBS >> elles restent néanmoins encore très utilisées. 
+Les courbes de Bézier ont été inventées par l'ingénieur Pierre Bézier (ingénieur Arts et Métiers (Pa. 1927) ingénieur chez Renault). Il s'agit de courbes paramétrées utilisées dans les logiciels de dessin, en conception assistée par ordinateur ou encore pour définir certaines polices de caractères. Même si ces courbes sont remplacées par des courbes de types << NURBS >> elles restent néanmoins encore très utilisées. 
 \end{minipage} \hfill
 \begin{minipage}[c]{0.47\linewidth}
 \begin{center}
@@ -99,11 +99,11 @@ Les courbes de Bézier ont été inventées par l'ingénieur Pierre Bézier (ing
 
 
 \begin{defi}
-Soient $P_0$, $P_1$, ..., $P_{n}$, $n+1$ points de contrôle. %La courbe de Bézier est définie par la courbe paramétrée suivante : 
+Soient $P_0$, $P_1$, ..., $P_{n}$, $n+1$ points de contrôle (ou pôles) de coordonnées $\left( x_{Pi},y_{Pi} \right)$. %La courbe de Bézier est définie par la courbe paramétrée suivante : 
 %$$
 %\forall t \in [0,1] \quad P(t)=\sum\limits_{i=0}^{n} B_i^n(t) P_i.
 %$$ 
-Pour une courbe plane la position d'un point $M$ de coordonnées $\left( x(t),y(t) \right)$ dans la base $\left(\vect{x},\vect{y} \right)$ est définie par :
+Pour une courbe plane, la position d'un point $M$ de coordonnées $\left( x(t),y(t) \right)$ dans la base $\left(\vect{x},\vect{y} \right)$ est définie par :
 $$
 \forall t \in [0,1]
 \left\{
@@ -125,8 +125,8 @@ $$
 \forall t \in [0,1]
 \left\{
 \begin{array}{l}
-x(t)=  \left(1-t \right)^3 t^0 x_{P_0} +\left(1-t \right)^2 t^1 x_{P_1} +\left(1-t \right)^1 t^2 x_{P_2} +\left(1-t \right)^0 t^3 x_{P_3}\\
-y(t)=  \left(1-t \right)^3 t^0 y_{P_0} +\left(1-t \right)^2 t^1 y_{P_1} +\left(1-t \right)^1 t^2 y_{P_2} +\left(1-t \right)^0 t^3 y_{P_3}\\
+x(t)=  \left(1-t \right)^3 t^0 x_{P_0} +3\left(1-t \right)^2 t^1 x_{P_1} +3\left(1-t \right)^1 t^2 x_{P_2} +\left(1-t \right)^0 t^3 x_{P_3}\\
+y(t)=  \left(1-t \right)^3 t^0 y_{P_0} +3\left(1-t \right)^2 t^1 y_{P_1} +3\left(1-t \right)^1 t^2 y_{P_2} +\left(1-t \right)^0 t^3 y_{P_3}\\
 \end{array}
 \right..
 $$ 
@@ -140,71 +140,221 @@ $$
 L'objectif est de tracer les courbes de Bézier en utilisant des méthodes différentes.
 \end{obj}
 
-\section{Tracer naïf d'une courbe de Bézier}
+\section{Tracé naïf d'une courbe de Bézier}
+Le tracé d'une courbe de Bézier de degré $n$ fait appel à la fonction \texttt{fact(n)} permettant de calculer $n!$. 
+\subparagraph{}
+\textit{Écrire cette fonction en utilisant un algorithme récursif \texttt{factRec(n)}. Vous prendrez soin de documenter votre fonction.}
+\subparagraph{}
+\textit{Écrire cette fonction en utilisant un algorithme itératif \texttt{factIt(n)}. Vous prendrez soin de documenter votre fonction.}
+\ifprof
+\begin{corrige}
+\begin{py}
+\begin{python}
+def fact(n):
+    """
+    Calcul de n! = 1 x 2 x ... x (n-1) x n
+    Par convention, 0! = 1
+    n doit être un int
+    """
+    if n==0 :
+        return 1
+    else : 
+        return n*fact(n-1)
+\end{python}
+\end{py}
+\end{corrige}
+\else
+\fi
 
 \subparagraph{}
-\textit{Le tracer d'une courbe de Bézier de degré $n$ fait appel à la fonction \texttt{fact(n)} permettant de calculer $n!$. Écrire cette fonction en utilisant un algorithme récursif et itératif. Vous prendrez soin de documenter votre fonction.}
+\textit{En utilisant la fonction \texttt{calculPointCourbe(poles,t)}, réaliser le programme permettant de tracer une courbe sur 100 points. On rappelle que pour utiliser la fonction \texttt{plot} il est nécessaire de réaliser la liste des abscisses, qu'on pourra nommer \texttt{les\_x}, et la liste des ordonnées, qu'on pourra nommer \texttt{les\_y}. On fera l'hypothèse que la liste de pôles a déjà été renseignée dans la variable \texttt{poles}. }
+\ifprof
+\begin{corrige}~\\
+
+\begin{py}
+\begin{python}
+poles = [[0,0],[0,20],[40,20],[40,0]]
+les_u = np.linspace(0,1,100)
+
+les_x_bern = []
+les_y_bern = []
+for t in les_u:
+    pt = calculPointCourbe(poles,t)
+    les_x_bern.append(pt[0])
+    les_y_bern.append(pt[1])
+
+plt.plot(les_x_bern,les_y_bern,"b.")
+\end{python}
+\end{py}    
+\end{corrige}
+\else
+\fi
 
 \subparagraph{}
-\textit{En utilisant la fonction \texttt{calculPointCourbe(poles,u)},réaliser le programme permettant de tracer une courbe sur 100 points. On rappelle que pour utiliser la fonction \texttt{plot} il est nécessaire de réaliser la liste des abscisses, qu'on pourra nommer \texttt{les\_x}, et liste des ordonnées, qu'on pourra nommer \texttt{les\_y}. }
-
-
-\subparagraph{}
-\textit{On fait l'hypothèse (forte) que la complexité algorithmique de la fonction \texttt{pow} est linéaire. Donner la complexité algorithmique temporelle de la fonction \texttt{fonctionBernstein}.}
+\textit{On fait l'hypothèse (forte) que la complexité algorithmique de la fonction \texttt{pow}, appelée dans la fonction \texttt{fonctionBernstein}, est linéaire. Donner la complexité algorithmique temporelle de la fonction \texttt{fonctionBernstein}.}
 
 
 \section{Utilisation de l'algorithme de De Casteljau}
 
 
 \begin{minipage}[c]{0.6\linewidth}
-L'algorithme de De Casteljau se repose sur le fait qu'une restriction d'une courbe de Bézier est aussi une courbe de Bézier. En notant $P_0$, $P_1$, $P_2$ et $P_3$ les 4 points de contrôle d'une courbe de Bézier et $t$ un réel donnée appartenant à $[0;1]$ et $\text{d}t$ le pas de calcul : 
+L'algorithme de De Casteljau repose sur le fait qu'une restriction d'une courbe de Bézier est aussi une courbe de Bézier. En notant $P_0$, $P_1$, $P_2$ et $P_3$ les 4 points de contrôle (ou pôles) d'une courbe de Bézier et $t$ un réel donné appartenant à $[0;1]$ : 
 \begin{itemize}[label=\ding{112},font=\color{ocre}] 
-\item on construit les 3 barycentres $P_j^1$, $j \in [0;2]$ des points de contrôle $P_i^0$, $i\in[0;3]$: $P_j^1 = \left(1-t\right)P_j^0 + tP_{j+1}^{0}$;
+\item on construit les 3 barycentres $P_j^1$, $j \in [0;2]$ des pôles $P_i^0$, $i\in[0;3]$: $P_j^1 = \left(1-t\right)P_j^0 + tP_{j+1}^{0}$;
 \item on construit les 2 barycentres $P_j^2$, $j \in [0;1]$ : $P_j^2 = \left(1-t\right)P_j^1 + tP_{j+1}^{1}$;
-\item on construit les dernier barycentre  $P_0^3 = \left(1-t\right)P_0^2 + tP_{1}^{2}$.
+\item on construit le dernier barycentre  $P_0^3 = \left(1-t\right)P_0^2 + tP_{1}^{2}$.
 \end{itemize}
+Le dernier barycentre est un point de le courbe de Bézier. 
 \end{minipage} \hfill
 \begin{minipage}[c]{0.37\linewidth}
 \begin{center}
 \includegraphics[width=.9\linewidth]{images/casteljau}
 \end{center}
 \end{minipage}
-Le dernier barycentre est un point de le courbe de Bézier. 
+
+
+
+\subparagraph{}
+\textit{On donne la fonction \texttt{deCasteljau} permettant de calculer l'abscisse (ou l'ordonnée) d'un point d'une courbe. Déterminer ce que retourne l'appel suivant (en justifiant et détaillant votre démarche) : ~\\
+\texttt{deCasteljau([0,0,40,40],0,3,0.5)}.}
+\ifprof
+\begin{corrige} ~\\
+
+\noindent deCasteljau(P,0,3,0.5) =  deCasteljau(P,0,2,0.5)*(1-0.5)+deCasteljau(P,1,2,0.5)*0.5 ~\\
+
+\noindent  = (deCasteljau(P,0,1,0.5)*(1-0.5)+deCasteljau(P,1,1,0.5)*0.5)*(1-0.5) ~\\ 
+\indent+(deCasteljau(P,1,1,0.5)*(1-0.5)+deCasteljau(P,2,1,0.5)*0.5)*0.5 ~\\
+
+\noindent  = ((deCasteljau(P,0,0,0.5)*(1-0.5)+deCasteljau(P,1,0,0.5)*0.5)*(1-0.5)~\\ 
+\indent +(deCasteljau(P,1,0,0.5)*(1-0.5)+deCasteljau(P,2,0,0.5)*0.5)*0.5)*(1-0.5) ~\\ 
+\indent+((deCasteljau(P,1,0,0.5)*(1-0.5)+deCasteljau(P,2,0,0.5)*0.5)*(1-0.5)  ~\\
+\indent +(deCasteljau(P,2,0,0.5)*(1-0.5)+deCasteljau(P,3,0,0.5)*0.5)*0.5)*0.5 ~\\
+
+\noindent  = 20
+\end{corrige}
+\else
+\fi
+
+\subparagraph{}
+\textit{Évaluer la complexité algorithmique de l'algorithme de De Casteljau en fonction du nombre de pôles.}
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi
 
 
 \subparagraph{}
-\textit{On donne la fonction \texttt{deCasteljau} permettant de calculer l'abscisse (ou l'ordonnée) d'un point d'une courbe. Déterminer (en le justifiant) ce que retourne l'appel suivant : \texttt{deCasteljau([0,0,40,40],0,3,0.5)}.}
+\textit{En identifiant un variant de boucle, montrer que l'algorithme se termine.}
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi
+%
+%\subparagraph{}
+%\textit{Montrer que la propriété $x(t)=\sum\limits_{i=0}^{n} B_i^n(t) x_{Pi}$ est un invariant de boucle.***}
+%\ifprof
+%\begin{corrige}~\\
+%\begin{itemize}
+%\item Au rang 0 : 
+%\begin{itemize}
+%\item d'une part, en utilisant la propriété, lorsque $n=0$ on a : $x(t)=\sum\limits_{i=0}^{0} B_0^0(t) x_{Pi} = x_{P0}$;
+%\item d'autre part, en utilisant l'algorithme, lorsque $n=0$ on a appelle \texttt{deCasteljau(P,0,0,t)} qui retourne \texttt{P0};
+%\end{itemize}
+%\item au rang n : 
+%\begin{itemize}
+%\item on considère que l'hypothèse est vérifiée;
+%\end{itemize}
+%\item au rang $n+1$ on a :
+%\begin{itemize}
+%\item d'une part, en utilisant la propriété, $x(t)=\sum\limits_{i=0}^{n+1} B_i^{n+1}(t) x_{Pi}$. 
+%On a,  $B_i^{n+1}(t) = \begin{pmatrix} n+1 \\ i\end{pmatrix} t^i \left(1-t\right)^{n+1-i}$ et $\begin{pmatrix} n+1 \\ i\end{pmatrix} = \dfrac{(n+1)!}{\left(n+1-i \right) ! i !}=\dfrac{n!(n+1)}{\left(n-i \right) ! i !\left(n+1-i \right)}=\begin{pmatrix} n \\ i\end{pmatrix} \dfrac{n+1}{n+1-i}$. On a donc $B_i^{n+1}(t) =B_i^{n}(t) \dfrac{n+1}{n+1-i}  (1-t)$. En conséquence :
+%$\sum\limits_{i=0}^{n+1} B_i^{n+1}(t) x_{Pi} =\sum\limits_{i=0}^{n} B_i^{n+1}(t) x_{Pi} + B_{n+1}^{n+1}(t) x_{P(n+1)} =(n+1) (1-t)\sum\limits_{i=0}^{n}B_i^{n}(t) \dfrac{1}{n+1-i}    + t^{n+1} x_{P(n+1)}$
+%
+%\item d'autre part, en utilisant l'algorithme, lorsque $n=0$ on a appelle
+%
+%\texttt{deCasteljau(P,0,n+1,t) = deCasteljau(P,0,n,t)*(1-t)+deCasteljau(P,1,n,t)*t }.
+%
+%
+%\item en utilisant l'hypothèse, on a : \texttt{deCasteljau(P,0,n,t)}$=\sum\limits_{i=0}^{n} B_i^n(t) x_{Pi}$ et  \texttt{deCasteljau(P,1,n,t)}$=\sum\limits_{i=1}^{n} B_i^n(t) x_{Pi}=\sum\limits_{i=0}^{n} B_i^n(t) x_{Pi}-B_0^n(t) x_{P0}$. On a donc : 
+%\texttt{deCasteljau(P,0,n,t)}$=  \sum\limits_{i=0}^{n} B_i^n(t) x_{Pi}-t \sum\limits_{i=0}^{n} B_i^n(t) x_{Pi} +t\sum\limits_{i=0}^{n} B_i^n(t) x_{Pi} - tB_0^n(t) x_{P0}=  \sum\limits_{i=0}^{n} B_i^n(t) x_{Pi} - tB_0^n(t) x_{P0}$
+%\end{itemize}
+%
+%\end{itemize}
+%\end{corrige}
+%\else
+%\fi
 
-\subparagraph{}
-\textit{Évaluer la complexité algorithmique de l'algorithme de de Casteljau en fonction du nombre de pôles.}
-
-\subparagraph{}
-\textit{Montrer que la propriété $x(t)=\sum\limits_{i=0}^{n} B_i^n(t) x_{Pi}$ est un invariant de boucle.***}
 
 \section{Utilisation de l'algorithme de Horner}
 
-\subparagraph{}
-\textit{Réécrire la fonction permettant de calculer l'abscisse de la courbe de Bézier en mettant la fonction $x(t)=\sum\limits_{i=0}^{n} B_i^n(t) x_{Pi}$ sous la forme $x(t)=\sum\limits_{i=0}^{n} a_i t^i$ en explicitant $a_i$.}
+%\subparagraph{}
+%\textit{Réécrire la fonction permettant de calculer l'abscisse de la courbe de Bézier en mettant la fonction $x(t)=\sum\limits_{i=0}^{n} B_i^n(t) x_{Pi}$ sous la forme $x(t)=\sum\limits_{i=0}^{n} a_i t^i$ en explicitant $a_i$.}
 
-En mettant le polynôme sous la forme de Horner, on a : 
-$x(t)=\left(\left(\left(a_nt+a_{n-1}\right)t+...\right)t+a_1\right)t+a_0$.
+%\ifprof
+%\begin{corrige}
+%\end{corrige}
+%\else
+%\fi
+%
+En mettant le polynôme sous la forme de Horner, on peut écrire que : 
+$f(x)=a_0 + a_1 x + a_2 x^2 +...+ a_n x^n = a_0 + x\left( a_1  + x \left( a_2+ ...
+x \left(a_{n-1} +a_n x\right)\right)\right)$. Ainsi, sous la forme de Horner, $x(t)= \sum\limits_{i=0}^{n} B_i^n(t) x_{Pi} = \sum\limits_{i=0}^{n} a_i t^i$.
+
 
 \begin{exemple}~\\
 
-Pour une courbe de Bézier cubique, on a : $x(t)=  \left(1-t \right)^3 t^0 x_{P_0} +\left(1-t \right)^2 t^1 x_{P_1} +\left(1-t \right)^1 t^2 x_{P_2} +\left(1-t \right)^0 t^3 x_{P_3}$.
+Pour une courbe de Bézier cubique, on a : $x(t)=  \left(1-t \right)^3 t^0 x_{P_0} +3\left(1-t \right)^2 t^1 x_{P_1} +3\left(1-t \right)^1 t^2 x_{P_2} +\left(1-t \right)^0 t^3 x_{P_3}$.
 
 Sous la forme de Horner, on a : $x(t)=\left(\left(\left(x_{P_3}-3x_{P_2}+3x_{P_1}-x_{P_0}\right)t+3\left(x_{P_2}-2x_{P_1}+x_{P_0}\right)\right)t+3\left( x_{P_1}-x_{P_0}\right)\right)t+x_{P_0}$.
 \end{exemple}
 
 
+
 \subparagraph{}
-\textit{Écrire un algorithme récursif, permettant de calculer un point de la courbe par la méthode de Horner. La fonction \texttt{horner} prendra comme argument \texttt{a} la liste des $a_i$ (\texttt{[a0,a1,a2,...,an]}) et le paramètre $t$.}
+\textit{Monter que $a_i = 
+\begin{pmatrix} n \\ i \end{pmatrix} \sum\limits_{j=0}^{i} \left( \left(-1\right)^{i-j} 
+\begin{pmatrix} i \\ j
+\end{pmatrix}x_{Pj} \right)$.}
+
+
+\subparagraph{}
+\textit{Écrire un algorithme récursif, permettant de calculer un point de la courbe par la méthode de Horner. La fonction \texttt{horner} prendra comme argument \texttt{L} la liste des $a_i$ (\texttt{[an,a(n-1),...,a1,a0]}) et le paramètre $t$.}
+\ifprof
+\begin{corrige}
+\begin{py}
+\begin{python}
+def horner(L,t):
+    if(len(L))==0:
+        return 0
+    else : 
+        return horner(L[0:len(L)-1],t)*t+L[len(L)-1]
+\end{python}
+\end{py}
+
+\end{corrige}
+\else
+\fi
+
+\subparagraph{}
+\textit{Quel peut-être l'avantage d'évaluer un polynôme en un point par la méthode de Horner plutôt que par une méthode naïve ?}
+
+
+%\subparagraph{}
+%\textit{En conclusion quelle méthode préconiseriez-vous pour .}
+
+\newpage
 
 
 \section*{Algorithmes}
 
 \begin{py}
 \begin{python}
+
+import numpy as np
+import matplotlib.pyplot as plt
+
 def coef_binom(i,n):
     """
     Retourne le coefficient binomial : 
@@ -250,7 +400,8 @@ def fonctionBernstein(p,u):
     return x
 \end{python}    
 
-\begin{python}    
+\begin{python}
+def deCasteljau(P, i, j, t):
     """
     Retourne l'abscisse(ou l'ordonnées) d'un point de la courbe de Bézier pour un paramètre donné.
     Entrées : 
