@@ -152,6 +152,20 @@ Le premier bloc de fonctions donné en annexe permet de tracer un point apparten
 \textit{Écrire cette fonction en utilisant un algorithme récursif \texttt{factRec(n)}. Vous prendrez soin de documenter votre fonction.}
 \ifprof
 \begin{corrige}
+\begin{py}
+\begin{python}
+def factRec(n):
+		"""
+    Calcul de n! = 1 x 2 x ... x (n-1) x n
+    Par convention, 0! = 1
+    n doit être un int
+    """
+    if n==0:
+        return (1)
+    else:
+        return (n*factRec(n-1))
+\end{python}
+\end{py}
 \end{corrige}
 \else
 \fi
@@ -161,16 +175,11 @@ Le premier bloc de fonctions donné en annexe permet de tracer un point apparten
 \begin{corrige}
 \begin{py}
 \begin{python}
-def fact(n):
-    """
-    Calcul de n! = 1 x 2 x ... x (n-1) x n
-    Par convention, 0! = 1
-    n doit être un int
-    """
-    if n==0 :
-        return 1
-    else : 
-        return n*fact(n-1)
+def factIt(n):
+    p=1
+    for i in range(1,n+1):
+        p=p*i
+    return (p)
 \end{python}
 \end{py}
 \end{corrige}
@@ -196,6 +205,7 @@ for t in les_u:
     les_y_bern.append(pt[1])
 
 plt.plot(les_x_bern,les_y_bern,"b.")
+plt.show()
 \end{python}
 \end{py}    
 \end{corrige}
@@ -204,6 +214,16 @@ plt.plot(les_x_bern,les_y_bern,"b.")
 
 \subparagraph{}
 \textit{On fait l'hypothèse que la complexité algorithmique de la fonction \texttt{pow}, appelée dans la fonction \texttt{fonctionBernstein}, est linéaire. Donner la complexité algorithmique temporelle de la fonction \texttt{fonctionBernstein}.}
+
+\ifprof
+\begin{corrige}
+Si fonction Bernstein a une complexité $C(n)$, alors $C(n+1)$ vaut :
+pour obtenir le $n+1$ élément, nous avons une affectation, une somme, 3 produits de termes obtenus par 3 appels de fonctions elles-mêmes de complexité linéaire (\texttt{pow} est linéaire par hypothèse et \texttt{coef\_binom} est linéaire car \texttt{fact} l'est) $C(n+1)=C(n)+3\cdot (n+1)+5$.
+
+La complexité algorithmique de la fonction de Bernstein est en $\mathcal{O}\left(n^2\right)$.
+\end{corrige}
+\else
+\fi
 
 
 \section{Utilisation de l'algorithme de De Casteljau}
@@ -252,6 +272,7 @@ Le dernier barycentre est un point de le courbe de Bézier.
 \textit{Évaluer la complexité algorithmique de l'algorithme de De Casteljau en fonction du nombre de pôles.}
 \ifprof
 \begin{corrige}
+Si la complexité de De Casteljau est $C(n)$ pour $n$ pôles alors $C(n+1) = C(n) \cdot 2$. On double les appels à la fonction ainsi la complexité est exponentielle en $\mathcal{O}\left(2^n\right)$.
 \end{corrige}
 \else
 \fi
@@ -261,6 +282,7 @@ Le dernier barycentre est un point de le courbe de Bézier.
 \textit{En identifiant un variant de boucle, montrer que l'algorithme se termine.}
 \ifprof
 \begin{corrige}
+Le variant de boucle est j, entier positif qui décroit strictement à chaque appel récursif jusqu'à 0. À \texttt{j==0}, l'algorithme se termine.
 \end{corrige}
 \else
 \fi
@@ -367,6 +389,8 @@ def horner(L,t):
 \textit{Quel  est l'avantage d'évaluer un polynôme en un point par la méthode de Horner plutôt que par une méthode naïve ?}
 \ifprof
 \begin{corrige}
+La complexité de la méthode de Horner est linéaire : si la complexité de Horner au rang $n$ est $C(n)$ alors $C(n+1)=C(n)+2$ soit $\mathcal{O}(n)$
+alors que la complexité de la méthode Naïve est quadratique : $C(n+1)=C(n)+3n+5$ soit $\mathcal{O}\left(n^2\right)$.
 \end{corrige}
 \else
 \fi
@@ -378,6 +402,14 @@ def horner(L,t):
 
 \ifprof
 \begin{corrige}
+Pour 4 pôles, la comparaison des temps de résolution des trois méthodes donne : 
+\begin{itemize}
+\item pour Horner (une multiplication, une addition, un test à chaque boucle) est de $3\cdot 4=12$ sachant qu'il faut aussi créer la liste des coefficients à partir du polynôme de base de Bernstein;
+\item pour la méthode naïve (une affectation, une boucle de taille $n$, une affectation, une somme et 3 produits) est $5\cdot n\cdot n+1$ soit 81;
+\item enfin pour De Casteljau (un test, 2 produits, une somme par appel) est $4\cdot 2^4=64$.
+\end{itemize}
+
+L'algorithme de De Casteljau reste plus simple à programmer.
 \end{corrige}
 \else
 \fi

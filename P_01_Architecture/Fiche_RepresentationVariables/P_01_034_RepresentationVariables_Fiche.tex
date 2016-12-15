@@ -9,8 +9,8 @@
 \fichetrue
 %\fichefalse
 
-%\proftrue
-\proffalse
+\proftrue
+%\proffalse
 
 %\tdtrue
 \tdfalse
@@ -122,7 +122,7 @@ $$
 $$
 On appelle alors : 
 \begin{enumerate}
-\item le signe (positif ou négatif);
+\item le signe (positif (bit à 0) ou négatif (bit à 1));
 \item la mantisse (nombre de chiffres significatifs);
 \item l'exposant : puissance à laquelle la base est élevée. 
 \end{enumerate}
@@ -203,111 +203,152 @@ Par exemple, l'ASCII est un encodage fréquemment utilisé où les caractères s
 
 \begin{multicols}{2}
 \footnotesize
+%\subsection*{Exercice 1}
+%\subparagraph*{}
+%\textit{Réalisez la conversion des nombres suivants dans les autres systèmes de numération (base 10, 2 ou 16) :
+%$(10050)_{(10)}$,
+%$(1001 0001)_{(2)}$ et 
+%$(A3F)_{16}$.}
+%
+%\ifprof
+%\begin{corrige}
+%~\\
+%
+%$$
+%\begin{array}{lcl}
+%10050_{10} &=& 
+%1 \cdot 8192 + 0 \cdot 4096 + 0 \cdot 2048 + 1 \cdot 1024 + 1 \cdot  512 + 1 \cdot 256 \\
+%&& + 0 \cdot 128 + 1 \cdot 64 + 0 \cdot 32 + 0 \cdot 16 + 0 \cdot 8 + 0 \cdot 4 + 1 \cdot 2 + 0 \cdot 1 \\
+%&=& \left(0010\;0111\;0100\;0010\right)_2 = (2742)_{16}
+%\end{array}
+%$$
+%\end{corrige}
+%\else
+%\fi
+%\subsection*{Exercice 2}
+%On désire utiliser 12 bits pour comptabiliser des objets.
+%\subparagraph{}
+%\textit{Quel est le nombre maximum d'objets qu'il est possible de compter ?}
+%\subparagraph{}
+%\textit{Indiquer le numéro du premier et du dernier (dans les systèmes de numération décimale, binaire et hexadécimale).}
+%
+%
+%\subsection*{Exercice 3}
+%\setcounter{subparagraph}{0}
+%
+%On désire compter 65000 objets. 
+%\subparagraph{}
+%\textit{Sur combien de bit peut-on réaliser cette opération ?}
+%\subparagraph{}
+%\textit{Quel est le numéro du premier et du dernier (dans les systèmes de numération binaire et hexadécimale) ?}
+%
+%
+%\subsection*{Exercice 4}
+%Soit une machine où les nombres entiers sont codés sur 8 bits.
+%\setcounter{subparagraph}{0}
+%\subparagraph{}
+%\textit{Donner le plus grand et le plus petit nombre représentable selon que le codage utilisé est non signé ou signé.}
+%\ifprof
+%\begin{corrige}
+%Avec 8 bits, on peut représenter des nombres allant de 0 à 255 ou de -128 à 127.
+%
+%Par exemple : 
+%\begin{itemize}
+%\item $128_{10}=1000\; 0000_2$. En passant en complément à 2, on obtient :
+%$0111\; 1111_2$ puis en ajoutant 1, on a : $-128_{10} = 1000\; 0000_2$.
+%\item $127_{10}=0111\; 1111_2$. En passant en complément à 2, on obtient :
+%$1000\; 0000_2$ puis en ajoutant 1 on a : $-127_{10} = 1000\; 0001_2$.
+%\end{itemize}
+%\end{corrige}
+%\else
+%\fi
+%\subparagraph{}
+%\textit{Écrire dans les différents formats signés les nombres décimaux 1, -1, 111 et 55.}
+%\ifprof
+%
+%\begin{corrige}
+%~\\
+%\begin{itemize}
+%\item $1_{10}=0000\;0001_{2}$.
+%\item En réalisant un complément à 2 et en ajoutant 1 : $-1_{10}=1111\;1111_{2}$.
+%\end{itemize}
+%\end{corrige}
+%\else
+%\fi
+%
+%\subparagraph{}
+%\textit{Quelles sont inversement les valeurs décimales codées par $4C$ et $B4$ suivant les différents codages signés et celui non signé.}
+%\ifprof
+%\begin{corrige}
+%\begin{itemize}
+%\item $4C_{16}=0100\, 1100$ en soustrayant 1 on obtient $0100\, 1011$. On réalise le complément à 1 : $1011\, 0100=180$. 180  étant supérieur à 128, on soustrait 128 et on a 
+%$4C_{16}=-52_{10}$.
+%\end{itemize}
+%\end{corrige}
+%\else
+%\fi
+%
+%%\item Un périphérique de la machine lui délivre des données sur 8 bits dans le format signe et valeur absolue. Il transmet successivement $9A$ puis $3C$, quelles sont les valeurs signifiées ? 
+%
+%
+%
+%
+%\subsection*{Exercice 5}
+%\setcounter{subparagraph}{0}
+%\subparagraph*{}
+%\textit{Effectuez les opérations arithmétiques suivantes dans les systèmes de numération binaire (codé sur 8 bits) : $71 + 35 =$, $15 - 25 =$, $121 - 75 =$, $-51 - 77 =$.}
+%
+
 \subsection*{Exercice 1}
-\subparagraph*{}
-\textit{Réalisez la conversion des nombres suivants dans les autres systèmes de numération (base 10, 2 ou 16) :
-$(10050)_{(10)}$,
-$(1001 0001)_{(2)}$ et 
-$(A3F)_{16}$.}
+\setcounter{subparagraph}{0}
+\subparagraph{}\textit{Réaliser la conversion des nombres suivants dans les autres systèmes de numération : $(10050)_{10}$, $(343,56)_{10}$, $(1001 0001)_{2}$, $(A3F)_{16}$ et $(1C2A)_{16}$}
 
-\begin{corrige}
-~\\
 
-$$
-\begin{array}{lcl}
-10050_{10} &=& 
-1 \cdot 8192 + 0 \cdot 4096 + 0 \cdot 2048 + 1 \cdot 1024 + 1 \cdot  512 + 1 \cdot 256 \\
-&& + 0 \cdot 128 + 1 \cdot 64 + 0 \cdot 32 + 0 \cdot 16 + 0 \cdot 8 + 0 \cdot 4 + 1 \cdot 2 + 0 \cdot 1 \\
-&=& \left(0010\;0111\;0100\;0010\right)_2 = (2742)_{16}
-\end{array}
-$$
-\end{corrige}
 
 \subsection*{Exercice 2}
-On désire utiliser 12 bits pour comptabiliser des objets.
-\subparagraph{}
-\textit{Quel est le nombre maximum d'objets qu'il est possible de compter ?}
-\subparagraph{}
-\textit{Indiquer le numéro du premier et du dernier (dans les systèmes de numération décimale, binaire et hexadécimale).}
+\setcounter{subparagraph}{0}
+On désire utiliser 8 bits pour comptabiliser des objets.
+\subparagraph{}\textit{Quel est le nombre maximum d’objets qu’il est possible de compter ?}
+\ifprof
+\begin{corrige}
+$2^8  = 256$
+\end{corrige}
+\else
+\fi
+\subparagraph{}\textit{Indiquer le numéro du premier et du dernier (dans les systèmes de numération décimale, binaire et hexadécimale) lors du codage d'entiers et entiers relatifs.}
+\ifprof
+\begin{corrige}
+Pour coder les entiers : de $0 = 0_b=0_h$ à $255=1111\,1111_b=FF_h$.
+
+Pour les entiers relatifs : $127=0111\,0000_{b\mathbb{Z}}$.
+
+Codage de -128 : $128=1000\,0000$. Inversion des bits : $01111\,1111$ En ajoutant 1, on a : $1000\,0000$.  
+
+%Transcodage de $1000\,0000$ ; $1000\,0000 - 1 = 0111\,1111$. Complément à 1 : $1000\,0000 = 128$.
+\end{corrige}
+\else
+\fi
+\subparagraph{}\textit{Donner le codage de 24 et de -24 en binaire. Vérifier que la somme (en binaire) vaut 0. }
+\ifprof
+\begin{corrige}
+Codage de 24 : $24=0001\,1000$. Pour coder -24, on inverse les bits : $1110\,0111$ et on ajoute 1 : $1110\,1000$.
+
+\end{corrige}
+\else
+\fi
 
 
 \subsection*{Exercice 3}
 \setcounter{subparagraph}{0}
-
-On désire compter 65000 objets. 
-\subparagraph{}
-\textit{Sur combien de bit peut-on réaliser cette opération ?}
-\subparagraph{}
-\textit{Quel est le numéro du premier et du dernier (dans les systèmes de numération binaire et hexadécimale) ?}
-
-
-\subsection*{Exercice 4}
-Soit une machine où les nombres entiers sont codés sur 8 bits.
-\setcounter{subparagraph}{0}
-\subparagraph{}
-\textit{Donner le plus grand et le plus petit nombre représentable selon que le codage utilisé est non signé ou signé.}
-\begin{corrige}
-Avec 8 bits, on peut représenter des nombres allant de 0 à 255 ou de -128 à 127.
-
-Par exemple : 
-\begin{itemize}
-\item $128_{10}=1000\; 0000_2$. En passant en complément à 2, on obtient :
-$0111\; 1111_2$ puis en ajoutant 1, on a : $-128_{10} = 1000\; 0000_2$.
-\item $127_{10}=0111\; 1111_2$. En passant en complément à 2, on obtient :
-$1000\; 0000_2$ puis en ajoutant 1 on a : $-127_{10} = 1000\; 0001_2$.
-\end{itemize}
-\end{corrige}
-\subparagraph{}
-\textit{Écrire dans les différents formats signés les nombres décimaux 1, -1, 111 et 55.}
-
-\begin{corrige}
-~\\
-\begin{itemize}
-\item $1_{10}=0000\;0001_{2}$.
-\item En réalisant un complément à 2 et en ajoutant 1 : $-1_{10}=1111\;1111_{2}$.
-\end{itemize}
-\end{corrige}
-
-\subparagraph{}
-\textit{Quelles sont inversement les valeurs décimales codées par $4C$ et $B4$ suivant les différents codages signés et celui non signé.}
-\begin{corrige}
-\begin{itemize}
-\item $4C_{16}=0100\, 1100$ en soustrayant 1 on obtient $0100\, 1011$. On réalise le complément à 1 : $1011\, 0100=180$. 180  étant supérieur à 128, on soustrait 128 et on a 
-$4C_{16}=-52_{10}$.
-\end{itemize}
-\end{corrige}
-%\item Un périphérique de la machine lui délivre des données sur 8 bits dans le format signe et valeur absolue. Il transmet successivement $9A$ puis $3C$, quelles sont les valeurs signifiées ? 
-
-
-
-
-\subsection*{Exercice 5}
-\setcounter{subparagraph}{0}
-\subparagraph*{}
-\textit{Effectuez les opérations arithmétiques suivantes dans les systèmes de numération binaire (codé sur 8 bits) : $71 + 35 =$, $15 - 25 =$, $121 - 75 =$, $-51 - 77 =$.}
-
-
-\subsection*{Exercice 6}
-\setcounter{subparagraph}{0}
-\subparagraph{}\textit{Réaliser la conversion des nombres suivants dans les autres systèmes de numération : $(10050)_{10}$, $(343,56)_{10}$, $(1001 0001)_{2}$, $(A3F)_{16}$ et $(1C2A)_{16}$}
-
-\subsection*{Exercice 7}
-\setcounter{subparagraph}{0}
-On désire utiliser 12 bits pour comptabiliser des objets.
-\subparagraph{}\textit{Quel est le nombre maximum d’objets qu’il est possible de compter ?}
-\subparagraph{}\textit{Indiquer le numéro du premier et du dernier (dans les systèmes de numération décimale, binaire et hexadécimale).}
-
-\subsection*{Exercice 8}
-\setcounter{subparagraph}{0}
 On désire compter 65 000 objets.
-\subparagraph{}\textit{Sur combien de bit peut-on réaliser cette opération ? }
+\subparagraph{}\textit{Sur combien de bits peut-on réaliser cette opération ? }
 \subparagraph{}\textit{Quel est le numéro du premier et du dernier (dans les systèmes de numération binaire et hexadécimale) ?}
 
-\subsection*{Exercice 9}
+\subsection*{Exercice 4}
 \setcounter{subparagraph}{0}
 \subparagraph{}\textit{Effectuez les opérations arithmétiques suivantes dans les systèmes de numération binaire (codé sur 8 bits) : $71+35$, $121-75$, $15-25$ et $- 51 - 77$.}
 
-\subsection*{Exercice 10}
+\subsection*{Exercice 5}
 \setcounter{subparagraph}{0}
 Soit une machine où les nombres sont codés sur 8 bits.
 \subparagraph{}\textit{Donner le nombre le plus grand et le plus petit nombre représentable selon que le codage utilisé est non signé ou signé. }
@@ -315,10 +356,10 @@ Soit une machine où les nombres sont codés sur 8 bits.
 \subparagraph{}\textit{Quelles sont  les valeurs décimales codées par $4C_{16}$ et $B4_{16}$ si le codage est signé ou non ?}
 \subparagraph{}\textit{Un périphérique de la machine lui délivre des données sur 8 bits dans le format valeur absolue + signe, la valeur absolue sur 7 bits est précédée d’un bit de signe valant 1 si positif ou nul, 0 sinon. Il transmet successivement $9A_{16}$ puis $3C_{16}$, quelles sont les valeurs signifiées ? }
 
-\subsection*{Exercice 11}
+\subsection*{Exercice 6}
 \setcounter{subparagraph}{0}
-\subparagraph*{}\textit{Écrire dans le format flottant simple précision (IEEE 754) les nombres 
-1,0,  	–1,0,  	15,25  et –3,26. Les résultats seront donnés en hexadécimal.}
+\subparagraph*{}\textit{Écrire dans le format flottant simple précision (IEEE 754) les nombres,  	<<–0,1>>,  	<<15,25>>  et <<–23,03125>>. Les résultats seront donnés en hexadécimal.}
+\ifprof
 
 \begin{corrige}
 On a : $15_{10}=1111_2$. D'autre part il faut convertir 0,25 en binaire : 
@@ -340,17 +381,21 @@ On a donc : $15,25=1111,01 = 1,11101 \cdot 2^{3}$. Utilisant l'exposant décalé
 
 En hexadécimal, on a donc :
 
- $15,25_{10} =4174\; 0000\; 0000\; 0000\; 0000 \;0000 \;0000 \; 0000 $
+ $15,25_{10} =4174\; 0000 $
 
+
+Pour $-0,1\simeq BDCCCCCD \simeq -0,100000001490116119384765625$.
+
+$–23,03125 = C1B84000$
 \end{corrige}
+\else
+\fi
 
-
-\subsection*{Exercice 12}
+\subsection*{Exercice 7}
 \setcounter{subparagraph}{0}
 Une mesure est réalisée grâce à un capteur tachymétrique pendant 10 secondes. L'échantillonnage est de 1 kHz. Les données sont écrites dans un fichier texte de deux colonnes (temps et mesure) séparées par des espaces. Les temps mesurés sont compris entre \texttt{0} et {99.9999} s. La vitesse mesurée peut être comprise entre \texttt{-999,9999} et \texttt{999,9999} $\text{rad s}^{-1}$.
 \subparagraph*{}\textit{}{Quelle sera la taille maximale du fichier texte obtenu ?}
 
 \end{multicols}
 \end{document}
-
 

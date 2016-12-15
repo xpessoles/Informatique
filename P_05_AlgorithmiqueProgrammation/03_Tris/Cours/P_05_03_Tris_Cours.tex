@@ -85,7 +85,7 @@ A l'étape « $i$ », la ième carte est insérée à sa place dans le paquet d�
 Pour cela, on peut :
 \begin{itemize}
 \item soit partir du début du tas déjà trié et s'arrêter lorsqu'on rencontre une carte plus grande que la i\ieme (méthode 1);
-\item soit partir de la fin du tas déjà trié, et s'arrêter si on rencontre une carte plus petite que la i\ieme (méthode 2).
+\item soit partir de la fin du tas déjà trié et s'arrêter si on rencontre une carte plus petite que la i\ieme (méthode 2).
 \end{itemize}
 Le paquet contient alors « $i$ » cartes triées. On procède ainsi de suite jusqu'à la dernière carte.
 
@@ -220,49 +220,46 @@ $$
 L'analyse de la complexité de l'algorithme peut se faire par l'étude du nombre de comparaisons à effectuer.
 \subsection{Méthode 1}
 
-\begin{pseudo}
-~\\
-\begin{minipage}[c]{.48\linewidth}
-\begin{tabular}{p{.9\textwidth}}
-\hline
-\textbf{Algorithme :} Tri par insertion -- Méthode 1\\
-\hline
-\textbf{Données :}
-\begin{itemize}
-\item \tsf{tab}, liste : une liste de nombres
-\end{itemize}
-\textbf{Résultat :} 
-\begin{itemize}
-\item \tsf{tab}, liste : la liste de nombres triés
-\end{itemize}
-\\
-\textbf{tri\_insertion}(\tsf{tab}) :\\
-\hspace{.4cm} \tsf{n} $\leftarrow$ \textbf{longueur}(\tsf{tab}) \\
-\hspace{.4cm}\textbf{Pour} \tsf{i} \textbf{de} 2 \textbf{à} \tsf{n} : \\
-\hspace{.8cm} \tsf{x} $\leftarrow$ \tsf{tab[i]} \\
-\hspace{.8cm} \tsf{j} $\leftarrow$ \tsf{1} \\
-\hspace{.8cm}\textbf{Tant que} \tsf{j $\leq$ i-1} \textbf{et} \tsf{tab[j]<x}  : \\
-\hspace{1.2cm} \tsf{j} $\leftarrow$ \tsf{j+1} \\
-\hspace{.8cm}\textbf{Fin Tant que} \\
-\hspace{.8cm}\textbf{Pour} \tsf{k} \textbf{de} \tsf{i-1} \textbf{à} \tsf{j-1} \textbf{par pas de} \tsf{-1} \textbf{faire} : \\
-\hspace{1.2cm} \tsf{tab[k+1]} $\leftarrow$ \tsf{tab[k]} \\
-\hspace{.8cm} \textbf{Fin Pour} \\
-\hspace{.8cm} \tsf{tab[j]} $\leftarrow$ \tsf{x} \\
-\hspace{.4cm} \textbf{Fin Pour} \\
-\hline
-\end{tabular}
-\end{minipage}\hfill
-\begin{minipage}[c]{.48\linewidth}
+%\begin{pseudo}
+%~\\
+%\begin{minipage}[c]{.48\linewidth}
+%\begin{tabular}{p{.9\textwidth}}
+%\hline
+%\textbf{Algorithme :} Tri par insertion -- Méthode 1\\
+%\hline
+%\textbf{Données :}
+%\begin{itemize}
+%\item \tsf{tab}, liste : une liste de nombres
+%\end{itemize}
+%\textbf{Résultat :} 
+%\begin{itemize}
+%\item \tsf{tab}, liste : la liste de nombres triés
+%\end{itemize}
+%\\
+%\textbf{tri\_insertion}(\tsf{tab}) :\\
+%\hspace{.4cm} \tsf{n} $\leftarrow$ \textbf{longueur}(\tsf{tab}) \\
+%\hspace{.4cm}\textbf{Pour} \tsf{i} \textbf{de} 2 \textbf{à} \tsf{n} : \\
+%\hspace{.8cm} \tsf{x} $\leftarrow$ \tsf{tab[i]} \\
+%\hspace{.8cm} \tsf{j} $\leftarrow$ \tsf{1} \\
+%\hspace{.8cm}\textbf{Tant que} \tsf{j $\leq$ i-1} \textbf{et} \tsf{tab[j]<x}  : \\
+%\hspace{1.2cm} \tsf{j} $\leftarrow$ \tsf{j+1} \\
+%\hspace{.8cm}\textbf{Fin Tant que} \\
+%\hspace{.8cm}\textbf{Pour} \tsf{k} \textbf{de} \tsf{i-1} \textbf{à} \tsf{j-1} \textbf{par pas de} \tsf{-1} \textbf{faire} : \\
+%\hspace{1.2cm} \tsf{tab[k+1]} $\leftarrow$ \tsf{tab[k]} \\
+%\hspace{.8cm} \textbf{Fin Pour} \\
+%\hspace{.8cm} \tsf{tab[j]} $\leftarrow$ \tsf{x} \\
+%\hspace{.4cm} \textbf{Fin Pour} \\
+%\hline
+%\end{tabular}
+%\end{minipage}\hfill
+%\begin{minipage}[c]{.48\linewidth}
 \begin{py}
 \begin{python}
 def tri_insertion_01(tab):
     """ 
-    Trie une liste de nombre en utilisant la 
-    méthode du tri par insertion.
-    En Python, le passage se faisant par référence, 
-    il n'est pas indispensable de retourner le tableau.
+    Trie une liste de nombre en utilisant la méthode du tri par insertion.
     Keyword arguments:
-    tab -- liste de nombres
+        tab -- liste de nombres
     """
     for i in range (1,len(tab)):
         x=tab[i]
@@ -274,10 +271,14 @@ def tri_insertion_01(tab):
         tab[j]=x
 \end{python}
 \end{py}
-\end{minipage}
+%\end{minipage}
+%
+%\end{pseudo}
 
-\end{pseudo}
  
+\begin{rem}
+  En Python, le passage se faisant par référence, il n'est pas indispensable de retourner le tableau.
+\end{rem} 
 
 Dans le cas de la méthode 1, la complexité algorithmique peut se déterminer ainsi : 
 \begin{itemize}
@@ -285,48 +286,45 @@ Dans le cas de la méthode 1, la complexité algorithmique peut se déterminer a
 \item pire des cas, le tableau est déjà trié. Il y a alors une comparaison à effectuer à la première étape, puis deux, … puis $n-1$. On en déduit donc un nombre total de $\dfrac{n\left(n-1\right)}{2}$ comparaisons. La complexité est donc de classe quadratique : $C(n)=\mathcal{O}\left(n^2\right)$.
 \end{itemize}
 
-
 \subsection{Méthode 2}
 
-\begin{pseudo}
-~\\
-\begin{minipage}[c]{.48\linewidth}
-\begin{tabular}{p{.9\textwidth}}
-\hline
-\textbf{Algorithme :} Tri par insertion -- Méthode 2\\
-\hline
-\textbf{Données :}
-\begin{itemize}
-\item \tsf{tab}, liste : une liste de nombres
-\end{itemize}
-\textbf{Résultat :} 
-\begin{itemize}
-\item \tsf{tab}, liste : la liste de nombres triés
-\end{itemize}
-\\
-\textbf{tri\_insertion}(\tsf{tab}) :\\
-\hspace{.4cm} \tsf{n} $\leftarrow$ \textbf{longueur}(\tsf{tab}) \\
-\hspace{.4cm}\textbf{Pour} \tsf{i} \textbf{de} 2 \textbf{à} \tsf{n} : \\
-\hspace{.8cm} \tsf{x} $\leftarrow$ \tsf{tab[i]} \\
-\hspace{.8cm} \tsf{j} $\leftarrow$ \tsf{i} \\
-\hspace{.8cm}\textbf{Tant que} \tsf{j >1} \textbf{et} \tsf{tab[j-1]>x}  : \\
-\hspace{1.2cm} \tsf{tab[j]} $\leftarrow$ \tsf{tab[j-1]} \\
-\hspace{1.2cm} \tsf{j} $\leftarrow$ \tsf{j-1} \\
-\hspace{.8cm}\textbf{Fin Tant que} \\
-\hspace{.8cm} \tsf{tab[j]} $\leftarrow$ \tsf{x} \\
-\hspace{.4cm}\textbf{Fin Pour} \\
-\hline
-\end{tabular}
-\end{minipage} \hfill
-\begin{minipage}[c]{.48\linewidth}
-%\begin{py}
+%\begin{pseudo}
+%~\\
+%\begin{minipage}[c]{.48\linewidth}
+%\begin{tabular}{p{.9\textwidth}}
+%\hline
+%\textbf{Algorithme :} Tri par insertion -- Méthode 2\\
+%\hline
+%\textbf{Données :}
+%\begin{itemize}
+%\item \tsf{tab}, liste : une liste de nombres
+%\end{itemize}
+%\textbf{Résultat :} 
+%\begin{itemize}
+%\item \tsf{tab}, liste : la liste de nombres triés
+%\end{itemize}
+%\\
+%\textbf{tri\_insertion}(\tsf{tab}) :\\
+%\hspace{.4cm} \tsf{n} $\leftarrow$ \textbf{longueur}(\tsf{tab}) \\
+%\hspace{.4cm}\textbf{Pour} \tsf{i} \textbf{de} 2 \textbf{à} \tsf{n} : \\
+%\hspace{.8cm} \tsf{x} $\leftarrow$ \tsf{tab[i]} \\
+%\hspace{.8cm} \tsf{j} $\leftarrow$ \tsf{i} \\
+%\hspace{.8cm}\textbf{Tant que} \tsf{j >1} \textbf{et} \tsf{tab[j-1]>x}  : \\
+%\hspace{1.2cm} \tsf{tab[j]} $\leftarrow$ \tsf{tab[j-1]} \\
+%\hspace{1.2cm} \tsf{j} $\leftarrow$ \tsf{j-1} \\
+%\hspace{.8cm}\textbf{Fin Tant que} \\
+%\hspace{.8cm} \tsf{tab[j]} $\leftarrow$ \tsf{x} \\
+%\hspace{.4cm}\textbf{Fin Pour} \\
+%\hline
+%\end{tabular}
+%\end{minipage} \hfill
+%\begin{minipage}[c]{.48\linewidth}
+%%
+\begin{py}
 \begin{python}
 def tri_insertion_02(tab):
     """ 
-    Trie une liste de nombre en utilisant la méthode 
-    du tri par insertion.
-    En Python, le passage se faisant par référence, 
-    il n'est pas indispensable de retourner le tableau.
+    Trie une liste de nombre en utilisant la méthode du tri par insertion.
     Keyword arguments:
     tab -- liste de nombres
     """
@@ -338,9 +336,9 @@ def tri_insertion_02(tab):
             j = j-1
         tab[j]=x
 \end{python}
-%\end{py}
-\end{minipage}
-\end{pseudo}
+\end{py}
+%\end{minipage}
+%\end{pseudo}
 
 %\subsubsection*{Estimation de la complexité}
 %\begin{itemize}
@@ -349,7 +347,7 @@ def tri_insertion_02(tab):
 %\end{itemize}
 
 
-Dans le cas de la méthode 2 la complexité algorithmique peut se déterminer ainisi: 
+Dans le cas de la méthode 2 la complexité algorithmique peut se déterminer ainsi: 
 \begin{itemize}
 \item meilleur des cas : le tableau est déjà trié. Il y a donc $n - 1$ comparaisons à effectuer. La complexité est donc de classe linéaire : $C(n)=\mathcal{O}(n)$;
 \item pire des cas, le tableau est trié à l'envers. Il y a alors une comparaison à effectuer à la première étape, puis deux, … puis $n-1$. On en déduit donc un nombre total de $\dfrac{n\left(n-1\right)}{2}$  comparaisons. La complexité est donc de classe quadratique : $C(n)=\mathcal{O}\left(n^2\right)$.
@@ -383,11 +381,10 @@ On peut aussi montrer que la complexité en moyenne est de classe quadratique lo
 \subsection{Méthode}
 
 \begin{exemple}
-Tri de valeurs numériques
-Problème : Comment trier une liste de nombres par la méthode de « tri rapide » ?
+Problème : Comment trier une liste de nombres par la méthode de  << tri rapide >> ?
 \end{exemple}
 \begin{minipage}[c]{.48\linewidth}
-L'algorithme fait parti de la catégorie des algorithmes « diviser pour régner ».
+L'algorithme fait parti de la catégorie des algorithmes <<~diviser pour régner >>.
 À chaque appel de la fonction de tri, le nombre de données à traiter est diminué de un. C'est-à-dire que l'on ne traite plus l'élément appelé « pivot » dans les appels de fonction ultérieurs, il est placé à sa place définitive dans le tableau.
 Le tableau de valeurs est ensuite segmenté en deux parties :
 \begin{itemize}
@@ -396,7 +393,7 @@ Le tableau de valeurs est ensuite segmenté en deux parties :
 \end{itemize}
 
 L'appel de la fonction de tri est récursif sur les tableaux segmentés.
-On peut par exemple choisir le premier élément du tableau comme « pivot » :
+On peut par exemple choisir le premier élément du tableau comme « pivot ».
 \end{minipage} \hfill
 \begin{minipage}[c]{.48\linewidth}
 \begin{center}
@@ -408,11 +405,11 @@ On peut par exemple choisir le premier élément du tableau comme « pivot » :
 Le « coût » temporel de l'algorithme de tri est principalement donné par des opérations de comparaison sur les éléments à trier. On raisonne donc sur le nombre de données à traiter pour l'analyse de la complexité de l'algorithme.
 
 Dans le pire des cas, un des deux segments est vide à chaque appel de la fonction de tri. Cela arrive lorsque le tableau est déjà trié. Le nombre de données à traiter  pour le i\ieme appel, est $n - i + 1$.
-Le nombre total pour n appels de fonction est donc $\dfrac{n(n+1)}{2}$. On peut aussi écrire une relation de récurrence du type $C(n) = C(n-1) + n - 1$
+Le nombre total pour n appels de fonction est donc $\dfrac{n(n+1)}{2}$. %On peut aussi écrire une relation de récurrence du type $C(n) = C(n-1) + n - 1$
 La complexité est donc de classe quadratique $C(n) = \mathcal{O}\left(n^2\right)$.
 
 Dans le meilleur des cas, les deux segments sont de taille égale. Pour un nombre de données à traiter $n$, chacun des segments suivant a donc au plus $\dfrac{n-1}{2}$ éléments (on retire le pivot). On répète ainsi la segmentation des tableaux jusqu'à arriver au plus à un seul élément. 
-On peut écrire une relation de récurrence du type $C(n) = 2 C\left(\dfrac{n - 1}{ 2} \right)  +  n - 1$.
+%On peut écrire une relation de récurrence du type $C(n) = 2 C\left(\dfrac{n - 1}{ 2} \right)  +  n - 1$.
  
 La complexité est donc de classe quasi linéaire $C(n)=\mathcal{O}\left(n \ln(n)\right)$.
 
@@ -490,63 +487,60 @@ Les éléments à sa droite sont plus grands
 
 \subsection{Algorithmes du tri rapide}
 
-\begin{minipage}[c]{.48\linewidth}
-\begin{pseudo}
-~\\
-\begin{tabular}{p{.98\textwidth}}
-\hline
-\textbf{Algorithme :} Tri Quicksort -- Segmentation\\
-\hline
-\textbf{Données :}
-\begin{itemize}
-\item \tsf{tab}, liste : une liste de nombres
-\item \tsf{i,j}, entiers : indices de début et de fin de la segmentation à effectuer
-\end{itemize}
-\textbf{Résultats :} 
-\begin{itemize}
-\item \tsf{tab}, liste : la liste de nombre segmenté avec le pivot à sa place définitive
-\item \tsf{k} entier : l'indice de la place du pivot
-\end{itemize}
-\\
-\textbf{segmente}(\tsf{tab,i,j}) :\\
-\hspace{.4cm} \tsf{g $\leftarrow$ i+1 }\\
-\hspace{.4cm} \tsf{d $\leftarrow$ j}\\
-\hspace{.4cm} \tsf{p $\leftarrow$ tab[i]}\\
-\hspace{.4cm} \textbf{Tant que} \tsf{g $\leq$ d} \textbf{Faire} \\
-\hspace{.8cm} \textbf{Tant que} \tsf{d$\geq$ 0} \textbf{et} \tsf{tab[d]>p} \textbf{Faire} \\
-\hspace{1.2cm} \tsf{d $\leftarrow$ d-1}\\  
-\hspace{.8cm} \textbf{Fin Tant que}  \\
-\hspace{.8cm} \textbf{Tant que} \tsf{g$\leq$ j} \textbf{et} \tsf{tab[g]$\leq$p} \textbf{Faire} \\
-\hspace{1.2cm} \tsf{g $\leftarrow$ g+1}\\  
-\hspace{.8cm} \textbf{Fin Tant que}  \\
-\hspace{.8cm} \textbf{Si} \tsf{g<d} \textbf{alors} \\
-\hspace{1.2cm} \textbf{Échange(} \tsf{tab,g,d} \textbf{)} \\
-\hspace{1.2cm} \tsf{d $\leftarrow$ d-1}\\  
-\hspace{1.2cm} \tsf{g $\leftarrow$ g+1}\\  
-\hspace{.8cm} \textbf{Fin Si} \\
-\hspace{.4cm} \textbf{Fin Tant que}  \\
-\hspace{.4cm} \tsf{k$\leftarrow$ d}  \\
-\hspace{.4cm} \textbf{Échange(} \tsf{tab,i,d} \textbf{)} \\
-\hspace{.4cm} \textbf{Retourner} \tsf{k}  \\
-\hline
-\end{tabular}
-\end{pseudo}
-\end{minipage}\hfill
-\begin{minipage}[c]{.48\linewidth} 
+%\begin{minipage}[c]{.48\linewidth}
+%\begin{pseudo}
+%~\\
+%\begin{tabular}{p{.98\textwidth}}
+%\hline
+%\textbf{Algorithme :} Tri Quicksort -- Segmentation\\
+%\hline
+%\textbf{Données :}
+%\begin{itemize}
+%\item \tsf{tab}, liste : une liste de nombres
+%\item \tsf{i,j}, entiers : indices de début et de fin de la segmentation à effectuer
+%\end{itemize}
+%\textbf{Résultats :} 
+%\begin{itemize}
+%\item \tsf{tab}, liste : la liste de nombre segmenté avec le pivot à sa place définitive
+%\item \tsf{k} entier : l'indice de la place du pivot
+%\end{itemize}
+%\\
+%\textbf{segmente}(\tsf{tab,i,j}) :\\
+%\hspace{.4cm} \tsf{g $\leftarrow$ i+1 }\\
+%\hspace{.4cm} \tsf{d $\leftarrow$ j}\\
+%\hspace{.4cm} \tsf{p $\leftarrow$ tab[i]}\\
+%\hspace{.4cm} \textbf{Tant que} \tsf{g $\leq$ d} \textbf{Faire} \\
+%\hspace{.8cm} \textbf{Tant que} \tsf{d$\geq$ 0} \textbf{et} \tsf{tab[d]>p} \textbf{Faire} \\
+%\hspace{1.2cm} \tsf{d $\leftarrow$ d-1}\\  
+%\hspace{.8cm} \textbf{Fin Tant que}  \\
+%\hspace{.8cm} \textbf{Tant que} \tsf{g$\leq$ j} \textbf{et} \tsf{tab[g]$\leq$p} \textbf{Faire} \\
+%\hspace{1.2cm} \tsf{g $\leftarrow$ g+1}\\  
+%\hspace{.8cm} \textbf{Fin Tant que}  \\
+%\hspace{.8cm} \textbf{Si} \tsf{g<d} \textbf{alors} \\
+%\hspace{1.2cm} \textbf{Échange(} \tsf{tab,g,d} \textbf{)} \\
+%\hspace{1.2cm} \tsf{d $\leftarrow$ d-1}\\  
+%\hspace{1.2cm} \tsf{g $\leftarrow$ g+1}\\  
+%\hspace{.8cm} \textbf{Fin Si} \\
+%\hspace{.4cm} \textbf{Fin Tant que}  \\
+%\hspace{.4cm} \tsf{k$\leftarrow$ d}  \\
+%\hspace{.4cm} \textbf{Échange(} \tsf{tab,i,d} \textbf{)} \\
+%\hspace{.4cm} \textbf{Retourner} \tsf{k}  \\
+%\hline
+%\end{tabular}
+%\end{pseudo}
+%\end{minipage}\hfill
+%\begin{minipage}[c]{.48\linewidth} 
 \begin{py}
 \begin{python}
 def segmente(tab,i,j):
     """
-    Segmentation d'un tableau par rapport à
-    un pivot.
+    Segmentation d'un tableau par rapport à un pivot.
     Keyword arguments: 
-    tab (list) -- liste de nombres
-    i,j (int) -- indices de fin et de début de la 
-    segmentation
+      tab (list) -- liste de nombres
+      i,j (int) -- indices de fin et de début de la segmentation
     Retour :    
-    tab (list) -- liste de nombres avec le pivot 
-    à sa place définitive
-    k (int) -- indice de la place du pivot
+      tab (list) -- liste de nombres avec le pivot à sa place définitive
+      k (int) -- indice de la place du pivot
     """
     g =i+1
     d=j
@@ -565,52 +559,50 @@ def segmente(tab,i,j):
     return k
 \end{python}
 \end{py}
-\end{minipage}
+%\end{minipage}
 
 \begin{resultat}
 Le nombre de comparaisons du type $T[d]>p$ et $T[g]\leq p$ est égal à $n-1$.
 La complexité de cet algorithme est donc de classe linéaire : $C(n)=\mathcal{O}(n)$.
 \end{resultat}
-
-\begin{minipage}[c]{.48\linewidth}
-\begin{pseudo}
-\begin{tabular}{p{.9\linewidth}}
-\hline
-\textbf{Algorithme :} Tri Quicksort -- Tri rapide\\
-\hline
-\textbf{Données :}
-\begin{itemize}
-\item \tsf{tab}, liste : une liste de nombres
-\item \tsf{i,j}, entiers : indices de début et de fin de la portion à trier
-\end{itemize}
-\textbf{Résultats :} 
-\begin{itemize}
-\item \tsf{tab}, liste : liste triée entre les indices \tsf{i} et \tsf{j}
-\end{itemize}
-\\
-\textbf{tri\_quicksort}(\tsf{tab,i,j}) :\\
-\hspace{.4cm} \textbf{Si} \tsf{g<d} \textbf{alors} \\
-\hspace{.8cm} \tsf{k$\leftarrow$} \textbf{segmente(}\tsf{tab,i,j} \textbf{)} \\
-\hspace{.8cm} \textbf{tri\_quicksort(}\tsf{tab,i,k-1} \textbf{)} \\
-\hspace{.8cm} \textbf{tri\_quicksort(}\tsf{tab,k+1,j} \textbf{)} \\
-\hspace{.4cm} \textbf{Fin Si} \\
-\hline
-\end{tabular}
-\end{pseudo}
-\end{minipage}\hfill
-\begin{minipage}[c]{.48\linewidth} 
+%
+%\begin{minipage}[c]{.48\linewidth}
+%\begin{pseudo}
+%\begin{tabular}{p{.9\linewidth}}
+%\hline
+%\textbf{Algorithme :} Tri Quicksort -- Tri rapide\\
+%\hline
+%\textbf{Données :}
+%\begin{itemize}
+%\item \tsf{tab}, liste : une liste de nombres
+%\item \tsf{i,j}, entiers : indices de début et de fin de la portion à trier
+%\end{itemize}
+%\textbf{Résultats :} 
+%\begin{itemize}
+%\item \tsf{tab}, liste : liste triée entre les indices \tsf{i} et \tsf{j}
+%\end{itemize}
+%\\
+%\textbf{tri\_quicksort}(\tsf{tab,i,j}) :\\
+%\hspace{.4cm} \textbf{Si} \tsf{g<d} \textbf{alors} \\
+%\hspace{.8cm} \tsf{k$\leftarrow$} \textbf{segmente(}\tsf{tab,i,j} \textbf{)} \\
+%\hspace{.8cm} \textbf{tri\_quicksort(}\tsf{tab,i,k-1} \textbf{)} \\
+%\hspace{.8cm} \textbf{tri\_quicksort(}\tsf{tab,k+1,j} \textbf{)} \\
+%\hspace{.4cm} \textbf{Fin Si} \\
+%\hline
+%\end{tabular}
+%\end{pseudo}
+%\end{minipage}\hfill
+%\begin{minipage}[c]{.48\linewidth} 
 \begin{py}
 \begin{python}
 def tri_quicksort(tab,i,j):
     """
-    Tri d'une liste par l'utilisation du 
-    tri rapide (Quick sort).
+    Tri d'une liste par l'utilisation du tri rapide (Quick sort).
     Keyword arguments: 
-    tab (list) -- liste de nombres
-    i,j (int) -- indices de fin et de 
-    début de la zone de tri
+      tab (list) -- liste de nombres
+      i,j (int) -- indices de fin et de début de la zone de tri
     Retour :    
-    tab (list) -- liste de nombres avec 
+      tab (list) -- liste de nombres avec 
     le pivot à sa place définitive
     """
     if i<j :
@@ -619,7 +611,7 @@ def tri_quicksort(tab,i,j):
         tri_quicksort(tab,k+1,j)
 \end{python}
 \end{py}
-\end{minipage}
+%\end{minipage}
 
 
 \begin{rem}
@@ -688,67 +680,65 @@ L'algorithme est donc récursif. Il fait partie des algorithmes « diviser pour 
 
 \subsection{Algorithme de tri fusion}
 
-\begin{minipage}[c]{.48\linewidth}
-\begin{pseudo}
-~\\
-\begin{tabular}{p{.9\textwidth}}
-\hline
-\textbf{Algorithme :} Tri Fusion -- Fusion de deux listes\\
-\hline
-\textbf{Données :}
-\begin{itemize}
-\item \tsf{tab}, liste : une liste de nombres \tsf{tab[g:d]} avec \tsf{g} indice de la valeur de gauche, \tsf{d} indice de la valeur de droite
-\item \tsf{m}, entier : indice tel que \tsf{$g\leq$m<d} et tel que les sous-tableaux \tsf{tab[g:m]} et \tsf{tab[m+1:d]} soient ordonnés
-\end{itemize}
-\textbf{Résultats :} 
-\begin{itemize}
-\item \tsf{tab}, liste : liste triée entre les indices \tsf{g} et \tsf{d}
-\end{itemize}
-\\
-\textbf{fusion\_listes}(\tsf{tab,g,d,m}) :\\
-\hspace{.4cm} \tsf{n1$\leftarrow$ m-g+1}\\
-\hspace{.4cm} \tsf{n2$\leftarrow$ d-m}\\
-\hspace{.4cm} \textbf{Initialiser tableau} \tsf{G}  \\
-\hspace{.4cm} \textbf{Initialiser tableau} \tsf{D}  \\
-\hspace{.4cm} \textbf{Pour} \tsf{i} \textbf{allant de} \tsf{1} \textbf{à} \tsf{n1} \textbf{faire}\\
-\hspace{.8cm} \tsf{G[i] $ \leftarrow$ tab[g+i-1]}\\
-\hspace{.4cm} \textbf{Fin Pour}\\
-\hspace{.4cm} \textbf{Pour} \tsf{j} \textbf{allant de} \tsf{1} \textbf{à} \tsf{n2} \textbf{faire}\\
-\hspace{.8cm} \tsf{D[j] $ \leftarrow$ tab[m+j]}\\
-\hspace{.4cm} \tsf{Fin Pour}\\
-\hspace{.4cm} \tsf{i $\leftarrow$ 1}\\
-\hspace{.4cm} \tsf{j $\leftarrow$ 1}\\
-\hspace{.4cm} \tsf{G[n1+1] $\leftarrow$ $+\infty$}\\
-\hspace{.4cm} \tsf{D[n2+1] $\leftarrow$ $+\infty$}\\
-\hspace{.4cm} \textbf{Pour} \tsf{k} \textbf{allant de} \tsf{g} \textbf{à} \tsf{d} \textbf{faire}\\
-%\hspace{.8cm} \textbf{Si} \textsf{i$\leq$n1} \textbf{et} \textsf{G[i]$\leq$D[j]} \textbf{alors} \\
-\hspace{.8cm} \textbf{Si}  \tsf{G[i]$\leq$D[j]} \textbf{alors} \\
-\hspace{1.2cm} \tsf{tab[k]$\leftarrow$ G[i]} \\
-\hspace{1.2cm} \tsf{i$\leftarrow$ i+1} \\
-\hspace{.8cm} \textbf{Sinon} \\
-%\hspace{1.2cm} \textbf{Si} \textsf{j$\leq$n2} \textbf{et} \textsf{G[i]>D[j]} \textbf{alors} \\
-\hspace{1.2cm} \textbf{Si} \tsf{G[i]>D[j]} \textbf{alors} \\
-\hspace{1.6cm} \tsf{tab[k]$\leftarrow$ D[j]} \\
-\hspace{1.6cm} \tsf{j$\leftarrow$ j+1} \\
-\hspace{1.2cm} \textbf{Fin Si} \\
-\hspace{.8cm} \textbf{Fin Si} \\
-\hspace{.4cm}  \textbf{Fin Pour}\\
-\hline
-\end{tabular}
-\end{pseudo}
-\end{minipage} \hfill
-\begin{minipage}[c]{.48\linewidth}
+%\begin{minipage}[c]{.48\linewidth}
+%\begin{pseudo}
+%~\\
+%\begin{tabular}{p{.9\textwidth}}
+%\hline
+%\textbf{Algorithme :} Tri Fusion -- Fusion de deux listes\\
+%\hline
+%\textbf{Données :}
+%\begin{itemize}
+%\item \tsf{tab}, liste : une liste de nombres \tsf{tab[g:d]} avec \tsf{g} indice de la valeur de gauche, \tsf{d} indice de la valeur de droite
+%\item \tsf{m}, entier : indice tel que \tsf{$g\leq$m<d} et tel que les sous-tableaux \tsf{tab[g:m]} et \tsf{tab[m+1:d]} soient ordonnés
+%\end{itemize}
+%\textbf{Résultats :} 
+%\begin{itemize}
+%\item \tsf{tab}, liste : liste triée entre les indices \tsf{g} et \tsf{d}
+%\end{itemize}
+%\\
+%\textbf{fusion\_listes}(\tsf{tab,g,d,m}) :\\
+%\hspace{.4cm} \tsf{n1$\leftarrow$ m-g+1}\\
+%\hspace{.4cm} \tsf{n2$\leftarrow$ d-m}\\
+%\hspace{.4cm} \textbf{Initialiser tableau} \tsf{G}  \\
+%\hspace{.4cm} \textbf{Initialiser tableau} \tsf{D}  \\
+%\hspace{.4cm} \textbf{Pour} \tsf{i} \textbf{allant de} \tsf{1} \textbf{à} \tsf{n1} \textbf{faire}\\
+%\hspace{.8cm} \tsf{G[i] $ \leftarrow$ tab[g+i-1]}\\
+%\hspace{.4cm} \textbf{Fin Pour}\\
+%\hspace{.4cm} \textbf{Pour} \tsf{j} \textbf{allant de} \tsf{1} \textbf{à} \tsf{n2} \textbf{faire}\\
+%\hspace{.8cm} \tsf{D[j] $ \leftarrow$ tab[m+j]}\\
+%\hspace{.4cm} \tsf{Fin Pour}\\
+%\hspace{.4cm} \tsf{i $\leftarrow$ 1}\\
+%\hspace{.4cm} \tsf{j $\leftarrow$ 1}\\
+%\hspace{.4cm} \tsf{G[n1+1] $\leftarrow$ $+\infty$}\\
+%\hspace{.4cm} \tsf{D[n2+1] $\leftarrow$ $+\infty$}\\
+%\hspace{.4cm} \textbf{Pour} \tsf{k} \textbf{allant de} \tsf{g} \textbf{à} \tsf{d} \textbf{faire}\\
+%%\hspace{.8cm} \textbf{Si} \textsf{i$\leq$n1} \textbf{et} \textsf{G[i]$\leq$D[j]} \textbf{alors} \\
+%\hspace{.8cm} \textbf{Si}  \tsf{G[i]$\leq$D[j]} \textbf{alors} \\
+%\hspace{1.2cm} \tsf{tab[k]$\leftarrow$ G[i]} \\
+%\hspace{1.2cm} \tsf{i$\leftarrow$ i+1} \\
+%\hspace{.8cm} \textbf{Sinon} \\
+%%\hspace{1.2cm} \textbf{Si} \textsf{j$\leq$n2} \textbf{et} \textsf{G[i]>D[j]} \textbf{alors} \\
+%\hspace{1.2cm} \textbf{Si} \tsf{G[i]>D[j]} \textbf{alors} \\
+%\hspace{1.6cm} \tsf{tab[k]$\leftarrow$ D[j]} \\
+%\hspace{1.6cm} \tsf{j$\leftarrow$ j+1} \\
+%\hspace{1.2cm} \textbf{Fin Si} \\
+%\hspace{.8cm} \textbf{Fin Si} \\
+%\hspace{.4cm}  \textbf{Fin Pour}\\
+%\hline
+%\end{tabular}
+%\end{pseudo}
+%\end{minipage} \hfill
+%\begin{minipage}[c]{.48\linewidth}
 \begin{py}
 \begin{python}
 def fusion_listes(tab,g,d,m):
     """
     Fusionne deux listes triées.
     Keyword arguments:
-     * tab (list) -- liste : une liste de nombres 
-        tab[g:d] avec g indice de la valeur de 
+     * tab (list) -- liste : une liste de nombres tab[g:d] avec g indice de la valeur de 
         gauche, d indice de la valeur de droite
-     * g,d,m (int) -- entiers : indices tels que 
-        g<=m<d et tel que les sous-tableaux
+     * g,d,m (int) -- entiers : indices tels que g<=m<d et tel que les sous-tableaux
         tab[g:m] et tab[m+1:d] soient ordonnés
     Résultat :
      * tab (list) : liste triée entre les indices 
@@ -773,57 +763,54 @@ def fusion_listes(tab,g,d,m):
             j=j+1
 \end{python}
 \end{py}
-\end{minipage} 
+%\end{minipage} 
 
 \begin{resultat}
 Cet algorithme a une complexité en temps de classe linéaire : $C(n)=\mathcal{O}(n)$.
 Par contre, il oblige à utiliser un espace supplémentaire égal à la taille du tableau original \texttt{tab}.
 \end{resultat}
 
-\begin{minipage}[c]{.48\linewidth}
-\begin{pseudo}
-~\\
-\begin{tabular}{p{.9\textwidth}}
-\hline
-\textbf{Algorithme :} Tri Fusion \\
-\hline
-Algorithme récursif du table de tri. \\
-\textbf{Données :}
-\begin{itemize}
-\item \tsf{tab}, liste : une liste de nombres non triés \tsf{tab[g:d]} 
-\item \tsf{g,d}, entiers : indices de début et de fin de la liste
-\end{itemize}
-\textbf{Résultats :} 
-\begin{itemize}
-\item \tsf{tab}, liste : liste triée entre les indices \tsf{g} et \tsf{d}
-\end{itemize}
-\\
-\textbf{tri\_fusion}(\tsf{tab,g,d}) :\\
-\hspace{.4cm} \textbf{Si} \tsf{g<d}  \textbf{alors} \\
-\hspace{.8cm} \tsf{m $\leftarrow$ (g+d)} \textbf{div} 2\\
-\hspace{.8cm} \textbf{tri\_fusion}(tab,g,m) \\
-\hspace{.8cm} \textbf{tri\_fusion}(tab,m+1,d) \\
-\hspace{.8cm} \textbf{fusion\_listes}(tab,g,d,m) \\
-\hspace{.4cm}  \textbf{Fin Si}\\
-\hline
-\end{tabular}
-\end{pseudo}
-\end{minipage}\hfill
-\begin{minipage}[c]{.48\linewidth}
+%\begin{minipage}[c]{.48\linewidth}
+%\begin{pseudo}
+%~\\
+%\begin{tabular}{p{.9\textwidth}}
+%\hline
+%\textbf{Algorithme :} Tri Fusion \\
+%\hline
+%Algorithme récursif du table de tri. \\
+%\textbf{Données :}
+%\begin{itemize}
+%\item \tsf{tab}, liste : une liste de nombres non triés \tsf{tab[g:d]} 
+%\item \tsf{g,d}, entiers : indices de début et de fin de la liste
+%\end{itemize}
+%\textbf{Résultats :} 
+%\begin{itemize}
+%\item \tsf{tab}, liste : liste triée entre les indices \tsf{g} et \tsf{d}
+%\end{itemize}
+%\\
+%\textbf{tri\_fusion}(\tsf{tab,g,d}) :\\
+%\hspace{.4cm} \textbf{Si} \tsf{g<d}  \textbf{alors} \\
+%\hspace{.8cm} \tsf{m $\leftarrow$ (g+d)} \textbf{div} 2\\
+%\hspace{.8cm} \textbf{tri\_fusion}(tab,g,m) \\
+%\hspace{.8cm} \textbf{tri\_fusion}(tab,m+1,d) \\
+%\hspace{.8cm} \textbf{fusion\_listes}(tab,g,d,m) \\
+%\hspace{.4cm}  \textbf{Fin Si}\\
+%\hline
+%\end{tabular}
+%\end{pseudo}
+%\end{minipage}\hfill
+%\begin{minipage}[c]{.48\linewidth}
 \begin{py}
 \begin{python}        
 def tri_fusion(tab,g,d):
     """
     Tri d'une liste par la métode du tri fusion
     Keyword arguments:
-    tab (list) -- liste : une liste de nombres non 
-      triés tab[g:d]
-    g,d (int) -- entiers : indices de début et 
-      de fin de liste si on veut trier
+    tab (list) -- liste : une liste de nombres non triés tab[g:d]
+    g,d (int) -- entiers : indices de début et de fin de liste si on veut trier
       tout le tableau g=0, d=len(tab)-1
     Résultat :
-    tab (list) : liste triée entre les indices 
-      g et d
+    tab (list) : liste triée entre les indices g et d
     """
     if g<d:
         m=(g+d)//2
@@ -832,7 +819,7 @@ def tri_fusion(tab,g,d):
         fusion_listes(tab,g,d,m)
 \end{python}
 \end{py}
-\end{minipage}
+%\end{minipage}
 
 Si l'on s'intéresse au nombre de données à traiter à chaque appel de fonction, la relation de récurrence est du type :
 $C(n) = 2 C\left(\dfrac{n}{2}\right)  +  n$.
