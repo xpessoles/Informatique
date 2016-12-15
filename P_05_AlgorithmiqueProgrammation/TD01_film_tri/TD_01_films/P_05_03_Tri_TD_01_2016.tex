@@ -1,0 +1,193 @@
+\documentclass[10pt,fleqn]{article} % Default font size and left-justified equations
+\usepackage[%
+    pdftitle={Informatique : Tris},
+    pdfauthor={Xavier Pessoles}]{hyperref}
+    
+\input{style/new_style}
+\input{style/macros_SII}
+
+\usepackage{multicol}
+\fichetrue
+%\fichefalse
+
+\proftrue
+\proffalse
+
+\tdtrue
+%\tdfalse
+
+%\courstrue
+\coursfalse
+
+% -------------------------------------
+% Déclaration des titres
+% -------------------------------------
+
+\def\discipline{Informatique}
+\def\xxtete{Informatique}
+\def\classe{PT -- PT$\star$}
+\def\xxnumpartie{Partie 5}
+\def\xxpartie{Algorithmique \& Programmation (Suite)}
+
+\def\xxnumchapitre{Chapitre 3}
+\def\xxchapitre{\hspace{.12cm} Tri d'une liste de valeurs numériques}
+
+\def\xxtitreexo{Exercices d'applications}
+\def\xxsourceexo{}%\hspace{.2cm} Informatique pour tous en CPGE -- \textit{Wack \& al.}}
+
+\def\xxposongletx{2}
+\def\xxposonglettext{1.45}
+\def\xxposonglety{13}%10
+
+\def\xxonglet{Part. 5 -- Ch. 3}
+
+\def\xxactivite{TD -- 01}
+\def\xxauteur{\textsl{Xavier Pessoles - Patricia Bessonnat}}
+
+\def\xxcompetences{%
+\textsl{%
+\textbf{Savoirs et compétences :}
+\begin{itemize}[label=\ding{112},font=\color{ocre}] 
+\item Alg -- C17 : tris d’un tableau à une dimension de valeurs numériques (tri par insertion, tri rapide, tri fusion).
+\end{itemize}
+}}
+
+\def\xxfigures{}%figues de la page de garde
+
+\def\xxpied{%
+Partie 5 -- Algorithmique et Programmation\\
+Ch 3 : Tri d'une liste de valeurs numériques -- \xxactivite%
+}
+
+
+
+\setcounter{secnumdepth}{5}
+%---------------------------------------------------------------------------
+
+
+\begin{document}
+%\chapterimage{png/Fond_Cin}
+\input{style/new_pagegarde}
+\vspace{8cm}
+\pagestyle{fancy}
+\thispagestyle{plain}
+
+
+\def\columnseprulecolor{\color{ocre}}
+\setlength{\columnseprule}{0.4pt} 
+\begin{multicols}{2}
+
+\section*{Exercice 1 -- Représentation graphique}
+Soit la liste de nombres suivante : \texttt{[10, 3, 7, 5, 9, 7, 8, 0, 8]}.
+
+\subparagraph{}
+\textit{Pour le tri par insertion, le tri rapide et le tri fusion, représenter graphiquement l'évolution de la liste de nombres.}
+
+\subparagraph{}
+\textit{Donner, pour chacun des cas, la complexité dans le meilleur des cas, le pire des cas et le cas moyen.}
+
+\vspace{1cm}
+Créer un dossier TD$01$\_tri où sauvegarder chacun des fichiers donnés ou créés.
+
+\section*{Exercice 2 -- Représentation du coût temporel des tris}
+
+\begin{obj}
+Représenter pour chacun des tris les courbes indiquant le temps d'exécution en fonction du nombre d'éléments à trier.
+\end{obj}
+On donne la bibliothèque de tri \texttt{tris.py} dans laquelle différents tris ont été implémentés.
+On dispose ainsi des fonctions : 
+\begin{itemize}
+\item \texttt{tri\_insertion};
+\item \texttt{tri\_rapide};
+\item \texttt{tri\_fusion}.
+\end{itemize}
+On dispose aussi de la méthode \texttt{sort} disponible en Python.
+
+On utilisera de plus le module \texttt{perf\_counter} de la bibliothèque \texttt{time} pour créer un chronomètre et le module \texttt{randint} de la bibliothèque \texttt{random}.
+
+Pour augmenter la limite de récursivité de Python, on utilisera les instructions suivantes : \texttt{import sys} puis \texttt{sys.setrecursionlimit(1000000)}.
+
+\subparagraph{}
+\textit{Définir une fonction \texttt{hasardListe} d'argument $n$ la longueur de la liste retournant une liste composée de nombres choisis aléatoirement entre 0 et $n$.}
+
+\subparagraph{}
+\textit{Tracer, dans chacun des 4 cas, le temps de tri d'une liste en fonction du nombre d'éléments de la liste. Le nombre d'éléments variera de $0$ à $1\, 000$ par pas de 100. Ce réseau de courbes représentera le cas moyen. Sauvegarder le tracé obtenu.}
+
+\begin{center}
+\includegraphics[width=.8\linewidth]{images/trace1}
+\end{center}
+
+Vous pouvez avantageusement ajouter une légende à votre tracé de courbes en ajoutant les instructions ci-dessous à votre script :
+\begin{python}
+plt.plot(les_x,les_y,label='courbe')
+plt.legend(loc='upper left')
+\end{python}
+
+\subparagraph{}
+\textit{Tracer, pour les trois tris les plus rapides, le temps de tri d'une liste en fonction du nombre d'éléments de la liste. Le nombre d'éléments variera de $0$ à $20\, 000$ par pas de $1\,000$. Ce réseau de courbes représentera le cas moyen. Sauvegarder le tracé obtenu.}
+
+\subparagraph{}
+\textit{Conclure sur l'efficacité algorithme de chacun des tris dans le cas moyen.}
+
+\subparagraph{}
+\textit{Tracer, pour le tri rapide, le temps de tri en fonction du nombre d'éléments de la liste. Cette liste sera triée. Le nombre d'éléments variera de $0$ à $4\,000$ par pas de 400. Conclure sur la complexité du tri rapide d'une liste triée.}
+
+\section*{Exercice 3 -- Tris d'une base de données des films de cinéma}
+
+\begin{obj}
+Réaliser un tri numérique et un tri alphabétique à partir d'une base de données
+\end{obj}
+
+On donne le fichier \texttt{films\_martiniere.csv} dans lequel un peu plus de 2000 films sont référencés avec le titre, l'année de création, le réalisateur et le box office.
+
+Une proposition de lecture du fichier csv et de création de la liste de films est donnée ci-dessous et dans le fichier \texttt{lecture\_fichier\_csv.py} :
+
+\begin{python}
+f=open('films_martiniere.csv','r')
+ligne=f.readline()
+fichier=f.readlines()
+f.close()
+
+L=[]
+for ligne in fichier:
+    ligne=ligne.replace('"','')
+    ligne=ligne.split(';')
+    ligne[-1]=ligne[-1].rstrip('\n')
+    ligne[-1]=int(ligne[-1])
+    ligne[1]=int(ligne[1])
+    L.append(ligne)
+\end{python}
+
+Pour ceux qui travaillent avec le logiciel \texttt{Pyzo}, vous devez avoir votre dossier visible dans la fenêtre \texttt{file browser} ou alors exécuter le fichier en cliquant droit sur l'onglet de votre nom de fichier et sélectionner \textit{Exécuter en tant que script}. Votre fichier python et le fichier \texttt{films\_martiniere.csv} doivent être dans le même dossier.
+
+\subparagraph{}
+\textit{Commenter chaque ligne du programme proposé de lecture du fichier csv. Copier vos tests dans le script python.}
+
+\subparagraph{}
+\textit{A partir de l'étude réalisée dans l'exercice 2, choisir l'algorithme de tri le plus efficace pour trier le fichier de 2000 films. Copier l'algorithme choisi dans votre script et modifier-le afin qu'il puisse trier une liste de listes.}
+
+\subparagraph{}
+\textit{Trier les films en fonction du box office. Quel est le film qui a été le plus vu au cinéma ?}
+
+\subparagraph{}
+\textit{Définir la fonction \texttt{comparer} qui a pour argument une liste de deux mots \texttt{mot1} et \texttt{mot2} et qui renvoie cette liste triée par ordre alphabétique. Les mots de la liste seront écrits en lettres majuscules. Les titres de films peuvent comporter des chiffres.}
+
+\subparagraph{}
+\textit{Implémenter un algorithme de tri alphabétique adapté au fichier de films. Quel est le titre du premier film de la liste ?}
+
+
+
+
+\end{multicols}
+\end{document}
+
+
+\section*{Exercice}
+\setcounter{exo}{0}
+\subparagraph{}
+\textit{}
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi

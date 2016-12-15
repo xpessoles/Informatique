@@ -1,0 +1,183 @@
+\documentclass[11pt,oneside]{article}
+\input{style/coursHeadings}
+\input{style/programHeadings}
+
+%Si le boolen xp est vrai : compilation pour xabi
+%Sinon compilation Damien
+\newboolean{xp}
+\setboolean{xp}{true}
+
+\newboolean{prof}
+\setboolean{prof}{false}
+
+\def\xxtitre{\ifthenelse{\boolean{xp}}{
+CI 2 -- Algorithmique et Programmation
+}}
+
+\def\xxsoustitre{\ifthenelse{\boolean{xp}}{
+TP -- Algorithmes de tris}{
+}}
+
+
+\def\xxauteur{\ifthenelse{\boolean{xp}}{
+\noindent \textsl{Cédric Lopez} \\
+\textsl{Xavier Pessoles}
+}{
+}}
+
+
+\def\xxpied{\ifthenelse{\boolean{xp}}{
+CI 2 : Algorithmique et Programmation -- TP \\
+Algorithmes de tris -- \ifthenelse{\boolean{prof}}{P}{E}%
+}{
+}}
+
+\usepackage[%
+    pdftitle={Algoritmique et Programmation - TP Tri},
+    pdfauthor={Xavier Pessoles},
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=magenta]{hyperref}
+
+
+
+\usepackage{pifont}
+\sloppy
+\hyphenpenalty 10000
+
+
+\begin{document}
+
+
+\input{style/entete1}
+
+\begin{center}
+ \huge\textsc{\xxtitre}
+\end{center}
+
+\begin{center}
+ \LARGE\textsc{\xxsoustitre}
+\end{center}
+
+
+
+
+
+
+
+
+
+\section{Présentation}
+
+Lors de l'acquisition d'un grand nombre de données, il est souvent nécessaire de les trier suivant un critère donné. Par exemple, dans les cas où les données sont des nombres, il peut être nécessaire de les ordonner dans l'ordre croissant ou décroissant. Ainsi, il devient plus rapide de déterminer le plus grand ou le plus petit nombre de la liste. 
+
+Lorsque le nombre de valeurs devient important, il devient indispensable d'optimiser cette opération afin de réduire le temps d'exécution d'un programme. 
+
+\section{Le tri par insertion}
+\setcounter{subparagraph}{0}
+\subsection{Principe}
+Le tri par insertion est celui utilisé naturellement pour trier sa main lorsqu'on joue au carte. Le joueur reçoit un certain nombre de cartes mélangées. Pour les trier, le joueur procède souvent ainsi :
+\begin{enumerate}
+\item le joueur prend la première carte;
+\item le joueur prend la seconde carte :
+\begin{itemize}
+\item il la compare à la première carte :
+\begin{itemize}
+\item si la carte 2 est plus petite que la première il la positionne en premier;
+\item sinon il la positionne en second;
+\end{itemize}
+\end{itemize}
+\item le joueur prend la troisième carte :
+\begin{itemize}
+\item il la compare à la première carte :
+\begin{itemize}
+\item si la carte 3 est plus petite que la première, il la positionne avant en premier;
+\item sinon, il compare la carte 3 à la seconde :
+\begin{itemize}
+\item si la carte 3 est plus petite que la seconde, il la positionne avant en second;
+\item sinon, il la positionne en troisième.
+\end{itemize}
+\end{itemize}
+\end{itemize}
+\item \textit{etc.}
+\end{enumerate}
+
+\subsection{Illustration}
+On peut illustrer ainsi le tri de 5 cartes :
+\begin{center}
+\includegraphics[width=\textwidth]{png/insertion}
+\end{center}
+
+\subsection{Travail demandé}
+
+\ifthenelse{\boolean{prof}}{
+On donne en pseudo code un algorithme permettant de réaliser un tri par insertion :
+
+\begin{pseudo}
+\begin{algorithm}[H]
+\Donnees{Tableau tab de $N$ éléments}
+\Fonction{
+Tri par insertion ($tab$):\\
+\Pour{i de 1 à $N$}{
+$a \gets tab[i]$\\
+$j \gets i-1$\\
+\Tq{$j \geq 0$ et $tab[j]>a$}{
+$tab[j+1] \gets tab[j]$ \\
+$j\gets j-1$}
+$tab[j+1] \gets a$ \\
+}
+\Retour{tab}}
+\end{algorithm}
+\end{pseudo}
+}{}
+
+\subparagraph{}
+\textit{Le fichier Excel \textsl{TriInsertion.xls} contient une séquence de nombres à trier par la méthode du tri par insertion. Indiquer les étapes successives de tri.}
+
+\subparagraph{}
+\textit{Proposer un algorithme en pseudo code permettant de trier un tableau de nombres. }
+
+
+\subparagraph{}
+\textit{Implémenter la fonction \textsf{triInsertion} en Python. Vous prendrez soin de documenter votre fonction.}
+
+On considère le tableau suivant : $[17,38,10,25,72,4,98,32,11]$.
+
+\subparagraph{}
+\textit{Tester l'algorithme sur l'exemple précédent.}
+
+\subparagraph{}
+\textit{Donner le nombre d'opérations nécessaire à la réalisation de ce tri.}
+
+\section{Tri à bulles}
+\setcounter{subparagraph}{0}
+\subsection{Principe}
+Le tri à bulles consiste à parcourir un tableau pour en déterminer le plus petit élément. On échange alors cet élément avec le premier élément du tableau. Il reste alors qu'à réaliser un tri du deuxième élément du tableau à la fin du tableau en utilisant la même méthode. 
+
+\subsection{Illustration}
+L'exemple qui suit illustre les étapes du tri d'un tableau.
+\begin{center}
+\includegraphics[width=\textwidth]{png/bulles}
+\end{center}
+
+
+\subsection{Travail demandé}
+
+\subparagraph{}
+\textit{Le fichier Excel \textsl{TriBulles.xls} contient une séquence de nombres à trier par la méthode du tri par insertion. Indiquer les étapes successives de tri.}
+
+\subparagraph{}
+\textit{Proposer un algorithme en pseudo code permettant de trier un tableau de nombres. }
+
+
+\subparagraph{}
+\textit{Implémenter la fonction \textsf{triBulles} en Python. Vous prendrez soin de documenter votre fonction.}
+
+On considère le tableau suivant : $[17,38,10,25,72,4,98,32,11]$.
+
+\subparagraph{}
+\textit{Tester l'algorithme sur l'exemple précédent.}
+
+\subparagraph{}
+\textit{Donner le nombre d'opérations nécessaire à la réalisation de ce tri.}
+\end{document}

@@ -1,0 +1,402 @@
+\documentclass[10pt,fleqn]{article} % Default font size and left-justified equations
+\usepackage[%
+    pdftitle={Informatique : Tris},
+    pdfauthor={Xavier Pessoles}]{hyperref}
+    
+\input{style/new_style}
+\input{style/macros_SII}
+
+\usepackage{multicol}
+\fichetrue
+%\fichefalse
+
+\proftrue
+\proffalse
+
+\tdtrue
+%\tdfalse
+
+%\courstrue
+\coursfalse
+
+% -------------------------------------
+% Déclaration des titres
+% -------------------------------------
+
+\def\discipline{Informatique}
+\def\xxtete{Informatique}
+\def\classe{PT -- PT$\star$}
+\def\xxnumpartie{Partie 5}
+\def\xxpartie{Algorithmique \& Programmation (Suite)}
+
+\def\xxnumchapitre{Chapitre 3}
+\def\xxchapitre{\hspace{.12cm} Tri d'une liste de valeurs numériques}
+
+\def\xxtitreexo{Exercices d'applications}
+\def\xxsourceexo{}%\hspace{.2cm} Informatique pour tous en CPGE -- \textit{Wack \& al.}}
+
+\def\xxposongletx{2}
+\def\xxposonglettext{1.45}
+\def\xxposonglety{13}%10
+
+\def\xxonglet{Part. 5 -- Ch. 3}
+
+\def\xxactivite{TD -- 02}
+\def\xxauteur{\textsl{Xavier Pessoles}}
+
+\def\xxcompetences{%
+\textsl{%
+\textbf{Savoirs et compétences :}
+\begin{itemize}[label=\ding{112},font=\color{ocre}] 
+\item Alg -- C17 : tris d’un tableau à une dimension de valeurs numériques (tri par insertion, tri rapide, tri fusion).
+\end{itemize}
+}}
+
+\def\xxfigures{}%figues de la page de garde
+
+\def\xxpied{%
+Partie 5 -- Algorithmique et Programmation\\
+Ch 3 : Tri d'une liste de valeurs numériques -- \xxactivite%
+}
+
+
+
+\setcounter{secnumdepth}{5}
+%---------------------------------------------------------------------------
+
+
+\begin{document}
+%\chapterimage{png/Fond_Cin}
+\input{style/new_pagegarde}
+\vspace{5cm}
+\pagestyle{fancy}
+\thispagestyle{plain}
+
+
+\def\columnseprulecolor{\color{ocre}}
+\setlength{\columnseprule}{0.4pt} 
+\begin{multicols}{2}
+
+\section*{Exercice 1 -- Représentation du coût temporel des tris}
+
+\begin{obj}
+Représenter pour chacun des tris les courbes indiquant le temps d'exécution en fonction du nombre d'éléments à trier.
+\end{obj}
+On donne la bibliothèque de tri \texttt{tris.py} dans laquelle différents tris ont été implémentés (même fichier que pour le TD01).
+On dispose ainsi des fonctions : 
+\begin{itemize}
+\item \texttt{tri\_insertion};
+\item \texttt{tri\_rapide};
+\item \texttt{tri\_fusion}.
+\end{itemize}
+On dispose aussi de la méthode \texttt{sort} disponible en Python.
+
+Pour augmenter la limite de récursivité de Python, on utilisera les instructions suivantes : \texttt{import sys} puis \texttt{sys.setrecursionlimit(100000)}.
+
+\section*{Exercice -- Classement de l'étape Tarbes -- La Pierre-Saint-Martin -- 167 km}
+Les coureurs du tour de France sont en train de terminer la seizième étape du Tour de France qui sépare Tarbes et La Pierre-Saint-Martin. 
+
+Le fichier \texttt{classement\_général} rassemble le classement général à l'issue de l'étape 9. Le fichier \texttt{etape\_10} contient le classement de l'étape 10 uniquement. Dans le fichier texte, les champs sont séparés par des tabulations.
+
+
+\begin{obj}
+L'objectif est de réaliser le classement général après la seizième étape. 
+\end{obj}
+
+\subsection*{Lecture des fichiers de résultat}
+\setcounter{exo}{0}
+\subparagraph{}
+\textit{Réaliser la fonction \texttt{charge\_classement} permettant de lire un fichier de classement 
+et de retourner une liste de la forme \texttt{[[Nom\_1, Dossard\_1, Temps\_1], [Nom\_2, Dossard\_2, Temps\_2], ...]}. Le temps devra être exprimé en secondes.}
+
+
+
+\subsection*{Classement en fin d'étape}
+Dans une première approche, on souhaite réaliser le classement général après la fin de l'étape. 
+
+\subparagraph{}
+\textit{Réaliser la fonction permettant d'ajouter les temps de l'étape 10 aux temps du classement général.}
+
+\subparagraph{}
+\textit{Quel méthode de tri vous semble la mieux adaptée au tri du classement général ?}
+
+\subparagraph{}
+\textit{Modifier les algorithmes de tris pour pouvoir trier la liste donnée suivant le temps de course d'un coureur. Le classement général a-t-il changé à l'issue de la dixième étape ?}
+
+\begin{rem}
+Travaillant sur une liste de listes, la méthode \texttt{sort} n'est plus adaptée. On peut donc utiliser la fonction, \texttt{sorted} en utilisant une clef de tri (la clef correspondant à la colonne sur laquelle on souhaite trier la liste): 
+\end{rem}
+\begin{python}
+# Tri de la liste <<liste>> sur la colonne 3
+sorted(liste, key=lambda colonnes: colonnes[2])
+\end{python}
+
+
+
+\subsection*{Classement en cours d'étape -- Implémentation d'une file}
+On cherche à reconstituer le classement général au fur et à mesure que les coureurs arrivent. Dans cette partie le classement de l'étape (liste de liste) sera vu comme une \textbf{file} FIFO (First In First Out) ou le premier élément est le premier coureur arrivé et le dernier élément est le dernier coureur à avoir passé la ligne d'arrivée.  
+
+\subparagraph{}\textit{Implémenter les fonctions élémentaires liées à la gestion des files : \texttt{enfiler}, \texttt{defiler}, \texttt{est\_vide}. À l'intérieur de ces fonctions, on s'autorise les méthodes liées au listes (\texttt{append}, \texttt{pop}, ...).}
+
+\subparagraph{}
+\textit{Implémenter la fonction \texttt{ajout} ayant pour but d'ajouter le temps de l'étape d'un coureur dans le classement général et de mettre à jour ce classement. La gestion du classement de l'étape devra être réalisé grâce à une liste.}
+
+\subparagraph{}
+\textit{Implémenter la fonction \texttt{ajout} ayant pour but d'ajouter le temps de l'étape d'un coureur dans le classement général et de mettre à jour ce classement. La gestion du classement de l'étape devra être réalisé grâce à une liste.}
+
+\subparagraph{}
+\textit{Quelle pourrait être l'utilité de la fonction \texttt{enfiler} dans un tel contexte ?}
+
+
+\end{multicols}
+\end{document}
+
+\newpage
+
+\subsection*{Classement en cours d'étape -- arbre binaire}
+Dans cette partie, on se propose d'étudier une nouvelle structure de donnée : les arbres binaires. L'objectif sera de représenter le classement non plus sous forme d'une liste ordonnée, mais sous la forme d'un arbre. 
+
+\subsubsection*{Présentation des arbres}
+Un tas binaire est une structure de données informatiques qui permet d'accéder
+au maximum (respectivement minimum) d'un ensemble de données en temps
+constant. On peut la représenter par un arbre binaire vérifiant
+deux contraintes :
+\begin{itemize}
+\item c'est un arbre binaire parfait : tous les niveaux de l'arbre
+(excepté le niveau le plus bas) sont totalement remplis. Si le dernier n'est pas totalement rempli alors il doit l'être de gauche à droite;
+\item c'est un tas : une clé est associée à chaque nœud de l'arbre. Cette dernière doit être supérieure ou égale aux clés de chacun de ses fils.
+\end{itemize}
+
+Ainsi, lorsque les clés sont des nombres (valeurs) et quand la relation d'ordre choisie est l'ordre naturel, on parle alors de tas-max (ou max-heap). 
+
+Un tas binaire étant un arbre binaire complet, on peut l'implémenter à l'aide d'un tableau tel que :
+\begin{itemize}
+\item la racine de l'arbre (niveau le plus haut) se trouve à l'index absolu 1;
+\item en considérant un nœud à l'index absolu $i$ :
+\begin{itemize}
+\item[$\bullet$] son fils gauche se trouve à l'index absolu $2i$;
+\item[$\bullet$] son fils droit se trouve à l'index absolu $2i + 1$;
+\end{itemize}
+\item en considérant un nœud à l'index absolu $i > 1$ :
+\begin{itemize}
+\item [$\bullet$]son père se trouve à l'index absolu $i/2$, le symbole / désignant ici la division entière.
+\end{itemize}
+\end{itemize}
+
+La figure suivante illustre un arbre binaire (trié) et le tableau qu'on peut lui associer avec les index associés (index absolu, index en langage Python).%, index en langage Scilab).
+
+%\begin{figure}[!ht]
+%\begin{minipage}[c]{.3\linewidth}
+\footnotesize{
+\begin{center}
+\begin{tikzpicture}[level/.style={sibling distance=20mm/#1},level distance = .8cm ]
+\node [circle,draw] (z){\textsf{62}}
+  child {
+    node [circle,draw] (a) {\textsf{35}}
+    child {
+      node [circle,draw] (b) {\textsf{13}}
+      child {node [circle,draw] (c) {\textsf{5}}}
+      child {node [circle,draw] (d) {\textsf{6}}}
+      }
+    child {node [circle,draw] (g) {\textsf{3}}}
+  }
+  child {node [circle,draw] (j) {\textsf{23}}
+    child {node [circle,draw] (k) {\textsf{17}}}
+    child {node [circle,draw] (l) {\textsf{12}}}
+  };
+\end{tikzpicture}
+\end{center}}
+
+
+%\begin{figure}
+%[!ht]
+%\end{minipage}\hspace{1cm}
+%\begin{minipage}[c]{.45\linewidth}
+
+\footnotesize{
+\begin{center}
+\begin{tabular}{|m{1.75cm}|c|c|c|c|c|c|c|c|c|}
+\hline
+Valeur dans l'arbre (clé) & 62 & 35 & 23 & 13 & 3 & 17 & 12 & 5 & 6 \\
+\hline \hline
+Index absolu dans l'arbre & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 \\ \hline
+%Index du tableau en Python & 0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 \\ \hline
+%Index du tableau en Scilab & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 \\ \hline
+\end{tabular}
+\end{center}
+}
+%\vspace{.5cm}
+\textit{Le nœud ayant la valeur 62 est la racine de l'arbre (niveau le plus haut). Les nœuds ayant les clefs 5 et 6 sont au niveau le plus bas.}
+
+\normalsize
+
+\subsubsection*{Construction de l'arbre}
+On souhaite construire l'arbre représentatif du classement des coureurs. Les valeurs de l'arbre seront le temps de course.
+
+Dans un tas binaire, on insère l'élément à la prochaine position libre (la position libre la plus
+à gauche possible sur le dernier niveau) puis on effectue l'opération suivante (nommée \texttt{percolateUp}) pour rétablir si nécessaire la propriété d'ordre du tas binaire : tant que l'élément n'est pas la racine de l'arbre et que la clé de l'élément est strictement supérieure à son père on échange les positions entre l'élément et son père. L'exemple de la figure suivante montre l'insertion d'un élément ayant une clé de valeur 72.
+
+
+%\begin{figure}[!ht]
+\begin{minipage}[c]{.45\linewidth}
+\begin{tikzpicture}[level/.style={sibling distance=20mm/#1},level distance = .8cm ]
+\node [scale=.7,circle,draw] (z){\textsf{62}}
+  child {
+    node [scale=.7,circle,draw] (a) {\textsf{35}}
+    child {
+      node [scale=.7,circle,draw] (b) {13}
+      child {node [scale=.7,circle,draw] (c) {\textsf{8}}}
+      child {node [scale=.7,circle,draw] (d) {\textsf{9}}}
+      }
+    child {
+    node [scale=.7,circle,draw] (g) {\textsf{3}}
+    child {node [scale=.8,circle,draw,fill={rgb:black,1;white,6}] (e) {\textbf{\textsf{72}}}}
+    }
+  }
+  child {node [scale=.7,circle,draw] (j) {\textsf{23}}
+    child {node [scale=.7,circle,draw] (k) {\textsf{17}}}
+    child {node [scale=.7,circle,draw] (l) {\textsf{12}}}
+  };
+%  \draw (0,-3.5) node[below]{Insertion de la clef 72} ;
+\end{tikzpicture}
+
+\begin{center}
+Insertion de la clef 72
+\end{center}
+\end{minipage} %\hspace{2.7cm}
+\begin{minipage}[c]{.45\linewidth}
+\begin{tikzpicture}[level/.style={sibling distance=20mm/#1},level distance = .8cm ]
+\node [scale=.7,circle,draw] (z){\textsf{62}}
+  child {
+    node [scale=.7,circle,draw] (a) {\textsf{35}}
+    child {
+      node [scale=.7,circle,draw] (b) {13}
+      child {node [scale=.7,circle,draw] (c) {\textsf{8}}}
+      child {node [scale=.7,circle,draw] (d) {\textsf{9}}}
+      }
+    child {
+    node [scale=.8,circle,draw,fill={rgb:black,1;white,6}] (g) {\textbf{\textsf{72}}}
+    child {node [scale=.7,circle,draw] (e) {\textsf{3}}}
+    }
+  }
+  child {node [scale=.7,circle,draw] (j) {\textsf{23}}
+    child {node [scale=.7,circle,draw] (k) {\textsf{17}}}
+    child {node [scale=.7,circle,draw] (l) {\textsf{12}}}
+  };
+%    \draw (0,-3.5) node[below]{Échange de la clef 72} ;
+ %   \draw (0,-4) node[below]{avec son père (clef 3)} ;
+\end{tikzpicture}
+
+\begin{center}
+Échange de la clef 72 avec son père (clef 3)
+\end{center}
+\end{minipage} 
+
+%\hspace{2.5cm}
+
+\begin{minipage}[c]{.45\linewidth}
+\begin{tikzpicture}[level/.style={sibling distance=20mm/#1},level distance = .8cm ]
+\node [scale=.7,circle,draw] (z){\textsf{62}}
+  child {
+    node [scale=.8,circle,draw,fill={rgb:black,1;white,6}] (a) {\textsf{\textbf{72}}}
+    child {
+      node [scale=.7,circle,draw] (b) {13}
+      child {node [scale=.7,circle,draw] (c) {\textsf{8}}}
+      child {node [scale=.7,circle,draw] (d) {\textsf{9}}}
+      }
+    child {
+    node [scale=.7,circle,draw] (g) {\textsf{35}}
+    child {node [scale=.7,circle,draw] (e) {3}}
+    }
+  }
+  child {node [scale=.7,circle,draw] (j) {\textsf{23}}
+    child {node [scale=.7,circle,draw] (k) {\textsf{17}}}
+    child {node [scale=.7,circle,draw] (l) {\textsf{12}}}
+  };
+    %\draw (0,-3.5) node[below]{Échange de la clef 72} ;
+    %\draw (0,-4) node[below]{avec son père (clef 35)} ;
+\end{tikzpicture}
+\begin{center}
+Échange de la clef 72 avec son père (clef 35)
+\end{center}
+\end{minipage} 
+\begin{minipage}[c]{.45\linewidth}
+\begin{tikzpicture}[level/.style={sibling distance=20mm/#1},level distance = .8cm ]
+\node [scale=.8,circle,draw,fill={rgb:black,1;white,6}] (z){\textsf{\textbf{72}}}
+  child {
+    node [scale=.7,circle,draw] (a) {\textsf{62}}
+    child {
+      node [scale=.7,circle,draw] (b) {13}
+      child {node [scale=.7,circle,draw] (c) {\textsf{8}}}
+      child {node [scale=.7,circle,draw] (d) {\textsf{9}}}
+      }
+    child {
+    node [scale=.7,circle,draw] (g) {\textsf{35}}
+    child {node [scale=.7,circle,draw] (e) {3}}
+    }
+  }
+  child {node [scale=.7,circle,draw] (j) {\textsf{23}}
+    child {node [scale=.7,circle,draw] (k) {\textsf{17}}}
+    child {node [scale=.7,circle,draw] (l) {\textsf{12}}}
+  };
+   % \draw (0,-3.5) node[below]{Échange de la clef 72} ;
+   % \draw (0,-4) node[below]{avec son père (clef 62)} ;
+\end{tikzpicture}
+\begin{center}
+Échange de la clef 72 avec son père (clef 62)
+\end{center}
+\end{minipage}
+
+
+\subparagraph{}
+\textit{En utilisant la fonction \texttt{percolateUp} construire l'arbre correspondant à l'arbre présenté dans l'exemple.}
+
+\subparagraph{}
+\textit{Modifier la fonction \texttt{percolateUp} pour pouvoir réorganiser le classement général.}
+
+
+\subsubsection*{Extraction du premier du classement}
+
+
+On souhaite extraire le premier du classement de l'arbre. Pour cela, il faut retirer la racine de notre tas
+binaire (c'est-à-dire le maximum de notre tas). Cependant il faut pouvoir conserver la structure
+de tas binaire après cette suppression. Pour cela, on procède donc de la manière suivante :
+\begin{itemize}
+\item on supprime la racine et on met à sa place l’élément qui était en dernière position de l’arbre
+(c'est-à-dire le plus à droite sur le dernier niveau);% que l’on notera $x$;
+\item puis on exécute l’opération nommée \texttt{percolateDown} dont l’implémentation est donnée dans le fichier ressource.
+\end{itemize}
+
+
+\subparagraph{}
+\textit{On cherche à analyser les évolutions de la fonction \texttt{percolateDown}. Appliquer l'opération d'extraction sur l'exemple du tas binaire modélisé dans le paragraphe précédent. On donnera la liste de départ, un schéma du tas binaire à chaque étape ainsi que la liste finale.}
+
+
+\subparagraph{}
+\textit{Modifier la fonction \texttt{percolateDown} pour qu'elle puisse s'appliquer au classement général.}
+
+%\caption{\label{ex_arbre} Insertion d'un élément de clef 72}
+%\end{figure}
+
+
+
+%\end{minipage}
+%\vspace{.25cm}
+%\caption{\label{arbre} Arbre binaire et son implémentation en tableau}
+%\end{figure}
+
+
+
+\end{multicols}
+\end{document}
+
+
+\section*{Exercice}
+\setcounter{exo}{0}
+\subparagraph{}
+\textit{}
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi

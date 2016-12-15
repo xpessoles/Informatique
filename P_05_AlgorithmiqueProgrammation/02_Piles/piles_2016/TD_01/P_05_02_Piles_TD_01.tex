@@ -1,0 +1,295 @@
+\documentclass[10pt,fleqn]{article} % Default font size and left-justified equations
+\usepackage[%
+    pdftitle={Informatique : Piles et files},
+    pdfauthor={Xavier Pessoles}]{hyperref}
+    
+\input{style/new_style}
+\input{style/macros_SII}
+
+\usepackage{multicol}
+\fichetrue
+%\fichefalse
+
+\proftrue
+\proffalse
+
+\tdtrue
+%\tdfalse
+
+%\courstrue
+\coursfalse
+
+% -------------------------------------
+% Déclaration des titres
+% -------------------------------------
+
+\def\discipline{Informatique}
+\def\xxtete{Informatique}
+\def\classe{PT -- PT$\star$}
+\def\xxnumpartie{Partie 5}
+\def\xxpartie{Algorithmique \& Programmation (Suite)}
+
+\def\xxnumchapitre{Chapitre 2}
+\def\xxchapitre{\hspace{.12cm} Piles et files}
+
+\def\xxtitreexo{Exercices d'applications}
+\def\xxsourceexo{\hspace{.2cm} Informatique pour tous en CPGE -- \textit{Wack \& al.}}
+
+\def\xxposongletx{2}
+\def\xxposonglettext{1.45}
+\def\xxposonglety{13}%10
+
+\def\xxonglet{Part. 5 -- Ch. 2}
+
+\def\xxactivite{TD - 01}
+\def\xxauteur{\textsl{Xavier Pessoles}}
+
+\def\xxcompetences{%
+\textsl{%
+\textbf{Savoirs et compétences :}
+\begin{itemize}[label=\ding{112},font=\color{ocre}] 
+\item Alg -- C16 : Piles - Algorithmes de manipulation : fonctions «push» et «pop».
+\end{itemize}
+}}
+
+\def\xxfigures{}%figues de la page de garde
+
+\def\xxpied{%
+Partie 5 -- Algorithmique et Programmation\\
+Ch 2 : Piles et files-- \xxactivite%
+}
+
+
+
+\setcounter{secnumdepth}{5}
+%---------------------------------------------------------------------------
+
+
+\begin{document}
+%\chapterimage{png/Fond_Cin}
+\input{style/new_pagegarde}
+\vspace{8cm}
+\pagestyle{fancy}
+\thispagestyle{plain}
+
+
+\def\columnseprulecolor{\color{ocre}}
+\setlength{\columnseprule}{0.4pt} 
+\begin{multicols}{2}
+Dans l'ensemble des exercices, on considère disposer des fonctions suivantes :
+\begin{itemize}
+\item \texttt{creer\_pile(t)} : crée une pile de taille \texttt{t};
+\item \texttt{est\_vide(p)} : renvoie \texttt{True} si la pile \texttt{p} est vide;
+\item \texttt{empiler(p,e)} : empile l'élément \texttt{e} au sommet de la pile \texttt{p};
+\item \texttt{depiler(p)} : dépile l'élément au sommet de la pile \texttt{p} et le retourne;
+\end{itemize}
+\section*{Exercice 1 - La parenthèse inattendue}
+Dans cet exercice, on souhaite savoir si une chaîne de caractères est bien parenthésée ou non. 
+Une chaîne bien parenthésée est une chaîne vide ou la concaténation de chaînes bien parenthésées. 
+\begin{exemple}
+Chaînes bien parenthésées :
+\begin{itemize}
+\item \texttt{"()"},\texttt{"()()"},\texttt{"(())"} et \texttt{"(()())"}.
+\end{itemize}
+Chaînes mal parenthésées :
+\begin{itemize}
+\item \texttt{")("},\texttt{"(("},\texttt{"(()"} et \texttt{"())"}.
+\end{itemize}
+\end{exemple} 
+
+\subparagraph{}\textit{Implémenter la fonction \texttt{parentheses} répondant aux spécifications suivantes : }
+
+\begin{py}
+\begin{python}
+def parenthese(s):
+    "
+    Retourne les couples d'indice parenthèse 
+    ouvrante, parenthèse fermante.
+    Entrée :
+     * s(str) : chaîne de caractères bien 
+     parenthésée constituée uniquement 
+     de parenthèses.
+    Sortie : 
+     * Affichage des couples d'indices.
+    "
+\end{python}
+\end{py}
+
+\ifprof
+\begin{corrige}
+~\\
+\begin{python}
+def parentheses(s):
+    p = creer_pile(len(s))
+    for i in range(len(s)):
+    if s[i] == '(':
+        empiler(p, i)
+    else:
+        if est_vide(p):
+            return False
+        j = depiler(p)
+        print((j, i))
+    return est_vide(p)
+\end{python}
+\end{corrige}
+\else
+\fi
+
+\subparagraph{}
+\textit{Réaliser un programme permettant de savoir si une chaîne de caractères est bien parenthésée. La structure de pile est-elle nécessaire ?}
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi
+
+
+\subparagraph{}
+\textit{Adapter le premier programme pour qu'il puisse traiter des chaînes constituées de parenthèses, de crochets, ou d'accolades. Un mot est alors bien parenthésé si la parenthèse fermante qui correspond à chaque parenthèse ouvrante est du même type.}
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi
+
+\subparagraph{}
+\textit{Adapter le programme pour qu’il puisse traiter des mots constitués de parenthèses et
+d’autres caractères, qui n’interfèrent pas avec les parenthèses.}
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi
+
+
+\subparagraph{}
+\textit{Écrire une version récursive de la fonction \texttt{parentheses}.}
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi
+
+
+\section*{Exercice 2 -- Inversion}
+\subparagraph*{}
+\setcounter{exo}{0}
+\textit{Écrire une fonction qui intervertit les deux éléments situés au sommet d’une pile de taille
+au moins égale à 2.}
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi
+
+
+\section*{Exercice 3 -- Dépile le n\ieme}
+\setcounter{exo}{0}
+\subparagraph*{}
+\textit{Écrire une fonction qui dépile et renvoie le troisième élément d’une pile de taille au moins
+égale à 3. Les premier et deuxième éléments devront rester au sommet de la pile.}
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi
+
+\section*{Exercice 4 -- Lire  le n\ieme}
+\setcounter{exo}{0}
+\subparagraph*{}
+\textit{Écrire une fonction qui permet de lire (sans l’extraire) le n-ième élément d’une pile. On
+prévoira le cas où la pile n’est pas de taille suffisante pour qu’un tel élément existe.}
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi
+
+%\section*{Exercice}
+%\setcounter{exo}{0}
+%\subparagraph*{}
+%\textit{Programmer les fonctions sommet et taille uniquement à l’aide de empiler, depiler et
+%est_vide, indépendamment de la réalisation de pile choisie.
+%Que peut-on dire de la complexité en temps et en espace de cette fonction taille ?}
+%\ifprof
+%\begin{corrige}
+%\end{corrige}
+%\else
+%\fi
+
+\section*{Exercice 5 -- Inversion des extrêmes}
+
+\setcounter{exo}{0}
+\subparagraph*{}
+\textit{Écrire une fonction qui prend une pile non vide en argument et place l’élément situé à
+son sommet tout au fond de la pile, en conservant l’ordre des autres éléments.
+Quelle est sa complexité en temps et en espace ?}
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi
+
+\section*{Exercice 6 -- Inversion de la pile}
+\setcounter{exo}{0}
+\subparagraph{}
+\textit{Écrire une fonction similaire à \texttt{reversed}, qui prend une pile en argument et renvoie une autre pile constituée des mêmes éléments placés dans l’ordre inverse.}
+
+\subparagraph{}
+\textit{ Si l’on s’autorise à détruire la pile fournie, quelle est la complexité en temps et en espace de cette fonction ? Et si on ne s’y autorise pas ?}
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi
+
+\section*{Exercice 7 -- Tu coupes ?}
+\setcounter{exo}{0}
+\subparagraph*{}
+\textit{Écrire une fonction couper qui prend une pile et la coupe en enlevant de son sommet un
+certain nombre d’éléments (tirés au hasard) qui sont renvoyés dans une seconde pile.}
+
+\begin{exemple}
+Si la pile initiale est \texttt{[1, 2, 3, 4, 5]}, et que le nombre d’éléments retiré vaut 2, alors la pile ne contient plus que \texttt{[1, 2, 3]} et la pile renvoyée contient \texttt{[5,4]}.
+\end{exemple}
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi
+
+\section*{Exercice 8 -- Mélange de cartes}
+\setcounter{exo}{0}
+\subparagraph*{}
+\textit{Écrire une fonction \texttt{melange} qui prend en arguments deux piles et qui
+mélange leurs éléments dans une troisième pile de la façon suivante : tant qu’une pile au moins n’est pas vide, on retire aléatoirement un élément au sommet d’une des deux piles et on l’empile sur la pile résultat. }
+\begin{exemple}
+Un mélange possible des piles \texttt{[1, 2, 3]} et \texttt{[5, 4]} est \texttt{[3, 2, 4, 1, 5]}. Note : à l’issue du mélange, les deux piles de départ sont donc vides.
+\end{exemple}
+
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi
+%
+%\section*{Exercice 9 -- Tour de magie de Gilbreath}
+% Construire un paquet de cartes en empilant n fois les mêmes
+%$k$ cartes. (Par exemple, pour un paquet de 32 cartes, on empile n = 16 paquets de paires rouge/noir.)
+%Couper alors le paquet avec la fonction couper ci-dessus, puis mélanger les deux paquets obtenus à l’aide
+%de la fonction melange. On observe alors que le paquet final contient toujours n blocs des mêmes k cartes
+%(même si ces dernières peuvent apparaître dans un ordre différent au sein de chaque bloc). Sur l’exemple
+%des 16 paquets rouge/noir, on obtient toujours 16 paquets rouge/noir ou noir/rouge.
+\end{multicols}
+\end{document}
+
+
+\section*{Exercice}
+\setcounter{exo}{0}
+\subparagraph*{}
+\textit{}
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi

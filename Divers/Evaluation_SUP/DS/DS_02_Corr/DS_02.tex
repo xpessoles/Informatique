@@ -1,0 +1,366 @@
+\documentclass[10pt,oneside]{article}
+\input{style/coursHeadings}
+\input{style/programHeadings}
+
+
+%Si le boolen xp est vrai : compilation pour xabi
+%Sinon compilation Damien
+\newboolean{xp}
+\setboolean{xp}{true}
+
+\newboolean{prof}
+\setboolean{prof}{true}
+
+\def\xxtitre{\ifthenelse{\boolean{xp}}{
+Devoir Surveillé 2 -- 1 heure}{
+}}
+
+
+\def\xxsoustitre{\ifthenelse{\boolean{xp}}{
+CI 2 : Algorithmique et programmation}{
+}}
+
+\def\xxauteur{\ifthenelse{\boolean{xp}}{
+Xavier \textsc{Pessoles}}{% \\ Damien \textsc{Iceta}}{
+Damien \textsc{Iceta} \\ Xavier \textsc{Pessoles}}}
+
+\def\xxpied{\ifthenelse{\boolean{xp}}{
+DS 02 -- CI 2}{
+\xxtitre}}
+
+\def\xxcathegorie{\ifthenelse{\boolean{xp}}{
+2013 -- 2014 \\
+Xavier \textsc{Pessoles}\\Informatique -- DS 2}{
+Informatique -- DS 2}}
+
+\ifthenelse{\boolean{xp}}{\input{style/enteteXP}}{\input{style/enteteDI}}
+
+
+%---------------------------------------------------------------------------
+
+
+\ifthenelse{\boolean{prof}}{
+\begin{center}
+ \large\textsc{Éléments de corrigés}
+\end{center}
+}{
+%\begin{center}
+% \large\textsc{CI 2 : Algorithmique et programmation}
+%\end{center}
+}
+\vspace{.5cm}
+
+
+\ifthenelse{\boolean{prof}}{}{
+\begin{obj}
+Objectifs : 
+\begin{itemize}
+\item comprendre un algorithme et expliquer ce qu’il fait;
+\item modifier un algorithme existant pour obtenir un résultat différent;
+\item concevoir un algorithme répondant à un problème précisément posé;
+\item expliquer le fonctionnement d’un algorithme.
+\end{itemize}
+\end{obj}
+
+\textbf{Vous pourrez répondre aux questions en utilisant du pseudo code ou du code Python.}
+}
+
+
+\subsection*{Exercice}
+\ifthenelse{\boolean{prof}}{}{
+L'objectif est de trier un tableau dans le but de diminuer le temps nécessaire à la recherche d'un ou de plusieurs éléments. Une étape préalable à la recherche d'un élément est le tri du tableau.
+
+
+Avant tout on se propose d'écrire la fonction \textsf{permute} qui permet de permuter deux éléments d'un tableau. Si on veut permuter le premier élément et le second élément d'un tableau, la fonction doit avoir le comportement suivant :
+}
+
+%\begin{py}
+%\begin{minipage}[c]{.05\linewidth}
+%$\quad$
+%\end{minipage} \hfill
+%\begin{minipage}[c]{.75\linewidth}
+%\begin{python}
+%>>> tab=[10,20,30]
+%>>> permute(tab,0,1)
+%>>> print(tab)
+%                [20,10,30]
+%\end{python}
+%\end{minipage}
+%\end{py}
+%
+
+
+
+\subparagraph{}
+\textit{Écrire la fonction permettant de permuter les valeurs du tableau. Cette fonction devra correspondre aux spécifications suivantes : 
+\begin{itemize}
+\item nom de la fonction : \textsf{permute};
+\item arguments de la fonction : un tableau, les deux indices à permuter. 
+\end{itemize}}
+
+
+%\ifthenelse{\boolean{prof}}{
+\begin{corrige}
+\begin{py}
+\begin{python2}
+def permute(tab, i,j):
+    tab[i],tab[j]=tab[j],tab[i]
+    return tab
+\end{python2}
+\end{py}
+\end{corrige}
+%}{}
+
+
+
+%\ifthenelse{\boolean{prof}}{
+%\vspace{.25cm}
+%On propose maintenant un algorithme permettant de trier le tableau à proprement parlé. Ce tri est appelé tri par sélection. Le voici :
+%\begin{py}
+%\begin{minipage}[c]{.05\linewidth}
+%$\quad$
+%\end{minipage} \hfill
+%\begin{minipage}[c]{.75\linewidth}
+%\begin{python}
+%def tri(tab):
+%    for i in range(0,len(tab)):
+%        indice = i
+%        for j in range(i+1,len(tab)):
+%            if tab[j]<tab[indice]:
+%               indice = j
+%        permute(tab,i,indice)
+%    return tab
+%\end{python}
+%\end{minipage}
+%\end{py}
+
+\subparagraph{}
+\textit{Soit le tableau $\text{tab}=[2,3,1,4]$. Pour chaque valeur de $i$ et pour chaque valeur de $j$, indiquer le contenu du tableau tab. Pour répondre à la question on utilisera le tableau donné en fin de sujet. On le remplira à partir de la double barre. Les colonnes $i$, $j$, indice et tab seront à remplir intégralement. Les * sont à remplacer par les valeurs correspondantes.}
+
+%\begin{itemize}
+%\item Pour $i$ variant de 0 à 3 :
+%\begin{itemize}
+%\item Pour $i=0$:
+%\begin{itemize}
+%\item indice = 0
+%\item Pour $j$ variant de 1 à 3 :
+%\begin{itemize}
+%\item Pour j = 1 :
+%\begin{itemize}
+%\item La condition $tab[1]<tab[0] \Rightarrow 3<2$ est fausse. 
+%\end{itemize}
+%\item Pour j = 2 :
+%\begin{itemize}
+%\item La condition $tab[2]<tab[0] \Rightarrow 1<2$ est vraie. 
+%\begin{itemize}
+%\item On a donc 
+%\end{itemize}
+%\end{itemize}
+%\end{itemize}
+%%\end{itemize}
+%\end{itemize}
+%\end{itemize}
+
+
+
+\subparagraph{}
+\textit{Écrire la fonction qui vérifie si un tableau est trié. Cette fonction devra correspondre aux spécifications suivantes : 
+\begin{itemize}
+\item nom de la fonction : \textsf{is\_sorted};
+\item argument de la fonction : un tableau;
+\item retour de la fonction : la fonction doit retourner la valeur booléenne \textsf{True} si le tableau est trié. Elle devra retourner la valeur booléenne\textsf{False} si le tableau n'est pas trié.
+\end{itemize}
+On utilisera une boucle \textbf{\textsf{Pour}.}}
+%\ifthenelse{\boolean{prof}}{%
+\begin{corrige}
+\begin{py}
+\begin{python2}
+def is_sorted(tab):
+    for i in range(0,len(tab)-1):
+        if tab[i]>tab[i+1] :
+            return False
+    return True
+\end{python2}
+\end{py}
+\end{corrige}
+%}{}
+
+
+\subparagraph{}
+\textit{Réécrire la fonction précédente en utilisant exclusivement une boucle \textbf{\textsf{Tant que}}.}
+
+%\ifthenelse{\boolean{prof}}{%
+\begin{corrige}
+\begin{py}
+\begin{python2}
+def is_sorted_while(tab):
+    i=1
+    while tab[i-1]<=tab[i] and i<len(tab)-1:
+        i=i+1
+    return tab[i-1]<=tab[i]
+\end{python2}
+\end{py}
+\end{corrige}%}{}
+
+\subparagraph{}
+\textit{Des deux structures proposées, estimez laquelle peut être le plus efficace ? (c'est-à-dire, laquelle nécessite, le cas échéant, le moins d'opérations).}
+%\ifthenelse{\boolean{prof}}{%
+\begin{corrige}
+Pour les deux boucles proposées, la même portion de tableau sera parcourue afin de savoir sil e tableau est trié. 
+\end{corrige}
+
+%}{}
+%\vspace{.25cm}
+
+%Dans le but de diminuer le temps d'exécution lors de la recherche d'éléments dans le tableau, on propose un algorithme permettant de vérifier qu'une valeur se trouve dans un tableau. 
+%
+%La méthode consiste en découper le tableau en 2. On regarde ensuite dans quelle partie du tableau est susceptible de se trouver la valeur recherchée. On redivise en 2 la partie de tableau considérée et on regarde dans quelle partie du tableau est susceptible de se trouver la valeur recherchée \textit{etc}. La fonction doit renvoyer à l'utilisateur l'index de l'élément recherché s'il existe et qui renvoie \textsf{None} sinon. 
+%On donne le programme suivant : 
+
+
+%\begin{py}
+%\begin{minipage}[c]{.05\linewidth}
+%$\quad$
+%\end{minipage} \hfill
+%\begin{minipage}[c]{.75\linewidth}
+%\begin{python}
+%def recherche_dichotomique(x, a):
+%    g, d = 0, len(a)-1
+%    while g <= d:
+%        m = (g + d) // 2
+%        if a[m] == x:
+%        if a[m] < x:
+%            g = m+1
+%        else:
+%            d = m-1
+%\end{python}
+%\end{minipage}
+%\end{py}
+
+%\ifthenelse{\boolean{prof}}{%
+\begin{corrige}
+\begin{py}
+\begin{python2}
+def recherche_dichotomique(x, a):
+    g, d = 0, len(a)-1
+    while g <= d:
+        m = (g + d) // 2
+        if a[m] == x:
+            return m
+        if a[m] < x:
+            g = m+1
+        else:
+            d = m-1
+    return None
+\end{python2}
+\end{py}
+\end{corrige}
+%}{}
+
+
+
+\subparagraph{}
+\textit{De quel type sont les variables $x$ et $a$ ?}
+%\ifthenelse{\boolean{prof}}{%
+\begin{corrige}
+La variable $x$ représente le tableau à trier. La variable $a$ représente la valeur à tester.
+\end{corrige}
+%}{}
+
+\subparagraph{}
+\textit{Quelle opération est effectuée ligne 4 ? Expliquer ce choix.}
+%\ifthenelse{\boolean{prof}}{%
+\begin{corrige}
+En ligne 4 on effectue une division euclidienne. Ainsi on ne récupère que la partie entière d'un nombre. Cela est nécessaire car ce nombre représente par la suite un index du tableau. Ce doit donc être nécessairement un nombre entier. 
+\end{corrige}
+%}{}
+
+\subparagraph{}
+\textit{Pour chaque itération de la boucle \textsl{while}, quelle est l'étendue de la zone de recherche ?}
+%\ifthenelse{\boolean{prof}}{%
+\begin{corrige}
+A chaque incrémentation de la boucle while la zone de recherche est divisée par 2. 
+\end{corrige}
+%}{}
+
+\subparagraph{}
+\textit{Compléter l'algorithme (en recopiant les lignes qui vous semblent nécessaires) pour qu'il renvoie l'index de l'élément recherché.}
+
+\subparagraph{}
+\textit{L'algorithme a-t-il le comportement souhaité ? Si ce n'est pas le cas, compléter l'algorithme.}
+
+\subparagraph{}
+\textit{A partir des fonctions définies précédemment, écrire une fonction permettant, à partir d'un tableau d'entier quelconque (trié ou non trié), de dire si un élément appartient au tableau ou non :
+\begin{itemize}
+\item données d'entrées de la fonction : un tableau, un nombre;
+\item données de sortie de la fonction : un booléen.
+\end{itemize}}
+%\ifthenelse{\boolean{prof}}{%
+\begin{corrige}
+\begin{py}
+\begin{python2}
+def recherche_dichotomique(tab, nb):
+    if is_sorted(tab):
+        return(recherche_dichotomique(tab, nb))
+    else :
+        tri(tab)
+        return(recherche_dichotomique(tab, nb))
+\end{python2}
+\end{py}
+\end{corrige}
+%}{}
+\subparagraph{}
+\textit{Quel est l'intérêt de trier un tableau dans le cas où on cherche une valeur dans le tableau ? Quel est l'intérêt de le trier lorsqu'on cherche plusieurs valeurs ? Commenter.}
+
+%\ifthenelse{\boolean{prof}}{%
+\begin{corrige}
+Pour être trié, le tableau est parcouru $(n-1)+ (n-2)+\cdot\cdot\cdot +2+ 1$ fois. Une fois trié, dans le pire des cas, une recherche dichotomique demande ** redivision du tableau. 
+
+Ainsi pour rechercher une seule fois une valeur dans un tableau, il est moins coûteux de ne pas trier le tableau.
+\end{corrige}
+%}{}
+\newpage
+
+NOM :
+\vspace{.25cm}
+
+\begin{center}
+\begin{tabular}{|p{.25\textwidth}p{.25\textwidth}l|c|c|c|c|}
+\hline
+Commentaires & & &$i$ & $j$ & indice & tab\\
+\hline
+\hline
+Instant initial &&& -- & -- &  -- & [2,3,1,4] \\  
+\hline
+Pour $i$ allant de 0 à 3 :&& & -- & -- & -- & [2,3,1,4]\\
+\hline
+Pour $i=0$ & && 0 & -- & --&  [2,3,1,4]\\ \hline
+Affectation & && 0 & -- &0 &  [2,3,1,4]\\ \hline
+Pour $j$ allant de 1 à 3 & & & 0 & -- & 0 & [2,3,1,4] \\ \hline
+& Pour $j = 1$ & &0 &1 & 0&  [2,3,1,4]\\ \hline
+& tab[1]<tab[0] & $ \Rightarrow$  3<2 est faux &0 &1 & 0&  [2,3,1,4]\\ \hline
+& Pas d'affectation de l'indice  &&0 &1 & 0 &  [2,3,1,4]\\ \hline
+& Pour $j = 2$ & & 0 & 2 & 0 & [2,3,1,4]\\ \hline
+& tab[2]<tab[0] &$ \Rightarrow$  1<2 est vrai &0 &2 & 0&  [2,3,1,4]\\ \hline
+& Affectation de indice  &&0 &2 & 2&  [2,3,1,4]\\ \hline\hline %%%%%
+& Pour $j=  3$ &  & 0 & 3 & 2 & [2,3,1,4] \\ \hline
+& tab[3]<tab[0] & $ \Rightarrow$  4<2 est faux & 0 & 3 & 2 & [2,3,1,4]\\ \hline
+& Affectation ?  & Non & 0 & 3 & 2 & [2,3,1,4] \\ \hline%%%%%
+Permutation  & (Oui) & & 0 & 3 & 2 & [1,3,2,4] \\ \hline
+Pour $i=1$ & & & 1 & 3 & 2 & [1,3,2,4] \\ \hline
+Affectation & & & 1 & 3  & 1  & [1,3,2,4] \\ \hline
+Pour $j$ allant de 2 à 3 & & & &  & & \\ \hline
+& Pour $j=  2$ & & 1& 2&1 & [1,3,2,4]\\ \hline
+& tab[2]<tab[1] &$ \Rightarrow$  2<3 est vrai &1&2& 1& [1,3,2,4]\\ \hline
+& Affectation ?  & Oui & 1&2 & 2& [1,3,2,4]\\ \hline
+& Pour $j=  3$ & & 1& 3& 2& [1,3,2,4]\\ \hline
+& tab[3]<tab[2] & $ \Rightarrow$  4<2 est Fau &1&3& 2& [1,3,2,4]\\ \hline
+& Affectation ?  & Non& & & & [1,3,2,4]\\ \hline
+& Pour $j=  *$ & & *&* &* &* \\ \hline
+& tab[*]<tab[*] & &*&*& *& *\\ \hline
+& Affectation ?  && *& *& *& *\\ \hline
+Permutation ? & && & & &[1,2,3,4] \\ \hline
+\end{tabular}
+\end{center}
+
+\end{document}

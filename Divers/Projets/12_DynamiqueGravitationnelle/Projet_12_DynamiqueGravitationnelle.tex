@@ -1,0 +1,111 @@
+\documentclass[10pt]{article}
+\input{style/coursHeadings}
+\input{style/programHeadings}
+\input{style/macros_SII}
+\input{style/macros_Titres}
+\input{style/macros_Frames}
+
+\newif\ifprof
+%\proftrue
+\proffalse
+
+\newif\ifxp
+\xptrue
+%\xpfalse
+
+\newif\iftd
+\tdtrue
+%\tdfalse
+
+\usepackage[%
+    pdftitle={Projet - Modélisation matériau visco élastique},
+    pdfauthor={Xavier Pessoles},
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=magenta]{hyperref}
+
+\def\discipline{Informatique}
+\def\xxtitre{%
+\ifxp
+Projet d'informatique
+\else
+\fi
+}
+
+\def\xxsoustitre{%
+\ifxp
+Modélisation du comportement visco-élastique d'un matériau
+\else
+\fi}
+
+\def\xxauteur{%
+\ifxp
+Xavier \textsc{Pessoles}
+\else
+\fi}
+
+\def\xxpied{%
+\ifxp
+Projet d'informatique\\
+Modélisation du comportement visco-élastique d'un matériau
+\else
+\fi}
+
+
+
+
+
+%---------------------------------------------------------------------------
+
+
+\begin{document}
+\ifxp
+\input{style/enteteXP}
+\else
+\input{style/enteteDI}
+\fi
+
+
+
+ \renewcommand{\baselinestretch}{1.2}
+\setlength{\parskip}{2ex plus 0.5ex minus 0.2ex}
+
+
+
+\section{Mise en situation}
+\begin{minipage}[c]{.77\linewidth}
+
+
+\begin{obj}
+
+\end{obj}
+\end{minipage} \hfill
+\begin{minipage}[c]{.2\linewidth}
+
+\end{minipage}
+
+\section{Travail demandé}
+Pour mener à bien ce projet il est demandé de réaliser un certain nombre d'activités (non exhaustives).
+\begin{enumerate}
+\item Réaliser une recherche sur les domaines d'application du modèle masse amortisseur et trouver des triplets \textit{(masse, raideur du ressort, coefficient d'amortissement)}
+\item Modéliser le problème et déterminer la (ou les) équation(s) différentielle(s) liant le déplacement de la masse et de la sollicitation mécanique du système.
+\item Résoudre le problème en utilisant plusieurs méthode : 
+\begin{itemize}
+\item résolution numérique de l'équation différentielle (en Python);
+\item résolution analytique de l'équation différentielle;
+\item résolution de l'équation en utilisant le formalisme de Laplace (et éventuellement le module Xcos de Scilab ou Matlab-Simulink);
+\item résolution de l'équation en utilisant la modélisation multiphysique (Scilab-Xcos-SIMM ou Matlab-Simulink).
+\end{itemize}
+\item Comparer les résultats des simulations et commenter les paramètres des solver.
+\end{enumerate}
+
+\section{Évaluation}
+L'évaluation se fera sous forme d'une présentation de 10 à 15 minutes (6 diapositives au maximum). Les élèves devront présenter au minimum : 
+\begin{itemize}
+\item la modélisation retenue;
+\item la structure du programme en Python;
+\item une démonstration de l'exécution du code Python.
+\end{itemize}
+\end{document}
+
+

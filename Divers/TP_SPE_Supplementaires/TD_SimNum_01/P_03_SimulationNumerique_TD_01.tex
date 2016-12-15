@@ -1,0 +1,211 @@
+\documentclass[10pt,fleqn]{article} % Default font size and left-justified equations
+\usepackage[%
+    pdftitle={Informatique : Simulation numérique},
+    pdfauthor={Xavier Pessoles}]{hyperref}
+    
+\input{style/new_style}
+\input{style/macros_SII}
+
+\usepackage{multicol}
+\fichetrue
+%\fichefalse
+
+\proftrue
+%\proffalse
+
+\tdtrue
+%\tdfalse
+
+%\courstrue
+\coursfalse
+
+% -------------------------------------
+% Déclaration des titres
+% -------------------------------------
+
+\def\discipline{Informatique}
+\def\xxtete{Informatique}
+\def\classe{PT -- PT$\star$}
+\def\xxnumpartie{Synthèse}
+\def\xxpartie{}
+
+\def\xxnumchapitre{}
+\def\xxchapitre{\hspace{.12cm}}
+
+\def\xxtitreexo{Traitement des données d'un accéléromètre}
+\def\xxsourceexo{\hspace{.2cm} Julien Dupuy -- UPSTI }
+
+\def\xxposongletx{2}
+\def\xxposonglettext{1.45}
+\def\xxposonglety{13}%10
+
+\def\xxonglet{Synthèse}
+
+\def\xxactivite{TD}
+\def\xxauteur{\textsl{Julien Dupuy} \\ \textsl{Équipe pédagogique de la Martinière}}
+
+\def\xxcompetences{%
+\textsl{%
+\textbf{Savoirs et compétences :}
+\begin{itemize}[label=\ding{112},font=\color{ocre}] 
+\item Alg -- C16 : Piles - Algorithmes de manipulation : fonctions «push» et «pop».
+\end{itemize}
+}}
+
+\def\xxfigures{\includegraphics[width=4cm]{images/fig_01}}%figues de la page de garde
+
+\def\xxpied{%
+Synthèse\\
+%Ch 2 : Piles et files-- \xxactivite%
+}
+
+
+
+\setcounter{secnumdepth}{5}
+%---------------------------------------------------------------------------
+
+
+\begin{document}
+%\chapterimage{png/Fond_Cin}
+\input{style/new_pagegarde}
+\vspace{8cm}
+\pagestyle{fancy}
+\thispagestyle{plain}
+
+
+\def\columnseprulecolor{\color{ocre}}
+\setlength{\columnseprule}{0.4pt} 
+\begin{multicols}{2}
+
+\subsection*{Mise en situation}
+
+\begin{obj}
+Déterminer le mouvement (trajectoire et déplacement) d’un tramway à partir de mesures réalisées par un accéléromètre.
+\end{obj}
+\begin{minipage}[c]{.7\linewidth}
+Les mesures ont été réalisées à l’aide d’un téléphone portable tenu par un passager de la façon suivante :
+\begin{itemize}
+\item le vecteur +Y orienté dans le sens du mouvement;
+\item le vecteur +Z s'oppose à la pesanteur;
+\item le vecteur +X est par conséquent orienté <<latéral droit>>.
+\end{itemize}
+\end{minipage}\hfill
+\begin{minipage}[c]{.28\linewidth}
+\begin{center}
+\includegraphics[width=\linewidth]{images/fig_02}
+\end{center}
+\end{minipage}
+\subsection*{Tracé des accélérations}
+Le capteur du téléphone portable fournit un fichier texte de points de mesure organisé de la manière suivante :
+
+\begin{center}
+\includegraphics[width=.8\linewidth]{images/fig_03}
+\end{center}
+
+La première ligne indique le nom de mesure des colonnes.
+\begin{itemize}
+\item la première colonne est le temps en millisecondes;
+\item la deuxième colonne est le temps en secondes;
+\item la troisième colonne est l’accélération latérale (selon $\vect{x}$) en centièmes de 
+$g$ (accélération de pesanteur, on prendra $g=-9.81\;\text{m}\cdot \text{s}^{-2}$);
+\item la quatrième colonne est l’accélération latérale (selon $\vect{x}$) en $g$;
+\item la cinquième colonne est l’accélération longitudinale (selon $\vect{y}$) en centièmes de $g$;
+\item la sixième colonne est l’accélération longitudinale (selon $\vect{y}$) en $g$;
+\item la septième colonne est l’accélération selon $\vect{z}$ en $g$.
+\end{itemize}
+
+L’objectif de cette partie est de tracer les accélérations longitudinale et latérale mesurées pour en déduire la trajectoire du tramway.
+
+\subparagraph{}
+\textit{Ouvrir le fichier tramway.txt et créer les listes temps, acceleration et accel\_lat.}
+
+\subparagraph{}
+\textit{Compléter le programme qui convertit les éléments des listes temps, acceleration et \text{accel\_lat} en flottant et en $\text{m}\cdot \text{s}^{-2}$.}
+
+\subparagraph{}
+\textit{Écrire une fonction \texttt{affiche} ayant pour argument deux listes, liste1 (liste des abscisses) et liste2 (liste des ordonnées) et qui permet d’afficher la courbe.}
+
+\subparagraph{}
+\textit{Tracer et sauvegarder les courbes de l’accélération longitudinale et de l’accélération transversale.}
+
+\subparagraph{}
+\textit{En déduire la trajectoire simple effectuée par le tramway.}
+
+\subsection*{Filtrage des mesures}
+Le signal de l’accélération étant bruité, on souhaite le filtrer à l’aide d’une moyenne glissante. C’est une moyenne qui au lieu d’être calculée sur l’ensemble des $n$ valeurs d’un échantillonnage, est calculée tour à tour sur chaque sous-ensemble de $N$ valeurs consécutives ($N \leq n$) ; le sous-ensemble utilisé pour calculer chaque moyenne <<glisse>> sur l’ensemble des données. On appelle $N$, l’ordre de la moyenne glissante.
+
+Par exemple, le tableau suivant montre les moyennes mobiles simples sur 3 valeurs, pour une série de 9 mesures.
+\begin{center}
+\footnotesize{
+\begin{tabular}{|c|c|c|c|}
+\hline
+Mesures & 2 & 3 & 5  \\
+\hline
+Moyennes  & Néant & Néant & $(2+3+5)/3$   \\
+glissantes & & & 3,3333 \\
+\hline
+\hline
+Mesures & 8 & 8 & 7 \\
+\hline
+Moyennes  & $(3+5+8)/3$ & $(5+8+8)/3$ & $(8+8+7)/3$  \\
+glissantes & 5,3333  &  7 &  7,6666\\
+\hline
+\hline
+Mesures & 8 & 5 & 2   \\
+\hline
+Moyennes    &  $(8+7+8)/3$ & $(7+8+5)/3$ & $(8+5+2)/3$ \\
+glissantes & 7,6666 & 7,6666 & 5 \\
+\hline
+\end{tabular}}
+\end{center}
+
+Une formule permettant de calculer une moyenne mobile est :
+$x_n=\dfrac{1}{N} \sum \limits_{k=0}^{N-1}x_{n-k} $.
+
+\subparagraph{}
+\textit{Écrire la fonction filtre\_mg ayant pour arguments une liste $L$ et l'entier $N$ (ordre de la moyenne glissante) et qui renvoie la liste $L$ filtrée. Il ne doit pas y avoir d'effet de bord.}
+
+\subsection*{Détermination de la distance parcourue}
+
+\subparagraph{}
+\textit{Écrire la fonction \texttt{trapeze} ayant pour arguments une liste et un pas de temps et qui renvoie la liste des valeurs calculées par la méthode des trapèzes.}
+
+\subparagraph{}
+\textit{Tracer la courbe de la vitesse longitudinale du tramway par rapport au temps et la courbe de la position du tramway par rapport au temps. Quelle est la distance parcourue par le tramway ?}
+
+\subsection*{Détermination de l'accélération maximale}
+
+L'objectif de cette partie est de déterminer l'accélération longitudinale maximale en réalisant deux fonctions récursives qui donnent l’élément maximal suivant les méthodes suivantes :
+\begin{itemize}
+\item la fonction \texttt{maxi1} comparera son premier élément au maximum du reste de la liste;
+\item la fonction \texttt{maxi2} comparera le maximum de la première <<moitié>> de la liste au maximum de la deuxième <<moitié>>.
+\end{itemize}
+\begin{rappel}
+Rappel : $L[n:p]$ (slicing) désigne la liste des éléments $[L[n],L[n+1],...,L[p-1]]$.
+\end{rappel}
+\subparagraph{}
+\textit{En respectant la méthode imposée dans l'objectif, écrire la fonction récursive \texttt{maxi1} ayant pour argument une liste $L$ et renvoyant le plus grand des éléments de la liste. Il ne doit pas y avoir d'effet de bord.}
+
+On note que : 
+\begin{itemize}
+\item une comparaison ou une affectation comptera comme une opération;
+\item un appel à la fonction return comptera comme une opération;
+\item une affectation comptera comme une opération.
+\end{itemize}
+On note n la longueur de la liste $L$. Déterminer la relation de récurrence entre la complexité au rang $n$, noté $C(n)$, et la complexité au rang $n-1$, $C(n-1)$. En déduire lordre de la complexité de la fonction \texttt{maxi1(L)} (linéaire, exponentielle, logarithmique...).
+
+\subparagraph{}
+\textit{En respectant la méthode imposée dans l’objectif, écrire la fonction récursive \texttt{maxi2} ayant pour argument une liste $L$ et renvoyant le plus grand des éléments de la liste. Il ne doit pas y avoir d’effet de bord.}
+
+On note n la longueur de la liste L, on supposera que $n = 2^k$.
+
+\subparagraph{}
+\textit{Déterminer la relation de récurrence entre la complexité $C(2^k )$ et $C(^{2k-1})$. En déduire l’ordre de la complexité de la fonction \texttt{maxi2(L)} par rapport à $n$. Comparer à la complexité de \texttt{maxi1(L)}.}
+
+
+
+
+\end{multicols}
+\end{document}
+
+

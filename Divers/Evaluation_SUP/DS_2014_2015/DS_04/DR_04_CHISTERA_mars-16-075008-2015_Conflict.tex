@@ -1,0 +1,780 @@
+\documentclass[10pt]{article}
+\input{style/coursHeadings}
+\input{style/programHeadings}
+\input{style/macros_SII}
+\input{style/macros_Titres}
+\input{style/macros_Frames}
+
+%Si le boolen xp est vrai : compilation pour xabi
+%Sinon compilation Damien
+\newif\ifprof
+%\proftrue
+\proffalse
+
+\newif\ifxp
+\xptrue
+%\xpfalse
+
+\newif\iftd
+\tdtrue
+%\tdfalse
+
+\usepackage[%
+    pdftitle={DS Informatique - Concours Blanc},
+    pdfauthor={Xavier Pessoles},
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=magenta]{hyperref}
+
+\def\discipline{Informatique}
+\def\xxtitre{%
+\ifxp
+Concours Blanc : Informatique
+\else
+\fi
+}
+
+\def\xxsoustitre{%
+Autour de données météorologiques 
+
+\ifprof
+Corrigé
+\else
+Document réponse
+\fi}
+
+\def\xxauteur{%
+\ifxp
+Xavier \textsc{Pessoles} \\
+Extrait de sujet 0 -- Luminy
+\else
+\fi}
+
+\def\xxpied{%
+\ifxp
+Concours Blanc -- Informatique \\
+Autour de données météorologiques -- \ifprof P \else E \fi
+\else
+\fi}
+
+
+
+
+%---------------------------------------------------------------------------
+
+
+\begin{document}
+\ifxp
+\input{style/enteteXP}
+\else
+\input{style/enteteDI}
+\fi
+
+\ifprof
+\else
+\begin{center}
+\Large Nom  : ...........................................
+\end{center}
+\fi
+
+ \renewcommand{\baselinestretch}{1.2}
+\setlength{\parskip}{2ex plus 0.5ex minus 0.2ex}
+
+
+\section{Variations autour du minimum}
+
+\subparagraph{}
+\textit{}%On appelle \textsf{m = mini([6,2,15,2,15])}. Donner la valeur de \textsf{len(t)} puis l'ensemble des valeurs qui seront prises par \textsf{i}. Expliquer le déroulement pas à pas (évolution de la valeur des variables) lors du déroulement de la boucle \textsf{for}. Donner enfin la valeur retournée.}
+\ifprof
+\begin{corrige}
+\begin{itemize}
+\item \textsf{len(t)} : 5
+\item Valeurs prises par \textsf{i} :0, 1, 2, 3, 4
+\end{itemize}
+\begin{center}
+\begin{tabular} {|c||c|c||c|c|}
+\hline
+Itération \textsf{i} & \textsf{t[i]} & \textsf{p} & \textsf{t<[i]=p} ? & p \\
+\hline
+0 & 6 & 6 & OUI & 6\\
+1 & 2 & 6 & OUI & 2\\
+2 & 15 & 2  & NON & 2\\
+3 &  2 & 2 & OUI & 2\\
+4 &  15 & 2 & NON & 2\\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{itemize}
+\item Valeur retournée : 2
+\end{itemize}
+\end{corrige}
+\else
+
+\begin{center}
+\begin{tabular}{|p{.95\linewidth}|}
+\hline
+\begin{itemize}
+\item Valeur de \textsf{len(t)} : \dotfill
+\vspace{1cm}
+\item Valeurs prises par \textsf{i} : \dotfill
+\end{itemize} 
+\begin{center}
+\begin{tabular}{|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
+\hline 
+& & & & \\
+Itération \textsf{i} & \textsf{t[i]} & \textsf{p} & \textsf{t[i]<=p} ? & p \\
+& & & & \\
+\hline
+& & & & \\
+& & & & \\
+\hline
+& & & & \\
+& & & & \\
+\hline
+& & & & \\
+& & & & \\
+\hline
+& & & & \\
+& & & & \\
+\hline
+& & & & \\
+& & & & \\
+\hline
+& & & & \\
+& & & & \\
+\hline
+& & & & \\
+& & & & \\
+\hline
+\end{tabular}
+\end{center}
+\begin{itemize}
+\item Valeur retournée : \dotfill
+\end{itemize} 
+\\
+\hline
+\end{tabular}
+\end{center}
+
+\newpage
+\fi
+
+
+
+\subparagraph{}
+\textit{}%Prouver que lorsque \textsf{t} est une liste non vide d’entiers ou de flottants, \textsf{mini(t)} renvoie la valeur minimale des éléments de \textsf{t} . On pourra exhiber un invariant de boucle précis.}
+
+
+\ifprof
+\begin{corrige}
+Invariant de boucle proposé : à chaque itération de boucle \textsf{i}, \textsf{p} contient le minimum de la liste \textsf{t[0:i]}, \textsf{i} inclus.
+
+\begin{enumerate}
+\item L'algorithme faisant appel à une boucle for dans laquelle la taille de \textsf{t} ne varie jamais et dans laquelle \textsf{i} est incrémentée à chaque itération, la boucle se terminera après \textsf{len(t)} itérations.
+\item Avant d'entrer dans la boucle, \textsf{p=t[0]}.
+\item À la première itération, en entrant dans la boucle, \textsf{p=t[0]}. \textsf{p} est bien la valeur minimale de la portion de tableau de 1 élément.
+\item À la ième itération, on considère que \textsf{p} est le minimum de la liste \textsf{t[0:i]}. À l'itération \textsf{i+1}, si \textsf{p} est inférieur à \textsf{t[i+1]} alors la \textsf{p} prend la valeur de \textsf{t[i+1]}. \textsf{p} est donc la valeur minimale de la liste \textsf{t[i+1]}.
+\item À l'itération \textsf{len(t)}, \textsf{p} est donc la valeur minimale de \textsf{t}.
+
+\end{enumerate}
+\end{corrige}
+\else
+\begin{center}
+\begin{tabular}{|p{.95\linewidth}|}
+\hline
+\vspace{1cm}
+\dotfill
+
+\vspace{1cm}
+\dotfill
+
+\vspace{1cm}
+\dotfill
+
+\vspace{1cm}
+\dotfill
+
+\vspace{1cm}
+\dotfill
+
+\vspace{1cm}
+\dotfill
+
+\vspace{1cm}
+\dotfill
+
+\vspace{1cm}
+\dotfill
+
+\vspace{1cm}
+\dotfill
+
+\vspace{1cm}
+\dotfill
+
+\vspace{1cm}
+\dotfill
+
+\vspace{1cm}
+\dotfill
+
+\vspace{.5cm} \\
+\hline
+\end{tabular}
+\end{center}
+
+\newpage 
+
+\fi
+
+\subparagraph{}
+\textit{}%Évaluer la complexité temporelle de l’appel \textsf{mini(t)} en fonction du nombre \textsf{n} d’éléments de \textsf{t}.}
+\ifprof
+\begin{corrige}
+Au cours de l'algorithme, on parcourt une seule fois chacune des valeurs de la liste. La complexité de l'opération de recherche du minimum est donc linéaire $\mathcal{O}(n)$.
+\end{corrige}
+\else
+
+\begin{center}
+\begin{tabular}{|p{.95\linewidth}|}
+\hline
+\vspace{1cm}
+\dotfill
+
+\vspace{1cm}
+\dotfill
+
+\vspace{1cm}
+\dotfill
+
+\vspace{1cm}
+\dotfill
+
+\vspace{.5cm}
+ \\
+\hline
+\end{tabular}
+\end{center}
+
+\fi
+
+
+\subparagraph{}
+\textit{}%Proposer une modification de la fonction \textsf{mini} pour que la valeur renvoyée soit le maximum et non le minimum. On pourra utiliser la numérotation des lignes pour préciser le lieu d’éventuelles modifications et ainsi éviter de réécrire toute la fonction.}
+\ifprof
+\begin{corrige}
+La ligne 7 peut être remplacée par \textsf{if t[i] >= p:}.
+\end{corrige}
+\else
+\begin{center}
+\begin{tabular}{|p{.95\linewidth}|}
+\hline
+\vspace{1cm}
+\dotfill
+
+\vspace{1cm}
+\dotfill
+
+\vspace{.5cm}
+ \\
+\hline
+\end{tabular}
+\end{center}
+\fi
+
+
+
+
+\subparagraph{}
+\textit{}%Expliquer le principe d’une fonction réalisant cette opération et en particulier le rôle des variables manipulées. Écrire alors une fonction \textsf{position\_mini} réalisant effectivement cette opération}
+\ifprof
+\begin{corrige}
+
+Il ne faut plus stocker la valeur minimale mais l'indice de la valeur minimale dans la liste.
+
+\begin{py}
+\begin{python}
+def position_mini(t):
+    """Calcule l'indice du minimum d'un tableau d'entiers 
+    ou de flottants."""
+    if len(t) == 0:
+        return None
+    p = 0
+    for i in range(len(t)):
+    # Ou for i in range(1,len(t)):
+        if t[i] <= t[p]:
+            p = i
+    return p
+\end{python}
+\end{py}
+
+\end{corrige}
+\else
+\begin{center}
+\begin{tabular}{|p{.95\linewidth}|}
+\hline
+\vspace{1cm}
+\dotfill
+
+\vspace{.5cm}
+\dotfill
+
+
+
+\vspace{7cm}
+ \\
+\hline
+\end{tabular}
+\end{center}
+\fi
+
+
+
+\subparagraph{}
+\textit{}%Préciser l’indice renvoyé si le minimum est présent plusieurs fois dans la liste. Proposer une modification permettant de changer ce comportement.}
+\ifprof
+\begin{corrige}
+Dans la question précédente, l'indice renvoyé est l'indice de la dernière valeur rencontrée.
+
+Si on souhaite retourner le premier indice, il faut utiliser une inégalité stricte : \textsf{if t[i] <= p:}.
+\end{corrige}
+\else
+
+\begin{center}
+\begin{tabular}{|p{.95\linewidth}|}
+\hline
+\vspace{1cm}
+\dotfill
+
+\vspace{1cm}
+\dotfill
+
+\vspace{1cm}
+\dotfill
+
+\vspace{1cm}
+\dotfill
+
+\vspace{.5cm}
+ \\
+\hline
+\end{tabular}
+\end{center}
+\fi
+
+
+\subparagraph{}
+\textit{}%Expliquer le principe d’une fonction réalisant ce travail.}
+\ifprof
+\begin{corrige}
+Pour rechercher un minimum dans une liste de liste, il faut rechercher le minimum dans chacune des sous-listes. Pour cela, on peut, par exemple, avoir recours à deux boucles imbriquées.
+\end{corrige}
+\else
+\begin{center}
+\begin{tabular}{|p{.95\linewidth}|}
+\hline
+\vspace{1cm}
+\dotfill
+
+\vspace{1cm}
+\dotfill
+
+\vspace{1cm}
+\dotfill
+
+\vspace{1cm}
+\dotfill
+
+\vspace{.5cm}
+ \\
+\hline
+\end{tabular}
+\end{center}
+\fi
+
+
+\subparagraph{}
+\textit{}%Programmer effectivement cette fonction (on supposera les listes internes de taille non nulle) en utilisant la fonction \textsf{mini}.}
+\ifprof
+\begin{corrige}
+\begin{py}
+\begin{python}
+def mini2D(t):
+    if len(t)==0:
+        return None
+    p = t[0][0]
+    for i in range(len(t)):
+        m = mini(t[i])
+        if m<p:
+            p=m
+    return p
+\end{python}
+\end{py}
+\end{corrige}
+\else
+\begin{center}
+\begin{tabular}{|p{.95\linewidth}|}
+\hline
+\vspace{6cm}
+ \\
+\hline
+\end{tabular}
+\end{center}
+\fi
+
+
+
+\subparagraph{}
+\textit{}%Évaluer la complexité temporelle de cette fonction.}
+\ifprof
+\begin{corrige}
+Pour une liste de taille \textsf{nxn} il faut rechercher la valeur minimale en utilisant la fonction \textsf{mini} dans \textsf{n} listes. La complexité est donc  quadratique et donc $C(n)=\mathcal{O}(n^2)$.
+
+\end{corrige}
+\else
+\begin{center}
+\begin{tabular}{|p{.95\linewidth}|}
+\hline
+\vspace{1cm}
+\dotfill
+
+\vspace{1cm}
+\dotfill
+
+\vspace{1cm}
+ \\
+\hline
+\end{tabular}
+\end{center}
+\fi
+
+
+
+\subparagraph{}
+\textit{}%Écrire une fonction \textsf{chaine\_mini} réalisant effectivement cette opération.}
+\ifprof
+\begin{corrige}
+\begin{py}
+\begin{python}
+def chaine_mini(t):
+    if len(t)==0:
+        return None
+    p = 0
+    for i in range(len(t)):
+        if t[i][1]<t[p][1]:
+            p=i
+    return t[p][0]
+\end{python}
+\end{py}
+\end{corrige}
+\else
+\begin{center}
+\begin{tabular}{|p{.95\linewidth}|}
+\hline
+\vspace{5cm}
+
+ \\
+\hline
+\end{tabular}
+\end{center}
+\fi
+
+
+\subparagraph{}
+\textit{}%Écrire enfin une fonction \textsf{majores\_par} prenant en entrée une liste \textsf{t} d’entiers/de flottants ainsi qu’un entier/flottant seuil et renvoyant le nombre d’éléments de \textsf{t} majorés (au sens strict) par seuil :}
+
+%\begin{py}
+%\begin{python}
+%>>> majores_par([12,-5,10,9],10)
+%            2
+%\end{python}
+%\end{py}
+\ifprof
+\begin{corrige}
+\begin{py}
+\begin{python}
+def majores_par(t,seuil):
+    cpt = 0
+    for i in range(len(t)):
+        if t[i]<seuil:
+            cpt = cpt+1
+    return cpt
+\end{python}
+\end{py}
+\end{corrige}
+\else
+\begin{center}
+\begin{tabular}{|p{.95\linewidth}|}
+\hline
+\vspace{5cm}
+
+ \\
+\hline
+\end{tabular}
+\end{center}
+
+\newpage
+
+\fi
+
+
+
+\section{Manipulation de données}
+
+
+
+\subparagraph{}
+\textit{}%Proposer un ordre de grandeur du nombre d’octets utiles du fichier \textsf{besancon.txt}.}
+\ifprof
+\begin{corrige}
+Un caractère est codé par un octet en ASCII. En comptant 3 caractères pour le numéro du jour, 4 caractères pour la température minimale et 4 caractères pour la température maximale, les 2 points virgules et le retour chariot, il faut donc 14 octets pour coder une ligne et 5110 octets pour stocker les mesures sur une année. 
+
+On peut ajouter les 17 octets d'en-tête.
+
+\end{corrige}
+\else
+\begin{center}
+\begin{tabular}{|p{.95\linewidth}|}
+\hline
+\vspace{1cm}
+\dotfill
+
+\vspace{1cm}
+\dotfill
+
+\vspace{1cm}
+\dotfill
+
+\vspace{1cm}
+\dotfill
+
+\vspace{1cm}
+\dotfill
+
+\vspace{1cm}
+\dotfill
+
+\vspace{1cm}
+
+ \\
+\hline
+\end{tabular}
+\end{center}
+
+\fi
+
+
+\subparagraph{}
+\textit{}%Décrire à quoi servent les lignes 5 et 6 du programme précédent. Donner le type des variables jours,\textsf{Tmin} et \textsf{Tmax}. Donner ensuite, si cela a un sens, le type des objets contenus dans \textsf{jours}, \textsf{Tmin} et \textsf{Tmax}.}
+\ifprof
+\begin{corrige}
+La ligne 5 permet d'ignorer les lignes (de commentaires) contenant le caractère \#.
+La ligne 6 permet de diviser une ligne en 3 chaînes de caractères. La ligne est séparée par les points virgules.
+
+\textsf{jours} est une liste d'entiers. \textsf{Tmin} et \textsf{Tmax} sont des listes de flottants. 
+
+\end{corrige}
+\else
+\begin{center}
+\begin{tabular}{|p{.95\linewidth}|}
+\hline
+\vspace{1cm}
+\dotfill
+
+\vspace{1cm}
+\dotfill
+
+\vspace{1cm}
+\dotfill
+
+\vspace{1cm}
+\dotfill
+
+\vspace{1cm}
+ \\
+\hline
+\end{tabular}
+\end{center}
+
+\newpage
+\fi
+
+\subparagraph{}
+\textit{}%Expliquer pourquoi il est préférable d’utiliser \textsf{jours.append(int(t))} (ligne 7) plutôt qu’une concaténation du type \textsf{jours = jours + [int(t)]}.}
+\ifprof
+\begin{corrige}
+La méthode \textsf{append} permet d'ajouter un élément à la liste sans changer sa référence (son adresse). 
+
+Lors de la concaténation, un nouvel objet (avec une nouvelle adresse est crée). On peut supposer que lorsque la liste grandie, une concaténation et la création d'un nouvel objet prendra davantage de temps que l'utilisation de la méthode \textsf{append}.
+\end{corrige}
+\else
+
+\begin{center}
+\begin{tabular}{|p{.95\linewidth}|}
+\hline
+\vspace{1cm}
+\dotfill
+
+\vspace{1cm}
+\dotfill
+
+\vspace{1cm}
+\dotfill
+
+\vspace{1cm}
+\dotfill
+
+\vspace{1cm}
+ \\
+\hline
+\end{tabular}
+\end{center}
+
+
+\fi
+
+
+\subparagraph{}
+\textit{}%Écrire une fonction \textsf{moyenne} qui prend en entrée deux listes \textsf{a} et \textsf{b} de mêmes tailles (condition que la fonction devra vérifier préalablement) et renvoie une liste de même taille contenant dans la case d’indice \textsf{i} la valeur moyenne des valeurs des flottants stockés dans les deux listes \textsf{a} et \textsf{b} à l’indice \textsf{i}.}
+\ifprof
+\begin{corrige}
+\begin{py}
+\begin{python}
+def moyenne(a,b):
+    if(len(a)!=len(b)):
+        return None
+    moy = []
+    for i in range(len(a)):
+        moy.append((a[i]+b[i])/2)
+    return moy
+\end{python}
+\end{py}
+
+\end{corrige}
+\else
+\begin{center}
+\begin{tabular}{|p{.95\linewidth}|}
+\hline
+\vspace{5cm}
+ \\
+\hline
+\end{tabular}
+\end{center}
+
+
+\fi
+
+
+\subparagraph{}
+\textit{}%En appliquant la fonction précédente, écrire l’instruction Python qui stocke dans la variable \textsf{Tmoy} la liste des températures moyennes journalières à partir des données stockées dans les listes \textsf{Tmin} et \textsf{Tmax}.}
+\ifprof
+\begin{corrige}
+%\begin{py}
+\begin{python}
+>>> Tmoy = moyenne(Tmin,Tmax)
+\end{python}
+%\end{py}
+\end{corrige}
+\else
+\begin{center}
+\begin{tabular}{|p{.95\linewidth}|}
+\hline
+\vspace{1cm}
+\dotfill
+
+\vspace{1cm}
+\dotfill
+
+\vspace{1cm}
+ \\
+\hline
+\end{tabular}
+\end{center}
+
+\newpage
+\fi
+
+\subparagraph{} 
+\textit{}%On considère qu’il est nécessaire de couper les arrivées d’eau extérieures pour risque de gel quand la température moyenne sur la journée est strictement inférieure à 0\textdegree C. En utilisant une des fonctions programmées dans la première partie, stocker dans la variable \textsf{nb\_jours\_gel} le nombre de jours où il a fallu couper l’eau des conduites extérieures pour la ville de Besançon.}
+\ifprof
+\begin{corrige}
+%\begin{py}
+\begin{python}
+>>> nb_jours_gel=majores_par(Tmoy,0)
+\end{python}
+%\end{py}
+\end{corrige}
+\else
+\begin{center}
+\begin{tabular}{|p{.95\linewidth}|}
+\hline
+\vspace{1cm}
+\dotfill
+
+\vspace{1cm}
+ \\
+\hline
+\end{tabular}
+\end{center}
+
+\fi
+
+
+\subparagraph{}
+\textit{}%Donner la suite d'instruction permettant de tracer sur un même graphe, la courbe des températures moyennes, minimales et maximales.}
+\ifprof
+\begin{corrige}
+%\begin{py}
+\begin{python}
+import numpy as np
+import matplotlib.pyplot as plt 
+plt.plot(t,Tmin)
+plt.plot(t,Tmax)
+plt.plot(t,Tmoy)
+plt.show()
+\end{python}
+%\end{py}
+\end{corrige}
+\else
+\begin{center}
+\begin{tabular}{|p{.95\linewidth}|}
+\hline
+\vspace{6cm} \\
+\hline
+\end{tabular}
+\end{center}
+
+\fi
+
+\end{document}
+
+\subparagraph{}
+\textit{}
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi
+
+
+\subparagraph{}
+\textit{}
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi
+
+
+\subparagraph{}
+\textit{}
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi
+
+\end{document}
+
+

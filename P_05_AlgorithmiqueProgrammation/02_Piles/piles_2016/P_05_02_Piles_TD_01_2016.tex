@@ -1,0 +1,251 @@
+\documentclass[10pt,fleqn]{article} % Default font size and left-justified equations
+\usepackage[%
+    pdftitle={Informatique : Piles et files},
+    pdfauthor={Xavier Pessoles}]{hyperref}
+    
+\input{style/new_style}
+\input{style/macros_SII}
+
+\usepackage{multicol}
+\fichetrue
+%\fichefalse
+
+\proftrue
+\proffalse
+
+\tdtrue
+%\tdfalse
+
+%\courstrue
+\coursfalse
+
+% -------------------------------------
+% Déclaration des titres
+% -------------------------------------
+
+\def\discipline{Informatique}
+\def\xxtete{Informatique}
+\def\classe{PT -- PT$\star$}
+\def\xxnumpartie{Partie 5}
+\def\xxpartie{Algorithmique \& Programmation (Suite)}
+
+\def\xxnumchapitre{Chapitre 2\hspace{.2cm}}
+\def\xxchapitre{\hspace{.2cm} Piles et files}
+
+\def\xxtitreexo{}%Exercices d'applications}
+\def\xxsourceexo{}%\hspace{.2cm} Informatique pour tous en CPGE -- \textit{Wack \& al.}}
+
+\def\xxposongletx{2}
+\def\xxposonglettext{1.45}
+\def\xxposonglety{13}%10
+
+\def\xxonglet{Part. 5 -- Ch. 2}
+
+\def\xxactivite{TD - 02}
+\def\xxauteur{\textsl{Xavier Pessoles}}
+
+\def\xxcompetences{%
+\textsl{%
+\textbf{Savoirs et compétences :}
+\begin{itemize}[label=\ding{112},font=\color{ocre}] 
+\item Alg -- C16 : Piles - Algorithmes de manipulation : fonctions de gestion des piles avec les méthodes des listes.
+\end{itemize}
+}}
+
+\def\xxfigures{}%figues de la page de garde
+
+\def\xxpied{%
+Partie 5 -- Algorithmique et Programmation\\
+Ch 2 : Piles et files-- \xxactivite%
+}
+
+
+
+\setcounter{secnumdepth}{5}
+%---------------------------------------------------------------------------
+
+
+\begin{document}
+%\chapterimage{png/Fond_Cin}
+\input{style/new_pagegarde}
+\vspace{7cm}
+\pagestyle{fancy}
+\thispagestyle{plain}
+
+
+\def\columnseprulecolor{\color{ocre}}
+\setlength{\columnseprule}{0.4pt} 
+\begin{multicols}{2}
+
+\section*{Exercice 1 - Le marchand de sable}
+\begin{minipage}[c]{.75\linewidth}
+On se propose de modéliser la constitution d'un tas de sable ainsi que l'écoulement des grains dans un sablier. Afin de simplifier le problème, on se restreindra à travailler en 2 dimensions. Le tas sera modélisé par une pile de grains de sable. 
+\end{minipage}
+\hfill
+\begin{minipage}[c]{.2\linewidth}
+\begin{center}
+\includegraphics[width=.8\linewidth]{images/sablier_p}
+\end{center}
+\end{minipage}
+
+Dans le cas du sablier, les grains tombent toujours sur la même pile. Le processus de constitution de la pile est le suivant : 
+\begin{center}
+\includegraphics[width=\linewidth]{images/sablier_02}
+\end{center}
+Un algorithme très succinct présente le déroulement de la chute d'un grain de sable.
+\begin{center}
+\includegraphics[width=.4\linewidth]{images/algo}
+\end{center}
+\section*{Création des objets}
+\subsection*{Gestion des piles de sables}
+Une pile de sable est modélisée par... une pile ! Cette dernière est implémentée sous forme d'une liste. 
+
+\subparagraph{}
+\textit{Donner l'implémentation des fonctions élémentaires permettant de créer une pile dans Python à savoir les fonctions \texttt{creer\_pile}, \texttt{empiler}, \texttt{depiler}, \texttt{est\_vide}. \textbf{Pour cette question on s'autorise l'utilisation des méthodes sur les listes.}}
+
+\subparagraph{}
+\textit{Donner l'implémentation de la fonction \texttt{taille\_pile}, permettant de connaître la taille d'une pile. \textbf{Pour cette question seules les fonctions définies ci-dessus sont acceptées.} Donner la complexité algorithmique de la fonction implémentée.}
+
+\subparagraph{}
+\textit{Redéfinir la fonction \texttt{empiler} en la nommant \texttt{empilerSable} pour que le seul élément empilable soit la chaîne de caractères "*". Ainsi, une pile de sable sera constituée d'une pile d'étoiles. }
+
+\subsection*{Gestion du tas de sable}
+Un tas de sable va être modélisé par une \textbf{liste de piles} de grains de sable. Pour cette liste, les méthodes de liste peuvent être utilisées.
+
+\subparagraph{}\textit{Implémenter la fonction \texttt{creer\_tas} d'argument \texttt{n} permettant de créer un tas de \texttt{n} piles de sables.}
+
+\subparagraph{}\textit{Donner les instructions permettant de dépiler un grain de sable sur la pile $i$ et d'empiler un grain de sable sur la pile $i-1$ du tas à n piles. Tester les instructions pour la pile $i=2$ du \texttt{tasSable=[[],["*"],["*","*","*"],["*"],["*","*"]]}.}
+\section*{Écoulement}
+On va maintenant implémenter les fonctions qui vont permettre de régir l'écoulement d'un grain de sable. On suppose que les grains tombent toujours sur la même pile. 
+
+On s'intéresse d'abord au sens d'écoulement d'un grain de sable. Pour cela, on définit une variable \texttt{sens} qui vaut 0 lorsque le grain doit s'écouler vers la gauche et qui vaut 1 lorsque le grain doit s'écouler vers la droite.
+
+On identifie les 3 cas suivants pour déterminer le sens de chute d'un grain :
+\begin{center}
+\includegraphics[width=\linewidth]{images/sablier_03}
+\end{center}
+\textbf{On compare la taille des piles avant que le grain de sable soit tombé.
+}
+\subparagraph{}
+\textit{Exprimer la condition booléenne pour laquelle un grain de sable chute à gauche.}
+
+\subparagraph{}
+\textit{Exprimer la condition booléenne pour laquelle un grain de sable chute aléatoirement à gauche ou à droite.}
+
+\subparagraph{}
+\textit{En réalisant un schéma, donner un cas de figure pour lequel il n'y a pas d'écoulement de grain. Traduire la condition booléenne correspondante.}
+
+\subparagraph{}
+\textit{Exprimer la condition booléenne permettant de savoir si un grain qui tomberait sur la pile $n$ doit s'écouler sur la gauche. On tiendra compte du cas où le grain est sur le bord du sablier. }
+
+\subparagraph{}
+\textit{Implémenter la fonction \texttt{sens} permettant de déterminer le sens de la chute du grain : droite, gauche ou si le grain tombe sur sa pile. Cette fonction prendra comme arguments tas(liste de piles) et indice(int) l'indice de la pile sur laquelle le grain sera laché.}
+
+\vspace{.25cm}
+
+On appelle \texttt{chute} la fonction permettant de régir la chute du grain. Les spécifications de la fonction sont les suivantes : 
+\begin{py}
+\begin{python}
+def chute(tas,indice):
+    """
+    Gestion d'une chute de grain de sable.
+    Entrées : 
+     * tas(liste de piles) : tas de sable
+     * indice(int) : pile sur laquelle le dernier 
+		grain de sable va tomber
+     * sens(int) : 0 chute à gauche, 1 chute à droite
+		None si le grain reste sur la pile
+    Sortie : 
+     * le tas est modifié mais n'est pas retourné.
+    """
+\end{python}
+\end{py}
+
+\subparagraph{}
+\textit{Implémenter la fonction \texttt{chute} permettant de gérer la chute d'un grain de sable. \textbf{Cette fonction devra être récursive}. Tester la fonction \texttt{chute} à partir d'un tas de sable de 7 piles sur lequel vous ferez chuter 12 grains de sable sur la pile d'indice 3.}
+
+\section*{Affichage du tas de sable}
+On donne le tas suivant : 
+\begin{py}
+\begin{python}
+>> print(tas)
+    [[],['*'],['*','*'],['*','*','*'], 
+		['*','*'],['*'],[]]
+\end{python}
+\end{py}
+On souhaite l'afficher sous la forme suivante : 
+\begin{py}
+\begin{python}
+_______
+___*___
+__***__
+_*****_
+\end{python}
+\end{py}
+
+\subparagraph{}
+\textit{Implémenter la fonction \texttt{affichage} permettant d'afficher un tas sous la forme définie ci-dessus. Tester l'affichage du tas créé à la question précédente.}
+
+\section*{Exercice 2 -- Notation polonaise inversée}
+\setcounter{exo}{0}
+La notation polonaise inversée permet de réaliser des opérations arithmétiques sans utiliser de parenthèses. On parle aussi d'expressions \textbf{postfixées}. Dans cette notation, l'opérateur (+, -, *, /) suit toujours l'opérande (nombres). Ici, l'opération suit le deuxième opérande.
+
+On doit évaluer une expression composée d'opérateurs et d'opérandes. L'expression est lue de gauche à droite en suivant les règles suivantes :
+\begin{itemize}
+\item si on lit une opérande, on l'empile;
+\item si on lit un opérateur, on dépile deux opérandes, on réalise le calcul et on empile le résultat. 
+\end{itemize}
+\begin{exemple}:
+
+Pour calculer $7\times 2$, on évalue l'expression $7\;2\; *$.
+
+Pour calculer $((1 + 2) \times 4) + 3$, on évalue l'expression $1\;2\;+\;4\;*\;3\;+$.
+
+Pour calculer $((1 - 2) \times (4 + 5))$, on évalue l'expression $1\;2\;-\;4\;5\;+\;*$.
+
+Pour calculer $((3 + (5\times (7 + 2))) + (4 + (8 \times 9))$, on évalue l'expression $3\;5\;7\;2\;+\;\times\;+\;4\;8\;9\;\times\;+\;+$.
+\end{exemple} 
+
+
+\begin{rem}
+Le principal avantage de cette méthode est la suppression totale des parenthèses. En contrepartie, elle nécessite une petite gymnastique intellectuelle pour les néophytes que nous sommes.
+
+Cette notation est utilisée dans certaines calculatrices HP et dans certains utilitaires (programme calc d'Emacs, description des bibliographies dans LaTeX \textit{etc.}).
+\end{rem}
+
+Dans cet exercice, la pile sera implémentée sous forme d'une liste d'opérande et d'opérateurs.
+
+\textbf{On utilisera les fonctions définies à l'exercice précédent.}
+ 
+\subparagraph{}\textit{Créer la fonction \texttt{est\_nombre} permettant de savoir si une variable est un nombre ou non.}
+
+\subparagraph{}\textit{Créer la fonction \texttt{est\_operation} permettant de savoir si une variable est une opération ou non.}
+
+\subparagraph{}\textit{L'expression postfixée se lisant de gauche à droite et les outils permettant de traiter la pile traitant cette dernière de droite à gauche, réaliser la fonction \texttt{inversion} permettant d'inverser les éléments de la pile.}
+
+
+\subparagraph{}\textit{Créer la fonction \texttt{evaluer} permettant d'évaluer une expression postfixée. Les spécifications sont les suivantes :}
+
+\begin{py}
+\begin{python}
+def evaluer(exp):
+    """
+    Évaluer le résultat d'une opération post-fixée.
+    Entrée : 
+     * ex(lst) : liste d'opérateurs et d'opérandes
+    Sortie : 
+     * res(flt) : résultat du calcul de l'expression.
+    """
+\end{python}
+\end{py}
+
+\subparagraph{}
+\textit{Transcrire l'expression suivante en NPI puis l'évaluer : $\left( 1+2\right)\times\left(3\times10\right)+4$.}
+
+\subparagraph{}
+\textit{Analyse d'une fonction récursive... à partir d'un arbre binaire.}
+\begin{center}
+\includegraphics[width=.5\linewidth]{images/arbre}
+\end{center}
+\end{multicols}
+\end{document}

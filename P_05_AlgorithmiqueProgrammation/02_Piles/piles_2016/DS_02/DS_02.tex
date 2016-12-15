@@ -1,0 +1,402 @@
+\documentclass[10pt,fleqn]{article} % Default font size and left-justified equations
+\usepackage[%
+    pdftitle={Informatique : Marchand de sable},
+    pdfauthor={Xavier Pessoles}]{hyperref}
+
+\input{style/new_style}
+\input{style/macros_SII}
+
+\fichetrue
+%\fichefalse
+
+\proftrue
+%\proffalse
+
+%\tdtrue
+\tdfalse
+
+%\courstrue
+\coursfalse
+
+% -------------------------------------
+% Déclaration des titres
+% -------------------------------------
+
+\def\discipline{Informatique}
+\def\xxtete{Informatique}
+
+\def\classe{PT -- PT $\star$}
+\def\xxnumpartie{DS 2}
+\def\xxpartie{Devoir Surveillé 2}
+
+\def\xxnumchapitre{}
+\def\xxchapitre{Marchand de sable}
+
+\def\xxtitreexo{Prothèse Active Transtibiale}
+\def\xxsourceexo{\hspace{.2cm} D'après concours Mines-Ponts -- 2013.}
+
+\def\xxposongletx{2}
+\def\xxposonglettext{1.45}
+\def\xxposonglety{20}
+\def\xxonglet{\textsf{DS 2}}
+
+\def\xxactivite{TD 1}
+\def\xxauteur{\textsl{Xavier Pessoles -- Patricia Bessonnat}}
+
+\def\xxcompetences{%
+\texttt{%
+\textbf{Savoirs et compétences :}\\
+\noindent \textbf{Résoudre :} à partir des modèles retenus :
+\begin{itemize}[label=\ding{112},font=\color{ocre}] 
+\item choisir une méthode de résolution analytique, graphique, numérique;
+\item mettre en \oe{}uvre une méthode de résolution.
+\end{itemize}
+\begin{itemize}[label=\ding{112},font=\color{ocre}] 
+\item \textit{Rés -- C1.1 :} Loi entrée sortie géométrique et cinématique -- Fermeture géométrique.
+\end{itemize}
+%
+%\noindent \textit{Mod2 -- C4.1 :} Représentation par schéma bloc.
+}}
+
+\def\xxfigures{
+%\includegraphics[width=.8\textwidth]{images/prot_01}
+}%figues de la page de garde
+
+\def\xxpied{%
+DS 2 : Marchand de sable}
+
+
+\setcounter{secnumdepth}{5}
+%---------------------------------------------------------------------------
+
+
+\begin{document}
+%\chapterimage{png/Fond_Cin}
+\input{style/new_pagegarde}
+\vspace{2cm}
+\pagestyle{fancy}
+\thispagestyle{plain}
+
+\section{Présentation}
+
+\ifprof
+\else
+\begin{minipage}[c]{.88\linewidth}
+On se propose de modéliser la constitution d'un tas de sable ainsi que l'écoulement des grains dans un sablier. Afin de simplifier le problème, on se restreindra à travailler en 2 dimensions. Le tas sera modélisé par une pile de grains de sable. 
+\end{minipage} \hfill
+\begin{minipage}[c]{.05\linewidth}
+\begin{center}
+\includegraphics[width=\linewidth]{images/sablier_p}
+\end{center}
+\end{minipage}
+
+Dans le cas du sablier, les grains tombent toujours sur la même pile. Le processus de constitution de la pile est le suivant : 
+\begin{center}
+\includegraphics[width=\linewidth]{images/sablier_02}
+\end{center}
+
+Un algorithme très succinct présente le déroulement de la chute d'un grain de sable.
+\begin{center}
+\includegraphics[width=\linewidth]{images/algo_02}
+\end{center}
+
+\fi
+
+\section{Création des objets}
+\subsection{Gestion des piles de sables}
+Une pile de sable est modélisée par... une pile dont la taille n'est pas limitée. Cette dernière est implémentée sous forme d'une liste. 
+
+\subparagraph{}
+\textit{Donner l'implémentation des fonctions élémentaires permettant de créer une pile dans Python à savoir les fonctions \texttt{creer\_pile}, \texttt{empiler}, \texttt{depiler}, \texttt{est\_vide}. \textbf{Pour cette question on s'autorise l'utilisation des méthodes sur les listes.}}
+\ifprof
+\begin{corrige}
+~\\
+\begin{minipage}[c]{.95\linewidth}
+\begin{minipage}[c]{.2\linewidth}
+\begin{python}
+def creer_pile():
+    return []
+\end{python}
+\end{minipage}\hfill
+\begin{minipage}[c]{.2\linewidth}
+\begin{python}
+def empiler2(pile,el):
+    pile.append(el)
+\end{python}
+\end{minipage}\hfill
+\begin{minipage}[c]{.2\linewidth}
+\begin{python} 
+def depiler(pile):
+    return pile.pop()
+\end{python}
+\end{minipage}\hfill
+\begin{minipage}[c]{.2\linewidth}
+\begin{python}
+def est_vide(pile):
+    return len(pile)==0
+\end{python}
+\end{minipage}
+\end{minipage}
+\end{corrige}
+\else
+\fi
+
+\subparagraph{}
+\textit{Donner l'implémentation de la fonction \texttt{taille\_pile}, permettant de connaître la taille d'une pile. \textbf{Pour cette question seules les fonctions définies ci-dessus sont acceptées.} La pile ne doit pas être modifiée à l'issue de la fonction. Donner la complexité algorithmique de la fonction implémentée. La fonction devra être commentée.}
+\ifprof
+\begin{corrige}    ~\\
+\begin{python}
+def taille(pile):
+    i=0
+    pile_tmp=creer_pile()
+    while not est_vide(pile):
+        i=i+1
+        empiler(pile_tmp,depiler(pile))
+    while not est_vide(pile_tmp):
+        empiler(pile,depiler(pile_tmp))
+    return i
+\end{python}
+La complexité de l'opération est une $\mathcal{O}(n)$.
+\end{corrige}
+\else
+\fi
+
+\subparagraph{}
+\textit{Redéfinir la fonction \texttt{empiler} pour que le seul élément empilable soit la chaîne de caractères "*". Ainsi, une pile de sable sera constituée d'une pile d'étoiles. }
+\ifprof
+\begin{corrige}
+~\\
+\begin{python}
+def empiler(pile):
+    pile.append("*")
+\end{python}
+
+\end{corrige}
+\else
+\fi
+
+\subsection{Gestion du tas de sable}
+Un tas de sable va être modélisé par une liste de piles de grains de sable. 
+
+\subparagraph{}\textit{Implémenter la fonction \texttt{creer\_tas} permettant de créer un tas de \texttt{n} piles (vides et verticales) de sable.}
+\ifprof
+\begin{corrige}~\\
+\begin{python}
+def creer_tas(n):
+    tas = []
+    for i in range(n):
+        tas.append(creer_pile())
+    return tas
+\end{python}
+\end{corrige}
+\else
+\fi
+
+\subparagraph{}\textit{Donner l'(ou les) instruction(s) permettant de dépiler un grain de sable sur la pile $n$ et d'empiler un grain de sable sur la pile $n-1$.}
+\ifprof
+\begin{corrige}~\\
+\begin{python}
+depiler(tas[n])
+empiler(tas[n-1])
+\end{python}
+\end{corrige}
+\else
+\fi
+
+\section{Écoulement}
+\ifprof
+\else
+
+On va maintenant implémenter les fonctions qui vont permettre de régir l'écoulement d'un grain de sable. On suppose que les grains tombent toujours sur la même pile. 
+
+On s'intéresse d'abord au sens d'écoulement d'un grain de sable. Pour cela, on définit une variable \texttt{sens} qui vaut 0 lorsque le grain doit s'écouler vers la gauche et qui vaut 1 lorsque le grain doit s'écouler vers la droite. 
+
+On identifie les 3 cas suivants pour déterminer le sens de chute d'un grain :
+\begin{center}
+\includegraphics[width=\linewidth]{images/sablier_03}
+\end{center}
+\fi
+
+\subparagraph{}
+\textit{Exprimer la condition booléenne pour laquelle un grain de sable chute à gauche.}
+\ifprof
+\begin{corrige}
+\begin{python}
+(taille(tas[indice_m-1])==hauteur_tas-2 and taille(tas[indice_m+1])==hauteur_tas-1)
+\end{python}
+Remarque : \texttt{hauteur\_tas} désigne la hauteur de la pile dans laquelle tombe le grain.
+\end{corrige}
+\else
+\fi
+
+\subparagraph{}
+\textit{Exprimer la condition booléenne pour laquelle un grain de sable chute aléatoirement à gauche ou à droite.}
+\ifprof
+\begin{corrige}
+\begin{python}
+(taille(tas[indice_m-1])==hauteur_tas-2 and taille(tas[indice_m+1])==hauteur_tas-2)
+\end{python}
+\end{corrige}
+\else
+\fi
+
+\subparagraph{}
+\textit{En réalisant un schéma donner un cas de figure pour lequel il n'y a pas d'écoulement de grain. Traduire la condition booléenne correspondante.}
+\ifprof
+\begin{corrige}
+On ne fait rien si on n'est pas dans les cas précédents ... Sinon : 
+\begin{python}
+(taille(tas[indice_m-1])>=hauteur_tas-1 and taille(tas[indice_m+1])>=hauteur_tas-1)
+\end{python}
+\end{corrige}
+\else
+\fi
+
+\textbf{On considère un écoulement vers la gauche.}
+
+\subparagraph{}
+\textit{Exprimer la condition booléenne permettant de savoir si un grain sur la pile $n$ doit s'écouler sur la gauche. On tiendra compte du cas ou le grain est sur le bord du sablier. On pourra s'appuyer sur des figures}
+\ifprof
+\begin{corrige}
+\begin{python}
+(taille(tas[indice])>taille(tas[indice-1])+1 and taille(tas[indice])>1 and indice >0)
+\end{python}
+\end{corrige}
+\else
+\fi
+
+\vspace{.25cm}
+
+On appelle \texttt{cond} la condition exprimée à la question précédente.
+On appelle \texttt{chute} la fonction permettant de régir la chute du grain (\textbf{ici vers la gauche}). Les spécifications de la fonction sont les suivantes : 
+\begin{py}
+\begin{python}
+def chute(tas,indice,sens):
+    """
+    Gestion d'une chute de grain de sable.
+    Entrées : 
+     * tas(liste de piles) : tas de sable
+     * indice(int) : pile à laquelle on a déposé le dernier grain de sable
+     * sens(int) : 0 chute à gauche, 1 chute à droite
+    Sortie : 
+     * le tas est modifié mais n'est pas retourné.
+    """
+\end{python}
+\end{py}
+
+\subparagraph{}
+\textit{Implémenter la fonction \texttt{chute} permettant de gérer la chute d'un grain de sable vers la gauche. \textbf{Cette fonction devra être récursive.} La fonction devra être commentée.}
+\ifprof
+\begin{corrige}
+~\\
+\begin{python}
+def chute(tas,indice,sens):
+    if sens == 0 :
+        if (taille(tas[indice])>taille(tas[indice-1])+1 and taille(tas[indice])>1 and indice >0):
+            depiler(tas[indice])
+            empiler(tas[indice-1])
+            chute(tas,indice-1,sens)
+        else :
+            return None
+\end{python}
+\end{corrige}
+\else
+\fi
+
+\section{Affichage du tas de sable}
+\ifprof
+\else
+On souhaite afficher le tas de sable à la fin de la chute d'un grain. 
+
+\begin{minipage}[t]{.47\linewidth}
+On donne le tas de sable suivant où 8 grains de sable sont tombés dans un sablier de largeur 7.  
+\begin{py}
+\begin{python}
+>> print(tas)
+    [[], ['*'], ['*', '*'], ['*', '*'], 
+    ['*', '*'], ['*'], []]
+\end{python}
+\end{py}
+\end{minipage} \hfill
+\begin{minipage}[t]{.47\linewidth}
+On souhaite l'afficher sous la forme suivante : 
+\begin{py}
+\begin{python}
+_______
+_______
+__***__
+_*****_
+\end{python}
+\end{py}
+\end{minipage} 
+\fi
+
+\subparagraph{}
+\textit{Implémenter la fonction \texttt{affichage} permettant d'afficher un tas sous la forme définie ci-dessus.}
+\ifprof
+\begin{corrige}
+~\\
+\begin{python}
+def affichage_tas(tas,hauteur_tas):
+    # hauteur_tas désigne la taille du tas
+    for i in range(hauteur_tas,0,-1):
+        ch=""
+        for pile in tas :
+            if taille(pile)>=i:
+                ch = ch +"*"
+            else :
+                ch=ch + "_"
+        print(ch)
+\end{python}
+\end{corrige}
+\else
+\fi
+
+\subparagraph{}
+\textit{Question subsidiaire -- Créer la fonction \texttt{sablier} prenant comme argument la taille de la base du sablier et le nombre de grains à écouler. Cette fonction devra retourner un tas de sable résultat de l'écoulement d'un seul grain.}
+\ifprof
+\begin{corrige}
+~\\
+\begin{python}
+def chute(tas,indice,sens):
+    """
+    Gestion d'une chute de grain de sable.
+    Entrées : 
+     * tas(liste de piles) : tas de sable
+     * indice(int) : pile à laquelle on a déposé le dernier grain de sable
+     * sens(int) : 0 chute à gauche, 1 chute à droite
+    Sortie : 
+     * le tas est modifié mais n'est pas retourné.
+    """
+    if sens == 0 :
+        if (taille(tas[indice])>taille(tas[indice-1])+1 and taille(tas[indice])>1 and indice >0):
+            depiler(tas[indice])
+            empiler(tas[indice-1])
+            chute(tas,indice-1,sens)
+        else :
+            return None
+    if sens == 1 :
+        if (indice==len(tas)-1):
+            return None
+        elif (taille(tas[indice])>taille(tas[indice+1])+1 and taille(tas[indice])>1):
+            depiler(tas[indice])
+            empiler(tas[indice+1])
+            chute(tas,indice+1,sens)
+        else :
+            return None
+    return None
+\end{python}
+\end{corrige}
+\else
+\fi
+
+%\subparagraph{}
+%\textit{Analyse d'une fonction récursive... à définir.}
+%\ifprof
+%\begin{corrige}
+%
+%\end{corrige}
+%\else
+%\fi
+
+\end{document}

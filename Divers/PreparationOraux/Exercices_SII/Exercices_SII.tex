@@ -1,0 +1,298 @@
+\documentclass[10pt,fleqn]{article} % Default font size and left-justified equations
+\usepackage[%
+    pdftitle={CIN : Cinématique du solide},
+    pdfauthor={Xavier Pessoles}]{hyperref}
+
+\input{style/new_style}
+\input{style/macros_SII}
+
+%\fichetrue
+\fichefalse
+
+%\proftrue
+\proffalse
+
+%\tdtrue
+\tdfalse
+
+\courstrue
+%\coursfalse
+
+% -------------------------------------
+% Déclaration des titres
+% -------------------------------------
+
+\def\discipline{Informatique}
+\def\xxtete{Informatique}
+
+\def\classe{\textsf{PT -- PT} $\star$}
+\def\xxnumpartie{Oral}
+\def\xxpartie{Préparation aux oraux de la banque PT}
+
+\def\xxnumchapitre{Préparation aux oraux de la banque PT}
+\def\xxchapitre{\hspace{.12cm} Épreuve de TP de SII}
+
+\def\xxposongletx{2}
+\def\xxposonglettext{1.45}
+\def\xxposonglety{20}
+\def\xxonglet{Oral}
+
+\def\xxactivite{Exercices}
+\def\xxauteur{\textsl{Patricia Bessonnat \\  Xavier Pessoles }}
+
+\def\xxcompetences{%
+%\textsl{%
+%\textbf{Savoirs et compétences :}
+%\begin{itemize}[label=\ding{112},font=\color{ocre}] 
+%\item Mod-C11 : Modélisation géométrique et cinématique des mouvements entre solides indéformables 
+%\begin{itemize}[label=\ding{112},font=\color{ocre}] 
+%\item Mod-C11.2 : Champ des vecteurs vitesses des points d'un solide
+%\item Mod-C11.4 : Composition des vitesses
+%\item Mod-C11.6 : Champ des vecteurs accélérations des points d'un solide
+%\item Mod-C11.6 : Composition des accélérations
+%\item Mod-C11-S5 : Déterminer la trajectoire d’un point d’un solide
+%\item Mod-C11-S8 : Écrire le vecteur accélération d’un point d’un solide
+%\end{itemize}
+%\end{itemize}
+%%}
+}
+
+\def\xxfigures{
+}%figues de la page de garde
+\def\xxpied{%
+Préparation aux oraux de la banque PT \\
+Préparation à l'épreuve de TP de SII%
+}
+
+%---------------------------------------------------------------------------
+
+
+\begin{document}
+\chapterimage{png/Fond_ALG}
+\input{style/new_pagegarde}
+
+%\newpage
+
+%\begin{multicols}{2}
+\section{Loi entrée-sortie du portail ABB}
+On donne le schéma cinématique et le paramétrage de la loi Entrée-Sortie du portail ABB.
+
+\begin{center}
+\includegraphics[width=.7\linewidth]{images/Schema}
+
+\includegraphics[width=.8\linewidth]{images/Parametrage}
+\end{center}
+
+Un moteur à courant continu commande la liaison pivot entre \textbf{0} et \textbf{3}.  
+
+
+On a : 
+\begin{multicols}{2}
+\begin{itemize}
+\item $\vect{OA} = a \vx{1}-f \vy{1}$;
+\item $\vect{AB} = b \vx{2}$;
+\item $\vect{BC} = -c \vx{3}$;
+\item $\vect{OC} = -d \vx{0}-e\vy{0}$;
+\end{itemize}
+\end{multicols}
+ 
+Les équations régissant la loi entre l'angle d'entrée $\theta_4$ et l'angle de sortie $\theta_1$ sont donnés par les équations suivantes : 
+
+$$
+\left\{
+\begin{array}{l}
+a \cos \theta_1 + b\cos \theta_2 \cos \theta_1 
+-b \sin\theta_2 \sin\theta_1 - c \cos \theta_4  
++d 
++f\sin \theta_1 
+ =0  \\
+a \sin\theta_1 + b\cos \theta_2 \sin\theta_1 + b\sin\theta_2 \cos \theta_1  
+- c \sin\theta_4 +e 
+-f\cos \theta_1 = 0  \\
+\theta_1 +\theta_2 + \theta_3 - \theta_4 = 0
+\end{array}
+\right.
+$$
+
+
+On donne le programme \texttt{01\_LoisESABB.py} permettant de tracer $\theta_2$, $\theta_3$ et $\theta_4$ en fonction de $\theta_1$.
+\begin{enumerate}
+\item Exécuter le programme. Quelle phase de vie du portail est simulée ?
+\item Quel est le domaine de variation angulaire du moteur pour un cycle d'ouverture ou de fermeture ?
+\item Modifier le programme pour avoir une plus grande précision angulaire sur les différentes positions.
+\item Expliquer comment a été rédigée la fonction \texttt{systeme}. Vous préciserez la nature et le type des données d'entrées et de sorties. 
+\item Quel est l'objectif de la fonction \texttt{resoudre} ? Commenter les différents blocs d'instruction. Vous préciserez en particulier le rôle de la fonction \texttt{fsolve} et vous justifierez le rôle de la variable \texttt{sol\_ini}.
+\item Le fichier \texttt{mesure.txt} situé dans le répertoire \texttt{data} contient les mesures des angles $\theta_1$ et $\theta_4$ en fonction du temps. Afficher $\theta_4$ en fonction de $\theta_1$ (angles mesurés). (Dans le fichier texte, la première colonne correspond au temps, la seconde à $\theta_4$ et la dernière à $\theta_1$.)
+\item Afficher sur un même graphe la courbe mesurée et la courbe simulée.  
+\item On souhaite que la vitesse du portail soit de $6,59\degres.\text{min}^{-1}$. On néglige le temps d'accélération. Modifier le programme en conséquence et afficher $\theta_1$ et $\theta_4$ en fonction du temps.
+\item Tracer $\dot{\theta_4}(t)$ en fonction du temps.
+\item Tracer $\dot{\theta_4}(t)$ pour les courbes mesurées et simulées.
+\end{enumerate}
+
+\newpage
+
+\section{Traitement du signal }% des génératrices tachymétriques de la capsuleuse}
+La vitesse du maneton et de la croix Malte de la capsuleuse est mesurée grâce à deux génératrices tachymétriques.
+
+\begin{center}
+\includegraphics[width=.7\linewidth]{images/CE_CI}
+\end{center}
+Le fichier \texttt{mesure.txt} contenu dans le dossier \texttt{data} contient les mesures réalisées par chacune des deux génératrices.
+
+
+\begin{enumerate}
+\item Ouvrir le fichier \texttt{02\_FiltrageCapsuleuse.py} et l'exécuter. Commenter l'allure des courbes.
+\item Déterminer la fréquence d'échantillonnage du signal mesuré. 
+\item Commenter les 3 fonctions \texttt{lireFichierMesure}, \texttt{filtrageMoyenne} et \texttt{filtrageMoyenneGlissante}. Pour cela vous préciserez la nature des variables d'entrée et de sortie. Vous commenterez ensuite les blocs d'instruction. 
+\item Modifier les valeurs du filtre et observer leur effet. Quelles valeurs permettent d'avoir une courbe lissée. 
+\item On souhaite filtrer le signal grâce à un filtre passe-bas. L'équation différentielle est la suivante : $s(t)+\tau \dfrac{\text{d} s(t)}{\text{d}t} = e(t)$. $e(t)$ désigne le signal non filtré et $s(t)$ désigne le signal filtré. Exprimer la suite $s_k$ correspondant au signal filtré en fonction du pas de calcul $k$, de $\tau$ et des échantillons $s_k$ et $e_k$ nécessaires. 
+\item Implémenter la fonction \texttt{filtrePB} prenant comme arguments la liste des échantillons $e_k$, le pas de calcul $p$ et la pulsation de coupure du filtre $1/\tau$.
+\item Tracer le signal non filtré ainsi que le signal filtré avec différentes pulsations de coupure.
+\end{enumerate}
+
+\newpage
+\section{Détermination des paramètres de rugosité}
+
+\begin{center}
+\includegraphics[width=4cm]{images/rugosimetre}
+\includegraphics[width=5cm]{images/profil}
+\end{center}
+Un rugosimètre est un appareil permettant de mesurer une le profil d'une ligne sur une surface fabriquée. On peut donc mesurer une altitude ($y$) en fonction d'une position longitudinale $(x)$. Une fois le profil mesuré, il est possible de calculer un certain nombre de paramètres sur le profil mesuré : 
+$$
+R_y = y_{\text{max}} - y_{\text{min}}  \quad  Ra = \dfrac{1}{l}\int\limits_0^l |f(x)| \text{d} x .
+$$
+
+\begin{enumerate}
+\item Exécuter le programme et identifier les différents profils.
+\item Analyser l'influence de \texttt{tau} sur les profils. 
+\item Commenter les programmes \texttt{filtrePB}, \texttt{calculAire} et \texttt{rechercheh}. Vous expliciterez quelles sont les données d'entrées et de sorties de ces programmes et vous expliquerez quelles sont les méthodes numériques utilisées.
+\item Déterminer le paramètre \texttt{tau} qui permet de déterminer la porteuse du profil. 
+\item Calculer le paramètre $R_y$.
+\item Calculer le paramètre $R_a$.
+\end{enumerate}
+
+
+\newpage
+\section{Mesure au marbre d'un défaut de planéité}
+\indent
+\begin{minipage}[c]{.7\linewidth}
+\indent Le bras de mesure est utilisé en métrologie afin de contrôler les spécifications inscrites sur le dessin de définition d'une pièce fabriquée.
+Nous allons nous intéresser ici à l'algorithme de calcul du défaut de planéité à partir d'un nuage de points mesurés à l'aide du palpeur du bras. Les mesures sont réalisées dans un repère machine $\mathcal{R}(O,\vx,\vy,\vz)$. Les coordonnées des points sont stockées dans un fichier \textbf{plan.csv} sous forme de tableau à trois colonnes $x$, $y$ et $z$ (contient 350 points).
+
+\vspace{.5cm}
+
+Le défaut de planéité est défini comme étant la distance $d$ la plus petite entre deux plans parallèles $P_1$ et $P_2$ tels que tous les points mesurés soient positionnés entre ces deux plans.
+\end{minipage}\hfill
+\begin{minipage}[c]{.35\linewidth}
+\begin{center}
+\includegraphics[width=4cm]{images/bras}
+\end{center}
+\end{minipage}
+
+
+En pratique, on associe aux nuages de points $M_i$ un plan $\Pi$. Ce plan $\Pi$ d'équation $ax+by+cz+d=0$ est construit suivant le critère des moindres carrés :
+
+$$S=\sum\limits_{i=0}^{n-1} (e_{i})^{2} \text{doit être minimale}$$
+
+
+
+Les distances $e_{i}$ sont définies comme les distances des points $M_i$ au plan $\Pi$.
+
+Pour $c\ne0$, l'équation du plan devient $Ax+By+z+D=0$.
+On rappelle que si une fonction admet un extremum en un point alors toutes ses dérivées partielles seront forcément nulles en ce point. On va donc calculer les trois dérivées partielles de $S$ : $S'(A)$, $S'(B)$ et $S'(D)$ et définir $A$, $B$, $D$ pour :
+$$
+\frac{\partial S}{\partial A}=0, \frac{\partial S}{\partial B}=0, \frac{\partial S}{\partial D}=0
+$$
+
+L'équation du plan $\Pi$ obtenue, le défaut de planéité calculé est $d$ la somme entre la distance du point $M_i$ le plus éloigné au dessus du plan et la distance du point $M_j$ le plus éloigné en dessous du plan.
+\\
+ 
+\begin{enumerate}
+\item A partir du fichier \textbf{plan.csv} fourni, créer la liste des listes de coordonnées des points mesurées. On appellera cette liste \texttt{pointMesure}.
+\item Montrer que la minimisation de $S$ permet de définir 3 équations faisant intervenir les paramètres $(A,B,D)$ du plan. Mettre ce système sous forme matricielle.
+$$
+\underbrace{\left[
+\begin{tabular}{cccc} 
+& & & \\
+& & & \\
+& & & \\
+\end{tabular}
+\right]}_{M}
+\cdot 
+\underbrace{
+\left[
+\begin{tabular}{cccc} 
+A \\
+B \\
+D \\
+\end{tabular}
+\right]}_{P}
+=
+\underbrace{
+\left[
+\begin{tabular}{cccc} 
+ \\
+ \\
+ \\
+\end{tabular}
+\right]}_{V}
+$$
+%\begin{center}
+%\includegraphics[width=4.5cm]{images/matrice}
+%\end{center}
+\item Définir une fonction \textbf{matriceM} d'argument une liste de listes des coordonnées de points et qui renvoie la matrice $M$.
+On notera dans le script python :
+$$
+\begin{array}{|c|c|c|c|c|c|c|c|}
+\hline
+ & & & & & & & \\
+\sum\limits_i x_{pi} & 
+\sum\limits_i y_{pi} & 
+\sum\limits_i z_{pi} & 
+\sum\limits_i x_{pi}\cdot y_{pi}  & 
+\sum\limits_i x_{pi}\cdot z_{pi}  & 
+\sum\limits_i y_{pi}\cdot z_{pi}  & 
+\sum\limits_i x_{pi}^2 & 
+\sum\limits_i y_{pi}^2 \\
+ & & & & & & & \\
+\hline 
+Sx_i & Sy_i & Sz_i&  Sx_iy_i & Sx_iz_i & Sy_i z_i  & Sx_{i^2}& Sy_{i^2} \\
+\hline
+\end{array}
+$$
+
+%\includegraphics[width=15cm]{images/tableau}
+
+\item Définir une fonction \textbf{vecteurV} d'argument une liste de listes des coordonnées de points et qui renvoie le vecteur $V$. 
+\item Définir une fonction \textbf{vecteurP} d'argument une liste de listes des coordonnées de points et qui renvoie le vecteur $P$.
+\item Définir la fonction \textbf{defautPlaneite} qui a pour argument un vecteur et une liste de listes des coordonnées de points et renvoie la valeur calculée du défaut de planéité. Afficher à l'écran cette valeur.
+\end{enumerate}
+
+
+\end{document}
+\newpage
+
+
+
+\newpage
+\addcontentsline{toc}{section}{Simulation du comportement d'un onduleur}
+\section{Simulation du comportement d'un onduleur}
+
+\newpage
+\addcontentsline{toc}{section}{Valeur moyenne, valeur efficace}
+\section*{Valeur moyenne, valeur efficace}
+
+\newpage
+\addcontentsline{toc}{section}{Analyse d'image}
+\section*{Analyse d'image}
+
+\newpage
+\addcontentsline{toc}{section}{Petits déplacements}
+\section*{Calcul des petits déplacements d'une pièce}
+
+%\end{multicols}
+
+
+
+\end{document}
+
