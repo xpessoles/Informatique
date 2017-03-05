@@ -1,0 +1,294 @@
+\documentclass[11pt,oneside]{article}
+\input{coursHeadings}
+\input{programHeadings}
+\usepackage[%
+    pdftitle={TP - Algorithmes de recherche},
+    pdfauthor={Xavier Pessoles},
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=magenta]{hyperref}
+
+\usepackage{pifont}
+
+
+% \makeatletter \let\ps@plain\ps@empty \makeatother
+%% DEBUT DU DOCUMENT
+%% =================
+\sloppy
+\hyphenpenalty 10000
+
+\newcommand{\Pointilles}[1][3]{%
+\multido{}{#1}{\makebox[\linewidth]{\dotfill}\\[\parskip]
+}}
+
+
+\colorlet{shadecolor}{orange!15}
+
+\newtheorem{theorem}{Theorem}
+
+
+\begin{document}
+
+
+\newboolean{prof}
+\setboolean{prof}{true}
+%------------- En tetes et Pieds de Pages ------------
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}
+
+\fancyhead{}
+\fancyhead[L]{%
+\noindent\noindent\begin{minipage}[c]{2.6cm}
+%Lycée Rouvière PTSI
+\includegraphics[width=2cm]{png/logo_ptsi.png}%
+\end{minipage}
+}
+
+\fancyhead[C]{\rule{12cm}{.5pt}}
+
+\fancyhead[R]{%
+\noindent\begin{minipage}[c]{3cm}
+\begin{flushright}
+\footnotesize{\textit{\textsf{Informatique}}}%
+\end{flushright}
+\end{minipage}
+}
+
+\renewcommand{\footrulewidth}{0.2pt}
+
+\fancyfoot[C]{\footnotesize{\bfseries \thepage}}
+\fancyfoot[L]{\footnotesize{2012 -- 2013} \\ X. \textsc{Pessoles}}
+\ifthenelse{\boolean{prof}}{%
+\fancyfoot[R]{\footnotesize{TP 2 -- CI 2 : Algorithmique \& Programmation}}
+}{%
+\fancyfoot[R]{\footnotesize{TP 2 -- CI 2 : Algorithmique \& Programmation}}
+}
+
+
+
+\begin{center}
+ \huge\textsc{CI 2 -- Algorithmique et Programmation}
+
+% \large\textsc{Introduction à la programmation}
+\end{center}
+
+\begin{center}
+ \LARGE\textsc{TP 3 -- Algorithmes de recherche}
+\end{center}
+
+\begin{savoir}
+%\textsc{Objectifs :}
+\begin{itemize}
+\item Recherche dans une une liste
+\item Recherche du maximum dans une liste de nombres
+\item Calcul de la moyenne et de la variance
+\item Recherche par dichotomie dans un tableau trié
+\item Recherche par dichotomie du zéro d'une fonction monotone
+\item Recherche d'un mot dans une chaîne de caractères
+\end{itemize}
+\end{savoir}
+ 
+\begin{warn}
+\textbf{TODO : Trouver une contextualisation aux exercices}
+\end{warn}
+
+\setlength{\parskip}{0ex plus 0.2ex minus 0ex}
+ \renewcommand{\contentsname}{}
+ \renewcommand{\baselinestretch}{1}
+
+\tableofcontents
+
+ \renewcommand{\baselinestretch}{1.2}
+\setlength{\parskip}{2ex plus 0.5ex minus 0.2ex}
+
+% \vspace{1cm}
+\textit{Ce document évolue. Merci de signaler toutes erreurs ou coquilles.}
+
+
+\subsection*{Exercice 1 -- Recherche de nombres}
+La bibliothèque \textsf{random} de Python permet de générer des nombres aléatoires. Ainsi, pour générer un nombre entier compris entre $m$ et $n$, on procède ainsi : 
+
+\begin{py}
+\begin{python}
+import random
+random.randint(m,n)
+\end{python}
+\end{py}
+
+\paragraph{}
+\textit{Générer un tableau de 100 nombres aléatoires compris entre 0 et 1000.}
+
+\paragraph{}
+\textit{Écrire et implémenter l'algorithme permettant de rechercher le nombre maximal de la liste.}
+
+\paragraph{}
+\textit{Écrire une fonction permettant de calculer la moyenne des nombres de la liste.}
+
+\begin{defi}
+\textbf{La variance}
+
+On définit la variance comme étant la moyenne des carrés des écarts à la moyenne. 
+\end{defi}
+
+\paragraph{}
+\textit{Écrire une fonction permettant de calculer la variance associée au tableau de nombres.}
+
+Les méthodes \textsf{var} et \textsf{average} de la bibliothèque \textsf{numpy} permettent de 
+calculer la moyenne et la variance d'un tableau. 
+
+
+\paragraph{}
+\textit{Vérifier vos résultats avec ceux fournis par les méthodes ci-dessus.}
+
+\paragraph{}
+\textit{Après avoir cherché de la documentation pour mesurer le temps avec Python, donner le temps pour faire les calculs de variance et de moyenne avec vos fonctions et celles de Numpy.}
+
+\paragraph{}
+\textit{Que conclure sur la complexité temporelle ?}
+
+\paragraph{}
+\textit{Après avoir généré un nombre aléatoire, écrire l'algorithme qui permet de dire que ce nombre est dans le tableau. Implémenter cet algorithme.}
+
+La méthode \textsf{sort} permet de trier un tableau par ordre croissant. 
+
+Pour rechercher un nombre dans un tableau trié, on va procéder par \textbf{dichotomie}. Pour cela, on va diviser une première fois notre tableau initial et vérifier que le nombre peut être dans une des deux parties. On redivise alors le tableau en 2 pour vérifier que le nombre peut être dans une des deux sous parties \textit{etc.}
+
+
+
+\paragraph{}
+\textit{Après avoir trié le tableau, écrire l'algorithme qui permet de dire, par dichotomie, si un nombre aléatoire est dans le tableau. Implémenter cet algorithme.}
+
+\paragraph{}
+\textit{Comparer le temps de calcul avec la méthode naïve. Que dire de la complexité des deux algorithmes ?}
+
+\subsection*{Exercice 2 -- Recherche du zéro d'une fonction}
+\subsubsection*{Recherche d'un zéro par dichotomie}
+\setcounter{paragraph}{0}
+
+\begin{theo}
+\textbf{Théorème des valeurs intermédiaires}
+
+
+Soit $f:[a,b]\rightarrow \mathbb{R}$ une application continue.
+
+Pour tout réel $u$ compris entre $f(a)$ et $f(b)$, il existe au moins un réel $c$ tel que $c\in[a,b]$ et $f(c)=u$.
+
+En conséquence, si $f(a)\cdot f(b)<0$, il existe au moins un réel $c$ compris entre $a$ et $b$ tel que $f(c)=0$.
+
+\end{theo}
+
+
+L'objectif est de déterminer un algorithme permettant de déterminer le zéro d'une fonction continue. On se place dans le cas où $f$ est monotone. 
+
+\paragraph{}
+\textit{Quelle est la conséquence du fait de travailler avec une fonction monotone ?}
+
+
+\paragraph{}
+\textit{Déterminer une condition d'arrêt qui permettrait de terminer l'algorithme de recherche du zéro d'une fonction?}
+
+\paragraph{}
+\textit{Déterminer un algorithme permettant de déterminer le zéro d'une fonction.}
+
+\paragraph{}
+\textit{Implémenter l'algorithme dans Python.}
+
+Soient les fonctions suivantes : 
+$$ 
+\begin{array}{l}
+f:x \mapsto\\
+\\
+g:x \mapsto\\
+\\
+h:x \mapsto\\
+\\
+\end{array}
+$$
+
+
+\paragraph{}
+\textit{Après avoir défini les fonctions précédentes, déterminer le zéro de chacune d'entre elles.}
+
+
+\subsubsection*{Recherche d'un zéro par la méthode de Newton}
+La méthode de Newton permet de calculer le zéro d'une fonction suffisamment dérivable. Elle se base sur le développement de Taylor au premier ordre de la fonction $f$ : $f(x)\simeq f(x_0)+d'(x_0)\left(x-x_0\right)$.
+
+Partant d'une valeur initiale $x_0$, on cherche alors $x_1$, l'intersection de la tangente à le courbe et de l'axe des abscisses. 
+
+En réitérant l'opération, $x_n$ tend vers le zéro de la fonction.
+
+\paragraph{}
+\textit{En partant par exemple de la fonction $f:x\mapsto \sqrt{x}-1$ définie sur $[0,+\infty[$, montrer graphiquement comment fonctionne cet algorithme.}
+
+\paragraph{}
+\textit{Après avoir recherché un algorithme, implémenter le et tester le dans Python.}
+
+
+\paragraph{}
+\textit{Comparer la vitesse de convergence de l'algorithme de Newton et de l'algorithme de recherche par dichotomie. Faire un bilan qui permettant de savoir dans quel cas utiliser un algorithme ou le second.}
+
+
+\paragraph{}
+\textit{En vous aidant d'internet, recherchez si Python permet de déterminer le zéro d'une fonction. Rechercher dans la documentation le principe de fonctionnement de la méthode de recherche de zéro.}
+
+
+
+\subsection*{Exercice 3 -- Recherche d'un mot dans une chaîne de caractère -- Code de César}
+\setcounter{paragraph}{0}
+Dans un premier temps, on va charger chacun des mots dans une liste. Pour cela, on définit la fonction suivante : 
+
+\begin{py}
+\begin{python}
+def lire_fichier(fichier):
+    """
+    Permet de lire un fichier texte en mettant chaque ligne dans une case d'un tableau.
+    fichier est une chaine de caractere contenant le lien vers le fichier.
+    """
+    # Ouvrir un fichier
+    fid=open(fichier, "r")
+    tab=[]
+    for ligne in fid:
+       # Stocker les lignes du fichier dans un tableau en supprimant le retour chariot
+        tab.append(fid.readline().rstrip('\n\r'))
+    # Fermer le fichier
+    fid.close()
+    return tab
+
+tab=lire_fichier("liste_francais.txt")
+
+\end{python}
+\end{py}
+
+\paragraph{}
+\textit{Rechercher l'algorithme permettant de placer tous les mots dans un dictionnaire, contenant chacun des mots ainsi que le nombre de lettres.}
+
+\paragraph{}
+\textit{Rechercher le mot ayant le plus grand nombre de lettres.}
+
+\paragraph{}
+\textit{Rechercher un algorithme permettant de faire la liste des nombre de moins de $n$
+ lettres.}
+
+\paragraph{}
+\textit{Rechercher un algorithme permettant d'évaluer, au total, combien de fois apparaissent chacune des lettres.}
+
+
+Le code de César fut un des premiers moyens de chiffrer des informations. Pour coder un mot, il faut choisir un nombre (inférieur à 26 si le texte est en français). Chaque lettre du mot sera remplacée par décalage. Par exemple, si le nombre est 1, on remplace A par B, B par C \textit{etc.}
+
+\paragraph{}
+\textit{Rechercher une fonction permettant de chiffrer et de déchiffre un texte en utilisant le code de César pour un décalage donné.}
+
+Maintenant, à vous de faire jouer vos dons de pirates en herbe.
+
+\paragraph{}
+\textit{On donne un fichier chiffré selon le code de César. Déterminer une méthode pour décoder le message.}
+
+
+
+
+% Algorythme de Babylone
+%Parcours de Graham
+
+
+
+\end{document}

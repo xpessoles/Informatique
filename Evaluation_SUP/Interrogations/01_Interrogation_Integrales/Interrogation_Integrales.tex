@@ -1,0 +1,109 @@
+\documentclass[10pt]{article}
+\input{style/coursHeadings}
+\input{style/programHeadings}
+\input{style/macros_SII}
+\input{style/macros_Titres}
+\input{style/macros_Frames}
+
+%Si le boolen xp est vrai : compilation pour xabi
+%Sinon compilation Damien
+\newif\ifprof
+%\proftrue
+\proffalse
+
+\newif\ifxp
+\xptrue
+%\xpfalse
+
+\newif\iftd
+\tdtrue
+%\tdfalse
+
+\usepackage[%
+    pdftitle={Interrogation - Calcul Integral},
+    pdfauthor={Xavier Pessoles},
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=magenta]{hyperref}
+
+\def\discipline{Informatique}
+\def\xxtitre{%
+\ifxp
+CI 3 : Simulation numérique
+\else
+\fi
+}
+
+\def\xxsoustitre{%
+\ifxp
+Chapitre 1 -- Intégration numérique
+\else
+\fi}
+
+\def\xxauteur{%
+\ifxp
+Éric \textsc{Olivi} \\
+Xavier \textsc{Pessoles}
+\else
+\fi}
+
+\def\xxpied{%
+\ifxp
+CI 3 : Simulation numérique\\
+Ch. 1 : Intégration numérique -- Interrogation
+\else
+\fi}
+
+
+
+
+
+%---------------------------------------------------------------------------
+
+
+\begin{document}
+\ifxp
+\input{style/enteteXP}
+\else
+\input{style/enteteDI}
+\fi
+
+\begin{center}
+ \large Nom : .........................................................
+\end{center}
+
+
+ \renewcommand{\baselinestretch}{1.2}
+\setlength{\parskip}{2ex plus 0.5ex minus 0.2ex}
+
+\vspace{1cm}
+
+ \begin{minipage}[c]{.47\linewidth}
+\subparagraph{}
+\textit{En utilisant le courbe ci-contre, représenter les rectangles à gauche pour une subdivision en 5 sous-intervalles de~[1;2]. }
+
+\vspace{1cm}
+
+\subparagraph{}
+\textit{Ecrire une fonction \textbf{Intgrl}(f,a,b,n) où :
+\begin{itemize}
+\item a et b sont les bornes (ordonnées) d'un intervalle,
+\item n est le nombre de subdivisions de [a;b]
+\item f désigne une fonction définie sur [a;b]
+\end{itemize}
+qui renvoie sous forme d'une liste de deux nombres :
+\begin{itemize}
+\item la somme de aires des rectangles à gauche,
+\item celle des rectangles à droite.
+\end{itemize}
+(au moins "une des deux" vaut mieux que rien)}
+\end{minipage} \hfill
+\begin{minipage}[c]{.47\linewidth}
+\begin{center}
+\includegraphics[width=.6\textwidth]{images/courbe}
+\end{center}
+\end{minipage}
+
+\end{document}
+
+
