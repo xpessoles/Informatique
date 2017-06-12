@@ -1,0 +1,713 @@
+\documentclass[10pt,fleqn]{article} % Default font size and left-justified equations
+\usepackage[%
+    pdftitle={Informatique : capteur rayonnement},
+    pdfauthor={Xavier Pessoles}]{hyperref}
+
+\input{style/new_style}
+\input{style/macros_SII}
+
+\fichetrue
+%\fichefalse
+
+\proftrue
+\proffalse
+
+%\tdtrue
+\tdfalse
+
+%\courstrue
+\coursfalse
+
+% -------------------------------------
+% Déclaration des titres
+% -------------------------------------
+
+\def\discipline{Informatique \ifprof \\ Corrigé \else \fi}
+\def\xxtete{Informatique}
+
+\def\classe{PT -- PT $\star$}
+\def\xxnumpartie{DS 2}
+\def\xxpartie{Devoir Surveillé 3}
+
+\def\xxnumchapitre{Tracé de l'abaque te temps de réponse réduit $\;$}
+\def\xxchapitre{}
+
+\def\xxtitreexo{Tracé de l'abaque te temps de réponse réduit}
+\def\xxsourceexo{\hspace{.2cm} }
+
+\def\xxposongletx{2}
+\def\xxposonglettext{1.45}
+\def\xxposonglety{20}
+\def\xxonglet{\textsf{DS 03}}
+
+\def\xxactivite{}
+\def\xxauteur{\textsl{La Martinière Monplaisir} \\ \textsl{Patricia Bessonnat et Xavier Pessoles}}
+
+\def\xxcompetences{%
+\texttt{%
+\subparagraph{Savoirs et compétences :}\\
+\noindent \subparagraph{Résoudre :} à partir des modèles retenus :
+\begin{itemize}[label=\ding{112},font=\color{ocre}] 
+\item choisir une méthode de résolution analytique, graphique, numérique;
+\item mettre en \oe{}uvre une méthode de résolution.
+\end{itemize}
+\begin{itemize}[label=\ding{112},font=\color{ocre}] 
+\item \subparagraph{Rés -- C1.1 :} Loi entrée sortie géométrique et cinématique -- Fermeture géométrique.
+\end{itemize}
+%
+%\noindent \subparagraph{Mod2 -- C4.1 :} Représentation par schéma bloc.
+}}
+
+\def\xxfigures{
+%\includegraphics[width=.8\textwidth]{images/prot_01}
+}%figues de la page de garde
+
+\def\xxpied{%
+DS 3 -- Tracé de l'abaque de temps de réponse réduit}
+
+
+\setcounter{secnumdepth}{5}
+%---------------------------------------------------------------------------
+
+
+\begin{document}
+
+%\chapterimage{png/Fond_Cin}
+\input{style/new_pagegarde}
+\vspace{2cm}
+\pagestyle{fancy}
+\thispagestyle{plain}
+
+\section{Mise en situation}
+
+
+L'équation différentielle d'un système du second ordre peut se mettre sous la forme :
+
+\vspace{.25cm}
+
+\begin{minipage}[c]{.48\linewidth}
+$$
+s(t)
++\dfrac{2\xi}{\omega_0}\cdot \dfrac{\text{d}s(t)}{\text{d}t}
++\dfrac{1}{\omega_0^2}\cdot \dfrac{\text{d}^2s(t)}{\text{d}t^2}
+= K\cdot e(t)
+$$
+\end{minipage}\hfill
+\begin{minipage}[c]{.48\linewidth}
+en notant :
+\begin{itemize}
+\item $K$ : le gain statique;
+\item $\xi$ : le coefficient d'amortissement;
+\item $e(t)$ et $s(t)$ : l'entrée et la sortie du système. 
+\end{itemize}
+\end{minipage}
+
+
+\begin{minipage}[c]{.48\linewidth}
+\begin{obj}
+L'objectif de ces travaux est de construire le programme permettant de tracer l'abaque du temps de réponse réduit utilisé en asservissement pour connaître le temps de réponse à 5\% des systèmes d'ordre 2. 
+\end{obj}
+\end{minipage}\hfill
+\begin{minipage}[c]{.5\linewidth}
+\begin{center}
+\includegraphics[width=.95\textwidth]{images/figure_1}
+\end{center}
+\end{minipage}
+
+\section{Résolution de l'équation différentielle}
+
+On cherche à résoudre $
+s(t)
++\dfrac{2\xi}{\omega_0}\cdot \dfrac{\text{d}s(t)}{\text{d}t}
++\dfrac{1}{\omega_0^2}\cdot \dfrac{\text{d}^2s(t)}{\text{d}t^2}
+= K\cdot e(t)
+$.
+On pose : 
+$
+\left\{ 
+\begin{array}{l}
+y_1(t)=s(t) \\
+y_2(t)=\dfrac{\text{d}s(t)}{\text{d} t}
+\end{array}
+\right.
+$.
+
+\subparagraph{}
+\textit{Donner la solution \textbf{numérique} de l'équation différentielle du second ordre en utilisant le changement de variable proposé et le schéma d'Euler explicite. On notera $h$ le pas du schéma.}
+
+
+\ifprof
+\begin{corrige}
+D'après le schéma d'Euler explicite, on a $s_{k+1}=s_{k}+hy_{1,k}$. 
+\end{corrige}
+\else
+\fi
+
+
+\subparagraph{}
+\textit{Donner la solution \textbf{numérique} de l'équation différentielle $y_2(t)=\dfrac{\text{d}s(t)}{\text{d} t}$ en utilisant un schéma d'Euler explicite. Vous mettrez la solution sous la forme
+$ \left\{ 
+\begin{array}{l}
+y_{1,k+1}=y_{1,k}+h \Phi_{1,k} \\
+y_{2,k+1}=y_{2,k}+h \Phi_{2,k} \\
+\end{array}
+\right.
+$ avec $\Phi_{1,k}$ et $\Phi_{2,k}$ deux fonctions à expliciter.}
+
+\ifprof
+\begin{corrige}
+En appliquant le changement de variable à l'équation différentielle, on a :
+$$
+\left\{ 
+\begin{array}{l}
+y_2(t)=\dfrac{\text{d}y_1(t)}{\text{d}t} \\
+y_1(t)
++\dfrac{2\xi}{\omega_0}\cdot y_2(t)
++\dfrac{1}{\omega_0^2}\cdot \dfrac{\text{d}y_2(t)}{\text{d}t}
+= K\cdot e(t) \\
+\end{array}
+\right.
+\Leftrightarrow 
+\left\{ 
+\begin{array}{l}
+y_2(t)=\dfrac{\text{d}y_1(t)}{\text{d}t} \\
+y_1(t)
++\dfrac{2\xi}{\omega_0}\cdot y_2(t)
++\dfrac{1}{\omega_0^2}\cdot \dfrac{\text{d}y_2(t)}{\text{d}t}
+= K\cdot e(t) \\
+\end{array}
+\right.
+$$
+
+En utilisant la formulation de Cauchy, on a :
+$$
+\left\{ 
+\begin{array}{l}
+\Phi_1(t,y_1(t),y_2(t))=y_2(t)\\
+\Phi_2(t,y_1(t),y_2(t))=K\omega_0^2\cdot e(t) - 2\xi \omega_0  y_2(t) -\omega_0^2y_1(t)\\
+\end{array}
+\right.
+.
+$$
+
+En utilisant le schéma d'Euler explicite, on a donc : 
+
+$$
+\left\{ 
+\begin{array}{l}
+y_{1,k+1}=y_{1,k}+h \Phi_1(t_k,y_{1,k},y_{2,k}) \\
+y_{2,k+1}=y_{2,k}+h \Phi_2(t_k,y_{1,k},y_{2,k}) \\
+\end{array}
+\right.
+\Rightarrow
+\left\{ 
+\begin{array}{l}
+y_{1,k+1}=y_{1,k}+h y_{2,k} \\
+y_{2,k+1}=y_{2,k}+h \left( K\omega_0^2\cdot e_k - 2\xi \omega_0  y_{2,k} -\omega_0^2y_{1,k}\right) \\
+\end{array}
+\right.
+.
+$$
+\end{corrige}
+\else
+\fi
+
+Les variables $K$, $\omega_0$, $\xi$, $h$ sont données. On considère que $s(0)=0$ et $s'(0)=0$. On considère que les fonctions $\Phi_1(k)$ et $\Phi_2(k)$ ont été implémentées et peuvent être évaluées en utilisant les fonctions Python \texttt{phi\_1} et \texttt{phi\_2} . On note $T$ le temps de simulation.
+
+
+\subparagraph{}
+\textit{Donner en Python la suite d'instructions permettant de disposer des listes \texttt{les\_y1} et \texttt{les\_y2}.}
+
+
+\subparagraph{}
+\textit{Donner en Python la suite d'instructions permettant de tracer la réponse du système en fonction du temps.}
+
+\section{Recherche du temps de réponse à 5\%}
+
+\subparagraph{}
+\textit{Pour $K=1$ et pour une entrée de type échelon, tracer l'allure de la réponse temporelle pour $\xi<0,7$ et pour $\xi>1$. Pour chacune des courbes deux courbes, afficher le temps de réponse à 5\%.}
+
+\vspace{.5cm}
+
+Pour un système du second ordre de gain $K=1$ sollicité par un échelon, il est nécessaire de résoudre l'équation $s(t)=0,95$ et $s(t)=1,05$ pour déterminer le temps de réponse à 5\%.
+
+\subparagraph{}
+\textit{En utilisant des schémas (un schéma par méthode), expliquer la méthode de résolution de l'équation en utilisant la méthode de Newton et en utilisant une méthode par dichotomie.}
+
+
+\subparagraph{}
+\textit{Donner l'algorithme de la méthode de Newton.}
+
+
+\subparagraph{}
+\textit{Dans notre cas, quelle méthode semble la plus appropriée ? Quel(s) problème(s) peut-on rencontrer ? Comment l'(es) éviter ? }
+
+
+
+\subparagraph{}
+\textit{Proposer une méthode pour déterminer le temps de réponse à 5\%. }
+
+
+\section{Tracé de l'abaque de temps de réponse à 5 \%}
+
+
+\ifprof
+\else
+On reprend l'équation différentielle présentée précédemment. On suppose que toutes les conditions initiales sont nulles. Pour une entrée unitaire de type échelon unitaire $e(t)=1$, $K=1$ et $t\geq0$ on montre que : 
+\begin{itemize}
+\item si $\xi <1$, le régime est pseudo périodique et :
+$
+s(t)=1-\dfrac{e^{-\xi\omega_0 t}}{\sqrt{1-\xi^2}}\sin\left(  \omega_0 t\sqrt{1-\xi^2}+\arcsin \sqrt{1-\xi^2} \right)
+$;
+\item si $\xi=1$, le régime est critique et : 
+$
+s(t)=1-\left(1+\omega_0 t \right)e^{-\omega_0 t} 
+$;
+\item si $\xi>1$, le régime est apériodique et : 
+$
+s(t)=1
++\dfrac{e^{- \omega_0 t\left( \xi + \sqrt{\xi^2-1}\right)}}{2\left(\xi\sqrt{\xi^2-1}+\xi^2-1 \right)}
+-\dfrac{e^{- \omega_0 t \left( \xi - \sqrt{\xi^2-1}\right)}}{2\left(\xi\sqrt{\xi^2-1}-\xi^2+1 \right)}
+$.
+\end{itemize} 
+
+
+\textbf{Dans la suite, on considèrera que $s$ est une fonction du temps réduit $t\cdot\omega_0$ que l'on notera $t\omega_0$ ou \texttt{tom0}. On notera indifféremment le coefficient d'amortissement $z$ ou $\xi$.}
+
+
+
+\fi
+
+\ifprof
+\else
+On dispose des fonctions Python \texttt{f\_pseudo}, \texttt{f\_critique} et \texttt{f\_aperiodique} permettant d'évaluer la fonction pour $s$ pour un couple $(t\omega_0,\xi)$.
+\fi
+
+
+
+
+\subparagraph{} \textit{Donner, en Python, le contenu de la fonction \textsf{f\_s} permettant de définir la fonction $(t\omega_0,\xi) \rightarrow s(t\omega_0\xi)$ dans le cas où $\xi\in \mathbb{R}_+^*$. On donne ci-dessous les spécifications de la fonction.}
+\ifprof
+\else
+\begin{py}
+\begin{python}
+def f_s(tom0,z):
+    """
+    Fonction permettant de calculer la réponse indicielle d'un système du second ordre. 
+    Entrées : 
+        * tom0, flt : temps de réponse réduit
+        * z, flt : coefficient d'amortissement
+    Sortie : 
+        * s(tom0,z), flt
+    """
+\end{python}
+\end{py}
+\fi
+
+\ifprof
+\begin{corrige}
+\begin{py}
+\begin{python}
+def f_s(tom0,z) :
+    """
+    Fonction permettant de calculer la réponse indicielle d'un système du second ordre. 
+    Entrées : 
+        * tom0, flt : temps de réponse réduit
+        * z, flt : coefficient d'amortissement
+    Sortie : 
+        * s(tom0,z), flt
+    """
+    if z<0 :
+        return None
+    elif z<1 :
+        return f2_pseudo(tom0,z)
+    elif z==1:
+        return f2_critique(tom0)
+    else : 
+        return f2_aperiodique(tom0,z)
+\end{python}
+\end{py}
+\end{corrige}
+\else
+
+%\begin{tabular}{|p{.95\textwidth}|}
+%\hline
+%$$\quad$$
+%\vspace{4cm}
+%$$\quad$$ \\
+%\hline
+%\end{tabular}
+\fi
+
+\ifprof
+\else
+
+%\newpage 
+%
+%La fonction \texttt{trace\_s} donnée ci-dessous permet de tracer $s(t\omega_0,\xi)$ pour $t\omega_0 \in [0,10]$ par pas de 1 et pour une valeur de $\xi$ déterminée. Les deux appels successifs de la fonction \texttt{trace\_s} permettent de réaliser le tracer les 2 courbes ci-dessous.
+%
+%
+%\begin{minipage}[c]{.48\linewidth}
+%\begin{py}
+%\begin{python}
+%# Définition de la fonction trace
+%def trace_s(z):
+%    x = []
+%    y = []
+%    for i in range(11):
+%        t = i
+%        x.append(t)
+%        y.append(f_s(t,z))
+%    plot(x,y)
+%# Appels de la fonction trace
+%trace_s(0.4)
+%trace_s(0.7)
+%
+%\end{python}
+%\end{py}
+%\end{minipage} \hfill
+%\begin{minipage}[c]{.48\linewidth}
+%\begin{center}
+%%\includegraphics[width=\textwidth]{images/courbe}
+%\end{center}
+%\end{minipage}
+%\fi
+
+%
+%\subparagraph{}
+%\textit{Expliquer l'objectif des lignes 2 à 9.}
+%
+%\ifprof
+%\begin{corrige}
+%\begin{itemize}
+%\item La ligne 2 permet de définir la fonction.
+%\item Les lignes 3 et 4 permettent d'initialiser deux listes.
+%\item Les lignes 5 à 8 vont permettre de créer deux listes de 11 éléments. Ainsi la liste x contiendra le temps réduit de 0 à 10 et la liste y contiendra les valeurs de s(x) pour chacune de ces 11 valeurs. 
+%\end{itemize}
+%\end{corrige}
+%\else
+%\begin{tabular}{|p{.95\textwidth}|}
+%\hline
+%$$\quad$$
+%\vspace{3cm}
+%$$\quad$$ \\
+%\hline
+%\end{tabular}
+%\ifprof
+%\else
+%
+%\vspace{1cm}
+%
+%\fi
+%
+%
+%On observe que la courbe tracée n'est pas lissée. Pour avoir un meilleur rendu, il est nécessaire d'évaluer la fonction en davantage de points. 
+%\fi
+%
+%\subparagraph{}
+%\textit{Modifier les lignes 5 et 6 pour que la courbe tracée soit réalisée en 1000 points sur un intervalle de $t \omega_0$ variant de 0 à 10. }
+%
+%\ifprof
+%\begin{corrige}
+%\begin{py}
+%\begin{python}
+%def trace_s(z):
+%    x = []
+%    y = []
+%    n = 1000
+%    for i in range(n+1):
+%        t = 10*i/n
+%        x.append(t)
+%        y.append(f_s(t,z))
+%    plot(x,y)
+%\end{python}
+%\end{py}
+%\end{corrige}
+%\else
+%
+%\begin{tabular}{|p{.95\textwidth}|}
+%\hline
+%$$\quad$$
+%\vspace{2cm}
+%$$\quad$$ \\
+%\hline
+%\end{tabular}
+%\newpage
+%\fi
+
+%\subsection*{Tracé de l'abaque}
+
+On note $t_r$  le temps de réponse à 5\%. L'abaque du temps de réponse permet de tracer le produit $t_r\omega_0$ en fonction du coefficient d'amortissement $\xi$.
+
+\subparagraph{}
+\textit{Quelle est la valeur finale prise par $s(t)$ ?} 
+\ifprof
+\begin{corrige}
+La valeur finale est 1. 
+\end{corrige}
+\else
+
+
+%\begin{tabular}{|p{.95\textwidth}|}
+%\hline
+%$$\quad$$ \\
+%\hline
+%\end{tabular}
+
+\fi
+
+
+\subparagraph{}
+\textit{Écrire en Python la fonction \textsf{\textbf{is\_in\_strip}} ayant les spécifications suivantes : } 
+\ifprof
+\else
+
+\begin{py}
+\begin{python}
+def is_in_strip(x):
+    """
+    Fonction permettant de savoir si une valeur est dans la bande des + ou - 5% de la valeur finale.
+    Entrée : 
+        x, flt : réel
+    Sortie : 
+        True si la valeur est dans la bande à + ou - 5%
+        False si la valeur n'est pas dans la bande à + ou - 5%
+    """
+\end{python}
+\end{py}
+\fi
+
+\ifprof
+\begin{corrige}
+\begin{py}
+\begin{python}
+def is_in_strip(x):
+    """
+    Fonction permettant de savoir si une valeur est dans la bande des + ou - 5% de la valeur finale.
+    Entrée : 
+        x, flt : réel
+    Sortie : 
+        True si la valeur est dans la bande à + ou - 5%
+        False si la valeur n'est pas dans la bande à + ou - 5%
+    """
+    if x>.95 and x<1.05:
+        return True
+    else:
+        return False
+\end{python}
+\end{py}
+\end{corrige}
+\else
+%
+%
+%\begin{tabular}{|p{.95\textwidth}|}
+%\hline
+%$$\quad$$
+%\vspace{2cm}
+%$$\quad$$ \\
+%\hline
+%\end{tabular}
+\fi
+
+\ifprof
+\else
+\vspace{1cm}
+
+On donne la fonction suivante permettant de connaître le temps de réponse réduit à partir duquel la réponse indicielle d'un système est dans la bande à plus ou moins 5\% pour un coefficient d'amortissement particulier.
+
+\begin{py}
+\begin{python}
+def calcul_tom0(z,tom0=500):
+    """
+    Recherche du temps de réponse à 5%
+    Entrées : 
+       * z, flt : coefficient d'amortissement
+       * tom0 (flt, optionnel) : si non précisé, on calcule le temps de réponse en partant de tom0 = 500
+    Sortie : 
+       * tom0 (flt) : temps de réponse à 5%
+    """
+    pas_tom0=0.05
+    x = f_s(tom0,z) 
+    if z<0.7:
+        while is_in_strip(x) :
+            tom0  = tom0 - pas_tom0
+            x = f_s(tom0,z)
+        tom0=tom0+pas_tom0
+    else :
+        while not is_in_strip(x) :
+            tom0  = tom0 + pas_tom0 
+            x = f_s(tom0,z)
+        tom0=tom0-pas_tom0
+    return tom0
+\end{python}
+\end{py}
+
+
+\fi
+
+
+
+\subparagraph{}
+\textit{Expliquer le mode de recherche du temps de réponse à 5\% dans le cas où $z<0,7$ puis dans le cas où $z\geq 0,7$. Pourquoi distingue-t-on ces 2 cas ? On pourra s'aider de l'abaque donné sur la première page.}
+
+\ifprof
+\else
+%\begin{rem}
+%On pourra remarquer que dans un cas, la recherche se fait << en avançant >> et dans le second cas << en reculant >>. 
+%\end{rem}
+
+%
+%\begin{tabular}{|p{.95\textwidth}|}
+%\hline
+%$$\quad$$
+%\vspace{1cm}
+%$$\quad$$ \\
+%\hline
+%\end{tabular}
+%
+%\vspace{1cm}
+
+\fi
+
+\ifprof
+\begin{corrige}
+Pour déterminer le temps de réponse à 5\%, on cherche le dernier temps pour lequel, le signal est dans la bande à plus ou moins 5\%. En régime permanent, le signal est dans la bande. En << remontant le temps >> la première valeur hors de la bande correspond donc au temps de réponse recherché. 
+
+Lorsque $\xi<0,7$, le système est oscillant, et le temps de réponse est mesuré lorsque les oscillations deviennent <<petites>>. Il est donc préférable de partir de la fin.
+
+Lorsque $\xi>0,7$, on sait que dès lors que le signal entre dans la bande, il n'en sortira plus. Il est donc plus rapide de commencer par le début. 
+
+\end{corrige}
+\else
+\fi
+
+\ifprof
+\else
+
+\vspace{.5cm}
+
+L'algorithme suivant permet de créer les listes \textsf{xx} et \textsf{yy} permettant de tracer l'abaque du temps de réponse réduit en fonction du coefficient d'amortissement. 
+
+\begin{py}
+\begin{python}
+xx,yy = [],[]
+n = 1000
+z = 0.01
+tom0 = 500
+pasz = 0.01
+while z<=100:
+    if z<0.7:
+        tom0=calcul_tom0(z,tom0)
+    else :
+        tom0=calcul_tom0(z,0)  
+    if z<0.1:
+        pasz = 0.001
+    elif z<1:
+        pasz = 0.01
+    elif z<10:
+        pasz = 0.1
+    else :
+        pasz = 1    
+    xx.append(z)
+    yy.append(tom0)
+    z=z+pasz
+\end{python}
+\end{py}
+
+%\newpage
+\fi
+
+
+ 
+
+\subparagraph{}
+\textit{
+\begin{enumerate}
+\item Donner l'intervalle de variation de \textsf{z} pour le tracé demandé.
+\item Donner le pas de \textsf{z} sur chacun des intervalles.
+\item Pourquoi ne pas conserver le même pas sur chacun de ces intervalles ?
+\item En vous aidant du tracé de l'abaque, expliquer pourquoi \textsf{tom0} est calculé différemment suivant la valeur de \textsf{z} ? Expliquer le choix des arguments de la fonction \textsf{calcul\_tom0} dans chacun des cas. 
+\end{enumerate}}
+\ifprof
+\begin{corrige}
+\begin{enumerate}
+\item $z$ variera de 0,01 à 100.
+\item On a : 
+\begin{itemize}
+\item si $0,01<z<0,1$ : $pasz = 0,001$;
+\item si $0,1<z<1$ : $pasz = 0,01$;
+\item si $1<z<10$ : $pasz = 0,1$;
+\item si $10<z<100$ : $pasz = 1$.
+\end{itemize}
+\item La courbe est tracée en diagramme log-log. On adopte donc un pas différent par décade. 
+\item Lorsque $\xi<0.7$, $tom0$ décroit lorsque $z$ croît. Pour trouver plus rapidement $tom0$ on peut donc utiliser la valeur prise précédemment (dans ce cas, la recherche de tom0 dans la fonction \textsf{calcul\_tom0} se fait à rebours). A l'inverse, lorsque $\xi>0.7$, $tom0$ croit lorsque $z$ croît. On choisit dans ce cas, de partir à chaque fois de 0 (en modifiant le code, il serait possible de partir du $tom0$ calculé précédemment, mais il faudrait réfléchir à la gestion de la bascule de $\xi<0,7$ à $\xi>0,7$).
+\end{enumerate}
+\end{corrige}
+\else
+
+%
+%\begin{tabular}{|p{.95\textwidth}|}
+%\hline
+%$$\quad$$
+%\vspace{6cm}
+%$$\quad$$ \\
+%\hline
+%\end{tabular}
+
+\fi
+
+\subparagraph{}
+\textit{On souhaite stocker les données des listes \textsf{xx} et \textsf{yy} dans un fichier texte encodé en ASCII. Chacun des nombres doit être stocké sur 17 caractères. Indiquer la taille du fichier ainsi créé.}
+\ifprof
+\begin{corrige}
+90 valeurs sont calculées pour chaque intervalles de $z$. $xx$ et $yy$ ont donc une taille de 360 éléments. 
+En prenant en compte les 34 caractères, l'espace et le retour à la ligne (2 caractères), une ligne a donc une taille de 37 octets. Le fichier sera donc d'approximativement de 13 320 octets.
+\end{corrige}
+\else
+
+%\begin{tabular}{|p{.95\textwidth}|}
+%\hline
+%$$\quad$$
+%\vspace{2cm}
+%$$\quad$$ \\
+%\hline
+%\end{tabular}
+
+\fi
+\ifprof
+\else
+%
+%
+%\begin{py}
+%\begin{python}
+%import matplotlib.pyplot as plt
+%import numpy as np
+%
+%plt.plot(xx,yy,label="Temps de réponse réduit $tr \\omega_0$")
+%plt.xlabel("Coefficient d'amortissement $\\xi$")
+%plt.ylabel("Temps de réponse réduit $tr \\omega_0$")
+%plt.title("Temps de réponse réduit d'un système du 2nd ordre")
+%plt.legend()
+%plt.loglog()
+%plt.grid(which="major",axis="x",linewidth=1.5, linestyle='-')
+%plt.grid(which="major",axis="y",linewidth=1.5, linestyle='-')
+%plt.grid(which="minor",axis="x",linewidth=0.75, linestyle='-', color='0.75')
+%plt.grid(which="minor",axis="y",linewidth=0.75, linestyle='-', color='0.75')
+%\end{python}
+%\end{py}
+%%
+%%\begin{figure}[!ht]
+%%\begin{center}
+%%\includegraphics[width=.8\linewidth]{images/figure_1}
+%%
+%%Abaque du temps de réponse réduit pour un système du second ordre \label{ref_aba}
+%%\end{center}
+%%\end{figure}
+\fi
+
+\section*{Question supplémentaire}
+
+\subparagraph{}
+\textit{En utilisant la méthode des trapèzes, calculer l'intégrale de $s(t)$ pour un intervalle de $T$ secondes, avec un pas de temps $h$.}
+
+\end{document}

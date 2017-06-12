@@ -1,0 +1,165 @@
+\documentclass[10pt,fleqn]{article} % Default font size and left-justified equations
+\usepackage[%
+    pdftitle={Informatique : capteur rayonnement},
+    pdfauthor={Xavier Pessoles}]{hyperref}
+
+\input{style/new_style}
+\input{style/macros_SII}
+
+\fichetrue
+%\fichefalse
+
+%\proftrue
+\proffalse
+
+%\tdtrue
+\tdfalse
+
+%\courstrue
+\coursfalse
+
+% -------------------------------------
+% Déclaration des titres
+% -------------------------------------
+
+\def\discipline{Informatique \ifprof \\ Corrigé \else \fi}
+\def\xxtete{Informatique}
+
+\def\classe{PT -- PT $\star$}
+\def\xxnumpartie{I 1B}
+\def\xxpartie{Interrogation 1B}
+
+\def\xxnumchapitre{Codage}
+\def\xxchapitre{$\;$ \\ }
+
+\def\xxtitreexo{Codage}
+\def\xxsourceexo{\hspace{.2cm} }
+
+\def\xxposongletx{2}
+\def\xxposonglettext{1.45}
+\def\xxposonglety{20}
+\def\xxonglet{\textsf{I 1}}
+
+\def\xxactivite{}
+\def\xxauteur{\textsl{La Martinière Monplaisir}}
+
+\def\xxcompetences{%
+\texttt{%
+\subparagraph{Savoirs et compétences :}\\
+\noindent \subparagraph{Résoudre :} à partir des modèles retenus :
+\begin{itemize}[label=\ding{112},font=\color{ocre}] 
+\item choisir une méthode de résolution analytique, graphique, numérique;
+\item mettre en \oe{}uvre une méthode de résolution.
+\end{itemize}
+\begin{itemize}[label=\ding{112},font=\color{ocre}] 
+\item \subparagraph{Rés -- C1.1 :} Loi entrée sortie géométrique et cinématique -- Fermeture géométrique.
+\end{itemize}
+%
+%\noindent \subparagraph{Mod2 -- C4.1 :} Représentation par schéma bloc.
+}}
+
+\def\xxfigures{
+%\includegraphics[width=.8\textwidth]{images/prot_01}
+}%figues de la page de garde
+
+\def\xxpied{%
+I 1 : Codage}
+
+
+\setcounter{secnumdepth}{5}
+%---------------------------------------------------------------------------
+
+
+\begin{document}
+
+%\chapterimage{png/Fond_Cin}
+\input{style/new_pagegarde}
+\vspace{2cm}
+\pagestyle{fancy}
+\thispagestyle{plain}
+
+\subparagraph{}
+\textit{Exprimer dans les codages binaires et hexadécimaux le nombre 213.}
+
+\ifprof
+\begin{corrige}
+11010101
+
+D5
+\end{corrige}
+\else
+\noindent\begin{tabular}{|p{\linewidth}|}
+\hline
+$$ \quad $$ \\
+$$ \quad $$ \\
+\hline
+\end{tabular}
+\fi
+\subparagraph{}
+\textit{Soit un entier relatif codé sur 8 bits. Donner en décimal le nombre suivant : 10010100.}
+
+\ifprof
+\begin{corrige}
+-108
+\end{corrige}
+\else
+\noindent\begin{tabular}{|p{\linewidth}|}
+\hline
+$$ \quad $$ \\
+$$ \quad $$ \\
+\hline
+\end{tabular}
+\fi
+
+\subparagraph{}
+\textit{Donner en hexadécimal le nombre suivant : -2,8125 dans un système 32 bits (rappel le signe est codé sur 1 bit et l'exposant sur 8 bits).}
+
+\ifprof
+\begin{corrige}
+11000000001101000000000000000000
+
+c0340000
+\end{corrige}
+\else
+\noindent\begin{tabular}{|p{\linewidth}|}
+\hline
+$$ \quad $$ \\
+$$ \quad $$ \\
+\hline
+\end{tabular}
+\fi
+
+
+\subparagraph{}
+\textit{Donner la taille d'un fichier constitué de 1000 lignes du type : \texttt{9.99 999 999}.}
+
+\ifprof
+\begin{corrige}
+
+\end{corrige}
+\else
+\noindent\begin{tabular}{|p{\linewidth}|}
+\hline
+$$ \quad $$ \\
+$$ \quad $$ \\
+\hline
+\end{tabular}
+\fi
+
+\subparagraph{}
+\textit{Donner la complexité du tri fusion dans le meilleur des cas, dans le cas moyen et dans le pire des cas.}
+\ifprof
+\begin{corrige}
+
+\end{corrige}
+\else
+\noindent\begin{tabular}{|p{\linewidth}|}
+\hline
+$$ \quad $$ \\
+$$ \quad $$ \\
+\hline
+\end{tabular}
+\fi
+
+
+\end{document}

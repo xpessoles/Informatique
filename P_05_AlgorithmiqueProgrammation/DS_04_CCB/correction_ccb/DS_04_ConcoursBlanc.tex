@@ -1,0 +1,999 @@
+\documentclass[10pt,fleqn]{article} % Default font size and left-justified equations
+\usepackage[%
+    pdftitle={Informatique : Transfert thermique},
+    pdfauthor={Xavier Pessoles}]{hyperref}
+
+\input{style/new_style}
+\input{style/macros_SII}
+
+\fichetrue
+%\fichefalse
+
+\proftrue
+%\proffalse
+
+%\tdtrue
+\tdfalse
+
+%\courstrue
+\coursfalse
+
+% -------------------------------------
+% Déclaration des titres
+% -------------------------------------
+
+\def\discipline{Informatique \ifprof \\ Corrigé \else \fi}
+\def\xxtete{Informatique}
+
+\def\classe{PT -- PT $\star$}
+\def\xxnumpartie{CB 2017}
+\def\xxpartie{Concours Blanc 2017}
+
+\def\xxnumchapitre{Autour de données météorologiques }
+\def\xxchapitre{}%\textit{$\;$ \\ D'après Concours CCP -- PC 2015}}
+
+\def\xxtitreexo{Prothèse Active Transtibiale}
+\def\xxsourceexo{\hspace{.2cm} D'après X 2015 -- MP/PC.}
+
+\def\xxposongletx{2}
+\def\xxposonglettext{1.45}
+\def\xxposonglety{20}
+\def\xxonglet{\textsf{CB 2017 }}
+
+\def\xxactivite{}
+\def\xxauteur{\textsl{La Martinière Monplaisir -- Lyon\\Étienne Mimard -- Saint-Étienne }}
+
+\def\xxcompetences{%
+\texttt{%
+\textbf{Savoirs et compétences :}\\
+\noindent \textbf{Résoudre :} à partir des modèles retenus :
+\begin{itemize}[label=\ding{112},font=\color{ocre}] 
+\item choisir une méthode de résolution analytique, graphique, numérique;
+\item mettre en \oe{}uvre une méthode de résolution.
+\end{itemize}
+\begin{itemize}[label=\ding{112},font=\color{ocre}] 
+\item \textit{Rés -- C1.1 :} Loi entrée sortie géométrique et cinématique -- Fermeture géométrique.
+\end{itemize}
+%
+%\noindent \textit{Mod2 -- C4.1 :} Représentation par schéma bloc.
+}}
+
+\def\xxfigures{
+%\includegraphics[width=.8\textwidth]{images/prot_01}
+}%figues de la page de garde
+
+\def\xxpied{%
+Concours Blanc 2017}
+
+
+\setcounter{secnumdepth}{5}
+%---------------------------------------------------------------------------
+
+
+\begin{document}
+
+%\chapterimage{png/Fond_Cin}
+\input{style/new_pagegarde}
+\vspace{1.7cm}
+\pagestyle{fancy}
+\thispagestyle{plain}
+
+
+%\Huge
+%\begin{center} \fbox{{Autour de données météorologiques}}\end{center}
+%\normalsize
+\begin{obj}
+Le service des prévisions et d'observations météorologiques de météo-France relève 
+toute l'année les conditions météorologiques dans chaque ville de France.\\
+Cela permet de déterminer les évolutions de climat et d'aider les prévisions saisonnières.
+ 
+Étudier le climat passé permet de mieux comprendre le fonctionnement du système climatique, 
+clé pour anticiper ses évolutions futures.
+ Pour cela, les climatologues doivent disposer de séries d'observations sur la période 
+ la plus longue possible.\\
+ 
+Pour assurer sa mission de conservation de la mémoire du climat, Météo-France assure 
+la collecte, le contrôle et l'archivage des données climatiques dans une base nationale.\\ 
+Cette base de données contient les données de métropole, d'outre-mer et des TAAF 
+(Terres australes et antarctiques françaises) observées au sol, en mer ou en altitude. \\
+Les principales informations recueillies concernent la température, les précipitations, l'humidité,
+ la pression atmosphérique, le vent et le rayonnement.\\
+ 
+ L'objectif de ce sujet est :
+\begin{itemize}
+ \item partie 1 : de créer quelques outils (autour du minimum) pour le traitement de données
+  météorologiques;
+ \item partie 2 : d'exploiter les mesures de température;
+ \item partie 3 : d'extraire des données de la base de données de météo-France;
+ \item partie 4 : de manipuler des données particulières récupérées dans un fichier;
+ \item partie 5 : d'étudier une modélisation physique des variations annuelles de température.
+ \end{itemize}
+Remarque : chaque partie présente des questions de difficultés variées. 
+  
+\end{obj}
+
+
+
+%Évolution de la température dans une partie de la France}
+
+\section*{Partie 1 : quelques outils pour le traitement des données}
+
+Dans toutes cette partie, on s'interdit l'usage de la fonction \textbf{min}
+préprogrammée en Python et permettant d'obtenir directement le minimum d'une 
+liste donnée en argument. En revanche, on se donne la fonction 
+\textbf{mini} suivante, écrite en Python :
+
+\begin{py}
+\begin{lstlisting}
+def mini(t):
+    '''Calcule le minimum d'un tableau d'entiers ou de flottants.'''
+    if len(t) == 0:
+        return None
+    p = t[0]
+    for i in range(1,len(t)):
+        if t[i] <= p:
+            p = t[i]
+    return p
+\end{lstlisting}
+\end{py}
+
+\subparagraph{}
+\textit{Expliquer le déroulement pas à pas (évolution de la valeur des
+  variables) lors de l'appel   \textbf{mini([6,2,15,1,15,1])}, puis donner la valeur   renvoyée.}
+	
+
+\ifprof
+\begin{corrige}
+\begin{py}
+\begin{python}
+mini([6,2,15,1,15,1])
+pour i=1 mini=2
+pour i=2 mini=2
+pour i=3 mini=1
+pour i=4 mini=1
+pour i=5 mini=1
+\end{py}
+\end{corrige}
+\else
+\fi
+
+\subparagraph{}
+\textit{Évaluer la complexité temporelle de l'appel \textbf{mini(t)} en fonction du nombre $n$ 
+d'éléments de  \texttt{t}.\\
+Vous calculerez pour cela le nombre de comparaisons et d'opérations (addition, soustraction, division, multiplication) réalisées.}
+
+\ifprof
+\begin{corrige}
+il y a (n-1) comparaisons et aucune opération soit une complexité en O(n)
+\end{corrige}
+\else
+\fi
+
+\subparagraph{}
+ \textit{Proposer une modification de la fonction \textbf{mini} pour que la valeur
+  renvoyée soit le \emph{maximum} et non le \emph{minimum}.}
+	
+\ifprof
+\begin{corrige}
+\begin{py}
+\begin{python}
+def max(t):
+    if len(t)==0:
+        return None
+    m=t[0]
+    for i in range(1,len(t)):
+        if t[i]>=m:
+            m=t[i]
+    return (m)
+\end{py}
+\end{corrige}
+\else
+\fi
+	
+\subparagraph{}
+\textit{Définir, du point de vue de la programmation, ce qu'est une fonction récursive. Donner les étapes de l'écriture d'une fonction récursive en donnant comme exemple la recherche du minimum d'une liste.}
+
+\ifprof
+\begin{corrige}
+Il est nécessaire d'avoir une condition d'arrêt et une boucle de récursivité. La condtion d'arrêt pour la fonction \textbf{mini\_recursive} est le mini de la liste à un seul élément et la boucle de récursivité est la comparaison du mini de la liste tronquée avec l'élément suivant.
+\end{corrige}
+\else
+\fi
+	
+\subparagraph{}
+\textit{Définir une fonction \textbf{mini\_recursive} qui a pour argument une liste de valeurs entières ou flottants et qui renvoie par une méthode récursive le \emph{minimum} de cette liste.}
+
+\ifprof
+\begin{corrige}
+\begin{py}
+\begin{python}
+def mini_recursive(t):
+    n=len(t)
+    if n==1:
+        return t[0]
+    else:
+        p=mini_recursive(t[0:n-1])
+        if t[-1]<p:
+            p=t[-1]
+        return p
+\end{py}
+\end{corrige}
+\else
+\fi
+
+\ifprof
+\begin{corrige}
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=0.5\textwidth]{images/recursivite.png}
+\end{figure}
+\end{corrige}
+\else
+\fi
+  
+ \subparagraph{}
+\textit{ Écrire une fonction \textbf{position\_mini} d'argument une liste et renvoyant \textbf{une} position
+  du minimum de cette liste.\\}
+  
+ Dans  l'exemple vu plus haut,  il y a deux positions pour lesquelles
+  le minimum est atteint : $3$ et $5$.
+	
+\ifprof
+\begin{corrige}
+\begin{py}
+\begin{python}
+def position_mini(t):
+    indice=0
+    p=t[0]
+    for i in range(1,len(t)):
+        if t[i]<=p: #ou t[i]<p
+            p=t[i]
+            indice=i
+    return i
+\end{py}
+\end{corrige}
+\else
+\fi
+  
+On souhaite maintenant déterminer la valeur minimale d'un tableau
+  bidimensionnel d'entiers ou de flottants (c'est une liste de listes).\\
+  Par exemple le minimum de $[[10,3,15],[5,13,10]]$ est $3$
+  
+\subparagraph{}
+\textit{Écrire une fonction \textbf{min2D} d'argument un tableau \textbf{t} d'entiers ou flottants 
+et renvoyant le minimum de \textbf{t}. On utilisera la fonction \textbf{mini}.}
+
+\ifprof
+\begin{corrige}
+\begin{py}
+\begin{python}
+def mini2D(t):
+    p=mini(t[0])
+    for i in range(1,len(t)):
+        p1=mini(t[i])
+        if p1<p:
+            p=p1
+    return p
+\end{py}
+\end{corrige}
+\else
+\fi
+
+\textit{Évaluer la complexité temporelle de cette fonction.
+Vous calculerez pour cela le nombre de comparaisons et d'opérations (addition, soustraction, division, multiplication) réalisées.}
+  
+On souhaite, partant d'une liste constituée de couples
+%\footnote{Ou liste de listes à deux éléments.}
+  (chaîne, entier), déterminer la (les) chaîne(s) pour laquelle(s) l'entier/le flottant 
+  associé est minimal, voici un exemple d'utilisation de cette fonction :
+\begin{py}
+\begin{lstlisting}
+>>> chaine_mini([['Tokyo',7000],['Paris',6000],['Londres',8000]]) 
+>>> 'Paris'
+\end{lstlisting}
+\end{py}
+\subparagraph{}
+\textit{Écrire une fonction \textbf{chaine\_mini} réalisant effectivement cette opération.}
+
+
+\ifprof
+\begin{corrige}
+\begin{py}
+\begin{python}
+def chaine_mini(L):
+    nom=L[0][0]
+    valeur=L[0][1]
+    for i in range(1,len(t)):
+        if L[i][1]<=valeur:
+            valeur=L[i][1]
+            nom=L[i][0]
+    return nom
+\end{py}
+\end{corrige}
+\else
+\fi
+
+
+
+On souhaite enfin, à partir d'une liste \textbf{L}
+ d'entiers (ou flottants) et d'un entier (ou flottant) appelé \texttt{seuil} obtenir le nombre 
+ d'éléments de \textbf{L} majorés (au sens strict) par \texttt{seuil}, voici un exemple d'utilisation de cette fonction : 
+ \begin{py}
+\begin{lstlisting}
+>>> majores_par([12,-5,10,9],10)
+>>> 2
+\end{lstlisting}
+\end{py}
+\subparagraph{} 
+\textit{Écrire enfin une fonction \textbf{majores\_par} réalisant cette opération.}
+
+\ifprof
+\begin{corrige}
+\begin{py}
+\begin{python}
+def majores_par(t,seuil):
+    k=0
+    for i in range(len(t)):
+        if t[i]<seuil:
+            k+=1
+    return k
+\end{py}
+\end{corrige}
+\else
+\fi
+
+\subparagraph{}
+\textit{Modifier la fonction précédente pour obtenir une fonction \textbf{elements\_majores\_par}
+  retournant la liste des éléments majorés par le seuil.}
+	
+\ifprof
+\begin{corrige}
+\begin{py}
+\begin{python}
+def elements_majores_par(t,seuil):
+    L1=[]
+    for i in range(len(t)):
+        if t[i]<seuil:
+            L1.append(t[i])
+    return L1
+\end{py}
+\end{corrige}
+\else
+\fi
+
+
+
+\section*{Partie 2 : Exploitation des mesures de température}
+La problématique de Météo France est de fournir des valeurs mesurées les plus justes possibles. Les écarts sont essentiellement dus :
+\begin{itemize}
+	\item à la configuration de l'installation de la station météo qui doit respecter les normes MF et OMM (à une distance minimum de 2 fois la hauteur des obstacles dans un secteur le plus ensoleillé possible même en hiver, positionné à 1,5m d'un sol herbeux, à, au moins, 100m de sources de chaleur artificielles ou réfléchissantes et d'étendues d'eau). Ces conditions permettent de limiter les erreurs de mesures dues à l'environnement. Ces dernières pouvant facilement atteindre un écart de 50\% dans des configurations défavorables;
+	\item à la qualité des appareils de mesure.
+\end{itemize}
+
+\vspace{0.5cm}
+Météo-France utilise, dans ses stations météos automatiques, des thermomètres conçus sur la variation de résistance nommés Pt100 (fil de platine dont la résistance vaut 100 Ohms à 0°C). Ces sondes possèdent une sensibilité égale à $0,39\, \Omega.°C^{-1}$.
+
+\vspace{0.5cm}
+Les sondes de platine utilisées possèdent les caractéristiques suivantes :
+\begin{itemize}
+	\item pour $\theta=0°$, $R(0°C)=100\Omega$
+	\item pour $\theta$ température ambiante en (°C) et $R$ en Ohms :
+	
+	\begin{center}
+	$R(\theta)=R(0°C)\times(1+a\theta+b{\theta}²+c{\theta}^3\times(\theta-100))$
+	\end{center}
+	
+\end{itemize}
+Les coefficients \texttt{a}, \texttt{b} et \texttt{c} sont donnés par une norme internationale EIT90.\\
+
+On désire connaitre la température mesurée lorsque la résistance de la sonde est connue.\\
+On souhaite donc résoudre l'équation \textbf{R($\theta$)-$R_{\text{mesure}}$=0} d'inconnue $\theta$ pour une valeur de résistance $R_{\text{mesure}}$ connue.
+
+\textbf{On suppose pour la suite que les valeurs de $a$, $b$ et $c$ sont définies comme 
+variables globales dans le programme principal.} \\
+
+\subparagraph{}
+\textit{Définir la fonction \textbf{g($\theta$)=R($\theta$)-$R_{\text{mesure}}$}.}
+
+\ifprof
+\begin{corrige}
+\begin{py}
+\begin{python}
+def g(x):
+    return 100*(1+a*x+b*x**2+c*x**3*(x-100))-R
+\end{py}
+\end{corrige}
+\else
+\fi
+
+\subparagraph{}
+\textit{Écrire les instructions python permettant de tracer \textbf{g($\theta$)} pour $\theta\in[0°,50°]$ et $R=104\Omega$ par pas de $0.5°$.}
+
+\ifprof
+\begin{corrige}
+\begin{py}
+\begin{python}
+les_theta=[i*0.5 for i in range(101)]
+les_g=[g(i) for i in les_theta]
+plt.plot(les_theta,les_g)
+plt.xlabel('les theta')
+plt.ylabel('g(theta)')
+plt.grid()
+plt.show()
+\end{py}
+\end{corrige}
+\else
+\fi
+
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=0.5\textwidth]{images/courbe.png}
+\end{figure}
+
+\subparagraph{}
+\textit{Écrire une fonction \textbf{dichotomie} d'arguments les bornes d'étude \texttt{a} et \texttt{b}, la fonction \texttt{g} ainsi que la précision \texttt{epsilon} et qui renvoie la valeur de $\theta$ à epsilon près solution de \textbf{g($\theta$)=0}. Proposer une valeur pour \texttt{a} et une valeur pour \texttt{b}. Justifier votre choix.}
+
+\ifprof
+\begin{corrige}
+\begin{py}
+\begin{python}
+def dichotomie(a, b, f, epsilon):
+    g = a
+    d = b
+    while (d - g) > 2 * epsilon:
+        m = (g + d)/2
+        if f(g) * f(m) <= 0:
+            d = m
+        else:
+            g = m
+    return((d + g) / 2)
+\end{py}
+\end{corrige}
+\else
+\fi
+
+\vspace{0.5cm}
+Remarque : \texttt{b} et \texttt{c} étant très faibles, on utilise généralement la relation approchée suivante :
+\begin{itemize}
+	\item $R(\theta)=R(0°C)\times(1+a\theta)$ avec $a=3,90802.10^{-3}°C^{-1}$
+\end{itemize}
+
+\vspace{0.5cm}
+Le réseau RADOME fournit aux abonnés les données "en temps réel" mesurées aux stations automatiques du réseau français au pas de temps infrahoraire (6mn).\\
+Ces données stockées dans un tableur sont obtenues après traitement des données brutes des différents appareils de mesure.\\
+Pour les mesures de température, deux listes sont générées : la liste des temps \texttt{les\_t} et la liste des températures \texttt{les\_theta} telles que \texttt{les\_theta}[i] correspond à la mesure de température à l'instant \texttt{les\_t}[i].
+
+\texttt{les\_t=[220.254,220.279,223.254,223.279,.....1012.368]}\\
+\texttt{les\_theta=[26,26,25.9,25.9,25.8,.......25.5]}
+
+\subparagraph{}
+\textit{Écrire une fonction \textbf{tempInfrahoraire} ayant pour arguments une liste des temps en seconde sur un intervalle de 6 minutes et la liste des températures en degré celsius correspondantes et qui renvoie deux valeurs : la moyenne des températures sur cet intervalle de temps et l'heure en seconde correspondant au relevé de température.\
+Les pas de temps ne sont pas constants dans la liste des temps. Vous appliquerez pour l'intégration la méthode des rectangles à "droite".}
+
+\ifprof
+\begin{corrige}
+\begin{py}
+\begin{python}
+def tempinfrahoraire(Ltemps,Ltheta):
+    s=0
+    for i in range(1,len(Ltheta)):
+        s=s+Ltheta[i]*(Ltemps[i]-Ltemps[i-1]) #intégration à droite, c'est la valeur de température mesurée à l'instant t{i+1} qui correspond à la température mesurée sur l'intervalle [t{i},t{i+1}]
+    return s/(Ltemps[-1]-Ltemps[0]),Ltemps[-1]
+\end{py}
+\end{corrige}
+\else
+\fi
+
+\subparagraph{}
+\textit{Écrire les instructions python pour construire les deux listes \texttt{les\_t\_6min} et \texttt{les\_theta\_6min} à partir des deux listes des relevés pour une journée. Vous utiliserez la fonction \textbf{tempInfrahoraire}.}
+
+\ifprof
+\begin{corrige}
+\begin{py}
+\begin{python}
+les listes de temps en secondes et de theta ont la même longueur
+les_t_6min=[]
+les_theta_6min=[]
+for i in range(len(theta)):
+    s=0
+    Ltemps=[]
+    Ltheta=[]
+    while s<=360:
+        Ltemps.append(temps[i])
+        Ltheta.append(theta[i])
+        s=s+temps[i]-temps[i-1]
+    moy_theta,heure=tempinfrahoraire(Ltemps,Ltheta)
+    les_t_6min.append(heure)
+    les_theta_6min.append(moy_theta)
+\end{py}
+\end{corrige}
+\else
+\fi
+
+
+
+\section*{Partie 3 : Recherche dans les archives de Météo-France}
+La base de données de Météo-France concernant l'année écoulée est 
+constituée de deux tables :\\
+
+
+	\begin{itemize}
+		\item	la table \textbf{villes} stocke les informations sur chaque ville 
+		de France et contient les colonnes (attributs) suivantes:
+		
+			\begin{description}
+				\item[\textbf{insee}:] Chaîne de caractères représentant le 
+				numéro INSEE (caractéristique : deux villes différentes ont 
+				toujours deux numéros INSEE différents).
+
+				\item[\textbf{nom}:] Chaîne de caractères représentant le nom de la ville.
+
+				\item[\textbf{dpt}:] Chaîne de caractères représentant le département de la ville.\\
+				Ce n'est pas un simple entier du fait des départements corses numérotés
+				2A et 2B.
+
+				\item[\textbf{lat}:] Flottant représentant la latitude de la 
+				ville en degrés (positif si la ville est dans l'hémisphère 
+				nord).\\ On prendra $47$ degre de latitude Nord comme étant 
+				le milieu de la France.
+
+				\item[\textbf{lon}:] Flottant représentant la longitude de la 
+				ville en degrés (positif si la ville est à l'Est du méridien 
+				de Greenwich). On prendra $2$ degre de longitude Est comme 
+				étant le milieu de la France.
+				
+				\item[\textbf{pop}:] Entier représentant la population de la ville.
+				
+			\end{description}
+
+
+\begin{exemple}
+Extrait de la table \textbf{villes}
+\begin{center}\begin{tabular}{*{6}{c}}
+\textbf{insee} & \textbf{nom} & \textbf{dpt} & \textbf{lat} & \textbf{lon} & \textbf{pop}\\ 
+\hline \hline
+$2B033$&Bastia&2B&42.7&9.45&$42912$\\ 
+$23067$&Saint Denis&23&45.7&2.25&$766$\\ 
+$25056$&Besançon&25&47.23&6.02&$115879$\\ 
+$46175$&Saint Denis&46&44.62&1.98&$940$\\ 
+$67482$&Strasbourg&67&48.58&7.75&$761042$\\ 
+$93066$&Saint Denis&93&48.93&2.35&$107762$\\ 
+$97411$&Saint Denis&97&-20.87&55.43&$145347$\\ 
+...\end{tabular}\end{center}
+\end{exemple}
+
+		
+		\item	la table \textbf{mesures} enregistre l'évolution des températures
+		au cours de l'année et contient les colonnes (attributs) suivantes :
+		
+			\begin{description}
+				\item[\textbf{ville}:] Chaîne de caractères représentant le numéro INSEE 
+				identifiant la ville.
+				
+				\item[\textbf{jour}:] Entier (de valeur comprise entre 1 et 365 
+				pour l'année 2013) représentant le jour $j$ de l'année où est 
+				faite la mesure (1 correspond au premier janvier alors que 365 
+				correspond au 31 décembre).
+				
+				\item[\textbf{Tmin}:] Flottant représentant la température 
+				minimale mesurée le jour $j$ en degrés celsius.
+				
+				\item[\textbf{Tmax}:] Flottant représentant la température 
+				maximale mesurée le jour $j$ en degrés celsius.
+				
+			\end{description}
+		
+\begin{exemple}
+Extrait de la table \textbf{mesures}
+\begin{center}\begin{tabular}{*{4}{c}}
+\textbf{ville} & \textbf{jour} & \textbf{Tmin} & \textbf{Tmax} \\ \hline \hline
+$$25056$$&$110$&$5.2$&$9.7$\\ 
+$$97411$$&$110$&$25.4$&$36.8$\\ 
+$$25056$$&$216$&$16.7$&$33.9$\\ 
+$$67482$$&$363$&$-2.7$&$3.3$\\ 
+...\end{tabular}\end{center}
+\end{exemple}
+
+	\end{itemize}
+
+
+	
+%\subparagraph{}
+%Définir rapidement ce qu'est une clef primaire. Expliquer si la colonne 
+%	(attribut) \textbf{nom} de la première table peut être une clef primaire et, 
+%	dans le cas contraire, si une autre colonne (attribut) peut jouer ce rôle. 
+%	Même question pour la seconde table concernant la colonne (attribut) 
+%	\textbf{ville}.
+\subparagraph{} 	\textit{Qu'appelle-t-on \textbf{clé primaire} pour une table ? 
+	Peut-on facilement en définir une pour la table \textbf{villes} ? 
+	Pour la table \textbf{mesures} ?}
+	
+\ifprof
+\begin{corrige}
+\begin{py}
+\begin{python}
+une clé primaire est la donnée qui permet d'identifier de manière unique un enregistrement dans une table
+pour la table ville, la clé primaire est le numéro d'insee
+pour la table mesures, il n'y a pas de clé primaire simple, il faut la construire à partir de deux colonnes ville,jour
+\end{py}
+\end{corrige}
+\else
+\fi
+	
+\subparagraph{} 	
+\textit{ Écrire une requête en langage SQL qui récupère depuis la table 
+	\textbf{mesures} les relevés dont la température moyenne définie par 
+	$T_{\text{moy}}=\frac{T_{\text{min}}+T_{\text{max}}}{2}$ est strictement inférieure à $0$ degré celsius
+		 (avec 	toutes les colonnes disponibles). }
+		 
+\ifprof
+\begin{corrige}
+\begin{py}
+\begin{python}
+SELECT * FROM mesures WHERE (Tmax+Tmin)/2<0;
+\end{py}
+\end{corrige}
+\else
+\fi
+	
+\subparagraph{} 
+\textit{Écrire une requête en langage SQL qui récupère depuis la table 
+	\textbf{villes} le numéro INSEE, le nom et le département de toutes les villes du quart 
+	nord-est de la France, c'est-à-dire celles dont la latitude est supérieure 
+	à $47$ degrés et dont la longitude est supérieure à $2$ degrés.}
+
+\ifprof
+\begin{corrige}
+\begin{py}
+\begin{python}
+SELECT INSEE,nom,dpt  FROM villes WHERE lat>47 AND lon>2;
+\end{py}
+\end{corrige}
+\else
+\fi
+
+\subparagraph{}
+\textit{Écrire une requête SQL qui récupère le nom des villes dont la température maximale est supérieure strictement à 30°C.}
+
+\ifprof
+\begin{corrige}
+\begin{py}
+\begin{python}
+SELECT DISTINCT nom FROM villes INNER JOIN mesures ON INSEE=ville WHERE Tmax>30;
+\end{py}
+\end{corrige}
+\else
+\fi
+
+\section*{Partie 4 : Manipulation des données}
+
+Depuis la base de données, on a récupéré les 
+relevés météorologiques  concernant la ville de Saint-Étienne pour l'année 2016 dans
+ un fichier nommé \textbf{SaintEtienne\_2016.txt} .\\
+  Ce fichier contient 365 lignes (une pour chaque mesure et donc jour de l'année) du 
+type 
+
+\begin{exemple}
+Extrait du fichier \textbf{SaintEtienne\_2016.txt}
+\begin{verbatim}
+# Jour;Tmin;Tmax
+1;4.5;12
+2;5.1;10.2
+3;2.5;8.8
+...
+168;11.8;22.3
+169;12.3;21.1
+...
+366;-4.7;4.7
+\end{verbatim}
+
+NB : les trois petits points ne sont bien sûr pas présents dans 
+le fichier mais signalent juste que l'on a omis de recopier un certain nombre 
+de lignes.
+\end{exemple}
+
+
+Sur chaque ligne, la chaîne de caractère correspond à trois champs séparés par des point-virgules, à savoir
+	\begin{itemize}
+		\item	le numéro correspondant au jour de la mesure (entier naturel);
+		\item	la température minimale mesurée ce jour (en degrés celsius, flottant);
+		\item	la température maximale mesurée ce jour (en degrés celsius, flottant).
+	\end{itemize}
+
+
+Pour lire des fichiers de ce type,  on a écrit  :
+ \begin{py}
+\begin{lstlisting}
+def lecture_fichier(fichier):
+    f = open(fichier,mode='r')
+    liste=f.readlines()
+    f.close()
+    
+    jours,Tmin,Tmax = [ ],[ ],[ ]
+    for ligne in liste:
+        if ligne[0] != '\#':
+            t,T1,T2 = ligne.split(';')
+            jours.append(int(t))
+            Tmin.append(float(T1))
+            Tmax.append(float(T2))
+    
+    return jours,Tmin,Tmax
+
+jours,Tmin,Tmax = lecture_fichier('SaintEtienne_2016.txt')
+\end{lstlisting}
+\end{py}
+
+%
+%
+%
+%Aide Python concernant \textbf{split}, méthode agissant sur une chaîne de caractères
+%\begin{verbatim}
+% |  split(...)
+% |      S.split(sep=None, maxsplit=-1) -> list of strings
+% |      
+% |      Return a list of the words in S, using sep as the
+% |      delimiter string.  If maxsplit is given, at most maxsplit
+% |      splits are done. If sep is not specified or is None, any
+% |      whitespace string is a separator and empty strings are
+% |      removed from the result.
+%\end{verbatim}
+
+On admet que l'appel de la fonction a permis de récupérer trois listes : la liste \textbf{jours}
+contenant le numéros du jour et  les deux listes \textbf{Tmin} et 
+\textbf{Tmax} contenant les températures minimales et maximales concernant le jour 
+correspondant.
+
+
+\subparagraph{} 
+\textit{Proposer un ordre de grandeur du nombre d'octets utiles du fichier 
+\textbf{saintEtienne\_2016.txt} dont chaque caractère est codé en ASCII.}
+
+\ifprof
+\begin{corrige}
+\begin{py}
+\begin{python}
+nb de jours codage de 1 à 365 soit (9+2*90+3*265)caractères
+nb de ';' 2*365
+4 caractères maxi pour la température mini et maxi : 4*2*365
+soit 4634 octets (ASCII 1 octet)
+\end{py}
+\end{corrige}
+\else
+\fi
+	
+\subparagraph{} 
+	\textit{Écrire une fonction \textbf{moyenne} qui prend en entrée deux listes 
+	\textbf{a} et \textbf{b} de même taille (condition qui ne doit \textbf{pas} être vérifiée)
+	 et renvoie une liste de même taille contenant dans 
+	la case d'indice \textbf{i} la valeur moyenne des valeurs des flottants 
+	stockés dans les deux listes \textbf{a} et \textbf{b} à l'indice \textbf{i}.}
+	
+\ifprof
+\begin{corrige}
+\begin{py}
+\begin{python}
+def moyenne(a,b):
+    Lm=[]
+    for i in range(len(a)):
+        Lm.append((a[i]+b[i])/2)
+    return Lm
+\end{py}
+\end{corrige}
+\else
+\fi
+	
+\subparagraph{} 
+\textit{En appliquant la fonction précédente, écrire l'instruction Python 
+	qui stocke dans la variable \textbf{Tmoy} la liste des températures moyennes 
+	journalières à partir des données stockées dans les listes \textbf{Tmin} et~\textbf{Tmax}.}
+	
+\ifprof
+\begin{corrige}
+\begin{py}
+\begin{python}
+Tmoy=moyenne(Tmin,Tmax)
+\end{py}
+\end{corrige}
+\else
+\fi
+
+	
+\subparagraph{} 
+\textit{On considère qu'il est nécessaire de couper les arrivées d'eau 
+	extérieures pour risque de gel quand la température moyenne sur la journée 
+	est strictement inférieure à $0$ degré celsius. En utilisant une des fonctions 
+	programmées dans la première partie, stocker dans la variable 
+	\textbf{nb\_jours\_gel} le nombre de jours où il a fallu couper l'eau des 
+	conduites extérieures pour la ville de Saint Étienne.}
+	
+\ifprof
+\begin{corrige}
+\begin{py}
+\begin{python}
+nb_jours_gel=majores_par(Tmoy,0)
+\end{py}
+\end{corrige}
+\else
+\fi
+
+\subparagraph{} 
+\textit{On s'intéresse ici aux écarts entre les températures minimale et maximale au cours d'une même
+ journée, écrire les lignes de commande qui permettent de créer une liste \textbf{ecart} 
+ contenant les écarts $Tmax-Tmin$ pour chaque jour et de créer la variable mini\_ecart contenant 
+ le minimum des écarts pour l'année $2016$.}
+
+\ifprof
+\begin{corrige}
+\begin{py}
+\begin{python}
+ecart=[Tmax[i]-Tmin[i] for i in range(len(Tmin))]
+mini_ecart=mini(ecart)
+\end{py}
+\end{corrige}
+\else
+\fi
+ 
+ \subparagraph{} 
+\textit{On souhaite étudier les variations d'un jour sur l'autre de la température maximale.\\
+ Donner les lignes de commandes permettant d'obtenir, \textbf{sans créer de nouvelles listes}, 
+ la plus grande variation de la température maximale entre deux jours consécutifs.}
+
+\ifprof
+\begin{corrige}
+\begin{py}
+\begin{python}
+variation=0
+for i in range(0,len(Tmax)-1):
+    e=abs(Tmax[i+1]-Tmax[i])
+    if e>variation:
+        variation=e
+print (variation)
+\end{py}
+\end{corrige}
+\else
+\fi
+ 
+
+\section*{Partie 5 : une modélisation physique}
+
+On souhaite modéliser les variations annuelles de 
+température en les couplant aux variations saisonnières d'ensoleillement.
+
+On admet que l'équation régissant l'évolution de la température (notée $\theta$ exprimée
+en degrés Celsius) s'écrit
+
+$$	\frac{d\theta(t)}{dt} + \alpha\left( \theta(t)+T_0\right)^4 = \mu\left(1 + \varepsilon
+\cos(\omega t)\right)	$$
+
+où $\alpha$, $T_0$, $\mu$, $\varepsilon$ et $\omega$ sont des constantes définies de manières 
+globales et accessibles dans toute fonction.\\
+
+L'équation différentielle vérifiée par $\theta$ peut se mettre sous la forme :
+$\frac{d\theta(t)}{dt} =f(\theta(t),t)$ où $f$ est une fonction.
+
+On souhaite résoudre cette équation différentielle par la méthode d'Euler.\\
+On travaille sur l'intervalle de temps $[0,t_max]$ avec le pas de temps $d t$.\\
+On pose $t_0=0$, $t_1=t_0+dt$, $\cdots$, $t_N=t_{N-1}+dt$ jusqu'à ce que $t_N+dt>t_max$
+et, $\theta_k$ une valeur approchée de la température au temps $t_k$ obtenu par la méthode d'Euler.\\
+
+\subparagraph{}
+\textit{Écrire la  fonction \textbf{f} d'arguments deux flottants $t$ et $\theta$ et retournant 
+$f(\theta,t)$.}
+
+\ifprof
+\begin{corrige}
+\begin{py}
+\begin{python}
+def f(theta,t):
+    return (mu*(1+eps*np.cos(omega*t))-alpha*(theta+T0)**4)
+\end{py}
+\end{corrige}
+\else
+\fi
+
+\subparagraph{} 
+\textit{Justifier que pour tout $k$ tel que $1 \leq k \leq N$, on a 
+$\theta_{k}=\theta_{k-1}+f(\theta_{k-1},t_{k-1}) \times dt$.}
+
+\subparagraph{} 
+\textit{Écrire la fonction \textbf{euler} d'argument trois flottants $theta0$, $dt$ et $tmax$ qui retourne 
+deux listes : \textbf{temps} et \textbf{theta} contenant respectivement les valeurs 
+$t_k$ et $\theta_k$ pour $0\leq k \leq N$.}
+
+\ifprof
+\begin{corrige}
+\begin{py}
+\begin{python}
+def euler(theta0,dt,tmax):
+    temps=[0]
+    theta=[theta0]
+    t=dt
+    while t<=tmax:
+        temps.append(t)
+        theta.append(theta[-1]+dt*f2(theta[-1],t))
+        t=t+dt
+    return temps,theta
+\end{py}
+\end{corrige}
+\else
+\fi
+
+\section*{V \quad Annexe - documentation partielle}
+
+On supposera que les fonctions ont \'et\'e import\'ees et sont directement utilisables.
+
+
+\subsection*{V.1 \quad Tracer une courbe {\tt plot(*args,**kwargs)}}
+
+Plot lines and/or markers to the Axes. {\tt args} is a variable length argument, allowing for multiple {\tt x}, {\tt y} pairs with an optional format string ({\tt fmt}). For example, each of the following is legal :
+
+\fbox{ \parbox{0.97\textwidth}{\tt
+plot (x, y)        \# plot x and y using default linestyle and color\\
+plot (x, y, 'bo')  \# plot x and y using blue circle markers}}
+
+An arbitrary number of {\tt x}, {\tt y}, {\tt fmt} groups can be specified, as in :
+
+
+\fbox{ \parbox{0.97\textwidth}{\tt
+plot (x1, y1, 'g\^ ', x2, y2, 'g-' )}}
+
+Return value is a list of lines that were added.
+
+By default, each line is assigned a different style specified by a 'style cycle'.
+
+The following format string characters are accepted to control the line style or marker :
+
+\hfil
+\begin{tabular}{|cc|c|cc|}
+\hline
+character &description & \quad &  character & description \\
+\hline
+'-' &  solid line style & & '3' &  tri\_left marker\\
+'' &  dashed line style & &  '4' &  tri\_right marker\\
+'-.' &  dash-dot line style & & 's' &  square marker\\
+' :' &  dotted line style & & 'p' &  pentagon marker\\
+'.' &  point marker & & '*' &  star marker\\
+',' &  pixel marker & & 'h' &  hexagon1 marker\\
+'o' &  circle marker & & 'H' &  hexagon2 marker\\
+'v' &  triangle\_down marker & & '+' &  plus marker\\
+' ' &  triangle\_up marker & & 'x' &  x marker\\
+'<' &  triangle\_left marker & & 'D' &  diamond marker\\
+'>' &  triangle\_right marker & & 'd' &  thin\_diamond marker\\
+'1' &  tri\_down marker & & '|' &  vline marker\\
+'2' &  tri\_up marker & & '\_' &  hline marker \\
+\hline
+\end{tabular}
+
+The following color abbreviations are supported :
+
+\hfil
+\begin{tabular}{|cc|}
+\hline
+character & color\\
+\hline
+b' &  blue \\
+g' & green \\
+r' & red \\
+c' & cyan \\
+m' & magenta \\
+y'  & yellow \\
+k'  & black \\
+w'  & white \\
+\hline
+\end{tabular}
+
+
+Line styles and colors are combined in a single format string, as in {\tt 'bo'} for blue circles.
+
+
+\subsection*{V.2 \quad  Titres et l\'egende}
+
+{\tt xlabel(s)} : Set the x axis label of the current axis with the string {\tt s}.
+
+{\tt ylabel(s)} : Set the y axis label of the current axis with the string {\tt s}.
+
+{\tt title(s)} : Set a title of the current axes with the string {\tt s}.
+
+{\tt legend(*args)} : Places a legend on the axes. args must be a list of string.
+
+\end{document}

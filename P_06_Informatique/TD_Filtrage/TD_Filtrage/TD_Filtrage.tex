@@ -1,0 +1,166 @@
+\documentclass[10pt,fleqn]{article} % Default font size and left-justified equations
+\usepackage[%
+    pdftitle={Informatique : Tris},
+    pdfauthor={Xavier Pessoles}]{hyperref}
+    
+\input{style/new_style}
+\input{style/macros_SII}
+
+\usepackage{multicol}
+\fichetrue
+%\fichefalse
+
+\proftrue
+\proffalse
+
+\tdtrue
+%\tdfalse
+
+%\courstrue
+\coursfalse
+
+% -------------------------------------
+% Déclaration des titres
+% -------------------------------------
+
+\def\discipline{Informatique}
+\def\xxtete{Informatique}
+\def\classe{PT -- PT$\star$}
+\def\xxnumpartie{Partie 5}
+\def\xxpartie{Informatique}
+
+\def\xxnumchapitre{}%}num synth }
+\def\xxchapitre{\hspace{.12cm} Traitement du signal}
+
+\def\xxtitreexo{CAN et filtrage d'un signal}
+\def\xxsourceexo{}%\hspace{.2cm} Informatique pour tous en CPGE -- \textit{Wack \& al.}}
+
+\def\xxposongletx{2}
+\def\xxposonglettext{1.45}
+\def\xxposonglety{13}%10
+
+\def\xxonglet{Part. 6}
+
+\def\xxactivite{TD 01}
+\def\xxauteur{\textsl{Xavier Pessoles}}
+
+\def\xxcompetences{%
+%\textsl{%
+%\textbf{Savoirs et compétences :}
+%\begin{itemize}[label=\ding{112},font=\color{ocre}] 
+%\item Alg -- C17 : tris d’un tableau à une dimension de valeurs numériques (tri par insertion, tri rapide, tri fusion).
+%\end{itemize}
+%}
+}
+
+\def\xxfigures{\includegraphics[width=5cm]{images/ordre1_3}}%figues de la page de garde
+
+\def\xxpied{%
+Partie 5 -- Informatique\\
+Ch. 1 : Traitement du signal -- \xxactivite%
+}
+
+
+
+\setcounter{secnumdepth}{5}
+%---------------------------------------------------------------------------
+
+
+\begin{document}
+%\chapterimage{png/Fond_Cin}
+\input{style/new_pagegarde}
+\vspace{7cm}
+\pagestyle{fancy}
+\thispagestyle{plain}
+
+
+\def\columnseprulecolor{\color{ocre}}
+\setlength{\columnseprule}{0.4pt} 
+\begin{multicols}{2}
+%
+\begin{obj}
+L'objectif est de réaliser le convertisseur analogique numérique (CAN) d'un signal. Pour cela on partira d'un signal bruité artificiel que l'on échantillonnera, quantifiera puis filtrera.
+\end{obj}
+
+
+\subsection*{Génération du signal bruité}
+
+\subparagraph{}
+\textit{Saisir et commenter le bloc de code suivant.}
+
+
+\begin{py}
+\begin{python}
+import numpy as np
+import matplotlib.pyplot as plt
+from random import randint
+from math import pi,floor
+# Génération du signal artificiel
+nb = 10000
+temps = np.linspace(0,10,nb)
+aleatoire = [randint(-200,200)/10000
+    *(i%2)*(i%3)*(i%4)*(i%5) for i in range(nb)]
+aleatoire  = np.array(aleatoire)
+# Signal clair (porteuse)
+signal_clair = 10*np.sin(temps*2*pi*5000)
+    *np.exp(-temps/2)*(1-np.exp(-temps))
+# Signal bruité
+signal = 10*np.sin(temps*2*pi*5000)
+   *np.exp(-temps/2)*(1-np.exp(-temps))+aleatoire
+\end{python}
+\end{py}
+
+\subparagraph{}
+\textit{Tracer la courbe bruitée et la courbe non bruitée.}
+
+\subsection*{Échantillonnage et blocage du signal}
+
+\subparagraph{}
+\textit{Réaliser un échantillonnage du signal en fonction d'une période d'échantillonnage \texttt{Te} ou d'une fréquence d'échantillonnage \texttt{fe}.}
+
+\subparagraph{}
+\textit{Tracer le signal avec une fréquence d'échantillonnage de 1 Hz et de 0,5 Hz. Commentez.}
+
+\subparagraph{}
+\textit{Entre deux échantillons, le signal est bloqué. Cela signifie qu'il conserve la même valeur pendant toute la durée de l'échantillon. Tracer le signal bloqué.}
+
+
+\subsection*{Quantification du signal}
+Un système numérique étant codé sur $n$ bits, il est nécessaire de faire une approximation entre la valeur analogique du signal et la valeur numérique. 
+
+\subparagraph{}
+\textit{Réaliser une fonction permettant de trouver le niveau de quantification en fonction d'une valeur maximale notée \texttt{Umax}, d'une valeur minimale notée \texttt{Umin} et du niveau de quantification noté \texttt{Nq}.}
+
+\subparagraph{}
+\textit{Tracer le signal analogique et le signal quantifié -- bloqué.}
+
+\subsection*{Filtrage d'un signal numérique}
+On utilise un filtre du premier ordre qui ne nécessite pas d'amplification. 
+
+\subparagraph{}
+\textit{Réaliser le filtrage du signal en fonction de la pulsation de cassure.}
+
+\subparagraph{}
+\textit{Tracer le signal analogique et le signal filtré pour deux pulsations différentes.}
+
+
+\subparagraph{}
+\textit{Réaliser le filtrage du signal en utilisant une moyenne glissante.}
+
+\subparagraph{}
+\textit{Tracer le signal analogique et le signal filtré pour deux fenêtres différentes.}
+
+
+\end{multicols}
+\end{document}
+
+
+\section*{Exercice}
+\setcounter{exo}{0}
+\subparagraph{}
+\textit{}
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi

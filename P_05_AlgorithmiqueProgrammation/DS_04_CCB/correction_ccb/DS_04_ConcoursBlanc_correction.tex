@@ -1,0 +1,586 @@
+\documentclass[10pt,fleqn]{article} % Default font size and left-justified equations
+\usepackage[%
+    pdftitle={Informatique : Transfert thermique},
+    pdfauthor={Xavier Pessoles}]{hyperref}
+
+\input{style/new_style}
+\input{style/macros_SII}
+
+\fichetrue
+%\fichefalse
+
+\proftrue
+%\proffalse
+
+%\tdtrue
+\tdfalse
+
+%\courstrue
+\coursfalse
+
+% -------------------------------------
+% Déclaration des titres
+% -------------------------------------
+
+\def\discipline{Informatique \ifprof \\ Corrigé \else \fi}
+\def\xxtete{Informatique}
+
+\def\classe{PT -- PT $\star$}
+\def\xxnumpartie{CB 2017}
+\def\xxpartie{Concours Blanc 2017}
+
+\def\xxnumchapitre{Autour de données météorologiques }
+\def\xxchapitre{}%\textit{$\;$ \\ D'après Concours CCP -- PC 2015}}
+
+\def\xxtitreexo{Prothèse Active Transtibiale}
+\def\xxsourceexo{\hspace{.2cm} D'après X 2015 -- MP/PC.}
+
+\def\xxposongletx{2}
+\def\xxposonglettext{1.45}
+\def\xxposonglety{20}
+\def\xxonglet{\textsf{CB 2017 }}
+
+\def\xxactivite{}
+\def\xxauteur{\textsl{La Martinière Monplaisir -- Lyon\\Étienne Mimard -- Saint-Étienne }}
+
+\def\xxcompetences{%
+\texttt{%
+\textbf{Savoirs et compétences :}\\
+\noindent \textbf{Résoudre :} à partir des modèles retenus :
+\begin{itemize}[label=\ding{112},font=\color{ocre}] 
+\item choisir une méthode de résolution analytique, graphique, numérique;
+\item mettre en \oe{}uvre une méthode de résolution.
+\end{itemize}
+\begin{itemize}[label=\ding{112},font=\color{ocre}] 
+\item \textit{Rés -- C1.1 :} Loi entrée sortie géométrique et cinématique -- Fermeture géométrique.
+\end{itemize}
+%
+%\noindent \textit{Mod2 -- C4.1 :} Représentation par schéma bloc.
+}}
+
+\def\xxfigures{
+%\includegraphics[width=.8\textwidth]{images/prot_01}
+}%figues de la page de garde
+
+\def\xxpied{%
+Concours Blanc 2017}
+
+
+\setcounter{secnumdepth}{5}
+%---------------------------------------------------------------------------
+
+
+\begin{document}
+
+\input{style/new_pagegarde}
+\vspace{1.7cm}
+\pagestyle{fancy}
+\thispagestyle{plain}
+
+\section*{Partie 1 : quelques outils pour le traitement des données}
+
+\subparagraph{}
+\textit{Expliquer le déroulement pas à pas (évolution de la valeur des
+  variables) lors de l'appel   \textbf{mini([6,2,15,1,15,1])}, puis donner la valeur   renvoyée.}
+	
+\ifprof
+\begin{corrige}~\
+\begin{python}
+mini([6,2,15,1,15,1])
+pour i=1 mini=2
+pour i=2 mini=2
+pour i=3 mini=1
+pour i=4 mini=1
+pour i=5 mini=1
+\end{python}
+\end{corrige}
+\else
+\fi
+
+\subparagraph{}
+\textit{Évaluer la complexité temporelle de l'appel \textbf{mini(t)} en fonction du nombre $n$ 
+d'éléments de  \texttt{t}.\\
+Vous calculerez pour cela le nombre de comparaisons et d'opérations (addition, soustraction, division, multiplication) réalisées.}
+
+\ifprof
+\begin{corrige}
+il y a (n-1) comparaisons et aucune opération soit une complexité en O(n)
+\end{corrige}
+\else
+\fi
+
+\subparagraph{}
+ \textit{Proposer une modification de la fonction \textbf{mini} pour que la valeur
+  renvoyée soit le \emph{maximum} et non le \emph{minimum}.}
+	
+\ifprof
+\begin{corrige}~\
+\begin{python}
+def max(t):
+    if len(t)==0:
+        return None
+    m=t[0]
+    for i in range(1,len(t)):
+        if t[i]>=m:
+            m=t[i]
+    return (m)
+\end{python}
+\end{corrige}
+\else
+\fi
+	
+\subparagraph{}
+\textit{Définir, du point de vue de la programmation, ce qu'est une fonction récursive. Donner les étapes de l'écriture d'une fonction récursive en donnant comme exemple la recherche du minimum d'une liste.}
+
+\ifprof
+\begin{corrige}
+Il est nécessaire d'avoir une condition d'arrêt et une boucle de récursivité. La condtion d'arrêt pour la fonction \textbf{mini\_recursive} est le mini de la liste à un seul élément et la boucle de récursivité est la comparaison du mini de la liste tronquée avec l'élément suivant.
+\end{corrige}
+\else
+\fi
+	
+\subparagraph{}
+\textit{Définir une fonction \textbf{mini\_recursive} qui a pour argument une liste de valeurs entières ou flottants et qui renvoie par une méthode récursive le \emph{minimum} de cette liste.}
+
+\ifprof
+\begin{corrige}~\
+\begin{python}
+def mini_recursive(t):
+    n=len(t)
+    if n==1:
+        return t[0]
+    else:
+        p=mini_recursive(t[0:n-1])
+        if t[-1]<p:
+            p=t[-1]
+        return p
+\end{python}
+\end{corrige}
+\else
+\fi
+
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=0.3\textwidth]{images/recursivite.png}
+\end{figure}
+
+  
+ \subparagraph{}
+\textit{ Écrire une fonction \textbf{position\_mini} d'argument une liste et renvoyant \textbf{une} position
+  du minimum de cette liste.\\}
+  
+\ifprof
+\begin{corrige}~\
+\begin{python}
+def position_mini(t):
+    indice=0
+    p=t[0]
+    for i in range(1,len(t)):
+        if t[i]<=p: #ou t[i]<p
+            p=t[i]
+            indice=i
+    return i
+\end{python}
+\end{corrige}
+\else
+\fi
+
+\subparagraph{}
+\textit{Écrire une fonction \textbf{min2D} d'argument un tableau \textbf{t} d'entiers ou flottants 
+et renvoyant le minimum de \textbf{t}. On utilisera la fonction \textbf{mini}.}
+
+\ifprof
+\begin{corrige}~\
+\begin{python}
+def mini2D(t):
+    p=mini(t[0])
+    for i in range(1,len(t)):
+        p1=mini(t[i])
+        if p1<p:
+            p=p1
+    return p
+\end{python}
+\end{corrige}
+\else
+\fi
+
+\textit{Évaluer la complexité temporelle de cette fonction.
+Vous calculerez pour cela le nombre de comparaisons et d'opérations (addition, soustraction, division, multiplication) réalisées.}
+
+\subparagraph{}
+\textit{Écrire une fonction \textbf{chaine\_mini} réalisant effectivement cette opération.}
+
+
+\ifprof
+\begin{corrige}~\
+\begin{python}
+def chaine_mini(L):
+    nom=L[0][0]
+    valeur=L[0][1]
+    for i in range(1,len(t)):
+        if L[i][1]<=valeur:
+            valeur=L[i][1]
+            nom=L[i][0]
+    return nom
+\end{python}
+\end{corrige}
+\else
+\fi
+
+\subparagraph{} 
+\textit{Écrire enfin une fonction \textbf{majores\_par} réalisant cette opération.}
+
+\ifprof
+\begin{corrige}~\
+\begin{python}
+def majores_par(t,seuil):
+    k=0
+    for i in range(len(t)):
+        if t[i]<seuil:
+            k+=1
+    return k
+\end{python}
+\end{corrige}
+\else
+\fi
+
+\subparagraph{}
+\textit{Modifier la fonction précédente pour obtenir une fonction \textbf{elements\_majores\_par}
+  retournant la liste des éléments majorés par le seuil.}
+	
+\ifprof
+\begin{corrige}~\
+\begin{python}
+def elements_majores_par(t,seuil):
+    L1=[]
+    for i in range(len(t)):
+        if t[i]<seuil:
+            L1.append(t[i])
+    return L1
+\end{python}
+\end{corrige}
+\else
+\fi
+
+\section*{Partie 2 : Exploitation des mesures de température}
+
+
+\subparagraph{}
+\textit{Définir la fonction \textbf{g($\theta$)=R($\theta$)-$R_{\text{mesure}}$}.}
+
+\ifprof
+\begin{corrige}~\
+\begin{python}
+def g(x):
+    return 100*(1+a*x+b*x**2+c*x**3*(x-100))-R
+\end{python}
+\end{corrige}
+\else
+\fi
+
+\subparagraph{}
+\textit{Écrire les instructions python permettant de tracer \textbf{g($\theta$)} pour $\theta\in[0°,50°]$ et $R=104\Omega$ par pas de $0.5°$.}
+
+\ifprof
+\begin{corrige}~\
+\begin{python}
+les_theta=[i*0.5 for i in range(101)]
+les_g=[g(i) for i in les_theta]
+plt.plot(les_theta,les_g)
+plt.xlabel('les theta')
+plt.ylabel('g(theta)')
+plt.grid()
+plt.show()
+\end{python}
+\end{corrige}
+\else
+\fi
+
+\subparagraph{}
+\textit{Écrire une fonction \textbf{dichotomie} d'arguments les bornes d'étude \texttt{a} et \texttt{b}, la fonction \texttt{g} ainsi que la précision \texttt{epsilon} et qui renvoie la valeur de $\theta$ à epsilon près solution de \textbf{g($\theta$)=0}. Proposer une valeur pour \texttt{a} et une valeur pour \texttt{b}. Justifier votre choix.}
+
+\ifprof
+\begin{corrige}~\
+\begin{python}
+def dichotomie(a, b, f, epsilon):
+    g = a
+    d = b
+    while (d - g) > 2 * epsilon:
+        m = (g + d)/2
+        if f(g) * f(m) <= 0:
+            d = m
+        else:
+            g = m
+    return((d + g) / 2)
+\end{python}
+\end{corrige}
+\else
+\fi
+
+\vspace{0.5cm}
+Remarque : \texttt{b} et \texttt{c} étant très faibles, on utilise généralement la relation approchée suivante :
+\begin{itemize}
+	\item $R(\theta)=R(0°C)\times(1+a\theta)$ avec $a=3,90802.10^{-3}°C^{-1}$
+\end{itemize}
+
+\subparagraph{}
+\textit{Écrire une fonction \textbf{tempInfrahoraire} ayant pour arguments une liste des temps en seconde sur un intervalle de 6 minutes et la liste des températures en degré celsius correspondantes et qui renvoie deux valeurs : la moyenne des températures sur cet intervalle de temps et l'heure en seconde correspondant au relevé de température.\
+Les pas de temps ne sont pas constants dans la liste des temps. Vous appliquerez pour l'intégration la méthode des rectangles à "droite".}
+
+\ifprof
+\begin{corrige}~\
+\begin{python}
+def tempinfrahoraire(Ltemps,Ltheta):
+    s=0
+    for i in range(1,len(Ltheta)):
+        s=s+Ltheta[i]*(Ltemps[i]-Ltemps[i-1]) #intégration à droite, c'est la valeur de température mesurée à l'instant t{i+1} qui correspond à la température mesurée sur l'intervalle [t{i},t{i+1}]
+    return s/(Ltemps[-1]-Ltemps[0]),Ltemps[-1]
+\end{python}
+\end{corrige}
+\else
+\fi
+
+\subparagraph{}
+\textit{Écrire les instructions python pour construire les deux listes \texttt{les\_t\_6min} et \texttt{les\_theta\_6min} à partir des deux listes des relevés pour une journée. Vous utiliserez la fonction \textbf{tempInfrahoraire}.}
+
+\ifprof
+\begin{corrige}~\
+\begin{python}
+les listes de temps en secondes et de theta ont la même longueur
+les_t_6min=[]
+les_theta_6min=[]
+for i in range(len(theta)):
+    s=0
+    Ltemps=[]
+    Ltheta=[]
+    while s<=360:
+        Ltemps.append(temps[i])
+        Ltheta.append(theta[i])
+        s=s+temps[i]-temps[i-1]
+    moy_theta,heure=tempinfrahoraire(Ltemps,Ltheta)
+    les_t_6min.append(heure)
+    les_theta_6min.append(moy_theta)
+\end{python}
+\end{corrige}
+\else
+\fi
+
+\section*{Partie 3 : Recherche dans les archives de Météo-France}
+La base de données de Météo-France concernant l'année écoulée est 
+constituée de deux tables :\\
+	
+\subparagraph{} 	\textit{Qu'appelle-t-on \textbf{clé primaire} pour une table ? 
+	Peut-on facilement en définir une pour la table \textbf{villes} ? 
+	Pour la table \textbf{mesures} ?}
+	
+\ifprof
+\begin{corrige}
+une clé primaire est la donnée qui permet d'identifier de manière unique un enregistrement dans une table
+pour la table ville, la clé primaire est le numéro d'insee
+pour la table mesures, il n'y a pas de clé primaire simple, il faut la construire à partir de deux colonnes ville,jour
+\end{corrige}
+\else
+\fi
+	
+\subparagraph{} 	
+\textit{ Écrire une requête en langage SQL qui récupère depuis la table 
+	\textbf{mesures} les relevés dont la température moyenne définie par 
+	$T_{\text{moy}}=\frac{T_{\text{min}}+T_{\text{max}}}{2}$ est strictement inférieure à $0$ degré celsius
+		 (avec 	toutes les colonnes disponibles). }
+		 
+\ifprof
+\begin{corrige}~\
+\begin{python}
+SELECT * FROM mesures WHERE (Tmax+Tmin)/2<0;
+\end{python}
+\end{corrige}
+\else
+\fi
+	
+\subparagraph{} 
+\textit{Écrire une requête en langage SQL qui récupère depuis la table 
+	\textbf{villes} le numéro INSEE, le nom et le département de toutes les villes du quart 
+	nord-est de la France, c'est-à-dire celles dont la latitude est supérieure 
+	à $47$ degrés et dont la longitude est supérieure à $2$ degrés.}
+
+\ifprof
+\begin{corrige}~\
+\begin{python}
+SELECT INSEE,nom,dpt  FROM villes WHERE lat>47 AND lon>2;
+\end{python}
+\end{corrige}
+\else
+\fi
+
+\subparagraph{}
+\textit{Écrire une requête SQL qui récupère le nom des villes dont la température maximale est supérieure strictement à 30°C.}
+
+\ifprof
+\begin{corrige}~\
+\begin{python}
+SELECT DISTINCT nom FROM villes INNER JOIN mesures ON INSEE=ville WHERE Tmax>30;
+\end{python}
+\end{corrige}
+\else
+\fi
+
+\section*{Partie 4 : Manipulation des données}
+
+On admet que l'appel de la fonction a permis de récupérer trois listes : la liste \textbf{jours}
+contenant le numéros du jour et  les deux listes \textbf{Tmin} et 
+\textbf{Tmax} contenant les températures minimales et maximales concernant le jour 
+correspondant.
+
+\subparagraph{} 
+\textit{Proposer un ordre de grandeur du nombre d'octets utiles du fichier 
+\textbf{saintEtienne\_2016.txt} dont chaque caractère est codé en ASCII.}
+
+\ifprof
+\begin{corrige}~\
+nb de jours codage de 1 à 365 soit (9+2*90+3*265)caractères
+nb de ';' 2*365
+4 caractères maxi pour la température mini et maxi : 4*2*365
+soit 4634 octets (ASCII 1 octet)
+\end{corrige}
+\else
+\fi
+	
+\subparagraph{} 
+	\textit{Écrire une fonction \textbf{moyenne} qui prend en entrée deux listes 
+	\textbf{a} et \textbf{b} de même taille (condition qui ne doit \textbf{pas} être vérifiée)
+	 et renvoie une liste de même taille contenant dans 
+	la case d'indice \textbf{i} la valeur moyenne des valeurs des flottants 
+	stockés dans les deux listes \textbf{a} et \textbf{b} à l'indice \textbf{i}.}
+	
+\ifprof
+\begin{corrige}~\
+\begin{python}
+def moyenne(a,b):
+    Lm=[]
+    for i in range(len(a)):
+        Lm.append((a[i]+b[i])/2)
+    return Lm
+\end{python}
+\end{corrige}
+\else
+\fi
+	
+\subparagraph{} 
+\textit{En appliquant la fonction précédente, écrire l'instruction Python 
+	qui stocke dans la variable \textbf{Tmoy} la liste des températures moyennes 
+	journalières à partir des données stockées dans les listes \textbf{Tmin} et~\textbf{Tmax}.}
+	
+\ifprof
+\begin{corrige}~\
+\begin{python}
+Tmoy=moyenne(Tmin,Tmax)
+\end{python}
+\end{corrige}
+\else
+\fi
+
+\subparagraph{} 
+\textit{On considère qu'il est nécessaire de couper les arrivées d'eau 
+	extérieures pour risque de gel quand la température moyenne sur la journée 
+	est strictement inférieure à $0$ degré celsius. En utilisant une des fonctions 
+	programmées dans la première partie, stocker dans la variable 
+	\textbf{nb\_jours\_gel} le nombre de jours où il a fallu couper l'eau des 
+	conduites extérieures pour la ville de Saint Étienne.}
+	
+\ifprof
+\begin{corrige}~\
+\begin{python}
+nb_jours_gel=majores_par(Tmoy,0)
+\end{python}
+\end{corrige}
+\else
+\fi
+
+\subparagraph{} 
+\textit{On s'intéresse ici aux écarts entre les températures minimale et maximale au cours d'une même
+ journée, écrire les lignes de commande qui permettent de créer une liste \textbf{ecart} 
+ contenant les écarts $Tmax-Tmin$ pour chaque jour et de créer la variable mini\_ecart contenant 
+ le minimum des écarts pour l'année $2016$.}
+
+\ifprof
+\begin{corrige}~\
+\begin{python}
+ecart=[Tmax[i]-Tmin[i] for i in range(len(Tmin))]
+mini_ecart=mini(ecart)
+\end{python}
+\end{corrige}
+\else
+\fi
+ 
+ \subparagraph{} 
+\textit{On souhaite étudier les variations d'un jour sur l'autre de la température maximale.\\
+ Donner les lignes de commandes permettant d'obtenir, \textbf{sans créer de nouvelles listes}, 
+ la plus grande variation de la température maximale entre deux jours consécutifs.}
+
+\ifprof
+\begin{corrige}~\
+\begin{python}
+variation=0
+for i in range(0,len(Tmax)-1):
+    e=abs(Tmax[i+1]-Tmax[i])
+    if e>variation:
+        variation=e
+print (variation)
+\end{python}
+\end{corrige}
+\else
+\fi
+ 
+
+\section*{Partie 5 : une modélisation physique}
+
+\subparagraph{}
+\textit{Écrire la  fonction \textbf{f} d'arguments deux flottants $t$ et $\theta$ et retournant 
+$f(\theta,t)$.}
+
+\ifprof
+\begin{corrige}~\
+\begin{python}
+def f(theta,t):
+    return (mu*(1+eps*np.cos(omega*t))-alpha*(theta+T0)**4)
+\end{python}
+\end{corrige}
+\else
+\fi
+
+\subparagraph{} 
+\textit{Justifier que pour tout $k$ tel que $1 \leq k \leq N$, on a 
+$\theta_{k}=\theta_{k-1}+f(\theta_{k-1},t_{k-1}) \times dt$.}
+
+\ifprof
+\begin{corrige}~\\
+$\frac{d\theta(t)}{dt} =f(\theta(t),t)$\\
+$\frac{\theta(t+h)-\theta(t)}{h} \approx f(\theta(t),t)$\\
+ainsi $\theta_{k}=\theta_{k-1}+f(\theta_{k-1},t_{k-1}) \times dt$
+\end{corrige}
+\else
+\fi
+
+\subparagraph{} 
+\textit{Écrire la fonction \textbf{euler} d'argument trois flottants $theta0$, $dt$ et $tmax$ qui retourne 
+deux listes : \textbf{temps} et \textbf{theta} contenant respectivement les valeurs 
+$t_k$ et $\theta_k$ pour $0\leq k \leq N$.}
+
+\ifprof
+\begin{corrige}~\
+\begin{python}
+def euler(theta0,dt,tmax):
+    temps=[0]
+    theta=[theta0]
+    t=dt
+    while t<=tmax:
+        temps.append(t)
+        theta.append(theta[-1]+dt*f2(theta[-1],t))
+        t=t+dt
+    return temps,theta
+\end{python}
+\end{corrige}
+\else
+\fi
+
+\end{document}
