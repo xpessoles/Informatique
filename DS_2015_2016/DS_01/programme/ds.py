@@ -101,6 +101,6 @@ print(defaut_planeite(X,liste_pt))
 res = balancage(X,liste_pt[-1])
 
 import os
-os.chdir("E:\Github\Informatique\DS_2015_2016\DS_01\programme")
+os.chdir("C:\Enseignement\GitHub\Informatique\DS_2015_2016\DS_01\programme")
 
 print(read_file("mesures.txt"))
