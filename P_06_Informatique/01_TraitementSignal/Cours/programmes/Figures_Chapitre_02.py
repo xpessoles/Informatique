@@ -9,9 +9,7 @@ aleatoire  = np.array(aleatoire)
 signal = 10*np.sin(temps*2*pi*5000)*np.exp(-temps/2)*(1-np.exp(-temps))+aleatoire
 signal_clair = 10*np.sin(temps*2*pi*5000)*np.exp(-temps/2)*(1-np.exp(-temps))
 
-Umin = -4 
-Umax = 4
-Nq = 10 # 2^Nb niveaux de quantification. 
+ 
 
 freq = 1000 # Hz
 T = 1/freq
@@ -21,15 +19,25 @@ ech = [signal[0]]
 tps_ech = [temps[0]]
 
 
-for i in range(1,len(temps)):
-    tps = temps[i]
-    if tps<TT:
-        ech_blo.append(ech[-1])
-    else :
-        TT = TT+T
-        ech_blo.append(signal[i])
-        ech.append(signal[i])
-        tps_ech.append(temps[i])
+def echant(temps,signal,freq):
+    T = 1/freq
+    TT = T
+    ech_blo = [signal[0]]
+    ech = [signal[0]]
+    tps_ech = [temps[0]]
+    
+        
+    for i in range(1,len(temps)):
+        tps = temps[i]
+        if tps<TT:
+            ech_blo.append(ech[-1])
+        else :
+            TT = TT+T
+            ech_blo.append(signal[i])
+            ech.append(signal[i])
+            tps_ech.append(temps[i])
+    return tps_ech,ech,ech_blo
+
         
 def recherche_niveau(nb,niv):
     if nb<niv[0]:
@@ -41,13 +49,15 @@ def recherche_niveau(nb,niv):
     return niv[-1]
         
 # Définition des niveaux de quantification
-niv = []
-for i in range(2**Nq):
-    niv.append(i*(Umax-Umin)/(2**Nq-1)+Umin)
-
-quan = []
-for s in signal:
-    quan.append(recherche_niveau(s,niv))
+def signal_quan(Umin,Umax,Nq,signal):
+    niv = []
+    for i in range(2**Nq):
+        niv.append(i*(Umax-Umin)/(2**Nq-1)+Umin)
+    
+    quan = []
+    for s in signal:
+        quan.append(recherche_niveau(s,niv))
+    return quan
 
 
 """
@@ -61,18 +71,26 @@ for i in range(len(ech)):
       
 
 # Filtrage du signal
-tau = 1*1/freq
-print(1/tau)
-h = 1/freq
-K=1
-"""
-filtrage=[quan[0]]
-for i in range(
-"""
-res=[quan[0]]
-for i in range(1,len(quan)):
-    res.append((h*K*quan[i]+tau*res[-1])/(h+tau))
+def filtrage_passe_bas(freq,pas_filtre,signal):
+    tau = 1/freq # Coupure du filtre
+    h = pas_filtre # Pas du filtre
+    K=1
+    res=[signal[0]]
+    for i in range(1,len(signal)):
+        res.append((h*K*signal[i]+tau*res[-1])/(h+tau))
+    return res
 
+
+# Filtrage du signal
+def filtrage_passe_haut(freq,pas_filtre,signal):
+    tau = 1/freq # Coupure du filtre
+    h = pas_filtre # Pas du filtre
+    K=1
+    res=[signal[0]]
+    for i in range(1,len(signal)):
+        res.append((K*(signal[i]-signal[i-1])+res[-1]*(tau-h))/tau)
+    return res
+    
 #Moyenne glissante
 filtrageg =[]
 
@@ -83,10 +101,48 @@ for i in range(fenetre-1,len(quan)):
 
 
 plt.grid()
-#plt.plot(temps,signal,label = "Signal")
-#plt.plot(tps_ech,quan,label="Echantillonage "+str(freq)+ "Hz - Quantification "+str(Nq)+" bits")
 
-plt.plot(tps_ech,res,linewidth=2,label="Pulsation de coupure "+str(1/tau)+" rad/s")
+
+
+## AFFICHAGE DU SIGNAL CLAIR
+#plt.plot(temps,signal_clair)
+
+## AFFICHAGE DU SIGNAL BRUITE
+#plt.plot(temps,signal)
+
+## AFFICHAGE DU SIGNAL BRUITE
+#plt.plot(temps,signal)
+
+## AFFICHAGE DU SIGNAL ECHANTILLONE
+freq = 100
+tps_ech,ech,ech_blo = echant(temps,signal,freq)
+
+#plt.plot(temps,ech_blo,label="Signal bloqué")
+#plt.plot(tps_ech,ech,label="Signal échantilonné")
+
+## AFFICHAGE DU SIGNAL QUANTIFIE
+Umin = -4 
+Umax = 4
+Nq = 4 # 2^Nb niveaux de quantification.
+quan = signal_quan(Umin,Umax,Nq,ech_blo)
+#plt.plot(temps,quan,label="Echantillonage "+str(freq)+ "Hz - Quantification "+str(Nq)+" bits")
+
+## AFFICHAGE DU SIGNAL FILTRE PB
+f = 1
+s_pb= filtrage_passe_bas(1,0.001,signal)
+#plt.plot(temps,signal,label="Signal brut")
+#plt.plot(temps,s_pb,label="Signal filtré")
+
+
+## AFFICHAGE DU SIGNAL FILTRE PH
+f = .1
+s_ph= filtrage_passe_haut(f,0.001,signal)
+#plt.plot(temps,signal,label="Signal brut")
+plt.plot(temps,s_ph,label="Signal filtré PH")
+
+
+
+#plt.plot(tps_ech,res,linewidth=2,label="Pulsation de coupure "+str(1/tau)+" rad/s")
 
 #plt.plot(tps_ech[fenetre-1:len(tps_ech)],filtrageg,linewidth=2,label="Moyenne sur "+str(fenetre)+" points")
 
@@ -98,7 +154,7 @@ import scipy.fftpack
 N = len(quan)
 T = 1/freq
 yf = scipy.fftpack.fft(quan)
-plt.plot(tps_ech,np.abs(yf)*2/N)
+#plt.plot(tps_ech,np.abs(yf)*2/N)
 
 plt.legend()
 plt.show()
