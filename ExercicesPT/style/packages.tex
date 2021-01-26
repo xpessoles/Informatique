@@ -1,0 +1,114 @@
+%----------------------------------------------------------------------------------------
+%	VARIOUS REQUIRED PACKAGES AND CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\usepackage[top=2cm,bottom=2cm,left=2cm,right=2cm,a4paper]{geometry} % Page margins
+
+\usepackage{graphicx} % Required for including pictures
+\usepackage{float}
+\usepackage[francais]{babel} % English language/hyphenation
+\frenchbsetup{StandardLists=true} % Pour éviter la collision babel enumitem pour les listes
+
+\usepackage{enumitem} % Customize lists
+\setlist{nolistsep} % Reduce spacing between bullet points and numbered lists
+
+\usepackage{booktabs} % Required for nicer horizontal rules in tables
+
+\usepackage[svgnames]{xcolor} % Required for specifying colors by name
+%\definecolor{ocre}{RGB}{243,102,25} % Define the orange color used for highlighting throughout the book
+\definecolor{bleuxp}{RGB}{49,133,156} % Couleur ''bleue''
+\definecolor{violetf}{RGB}{112,48,160} % Couleur ''violet''
+
+\usepackage{enumitem}
+\usepackage{pifont} % Pour les dinglist
+\usepackage{multicol}
+\usepackage{array} % Centrage vertical dans les tableaux
+\usepackage{schemabloc}
+
+% Requis par UPSTI pedagogique
+\usepackage{etoolbox}         % Scripting
+\usepackage{ifthen}           % Scripting
+\usepackage{xargs}            % Pour arguments optionnels multiples
+\usepackage{tabularx}         % Tableaux avancés
+
+
+\usepackage{tikz} % Required for drawing custom shapes
+
+% Définition des booleéns
+\newif\iffiche
+\newif\ifprof
+\newif\iftd
+\newif\ifcours
+\newif\ifnormal
+\newif\ifdifficile
+\newif\iftdifficile
+\newif\ifcolle
+\newif\iflivret
+\newif\ifcorrection % True si le corrigé existe, False Sinon
+
+%----------------------------------------------------------------------------------------
+%	FONTS
+%----------------------------------------------------------------------------------------
+\usepackage{bm}
+\usepackage{siunitx}
+\sisetup{output-decimal-marker = {,}}
+\usepackage{textcomp}
+
+
+\usepackage{avant} % Use the Avantgarde font for headings
+%\usepackage{times} % Use the Times font for headings
+%\usepackage{mathptmx} % Use the Adobe Times Roman as the default text font together with math symbols from the Sym­bol, Chancery and Com­puter Modern fonts
+\usepackage[adobe-utopia]{mathdesign}
+\usepackage{microtype} % Slightly tweak font spacing for aesthetics
+
+%% Pour PdfLaTex
+\usepackage[utf8]{inputenc} % Required for including letters with accents
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+% Pour xelatex
+%\usepackage{fontspec}
+
+\usepackage{amsmath}
+%----------------------------------------------------------------------------------------
+%	BIBLIOGRAPHY AND INDEX
+%----------------------------------------------------------------------------------------
+
+%\usepackage[style=alphabetic,citestyle=numeric,sorting=nyt,sortcites=true,autopunct=true,babel=hyphen,hyperref=true,abbreviate=false,backref=true,backend=biber]{biblatex}
+\usepackage[style=alphabetic,citestyle=numeric,sorting=nyt,sortcites=true,autopunct=true,hyperref=true,abbreviate=false,backref=true,backend=biber]{biblatex}
+\addbibresource{bibliography.bib} % BibTeX bibliography file
+\defbibheading{bibempty}{}
+\usepackage{calc} % For simpler calculation - used for spacing the index letter headings correctly
+\usepackage{makeidx} % Required to make an index
+\makeindex % Tells LaTeX to create the files required for indexing
+
+%----------------------------------------------------------------------------------------
+%	MAIN TABLE OF CONTENTS
+%----------------------------------------------------------------------------------------
+
+\usepackage{titletoc} % Required for manipulating the table of contents
+\setcounter{tocdepth}{2}     % Dans la table des matieres
+\setcounter{secnumdepth}{2}
+\contentsmargin{0cm} % Removes the default margin
+
+
+%----------------------------------------------------------------------------------------
+%	PAGE HEADERS
+%----------------------------------------------------------------------------------------
+
+\usepackage{fancyhdr} % Required for header and footer configuration
+
+%----------------------------------------------------------------------------------------
+%	HYPERLINKS IN THE DOCUMENTS
+%----------------------------------------------------------------------------------------
+
+
+\hypersetup{hidelinks,backref=true,pagebackref=true,hyperindex=true,colorlinks=false,breaklinks=true,urlcolor= ocre,bookmarks=true,bookmarksopen=false,pdftitle={Title},pdfauthor={Author}}
+\usepackage{bookmark}
+\bookmarksetup{open,numbered,addtohook={%
+\ifnum
+	\bookmarkget{level}=0 % chapter
+	\bookmarksetup{bold}%
+\fi
+\ifnum
+	\bookmarkget{level}=-1 % part
+	\bookmarksetup{color=bleuxp,bold}%
+\fi}}
