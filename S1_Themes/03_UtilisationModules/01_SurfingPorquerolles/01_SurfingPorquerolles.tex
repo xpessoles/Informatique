@@ -1,1 +1,38 @@
+
 %
+
+\exer{Surfing Porquerolles} 
+
+\textit{D'après Concours Mines Ponts 2018}
+\begin{obj} ~\\
+\begin{itemize}
+\item Lire un fichier texte.
+\item Analyser les données d'un fichiers. 
+\end{itemize}
+\end{obj}
+
+Le fichier \texttt{vagues.txt} contient un relevé des niveaux d'eau mesurés par une bouée au large de Porquerolles. (Pour ne pas se mentir, on a plutôt généré un profil qui pourrait vaguement ressembler à un tel relevé.)
+
+Il est constitué de deux colonnes, séparées par une virgule, la première colonne correspondant à une mesure de temps (en secondes), la seconde colonne correspondant à une mesure de niveau de hauteur d'eau (en mètres). 
+
+\question{Écrire une fonction 
+\texttt{lire\_fichier(file: str) -> list,list :} 
+prenant comme argument le nom d'un fichier et renvoyant la liste des temps que l'on notera \texttt{les\_t} et la liste des niveaux de vagues que l'on notera \texttt{liste\_niveaux}.}
+
+\question{Écrire une fonction 
+\texttt{trace\_vagues(file: str) -> None :} 
+prenant comme argument le nom d'un fichier affichant le profil des vagues en fonction du temps.}
+
+Le résultat attendu est le suivant : 
+......
+
+\question{Écrire une fonction 
+\texttt{moyenne(liste\_niveaux: list) -> float :} 
+prenant comme argument une liste non vide \texttt{liste\_niveaux}, et retournant sa valeur moyenne.}
+
+
+\question{Écrire une fonction
+\texttt{ind\_premier\_pzd(liste\_niveaux: list) -> int : } 
+retournant, s’il existe, l’indice
+du premier élément de la liste tel que cet élément soit supérieur à la moyenne et l’élément suivant
+soit inférieur à la moyenne. Cette fonction devra retourner -1 si aucun élément vérifiant cette condition n’existe.}
