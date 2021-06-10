@@ -22,12 +22,22 @@ les_vagues3 = les_vagues2 * np.sin(0.001*les_t+2)*.01
 les_vagues4 = les_vagues3+0.00002*les_t*les_t
 #plt.plot(les_t,les_vagues4*100)
 
-les_v = les_vagues4[2500:-200]
+les_v = 100*les_vagues4[2500:-200]
 les_t = np.linspace(0,40,len(les_v))
-plt.plot(les_t,les_v*100)
 
+plt.grid()
+plt.xlabel("Temps ($t$ en s.)")
+plt.ylabel("Niveau de vague ($\\eta$ en m.)")
+
+m = sum(les_v)/len(les_v)
+plt.plot(les_t,les_v,label="Niveau des vagues")
+xx = [0,40]
+yy = [m,m]
+plt.plot(xx,yy,label="Niveau moyen")
+plt.legend()
 fid = open('vague.txt',"w")
 for i in range(len(les_t)):
     s = str(les_t[i])+","+str(les_v[i])+"\n"
     fid.write(s)
 fid.close()
+plt.savefig("fig_00.pdf")
