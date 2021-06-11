@@ -35,7 +35,7 @@ xx = [0,40]
 yy = [m,m]
 plt.plot(xx,yy,label="Niveau moyen")
 plt.legend()
-fid = open('vague.txt',"w")
+fid = open('vagues.txt',"w")
 for i in range(len(les_t)):
     s = str(les_t[i])+","+str(les_v[i])+"\n"
     fid.write(s)

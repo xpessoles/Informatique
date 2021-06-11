@@ -3,8 +3,6 @@
 
 \exer{Surfing Porquerolles} 
 
-\textbf{TODO : corrigé}
-
 \begin{flushright}
 \textit{D'après Concours Mines Ponts 2018.}
 \end{flushright}
@@ -39,8 +37,6 @@ On définit les périodes de vagues par $T_i = Z_{i+1}-Z_i$.
 \begin{center}
 \includegraphics[width=\linewidth]{fig_00}
 \end{center}
-
-
 
 Le fichier \texttt{vagues.txt} contient un relevé des niveaux d'eau mesurés par une bouée au large de Porquerolles. (Pour ne pas se mentir, on a plutôt généré un profil qui pourrait vaguement ressembler à un tel relevé.)
 
@@ -102,16 +98,15 @@ listes à deux éléments \texttt{[Hi,Ti]} permettant de caractériser chacune d
 \end{itemize}
 
 \question{Écrire une fonction  \\
-\texttt{proprietes(liste\_niveaux: list) -> list}
-réalisant cet objectif. On pourra
-utiliser les fonctions de Python \texttt{max(L)} et \texttt{min(L)} qui retournent le maximum et le minimum d’une
+\texttt{proprietes(liste\_niveaux: list, dt:float) -> list}
+réalisant cet objectif. \texttt{dt} représente la durée entre deux échantillons de la liste des temps obtenu à la question 2. On pourra utiliser les fonctions de Python \texttt{max(L)} et \texttt{min(L)} qui retournent le maximum et le minimum d’une
 liste \texttt{L}, respectivement.}
 
 \subsubsection*{Contrôle des données}
 Plusieurs indicateurs sont couramment considérés pour définir l’état de la mer. Parmi eux, on
 note :
 \begin{itemize}
-\item $H_{max}$ : la hauteur de la plus grande vague observée sur l’intervalle d’enregistrement $[0, T]$ ;
+\item $H_{\text{max}}$ : la hauteur de la plus grande vague observée sur l’intervalle d’enregistrement $[0, T]$ ;
 \item $H_{1/3}$ : la valeur moyenne des hauteurs du tiers supérieur des plus grandes vagues observées
 sur $[0, T]$ ;
 \item $T_{H1/3}$ : la valeur moyenne des périodes du tiers supérieur des plus grandes vagues observées
@@ -119,19 +114,24 @@ sur $[0, T]$.
 \end{itemize}
 
 \question{Écrire une fonction  \\
-****
-prenant en argument la liste liste\_niveaux de la question 12*** et
-renvoyant $H_{max}$.}
+\texttt{H\_max(liste\_niveaux: list, dt: float) -> float}
+prenant en argument la liste liste\_niveaux de la question 
+renvoyant $H_{\text{max}}$.}
 
 Afin de déterminer $H_{1/3}$ et $T_{H1/3}$, il est nécessaire de trier la liste des propriétés des vagues. 
 
-****
+
 
 
 La distribution des hauteurs de vague (voir figure suivante) lors de l’analyse vague par vague est
 réputée être gaussienne. On peut contrôler ceci par des tests de skewness (variable désignée par $S$)
 et de kurtosis (variable désignée par $K$) définis ci-après. Ces deux tests permettent de quantifier
 respectivement l’asymétrie et l’aplatissement de la distribution.
+
+\begin{center}
+\includegraphics[width=\linewidth]{fig_02}
+\end{center}
+
 
 On appelle $\overline{H}$ et $\sigma^2$ les estimateurs non biaisés de l'espérance et de la variance, $n$ le nombre d'éléments $H_1$, $H_2$, ..., $H_n$.
 
@@ -150,12 +150,11 @@ Le test suivant est appliqué :
 \item si la valeur absolue de $S$ est supérieure à 0,3 alors l’horodate est déclaré non valide ;
 \item si la valeur de $K$ est supérieure à 5 alors l’horodate est déclaré non valide.
 \end{itemize}
-On utilise la fonction \texttt{moyenne} pour estimer la valeur de $\overline{H}$, et on suppose disposer de la fonction
-\texttt{ecartType} qui permet de retourner la valeur de l’écart type non biaisé $\sigma$.
+On utilise la fonction \texttt{moyenne} pour estimer la valeur de $\overline{H}$. 
+Même s'il serait aisé de coder la fonction écart type, on utilisera la fonction \texttt{
+pstdev} de la bibliothèque \texttt{statistics} qui permet de retourner la valeur de l’écart type non biaisé $\sigma$.
 
 
-%% CODER TOUTES CES FONCTIONS
-\question{Un codage de la fonction \texttt{skewness} pour une liste ayant au moins 3 éléments est donné
-en annexe (algorithme 4). Le temps d’exécution est anormalement long. Proposer une modification
-simple de la fonction pour diminuer le temps d’exécution (sans remettre en cause le codage des
-fonctions \texttt{ecartType} et \texttt{moyenne}).}
+
+\question{Écrire une fonction  \\
+\texttt{skewness(liste\_niveaux) -> float} permettant de déterminer $S$.}
