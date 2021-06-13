@@ -1,0 +1,17 @@
+\exer{}
+\setcounter{numques}{0}
+
+Que renvoie la fonction suivante ? Le justifier, notamment à l'aide d'un invariant. 
+\begin{lstlisting}
+%[gobble=0,numbers=left]
+def mystere(n,p):
+    """Précondition : n entier positif, p entier"""
+    if p < 0 or p > n : 
+        return 0
+    else : 
+        f = 1
+        for i in range(p) : 
+            f = f * (n + 1 - p + i) // (i + 1)
+        return f
+\end{lstlisting}
+

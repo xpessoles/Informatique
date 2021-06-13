@@ -1,0 +1,24 @@
+Dans un tableau $t$ contenant $2N$ ou $2N+1$ nombres, une médiane est un réel $m$ tel que, si l'on classe $t$ par ordre croissant,
+\begin{enumerate}
+  \item $m$ est supérieur ou égal aux $N$ premiers nombres de $t$ ;
+  \item $m$ est inférieur ou égal aux $N$ derniers nombres de $t$.
+\end{enumerate}
+
+
+\begin{exemple}
+  \begin{itemize}
+    \item[\textbullet] La seule médiane de $[1,3,2]$ est $2$.
+    \item[\textbullet] La seule médiane de $[5,1,2,5,5]$ est $5$. 
+    \item[\textbullet] La seule médiane de $[0,1,0,0]$ est $0$. 
+    \item[\textbullet] L'ensemble des médianes de $[-3,4,1,-1]$ est l'intervalle $]-1,1[$.
+  \end{itemize}
+\end{exemple}
+
+\question \'Ecrire une fonction \pyv{mediane(t)} qui, à un tableau de nombres \pyv{t}, renvoie une médiane de \pyv{t}.
+
+\emph{On pourra s'inspirer de l'une des deux idées suivantes.
+\begin{itemize}
+  \item Copier \pyv{t}, lui ôter tant que possible son maximum et son minimum.
+  \item Trier \pyv{t} par ordre croissant.
+\end{itemize}
+}

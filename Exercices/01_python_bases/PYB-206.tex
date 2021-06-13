@@ -1,0 +1,23 @@
+\exer{}
+\setcounter{numques}{0}
+
+Supposons que la variable $x$ est déjà affectée, et soit $n\in\mathbb{N}$. On veut calculer $x^n$ sans 
+utiliser la puissance, avec uniquement des affectations, autant de variables que l'on veut, mais 
+avec le moins de multiplications possible. Par exemple, avec les 4 instructions :
+\begin{lstlisting}
+>>> y1 = x * x
+>>> y2 = y1 * x
+>>> y3 = y2 * x
+>>> y4 = y3 * x
+\end{lstlisting}
+
+on calcule $x^5$, qui est la valeur de \texttt{y4}.\\
+Mais 3 instructions suffisent :
+\begin{lstlisting}
+>>> y1 = x * x
+>>> y2 = y1 * y1
+>>> y3 = y2 * x
+\end{lstlisting}
+
+En fonction de $n$, et avec les contraintes précédentes, quel est le nombre minimum d'instructions
+pour calculer $x^n$ ?

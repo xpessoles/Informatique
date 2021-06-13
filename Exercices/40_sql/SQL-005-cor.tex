@@ -1,0 +1,196 @@
+\lstset{language=SQL,morekeywords={REFERENCES}}
+
+\question{}
+Il y a 172 tables (valeur indiquée dans l'onglet Tables).
+
+\question{}
+\texttt{pokemon(id : integer, identifier : string, species\_id : integer, height : integer, weight : integer, bASe\_experience : integer, order : integer, is\_default : boolean )} 
+
+% Q3
+\question{}
+La clé primaire d'une table est une contrainte d'unicité, composée d'une ou plusieurs colonnes et qui permet d'identifier de manière unique chaque ligne de la table.
+
+%
+%\question{}
+%\texttt{SELECT count(*) FROM pokemon;}  \boxed{811}
+
+% Q4
+\question{}
+\begin{lstlisting}
+SELECT height 
+	FROM pokemon 
+	WHERE identifier = 'pikachu';
+\end{lstlisting}
+
+\boxed{4} 
+
+% Q5
+\question{}
+\begin{lstlisting}
+SELECT weight 
+	FROM pokemon 
+	WHERE identifier = "pikachu";
+\end{lstlisting}
+\boxed{60} 
+
+% Q6
+\question{}
+\begin{lstlisting}
+SELECT identifier 
+	FROM pokemon
+	WHERE height> 4;
+\end{lstlisting}
+
+% Q7
+\question{}
+\begin{lstlisting}
+SELECT identifier 
+	FROM pokemon 
+	WHERE height > 
+		(SELECT height 
+		FROM pokemon 
+		WHERE identifier = "pikachu");
+\end{lstlisting}
+
+%Q8
+\question{}
+\begin{lstlisting}
+SELECT count(*) 
+	FROM pokemon 
+	WHERE height > 
+		(SELECT height 
+		FROM pokemon 
+		WHERE identifier = 'pikachu');
+\end{lstlisting}
+\boxed{678} 
+
+%Q9
+\question{}
+\begin{lstlisting}
+SELECT count(*) 
+	FROM pokemon 
+	WHERE height = 
+		(SELECT height 
+		FROM pokemon 
+		WHERE identifier = 'pikachu');
+\end{lstlisting}
+ \boxed{63} ;
+
+
+%Q10
+\question{}
+\begin{lstlisting}
+SELECT identifier,max(weight) 
+	FROM pokemon 
+	WHERE height = 
+		(SELECT height 
+		FROM pokemon 
+		WHERE identifier = 'pikachu'); 
+\end{lstlisting}
+\boxed{aron, 600}
+
+
+
+
+% Q11
+\question{}
+\begin{lstlisting}
+SELECT identifier, height, weight
+	FROM pokemon 
+	WHERE height = 
+		(SELECT max(height) FROM pokemon);
+\end{lstlisting}
+\boxed{\text{wailord, 145, 3980}}
+
+
+% Q12
+\question{}
+\begin{lstlisting}
+SELECT identifier
+	FROM pokemon 
+	WHERE height = 
+		(SELECT min(height) FROM pokemon); 
+\end{lstlisting}
+
+\boxed{\text{joltik et flabebe}} 
+
+
+% Q13
+\question{}
+\begin{lstlisting}
+SELECT height,count(height) 
+	FROM pokemon 
+	GROUP BY height
+	order BY height DESC
+\end{lstlisting}
+
+% Q14
+\question{}
+\begin{lstlisting}
+SELECT height,MAX(ch) FROM 
+	(SELECT height,count(height) AS ch
+		FROM pokemon 
+		GROUP BY height)
+\end{lstlisting}
+\boxed{\text{6,68}} 
+
+% Q15
+\question{}
+\begin{lstlisting}
+SELECT identifier,max(height) FROM 
+	(SELECT identifier,height 
+	FROM pokemon 
+	WHERE height!=(SELECT max(height) from pokemon))
+\end{lstlisting}
+\boxed{\text{rayquaza-mega, 108}} 
+
+
+
+\question{}% Q16
+\begin{lstlisting}
+SELECT avg(height) FROM pokemon;
+\end{lstlisting}
+\boxed{12.2503082614057}
+ 
+ % Q17
+\question{}
+\begin{lstlisting}
+SELECT count(*) 
+	FROM pokemon 
+	WHERE height <= 8.5 AND height >= 7.5;
+\end{lstlisting}
+\boxed{44} 
+
+ % Q18
+\question{}
+\begin{lstlisting}
+SELECT S.identifier,H.identifier 
+	FROM pokemon\_species AS S 
+	JOIN pokemon\_habitats AS H 
+	ON S.habitat\_id = H.id;
+\end{lstlisting}
+
+ % Q19
+\question{}
+\begin{lstlisting}
+SELECT count(*) 
+	FROM pokemon\_species AS S 
+	JOIN pokemon\_habitats AS H 
+	ON 
+	S.habitat\_id = H.id 
+	WHERE H.identifier = 'forest';
+\end{lstlisting}  
+\boxed{71} 
+
+ % Q20
+\question{}
+\begin{lstlisting}
+SELECT count(*) 
+	FROM pokemon\_species AS S 
+	JOIN pokemon\_habitats AS H 
+	ON S.habitat\_id = H.id 
+	WHERE H.identifier = 'forest' AND S.generation\_id = 3;
+\end{lstlisting} 
+\boxed{29}
+
+

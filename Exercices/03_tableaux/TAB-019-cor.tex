@@ -1,0 +1,42 @@
+\question{} En entrée de boucle, on a toujours $m=0$ et le tableau $t[i:i+1]$ n'a qu'un élément, donc aucune ascensions, donc l'invariant est vérifié en entrée de boucle. 
+
+Supposons que cette propriété soit vraie au début d'un tour de boucle. 
+\begin{itemize}
+  \item Si $t[j]  \leq t[i]$, alors il n'y a pas d'ascension entre $i$ et $j$. Les ascensions de $t[i:j+1]$ sont exactement les mêmes que celles de $t[i:j]$, donc si $\texttt{m}>0$, alors \texttt{m} est la hauteur de la plus haute ascension de \texttt{t[i:j+1]}, sinon $m=0$ 
+  \item Si $t[j]  > t[i]$, alors il y a une ascension en plus dans $t[i:j+1]$ que dans $t[i:j]$ : c'est celle entre $i$ et $j$. 
+    \begin{itemize}
+      \item[\textbullet] Si $t[j]-t[i] > m$, au début de la ligne 10, $t[j]-t[i]$ est donc la hauteur de la plus grande ascension de $t[i:j+1]$. À la fin de la ligne 10, $m$ a alors pour valeur  $t[j]-t[i]$
+      \item[\textbullet] Sinon, au début de la ligne 10, \texttt{m} est la hauteur de la plus haute ascension de \texttt{t[i:j+1]}, sinon $m=0$.
+    \end{itemize}
+    Dans tous les cas, à la fin de la ligne 10, \texttt{m} est la hauteur de la plus haute ascension de \texttt{t[i:j+1]}, sinon $m=0$.
+\end{itemize}
+Ainsi, cette propriété est vraie à la fin de ce tour de boucle. 
+
+\fbox{C'est donc bien un invariant pour cette boucle for.}
+
+
+\question{}
+Exactement de la même manière, \og \texttt{M} est la hauteur de la plus haute ascension de \texttt{t[:i]} \fg{} est un invariant pour la boucle  for portant des lignes n°6 à 12.
+
+En sortie de boucle, on a $i = n$, donc \texttt{M} est la hauteur de la plus haute ascension de \texttt{t}.
+
+\fbox{%
+\begin{minipage}{0.9\textwidth}%
+  Un appel de la fonction \texttt{plus\_haute\_ascension(t)} renvoie bien la hauteur de la plus haute ascension de \texttt{t}.
+\end{minipage}%
+}
+
+
+\question{}
+\begin{pyverbatim}
+def nb_ascensions(t):
+    """Nombre d'ascensions du tableau t.
+    Préconditions : t est un tableau de nombres."""
+    n = len(t)
+    nb = 0
+    for i in range(n):
+        for j in range(i+1,n):
+            if t[j] > t[i]:
+                nb = nb + 1
+    return nb
+\end{pyverbatim}

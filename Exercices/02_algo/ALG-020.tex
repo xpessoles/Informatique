@@ -1,0 +1,44 @@
+\exer{}
+\setcounter{numques}{0}
+
+\question{Soit les algorithmes de calculs de moyenne ci-dessous, proposez des invariants de boucles.}
+
+\begin{lstlisting}
+def moyenne(t):
+    """Calcule la moyenne de t
+       Précondition : t est un tableau de 
+       nombres non vide"""
+    s = 0 
+    for x in t:
+        s = s + x 
+    return s/len(t)
+\end{lstlisting}
+
+\begin{lstlisting}
+def moyenne(t):
+    """Calcule la moyenne de t
+       Précondition : t est un tableau de 
+       nombres non vide"""
+    n = len(t) # Longueur de t
+    s = 0 
+    for i in range(n):
+        s = s + t[i]
+    return s/n 
+\end{lstlisting}
+
+
+\question{Soit l'algorithme de calculs de variance ci-dessous, proposez un invariants de boucles.}
+%\begin{lstlisting}
+\begin{lstlisting}
+def variance(t):
+    """Renvoie la variance de t
+       Précondition : t est un tableau de 
+       nombres non vide"""
+    sc = 0
+    for x in t:
+        sc = sc + x**2 
+    return sc/len(t) - moyenne(t)**2
+\end{lstlisting}
+%\end{lstlisting}
+
+

@@ -1,0 +1,35 @@
+\question{ \'Etudier la complexité théorique de la fonction \pyv{conv_b2}}
+
+\begin{lstlisting}
+def conv_b2(p):
+ """Convertit l'entier p en base 2 (renvoie une chaîne)"""
+    x = p
+    s = ""
+    while x > 1 :
+        s = str(x%2) + s
+        x = x // 2
+    return str(x)+s
+\end{lstlisting}    
+
+\question{\'Etudier les complexités théoriques des fonctions \pyv{calc_b2_naif} et \pyv{calc_b2_horner}. Les comparer.}
+
+\begin{lstlisting}
+def calc_b2_naif(s):
+    """Renvoie l'entier p représente en binaire par s"""
+    p = 0
+    x = 1 ## 2**0
+    for i in range(len(s)):
+        p = p+int(s[len(s)-i-1])*x
+        x = 2*x
+    return p
+\end{lstlisting}
+
+
+\begin{lstlisting}
+def calc_b2_horner(s):
+    """Renvoie l'entier p représente en binaire par s"""
+    p = int(s[0])
+    for i in range(1,len(s)):
+        p = int(s[i])+2*p
+    return p
+\end{lstlisting}

@@ -1,0 +1,52 @@
+En préambule : 
+\begin{pyverbatim}
+import matplotlib.pyplot as plt
+from numpy import exp, linspace, pi, sin, cos
+from math import floor
+\end{pyverbatim}
+
+
+\question{}
+\texttt x est une liste python, donc de type \texttt{list}.
+
+\question{}
+Python représente une fonction comme une ligne brisée. 
+On indique les coordonnées des extrémités des segments en passant en argument la liste des abscisses et celle des ordonnées à la fonction plot.
+
+\question{}
+Le tracé s'arrete au point d'abscisse 9,5. C'est bien le dernier élément de x.
+
+\question{}
+\begin{pyverbatim}
+def ex_sin(nom_de_fichier):
+    """Trace la courbe du sinus sur [0,10] et l'enregistre dans nom_de_fichier"""
+    x = linspace(0,10,200)
+    y = [sin(t) for t in x]
+
+    plt.clf()
+    plt.plot(x,y,label='sin(x)')
+    plt.xlabel('x')
+    plt.legend(loc=0)
+    plt.title('Tracé du sinus sur [0,10]')
+    plt.savefig(nom_de_fichier)
+\end{pyverbatim}
+\question{}
+\begin{pyverbatim}
+def transitoire(A,nom_de_fichier):
+    """Trace les graphes de t->A(1-exp(t/tau)) pour tau = 2,4,6,8 sur [0,10].
+       Les sauvegarde dans nom_de_fichier."""
+    x = linspace(0,10,200)
+    tau = [0.5,1,2,4,8]
+    style = ['g-','b-','r-','b--','r--']
+    plt.clf()
+    for k in range(5):
+       y = [A*(1-exp(-t/tau[k])) for t in x]
+       plt.plot(x,y,style[k],label='$\\tau='+str(tau[k])+'$') 
+    plt.xlabel('$t$')
+    plt.ylabel('$'+str(A)+'\\times\\exp(-t / \\tau)$')
+    plt.title('Régime transitoire, A={}'.format(A))
+    plt.axis([0,10,0,A])
+    plt.legend(loc=0)
+    plt.savefig(nom_de_fichier)
+    return None
+\end{pyverbatim}

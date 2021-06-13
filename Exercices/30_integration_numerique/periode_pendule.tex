@@ -1,0 +1,73 @@
+On considère un pendule de masse $m=1+0,01\cdot \alpha$, de longueur $L=\alpha$ que l'on abandonne, sans vitesse initiale, à un angle de $\theta_0=\dfrac{\pi}{4\cdot \alpha}$ avec $g=\SI{9,81}{m.s^{-2}}$.
+
+En appliquant la conservation de l'énergie, on trouve l'équation suivante :
+
+
+\begin{minipage}{0.4\textwidth}
+
+\begin{align*}
+\dfrac{1}{2}mL^2\dot{\theta}(t)^2+mgl\left(1-\cos\theta(t)\right)=mgL\left(1-\cos\theta_0\right)
+\end{align*}
+
+On en déduit : 
+$
+\dfrac{\dd\theta(t)}{\dd t}=\sqrt{\dfrac{2g}{L}\left(\cos\theta(t)-\cos\theta_0\right)}
+$.
+
+Ce qui donne : 
+$\dd t=\dfrac{\dd \theta(t)}{\sqrt{\dfrac{2g}{L}\left(\cos\theta(t)-\cos\theta_0\right)}}$.
+\end{minipage}
+\begin{minipage}{0.6\textwidth}
+\begin{center}
+\begin{tikzpicture}[scale=0.9] 
+\draw (0,0)--++(-2,+5); 
+\draw[dashed] ({5.4*sin(35)-2},{5-5.4*cos(35)})--(-2,+5); 
+\node at (-0.7,2.4) {L}; 
+\node at (-1.5,2.5) {$\theta(t)$}; 
+\node at (-0.6,0.8) {$\theta_0$};
+\draw [rounded corners=4pt,color=white,ball color=gray,smooth] (0,0) circle (0.2); 
+\draw [rounded corners=4pt,color=white,ball color=gray,smooth] ({5.4*sin(35)-2},{5-5.4*cos(35)}) circle (0.2); 
+\draw [dashed] (-2,-0.4)--++(0,5.4); 
+\draw [dotted] (-2,-0.4) arc (-90:-55:5.4); 
+\draw [dotted] (-2,-0.4) arc (-90:-110:5.4); 
+\draw [thick] (-2,3) arc (-90:{atan(2/5)-90}:2); 
+\draw [thick] (-2,1) arc (-90:{35-90}:4); 
+\fill [pattern=north east lines,rotate=0] (-2.5,5) rectangle (-1.5,5.3); %bloc qui tient le pendule 
+\draw[thick] (-2.5,5) --++ (1,0); %bloc qui tient le pendule 
+\end{tikzpicture}
+\end{center}
+\end{minipage}
+
+
+
+
+La période est donc : $
+T=\displaystyle{\int_0^T\dd t=4\times \int_0^{\theta_0}}\dfrac{\dd \theta(t)}{\sqrt{\dfrac{2g}{L}\left(\cos\theta(t)-\cos\theta_0\right)}}$.
+
+On rappelle que la période avec l'approximation des petites oscillations est donnée par : 
+$
+T_0=\sqrt{\dfrac{L}{g}}\times 2\pi
+$.
+
+\begin{rem}
+$T=\displaystyle{\int_0^{\theta_0}f(\theta)\dd \theta}$ est une intégrale généralisée car $f(\theta)$ tend vers l'infini. Donc certaines méthodes numériques d'intégration donnent des résultats infinis.
+
+\textbf{Pour les méthodes posant problèmes, il faut alors remplacer la borne supérieur $\theta_0$ par $\theta_0(1-\varepsilon)$ avec $\varepsilon=10^{-3}$.}
+\end{rem}
+
+
+\question{} Calculer $T_0$.
+
+Pour les méthodes d'intégration numérique, on renverra les résultats avec 100 subdivisions.
+
+\question{} Calculer $T$ (noté $T_{g}$) par la méthode des rectangles à gauche.
+
+\question{} Calculer $T$ (noté $T_{d}$) par la méthode des rectangles à droite.
+
+\question{} Calculer $T$ (noté $T_{t}$) par la méthode des trapèzes.
+
+On note $\varepsilon_g=\vert T_g-T_0\vert$,  $\varepsilon_d=\vert T_d-T_0\vert$,  $\varepsilon_t=\vert T_t-T_0\vert$, les erreurs entre les différentes approximation et l'estimation de $T_0$.
+
+\question{} Renvoyer $\varepsilon_g$,  $\varepsilon_d$,  $\varepsilon_t$.
+
+

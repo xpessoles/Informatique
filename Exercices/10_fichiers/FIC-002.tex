@@ -1,0 +1,33 @@
+On suppose que l'on dispose d'un fichier \texttt{nombres.txt} contenant des entiers naturels séparés pas des blancs (on 
+rappelle qu'un blanc est soit un espace, soit une tabulation \texttt{\textbackslash t} soit un retour à la ligne 
+\texttt{\textbackslash n}).
+
+Pour faciliter votre travail, un exemple de tel fichier est disponible sur le site de classe. Nous vous encourageons fortement à tester vos fonctions sur des exemples dont vous aurez calculé le résultat à la main.  
+
+\medskip
+
+\question\ Écrire une fonction \texttt{somme()}, sans argument, renvoyant la somme de tous les entiers contenus dans ce 
+fichier.
+
+\medskip
+
+\question\ Pour chaque ligne du fichier, on effectue le produit des entiers de cette ligne. Écrire une fonction \texttt{moyenne()}, sans 
+argument, renvoyant la moyenne de tous ces produits.
+
+\medskip
+
+\question\ Si $i$ est un entier inférieur au nombre de lignes du fichier, on note $s_i$ la somme des entiers de la ligne 
+$i$. Écrire une fonction \texttt{inversion()}, sans argument, retournant le nombre de couples $(i, j)$ tels que $i < 
+j$, et $s_j<s_i$. 
+
+Les invariants de boucle seront impérativement précisés en commentaires, dans le script renvoyé.
+
+\medskip
+
+\question\label{qu:complexité} Dans cette dernière question, on suppose que le fichier contient $n$ lignes, et que chaque ligne 
+ne contient qu'un entier. Quelle est en fonction de $n$ la complexité de l'algorithme \texttt{inversion()} ? 
+
+On supposera que les opérations de lecture dans le fichier se font en temps constant. Ainsi, l'opération consistant à lire tous les 
+entiers du fichier et à les stocker un par un dans un tableau sera supposée avoir une complexité en $O(n)$.
+
+Pour plus de clarté, vous recopierez le code de la fonction \texttt{inversion()} avant d'étudier sa complexité. 

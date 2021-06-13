@@ -1,0 +1,340 @@
+\begin{enumerate}
+\item  \textbf{Lisez attentivement  tout l'énoncé
+    avant de commencer.}
+% \item Commencez la séance en créant un dossier au nom du TP dans le répertoire dédié à l'informatique de votre compte. 
+\item Après la séance, vous devez rédiger un compte-rendu de TP et
+l'envoyer au format électronique à votre enseignant.
+\item Le seul format accepté pour l'envoi d'un texte de compte-rendu est le
+format PDF. Votre fichier s'appellera impérativement \texttt{tp02\_kleim\_durif.pdf}, où \og \texttt{kleim}\fg\ et \og \texttt{durif}\fg\ sont à remplacer par les noms des membres du binôme. 
+\item Ce TP est à faire en binôme, vous ne rendrez donc qu'un compte-rendu pour deux.
+\item Vous préciserez en préambule de votre compte-rendu les noms des membres du binôme ainsi que le système d'exploitation sur lequel vous avez travaillé. 
+\item Ayez toujours un crayon et un papier sous la main. Quand vous réfléchissez à une question, utilisez-les !
+\item Vous devez être autonome. Ainsi, avant de poser une question à l'enseignant, merci de commencer par :
+\begin{itemize}
+  \item relire l'énoncé du TP (beaucoup de réponses se trouvent dedans) ;
+  \item relire les passages du cours\footnote{Dans le cas fort 
+improbable où vous ne vous en souviendriez pas.} relatifs à votre problème ;
+  \item effectuer une recherche dans l'aide disponible sur votre ordinateur (ou sur internet) concernant votre question.
+\end{itemize}
+  Il est alors raisonnable d'appeler votre enseignant pour lui demander des explications ou une confirmation !
+\end{enumerate}
+
+Le but de ce TP est de vous faire de manipuler un système d'exploitation par lignes de commandes, puis de prendre en main \python{}.
+
+{\bf Attention :} les étudiants travaillant sous Unix (Linux et MacOS) répondront d'abord aux questions des parties \ref{tp02:sec:unix1} et \ref{tp02:sec:unix2}, ceux travaillant sous Windows répondront d'abord aux questions des parties \ref{tp02:sec:win1} et \ref{tp02:sec:win2}. Tous les étudiants finiront par répondre aux questions de la partie~\ref{tp02:sec:python}. 
+
+Pour les manipulations de fichier, vous utiliserez le code source du logiciel
+\python{}, que vous pourrez trouver dans le dossiers groupes. à l'adresse suivante (où \texttt{X} 
+est à remplacer par \texttt{1} ou \texttt{2})  :
+\begin{center}
+  $\sim$\texttt{/groupes/mpsX/données/TP02/cpython-4243df51fe43}
+\end{center}
+
+
+
+
+\subsection{Introduction : terminal et shell} 
+
+Unix a été inventé à un moment où l'utilisateur avait la possibilité
+d'interagir avec l'ordinateur via un \emph{terminal}, c'est-à-dire la
+combinaison d'un clavier et d'un écran pouvant écrire (en général) 25
+lignes de 80 caractères (en une seule couleur, généralement vert ou
+orange sur fond noir). Cette façon d'interagir avec la machine peut
+paraître archaïque de nos jours mais elle est pourtant d'une puissance
+diabolique.
+
+Vous trouverez un émulateur de terminal dans
+le menu \og{}Applications\fg{}, sous-menu \og{}Accessoires\fg{}, et
+sélectionnez \og{}LXTerminal\fg{}. Ceci démarre un programme, appelé
+\textit{shell}
+ou \emph{interprète de commandes}. Ce \textit{shell} vous donne
+quelques informations, et
+affiche un symbole \texttt{\$}, appelé invite (ou \textit{prompt} en
+anglais) signe qu'il attend vos ordres.
+
+Pour lui donner un ordre, il suffit de taper le nom de la commande
+désirée, éventuellement suivie d'un espace puis
+d'options ou d'arguments séparés par des espaces, puis de valider par la touche
+Entrée.
+
+Sous Windows, le programme \texttt{cmd.exe} permet d'ouvrir une console fonctionnant sous le même principe.
+Une remarque : les noms de dossiers comportant des espaces devront être écrits entre guillemets (par exemple : \texttt{"Mes Documents"}). 
+De manière générale, c'est une très mauvaise idée de placer des espaces dans des noms de dossiers (ou de fichiers). 
+
+Vous trouverez dans la table~\ref{TP02:tab:comlinwin} les équivalents Windows de quelques commandes Unix. 
+
+\begin{table}[!h]
+  \begin{center}
+  \begin{tabular}{|c|c|l|}
+    \hline 
+    Commande Unix & Commande Windows & Description rapide\\
+    \hline
+    \texttt{cd}    & \texttt{cd}      & Change le répertoire courant\\
+    \hline
+    \texttt{cp}    & \texttt{copy}    & Copie un ou des fichiers \\
+    \hline
+    \texttt{exit}  & \texttt{exit}    & Ferme la console \\
+    \hline
+    \texttt{less}  & \texttt{more}    & Lit un document texte \\
+    \hline
+    \texttt{ls}    & \texttt{dir}     & Liste les fichiers dans un répertoire \\
+    \hline
+    \texttt{man}   & \texttt{help}    & Ouvre une page de documentation \\
+    \hline
+    \texttt{mkdir} & \texttt{mkdir}   & Crée un répertoire\\
+    \hline
+    \texttt{mv}    & \texttt{move}    & Déplace un ou des fichiers \\
+    \hline
+    \texttt{pwd}   & \texttt{cd}      & Affiche le répertoire courant\\
+    \hline
+    \texttt{rm}    & \texttt{del}     & Supprime  un ou des fichiers \\
+    \hline
+  \end{tabular}
+  \caption{Correspondances des commandes Unix et Windows}
+  \label{TP02:tab:comlinwin}
+  \end{center}
+\end{table}
+
+\begin{table}[!h]
+  \begin{center}
+  \begin{tabular}{|c|c|}
+    \hline 
+    Variable Unix & Variable Windows \\
+    \hline
+    $\sim$ & \texttt{\%UserProfile\%} \\
+    \hline
+    \texttt{/} & {\bf\textbackslash} \\
+    \hline
+  \end{tabular}
+  \caption{Correspondances des variables Unix et Windows}
+  \label{TP02:tab:varlinwin}
+  \end{center}
+\end{table}
+
+
+\subsection{Unix : utilisation d'un terminal.}  \label{tp02:sec:unix1}
+
+Une commande très pratique est \texttt{man}: elle permet d'obtenir le
+manuel de quasiment toutes les commandes. On l'utilise sous la
+forme \texttt{man} \textit{page} où \textit{page} est la page de
+manuel désirée.
+
+\medskip
+
+\question\ Tapez \texttt{man less}. Que se passe t-il ?
+
+\medskip
+
+Vous pouvez faire défiler le texte ligne par ligne avec Entrée ou page
+par page avec la barre d'espace et quitter \texttt{man} avec la touche
+q.
+
+\medskip
+
+\question\ Quelle commande permet d'afficher la page suivante dans \texttt{less} ? de quitter \texttt{less} ? 
+
+
+
+\subsection{Unix : fichiers et répertoires} \label{tp02:sec:unix2}
+
+Sous Unix (dont la distribution GNU/Linux est un représentant) les
+fichiers sont organisés hiérarchiquement en une arborescence unique de
+répertoires. La racine de cette arborescence, c'est-à-dire le
+répertoire supérieur de la hiérarchie contenant tous les fichiers
+auxquels à accès le système, est noté \texttt{/}. Ses sous-répertoires
+directs (de l'ordre de la dizaine ou quelques dizaines de
+répertoires), comme \texttt{home}, \texttt{media}, \ldots{}
+sont notés \texttt{/home}, \texttt{/media}, \ldots
+
+Le \emph{chemin absolu} d'un fichier est l'adresse complète de son emplacement,
+débutant de la racine et passant par tous les sous-répertoires requis pour
+atteindre le fichier visé.
+
+Le \emph{chemin relatif} d'un fichier est l'adresse de son emplacement, écrite à partir d'un emplacement de l'arborescence que l'on appelle \emph{répertoire courant} (en anglais : \emph{current working directory}). 
+Ce répertoire courant est initialisé par défaut à un point prédéterminé de l'arborescence (répertoire \og maison \fg, ou \emph{home}), mais peut ensuite être modifié.
+
+\medskip
+
+\question\ Que fait précisément la commande \texttt{ls} ?
+
+\medskip
+
+La commande \texttt{cd} permet de changer de répertoire
+courant, \texttt{pwd} permet d'afficher le répertoire courant. En
+particulier, la commande \texttt{cd} \textit{d},où \textit{d} est le nom absolu ou relatif
+d'un répertoire, change le répertoire courant en
+\textit{d}. Essayez avec \texttt{cd /usr/bin} par exemple.
+
+\medskip
+
+\question\ Que fait \texttt{cd} sans argument (\emph{i.e.} \texttt{cd} non
+  suivi du nom d'un répertoire) ?
+
+\question\ Changer le répertoire courant (par exemple en \texttt{/usr/bin}). Que fait \texttt{cd }$\sim$ ?  De 
+quoi $\sim$ est-il l'abréviation ? Quel est le chemin absolu du répertoire $\sim$ ?
+
+\medskip
+
+\question\ Que fait la commande \texttt{mkdir } ? En utilisant une ligne de commande, créer dans le répertoire $\sim$ un sous-répertoire nommé \texttt{TP02}. Qu'observe-t-on en exécutant la commande \texttt{ls }$\sim$ ? 
+
+\medskip
+
+\question\ Après avoir éxécuter la commande \texttt{cd TP02} à partir du répertoire $\sim$, qu'affiche la commande
+  \texttt{pwd}?
+  
+\medskip  
+
+Copier le dossier \texttt{cpython-4243df51fe43} depuis le dossier \texttt{groupes/mpsX/TP02} dans le répertoire $\sim$\texttt{/TP02} en passant par un explorateur de fichiers. Exécuter la commande \texttt{cd} dans le terminal. 
+
+% \emph{Indication : si vous devez recommencer les étapes suivantes, veillez à bien réinitialiser les fichiers.}
+
+\medskip 
+
+Pour Unix : dans un répertoire, les fichiers et répertoires dont le nom
+commence par un point sont dits \emph{cachés}.
+
+\medskip
+
+\question\ {En consultant le manuel de \texttt{ls}, trouver la commande qui
+permet d'afficher les fichiers et répertoires cachés.}
+
+\medskip
+
+\question\ Dans $\sim$\texttt{/TP02}, vous pouvez alors voir deux
+  répertoires cachés. Quels sont leurs noms ? 
+  
+\medskip
+
+En fait, dans chaque répertoire du système, il existe deux répertoires cachés
+avec ces deux mêmes noms.
+
+\medskip
+
+\question{} Que désignent les répertoires \texttt{.} et \texttt{..} ?
+Que donne un \texttt{cd} sur chacun de ces répertoires ?
+
+\medskip
+
+\question\ Changez le répertoire courant en 
+$\sim$\texttt{/TP02/cpython-4243df51fe43/Lib/test/capath}. Que
+fait   alors \texttt{cd ../../multiprocessing} ?
+
+\medskip
+
+\question\ Comment obtenir grâce à la commande
+\texttt{ls} et l'option \texttt{-l} la taille de tous les
+fichiers de \texttt{TP02/cpython-4243df51fe43/Modules}, en les triant par ordre
+croissant de taille ?
+
+\medskip
+
+\question{}\emph{Facultatif :} Avec la commande précédente, que remarquez-vous quant à la taille des
+sous-répertoires de \texttt{TP02/cpython-4243df51fe43/Modules} ?
+
+\medskip
+
+\question{}\emph{Facultatif :} En utilisant la commande \texttt{du}, donner la taille du répertoire
+\texttt{cjkcodecs}. En comparant ce résultat à celui de la question
+précédente, que pouvez-vous dire de la manière dont Linux considère les
+répertoires ?
+
+\subsection{Windows : utilisation d'un terminal.}  \label{tp02:sec:win1}
+
+Une commande très pratique est \texttt{help}: elle permet d'obtenir le
+manuel de quasiment toutes les commandes. On l'utilise sous la
+forme \texttt{help} \textit{page} où \textit{page} est la page de
+manuel désirée.
+
+\medskip
+
+\question\ Tapez \texttt{help more}. Que se passe t-il ?
+
+\medskip
+
+Vous pouvez faire défiler le texte ligne par ligne avec Entrée ou page
+par page avec la barre d'espace et quitter \texttt{man} avec la touche
+q.
+
+\medskip
+
+\question\ Quelle commande permet d'afficher la page suivante dans \texttt{more} ? de quitter \texttt{more} ? 
+
+\subsection{Windows : fichiers et répertoires} \label{tp02:sec:win2}
+
+Sous Windows, les fichiers sont organisés hiérarchiquement en plusieurs arborescences de
+répertoires. La racine de chacune de ces arborescences, c'est-à-dire le
+répertoire supérieur de la hiérarchie contenant tous les fichiers
+auxquels à accès le système, est nommé par une lettre (\texttt{A:}, \texttt{B:} \textit{etc.}). 
+
+Le séparateur de nom de dossier est alors {\bf\textbackslash}. Par exemple, le sous-répertoire \texttt{Home} de la racine \texttt{C:} est noté \texttt{C:\textbackslash Home}. 
+
+Le \emph{chemin absolu} d'un fichier est l'adresse complète de son emplacement,
+débutant de la racine et passant par tous les sous-répertoires requis pour
+atteindre le fichier visé.
+
+Le \emph{chemin relatif} d'un fichier est l'adresse de son emplacement, écrite à partir d'un emplacement de l'arborescence que l'on appelle \emph{répertoire courant} (en anglais : \emph{current working directory}). 
+Ce répertoire courant est initialisé par défaut à un point prédéterminé de l'arborescence (répertoire \og maison \fg, ou \emph{home}), mais peut ensuite être modifié.
+
+\medskip
+
+\question\ Que fait précisément la commande \texttt{dir} ?
+
+\medskip
+
+La commande \texttt{cd}, avec un argument, permet de changer de répertoire
+courant. Sans argument, elle permet d'afficher le répertoire courant. En
+particulier, la commande \texttt{cd} \textit{d},où \textit{d} est le nom absolu ou relatif
+d'un répertoire, change le répertoire courant en
+\textit{d}. Essayez avec par exemple.
+
+\medskip
+
+\question\ Changer le répertoire courant. Que fait \texttt{cd \%UserProfile\%} ?  De 
+quoi \texttt{\%UserProfile\%} est-il l'abréviation ? Quel est le chemin absolu du répertoire \texttt{\%UserProfile\%} ?
+
+\medskip
+
+\question\ Que fait la commande \texttt{mkdir} ? En utilisant une ligne de commande, créer dans le répertoire \texttt{\%UserProfile\%} un sous-répertoire nommé \texttt{TP02}. Qu'observe-t-on en exécutant la commande \texttt{dir }\texttt{\%UserProfile\%} ? 
+
+\medskip
+
+\question\ Après avoir éxécuter la commande \texttt{cd TP02} à partir du répertoire $\sim$, qu'affiche la commande
+  \texttt{cd}?
+  
+\medskip  
+
+Copier le dossier \texttt{cpython-4243df51fe43} depuis le dossier \texttt{groupes/mpsX/TP02} dans le répertoire \texttt{\%UserProfile\%\textbackslash TP02} en passant par un explorateur de fichiers.  
+
+% \emph{Indication : si vous devez recommencer les étapes suivantes, veillez à bien réinitialiser les fichiers.}
+
+\medskip 
+
+Pour Unix : dans un répertoire, les fichiers et répertoires dont le nom
+commence par un point sont dits \emph{cachés}. Ce n'est pas la même chose sous Windows.
+
+\medskip
+
+\question\ En consultant le manuel de \texttt{dir}, trouver la commande qui
+permet d'afficher les fichiers et répertoires cachés.
+
+\medskip
+
+\question\ Faire un inventaire des fichiers de \texttt{\%UserProfile\%\textbackslash TP02}? Y en a-t-il des cachés ? 
+  
+\medskip
+
+\question{} Que désignent les répertoires \texttt{.} et \texttt{..} ?
+Que donne un \texttt{cd} sur chacun de ces répertoires ?
+
+\medskip
+
+\question\ Changez le répertoire courant en 
+\texttt{\%UserProfile\%\textbackslash TP02\textbackslash cpython-4243df51fe43\textbackslash Lib\textbackslash test\textbackslash capath}. Que
+fait   alors \texttt{cd ..\textbackslash ..\textbackslash multiprocessing} ?
+
+\medskip
+
+\question\ Comment obtenir grâce à la commande
+\texttt{dir} et l'option \texttt{-l} la taille de tous les
+fichiers de \texttt{TP02\textbackslash cpython-4243df51fe43\textbackslash Modules}, en les triant par ordre
+croissant de taille ?

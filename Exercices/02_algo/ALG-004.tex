@@ -1,0 +1,48 @@
+\exer{}
+\setcounter{numques}{0}
+
+On ne s'intéresse pas ici à la validité d'un nombre écrit en chiffre romains, mais à sa valeur. On rappelle
+quelques principes de base. Les sept caractères de la numération romaine sont :\\
+
+\begin{tabular}{|c|c|c|c|c|c|c|}
+ \hline
+ I&V&X&L&C&D&M\\ \hline
+ 1&5&10&50&100&500&1000\\ \hline
+\end{tabular}\\
+
+Certaines lettres sont dites d'\emph{unité}. Ainsi on dit que I est une unité pour V et X, X est une 
+unité pour L et C, C est une unité pour D et M.\\
+
+Pour trouver la valeur d'un nombre écrit en chiffres romains, on s'appuie sur les règles suivantes :
+\begin{itemize}
+\item toute lettre placée à la droite d'une lettre dont valeur est supérieure ou égale à la sienne s'ajoute
+à celle-ci ;
+\item toute lettre d'unité placée immédiatement à la gauche d'une lettre plus forte qu'elle indique que
+le nombre qui lui correspond doit être retranché au nombre qui suit ;
+\item les valeurs sont groupées en ordre décroissant, sauf pour les valeurs à retrancher selon la règle
+précédente ;
+1
+\item la même lettre ne peut pas être employée quatre fois consécutivement sauf M.
+\end{itemize}
+
+Par exemple,  DXXXVI = 536, CIX = 109 et MCMXL = 1940.
+
+\begin{enumerate}
+\item Écrire une fonction \texttt{valeur (caractere)} qui retourne la valeur décimale d'un caractère romain. Cette
+fonction doit renvoyer 0 si le caractère n'est pas l'un des 7 chiffres romains.
+\item  Écrire la fonction principale \texttt{conversion (romain)} qui permet de convertir un nombre romain en nombre 
+décimal. Cette fonction doit prendre en argument une chaîne de caractères \texttt{romain}. Si cette chaîne est 
+écrite en majuscule et correspond à un nombre romain correctement écrit, la fonction doit renvoyer le nombre décimal 
+égal au nombre romain passé en argument. Sinon, la fonction doit renvoyer -1.
+% Voici un algorithme pour vous aider :
+% \begin{itemize}
+% \item initialiser une variable \texttt{decimal} à 0 ;
+% \item  parcourir \texttt{romain} en lisant à chaque fois un caractère et le caractère suivant, notés \texttt{car} et 
+% \texttt{carsuiv} ;
+% \item  transformer \texttt{car} et \texttt{carsuiv} en leur valeur \texttt{val} et \texttt{valsuiv} selon la fonction 
+% précédente ;
+% \item  si \texttt{val < valsuiv} on ajoute -val\right à \texttt{decimal}. Sinon, on ajoute \texttt{val} à 
+% \texttt{decimal} ;
+% \item  renvoyer \texttt{decimal}.               
+% \end{itemize}
+\end{enumerate}

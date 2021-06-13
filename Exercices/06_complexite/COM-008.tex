@@ -1,0 +1,13 @@
+\question{\'Etudier la complexité théorique de la fonction \pyv{maxi}}
+
+\begin{lstlisting}
+def maxi(t):
+    """Renvoie le plus grand élément de t.
+       Précondition : t est un tableau non vide"""
+    m = t[0]
+    for x in t:
+        # Invariant : m est le plus grand élément trouvé jusqu'ici
+        if x > m:
+            m = x # On a trouvé plus grand, on met à jour m
+    return m
+\end{lstlisting}

@@ -1,0 +1,81 @@
+Le fichier sur lequel vous allez travailler a été chiffré en utilisant le chiffre de César. C'est un code par décalage très simple, qui fonctionne avec une clef $c \in \ii{0,26}$. 
+En numérotant les lettres de $0$ (lettre \texttt a) à $25$ (lettre \texttt z), chaque lettre de numéro $r$ est remplacée par la lettre de numéro $(r+c) \% 26$. 
+
+Par exemple, si la clef est $2$ (lettre \texttt c), le \texttt a est transformé en \texttt c, le \texttt b en \texttt d, ..., le \texttt x en \texttt z, le \texttt y en \texttt a et le \texttt z en \texttt b.
+
+\medskip{}
+
+\emph{Indication :} dans cet exercice, vous pourrez introduire \texttt{alphabet="abcdefghijklmnopqrstuvwxyz"}. Ainsi, si $i\in \ii{0,26}$, $\texttt{alphabet[}i\texttt{]}$ sera la lettre \no$i$.
+
+\medskip{}
+
+\question{} Appliquez la tranformation de clef 24 (lettre \texttt y) à votre texte. Quelle est le $(\alpha+50)\ieme$ mot de ce nouveau texte (on numérote à partir de zéro) ?
+
+\medskip{}
+
+Pour déchiffrer un texte chiffré avec la clef $c$, il suffit d'appliquer la transformation de clef $(26 - c) \% 26$. Cette dernière clef sera appelée \emph{clef de déchiffrement} du texte.
+Par exemple, si la clef de chiffrement est $3$ (lettre \texttt d), alors la clef de déchiffrement sera $23$ (lettre \texttt x).
+
+La cryptanalyse du chiffre de César, c'est-à-dire l'obtention de la clef à partir du texte chiffré, peut se faire par analyse de fréquences. 
+
+La fréquence d'une lettre dans un texte est le rapport entre le nombre d'occurences dans ce texte de cette lettre et le nombre total de lettres du texte. 
+
+\medskip{}
+
+\question{} Quelle est la fréquence de la lettre \texttt{e} dans votre texte chiffré ? 
+
+\medskip{}
+
+Pour comparer deux tableaux de fréquences de lettres $t = [t_0,\dots,t_ {25}]$ et $u = [u_0,\dots,u_{25}]$, on utilise la distance 
+\begin{equation*}
+    d(t,u) = \sum_{k=0}^{25} (t_k-u_k)^2.
+\end{equation*}
+Le fichier \texttt{frequences.txt} contient une liste de fréquences des lettres, que l'on supposera être celle du français. Vous le retrouverez dans le tableau~\ref{FIC-008:table_frequences}. 
+
+\begin{table}[!h]
+    \begin{center}
+    \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
+        \hline
+        Lettre & \texttt a & \texttt b & \texttt c & \texttt d & \texttt e & \texttt f & \texttt g & \texttt h & \texttt i \\
+        \hline
+        Fréquence & $0,0840$ & $0,0106$ & $0,0303$ & $0,0418$ & $0,1726$ & $0,0112$ & $0,0127$ & $0,0092$ & $0,0734$ \\
+        \hline
+    \end{tabular}
+    
+    \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
+        \hline
+        Lettre & \texttt j & \texttt k & \texttt l & \texttt m & \texttt n & \texttt o & \texttt p & \texttt q & \texttt r \\
+        \hline
+        Fréquence & $0,0031$ & $0,0005$ & $0,0601$ & $0,0296$ & $0,0713$ & $0,0526$ & $0,0301$ & $0,0099$ & $0,0655$ \\
+        \hline
+    \end{tabular}
+    
+    \begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+        \hline
+        Lettre & \texttt s & \texttt t & \texttt u & \texttt v & \texttt w & \texttt x & \texttt y & \texttt z   \\
+        \hline
+        Fréquence & $0,0808$ & $0,0707$ & $0,0574$ & $0,0132$ & $0,0004$ & $0,0045$ & $0,0030$ & $0,0012$  \\
+        \hline
+    \end{tabular}~~~~~~~~~~~~
+    \caption{Tableau des fréquences des lettres en français}
+    \label{FIC-008:table_frequences}
+    \end{center}
+\end{table}
+
+\medskip{}
+
+\question{} Quelle est la distance entre le tableau des fréquences des lettres de votre texte chiffré et celui des fréquences données dans le fichier~\texttt{frequences.txt} ? 
+
+\pagebreak{}
+
+L'algorithme de déchiffrement est le suivant : pour chaque clef $c \in \ii{0,26}$, on applique le code de César de clef $c$ au texte (ce qui donne un second texte), puis l'on calcule le tableau des fréquences des lettres de ce second texte, et enfin l'on calcule la distance entre ce tableau et celui donné par le fichier~\texttt{frequences.txt}. 
+
+On sélectionne alors la clef qui minimise les distances calculées ci-dessus. 
+
+\medskip{}
+
+\question{} Quelle est la clef de déchiffrement de votre texte ? 
+
+\medskip{}
+
+\question{} Quelle est le $(\alpha+100)\ieme$ mot du texte déchiffré (on numérote à partir de zéro) ? 

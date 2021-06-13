@@ -1,0 +1,164 @@
+% \section*{Modélisation dynamique d'une structure déformable}
+
+\question{}
+
+\begin{pyverbatim}
+def newton(f, fp, x0, epsilon):
+    """Zéro de f par la méthode de Newton
+       départ : x0, f' = fp, critère d'arrêt epsilon"""
+    u = x0
+    v = u - f(u)/fp(u)
+    while abs(v-u) > epsilon:
+        u, v = v, v - f(v)/fp(v)
+    return u
+\end{pyverbatim}
+
+\question{}
+
+La convergence de la méthode n'est pas toujours assurée. Dans plusieurs cas notamment : 
+  \begin{itemize}
+    \item point singulier au point d'annulation ;
+    \item point initial éloigné du zéro.
+  \end{itemize}
+Un exemple où la méthode ne converge jamais : $f : x \mapsto \sqrt{\abs x}$. 
+  
+Si $f$ est $\mathscr{C}^2$ alors, pour $u_{0}$ suffisamment proche
+de $x_{0}$, la méthode converge la vitesse de convergence est en $2^{-2^{n}}$.
+Il existe $C>0$ tel que
+\begin{equation*}
+  \forall n\in\N\quad \abs{u_{n} - x_{0}} \leq C 2^{-2^{n}}.
+\end{equation*}
+
+\question{} 
+
+\begin{pyverbatim}
+import numpy as np
+
+def matrice_H(m,c,k,dt,n):
+    H=np.zeros([n,n])
+    H[0,0]=m/dt**2+2*(c/dt+k)
+    for i in range(1,n):
+        H[i,i]=m/dt**2+2*(c/dt+k)
+        H[i,i-1]=-(c/dt+k)
+        H[i-1,i]=-(c/dt+k)
+    return H
+\end{pyverbatim}
+
+\question{} 
+On se place dans le modèle de complexité usuel.
+
+On peut exprimer la complexité de l'appel à la fonction \texttt{vecteur\_G(m,c,dt,q,X1,X2,f)} en fonction de $n$, la dimension de \texttt{X1}. 
+
+La construction du vecteur \texttt{G} est en $O(n)$.
+
+Dans chaque boucle \texttt{for} on peut considérer que toutes les opérations sont à temps constants et dans chaque tour de boucle il y a un nombre borné d'opérations en $O(1)$.
+On effectue $n$ puis $n-2$ tours de boucle, chacun en $O(1)$ ce qui donne une complexité en $O(n+n-2) = O(n)$.
+
+En dehors des boucles for et de la création de \texttt G, il n'y a qu'un nombre borné d'opérations en $O(1)$.
+
+On obtient alors une complexité en $O(n)+O(n)+O(1) = O(n)$.
+
+\question{} 
+
+H est tridiagonale donc $\forall i \in \left\{1,n-2\right\}$ et $\forall j \in \left\{0,i-2\right\}\cup \left\{i+2,n-1\right\}$ ; $H_{i,j}=0$.
+
+On obtient alors : 
+
+\begin{align*}
+\left\{
+\begin{array}{c}
+y_i^{q+1}=\dfrac{1}{h_{i,i}}\left[g_i-\left(h_{i,i-1}y^q_{i-1}+h_{i,i+1}y^q_{i+1}\right)\right]\forall i\in\left\{1,n-2\right\}\\
+\\
+y_0^{q+1}=\dfrac{1}{h_{0,0}}\left[g_0 -h_{0,1}y^q_{1}\right]\\
+\\
+y_{n-1}^{q+1}=\dfrac{1}{h_{n-1,n-1}}\left[g_{n-1}-h_{n-1,n-2}y^q_{n-2}\right]\\
+\end{array}
+\right.
+\end{align*}  
+
+\question{}
+
+
+\begin{pyverbatim}
+import numpy as np
+
+def iteration_Jacobi(H,G,Yq):
+    """Vecteur Yq+1 
+    Préconditions : H matrice tridiagonale nxn
+                    G,Yq : vecteurs nx1"""
+    n,_ = H.shape
+    Y = np.zeros((n,1))
+    Y[0] = (G[0] - H[0,1]*Yq[1]) / H[0,0]
+    Y[-1] = (G[-1] - H[-1,-2]*Yq[-2]) / H[-1,-1]
+    for i in range(1,n-1):
+        Y[i] = (G[i] - H[i,i-1]*Yq[i-1] - H[i,i+1]*Yq[i+1]) / H[i,i]
+    return Y
+\end{pyverbatim}
+
+
+
+\question{}
+
+\begin{pyverbatim}
+def carre_norme(X):
+    """Renvoie le carré de la norme euclidienne de X"""
+    S = 0
+    n,_ = X.shape
+    for i in range(n):
+        S = S + X[i]**2
+    return S
+\end{pyverbatim}
+
+
+\question{}
+
+\begin{pyverbatim}
+def Jacobi(H,G,Y0,eps):
+    """Renvoie une solution approchée de HY=G par la méthode de Jacobi"""
+    nG = carre_norme(G)
+    Y = Y0
+    while carre_norme(H.dot(Y)-G) > eps**2 * nG : 
+        Y = iteration_Jacobi(H,G,Y)
+    return Y
+\end{pyverbatim}
+
+\question{}
+On détaille la matrice $H$ : 
+\begin{equation*}
+  H = \begin{pmatrix}
+        \frac{m}{\texttt{dt}^2} + \frac{2c}{\texttt{dt}} + 2k & -\frac{c}{\texttt{dt}} - k & 0 & \dots & 0 \\
+        -\frac{c}{\texttt{dt}} - k                            & \frac{m}{\texttt{dt}^2} + \frac{2c}{\texttt{dt}} + 2k & -\frac{c}{\texttt{dt}} - k & \ddots & \vdots  \\
+        0 & -\frac{c}{\texttt{dt}} - k & \ddots & \ddots & 0 \\
+        \vdots & \ddots & \ddots &\frac{m}{\texttt{dt}^2} + \frac{2c}{\texttt{dt}} + 2k & -\frac{c}{\texttt{dt}} - k \\
+        0 & \dots & 0 & -\frac{c}{\texttt{dt}} - k & \frac{m}{\texttt{dt}^2} + \frac{2c}{\texttt{dt}} + 2k 
+      \end{pmatrix}
+\end{equation*}
+$H$ a pour coefficients sur la diagonale $\frac{m}{\texttt{dt}^2} + \frac{2c}{\texttt{dt}} + 2k$ (tout est strictement positif). 
+Sur la première ligne, on a 
+\begin{equation*}
+  \sum_{j\neq 0} \abs{h_{0,j}} = \abs{h_{0,1}} = \frac{c}{\texttt{dt}} + k < \frac{m}{\texttt{dt}^2} + \frac{2c}{\texttt{dt}} + 2k,
+\end{equation*}
+et de même sur la dernière ligne.
+
+Si $1 \leq i < n-1$, sur la $i\ieme$ ligne,
+\begin{equation*}
+  \sum_{j\neq i} \abs{h_{i,j}} = \abs{h_{i,i-1}}+\abs{h_{i,i+1}} = \frac{2c}{\texttt{dt}} + 2k < \frac{m}{\texttt{dt}^2} + \frac{2c}{\texttt{dt}} + 2k.
+\end{equation*}
+Ainsi, $H$ est à diagonale strictement dominante donc la méthode de Jacobi converge.
+
+\question{} On résout ici un système $n\times n$ par pas de temps.
+Notons $N$ le nombre de pas de temps nécessaires. 
+La création de $H$ se fait en $O(n^2)$.
+Un appel de la fonction \texttt{iteration\_Jacobi} se fait en $O(n)$.
+Un appel de la fonction \texttt{carre\_norme} se fait aussi en $O(n)$.
+Le calcul $HY_q$ dans la boucle de la fonction \texttt{Jacobi} se fait en $O(n)$.
+Si l'on note $J$ un majorant du nombre d'itérations de la méthode de Jacobi, un appel de la fonction \texttt{Jacobi} se fait en $O(nJ)$. 
+La résolution proposée ici a donc pour complexité $O(n^2+nJN)$.
+
+On pourrait aussi chercher à inverser la matrice $H$ en résolvant $n$ systèmes par la méthode de Jacobi : cela se fait en $O(n^2J)$. 
+On calcule ensuite de proche en proche  : $X_{q+1} = H^{-1}X_q$.
+Attention : l'inverse d'une matrice tridiagonale n'est pas forcément tridiagonale. 
+Chaque calcul $H^{-1}X_q$ se fait donc en $O(n^2)$. 
+La complexité de la méthode proposée ici est donc en $O(n^2J + Nn^2) = O(n^2(J+N))$ . 
+
+Du point de vue de la complexité, on préférera la première méthode si $J+N = o(nJN)$  et la deuxième si $nJN = o(J+N)$, ce qui est impossible.

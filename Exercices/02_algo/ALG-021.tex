@@ -1,0 +1,59 @@
+\exer{}
+\setcounter{numques}{0}
+
+\question{Soit les algorithmes de recherche de maximum d'un tableau ci-dessous, proposez des invariants de boucles.}
+\begin{lstlisting}
+def maxi(t):
+    """Renvoie le plus grand élément de t.
+       Précondition : t est un tableau 
+       non vide"""
+    m = t[0]
+    for x in t:
+        if x > m:
+            m = x 
+    return m
+\end{lstlisting}
+
+
+\begin{lstlisting}
+def maxi(t):
+    """Renvoie le plus grand élément de t.
+       Précondition : t est un tableau 
+       non vide"""
+    m = t[0] 
+    for i in range(1, len(t)):
+        if t[i] > m:
+            m = t[i] 
+    return m
+\end{lstlisting}
+
+\question{Soit les algorithmes de recherche d'indice de maximum d'un tableau ci-dessous, proposez des invariants de boucles.}
+
+\begin{lstlisting}
+def indicemaxi(t):
+    """Renvoie l'indice du plus grand 
+        élément de t.
+       Précondition : t est un tableau 
+       non vide"""
+    im = 0 
+    for i in range(1, len(t)):
+        if t[i] > t[im]:
+            im = i 
+    return im
+    
+\end{lstlisting}
+
+
+
+\begin{lstlisting}
+def indicemaxi(t):
+    """Renvoie l'indice du plus grand élément 
+       de t.
+       Précondition : t est un tableau 
+       non vide"""
+    im = 0 
+    for i, x in enumerate(t):
+        if x > t[im]:
+            im = i 
+    return im
+\end{lstlisting}

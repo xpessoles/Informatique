@@ -1,0 +1,23 @@
+On considère une équation différentielle $(\mathscr{E})$ : $y' = F(y,t)$, où $F$ est une fonction de $\R^n \times \R$ dans 
+$\R^n$, et où l'inconnue $y$ est une fonction de $\mathscr{C}^1(\R,\R^n)$, avec la condition initiale $y(t_0) = y_0$.
+
+\medskip
+
+\question\ Décrire le principe de la méthode d'Euler. On donnera clairement la relation de récurrence qui est au coeur de 
+cette méthode, en expliquant bien ce que représente la suite vérifiant cette relation de récurrence.
+
+\medskip 
+
+\question\ Écrire en \python{} une fonction mettant en \oe uvre la méthode d'Euler  et permettant de résoudre numériquement $(\mathscr{E})$ sur le segment 
+$[a,b]$, 
+où $a,b\in\R$, $a<b$. Vous écrirez une docstring décrivant tous les arguments de cette fonction.
+
+\medskip
+
+On considère l'équation différentielle d'inconnue $y\in\mathscr{C}^2(\R)$ et les conditions initiales suivantes : 
+\begin{equation}\tag{$\mathscr{E}$}\label{d03s:equadiff}
+  y''+\cos(t) y' - t^2 y = \e^t,\qquad y(0) = 4,~ y'(0) = 2. 
+\end{equation}
+
+\question\ Donnez une fonction $F$ et une variable $X$ telle que \eqref{d03s:equadiff} soit équivalente à l'équation $X'=F(X,t)$. On précisera bien 
+les ensembles de définition et d'arrivée de $F$, et l'ensemble auquel appartient la variable $X$, ainsi que la condition initiale à utiliser.

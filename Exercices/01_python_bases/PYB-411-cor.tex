@@ -1,0 +1,63 @@
+\exer{}
+\setcounter{numques}{0}
+
+\question{} 
+Indentation vraie.
+\begin{lstlisting}
+
+x=0
+y=5
+t=False
+if x>=1:
+    t=True
+if y<=6:
+    t=True
+\end{lstlisting}
+
+Indentation fausse.
+\begin{lstlisting}
+
+x=0
+y=5
+t=False
+if x>=1:
+    t=True
+    if y<=6:
+        t=True
+\end{lstlisting}
+
+
+
+
+\medskip{}
+
+
+\question{} 
+\begin{lstlisting}
+
+from random import randrange
+n= randrange(100) # Un entier aléatoire entre 0 et 99
+
+if n <= 10:
+    print("Trop petit")
+elif n >= 50:
+    print("Trop grand")
+else:
+    print("Juste comme il faut")
+\end{lstlisting}
+
+
+
+\medskip{}
+
+\question{} 
+\begin{lstlisting}
+
+def inv(n):
+    """Somme les inverses des n premiers entiers naturels non nuls"""
+    s = 0
+    for k in range(n):
+        x = 1/(k+1)
+        s = s+x
+    return s
+\end{lstlisting}

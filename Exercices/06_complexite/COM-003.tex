@@ -1,0 +1,46 @@
+On considère la suite $u$ définie par 
+\begin{equation*}
+  u_0 = 2,\quad \forall n \in \N,~ u_{n+1} = u_n^2.
+\end{equation*}
+On se considère la fonction suivante, permettant de calculer les valeurs de $u$. 
+\begin{pyverbatim}
+def u(n):
+    """u_n, n : entier naturel"""
+    v = 2
+    # Inv : v = u_0
+    for k in range(n):
+        # Inv : v = u_k
+        v = v*v
+        # Inv : v = u_k**2 = u_k+1
+    # Inv : au dernier tour, 
+    # k = n-1, donc v = u_n
+    return v
+\end{pyverbatim}
+
+Pour étudier le temps d'exécution d'une fonction, on pourra utiliser le morceau de code suivant. 
+\begin{pyverbatim}
+import timeit
+
+REPEAT=3
+
+def duree(f, x):
+  """Calcule le temps mis par Python pour 
+  calculer f(x).   Cette fonction effectue 
+  en fait le calcul de f(x) REPEAT fois et
+  garde la valeur la plus petite (l'idée est
+  d'éliminer les éventuelles perturbations 
+  provoquées par d'autres processus
+  tournant sur la machine)"""
+  t = timeit.Timer(stmt=lambda : f(x))
+  time = min(t.repeat(REPEAT, number=1))
+  return time
+\end{pyverbatim}
+
+\begin{enumerate}
+  \item Étudier en fonction de $n$ la complexité asymptotique de la fonction \texttt{u}, dans le modèle standard.
+  \item Tracer les temps de calculs de $u_k$ pour $k \in \ii{0;30}$ par la fonction \texttt{u}. Discuter le résultat.
+  
+    \emph{Indication :} on pourra utiliser une échelle semi-logarithmique.
+  \item Proposer un modèle de complexité plus réaliste et étudier dans ce modèle $n$ la complexité asymptotique de la fonction \texttt{u}.
+    On pourra déterminer explicitement $u_n$. 
+\end{enumerate}

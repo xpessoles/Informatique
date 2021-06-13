@@ -1,0 +1,14 @@
+\question{\'Etudier la complexité théorique dans le pire des cas de la fonction \pyv{recherche}. On pourra être amené à la reformuler légèrement.}
+
+\begin{lstlisting}
+def recherche(m,s):
+    """Recherche le mot m dans la chaîne s
+       Préconditions : m et s sont des chaînes de caractères"""
+    long_s = len(s) # Longueur de s
+    long_m = len(m) # Longueur de m
+    for i in range(long_s-long_m+1): 
+        # Invariant : m n'a pas été trouvé dans s[0:i+long_m-1]
+        if s[i:i+long_m] == m: # On a trouvé m
+            return True
+    return False
+\end{lstlisting}

@@ -1,0 +1,15 @@
+\exer{}
+\setcounter{numques}{0}
+
+On s'intéresse au problème d'insertion d'un nombre dans un tableau de nombres trié par ordre croissant. 
+
+Soit $\texttt{t} = [t_0,\dots,t_{n-1}]$ un tableau de nombres trié par ordre croissant, c'est-à-dire que 
+\begin{equation*}
+  t_0  \leq t_1 \leq \dots \leq t_{n-1}.
+\end{equation*}
+On dit qu'un nombre $x$ s'insère en position $i \in [0,n-1]$ dans le tableau \texttt{t} si $t_i \leq x \leq t_{i+1}$. 
+Si $x < t_0$, alors $x$ s'insère en position $-1$ dans \texttt{t} et, si $x>t_{n-1}$, alors $x$ s'insère en position $n-1$ dans \texttt{t}.
+
+\bigskip{}
+
+\question{} Écrire une fonction \texttt{position\_insertion(t,x)} prenant en argument un tableau de nombres \texttt{t} trié par ordre croissant et un nombre \texttt{x} et renvoyant une position où \texttt{x} s'insère dans \texttt{t}. 

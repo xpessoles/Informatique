@@ -1,0 +1,44 @@
+\exer{}
+\setcounter{numques}{0}
+
+\question{}
+%On peut utiliser une structure de liste puisque cette structure en sera pas amenée à évoluer. On peut choisir de donner les valeurs de billets en centime afin de n'utiliser que des entiers et éviter des erreurs d'arrondis.
+\begin{lstlisting}
+valeurs=[2000, 1000, 500, 200, 100, 50, 20, 10, 5, 2, 1]
+\end{lstlisting}
+
+\question{}
+
+\begin{lstlisting}
+def rendre_monnaie(cout,somme_client,valeurs):
+    """
+    Retourne une liste nombre_billets donnant le nombre de billets ou pièce à rendre selon le type de billet ou pièce
+    Keywords arguments :
+    cout : somme à payer
+    somme_client : argent donné par le client
+    """
+    nombre_billets=[0]*len(valeurs)
+    montant_a_rendre = somme_client - cout
+    k=0#Indice du billet dans la liste valeur
+    while montant_a_rendre>0:
+        nombre_billets[k]=montant_a_rendre//valeurs[k]
+        montant_a_rendre-=nombre_billets[k]*valeurs[k]
+        k+=1
+    return nombre_billets
+\end{lstlisting}
+
+\question{}
+
+\begin{lstlisting}
+def afficher_rendu_monnaie(cout,somme_client,valeurs):
+    cout=100*cout
+    somme_client=100*somme_client
+    nombre_billets=rendre_monnaie(cout,somme_client,valeurs)
+    for k in range(len(nombre_billets)):
+        if valeurs[k]>200:
+            print(str(int(nombre_billets[k]))+' : billet de '+str(int(valeurs[k]/100))+' euros')
+        elif valeurs[k]>=100:
+            print(str(int(nombre_billets[k]))+' : pièce de '+str(int(valeurs[k]/100))+' euros')
+        else:
+            print(str(int(nombre_billets[k]))+' : pièce de '+str(int(valeurs[k]))+' centimes')
+\end{lstlisting}

@@ -1,0 +1,76 @@
+\lstinputpath{../../../exos/systemes/robucar/}
+
+\question{Écrire le programme permettant de lire le fichier 'premier$\_$ordre.csv' et de stocker sous la forme de deux tableaux $t=\left[t_1,t_2\cdots,t_n\right]$ et $V=\left[V_1,V_2\cdots,V_n\right]$ respectivement le temps et la vitesse angulaire à chaque instant.}
+
+\lstinputlisting{programmes/Q2.py}
+
+\question{Tracer en fonction du temps la grandeur $ln\left(\frac{\Delta \dot{\theta}(\infty)-V}{\Delta \dot{\theta}(\infty)}\right)$. Que remarquez-vous ?}
+
+
+
+\question{Donner l'expression de $\alpha$ en fonction des $Y_i$ et des $t_i$ (valeurs des tableaux $Y$ et $t$ pris aux instants $i$.}
+
+\begin{align*}
+\frac{\partial E(\alpha)}{\partial \alpha}=0=\sum^n_{i=1}2\cdot \left(y_i-\alpha\cdot t_i\right)\cdot t_i
+\end{align*}
+
+On en déduit donc,
+
+\begin{align*}
+\alpha=\frac{\sum^n_{i=1}y_i\cdot t_i}{\sum^n_{i=1} t_i^2}
+\end{align*}
+
+
+\question{Écrire une fonction qui prend en arguments les tableaux $t$ et $Y$ et qui renvoie la quantité $\alpha$}
+
+
+\question{Donner la relation entre $\alpha$ et $\tau$.}
+
+On en déduit : 
+
+\begin{align*}
+ln\left(\frac{\Delta \dot{\theta}(\infty)-V(t)}{\Delta \dot{\theta}(\infty)}\right)=-\frac{1}{\tau}\cdot t
+\end{align*}
+
+d'où : 
+
+$$
+\boxed{\alpha=-\frac{1}{\tau}}
+$$
+
+
+\question{Tracer un graph permettant de comparer l'identification aux mesures expérimentales.}
+
+\question{Écrire une fonction permettant de calculer le résidu au sens des moindre carrés pour la valeur de $\alpha$ mesurée.}
+
+\question{Écrire une fonction permettant de calculer par différence finie la dérivée du vecteur $V$.}
+
+\question{Tracer son évolution au cours du temps. Que pouvons-nous remarquer ?}
+
+
+\question{\begin{itemize}
+\item Après avoir fait appel à la fonction permettant de calculer la dérivée de V, construire la matrice $\Phi$ (On pourra pour cela utiliser la fonction transpose du module numpy.
+\item Construire le vecteur $E$ qui contient les mêmes valeurs pour chacune de ses composantes égales à $E_0=4N\cdot m$.
+\item Calculer le vecteur $X$ en utilisant la propriété donnée ci-dessus (On pourra utiliser la fonction inv du module linalg sous-module de numpy.)
+\item Extraire alors $K$ et $\tau$.
+\item Avec ces valeurs identifiées calculer le vecteur $V\_th1$ donnant l'évolution de la vitesse angulaire en fonction du temps et la comparer aux résultats expérimentaux.
+\item Que peut-on en conclure ?
+\end{itemize} 
+}
+
+
+
+\question{Écrire une fonction prenant en arguments une liste $t$ et un vecteur $U$ et retournant une liste $iU$ correspondant à l'intégrale de $U$ entre $0$ et $t$.}
+
+\question{
+\begin{itemize}
+\item Construire les vecteurs $iS$ et $iE$ ; 
+\item construire la matrice $i\Phi$ ;
+\item extraire les coefficients $\tau$ et $K$ issue de cette méthode ;
+\item avec ces valeurs identifiées, calculer le vecteur $V\_th2$ donnant l'évolution de la vitesse angulaire en fonction du temps et la comparer aux résultats expérimentaux et à $V\_th1$.
+\item Que peut-on en conclure ?
+\end{itemize}
+}
+
+\question{Comparer les résidus des trois méthodes}
+

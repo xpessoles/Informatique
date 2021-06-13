@@ -1,0 +1,16 @@
+Un marcheur $M$ suit une trajectoire rectiligne à vitesse constante $V_M$. Son chien $C$, qui part d'un point éloigné, court pour le rejoindre à vitesse constante $V_C$. \`{A} chaque instant, sa course est dirigée vers son maître, \textit{i.e.} les vecteurs $\dfrac{\text{d}\overrightarrow{OC}}{\text{d}t}(t)$ et $\overrightarrow{CM}(t)$ sont colinéaires et de même sens :
+$ \dfrac{\text{d}\overrightarrow{OC}}{\text{d}t}(t)=V_C\,\frac{\overrightarrow{CM}(t)}{\vert\vert\overrightarrow{CM}(t)\vert\vert}$. 
+Ainsi, les coordonnées $\big(x(t),y(t)\big)$ du chien vérifient le système différentiel :
+\[ \left\{ \begin{aligned} x'(t)&=V_C\,\frac{V_M\,t-x(t)}{\sqrt{\big( V_M\,t-x(t) \big)^2+\big( -y(t) \big)^2}} \\ y'(t)&=V_C\,\frac{-y(t)}{\sqrt{\big( V_M\,t-x(t) \big)^2+\big( -y(t) \big)^2}} \end{aligned} \right. \]
+ 
+ \textbf{\'{E}crire un programme permettant de résoudre ce système différentiel avec la méthode d'Euler jusque $t=38s$ et avec 100 subdivisions.}
+
+On a $V_M=1{,}5+\alpha/100\,\text{m}.\text{s}^{-1} \quad \text{et} \quad V_C=8\,\text{m}.\text{s}^{-1} $
+		et les conditions initiales :
+		$ x(0)=100+\alpha  \quad \text{et} \quad y(0)=300+\alpha$ (coordonnées de la position initiale donnée en mètre). 
+
+\question{} Donner l'expression de la variable initiale à préciser dans la méthode d'Euler sous forme numérique en respectant son type.
+
+\question{} Donner $x(t=38s)$ obtenu avec la méthode d'Euler.
+
+\question{} Donner $y(t=38s)$ obtenu avec la méthode d'Euler.

@@ -1,0 +1,133 @@
+\'Etant donné un tableau $t = [t_0,\dots,t_{n-1}]$ d'entiers de longueur $n$, on appelle sous-tableau croissant de $t$ un tableau $[t_{i_0},\dots,t_{i_{k-1}}]$ (donc, de longueur $k$), avec 
+\begin{itemize}
+  \item $0\leq i_0 < i_1 < \dots < i_{k-1} \leq n-1$ ;
+  \item $t_{i_0}\leq t_{i_1} \leq \dots \leq t_{i_{k-1}}$.
+\end{itemize}
+On considèrera qu'un tableau vide, donc de longueur $0$, est croissant.
+
+On s'intéresse au problème de la recherche du plus long sous-tableau croissant dans un tableau d'entiers. 
+
+\question{} Quelle est la longueur minimale d'un tel plus long sous-tableau croissant ? Quand est-elle atteinte ?
+
+\question{} Que dire si l'on trouve un plus long sous-tableau croissant de longueur $n$ ? 
+
+\question{}  \'Ecrire une fonction \pyv{est_croissant(t)} renvoyant un booléen indiquant si le tableau d'entiers \pyv{t} est croissant. 
+
+% \subsection{Recherche exhaustive.}
+% 
+% On cherche d'abord à mettre en {\oe}uvre une stratégie naïve : on explore tous les sous-tableaux de $t$ (là, vous devriez vous dire que ce n'est pas une bonne idée) ! 
+% 
+% Pour faire cela, rappelons nous que prendre un sous-tableau de $t$ correspond à prendre une partie de $\ii{0,n}$. Or, l'ensemble des parties de $\ii{0,n}$ est en bijection avec $\ens{0,1}^{\ii{0,n}}$.
+% Un sous-tableau $v$ de $t$ est donc caractérisé par une famille $\p{e_0,\dots,e_{n-1}} \in \ens{0,1}^{\ii{0,n}}$, avec, si $0\leq i < n$, $e_i = 1$ si et seulement si $t[i]$ est présent dans $v$.
+% Enfin, on peut voir que pour obtenir toutes les familles de $ \ens{0,1}^{\ii{0,n}}$, il suffit d'écrire la décomposition binaire sur $n$ bits de tous les entiers entre $0$ et $2^n-1$. 
+% 
+% \begin{exemple}
+%   Avec \pyv{t = [1,5,3,2]}, de longueur 4, le sous-tableau de \pyv{t} décrit par \pyv{[0,0,0,0]} est \pyv{[]}, celui décrit par \pyv{[1,0,0,1]} est \pyv{[1,2]} et celui décrit par \pyv{[0,1,1,1]} est \pyv{[5,3,2]}.
+% \end{exemple}
+% 
+% 
+% On peut alors penser à implémenter l'idée suivante : on parcourt séquentiellement les entiers entre $0$ et $2^n-1$, on calcule l'écriture binaire de chaque entier, cela définit un sous-tableau de $t$ et il ne reste plus qu'à savoir si ce sous-tableau est croissant. 
+% On se rend compte rapidement que cette idée est peu efficace : on va calculer beaucoup de décompositions binaires !
+% On va plutôt parcourir directement ces décompositions binaires. 
+% 
+% \bigskip{}
+% 
+% \question{} \'Ecrire une fonction \pyv{plus_un(e)} qui prend en argument un tableau \pyv{e} contenant des $0$ et des $1$ et qui, si \pyv{e} représente l'entier $p$ en binaire, le modifie pour qu'il représente l'entier $p+1$ (modulo $2^n$). \\
+% \emph{Indice : on partira de la fin de \pyv{e} et l'on réfléchira à la propagation de la retenue : tant que l'on rencontre des $1$, on les change en $0$ ; dès que l'on rencontre un $0$, on le change en $1$ et l'on s'arrête.}
+% 
+% \begin{exemple}
+%   \`A partir de \pyv{e=[0,0,0]}, \pyv{plus_un(e)} change \pyv{e} en \pyv{[0,0,1]}, ensuite \pyv{plus_un(e)}  change \pyv{e} en \pyv{[0,1,0]} etc.
+% \end{exemple}
+% 
+% \medskip{}
+% 
+% \question{} \'Ecrire une fonction \pyv{longueur(e)} qui prend en argument un tableau \pyv{e} contenant des $0$ et des $1$ et qui renvoie le nombre de $1$ dans \pyv{e}.
+% 
+% \medskip{}
+% 
+% \question{} \'Ecrire une fonction \pyv{extrait(t,e)} qui prend en argument un tableau \pyv{t} d'entiers et un tableau \pyv{e} de $0$ et de $1$ et qui renvoie le sous-tableau de \pyv{t} désigné par \pyv{e}.
+% 
+% \medskip{}
+% 
+% \question{} \'Ecrire une fonction \pyv{stc_exhaustif(t)} donnant la longueur du plus grand sous-tableau croissant de \pyv{t}.
+
+\subsection{Recherche exhaustive.}
+
+On cherche d'abord à mettre en {\oe}uvre une stratégie naïve : on explore tous les sous-tableaux de $t$ (là, vous devriez vous dire que ce n'est pas une bonne idée) ! 
+
+Pour faire cela, rappelons nous que prendre un sous-tableau de $t$ correspond à prendre une partie de $\ii{0,n}$. Or, l'ensemble des parties de $\ii{0,n}$ est en bijection avec $\ens{0,1}^{\ii{0,n}}$.
+Un sous-tableau $v$ de $t$ est donc caractérisé par une famille $\p{e_0,\dots,e_{n-1}} \in \ens{0,1}^{\ii{0,n}}$, avec, si $0\leq i < n$, $e_i = 1$ si et seulement si $t[i]$ est présent dans $v$.
+Enfin, on peut voir que pour obtenir toutes les familles de $ \ens{0,1}^{\ii{0,n}}$, il suffit d'écrire la décomposition binaire sur $n$ bits de tous les entiers entre $0$ et $2^n-1$. 
+
+\begin{exemple}
+  Avec \pyv{t = [1,5,3,2]}, de longueur 4, le sous-tableau de \pyv{t} décrit par \pyv{[0,0,0,0]} est \pyv{[]}, celui décrit par \pyv{[1,0,0,1]} est \pyv{[1,2]} et celui décrit par \pyv{[0,1,1,1]} est \pyv{[5,3,2]}.
+\end{exemple}
+
+
+On peut alors penser à implémenter l'idée suivante : on parcourt séquentiellement les entiers entre $0$ et $2^n-1$, on calcule l'écriture binaire de chaque entier, cela définit un sous-tableau de $t$.
+Il ne reste plus qu'à savoir si ce sous-tableau est croissant et à calculer sa longueur. 
+
+\medskip{}
+
+Commencez par recopier le code suivant dans votre script. 
+
+\begin{pyverbatim}
+def binaire(k,n):
+    """Renvoie le tableau de n bits écrivant k en binaire
+    Précondition : 0 <= k <= 2**n -1 """
+    L = [0]*n
+    p = k
+    for i in range(n):
+        L[n-1-i] = p % 2
+        p = p // 2
+    return L
+\end{pyverbatim}
+
+\medskip{}
+
+Soit \texttt{k} un entier écrit en binaire avec \texttt{n} chiffres : $\texttt{k} = \underline{a_{\texttt{n}-1}\ldots a_{1}a_{0}}_{2}$, c'est-à-dire que 
+\begin{equation*}
+  \texttt{k} = \sum_{j=0}^{\texttt{n}-1} a_j 2^j.
+\end{equation*}
+
+\medskip{}
+
+\question{} Écrire un invariant portant sur \texttt{L} et \texttt{p} dans la boucle \texttt{for} de la fonction \texttt{binaire(k,n)} et justifier que cette fonction renvoie bien le résultat demandé.
+
+\medskip{}
+
+\question{} \'Ecrire une fonction \pyv{longueur(e)} qui prend en argument un tableau \pyv{e} contenant des $0$ et des $1$ et qui renvoie le nombre de $1$ dans \pyv{e}.
+
+\medskip{}
+
+\question{} \'Ecrire une fonction \pyv{extrait(t,e)} qui prend en argument un tableau \pyv{t} d'entiers et un tableau \pyv{e} de $0$ et de $1$ et qui renvoie le sous-tableau de \pyv{t} désigné par \pyv{e}.
+
+\medskip{}
+
+\question{} \'Ecrire une fonction \pyv{stc_exhaustif(t)} donnant la longueur du plus grand sous-tableau croissant de \pyv{t}.
+
+\subsection{Facultatif : programmation dynamique.}
+
+Le programme écrit dans la partie précédente n'est pas très efficace (essayez par exemple de le tester sur un tableau de longueur 100). Nous allons adopter une autre statégie. 
+
+Toujours avec $t = [t_0,\dots,t_{n-1}]$ un tableau d'entiers de longueur $n$, on note $m = [m_0,\dots,m_{n-1}]$ le tableau de longueur $n$ tel que, si $0\leq i < n$, $m_i$ est la taille du plus grand sous-tableau croissant de $t$ dont le dernier élément est $t_i$.
+
+\medskip{}
+
+\question{} Que vaut $m_0$ ? 
+
+\medskip{}
+
+\question{} Soit $0\leq i < n-1$, supposons que l'on connaisse $t$ et $[m_0,\dots,m_i]$. Comment calculer $m_{i+1}$ ? 
+
+\medskip{}
+
+\question{} Si l'on connaît $m$, comment obtenir la longueur de la plus grande sous-suite croissante de $t$ ? 
+
+\medskip{}
+
+\question{} \'Ecrire une fonction \pyv{stc_dynamique(t)} donnant la longueur du plus grand sous-tableau croissant de \pyv{t}.
+
+\medskip{}
+
+\question{} Quelle est la différence entre les fonctions écrites dans chaque partie, notamment à l'utilisation ? 

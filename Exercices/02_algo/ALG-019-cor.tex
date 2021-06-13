@@ -1,0 +1,12 @@
+\exer{}
+\setcounter{numques}{0}
+
+L'invariant est : \og $\forall k \in \ii{0,i},~ L[n-1-k] = a_{k}$ et $p = \underline{a_{n-1}\dots a_{i}}_2$\fg{}. 
+
+Pour $i=0$, $\ii{0,i}$ est vide et $p = n =  \underline{a_{n-1}\dots a_{0}}_2$, donc l'invariant est bien initialisé. 
+
+Soit $0 \leq i \leq n-1$, supposons que $\forall k \in \ii{n-i,n},~ L[k] = a_k$ et $p = \underline{a_{n-1}\dots a_{i}}_2$. 
+La division euclidienne de $p$ par $2$ donne pour reste $a_{i}$ et pour quotient $\underline{a_{n-1}\dots a_{i+1}}_2$.
+On a donc bien $L[n-1-i] = a_i$ et au tour suivant $p = \underline{a_{n-1}\dots a_{i+1}}_2$. L'invariant est donc vrai au tour suivant. 
+
+Au dernier tour, $i = n-1$, donc $L$ contient bien les chiffres de l'écriture en binaire de $n$. 

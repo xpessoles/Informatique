@@ -1,0 +1,179 @@
+============================= test session starts =============================
+platform win32 -- Python 3.6.7, pytest-5.3.0, py-1.8.0, pluggy-0.13.0 -- c:\programdata\miniconda3\python.exe
+cachedir: .pytest_cache
+rootdir: C:\GitHub\Informatique_MPSI\exos\sql\SQL-005
+collecting ... collected 32 items
+
+test_SQL_005.py::test_Q1_res PASSED                                      [  3%]
+test_SQL_005.py::test_Q2_res FAILED                                      [  6%]
+test_SQL_005.py::test_Q3_res FAILED                                      [  9%]
+test_SQL_005.py::test_Q4_res PASSED                                      [ 12%]
+test_SQL_005.py::test_Q4_req FAILED                                      [ 15%]
+test_SQL_005.py::test_Q5_res PASSED                                      [ 18%]
+test_SQL_005.py::test_Q5_req FAILED                                      [ 21%]
+test_SQL_005.py::test_Q6_req FAILED                                      [ 25%]
+test_SQL_005.py::test_Q7_req FAILED                                      [ 28%]
+test_SQL_005.py::test_Q8_res PASSED                                      [ 31%]
+test_SQL_005.py::test_Q8_req PASSED                                      [ 34%]
+test_SQL_005.py::test_Q9_res FAILED                                      [ 37%]
+test_SQL_005.py::test_Q9_req PASSED                                      [ 40%]
+test_SQL_005.py::test_Q10_res PASSED                                     [ 43%]
+test_SQL_005.py::test_Q10_req PASSED                                     [ 46%]
+test_SQL_005.py::test_Q11_res PASSED                                     [ 50%]
+test_SQL_005.py::test_Q11_req PASSED                                     [ 53%]
+test_SQL_005.py::test_Q12_res FAILED                                     [ 56%]
+test_SQL_005.py::test_Q12_req FAILED                                     [ 59%]
+test_SQL_005.py::test_Q13_req FAILED                                     [ 62%]
+test_SQL_005.py::test_Q14_res FAILED                                     [ 65%]
+test_SQL_005.py::test_Q14_req FAILED                                     [ 68%]
+test_SQL_005.py::test_Q15_req PASSED                                     [ 71%]
+test_SQL_005.py::test_Q16_res PASSED                                     [ 75%]
+test_SQL_005.py::test_Q16_req PASSED                                     [ 78%]
+test_SQL_005.py::test_Q17_res PASSED                                     [ 81%]
+test_SQL_005.py::test_Q17_req PASSED                                     [ 84%]
+test_SQL_005.py::test_Q18_req PASSED                                     [ 87%]
+test_SQL_005.py::test_Q19_res PASSED                                     [ 90%]
+test_SQL_005.py::test_Q19_req PASSED                                     [ 93%]
+test_SQL_005.py::test_Q20_res PASSED                                     [ 96%]
+test_SQL_005.py::test_Q20_req PASSED                                     [100%]
+
+================================== FAILURES ===================================
+_________________________________ test_Q2_res _________________________________
+
+    def test_Q2_res ():
+>       assert sol_Q2_res ==  Q2_res
+E       AssertionError: assert 'pokemon(id :...lt : boolean)' == 'pokemon(id :...lt : BOOLEAN)'
+E         - pokemon(id : integer, identifier : string, species_id : integer, height : integer, weight : integer, base_experience : integer, order : integer, is_default : boolean)
+E         + pokemon(id : INTEGER, identifier : VARCHAR(79), species_id : INTEGER, height : INTEGER, weight : INTEGER, base_experience : INTEGER,order : INTEGER, is_default : BOOLEAN)
+
+test_SQL_005.py:36: AssertionError
+_________________________________ test_Q3_res _________________________________
+
+    def test_Q3_res ():
+>       assert sol_Q3_res ==  Q3_res
+E       NameError: name 'Q3_res' is not defined
+
+test_SQL_005.py:39: NameError
+_________________________________ test_Q4_req _________________________________
+
+    def test_Q4_req ():
+>       assert requete(sol_Q4_req) == requete(Q4_req)
+E       AssertionError: assert [(4,)] == [('pikachu', 4)]
+E         At index 0 diff: (4,) != ('pikachu', 4)
+E         Full diff:
+E         - [(4,)]
+E         + [('pikachu', 4)]
+
+test_SQL_005.py:45: AssertionError
+_________________________________ test_Q5_req _________________________________
+
+    def test_Q5_req ():
+>       assert requete(sol_Q5_req) == requete(Q5_req)
+E       AssertionError: assert [(60,)] == [('pikachu', 60)]
+E         At index 0 diff: (60,) != ('pikachu', 60)
+E         Full diff:
+E         - [(60,)]
+E         + [('pikachu', 60)]
+
+test_SQL_005.py:51: AssertionError
+_________________________________ test_Q6_req _________________________________
+
+    def test_Q6_req ():
+>       assert requete(sol_Q6_req) == requete(Q6_req)
+E       AssertionError: assert [('bulbasaur'...izard',), ...] == [('bulbasaur'...rd', 17), ...]
+E         At index 0 diff: ('bulbasaur',) != ('bulbasaur', 7)
+E         Right contains 63 more items, first extra item: ('aegislash-blade', 17)
+E         Full diff:
+E           [
+E         -  ('bulbasaur',),
+E         ?               --
+E         +  ('bulbasaur',...
+E         
+E         ...Full output truncated (2837 lines hidden), use '-vv' to show
+
+test_SQL_005.py:54: AssertionError
+_________________________________ test_Q7_req _________________________________
+
+    def test_Q7_req ():
+>       assert requete(sol_Q7_req) == requete(Q7_req)
+E       AssertionError: assert [('bulbasaur'...izard',), ...] == [('bulbasaur'...rd', 17), ...]
+E         At index 0 diff: ('bulbasaur',) != ('bulbasaur', 7)
+E         Right contains 63 more items, first extra item: ('aegislash-blade', 17)
+E         Full diff:
+E           [
+E         -  ('bulbasaur',),
+E         ?               --
+E         +  ('bulbasaur',...
+E         
+E         ...Full output truncated (2837 lines hidden), use '-vv' to show
+
+test_SQL_005.py:57: AssertionError
+_________________________________ test_Q9_res _________________________________
+
+    def test_Q9_res ():
+>       assert sol_Q9_res ==  Q9_res
+E       AssertionError: assert '63' == '9'
+E         - 63
+E         + 9
+
+test_SQL_005.py:66: AssertionError
+________________________________ test_Q12_res _________________________________
+
+    def test_Q12_res ():
+>       assert (sol_Q12_res ==  Q12_res) or (("joltik" in Q12_res) and ("flabebe" in Q12_res))
+E       AssertionError: assert ('joltik,flabebe' == 'gastly, haunter flabebe'
+E         - joltik,flabebe
+E         + gastly, haunter flabebe or ('joltik' in 'gastly, haunter flabebe'))
+
+test_SQL_005.py:84: AssertionError
+________________________________ test_Q12_req _________________________________
+
+    def test_Q12_req ():
+>       assert requete(sol_Q12_req) == requete(Q12_req)
+E       AssertionError: assert [('joltik',), ('flabebe',)] == [('gastly',),... ('flabebe',)]
+E         At index 0 diff: ('joltik',) != ('gastly',)
+E         Right contains one more item: ('flabebe',)
+E         Full diff:
+E         - [('joltik',), ('flabebe',)]
+E         + [('gastly',), ('haunter',), ('flabebe',)]
+
+test_SQL_005.py:87: AssertionError
+________________________________ test_Q13_req _________________________________
+
+    def test_Q13_req ():
+>       assert requete(sol_Q13_req) == requete(Q13_req)
+E       AssertionError: assert [(145, 1), (1... (88, 1), ...] == [('wailord', ...ix', 88), ...]
+E         At index 0 diff: (145, 1) != ('wailord', 145)
+E         Right contains 758 more items, first extra item: ('kangaskhan', 22)
+E         Full diff:
+E           [
+E         +  ('wailord',
+E         -  (145,
+E         ?  ^...
+E         
+E         ...Full output truncated (1727 lines hidden), use '-vv' to show
+
+test_SQL_005.py:90: AssertionError
+________________________________ test_Q14_res _________________________________
+
+    def test_Q14_res ():
+>       assert (sol_Q14_res ==  Q14_res) or (sol_Q14_res in Q14_res)
+E       AssertionError: assert ('6,68' == '(68,6)'
+E         - 6,68
+E         + (68,6) or '6,68' in '(68,6)')
+
+test_SQL_005.py:93: AssertionError
+________________________________ test_Q14_req _________________________________
+
+    def test_Q14_req ():
+>       assert requete(sol_Q14_req) == requete(Q14_req)
+E       assert [(6, 68)] == [(68, 6)]
+E         At index 0 diff: (6, 68) != (68, 6)
+E         Full diff:
+E         - [(6, 68)]
+E         ?       -
+E         + [(68, 6)]
+E         ?    +
+
+test_SQL_005.py:96: AssertionError
+======================= 12 failed, 20 passed in 41.91s ========================

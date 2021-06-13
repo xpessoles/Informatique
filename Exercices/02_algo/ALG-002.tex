@@ -1,0 +1,32 @@
+\exer{}
+\setcounter{numques}{0}
+
+Un marchand de légumes très maniaque souhaite ranger ses petits pois en les regroupant en boîtes de 
+telle sorte que chaque boîte contienne un nombre factoriel de petits pois. On rappelle qu'un nombre 
+est factoriel s'il est de la forme $1$, $1 \times 2$, $1 \times 2 \times 3$, $1 \times 2 \times 3 
+\times 4\cdots$ et qu'on les note sous la forme suivante :\\
+$$n!=1\times 2\times 3\times \cdots\times (n-1)\times n$$
+
+Il souhaite également utiliser le plus petit nombre de boîtes possible.\\
+Ainsi, s'il a 17 petits pois, il utilisera :\\
+   \hspace*{2cm} 2 boîtes de 3! = 6 petits pois\\
+   \hspace*{2cm} 2 boîtes de 2! = 2 petits pois\\
+   \hspace*{2cm} 1 boîte de 1! = 1 petits pois.\\
+ce qui donne bien $2 \times 3! + 2 \times 2! + 1 \times 1! = 12 + 4 + 1 = 17$.\\
+
+D'une manière générale, s'il a \texttt{nbp} petits pois, il doit trouver une suite 
+\texttt{a\_1,a\_2$\cdots$,a\_p} d'entiers positifs ou nuls avec \texttt{a\_p}$>0$ et telle que :
+\texttt{nbp=a\_1 x  1!+a\_2 x  2!+$\cdots$+a\_p x  p!} avec 
+\texttt{a\_1+$\cdots$+a\_p} minimal. \\
+Remarque mathématique : si à chaque étape on cherche le plus grand entier \texttt{k} possible tel 
+que \texttt{k!} soit inférieur au nombre de petits pois restant, on est sûrs d'obtenir la 
+décomposition optimale : en termes informatiques, on dit que l'algorithme \textit{glouton} est 
+optimal.\\
+
+\noindent ENTRÉE : un entier, \texttt{nbp}, le nombre total de petits poids.\\
+\noindent SORTIE : un couple constitué de l'entier \texttt{p} et du tableau 
+\texttt{[ a\_1, a\_2, $\cdots$, a\_p ]}.\\
+
+\noindent EXEMPLE :\\
+entrée : \texttt{17}\\
+sortie : \texttt{(3, [ 1, 2, 2 ] )}.

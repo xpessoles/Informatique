@@ -1,0 +1,20 @@
+\exer{}
+\setcounter{numques}{0}
+
+\question{} 
+\begin{lstlisting}
+
+def nb_exos():
+    """Nombre d'exercices réalisés en 240 min"""
+    t=0
+    i=0
+    #0 exos réalisés en 0 minute
+    while t<=240:
+        #invariant de boucle i exos réalisés en t<=240 minutes
+        i=i+1
+        #invariant de boucle (i-1) exos réalisés en t<=240 minutes
+        t=t+(i)**(1/2)
+ #      invariant de fin de boucle : i+1 exos réalisé en t minutes
+ #sortie de boucle : n<=240<t avec n le nombre de minutes pour faire i exos-1
+    return i-1
+\end{lstlisting}

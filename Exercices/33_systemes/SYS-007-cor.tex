@@ -1,0 +1,45 @@
+\textbf{Importation des modules nécessaires : }
+
+
+\begin{lstlisting}
+from numpy import array
+import numpy as np
+\end{lstlisting}
+
+
+\question{} Résoudre
+
+  \begin{equation*}
+    A
+    \begin{pmatrix}
+      x_{1}\\x_{2}\\x_{3}\\x_{4}
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+      1\\ 2\\ 3\\ \alpha
+    \end{pmatrix}
+  \end{equation*}
+  Donner la valeur de $x_{1}$.
+  
+  
+\begin{lstlisting}
+A=array([[0,1,32,243],[1,32,243,1024],[32,243,1024,3125],[243,1024,3125,7776]])
+B=array([[1],[2],[3],[alpha]])
+
+X=np.linalg.solve(A,B)
+
+print("Qu. 9 : ",X[0][0])
+
+
+\end{lstlisting}
+
+
+\question{}
+  Calculer $B = A^{3}$ et donner le reste du coefficient de $B$ situé
+  sur la première ligne et la première colonne de $B$ (donc d'indices
+  $0$ et $0$ en \texttt{numpy}) dans la division par $10\,000+\alpha$.
+
+\begin{lstlisting}  
+  B=np.dot(A,np.dot(A,A))
+print("Qu. 10 : ",B[0][0]%(10000+alpha))
+\end{lstlisting}

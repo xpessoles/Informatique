@@ -1,0 +1,19 @@
+On considère la fonction suivante.
+\begin{Verbatim}[gobble=0,numbers=left]
+def mystere(n):
+    """Préconditions : n entier positif"""
+    L = []
+    c = 0 
+    while c ** 2 <= n : 
+        L.append(c**2)
+        c = c+1
+    return L
+\end{Verbatim}
+
+\bigskip{}
+
+\question{} Montrer que, si \texttt{n} est un entier, un  appel de la fonction \texttt{mystere(n)} renvoie un résultat, à l'aide d'un variant. 
+
+\medskip{}
+
+\question{} Que renvoie un appel de la fonction \texttt{mystere(n)} ? On justifiera la réponse, à l'aide notamment d'un invariant. 

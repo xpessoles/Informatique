@@ -1,0 +1,44 @@
+\exer{}
+\setcounter{numques}{0}
+\question{}
+\begin{lstlisting}
+def somme1(n):
+    """n = entier naturel.
+       Calcule la somme des 1/(i+j**2), pour 1<=i,j<=n"""
+    s = 0
+    # Inv : s = somme des 1/(k+l**2) pour 1<=k<=0 et 1 <= l <= n (somme vide)
+    for i in range(1,n+1):
+        # Inv : s = somme des 1/(k+l**2) pour 1<=k<=(i-1) et 1 <= l <= n 
+        for j in range(1,n+1):
+            # Inv : s = somme des 1/(k+l**2) pour 1<=k<=(i-1) et 1 <= l <= n 
+            #           + somme des 1 / (i + l**2) pour 1 <= l <= j-1
+            s = s + 1 / (i + j**2)
+            # Inv : s = somme des 1/(k+l**2) pour 1<=k<=(i-1) et 1 <= l <= n 
+            #           + somme des 1 / (i + l**2) pour 1 <= l <= j
+        # Au dernier tour de boucle, j = n, donc 
+	# Inv : s = somme des 1/(k+l**2) pour 1<=k<=i et 1 <= l <= n
+    # Au dernier tour de boucle, i = n, donc 
+    # s = somme des 1/(k+l**2) pour 1<=k<=n et 1 <= l <= n 
+    return s
+\end{lstlisting}
+
+\begin{lstlisting}
+def somme2(n):
+    """n = entier naturel.
+       Calcule la somme des 1/(i+j**2), pour 1<=i<j<=n"""
+    s = 0
+    # Inv : s = somme des 1/(k+l**2) pour 1<=k<=0 et k < l <= n (somme vide)
+    for i in range(1,n+1):
+        # Inv : s = somme des 1/(k+l**2) pour 1<=k<=i et i < l <= n 
+        for j in range(i+1,n+1):
+            # Inv : s = somme des 1/(k+l**2) pour 1<=k<=i-1 et k < l <= n 
+            #           + somme des 1 / (i + l**2) pour i+1 < l <= j-1 
+            s = s + 1 / (i+j**2)
+            # Inv : s = somme des 1/(k+l**2) pour 1<=k<=i-1 et k < l <= n 
+            #           + somme des 1 / (i + l**2) pour i+1 < l <= j 
+        # Au dernier tour de boucle, j = n, donc 
+	# Inv : s = somme des 1/(k+l**2) pour 1<=k<=i et k < l <= n
+    # Au dernier tour de boucle, i = n, donc 
+    # s = somme des 1/(k+l**2) pour 1<=k<=n et k < l <= n 
+    return s
+\end{lstlisting}

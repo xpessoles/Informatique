@@ -1,0 +1,8 @@
+\question{} En entrée de boucle, on a $i = 0$ et $u = 2 = 4^0+1$, donc l'invariant est initialisé. 
+
+En début d'un tour de boucle, supposons qu'au début de la ligne $5$, $u = 4^i+1$. Alors, à la fin de la ligne $4$, $u = 4(4^i+1)-3 = 4^{i+1}+1$. 
+Ainsi, au début du tour de boucle suivant, on a bien $u= 4^{i+1}+1$. 
+
+\fbox{\og $u = 4^i + 1$ \fg{} est un invariant d'entrée de boucle.}
+
+Au dernier tour de boucle, on a $i=n-1$, donc \fbox{le résultat renvoyé est $4^n+1$.}

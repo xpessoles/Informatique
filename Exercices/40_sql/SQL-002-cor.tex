@@ -1,0 +1,185 @@
+\question{} Le couple (\texttt{id\_etudiant}, \texttt{id\_interro}) est une clef primaire pour la table \texttt{interros}. 
+  Ainsi, tout système de gestion de bases de données devrait refuser deux enregistrements ayant les mêmes valeurs pour ce couple d'attributs. 
+  
+  \fbox{On ne peut donc pas donner plusieurs notes pour un même étudiant et une même interrogation.}
+  
+\medskip{}  
+  
+\question{}
+\begin{verbatim}
+SELECT sujet
+FROM interros
+WHERE id = 1 ;
+\end{verbatim}
+
+  
+\medskip{}  
+  
+\question{}
+\begin{verbatim}
+SELECT nom, prenom
+FROM etudiants ;
+\end{verbatim}
+  
+\medskip{}  
+  
+\question{}
+\begin{verbatim}
+SELECT DISTINCT prenom
+FROM etudiants ;
+\end{verbatim}
+  
+\medskip{}  
+  
+\question{}
+\begin{verbatim}
+SELECT id
+FROM etudiants
+WHERE nom = "reinedesneiges" ;
+\end{verbatim}
+  
+\medskip{}  
+  
+\question{}
+\begin{verbatim}
+SELECT max(date_naissance)
+FROM etudiants ;
+\end{verbatim}
+  
+\medskip{}  
+  
+\question{}
+\begin{verbatim}
+SELECT DISTINCT nom, prenom
+FROM etudiants, notes 
+WHERE id = id_etudiant
+      AND
+      note = 20 ;
+\end{verbatim}
+Ou bien, avec une jointure : 
+\begin{verbatim}
+SELECT DISTINCT nom, prenom
+FROM etudiants JOIN notes ON id = id_etudiant
+WHERE note = 20 ;
+\end{verbatim}
+
+\medskip{}  
+  
+\question{}
+
+\begin{verbatim}
+SELECT nom, prenom, titre
+FROM etudiants, interros, notes
+WHERE etudiants.id = id_etudiant
+      AND
+      interros.id = id_interro
+      AND 
+      note = 0;
+\end{verbatim}
+
+\medskip{}  
+  
+\question{}
+\begin{verbatim}
+SELECT nom, prenom, AVG(note) AS moyenne
+FROM etudiants, notes
+WHERE id = id_etudiant
+GROUP BY id;
+\end{verbatim}
+Ou bien, avec une jointure : 
+\begin{verbatim}
+SELECT nom, prenom, AVG(note) AS moyenne
+FROM etudiants JOIN notes ON id = id_etudiant
+GROUP BY id;
+\end{verbatim}
+
+\medskip{}
+
+\question{}
+\begin{verbatim}
+SELECT nom, prenom, COUNT(*) AS nb_copies
+FROM etudiants notes
+WHERE etudiants.id = id_etudiant
+GROUP BY etudiants.id
+\end{verbatim}
+Ou bien, avec une jointure : 
+\begin{verbatim}
+SELECT nom, prenom, COUNT(*) AS nb_copies
+FROM etudiants JOIN notes ON id = id_etudiant
+GROUP BY etudiants.id
+\end{verbatim}
+
+\medskip{}  
+  
+\question{}
+\begin{verbatim}
+SELECT nom, prenom, COUNT(*) AS nb_max_notes
+FROM etudiants, notes
+WHERE id = id_etudiant
+GROUP BY id
+ORDER BY nb_max_notes DESC
+LIMIT 1;
+\end{verbatim}
+Ou bien, avec une jointure : 
+\begin{verbatim}
+SELECT nom, prenom, COUNT(*) AS nb_max_notes
+FROM etudiants JOIN notes ON id = id_etudiant
+GROUP BY id
+ORDER BY nb_max_notes DESC
+LIMIT 1;
+\end{verbatim}
+
+\medskip{}  
+  
+\question{}
+\begin{verbatim}
+SELECT nom, prenom, COUNT(*) AS nb_copies
+FROM etudiants, notes
+WHERE id = id_etudiant
+GROUP BY id
+HAVING nb_copies >= 10;
+\end{verbatim}
+Ou bien, avec une jointure : 
+\begin{verbatim}
+SELECT DISTINCT titre, COUNT(*) AS nb_copies
+FROM etudiants JOIN notes ON id = id_etudiant
+GROUP BY id
+HAVING nb_copies >= 10;
+\end{verbatim}
+
+\medskip{}
+
+\question{}
+\begin{verbatim}
+SELECT nom, prenom, COUNT(*) AS nb_copies_non_rendues
+FROM interros, etudiants,
+WHERE NOT EXISTS (SELECT *
+                  FROM notes
+                  WHERE etudiants.id = id_etudiant
+                        AND
+                        interros.id = id_interro
+                 )
+GROUP BY interros.id;
+\end{verbatim}
+
+\medskip{}
+
+\question{}
+\begin{verbatim}
+SELECT titre
+FROM interros
+
+EXCEPT 
+
+SELECT DISTINCT titre 
+FROM interros, etudiants
+WHERE NOT EXISTS (SELECT *
+                  FROM notes
+                  WHERE etudiants.id = id_etudiant
+                        AND
+                        interros.id = id_interro
+                 )
+;
+\end{verbatim}
+
+

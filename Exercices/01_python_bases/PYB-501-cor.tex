@@ -1,0 +1,28 @@
+\exer{}
+\setcounter{numques}{0}
+
+\question{}
+\begin{lstlisting}
+
+def touche(a,b,x):
+    """Le navire se trouve entre les cases a et b, indique si le tir
+    en x touche de navire"""
+    xa,ya=a
+    xb,yb=b
+    xx,yx=x
+    if xa==xb==xx :
+        return (ya-yx)*(yb-yx) <= 0
+    elif (yb==ya==yx) :
+        return (xa-xx)*(xb-xx) <= 0
+    else :
+        return False 
+\end{lstlisting}
+
+%On pouvait aussi écrire le code suivant, plus astucieusement.
+%\begin{lstlisting}
+
+%def touche(a,b,x):
+%    """Le navire se trouve entre les cases a et b, indique si le tir
+%    en x touche de navire"""
+%    return a <= x <= b or b <= x <= a
+%\end{lstlisting}

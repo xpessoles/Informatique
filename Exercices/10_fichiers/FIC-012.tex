@@ -1,0 +1,28 @@
+Le fichier \texttt{embrunman2019.csv} contient les résultats de l'ultratriatlon de Embrun 2019. Les données concernent dans l'ordre :
+\begin{itemize}
+  \item le classement  ;
+  \item le numéro de dossard ;
+  \item
+\end{itemize}
+
+On pensera d'abord à ouvrir ce fichier dans un éditeur de texte puis dans un tableur afin de bien visualiser ces données. 
+
+
+
+Quelques rappels sur les chaînes. Il existe un moyen de \og découper \fg{} des chaînes de caractères en \python\ : c'est la méthode \texttt{split}. 
+Réciproquement, la méthode \texttt{join(t)} appliquée à une chaîne \texttt{x} permet de concaténer toutes les chaînes du tableau \texttt{t}, séparées par \texttt{x}.
+Il existe aussi des outils de conversion de nombres flottants en chaînes de caractère, et vice-versa.
+Tout cela s'utilise comme suit.
+
+\begin{pyconsole}
+s = '123,45,2;1587,45,;45'
+s.split(',')
+s.split(';')
+sep = '<'
+t = ['GA','BU','ZO','MEU']
+sep.join(t)
+str(123.456)
+float('456.123')
+\end{pyconsole}
+
+Enfin, on voudra bien entendu représenter les données contenues dans \texttt{embrunman2019.csv} sous forme de \emph{tableau à double entrée}, c'est-à-dire comme une matrice. On représentera le tableau sous forme de liste \python, ligne par ligne, chaque ligne étant elle même une liste \python.

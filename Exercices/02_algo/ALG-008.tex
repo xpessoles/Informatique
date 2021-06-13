@@ -1,0 +1,31 @@
+\exer{}
+\setcounter{numques}{0}
+
+On s'intéresse au problème du codage d'une suite de bits (représentée sous la forme d'un tableau de 0 ou 1), de manière à pouvoir réparer une erreur de transmission. 
+On fixe un entier naturel non nul \texttt{k}.
+Un tableau de bits \texttt{b} sera codé avec un niveau de redondance \texttt{k} en répétant chaque bit $2k+1$ fois. 
+Pour décoder un tableau avec un niveau de redondance \texttt{k}, on le découpe en blocs de $2k+1$ bits. Dans chaque bloc, on effectue un \og vote \fg\ et l'on considère la valeur majoritaire. 
+
+Exemple : Avec $k = 2$ (et donc un niveau de redondance de $2$), le tableau 
+\begin{equation*}
+  b = [0,1,0]
+\end{equation*}
+sera codé en 
+\begin{equation*}
+  c = [\underbrace{0,0,0,0,0}_{5~\textrm{bits}},\underbrace{1,1,1,1,1}_{5~\textrm{bits}},\underbrace{0,0,0,0,0}_{5~\textrm{bits}}].
+\end{equation*}
+Imaginons qu'après transmission, le tableau reçu soit 
+\begin{equation*}
+  c' = [\underbrace{0,0,0,1,0}_{1~\textrm{erreur}},\underbrace{0,1,1,0,1}_{2~\textrm{erreurs}},\underbrace{0,1,0,1,1}_{3~\textrm{erreurs}}].
+\end{equation*}
+On le décode alors en 
+\begin{equation*}
+  b' = [0,1,1].
+\end{equation*}
+
+\question\ Écrire une fonction \texttt{code(b,k)} renvoyant le tableau codant un tableau \texttt{b}, avec un niveau de redondance~\texttt{k}. 
+
+\question\ Écrire une fonction \texttt{decode(c,k)} renvoyant le tableau décodant un tableau \texttt{c}, avec un niveau de redondance~\texttt{k}. 
+
+
+

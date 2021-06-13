@@ -1,0 +1,32 @@
+\exer{}
+\setcounter{numques}{0}
+
+\begin{enumerate}
+\item Nous pouvons proposer le programme suivant :
+\iflivret
+\lstinputlisting[fontadjust]{../../exos/algo/ALG-005/ALG-005-cor.py}
+\else
+\lstinputlisting{ALG-005-cor.py}
+\fi
+
+\item Démontrons l'invariant : à chaque tour de boucle, $u=S_k$ et $v=S_{k+1}$.\\
+Initialement, à l'entrée du premier tour de boucle, nous avons $k=2$, $u=\dfrac{(-1)^2}{2\ln 2}=S_2$ et 
+$v=u+\dfrac{(-1)^{k+1}}{(k+1)\ln(k+1)}=S_3$. L'invariant est donc vérifié.\\
+Supposons l'invariant vérifié à l'entrée d'un tour de boucle donné. Notons alors $k_1$, $u_1$ et $v_1$ les valeurs à 
+l'entrée de ce tour de boucle, et $k_2$, $u_2$ et $v_2$ leurs valeurs à la sortie. Alors $k_2=k_1+1$, 
+$u_2=v_1=S_{k_1+1}=S_{k_2}$ et $v_2=u_2+\dfrac{(-1)^{k_2+1}}{(k_2+1)\ln(k_2+1)} 
+=S_{k_2+1}$ : l'invariant est donc vérifié en sortie de boucle.\\
+Par principe de récurrence, l'invariant est donc bien vérifié à chaque tour de boucle.\\
+
+Démontrons maintenant la terminaison de l'algorithme : puisque nous savons que la suite $(S_n)$ a une limite, alors à 
+partir d'un certain rang la valeur absolue de la différence entre deux termes consécutifs de la suite est strictement 
+inférieure à $2.10^{-8}$. Puisqu'à l'entrée de chaque tour de boucle, $u=S_k$ et $v=S_{k+1}$, et puisque $k$ augmente 
+de 1 à chaque tour de boucle, alors à partir d'un certain nombre de tours de boucle, nous aurons $|u-v| <2.10^{-8}$, et 
+l'algorithme se termine donc.\\
+
+Pour finir, démontrons la correction de l'algorithme : à la sortie du dernier tour de boucle, nous avons 
+$|u-v|<2.10^{-8}$. Or l'énoncé assure que la limite $\ell$ se trouve entre $u$ et $v$. Ainsi, cette limite est à une 
+distance inférieure à $\dfrac{|u-v|}2$ du milieu de l'intervalle $[u,v]$ (ou $[v,u]$). En renvoyant ce milieu, 
+c'est-à-dire $\dfrac{u+v}2$, l'algorithme renvoie bien une approximation à $10^{-8}$ près de $\ell$.
+
+\end{enumerate}

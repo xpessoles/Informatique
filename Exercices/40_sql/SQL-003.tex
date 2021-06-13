@@ -1,0 +1,75 @@
+On s'intéresse dans cet exercice à la gestion des données produites par la caisse enregistreuse d'une boulangerie (fictive), un jour donné. Sur chaque ticket produit par la caisse figure une ligne par produit vendu, indiquant notamment le nombre d'unités vendues par produit et le prix de chaque produit. 
+
+Chaque étudiant dispose d'un fichier \texttt{bdd\_boulangerie\_}$\alpha$\texttt{.sqlite}, possédant trois tables. Voici les commandes ayant permis de créer ces tables. 
+\begin{verbatim}
+CREATE TABLE tickets (
+        -- table des tickets
+        id INTEGER,
+        heure TIME NOT NULL,
+        paiement VARCHAR(10) NOT NULL,
+        PRIMARY KEY (id)
+        );
+
+CREATE TABLE produits (
+        -- table des produits
+        id INTEGER,
+        nom VARCHAR(50) NOT NULL,
+        prix FLOAT,
+        PRIMARY KEY (id)
+        );
+
+CREATE TABLE lignes_tickets (
+        -- table des lignes des tickets
+        id INTEGER,
+        idt INTEGER,
+        idp INTEGER,
+        quantite INTEGER NOT NULL,
+        PRIMARY KEY (id),
+        FOREIGN KEY (idt) REFERENCES tickets,
+        FOREIGN KEY (idp) REFERENCES produits
+        );
+\end{verbatim}
+
+La table \texttt{produits} recence les produits vendus par la boulangerie et indique pour chaque produit son nom et son prix (en €). 
+
+La table \texttt{tickets} recence pour chaque ticket l'heure d'enregistrement du ticket et le moyen de paiment (carte bleue, liquide ou chèque).
+
+La table \texttt{lignes\_tickets} indique pour chaque ticket (identifiant \texttt{idt}) et chaque produit (identifiant \texttt{idp}) le nombre d'unités du produit acheté sur ce ticket. 
+
+\bigskip{}
+
+\question{} Combien d'unités ont été vendues par la boulangerie ce jour là ?
+
+\bigskip{}
+
+\question{} Quel est le chiffre d'affaire de la boulangerie ce jour là ? 
+
+\medskip{}
+
+\question{} Quel est l'identifiant du produit dont ont été vendues le plus d'unités ? S'il y en a plusieurs, mettez le plus petit. 
+
+\medskip{}
+
+\question{} Combien de tickets ne contiennent qu'un produit vendu (quelqu'en soit le nombre d'unités) ?
+
+\medskip{}
+
+\question{} Combien de tickets ne contiennent que des produits vendus en une unité ? 
+
+\medskip{}
+
+\question{} Quel est l'heure du dernier ticket enregistré ? 
+
+\medskip{}
+
+\question{} Quelle est la valeur en € du premier ticket enregistré ? 
+
+\medskip{}
+
+La banque de la boulangerie prélève une commission de $1\%$ sur chaque transaction effectuée par carte bleue. 
+
+\question{} Quel est le montant total prélevé par la banque à la boulangerie ce jour là ? 
+
+\medskip{}
+
+\question{} Combien y a-t-il de tickets dont la valeur est supérieure ou égale à $10$ € ? 

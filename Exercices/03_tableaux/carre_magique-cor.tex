@@ -1,0 +1,83 @@
+\question{}
+
+\renewcommand{\arraystretch}{1.2}
+		\begin{tabular}{|*{5}{c|}}
+			\hline
+			$15$ & $22$ & $9$ & $16$ &$~3~$\\
+			\hline
+			$~2~$& $14$ & $21$ & $8$ & $20$ \\
+			\hline
+			 $19$  &$~1~$& $13$  & $25$  & $7$   \\
+			\hline
+			$~6~$& $18$ &$~5~$& $12$ & $24$ \\
+			\hline
+			 $23$ & $10$ & $17$ &$~4~$& $11$ \\
+			\hline
+		\end{tabular}
+\renewcommand{\arraystretch}{1}
+
+On vérifie les trois propriétés d'un carré magique avec La somme de chaque colonne, la somme de chaque et la somme de chaque diagonale est égale à la densité $d=65$.
+
+\question{}
+
+\begin{lstlisting}
+def Carre_vide(n):
+    if n%2==0:
+        print("Erreur n doit être impair")
+        return None
+    else:
+        carre=[]
+        for i in range(n):
+            carre.append([0]*n)
+        return carre
+\end{lstlisting}
+
+
+\question{}
+
+\begin{lstlisting}
+def Remplir_carre(carre):
+    n=len(carre)
+    carre_magique=deepcopy(carre)
+    x,y=(n-1)//2-1,(n-1)//2
+    for i in range(1,n**2+1):
+        carre_magique[y][x]=i
+        print(carre_magique)
+        if i%(n)==0:
+            x=(x-2)%n
+        else:
+            x,y=(x-1)%n,(y-1)%n
+    return carre_magique
+\end{lstlisting}
+
+
+\question{}
+
+On vérifie les trois propriétés d'un carré magique avec les sommes suivantes égales à la densité :
+\begin{itemize}
+\item La somme de chaque colonne
+\item La somme de chaque ligne
+\item La somme de chaque diagonale
+\end{itemize}
+
+\begin{lstlisting}
+def Verif_carre(carre_magique):
+    n=len(carre)
+    dens=int(n*(n**2 + 1)/2)
+    for i in range(n):
+        d1=0
+        d2=0
+        for j in range(n):
+            d1+=carre_magique[j][i]
+            d2+=carre_magique[i][j]
+        if d1!=dens or d2!=dens:
+            return False
+    d1=0
+    d2=0
+    for i in range(n):
+        d1+=carre_magique[i][i]
+        d2+=carre_magique[n-1-i][i]
+    if d1!=dens or d2!=dens:
+        return False
+    return True
+\end{lstlisting}

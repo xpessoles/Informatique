@@ -1,0 +1,90 @@
+
+\begin{center}
+\begin{Huge}
+Fiche d'aide à l'installation des programmes
+\end{Huge}
+\end{center}
+\vspace{2cm}
+
+Pour pouvoir travailler chez vous en informatique, vous aurez besoin :
+\begin{itemize}
+  \item d'utiliser \texttt{Python} (version 3) dans un IDE, avec plusieurs modules ; 
+  \item pouvoir manipuler des fichiers textes et des tableurs ; 
+  \item pouvoir manipuler une base de données \texttt{sqlite}.
+\end{itemize}
+Comme IDE pour \texttt{Python}, nous vous conseillons {IDLE}, mais tout IDE pour \texttt{Python} conviendra. 
+
+Voici quelques indications pour installer les logiciels nécessaires sur les différentes plateformes. 
+
+\section{Linux.}\label{installation:sec:linux}
+
+Vous pouvez installer un paquet en tapant la commande suivante dans un terminal (le système vous demandra votre mot de passe). 
+\begin{verbatim}
+sudo apt-get install nom_du_paquet
+\end{verbatim}
+Alternativement, vous pouvez utiliser un gestionnaire graphique de paquets (par exemple, Synaptic via le paquet \texttt{synaptic}).
+
+Pour pouvoir utiliser \texttt{Python} et \texttt{sqlite} correctement, installez les paquets 
+\begin{itemize}
+  \item \texttt{python3}
+  \item \texttt{idle-python3.XX} (le plus récent disponible, avec \texttt{XX} valant \texttt{4}, \texttt{5} ou \texttt{6}).
+  \item \texttt{python3-numpy}
+  \item \texttt{python3-scipy}
+  \item \texttt{python3-matplotlib}
+  \item \texttt{sqlite3}
+  \item \texttt{sqlitebrowser}
+\end{itemize}
+
+Vous aurez aussi besoin d'un éditeur de texte proposant des colorations syntaxiques (par exemple, gedit via le paquet \texttt{gedit} ou emacs via le paquet \texttt{emacs}), ainsi que d'un tableur (LibreOffice via le paquet \texttt{libreoffice-calc} ou Gnumeric via le paquet \texttt{gnumeric}).
+
+\section{Mac OS.}
+
+Python est déjà installé de base sous Mac OS. Cependant par défaut il s'agit de la version 2.7 alors que nous allons travailler avec la version 3.
+
+Les fichiers d'installation de Python 3.6 se situent sur le lien URL suivant : \url{https://www.python.org/downloads/} et vous pouvez cliquer sur \texttt{"Download Python 3.6.2"}. Il vous suffira ensuite d'exécuter le fichier \texttt{python-3.6.2-macosx10.6.pkg} et de suivre les instructions.
+
+Un dossier \texttt{Python 3.6} sera alors créé dans le dossier \texttt{Applications} et vous pourrez lancer \texttt{IDLE} qui vous donnera accès à une console et à un éditeur. 
+
+Comme dans \texttt{Linux} (Partie \ref{installation:sec:linux}) il faut installer les paquets. Pour cela on précèdera de la manière suivante :
+
+\begin{itemize}
+\item Installer l'utilitaire d'installation \texttt{pip} : 
+\begin{itemize}
+\item Ouvrir un terminal (Dans Application/Utilitaires/Terminal).
+\item Taper l'instruction : \texttt{sudo easy$\_$install pip} puis saisir votre mot de passe administrateur.
+\end{itemize}
+\item Installer les paquets les uns après les autres avec la commande :
+\texttt{python3 -m pip install nom$\_$du$\_$paquet} en remplaçant \texttt{nom$\_$du$\_$paquet} par : 
+\begin{itemize}
+  \item \texttt{numpy}
+  \item \texttt{scipy}
+  \item \texttt{matplotlib}.
+\end{itemize}
+\item Ici, il n'est pas utile d'installer \texttt{sqlite3} car il est déjà installé par défaut.
+\end{itemize}
+
+Vous pouvez également installer pyzo qui est un environnement assez convivial pour travailler avec python (\url{http://www.pyzo.org/start.html}).
+
+
+Comme dans linux il faudra installer sqlitebrowser pour taiter les bases de données. Pour cela il faut télécharger le logiciel sur \url{https://sqlitebrowser.org/} et télécharger la version "Mac.dmg". Il faudra ensuite exécuter ce fichier et suivre les instructions.
+
+
+
+\section{Windows.}
+
+Vous pouvez installer pyzo sous windows. Vous trouverez les fichiers d'installation sur le lien suivant : \url{http://www.pyzo.org/start.html}. Il faut suivre les étapes précisées sur le site pour installer : 
+\begin{itemize}
+\item l'environnement de développement intégré (IDE)
+\item l'environnement python avec miniconda.
+\end{itemize}
+%
+%Installer la bibliothèque de calcul scientifique \texttt{scipy} séparément de \texttt{Python} est très difficile sous Windows.
+%
+Si vous souhaitez installer une distribution Linux directement sur votre ordinateur, en parallèle de Windows, une option simple est d'installer une machine virtuelle (nous vous conseillons {VirtualBox}\footnote{\texttt{https://www.virtualbox.org/}}), puis d'installer une distribution Linux\footnote{\texttt{https://www.ubuntu-fr.org/telechargement/} pour une distribution grand public} dans cette machine virtuelle. 
+Il suffit ensuite de suivre les instructions de la partie~\ref{installation:sec:linux}.
+%
+%Dans le cas contraire, vous pouvez installer Anaconda\footnote{\texttt{https://www.continuum.io/downloads}}, qui comporte l'IDE spyder et contient toutes les bibliothèques usuelles.  
+%
+%Vous aurez aussi besoin d'un éditeur de texte proposant des colorations syntaxiques (par exemple, Notepad++\footnote{\texttt{https://notepad-plus-plus.org/}}), ainsi que d'un tableur (par exemple, LibreOffice\footnote{\texttt{https://fr.libreoffice.org/}}).
+
+Pour utiliser SQLite, nous vous conseillons d'installer «DB Browser for SQLite»\footnote{\texttt{https://sqlitebrowser.org/}}. Comme dans linux et MacOS il faut télécharger le logiciel et télécharger la version "Windows.exe". Il faudra ensuite exécuter ce fichier et suivre les instructions.

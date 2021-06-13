@@ -1,0 +1,23 @@
+On considère la fonction \texttt{Python} suivante. 
+\begin{pyverbatim}
+def mystere(u,v):
+    """u,v : tableaux d'entiers"""
+    m = 0
+    p,q = len(u),len(v)
+    for i in range(p) : 
+        for a in range(q) :
+	    k = 0
+            while i+k < p and a+k < q and u[i+k] == v[a+k] : 
+                k = k+1
+            if k > m : 
+                m = k
+    return m
+\end{pyverbatim}
+
+\medskip
+
+\question\ Que contient le résultat renvoyé par \texttt{mystere(u,v)} ? Justifier. 
+
+\medskip
+
+\question\ Quelle est la complexité de la fonction \texttt{mystere(u,v)}, en fonction du maximum des longueurs de \texttt{u} et \texttt{v}, que l'on notera $n$ ? 

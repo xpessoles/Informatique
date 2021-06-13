@@ -1,0 +1,162 @@
+\section{Images en niveaux de gris}
+
+On cherche à représenter des  images. Pour simplifier, on ne cherchera
+pas  à  représenter les  couleurs  mais  seulement  la luminosité  des
+différents points de l'image.  Pour cela, on découpe l'image, supposée
+rectangulaire,  en carrés  de même  taille (appelés \emph{pixels}). On
+remplace  alors chaque
+carré  par un  entier  naturel indiquant  la  luminosité (moyenne)  de
+l'image sur le carré considéré (la luminosité est donnée dans une
+unité arbitraire, les valeurs allant de $0$ pour un carré noir à $N$
+pour un carré blanc, où $N$ est une valeur arbitrairement fixée). On
+obtient ainsi une matrice de $n\times p$ valeurs entières appartenant
+à l'intervalle $[0, N]$.
+
+Pour lire et écrire une telle image dans un fichier, on peut utiliser
+le format de données PGM (Portable GrayMap), dans sa version texte
+(\textit{plain format}).
+
+Ce format de données consiste à représenter une image de la façon
+suivante par un fichier.
+\begin{itemize}
+\item[\textbullet] Le fichier est un fichier texte (ne comportant que des
+  caractères ASCII).
+\item[\textbullet] On appellera \emph{blanc} tout caractère qui est soit un retour à la
+  ligne, soit un caractère espace, soit un caractère de tabulation (en
+  fait, un autre caractère)
+\item[\textbullet] Toutes les valeurs contenues dans le fichier sont séparées par
+  un ou plusieurs blancs.\footnote{À toutes fins utiles, pour toute
+    chaîne de caractères \texttt{s}, l'expression \texttt{s.split()} désigne
+    la liste obtenue par découpage de \texttt{s} en utilisant les blancs
+    comme séparateurs.}
+\item[\textbullet] La première ligne du fichier doit contenir la «valeur magique»
+  constituée des deux caractères «P2» (cette contrainte sert à
+  distinguer un fichier pgm en niveaux de gris d'un autre type de fichier) et doit être
+  suivie d'un blanc.
+\item[\textbullet] Les autres valeurs écrites dans le fichier sont toutes des
+  entiers naturels, écrits en base $10$ (autrement
+  dit, «douze» est représenté par la succession des caractères $1$ et $2$).
+\item[\textbullet] Après  la valeur  magique, on trouve  un nombre  représentant la
+  largeur $p$ de la matrice puis un nombre représentant la hauteur $n$
+  de l'image,  puis un  nombre donnant la  valeur de $N$  choisie pour
+  cette image  (intensité de gris représentant le  blanc), puis toutes
+  les valeurs de  la matrice représentant l'image, dans  l'ordre où on
+  les  lirait  normalement si  la  matrice  était  un texte  écrit  en
+  français (c'est-à-dire de gauche à droite puis de haut en bas).
+\item[\textbullet] Le fichier peut contenir des commentaires ; ceux-ci commencent par le
+  caractère \texttt{\#} et finissent avec le retour à la ligne
+  suivant. Ils doivent être simplement ignorés. Pour faciliter le
+  travail demandé par la suite, \emph{on supposera qu'il n'y a aucun
+    commentaire dans les fichiers que l'on
+  traitera}.
+\item[\textbullet] On doit avoir $N\in\ii{0, 2^{16}}$.
+\item[\textbullet] Les lignes du fichier doivent faire au plus $70$ caractères.
+\end{itemize}
+
+On rappelle qu'on peut convertir une chaîne représentant un nombre
+décimal avec \texttt{int} et réciproquement, convertir un nombre en chaîne
+le représentant avec \texttt{str}.
+
+
+Enfin, on réprésentera une matrice (de nombres) à $n$ lignes et $p$ colonnes comme un tableau (ou liste Python) de longueur $n$, chacun de ses éléments étant un tableau de longueur $p$. On décrit donc la matrice ligne par ligne. 
+Ainsi, l'indice \og ligne \texttt{i} colonne \texttt{j} \fg\ de la matrice représentée par \texttt{M} sera \texttt{M[i][j]}.
+\begin{exemple}
+  La matrice $\begin{pmatrix} 0&1&2 \\ 3&4&5 \end{pmatrix}$ sera représentée par \pyv{[ [0,1,2] , [3,4,5] ]}.
+\end{exemple}
+
+\section{Travail demandé}
+
+Commencez par recopier les fonctions  \pyv{image_noire}, \pyv{dim} et  \pyv{lit_valeurs} données ci dessous : ce sont des exemples utiles, utilisez les ! 
+
+\begin{lstlisting}
+def image_noire(n, p):
+    """Construit la matrice n*p d'une image noire."""
+    img = [0]*n
+    for i in range(n):
+        img[i] = [0]*p
+    return img
+    
+def dim(img):
+   """Donne le couple (n, p) des dimensions de la matrice img. n :
+   nombre de lignes, p : nombre de colonnes. La matrice est supposée
+   avoir au moins une ligne."""
+   n = len(img)
+   p = len(img[0])
+   return (n,p)
+   
+def lit_valeurs(nom_de_fichier):
+    """Lit le contenu du fichier image f et renvoie la liste des
+      valeurs lues (séparées par des blancs) sous forme d'une liste
+      de chaines de caractères. La première valeur est normalement
+      'P2'."""
+    with open(nom_de_fichier, 'r') as f:
+        c = f.read()
+    return c.split()
+\end{lstlisting}
+
+
+N'hésitez pas à ouvrir l'image \texttt{degrade.pgm} et \texttt{joconde.pgm} dans un éditeur de texte puis dans un lecteur d'images, afin de comprendre le codage des images.
+
+
+\subsection{Sauvegarde d'images}
+
+\question\ Écrire une fonction \pyv{sauve_image(img, N, nom_de_fichier)} prenant en argument
+  une matrice \pyv{img} représentant une image, l'entier \pyv{N} comme
+  niveau de gris maximal (dans $\ii{0,2^{16}}$) ainsi qu'une chaîne \pyv{nom_de_fichier} et
+  sauvant l'image dans le fichier nommé \pyv{nom_de_fichier}, au format PGM.
+  
+\question\ Écrire une fonction \pyv{sauve_rectangle_noir(n, p, N, nom_de_fichier)}
+  sauvant dans le fichier \pyv{nom_de_fichier} un rectangle noir, de côté
+  $n$ pixels de hauteur et $p$ de largeur, où le blanc est
+  d'intensité $N$. Vérifier que l'image produite par
+   \begin{lstlisting}
+     sauve_rectangle_noir(100, 200, 255, 'rectangle_noir.pgm')
+   \end{lstlisting}
+  est bien ce que   vous attendiez grâce à GIMP ou la visionneuse d'images.
+  
+\question\ Écrire une fonction
+   \pyv{sauve_rectangle_blanc(n, p, N, nom_de_fichier)}
+   sauvant dans le fichier   \pyv{nom_de_fichier} un rectangle blanc, de côté $n$ pixels de hauteur et $p$ de
+   largeur, où le blanc est d'intensité $N$. De même, vérifiez l'image
+   produite par
+   \begin{lstlisting}
+     sauve_rectangle_blanc(100, 200, 255, 'rectangle_blanc.pgm'). 
+   \end{lstlisting}
+   
+\question\ (Question facultative) Écrire une fonction \pyv{sauve_echiquier(p, N, nom_de_fichier)} produisant
+   dans le fichier \pyv{nom_de_fichier} l'image d'un échiquier, où chaque case de
+   l'échiquier a pour côté $p$ pixels et $N$ est le niveau d'intensité
+   du blanc. Pour mémoire un échiquier a 64 cases, et dans sa
+   représentation traditionnelle, la case en bas à droite est blanche.
+
+
+ \subsection{Lecture et modification d'images}
+ 
+ On pourra, pour tester les fonctions écrites ici, utiliser d'une part
+ les images précédemment produites, d'autre part utiliser l'image
+ disponible sur le site de la classe.
+
+\question\ Écrire une fonction \pyv{lit_image(nom_de_fichier)}, où
+   la chaîne \pyv{nom_de_fichier} représente le nom  d'un fichier PGM et renvoyant un couple \pyv{(img, N)} où \pyv{N} est
+   le niveau d'intensité du blanc de l'image et \pyv{img} la matrice des
+   pixels. \\ 
+   \emph{On suppose que le fichier respecte les contraintes données
+   dans l'énoncé et on ne fera aucun effort particulier pour gérer les
+   situations où il ne les respecterait pas. \\
+   Par exemple, votre
+   fonction a le droit d'accepter un fichier dont les lignes
+   font plus de $70$ caractères. On suppose de plus que le fichier ne
+   contient aucun commentaire.}\\
+\begin{rem}
+  On pourra utiliser la fonction \pyv{lit_valeurs}, que vous trouverez sur le site de classe.
+\end{rem}
+
+\question\ Écrire une fonction \pyv{negatif(fichier_entree, fichier_sortie)} prenant en argument
+   deux noms de fichiers \pyv{fichier_entree} et \pyv{fichier_sortie}. La fonction lit d'abord le fichier
+   \pyv{fichier_entree} et crée le fichier \pyv{fichier_sortie} obtenu en remplaçant chaque pixel
+   de niveau de gris $k$ par un pixel de niveau $N-k$, où $N$ est l'intensité du blanc du fichier d'entrée.
+   
+\question\ (Question facultative) Écrire une fonction \pyv{rotation90(fichier_entree, fichier_sortie)}
+   lisant le fichier 
+   \pyv{fichier_entree} et créant le fichier \pyv{fichier_sortie} obtenu en effectuant une rotation
+   de $90$ degrés (dans le sens trigonométrique) de l'image originale.

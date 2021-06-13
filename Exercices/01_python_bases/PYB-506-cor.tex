@@ -1,0 +1,23 @@
+\exer{}
+\setcounter{numques}{0}
+
+\question{}
+
+\begin{lstlisting}
+def f(n):
+    """n = entier naturel
+       Calcule le n-eme terme de la suite un"""
+    u = 1
+    v = 1
+    for k in range(n):
+	# Invariants : u = u_k et v = v_k
+        u = .5*(u+(k+1)/u)
+        v = v + (1/u**5)
+        # u = u_(k+1) et v = v_(k+1)
+    # Au dernier tour de boucle, k = n-1, donc v = v_(n-1+1)
+    return v
+\end{lstlisting}
+
+\question{}
+
+Il faut bien faire en sorte que les suive $u_n$ et $v_n$ soient calculées dans la même fonction et dans une même boucle.

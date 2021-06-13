@@ -1,0 +1,93 @@
+Soit $A$ une matrice carrée telle que toute sous-matrice principale (sous-matrice carrée calée dans 
+le coin supérieur gauche) soit inversible.\\
+
+
+On rappelle que l'opération $L_i \leftarrow L_i + \alpha L_j$ effectuée sur les lignes d'une 
+matrice $A$, revient à effectuer le produit $T(i,j,\alpha)\times A$, où $T(i,j,\alpha)$ est la 
+matrice de transvection égale à l'identité, à l'exception du coefficient $(i,j)$ qui vaut 
+$\alpha$.\\
+
+
+Et l'opération $C_i \leftarrow C_i + \alpha C_j$ effectuée sur les colonnes d'une matrice $A$, 
+revient à effectuer le produit $A\times T(j,i,\alpha)$.\\
+On peut montrer qu'alors la matrice $A$ admet une décomposition $A = LU$, où $L$ est une matrice 
+triangulaire inférieure et $U$ une matrice triangulaire supérieure. La matrice $L$ est obtenue en 
+appliquant à la matrice identité les opérations sur les colonnes correspondant aux inverses des 
+matrices d'opérations sur les lignes permettant de trianguler $A$ par la méthode de Gauss (sans 
+échange de ligne : toute sous-matrice de $A$ étant principale, on  peut montrer que si la 
+matrice $A$ est rendue triangulaire pour ses $k$ premières colonnes, alors le coefficient 
+diagonal de la colonne suivante n'est pas nul et peut être choisi comme pivot).\\
+Plus précisément : si $T_1$, ... , $T_p$ sont les $p$ transvections successives à appliquer à $A$ 
+pour la rendre triangulaire supérieure, nous obtenons : $(T_p\times \ldots \times T_1)\times A=U$. 
+Il faut alors poser $L=(T_p\times \ldots\times T_1)\inv=I_n\times T_1\inv \times \ldots\times 
+T_p\inv$.\\
+
+
+L'intérêt réside dans le fait qu'on ramène la résolution de $AX = B$ à la résolution de 2 systèmes 
+triangulaires. Ceci s'avère notamment intéressant lorsqu'on a plusieurs systèmes à résoudre 
+associés 
+à la même matrice $A$.\\
+
+
+Nous allons écrire un programme permettant de calculer cette décomposition LU, et le comparer à 
+l'algorithme du pivot de Gauss classique.\\
+Pour cela, nous écrirons les matrices sous forme de tableaux bi-dimensionnels de type 
+\texttt{array}, en utilisant le module \texttt{numpy}, dont voici quelques exemples 
+d'utilisations :\\
+
+\begin{tabular}{ll}
+
+\noindent\texttt{import numpy as np} &\\
+\texttt{A=np.array([[1, 2], [3, 4]])} &%$\# 
+%A=\begin{pmatrix} 
+%1&2\\3&4\end{pmatrix}$
+\\
+\texttt{B=np.eye(2)} &$\#$ $B=I_2$
+\\
+\texttt{B[1,0]=2} &%$\#$ $ B=\begin{pmatrix} 1.&2.\\0.&1.\end{pmatrix}$
+\\
+\texttt{C = A.dot(A) + 2*B.dot(A)} &$\#$ calcule $C=A^2+2BA$.\\
+
+\end{tabular}
+
+\vspace{1cm}
+
+Nous utiliserons aussi les fonctions définies dans le fichier \texttt{random\_matrix}, disponible 
+sur le site de la classe, ainsi que la fonction \texttt{clock} du module \texttt{time} pour 
+chronométrer les temps d'éxécution.\\
+
+
+\begin{enumerate}
+\item Écrire une fonction \texttt{trans\_ligne} qui à un quadruplet \texttt{(A,i,j,alpha)}, où $A$ 
+est une matrice d'ordre $n$, $i,j\in\llbr 1,n\rrbr$, et $\alpha\in\R$, associe le résultat du 
+produit de la matrice de transvection $T(i,j,\alpha)$ d'ordre $n$, par $A$. Attention : par souci 
+d'efficacité, il est préférable de voir cette opération comme une opération entre des lignes de 
+$A$, 
+plutôt que comme un produit matriciel. On s'arrangera autant que possible pour éviter les calculs 
+inutiles sur les coefficients qu'on sait être nuls.
+\item Écrire une fonction \texttt{trans\_colonne} qui à un quadruplet \texttt{(A,i,j,alpha)}, où 
+$A$ est une matrice d'ordre $n$, $i,j\in\llbr 1,n\rrbr$, et $\alpha\in\R$, associe le résultat du 
+produit de $A$ par l'inverse de la matrice de transvection $T(i,j,\alpha)$ d'ordre $n$, par $A$ (la 
+remarque de la question précédente est toujours d'actualité).
+\item Écrire une fonction \texttt{LU} retournant les deux matrices $L$ et $U$ de la décomposition 
+ci-dessus, pour une matrice $A$ donnée.
+\item Écrire une fonction \texttt{resolution\_sup} de résolution d'un système triangulaire 
+supérieur.
+\item Écrire une fonction \texttt{resolution\_inf} de résolution d'un système triangulaire 
+inférieur.
+\item Soient $A\in \mathscr M_{100}(\R)$ et $b_0,\ldots,b_{24}\in \mathscr M_{100,1}(\R)$, choisies 
+aléatoirement (les coefficients étant pris dans $\llbr 0,100\rrbr$).\\
+Calculer :\begin{enumerate}
+\item le temps de résolution de 25 systèmes associés à $A$, en calculant une fois pour toutes la 
+décomposition $LU$ de $A$, puis en résolvant 2 systèmes triangulaires pour chaque second membre $B$ 
+;
+\item le temps de résolution de 25 systèmes associés à $A$, en reprenant un pivot complet pour 
+chaque système ;
+\item le temps de résolution de 25 systèmes associés à $A$, en calculant $A\inv$ par la méthode du 
+pivot, une fois pour toutes puis en calculant $A\inv B$ pour chaque second membre.
+\end{enumerate}
+\item Plus généralement, tracer, pour $k\in\llbr1, 25\rrbr$, les 2 courbes correspondant au temps 
+de réponse pour la résolution de $k$ systèmes associés à $A\in \mathscr M_{100}(\R)$, par 
+décomposition $LU$, et par calcul de $A\inv$. Commenter.
+
+\end{enumerate}

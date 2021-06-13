@@ -1,0 +1,803 @@
+
+
+
+\section{La police a besoin de vous}
+
+Un crime a été commis et la police a besoin de vous. Celle-ci vous a donné le rapport de la scène 
+de crime mais vous avez réussi malgré tout à le perdre... Vous vous rappelez vaguement que le crime
+était un meurtre -- \emph{murder} -- qui a eu lieu à un moment de la journée du \emph{15 Janvier 2018} et qui s'est
+déroulé à \emph{SQL City}. Commencez par consulter les rapports de scène de crime correspondants dans
+la base de donnée du département de police.
+
+\section{Consignes}
+
+Le principal objet du TD est de travailler le langage SQL tout en abordant un sujet sympathique. Cela veut dire qu'il n'y a pas de difficultés/pièges dans la partie enquête policière. 
+
+Toutes vos requêtes seront effectuées sur la base de données \texttt{sql-murder-mystery.db}. \'Evidemment, le but est
+de franchir chaque étape de la résolution de l'enquête en effectuant la requête adaptée et non en lisant toute la
+base de données (vous saurez assez vite de quoi je parle, parfois c'est tentant). Une fois que vous aurez trouvé le
+criminel, vous pourrez tester votre réponse en utilisant la commande :
+
+\begin{lstlisting}
+INSERT INTO solution VALUES (1, 'Insert the name of the person you found here');
+SELECT value FROM solution;
+\end{lstlisting}
+
+
+Afin de vous aider dans l'analyse de la base de données, la figure~\ref{fig:Schema} ci-dessous représente l'architecture et les liens de la base de données.
+
+
+\textbf{Pour déterminer l'assassin, vous pourrez former des groupes de deux des enquêteurs. La requête précédente permet de valider le résultat de votre enquête.
+Il vous est demandé de rendre un fichier python contenant la liste des requêtes des questions 2 à 12 sous la forme d'un fichier python qui aura la forme suivante : }
+
+\noindent\texttt{req\_q2=''Ici la requete de la question 2''} \\
+\texttt{req\_q3=''Ici la requete de la question 3''}
+
+Les fichiers sont à déposer, par binôme sur \texttt{http://envoi.lamartin.fr/} en précisant bien mon nom.
+
+\vspace{.5cm}
+
+\question{}
+Déterminer qui est l'assassin !
+
+
+
+Si vous êtes coincés, voici un cheminement :
+\begin{itemize}
+\item rédiger une requête qui identifie le premier témoin;
+\item écrivez une requête qui identifie le deuxième témoin;
+\item écrivez une requête qui montre les transcriptions des entretiens pour nos deux sujets;
+\item trouvez le meurtrier !
+\end{itemize}
+
+
+
+
+\newpage
+
+%\begin{landscape}
+
+
+
+\begin{figure}[!htbp]
+\centering
+\begin{tikzpicture}
+\def\distance{1cm}
+{\small
+{\tt
+
+%dl
+\node[draw,rectangle split,rectangle split parts=2,rectangle split part fill={gray!10,white},
+align=center] (dl) at (0,0){drivers\_license
+\nodepart{two}
+\begin{tabular}{lll}
+K & \textcolor{red}{id} & INTEGER \\
+&age & INTEGER \\
+&height & INTEGER \\
+&eye\_color & TEXT \\
+&hair\_color & TEXT \\
+&gender & TEXT \\
+&plate\_number & TEXT \\
+&car\_make & TEXT \\
+&car\_model & TEXT  \\
+\end{tabular}
+};
+
+
+%person
+\node[draw,rectangle split,rectangle split parts=2,rectangle split part fill={gray!10,white},
+align=center, below=\distance of dl] (p) {person
+\nodepart{two}
+\begin{tabular}{lll}
+K & \textcolor{blue}{id} & INTEGER \\
+&name & TEXT \\
+&\textcolor{red}{license\_id} & INTEGER \\
+&adress\_number & INTEGER \\
+&adress\_street\_name & TEXT \\
+&\textcolor{olive}{ssn} & INTEGER \\
+\end{tabular}
+};
+
+%get fit now member
+\node[draw,rectangle split,rectangle split parts=2,rectangle split part fill={gray!10,white},
+align=center, below=\distance of p] (gfm) {get\_fit\_now\_member
+\nodepart{two}
+\begin{tabular}{lll}
+K &\textcolor{orange}{id} & TEXT \\
+&\textcolor{blue}{person\_id} & INTEGER \\
+&name & TEXT \\
+&membership\_start\_date & INTEGER \\
+&membership\_status & TEXT \\
+\end{tabular}
+};
+
+
+%interview
+\node[draw,rectangle split,rectangle split parts=2,rectangle split part fill={gray!10,white},
+align=center, left=\distance of gfm] (i) {interview
+\nodepart{two}
+\begin{tabular}{ll}
+\textcolor{blue}{person\_id} & INTEGER \\
+transcript & TEXT \\
+\end{tabular}
+};
+
+
+%facebook
+\node[draw,rectangle split,rectangle split parts=2,rectangle split part fill={gray!10,white},
+align=center, right=\distance of gfm] (f) {facebook\_event\_checkin
+\nodepart{two}
+\begin{tabular}{ll}
+\textcolor{blue}{person\_id} & INTEGER \\
+event\_id & INTEGER \\
+event\_name & TEXT \\
+date & INTEGER \\
+\end{tabular}
+};
+
+
+%get fit now check in
+\node[draw,rectangle split,rectangle split parts=2,rectangle split part fill={gray!10,white},
+align=center, below=\distance of gfm] (gfc) {get\_fit\_now\_check\_in
+\nodepart{two}
+\begin{tabular}{ll}
+\textcolor{orange}{membership\_id} & TEXT \\
+check\_in\_date & INTEGER \\
+check\_in\_time & INTEGER \\
+check\_out\_time & INTEGER \\
+\end{tabular}
+};
+
+
+%income
+\node[draw,rectangle split,rectangle split parts=2,rectangle split part fill={gray!10,white},
+align=center, right=\distance of p] (in) {income
+\nodepart{two}
+\begin{tabular}{lll}
+K & \textcolor{olive}{ssn} & INTEGER \\
+& annual\_income & INTEGER \\
+\end{tabular}
+};
+
+
+%crime_scene_report
+\node[draw,rectangle split,rectangle split parts=2,rectangle split part fill={gray!10,white},
+align=center, left=\distance of dl] (c) {crime\_scene\_report
+\nodepart{two}
+\begin{tabular}{ll}
+date & INTEGER \\
+type & TEXT \\
+description & TEXT \\
+city & TEXT \\
+\end{tabular}
+};
+
+
+%solution
+\node[draw,rectangle split,rectangle split parts=2,rectangle split part fill={gray!10,white},
+align=center, right=\distance of dl] (s) {solution
+\nodepart{two}
+\begin{tabular}{ll}
+user & INTEGER \\
+value & TEXT \\
+\end{tabular}
+};
+
+
+
+\draw[->,>=latex] (p) -- (dl);
+\draw[->,>=latex] (in) -- (p);
+\draw[->,>=latex] (i) |- (p);
+\draw[->,>=latex] (gfm) -- (p);
+\draw[->,>=latex] (f) |- (p.south east);
+\draw[->,>=latex] (gfc) -- (gfm);
+
+}
+}
+\end{tikzpicture}
+\caption{Schéma entité-relation}
+\label{fig:Schema}
+\end{figure}
+
+
+\section{Requêtes bonus pour s'exercer}
+Ces requêtes demandées ne sont pas utiles à la résolution du crime précédent. Mais elles permettent de vous entraîner. C'est parti !
+
+\question{}
+Combien de personnes se trouvent dans cette base de données ?
+
+
+\question{}
+Que savons-nous de ces personnes ? On se limite aux 10 premières personnes.
+
+
+\question{}
+Quelles sont les valeurs possibles pour le type dans la base \texttt{crime\_scene\_report} ?
+
+
+\question{}
+On souhaite tout connaître de \texttt{Kinsey Erickson}.
+
+
+
+\question{}
+On souhaite connaître tous les vols (\texttt{theft}) recensés à \texttt{Chicago}.
+
+
+\question{}
+On souhaite connaître toutes les villes où ont eu lieu des accidents avec un \texttt{i}.
+
+
+\question{}
+On souhaite connaître toutes les villes où ont eu lieu des accidents qui commencent par les lettres  de \texttt{W} à \texttt{Z}.
+
+
+
+\question{}
+L'âge le plus grand d'un possesseur d'un permis ?
+
+
+
+\question{}
+Toutes les infos sur les 10 plus vieux possesseur de permis. Tri par ordre croissant sur l'âge.
+
+
+
+\question{}
+Identifier les noms des personnes, ainsi que leurs revenus qui gagnent plus de \num{450000}.
+
+
+
+\question{}
+Le nom, les revenus, le genre, la couleur des yeux et la couleur des cheveux des personnes qui gagnent plus de \num{450000}.
+
+
+
+%\section{Solution}
+%
+%\setcounter{cexo}{0}
+%	
+%\question{}
+%
+%Commencez par récupérer le rapport de scène de crime correspondant dans la base de données du service de police.
+%
+%\begin{sql}
+%SELECT description FROM crime_scene_report
+%WHERE date = '20180115' AND type = 'murder' AND city = 'SQL City'
+%\end{sql}
+%qui renvoie :
+%
+%%\begin{tabular}{p{10cm}}
+%%"description" \\ \hline
+%{\tt "Security footage shows that there were 2 witnesses. The first witness lives at the last house on ""Northwestern Dr"". The second witness, named Annabel, lives somewhere on ""Franklin Ave""."}
+%%\end{tabular}
+%
+%On creuse  alors la piste du témoin 1 :
+%\begin{sql}
+%SELECT * FROM person
+%WHERE address_street_name = 'Northwestern Dr'
+%ORDER BY address_number DESC 
+%\end{sql}
+%qui renvoie :
+%
+%\begin{table}[!htp]
+%\centering
+%{\tt 
+%\begin{tabular}{rrrrrr}
+%id & name& license\_id& address\_number& address\_street\_name& ssn \\ \hline
+%14887& Morty Schapiro& 118009& 4919& Northwestern Dr& 111564949 \\
+%17729& Lasonya Wildey& 439686& 3824& Northwestern Dr& 917817122 \\
+%53890& Sophie Tiberio& 957671& 3755& Northwestern Dr& 442830147 \\
+%... &...&...&...&...&... 
+%\end{tabular}
+%}
+%\end{table}
+%
+%Si on ne veut que le premier on peut indiquer une limite (bonus) :
+%
+%\begin{sql}
+%SELECT * FROM person
+%WHERE address_street_name = 'Northwestern Dr'
+%ORDER BY address_number DESC LIMIT 1
+%\end{sql}
+%qui renvoie :
+%
+%\begin{table}[!htp]
+%\centering
+%{\tt
+%\begin{tabular}{rrrrrr}
+%id& name& license\_id& address\_number& address\_street\_name& ssn \\ \hline
+%14887& Morty Schapiro& 118009& 4919& Northwestern Dr& 111564949 \\
+%\end{tabular}
+%}
+%\end{table}
+%
+%En ce qui concerne le deuxième témoin :
+%\begin{sql}
+%SELECT * FROM person
+%WHERE name like '%Annabel%' AND address_street_name = 'Franklin Ave' 
+%\end{sql}
+%qui renvoie :
+%
+%\begin{table}[!htp]
+%\centering
+%{\tt
+%\begin{tabular}{rrrrrr}
+%id& name& license\_id& address\_number& address\_street\_name& ssn \\ \hline
+%16371& Annabel Miller& 490173& 103& Franklin Ave& 318771143
+%\end{tabular}
+%}
+%\end{table}
+%
+%
+%Le témoignage de ces deux témoins donne avec le mot-clé \texttt{in} (mais c'est un exemple), à l'aide de la requête :
+%\begin{sql}
+%SELECT * FROM interview where person_id in (14887, 16371)
+%\end{sql}
+%donne : {\tt \begin{itemize}
+%\item 14887 -- I heard a gunshot and then saw a man run out. He had a "Get Fit Now Gym" bag. The membership number on the bag started with "48Z". Only gold members have those bags. The man got into a car with a plate that included "H42W".
+%\item 16371 -- I saw the murder happen, and I recognized the killer from my gym when I was working out last week on January the 9th.
+%\end{itemize}
+%}
+%
+%
+%
+%On s'attaque aux personnes du côté de la gym, avec le bon sac, le statut est présent le 09 janvier.
+%
+%\begin{sql}
+%SELECT m.person_id, m.name FROM get_fit_now_member AS m 
+%JOIN get_fit_now_check_in AS c ON m.id=c.membership_id 
+%WHERE m.id like '48Z%' and m.membership_status = 'gold' 
+%AND c.check_in_date = '20180109'
+%
+%\end{sql}
+%
+%ce qui renvoie deux candidats :
+%
+%\begin{table}[!htp]
+%\centering
+%{\tt
+%\begin{tabular}{rr}
+%person\_id& name\\ \hline
+%28819& Joe Germuska \\
+%67318& Jeremy Bowers \\
+%\end{tabular}
+%}
+%\end{table}
+%
+%Il faut donc croiser avec les plaques minéralogiques.
+%
+%\begin{sql}
+%SELECT p.id, p.name FROM person as p JOIN drivers_license as d
+%ON d.id = p.license_id
+%WHERE d.plate_number like '%H42W%'
+%\end{sql}
+%qui nous renvoie 3 possibilités :
+%
+%\begin{table}[!htp]
+%\centering
+%{\tt
+%\begin{tabular}{rrr}
+%id& name \\ \hline
+%51739& Tushar Chandra \\
+%67318& Jeremy Bowers \\
+%78193& Maxine Whitely\\
+%\end{tabular}
+%}
+%\end{table}
+%
+%
+%
+%Remarquons la possibilité de conclure l'histoire sur ce personnage :
+%\begin{sql}
+%INSERT INTO solution VALUES (1, "Jeremy Bowers");
+%SELECT value FROM solution;
+%\end{sql}
+%qui renvoie : 
+%
+%{\tt Congrats, you found the murderer! But wait, there's more... If you think you're up for a challenge, try querying the interview transcript of the murderer to find the real villian behind this crime. If you feel especially confident in your SQL skills, try to complete this final step with no more than 2 queries. }
+%
+%
+%
+%Le tueur est donc : \texttt{Jeremy Bowers}. Regardons alors ce qu'il a à dire pour sa défense :
+%
+%\begin{sql}
+%SELECT transcript FROM interview WHERE person_id = 67318
+%\end{sql}
+%ce qui donne :
+%
+%{\tt I was hired by a woman with a lot of money. I don't know her name but I know she's around 5'5" (65") or 5'7" (67"). She has red hair and she drives a Tesla Model S. I know that she attended the SQL Symphony Concert 3 times in December 2017.}
+%
+%
+%Du côté de la voiture, du genre et de la couleur de cheveux :
+%\begin{sql}
+%SELECT * FROM drivers_license
+%WHERE gender = 'female' AND hair_color = 'red' 
+%AND car_make = 'Tesla' AND car_model = 'Model S' 
+%AND height BETWEEN 65 AND 67 
+%\end{sql}
+%nous permet d'obtenir 3 numéros :
+%
+%\begin{table}[!htp]
+%\centering
+%{\tt
+%\begin{tabular}{rrrrrrrrr}
+%id& age& height& eye\_color& hair\_color& gender& plate\_number& car\_make& car\_model \\ \hline
+%202298& 68& 66& green& red& female& 500123& Tesla& Model S \\
+%291182& 65& 66& blue& red& female& 08CM64& Tesla& Model S \\
+%918773& 48& 65& black& red& female& 917UU3& Tesla& Model S \\
+%\end{tabular}
+%}
+%\end{table}
+%
+%Est-ce que l'une d'entre elles est riche ?
+%\begin{sql}
+%SELECT i.annual_income, p.id, p.name, d.age FROM income AS i
+%JOIN person AS p 
+%ON i.ssn = p.ssn
+%JOIN drivers_license AS d
+%ON p.license_id = d.id
+%WHERE d.id in (202298,291182,918773)
+%ORDER BY i.annual_income DESC
+%\end{sql}
+%Oui !
+%
+%\begin{table}[!htp]
+%\centering
+%{\tt
+%\begin{tabular}{rrrr}
+%annual\_income	&id&	name&	age \\ \hline
+%310000	&99716&	Miranda Priestly	&68\\
+%278000	&78881	&Red Korb&	48\\
+%\end{tabular}
+%}
+%\end{table}
+%
+%Mais qui est allé au concert de musique 3 fois au mois de décembre ?
+%
+%\begin{sql}
+%SELECT person_id, COUNT(*) AS nbFois
+%FROM facebook_event_checkin
+%WHERE event_name = 'SQL Symphony Concert'
+%AND date between 20171201 and 20171231
+%GROUP BY person_id
+%HAVING nbFois = 3 
+%\end{sql}
+%
+%\begin{table}[!htp]
+%\centering
+%{\tt
+%\begin{tabular}{rr}
+%person\_id& nbFois \\ \hline
+%24556& 3 \\
+%99716& 3 \\
+%\end{tabular}
+%}
+%\end{table}
+%
+%Je crois que Miranda est coincée !
+%\begin{sql}
+%INSERT INTO solution VALUES (1, "Miranda Priestly");
+%SELECT value FROM solution;
+%\end{sql}
+%Et félicitations, vous avez trouvé le cerveau du meurtre ! Tout le monde à SQL City vous salue comme le plus grand détective SQL de tous les temps. Il est temps de sabrer le champagne !
+%%\end{landscape}
+%
+%
+%
+%
+%
+%
+%\underline{Remarque :}
+%
+%Il est demandé de le faire en deux requêtes ce qui n'est pas très pédagogique, mais bien sûr c'est possible. On peut proposer cela\footnote{https://gist.github.com/bearloga/cfc8099223d1dace2604c8737dcbb4c3} :
+%\begin{sql}
+%WITH red_haired_tesla_drivers AS (
+%    SELECT id AS license_id
+%    FROM drivers_license
+%    WHERE gender = 'female' AND hair_color = 'red'
+%    AND car_make = 'Tesla' AND car_model = 'Model S'
+%    AND height BETWEEN 65 AND 67 
+%), rich_suspects AS (
+%    SELECT person.id AS person_id, name, annual_income
+%    FROM red_haired_tesla_drivers AS rhtd
+%    LEFT JOIN person ON rhtd.license_id = person.license_id
+%    LEFT JOIN income ON person.ssn = income.ssn
+%), symphony_attenders AS (
+%    SELECT person_id, COUNT(*) AS nbFois
+%    FROM facebook_event_checkin
+%    WHERE event_name = 'SQL Symphony Concert'
+%	AND date between 20171201 and 20171231 
+%    GROUP BY person_id
+%    HAVING nbFois = 3 
+%)
+%SELECT name, annual_income
+%FROM rich_suspects
+%JOIN symphony_attenders ON rich_suspects.person_id = symphony_attenders.person_id
+%\end{sql}
+%
+%
+%
+%
+%\section{Solution 2}
+%
+%\question{}
+%
+%La requête
+%\begin{sql}
+%SELECT count(*) FROM person;
+%\end{sql}
+%donne :
+%\begin{table}[!htp]
+%\centering
+%{\tt
+%\begin{tabular}{r}
+%count(*) \\ \hline
+%10011
+%\end{tabular}
+%}
+%\end{table}
+%
+%
+%\question{}
+%
+%La requête
+%\begin{sql}
+%SELECT * FROM person LIMIT 10;
+%\end{sql}
+%donne
+%\begin{table}[!htp]
+%\centering
+%{\tt
+%\begin{tabular}{rrrrrr}
+%id &	name	&license\_id	&address\_number	&address\_street\_name	&ssn \\ \hline
+% 10000  &  Christoper Peteuil  &  993845  &  624  &  Bankhall Ave  &  747714076  \\
+% 10007  &  Kourtney Calderwood  &  861794  &  2791  &  Gustavus Blvd  &  477972044 \\
+% 10010  &  Muoi Cary  &  385336  &  741  &  Northwestern Dr  &  828638512 \\
+% 10016  &  Era Moselle  &  431897  &  1987  &  Wood Glade St  &  614621061 \\
+% 10025  &  Trena Hornby  &  550890  &  276  &  Daws Hill Way  &  223877684 \\
+% 10027  &  Antione Godbolt  &  439509  &  2431  &  Zelham Dr  &  491650087 \\
+% 10034  &  Kyra Buen  &  920494  &  1873  &  Sleigh Dr  &  332497972 \\
+% 10039  &  Francesco Agundez  &  278151  &  736  &  Buswell Dr  &  861079251 \\ 
+% 10095  &  Leslie Thate  &  729987  &  2772  &  Camellia Park Circle  &  127944356  \\
+% 10122  &  Alva Conkel  &  779002  &  116  &  Diversey Circle  &  148521773 \\
+%\end{tabular}
+%}
+%\end{table}
+%
+%
+%\question{}
+%
+%La requête
+%\begin{sql}
+%SELECT DISTINCT type FROM crime_scene_report;
+%\end{sql}
+%donne
+%\begin{table}[!htp]
+%\centering
+%{\tt
+%\begin{tabular}{r}
+%type \\ \hline
+%robbery \\
+%murder\\
+%theft\\
+%fraud\\
+%arson\\
+%bribery\\
+%assault\\
+%smuggling\\
+%blackmail\\
+%\end{tabular}
+%}
+%\end{table}
+%
+%
+%\question{}
+%
+%La requête
+%\begin{sql}
+%SELECT * FROM person WHERE name = 'Kinsey Erickson'
+%\end{sql}
+%donne
+%\begin{table}[!htp]
+%\centering
+%{\tt
+%\begin{tabular}{rrrrrr}
+%id&	name&	license\_id	&address\_number	&address\_street\_name	&ssn \\ \hline
+%89906&	Kinsey Erickson&	510019&	309&	Northwestern Dr	&635287661 \\
+%\end{tabular}
+%}
+%\end{table}
+%
+%\question{}
+%
+%La requête
+%\begin{sql}
+%SELECT * FROM crime_scene_report 
+%WHERE type = 'theft' 
+%AND city = 'Chicago';
+%\end{sql}
+%donne
+%\begin{table}[!htp]
+%\centering
+%{\tt
+%\begin{tabular}{rr>{\raggedleft\arraybackslash}p{10cm}r}
+%date&	type	&description	&city \\ \hline
+%20180115&	theft&	Big Bully stole my lunch money!&	Chicago \\
+%20170101&	theft&	‘Yes,’ said Alice, ‘we learned French and music.’ &	Chicago\\
+%20171227&	theft&	silence, and then another confusion of voices--‘Hold up his head--Brandy &	Chicago \\
+%\end{tabular}
+%}
+%\end{table}
+%
+%
+%\question{}
+%
+%La requête
+%\begin{sql}
+%SELECT DISTINCT city 
+%FROM crime_scene_report 
+%WHERE city LIKE 'I%';
+%\end{sql}
+%donne
+%\begin{table}[!htp]
+%\centering
+%{\tt
+%\begin{tabular}{r}
+%city \\ \hline
+%Irving\\
+%Indianapolis\\
+%Irvine\\
+%Inglewood\\
+%Independence\\
+%\end{tabular}
+%}
+%\end{table}
+%
+%
+%
+%\question{}
+%
+%La requête
+%\begin{sql}
+%SELECT DISTINCT city 
+%FROM crime_scene_report 
+%WHERE city BETWEEN 'W%' AND 'Z%';
+%\end{sql}
+%donne
+%\begin{table}[!htp]
+%\centering
+%{\tt
+%\begin{tabular}{r}
+%city \\ \hline
+%Wilmington\\
+%Waterbury\\
+%West Valley City\\
+%Winter Haven\\
+%Youngstown\\
+%Wichita\\
+%West Covina\\
+%Yakima\\
+%Washington\\
+%Winston\\
+%Westminster\\
+%Waco\\
+%Yonkers\\
+%Warren\\
+%Worcester\\
+%Waterloo\\
+%York\\
+%\end{tabular}
+%}
+%\end{table}
+%
+%
+%\question{}
+%
+%La requête
+%\begin{sql}
+%SELECT max(age) FROM drivers_license;
+%\end{sql}
+%donne
+%\begin{table}[!htp]
+%\centering
+%{\tt
+%\begin{tabular}{r}
+%max(age) \\ \hline
+%89
+%\end{tabular}
+%}
+%\end{table}
+%
+%
+%
+%\question{}
+%
+%La requête
+%\begin{sql}
+%SELECT * FROM drivers_license ORDER BY age ASC LIMIT 10
+%\end{sql}
+%donne
+%\begin{table}[!htp]
+%\centering
+%{\tt
+%\begin{tabular}{rrrrrrrrr}
+% id  &  age  &  height  &  eye\_color  &  hair\_color  &  gender  &  plate\_number  &  car\_make  &  car\_model  \\ \hline
+% 101255  &  18  &  79  &  blue  &  grey  &  female  &  5162Z1  &  Lexus  &  GS  \\
+% 108374  &  18  &  63  &  brown  &  red  &  male  &  X2KE6N  &  Ford  &  Escape  \\
+% 112201  &  18  &  57  &  green  &  green  &  male  &  HW66XJ  &  BMW  &  325 \\
+% 115674  &  18  &  74  &  blue  &  blue  &  female  &  2OGQIP  &  Mitsubishi  &  Diamante \\ 
+% 122161  &  18  &  73  &  black  &  black  &  male  &  2H3Y1S  &  BMW  &  M5  \\
+% 127288  &  18  &  59  &  black  &  black  &  female  &  A20YSP  &  Ford  &  Freestar \\ 
+% 131246  &  18  &  57  &  brown  &  white  &  female  &  VOU6R8  &  Suzuki  &  Grand Vitara \\ 
+% 141220  &  18  &  70  &  green  &  blue  &  male  &  215AK2  &  Lexus  &  LX \\
+% 152848  &  18  &  58  &  brown  &  blonde  &  male  &  4Y00IK  &  Mazda  &  Millenia \\ 
+% 160151  &  18  &  67  &  blue  &  grey  &  female  &  O1G724  &  Mitsubishi  &  Montero \\
+%\end{tabular}
+%}
+%\end{table}
+%
+%
+%\question{}
+%
+%La requête
+%\begin{sql}
+%SELECT person.name, income.annual_income 
+%FROM income 
+%JOIN person 
+%ON income.ssn = person.ssn 
+%WHERE annual_income > 450000
+%\end{sql}
+%donne
+%\begin{table}[!htp]
+%\centering
+%{\tt
+%\begin{tabular}{rr}
+%name	& annual\_income \\ \hline
+%Claudio Carlan	& 473100 \\
+%Felice Prudden	& 486600 \\
+%Buena Cosimini	& 475700 \\
+%Dianna Eyster	& 476300 \\
+%Numbers Cranker	& 498500 \\
+%Truman Haaker	& 489800 \\
+%\end{tabular}
+%}
+%\end{table}
+%
+%
+%
+%
+%
+%\question{}
+%
+%La requête
+%\begin{sql}
+%SELECT name, annual_income as income, 
+%gender, eye_color as eyes, hair_color as hair
+%FROM income i
+%JOIN person p
+%ON i.ssn = p.ssn 
+%JOIN drivers_license dl
+%ON p.license_id = dl.id
+%WHERE annual_income > 450000
+%\end{sql}
+%donne
+%\begin{table}[!htp]
+%\centering
+%{\tt
+%\begin{tabular}{rrrrr}
+%name & income & gender & eyes & hair \\ \hline
+%Claudio Carlan & 473100 & male & black & brown \\
+%Felice Prudden & 486600 & female & green & green \\
+%Buena Cosimini & 475700 & female & brown & blonde \\
+%Dianna Eyster & 476300 & female & brown & black \\
+%Numbers Cranker & 498500 & male & brown & green \\
+%Truman Haaker & 489800 & male & brown & grey\\
+%\end{tabular}
+%}
+%\end{table}
+%
+%
+%
+%
+%

@@ -1,0 +1,16 @@
+\exer{}
+\setcounter{numques}{0}
+
+% \question 
+Indenter de deux manières différentes la suite d'expressions suivante de manière à ce qu'à son exécution, le programme affiche soit la liste de tous les éléments de $L$ inférieurs ou égaux à $m$, soit juste le dernier.
+\begin{lstlisting}
+
+from random import randrange
+L = [randrange(100) for i in range(100)] # 100 valeurs entre 0 et 99.
+m = 50
+for x in L:
+if x <= m:
+p = x
+print(p)
+\end{lstlisting}
+

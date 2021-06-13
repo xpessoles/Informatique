@@ -1,0 +1,92 @@
+============================= test session starts =============================
+platform win32 -- Python 3.6.7, pytest-5.3.0, py-1.8.0, pluggy-0.13.0
+rootdir: C:\GitHub\Informatique_MPSI\exos\sql\SQL-005
+collected 32 items
+
+test_SQL_005.py .FF............FF..........FFFFF                         [100%]
+
+================================== FAILURES ===================================
+_________________________________ test_Q2_res _________________________________
+
+    def test_Q2_res ():
+>       assert sol_Q2_res ==  Q2_res
+E       AssertionError: assert 'pokemon(id :...lt : boolean)' == 'pokemon(id :...lt : BOOLEAN)'
+E         - pokemon(id : integer, identifier : string, species_id : integer, height : integer, weight : integer, base_experience : integer, order : integer, is_default : boolean)
+E         + pokemon(id : INTEGER, identifier : VARCHAR(79), species_id : INTEGER, height : INTEGER, weight : INTEGER, base_experience : INTEGER, order : INTEGER, is_default : BOOLEAN)
+
+test_SQL_005.py:37: AssertionError
+_________________________________ test_Q3_res _________________________________
+
+    def test_Q3_res ():
+>       assert sol_Q3_res ==  Q3_res
+E       assert 'La clé prima... de la table.' == "La clé prima... d'une table."
+E         - La clé primaire d'une table est une contrainte d'unicité, composée d'une ou plusieurs colonnes et qui permet d'identifier de manière unique chaque ligne de la table.
+E         + La clé primaire permet d'identifier de façon unique chaque occurence d'une table.
+
+test_SQL_005.py:40: AssertionError
+________________________________ test_Q11_res _________________________________
+
+    def test_Q11_res ():
+>       assert sol_Q11_res ==  Q11_res
+E       AssertionError: assert 'wailord,145,3980' == 'wailord,145'
+E         - wailord,145,3980
+E         ?            -----
+E         + wailord,145
+
+test_SQL_005.py:79: AssertionError
+________________________________ test_Q11_req _________________________________
+
+    def test_Q11_req ():
+>       assert requete(sol_Q11_req) == requete(Q11_req)
+E       AssertionError: assert [('wailord', 145, 3980)] == [('wailord', 145)]
+E         At index 0 diff: ('wailord', 145, 3980) != ('wailord', 145)
+E         Use -v to get the full diff
+
+test_SQL_005.py:82: AssertionError
+________________________________ test_Q18_req _________________________________
+
+    def test_Q18_req ():
+>       assert requete(sol_Q18_req) == requete(Q18_req)
+E       AssertionError: assert [('bulbasaur'...untain'), ...] == [('bulbasaur'...untain'), ...]
+E         At index 385 diff: ('deoxys', 'rare') != ('deoxys-normal', 'rare')
+E         Right contains 55 more items, first extra item: ('deoxys-attack', 'rare')
+E         Use -v to get the full diff
+
+test_SQL_005.py:115: AssertionError
+________________________________ test_Q19_res _________________________________
+
+    def test_Q19_res ():
+>       assert sol_Q19_res ==  Q19_res
+E       AssertionError: assert '71' == '87'
+E         - 71
+E         + 87
+
+test_SQL_005.py:118: AssertionError
+________________________________ test_Q19_req _________________________________
+
+    def test_Q19_req ():
+>       assert requete(sol_Q19_req) == requete(Q19_req)
+E       assert [(71,)] == [(83,)]
+E         At index 0 diff: (71,) != (83,)
+E         Use -v to get the full diff
+
+test_SQL_005.py:121: AssertionError
+________________________________ test_Q20_res _________________________________
+
+    def test_Q20_res ():
+>       assert sol_Q20_res ==  Q20_res
+E       AssertionError: assert '29' == '31'
+E         - 29
+E         + 31
+
+test_SQL_005.py:124: AssertionError
+________________________________ test_Q20_req _________________________________
+
+    def test_Q20_req ():
+>       assert requete(sol_Q20_req) == requete(Q20_req)
+E       assert [(29,)] == [(31,)]
+E         At index 0 diff: (29,) != (31,)
+E         Use -v to get the full diff
+
+test_SQL_005.py:127: AssertionError
+======================== 9 failed, 23 passed in 0.89s =========================

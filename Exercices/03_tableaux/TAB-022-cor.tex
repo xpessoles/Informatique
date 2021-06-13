@@ -1,0 +1,26 @@
+\question{} Un variant pour la boucle \texttt{while} est \og $n - c^2$ \fg{}. 
+
+En effet, d'une part $n$ et $c$ sont entiers (cela se démontre immédiatement par récurrence sur $c$), donc $n-c^2$ est entier. 
+De plus, la condition sur le while permet d'affirmer que $n-c^2 \geq 0$ en début de chaque tour de boucle. 
+
+Ensuite, si $c$ est entier naturel, alors $c^2 < (c+1)^2$, donc $n-(c+1)^2 < n-c^2$, donc la quantité $n-c^2$ décroît strictement à chaque tour de boucle. 
+
+\fbox{%
+\begin{minipage}{0.9\textwidth}
+La quantité $n-c^2$ est donc entière, positive, et décroît strictement à chaque tour de boucle. C'est donc un variant de la boucle while, qui termine donc.
+\end{minipage}}
+
+\medskip{}
+
+\question{}
+Montrons que \og $L = [k^2,~ 0 \leq k < c]$ \fg{} est un invariant de la boucle while. 
+
+En entrée de boucle, $L$ est vide et $c=0$, donc l'invariant est vrai en début de boucle.
+
+Supposons qu'au début de la ligne 6, l'invariant est vrai. Alors, au début de la ligne 7, on a $L = [k^2,~ 0 \leq k \leq c]$ donc, à la fin de la ligne 7, on a bien $L = [k^2,~ 0 \leq k < c]$. 
+
+\fbox{Ainsi, \og $L = [k^2,~ 0 \leq k < c]$ \fg{} est un invariant de la boucle while.}
+
+En sortie de boucle, l'invariant est toujours vrai, et $c$ est le plus petit entier dont le carré est strictement plus grand que $n$. 
+
+Ainsi, \fbox{\texttt{mystere(n)} renvoie la liste des carrés d'entiers inférieurs ou égaux à $n$.}

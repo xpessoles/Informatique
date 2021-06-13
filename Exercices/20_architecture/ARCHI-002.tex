@@ -1,0 +1,141 @@
+
+Lancer PYZO ou IDLE. Un \emph{interpréteur de commandes}, ou \texttt{shell}, s'affiche. 
+Le symbole \texttt{>}\texttt{>}\texttt{>} signifie que \python{} attend vos instructions. 
+
+Sitôt une instruction tapée et validée (par la touche \og Entrée \fg{}), le \texttt{shell} effectue le calcul demandé puis affiche un résultat, ou un message d'erreur. 
+Il est extrêmement important de bien lire ces messages d'erreur, et de les comprendre ! 
+
+\medskip{}
+
+\question{} Taper dans le \emph{shell} les instructions suivantes. 
+\begin{verbatim}
+x = 42
+y = 42.
+type(x)
+type(y)
+x = x+y
+x
+type(x)
+\end{verbatim}
+Que se passe-t-il ? Qu'est-ce que cela signifie ?
+
+\medskip{}
+
+\question{} Décrire ce que font les opérations suivantes, après les avoir étudiées sur des exemples numériques.
+\begin{center}
+  \texttt{+}\qquad \texttt{-}\qquad \texttt{*}\qquad \texttt{**}\qquad \texttt{/}\qquad \texttt{//}\qquad \texttt{\%}
+\end{center}
+
+
+\question{} Taper dans le \emph{shell} les instructions suivantes. 
+\begin{verbatim}
+B = 42 > 41.
+type(B)
+\end{verbatim}
+Que se passe-t-il ? Qu'est-ce que cela signifie ?
+
+\medskip{}
+
+\question{} Décrire ce que font les opérations suivantes, après les avoir étudiées sur des exemples numériques.
+\begin{center}
+  \texttt{==} {} \qquad{} \texttt{!=}\qquad\texttt{<}\qquad\texttt{>}\qquad\texttt{<=}\qquad\texttt{>=}
+\end{center}
+
+\medskip{}
+
+\question{} Taper dans le \emph{shell} les instructions suivantes. 
+\begin{verbatim}
+3/0 > 5
+\end{verbatim}
+Que se passe-t-il ? Qu'est-ce que cela signifie ?
+\medskip{}
+
+\question{} Taper dans le \emph{shell} les instructions suivantes. 
+\begin{verbatim}
+B = (42 > 41) or ( 3/0 > 5).
+type(B)
+\end{verbatim}
+Que se passe-t-il ? Qu'est-ce que cela signifie ?
+
+\medskip{}
+
+\question{} Décrire ce que font les opérations suivantes, après les avoir étudiées sur des exemples logiques.
+\begin{center}
+  \texttt{or}\qquad\texttt{and}\qquad\texttt{not}
+\end{center}
+
+
+\medskip{}
+
+\question{} Taper dans le \emph{shell} les instructions suivantes. 
+\begin{verbatim}
+x = -3
+abs(x)
+help(abs)
+\end{verbatim}
+Que se passe-t-il ? Qu'est-ce que cela signifie ?
+
+\medskip{}
+
+\question{} Taper dans le \emph{shell} les instructions suivantes. 
+\begin{verbatim}
+import math as m
+import numpy as np
+m.sin(m.pi)
+np.sin(np.pi)
+np.sin([0,np.pi])
+m.sin([0,m.pi])
+\end{verbatim}
+Que se passe-t-il ? Qu'est-ce que cela signifie ?
+
+
+\medskip{}
+
+\question{} Taper dans le \emph{shell} les instructions suivantes. 
+\begin{verbatim}
+L = [0,1,2,3,4,5,6]
+type(L)
+L[0]
+L[6]
+L[-1]
+L[-2]
+L[7]
+L[1:4]
+L[2:8]
+L.append(7)
+L
+L = L.append(8)
+L
+\end{verbatim}
+Que se passe-t-il ? Qu'est-ce que cela signifie ?
+
+\medskip{}
+
+Nous avons vu comment utiliser des fonctions et des bibliothèques. Nous pouvons bien entendu créer nos propres fonctions (et bibliothèques). 
+
+Dans PYZO ou IDLE, ouvrir un nouveau fichier (CTRL+N ou File / New file). L'enregistrer (CTRL + S ou File / Save) sous le nom \texttt{TP02.py}. 
+
+\medskip{}
+
+\question{} Taper dans cette fenêtre le script suivant. 
+\begin{lstlisting}
+"""TP n02"""
+def somme(n) : 
+    """Renvoie 0 + 1 + 2 + ... + n
+    Precondition : n entier naturel"""
+    return n*(n+1) // 2 
+\end{lstlisting}
+Enregistrer puis appuyer sur la touche Crtl+MAJ+E (sous PYZO) ou F5 (sous IDLE).
+Le \emph{shell} doit s'afficher. 
+Taper dans le \emph{shell} les instructions suivantes. 
+\begin{lstlisting}
+somme(42)
+somme(42.)
+somme(-1515)
+help(somme)
+\end{lstlisting}
+Que se passe-t-il ? Qu'est-ce que cela signifie ?
+
+\medskip{}
+
+\question{} Comment peut-on utiliser la fonction écrite précédemment dans un \emph{autre} script \python{} ? 

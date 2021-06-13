@@ -1,0 +1,241 @@
+\exer{}
+\setcounter{numques}{0}
+
+\question{Prévoir les résultats des expressions suivantes, puis le vérifier grâce à l'interpréteur interactif.}
+
+\begin{multicols}{3}
+  \begin{enumerate}[label=\emph{\alph*)}]
+    \item \texttt{(1,2)}
+    \item \texttt{(1)}
+    \item \texttt{(1,)}
+    \item \texttt{(,)}
+    \item \texttt{()}
+    \item \texttt{()+()}
+    \item \texttt{()+() == ()}
+    \item \texttt{(1,2)+3}
+    \item \texttt{(1,2)+(3)}
+    \item \texttt{(1,2)+(3,)}
+    \item \texttt{(1,2)+(3,4,5)}
+    \item \texttt{len((1,7,2,"zzz",[]))}
+    \item \texttt{len(())}
+    \item \texttt{len(("a","bc")+("cde",""))}
+  \end{enumerate}
+\end{multicols}
+
+\question{Pour chaque séquence d'instruction, prévoir son résultat puis le vérifier grâce à l'interpréteur interactif.}
+
+
+
+
+\begin{enumerate}[label=\emph{\alph*)}]
+\item 
+\begin{lstlisting}
+t = (2,"abra",9,6*9,22)
+print(t)
+t[0]
+t[-1]
+t[1]
+t[1] = "cadabra" 
+\end{lstlisting}
+\end{enumerate}
+\begin{enumerate}[label=\emph{\alph*)}]
+\setcounter{enumi}{1}
+\item 
+\begin{lstlisting}
+res = (45,5)
+x,y = res
+(x,y) == x,y
+(x,y) == (x,y)
+print x
+print(y)
+x,y = y,x
+print(y)
+\end{lstlisting}
+\end{enumerate}
+\begin{enumerate}[label=\emph{\alph*)}]
+\setcounter{enumi}{2}
+\item 
+\begin{lstlisting}
+v = 7
+ex = (-1,5,2,"","abra",8,3,v)
+5 in ex
+abra in ex
+(2 in ex) and ("abr" in ex)
+v in ex
+\end{lstlisting}
+\end{enumerate}
+
+\question{Prévoir les résultats des expressions suivantes, puis le vérifier grâce à l'interpréteur interactif.}
+
+\begin{multicols}{2}
+  \begin{enumerate}[label=\emph{\alph*)}]
+    \item \texttt{"abba"}
+    \item \texttt{abba}
+    \item \texttt{""}
+    \item \texttt{"" == " "}
+    \item \texttt{""+""}
+    \item \texttt{""+"" == ""}
+    \item \texttt{"May"+" "+"04th"}
+    \item \texttt{"12"+3}
+    \item \texttt{"12"+"trois"}
+    \item \texttt{len("abracadabra")}
+    \item \texttt{len("")}
+    \item \texttt{len("lamartin"+"2015")}
+  \end{enumerate}
+\end{multicols}
+
+\question{Pour chaque séquence d'instruction, prévoir son résultat puis le vérifier grâce à l'interpréteur interactif.}
+
+\begin{enumerate}[label=\emph{\alph*)}]
+\item 
+\begin{lstlisting}
+t = "oh oui youpi !"
+print(t)
+t[0]
+t[-1]
+t[1]
+t[2]
+t[1] = "o" 
+\end{lstlisting}
+\end{enumerate}
+\begin{enumerate}[label=\emph{\alph*)}]
+\setcounter{enumi}{1}
+\item
+\begin{lstlisting}
+ex = "abdefgh"
+"a" in ex
+a in ex
+"def" in ex
+"adf" in ex
+\end{lstlisting}
+\end{enumerate}
+
+\question{Prévoir les résultats des expressions suivantes, puis le vérifier grâce à l'interpréteur interactif d'IDLE.}
+
+\begin{multicols}{2}
+  \begin{enumerate}[label=\emph{\alph*)}]
+    \item \texttt{[1,2,3,"a"]}
+    \item \texttt{123a}
+    \item \texttt{[]}
+    \item \texttt{[]+[]}
+    \item \texttt{[]+[] == []}
+    \item \texttt{[1,2] + [5,7,9]}
+    \item \texttt{[0,0]+[0]}
+    \item \texttt{len(["a","b"])}
+    \item \texttt{len([])}
+    \item \texttt{len([[]])}
+    \item \texttt{len([[[]]])}
+    \item \texttt{len([0,0]+[1])}
+  \end{enumerate}
+\end{multicols}
+
+\question{Pour chaque séquence d'instruction, prévoir son résultat puis le vérifier grâce à l'interpréteur interactif d'IDLE.}
+
+\begin{enumerate}[label=\emph{\alph*)}]
+\item 
+\begin{lstlisting}
+t = [1,2,3,4,5,6]
+u = ["a","b","c","d"]
+print(t+u)
+t[0]
+t[-1]
+z = t[3]
+print(z)
+t.append(7)
+print(t)
+\end{lstlisting}
+\end{enumerate}
+\begin{enumerate}[label=\emph{\alph*)}]
+\setcounter{enumi}{2}
+\item
+\begin{lstlisting}
+ex = ["sin","cos","tan","log","exp"]
+"log" in ex
+log in ex
+"l" in ex
+z = ex.pop()
+print(z)
+z in ex
+print(ex)
+\end{lstlisting}
+\end{enumerate}
+\begin{enumerate}[label=\emph{\alph*)}]
+\setcounter{enumi}{3}
+\item 
+\begin{lstlisting}
+  u = [1,2,3,4,5,6]
+  L = u
+  u = [1,2,3,42,5,6]
+  print(L)
+\end{lstlisting}
+\end{enumerate}
+\begin{enumerate}[label=\emph{\alph*)}]
+\setcounter{enumi}{4}
+\item
+\begin{lstlisting}
+  u = [1,2,3,4,5,6]
+  L = u
+  u[3] = 42
+  print(L)
+\end{lstlisting}
+\end{enumerate}
+
+
+\question{Calculer cette suite d'expressions.}
+\begin{lstlisting}
+[i for i in range(10)]
+[compt**2 for compt in range(7)]
+[j+1 for j in range(-2,8)]
+\end{lstlisting}
+Sur ce modèle, obtenir de manière synthétique : 
+\begin{enumerate}[label=\emph{\alph*)}]
+  \item la liste des 20 premiers entiers naturels impairs ;
+  \item la liste de tous les multiples de 5 entre 100 et 200 (inclus) ;
+  \item La liste de tous les cubes d'entiers naturels, inférieurs ou égaux à 1000. 
+  \item une liste contenant tous les termes entre $-20$ et $5$ d'une progression arithmétique de raison $0,3$ partant de $-20$.
+\end{enumerate}
+
+\question{}
+\begin{enumerate}[label = \emph{\alph*)}]
+  \item Affecter à \texttt{v} la liste \texttt{[2,5,3,-1,7,2,1]}
+  \item Affecter à \texttt{L} la liste vide.
+  \item Vérifier le type des variables crées.
+  \item Calculer la longueur de \texttt{v}, affectée à \texttt{n} et celle de \texttt{L}, affectée à \texttt{m}.
+  \item Tester les expressions suivantes : \texttt{v[0]}, \texttt{v[2]}, \texttt{v[n]}, \texttt{v[n-1]}, \texttt{v[-1]} et \texttt{v[-2]}.
+  \item Changer la valeur du quatrième élément de \texttt{v}.
+  \item Que renvoie \texttt{v[1:3]} ? Remplacer dans \texttt{v} les trois derniers éléments par leurs carrés.
+  \item Que fait \texttt{v[1] = [0,0,0]} ? Combien d'éléments y a-t-il alors dans \texttt{v} ?
+\end{enumerate}
+
+
+\question{Quel type choisiriez-vous pour représenter les données suivantes ?}
+Vous justifierez brièvement chaque réponse. 
+
+\begin{enumerate}[label = \emph{\alph*)}]
+  \item Le nom d'une personne.
+  \item L'état civil d'une personne : nom, prénom, date de naissance, nationalité.
+  \item Les coordonnées d'un point dans l'espace.
+  \item L'historique du nombre de $5/2$ dans la classe de MP du lycée. 
+  \item Un numéro de téléphone. 
+  \item \emph{Plus difficile :} l'arbre généalogique de vos ancêtres. 
+\end{enumerate}
+=======
+% \question
+\'Evaluer les expressions suivantes.
+\begin{multicols}{2}
+  \begin{enumerate}[label=\emph{\alph*)}]
+    \item \texttt{4.3+2}
+    \item \texttt{2.5-7.3}
+    \item \texttt{42+4.}
+    \item \texttt{42+4}
+    \item \texttt{42.+4}
+    \item \texttt{12*0.}
+    \item \texttt{11.7*0}
+    \item \texttt{2,22/(1.6-2*0.8)}
+    \item \texttt{42/6}
+    \item \texttt{1,8/7}
+    \item \texttt{(447+3*6)/5}
+    \item \texttt{0/0}
+  \end{enumerate}
+\end{multicols}
+

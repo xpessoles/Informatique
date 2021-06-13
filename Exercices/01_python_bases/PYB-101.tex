@@ -1,0 +1,43 @@
+\exer{}
+\setcounter{numques}{0}
+
+% \question 
+Pour chaque séquence d'instruction, prévoir son résultat puis le vérifier grâce à l'interpréteur interactif d'IDLE.
+
+\begin{enumerate}[label=\emph{\alph*)}]
+\item 
+\begin{lstlisting}
+
+t = (2,"abra",9,6*9,22)
+print(t)
+t[0]
+t[-1]
+t[1]
+t[1] = "cadabra" 
+\end{lstlisting}
+
+\item 
+\begin{lstlisting}
+
+res = (45,5)
+x,y = res
+(x,y) == x,y
+(x,y) == (x,y)
+print x
+print(y)
+x,y = y,x
+print(y)
+\end{lstlisting}
+
+\item 
+\begin{lstlisting}
+
+v = 7
+ex = (-1,5,2,"","abra",8,3,v)
+5 in ex
+abra in ex
+(2 in ex) and ("abr" in ex)
+v in ex
+\end{lstlisting}
+
+\end{enumerate}

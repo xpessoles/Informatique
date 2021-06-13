@@ -1,0 +1,39 @@
+\question\ On se donne une condition initiale $(t_0,y0) \in \R\times \R^n$ ainsi qu'un pas temporel $h>0$. Notons $y$ la solution de l'équation vérifiant $y(t_0) = y_0$. 
+On approche alors $y(t_0+h)$ en approchant $y$ par sa tangente en $t_0$, d'équation (de la forme $z = at+b$) : 
+\begin{equation*}
+  z = (t-t_0)y'(t_0) + y_0 = (t-t_0)F(y_0,t_0)  + y_0. 
+\end{equation*}
+L'approximation en $t_0+h$ est donc $y_0 + hF(y_0,t_0)$. On itère ensuite ceci. 
+
+Ainsi, on construit la suite $t$ définie par : $\forall n \in \N,~ t_n = t_0 + nh$. On définit par récurrence la suite $y$ par $y_0 = t_0$ et, pour tout $n\in \N$, $y_{n+1} = y_n + h F(y_n,t_n)$. 
+
+\question\ On peut, au choix, écrire ceci en fonction du pas temporel $h$ ou du nombre de segments $n$ de l'approximation. 
+
+\begin{Verbatim}[gobble=0,numbers=left]
+def euler(F, a, b, y0, h):
+    """Solution de y'=F(y,t) sur [a,b], y(a) = y0, pas h"""
+    y = y0
+    t = a
+    les_y = [y0] # la liste des valeurs renvoyées
+    les_t = [a]
+    while t+h <= b:
+        y = y + h * F(y, t) # surtout pas += !
+        les_y.append(y)
+        t = t + h
+        les_t.append(t)
+    return les_t, les_y
+\end{Verbatim}
+
+\question Avec $X = \begin{pmatrix} y \\ y' \end{pmatrix}$, on a $X' = \begin{pmatrix} y' \\ y'' \end{pmatrix}$, donc pour tout $t\in \R$,
+\begin{equation*}
+  X'(t) = \begin{pmatrix} y'(t) \\-\cos(t)y'(t) + t^2y(t) + \e^t  \end{pmatrix} = F(X(t),t),
+\end{equation*}
+avec 
+\begin{equation*}
+  F : \R^2 \times \R,~ \left( \begin{pmatrix} a \\ b \end{pmatrix} , t \right) \longmapsto  \begin{pmatrix} b \\-\cos(t)b + t^2a + \e^t  \end{pmatrix}.
+\end{equation*}
+La condition initiale est alors ici 
+\begin{equation*}
+  X(0) = \begin{pmatrix} 4 \\ 2 \end{pmatrix}.
+\end{equation*}
+

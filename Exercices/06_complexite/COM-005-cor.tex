@@ -1,0 +1,25 @@
+\question\ Pour la boucle while des lignes 8-9, $p-k$ est clairement un variant, donc cette boucle termine bien. La fonction \texttt{mystere} renvoie donc un résultat. 
+
+  Toujours pour cette boucle while, \og $u[i:i+k] = v[a:a+k]$ \fg{} est clairement un invariant. Ainsi, à la sortie de cette boucle, on a $u[i:i+k] = v[a:a+k]$ mais $u[i+k] \neq v[a+k]$. 
+  Ainsi, $k$ est la taille de la plus longue tranche commune à $u$ et $v$ partant respectivement des positions $i$ et $a$. 
+  
+  Un invariant pour la boucle for des lignes 5 à 11 est alors : \og $m$ est la taille de la plus longue tranche commune à $u$ et $v$, dont le premier élément de la tranche de $u$ est dans $u[:i]$ \fg. 
+  
+  Un invariant pour la boucle for des lignes 6 à 11 est alors : \og $m$ est la taille de la plus longue tranche commune à $u$ et $v$, dont le premier élément de la tranche de $u$ est dans $u[:i]$ ou bien le premier élément de la tranche de $u$ est $u[i]$ et les premiers éléments de la tranche de $v$ est dans $v[:a]$ \fg. 
+  
+  À la fin de ces boucles, $m$ est donc la longueur de la plus grande sous-tranche commune à $u$ et $v$ : c'est ce que renvoie la fonction \texttt{mystere(u,v)}. 
+  
+\question\ On note $n$ le maximum des longueurs de $u$ et de $v$. 
+  On se place dans le modèle de complexité usuelle : les affectations, calculs de longueur de list, accès à un élément d'une liste et les comparaisons de nombres se font en temps $O(1)$.
+  
+  Les lignes 3 et 4 s'effectuent donc en $O(1)$.
+  
+  La ligne 9 s'effectue en temps $O(1)$. Il y a au plus $n$ tours de boucle dans la boucle while des lignes 8-9, donc cette boucle s'effectue en $O(n)$. 
+  
+  Les lignes 7-10-11 s'effectuent en $O(1)$, donc le bloc des lignes 7 à 11 s'effectue en temps $O(1) + O(n) = O(n)$. 
+  
+  Il y a au plus $n$ tours dans la boucle des lignes 6 à 11, donc cette boucle s'effectue en temps $n \times O(n) = O(n^2)$. 
+  
+  Il y a au plus $n$ tours dans la boucle des lignes 5 à 11, donc cette boucle s'effectue en temps $n \times O(n^2) = O(n^3)$.
+  
+  La fonction \texttt{mystere(u,v)} a donc une complexité en $O(n^3)$.

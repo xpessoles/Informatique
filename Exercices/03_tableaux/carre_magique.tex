@@ -1,0 +1,91 @@
+%\section{Les carrés magiques}
+
+
+\begin{table}[htbp]
+\begin{minipage}{0.5\textwidth}
+Tout d'abord, qu'est ce qu'un carré magique ? Selon Wikipédia en voici la définition :
+\textsl{\og En mathématiques, un carré magique d'ordre $n$ est composé de $n^2$ entiers strictement positifs, écrits sous la forme d'un tableau carré. Ces nombres sont disposés de sorte que leurs sommes sur chaque rangée, sur chaque colonne et sur chaque diagonale principale soient égales. On nomme alors constante magique (et parfois densité) la valeur de ces sommes. Un carré magique normal est un cas particulier de carré magique, constitué de tous les nombres entiers de $1$ à $n^2$, où $n$ est l'ordre du carré, sa densité est de $n\cdot\dfrac{n^2+1}{2}$.\fg}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\renewcommand{\arraystretch}{1.5}
+
+	\centering
+		\begin{tabular}{|*{5}{c|}cc}
+			\multicolumn{6}{r}{}                &$65$\\
+		  \multicolumn{6}{r}{$\nearrow$}      &   \\
+			\cline{1-5}
+			$17$&$24$&$1$&$8$&$15$&$\rightarrow$&$65$\\
+			\cline{1-5}
+			$23$&$5$&$7$&$14$&$16$&$\rightarrow$&$65$\\
+			\cline{1-5}
+			$4$&$6$&$13$&$20$&$22$&$\rightarrow$&$65$\\
+			\cline{1-5}
+			$10$&$12$&$19$&$21$&$3$&$\rightarrow$&$65$\\
+			\cline{1-5}
+			$11$&$18$&$25$&$2$&$9$&$\rightarrow$&$65$\\
+			\cline{1-5}
+			\multicolumn{6}{r}{$\searrow$}      &   \\
+			\multicolumn{6}{r}{}                &$65$\\
+		  
+		\end{tabular}
+		\caption{Exemple de carré magique avec $n=5$, la densité est de $65$.}
+\end{minipage}
+\end{table}
+\renewcommand{\arraystretch}{1}
+
+
+
+Dans le cas d'un carré magique normal et d'une valeur de $n$ impaire, il existe une méthode simple de construction.
+
+\begin{enumerate}
+	\item Nous notons $x$ et $y$ les numéros de colonne et de ligne $(x,y) \in \left[0,1,\cdots,n-1\right]^2$.
+	\item Dans tous les carrés impairs, il y a une case centrale située de coordonnée $((n-1)/2,(n-1)/2)$, on commence par remplir avec le chiffre $1$, la cellule juste à gauche de cette cellule centrale.
+\item On continue ensuite à remplir les autres cases avec la suite des entiers jusqu'à $n^2$, en suivant les règles suivantes, à partir des coordonnées $(x,y)$ :
+\begin{itemize}
+	\item si le chiffre que l'on vient de placer était un multiple de $n$ on place le nouveau chiffre en  $(x-2,y)$ \textbf{modulo $n$};
+	\item sinon on place le nouveau chiffre à la case de coordonnées $(x-1,y-1)$ \textbf{modulo $n$}.
+\end{itemize}
+\end{enumerate}
+
+On prendra soin de représenter ce carré magique, qui est une matrice, à l'aide d'une liste de listes. Par exemple, pour le carré magique de taille 3 suivant on utilisera le code suivant :
+
+	\[\begin{array}{ccc}
+	\mbox{\textbf{Code :} \texttt{A=[[2,7,6],[9,5,1],[4,3,8]]}} & \mbox{et} &\mbox{\textbf{Résultat :} } A=\begin{pmatrix}
+			2 & 7 & 6 \\ 
+			9 & 5 & 1 \\ 
+			4 & 3 & 8 
+	\end{pmatrix}
+	\end{array}
+\]
+
+\begin{table}[h]
+\renewcommand{\arraystretch}{1.2}
+	\centering
+		\begin{tabular}{|*{5}{c|}}
+			\hline
+			 & & & &$~3~$\\
+			\hline
+			$~2~$& & & & \\
+			\hline
+			   &$~1~$&   &   &   \\
+			\hline
+			$~6~$& &$~5~$& & \\
+			\hline
+			 & & &$~4~$& \\
+			\hline
+		\end{tabular}
+\renewcommand{\arraystretch}{1}
+\caption{Exemple de carré magique incomplet de taille $5$ illustrant la méthode proposée.}
+\label{Carre5}
+\end{table}
+
+\question{Continuez de compléter la carré magique de la table \ref{Carre5} en utilisant la méthode proposée. Testez les 3 propriétés du carré magique sur cet exemple.}
+
+\question{Proposer une fonction \pyv{def Carre_vide(n:int) -> list :} qui crée et renvoie un carré magique vide (n listes remplies de n $0$), et qui renvoie une liste vide si $n$ est pair.}
+
+
+\question{Proposer une fonction \pyv{def Remplir_carre(CarreVide : list) -> None :} qui complète et renvoie un carré magique à partir d'un carré vide.}
+
+
+\question{Proposer une fonction \pyv{def Verif_carre(Carre : list) -> bool : } qui vérifie les trois propriétés d'un carré magique et renvoie un booléen (\texttt{True} ou \texttt{False})}
+%}

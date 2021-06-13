@@ -1,0 +1,110 @@
+\question{} C'est 
+\begin{align*}
+    V &= [1 ; 3 ; -2 ] \\
+    L &= [0 ; 2 ; 2 ; 3 ; 3] \\
+    C &= [0 ; 2 ; 1 ]
+\end{align*}
+\question{} C'est 
+\begin{equation*}
+    A = \begin{pmatrix} 0 & 0 & 0 & 0 \\ 2 & 0 & 0 & -3 \\ 0 & 0 & 1 & 1 \end{pmatrix}. 
+\end{equation*}
+\question{} Comme il y a $L[i]$ éléments non nuls jusqu'à la ligne \no$i-1$ et $L[i+1]$ éléments non nuls jusqu'à la ligne \no$i$, il y a $L[i+1] - L[i]$ éléments non nuls sur la ligne \no$i$.
+Dans $V$ et $C$, ces éléments ont donc des indices allant de $L[i]$ (inclu) à $L[i+1]$ (exclu). On peut récupérer ces valeurs avec deux tranches : 
+\begin{verbatim}
+V[L[i] : L[i+1]]
+C[L[i] : L[i+1]]
+\end{pyverbatim}
+\question{}
+\begin{pyverbatim}
+def coeff_prod(V,L,C,X,i) : 
+    """ieme coefficient de AX
+    V,L,C : représentation CSR de A"""
+    S = 0
+    for j in range(L[i],L[i+1]):
+        S = S + X[C[j]] * V[j]
+    return S
+\end{verbatim}
+Toutes les opérations de cette fonction s'effectuent en temps constant. La boucle for effectue $\ell_i$ tours, chacun de complexité $O(1)$, donc est de complexité $O(\ell_i)$. 
+En dehors de la boucle, il y a une affectation en $O(1)$. 
+La complexité de cette fonction est donc en $O(1) + O(\ell_i) = O(\ell_i)$. 
+
+\question{} 
+\begin{pyverbatim}
+def prod(V,L,C,X) : 
+    n = len(L)-1
+    Y = zeros(n,1)
+    for i in range(n) : 
+        Y[i] = coeff_prod(V,L,C,X,i)
+    return Y
+\end{pyverbatim}
+Le calcul de $n$ se fait en $O(1)$, la création de $Y$ en $O(n)$. 
+D'après la question précédente, chaque tour de boucle s'effectue en $O(\ell_i)$, donc la boucle a pour complexité $O(\sum_{i=0}^{p-1}\ell_i) = O(s)$. 
+La fonction a donc pour complexité $O(n+s)$. 
+
+\question{}
+\begin{pyverbatim}
+def prod_naif(A,X) : 
+    n,p = A.shape
+    Y = zeros(n,1)
+    for i in range(n) : 
+        S = 0
+        for j in range(p) : 
+            S = S + A[i,j] * X[j]
+    return Y
+\end{pyverbatim}
+La complexité de cette fonction est en $O(np)$ (deux boucles imbriquées, l'une en $O(p)$, l'autre réalisant $n$ tours, le calcul de $n,p$ se faisant en $O(1)$ et la création de $Y$ en $O(n)$).
+
+\question{} 
+On voit facilement que la complexité du produit naïf est exactement de l'ordre de $np$. 
+
+On a toujours $s \leq np$. Toutefois, si $s$ est négigeable devant $np$, alors la complexité de la multiplication sous format CSR est négligeable devant celle du produit naïf. 
+
+\question{}
+On a directement 
+\begin{equation*}
+    A = \begin{pmatrix}
+            -1     & 1      & 0      & \dots  & \dots  & 0\\
+            -.5    & 0      & .5     & 0      &        & \vdots \\
+            0      & -.5    &   0    & .5     & \ddots & \vdots \\
+            \vdots & \ddots & \ddots & \ddots & \ddots & 0 \\
+            \vdots &        & 0      & -.5    & 0      & .5 \\
+            0      & \dots  & \dots  & 0      & -1     & 1    
+        \end{pmatrix}
+\end{equation*}
+
+\question{}
+Sur chaque ligne il y a $2$ coefficients non nuls : 
+\begin{itemize}
+    \item sur la ligne \no$0$, aux colonnes $0$ et $1$, avec pour valeurs $-1$ et $1$ ; 
+    \item si $1 \leq i < n-1$, sur la ligne \no$i$, aux colonnes $i-1$ et $i+1$, avec pour valeurs $-.5$ et $.5$ ; 
+    \item sur la ligne \no$n-2$, aux colonnes $n-2$ et $n-1$, avec pour valeurs $-1$ et $1$
+\end{itemize}
+On écrit donc 
+\begin{pyverbatim}
+def V_A(n) :
+    """Vecteur V de la représentation CSR de A"""
+    V = zeros(2*n)
+    V[0], V[1], V[2*n-2], V[2*n-1] = -1,1,-1,1
+    for i in range(1,n-1):
+        V[2*i], V[2*i+1] = -.5,.5
+    return V
+
+def L_A(n) :
+    """Vecteur L de la représentation CSR de A"""
+    L = zeros(n+1)
+    for i in range(1,n+1) :
+        L[i] = 2*i
+    return L
+
+def C_A(n) :
+    """Vecteur C de la représentation CSR de A"""
+    C = zeros(2*n)
+    C[0], C[1], C[2*n-2], C[2*n-1] = 0,1,n-2,n-1
+    for i in range(1,n-1):
+        C[2*i], C[2*i+1] = i-1,i+1
+    return C
+
+def CSR_A(n) :
+    """Représentation CSR de A"""
+    return V_A(n), L_A(n), C_A(n)
+\end{pyverbatim}

@@ -1,0 +1,28 @@
+\exer{}
+\setcounter{numques}{0}
+
+\question{} À la fin de la ligne n°3, on a $\texttt i = 1$ et $\texttt x = \texttt L[0]$. L'invariant est donc bien initialisé. 
+
+Supposons qu'au début de la ligne n°5, on ait $\texttt x = \texttt L[\texttt i-1]$. À la ligne n°5, les valeurs de $\texttt L[\texttt i-1]$ et de $\texttt L[\texttt i]$ sont échangées, donc $\texttt x = \texttt L[\texttt i]$.
+À la ligne n°6, $\texttt i$ est incrémenté de 1, donc $\texttt x = \texttt L[\texttt i-1]$.
+
+On a donc bien montré que \fbox{$\texttt x = \texttt L[\texttt i-1]$ est un invariant de la boucle while.}
+
+\question{} Montrons que $n-i$ est un variant de la boucle while. D'après la première condition d'arrêt de cette boucle, on a bien $n-i>0$. Comme $n$ et $i$ prennent d'abord des valeurs entières puis que $i$ est incrémenté de $1$ à chaque tour, $n-i$ est toujours à valeurs entières. De même, comme $i$ est incrémenté de $1$ à chaque tour, $n-i$ décroît strictement à chaque tour de boucle. 
+
+Ainsi, \fbox{$n-i$ est un variant de la boucle while}.
+
+On en déduit que \fbox{la boucle while termine, donc la fonction \texttt{mystere} termine.}
+
+\question{} Notons $L'$ la liste passée en argument de la fonction \texttt{mystere}. On montre aisément que $L'[1:i] = L[:i-1]$ est un invariant de la boucle while. 
+
+Ainsi, en sortie de la boucle while, on a d'après les questions précédentes : $x = L[i-1]$, $L'[1:i] = L[:i-1]$ et $x \leq L[i]$ et, pour tout $0 \leq j < i-2$, $L[j] < x$.
+
+Ainsi,
+
+\noindent\fbox{%
+\begin{minipage}{0.9\textwidth}
+un appel de \texttt{mystere(L)} décale le premier élément de \texttt{L} jusqu'à la positionner juste avant le premier élément qui lui est supérieur ou égal.
+\end{minipage}
+}
+

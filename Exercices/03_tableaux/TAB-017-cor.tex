@@ -1,0 +1,35 @@
+\question\
+
+\begin{Verbatim}[gobble=0,numbers=left]
+def maxi(T):
+    """INdice d'un maximum de T, T : tableau de nombres """
+    m = 0
+    for i in range(1,len(T)) : 
+        if T[i] > T[m] :
+            m = i
+    return m 
+\end{Verbatim}
+
+\question\ Montrons qu'un invariant pour la boucle for des lignes 4 à 6 est : $P_i$ : \og \texttt{T[m]} est le maximum 
+de \texttt{T[:i]} \fg. 
+
+Au début du premier tour de boucle (initialisation), $i = 1$, $T[:i] = [T[0]]$ et $T[m] = T[0]$, donc l'invariant est  
+bien vérifié. 
+
+Au début du tour de boucle \no$i$, supposons que $P_i$ est vérifié. Alors, $T[m] = \max(T[:i])$. Si $T[i] > T[m]$, 
+alors $T[i] = \max(T[:i+1])$ et sinon $T[m] = \max(T[:i])$. 
+Ainsi, à la fin de ce tour de boucle, on a bien $T[m] = \max(T[:i+1])$. 
+
+Au dernier tour de cette boucle, $i = \mathrm{len}(T)-1$, donc $T[m]$ est le maximum de $T$.
+
+Cette fonction renvoie $m$, qui est bien un indice du maximum de $T$. 
+
+\question\ Notons $n$ la longueur de $T$. 
+
+On se place dans le modèle de complexité usuelle : les affectations, accès à un élément d'une liste et comparaisons de nombres se font en $O(1)$. 
+
+La ligne 3 s'effectue en $O(1)$. 
+
+Chaque tour de la boucle for (lignes 5 et 6) s'effectue aussi en $O(1)$. Il y a au plus $n-1$ tour de boucles, donc cette boucle for s'effectue en $O(n)$. 
+
+La complexité de la fonction \texttt{maxi} est donc en $O(1)+O(n) = O(n)$. 

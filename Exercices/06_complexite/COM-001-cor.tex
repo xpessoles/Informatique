@@ -1,0 +1,135 @@
+\question\
+Voici un algorithme répondant à la question. 
+\begin{Verbatim}[gobble=0,numbers=left]
+def add(M,N):
+    """M+N, représentation classique"""
+    n = len(M)
+    S = [[0]*n for i in range(n)] # M+N
+    for i in range(n):
+        # Invariant : S[:i] = (M+N)[:i]
+        for j in range(n):
+            # Invariant : S[:i+1][:j] = (M+N)[:i+1][:j]
+            S[i][j] = M[i][j] + N[i][j]
+            # Invariant : S[:i+1][:j+1] = (M+N)[:i+1][:j+1]
+        # Invariant : S[:i+1] = (M+N)[:i+1]
+    return S
+\end{Verbatim}
+Montrons que \texttt{add(M,N)} renvoie bien le bon résultat. On a supposé que \texttt{M} et \texttt{N} sont de même dimension. 
+\begin{description}
+  \item[Ligne 4] \texttt{S} représente bien une matrice carrée d'ordre \texttt{n}. On a $S[:0] = []$ et $S[:0][:0] = []$, donc l'invariant de boucle de la ligne 4 est bien vérifié en début de boucle.
+  \item[Ligne 6] On suppose que, pour tout $0\leq a < i$ et $0\leq b < j$, $S[a][b] = M[a][b] + N[a][b]$. Notamment, $S[i][:0] = []$, donc l'invariant de boucle de la ligne 6 est bien vérifié en début de boucle. 
+  \item[Ligne 8] On suppose que, pour tout $0\leq b < j$, $S[i][b] = M[i][b] + N[i][b]$. 
+  \item[Ligne 9] Directement, $S[i][j] = M[i][j] + N[i][j]$.
+  \item[Ligne 10] Ainsi, $S[:i+1][:j+1] = (M+N)[:i+1][:j+1]$.
+  \item[Ligne 11] En fin de boucle, $j = n-1$, donc $S[:i+1] = (M+N)[:i+1]$.
+  \item[Ligne 12] En fin de boucle, $i = n-1$, donc $S = M+N$. L'algorithme renvoie bien le bon résultat.
+\end{description}
+
+\question\
+Voici un algorithme répondant à la question. 
+\begin{Verbatim}[gobble=0,numbers=left]
+def lexico(X,Y):
+    """(a,b) < (c,d) pour l'ordre lexicographique
+        avec X = (a,b,x), Y = (a,b,y)"""
+    a,b,_ = X
+    c,d,_ = Y
+    return (a < c) or (a==c and b < d) 
+
+def add_creuse(M,N):
+    """M+N, représentation creuse"""
+    m,n = len(M), len(N)
+    iM, iN = 0,0 # Indices des prochains éléments de M, N à ajouter
+    S = [] # M+N
+    while (iM < m) or (iN < n):
+        # Invariant : M[:iM] et N[:iN] ont été additionnés
+        # Variant : m+n-iM-iN
+        if (iM == m) or (iN < n and lexico(N[iN],M[iM])):
+            S.append(N[iN])
+            iN += 1
+        elif (iN == n) or lexico(M[iM],N[iN]):
+            S.append(M[iM])
+            iM += 1
+        else:
+            if M[iM][2]+N[iN][2] != 0:
+                S.append((M[iM][0],M[iM][1],M[iM][2]+N[iN][2]))
+            iM +=1
+            iN +=1
+    return S
+\end{Verbatim}
+Montrons que \texttt{add\_creuse(M,N)} renvoie bien le bon résultat. 
+\begin{description}
+  \item[Fonction lexico] \pyv{lexico((i,j,x),(a,b,y))} renvoie un booléen indiquant si \pyv{(i,j)} est strictement plus petit que \pyv{(a,b)} dans l'ordre lexicographique.
+  \item[Lignes 11-12] \pyv{M[:iM]} et \pyv{N[:iN]} sont vides donc \pyv{S} (vide) contient bien la somme des éléments de \pyv{M[:iM]} et \pyv{N[:iN]}.
+  \item[Ligne 14] Supposons que tous les éléments de \pyv{M[:iM]} et \pyv{N[:iN]} ont été ajoutés (leur somme se trouve dans \pyv{S}). 
+    Supposons de plus que tous les éléments de \pyv{M[:iM]} et \pyv{N[:iN]} sont strictement plus petits que tous les éléments de \pyv{M[iM:]} et \pyv{N[iN:]}.
+    On a trois cas possibles.
+    \begin{itemize}
+      \item Le prochain élément à ajouter est \pyv{N[iN]}, à une case contenant un zéro de $M$.
+      \item Le prochain élément à ajouter est \pyv{M[iM]}, à une case contenant un zéro de $N$.
+      \item Le prochain élément à ajouter correspond au cas où l'on ajoute deux cases non nulle de $M$ et de $N$, de mêmes indices : $M[iM]$ et $N[iN]$. 
+    \end{itemize}
+  \item[Lignes 15-17] On est dans le premier cas, soit $iM = m$, dans ce cas $M[iM:]$ est vide, soit $N[iN]$ est strictement plus petit que $M[iM]$ lexicographiquement. 
+    Dans les deux cas, le prochain élément à ajouter est $N[iN]$ (avec un zéro de $M$) et l'invariant de la ligne 14 est vérifié en $(iM,iN+1)$.
+  \item[Ligne 18] On a donc $iM < m$ et, si $iN < n$, on a $M[iM] \leq N[iN]$ lexicographiquement. 
+  \item[Lignes 18-20] On est dans le deuxième cas, soit $iN = n$, dans ce cas $N[iN:]$ est vide, soit $M[iM]$ est strictement plus petit que $N[iN]$ lexicographiquement. 
+    Dans les deux cas, le prochain élément à ajouter est $M[iM]$ (avec un zéro de $N$) et l'invariant de la ligne 14 est vérifié en $(iM+1,iN)$.
+  \item[Ligne 21] On a donc $iM < m$ et $iN < n$, avec $M[iM][:2]  = N[iN][:2]$. On est donc dans le troisième cas, on additionne deux cases non nulles de $M$ et de $N$ de mêmes indices.
+  \item[Lignes 22-23] Si la somme des cases est non nulle, on la rajoute à $S$, sinon cette case  \og disparaît \fg\ . 
+  \item[Lignes 24-25] L'invariant de la ligne 14 est vérifié en ($iM+1$,$iN+1$).
+  \item[Ligne 26] \`A la sortie de la boucle \pyv{while}, on a donc $m = iM$ et $n = iN$, donc $M$ et $N$ ont bien été ajoutés dans $S$. Le résultat donné est donc correct. 
+  \item[Variant] Dans tous les cas, la quantité $m+n-iM-iN$ a diminué d'au moins 1 (et d'au plus deux). De plus, $iM < m$ ou $iN < n$ si et seulement si $m+n-iM-iN > 0$, donc la boucle \pyv{while} termine. 
+\end{description}
+
+\question\ 
+On considère le modèle de complexité usuel. 
+
+Comptons les opérations effectuées, on donne pour chacune une domination asymptotique du nombre d'opérations élémentaires effectuées, en fonction de $n$. 
+\begin{itemize}
+  \item Un calcul de taille de tableau par la fonction \pyv{len} : $O(1)$. 
+  \item Création d'un tableau de taille $n$ : $n$ fois le temps de création de chaque élément de $S$. Chaque élément de $S$ est créé comme un tableau de taille $n$ et se fait en temps $O(n)$. 
+    Ainsi, $S$ est créé en temps $O(n)$. 
+  \item Une création d'objet \pyv{range} : $O(1)$. 
+  \item Dans chaque tour de la boucle indicée par \pyv{i} ($n$ tours en tout) : 
+    \begin{itemize}
+      \item Une création d'objet \pyv{range} : $O(1)$. 
+      \item Dans chaque tour de la boucle indicée par \pyv{j} ($n$ tours en tout) : deux lectures dans un tableau, une addition de nombres, une écriture dans un tableau : $O(1)$
+    \end{itemize}
+\end{itemize}
+Ainsi, le nombre d'opérations élémentaires est en $O(n^2)$. Remarquons que l'on ne pouvait pas faire mieux (asymptotiquement) : chaque case de $M$ doit être parcourue et $M$ possède $n^2$ cases. 
+
+Notons $A_n$ le nombre d'opérations élémentaires effectuées pour calculer \pyv{add(M,N)}. Il existe donc une constante $K$ telle que, pour tout $n\in\N$, 
+\begin{equation*}
+  n^2 \leq A_n \leq K\times n^2.
+\end{equation*}
+
+\question\ 
+On considère le modèle de complexité usuel. 
+
+Comptons les opérations effectuées, on donne pour chacune une domination asymptotique du nombre d'opérations élémentaires effectuées, en fonction de $p = \max(m,n)$.
+\begin{itemize}
+  \item Remarquons qu'un appel de \pyv{lexico} se fait en temps $O(1)$. 
+  \item On a deux calculs de longueurs par la fonction \pyv{len} et cinq affectations : $O(1)$.
+  \item Chaque tour dans la boucle \pyv{while} se fait en $O(1)$ : au plus $5$ comparaisons, $2$ appels à \pyv{lexico}, $12$ accès à des tableaux, $1$ ajout à une liste et deux incrémentations. 
+  \item Comme, à chaque tour de boucle, $m+n-iM-iN$ est réduit de $1$ ou deux, on a au plus $m+n\leq 2p$ tours de boucle. 
+\end{itemize}
+Ainsi, le nombre d'opérations élémentaires est en $O(p^2)$. Remarquons que l'on ne pouvait pas faire mieux (asymptotiquement) : chaque case non vide de $M$ (et de $N$) doit être parcourue et $M$ (ou $N$) possède $p$ cases. 
+
+Notons $C_p$ le nombre d'opérations élémentaires effectuées pour calculer \pyv{add_creuse(M,N)}. Il existe donc une constante $K'$ telle que, pour tout $p\in\N$, 
+\begin{equation*}
+  p \leq C_p \leq K'\times p.
+\end{equation*}
+
+\question\ 
+On discute ici de complexités asymptotiques, or nous avons deux variables sur lesquelles jouer : $n$ et $p$. Supposons que $p$ varie en fonction de $n$ (on le note $p(n)$). 
+Notamment, $\dfrac{p(n)}{n^2}$ est la proportion de cases non vides de $M$ et de $N$.
+
+Avec la constante $K'$ trouvée précédemment,
+\begin{equation*}
+  \forall n \in \N, \dfrac{C_{p(n)}}{A_n} \leq K' \times \dfrac{p(n)}{n^2}.
+\end{equation*}
+Ainsi, dès que $\dfrac{p(n)}{n^2} \leq \dfrac{1}{K'}$, on a $C_{p(n)} \leq A_n$. 
+Il existe donc une proportion de cases non vides en deçà de laquelle il est toujours préférable d'utiliser la représentation creuse des matrices.
+
+De même, il existe une proportion de cases non vides au dessus de laquelle il est toujours préférable d'utiliser la représentation classique des matrices. 
+
+Notre analyse ne nous permet pas d'être plus précis. 

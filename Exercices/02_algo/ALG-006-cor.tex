@@ -1,0 +1,30 @@
+\exer{}
+\setcounter{numques}{0}
+
+Nous pouvons proposer le programme suivant (les invariants sont déjà écrits dedans).
+\lstinputlisting{ALG-006-cor.py}
+
+Cette fonction ne contient qu'une boucle for, à laquelle on peut associer l'invariant suivant : à l'entrée de 
+chaque tour de boucle, $s$ est la somme de tous les diviseurs de 
+$n$ compris dans l'intervalle d'entiers $\llbr 1,d-1\rrbr$.
+
+Démontrons l'invariant : 
+
+Initialement, à l'entrée du premier tour de boucle, nous avons $d=1$, et $s=0$, donc l'invariant est bien vérifié car 
+$\llbr 1,0\rrbr$ est vide.\\
+Supposons l'invariant vérifié à l'entrée du tour de boucle $d$. Notons $s_1$ la valeur de $s$ à l'entrée du tour de 
+boucle, et $s_2$ sa valeur à la sortie.\\
+Si $d$ est un diviseur de $n$, c'est-à-dire si \texttt{n \% d == 0}, alors $s_2=s_1+d$. Puisque 
+$s_1$ est la somme de tous les diviseurs de $n$ de $\llbr 1,d-1\rrbr$, alors $s_2$ est la somme de tous les 
+diviseurs de $n$ de $\llbr 1,d\rrbr$.\\
+Si $d$ n'est pas un diviseur de $n$, nous avons $s_1=s_2$, et $s_2$ est encore la somme de tous les 
+diviseurs de $n$ de $\llbr 1,d\rrbr$.\\
+Dans tous les cas en sortie de la boucle $d$, $s$ est la somme de tous les diviseurs de 
+$n$ compris dans l'intervalle d'entiers $\llbr 1,d\rrbr$ donc l'invariant est vérifié à l'entrée de la boucle 
+suivante.\\
+
+Par principe de récurrence, à la sortie du dernier tour de boucle, $d=n-1$ donc $s$ vaut la somme de tous les diviseurs 
+de $n$ compris dans $\llbr 1,n-1\rrbr$. C'est donc la somme des diviseurs stricts de $n$.\\
+Le dernier \texttt{if} assure alors que l'algorithme renvoie \texttt{True} si $s=n$, c'est-à-dire si $n$ est parfait, 
+et \texttt{False} sinon : l'algorithme est donc correct.
+

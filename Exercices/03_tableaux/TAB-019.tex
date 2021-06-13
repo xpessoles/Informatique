@@ -1,0 +1,39 @@
+Soit $\texttt{t} = [t_0,\dots,t_{n-1}]$ un tableau de nombres de longueur $n\in\N^\ast$, soit $0 \leq i,j \leq n-1$. 
+
+On dit qu'il y a un \emph{ascension} dans le tableau \texttt{t} aux indices $i$ et $j$ si 
+\begin{equation*}
+  i < j \quad\textrm{et}\quad t_i < t_j. 
+\end{equation*}
+La \emph{hauteur} de cette ascension est alors $t_j - t_i$.
+
+\bigskip{}
+
+On propose la fonction suivante. 
+
+\begin{Verbatim}[gobble=0,numbers=left]
+def plus_haute_ascension(t):
+    """Plus haute ascension de t, ou 0 s'il n'y en a pas.
+    Précondition : t est un tableau de nombres"""
+    M = 0
+    n = len(t)
+    for i in range(n):
+        m = 0
+        for j in range(i+1,n):
+            if t[j] - t[i] > m :
+                m = t[j] - t[i]
+        if m > M :
+            M = m
+    return M
+\end{Verbatim}
+
+\bigskip{}
+
+\question{} Montrer que \og si $\texttt{m}>0$, alors \texttt{m} est la hauteur de la plus haute ascension de \texttt{t[i:j]}, sinon $m=0$ \fg{} est un invariant de boucle pour la boucle \texttt{for} portant des lignes 8 à 10 de la fonction \texttt{plus\_haute\_ascension(t)}.
+
+\medskip{} 
+
+\question{} Justifier qu'un appel de la fonction \texttt{plus\_haute\_ascension(t)} renvoie bien le résultat demandé, à l'aide notamment d'un invariant.
+
+\medskip{}
+
+\question{} Écrire une fonction \texttt{nb\_ascensions(t)} renvoyant le nombre d'ascensions présentes dans le tableau de nombres \texttt{t} passé en argument. 

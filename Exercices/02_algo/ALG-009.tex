@@ -1,0 +1,77 @@
+\exer{}
+\setcounter{numques}{0}
+
+On considère un fichier \texttt{points.csv} contenant $n$ lignes, chaque ligne contenant $n$ entiers parmi $0$ ou $1$, séparés par des virgules. 
+Ce fichier représente donc un tableau de nombres. 
+Par exemple, le fichier 
+\begin{lstlisting}0,1,0,0
+1,1,0,1
+1,0,1,0
+0,0,0,0
+\end{lstlisting}sera représenté (en \texttt{Python}) par le tableau bidimensionnel \texttt{t} (construit comme un tableau de tableaux) : 
+\begin{lstlisting}t = [ [0,1,0,0],
+      [1,1,0,1],
+      [1,0,1,0],
+      [0,0,0,0] ]
+\end{lstlisting}
+\medskip
+
+\question\ Écrire une fonction \texttt{lit\_fichier(nom\_de\_fichier)} qui, à un tel fichier \texttt{nom\_de\_fichier}, renvoie le tableau associé. 
+
+\medskip 
+
+On voit ce tableau comme décrivant des points dans le plan. Étant donné un tel tableau \texttt{t}, on considère que l'on a un point aux coordonnées \texttt{(i,j)} si et seulement si \texttt{t[i][j]} vaut 1. 
+Par exemple, avec le tableau précédents, la liste \texttt{L} des points décrits est 
+\begin{lstlisting}
+L = [ (0,1) , (1,0) , (1,1) , (1,3) , (2,0) , (2,2) ] 
+\end{lstlisting}
+\medskip
+
+\question\ Écrire une fonction \texttt{lit\_tableau(t)} qui, à un tel tableau bidimensionnel \texttt{t}, renvoie la liste des points décrits. 
+
+\question\ Complexité ou invariants ? 
+
+\medskip 
+
+\question\ Écrire une fonction \texttt{d(a,b)} qui, pour deux couples d'entiers \texttt{a}, \texttt{b}, dont nous noterons les coordonnées repectivement $(x_a,y_a)$ et $(x_b,y_b)$, renvoie la valeur $(x_a-x_b)^2 + (y_a-y_b)^2$. 
+
+\medskip
+
+On veut maintenant, étant donné un entier naturel $k$ non nul et un couple d'entiers \texttt{c}, trouver les $k$ couples de la liste de points les plus proches de \texttt{c}. S'il y a égalité entre plusieurs points, on n'en garde que $k$. 
+
+Par exemple [...]
+
+\medskip
+
+On considère le code suivant. 
+
+%\begin{pyverbatim}[gobble=0,numbers=left]
+\begin{lstlisting}
+def kNN(L,c,k,d):
+    """k plus proches voisins du point c dans L
+       d : fonction de distance"""
+    v = []
+    for j in range(L) :
+        a = L[j]
+        if len(v) < k : 
+            v.append(a)
+        if d(a,c) < d(v[-1],c) : 
+            v[-1] = a
+        i = len(v) - 1 
+        while i >= 1 and v[i] < v[i-1] : 
+            v[i-1],v[i] = v[i],v[i-1]
+            i = i-1
+    return v
+\end{lstlisting}
+
+\medskip
+
+\question\ Donner l'invariant pour la boucle while et faire montrer que c'en est un. 
+
+\medskip
+
+\question\ Donner l'invariant pour la boucle for. 
+
+\medskip
+
+\question\ Complexité. 

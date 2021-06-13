@@ -1,0 +1,29 @@
+\exer{}
+\setcounter{numques}{0}
+
+\question{} 
+\begin{lstlisting}
+
+def moy_extr(L):
+    """Renvoie la moyenne du premier et du dernier élément de L"""
+    return (L[0]+L[-1])/2
+\end{lstlisting}
+
+
+\medskip{}
+
+\question{} 
+\begin{lstlisting}
+
+def incr_sans_effet_de_bord(L):
+    """Renvoie une nouvelle liste identique à L, 
+    sauf le premier terme incrémenté de 1"""
+    c = L.copy()
+    c[0] = c[0]+1
+    return c
+
+def incr_avec_effet_de_bord(L):
+    """Incrémente le premier élément de L de 1"""
+    L[0] = L[0]+1
+    return None
+\end{lstlisting}

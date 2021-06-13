@@ -1,0 +1,148 @@
+\question{} 
+% Écrire la fonction \pyv{T(f,a,b,N)} permet de donner l'estimation de $\displaystyle{\int_{z=a}^bf(z)dz}$ avec la méthode des trapèzes en fonction du nombre d'intervalles ($N$) sur $\left[a,b\right]$.
+\begin{pyverbatim}
+def T(f,a,b,N):
+    h=(b-a)/N
+    S=(f(a)+f(b))*0.5
+    for k in range(1,N):
+        S+=f(a+k*h)
+    return S*h
+\end{pyverbatim}
+
+\question{} 
+% Écrire une fonction \pyv{volume_immerge(z)} qui renvoie le volume immergé du bouchon en fonction de la profondeur du bas du bouchon (noté $z$) en utilisant la fonction définie à la question précédente.
+
+\begin{pyverbatim}
+from math import sin, pi
+
+def r(z):
+    return R*(1+0.1*sin(np.pi*z/H))
+    
+def r2(z):
+    return r(z)**2
+
+def volume_immerge(z):
+    """Renvoie le volume immergé du bouchon.
+    z : profondeur du bas du bouchon"""
+    if z <= 0 :
+        # bouchon hors de l'eau
+        return 0
+    elif z <= H :
+        # bouchon immergé jusqu'à la hauteur z
+        return pi*T(r2,0,z,N)
+    else :
+        # bouchon totalement immergé
+        return pi*T(r2,0,H,N)
+\end{pyverbatim}
+
+\question{} 
+% Écrire une instruction qui affecte le volume du bouchon à \texttt V. 
+\begin{pyverbatim}
+V = volume_immerge(H)
+\end{pyverbatim}
+
+
+\question{} 
+% Écrire une fonction \pyv{Fv(z,zp)} qui renvoie la force de frottement visqueux $F_v\left(z_A(t),\dfrac{\mathrm{d}z_A}{\mathrm{d}t}(t)\right)$.
+\begin{pyverbatim}
+def Fv(z,zp):
+    """renvoie la force de frottement visqueux"""
+    if zp==0 or z<0:
+        return 0
+    else:
+        if zp>0 : 
+            signe = 1
+        else :
+            signe = -1
+        alpha = -signe*0.5*Cx*rho_eau*zp**2
+        if zp>0 : # Le bouchon descend
+            if 0<=z<H/2:
+                return alpha*pi*r(z)**2
+            else: # z >= H/2
+                return alpha*pi*r(H/2)**2
+        else s: #Le bouchon remonte
+            if 0<=z<H/2:
+                return 0
+            elif H/2<=z<=H:
+                return alpha*pi*(r(H/2)**2-r(z)**2)
+            else : # z>H:
+                return alpha*pi*r(H/2)**2
+\end{pyverbatim}
+
+
+\question{} 
+% Exprimer $\dfrac{\mathrm{d}^2z_A}{\mathrm{d}t^2}(t)$ en fonction de $\rho_{e}$, $\rho_b$, $V_i(z_A(t))$, $F_v\left(z_A(t),\dfrac{\mathrm{d}z_A}{\mathrm{d}t}(t)\right)$ et $z_A(t)$. 
+
+
+
+En combinant les différentes équations, on obtient : 
+
+\begin{align*}
+\rho_b\cdot V \cdot \dfrac{\mathrm{d}^2z_A}{\mathrm{d}t^2}(t)=-\rho_e\cdot g\cdot V_i(z_A(t))+\rho_b\cdot g\cdot V+F_v\left(z_A(t),\dfrac{\mathrm{d}z_A}{\mathrm{d}t}(t)\right)
+\end{align*}
+
+En simplifiant les équations, on obtient : 
+
+\begin{align*}
+\dfrac{\mathrm{d}^2z_A}{\mathrm{d}t^2}(t)=\dfrac{F_v\left(z_A(t),\dfrac{\mathrm{d}z_A}{\mathrm{d}t}(t)\right)-\rho_e\cdot g\cdot V_i(z_A(t))}{\rho_b\cdot V}+g
+\end{align*}
+
+\question{} 
+% Définir l'expression de $Z(t)$ et de $F(Z(t),t)$ pour que le problème de Cauchy de la forme $Z'=F(Z(t),t)$ corresponde à l'équation différentielle \ref{eqn_diff}. Écrire les instructions permettant de définir la fonction \pyv{F(Z(t),t)}.
+
+On peut poser 
+\begin{equation*}
+    Z(t) = \begin{pmatrix} z_A(t) \\ \dfrac{\mathrm{d}z_A}{\mathrm{d}t}(t)\end{pmatrix} \quad\textrm{et}\quad Z_0 = \begin{pmatrix} -0,2 \\ 0 \end{pmatrix},.
+\end{equation*}
+Ainsi, 
+\begin{equation*}
+    Z'(t) = \begin{pmatrix}\dfrac{\mathrm{d}z_A}{\mathrm{d}t}(t) \\ \dfrac{\mathrm{d}^2z_A}{\mathrm{d}t^2}(t) \end{pmatrix}
+\end{equation*}
+Avec 
+\begin{equation*}
+    F \p{\begin{pmatrix} a\\b \end{pmatrix},t} = \begin{pmatrix} b \\ g + \dfrac{1}{\rho_b V} \p{F_v(a,b) - \rho_e g V_i(a)} \end{pmatrix},
+\end{equation*}
+on a bien 
+\begin{equation*}
+    Z'(t) = F(Z(t),t) \quad\textrm{et}\quad Z(0) = Z_0.
+\end{equation*}
+
+\begin{pyverbatim}
+from numpy import array
+
+def F(Z,t):
+    """Avec frottement visqueux"""
+    z,zp = Z
+    zpp = (Fv(z,zp)- rho_eau*g*volume_immerge(z)) / (rho_b*volume_immerge(H)) + g
+    return array([zp,zpp])
+    
+Z0 = array([-0.2,0])
+\end{pyverbatim}
+
+\question{} 
+% Écrire une fonction \pyv{euler(F, tmin, tmax, Z0, h)} prenant en argument la fonction \texttt F définie précédemment, \texttt{tmin} et \texttt{tmax} définissant l'intervalle de résolution, le vecteur \texttt{Z0} définissant les consitions initiales ainsi \texttt h le pas de discrétisation temporelle et permettant de résoudre de manière approchée l'équation~\eqref{EQD-003:eq:eqn_Z} par la méthode d'Euler.
+
+\begin{pyverbatim}
+def euler(F, tmin, tmax, Z0, h):
+    """Solution de Z'=F(Z,t) sur [tmin,tmax], Z(tmin) = Z0,"""
+    Z = Z0
+    t = tmin
+    z_list = [Z0] # la liste des valeurs renvoyées
+    t_list = [tmin] # la liste des temps
+    while t+h <= tmax : 
+        # Variant : floor((tmax-t)/h)
+        # Invariant : au tour k, z_list = [Z_0,...,Z_k], t_list = [t_0,...,t_k]
+        Z = Z + h * F(Z, t)
+        z_list.append(Z)
+        t = t + h
+        t_list.append(t)
+    return t_list, z_list
+\end{pyverbatim}
+
+\question{} 
+% Commenter brièvement la cohérence physique d'une telle courbe. Pouvez-vous fournir une explication et une solution au problème observé, tout en restant dans le cadre de la méthode d'Euler ? 
+Le terme de frottement fluide induit une perte d'énergie pour le bouchon. Après la phase de chute libre, les oscillations du bouchon dans l'eau devraient donc décroître en amplitude.
+Ce n'est pas ce que l'on observe (la second oscillation a même une amplitude légèrement plus grande que la première !).
+
+Une explication : le pas temporel choisi pour la méthode d'Euler est trop grand. Il suffit de le diminuer.
+

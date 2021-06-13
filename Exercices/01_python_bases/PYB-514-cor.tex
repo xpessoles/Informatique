@@ -1,0 +1,34 @@
+\exer{}
+\setcounter{numques}{0}
+
+Soit $n\in\N$ et $p\in\Z$.
+
+Si $p < 0$ ou si $p > n$, les lignes n°3 et 4 indiquent bien que le résultat renvoyé est $\displaystyle 0 = \binom{n}{p}$.
+
+Supposons que $0 \leq p \leq n$, un appel de \texttt{mystere(n,p)} parcourt donc le bloc constitué des lignes n°6 à 8.
+
+Montrons que \og $\displaystyle f = \binom{n-p+i}{i}$ \fg{} est un invariant pour la boucle \texttt{for} des lignes n°7 et 8. 
+
+En entrée de boucle, on a $i = 0$ et $\displaystyle f = 1 = \binom{n-p}{0}$, donc l'invariant est bien initialisé au premier tour de boucle. 
+
+Soit $0 \leq i < p$, supposons que $\displaystyle f = \binom{n-p+i}{i}$ au début de la ligne n°8. On a 
+\begin{equation*}
+  \dfrac{n+1-p+i}{i+1}\binom{n-p+i}{i} = \binom{n+1-p+i}{i+1},
+\end{equation*}
+donc $i+1$ divise $\displaystyle (n+1-p+i) \binom{n-p+i}{i}$ et donc à la fin de la ligne n°8 on a bien 
+\begin{equation*}
+  f = \binom{n+1-p+i}{i+1}.
+\end{equation*}
+
+On a donc bien vérifié que \og $\displaystyle f = \binom{n-p+i}{i}$ \fg{} est un invariant pour la boucle \texttt{for} des lignes n°7 et 8. 
+
+En sortie de boucle, on a $i = p$, donc au début de la ligne n°9 on a 
+\begin{equation*}
+  f = \binom{n-p + p}{p} = \binom{n}{p}.
+\end{equation*}
+
+Ainsi, 
+\begin{center}
+  \fbox{pour tout $n\in\N$ et $p\in\Z$, \texttt{mystere(n,p)} renvoie $\displaystyle\binom{n}{p}$.}
+\end{center}
+

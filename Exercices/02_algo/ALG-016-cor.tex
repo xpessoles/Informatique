@@ -1,0 +1,37 @@
+\exer{}
+\setcounter{numques}{0}
+
+\question{Écrire une fonction \texttt{chercheMax(L)} qui prend comme argument une liste \texttt{L} d'entiers \texttt{int} et qui renvoie le plus grand élément de la liste.}
+
+%\begin{xxpy}~\\
+%\vspace{-1cm}
+\begin{lstlisting}
+def chercheMax(L):
+    '''prend comme argument une liste L d'entiers int et 
+    qui renvoie le plus grand élément de la liste'''
+    max=L[0]
+    for i in range(1,len(L)):
+        if L[i]>max:
+            max=L[i]
+    return max
+\end{lstlisting}
+%\end{xxpy}
+
+
+\question{Écrire une fonction \texttt{chercheMaxIndice(L)} qui prend comme argument une liste \texttt{L} d'entiers \texttt{int} et qui renvoie l'indice du plus grand élément de la liste et s'il y en plusieurs renvoie le plus petit.}
+
+%\begin{xxpy}~\\
+%\vspace{-1cm}
+\begin{lstlisting}
+def chercheMaxIndice(L):
+    '''prend comme argument une liste L d'entiers int et
+     qui renvoie l'indice du plus grand élément de la liste'''
+    max=L[0]
+    indmax=0
+    for i in range(1,len(L)):
+        if L[i]>max:
+            max=L[i]
+            indmax=i
+    return indmax
+\end{lstlisting}
+%\end{xxpy}

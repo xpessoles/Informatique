@@ -1,0 +1,78 @@
+\question{} 
+\begin{lstlisting}
+
+def trapeze(f,a,b,nb):
+    res = 0
+    pas = abs(b-a)/nb
+    for i in range(nb):
+        x0 = a+pas*i
+        x1 = a+pas*(i+1)
+        res = res + (x1-x0)*0.5*(f(x0)+f(x1))
+    return res
+
+\end{lstlisting}
+
+\question{} 
+
+\begin{lstlisting}
+
+from math import pi,exp
+
+def erf(x,nb):
+    """
+    x : borne supérieure de l'intégrale
+    nb : nombre d'échantillons
+    """
+    if x>=0:
+        return trapeze(fexp,0,x,nb)
+    else :
+        return None
+
+def fexp(u):
+    return (2/math.sqrt(math.pi))*exp(-u*u)
+
+\end{lstlisting}
+
+\question{}
+
+\begin{lstlisting}
+# Paramètres physiques du problème
+
+D = 2.8E-7         # Diffusivité thermique du sol terrestre
+To = 278           # Température de la surface du sol terrestre pour t < 0
+T1 = 258           # Température de la surface du sol terrestre pour t >= 0
+Tf = 273.15      # Température de fusion de l'eau sous la pression de 1,013 bar
+
+def Temperature (z, t) :
+    u = z / (2 * sqrt (D * t))
+    T = T1 + (To - T1) * erf (u,500)
+    return T
+\end{lstlisting}
+
+\question{} 
+
+\begin{lstlisting}
+
+ListeErreur = list ()
+
+for i in range (0, 41, 1) :
+    x = 0 + i * 0.05
+    ListeErreur.append (erf (x,500))
+
+
+\end{lstlisting}
+
+\question{}
+
+\begin{lstlisting}
+
+z = 0
+t = 864000         # 864 000 = 10 * 24 * 3600 secondes = 10 jours
+T = Temperature (z, t)
+while T < Tf :
+    z = z + 0.01     # 0.01 m = 1 cm : précision de la recherche
+    T = Temperature (z, t)
+    
+print ("La canalisation doit être enterrée à une profondeur minimale de", int (z * 100), "cm")
+
+\end{lstlisting}

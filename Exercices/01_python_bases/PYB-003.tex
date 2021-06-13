@@ -1,0 +1,126 @@
+\exer{}
+\setcounter{numques}{0}
+
+\question{Voici des affectations successives des variables $a$ et $b$. Dresser un tableau donnant les valeurs 
+de $a$ et $b$ à chaque étape.}
+
+\begin{lstlisting}
+>>>  a = 1
+>>>  b = 5
+>>>  a = b-3 
+>>>  b = 2*a 	
+>>>  a = a
+>>>  a = b	
+\end{lstlisting}
+
+\question{Écrire une séquence d'instructions qui échange les valeurs de deux variables $x$ et $y$.}
+
+\question{Écrire, sans variable supplémentaire, une suite d'affectation qui permute circulairement vers la 
+gauche les valeurs des variables $x$, $y$, $z$ : $x$ prend la valeur de $y$ qui prend celle de $z$ 
+qui prend celle de $x$.}
+
+\question{Dans les cas où c'est possible, affecter les valeurs aux variables correspondantes à l'aide de l'interpréteur interactif. 
+On notera \texttt{var} $\leftarrow$ \texttt{a} pour dire que l'on affecte la valeur \texttt{a} à la variable \texttt{var}.}
+
+\begin{multicols}{3}
+  \begin{enumerate}[label=\emph{\alph*)}]
+    \item \texttt{ArthurDent} $\leftarrow$ \texttt{42}
+    \item \texttt{4} $\leftarrow$ \texttt{0.}
+    \item \texttt{L} $\leftarrow$ \texttt{[]}
+    \item \texttt{list} $\leftarrow$ \texttt{[1,2,3]}
+    \item \texttt{int} $\leftarrow$ \texttt{5}
+    \item \texttt{s} $\leftarrow$ \texttt{""}
+    \item \texttt{True} $\leftarrow$ \texttt{1}
+    \item \texttt{ok} $\leftarrow$ \texttt{ok}
+    \item \texttt{x} $\leftarrow$ \texttt{"x"}
+    \item \texttt{a} $\leftarrow$ \texttt{1<0}
+    \item \texttt{lam} $\leftarrow$ \texttt{1/0}
+    \item \texttt{or} $\leftarrow$ \texttt{"xor"}
+  \end{enumerate}
+\end{multicols}
+
+\question{On part des affectations suivantes : \texttt{a} $\leftarrow$ \texttt{5} et \texttt{b} $\leftarrow$ \texttt{0}. 
+Pour la suite d'instructions suivante, prévoir ligne à ligne le résultat affiché par l'interpréteur interactif de Python ainsi que l'état des variables.
+Le vérifier grâce à l'interpréteur interactif d'IDLE, en prenant soin de partir d'une nouvelle session.}
+\begin{lstlisting}
+a*b
+x = a**b + a
+print(x)
+print(y)
+z = x
+x = 5
+print(z)
+a = a+a**b
+print(a)
+\end{lstlisting}
+
+\question{Affecter des valeurs toutes différentes aux variables \texttt{a}, \texttt{b}, \texttt{c} et \texttt{d}.}
+
+\'A chaque fois, effectuer les permutations suivantes de manière naïve (c'est-à-dire, sans utiliser de \texttt{tuple}).
+\begin{enumerate}[label=\emph{\alph*)}]
+  \item \'Echanger les contenus de \texttt{a} et de \texttt{b}.
+  \item Placer le contenu de \texttt{b} dans \texttt{a}, celui de \texttt{a} dans \texttt{c} et celui de \texttt{c} dans \texttt{b}.
+  \item Placer le contenu de \texttt{a} dans \texttt{d}, celui de \texttt{d} dans \texttt{c}, celui de \texttt{c} dans \texttt{b} et celui de \texttt{b} dans \texttt{a}.
+\end{enumerate}
+Reprendre cet exercice en effectuant chaque permutation en une instruction à l'aide d'un \texttt{tuple}.
+
+\question{Combien d'affectations sont suffisantes pour permuter circulairement les valeurs des variables 
+$x_1,\cdots ,x_n$ sans utiliser de variable supplémentaire ? Et en utilisant autant de variables 
+supplémentaires que l'on veut ?}
+
+\question{Mêmes questions en remplaçant suffisantes par nécessaires.}
+
+\question{Supposons que la variable $x$ est déjà affectée, et soit $n\in\mathbb{N}$. On veut calculer $x^n$ sans 
+utiliser la puissance, avec uniquement des affectations, autant de variables que l'on veut, mais 
+avec le moins de multiplications possible. Par exemple, avec les 4 instructions :}
+
+\begin{lstlisting}
+>>> y1 = x * x
+>>> y2 = y1 * x
+>>> y3 = y2 * x
+>>> y4 = y3 * x
+\end{lstlisting}
+
+on calcule $x^5$, qui est la valeur de \texttt{y4}.\\
+Mais 3 instructions suffisent :
+\begin{lstlisting}
+>>> y1 = x * x
+>>> y2 = y1 * y1
+>>> y3 = y2 * x
+\end{lstlisting}
+
+\question{En fonction de $n$, et avec les contraintes précédentes, quel est le nombre minimum d'instructions
+pour calculer $x^n$ ?}
+
+\question{Calculer, sans utiliser la fonction \texttt{sqrt} ni la division flottante \texttt{/}, les nombres suivants.}
+\begin{multicols}{2}
+  \begin{enumerate}[label=\emph{\alph*)}]
+    \item $\dfrac{1}{7,9}$
+    \item $\sqrt{6,2}$
+    \item $\dfrac{1}{\sqrt{3,5}}$
+    \item $2\sqrt{2}$
+  \end{enumerate}
+\end{multicols}
+De base, on ne peut réaliser que des calculs élémentaires avec Python. Cependant, il est possible d'avoir accès à des possibilités de calcul plus avancées en utilisant une \emph{bibliothèque}. 
+Par exemple, la bibliothèque \texttt{math} permet d'avoir accès à de nombreux outils mathématiques. 
+On peut donc taper
+\begin{lstlisting}
+
+  from math import sqrt, log, exp, sin, cos, tan, pi, e 
+\end{lstlisting}
+
+pour avoir accès à toutes ces fonctions. \\
+Calculer les nombres suivants (on n'hésitera pas à consulter l'aide en ligne).
+\begin{multicols}{2}
+  \begin{enumerate}[label=\emph{\alph*)}]
+    \item $e^2$
+    \item $\sqrt{13}$
+    \item $\cos\left(\dfrac{\pi}{5}\right)$
+    \item $e^{\sqrt{5}}$
+    \item $\ln 2$
+    \item $\ln 10$
+    \item $\log_{2} 10$
+    \item $\tan\left(\dfrac{\pi}{2}\right)$
+  \end{enumerate}
+\end{multicols}
+

@@ -1,0 +1,166 @@
+\section{Pour commencer}
+
+Avant toute chose, on prendra soin de recopier la fonction \pyv{euler(F,a,b,y0,h)} donnée dans le chapitre 11 du cours. 
+
+\section{Oscillations libres d'un pendule}
+
+On considère les oscillations libres d'un pendule. L'angle que fait ce pendule avec la verticale au temps $t$ sera noté $\theta(t)$ et l'on étudie les oscillations du pendule entre $0$ et $10$ secondes.
+L'équation vérifiée par la fonction $\theta$ est alors 
+\begin{equation}\label{eq:pendule}\tag{$\mathscr{P}$}
+  \ddot{\theta} + \alpha\dot{\theta}+\omega_0^2\sin\theta = 0,
+\end{equation}
+où
+\begin{itemize}
+  \item $\alpha$  (proportionnel au coefficient de frottements) est exprimé en $s^{-1}$ ;
+  \item $\omega_0$ (la pulsation propre) est exprimé en $s^{-1}$ . 
+\end{itemize}
+Si le coefficient de frottement est nul, l'équation devient 
+\begin{equation}\label{eq:pendulesf}\tag{$\mathscr{P}_{sf}$}
+  \ddot{\theta} + \omega_0^2\sin\theta = 0.
+\end{equation}
+Enfin, on sait qu'au voisinage de $0$ on a $\sin\theta = \theta + o(\theta^2)$. En supposant que les oscillations sont petites, on approche alors la dernière équation par 
+\begin{equation}\label{eq:pendulepo}\tag{$\mathscr{P}_{po}$}
+  \ddot{\theta} + \omega_0^2\theta = 0.
+\end{equation}
+
+\question\ Pour quelle variable $\Theta$ et quelles fonctions $F$, $F_{sf}$ et $F_{po}$ les équations respectives \eqref{eq:pendule}, \eqref{eq:pendulesf} et \eqref{eq:pendulepo} sont-elles équivalentes aux équations suivantes ?
+\begin{equation*}
+  \dot{\Theta} = F(\Theta, t),\quad \dot{\Theta} = F_{sf}(\Theta, t), \quad \dot{\Theta} = F_{po}(\Theta, t).
+\end{equation*}
+
+\subsection{Approximation des petites oscillations par la méthode d'Euler}
+
+On suppose les oscillations petites et sans frottements, on prendra donc les valeurs numériques suivantes : $\alpha = 0 s^{-1}$, $\omega_0 = \sqrt{2\pi} s^{-1}$. 
+On étudiera les solutions sur un intervalle de temps de $10$ secondes et l'on supposera que $\dot{\theta}(0) = 0s^{-1}$. 
+Notamment, une méthode numérique effectuée avec $n$ segments correspondra à un pas de $\dfrac{10}{n}$ secondes. 
+
+\question{} Résoudre littéralement l'équation \eqref{eq:pendulepo}.
+
+\medskip
+
+\question\ \'Ecrire une fonction \pyv{Fpo(Theta,t)} prenant en argument un vecteur \pyv{Theta} et un nombre \pyv{t} et renvoyant $F_{po}(\texttt{Theta},\texttt{t})$.
+
+\medskip
+
+\question{\label{qu:tracepo}} \'Ecrire une fonction \pyv{trace_po(th0,n,nom_de_fichier)} enregistrant dans \pyv{nom_de_fichier} le tracé de la solution exacte de \eqref{eq:pendulepo} ($\theta(0) = \texttt{th0}$, $\dot{\theta}(0) = 0s^{-1}$) ainsi que, sur le même graphe, celui de la solution obtenue par la méthode d'Euler avec \pyv{n} segments.  
+
+Vous enverrez à l'enseignant la figure produite pour $\theta_0 = 10^{-1}$ et $n=10^2$. 
+
+\subsection{Facultatif : approximation des petites oscillations par la méthode de Runge-Kutta d'ordre 4}
+
+\question{} Sur le modèle de la fonction \pyv{euler(F,a,b,y0,pas)}, écrire une fonction Python \pyv{rk4(F,a,b,y0,pas)} mettant en {\oe}uvre la méthode de Runge-Kutta d'ordre 4 pour la fonction \pyv{F}, sur le segment $[a,b]$, avec un pas \pyv{pas} et la condition initiale \pyv{y0}. 
+  Cette fonction renverra un couple de tableaux. 
+  
+\medskip
+  
+\question{} Compléter la fonction \pyv{trace_po(th0,n,nom_de_fichier)} pour y superposer le tracé obtenu par la méthode de Runge-Kutta.  Que remarque-t-on ?
+
+\subsection{Oscillations sans frottements}
+
+On suppose les oscillations sans frottements, mais pas forcément petites on prendra donc les valeurs numériques suivantes : $\alpha = 0 s^{-1}$, $\omega_0 = \sqrt{2\pi} s^{-1}$.
+On étudiera les solutions sur un intervalle de temps de $10$ secondes et l'on supposera que $\dot{\theta}(0) = 0s^{-1}$. 
+Notamment, une méthode numérique effectuée avec $n$ points correspondra à un pas de $\dfrac{10}{n}$ secondes. 
+
+
+\question{} \'Ecrire une fonction \pyv{Fsf(Theta,t)} prenant en argument un vecteur \pyv{Theta} et un nombre \pyv{t} et renvoyant $F_{sf}(\texttt{Theta},\texttt{t})$.
+
+\bigskip{}
+
+On veut maintenant vérifier numériquent l'approximation des petites oscillations. On connait déjà la solution exacte de \eqref{eq:pendulepo}, il ne nous reste plus qu'à obtenir une approximation de la solution de \eqref{eq:pendulesf}. 
+
+\medskip{}
+
+\question{\label{qu:tracesf}} \'Ecrire une fonction \pyv{approx_po(th0,n,nom_de_fichier)} enregistrant dans \pyv{nom_de_fichier} le tracé de la solution exacte de \eqref{eq:pendulepo} ($\theta(0) = \texttt{th0}$, $\dot{\theta}(0) = 0s$) ainsi que, sur le même graphe, celui de la solution de \eqref{eq:pendulesf} obtenue par la méthode d'Euler avec \pyv{n} segments.  
+Que remarque-t-on ? 
+
+Vous enverrez à l'enseignant la figure produite pour $\theta_0 = 1$ et $n=10^4$. 
+
+\subsection{Facultatif : période des oscillations.}
+
+En dehors de la situation des petites oscillations, le mouvement du pendule est toujours périodique, mais sa période n'est pas $T_0 = \dfrac{2\pi}{\omega_0}$. 
+Plus exactement, cette période dépend de la position initiale du pendule (le calcul précis n'est pas à votre portée). Nous allons tracer cette période en fonction de la position initiale du pendule.
+
+Nous allons donc estimer la période de ces oscillations à partir d'une approximation obtenue par une méthode numérique. 
+
+\medskip{}
+
+On appelle \emph{pic} d'un tableau une élément de ce tableau strictement plus grand que ses deux voisins. 
+On considérera que le premier et le dernier élément d'un tableau ne sont pas des pics de ce tableau. 
+On appelle alors \emph{période} d'un tableau la moyenne des distances entre deux pics consécutifs. 
+
+\medskip{}
+
+\question{} \'Ecrire une fonction \pyv{periode(L)} renvoyant la période du tableau \pyv{L}.
+
+\medskip{}
+
+On estimera la période du pendule simple à partir de la période du tableau des valeurs successives de $\theta$ obtenues par la méthode de Runge-Kutta. 
+Plus exactement, si la période de ce tableau est $p$, si ce tableau comporte $m$ valeurs et si les oscillations ont été mesurées sur un intervalle de temps de longueur $T$, alors l'estimation de la pédiode du pendule simple sera 
+\begin{equation*}
+    T \times \dfrac{p}{m}.
+\end{equation*}
+
+
+\medskip{}
+
+\question{} \'Ecrire une fonction \pyv{periode_pendule(n)} prenant en argument un entier \pyv{n} et renvoyant le tableau des estimations de la période du pendule, pour les conditions initiales $\dot{\theta}(0) = 0s^{-1}$ et $\theta(0) = \dfrac{k\pi}{2n}$, pour chaque $k \in \iif{1,n}$.
+
+\medskip{}
+
+On réfléchira à l'intervalle de temps utilisé ainsi qu'à la discrétisation utilisée dans la méthode de Runge-Kutta.
+
+\medskip{}
+
+\question{\label{qu:periode}} \'Ecrire une fonction \pyv{trace_periode(n,nom_de_fichier)} prenant en argument un entier \pyv{n} et enregistrant dans \pyv{nom_de_fichier} le tracé des points obtenus à la question précédente. 
+  On placera en abscisse les $\theta(0) = \dfrac{k\pi}{2n}$ et en ordonnée les périodes estimées.
+
+  Vous enverrez à votre enseignant la figure produite pour $n=100$.
+  
+\section{Oscillations forcées d'un pendule avec frottements}
+
+On suppose les oscillations forcées, avec frottements. 
+La variable $\theta$ suit alors l'équation différentielle suivante.
+\begin{equation}\label{eq:penduleforce}\tag{$\mathscr{P}_f$}
+  \ddot{\theta} + \alpha\dot{\theta}+\omega_0^2\sin\theta = \cos(\omega t).
+\end{equation}
+On prendra les valeurs numériques suivantes : $\alpha = 0,5 s^{-1}$, $\omega_0 = \sqrt{2\pi} s^{-1}$ et $\omega = 1s^{-1}$.
+On étudiera les solutions sur un intervalle de temps de $10$ secondes. 
+Notamment, une méthode numérique effectuée avec $n$ segments correspondra à un pas de $\dfrac{10}{n}$ secondes. 
+
+\question{} Pour quelle variable $\Theta$ et quelle fonction $F_f$ l'équation  \eqref{eq:penduleforce} est-elle équivalente à l'équation suivante ? 
+\begin{equation*}
+  \dot{\Theta} = F_f(\Theta, t).
+\end{equation*}
+
+\question{} \'Ecrire une fonction \pyv{Ff(Theta,t)} prenant en argument un vecteur \pyv{Theta} et un nombre \pyv{t} et renvoyant $F_f(\texttt{Theta},\texttt{t})$.
+
+% \question\label{qu:eulerf} \'Ecrire une fonction \pyv{euler_f(th0,thp0,n)} prenant en argument deux nombres \pyv{th0}, \pyv{thp0} ainsi qu'un entier \pyv{n} et renvoyant le couple de listes  \pyv{t_list,y_list} obtenu en appliquant la méthode d'Euler avec \pyv{n} segments à l'équation \eqref{eq:penduleforce}, avec les conditions initiales  $ \theta(0) = \texttt{th0}$ et $\dot{\theta}(0) = \texttt{thp0}$.
+
+\medskip{}
+
+\question{} \label{qu:trace_trajectoire_f} Écrire une fonction \pyv{trace_trajectoire_f(th0,thp0,n,nom_de_fichier)} prenant en argument deux nombres \pyv{th0}, \pyv{thp0}, un entier \pyv{n} ainsi qu'une chaîne \pyv{nom_de_fichier} et enregistrant dans \pyv{nom_de_fichier} la courbe de la trajectoire du pendule (c'est-à-dire des points $(t,\theta(t))$, obtenue en appliquant la méthode d'Euler avec \pyv{n} segments à l'équation \eqref{eq:penduleforce}, avec les conditions initiales  $ \theta(0) = \texttt{th0}$ et $\dot{\theta}(0) = \texttt{thp0}$.
+
+Vous enverrez à l'enseignant les figures produites pour les conditions initiales $\theta(0) = 1$ et $\dot{\theta}(0) = 2$ et pour $n=10^2$. 
+
+\medskip{}
+
+\question{} \label{qu:trace_phase_f} Écrire une fonction \pyv{trace_phase_f(th0,thp0,n,nom_de_fichier)} prenant en argument deux nombres \pyv{th0}, \pyv{thp0}, un entier \pyv{n} ainsi qu'une chaîne \pyv{nom_de_fichier} et enregistrant dans \pyv{nom_de_fichier} le portrait de phase du pendule (c'est-à-dire des points $(\theta(t),\dot{\theta}(t))$, obtenu en appliquant la méthode d'Euler avec \pyv{n} segments à l'équation \eqref{eq:penduleforce}, avec les conditions initiales  $ \theta(0) = \texttt{th0}$ et $\dot{\theta}(0) = \texttt{thp0}$.
+
+Vous enverrez à l'enseignant les figures produites pour les conditions initiales $\theta(0) = 1$ et $\dot{\theta}(0) = 2$ et pour $n=10^2$. 
+
+
+\medskip
+
+\question{\label{qu:odeintf}} \'Ecrire une fonction \pyv{odeint_f(th0,thp0,n)} prenant en argument deux nombres \pyv{th0} et \pyv{thp0} ainsi qu'un entier \pyv{n} et renvoyant le couple de listes  \pyv{t_list,y_list} obtenu en appliquant la fonction \pyv{odeint} avec \pyv{n} segments à l'équation \eqref{eq:penduleforce}, avec les conditions initiales  $ \theta(0) = \texttt{th0}$ et $\dot{\theta}(0) = \texttt{thp0}$.
+
+\medskip{}
+
+\question{}\label{qu:trace_trajectoire_odeint} Écrire une fonction \pyv{trace_trajectoire_odeint(t_list,y_list,nom_de_fichier)} enregistrant dans \pyv{nom_de_fichier} la courbe de la trajectoire du pendule (c'est-à-dire des points $(t,\theta(t))$, où \pyv{t_list} et \pyv{y_list} sont supposées être les listes renvoyées par la fonction \pyv{odeint_f}.
+
+Vous enverrez à l'enseignant les figures produites pour les conditions initiales $\theta(0) = 1$ et $\dot{\theta}(0) = 2$ et pour $n=10^2$. 
+
+\medskip{}
+
+\question{}\label{qu:trace_phase_odeint} Écrire une fonction \pyv{trace_phase_odeint(t_list,y_list,nom_de_fichier)} enregistrant dans \pyv{nom_de_fichier} le portrait de phase du pendule (c'est-à-dire des points $(\theta(t),\dot{\theta}(t))$, où \pyv{t_list} et \pyv{y_list} sont supposées être les listes renvoyées par la fonction \pyv{odeint_f}.
+
+Vous enverrez à l'enseignant les figures produites pour les conditions initiales $\theta(0) = 1$ et $\dot{\theta}(0) = 2$ et pour $n=10^2$. 

@@ -1,0 +1,67 @@
+On considère une fonction réelle $f$ de classe $\mathscr{C}^n$ au voisinage de $0$, vérifiant $f(0) = 0$ et $f'(0) \neq 0$. 
+On cherche à calculer le développement limité à l'ordre $n$ de $f^{-1}$ au voisinage de $0$, en fonction de celui de $f$. 
+
+On représentera un polynôme par la liste de ses coefficients, écrits par degrés croissants. Ainsi, le polynôme $1+2X^2$ pourra être représenté par les listes \texttt{[1.,0.,2.]} et \texttt{[1.,0.,2.,0.,0.]}.
+
+Les vecteurs et matrices seront représentés en \texttt{Python} en utilisant le type \texttt{array} de la bibliothèque \texttt{numpy}. 
+
+Chaque fois que l'on demandera de calculer une complexité, on rédigera ceci \emph{sur papier}, après avoir recopié \emph{à la main} le code de la fonction et numéroté ses lignes, afin de pouvoir y faire référence clairement. 
+Les fonctions ayant une complexité asymptotique clairement sous-optimale seront fortement pénalisées.
+On ne demande pas de justifier ce dernier point. 
+
+Enfin, on s'interdira les spécificités de Python permettant d'éviter d'écrire des boucles. Notamment : la fonction \texttt{sum}, la méthode \texttt{.dot}, l'écriture d'une liste en compréhension. Chaque boucle sera accompagnée d'un invariant justifiant sa correction. 
+
+\medskip
+
+\question\ Écrire une fonction  \texttt{produit(P,Q,n)} prenant en argument deux listes de flottants \texttt{P} et \texttt{Q} ainsi qu'un entier $n$ et renvoyant la liste des coefficients du produit des polynômes représentés par \texttt{P} et \texttt{Q}, tronquée à l'ordre $n$. 
+
+Par exemple, avec \texttt{P = [1.,1.,1.]} et \texttt{Q = [3.,-1.,2.,4.]}, le produit des polynômes représentés par \texttt{P} et \texttt{Q} est 
+\begin{equation*}
+  3+2X+4X^2+5X^3+6X^4+4X^5. 
+\end{equation*}
+Ainsi, \texttt{produit(P,Q,3)} renverra \texttt{[3.0, 2.0, 4.0, 5.0]}, tandis que \texttt{produit(P,Q,7)} renverra \texttt{[3.0, 2.0, 4.0, 5.0, 6.0, 4.0, 0., 0.]}.
+
+\medskip
+
+\question\ \emph{Question manuscrite.} Étudier la complexité asymptotique de \texttt{produit(P,Q,n)} en fonction de $n$. 
+
+\medskip
+
+\question\ \emph{Question manuscrite.} On note le développement limité de $f^{-1}$ au voisinage de $0$ et à l'ordre $n$ comme suit : 
+\begin{equation*}
+  f^{-1}(t) \underset{t\to0}{=} x_1t + x_2t^2 + \dots +x_n t^n + o(t^n).
+\end{equation*}
+En écrivant, au voisinage de $0$, $(f^{-1}\circ f)(t) = t$, écrire le système vérifié par le vecteur $(x_1,\dots ,x_n)$ et justifier que ce système est triangulaire inférieur. 
+On pourra introduire les coefficients des développements limités des $f^j$, pour $1 \leq j \leq n$, au voisinage de $0$ et à l'ordre $n$. 
+
+\medskip
+
+\question\ Écrire une fonction \texttt{matrice(P)} renvoyant la matrice du système précédent, où \texttt{P} est la liste des coefficients de la partie principale du développement limité de $f$ au voisinage de $0$.
+
+Par exemple, si $f(t) \underset{t\to0}{=} 3t - 5t^2 + 3t^4 + o(t^4)$, alors on utilisera \texttt{P = [0.,3.,0.,-5.,3.]} et l'on remarquera que \texttt{P} est alors de longueur $5$.
+
+\medskip
+
+\question\ \emph{Question manuscrite.} Étudier la complexité asymptotique de \texttt{matrice(P)} en fonction de $n$, où $n+1$ est la longueur de \texttt{P}. 
+
+\medskip
+
+\question\ Écrire une fonction \texttt{resoutTI(T,Y)} renvoyant la solution du système $TX=Y$, où \texttt{T} est une matrice triangulaire inférieure et \texttt{Y} un vecteur de même dimension que \texttt{T} n'a de lignes. 
+
+\medskip
+
+\question\ \emph{Question manuscrite.} Étudier la complexité asymptotique de \texttt{resoutTI(T,Y)} en fonction de $n$, où $n$ est la dimension de \texttt{Y}. 
+
+\medskip
+
+\question\ Écrire une fonction \texttt{DLreciproque(P)} renvoyant la liste des coefficients du développement limité en $0$ de $f^{-1}$, de même ordre que celui de $f$, où \texttt{P} est la liste des coefficients de la partie principale du développement limité de $f$ au voisinage de $0$.
+
+\medskip
+
+\question\ \emph{Question manuscrite.} Étudier la complexité asymptotique de \texttt{DLreciproque(P)} en fonction de $n$, où $n+1$ est la longueur de \texttt{P}.  
+
+\medskip
+
+\question\ \emph{Application.} Écrire une fonction \texttt{DLtan(n)} prenant en argument en entier naturel \texttt{n} et renvoyant la liste des coefficients de la partie principale de développement limité de la fonction tangente au voisinage de $0$ et à l'ordre $n$. 
+
+Commenter le résultat obtenus pour $n=7$. 

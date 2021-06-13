@@ -1,0 +1,95 @@
+
+La base de données\footnote{Source : http://base-donnees-publique.medicaments.gouv.fr/telechargement.php} \texttt{medocs.sqlite} contient 5 tables : 
+
+\begin{description}
+  \item[LABORATOIRES :] Contient une liste de laboratoires pharmaceutiques. Cette table possède deux attributs : 
+    \begin{description}
+      \item[id :] Identifiant du laboratoire dans la base de données.
+      \item[laboratoire :] Nom du laboratoire.
+    \end{description}
+  \item[CIS\_COMPO :] Contient la liste des compositions qualitatives et quantitatives des médicaments de la base de données, substance par substance. Cette table contient 8 attributs :
+    \begin{description}
+      \item[code\_CIS :] Code CIS (code identifiant de spécialité) d'un médicament, vous pouvez le considérer comme un identifiant de médicament. 
+      \item[désignation :] Désignation de l'élément pharmaceutique. 
+      \item[code\_substance :] Code de la substance.
+      \item[dénomination\_substance :] Dénomination de la substance. 
+      \item[dosage :] Dosage de la substance. 
+      \item[ref\_dosage :] Référence de ce dosage. Exemple : \texttt{"(pour) un comprimé"}.
+      \item[nature\_compo :]   Nature du composant (principe actif : « SA » ou fraction thérapeutique : « ST »).
+      \item[numéro\_liaison :]  Numéro permettant de lier, le cas échéant, substances actives et fractions thérapeutiques.
+    \end{description}
+  \item[HAS\_Liens :] Contient les liens vers les avis de la commission de transparence (CT) de la Haute Autorité de la Santé (HAS). Cette table contient 2 attributs : 
+    \begin{description}
+      \item[code\_HAS :] Code de dossier HAS. 
+      \item[lien :] Lien vers la page d'avis de la CT.
+    \end{description}
+  \item[CIS\_bdpm :] Cette table contient la liste des médicaments commercialisés, ou en arrêt de commercialisation depuis moins de trois ans. Cette table contient 11 attibuts : 
+    \begin{description}
+      \item[code\_CIS :] Code CIS (code identifiant de spécialité) d'un médicament, vous pouvez le considérer comme un identifiant de médicament. 
+      \item[dénomination :] Dénomination du médicament. 
+      \item[forme :] Forme pharmaceutique.
+      \item[voie :] Voies d'administration (avec un séparateur « ; » entre chaque valeur quand il y en a plusieurs). 
+      \item[statut :]  Statut administratif de l’autorisation de mise sur le marché (AMM).
+      \item[procédure :] Type de procédure d'autorisation de mise sur le marché (AMM).
+      \item[commercialisation :] État de commercialisation.
+      \item[date\_AMM :] Date d’AMM (format JJ/MM/AAAA).
+      \item[statutBdM :] Valeurs possibles : « Alerte » (icône rouge) ou « Warning disponibilité » (icône grise).
+      \item[numéro\_autorisation :]  Numéro de l’autorisation européenne.
+      \item[titulaire :] Numéro du laboratoire titulaire. 
+      \item[surveillance :] Surveillance renforcée (triangle noir) : valeurs « Oui » ou « Non ».
+    \end{description}
+  \item[CIS\_HAS\_SMR :] Cette table contient l'ensemble des avis de SMR (Service médical rendu) de la HAS. Cette table contient 6 attributs : 
+    \begin{description}
+      \item[code\_CIS :] Code CIS (code identifiant de spécialité) d'un médicament, vous pouvez le considérer comme un identifiant de médicament. 
+      \item[code\_HAS :] Code de dossier HAS. 
+      \item[motif :] Motif d'évaluation.
+      \item[date\_avis :] Date de l’avis de la Commission de la transparence (format AAAAMMJJ).
+      \item[valeur :] Valeur du SMR. 
+      \item[libellé :] Libellé du SMR. 
+    \end{description}
+\end{description}
+
+\section*{Question.}
+
+\question{} \texttt{code\_CIS} est-il une clé primaire de la table \texttt{CIS\_bdmp} ?
+
+\medskip
+
+\question{} \texttt{code\_HAS} est-il une clé primaire de la table \texttt{CIS\_HAS\_SMR} ?
+
+\medskip
+
+\question{} Donner le nom du laboratoire dont le numéro d'identification est $\alpha$.
+
+\medskip
+
+\question{} Donner le nombre de médicaments produits par ce laboratoire.
+
+\medskip 
+
+\question{} Donner le nombre médicaments de ce laboratoire dont l'AMM a été donnée le 1er janvier 2000 ou après.
+
+\medskip 
+
+\question{} Donner le code CIS du médicament de ce laboratoire ayant la plus ancienne AMM. S'il y en a plusieurs, on 
+donnera le code CIS le plus petit.
+
+
+\medskip
+
+\question{}  Quel est le lien internet vers la page d'avis de la CT sur ce dernier médicament (on ne donnera que la série de chiffres à la fin de cette adresse, qui sont au nombre de 6 ou 7 suivant les adresses) ?
+
+
+\medskip
+
+\question{} Quelle est la somme des numéros de liaison des médicaments de ce laboratoire ?
+
+\medskip
+
+\question{} Donner le code CIS du médicament de ce laboratoire ayant le plus de substances différentes. S'il y en a plusieurs, on donnera le code CIS le plus petit.
+
+\medskip
+
+\question{}  Cette question peut se traiter en interrogeant la base de données depuis \texttt{Python} : combien de codes CIS 
+contiennent votre numéro $\alpha$ comme sous-chaîne ? Si votre $\alpha$ est compris entre 0 et 9, vous le ferez 
+précéder d'un 0. Par exemple les $\alpha$ valant 8 ou 27 sont contenus dans 60008927 mais pas dans 60002875.

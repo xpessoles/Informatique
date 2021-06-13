@@ -1,0 +1,31 @@
+Soit $\texttt{t} = [t_0,\dots,t_{n-1}]$ un tableau de nombres de longueur $n\in\N^\ast$, soit $k \in \N^\ast$ et $i \in \ii{0,n+2-2k}$.
+
+On dit que \texttt{t} possède une \emph{pyramide} de \emph{hauteur} $k$ en position $i$ si
+\begin{equation*}
+  t_{i} < t_{i+1} < \dots t_{i+k-1}
+\end{equation*}
+et si 
+\begin{equation*}
+  t_{i+k-1} > t_{i+k} > \dots t_{i+2k-2}.
+\end{equation*}
+Par exemple, il y a une pyramide de longueur $1$ en tout élément de \texttt{t}, et il y a une pyramide de longueur $2$ en position $i$ si 
+\begin{equation*}
+  t_i < t_{i+1} \quad\textrm{et}\quad t_{i+1}> t_{i+2}.
+\end{equation*}
+Ainsi, avec 
+\begin{equation*}
+  \texttt{t} = [-1,0,4,2,-3,0,5,1],
+\end{equation*}
+\texttt{t} a une pyramide de hauteur 3 en position $0$, des pyramides de hauteur $2$ en position $1$ et $5$ et des pyramides de hauteur $1$ en toute position.
+\bigskip{}
+
+\question{} Écrire une fonction \texttt{nb\_pyramides\_2(t)} renvoyant le nombre de pyramides de hauteur 2 présentes dans le tableau de nombres \texttt{t} passé en argument. 
+
+\medskip{}
+
+\question{} Écrire une fonction \texttt{pyramide\_a\_partir(t,i)} prenant en argument un tableau de nombres \texttt{t} et un indice \texttt{i} et renvoyant la taille de la pyramide du tableau \texttt{t} débutant en position \texttt{i}.
+
+\medskip{}
+
+\question{} Écrire une fonction \texttt{plus\_haute\_pyramide(t)} renvoyant la taille de la plus haute pyramide présente dans le tableau de nombres \texttt{t} passé en argument. 
+On pourra utiliser la fonction \texttt{pyramide\_a\_partir(t,i)} de la question précédente, même si cette question n'a pas été résolue. 

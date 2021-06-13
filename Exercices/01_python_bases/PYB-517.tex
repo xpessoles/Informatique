@@ -1,0 +1,33 @@
+\exer{}
+\setcounter{numques}{0}
+
+On considère la fonction suivante. 
+%\begin{Verbatim}[gobble=0,numbers=left]
+\begin{lstlisting}
+
+def mystere(a,b) :
+    """Précondition : a,b sont des entiers, a>0, b>1"""
+    k,p = 0,1
+    while a % p == 0 :
+        k = k+1
+        p = p*b
+    return k-1
+\end{lstlisting}
+    
+%\end{Verbatim}
+
+\question{} Dresser un tableau de valeurs décrivant les valeurs des variables \texttt{k} et \texttt{p} en entrée des trois premiers tours de la boucle \texttt{while} de la fonction \texttt{mystere(a,b)}. 
+
+On pourra au besoin faire intervenir les variables \texttt{a} et \texttt{b}. 
+
+\medskip{}
+
+\question{} En s'aidant de la question précédente, écrire un invariant de boucle pour la boucle \texttt{while} de la fonction \texttt{mystere(a,b)}. On justifiera la réponse. 
+
+\medskip{}
+
+\question{} Donner un variant de boucle pour la boucle \texttt{while} de la fonction \texttt{mystere(a,b)}. On justifiera la réponse. 
+
+\medskip{}
+
+\question{} Déduire des questions précédentes qu'un appel de la fonction \texttt{mystere(a,b)} renvoie un résultat et déterminer le résultat alors renvoyé. On justifiera la réponse. 

@@ -1,0 +1,39 @@
+Sur un réseau social, vous avez un certain nombre d'amis. Vous pouvez aller sur la page de vos amis afin de savoir combien ils 
+ont d'amis chacuns. Le réseau va également vous indiquer combien d'amis vous avez en commun avec chacun de vos amis. 
+Cependant, vous aimeriez en savoir un peu plus. Plus précisément, vous vous demandez combien il y a de gens qui font 
+partie des amis de vos amis et qui ne font pas déjà partie de vos amis. 
+
+Compter à la main prendrait bien trop de temps, donc vous décidez d'écrire un algorithme pour cela. 
+Votre algorithme utilisera comme données le fichier \texttt{amis.csv}, dont les lignes comportent deux entiers chacune, séparés par une  virgule, qui sont deux identifiants de personnes amies l'une de l'autre.
+
+% Compter à la main prendrait bien trop de temps, donc vous décidez d'écrire un plugin Facebook pour cela. Votre plugin 
+% doit prendre en entrée votre identifiant, ainsi qu'une liste de relations d'amitiés, c'est-à-dire une liste de paires 
+% d'identifiants de personnes. Il doit ensuite calculer le nombre d'amis de vos amis qui ne sont pas (encore) vos amis. \\
+% Vous utiliserez le fichier \texttt{amis.csv}, dont les lignes suivantes deux entiers chacune, séparés par une 
+% virgule, qui sont deux identifiants de personnes amies l'une de l'autre.\\
+
+Notez que l'amitié est toujours réciproque : si $I_1$ est ami de $I_2$ alors $I_2$ est ami de $I_1$. On donnera soit 
+$(I_1,I_2)$ soit $(I_2,I_1)$ dans le fichier, mais pas les deux.
+De plus, une personne n'est jamais amie d'elle-même, \emph{i.e.} $I_1$ et $I_2$ sont toujours différents. \\
+
+Prenons comme exemple le fichier suivant.\\
+
+\noindent 0,1\\
+0,2\\
+0,3\\
+1,2\\
+1,3\\
+2,3\\
+1,4\\
+2,5\\
+2,4\\
+3,6\\
+7,8\\
+
+Alors, les amis de la personne d'identifiant $0$ sont les personnes d'identifiants 1, 2 et 3. Les amis des personnes d'identifiants 1, 2 et 3 sont les personnes d'identifiants 0, 1, 2, 3, 4, 5 et 6. 
+Les amis d'amis de la personne d'identifiant 0 qui ne sont pas des amis directs de la personne 
+d'identifiant 0 (ni cette même personne) sont donc les personnes d'identifiant 4, 5 et 6. Il y en a donc 3.
+
+\medskip
+
+\question\ Combien d'amis d'amis de la personne d'identifiant $\alpha$ ne sont pas des amis de la personne d'identifiant $\alpha$, ni $\alpha$ ?

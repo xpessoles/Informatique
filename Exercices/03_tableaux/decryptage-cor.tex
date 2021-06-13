@@ -1,0 +1,140 @@
+
+
+
+\question{}
+
+\begin{center}
+\begin{lstlisting}
+mess="la metamorphose"
+alphabet="abcdefghijklmnopqrstuvwxyz"
+code=""
+\end{lstlisting}
+\end{center}
+
+\question{}
+
+Avec un décalage de $n=3$, "franz" est codé "iudqc"
+
+
+\question{}
+
+\begin{center}
+\begin{lstlisting}
+def decalage(c,n):
+    ind=alphabet.index(c)
+    return alphabet[(ind+n)%26]
+\end{lstlisting}
+\end{center}
+
+
+\question{}
+
+
+\begin{center}
+\begin{lstlisting}
+def chiffrement_cesar(mess,n):
+    code=""
+    for i in range(len(mess)):
+        if mess[i].isalpha():
+            ind=alphabet.index(mess[i])
+            newind=(ind+n)%26
+            code=code+decalage(mess[i],n)
+        else:
+            code=code+mess[i]
+    return code
+\end{lstlisting}
+\end{center}
+
+\question{}
+
+\begin{center}
+\begin{lstlisting}
+def decryptage_cesar(code):
+    for n in range(len(alphabet)):
+        decrypt_mess=""
+        for i in range(len(code)):
+            if code[i].isalpha():
+                decrypt_mess+=decalage(code[i],-n)
+            else:
+                decrypt_mess+=code[i]
+        print(decrypt_mess," avec n= ",n)
+    return None
+\end{lstlisting}
+\end{center}
+
+
+%\question{}
+%
+%
+%On trouve avec $n=12$:  "le prochain devoir sera un sujet de modelisation".
+
+\question{}
+
+Ce code ne possède que 26 clés différentes. On sait que dans l'alphabet Français les lettres ne possèdent pas les mêmes fréquences d'apparition. Par exemple le 'e' est beaucoup plus répandu que le 'y'. Paradoxlamene plus le code serait long et plus il serait simple à décrypter en trouvant les caractères les plus répandus et en supposant qu'ils correspondent au "e". On peut aussi analyser les caractère présent à côté des apostrophes et supposés qu'il doivent correspondre au "m" ou au "l". 
+
+\question{}
+
+Ces instruction permettent d'afficher 26 lignes.
+
+Les deux première lignes affichées seront les suivantes : 
+
+
+\begin{pycode}
+alphabet= "abcdefghijklmnopqrstuvwxyz"
+for i in range(2):
+    alphabet = alphabet[1:]+alphabet[:1]
+    print (alphabet+'\n')
+\end{pycode}
+
+
+\question{}
+
+\begin{center}
+\begin{lstlisting}
+def generer_table():
+    alphabet= "abcdefghijklmnopqrstuvwxyz"
+    table = []
+    for i in range(26):
+        ligne=[]
+        ligne = [c for c in alphabet]
+        table.append(ligne)
+        alphabet = alphabet[1:]+alphabet[:1]
+    return table
+\end{lstlisting}
+\end{center}
+
+\question{}
+
+
+
+\question{}
+\begin{center}
+\begin{lstlisting}
+def code_vigenere(mot,cle):
+    alphabet= "abcdefghijklmnopqrstuvwxyz"
+
+    # On genere la table de vigenere
+    table = generer_table()
+    # On genere la clef
+    tab_cle = generer_cle_1(mot,cle)
+    # On genere le code
+    code = ""
+    for i in range(len(mot)):
+        ligne = mot[i]
+        col   = tab_cle[i]
+        id_ligne = alphabet.index(ligne)
+        id_col = alphabet.index(col)
+        code = code+table[id_ligne][id_col]
+    return code
+\end{lstlisting}
+\end{center}
+
+
+
+\question{}
+
+Le chiffre de Vigenère est une amélioration de la méthode de César, son principal intérêt réside dans l'utilisation non pas d'un, mais de 26 alphabets  décalés pour chiffrer un message que l'on retrouve dans le carré de Vigenère (d'où l'appellation polyalphabétique). Il est ainsi bien plus difficile à casser que celui de César, on passe d'une clé sous la forme d'un nombre entier de $d\in\left[1,25\right]$ à une clé sous la forme d'une chaine de caractère de longueur inconnue. Toutefois 300 ans après sa création plusieurs techniques permettant de casser cette méthode de chiffrement ont été développées.
+
+
+
+

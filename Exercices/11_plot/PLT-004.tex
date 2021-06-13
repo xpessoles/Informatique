@@ -1,0 +1,63 @@
+En utilisant \python{} on peut tracer de nombreux types de graphiques. 
+Nous allons utiliser une bibliothèque regroupant de (très) nombreuses fonctions de tracé : \pyv{matplotlib}.
+En fait, cette bibliothèque est bien trop vaste, nous n'utiliserons que sa sous-bibliothèque \pyv{matplotlib.pyplot}.
+
+Commencez par ouvrir votre IDE, puis créez un script nommé \pyv{tp05_ex_sin.py}. Recopiez dedans le script suivant. 
+\begin{pyverbatim}
+import matplotlib.pyplot as plt
+from numpy import sin
+
+n = 20
+x = [k*10/n for k in range(n)]
+y = [sin(t) for t in x]
+
+plt.clf()
+plt.plot(x,y,label='sin(x)')
+plt.xlabel('x')
+plt.legend(loc=0)
+plt.title('Tracé du sinus sur [0,10]')
+plt.savefig('tp05_ex_sin.png')
+\end{pyverbatim}
+\'Exécutez ce script et vérifiez que la figure créée est en tout point semblable à celle présente sur le site de classe. 
+
+\medskip{}
+
+\question{} Quel est le type de \pyv{x} ?
+
+\medskip{}
+
+\question{} Comment \python{} représente-t-il graphiquement une fonction ? 
+
+\medskip{}
+
+\question{} Où le tracé s'arrête-t-il ? Pourquoi ? 
+
+\medskip{}
+
+On rappelle que l'on peut simplement créer une liste d'abscisses en utilisant la fonction \pyv{linspace} de la bibliothèque de calcul \pyv{numpy}. 
+
+Chargez cette fonction dans l'interpréteur interactif par la commande 
+\begin{pyverbatim}
+from numpy import linspace
+\end{pyverbatim}
+puis consultez son manuel par la commande \pyv{help(linspace)}. 
+
+\medskip{}
+
+\question{}\label{tp05:qu:sin2} Écrire une fonction \pyv{ex_sin(nom_de_fichier)} permettant tracer de manière plus appropriée la courbe de l'exemple précédent et qui enregistre l'image produite dans le fichier \pyv{nom_de_fichier}. 
+Vous produirez alors une image, que vous enverrez à votre enseignant. 
+
+\emph{Indication :} Attention au type de \pyv{nom_de_fichier} ! Notamment, on supposera que l'extension du fichier est déjà présente dans \pyv{nom_de_fichier}.
+
+\medskip{}
+
+\question{}\label{tp05:qu:transitoire} \'Ecrire une fonction \pyv{transitoire(A,nom_de_fichier)} qui enregistre dans le fichier \pyv{nom_de_fichier} le graphe des fonctions 
+\begin{equation*}
+  t\mapsto A\p{1-\e^{-\sfrac{t}{\tau}}}
+\end{equation*}
+
+
+sur $[0,10]$, pour chaque $\tau\in\left\{\dfrac{1}{2};1;2;4;8\right\}$. 
+Vous produirez une image (vous choisirez $A$), que vous enverrez à votre enseignant. 
+
+\emph{Indication :} Attention au type de \pyv{nom_de_fichier} !

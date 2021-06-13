@@ -1,0 +1,30 @@
+\exer{}
+\setcounter{numques}{0}
+
+\question{Soit les algorithmes de test d'appartenance d'un élément dans un tableau. Proposer un invariant de boucle.}
+
+\begin{lstlisting}
+def appartient(e, t):
+    """Renvoie un booléen disant si e 
+    appartient à t
+       Précondition : t est un tableau"""
+    for x in t:
+        if e == x:
+            return True 
+    return False
+ 
+\end{lstlisting}
+
+\question{Soit les algorithmes de recherche d'indice de première occurrence d'un élément dans un tableau. Proposer un invariant de boucle.}
+
+\begin{lstlisting}
+def ind_appartient(e,t):
+    """Renvoie l'indice de la première 
+       occurrence de e dans t,
+       None si e n'est pas dans t
+       Précondition : t est un tableau"""
+    for i in len(t):
+        if t[i] == e:
+            return i 
+    return None
+\end{lstlisting}

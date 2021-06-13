@@ -1,0 +1,35 @@
+\exer{}
+\setcounter{numques}{0}
+
+Votre robot dispose de nombreux récepteurs et enregistre tous les signaux qui l'entourent. Cependant 
+vous avez remarqué que certains de ces signaux sont très bruités. Vous décidez donc d'écrire un 
+programme qui atténue le bruit de ces signaux, en effectuant ce que l'on appelle un lissage.
+
+Une opération de lissage d'une séquence de mesures (des nombres décimaux) consiste à remplacer 
+chaque mesure sauf la première et la dernière, par la moyenne des deux valeurs qui l'entourent.
+
+Par exemple, si l'on part de la séquence de mesures suivantes :$\hspace{.4cm}1\hspace{.4cm} 3\hspace{.4cm} 4\hspace{.4cm} 5$
+
+On obtient après un lissage : $\hspace{.4cm}1\hspace{.4cm} 2.5\hspace{.4cm} 4\hspace{.4cm} 5$
+
+Le premier et dernier nombre sont inchangés. Le deuxième nombre est remplacé par la moyenne du 1er 
+et du 3e, soit $(1+4)/2 = 2.5$, et le troisième est remplacé par $(3+5)/2 = 4$.
+
+On peut ensuite repartir de cette nouvelle séquence, et refaire un nouveau lissage, puis un autre 
+sur le résultat, etc.
+Votre programme doit calculer le nombre minimum de lissages successifs nécessaires pour s'assurer 
+que la valeur absolue de la différence entre deux valeurs successives de la séquence finale obtenue 
+ne dépasse jamais une valeur donnée, \texttt{diffMax}.
+
+On vous garantit qu'il est toujours possible d'obtenir la propriété voulue en moins de 5000 lissages 
+successifs.
+
+On cherche à définir la fonction suivante \texttt{def lissage(t:list[float], diffmax:float) -> int :} où
+\begin{itemize} 
+\item l'entrée est une liste \texttt{t} contenant les mesures, qui sont des flottants, et un 
+flottant \texttt{diffmax};
+\item la sortie est un entier qui correspond au nombre minimal de lissages nécessaire.
+\end{itemize}
+\begin{exemple}
+\noindent \texttt{lissage([1.292, 1.343, 3.322, 4.789, -0.782, 7.313, 4.212], 1.120) -> 13}.
+\end{exemple}

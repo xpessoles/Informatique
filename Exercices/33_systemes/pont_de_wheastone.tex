@@ -1,0 +1,45 @@
+
+
+
+On considère le circuit électrique ci-contre appelé \textit{pont de Wheatstone}. Les valeurs des résistances $R_1$, $R_2$, $R_3$, $R_4$, $R$ et de la tension $E$ étant connues, les inconnues sont les $5$ intensités $i_1$, $i_2$, $i_3$, $i_4$, et $i$ qui vérifient les $5$ équations :
+\begin{itemize}
+\item loi des noeuds en $B$ : $i_1 = i_2 + i_5$ ; \smallskip
+\item loi des noeuds en $D$ : $i_4 + i_5 = i_3$ ; \smallskip
+\item loi des mailles : $E = R_1 \times i_1 + R_2 \times i_2$ ; \smallskip
+\item loi des mailles : $E = R_4 \times i_4 + R_3 \times i_3$ ; \smallskip
+\item loi des mailles : $0 = R_1 \times i_1 + R \times i_5 - R_4 \times i_4$.
+\end{itemize}
+
+\begin{center}\begin{circuitikz}[european resistors,scale=0.8]
+\draw (8,0) -- (5,0) to[V, v=$E$] (3,0) -- (0,0) -- (0,2) to[R, l=$R_4$, i=$i_4$] (4,2) to[R, l=$R_3$, i=$i_3$] (8,2) -- (8,0) ;
+\draw (0,2) -- (0,5) to[R, l=$R_1$, i=$i_1$] (4,5) to[R, l=$R_2$, i=$i_2$] (8,5) -- (8,2) ;
+\draw (4,5) to [R, l=$R$, i=$i$] (4,2) ;
+\path (0,2) node{\small \textbullet} ; \path (-0.4,2) node{$A$} ;
+\path (4,5) node{\small \textbullet} ; \path (4,5.4) node{$B$} ;
+\path (8,2) node{\small \textbullet} ; \path (8.4,2) node{$C$} ;
+\path (4,2) node{\small \textbullet} ; \path (4,1.6) node{$D$} ;
+\end{circuitikz}\end{center}
+
+
+\question{} Calculer la valeur de l'intensité $i$ dans les deux cas suivants :
+		\begin{enumerate}
+			\item $E = 10$ V ; $R_1 = R_3 = 10 \text{ k} \Omega$ ; $R_2 = R_4 = R = 1 \text{ k} \Omega$ ;
+			\item $E = 10$ V ; $R_1 = R_3 = 4 \text{ k} \Omega$ ; $R_2 = R = 2 \text{ k} \Omega$ ; $R_4= 8 \text{ k} \Omega$.
+		\end{enumerate}
+
+\question{} Le second cas correspond au cas d'un point \textit{équilibré.} En observant la valeur de $i$ trouvée en déduire une relation entre les résistances $R_1$, $R_3$, $R_2$ et $R_4$.
+
+
+On suppose désormais connues les valeurs : $E = 10$ V, $R_1 = R = 1 \text{ k} \Omega$ et $R_4= 2 \text{ k} \Omega$. La valeur de la résistance $R_2$ est inconnue. On la fixera aléatoirement ainsi :
+		\begin{center}
+			\texttt{R2=(random.randrange(11)+5)*500}
+		\end{center}
+		
+\question{} Après avoir importé le module \texttt{random}. \'{E}crire un programme permettant :
+				\begin{enumerate}
+				\item de résoudre le système pour des valeurs de $R_3$ comprises entre $1\text{ k} \Omega$ et $20\text{ k} \Omega$ (on prendra $100$ valeurs) ;
+				\item d'afficher la courbe de l'intensité $i$ en fonction de la résistance $R_3$.
+				\end{enumerate}
+
+\question{} \`{A} l'aide d'une lecture graphique, en déduire la valeur de la résistance $R_2$.
+

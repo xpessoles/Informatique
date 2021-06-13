@@ -1,0 +1,1536 @@
+\documentclass[10pt,fleqn]{article} % Default font size and left-justified equations
+\usepackage[%
+    pdftitle={Modélisation systèmes multiphysiques : Modélisation linéaire et non linéaire},
+    pdfauthor={Xavier Pessoles}]{hyperref}
+    
+\usepackage{listingsutf8}
+
+
+\input{style/new_style}
+\input{style/macros_SII}
+\usepackage{multicol}
+\usepackage{standalone}
+\standaloneconfig{mode=buildnew}
+\usepackage{siunitx}
+\usepackage{wrapfig}
+\usepackage{float}
+
+
+
+
+\graphicspath{{images/}}
+
+\fichetrue
+
+%\fichefalse
+
+\proftrue
+%\proffalse
+
+\tdtrue
+%\tdfalse
+
+\courstrue
+\coursfalse
+
+\def\discipline{Informatique}
+\def\xxtete{Informatique}
+
+\def\classe{MPSI}
+\def\xxnumpartie{{Exercices}}%\textsf{\textsf{Cy. 4, 6 \& 7}}}
+\def\xxpartie{Exercices}
+
+
+\def\xxnumchapitre{28 avril 2021 \vspace{.2cm}}
+\def\xxchapitre{\hspace{.12cm} }
+
+
+\def\xxtitreexo{\noindent Exercices divers}
+\def\xxsourceexo{\hspace{.2cm} Banque PT}
+
+
+\def\xxposongletx{2}
+\def\xxposonglettext{1.45}
+\def\xxposonglety{20}
+%\def\xxonglet{Part. 1 -- Ch. 3}
+\def\xxonglet{\textsf{Exercices}}%\textsf{\textsf{Cy. 4, 6 \& 7}}}
+
+\def\xxactivite{\textsf{Exercices}}
+\def\xxauteur{\textsl{X. Pessoles -- E. Durif}}
+
+\def\xxcompetences{%
+\textsl{%
+%\textbf{Savoirs et compétences :}\\
+%Les sources sont associées par un \emph{hacheur série}. La détermination des grandeurs électriques associées à ce montage permet de conclure vis à vis du cahier des charges.
+%\noindent \textbf{Résoudre :} à partir des modèles retenus :
+%\begin{itemize}[label=\ding{112},font=\color{ocre}] 
+%\item choisir une méthode de résolution analytique, graphique, numérique;
+%\item mettre en \oe{}uvre une méthode de résolution.
+%\end{itemize}
+%\begin{itemize}[label=\ding{112},font=\color{ocre}] 
+%\item \textit{Rés -- C1.1 :} Loi entrée sortie géométrique et cinématique -- Fermeture géométrique.
+%\end{itemize}
+%
+%\noindent \textit{Mod2 -- C4.1 :} Représentation par schéma-blocs.
+}}
+
+\def\xxfigures{
+%\includegraphics[width=.5\linewidth]{images/fig_00}
+}%figues de la page de garde
+
+
+\def\xxpied{%
+%Cycle 01 -- Modéliser le comportement des systèmes multiphysiques\\
+\xxactivite%
+}
+
+\setcounter{secnumdepth}{5}
+%---------------------------------------------------------------------------
+
+\usepackage{pgfplots}
+\begin{document}
+%\defimages{images}
+%\chapterimage{png/Fond_Cin}
+\input{style/new_pagegarde}
+\vspace{5cm}
+\pagestyle{fancy}
+\thispagestyle{plain}
+
+\def\columnseprulecolor{\color{ocre}}
+\setlength{\columnseprule}{0.4pt} 
+
+%\defimages2{images}
+
+%\begin{multicols}{2}
+
+\lstset{language=Python,
+  inputencoding=utf8/latin1,
+  breaklines=true,breaklines=true,
+  basicstyle=\ttfamily\footnotesize, columns=fullflexible,
+  keywordstyle=\bfseries\color{green!40!black},
+  commentstyle=\itshape\color{purple!40!black},
+  identifierstyle=\color{blue},
+  stringstyle=\color{orange}}  
+\definecolor{mygreen}{rgb}{0,0.6,0}
+
+
+\lstset{
+     literate=%
+         {é}{{\'e}}1    
+         {à}{{\`a}}1    
+}
+
+\begin{multicols}{2}
+
+%\addcontentsline{toc}{subsection}{Exercice 1 -- Arithmétique}
+\subsection*{Exercice 1 -- Arithmétique}
+\begin{enumerate}
+\item Soit l’entier $n = 1234$. Quel est le quotient, noté $q$, dans la division euclidienne de $n$ par $10$ ? Quel est
+le reste ? Que se passe-t-il si on recommence la division par 10 à partir de $q$ ?
+\item Écrire la suite d’instructions calculant la somme des cubes des chiffres de l’entier 1234.
+\item Écrire une fonction \texttt{somcube}, d’argument \texttt{n}, renvoyant la somme des cubes des chiffres du nombre
+entier \texttt{n}.
+\item Trouver tous les nombres entiers inférieurs à 1000 égaux à la somme des cubes de leurs chiffres.
+\item En modifiant les instructions de la fonction \texttt{somcube}, écrire une fonction \texttt{somcube2} qui convertit
+l’entier \texttt{n} en une chaîne de caractères permettant ainsi la récupération de ses chiffres sous forme de
+caractères. Cette nouvelle fonction renvoie toujours la somme des cubes des chiffres de l’entier \texttt{n}.
+\end{enumerate}
+
+
+%\addcontentsline{toc}{subsection}{Exercice 2 -- Intégration}
+\subsection*{Exercice 2 -- Intégration}
+On cherche à calculer une valeur approchée de l’intégrale d’une fonction donnée par des points dont les coordonnées sont situées dans un fichier.
+\begin{enumerate}
+\item Le fichier \texttt{ex\_01.txt}, situé dans le sous-répertoire \texttt{data} du répertoire de travail, contient une quinzaine de lignes selon le modèle suivant :
+
+\begin{center}
+
+\texttt{0.0;1.00988282142}
+
+\texttt{0.1;1.07221264497}
+
+\end{center}
+
+Chaque ligne contient deux valeurs flottantes séparées par un point-virgule, représentant respective-
+ment l’abscisse et l’ordonnée d’un point. Les points sont ordonnés par abscisses croissantes.
+Ouvrir le fichier en lecture, le lire et construire la liste \texttt{LX} des abscisses et la liste \texttt{LY} des ordonnées contenues dans ce fichier.
+\item Représenter les points sur une figure.
+\item Les points précédents sont situés sur la courbe représentative d’une fonction \texttt{f}. On souhaite déterminer une valeur approchée de l’intégrale \texttt{I} de cette fonction sur le segment où elle est définie. Écrire une fonction \texttt{trapeze}, d’arguments deux listes \texttt{y} et \texttt{x} de même longueur \texttt{n}, renvoyant :
+
+$$
+\sum\limits_{i=1}^{n-1} \left(x_i - x_{i-1} \right) \dfrac{y_i +y_{i-1}}{2}.
+$$
+
+\texttt{trapeze(LY,LX)} renvoie donc une valeur approchée de l’intégrale $I$ par la méthode des trapèzes.
+\item En utilisant la méthode d’intégration numérique \texttt{trapz} de la sous-bibliothèque \texttt{scipy.integrate} du langage Python ou la méthode \texttt{inttrap} du logiciel Scilab, retrouver la valeur approchée de l'intégrale $I$.
+\end{enumerate}
+
+%\addcontentsline{toc}{subsection}{Exercice 3 -- Graphe}
+\subsection*{Exercice 3}
+On considère le graphe \texttt{G} suivant, où le nombre situé sur l'arête joignant deux sommets est leur distance, supposée entière :
+\begin{center}
+\includegraphics[width=.75\linewidth]{images/exo_3}
+\end{center}
+
+\begin{enumerate}
+\item Construire la matrice $\left( M_{ij}\right)_{0\leq i,j\leq 4}$, matrice de distances du graphe \texttt{G}, définie par :
+
+<< pour tous les indices $i$, $j$, $M_{ij}$ représente la distance entre les sommets $i$ et $j$,
+ou encore la longueur de l'arête reliant les sommets $i$ et $j$ >>.
+
+On convient que, lorsque les sommets ne sont pas reliés, cette distance vaut -1. La distance du
+sommet $i$ à lui-même est, bien sûr, égale à 0.
+\item Écrire une suite d'instructions permettant de dresser à partir de la matrice \texttt{M} la liste des voisins du sommet 4.
+\item Écrire une fonction \texttt{voisins}, d'argument un sommet $i$, renvoyant la liste des voisins du sommet $i$.
+\item Écrire une fonction \texttt{degre}, d'argument un sommet $i$, renvoyant le nombre des voisins du sommet $i$, c'est-à-dire le nombre d’arêtes issues de $i$.
+\item Écrire une fonction \texttt{longueur}, d’argument une liste \texttt{L} de sommets de \texttt{G}, renvoyant la longueur du trajet d'écrit par cette liste \texttt{L}, c’est-à-dire la somme des longueurs des arêtes empruntées. Si le trajet n'est pas possible, la fonction renverra $-1$.
+\end{enumerate}
+
+
+%\addcontentsline{toc}{subsection}{Exercice 4 -- Gestion de liste}
+\subsection*{Exercice 4 -- Gestion de liste}
+Soit un entier naturel $n$ non nul et une liste \texttt{t} de longueur $n$ dont les termes valent 0 ou 1. Le but de cet exercice est de trouver le nombre maximal de 0 contigus dans \texttt{t} (c’est-à-dire figurant dans des cases consécutives). Par exemple, le nombre maximal de zéros contigus de la liste \texttt{t1} suivante vaut 4 :
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+\hline 
+\texttt{i} & 0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 \\
+\hline
+\texttt{t1[i]} & 0 & 1 & 1 & 1 & 0 & 0 & 0 & 1 \\
+\hline
+\hline
+\texttt{i} & 8 & 9 & 10 & 11 & 12 & 13 & 14 \\
+\cline{0-7} 
+\texttt{t1[i]} & 0 & 1 & 1 & 0 & 0 & 0 & 0 \\
+\cline{0-7}  
+\end{tabular}
+\end{center}
+
+\begin{enumerate}
+\item Écrire une fonction \texttt{nombreZeros(t,i)}, prenant en paramètres une liste \texttt{t}, de longueur n, et un indice i compris entre 0 et $n-1$, et renvoyant :
+$$
+\left\{
+\begin{array}{l}
+0, \text{ si } t[i]=1 \\
+\text{le  nombre de zéros consécutifs dans t} \\ \text{à partir de t[i] inclus, si t[i] = 0}.
+\end{array}
+\right.
+$$
+Par exemple, les appels \texttt{nombreZeros(t1,4)}, \texttt{nombreZeros(t1,1)} et \texttt{nombreZeros(t1,8)} renvoient respectivement les valeurs 3, 0 et 1.
+\item Comment obtenir le nombre maximal de zéros contigus d’une liste \texttt{t} connaissant la liste des \texttt{nombreZeros(t,i)} pour $0\leq i \leq n-1$ ?
+En déduire une fonction \texttt{nombreZerosMax(t)}, de paramètre \texttt{t}, renvoyant le nombre maximal de 0 contigus d’une liste \texttt{t} non vide. On utilisera la fonction \texttt{nombreZeros}.
+\item Quelle est la complexité de la fonction \texttt{nombreZerosMax(t)} construite à la question précédente ?
+\item Trouver un moyen simple, toujours en utilisant la fonction \texttt{nombreZeros}, d’obtenir un algorithme plus performant.
+\end{enumerate}
+
+%\addcontentsline{toc}{subsection}{Exercice 5 -- Probabilités}
+\subsection*{Exercice 5 -- Probabilités}
+Soient $n$ un entier naturel strictement positif et $p$ un réel compris entre 0 et 1.
+On considère $X$ et $Y$ deux variables aléatoires à valeurs dans $\mathbb{N}$ sur un espace probabilisé donné. $X$ suit une
+loi de Poisson de paramètre $\lambda = np$ et $Y$ suit une loi binomiale de paramètres $(n, p)$.
+
+\begin{enumerate}
+\item Définir une fonction \texttt{Px}, d’arguments $k$, $n$ et $p$, renvoyant la valeur de $P(X = k)$. $k!$ (factorielle k) s’obtient par \texttt{factorial(k)} en Python (bibliothèque math) et \texttt{prod(1 : k)} en Scilab.
+Déterminer, pour $n = 30$ et $p = 0,1$, la liste des valeurs de $P(X = k)$ pour $k \in \mathbb{N}$, $0 \leq k \leq 30 $.
+\item Définir une fonction \texttt{Py}, d’arguments $k$, $n$ et $p$, renvoyant la valeur de $P(Y = k)$.
+On pourra utiliser \texttt{comb} de la sous-bibliothèque \texttt{scipy.misc} en Python et \texttt{binomial} en Scilab.
+
+Déterminer, pour $n = 30$ et $p = 0,1$, la liste des valeurs de $P(Y = k)$ pour $k \in \mathbb{N}$, $0 \leq k \leq 30$.
+\item Soit $k \in \mathbb{N}$. On rappelle que, sous certaines conditions sur $n$ et $p$, la probabilité $P(Y = k)$ peut être
+approchée par $P(X = k)$. Déterminer une fonction \texttt{Ecart} d’arguments $n$ et $p$, renvoyant le plus grand
+des nombres $|P(Y = k) - P(X = k)|$, pour $0 \leq k \leq n$.
+\item Soit $e$ un réel strictement positif. Déterminer une fonction \texttt{N}, d’arguments $e$ et $p$, renvoyant le plus
+petit entier $n$ tel que \texttt{Ecart(n, p)} soit inférieur ou égal à $e$.
+\item Faire l’application numérique dans les quatre cas suivants :
+\begin{itemize}
+\item $p = 0,075$ avec $e = 0,008$ et $e = 0,005$;
+\item $p = 0,1$ avec $e = 0,008$ et $e = 0,005$. Interpréter le dernier résultat.
+\end{itemize}
+\end{enumerate}
+
+
+%\addcontentsline{toc}{subsection}{Exercice 6 -- Tracer de fonction -- $f(x)=0$}
+\subsection*{Exercice 6 -- $f(x)=0$}
+On considère la fonction $g$ définie sur $[0 , 2[$ par :
+$$ g(x) =
+\left\{
+\begin{array}{ll}
+x &\text{ pour } 0\leq x < 1 \\
+1 &\text{ pour } 1\leq x < 2 
+\end{array}
+\right.
+$$
+\begin{enumerate}
+\item Définir la fonction $g$. Tracer sa courbe représentative sur $[0 , 2[$, c’est-à-dire la ligne brisée reliant les points $(x, g(x))$ pour $x$ variant de 0 à 1,99 avec un pas de 0,01.
+\item Définir une fonction $f$ donnée de manière récursive sur $[0 , +\infty[$ par :
+$$ f(x) =
+\left\{
+\begin{array}{ll}
+g(x) &\text{ pour } 0\leq x < 2 \\
+\sqrt{x} f(x-2) &\text{ pour } x \geq 2
+\end{array}
+\right.
+$$
+\item Tracer la courbe représentative de $f$ sur $[0,6]$.
+\item Écrire les instructions permettant de calculer, à $10^{-2}$ près, la plus petite valeur $\alpha > 0$ telle que $f(\alpha) > 4$.
+\end{enumerate}
+
+%\addcontentsline{toc}{subsection}{Exercice 7 -- Algorithmique }
+\subsection*{Exercice 7 -- Algorithmique }
+
+On considère le code Python de la fonction \texttt{d} suivante :
+
+\begin{py}
+\begin{lstlisting}
+def d(n):
+    L =[1]
+    for nombre in range(2,n+1):
+        if n%nombre == 0:
+            L.append(nombre)
+    return L
+\end{lstlisting}
+\end{py}
+
+\begin{enumerate}
+\item Quel est le résultat de l’appel \texttt{d(4)} ? Puis de l’appel \texttt{d(10)} ?
+Que fait la fonction \texttt{d} ?
+\item Un diviseur non-trivial d’un entier \texttt{n} est un diviseur de \texttt{n} différent de 1 et de \texttt{n}. Écrire une fonction \texttt{DNT}, d’argument \texttt{n}, renvoyant la liste des diviseurs non-triviaux de l’entier \texttt{n}.
+\item Écrire une fonction \texttt{sommeCarresDNT}, d’argument \texttt{n}, renvoyant la somme des carrés des diviseurs non-triviaux de l’entier \texttt{n}.
+\item Écrire la suite des instructions permettant d’afficher tous les nombres entiers inférieurs à 1000 et égaux à la somme des carrés de leurs diviseurs non-triviaux. Que peut-on conjecturer ?
+\end{enumerate}
+
+%\addcontentsline{toc}{subsection}{Exercice 8 -- Chiffrer -- déchiffrer}
+\subsection*{Exercice 8 -- Chiffrer -- déchiffrer}
+Soit n un entier vérifiant $n \leq 26$. On souhaite écrire un programme qui code un mot en décalant chaque lettre de l'alphabet de $n$ lettres.
+Par exemple pour $n = 3$, le décalage sera le suivant :
+\begin{center}
+\begin{tabular}{|l|c|c|c|c|c|c|c|c|c|}
+\hline
+Avant décalage & a & b & c & ... & x & y & z \\
+\hline
+Après décalage & d & e & f & ... & a & b & c \\
+\hline
+\end{tabular}
+\end{center}
+Le mot \texttt{oralensam} devient ainsi \texttt{rudohqvdp}.
+\begin{enumerate}
+\item Définir une chaîne de caractères contenant toutes les lettres dans l’ordre alphabétique (caractères en
+minuscule).
+\item Écrire une fonction \texttt{decalage}, d’argument un entier \texttt{n}, renvoyant une chaîne de caractères contenant
+toutes les lettres dans l’ordre alphabétique, décalées de \texttt{n}, comme indiqué ci-dessus.
+\item Écrire une fonction \texttt{indices}, d’arguments un caractère \texttt{x} et une chaîne de caractères \texttt{phrase}, renvoyant
+une liste contenant les indices de \texttt{x} dans \texttt{phrase} si \texttt{x} est une lettre de phrase et une liste vide sinon.
+\item Écrire une fonction codage d’arguments un entier \texttt{n} et une chaîne de caractères \texttt{phrase}, renvoyant
+\texttt{phrase} codé avec un décalage de \texttt{n} lettres.
+\item Comment peut-on décoder un mot codé ?
+\end{enumerate}
+
+
+
+%\addcontentsline{toc}{subsection}{Exercice 9 --  Fractale de Mandelbrot}
+\subsection*{Exercice 9 -- Fractale de Mandelbrot}
+
+On pose $M = 20$ et $m = 10$. À un nombre $c$ quelconque, on associe la suite $(u_n)_{n\geq 0}$ définie par $u_0 = 0$ et $u_{n+1} = u_n^2 + c$ pour $n \geq 0$.
+
+S’il existe, on note $k$ le plus petit entier tel que l’on ait $0 \leq k \leq m$ et $|u_k| > M$.
+On définit alors la fonction $f$ par 
+$$
+f : c \mapsto 
+\left\{
+\begin{array}{l}
+k \text{ s'il existe} \\
+m+1  \text{ sinon.}
+\end{array}
+\right.
+$$
+
+\begin{enumerate}
+\item  Donner le code définissant la fonction $f$.
+\item  Tracer l’allure de la courbe représentative de la fonction $f$ sur $[-2; 2]$, en créant une liste \texttt{LX} de 401 valeurs équiréparties entre -2 et 2 inclus et en utilisant les fonctions \texttt{plot} et show de la sous-bibliothèque \texttt{matplotlib.pyplot}.
+\item  Construire le tableau des valeurs $f(x+i y)$ où $x$ prend 101 valeurs comprises entre -2 et 0,5 et $y$ prend
+101 valeurs entre -1,1 et 1,1. \textit{On rappelle que le nombre complexe $i$ est représenté par $1j$. Par exemple,
+le complexe $1 + 2 i$ est représenté par $1+2j$.}
+\item  Tracer l’image que code ce tableau. On pourra utiliser les fonctions \texttt{imshow} et \texttt{show} de la sous-
+bibliothèque \texttt{matplotlib.pyplot}. Quels paramètres peut-on modifier pour obtenir une meilleure résolution ?
+\end{enumerate}
+
+
+%\addcontentsline{toc}{subsection}{Exercice 10 -- Calcul matriciel}
+\subsection*{Exercice 10 -- Calcul matriciel}
+\textit{Dans cet exercice, avec Python on pourra utiliser la fonction \texttt{array} de la bibliothèque \texttt{numpy}, ainsi que la
+fonction \texttt{eig} de la sous-bibliothèque \texttt{numpy.linalg}. Avec Scilab, on utilisera \texttt{spec}.}
+
+\begin{enumerate}
+\item Créer deux matrices $R=\begin{pmatrix} 1 & 2 & 3 \\ 4 & 5 & 6  \end{pmatrix}$ et 
+$S =\begin{pmatrix} 1 & 2 & 3 \\ 4 & 5 & 6\\ 7 & 8 & 9  \end{pmatrix}$ et les faire afficher.
+\item Créer une fonction \texttt{test}, d’argument $M$, renvoyant la valeur \texttt{n} si $M$ est une matrice carrée d’ordre \texttt{n} (entier naturel non nul) et zéro dans tous les autres cas.
+Vérifier la fonction test sur $R$ et sur $S$.
+\item Le fichier \texttt{ex\_006.txt}, situé dans le sous-répertoire \texttt{data} du répertoire de travail, contient un tableau de valeurs flottantes. Lire ce tableau dans le fichier et vérifier qu’il correspond bien à une matrice carrée d’ordre 5 que l’on désignera par \texttt{M1}. 
+\item Déterminer les valeurs propres de la matrice \texttt{M1}.
+\item Créer une fonction \texttt{dansIntervalle}, d’arguments une liste $L$ et deux réels $a$ et $b$, renvoyant la valeur \texttt{True} si tous les éléments de la liste $L$ sont dans l’intervalle $[a, b]$ et \texttt{False} sinon. Vérifier que toutes les valeurs propres de la matrice \texttt{M1} sont dans l’intervalle $[0, 1]$.
+\end{enumerate}
+
+
+%\addcontentsline{toc}{subsection}{Exercice 11 -- Tri de liste}
+\subsection*{Exercice 11 -- Tri de liste}
+Soit $N$ un entier naturel non nul. On cherche à trier une liste L d’entiers naturels strictement inférieurs à $N$.
+\begin{enumerate}
+\item Écrire une fonction comptage, d’arguments $L$ et $N$, renvoyant une liste $P$ dont le $k$-ième élément désigne le nombre d’occurrences de l’entier $k$ dans la liste $L$.
+\item Utiliser la liste $P$ pour en déduire une fonction \texttt{tri}, d’arguments $L$ et $N$, renvoyant la liste $L$ triée dans l’ordre croissant.
+\item Tester la fonction \texttt{tri} sur une liste de 20 entiers inférieurs ou égaux à 5, tirés aléatoirement.
+\item Quelle est la complexité temporelle de cet algorithme ? La comparer à la complexité d’un tri par insertion ou d’un tri fusion.
+\end{enumerate}
+
+%\addcontentsline{toc}{subsection}{Exercice 12 -- Courbes paramétrées}
+\subsection*{Exercice 12 -- Courbes paramétrées}
+\begin{enumerate}
+\item Deux paramètres $b$ et $w$ valant respectivement 0,5 et 6,0, définir trois fonctions d’une variable $t$ renvoyant des couples :
+$$
+\left\{
+\begin{array}{ll}
+p : t \mapsto &\left(\cos(t) +b \cos(wt),      \sin(t) + b \sin (wt) \right) \\
+v : t \mapsto &\left(-\sin(t)  -bw \sin(wt),\right. \\     
+& \quad \left. \cos(t) + b w\cos (wt) \right) \\
+a : t \mapsto &\left(-\cos(t)-bw^2 \cos(wt),\right. \\ 
+& \quad \left.-\sin(t) - b w^2 \sin (wt) \right) \\
+\end{array}
+\right.
+$$
+Vérifier ces fonctions sur un exemple.
+
+$p(t)=(x(t),y(t))$ désigne la position dans le plan d'une masse ponctuelle mobile au cours du temps, $v(t)=(x'(t),y'(t))$, sa vitesse, et $a(t)=(x''(t),y''(t))$, son accélération.
+\item Construire la liste \texttt{L} des points $p(t)$, pour $t$ variant de $-\pi$ à $\pi$ avec un pas de discrétisation $\delta t$ vérifiant $\delta t = 0,01 \; \pi$.
+\item Faire tracer dans le plan muni d’un repère orthonormal la ligne polygonale reliant les points $p(t)$ de la liste \texttt{L}.
+\item Définir puis tester la fonction $c$ d’une variable $t$ qui renvoie le couple des coordonnées du centre de courbure donnée par :
+$$
+c(t)=\left(x(t)-dy'(t),y(t)+dx'(t)\right) $$ 
+où
+$$
+d= \dfrac{x'(t)^2+y'(t)^2}{x'(t)y''(t)-y'(t)x''(t)}.
+$$
+\item Rajouter sur le graphique précédent la ligne décrite par les centres de courbure, avec la même
+discrétisation en temps.
+\item Calculer la longueur de la ligne polygonale reliant les points $p(t)$, pour différents pas de discrétisation $\delta t$. Observer l'évolution de cette longueur lorsque $\delta t$ diminue.
+\end{enumerate}
+\end{multicols}
+
+
+
+
+\newpage 
+%\begin{multicols}{2}
+
+\section{Corrigés -- Banque PT}
+%\addcontentsline{toc}{subsection}{Exercice 1 -- Arithmétique -- Corrigé}
+\subsection*{Exercice 1 -- Arithmétique -- Corrigé}
+
+\begin{corrige}
+$\quad$
+\begin{lstlisting}
+# Question 1
+n = 1234
+q = n//10
+r =  n%q
+
+# r contient le nombre d'unités de n
+\end{lstlisting}
+\end{corrige}
+
+\begin{corrige}
+$\quad$
+\begin{lstlisting}
+# Question 2
+s=0
+while n!=0:
+    q=n//10
+    r = n%10
+    #print(r)
+    s=s+r**3
+    n=q
+\end{lstlisting}
+\end{corrige}
+
+\begin{corrige}
+$\quad$
+\begin{lstlisting}
+# Question 3
+def somcube(n):
+    """
+    Entrées :
+     * n, int : nombre
+    Sortie : 
+     * s, int : somme des cubes du chiffre n
+    """
+    s=0
+    while n!=0:
+        q=n//10
+        r = n%10
+        s=s+r**3
+        n=q
+    return s
+\end{lstlisting}
+\end{corrige}
+
+\begin{corrige}
+$\quad$
+\begin{lstlisting}
+# Question 4
+res = []
+for i in range (10001):
+    if i == somcube(i):
+        res.append(i)
+\end{lstlisting}
+\end{corrige}
+
+\begin{corrige}
+$\quad$
+\begin{lstlisting}
+# Question 5
+def somcube2(n):
+    """
+    Entrées :
+     * n, int : nombre
+    Sortie : 
+     * s, int : somme des cubes du chiffre n
+    """
+    nombre=str(n)
+    s=0
+    for chiffre in nombre :
+        s = s+int(chiffre)**3
+    return s
+    
+print(somcube2(1234))
+\end{lstlisting}
+\end{corrige}
+
+%\vfill
+
+%%\columnbreak
+
+%\addcontentsline{toc}{subsection}{Exercice 2 -- Intégration -- Corrigé}
+\subsection*{Exercice 2 -- Intégration -- Corrigé}
+
+\begin{corrige}
+$\quad$
+\begin{lstlisting}
+# Question 1
+# ==========
+# Le répertoire courant est Exercice_02.
+# Le sous-répertoire data contient le
+# fichier ex_02.txt.
+
+# On ouvre le fichier en lecture)
+fid = open("data\ex_02.txt")
+
+# On charge le fichier dans une liste.
+# Chaque élément de la liste correspond à 
+# chaque ligne sous forme de chaîne de caractère.
+file = fid.readlines()
+# On ferme le fichier
+fid.close()
+
+LX=[]
+LY=[]
+for ligne in file :
+    ligne = ligne.split(';')
+    LX.append(float(ligne[0]))
+    LY.append(float(ligne[1]))
+\end{lstlisting}
+\end{corrige}
+
+\begin{corrige}
+$\quad$
+\begin{lstlisting}
+# Question 2
+# ==========
+# Ne pas oublier de charger préalablement 
+# import matplotlib.pyplot as plt
+
+plt.plot(LX,LY)
+plt.show()
+\end{lstlisting}
+\end{corrige}
+\begin{center}
+\includegraphics[width=6cm] {images/exo_02}
+\end{center}
+
+
+\begin{corrige}
+$\quad$
+\begin{lstlisting}
+# Question 3
+# ==========
+def trapeze(x,y):
+    res = 0 
+    for i in range(1,len(LX)):
+        res = res+(LX[i]-LX[i-1])*0.5*(LY[i]+LY[i-1])
+    return res
+print(trapeze(LX,LY))
+
+>>> 75.13635
+\end{lstlisting}
+\end{corrige}
+
+\begin{corrige}
+$\quad$
+\begin{lstlisting}
+# Question 4
+# ==========
+from scipy.integrate import trapz
+# Attention à l'ordre des arguments dans 
+# la fonction trapz : les_y puis les_x
+# Après l'import, help(trapz) permet d'avoir 
+# de l'aide sur la fonction.
+print(trapz(LY,LX))
+
+>>> 75.13635
+\end{lstlisting}
+\end{corrige}
+
+%\addcontentsline{toc}{subsection}{Exercice 3 -- Graphe -- Corrigé}
+\subsection*{Exercice 3 -- Graphe -- Corrigé}
+
+\begin{corrige}
+$\quad$
+\begin{lstlisting}
+# Question 1
+# ==========
+# Matrices avec des listes
+M=[[0,9,3,-1,7],
+      [9,0,1,8,-1],
+      [3,1,0,4,2],
+      [-1,8,4,0,-1],
+      [7,-1,2,-1,0]]
+\end{lstlisting}
+\end{corrige}
+%\newpage
+
+\begin{corrige}
+$\quad$
+\begin{lstlisting}
+# Question 2 & 3
+# ==============
+def voisins(M,i):
+    """
+    Entrées : 
+      * M(lst) : graphe
+      * i : noeud considéré
+    Sortie :
+      * v(lst) : liste des voisins
+    """
+    v = []
+    # On cherche les voisins sur une ligne 
+    # (on pourrait le faire sur une colonne)
+    for j in range(len(M[i])):
+        if M[i][j]>0:
+            v.append(j)
+    return v
+    
+# print(voisins(M,0))
+\end{lstlisting}
+\end{corrige}
+
+
+\begin{corrige}
+$\quad$
+\begin{lstlisting}
+# Question 4
+# ==========
+def degre(M,i):
+    """
+    Entrées : 
+      * M(lst) : graphe
+      * i : noeud considéré
+    Sortie :
+      * (int) : nomnbre de voisins
+    """
+    return len(voisins(M,i))
+\end{lstlisting}
+\end{corrige}
+
+\begin{corrige}
+$\quad$
+\begin{lstlisting}
+# Question 5
+# ==========
+def longueur(M,chemin):
+    l = 0
+    for i in range(len(chemin)-1):
+        if M[chemin[i]][chemin[i+1]]<0:
+            return -1
+        else :
+            l=l+M[chemin[i]][chemin[i+1]]
+    return l
+    
+chemin = [1,2,3,1,4]
+print(longueur(M,chemin))        
+chemin = [0,4,2,1,0]
+print(longueur(M,chemin))
+\end{lstlisting}
+\end{corrige}
+
+\vfill
+
+%\columnbreak
+%\addcontentsline{toc}{subsection}{Exercice 4 -- Corrigé}
+\subsection*{Exercice 4 -- Corrigé}
+\begin{corrige}
+$\quad$
+\begin{lstlisting}
+# Question 1 
+# ==========
+def nombreZeros(t,i):
+    if t[i]==1:
+        return 0
+    else : 
+        res = 1
+        j=i+1
+        while j<len(t) and t[j]==0:
+            res = res+1
+            j=j+1
+    return res
+# t1=[0,1,1,1,0,0,0,1,0,1,1,0,0,0,0]
+# print(nombreZeros(t1,4))
+# print(nombreZeros(t1,1))
+# print(nombreZeros(t1,8))
+\end{lstlisting}
+\end{corrige}
+
+\begin{corrige}
+$\quad$
+\begin{lstlisting}
+# Question 2
+# ==========
+def nombreZerosMax(t):
+    max=nombreZeros(t,0)
+    for i in range(1,len(t)):
+        tmp = nombreZeros(t,i)
+        if tmp>max:
+            max = tmp
+    return max
+print(nombreZerosMax(t1))
+\end{lstlisting}
+\end{corrige}
+
+\begin{corrige}
+La complexité est quadratique ($\mathcal{O}^2$)  du fait de la boucle \texttt{for} et de la boucle \texttt{while} imbriquée.
+
+Pour diminuer la complexité, il est possible de parcourir une seule fois la liste. On lit alors les termes un à un. Quand on détecte un zéro, on compte alors le nombre de zéros consécutifs et on poursuit jusqu'à la fin...
+
+\end{corrige}
+
+%\addcontentsline{toc}{subsection}{Exercice 5 -- Corrigé}
+\subsection*{Exercice 5 -- Corrigé}
+D'après Mme Barré \url{http://www.lycee-lesage.net/}.
+
+
+\begin{corrige}
+$\quad$
+\begin{lstlisting}
+import math
+import scipy.misc as scim
+# Question 1 
+# ==========
+def Px_poisson(k, n, p):
+    """
+    Entrée : 
+     * k(int)
+     * n(int) : strictement positif
+     * p(flt) : réel compris entre ]0, 1[
+    X suit une loi de Poisson P(n*p)
+    Sortie : 
+     * flt : (np)^k exp(-np)/k!
+    """
+    np = n * p
+    return (np)**k * math.exp(- np) / math.factorial(k)
+
+n, p = 30, 0.1
+lst_px = [Px_poisson(k, n, p) for k in range(n + 1)]
+\end{lstlisting}
+\end{corrige}
+
+\begin{corrige}
+$\quad$
+\begin{lstlisting}
+# Question 2
+# ==========
+def Py_binomiale(k, n, p):
+    """
+    Entrée : 
+     * k(int)
+     * n(int) : strictement positif
+     * p(flt) : réel compris entre ]0, 1[
+    Y suit une loi binomiale B(n,k)
+    Sortie : 
+     * int : B(n,k)*p^k *(1-p)^(n-k)
+    """
+    return scim.comb(n,k)*p**k*(1-p)**(n-k)
+
+n, p = 30, 0.1
+lst_py = [Py_binomiale(k, n, p) for k in range(n + 1)]
+\end{lstlisting}
+\end{corrige}
+
+\begin{corrige}
+$\quad$
+\begin{lstlisting}
+# Question 3
+# ==========
+def ecarts(n,p):
+	"""
+	Entrée :
+     * n(int) : strictement positif
+     * p(flt) : réel compris entre ]0, 1[
+    Sortie : 
+     * maxi(flt) écart maxi entre P(Y=k) et P(X=k)
+    """
+     
+	lst_px = [Px_poisson(k, n, p) for k in range(n + 1)]
+    lst_py = [Py_binomiale(k, n, p) for k in range(n + 1)]
+    maxi = max([abs(lst_py[i]-lst_px[i]) for i in range(len(lst_px))])
+    return maxi
+    
+#print(ecarts(n,p))
+\end{lstlisting}
+\end{corrige}
+
+\begin{corrige}
+$\quad$
+\begin{lstlisting}
+# Question 4
+# ==========
+def E(e,p):
+	"""
+	Retourne le plus petit entier naturel n tq ecart(n,p)<=e
+	Entrée : 
+	 * e(flt) : >0
+	 * p(flt) : réel compris entre ]0, 1[
+    Sortie :
+     n(int)
+	"""
+	n=1
+	while (ecarts(n,p))>e :
+		n=n+1
+	return n
+\end{lstlisting}
+\end{corrige}
+
+\begin{corrige}
+$\quad$
+\begin{lstlisting}
+# Question 5
+# ==========
+print(E(0.008,0.075))
+print(E(0.005,0.075))
+print(E(0.008,0.1))
+#print(E(0.005,0.1))
+\end{lstlisting}
+\end{corrige}
+
+
+
+%\columnbreak 
+
+%\addcontentsline{toc}{subsection}{Exercice 6 -- Corrigé}
+\subsection*{Exercice 6 -- Corrigé}
+\begin{corrige}
+$\quad$
+\begin{lstlisting}
+# Import de fonctions
+import matplotlib.pyplot as plt
+from math import sqrt
+# Question 1 
+# ==========
+def g(x):
+    if x>= 0 and x<1 :
+        return x
+    elif x>1 and x<2 :
+        return 1
+xx = [0]
+t=0
+while t<=1.99:
+    t=t+0.01
+    xx.append(t)
+yy = [g(x) for x in xx]
+plt.plot(xx,yy)
+plt.show()
+\end{lstlisting}
+\end{corrige}
+
+\begin{corrige}
+$\quad$
+\begin{lstlisting}
+# Question 2
+# ==========
+def f(x):
+    if x>=0 and x<2 :
+        return g(x)
+    else : # x>=2
+        return sqrt(x)*f(x-2)
+\end{lstlisting}
+\end{corrige}
+
+\begin{corrige}
+$\quad$
+\begin{lstlisting}
+# Question 3
+# ==========
+xxx = [0]
+t=0
+while t<=6:
+    t=t+0.01
+    xxx.append(t)
+yyy = [f(x) for x in xxx]
+plt.plot(xxx,yyy)
+plt.show()
+\end{lstlisting}
+\end{corrige}
+
+%\columnbreak 
+
+\begin{corrige}
+$\quad$
+\begin{lstlisting}
+# Question 4
+# ==========
+# On cherche à résoudre f(x)-4 = 0 sur
+# l'intervalle [5,6]
+def h(x):
+    res = f(x)-4
+    return res
+
+a = 5.
+b = 6.
+while (b-a)>0.01:
+    m=(a+b)/2
+    if h(m)>0:
+        b=m
+    else :
+        a=m
+m=(a+b)/2
+
+if h(m)<0:
+    m= m+ abs(b-a)
+print(m,h(m))
+\end{lstlisting}
+\end{corrige}
+ 
+
+%\addcontentsline{toc}{subsection}{Exercice 7 -- Corrigé}
+\subsection*{Exercice 7 -- Corrigé}
+
+\begin{corrige}
+$\quad$
+\begin{lstlisting}
+# Question 1 
+# ==========
+def d(n):
+    """
+    Retourne la liste de tous les diviseurs de n.
+    Entrée : 
+     * n(int) : entier.
+    Sortie : 
+     * L(lst) : liste des diviseurs de n.
+    """
+    L =[1]
+    for nombre in range(2,n+1):
+        if n%nombre == 0:
+            L.append(nombre)
+    return L
+print(d(4),d(10))
+\end{lstlisting}
+\end{corrige}
+
+\begin{corrige}
+$\quad$
+\begin{lstlisting}
+# Question 2 
+# ==========
+def DNT_01(n):
+    return d(n)[1:-1]
+def DNT_02(n):
+    L =[]
+    for nombre in range(2,n):
+        if n%nombre == 0:
+            L.append(nombre)
+    return L
+print(DNT_01(4),DNT_02(4))
+print(DNT_01(10),DNT_02(10))
+\end{lstlisting}
+\end{corrige}
+
+
+\begin{corrige}
+$\quad$
+\begin{lstlisting}
+# Question 3
+# ==========
+def sommeCarresDNT_01(n):
+    L = DNT_01(n)
+    res = [x**2 for x in L]
+    return sum(res)
+def sommeCarresDNT_02(n):
+    L = DNT_01(n)
+    res = 0
+    for x in L:
+        res = res + x*x
+    return res
+def sommeCarresDNT_03(n):
+    L = DNT_01(n)
+    res = 0
+    for i in range(len(L)):
+        res = res + L[i]**2
+    return res
+print(sommeCarresDNT_01(15),sommeCarresDNT_02(15),
+    sommeCarresDNT_03(15))
+\end{lstlisting}
+\end{corrige}
+
+
+\begin{corrige}
+$\quad$
+\begin{lstlisting}
+# Question 4
+# ==========
+from math import sqrt
+for i in range(1001):
+    if i == sommeCarresDNT_01(i) :
+        print(str(i)+"\t"+str(sqrt(i)))
+# Conjecture les nombres recherchés sont 
+# les carrés des nombres premiers. 
+\end{lstlisting}
+\end{corrige}
+
+
+%\addcontentsline{toc}{subsection}{Exercice 8 -- Corrigé}
+\subsection*{Exercice 8 -- Corrigé}
+\begin{corrige}
+$\quad$
+\begin{lstlisting}
+# Question 1 
+# ==========
+chaine = "abcdefghijklmnopqrstuvwxyz"
+\end{lstlisting}
+\end{corrige}
+
+\begin{corrige}
+$\quad$
+\begin{lstlisting}
+# Question 2
+# ==========
+def decalage(chaine,n):
+    chaine = chaine[n:-1]+chaine[0:n]
+    return chaine
+print(chaine,decalage(chaine,3))
+\end{lstlisting}
+\end{corrige}
+
+\begin{corrige}
+$\quad$
+\begin{lstlisting}
+# Question 3
+# ==========
+def indices(x,phrase):
+    """
+    Recherche des indices de x dans phrase
+    Entrée : 
+     * x(str) : un caractère
+     * phrase(str)
+    Sortie : 
+     * res(lst) : liste des indices de x
+    """
+    res = []
+    for i in range(len(phrase)):
+        if phrase[i] == x:
+            res.append(i)
+    return res
+
+print(indices("a","akjlkjalkjlkjalkjlkja"))
+\end{lstlisting}
+\end{corrige}
+
+\begin{corrige}
+$\quad$
+\begin{lstlisting}
+# Question 4
+# ==========
+def codage(n,phrase):
+    ch = "abcdefghijklmnopqrstuvwxyz"
+    ch_c = decalage(ch,n)
+    print(ch_c)
+    phrase_c=""
+    for c in phrase :
+        i = indices(c,ch)
+        i = i[0]
+        phrase_c = phrase_c+ch_c[i]
+    return phrase_c
+print(codage(3,"oralensam"))
+\end{lstlisting}
+\end{corrige}
+
+\begin{corrige}
+$\quad$
+\begin{lstlisting}
+# Question 5
+# ==========
+# Solution 1 : essayer les 26 permutations, 
+# jusqu'à trouver une phrase qui est du sens.
+# Solution 2 : statistiquement le e est la lettre
+# la plus présente dans la langue française. On
+# peut donc déterminer la fréquence d'apparition 
+# des lettres. # La lettre la plus fréquente 
+# peut être assimilée au e.
+# On calcule ainsi le décalage...
+\end{lstlisting}
+\end{corrige}
+
+%\addcontentsline{toc}{subsection}{Exercice 9 -- Fractale de Mandelbrot -- Corrigé}
+\subsection*{Exercice 9 -- Fractale de Mandelbrot -- Corrigé}
+\begin{corrige}
+$\quad$
+\begin{lstlisting}
+# Question 1 
+# ==========
+def suite_u(c,n):
+    """
+    Calcul de la suite u au rang n.
+    Entrées : 
+     * c(flt) : nombre quelconque
+     * n(int)
+    Sortie : 
+     * res(flt) : valeur de u(n)
+    """
+    res = 0
+    i=0
+    while i!=n:
+        res = res*res+c
+        i=i+1
+    return res
+\end{lstlisting}
+\end{corrige}
+
+\begin{corrige}
+$\quad$
+\begin{lstlisting}
+def recherche_k(m,M,c):
+    """ Recherche de k """
+    k=0
+    while k<=m:
+        if abs(suite_u(c,k))>M:
+            return k
+        k=k+1
+    return -1
+\end{lstlisting}
+\end{corrige}
+
+\begin{corrige}
+$\quad$
+\begin{lstlisting}
+def fonction_f(m,M,c):
+    """ Fonction """
+    k = recherche_k(m,M,c)
+    if k>=0:
+        return k
+    else :
+        return m+1
+\end{lstlisting}
+\end{corrige}
+
+\begin{corrige}
+$\quad$
+\begin{lstlisting}
+# Question 2
+#===========
+import matplotlib.pyplot as plt
+m,M=10,20
+LX = [-2+4*x/400 for x in range(401)]
+LF = [fonction_f(m,M,x) for x in LX]
+plt.plot(LX,LF,"*")
+plt.show()
+\end{lstlisting}
+\end{corrige}
+\begin{center}
+\includegraphics[width=.4\linewidth]{programmes/Exercice_09/figure_1}
+\end{center}
+\begin{corrige}
+$\quad$
+\begin{lstlisting}
+# Question 3
+#===========
+LX = [-2+2.5*x/100 for x in range(101)]
+LY = [-1.1+2.2*x/100 for x in range(101)]
+XY = [[[x,y] for x in LX] for y in LY]
+
+for i in range(len(LX)):
+    for j in range(len(LY)):
+        XY[i][j]=fonction_f(
+            m,M,complex(XY[i][j][0],XY[i][j][1]))
+\end{lstlisting}
+\end{corrige}
+
+\begin{corrige}
+$\quad$
+\begin{lstlisting}
+
+# Question 4
+#===========
+res = 100
+LX = [-2+2.5*x/res for x in range(res+1)]
+LY = [-1.1+2.2*x/res for x in range(res+1)]
+XY = [[[x,y] for x in LX] for y in LY]
+
+for i in range(len(LX)):
+    for j in range(len(LY)):
+        XY[i][j]=fonction_f(
+        m,M,complex(XY[i][j][0],XY[i][j][1]))
+
+# plt.imshow(XY)
+# plt.show()
+\end{lstlisting}
+\end{corrige}
+
+\begin{corrige}
+$\quad$
+\begin{lstlisting}
+
+# Bilan 
+#=======
+def affichage(m,M,res):
+    m = m
+    M = M
+    LX = [-2+2.5*x/res for x in range(res+1)]
+    LY = [-1.1+2.2*x/res for x in range(res+1)]
+    XY = [[[x,y] for x in LX] for y in LY]
+    for i in range(len(LX)):
+        for j in range(len(LY)):
+            XY[i][j]=fonction_f(
+                m,M,complex(XY[i][j][0],XY[i][j][1]))
+    plt.imshow(XY)
+    plt.show()
+\end{lstlisting}
+\end{corrige}
+
+\begin{center}
+\begin{tabular}{ccc}
+\includegraphics[width=.3\linewidth]{programmes/Exercice_09/10_20_100} &
+\includegraphics[width=.3\linewidth]{programmes/Exercice_09/10_20_500} & 
+\includegraphics[width=.3\linewidth]{programmes/Exercice_09/20_40_500} \\
+\textit{$m=10$, $M=20$} &
+\textit{$m=10$, $M=20$} &
+\textit{$m=20$, $M=40$} \\
+\textit{100 points par 100 points} & 
+\textit{500 points par 500 points} & 
+\textit{500 points par 500 points} \\
+\end{tabular}
+\end{center}
+
+
+%\columnbreak 
+
+%\addcontentsline{toc}{subsection}{Exercice 10 -- Corrigé}
+\subsection*{Exercice 10 -- Corrigé}
+\begin{corrige}
+$\quad$
+\begin{lstlisting}
+import numpy as np
+# Question 1
+R = np.array([[1,2,3],[4,5,6]])
+S = np.array([[1,2,3],[4,5,6],[7,8,9]])
+\end{lstlisting}
+\end{corrige}
+
+\begin{corrige}
+$\quad$
+\begin{lstlisting}
+# Question 2
+def test(M):
+    """
+    Fonction permettant de tester si la
+    matrice est carrée et retournant sa taille.
+    Entrée : 
+     * M(numpy.ndarray) : matrice
+    Sortie :
+     * 0 si taille non carrée
+     * n(int) : taille de M si elle est carrée
+    """
+    l = M.shape[0]
+    c = M.shape[1]
+    if l==c :
+        return l
+    else : 
+        return 0
+print(test(R),test(S))
+\end{lstlisting}
+\end{corrige}
+
+\begin{corrige}
+$\quad$
+\begin{lstlisting}
+# Question 3
+fid = open("data/ex_006.txt",'r')
+M1 = []
+for ligne in fid :
+    l = ligne.rstrip().split(" ")
+    Ligne = [float(x) for x in l]
+    M1.append(Ligne)
+fid.close()
+M1 = np.array(M1)
+\end{lstlisting}
+\end{corrige}
+
+\begin{corrige}
+$\quad$
+\begin{lstlisting}
+# Question 4
+if test(M1)>0:
+    valeurs_propres = np.linalg.eig(M1)[0]
+    print(valeurs_propres)
+\end{lstlisting}
+\end{corrige}
+
+\begin{corrige}
+$\quad$
+\begin{lstlisting}
+# Question 5
+def dansIntervalle(L,a,b):
+    """
+    Vérifier que chaque élément de L est dans 
+    l'intervalle [a,b]
+    Entrées : 
+     * L(lst) : liste de nombres
+     * a,b(flt) : nombres
+    Sortie : 
+     * True si chaque élément est dans [a,b]
+     * False sinon. 
+    """   
+    for e in L :
+        if e<a or e> b:
+            return False
+    return True
+print(dansIntervalle(valeurs_propres,0,1))
+\end{lstlisting}
+\end{corrige}
+
+%\addcontentsline{toc}{subsection}{Exercice 11 -- Tri de liste -- Corrigé}
+\subsection*{Exercice 11 -- Tri de liste -- Corrigé}
+
+\begin{corrige}
+$\quad$
+\begin{lstlisting}
+# Question 1 
+# ==========
+def comptage(L,n):
+    """
+    Comptage des éléments de L.
+    Entrées :
+     * n(int) : entier
+     * L(lst) : liste d'éléments inférieurs à n
+    """
+    P = [0 for i in range(n+1)]
+    # P = [0]*(n+1)
+    for e in L:
+        P[e]=P[e]+1
+    return P
+from random import randint
+maxi = 5
+LL = [randint(0,maxi) for x in range(20)]
+P = comptage(LL,maxi)
+# print(LL)
+# print(P)
+\end{lstlisting}
+
+\end{corrige}
+
+\begin{corrige}
+$\quad$
+\begin{lstlisting}
+# Question 2
+# ==========
+def tri(L,n):
+    """
+    Tri une liste.
+    Entrées :
+     * n(int) : entier
+     * L(lst) : liste d'éléments inférieurs à n
+    Sortie : 
+     * T(lst) : liste triée.
+    """
+    P = comptage(L,n)
+    T = []
+    for i in range(len(P)):
+        for j in range(P[i]):
+            T.append(i)
+    return T
+\end{lstlisting}
+\end{corrige}
+
+\begin{corrige}
+$\quad$
+\begin{lstlisting}
+# Question 3
+# ==========
+from random import randint
+maxi = 5
+LL = [randint(0,maxi) for x in range(20)]
+T = tri(LL,maxi)
+print(LL)
+print(T)
+\end{lstlisting}
+\end{corrige}
+
+\begin{corrige}
+$\quad$
+\begin{lstlisting}
+# Question 4
+# ==========
+# Complexité quadratique : C(n)=O(n+n^2)=O(n^2)
+# n : complexité de comptage
+# n^2 : complexité des deux boucles imbriquées du 
+# tri
+# Ce tri s'exécutera toujours dans le pire des cas.
+# Dans le cas moyen : tri fusion O(nlogn)
+# Dans le cas moyen : tri insertion O(n^2)
+\end{lstlisting}
+\end{corrige}
+ 
+%\columnbreak
+
+%\addcontentsline{toc}{subsection}{Exercice 12 -- Corrigé}
+\subsection*{Exercice 12 -- Corrigé}
+
+\begin{corrige}
+$\quad$
+\begin{lstlisting}
+b,w = 0.5,6
+# Question 1 
+# ==========
+import numpy as np
+def fonc_p(t):
+    return [np.cos(t)+b*np.cos(w*t),np.sin(t)
+    			+b*np.sin(w*t)]
+\end{lstlisting}
+\end{corrige}
+
+\begin{corrige}
+$\quad$
+\begin{lstlisting}
+def fonc_v(t):
+    return [-np.sin(t)-b*w*np.sin(w*t),np.cos(t)
+    			+b*w*np.cos(w*t)]
+\end{lstlisting}
+\end{corrige}
+
+\begin{corrige}
+$\quad$
+\begin{lstlisting}
+def fonc_a(t):
+    return [-np.cos(t)-b*w*w*np.cos(w*t),
+    		 -np.sin(t)-b*w*w*np.sin(w*t)]
+\end{lstlisting}
+\end{corrige}
+
+\begin{corrige}
+$\quad$
+\begin{lstlisting}
+# Question 2
+# ==========
+L=np.linspace(-np.pi,np.pi,200)
+\end{lstlisting}
+\end{corrige}
+
+\begin{corrige}
+$\quad$
+\begin{lstlisting}
+# Question 3
+# ==========
+import matplotlib.pyplot as plt
+p = fonc_p(L)
+#plt.plot(p[0],p[1])
+#plt.axis("equal")
+#plt.show()
+\end{lstlisting}
+\end{corrige}
+
+\begin{center}
+\includegraphics[width=.4\linewidth]{programmes/Exercice_12/figure_1}
+\end{center}
+
+\begin{corrige}
+$\quad$
+\begin{lstlisting}
+# Question 4
+# ==========
+def fonc_d(t):
+    xp,yp = fonc_v(t)
+    xpp,ypp = fonc_a(t)
+    return (xp**2 + yp**2)/(xp*ypp-yp*xpp)
+def fonc_c(t):
+    fd = fonc_d(t)
+    x,y = fonc_p(t)
+    xp,yp = fonc_v(t)
+    return [x-fd*yp,y+fd*xp]
+\end{lstlisting}
+\end{corrige}
+
+\begin{corrige}
+$\quad$
+\begin{lstlisting}
+# Question 5
+# ==========
+les_xc  = []
+les_yc  = []
+c = fonc_c(L)
+#plt.plot(c[0],c[1])
+\end{lstlisting}
+\end{corrige}
+
+\begin{corrige}
+$\quad$
+\begin{lstlisting}
+# Question 6
+# ==========
+from math import sqrt
+def distance(p):
+    """
+    Calcule la longueur du profil p.
+    Entrée : 
+     * p(lst) : liste [les_x,les_y]
+    Sortie : 
+     * L(flt) : longueur du profil.
+    """
+    L=0
+    for i in range(len(p[0])-1):
+        x0 = p[0][i]
+        y0 = p[1][i]
+        x1 = p[0][i+1]
+        y1 = p[1][i+1]
+        L = L+ sqrt((x1-x0)**2+(y1-y0)**2)
+    return L
+\end{lstlisting}
+\end{corrige}
+
+\begin{corrige}
+$\quad$
+\begin{lstlisting}
+les_dt = []
+les_dist = []
+for i in range(10,2000,1) :
+    dt = 2*np.pi/i
+    L=np.linspace(-np.pi,np.pi,i)
+    p = fonc_p(L)
+    d = distance(p)
+    les_dt.append(dt)
+    les_dist.append(d)
+plt.plot(les_dt,les_dist)
+plt.show()       
+\end{lstlisting}
+\end{corrige}
+
+
+\begin{center}
+\includegraphics[width=.4\linewidth]{programmes/Exercice_12/figure_2}
+
+\textit{Évolution de la longueur du polynôme en fonction de $\delta t$.}
+\end{center}
+
+
+\end{document}

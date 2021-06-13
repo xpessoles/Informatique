@@ -1,0 +1,32 @@
+\exer{}
+\setcounter{numques}{0}
+
+%\subsection{Un exemple : test de primalité} 
+
+
+On veut tester si un entier \texttt{n} est premier on donne l'algorithme suivant :
+
+
+
+%\begin{pyverbatim}
+%def est_premier(n):
+%    """ Renvoie True si n est premier, False sinon
+%        Préconditon : n est un entier."""
+%    for d in range(2,n):
+%        # n n'est pas divisible par 2, 3, ..., d-1.
+%        if n % d == 0:
+%            return False
+%    return True
+%\end{pyverbatim}
+
+\begin{lstlisting}
+def est_premier(n):
+    """ Renvoie True si n est premier, False sinon
+        Préconditon : n est un entier."""
+    for d in range(2,n):
+        if n % d == 0:
+            return False
+    return True
+\end{lstlisting}
+
+\question{Proposer un invariant de boucle pour démontrer cet algorithme.}

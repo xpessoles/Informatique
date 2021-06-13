@@ -1,0 +1,30 @@
+\exer{}
+\setcounter{numques}{0}
+
+Nous pouvons proposer le programme suivant (les invariants sont déjà écrits dedans).
+\lstinputlisting{ALG-007-cor.py}
+
+Cette fonction ne contient qu'une boucle while, à laquelle on peut associer l'invariant suivant : à l'entrée de 
+chaque tour de boucle, fact$=n!$.
+
+On lui associe également le variant $123456789$-\texttt{fact} : \texttt{fact} est un entier qui croît strictement d'un tour de boucle à l'autre et 
+tend vers $+\infty$.
+
+Démontrons l'invariant : 
+
+Initialement, à l'entrée du premier tour de boucle, nous avons $n=0$, et fact$=1$, donc l'invariant est bien vérifié.\\
+Supposons l'invariant vérifié à l'entrée d'un tour de boucle. Notons $n_1$ et fact$_1$ les valeurs de $n$ et fact à 
+l'entrée du tour de boucle, et $n_2$ et fact$_2$ leurs valeurs à la sortie.\\
+Alors : $n_2=n_1+1$ et fact$_2=$fact$_1\times n_2=n_1!\times(n_1+1)=(n_1+1)!=n_2!$, donc l'invariant est vérifié à la 
+sortie de ce tour de boucle, et il est donc vérifié à l'entrée du tour de boucle suivant.\\
+
+Démontrons la terminaison de l'algorithme : il est évident par récurrence qu'après $k$ tours de boucles, $n=k$, donc 
+grâce à l'invariant précédent, fact$=k!$. Puisque $k!\xrightarrow[k\to+\infty]{}+\infty$, alors il existe $k_0\in\N$ 
+tel que $k_0!>123456789$. L'algorithme va donc se terminer en au plus $k_0$ tours de boucles.\\
+
+Démontrons la correction de l'algorithme : notons $n_0$ la valeur de $n$ au début du dernier tour de boucle. Puisque 
+l'on est entrés dans ce tour de boucle, nous avons $n_0!\leq 123456789$. À la fin de ce tour de boucle, $n$ vaut 
+$n_0+1$ et fact=$(n_0+1)!$, mais puisque la boucle while s'interrompt à la fin de ce tour de boucle, c'est que 
+$(n_0+1)!>123456789$. La fonction renvoyant $n$, elle renvoie $n_0+1$, qui est bien le plus petit entier naturel dont 
+la factorielle est strictement supérieure à 123456789. L'algorithme est donc correct.
+

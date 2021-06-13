@@ -1,0 +1,18 @@
+On se place dans le modèle usuel de complexité temporelle  en \python. 
+\begin{description}
+  \item[l. 29] On suppose que la méthode \texttt{readlines()} a une complexité proportionnelle au nombre de caractères du fichier lu : sa complexité est donc en $O(n)$. 
+  \item[l. 30] La création d'une liste se fait en $O(1)$.
+  \item[l. 31 à 39] L est de longueur $n$, chaque élément de $L$ est une chaîne de caractères représentant un entier naturel. 
+  \item[l. 33] Une affectation se fait en $O(1)$.
+  \item[l. 34] Ce découpage se fait en $O(1)$.
+  \item[l. 35 à 37] Il n'y a qu'un tour dans cette boucle. 
+  \item[l. 37] La conversion en entier se fait en $O(1)$. 
+  \item[l. 39] L'ajout en bout de liste se fait en $O(1)$. 
+  \item[l. 31 à 39] La complexité de cette boucle est donc en $O(n)$. 
+  \item[l. 41] Une affectation se fait en $O(1)$.
+  \item[l. 42 et 44] Les calculs de longueur, additions, soustractions et les créations d'objets \texttt{range} se font chacun en $O(1)$. 
+  \item[l. 42 à 50] On a à chaque fois $\texttt{len(L)}=n$, donc il y a au plus $n$ tours dans chacune de ces boucles. Ces boucles sont imbriquées, donc le bloc des lignes 45 à 50 est répété au plus $n^2$ fois. 
+  \item[l. 47 et 48] Les additions, accès en lecture dans un tableau, affectation et comparaison se font chacun en $O(1)$. 
+  \item[l. 42 à 50] La complexité de ce bloc est donc en $O(n^2$). 
+\end{description}
+\fbox{La complexité de \texttt{inversion()} est donc en $O(n^2)$.}

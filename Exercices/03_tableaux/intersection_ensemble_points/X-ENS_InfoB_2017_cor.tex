@@ -1,0 +1,449 @@
+\documentclass[a4paper]{article}
+\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[francais]{babel}
+%\usepackage[babel=true,kerning=true]{microtype}
+
+\usepackage{listings} % pour insérer des bouts de code d'un langage particulier
+
+\usepackage{vmargin}
+\usepackage{mathtools, amsfonts, amssymb, amsthm}
+\usepackage{lmodern}
+\usepackage{dsfont}
+\usepackage{skull}
+\usepackage{fancybox}
+\usepackage{stmaryrd}
+\usepackage{marvosym}
+\usepackage{wrapfig} % pour insérer des images dans le texte
+\usepackage{tikz}
+\usepackage{longtable}
+\usepackage[all]{xy}
+\usepackage{enumitem} % pour modifier les puces et numérotations des listes.
+
+% configuration des bouts de code insérés avec le package listings
+\lstset{
+language=Python,
+basicstyle=\footnotesize,
+backgroundcolor=\color{white},
+}
+
+\setmarginsrb{1.5cm}{1.5cm}{1.5cm}{1.5cm}{0cm}{0cm}{1cm}{1cm}
+%\setmarginsrb{1}{2}{3}{4}{5}{6}{7}{8}
+%1 est la marge gauche
+%2 est la marge en haut
+%3 est la marge droite
+%4 est la marge en bas
+%5 fixe la hauteur de l'entête
+%6 fixe la distance entre l'entête et le texte
+%7 fixe la hauteur du pied de page
+%8 fixe la distance entre le texte et le pied de page
+
+\begin{document}
+
+\pagestyle{plain} % permet d'afficher le numéro de page en pied de page
+\title{Sujet~: Maths 1 PSI E3A 2016}
+
+\let\dps=\displaystyle
+\def\K{\mathbb{K}}
+\def\L{\mathbb{L}}
+\def\M{\mathbb{M}}
+\def\N{\mathbb{N}}
+\def\R{\mathbb{R}}
+\def\C{\mathbb{C}}
+\def\Q{\mathbb{Q}}
+\def\Z{\mathbb{Z}}
+\def\R{\mathbb R}
+\def\Ker{\hbox{Ker}\,}
+\def\tr{\hbox{Tr}\,}
+\def\im{\hbox{Im}\,}
+\def\rg{\hbox{rg}\,}
+\def\dim{\hbox{dim}\,}
+\def\ch{\hbox{ch}\,}
+\def\sh{\hbox{sh}\,}
+\def\Mat{\hbox{Mat}\,}
+\def\det{\hbox{det}\,}
+\def\P{\textsc{Python}}
+
+
+\newtheoremstyle{break}% name
+  {15pt}%      Space above, empty = `usual value'
+  {20pt}%      Space below
+  {}% Body font
+  {}%  Indent amount (empty = no indent, \parindent = para indent)
+  {\bfseries}% Thm head font
+  {:}%        Punctuation after thm head
+  {\newline}% Space after thm head: \newline = linebreak
+  {}%         Thm head spec
+\newtheorem{Def}{Définition}
+\newtheorem{Theo}{Théorème}
+\newtheorem{Prop}{Proposition}
+\newtheorem{Cor}{Corollaire}
+\newtheorem{Lem}{Lemme}
+\newtheorem{Rem}{Remarque}
+\newtheorem{Pte}{Propriété}
+\newtheorem{Ex}{Exemple}
+\newtheorem{Rev}{Révision}
+\newtheorem{Ax}{Axiome}
+\newtheorem{Quest}{Question}
+\newtheorem{Rep}{Réponse}
+\newtheorem{Ext}{Extension}
+\newtheorem{Cas}{Cas}
+\newtheorem{Prog}{Programmation}
+\newtheorem{Qn}{Q}
+
+
+%\theoremstyle{definition}
+\theoremstyle{break}
+\newtheorem{Exo}{Exercice}
+%\theoremstyle{plain} : Title and number in bold, body in italic (default). 
+%\theoremstyle{definition} : Title and number in bold, body in normal font. 
+%\theoremstyle{remark} : Title and number in italic, body in normal font. 
+
+
+
+%\centerline{{\bf \emph{Lycée Clemenceau}} \hfil \hfil {\bf PCSI 1} \hfil \hfil \hfil{\bf \emph{2013/2014}}}
+{\noindent \bf Informatique \hfill  CPGE}\\
+{$2^{de}$ année \hfill  Clemenceau}
+
+\bigskip
+\bigskip
+\centerline{\LARGE \bf Sujet~: X-ENS Informatique B 2017}
+\centerline{\LARGE \bf Corrigé}
+\bigskip
+
+\section*{Partie I. Une solution naïve en Python}
+
+\begin{Quest} % Q1
+\end{Quest}
+\begin{lstlisting}
+def membre(p, Q):
+    '''version puriste'''
+    i, cont = 0, False
+    n = len(Q)
+    while i < n and not cont :
+        if p[0] == Q[i][0]:
+            if p[1] == Q[i][1]:
+                cont = True
+        i += 1
+    return(cont)
+\end{lstlisting}
+
+La commande \verb|element in sequence| n'était pas stipulée dans les rappels de \P. \'Etait-elle tolérée à la correction~? Je n'en sais rien. Même chose pour \verb|Liste_1 == Liste_2| sans passer par le test élément par élément. La proposition de solution suivante ne rapportait pas forcément la totalité des points de la question.
+
+
+\begin{lstlisting}
+def membre_bis(p, Q):
+    '''version pythonesque'''
+    for point in Q:
+        if point == p:
+            return(True)
+        return(False)
+\end{lstlisting}
+
+Dans cette manière un peu puriste de voir les choses, je me suis forcé à proposer des algorithmes avec des boucles \verb|while| sans utiliser la possibilité de quitter une fonction par un \verb|return()| à l'intérieur d'une boucle \verb|for|. Mais cette solution, peut être moins élégante, me semble tout à fait envisageable.
+
+\begin{Quest} % Q2
+\end{Quest}
+\begin{lstlisting}
+def intersection(P, Q):
+    LI = []
+    np, nq = len(P), len(Q)
+    if np <= nq:
+        for i in range(np):
+            if membre(P[i], Q):
+                LI.append(P[i])
+    else :
+        for j in range(nq):
+            if membre(Q[j], P):
+                LI.append(Q[j])
+    return(LI)
+\end{lstlisting}
+
+\begin{Quest} % Q3
+\end{Quest}
+Quelle que soit la différence de taille entre les ensembles $P$ et $Q$ de longueurs $p$ et $q$, l'algorithme va parcourir chaque point de l'un puis chercher s'il est présent en le comparant au pire à chaque point de l'autre.
+
+
+La complexité de la fonction précédente est donc au pire en $\mathcal{O}(p \times q)$.
+
+\section*{Partie II. Une solution naïve en SQL}
+
+\begin{Quest} % Q4
+\end{Quest}
+\begin{verbatim}
+SELECT idensemble FROM Membre JOIN Points ON idpoint = id WHERE x = a AND y = b;
+\end{verbatim}
+
+\begin{Quest} % Q5
+\end{Quest}
+\begin{verbatim}
+SELECT x, y FROM Points JOIN Membre AS Ei ON id = Ei.idpoint JOIN Membre AS Ej ON id = Ej.idpoint
+WHERE Ei.idensemble = i AND Ej.idensemble = j;
+\end{verbatim}
+
+\begin{Quest} % Q6
+\end{Quest}
+\begin{verbatim}
+SELECT DISTINCT id FROM Points JOIN Membre ON id = idpoint
+WHERE idensemble IN (
+SELECT idensemble FROM Membre JOIN Points ON id = idpoint WHERE x = a AND y = b)
+AND id != (SELECT id FROM Points WHERE x = a and y = b);
+\end{verbatim}
+
+Il était aussi possible d'utiliser une auto-jointure.
+\begin{verbatim}
+SELECT DISTINCT E2.idpoint FROM Membre AS E1 JOIN Membre AS E2
+ON E1.idensemble = E2.idensemble
+JOIN Points ON Points.id = E1.idpoint
+WHERE x = 5 and y = 12
+AND E2.idpoint != (SELECT id FROM Points WHERE x = 5 and y = 12);
+\end{verbatim}
+
+
+\section*{Partie III. Codage de Lebesgue}
+
+\begin{Quest} % Q7
+\end{Quest}
+Ici $x$ vaut 1, donc $\overline{001}^2$ en binaire, et $y$ vaut 6, soit $\overline{110}^2$ en binaire. Le codage binaire de Lebesgue est donc $\overline{010110}^2$, soit en base 4 avec la notation décimale~: $\overline{112}^l$.
+
+
+Le point (1, 6) sera donc représenté par son codage de Lebesgue en \P  par la liste \verb|[1, 1, 2]|.
+
+\begin{Quest} % Q8
+\end{Quest}
+Voici une fonction \verb|bits(x, k)| qui prend en argument deux entiers naturels $x$ et $k$ et qui renvoie la valeur du bit de coefficient $2^k$ dans la représentation binaire de $x$.
+\begin{lstlisting}
+def bits(x, k):
+    return ((x // pow(2, k)) % 2)
+\end{lstlisting}
+
+
+Cette fonction renvoie la valeur recherchée directement et non en faisant la conversion complète de $x$ en binaire puis en prenant le chiffre de rang $k$, ce qui serait un algorithme naïf. Je ne vois pas pourquoi le sujet ne vous demandait pas cette petite fonction...
+
+
+Voici alors la fonction demandée.
+\begin{lstlisting}
+def code(n, p):
+    res = []
+    for i in range(n - 1, -1, -1):
+        res.append(2 * bits(p[0], i) + bits(p[1], i))
+    return(res)
+\end{lstlisting}
+
+\section*{Partie IV. Représentation d'un ensemble de points}
+
+\begin{Quest} % Q9
+\end{Quest}
+$\overline{000}^l < \overline{012}^l < \overline{101}^l < \overline{233}^l < \overline{311}^l$.
+
+\begin{Quest} % Q10
+\end{Quest}
+\begin{lstlisting}
+def compare_pcodes(n, c1, c2):
+    i = 0
+    while i < n - 1 and c1[i] == c2[i]:
+        i += 1
+    if c1[i] < c2[i]:
+        res = 1
+    elif c1[i] > c2[i]:
+        res = -1
+    else:
+        res = 0
+    return(res)
+\end{lstlisting}
+
+\begin{Quest} % Q11
+\end{Quest}
+La représentation binaire de l'ensemble de points $S_1$ vaut~:
+
+
+$\overline{S_1}^2 = \{(\overline{00}^2,\overline{00}^2),(\overline{11}^2,\overline{11}^2),(\overline{11}^2,\overline{10}^2),(\overline{01}^2,\overline{01}^2),(\overline{01}^2,\overline{10}^2),(\overline{10}^2,\overline{10}^2),(\overline{10}^2,\overline{11}^2)\}$.
+
+
+On en déduit le codage de Lebesgue de chaque point.
+
+
+$\overline{S_1}^l = \{\overline{00}^2 \overline{00}^2, \overline{11}^2 \overline{11}^2, \overline{11}^2 \overline{10}^2, \overline{00}^2 \overline{11}^2, \overline{01}^2 \overline{10}^2, \overline{11}^2 \overline{00}^2, \overline{11}^2 \overline{01}^2\} = \{\overline{00}^l, \overline{33}^l, \overline{32}^l, \overline{03}^l, \overline{12}^l, \overline{30}^l, \overline{31}^l\}$.
+
+
+Cet ensemble, une fois trié pour l'ordre lexicographique, s'écrit~:
+
+
+$\overline{S_1}^l = \{\overline{00}^l, \overline{03}^l, \overline{12}^l, \overline{30}^l, \overline{31}^l, \overline{32}^l, \overline{33}^l\}$.
+
+
+\section*{Partie V. Calcul efficace de l'intersection d'ensembles de points}
+
+\begin{Quest} % Q12
+\end{Quest}
+L'ensemble $S_1$, une fois compacté, s'écrit~:
+
+
+$\overline{S_1}^l = \{\overline{00}^l, \overline{03}^l, \overline{12}^l, \overline{34}^l\}$.
+
+
+\`A la question précédente, le sujet demandait le code compacté. Or la notion de compactage n'était pas encore définie. Il faut donc ôter ce terme à la question~11.
+
+\begin{Quest} % Q13
+\end{Quest}
+\begin{lstlisting}
+def ksuffixe(n, k, Q):
+    test = True
+    for i in range(n - 1, n - 1 - k, -1):
+        if Q[i] != 4:
+            test = False
+    if test :
+        return(Q[: n - 1 - k] + [4] * (k + 1))
+    else:
+        return(Q)
+\end{lstlisting}
+
+\begin{Quest} % Q14
+\end{Quest}
+Voici une première fonction qui compare plusieurs éléments consécutifs d'une liste de codes de Lebesgue.
+
+\begin{lstlisting}
+def compare(n, i0, rep, L):
+    '''Compare rep éléments consécutifs de L à partir du rang i0.
+    L est une liste de codes de Lebesgue en base 4 de Dn x Dn.
+    Renvoie True s'ils sont tous égaux, False sinon.'''
+    indice, compt = i0, 2
+    taille = len(L)
+    test = compare_pcodes(n, L[indice], L[indice + 1]) == 0
+    while compt < rep and test and indice < taille - 2:
+        indice += 1
+        compt += 1
+        test = compare_pcodes(n, L[indice], L[indice + 1]) == 0
+    return(test)
+\end{lstlisting}
+
+Voici une deuxième fonction qui compacte les blocs de 4 éléments consécutifs dans les codages de Lebesgue. J'utilise ici le fait que la fonction \verb|ksuffixe(n, 0, S)| affecte le dernier élément de S à la valeur 4.
+
+\begin{lstlisting}
+def compacte_bloc(n, k, S):
+    '''S est une liste de codages Lebesgue triée 
+    pour l'ordre lexicographique, et sans répétition.
+    k est le rang à tester pour compacter les codages, donc de 1 à n.
+    Renvoie la liste de codages compactés au rang k'''
+    taille = len(S)
+    res = []
+    iS = 0    # iS parcourt S
+    
+    # On applique ksuffixe() à tous les éléments de S au rang précédent
+    Smod = [ksuffixe(n, k - 1, si) for si in S]
+    # Alors si un bloc de 4 éléments de rang k - 1 existe dans S
+    # ils auront le même suffixe
+    
+    while iS < taille :   # Parcourt de tout S
+        if iS < taille - 3 and compare(n, iS, 4, Smod):
+            # si il reste plus de 4 éléments dans S
+            # et si les 4 éléments suivants forme un même bloc
+            res.append(Smod[iS])
+            iS += 4
+        else:
+            res.append(S[iS])
+            iS += 1
+    return(res)
+\end{lstlisting}
+
+Ensuite, j'itère cette fonction de 1 à $n$ compris avec la fonction suivante.
+
+\begin{lstlisting}
+def compacte(n, S):
+    for k in range(n):
+        S = compacte_bloc(n, k + 1, S)
+        # S en argument ne sera pas modifié car le S de la boucle for
+        # est une variable locale  e la fonction compacte()
+    return(S)
+\end{lstlisting}
+
+\newpage
+
+\begin{Quest} % Q15
+\end{Quest}
+\begin{lstlisting}
+def compare_ccodes(n, P, Q):
+    np, nq = len(P), len(Q)
+    k, res= 0, 0
+    while k < n and P[k] == Q[k] and P[k] != 4:
+        # Parcourt des deux codes
+        k += 1
+    if P[k] < Q[k]:
+        if Q[k] == 4:
+            # P inclus dans Q
+            res = 2
+        else:
+            # P inférieur à Q
+            res = 1
+    elif P[k] > Q[k]:
+        if P[k] == 4:
+            # Q inclus dans P
+            res = -2
+        else:
+            # Q inférieur à P
+            res = -1
+    else:
+        # dernier cas si P et Q ont même préfixe
+        res = 0
+    return(res)
+\end{lstlisting}
+
+C'est un procédé par disjonction de cas.
+
+\begin{Quest} % Q16
+\end{Quest}
+
+\begin{lstlisting}
+def intersection2(n, P, Q):
+    np, nq = len(P), len(Q)
+    LI = [] # initialisation de la liste intersection
+    kp, kq = 0, 0   # indices d'exploration des listes P et Q
+    
+    while kp < np and kq < nq:
+        # variant : (np - kp) + (nq - kq)
+        test = compare_ccodes(n, P[kp], Q[kq])
+        if test == 0:       # P[kp] et Q[kq] égaux
+            LI.append(P[kp])    # P[kp]=Q[kq] est dans l'intersection
+            kp += 1             # Passage à P[kp + 1]
+            kq += 1             # Passage à Q[kq + 1]
+        elif test == 1:     # P[kp] < Q[kq]
+            kp += 1             # Passage à P[kp + 1]
+        elif test == -1:    # Q[kq] < P[kp]
+            kq += 1             # Passage à Q[kq + 1]
+        elif test == 2:     # P[kp] inclus dans Q[kq]
+            LI.append(P[kp])    # P[kp] est dans l'intersection
+            kp += 1             # Passage à P[kp + 1]
+        elif test == -2:    # Q[kq] inclus dans P[kp]
+            LI.append(Q[kq])    # Q[kq] est dans l'intersection
+            kq += 1         # Passage à Q[kq + 1]
+    return(LI)
+\end{lstlisting}
+
+\`A chaque itération de la boucle \verb|while|, la fonction \verb|compare_ccodes()| est appelée et \verb|kp| ou \verb|kq| est incrémenté, ou les deux. 
+
+
+Au pire des cas, la boucle \verb|while| sera donc parcourue \verb|len(P) + len(Q)| fois. Le nombre d'appels à la fonction \verb|compare_ccodes()| effectués par \verb|intersection2(n, P, Q)| sera donc en $\mathcal{O}$(\verb|len(P) + len(Q)|).
+
+%\section{Présentation de la suite matérielle Arduino}
+%
+%\begin{wrapfigure}[8]{r}{4cm}
+%\includegraphics[width=3cm]{Images/logo_arduino.jpg}
+%\caption{Logo Arduino}
+%\label{Logo Arduino}
+%\end{wrapfigure}
+%Lorsque Massimo Banzi et ses collègues de l'\textit{Interaction Design Institute} d'Ivrea, en Italie, ont développé l'Arduino, l'objectif était de permettre de pouvoir disposer d'un microcontrôleur valant le prix d'une pizza pour réaliser des projets interactifs. Ainsi, l'Arduino a été conçu pour être bon marché, doté d'une grande quantité d'entrées et de sorties, compatible Mac, Windows et Linux, programmable avec un langage très simple et open source.
+%\newline
+%\newline
+%
+%\subsubsection{Architecture de la carte Arduino UNO}
+%
+%\begin{figure}[h]
+%\begin{center}
+%\includegraphics[width=12cm]{Images/ArduinoUno_legende.png}
+%\end{center}
+%\caption{Vue de face d'une carte Arduino UNO}
+%\label{Vue de face d'une carte Arduino UNO}
+%\end{figure}
+
+\end{document}
+

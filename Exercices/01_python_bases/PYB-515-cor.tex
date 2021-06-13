@@ -1,0 +1,20 @@
+\exer{}
+\setcounter{numques}{0}
+
+\question{}
+\begin{lstlisting}
+
+def H_depasse(M):
+    """Plus petit entier n tel que H_n >= M"""
+    n = 1
+    H = 1
+    #Inv H est la somme des 1/k allant de 1 a n=1
+    while H < M : 
+        # Inv : H = H_n est la somme des 1/k allant de 1 a n avec Hn<M
+        n = n+1
+        H = H + 1 / n
+        # Inv : H = H_n est la somme des 1/k allant de 1 a n avec Hn<M
+    # Inv : H = H_n est la somme des 1/k allant de 1 a n avec Hn>=M
+    return n
+\end{lstlisting}
+

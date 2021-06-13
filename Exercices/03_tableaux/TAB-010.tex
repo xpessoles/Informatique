@@ -1,0 +1,57 @@
+Le but de cet exercice est de trier un tableau \texttt{t} dont les éléments ne
+peuvent prendre qu'un ``petit'' nombre de valeurs (ici, trois valeurs : 0, 1 ou
+2).\\
+Par exemple, à partir du tableau initial :\\
+
+\begin{tabular}{|l|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+ \hline
+ valeurs&\bf 2&\bf 0&\bf 1&\bf 0&\bf 2&\bf 1&\bf 1&\bf 0&\bf 1&\bf
+2&\bf 2&\bf 1&\bf 0\\ \hline
+ \it indice&\it 1&\it 2&\it 3&\it 4&\it 5&\it 6&\it
+7&\it 8&\it 9&\it 10&\it 11&\it 12&\it 13\\\hline
+ \end{tabular}
+ \\
+ 
+il faut obtenir le tableau final :\\
+
+\begin{tabular}{|l|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+ \hline
+ valeurs&\bf 0&\bf 0&\bf 0&\bf 0&\bf 1&\bf 1&\bf 1&\bf 1&\bf 1&\bf
+2&\bf 2&\bf 2&\bf 2\\ \hline
+ \it indice&\it 1&\it 2&\it 3&\it 4&\it 5&\it 6&\it
+7&\it 8&\it 9&\it 10&\it 11&\it 12&\it 13\\\hline
+ \end{tabular}
+ \\
+ 
+ Le programme sera itératif (i.e. on utilisera une boucle \texttt{for}). Pour
+trouver comment écrire le corps de la boucle, on suppose que le tableau
+\texttt{t} (de taille $n$) a été traité jusqu'au rang $i$, et que sont connus
+$j$ et $k$ vérifiant :\\
+\begin{itemize}
+ \item tous les éléments du tableau d'indice inférieur ou égal à $j$ sont égaux
+à 0 ;
+\item tous les éléments du tableau d'indice supérieur strictement à $j$
+et inférieur ou égal à $j$ sont égaux à 1 ;
+\item tous les éléments du tableau d'indice supérieur strictement à $k$
+sont égaux à 2.\\
+\end{itemize}
+
+\begin{tabular}{|ccc|ccc|ccc|c|c|}
+ \hline 0&$\cdots$&0& 1&$\cdots$&1& 2&$\cdots$&2&x&$\cdots$\\
+ \hline \multicolumn{1}{c}{$1$}& \multicolumn{1}{c}{}& \multicolumn{1}{c}{$j$}&
+\multicolumn{1}{c}{$j+1$}& \multicolumn{1}{c}{}& \multicolumn{1}{c}{$k$}&
+\multicolumn{1}{c}{$k+1$}& \multicolumn{1}{c}{}& \multicolumn{1}{c}{$i$}&
+\multicolumn{1}{c}{$i+1$}& \multicolumn{1}{r}{$n$}
+\end{tabular}
+\\
+
+Le prochain élément du tableau à traiter est \texttt{t[i+1]}, noté \texttt{x}.\\
+$\bullet$ En supposant $1\leq j<k<i<n$ (c'est-à-dire qu'il y a au moins un 0, un
+1 et un 2 placés), quelles sont les modifications à faire sur \texttt{t}, $i$ et
+$j$ si $x=2$ ? si $x=1$ ? si $x=0$ ?\\
+
+Il se peut qu'il n'y ait pas encore de 0, 1 ou 2 dans la partie de tableau déjà
+triée. Il faut en tenir compte dans les modifications de \texttt{t}, $i$ et $j$
+selon les valeurs de $x$.\\
+
+\noindent$\bullet$  Écrire le traitement complet du tri.

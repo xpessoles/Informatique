@@ -1,0 +1,21 @@
+\exer{}
+\setcounter{numques}{0}
+
+ On pose $u_{0} = 1$ et pour tout $n\in \mathbb{N}$,
+\begin{align*}
+  u_{n+1} &= \frac{1}{2}\left(u_{n}+\frac{n+1}{u_{n}}\right)\\
+\text{et } v_{n} &= \sum_{k=0}^{n} \frac{1}{u_{k}^{5}}
+\end{align*}
+
+\question{} Écrire une fonction \texttt{f(n)} renvoyant la valeur de
+  $v_{n}$.
+
+On peut montrer que $\left(v_{n}\right)_{n\in \mathbb{N}}$ converge.
+
+\textbf{Attention}: on fera attention à ce que le calcul de \texttt{f}
+de demande  pas trop de (re)calculs inutiles. Pour fixer les idées,
+vous  pouvez considérer  que  \texttt{f(10**6)} doit être calculé  en
+(largement) moins d'une minute.
+
+\question{} Vérifier que vous pouvez calculer $v_{n}$ pour de grandes valeurs de $n$.
+

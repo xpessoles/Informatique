@@ -1,0 +1,148 @@
+\setcounter{question}{0}
+
+\question\
+
+L'algorithme suivant répond à la question. 
+\begin{Verbatim}[gobble=0,numbers=left]
+from numpy import zeros, array
+
+def produit(P,Q,n):
+    """Produit PQ tronqué à l'ordre n"""
+    L = [0.]*(n+1)
+    for k in range(n+1): # invariant : L[:k] contient les
+			 # coefficients de PQ de degré < k
+        for i in range(k+1): # invariant : L[k] vaut la somme 
+			 # des P[j]*Q[k-j] pour j de 0 à i-1
+            if k-len(Q) < i < len(P) :
+                L[k] = L[k] + P[i]*Q[k-i]
+    return L
+\end{Verbatim}
+
+\medskip\
+
+\question\ Soit $k\in\llbr 0,n\rrbr$. La boucle \texttt{for} des lignes 8 à 11 contient $k$ tours de boucle. Chacun de 
+ces tours de boucle contient au plus une instruction, celle de la ligne 11, qui elle-même contient trois opérations 
+(une somme, un produit et une affectation). La complexité de cette boucle est donc $O(k)$.\\
+La boucle des lignes 6 à 11 contient $n$ tours de boucle, et chacun de ces tours de boucle a une complexité en 
+$O(k)$, et donc en $O(n)$. La complexité de cette boucle est donc $O(n^2)$.\\
+La fonction \texttt{produit} ne comporte que l'instruction de la ligne 5 en plus de la boucle précédente, et la ligne 5 
+a une complexité en $O(n)$.\\
+La complexité de \texttt{produit} est donc un $O(n^2)$.
+
+
+\medskip\
+
+\question\ Soit $k\in\llbr 0,n\rrbr$. Puisque la valuation du DL de $f$ est 1, celle du DL de $f^k$ est $k$.\\
+Notons alors $f^k(t)\underset{t\to0}{=}\displaystyle\sum_{i=k}^n a_{i,k}t^i + o(t^n)$.\\
+Il vient donc :
+\begin{align*}
+ (f^{-1}\circ f)(t)&\underset{t\to0}{=}  \displaystyle\sum_{k=1}^n x_kf^k(t) + o(t^n)\\
+ &\underset{t\to0}{=} \displaystyle\sum_{k=1}^n x_k\displaystyle\sum_{i=k}^na_{i,k}t^i + o(t^n)\\
+ &\underset{t\to0}{=} \displaystyle\sum_{i=1}^n \displaystyle\sum_{k=1}^i x_k a_{i,k}t^i + o(t^n)
+\end{align*}
+Puisque $f^{-1}\circ f=\mathrm{Id}$, nous obtenons donc le système suivant :\\
+\begin{itemize}
+ \item $x_1 a_{1,1} = 1$ ;
+ \item pour tout $i\in\llbr 2,n\rrbr$, $\displaystyle\sum_{k=1}^i x_k a_{i,k} = 0$.
+\end{itemize}
+
+Ce système est bien triangulaire inférieur.
+
+\medskip\
+
+\question\ 
+\begin{Verbatim}[gobble=0,numbers=left]
+def matrice(P):
+    """Matrice du systeme donnant les coefficients du DL de la réciproque de f
+       P : coefficients du DL de f"""
+    n = len(P)-1
+    B = zeros((n,n))
+    Q = P.copy()
+    for j in range(n): 	# invariant : les lignes de la matrice du système 
+			# sont construites jusqu'à la (j-1)-ème.
+        for i in range(j,n): # invariant : les coefficients de la j-ème  
+			# ligne de la matrice du système sont construits
+			# jusqu'au la (i-1)-ème.
+            B[i,j] = Q[i+1]
+        Q = produit(P,Q,n)
+    return B
+\end{Verbatim}
+
+
+\medskip\
+
+\question\ Soit $n$ le degré du polynôme $P$. La fonction \texttt{matrice} contient ligne 5 une instruction en 
+$O(n^2)$, et ligne 6 une instruction en $O(n)$. Le reste de la fonction est constitué de deux boucles imbriquées.\\
+La boucle des lignes 9 à 12 comporte $n-j$ tours de boucle, et chacun des ces tours est constitué d'une affectation. 
+La complexité de cette boucle est donc un $O(n-j)$, soit un $O(n)$.\\
+La boucle des lignes 7 à 13 comporte $n$ tours de boucle. Dans chaque tour de boucle, il y a $O(n)$ opérations 
+contenues dans la boucle intérieure, et $O(n^2)$ opérations résultant de l'appel à \texttt{produit(P,Q,n)}. Cette 
+boucle a donc une complexité en $O(n^3)$\\
+Finalement, la complexité de \texttt{matrice} est un $O(n^3)$.
+
+\medskip\
+
+\question\ 
+\begin{Verbatim}[gobble=0,numbers=left]
+def resoutTI(T,Y):
+    """Donne X solution de TX = Y, avec T triangulaire inférieure"""
+    n,_ = T.shape
+    X = zeros((n,1))
+    for i in range(n): # invariant : les valeurs des X[j] pour j de 
+		      # 0 à (i-1) ont été calculées
+        X[i,0] = Y[i,0]
+        for j in range(i):
+            X[i,0] = X[i,0] - T[i,j]*X[j,0]
+        X[i,0] = X[i,0] / T[i,i]
+    return X
+\end{Verbatim}
+
+\medskip\
+
+\question\ Pour $i\in\llbr 0,n-1\rrbr$, la complexité de la boucle intérieure est un $O(i)$. On dénombre facilement que 
+chaque tour de la boucle initiée ligne 5 est en $O(i)$, donc cette boucle est en $O(n^2)$. La ligne 4 étant en $O(n)$, 
+la complexité de \texttt{resout} est un $O(n^2)$.
+
+\medskip\
+
+\question\
+\begin{Verbatim}[gobble=0,numbers=left]
+def DLreciproque(P):
+    """Donne le DL de la reciproque de f(x)+o(x n)
+       Précondition : f(0)=0"""
+    T = matrice(P)
+    n = len(P)-1
+    Y =zeros((n,1))
+    Y[0,0] = 1.
+    X = resoutTI(T,Y)
+    Q = [0.]*(n+1)
+    for i in range(1,n+1): # invariant : les coefficients du DL de 
+			# l'inverse de f sont calculés jusqu'au degré (i-1)
+        Q[i] = X[i-1,0]
+    return Q
+
+\end{Verbatim}
+ 
+\medskip\
+
+\question\ Il est aisé de constater qu'en dehors de l'appel à \texttt{matrice}, toutes les instructions sont au pire en 
+$O(n^2)$, donc la complexité de \texttt{DLreciproque} est un $O(n^3)$.
+
+\medskip\
+
+\question\
+\begin{Verbatim}[gobble=0,numbers=left]
+def DLtan(n):
+    """Donne la partie principale du DL de la tangente à l'ordre n"""
+    atan = [0.]*(n+1)
+    i = -1
+    s = -1
+    while i+2 <= n : # invariant : les coefficients du DL de 
+		# atan sont calculés jusqu'au degré (2*(i+1))
+        i = i+2
+        s = -s
+        atan[i] = s / i
+    return DLreciproque(atan)
+\end{Verbatim}
+
+L'appel à \texttt{DLtan(7)} donne bien le résultat voulu.

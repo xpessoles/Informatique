@@ -1,0 +1,100 @@
+\lstset{language=SQL,morekeywords={REFERENCES}}
+
+\question{Donner la requête permettant de lister tous les noms, prénoms et les titres (M. Mme. ou Melle.) des clients.}
+
+\begin{lstlisting}
+SELECT CLI_NOM, CLI_PRENOM, TIT_CODE FROM T_CLIENT;
+\end{lstlisting}
+
+\question{Donner le nombre de clients enregistrés dans la base.}
+
+\begin{lstlisting}
+SELECT COUNT(*) FROM T_CLIENT ;
+\end{lstlisting}
+
+
+\question{Trouver les noms et prénoms des clients dont le titre est ‘Mme.' (madame).}
+
+\begin{lstlisting}
+SELECT CLI_NOM, CLI_PRENOM, TIT_CODE FROM T_CLIENT WHERE TIT_CODE='Mme.';
+\end{lstlisting}
+
+\question{Donner les noms , prénoms et les titres (Mme. ou Melle.) des clientes.}
+
+\begin{lstlisting}
+SELECT CLI_NOM, CLI_PRENOM, TIT_CODE FROM T_CLIENT WHERE TIT_CODE='Mme.' OR TIT_CODE='Melle.';
+\end{lstlisting}
+
+\question{Donner le nombre de clientes.}
+
+\begin{lstlisting}
+SELECT count(*) FROM T_CLIENT WHERE TIT_CODE='Mme.' OR TIT_CODE='Melle.';
+\end{lstlisting}
+
+\question{Classer par ordre alphabétique les clients de sexe féminin. On ne demande que les noms et les prénoms qui devront être appelés Noms et Prénoms.}
+
+\begin{lstlisting}
+SELECT CLI_NOM as noms, CLI_PRENOM as prenoms FROM T_CLIENT WHERE TIT_CODE='Mme.' OR TIT_CODE='Melle.' ORDER BY noms, prenoms;
+\end{lstlisting}
+
+\question{Établir une nouvelle relation (table) faisant apparaître les noms des clients et leurs numéros de téléphone.}
+
+\begin{lstlisting}
+SELECT T_CLIENT.CLI_NOM, T_TELEPHONE.TEL_NUMERO FROM T_CLIENT JOIN T_TELEPHONE ON T_CLIENT.CLI_ID=T_TELEPHONE.CLI_ID;
+\end{lstlisting}
+
+\question{Donner la liste des clients ayant le même nom}
+
+\begin{lstlisting}
+SELECT NOM FROM (SELECT CLI_NOM as Nom, CLI_PRENOM as prenom, COUNT(*) as nb_nom FROM T_CLIENT GROUP BY Nom) WHERE nb_nom>1;
+\end{lstlisting}
+
+\question{Donner le nombre d'occurrences de chacun de ces noms.}
+
+\begin{lstlisting}
+SELECT * FROM(SELECT CLI_NOM,COUNT(CLI_NOM) AS ct FROM T_CLIENT GROUP BY CLI_NOM ORDER BY CLI_NOM) WHERE ct>1;
+\end{lstlisting}
+
+%\question{Reprendre la question 2 en faisant apparaître une colonne \texttt{Nom}, une colonne \texttt{Prénom} et une colonne \texttt{Sexe} qui renvoie l’indication << homme >> .}
+
+
+\question{Donner la valeur moyenne des remises en pourcentage et en montant.}
+
+\begin{lstlisting}
+SELECT AVG(LIF_REMISE_MONTANT),  AVG(LIF_REMISE_POURCENT) FROM T_LIGNE_FACTURE;
+\end{lstlisting}
+
+\question{Donner la valeur maximale des remises en pourcentage et en montant.}
+
+\begin{lstlisting}
+SELECT MAX(LIF_REMISE_MONTANT),  AVG(LIF_REMISE_POURCENT) FROM T_LIGNE_FACTURE;
+\end{lstlisting}
+
+\question{Donner les identifiants facture (\texttt{FAC\_ID} que l'on renomera \texttt{fac$\_$id1}) qui ont bénéficié de remise (soit en pourcentage soit en montant).}
+
+\begin{lstlisting}
+SELECT FAC_ID FROM T_LIGNE_FACTURE WHERE LIF_REMISE_POURCENT>0 OR LIF_REMISE_MONTANT>0 ;
+\end{lstlisting}
+
+\question{Donner les identifiants clients (\texttt{CLI\_ID}) qui ont bénéficié d’une remise (soit en pourcentage soit en montant).}
+
+\begin{lstlisting}
+SELECT DISTINCT CLI_ID FROM T_FACTURE JOIN (SELECT T_LIGNE_FACTURE.FAC_ID as facid1  FROM T_LIGNE_FACTURE WHERE LIF_REMISE_POURCENT>0 OR LIF_REMISE_MONTANT>0) ON facid1=T_FACTURE.FAC_ID;
+\end{lstlisting}
+
+\question{Donner les identifiants clients (\texttt{CLI\_ID}) qui n'ont pas bénéficié d'une remise.}
+
+\begin{lstlisting}
+SELECT CLI_ID FROM T_CLIENT EXCEPT SELECT DISTINCT CLI_ID FROM T_FACTURE JOIN (SELECT T_LIGNE_FACTURE.FAC_ID as facid1  FROM T_LIGNE_FACTURE WHERE LIF_REMISE_POURCENT>0 OR LIF_REMISE_MONTANT>0) ON facid1=T_FACTURE.FAC_ID;
+\end{lstlisting}
+
+
+\question{Donner le nom et prénom du client qui a le plus bénéficié de remises. Donner le montant de cette remise totale.}
+
+\begin{lstlisting}
+SELECT T_CLIENT.CLI_NOM, T_CLIENT.CLI_PRENOM, max(montant_total) FROM T_CLIENT JOIN (SELECT CLI_ID as id_client, sum(montant) as montant_total FROM T_FACTURE JOIN (SELECT T_LIGNE_FACTURE.FAC_ID as facid1,  T_LIGNE_FACTURE.LIF_REMISE_MONTANT as montant FROM T_LIGNE_FACTURE WHERE LIF_REMISE_POURCENT>0 OR LIF_REMISE_MONTANT>0)ON facid1=T_FACTURE.FAC_ID GROUP BY CLI_ID) ON T_CLIENT.CLI_ID=id_client;;
+\end{lstlisting}
+
+
+
+

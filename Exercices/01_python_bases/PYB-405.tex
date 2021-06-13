@@ -1,0 +1,32 @@
+\exer{}
+\setcounter{numques}{0}
+
+% \question 
+Décrire ce que fait cette suite d'instructions. 
+\begin{lstlisting}
+
+from random import randrange
+# Un entier entre 0 et 999
+n = randrange(1000) 
+# n+1 valeurs entre 0 et 99.
+L = [randrange(100) for i in range(n+1)] 
+p = 0
+for x in L:
+    if x <= 10:
+        p = p + x**2
+\end{lstlisting}
+
+Et celle-ci ? 
+\begin{lstlisting}
+
+from random import randrange
+# Un entier entre 0 et 999
+n = randrange(1000) 
+# n+1 valeurs entre 0 et 99.
+L = [randrange(100) for i in range(n+1)] 
+p = 0
+for i in range(n+1):
+    if L[i] <= 10:
+        p = p + i**2
+\end{lstlisting}
+

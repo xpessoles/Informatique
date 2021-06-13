@@ -1,0 +1,42 @@
+\begin{obj}
+On souhaite déterminer l’évolution d’une population d’une proie en fonction de celle de son prédateur.
+\end{obj}
+
+On suppose un milieu où existe une population « u » de proies (lapins) interagissant avec une unique population « v » de prédateurs (renards).
+
+\subsection*{Modèle sans prédation}
+
+Sans prédateur, l'évolution du nombre de proies est donné par l'équation différentielle suivante : $\dfrac{\dd u(t)}{\dd t} = a \times u(t)$ avec $a$ le taux re reproduction des proies. 
+
+On prendra  $u_0 = \alpha$ et $a=\alpha 10^{-2}$. 
+
+\question{Donner la population de lapins à 1 près après 20 unités de temps.}
+
+
+\subsection*{Modèle avec prédation}
+Le modèle avec prédateur est donné par : 
+$$
+\left\{
+\begin{array}{l}
+\dfrac{du(t)}{dt}=u(t)\left(a - b\times v(t)\right)\\
+\dfrac{dv(t)}{dt}=-v(t)\left(c - d\times u(t)\right)
+\end{array}
+\right.
+$$
+
+avec :
+\begin{itemize}
+\item $a $: taux de reproduction des proies;
+\item $b$ : taux de mortalité des proies à cause des prédateurs;
+\item $c$ : taux de mortalité des prédateurs;
+\item $d$ : taux de reproduction des prédateurs.
+\end{itemize}
+
+On donne $u_0=\alpha$, $a=\alpha 10^{-2}$, $b=\alpha 10^{-3}$ ainsi que 
+$v_0=\alpha+10$, $c=\alpha 10^{-2}$, $d=\dfrac{\alpha}{5} \times  10^{-3}$.
+
+
+\question{Donner la population de lapins après 300 unités de temps.}
+
+
+\question{Donner la population de renards après 300 unités de temps.}

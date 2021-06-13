@@ -1,0 +1,24 @@
+\exer{}
+\setcounter{numques}{0}
+
+\question{} À chaque tour de boucle, $k$ est incrémenté de $1$ et $p$ est multiplié par $b$.
+
+Au début du premier tour de boucle, on a $k=0$ et $p=1$. Au tour suivant, $k=1$ et $p = b$. Au second tour, $k=2$ et $p=b^2$. Le tableau se dresse aisément.
+
+\question{} Montrons que \og $b = p^k$ \fg{} est un invariant pour la boucle \texttt{while}. En entrée de boucle, on a $k=0$ et $p=1=b^0$, donc l'invariant est bien initialisé.
+Supposons qu'au début d'un tour de boucle on ait $b = p^k$. À la fin de la ligne 5, comme $k$ est incrémenté de $1$, $p = b^{k-1}$. À la fin de la ligne 6, comme $p$ est multiplié par $b$, on a $p = b^k$.
+L'invariant est donc vrai au début du tour de boucle suivant.
+
+Ainsi, \og $b = p^k$ \fg{} est un invariant pour la boucle \texttt{while}.
+
+\question{} Montrons que \og $a - p$ \fg{} est un variant pour la boucle \texttt{while}. 
+\begin{itemize}
+    \item C'est bien un entier car par construction $p$ est toujours un entier et $a$ est entier par définition. 
+    \item C'est un entier positif : d'après la condition de la boucle \texttt{while}, $p$ divise $a$. Comme $a$ est strictement positif et comme $p$ est positif, $p \leq a$, donc $a-p\geq 0$. 
+    \item C'est un entier positif qui décroît strictement à chaque tour de boucle : à chaque tour de boucle, $p$ est multiplié par $b$ et $b>1$. 
+\end{itemize}
+
+\question{} On a écrit un variant pour la boucle \texttt{while}, donc la fonction renvoie bien un résultat. Par l'invariant, en sortie de boucle, on a $p = b^k$. 
+En sortie de boucle, $k$ est le plus petit entier pour lequel $b^k$ ne divise pas $a$. On renvoie en sortie $k-1$. Ainsi, la fonction renvoie le plus grand entier $k$ tel que $b^k$ divise $a$. 
+
+

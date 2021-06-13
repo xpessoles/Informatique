@@ -1,0 +1,206 @@
+%\documentclass[11pt,a4paper]{article}
+%\usepackage[utf8]{inputenc}
+%\usepackage{amsmath}
+%\usepackage{amsfonts}
+%\usepackage{amssymb}
+%\usepackage{graphicx}
+%\usepackage{color}
+%\usepackage{caption}
+%\usepackage{wrapfig}
+%\usepackage{textcomp}
+%\usepackage[left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm]{geometry}
+%\usepackage{mathtools, bm}
+%\usepackage{amssymb, bm}
+%\usepackage{fancyhdr}
+%\usepackage{fancybox}
+%\usepackage{listings}
+
+
+\documentclass[11pt,fleqn]{book} % Default font size and left-justified equations
+
+%----------------------------------------------------------------------------------------
+
+\input{structure}
+
+
+%\pagestyle{fancy}
+%\fancyhead[L]{Lycée Dumont d'Urville / PB}
+%\fancyhead[R]{PSI / Informatique / TP}
+%\fancyfoot[C]{page \thepage}
+%
+%\newcommand{\cadretitre}[2]{\boxput*(0,1){
+%\colorbox {white}{#1}}{
+%\setlength{\fboxsep}{6pt}
+%\fbox {\begin{minipage}{\textwidth -0.7cm}
+%\bigskip
+%#2
+%\bigskip
+%\end{minipage}}
+%}}
+
+\makeatletter
+\renewcommand{\thesection}{\@arabic\c@section}
+\makeatother
+
+\begin{document}
+
+\chapterimage{image.jpg}
+\chapter{PTSI / Informatique / DS \No 2 - Correction}
+\begin{center}
+\huge{Analyse harmonique}
+\end{center}
+
+
+\section{Diagramme de Bode}
+
+\begin{tBox}
+\textbf{Question 1.} Quelles sont les fonctions de transfert dont le diagramme de Bode est représenté sur la figure 1 ?
+\end{tBox}
+
+\begin{dBox}
+\hspace{0.5 cm} \texttt{num = [1]}
+
+\texttt{for i in range(5):}
+
+\hspace{0.5 cm} \texttt{den = [1,0.1+i/5,1]}
+\end{dBox}
+
+Les fonctions de transfert sont donc :
+
+$H_1(p)=\frac{1}{p\up{2}+0.1p+1}$ ; $H_2(p)=\frac{1}{p\up{2}+0.3p+1}$ ; $H_3(p)=\frac{1}{p\up{2}+0.5p+1}$ ;
+
+$H_4(p)=\frac{1}{p\up{2}+0.7p+1}$ ;$H_5(p)=\frac{1}{p\up{2}+0.9p+1}$ ; 
+
+
+\begin{tBox}
+\textbf{Question 2.} A une étape de l'algorithme proposé, 
+\begin{enumerate}
+\item combien de données contiennent les listes \texttt{w}, \texttt{gain} et \texttt{phase} ?
+\item en admettant que chacune de ces données est de type \texttt{float} codé en double précision, quelle quantité de mémoire est nécessaire pour le stockage de ces trois listes ?
+\end{enumerate}
+\end{tBox}
+
+\begin{enumerate}
+\item \texttt{np.arange(0.1, 10, 0.02)}
+
+
+nombre de données : $\frac{9.98-0.1}{0.02}+1=495$
+\item en admettant que chacune de ces données est de type \texttt{float} codé en double précision, quelle quantité de mémoire est nécessaire pour le stockage de ces trois listes ?
+
+Le codage en double précision se fait sur 64 bits.
+
+La quantité de mémoire nécessaire est donc : $\frac{3 \times 495 \times 64}{8 \times 1000} = 11.88$ ko.
+
+\end{enumerate}
+
+
+\section{Propriétés caractéristiques du système}
+
+\subsection{Asymptote infinie de la courbe en gain}
+
+\begin{tBox}
+\textbf{Question 3.} Proposer un script permettant de donner la valeur de l'asymptote lorsque $\omega \to \infty$ de la courbe de gain en $dB/decade$ (décibels par décade).
+\end{tBox}
+
+\lstinputlisting[language=Python]{Algorithmes/asymptote.py}
+
+ou 
+
+\lstinputlisting[language=Python]{Algorithmes/asymptote2.py}
+
+\subsection{Résonance}
+
+\begin{tBox}
+\textbf{Question 4.} Dans le contexte de la figure 1, écrire la fonction \texttt{picResonance(w,gain,phase)} retournant pour une courbe un triplet de valeurs respectives la pulsation de résonance $wr$, le gain maximal $gr$ et la phase correspondante $pr$ :\texttt{(wr,gr,pr)}. Dans le cas où ce pic n'existerait pas, elle retourne un triplet vide.
+\end{tBox}
+
+\lstinputlisting[language=Python,firstnumber=1,numbers=left]{Algorithmes/pic.py}
+
+
+\begin{tBox}
+\textbf{Question 5.} Dans le cas où le diagramme en gain serait multi-pics, écrire la fonction \\ \texttt{picsResonance(w,gain,phase)} retournant une liste \texttt{L} de triplets de valeurs respectives une pulsation de résonance $wr$, le gain $gr$ et la phase correspondante $pr$ :\texttt{(wr,gr,pr)}. La liste \texttt{L} peut présenter l'allure suivante : \texttt{[(wr1,gr1,pr1),(wr2,gr2,pr2),...,(wrk,grk,prk)]}. Dans le cas où il n'y aurait aucun pics, la fonction retourne une liste vide.
+\end{tBox}
+
+\lstinputlisting[language=Python,firstnumber=1,numbers=left]{Algorithmes/pic2.py}
+
+
+\subsection{Bande passante}
+
+\begin{tBox}
+\textbf{Question 6.} Écrire la fonction \texttt{pulsationCoupure(w,gain)} retournant la valeur de la pulsation de coupure \texttt{wc} en utilisant une méthode par balayage de la liste \texttt{gain}. On s'assurera de la terminaison de l'algorithme. Si la pulsation de coupure n'existe pas, on retourne -1.
+\end{tBox}
+
+\lstinputlisting[language=Python,firstnumber=1,numbers=left]{Algorithmes/coupure.py}
+
+\begin{tBox} 
+\textbf{Question 7.} Proposer une fonction \texttt{pulsationCoupure(w,gain)} retournant la valeur de la pulsation de coupure \texttt{wc} en utilisant une méthode de dichotomie sur la liste \texttt{gain}. Si la pulsation de coupure n'existe pas, on retourne -1.
+\end{tBox}
+
+\lstinputlisting[language=Python,firstnumber=1,numbers=left]{Algorithmes/coupure_dicho.py}
+
+\begin{tBox} 
+\textbf{Question 8.}
+\begin{enumerate}
+\item Pour l'algorithme précédent, définir un variant de boucle et effectuer une preuve de terminaison,
+\item Définir un invariant de boucle et effectuer une preuve de correction.
+\item Quel intérêt présente la méthode de dichotomie par rapport à une méthode par balayage ?
+\end{enumerate}
+\end{tBox}
+
+\begin{enumerate}
+\item On définit comme variant de boucle la fonction $f : a,b \to b-a$.
+Cette fonction est strictement décroissante à chaque itération puisque l'intervalle $[a,b]$ est divisé par deux à chaque tour de boucle : il devient soit $[a,m]$, soit $[m,b]$.
+
+Au bout de $k$ itérations telles que $len(w) \le 2^{k}$ (soit $log_2(len(w))+1 > k \ge log_2(len(w))$), $f(a,b)$ sera égal à 1. On sort alors de la boucle \texttt{while}.
+
+\item On définit comme invariant de boucle la propriété suivante :
+
+$(P_i)$ : A chaque itération $i$, la pulsation de coupure si elle existe, appartient à l'intervalle $[w[a];w[b]]$.
+
+Cette propriété est vérifiée à l'initialisation puisque $a$ et $b$ sont les limites inférieures et supérieures des indices des listes \texttt{w} et \texttt{gain}. $(P_0)$ est donc vraie.
+
+Supposons vraie la propriété $(P_i)$.
+A l'itération suivante, si \texttt{(gain[a]+3)*(gain[m]+3)<0} alors c'est que la pulsation de coupure appartient à l'intervalle $[w[a];w[m]]$. On remplace donc $b$ par $m$.
+Si ce n'est pas le cas, c'est qu'elle appartient à l'intervalle $[w[m];w[b]]$. On remplace donc $a$ par $m$. La propriété $(P_{i+1})$ sera alors aussi vérifiée.
+
+A la sortie de la boucle \texttt{while}, si \texttt{a==len(w)-1}, c'est que $\omega_c$ n'appartient pas à $[w[a];w[b]]$. Sinon, c'est que $\omega_c$ est $w[a)]$ ou $w[b]$. Le résultat est donc donné à 0.02 rad/s près.
+\item La méthode par dichotomie nécessite moins d'itérations (9 au maximum pour 495 données numériques) que par un balayage de la liste.
+
+\end{enumerate}
+
+\vfill
+
+\pagebreak
+
+\section{Stockage des données dans un fichier texte}
+
+\begin{tBox}
+\textbf{Question 9.}
+\begin{enumerate}
+\item Quelle sera la taille approximative du fichier texte \texttt{"bode.txt"} sachant que le nombre de données est identique à celui de la question 2 ?
+\item Quel serait le gain de taille en \% si on se limitait à 3 chiffres significatifs pour chacune des valeurs numériques ?
+\end{enumerate}
+\end{tBox}
+
+Chaque ligne comporte environ 36 caractères (fin de ligne inclus).
+Sans compter la première ligne, cela fait $495*36=17820$ caractères.
+Chacun est codé en ASCII sur un octet.
+Cela fait donc environ 18 ko.
+
+
+\begin{tBox}
+\textbf{Question 10.} Écrire un script utilisant les listes \texttt{w}, \texttt{gain} et \texttt{phase}, et permettant de créer le fichier "bode.txt". A la fin de l'écriture, on assurera sa fermeture "propre".
+\end{tBox}
+
+\lstinputlisting[language=Python,firstnumber=1,numbers=left]{Algorithmes/ecrit_fichier.py}
+
+\begin{tBox}
+\textbf{Question 11.} Proposer une fonction \texttt{retourneListes(nomFichier)} prenant en argument une chaîne de caractère \texttt{nomFichier} et retournant les listes \texttt{w} (pulsations) et \texttt{gain} (gains). A la fin de la lecture, on assurera la fermeture "propre" du fichier.
+\end{tBox}
+
+\lstinputlisting[language=Python,firstnumber=1,numbers=left]{Algorithmes/lire_fichier.py}
+
+\vfill
+
+
+\end{document}

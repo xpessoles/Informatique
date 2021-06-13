@@ -1,0 +1,120 @@
+
+Le fichier \texttt{gilberte.txt} contient un extrait du premier volume d'\emph{À l'ombre des jeunes filles 
+en fleurs} de Marcel Proust, où il évoque la fin de sa relation avec Gilberte Swann, son 
+premier amour.
+
+Dans toute la suite, les questions porteront sur les lignes allant du numéro $\alpha$ inclus au 
+numéro $\alpha+300$ exclu. Comme toujours en \python, la première ligne du texte porte le numéro 
+0.
+
+On pourra remarquer qu'aucun mot n'est coupé lors d'un retour à la ligne, ce qui simplifiera les 
+choses.
+
+\question\ Combien de fois apparaît le mot \og Gilberte \fg\ ?
+
+\vspace{1cm}
+
+\noindent On appellera ici \emph{paragraphe} toute partie du texte telle que :
+\begin{itemize}
+ \item le premier caractère est une tabulation ;
+\item le caractère précédant cette tabulation est un retour à la  ligne, sauf s'il s'agit du début 
+du texte ; 
+\item le dernier caractère est un retour à la ligne ;
+\item le caractère suivant ce retour à la ligne est une tabulation, sauf s'il s'agit de la fin du 
+texte.
+\end{itemize}
+
+\question\ Combien y a-t-il de paragraphes ?
+
+
+
+\noindent Proust est célèbre pour la longueur de ces phrases. Vous allez donc chercher la phrase la plus 
+longue de la portion du texte que vous devez étudier.\\
+On rappelle que l'on appelle \emph{blanc} un caractère qui est un espace, un retour chariot ou une 
+tabulation.\\
+On appellera \emph{point} les caractères \og.\fg, \og!\fg\ et \og?\fg. \\
+On appellera ici \emph{phrase} toute portion du texte telle que :
+\begin{itemize}
+ \item le premier caractère est un blanc ;
+ \item le caractère précédant ce blanc est un retour à la ligne ou un point, sauf s'il s'agit du 
+début du texte ;
+ \item le dernier caractère est un point ;
+ \item le caractère suivant ce point est un blanc, sauf s'il s'agit de la fin du texte.
+\end{itemize}
+
+Attention, une phrase peut contenir un point autre que son dernier caractère, par exemple dans les 
+phrases :
+\begin{center}
+\emph{Je m'écriai \og Gilberte !\fg\ en la voyant.}
+\end{center}
+
+Ou
+\begin{center}
+\emph{J'étais perplexe ...}
+\end{center}
+
+Un autre exemple pour être sûr que tout est compris : dans le texte :\\
+
+\emph{
+Bonjour. Ça va ?\\
+Comment te portes-tu ?\\
+\indent Très bien,\\ je te remercie.\\}
+
+il y a quatre phrases, la phrase la plus longue est la dernière, et elle comporte 28 caractères (ne 
+pas oublier les deux blancs au début (retour chariot et tabulation), le retour chariot au milieu et le point à la fin 
+!).\\
+
+Et une dernière remarque : votre portion de texte risque de commencer au milieu d'une phrase et de finir au milieu 
+d'une autre : pour simplifier les choses, la portion de votre texte commençant au premier caractère de votre texte 
+et finissant là où commence la phrase suivante ne sera pas prise en compte, même si par hasard c'était une phrase 
+complète. Et si votre texte ne finit pas par un point suivi d'un blanc, vous ne tiendrez pas compte de la 
+phrase incomplète qui clôt votre portion de texte.
+
+
+\question\ Quel est le nombre de caractères de la phrase la plus longue ?
+
+\medskip
+
+\question\ Quel est le nombre de caractères de la phrase la plus courte ?
+
+
+
+\noindent Le texte d'\emph{À la recherche du temps perdu} étant tombé dans le domaine public depuis 1987, 
+vous décidez de publier vous-mêmes la partie du texte qui vous est échue aujourd'hui, dans une 
+édition au format particulier : ayant hérité de votre oncle épicier d'une grande quantité de 
+rouleaux pour caisse enregistreuse, vous décidez de faire imprimer le texte sur ce papier. Dans un 
+souci de lisibilité, vous décidez également d'imprimer ce texte dans une police de taille standard 
+: chaque ligne comportera au plus neuf caractères, sans compter les retours chariot.\\
+La règle est la suivante : les retours à la ligne du texte de base sont tous supprimés, sauf ceux 
+marquant un changement de paragraphe. Les retours à la ligne de la nouvelle édition seront donc 
+ceux des changements de paragraphe et ceux imposés par la taille maximale de neuf caractères de 
+chaque ligne. S'il le faut, les mots seront coupés par un retour à la ligne sans scrupule. Par 
+contre, les espaces en début de ligne seront supprimés.\\
+Par exemple, le texte :\\
+
+\emph{Marcel Proust est un enfant à la santé fragile. Toute sa vie il a des difficultés 
+respiratoires.\\
+\indent Très jeune, il fréquente des salons aristocratiques.}\\
+
+sera réédité de la manière suivante :\\
+
+\emph{Marcel P\\
+roust est\\
+un enfant\\
+à la sant\\
+é fragile\\
+. Toute s\\
+a vie il \\
+a des dif\\
+ficultés \\
+respirato\\
+ires.\\
+\indent Très jeu\\
+ne, il fr\\
+équente d\\
+es salons\\
+aristocra\\
+tiques.}\\
+ 
+\question\ Donner la 71-ème ligne (donc la ligne numéro 70) de votre texte réédité : on signalera les 
+tabulations en début de ligne et les espaces par le symbole.

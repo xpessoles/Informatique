@@ -1,0 +1,15 @@
+On considère la fonction suivante.
+\begin{Verbatim}[gobble=0,numbers=left]
+def mystere(L,M):
+    """Préconditions : L tableau de nombres, M nombre"""
+    S = 0
+    n = len(L)
+    for i in range(n) : 
+        if L[i] > M : 
+            S = S + L[i]
+    return S
+\end{Verbatim}
+
+\bigskip{}
+
+\question{} Que renvoie un appel de la fonction \texttt{mystere(L,M)} ? On justifiera la réponse, à l'aide notamment d'un invariant. 

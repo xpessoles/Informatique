@@ -1,0 +1,190 @@
+\exer{}
+\setcounter{numques}{0}
+
+\question{Évaluer les expressions suivantes en repérant auparavant celles qui donnent des résultats de type \texttt{int}.}%
+\begin{multicols}{2}
+  \begin{enumerate}[label=\emph{\alph*)}]
+    \item \texttt{4+2}
+    \item \texttt{25-3}
+    \item \texttt{-5+1}
+    \item \texttt{117*0}
+    \item \texttt{6*7-1}
+    \item \texttt{52*(3-5)}
+    \item \texttt{5*(-2)}
+    \item \texttt{22/(16-2*8)}
+    \item \texttt{42/6}
+    \item \texttt{18/7}
+    \item \texttt{(447+3*6)/5}
+    \item \texttt{0/0}
+  \end{enumerate}
+\end{multicols}%
+
+%\begin{multicols}{4}
+%  \begin{enumerate}[label=\emph{\alph*)}]
+%    \item \texttt{4+2}
+%    \item \texttt{25-3}
+%    \item \texttt{-5+1}
+%  \end{enumerate}
+%\end{multicols}%
+
+\question{Calculer les restes et les quotients des divisions euclidiennes suivantes : }
+\begin{multicols}{2}
+  \begin{enumerate}[label=\emph{\alph*)}]
+    \item $127 \div 8$
+    \item $54 \div 3$
+    \item $58 \div 5$
+    \item $58 \div (-5)$
+    \item $-58 \div 5$
+    \item $-58 \div (-5)$
+    \item $17583 \div 10$
+    \item $17583 \div 100$
+    \item $17583 \div 10^4$
+    \item $(2^7+2^4+2) \div 2^5$
+    \item $(2^7+2^4+2) \div 2^7$
+    \item $(2^7+2^4+2) \div 2^{10}$
+  \end{enumerate}
+\end{multicols}
+\question{Calculer les nombres suivants avec une expression Python en repérant auparavant ceux qui donnent un résultat de type \texttt{int}.}
+\begin{multicols}{2}
+  \begin{enumerate}[label=\emph{\alph*)}]
+    \item $3^5$
+    \item $2^{10}$
+    \item $(-3)^7$
+    \item $-3^7$
+    \item $5^{-2}$
+    \item $7^{{5^4}}$
+    \item ${7^5}^4$
+    \item $5^{7+6}$
+    \item $5^7+6$
+    \item $2^{{10^4}}$
+  \end{enumerate}
+\end{multicols}
+
+
+
+\question{Évaluer les expressions suivantes.}
+\begin{multicols}{2}
+  \begin{enumerate}[label=\emph{\alph*)}]
+    \item \texttt{4.3+2}
+    \item \texttt{2.5-7.3}
+    \item \texttt{42+4.}
+    \item \texttt{42+4}
+    \item \texttt{42.+4}
+    \item \texttt{12*0.}
+    \item \texttt{11.7*0}
+    \item \texttt{2,22/(1.6-2*0.8)}
+    \item \texttt{42/6}
+    \item \texttt{1,8/7}
+    \item \texttt{(447+3*6)/5}
+    \item \texttt{0/0}
+  \end{enumerate}
+\end{multicols}
+
+\question{Calculer, sans utiliser la fonction \texttt{sqrt} ni la division flottante \texttt{/}, les nombres suivants.}
+\begin{multicols}{2}
+  \begin{enumerate}[label=\emph{\alph*)}]
+    \item $\dfrac{1}{7,9}$
+    \item $\sqrt{6,2}$
+    \item $\dfrac{1}{\sqrt{3,5}}$
+    \item $2\sqrt{2}$
+  \end{enumerate}
+\end{multicols}
+De base, on ne peut réaliser que des calculs élémentaires avec Python. Cependant, il est possible d'avoir accès à des possibilités de calcul plus avancées en utilisant une \emph{bibliothèque}. 
+Par exemple, la bibliothèque \texttt{math} permet d'avoir accès à de nombreux outils mathématiques. 
+On peut donc saisir
+\begin{lstlisting}
+
+from math import sin, cos, tan, pi, e
+from math import sin, cos, tan, pi, e 
+\end{lstlisting}
+
+pour avoir accès à toutes ces fonctions. \\
+
+\question{Calculer les nombres suivants (on n'hésitera pas à consulter l'aide en ligne).}
+\begin{multicols}{2}
+  \begin{enumerate}[label=\emph{\alph*)}]
+    \item $e^2$
+    \item $\sqrt{13}$
+    \item $\cos\left(\dfrac{\pi}{5}\right)$
+    \item $e^{\sqrt{5}}$
+    \item $\ln 2$
+    \item $\ln 10$
+    \item $\log_{2} 10$
+    \item $\tan\left(\dfrac{\pi}{2}\right)$
+  \end{enumerate}
+\end{multicols}
+
+\question{Les expressions suivantes sont-elles équivalentes ?}
+
+\begin{multicols}{2}
+  \begin{enumerate}[label=\emph{\alph*)}]
+    \item \texttt{8.5 / 2.1}
+    \item \texttt{int(8.5) / int(2.1)}
+    \item \texttt{int(8.5 / 2.1)}
+  \end{enumerate}
+\end{multicols}
+
+Et celles-ci ?
+
+\begin{multicols}{2}
+  \begin{enumerate}[label=\emph{\alph*)}]
+    \item \texttt{float(8 * 2)}
+    \item \texttt{8 * 2}
+    \item \texttt{8. * 2.}
+  \end{enumerate}
+\end{multicols}
+
+Prévoir la valeur des expressions suivantes puis vérifier cela (avec IDLE).
+
+\begin{multicols}{2}
+  \begin{enumerate}[label=\emph{\alph*)}]
+    \item \texttt{1.7 + 1.3}
+    \item \texttt{2 - 1}
+    \item \texttt{2. - 1}
+    \item \texttt{2 - 1.}
+    \item \texttt{(2 - 1).}
+    \item \texttt{.5 + .5}
+    \item \texttt{4 / (9 - 3**2)}
+    \item \texttt{4 / (9. - 3**2)}
+  \end{enumerate}
+\end{multicols}
+
+\question{Déterminer de tête la valeur des expressions suivantes avant de le vérifier (avec IDLE).}
+
+\begin{multicols}{2}
+  \begin{enumerate}[label=\emph{\alph*)}]
+    \item \texttt{0 == 42}
+    \item \texttt{1 = 1}
+    \item \texttt{3 == 3.}
+    \item \texttt{0 != 1}
+    \item \texttt{0 < 1}
+    \item \texttt{4. >= 4}
+    \item \texttt{0 !< 1}
+    \item \texttt{2*True + False}
+    \item \texttt{-1 <= True}
+    \item \texttt{1 == True}
+    \item \texttt{False != 0.}
+    \item \texttt{True and False}
+    \item \texttt{True or False}
+    \item \texttt{True or True}
+    \item \texttt{(2 == 3-1) or (1/0 == 5)}
+    \item \texttt{(1/0 == 5) or (2 == 3-1)}
+    \item \texttt{True or True and False}
+    \item \texttt{False or True and False}    
+    \item \texttt{not (1 == 1 or 4 == 5)}
+    \item \texttt{(not 1 == 1) or 4 == 5}
+    \item \texttt{not True or True}
+  \end{enumerate}
+\end{multicols}
+
+\question{Dans votre IDE, cliquer sur File/New File. Une nouvelle fenêtre apparaît. Dans cette fenêtre, taper les lignes suivantes.}
+\begin{lstlisting}
+
+3*2
+print(2*3.)
+17*1.27
+\end{lstlisting}
+
+Enregistrer le document produit puis, toujours dans cette fenêtre, exécutez-le. 
+Observez le résultat dans l'interpréteur interactif. 
+Modifiez les instructions pour que tous les résultats de calcul s'affichent dans l'interpréteur interactif.

@@ -1,0 +1,41 @@
+Dans ce problème, on considère des tableaux d'entiers relatifs 
+\texttt{t=[t$_0$,t$_1$,...,t$_{n-1}$]}, et on appelle \emph{tranche} de \texttt{t} toute 
+sous-tableau non vide \texttt{[t$_i$,t$_{i+1}$,...,t$_{j-1}$]} d'entiers consécutifs de ce tableau 
+(avec $0\leq i<j\leq n$) qu'on notera désormais \texttt{t[i:j]}.\\
+À toute tranche \texttt{t[i:j]} on associe la somme \texttt{s[i : j]}
+$=\displaystyle \sum_{k=i}^{j-1}$\texttt{t\_k} des éléments qui la composent. Le but de ce 
+problème est de déterminer un algorithme efficace pour déterminer la valeur minimale des sommes des 
+tranches de \texttt{t}.
+
+\subsection{L'algorithme naïf}
+\begin{enumerate}
+\item Définir une fonction \texttt{somme} prenant en paramètre un tableau \texttt{t} et deux 
+entiers i et j, et retournant la somme \texttt{s[i : j]}.
+\item En déduire une fonction \texttt{tranche\_min1} prenant en paramètre un tableau \texttt{t} et 
+retournant la somme minimale d'une tranche de \texttt{t}.
+\item Montrer que la complexité de cet algorithme est en $\Theta(n^3)$, c'est-à-dire qu'il existe 
+deux constantes $a,b\in\R_+^\ast$ telles que si \texttt{t} a $n$ éléments, alors le nombre 
+d'opérations effectuées dans le calcul de \texttt{tranche\_min1(t)} est compris entre $an^3$ et 
+$bn^3$.
+\end{enumerate}
+ 
+\subsection{Un algorithme de coût quadratique}
+\begin{enumerate}
+\item Définir, sans utiliser la fonction \texttt{somme}, une fonction \texttt{mintranche} prenant 
+en paramètres un tableau \texttt{t} et un entier \texttt{i}, et calculant la valeur minimale de la 
+somme d'une tranche de \texttt{t} dont le premier élément est \texttt{t$_i$} , en parcourant une
+seule fois la liste a à partir de l'indice \texttt{i}.
+\item En déduire une fonction \texttt{tranche\_min2} permettant de déterminer la somme minimale 
+des tranches de \texttt{t}, en temps quadratique, c'est-à-dire que la complexité de cet 
+algorithme est en $\Theta(n^2)$. On justifiera que la complexité est précisément en $\Theta(n^2)$.
+\end{enumerate}
+ 
+\subsection{Un algorithme de coût linéaire}
+ 
+Étant donnée un tableau \texttt{t}, on note $m_i$ la somme minimale d'une tranche quelconque du 
+tableau \texttt{t[0 : i]}, et $c_i$ la somme minimale d'une tranche de \texttt{t[0 : i]} se 
+terminant par \texttt{t$_{i-1}$}.\\
+ 
+Montrer que $c_{i+1} = \min(c_i + t_i , t_i )$ et $m_{i+1} = \min(m_i , c_{i+1})$, et en déduire 
+une fonction \texttt{tranche\_min3} de coût linéaire (c'est-à-dire dont la complexité est en 
+$\Theta(n)$), calculant la somme minimale d'une tranche de \texttt{t}.

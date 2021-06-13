@@ -1,0 +1,15 @@
+\exer{}
+\setcounter{numques}{0}
+
+Expliquer et justifier ce que fait la fonction suivante. 
+\begin{lstlisting}
+
+def cesar(k):
+    """?????"""
+    alphabet = "abcdefghijklmnopqrstuvxyz"
+    s = ""
+    for i in range(26):
+        s = s + alphabet[i+k % 26]
+    return s
+\end{lstlisting}
+

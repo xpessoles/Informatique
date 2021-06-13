@@ -1,0 +1,35 @@
+\exer{}
+\setcounter{numques}{0}
+
+Rien de tel que de faire du camping pour profiter de la nature. Cependant sur Algoréa, les 
+moustiques sont particulièrement pénibles et il faut faire attention à l'endroit où l'on s'installe, 
+si l'on ne veut pas être sans cesse piqué.\\
+
+Vous disposez d'une carte sur laquelle est indiquée, pour chaque parcelle de terrain, si le nombre 
+de moustiques est supportable ou non. Votre objectif est de trouver le plus grand camping carré 
+évitant les zones à moustiques qu'il est possible de construire.\\
+
+\noindent ENTRÉE :  un tableau \texttt{t} de $n$ éléments correspondant à des lignes, chacune de 
+ces lignes contenant $p$ élements, qui ne sont que des 0 et des 1. 0 signifie qu'il n'y a pas de 
+moustiques et 1 qu'il y a des moustiques.\\
+SORTIE : un entier : la taille maximale du côté d'un carré ne comportant que des 0 et dont les 
+bords sont parallèles aux axes.\\
+
+\noindent EXEMPLE 1 :\\
+entrée : \texttt{t}= $\begin{matrix}[\  [1,\ &0,\ &0,\ &1,\ &0,\ &0,\ &1],\\
+                          [0,\ &0,\ &0,\ &0,\ &0,\ &0,\ &0],\\
+                          [1,\ &0,\ &0,\ &0,\ &0,\ &0,\ &0],\\
+                          [0,\ &0,\ &0,\ &0,\ &0,\ &0,\ &0],\\
+                          [0,\ &1,\ &0,\ &0,\ &0,\ &0,\ &1],\\
+                          [1,\ &0,\ &0,\ &0,\ &1,\ &0,\ &1]\ ]
+                         \end{matrix}$\\
+sortie : 4.\\
+
+\noindent EXEMPLE 2 :\\
+entrée : \texttt{t}= $\begin{matrix}[\  [0,\ &0,\ &0,\ &1,\ &1,\ &1,\ &1],\\
+                          [0,\ &0,\ &0,\ &1,\ &1,\ &1,\ &1],\\
+                          [0,\ &0,\ &0,\ &1,\ &1,\ &1,\ &1],\\
+                          [1,\ &1,\ &1,\ &1,\ &1,\ &0,\ &0],\\
+                          [1,\ &1,\ &1,\ &1,\ &1,\ &0,\ &0]\ ]
+                         \end{matrix}$\\
+sortie : 3.

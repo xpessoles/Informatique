@@ -1,0 +1,27 @@
+\exer{}
+\setcounter{numques}{0}
+
+On considère la fonction suivante.
+\begin{lstlisting}
+
+def mystere(L) :
+    """Précondition : L est une liste de nombres"""
+    x,n,i = L[0],len(L),1
+    while i<n and x > L[i] :
+        L[i-1],L[i] = L[i],L[i-1]
+        i = i+1
+    return None
+\end{lstlisting}
+
+
+\question{}Montrer que «$\texttt x = \texttt L[\texttt i-1]$» est un invariant de boucle pour la boucle \texttt{while} de la fonction \texttt{mystere}.
+
+\question{}Donner un variant de boucle pour la boucle \texttt{while} de la fonction \texttt{mystere}. Que peut-on en déduire ? 
+
+\question{}Si \texttt{L} est une liste de nombres, que fait \texttt{mystere(L)} ? Le justifier, notamment à l'aide des questions précédentes (vous pourrez cependant écrire un ou plusieurs autres invariants, au besoin).
+
+\bigskip{}
+
+\emph{Remarque :} vous avez tout intérêt à utiliser cette fonction et à observer son fonctionnement \emph{avant} de répondre à ces questions. 
+
+

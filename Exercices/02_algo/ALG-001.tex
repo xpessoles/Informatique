@@ -1,0 +1,33 @@
+\exer{}
+\setcounter{numques}{0}
+
+Il existe de nombreuses traditions étranges et amusantes sur Algoréa, la grande course de 
+grenouilles annuelle en fait partie. Il faut savoir que les grenouilles algoréennes sont beaucoup 
+plus intelligentes que les grenouilles terrestres et peuvent très bien être dressées pour participer 
+à des courses. Chaque candidat a ainsi entraîné sa grenouille durement toute l'année pour ce grand 
+événement.\\
+La course se déroule en tours et, à chaque tour, une question est posée aux dresseurs. Le premier 
+qui trouve la réponse gagne le droit d'ordonner à sa grenouille de faire un bond. Dans les règles de 
+la course de grenouilles algoréennes, il est stipulé que c'est la grenouille qui restera le plus 
+longtemps en tête qui remportera la victoire. Comme cette propriété est un peu difficile à vérifier, 
+le jury demande votre aide.\\
+Ce que doit faire votre programme :\\
+
+\noindent \texttt{nbg} numérotées de \texttt{1} à \texttt{nbg} sont placées sur une ligne 
+de départ. À chaque tour, on vous indique le numéro de la seule grenouille qui va sauter lors de ce 
+tour, et la distance qu'elle va parcourir en direction de la ligne d'arrivée.\\
+Écrivez un programme qui détermine laquelle des grenouilles a été strictement en tête de la course 
+à la fin du plus grand nombre de tours.\\
+
+\noindent ENTRÉE : deux entiers \texttt{nbg} et \texttt{nbt} et un tableau \texttt{t}.\\
+\texttt{nbg} est le nombre de grenouilles participantes.\\
+\texttt{nbt} est le nombre de tours de la course.\\
+\texttt{t} est un tableau ayant \texttt{nbt} éléments, et tel que chaque élément est un couple : 
+(numéro de la grenouille qui saute lors de ce tour, longueur de son saut).\\
+\noindent SORTIE : vous devez renvoyer un entier : le numéro de la grenouille qui a 
+été strictement en tête à la fin du plus grand nombre de tours. En cas d'égalité entre plusieurs 
+grenouilles, choisissez celle dont le numéro est le plus petit.\\
+
+\noindent EXEMPLE :\\
+entrée : (4, 6, [ [2,2], [1,2], [3,3], [4,1], [2,2], [3,1] ] )\\
+sortie : 2.

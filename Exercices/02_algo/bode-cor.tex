@@ -1,0 +1,138 @@
+
+\question{}
+
+\begin{dBox}
+\hspace{0.5 cm} \texttt{num = [1]}
+
+\texttt{for i in range(5):}
+
+\hspace{0.5 cm} \texttt{den = [1,0.1+i/5,1]}
+\end{dBox}
+
+Les fonctions de transfert sont donc :
+
+$H_1(p)=\frac{1}{p\up{2}+0.1p+1}$ ; $H_2(p)=\frac{1}{p\up{2}+0.3p+1}$ ; $H_3(p)=\frac{1}{p\up{2}+0.5p+1}$ ;
+
+$H_4(p)=\frac{1}{p\up{2}+0.7p+1}$ ;$H_5(p)=\frac{1}{p\up{2}+0.9p+1}$ ; 
+
+
+\question{}
+
+\begin{enumerate}
+\item \texttt{np.arange(0.1, 10, 0.02)}
+
+
+nombre de données : $\frac{9.98-0.1}{0.02}+1=495$
+\item en admettant que chacune de ces données est de type \texttt{float} codé en double précision, quelle quantité de mémoire est nécessaire pour le stockage de ces trois listes ?
+
+Le codage en double précision se fait sur 64 bits.
+
+La quantité de mémoire nécessaire est donc : $\frac{3 \times 495 \times 64}{8 \times 1000} = 11.88$ ko.
+
+\end{enumerate}
+
+
+\question{}
+
+\lstinputlisting[language=Python]{Algorithmes/asymptote.py}
+
+ou 
+
+\lstinputlisting[language=Python]{Algorithmes/asymptote2.py}
+
+
+%\question{} 
+%
+%\lstinputlisting[language=Python,firstnumber=1,numbers=left]{Algorithmes/pic.py}
+
+
+\question{} 
+
+\begin{itemize}
+\item \textbf{Proposition d'invariant : }
+On peut proposer un invariant d'entrée de boucle classique pour la recherche de maximum.
+
+\textit{\pyv{gr} est le maximum de la liste \pyv{gain} pour les indices allant de $0$ à $i-1$ et correspond à \pyv{gain[i-1]}.}
+
+\item \textbf{Preuve de correction : }
+
+On peut montrer que cet invariant est vrai par récurrence.
+
+\begin{itemize}
+\item A l'initialisation, $i=1$ et \pyv{gr=gain[0]} qui ne contient bien qu'un seul terme et donc \pyv{gr} correspond bien au maximum et correspond bien à \pyv{gain[1-1]}.
+\item On suppose l'invariant vrai à l'entrée de boucle. Montrons qu'il est vrai à la sortie de la boucle.
+Pour entrer dans la boucle while, la condition \pyv{gr<=gain[i]} est vrai et on affecte à \pyv{gr} la valeur \pyv{gain[i]}, et \pyv{i} est itéré de 1, ainsi \textit{\pyv{gr} est le maximum de la liste \pyv{gain} pour les indices allant de $0$ à $i-1$ et il s'agit bien de \pyv{gain[i-1]}.}
+\item A la sortie de la boucle, la condition \pyv{gr<=gain[i]} ou \pyv{i<n} est fausse.
+\begin{itemize}
+\item dans le premier cas le maximum est bien \pyv{gr=gain[i-1]}, il faut donc bien renvoyer \pyv{w[i-1]}, \pyv{gr} et \pyv{phase[i-1]}.
+\item dans le deuxième cas \pyv{i=n} et donc on a atteint le dernier terme. 
+\end{itemize}
+ ainsi si \pyv{gr<=gain[i]} est vrai on revient au cas précédent et si \pyv{gr<=gain[i]} est faux, alors le maximum est bien \pyv{gain[i-1]}.
+\end{itemize}
+
+
+\item \textbf{Proposition de variant et preuve de terminaison}
+
+La condition \pyv{while} possède deux conditions reliés par le "et" logique. On peut donc utiliser deux variants de boucle mais un seul suffit pour montrer la terminaison.
+
+on peut utiliser la suite \pyv{i-n} comme variant qui est une suite d'entiers strictement croissante donc elle devient positive au bout d'un moment.
+
+\end{itemize}
+
+
+
+
+\question{} 
+
+\lstinputlisting[language=Python,firstnumber=1,numbers=left]{Algorithmes/pic2.py}
+
+
+\question{} 
+
+
+\lstinputlisting[language=Python,firstnumber=1,numbers=left]{Algorithmes/coupure.py}
+
+\question{} 
+
+\lstinputlisting[language=Python,firstnumber=1,numbers=left]{Algorithmes/coupure_dicho.py}
+
+%\question{}
+%\begin{enumerate}
+%\item On définit comme variant de boucle la fonction $f : a,b \to b-a$.
+%Cette fonction est strictement décroissante à chaque itération puisque l'intervalle $[a,b]$ est divisé par deux à chaque tour de boucle : il devient soit $[a,m]$, soit $[m,b]$.
+%
+%Au bout de $k$ itérations telles que $len(w) \le 2^{k}$ (soit $log_2(len(w))+1 > k \ge log_2(len(w))$), $f(a,b)$ sera égal à 1. On sort alors de la boucle \texttt{while}.
+%
+%\item On définit comme invariant de boucle la propriété suivante :
+%
+%$(P_i)$ : A chaque itération $i$, la pulsation de coupure si elle existe, appartient à l'intervalle $[w[a];w[b]]$.
+%
+%Cette propriété est vérifiée à l'initialisation puisque $a$ et $b$ sont les limites inférieures et supérieures des indices des listes \texttt{w} et \texttt{gain}. $(P_0)$ est donc vraie.
+%
+%Supposons vraie la propriété $(P_i)$.
+%A l'itération suivante, si \texttt{(gain[a]+3)*(gain[m]+3)<0} alors c'est que la pulsation de coupure appartient à l'intervalle $[w[a];w[m]]$. On remplace donc $b$ par $m$.
+%Si ce n'est pas le cas, c'est qu'elle appartient à l'intervalle $[w[m];w[b]]$. On remplace donc $a$ par $m$. La propriété $(P_{i+1})$ sera alors aussi vérifiée.
+%
+%A la sortie de la boucle \texttt{while}, si \texttt{a==len(w)-1}, c'est que $\omega_c$ n'appartient pas à $[w[a];w[b]]$. Sinon, c'est que $\omega_c$ est $w[a)]$ ou $w[b]$. Le résultat est donc donné à 0.02 rad/s près.
+%\item La méthode par dichotomie nécessite moins d'itérations (9 au maximum pour 495 données numériques) que par un balayage de la liste.
+%
+%\end{enumerate}
+
+
+\question{}
+
+Chaque ligne comporte environ 36 caractères (fin de ligne inclus).
+Sans compter la première ligne, cela fait $495*36=17820$ caractères.
+Chacun est codé en ASCII sur un octet.
+Cela fait donc environ 18 ko.
+
+
+\question{}
+
+\lstinputlisting[language=Python,firstnumber=1,numbers=left]{Algorithmes/ecrit_fichier.py}
+
+\question{}
+
+\lstinputlisting[language=Python,firstnumber=1,numbers=left]{Algorithmes/lire_fichier.py}
+
+\vfill

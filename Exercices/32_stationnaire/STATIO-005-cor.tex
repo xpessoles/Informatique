@@ -1,0 +1,154 @@
+\textbf{Importation des modules nécessaires : }
+
+\begin{lstlisting}
+import scipy.optimize as so
+import scipy.integrate as si
+from math import sqrt, sin, cos, atan
+from numpy import array
+import numpy as np
+\end{lstlisting}
+
+
+
+\question{} Donner une approximation de $\int_{\alpha}^{\alpha+1} \cos(\sqrt{t})\,dt$ avec la méthode des trapèzes et 1000 subdivisions.
+
+\begin{lstlisting}
+def trapeze(f,a,b,n):
+    h=(b-a)/n
+    S=0.5*(f(a)+f(b))
+    for k in range(1,n):
+        S+=f(a+k*h)
+    return S*h
+    
+print("Qu. 1 : ", trapeze(lambda x : cos(sqrt(x)),alpha,alpha+1,1000))
+\end{lstlisting}
+
+
+\question{}  Donnez une approximation (à $10^-5$ près) de l'unique réel positif solution de
+  l'équation $x^{2}+\sqrt{x}-10 = \alpha$ avec la méthode de votre choix.
+  
+  
+  
+\begin{lstlisting}
+def newton(f, fp, x0, epsilon):
+    """Zéro de f par la méthode de Newton
+       départ : x0, f' = fp, critère d'arrêt epsilon"""
+    u = x0
+    v = u - f(u)/fp(u)
+    k=0
+    while abs(v-u) > epsilon:
+        u, v = v, v - f(v)/fp(v)
+        k+=1
+    return u,k
+
+def f2(t):
+    return t**2+t**0.5-10-alpha
+
+def f2p(t):
+    return 2*t+0.5*t**(-0.5)
+    
+print("Qu. 2 : méthode de Newton ", newton(f2,f2p,1,1e-5)[0])
+\end{lstlisting}
+  
+\question{}
+  Donnez le nombre d'itérations nécessaires pour obtenir ce résultats avec la méthode de Newton en prenant pour valeur initiale $\alpha$.
+  
+\begin{lstlisting}
+print("Qu. 3 : méthode de Newton ", newton(f2,f2p,alpha,1e-5)[1])
+\end{lstlisting}
+  
+  
+  
+\question{}
+  Donnez le nombre d'itérations nécessaires pour obtenir ce résultats avec la méthode de Dichotomie sur l'intervalle $\left[0,12+\alpha\right]$.
+
+\begin{lstlisting}
+def dichotomie(f, a, b, epsilon):
+    """Zéro de f sur [a,b] à epsilon près, par dichotomie
+       Préconditions : f(a) * f(b) <= 0
+                       f continue sur [a,b]
+                       epsilon > 0"""
+    c, d = a, b
+    fc, fd = f(c), f(d)
+    k=0
+    while d - c > 2 * epsilon:
+        m = (c + d) / 2.
+        fm = f(m)
+        if fc * fm <= 0:
+            d, fd = m, fm
+        else:
+            c, fc = m, fm
+        k+=1
+    return (c + d) / 2.,k
+    
+print("Qu. 4 : méthode de dichotomie ", dichotomie(f2, 0, 12+alpha, 1e-5)[1])
+
+\end{lstlisting} 
+  
+
+
+\question{}
+  Donnez à l'aide une approximation (à $10^-5$ près) de l'unique réel positif $t$ tel que
+  \begin{equation*}
+    \int_{\alpha}^{\alpha+t} (2+\sqrt{x}+\cos x)\, dx = 10
+  \end{equation*}
+
+  
+\begin{lstlisting}
+print("Qu. 5 : ", dichotomie(lambda t : trapeze(lambda x : 2+sqrt(x)+cos(x),alpha,alpha+t,1000)-10,0,50,1e-5))
+\end{lstlisting}
+  
+
+\question{}
+  Donner une valeur approchée de $x(1)$ avec $x$ l'unique fonction
+  vérifiant $x(0)=\alpha$ et pour tout $t\in \R$, $x'(t) = 3\cos(x(t))
+  + t$.
+
+\begin{lstlisting}
+def F (x,t) :
+    return 3*cos(x) + t
+
+les_t = [i/10000 for i in range(10001)]
+
+print("Qu. 6 : ", si.odeint(F,alpha,les_t)[-1,0])
+\end{lstlisting}
+  
+
+\question{}
+  Donner une valeur approchée de $x(1+\frac{\alpha}{10})$ avec $x$ l'unique fonction
+  vérifiant $x(0)=0$, $x'(0)=0$ et pour tout $t\in \R$, $x''(t) = 1 + \sin(t+x(t))$.
+
+\begin{lstlisting}
+def G (X,t) :
+    a,b = X[0],X[1]
+    return array([b,1+sin(t+a)])
+
+les_t = [i*(1+alpha/10)/10000 for i in range(10001)]
+
+print("Qu. 7 : ", si.odeint(G,array([0,0]),les_t)[-1,0])
+
+\end{lstlisting}
+  
+\question{}
+  Donner une approximation de $\beta\in \R$, pour que l'unique
+  solution de l'équation différentielle non linéaire $x''(t)=
+  1+\arctan(t+x(t))$ avec les conditions initiales $x(0)=0$ et
+  $x'(0)=\beta$ vérifie
+  \begin{equation*}
+    x(1+\frac{\alpha}{10}) = 1 + \frac{2}{3}\alpha
+  \end{equation*}
+  
+  
+\begin{lstlisting}
+def H (X,t) :
+    a,b = X[0],X[1]
+    return array([b,1+atan(t+a)])
+
+les_t = [i*(1+alpha/10)/10000 for i in range(10001)]
+
+f = lambda beta : si.odeint(H,array([0,beta]),les_t)[-1,0]-1-(2/3)*alpha
+
+print("Qu. 8 : ",so.brentq(f,-2,2))
+
+\end{lstlisting}
+  

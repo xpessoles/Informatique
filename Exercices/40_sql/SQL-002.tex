@@ -1,0 +1,100 @@
+Un professeur d'informatique a créé une base de données pour gérer les notes de ses interrogations hebdomadaires. 
+Pour cela, il a créé trois tables : \texttt{etudiants}, \texttt{interros}, \texttt{notes}. 
+Voici les commandes SQL ayant permis de créer ces tables. 
+
+\begin{verbatim}
+CREATE TABLE etudiants (
+    -- table des données des étudiants
+    id INTEGER, -- identifiant de l'étudiant
+    nom VARCHAR NOT NULL, -- nom de l'étudiant
+    prenom VARCHAR NOT NULL, -- prénom de l'étudiant
+    date_naissance DATE NOT NULL, -- date de naissance de l'étudiant, format AAAA-MM-JJ
+    PRIMARY KEY (id)
+    );
+\end{verbatim}
+
+\begin{verbatim}
+CREATE TABLE interros (
+    -- table des données des interros
+    id INTEGER, -- identifiant de l'interro
+    titre VARCHAR, -- titre de l'interro
+    sujet VARCHAR, -- sujet de l'interro
+    date DATE, -- date du jour où a été donnée l'interro, format AAAA-MM-JJ
+    PRIMARY KEY (id)
+    );
+\end{verbatim}
+
+\begin{verbatim}
+CREATE TABLE notes (
+    -- table des notes des étudiants aux interros
+    id_etudiant INTEGER NOT NULL, -- identifiant de l'étudiant
+    id_interro INTEGER NOT NULL, -- identifiant de l'interro
+    note INTEGER NOT NULL, -- note obtenue
+    PRIMARY KEY (id_etudiant, id_interro),
+    FOREIGN KEY (id_etudiant) REFERENCES etudiants,
+    FOREIGN KEY (id_interro) REFERENCES interros
+    );
+\end{verbatim}
+
+\medskip{}
+
+\question{} Peut-on donner plusieurs notes au même étudiant et pour la même interrogation ? 
+
+\medskip{}
+
+\question{} Donner une requête SQL traduisant l'opération suivante, exprimée dans le vocabulaire d'algèbre relationnelle usuel : 
+\begin{equation*}
+  \pi_{\texttt{sujet}}\p{\sigma_{\texttt{id}=1}(\texttt{interros})}.
+\end{equation*}
+
+\medskip{}
+
+\question{} Écrire une requête SQL permettant d'obtenir la liste des noms et prénoms des étudiants de la classe. 
+
+\medskip{}
+
+\question{} Écrire une requête SQL permettant d'obtenir la liste des prénoms des étudiants de la classe, sans doublon.
+
+\medskip{}
+
+\question{} Les enfants du professeur se sont amusés à rentrer des données factices, que le professeur aimerait retrouver afin de les effacer ensuite. 
+Écrire une requête SQL permettant d'obtenir la liste des identifiants des étudiants ayant pour nom \texttt{"reinedesneiges"}.
+
+\medskip{}
+
+\question{} Écrire une requête SQL permettant d'obtenir la date de naissance de l'étudiant le plus jeune de la classe. 
+
+\medskip{}
+
+\question{} Écrire une requête SQL permettant d'obtenir la liste des noms et prénoms des étudiants ayant obtenu au moins un 20 à une des interrogations. 
+
+\medskip{}
+
+\question{} Écrire une requête SQL permettant d'obtenir la liste des noms, prénoms d'étudiants et titres d'interrogations pour chaque note de 0 obtenue. 
+
+\medskip{}
+
+\question{} Écrire une requête SQL permettant d'obtenir la liste des noms et prénoms des étudiants, avec la moyenne des notes de chaque étudiant.
+
+\medskip{}
+
+\question{} Écrire une requête SQL permettant d'obtenir la liste des noms et prénoms des étudiants, suivis pour chaque étudiant du nombre d'interrogations rendues.
+
+\medskip{} 
+
+\question{} Écrire une requête SQL permettant d'obtenir le nom, le prénom et le nombre de copies rendues par l'étudiant ayant rendu le plus de copies (on suppose qu'il n'y en a qu'un). 
+  On rappelle que l'instruction \texttt{LIMIT k} permet de tronquer une table à ses \texttt{k} premières lignes.
+  
+\medskip{}
+
+\question{} Écrire une requête SQL permettant d'obtenir la liste des noms et prénoms des étudiants ayant rendu au moins 10 copies, suivis du nombre de copies rendues. 
+
+\medskip{}
+
+\question{} Écrire une requête SQL permettant d'obtenir la liste des titres des interrogations, suivie pour chaque interrogation du nombre d'étudiants qui n'ont pas rendu de copies. 
+
+\medskip{}
+
+\question{} Écrire une requête SQL permettant d'obtenir la liste des titres des interrogations pour lesquelles tous les étudiants ont rendu une copie. 
+
+% Idées : pour chaque interro, le nb d'étudiants qui n'ont pas rendu de copies. 

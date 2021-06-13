@@ -1,0 +1,57 @@
+On dispose en \texttt{Python} de la fonction \texttt{randrange} dans la bibliothèque \texttt{random}. 
+Elle prend deux  arguments entiers $a$ et $b$, et renvoie un entier tiré uniformément dans $\ii{a;b}$. 
+On peut considérer que deux appels successifs de cette fonction donnent des tirages indépendants l'un de l'autre. 
+
+Une variable aléatoire $R$ suit la loi de \emph{Rademacher} si $R$ ne peut prendre que $1$ ou $-1$ comme valeurs, avec $P(R=1)=P(R=-1) = \dfrac{1}{2}$.
+
+Étant donné une suite $(R_n)_{n\in\N}$ de variables aléatoires indépendantes et suivant chacune la loi de Rademacher, on considère la suite $(S_n)_{n\in\N}$ définie par 
+\begin{equation*}
+  S_0 = 0 \quad\textrm{ et }\quad \forall n \in \N^\ast,~S_{n} = \sum_{k=1}^n R_n.
+\end{equation*}
+Notamment, si $n\in\N$, $S_{n+1} = S_n + R_{n+1}$. On peut voir cette suite $(S_n)_{n\in\N}$ comme une \emph{marche aléatoire} sur $\Z$, et représenter son évolution en traçant les points $(k,S_k)$ pour $k$ dans une plage raisonnable. 
+
+Étant donné une telle suite  $(S_n)_{n\in\N}$ et deux entiers naturels $a,b$ avec $a<b$, on dit que la marche aléatoire $S$ réalise une excursion hors de zéro entre $a$ et $b$ si 
+\begin{equation*}
+  S_a = S_b = 0 \quad\textrm{ et }\quad \forall k \in \ii{a+1;b},~ S_k \neq 0.
+\end{equation*}
+
+Vous trouverez sur le site de la classe :
+\begin{itemize}
+  \item un fichier \texttt{marche.txt} contenant un exemple de telle marche ($n=500$, les valeurs sont séparées par des espaces) ;
+  \item un fichier \texttt{excursions.txt} contenant les excursions pour cette marche (une excursion par ligne) ; 
+  \item un fichier \texttt{d02m-nom-marche.png} représentant cette marche (vous devrez renvoyer une figure similaire) ; 
+  \item un fichier \texttt{d02m-nom-excursions.png} représentant les excursions hors de zéro de cette marche (vous devrez renvoyer une figure similaire).
+\end{itemize}
+
+\medskip
+
+\question\ Écrire une fonction \texttt{R()}, sans argument, renvoyant une réalisation d'une variable aléatoire de loi de Rademacher. 
+
+\medskip
+
+\question\ Écrire une fonction \texttt{marche(n)}, prenant en argument un entier naturel $n$, et renvoyant une liste contenant une réalisation de $[S_0,\dots,S_n]$. 
+
+\medskip
+
+\question\ Écrire une fonction \texttt{excursions(m)}, prenant en argument une liste d'entiers \texttt{m}, et renvoyant la liste des excursions pour la marche \texttt{m}. Par exemple, si 
+  \begin{equation*}
+    \texttt{m} = [0,1,0,-1,-2,-1,-2,-1,0,1,2],
+  \end{equation*}
+la fonction \texttt{excursions(m)} renverra la liste 
+  \begin{equation*}
+    \texttt{les\_e}  = [~[0,1,0]~,~[0,-1,-2,-1,-2,-1,0]~].
+  \end{equation*}
+  
+\medskip
+
+\question\label{PLT-000:qu:marche} Écrire une fonction \texttt{trace\_marche(m,nom\_de\_fichier)} ne renvoyant rien et enregistrant dans le fichier \texttt{nom\_de\_fichier} le tracé de la marche aléatoire dont les valeurs sont données dans \texttt{m}.
+
+  Vous enverrez à votre enseignant un tracé produit par cette fonction pour $n=500$. 
+
+  \medskip
+
+\question\label{PLT-000:qu:excursions} Écrire une fonction \texttt{trace\_excursions(les\_e,nom\_de\_fichier)} ne renvoyant rien et enregistrant dans le fichier \texttt{nom\_de\_fichier} le tracé des excursions données dans \texttt{les\_e}.
+
+  Vous enverrez à votre enseignant un tracé produit par cette fonction, pour la même marche que la question précédente.
+  
+  \emph{Remarque :} on n'hésitera pas à retirer quelques réalisations de la marche de manière à avoir un tracé lisible et un nombre d'excursions raisonnable.  

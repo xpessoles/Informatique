@@ -1,0 +1,22 @@
+On se place dans le modèle de complexité usuel. 
+Toutes les opérations de cette fonction sont en $O(1)$. 
+
+\question{} Le nombre de tours de cette boucle n'est pas déterminé à l'avance, on ne peut donc mener un calcul de complexité exact. 
+On peut cependant déterminer une complexité dans le pire des cas. 
+Il y aura au plus $i$ tours de boucle (un variant pour cette boucle est $j$). 
+Chaque tour de boucle a une complexité en $O(1)$ (nombre borné d'opérations en $O(1)$). 
+La complexité dans le pire des cas de cette boucle est en $O(i)$. 
+
+\question{} En dehors des boucles, il y a une opération en $O(1)$ (affectation). 
+
+Boucle \texttt{for} des lignes 7-8 : chaque tour a une complexité en $O(1)$, il y a $n$ tours de boucle, la boucle a donc une complexité en $O(n)$. 
+
+Boucle \texttt{for} des lignes 9-16 : la boucle while a une complexité en $O(i)$, chaque tour a donc une complexité en $O(i)+O(1)=O(i)$, il y a $n$ tours de boucle, la boucle a donc une complexité en 
+\begin{equation*}
+    O\left(\sum_{i=1}^n i\right) = O\left(\dfrac{n(n+1)}{2}\right) = O(n^2).
+\end{equation*}
+
+La complexité de cette fonction est donc 
+\begin{equation*}
+    O(n^2)+O(n)+O(1) = O(n^2).
+\end{equation*}

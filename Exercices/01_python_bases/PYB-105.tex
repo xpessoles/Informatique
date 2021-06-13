@@ -1,0 +1,52 @@
+\exer{}
+\setcounter{numques}{0}
+
+\question{Pour chaque séquence d'instruction, prévoir son résultat puis le vérifier grâce à l'interpréteur interactif d'IDLE.}
+
+\begin{enumerate}[label=\emph{\alph*)}]
+\item 
+\begin{lstlisting}
+
+t = [1,2,3,4,5,6]
+u = ["a","b","c","d"]
+print(t+u)
+t[0]
+t[-1]
+z = t[3]
+print(z)
+t.append(7)
+print(t)
+\end{lstlisting}
+
+\item 
+\begin{lstlisting}
+
+ex = ["sin","cos","tan","log","exp"]
+"log" in ex
+log in ex
+"l" in ex
+z = ex.pop()
+print(z)
+z in ex
+print(ex)
+\end{lstlisting}
+
+\item 
+\begin{lstlisting}
+
+  u = [1,2,3,4,5,6]
+  L = u
+  u = [1,2,3,42,5,6]
+  print(L)
+\end{lstlisting}
+
+\item 
+\begin{lstlisting}
+
+  u = [1,2,3,4,5,6]
+  L = u
+  u[3] = 42
+  print(L)
+\end{lstlisting}
+
+\end{enumerate}

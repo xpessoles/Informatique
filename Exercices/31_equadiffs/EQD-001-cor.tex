@@ -1,0 +1,279 @@
+\question{}
+
+\begin{itemize}
+\item $\left[1, 2, 3, 4, 5, 6\right]$ ;
+\item $\left[1, 2, 3, 1, 2, 3\right]$
+\end{itemize}
+
+\question{}
+
+\begin{pyverbatim}
+def smul(n,liste):
+	"""
+	Multiplie chaque élément de la liste par un nombre et renvoie une nouvelle liste
+	"""
+	liste2=[]
+	for i in liste:
+		liste2.append(i*n) 
+	return liste2
+	
+\end{pyverbatim}
+
+\question{}
+
+On effectue $len(liste)$ tours de boucle. La complexité pour chaque tour de boucle est en $O(1)$ (nombre borné/ fini d'opérations en $O(1)$) Ainsi la complexité est en $O(len(liste))$.
+
+
+%\question{}
+%
+%\begin{pyverbatim}
+%def vsom(liste1,liste2):
+%	"""
+%	Prend en paramètre deux listes de nombres de même longueur et renvoie une nouvelle
+%	liste constituée de la somme terme à terme de ces deux listes.
+%	"""   
+%	liste3=[]
+%	for i in range(len(liste1)):
+%		liste3.append(liste1[i]+liste2[i])
+%	return liste3    
+%\end{pyverbatim}
+%
+%
+%\question{}
+%
+%\begin{pyverbatim}
+%def vdif(liste1,liste2):
+%	"""
+%	Prend en paramètre deux listes de nombres de même longueur et qui renvoie une nouvelle
+%	liste constituée de la différence terme à terme de ces deux listes.
+%	"""
+%	liste3=[]
+%	for i in range(len(liste1)):
+%		liste3.append(liste1[i]-liste2[i]) 
+%	return liste3
+%\end{pyverbatim}
+
+\question{} 
+
+
+%On a par définition $y'(t)=z(t)$ or y est de classe $C^2$ donc on peut obtenir la deuxième expression par dérivation.
+
+On peut poser :
+$$Y=\left(
+\begin{array}{c}
+y(t)\\
+z(t)
+\end{array}
+\right)$$
+
+et $F$ peut se définir sous la forme : 
+
+\begin{align*}
+F:
+\left(
+\begin{array}{c}
+y(t)\\
+z(t)
+\end{array}
+\right)
+\mapsto
+\left(\begin{array}{c}
+z(t)\\
+f(y(t))
+\end{array}
+\right)
+\end{align*} 
+
+%\question{}
+%
+%D'après la question précédente, on a:
+%\begin{eqnarray*}
+%& y'(t)=z(t) & \\
+%& \int_{t_i}^{t_{i+1}}y'(t)dt=\int_{t_i}^{t_{i+1}}z(t)dt \\
+%& \boxed{y\left(t_{i+1}\right)=y\left(t_i\right)+\int_{t_i}^{t_{i+1}}z(t)dt}
+%\end{eqnarray*}
+%
+%De la même manière:
+%\begin{eqnarray*}
+%& z'(t)=f\left(y(t)\right) & \\
+%& \int_{t_i}^{t_{i+1}}z'(t)dt=\int_{t_i}^{t_{i+1}}f\left(y(t)\right)dt \\
+%& \boxed{z\left(t_{i+1}\right)=z\left(t_i\right)+\int_{t_i}^{t_{i+1}}f\left(y(t)\right)dt}
+%\end{eqnarray*}
+
+
+
+
+\question{}
+
+
+
+\begin{pyverbatim}
+import numpy as np
+def euler(F, tmin, tmax, Y0, n):
+    """Solution de Y'=F(Y,t) sur [a,b], y(a) = y0, pas h"""
+    Y = Y0
+    t = tmin
+    les_y = [Y0[0]] 
+    les_z = [Y0[1]] 
+    h=(tmax-tmin)/(n-1)
+    les_t = np.arange(tmin,tmax,h)
+    while t+h <= tmax:
+        Y = Y + h * F(Y, t) # surtout pas += !
+        les_y.append(Y[0])
+        les_z.append(Y[1])
+        t += h
+    return les_t, les_y, les_z
+\end{pyverbatim}
+
+%\question{}
+%$y''(t)=-\omega^2.y(t)$
+%En multipliant chaque membre de l'égalité par $y'(t)$, on a:
+%
+%$$y'(t).y''(t)=-\omega^2.y(t).y'(t)$$
+%
+%$$\frac{1}{2}\left(2y'(t).y''(t)\right) =(-\omega^2)\frac{1}{2}.\left(2y(t).y'(t)\right)$$
+%
+%donc en intégrant :
+%
+%$$\exists E\;tq\quad \frac{1}{2}y'(t)^2+\frac{\omega^2}{2} y(t)^2 =E $$
+%
+%
+%Ainsi en posant $g : x \mapsto \dfrac{\omega^2}{2} x^2$ avec $g'=-f$, on obtient :
+%
+%$$
+%\boxed{\frac{1}{2}y'(t)^2+g(y(t))= E
+%}
+%$$
+
+\question{}
+
+Mathématiquement, on écrit 
+\begin{align*}
+f:\fct{\R}{\R}{x}{-\omega^2x}
+\end{align*}
+
+\begin{align*}
+F : \begin{pmatrix} y \\ z \end{pmatrix} \longmapsto \begin{pmatrix} z \\ f(y) \end{pmatrix}.
+\end{align*}
+
+Informatiquement, cela donne :
+\begin{pyverbatim}
+def f(x):
+    return -w**2*x
+    
+
+def F(Y,t):
+    y=Y[0]
+    z=Y[1]
+    return np.array([z,f(y)])
+\end{pyverbatim}
+
+\question{}
+\begin{pyverbatim}
+tmin=0
+tmax=3
+w=2*np.pi
+n=100
+y0=3
+z0=0
+vt,vy,vz=euler(F, tmin, tmax, np.array([y0,z0]), n)
+
+plt.clf()
+plt.plot(vy,vz,'ko-')
+plt.xlabel('y(t)')
+plt.ylabel('z(t)')
+plt.grid()
+plt.savefig('figure1.png')
+\end{pyverbatim}
+
+%
+%$$E(t_i)=\frac{1}{2} y'(t_i)^2 + g(y(t_i))=\frac{1}{2} z(t_i)^2 + g(y(t_i))$$
+%$$E_i = \frac{1}{2} z_i^2 + g(y_i)= \frac{1}{2} z_i^2 + \frac{\omega^2}{2} (y_i)^2$$
+%
+%$$E_{i+1} = \frac{1}{2} z_{i+1}^2 + \frac{\omega^2}{2} (y_{i+1})^2$$
+%
+%Soit $$E_{i+1}-E_i=\frac{1}{2} z_{i+1}^2 + \frac{\omega^2}{2} (y_{i+1})^2-\frac{1}{2} z_i^2 - \frac{\omega^2}{2} (y_i)^2$$
+%
+%En utilisant les relations de récurrence:
+%
+%$$E_{i+1}-E_i=\frac{1}{2} (z_i-h \omega^2 y_i)^2 + \frac{\omega^2}{2} (y_i+h z_i)^2-\frac{1}{2} z_i^2 - \frac{\omega^2}{2} (y_i)^2$$
+%
+%Après simplification:
+%
+%$$E_{i+1}-E_i=\frac{1}{2} h^2 \omega^2 (z_i^2 +\omega^2 y_i^2)$$
+%
+%
+%$$\boxed{E_{i+1}-E_i= h^2 \omega^2 E_i}$$
+%
+%\question{}
+%
+%Pour conserver l'énergie il faut: $$E_{i+1}-E_i= 0$$
+%
+%Tous les $E_i$ sont égaux à $E$ or $E_i=\frac{1}{2} (z_i^2 +\omega^2 y_i^2)$ donc $ z_i^2 +\omega^2 y_i^2 = constante$.
+%
+%On obtient l'équation d'une ellipse.
+%
+%Exemples, circuit RLC avec R nulle (non dissipatif), barre en liaison pivot sans frottement. 
+%
+%\question{}
+%
+%Allure d'une ellipse centrée en $y_i = z_i = 0$. 
+%\begin{figure}[!h]
+%\centering
+%\includegraphics[scale=0.5]{ellipse.png}
+%\end{figure}
+
+%\question{} 
+%
+%L'allure n'est pas une ellipse. Il y a divergence des $y_i$ et des $z_i$. Le système ainsi modélisé n'est pas conservatif en énergie. 
+%En calculant le rapport $\dfrac{E_{i+1}}{E_i}$, on trouve : 
+%$$\dfrac{E_{i+1}}{E_i} = 1 + h^2 \omega^2 $$
+%
+%qui est strictement supérieur à 1. Donc, la raison de la suite est supérieur à 1, donc divergente. Cela signifie que l'énergie n'est pas finie, et donc diverge. 
+%Par conséquent, les $y_i$ et les $z_i$ divergent aussi. D'où l'allure de la figure de gauche. 
+
+\question{}
+
+Comme pour la méthode d'Euler, pour calculer tous les $y_i$ et $z_i$, il est nécessaire de connaître: $f,y_0,z_0,i$ et $h$. 
+
+
+\begin{pyverbatim}
+def verlet(f, tmin, tmax, Y0, n):
+    y,z=Y0[0],Y0[1]
+    valeursy =[ y ]
+    valeursz =[ z ]
+    h=(tmax-tmin)/(n-1)
+    h2sur2=h**2/2. # Hors de la boucle pour la complexité
+    les_t = np.arange(tmin,tmax,h)
+    for k in range ( n-1 ):
+        fi=f(valeursy[-1])
+        y = y + h * valeursz[ -1]+h2sur2*fi   
+        z = z + h/2. * (fi+f(y))
+        valeursy . append ( y )
+        valeursz . append ( z )
+    return [les_t,valeursy , valeursz ]
+\end{pyverbatim}
+
+
+
+\question{}
+
+
+
+\begin{pyverbatim}
+vt,vy,vz=verlet(f, tmin, tmax, np.array([y0,z0]), n)
+
+plt.clf()
+plt.plot(vy,vz,'ko-')
+plt.xlabel('y(t)')
+plt.ylabel('z(t)')
+plt.axis([-15,20,-80,100])
+plt.grid()
+plt.savefig('fig2.png')
+\end{pyverbatim}
+
+\question{} Le schéma de Verlet semble plus stable que le schéma d'Euler. 
+En effet l'équation différentielle traduit le comportement d'un système physique conservatif, c'est-à-dire que la quantité $\dfrac{(y')^2}{2} + \dfrac{\omega^2}{2}y^2$ doit être constante. 
+On devrait alors avoir un portrait de phase décrivant une ellipse. 
+On observe bien que c'est le cas du portrait de phase de Verlet mais pas celui obtenu avec la méthode d'Euler.
+La solution approchée donnée par la méthode d'Euler est absurde physiquement : il y aurait augmentation de l'énergie dans le système. 

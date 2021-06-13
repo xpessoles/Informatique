@@ -1,0 +1,219 @@
+\section{}
+\subsection{Introduction}
+
+On s'intéresse ici au problème de régression par moindres carrés, que l'on envisagera dans le cas particulier d'un problème de cinétique chimique. 
+
+On souhaite modéliser l'évolution de la concentration d'un réactif, en fonction du temps. On a 
+mesuré, expérimentalement, les données contenues dans la table~\ref{table:donnees}.
+\begin{figure}[!h]
+  \begin{center}
+    \setlength\extrarowheight{2.5pt}
+    \begin{tabular}{|c|c|c|c|c|c|c|c|}
+      \hline
+      Temps ($s$) & 0 & 7 & 18 & 27 & 37 & 56 & 102 \\[2.5pt]
+      \hline
+      Concentration ($\textrm{mol}.\textrm{L}^{-1}$) & 34,83 & 32,14 & 28,47 & 25,74 & 23,14 & 18,54 & 11,04\\[2.5pt]
+      \hline
+    \end{tabular}
+    \caption{Données expérimentales : concentration du réactif en fonction du temps.}
+    \label{table:donnees}
+  \end{center}
+\end{figure}
+
+\begin{rem}
+  En préambule de votre script, vous aurez intérêt à créer deux listes, une pour les temps, une pour les concentrations, de la manière suivante. 
+\begin{verbatim}
+T = [0, 7, 18, 27, 37, 56, 102]
+C = [34.83, 32.14, 28.47, 25.74, 23.14, 18.54, 11.04]
+\end{verbatim}
+
+\end{rem}
+
+
+On se donne donc une suite de sept mesures de temps $(t_i)_{i=0}^6$ ainsi que de sept mesures de concentration $(C_i)_{i=0}^6$. 
+L'objectif est de trouver une fonction $f$ telle que les points $f(t_i)$ sont proches des $C_i$. 
+Pour quantifier cela, on considèrera le critère des moindres carrés, ce qui revient à considérer la quantité 
+\begin{equation}\label{eq.mc}\tag{MC}
+  \cL(f) = \dfrac{1}{7}\sum_{i=0}^6 (C_i - f(t_i))^2 .
+\end{equation}
+Il exite une infinité de fonctions qui annulent cette quantité (penser par exemple à l'interpolation de Lagrange) et qui n'ont aucun rapport avec notre problème. 
+Nous allons donc nous restreindre à des ensembles réduits de fonctions : c'est ce que l'on appellera le \emph{modèle}.
+
+\subsubsection{Modèle cinétique d'ordre 1.}
+
+Dans ce modèle, on considère que la concentration vérifie l'équation différentielle 
+\begin{equation*}
+   C'(t) = -k C(t) \textrm{ avec }k>0 \textrm{, qui admet pour solution } C:t\mapsto C(0) \e^{-kt}.
+\end{equation*}
+
+Pour simplifier, on suppose que $C(0) = C_0 = 34,83~\textrm{mol}.\textrm{L}^{-1}$. On considère donc le modèle
+\begin{equation*}
+  \mathscr{M}_1 = \left\{ f^1_k :t\mapsto C_0 e^{-kt} ~\big|~ k>0 \right\}.   
+\end{equation*}
+On cherche donc une fonction dans $\mathscr{M}_1$ minimisant \eqref{eq.mc}, ce qui revient à chercher un paramètre $k>0$ minimisant 
+\begin{equation*}
+  L^1(k) = \dfrac{1}{7} \sum_{i=0}^6 \left(C_i - C_0 \e^{-k t_i}\right)^2.
+\end{equation*}
+
+\subsubsection{Modèle cinétique d'ordre 2.}
+
+Dans ce modèle, on considère que la concentration vérifie l'équation différentielle 
+\begin{equation*}
+   C'(t) = -k C^2(t) \textrm{ avec }k>0 \textrm{, qui admet pour solution } C:t\mapsto \dfrac{C(0)}{C(0)kt + 1}.
+\end{equation*}
+
+Pour simplifier, on suppose que $C(0) = C_0 = 34,83~\textrm{mol}.\textrm{L}^{-1}$. On considère donc le modèle
+\begin{equation*}
+  \mathscr{M}_2 = \left\{ f^2_k :t\mapsto  \dfrac{C_0}{C_0kt + 1} ~\big|~ k>0 \right\}.   
+\end{equation*}
+On cherche donc une fonction dans $\mathscr{M}_2$ minimisant \eqref{eq.mc}, ce qui revient à chercher un paramètre $k>0$ minimisant 
+\begin{equation*}
+  L^2(k) = \dfrac{1}{7} \sum_{i=0}^6 \left(C_i -\dfrac{C_0}{C_0kt_i + 1}\right)^2.
+\end{equation*}
+
+\subsection{Rendu graphique.}
+
+
+\question{} \'Ecrire une fonction \texttt{trace\_fonction(xmin,xmax,f,nom\_de\_fichier)} qui trace la courbe de la fonction \texttt{f} de \texttt{xmin} à \texttt{xmax}, puis sauvegarde le résultat dans le fichier \texttt{nom\_de\_fichier}.
+  
+    Par exemple, les commandes successives
+\begin{verbatim}
+xmin = 0
+xmax = 20
+def f(x) : 
+    return 0.02* x*(x-5)
+trace_fonction(xmin,xmax,f,'fig_ex_fonction.png')
+\end{verbatim}
+ devront produire (et sauvegarder) un graphique semblable (vous n'essaierez pas dans un premier temps de reproduire les titres, légendes etc.) à \texttt{fig\_ex\_fonction.png}, que vous trouverez sur le site de la classe.
+    
+\question{} \'Ecrire une fonction \texttt{trace\_ajustement(X,Y,f,nom)} qui trace un nuage de points 
+dont les abscisses sont données dans le vecteur \texttt{X} et les ordonnées dans le vecteur 
+\texttt{Y}, qui superpose la courbe de la fonction \texttt{f} pour des arguments allant de 
+\texttt{min(X)} à \texttt{max(X)} et qui sauvegarde l'image produite dans le fichier \texttt{nom}.
+    
+    Par exemple, les commandes successives 
+\begin{verbatim}
+import numpy as np
+T = [0, 7, 18, 27, 37, 56, 102]
+C = [34.83, 32.14, 28.47, 25.74, 23.14, 18.54, 11.04]
+def g(x) : 
+    return 34 - 0.2*x
+trace_ajustement(T,C,g,'fig_ex_ajustement.png')
+\end{verbatim}
+    devront produire (et sauvegarder) un graphique semblable (vous n'essaierez pas dans un premier temps de reproduire les titres, légendes etc.) à \texttt{fig\_ex\_ajustement.png}, que vous trouverez sur le site de la classe.
+
+
+\subsection{Régression pour le modèle d'ordre 1.}
+\label{sec.reg.o1}
+
+
+\question{} Écrire une fonction \texttt{L1(k)} prenant en argument un flottant positif \texttt{k} et renvoyant la valeur de $L^1(k)$.
+
+\medskip{}
+
+\question{\label{qu:traceL1}} Représenter $L^1$ sur un intervalle convenablement choisi. Semble-t-il y avoir un minimum à cette fonction ? Quelle est la régularité de $L^1$ sur $\R^\ast_+$ ? 
+
+  Vous enverrez la figure tracée à votre enseignant. 
+
+\medskip{}
+
+\question{} Déterminer une fonction $dL^1$ sur laquelle appliquer une méthode de Newton permet d'obtenir le lieu du minimum de $L^1$. 
+Écrire une fonction \texttt{dL1(k)} prenant en argument un flottant positif \texttt{k} et renvoyant la valeur de $dL^1(\texttt k)$.
+
+\medskip{}
+
+\question{} Écrire une fonction \texttt{ddL1(k)} prenant en argument un flottant positif \texttt{k} et renvoyant la valeur de $(dL^1)'(\texttt k)$.
+
+\medskip{}
+
+\question{} \'Ecrire une fonction \texttt{newton(f, fp, x0, eps)} implémentant la méthode de Newton pour la fonction \texttt{f}, ou \texttt{fp} est supposée être la dérivée de \texttt{f}, à partir du point \texttt{x0} et s'arrêtant dès que deux points consécutifs sont distants d'au plus \texttt{eps}.
+
+\medskip{}
+
+\question{} Appliquer la méthode de Newton pour trouver le lieu du minimum de $L^1$, noté $k_1$. Converge-t-elle pour toutes les valeurs initiales ? 
+
+Dans le script, vous écrirez une fonction \texttt{val\_k1()}, sans argument, effectuant ce calcul et renvoyant la valeur trouvée. On pourra affecter à la variable \texttt{k1} cette valeur pour la suite du script.
+
+\question{\label{qu:tracef1}} Représenter les mesures expérimentales superposées à la fonction $f^1_{k_1}$.
+
+  Vous enverrez la figure tracée à votre enseignant. 
+
+
+\subsection{Régression pour le modèle d'ordre 2.}
+\label{sec.reg.o2}
+
+\question{} Écrire une fonction \texttt{L2(k)} prenant en argument un flottant positif \texttt{k} et renvoyant la valeur de $L^2(\texttt k)$.
+
+\medskip{}
+
+\question{\label{qu:traceL2}} Représenter $L^2$ sur un intervalle convenablement choisi. Semble-t-il y avoir un minimum à cette fonction ? Quelle est la régularité de $L^2$ sur $\R^\ast_+$ ?
+
+  Vous enverrez la figure tracée à votre enseignant. 
+
+\medskip{}  
+  
+\question{} Déterminer une fonction $dL^2$ sur laquelle appliquer la méthode de la sécante (ou de Newton) permet d'obtenir le lieu du minimum de $L^2$.
+Écrire une fonction \texttt{dL2(k)} prenant en argument un flottant positif \texttt{k} et renvoyant la valeur de $dL^2(\texttt k)$.
+
+\medskip{}
+
+\question{}\'Ecrire une fonction \texttt{secante(f, x0, x1, eps)} implémentant la méthode de la sécante pour la fonction \texttt{f}, à partir du point \texttt{x0} et \texttt{x1} et s'arrêtant dès que deux points consécutifs sont distants d'au plus \texttt{eps}.
+
+\medskip{}  
+
+ 
+\question{} Appliquer la méthode de la sécante pour trouver le lieu du minimum de $L^2$, noté $k_2$. 
+
+Dans le script, vous écrirez une fonction \texttt{val\_k2()}, sans argument, effectuant ce calcul et renvoyant la valeur trouvée. On pourra affecter à la variable \texttt{k2} cette valeur pour la suite du script.
+
+\medskip{}
+
+\question{\label{qu:tracef2}} Représenter les mesures expérimentales superposées à la fonction $f^2_{k_2}$.
+
+  Vous enverrez la figure tracée à votre enseignant. 
+
+
+\medskip{}  
+ 
+\question{} Facultatif : appliquer la méthode de Newton pour trouver le lieu du minimum de $L^2$, noté $k_2$. Converge-t-elle pour toutes les valeurs initiales ?
+
+Dans le script, vous écrirez une fonction \texttt{val\_k2\_bis()}, sans argument, effectuant ce calcul et renvoyant la valeur trouvée. 
+
+
+\subsection{Comparaison qualitative des deux modèles.}
+
+
+\question{} Commenter les résultats des deux parties précédentes, ainsi que l'utilisation des méthodes de Newton et de la sécante.
+
+
+\subsection{Facultatif : régression linéaire.}
+\label{sec.papl.reglin}
+% La suite  est moins guidée : à vous de prendre des initiatives !  
+
+Dans le modèle d'ordre 1, on peut remarquer que l'on a $\displaystyle -\log\left(\dfrac{C(t)}{C(0)}\right) = kt$. 
+On a donc ici une relation linéaire entre le temps et une transformation des concentrations. On peut donc effectuer une \emph{régression linéaire par moindres carrés}, qui consiste à minimiser le critère 
+\begin{equation*}
+  L^1_{\mathrm{lin}}(k) = \dfrac{1}{7} \sum_{i=0}^6 \left( k t_i + \log\left(\dfrac{C_i}{C(0)}\right) \right)^2.
+\end{equation*}
+On effectue en réalité une régression linéaire par moindres carrés sur les points de coordonnées 
+\begin{equation*}
+  \left(t_i,\log\left(\dfrac{C_i}{C(0)}\right)\right).
+\end{equation*}
+
+\question{} Montrer qu'il existe un unique paramètre $k_1'$ minimisant $L^1_{\mathrm{lin}}$, puis le déterminer explicitement (en fonction des données du problème).
+
+\medskip{}
+
+\question{} \'Ecrirer une fonction \texttt{val\_kp1()}, sans argument, et renvoyant la valeur de $k_1'$. On pourra affecter ensuite à la variable \texttt{kp1} cette valeur pour la suite du script.
+
+\medskip{}
+
+\question{\label{qu:traceflin}} Représenter les mesures expérimentales superposées à la fonction $f^1_{k_1'}$.
+
+  Vous enverrez la figure tracée à votre enseignant.
+
+\medskip{}
+  
+\question{} Comparer cette méthode avec celle utilisée dans la partie \ref{sec.reg.o1}. Quels sont les avantages de chacune ?
+
+

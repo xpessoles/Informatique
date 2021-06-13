@@ -1,0 +1,73 @@
+Le but de cet exercice est de construire la suite ordonnée des entiers
+de la forme $2^p3^q5^r$, où $p$, $q$ et $r$ sont des entiers naturels.\\
+Cette suite commence par :\\
+
+
+\begin{tabular}{|l|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+ \hline
+ valeurs&\bf 1&\bf 2&\bf 3&\bf 4&\bf 5&\bf 6&\bf 8&\bf 9&\bf 10&\bf
+12&\bf 15&\bf 16&&&&\\ \hline
+ \it indice&\it 1&\it 2&\it 3&\it 4&\it 5&\it 6&\it
+7&\it 8&\it 9&\it 10&\it 11&\it 12&\it 13&\it 14&\it 15&\it 16\rm\\ 
+ \hline
+\multicolumn{1}{c}{} &\multicolumn{1}{c}{}
+&\multicolumn{1}{c}{} &\multicolumn{1}{c}{}
+&\multicolumn{1}{c}{$\uparrow$}&\multicolumn{1}{c}{}
+&\multicolumn{1}{c}{$\uparrow$}&\multicolumn{1}{c}{}
+&\multicolumn{1}{c}{$\uparrow$} &\multicolumn{1}{c}{}&\multicolumn{1}{c}{}
+&\multicolumn{1}{c}{}
+&\multicolumn{1}{c}{} &\multicolumn{1}{c}{} &\multicolumn{1}{c}{}
+&\multicolumn{1}{c}{} &\multicolumn{1}{c}{} \\
+ \multicolumn{1}{c}{} &\multicolumn{1}{c}{} &\multicolumn{1}{c}{}
+&\multicolumn{1}{c}{} &\multicolumn{1}{c}{$i_5$}&\multicolumn{1}{c}{}
+&\multicolumn{1}{c}{$i_3$}&\multicolumn{1}{c}{}
+&\multicolumn{1}{c}{$i_2$}&\multicolumn{1}{c}{} &\multicolumn{1}{c}{}
+&\multicolumn{1}{c}{}
+&\multicolumn{1}{c}{} &\multicolumn{1}{c}{} &\multicolumn{1}{c}{}
+&\multicolumn{1}{c}{} &\multicolumn{1}{c}{} 
+ \end{tabular}
+\\
+
+\noindent\bf Principe :\rm\\
+
+Le tableau \texttt{t} étant en cours de construction, l'élément suivant du
+tableau sera à choisir parmi les nombres suivants : \texttt{2*t[i\_2]},
+\texttt{3*t[i\_3]} et \texttt{5*t[i\_5]}, où $i_2$ (respectivement $i_3$,
+$i_5$) est l'indice du plus petit élément du tableau n'ayant pas son double
+(respectivement triple, quintuple) présent dans le tableau.\\
+Dans l'exemple, $i_2=8$, $i_3=6$ et $i_5=4$, et l'élément suivant est donc à
+choisir parmi 2*9=18, 3*6=18 et 5*4=20.\\
+Le plus petit élément étant 18, c'est l'élément à rajouter au tableau. Les
+indices concernés par le choix (ici $i_2$ et $i_3$) sont à augmenter de 1, ce
+qui donne le tableau suivant :\\
+
+\begin{tabular}{|l|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+ \hline
+ valeurs&\bf 1&\bf 2&\bf 3&\bf 4&\bf 5&\bf 6&\bf 8&\bf 9&\bf 10&\bf
+12&\bf 15&\bf 16&\bf 18&&&\\ \hline
+ \it indice&\it 1&\it 2&\it 3&\it 4&\it 5&\it 6&\it
+7&\it 8&\it 9&\it 10&\it 11&\it 12&\it 13&\it 14&\it 15&\it 16\rm\\ 
+ \hline
+\multicolumn{1}{c}{} &\multicolumn{1}{c}{}
+&\multicolumn{1}{c}{} &\multicolumn{1}{c}{}
+&\multicolumn{1}{c}{$\uparrow$}&\multicolumn{1}{c}{}
+&\multicolumn{1}{c}{} &\multicolumn{1}{c}{$\uparrow$}&\multicolumn{1}{c}{}
+&\multicolumn{1}{c}{$\uparrow$}&\multicolumn{1}{c}{} &\multicolumn{1}{c}{}
+&\multicolumn{1}{c}{} &\multicolumn{1}{c}{} &\multicolumn{1}{c}{}
+&\multicolumn{1}{c}{} &\multicolumn{1}{c}{} \\
+ \multicolumn{1}{c}{} &\multicolumn{1}{c}{} &\multicolumn{1}{c}{}
+&\multicolumn{1}{c}{} &\multicolumn{1}{c}{$i_5$}&\multicolumn{1}{c}{}
+&\multicolumn{1}{c}{} &\multicolumn{1}{c}{$i_3$}&\multicolumn{1}{c}{}
+&\multicolumn{1}{c}{$i_2$}&\multicolumn{1}{c}{} &\multicolumn{1}{c}{}
+&\multicolumn{1}{c}{} &\multicolumn{1}{c}{} &\multicolumn{1}{c}{}
+&\multicolumn{1}{c}{} &\multicolumn{1}{c}{} 
+ \end{tabular}
+\\
+
+
+
+\begin{enumerate}
+\item Écrire, selon ce principe, la fonction qui construit le tableau des $n$
+premiers nombres de la forme $2^p3^q5^r$.
+\item Donner l'invariant de boucle et la démonstration de ce théorème.
+\end{enumerate}

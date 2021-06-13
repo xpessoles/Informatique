@@ -1,0 +1,132 @@
+Les classes de MPSI du lycée LMM organisent un tournoi d'intelligences artificielles de morpion. 
+Une partie de morpion se déroule sur un damier de trois cases par trois cases. Un premier joueur choisit une case. 
+Puis, le deuxième joueur choisit une autre case. 
+Puis, le premier joueur choisit une troisième case, et l'on continue ainsi jusqu'à ce que :
+\begin{itemize}
+  \item soit un joueur aligne trois cases, dans ce cas il gagne ;
+  \item soit le damier est rempli, dans ce cas il y a match nul. 
+\end{itemize}
+\begin{figure}[!h]
+  \begin{center}
+    \begin{tabular}{|c|c|c|}
+      \hline
+      1 & 2 & 3 \\
+      \hline
+      4 & 5 & 6 \\
+      \hline
+      7 & 8 & 9 \\
+      \hline
+    \end{tabular}
+    \caption{Repérage des cases dans un damier de morpion.}
+    \label{morpion:cases}
+  \end{center}
+\end{figure}
+Les professeurs de ces classes ont donc créé une base de données afin de gérer ce tournoi. 
+Cette base contient deux tables : 
+\begin{itemize}
+  \item une table contenant les informations des joueurs : identifiant du joueur, pseudonyme, date de naissance, classe ; 
+  \item une table contenant les informations des parties : identifiant de la partie, identifiant du joueur \no 1, identifiant du joueur \no 2, résultat de la partie, coups joués, date de la partie. 
+\end{itemize}
+Voici les instructions SQL ayant permis de créé ces deux tables. 
+\begin{verbatim}
+CREATE TABLE joueurs (
+          idj INTEGER,
+          pseudo VARCHAR(50),
+          datenaiss DATE,
+          classe VARCHAR(50),
+          PRIMARY KEY (idj)
+          );
+
+CREATE TABLE parties (
+          idp INTEGER,
+          idj1 INTEGER, 
+          idj2 INTEGER,
+          res INTEGER,
+          coups INTEGER,
+          date DATETIME,
+          PRIMARY KEY(idp),
+          FOREIGN KEY(idj1) REFERENCES joueurs,
+          FOREIGN KEY(idj2) REFERENCES joueurs
+          );
+\end{verbatim}
+Quelques conventions et rappels.
+\begin{itemize}
+  \item Si le résultat d'une partie vaut 0, il y a match nul, s'il vaut 1 le joueur 1 a gagné et s'il vaut 2 le joueur 2 a gagné.
+  \item Pour une partie, on lit dans l'entier \texttt{coups} les coups effectués par les joueurs. Ainsi, si \texttt{coups = 54892}, alors 
+    \begin{itemize}
+      \item le joueur 1 joue dans la case 5 ;
+      \item le joueur 2 joue dans la case 4 ;
+      \item le joueur 1 joue dans la case 8 ;
+      \item le joueur 2 joue dans la case 9 ;
+      \item le joueur 1 joue dans la case 2.
+    \end{itemize}
+    Ainsi, dans cette partie, le joueur 1 a gagné (alignement sur la deuxième colonne). 
+  \item Les dates (type \texttt{DATE}) sont au format \texttt{AAAA-MM-JJ}.
+  \item Les dates-heures (type \texttt{DATETIME}) sont au format \texttt{AAAA-MM-JJ HH:MM:SS}. 
+  \item Les dates et dates-heures sont écrites comme des chaînes de caractères (exemple : \texttt{"1515-09-13"}) et peuvent être comparées entre elles. 
+  \item Si une requête ne donne pas qu'une réponse (exemple : plusieurs lignes vérifient un critère), on inscrira toutes les réponses. 
+  \item Pour effectuer une jointure d'une table \texttt{T} avec elle même, on pourra lui donner un alias avec l'instruction \texttt{AS}. Voici un exemple.
+\begin{verbatim}
+SELECT *
+FROM T
+JOIN T AS Tbis ON T.[...] = Tbis.[...] ;
+\end{verbatim}
+\end{itemize}
+% Enfin, voici quelques rappels concernant le fonctionnement de \texttt{sqlite3}.
+% \begin{itemize}
+%   \item Ouvrez un terminal dans le dossier contenant la base de données. 
+%   \item Avec ce terminal, lancez \texttt{sqlite3} sur cette base de données avec la commande suivante.
+% \begin{verbatim}
+% sqlite3 mabdd.sqlite
+% \end{verbatim}
+%   Vous pouvez aussi lancer \texttt{sqlite3} sans argument et ouvrir ensuite une base de donnée avec la fonction \texttt{.open}.
+%   \item Nous vous conseillons \emph{fortement} d'écrire vos requêtes SQL dans un script (fichier texte, via un éditeur de texte), enregistré dans le même dossier que votre base de données. 
+%     Vous pouvez ensuite exécuter ce script dans \texttt{sqlite3} par la commande suivante. 
+% \begin{verbatim}
+% .read monscript.sql
+% \end{verbatim}
+% \end{itemize}
+
+\bigskip
+
+\question\ Quel est le pseudonyme de l'étudiant d'identifiant \no 42 ?
+
+\medskip
+
+\question\ Quel est l'identifiant de l'étudiant dont le pseudonyme est \texttt{"Galois"} ?
+
+\medskip
+
+\question\ Combien de parties ont été jouées ? 
+
+\medskip
+
+\question\ Combien y a-t-il eu de matchs nuls ? 
+
+\medskip
+
+\question\ Combien de parties différentes (\emph{i.e.} de successions de coups différentes) ont été jouées ? 
+
+\medskip
+
+\question\ Quel est l'identifiant de l'étudiant le plus jeune ? Les donner tous s'il y en a plusieurs.  
+
+\medskip
+
+\question\ Combien de parties ont été jouées par l'étudiant de pseudonyme \texttt{"Tux"} ? 
+
+\medskip
+
+\question\ Combien de parties ont été perdues par l'étudiant de pseudonyme \texttt{"Tux"} ? 
+
+\medskip
+
+\question\ Combien de parties ont été gagnées par des étudiants de MPS1 contre des étudiants de MPS2 ?
+
+\medskip
+
+\question\ Quels sont les pseudonymes des joueurs ayant joué le plus de parties en tant que joueur \no 1 ? Les donner tous s'il y en a plusieurs.  
+
+\medskip
+
+\question\ Combien de parties ont été jouées en sept coups ou moins, en 2018 et entre deux étudiants d'une même classe ?

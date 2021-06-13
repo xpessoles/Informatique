@@ -1,0 +1,115 @@
+\documentclass[11pt]{article}
+
+\usepackage{amsmath,amsthm,amsfonts,amssymb,mathrsfs,mathtools,stmaryrd} % caract\`{e}res math\'{e}matiques
+
+\usepackage[french]{babel} % texte en français (gestion des c\'{e}sures)
+
+\usepackage[utf8]{inputenc} % gestion des accents - remplacer uft8 par applemac ?
+
+\usepackage[T1]{fontenc} % codage des caract\`{e}res
+
+\usepackage{geometry} % mise en page (gestion des marges)
+\geometry{ hmargin=1.5cm, vmargin=2cm }
+
+\usepackage[version=3]{mhchem}%pour écrire des formule chimique
+
+\usepackage{multicol}
+
+\usepackage{enumitem}
+
+\usepackage{graphicx} % ins\'{e}rer des figures
+\usepackage{epstopdf} % gestion du format eps
+\usepackage{tikz} % dessins et courbes
+\usepackage{tkz-tab} % tableaux de variations
+
+\usepackage{fancyhdr} % entête et pied de page
+\pagestyle{fancy}
+
+\usepackage{fancybox} % encadrements
+\usepackage{boxedminipage} % encadrement des minipages
+
+\usepackage{xcolor}
+
+\usepackage{listings}
+%\usepackage{xkeyval}
+\lstset{
+	language={Python},
+	columns=flexible,
+	basicstyle=\ttfamily,
+	keywordstyle=\color{blue}, % je voudrais mettre les mots-cl\'{e} en gras (\bfseries) mais c'est incompatible avec typewriter
+	commentstyle=\color{gray}, % commentaires
+	backgroundcolor=\color{green!15}, % couleur du fond
+	frame=single, rulecolor=\color{green!15}, % encadrement + couleur de l'encadrement
+	%numbers=left, numberstyle=\tiny, stepnumber=1, numbersep=5pt,
+	showstringspaces=false, % supprime les espaces apparents dans les lignes de texte
+	stringstyle=\color{red!60}\itshape,
+}
+
+\usepackage{fancyvrb}
+\newsavebox{\BBbox}
+\newenvironment{DDbox}[1]{
+\begin{lrbox}{\BBbox}\begin{minipage}{9,2cm}}
+{\end{minipage}\end{lrbox}\noindent\colorbox{gray!20}{\usebox{\BBbox}} \\
+[.5cm]}
+
+\newcommand{\tpIPT}[5]{
+	\lhead{#1}
+	\chead{\begin{minipage}{10cm} \begin{center} \textbf{#2} \end{center} \end{minipage}}
+	\rhead{TP \texttt{info} n$\textsuperscript{o}$#3}
+	\lfoot{#4}
+	\rfoot{Ann\'{e}e scolaire #5}}
+
+\usepackage{fourier-orns} % symbol "danger" par la commande \danger{}
+
+\usepackage{ulem} % pour souligner du texte sur plusieurs lignes avec \uline{texte}
+
+\parindent=0em
+
+\usepackage{lastpage}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+%\fancyfoot{\thepage/\pageref{LastPage}}
+\fancyfoot{}
+
+\tpIPT{PCSI 2}{Systèmes différentiels du premier ordre}{21}{Lyc\'{e}e F. Roosevelt -- Reims}{2013-2014}
+
+\section{Un marcheur et son chien.}
+
+Un marcheur $M$ suit une trajectoire rectiligne à vitesse constante $V_M$. Son chien $C$, qui part d'un point éloigné, court pour le rejoindre à vitesse constante $V_C$. \`{A} chaque instant, sa course est dirigée vers son maître, \textit{i.e.} les vecteurs $\dfrac{\text{d}\overrightarrow{OC}}{\text{d}t}(t)$ et $\overrightarrow{CM}(t)$ sont colinéaires et de même sens :
+\[ \dfrac{\text{d}\overrightarrow{OC}}{\text{d}t}(t)=V_C\,\frac{\overrightarrow{CM}(t)}{\vert\vert\overrightarrow{CM}(t)\vert\vert}. \]
+Ainsi, les coordonnées $\big(x(t),y(t)\big)$ du chien vérifient le système différentiel :
+\[ \left\{ \begin{aligned} x'(t)&=V_C\,\frac{V_M\,t-x(t)}{\sqrt{\big( V_M\,t-x(t) \big)^2+\big( -y(t) \big)^2}} \\ y'(t)&=V_C\,\frac{-y(t)}{\sqrt{\big( V_M\,t-x(t) \big)^2+\big( -y(t) \big)^2}} \end{aligned} \right. \]
+\begin{itemize}
+	\item[\textbullet] \'{E}crire un programme permettant de tracer la trajectoire du chien avec les données :
+		\[ V_M=1{,}5\,\text{m}.\text{s}^{-1} \quad \text{et} \quad V_C=8\,\text{m}.\text{s}^{-1} \]
+		et la condition initiale :
+		\[ x(0)=100\,\text{m} \quad \text{et} \quad y(0)=300\,\text{m}. \]
+\end{itemize}
+
+\section{Cinétique chimique.}
+
+On considère deux réactions successives :
+\[A \xrightarrow{k_1} B\]
+\[B \xrightarrow{k_2} C\]
+dans lesquelles $k_1$ et $k_2$ désignent les constantes de vitesse. Les vitesses de réaction sont donc :
+\[ v_1=-\dfrac{\text{d}[A]}{\text{d}t}=k_1[A] \quad \text{et} \quad v_2=\dfrac{\text{d}[C]}{\text{d}t}=k_2[B]. \]
+
+$B$ intervient dans les deux réactions chimiques : il est produit par la réaction 1 et consommé par la réaction 2. On en déduit :
+\[ \dfrac{\text{d}[B]}{\text{d}t}=v_1-v_2=k_1[A]-k_2[B]. \]
+
+On obtient ainsi un système de trois équations différentielles du premier ordre couplées : 
+\[ \left\{ \begin{aligned} \dfrac{\text{d}[A]}{\text{d}t}&=-k_1[A] \\
+	\dfrac{\text{d}[B]}{\text{d}t}&=k_1[A]-k_2[B] \\
+	\dfrac{\text{d}[C]}{\text{d}t}&=k_2[B] \end{aligned} \right. \]
+
+\begin{itemize}
+	\item[\textbullet] \'{E}crire un programme permettant de représenter l'évolution des concentrations $[A]$, $[B]$ et $[C]$ au cours du temps avec la donnée :
+		\[ (k_1,k_2)=(8,1) \]
+		et la condition initiale :
+		\[ [A]_0=1\,\text{mol}.\text{L}^{-1}, \quad [B]_0=0\,\text{mol}.\text{L}^{-1} \quad \text{et} \quad [C]_0=0\,\text{mol}.\text{L}^{-1}. \]
+\end{itemize}
+
+\end{document}

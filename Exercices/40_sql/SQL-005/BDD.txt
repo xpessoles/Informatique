@@ -1,0 +1,182 @@
+
+\section{Base de données!}
+\label{sec:bdd}
+
+Nous souhaitons maintenant mettre à jour le programme précédent selon le pokémon rencontré. En effet la taille des pokémons étant différente, l'ordonnée du point P est donc différente à chaque nouvelle capture.
+
+Pour cela nous allons utiliser la base de données issue du site \url{http://veekun.com/}. Un fichier nommé "veekun-pokedex.sqlite" doit être présent sur le bureau de votre ordinateur. Ouvrir cette base de données avec Sqliteman.
+
+
+Dans un premier temps, nous allons utiliser uniquement la table \texttt{pokemon} qui répertorie les pokémons, elle contient les colonnes :
+
+\begin{itemize}[itemsep=0mm]
+	\item \texttt{id} (clé primaire) : identifiant du pokemon 
+	\item \texttt{identifier} : nom du pokemon
+	\item \texttt{species\_id} : identifiant d'espèce
+	\item \texttt{height} : hauteur
+	\item \texttt{weight} : poids
+	\item \texttt{base\_experience} : expérience
+	\item \texttt{order} : ordre
+	\item \texttt{is\_default} : défaut
+\end{itemize}
+
+
+\begin{qexo}
+Donner le schéma relationnel de cette table.
+\end{qexo}
+
+\begin{qexo}
+Donner la définition d'une clé primaire.
+\end{qexo}
+
+
+\begin{qexo}
+Combien y a t-il de pokémons dans cette base ?
+\end{qexo}
+
+\begin{qexo}
+Quelle est la taille de pikachu ?
+\end{qexo}
+
+\begin{qexo}
+Combien y a t-il de pokemons plus grands (strictement) que pikachu ?
+\end{qexo}
+
+\begin{qexo}
+Combien de pokemons ont la même taille que pikachu (lui y compris)? Parmi ceux-ci, donner le poids du plus gros.
+\end{qexo}
+
+\begin{qexo}
+Quel pokémon est le plus grand ? Quel pokémon est le plus petit ? (Il peut y en avoir plusieurs ...)
+\end{qexo}
+
+\begin{qexo}
+Quelle est la taille moyenne des pokemons ?
+\end{qexo}
+
+
+Les paramètres réglés par défaut (angle et vitesse) dans notre application de capture permettent d'atteindre un pokemon de hauteur 8. Nous souhaiterions donc savoir combien de pokemons pourront être attrapés sans changer ces réglages.
+
+
+\begin{qexo}
+En considérant que le pokémon sera capturé si la pokeball l'atteint a plus ou moins 0.5 (inclus) de sa hauteur. Combien de pokémons sont capturés avec le reglage par défaut ?
+\end{qexo}
+
+Maintenant nous souhaitons placer les pokemons sur une carte selon leurs propriétés, pour cela nous allons utiliser les tables suivantes:
+
+
+La table \texttt{pokemon\_species} contient les colonnes :
+
+\begin{itemize}[itemsep=0mm]
+	\item \texttt{id} (clé primaire) : identifiant du pokemon 
+	\item \texttt{identifier} : nom du pokemon
+	\item \texttt{generation\_id} : identifiant du génération 
+	\item \texttt{evolves\_from\_species\_id} : origine d'évolution (\emph{non utilisé dans notre étude})
+	\item \texttt{evolution\_chain\_id} : chaine d'évolution (\emph{non utilisé dans notre étude})
+	\item \texttt{color\_id} : identifiant de couleur (\emph{non utilisé dans notre étude})
+	\item \texttt{shape\_id} : identifiant de forme (\emph{non utilisé dans notre étude})
+	\item \texttt{habitat\_id} : identifiant d'habitat
+	\item \texttt{gender\_rate} : taux de genre (\emph{non utilisé dans notre étude})
+	\item \texttt{capture\_rate} : taux de capture (\emph{non utilisé dans notre étude})
+	\item \texttt{base\_happiness} : (\emph{non utilisé dans notre étude})
+	\item \texttt{is\_baby} : (\emph{non utilisé dans notre étude})
+	\item \texttt{hatch\_counter} : (\emph{non utilisé dans notre étude})
+	\item \texttt{has\_gender\_differences} : (\emph{non utilisé dans notre étude})
+	\item \texttt{growth\_rate\_id} : (\emph{non utilisé dans notre étude})
+	\item \texttt{forms\_switchable} : (\emph{non utilisé dans notre étude})
+	\item \texttt{order} : (\emph{non utilisé dans notre étude})
+	\item \texttt{conquest\_order} : (\emph{non utilisé dans notre étude})
+\end{itemize}
+
+
+La table \texttt{pokemon\_habitats} contient les colonnes :
+
+\begin{itemize}[itemsep=0mm]
+	\item \texttt{id} (clé primaire) : identifiant d'habitat
+	\item \texttt{identifier} : nom de l'habitat
+\end{itemize}
+
+\begin{qexo}
+\'Ecrire la requête SQL permettant d'afficher le nom du pokemon et le nom de son habitat
+\end{qexo}
+
+\begin{qexo}
+Combien de pokemons vivent en forêt ('forest' en anglais) ?
+\end{qexo}
+
+
+\begin{qexo}
+Combien de pokemons de la generation 3 vivent en forêt ('forest' en anglais) ?
+\end{qexo}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{qexo}
+\end{qexo}
+\texttt{pokemon(id : integer, identifier : string, species\_id : integer, height : integer, weight : integer, base\_experience : integer, order : integer, is\_default : boolean )} 
+
+\begin{qexo}
+\end{qexo}
+La clé primaire d'une table est une contrainte d'unicité, composée d'une ou plusieurs colonnes, et qui permet d'identifier de manière unique chaque ligne de la table.
+
+
+\begin{qexo}
+\end{qexo}
+\texttt{select count(*) from pokemon;}  \boxed{811}
+
+\begin{qexo}
+\end{qexo}
+\texttt{select height from pokemon where identifier = 'pikachu';} \boxed{4} 
+
+\begin{qexo}
+\end{qexo}
+\texttt{select count(*) from pokemon where height > (select height from pokemon where identifier = 'pikachu');} \boxed{678} 
+
+\begin{qexo}
+\end{qexo}
+\texttt{select count(*) from pokemon where height = (select height from pokemon where identifier = 'pikachu');} \boxed{63} ;
+\texttt{select max(weight) from pokemon where height = (select height from pokemon where identifier = 'pikachu');} \boxed{600}
+
+\begin{qexo}
+\end{qexo}
+\texttt{select identifier from pokemon where height = (select max(height) from pokemon );} \boxed{\text{wailord}}
+\texttt{select identifier from pokemon where height = (select min(height) from pokemon );} \boxed{\text{joltik et flabebe}} 
+
+\begin{qexo}
+\end{qexo}
+\texttt{select avg(height) from pokemon;} \boxed{12.2503082614057}
+
+
+
+\begin{qexo}
+\end{qexo}
+ \texttt{select count(*) from pokemon where height <= 8.5 and height >= 7.5;} \boxed{44} 
+
+
+
+\begin{qexo}
+\end{qexo}
+\texttt{select S.identifier,H.identifier from pokemon\_species as S join pokemon\_habitats as H on S.habitat\_id = H.id;}
+
+\begin{qexo}
+\end{qexo}
+\texttt{select count(*) from pokemon\_species as S join pokemon\_habitats as H on S.habitat\_id = H.id where H.identifier = 'forest';}  \boxed{71} 
+
+\begin{qexo}
+\end{qexo}
+\texttt{select count(*) from pokemon\_species as S join pokemon\_habitats as H on S.habitat\_id = H.id where H.identifier = 'forest' and S.generation\_id = 3;} \boxed{29}
+
+
+
+

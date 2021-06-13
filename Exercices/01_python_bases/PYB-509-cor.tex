@@ -1,0 +1,31 @@
+\exer{}
+\setcounter{numques}{0}
+
+\question{} On peut écrire la fonction suivante
+\begin{Verbatim}[gobble=0,numbers=left]
+def comb(n,p) :
+    """Calcule «p parmi n»
+       Précondition : n,p sont des entiers et 0 <= p <= n"""
+    C = 1
+    for i in range(1,p+1):
+        C = C * (n-p+i) // i
+    return C
+\end{Verbatim}
+\question{}
+On considère l'invariant d'entrée de boucle «$\texttt{C} = \binom{\texttt n-\texttt p+\texttt i-1}{\texttt i-1}$»
+
+À la fin de la  ligne n°4, on a $\texttt C = 1 = \binom{\texttt n-\texttt p}{0}$. L'invariant est donc initialisé (pour $\texttt i=1$).
+
+Supposons qu'au début de la ligne n°6, on ait $\texttt{C} = \binom{\texttt n-\texttt p+\texttt i-1}{\texttt i-1}$. Alors, après la ligne n°6, on a 
+\begin{equation*}
+    \texttt C = \dfrac{\texttt n-\texttt p+\texttt i}{\texttt i}\binom{\texttt n-\texttt p+\texttt i-1}{\texttt i-1} = \binom{\texttt n-\texttt p+\texttt i}{\texttt i}.
+\end{equation*}
+Remarquons que le calcul est exact (quotient entier) et que \texttt C est toujours entier. 
+Ainsi, au début du tour de boucle suivant, on a bien «$\texttt{C} = \binom{\texttt n-\texttt p+\texttt i-1}{\texttt i-1}$».
+
+Au dernier tour de boucle, on a $\texttt i = \texttt p$, donc en sortie de boucle on aurait $\texttt i = \texttt p +1$, donc
+\begin{center}
+    \fbox{la valeur renvoyée est bien $\binom{\texttt n}{\texttt p}$.}
+\end{center}
+
+\emph{Remarque :} on pouvait améliorer la fonction en testant le cas $2\texttt p >\texttt n$. Dans ce cas, il est plus efficace de calculer $\binom{\texttt n}{\texttt n - \texttt p}$. 

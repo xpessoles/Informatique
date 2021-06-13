@@ -1,0 +1,81 @@
+\question{}
+\begin{pyverbatim}
+def creneau(t):
+    """0 si t entier
+       1 si floor(t) pair, -1 sinon"""
+    x = t% 2
+    if 0 < x < 1 : 
+        return 1
+    elif 1 < x < 2 : 
+        return -1
+    else:
+        return 0
+\end{pyverbatim}
+\question{}
+\begin{pyverbatim}
+def sp_creneau(n,t):
+    """Renvoie la somme partielle C_n de la série de Fourier associée au créneau"""
+    S = 0
+    for p in range(n+1) : 
+        S = S + sin((2*p+1)*pi*t)/(2*p+1)
+    return S*4/pi
+\end{pyverbatim}
+\question{}
+\begin{pyverbatim}
+def fourier_creneau(nom_de_fichier):
+    """Trace la fonction creneau et quelques approximations de Fourier"""
+    x = linspace(0,4,4000)
+    C = [creneau(t) for t in x]
+    plt.clf()
+    plt.plot(x,C,'b-',label="$C$")
+    n = [0,3,5,100]
+    style = ['-r','-c','-g','-m']
+    for k in range(4):
+        Cn = [sp_creneau(n[k],t) for t in x]
+        plt.plot(x,Cn,style[k],label="$C_{"+str(n[k])+"}$")
+    plt.xlabel("$t$")
+    plt.ylabel("$y$")
+    plt.title("Approximation de Fourier du signal créneau")
+    plt.legend(loc=0)
+    plt.savefig(nom_de_fichier)
+    return None
+\end{pyverbatim}
+\question{}
+\begin{pyverbatim}
+def triangle(t):
+    """Renvoie le signal triangle"""
+    x = t % 2
+    if 0 <= x <= 1 :
+        return 1-2*x
+    else : 
+        return 2*x - 3 
+\end{pyverbatim}
+\question{}
+\begin{lstlisting}
+def sp_triangle(n,t):
+    """Renvoie la somme partielle C_n de la série de Fourier associée au créneau"""
+    S = 0
+    for p in range(n+1) : 
+        S = S + cos((2*p+1)*pi*t)/(2*p+1)**2
+    return S*8/pi**2 
+\end{lstlisting}
+\question{}
+\begin{lstlisting}
+def fourier_triangle(nom_de_fichier):
+    """Trace la fonction creneau et quelques approximations de Fourier"""
+    x = linspace(0,4,1000)
+    T = [triangle(t) for t in x]
+    plt.clf()
+    plt.plot(x,T,'b-',label="$T$")
+    n = [0,3,5,100]
+    style = ['-r','-c','-g','-m']
+    for k in range(4):
+        Tn = [sp_triangle(n[k],t) for t in x]
+        plt.plot(x,Tn,style[k],label="$T_{"+str(n[k])+"}$")
+    plt.xlabel("$t$")
+    plt.ylabel("$y$")
+    plt.title("Approximation de Fourier du signal triangulaire")
+    plt.legend(loc=0)
+    plt.savefig(nom_de_fichier)
+    return None
+\end{lstlisting}

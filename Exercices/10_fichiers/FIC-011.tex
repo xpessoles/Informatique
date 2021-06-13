@@ -1,0 +1,46 @@
+Ouvrir le fichier \texttt{complot$\_$contre$\_$lamerique.txt} dans python (on prendra soin de nommer la variable contenant cet objet). Ce fichier contient un extrait du livre de Philip Roth, Complot contre l'Amérique.
+
+\question{} Que fait chacune des méthodes  \pyv{read()}, \pyv{readline()} et \pyv{readlines()} ? Quels sont les types des valeurs que chacune des ces fonctions renvoient ? 
+
+\question{} Que représentent les symboles \texttt{\textbackslash t} et \texttt{\textbackslash n} ?
+
+
+
+\question{} \'Ecrire une fonction \python\, \pyv{carac(nom_de_fichier)} qui renvoie un tableau contenant le nombre de caractères de chaque ligne du fichier \pyv{nom_de_fichier}, en excluant les symboles \texttt{\textbackslash t} et \texttt{\textbackslash n}. 
+
+\question{} \'Ecrire une fonction \python\, \pyv{somme_carac(nom_de_fichier)} qui renvoie le nombre de caractères total contenu dans le fichier \pyv{nom_de_fichier} , en excluant les symboles \texttt{\textbackslash t} et \texttt{\textbackslash n}. 
+
+\emph{Indication :} attention au type de \pyv{nom_de_fichier} !
+
+\question{} \'Ecrire une fonction \python\, \pyv{compte_carac(carac,nom_de_fichier)} qui renvoie pour un caractère de l'alphabet (noté \pyv{carac}) son nombre d'occurrences contenu dans le fichier \pyv{nom_de_fichier} sans tenir compte de la casse.
+
+\question{} \'Ecrire une fonction \python\, \pyv{stat_carac(nom_de_fichier)} qui renvoie une liste de 26 éléments donnant le nombre d'occurrences de chaque lettre de l'alphabet contenu dans le texte \pyv{nom_de_fichier} sans tenir compte de la casse.
+
+\emph{Indication :}  
+
+On pourra créer une variable globale contenant tous les caractères de l'alphabet :
+
+ \pyv{alphabet='abcdefghijklmnopqrstuvwxyz'}. 
+
+\question{ } \'Ecrire une fonction \python\, \pyv{tracer_occurrences(carac,nom_de_fichier)} qui trace en fonction du numéro de la lettre dans l'alphabet son nombre d'occurrences dans le fichier \pyv{nom_de_fichier}. La figure obtenue avec l'extrait du livre complot contre l'Amérique de Philip Roth sera sauvegardée sous le nom \pyv{tp06_vosnoms_q10.png}.
+
+\question{ } \'Ecrire une fonction \python\, \pyv{tracer_stat_occurrences(nom_de_fichier)} qui trace en fonction de chaque lettre dans l'alphabet sa fréquence d'apparition dans le fichier \pyv{nom_de_fichier} en pourcentage par rapport au nombre total de caractères présents en excluant les symboles \texttt{\textbackslash t} et \texttt{\textbackslash n}. Le tracé devra avoir l'apparence d'un histogramme. La figure obtenue avec l'extrait du livre complot contre l'Amérique de Philip Roth sera sauvegardée sous le nom \pyv{tp06_vosnoms_q11.png}.
+
+\emph{Indication :}  
+
+
+\begin{itemize}
+\item Pour faire apparaître les lettres en abscisses, on pourra utiliser la fonction \pyv{xticks} du module \pyv{matplotlib.pyplot}.
+\item Pour tracer les barres l'histogramme on pourra utiliser tout simplement des segments verticaux. 
+\end{itemize}
+
+On donne le fichier \pyv{frequence_wikipedia.csv} téléchargeable sur le site de la classe qui contient les fréquences en pourcentage d'apparition des 26 lettres de l'alphabet dans tous les articles français de Wikipedia. On pourra l'ouvrir avec un éditeur de texte pour observer son contenu.
+
+\question{} \'Ecrire une fonction \python\, \pyv{stat_carac_wikipedia(nom_de_fichier)} qui à partir du fichier \pyv{nom_de_fichier} contenant les statistiques de fréquences de caractères (sous le même format que dans le fichier \pyv{frequence_wikipedia.csv}) renvoie une liste donnant en fonction de la position de la lettre dans l'alphabet sa fréquence en \%.
+
+\question{ } \'Ecrire une fonction \python\, \pyv{tracer_stat_wikipedia()} qui trace en fonction de chaque lettre dans l'alphabet, sa fréquence d'apparition dans tous les articles français de wikipedia en pourcentage par rapport au nombre total de caractères présents. Le tracé devra avoir l'apparence d'un histogramme. La figure obtenue sera sauvegardée sous le nom \pyv{tp06_vosnoms_q13.png}.
+
+\question{} Utiliser les différentes fonctions réalisées précédemment pour comparer les fréquences de caractères entre l'extrait de complot contre l'Amérique de Philip Roth et celles issues de l'ensemble des articles français de wikipedia. Conclure. 
+
+
+

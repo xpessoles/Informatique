@@ -1,0 +1,86 @@
+Le fichier \texttt{body.csv} contient des données anatomiques de 507 personnes adultes. Pour chaque personne, plusieurs données sont disponibles : 
+\begin{itemize}
+  \item identifiant de la personne (nombre entre 1 et 507) ;
+  \item 21 mesures de la corpulence de la personne (en centimètres) ;
+  \item âge (en années) ;
+  \item poids (en kilogrammes) ; 
+  \item taille (en centimètres) ;
+  \item sexe (1 : homme et 0 : femme).
+\end{itemize}
+
+On pensera d'abord à ouvrir ce fichier dans un éditeur de texte puis dans un tableur afin de bien visualiser ces données. 
+
+L'indice de masse corporelle (IMC) est le rapport entre le poids d'un individu (exprimé en $kg$) et le carré de sa taille (exprimée en $m$). 
+C'est un indicateur (simpliste) permettant de mesurer le sous/sur-poids d'un individu adulte. 
+Ainsi, on (enfin, l'OMS) considère que si l'IMC d'un adulte est : 
+
+
+\begin{itemize}
+  \item dans $]0;18,5[$, la personne est en sous-poids ;
+  \item dans $[18,5;25[$, la personne a un poids normal ; 
+  \item dans $[25;30[$, la personne est en sur-poids ; 
+  \item dans $[30;+\infty[$, la personne est obèse. 
+\end{itemize}
+
+Quelques rappels sur les chaînes. Il existe un moyen de \og découper \fg{} des chaînes de caractères en \python\ : c'est la méthode \texttt{split}. 
+Réciproquement, la méthode \texttt{join(t)} appliquée à une chaîne \texttt{x} permet de concaténer toutes les chaînes du tableau \texttt{t}, séparées par \texttt{x}.
+Il existe aussi des outils de conversion de nombres flottants en chaînes de caractère, et vice-versa.
+Tout cela s'utilise comme suit.
+
+\begin{pyconsole}
+s = '123,45,2;1587,45,;45'
+s.split(',')
+s.split(';')
+sep = '<'
+t = ['GA','BU','ZO','MEU']
+sep.join(t)
+str(123.456)
+float('456.123')
+\end{pyconsole}
+
+Enfin, on voudra bien entendu représenter les données contenues dans \texttt{body.csv} sous forme de \emph{tableau à double entrée}, c'est-à-dire comme une matrice. On représentera le tableau sous forme de liste \python, ligne par ligne, chaque ligne étant elle même une liste \python.
+
+\begin{ex}
+  Pour représenter le tableau $T = \begin{pmatrix} a & b & c \\ 4 & 5 & 6 \end{pmatrix}$, on fera comme suit. 
+\begin{pyconsole}
+T = [['a','b','c'],['4','5','6']]
+T
+T[1]
+T[0][1]
+T.append(['x','y','z'])
+T
+\end{pyconsole}
+\end{ex}
+
+
+\question{} \label{qu.lecture} \'Ecrire une fonction \texttt{lecture(nom\_de\_fichier)} qui prend en argument une chaîne de caractères \texttt{nom\_de\_fichier} contenant le chemin du fichier \texttt{body.csv} et qui renvoie un tableau à double entrées, où :
+\begin{itemize}
+  \item[\textbullet] la ligne $0$ contient le titre de chaque colonne ;
+  \item[\textbullet] si $1\leq i \leq 507$, chaque ligne $i$ contient successivement:
+    \begin{itemize}
+      \item l'identifiant $i$ ;
+      \item les $21$ mesures de corpulence pour l'individu \no $i$ ;
+      \item l'âge de l'individu \no $i$ ;
+      \item le poids de l'individu \no $i$ ;
+      \item la taille de l'individu \no $i$ ; 
+      \item le sexe de l'individu \no $i$.
+    \end{itemize}  
+\end{itemize}
+
+
+\emph{Indication :} on choisira à chaque fois le type le plus convenable pour chaque donnée. 
+
+\question{}\label{qu.calcul_imc} Écrire une fonction \texttt{calcul\_imc(T)} prenant en argument un tableau à double entrées que l'on supposera être celui renvoyé par la fonction \texttt{lecture} et qui renvoie un tableau à double entrées S possédant 26 colonnes, identique à T sur ses 25 premières colonnes et dont la dernière colonne contient l'IMC de chaque individu.    
+
+\question{} \'Ecrire une fonction \texttt{catimc(nom\_de\_fichier)} qui prend en argument une chaîne de caractères \texttt{nom\_de\_fichier} contenant le chemin du fichier \texttt{body.csv} et qui renverra une liste \python\ de longueur 4 qui, pour chaque catégorie de poids, comptera le nombre de personnes du jeu de données dans cette catégorie. 
+    
+    Ainsi, le premier élément du tableau renvoyé par \texttt{catimc(nom\_de\_fichier)} sera le nombre d'individus en sous-poids dans \texttt{body.csv}. 
+
+%
+%\section{\'Ecriture de données.}
+
+\question{} \label{q.write} \'Ecrire une fonction \pyv{ecrire(T,nom_de_fichier,sep=',')} qui écrit le contenu d'un tableau \texttt{T} analogue à celui obtenu en sortie de la fonction \texttt{calcul\_imc()} (voir question \ref{qu.calcul_imc}) dans le fichier \pyv{nom_de_fichier}. 
+
+On veillera notamment à séparer les colonnes par le séparateur \texttt{sep}.
+    
+Vous enverrez le fichier produit à l'enseignant. Les instructions de rendu sont données dans le préambule.

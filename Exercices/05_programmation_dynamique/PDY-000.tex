@@ -1,0 +1,60 @@
+Dans une pyramide de nombres, en partant du sommet, et en se dirigeant vers le bas à 
+chaque étape, on cherche à maximiser le total de la somme des nombres traversés.
+
+\begin{center}
+$ \underline{\textbf{2}}$\\$4\ \underline{\textbf{5}}$\\$1\ 7\ 
+\underline{\textbf{8}}$\\$2\ 3\ 1\ \underline{\textbf{6}}$\\$9\ 4\ 6\ 
+\underline{\textbf{5}}\ 2$\end{center}
+
+Sur cet exemple, la somme totale maximale est 26, obtenue en parcourant les nombres soulignés.
+
+
+On peut voir la pyramide comme un graphe, parcourir les 16 chemins, et choisir celui qui 
+a le plus grand total. Quand la pyramide a $n$ niveaux, il y a $2^{n-1}$ chemins, ce qui 
+rend vite cet algorithme inexploitable.\\
+Un algorithme récursif est aussi possible, mais alors certains calculs sont effectués 
+plusieurs fois, et là encore l'algorithme est trop long pour des pyramides de taille 
+conséquente.\\
+La méthode la plus rapide est celle utilisant la \emph{programmation dynamique}. L'idée 
+est résumée dans la séquence suivante :
+
+\begin{center}
+\begin{tabular}{ccccccccccccc}
+ 2 &\hspace{1cm}&& 2 &\hspace{1cm}&& 2 &\hspace{1cm}&& 2&\hspace{1cm}& &26\\
+ 4\ 5 &\hspace{1cm}&& 4\ 5 &\hspace{1cm}&& 4\ 5 &\hspace{1cm}&& 20\ 24 &\hspace{1cm}&&\\
+ 1\ 7\ 8 &\hspace{1cm}&& 1\ 7\ 8&\hspace{1cm}&& 12\ 16\ 19 &\hspace{1cm}&& 
+&\hspace{1cm}&&\\
+ 2\ 3\ 1\ 6 &\hspace{1cm}&& 11\ 9\ 7\ 11 &\hspace{1cm}&& &\hspace{1cm}&& &\hspace{1cm}&& 
+\\
+ 9\ 4\ 6\ 5\ 2 &\hspace{1cm}&& &\hspace{1cm}&& &\hspace{1cm}&& &\hspace{1cm}&&
+\end{tabular}
+\end{center}
+
+À vous de comprendre cette idée et d'écrire un programme calculant ce total maximum pour 
+des pyramides que l'on définit de la manière suivante : chaque pyramide est donnée dans 
+un tableau, dont les éléments sont les lignes de la pyramide, représentées elles-mêmes 
+dans un tableau. Par exemple, la pyramide de l'exemple sera représentée dans le tableau 
+\texttt{[ [ 2 ], [ 4, 5 ], [ 1, 7, 8 ], [ 2, 3, 1, 6 ], [ 9, 4, 6, 5, 2 ] ]}. 
+
+Vous pourrez utiliser la fonction suivante pour construire ces pyramides :
+\begin{pyverbatim}
+def pyramide(alpha,n):
+    p = []
+    x = alpha
+    for i in range(n):
+        l = []
+        for j in range(i+1) :
+            y = x % 10
+            l.append(y)
+            x = (15091 * x) % 64007
+        p.append(l)
+    return p
+\end{pyverbatim}
+
+Enfin, on rappelle que si $x\in\N$, on note $x\% 10$ le reste de la division euclidienne par 10.
+
+\question\ Donner la somme maximale pour la pyramide ayant $20$ lignes, définie par les $u_k \% 10$ (lus de haut en bas, de gauche à droite, la première ligne est $[u_0\%10]$, la seconde $[u_1\%10$, $u_2\%10]$ \emph{etc}.).
+
+\medskip
+
+\question\ Donner la somme maximale pour la pyramide ayant $100$ lignes, définie par les $u_k \% 10$ (lus de haut en bas, de gauche à droite, la première ligne est $[u_0\%10]$, la seconde $[u_1\%10$, $u_2\%10]$ \emph{etc}.).

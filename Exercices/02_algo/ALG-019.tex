@@ -1,0 +1,27 @@
+\exer{}
+\setcounter{numques}{0}
+
+Commencez par recopier le code suivant dans votre script. 
+
+\begin{lstlisting}
+def binaire(k,n):
+    """Renvoie le tableau de n bits écrivant k en binaire
+    Précondition : 0 <= k <= 2**n -1 """
+    L = [0]*n
+    p = k
+    for i in range(n):
+        L[n-1-i] = p % 2
+        p = p // 2
+    return L
+\end{lstlisting}
+
+
+
+Soit \texttt{k} un entier écrit en binaire avec \texttt{n} chiffres : $\texttt{k} = \underline{a_{\texttt{n}-1}\ldots a_{1}a_{0}}_{2}$, c'est-à-dire que 
+\begin{equation*}
+  \texttt{k} = \sum_{j=0}^{\texttt{n}-1} a_j 2^j.
+\end{equation*}
+
+
+
+\question{} Écrire un invariant portant sur \texttt{L} et \texttt{p} dans la boucle \texttt{for} de la fonction \texttt{binaire(k,n)} et justifier que cette fonction renvoie bien le résultat demandé.
