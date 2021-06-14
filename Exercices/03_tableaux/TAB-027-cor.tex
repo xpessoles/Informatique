@@ -1,3 +1,6 @@
+\exer{}
+\setcounter{numques}{0}
+
 \question{}
 
 \begin{lstlisting}
@@ -6,12 +9,12 @@ def sauve_image (img, N, nom_de_fichier) :
     n = len(img) # n : hauteur = nombre de lignes de la matrice 
     p = len(img[0]) # p: largueur =nombre de colonnes de la matrice
     with open(nom_de_fichier,'w') as f :
-        f.write("P2\n"+str(p)+" "+str(n)+" "+str(N))
+        f.write("P2\mathbb{N}"+str(p)+" "+str(n)+" "+str(N))
         # Ligne 1 : P2
         # Ligne 2 : n p N
         for i in range(n) : # on écrit les lignes les unes après les autres
             for j in range(p) : # on écrit les éléments de la i ème ligne
-                f.write("\n"+str(img[i][j]))
+                f.write("\mathbb{N}"+str(img[i][j]))
     return None
 \end{lstlisting}
 

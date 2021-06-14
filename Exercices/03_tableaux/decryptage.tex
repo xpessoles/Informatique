@@ -1,3 +1,6 @@
+\exer{}
+\setcounter{numques}{0}
+
 
 
 \setcounter{section}{1}
@@ -6,19 +9,23 @@
 
 Les attributs suivants s'appliquent à des variables de type de chaîne de caractère :
 \begin{itemize}
-\item \pyv{.isalpha} renvoie \pyv{True} si c'est une des 26 lettres de l'alphabet et \pyv{False} sinon.
-\begin{pyconsole}
-'c'.isalpha()
-'1'.isalpha()
-\end{pyconsole}
-\item \pyv{.index(x)} renvoie l'indice de la première occurrence de \pyv{x} :
-\begin{pyconsole}
-'hello'.index('l')
-\end{pyconsole}
-\item \pyv{.count(x)} renvoie le nombre d'occurrences de \pyv{x} :
-\begin{pyconsole}
-'hello'.count('l')
-\end{pyconsole}
+\item \texttt{.isalpha} renvoie \texttt{True} si c'est une des 26 lettres de l'alphabet et \texttt{False} sinon.
+\begin{lstlisting}
+>>> 'c'.isalpha()
+	True
+>>> '1'.isalpha()
+	False
+\end{lstlisting}
+\item \texttt{.index(x)} renvoie l'indice de la première occurrence de \texttt{x} :
+\begin{lstlisting}
+>>> 'hello'.index('l')
+	2
+\end{lstlisting}
+\item \texttt{.count(x)} renvoie le nombre d'occurrences de \texttt{x} :
+\begin{lstlisting}
+>>> 'hello'.count('l')
+	2
+\end{lstlisting}
 \end{itemize}
 
 \subsection{Le chiffrement de César}
@@ -40,20 +47,19 @@ Par exemple en choisissant un décalage de 3, le A devient le D, le B devient le
 
 \question{Comment est codé le message << franz >> avec une valeur de décalage $n=3$ ?}
 
-\question{Écrire une fonction \pyv{def decalage(c:str, n:int) -> str:} permettant de renvoyer un caractère chiffré avec le chiffrement de César.}
+\question{Écrire une fonction \texttt{def decalage(c:str, n:int) -> str:} permettant de renvoyer un caractère chiffré avec le chiffrement de César.}
 
 %\question{En utilisant les fonctionnalités découvertes dans la première partie, établir un algorithme permettant de chiffrer un message par le code de César, pour un décalage $n$ donné. La fonction aura la signature suivante :
-%\pyv{def chiffrement_cesar(mess:str, n:int) -> str:}. }
+%\texttt{def chiffrement_cesar(mess:str, n:int) -> str:}. }
 
-\question{Etablir un algorithme permettant de chiffrer un message par le code de César, pour un décalage $n$ donné. La fonction associée à cet algorithme aura la signature suivante :
-
-\pyv{def chiffrement_cesar(mess:str, n:int) -> str:}. }
+\question{Établir un algorithme permettant de chiffrer un message par le code de César, pour un décalage $n$ donné. La fonction associée à cet algorithme aura la signature suivante :
+\texttt{def chiffrement\_cesar(mess:str, n:int) -> str:}. }
 
 
 
 
 \question{Proposer ensuite l'algorithme de déchiffrement qui affiche le message chiffré en clair, en supposant que $n$ est inconnu. L'utilisateur choisira parmi les déchiffrements proposés celui qui a du sens ! La fonction aura la signature suivante :
-\pyv{def decryptage_cesar(code:str) -> None:}.}
+\texttt{def decryptage\_cesar(code:str) -> None:}.}
 
 
 %
@@ -107,56 +113,56 @@ Ainsi le chiffrement du mot \og anticonstitutionnellement\fg~ avec la clé \og r
 
 La méthode de chiffrement par lecture de la table est une méthode adaptée \og aux humains\fg, ainsi on réfléchira à l'implémentation d'un algorithme plus efficace en s'aidant de l'exemple.
 
-On dispose de la variable \pyv{alphabet= "abcdefghijklmnopqrstuvwxyz"}. 
+On dispose de la variable \texttt{alphabet= "abcdefghijklmnopqrstuvwxyz"}. 
 
 On donne le bloc d'instruction suivant : 
 
-\begin{pyverbatim}
+\begin{lstlisting}
 alphabet= "abcdefghijklmnopqrstuvwxyz"
 for i in range(26):
     alphabet = alphabet[1:]+alphabet[:1]
     print (alphabet)
-\end{pyverbatim}
+\end{lstlisting}
 
 \question{Combien de lignes seront affichées ? Quelles seront les deux premières lignes affichées  ?}
 
-\question{Écrire la fonction \pyv{def generer_table()->list :} qui retourne la table de Vigenère sous la forme d'une liste de listes.}
+\question{Écrire la fonction \texttt{def generer\_table()->list :} qui retourne la table de Vigenère sous la forme d'une liste de listes.}
 Le résultat sera de la forme suivante :
 \footnotesize{
-\begin{pyverbatim}
+\begin{lstlisting}
 [['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'], 
  ['b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','a'],
  ... ]
-\end{pyverbatim}
+\end{lstlisting}
 }
 
 \normalsize
 
 On donne deux fonctions permettant de constuire la ligne << clé >> de la table \ref{TabVig} à partir d'un mot et d'une clé. 
-\begin{multicols}{2}
-\begin{pyverbatim}
+%\begin{multicols}{2}
+\begin{lstlisting}
 1. def generer_cle_1(mot,cle):
 2.     nb = len(mot)//len(cle)+1
 3.     ch_cle=nb*cle
 4.     ch_cle = ch_cle[0:len(mot)]
 5.     tab_cle = [car for car in ch_cle]
 6.     return tab_cle
-\end{pyverbatim}
+\end{lstlisting}
 
-\begin{pyverbatim}
+\begin{lstlisting}
 1. def generer_cle_2(mot,cle):
 2.     tab_cle = []
 3.     for i in range(len(mot)):
 4.         id = i%len(cle)
 5.         tab_cle.append(cle[id])
 6.     return tab_cle
-\end{pyverbatim}
+\end{lstlisting}
 
-\end{multicols}
+%\end{multicols}
 
 \question{En 2 à 3 lignes, expliquer les différences entre les 2 fonctions. Commentez les lignes 2 à 5 des deux fonctions.}
 
-\question{Écrire une fonction étant spécifier ainsi : \pyv{code_vigenere(ch:str, cle:str) -> str } où la chaîne renvoyée correspond à la chaîne codée avec la clé \texttt{cle}. Chaque ligne sera commentée. Vous pourrez utiliser les fonctions définies précédemment.}
+\question{Écrire une fonction étant spécifier ainsi : \texttt{code\_vigenere(ch:str, cle:str) -> str } où la chaîne renvoyée correspond à la chaîne codée avec la clé \texttt{cle}. Chaque ligne sera commentée. Vous pourrez utiliser les fonctions définies précédemment.}
 
 %On donne la fonction suivante.
 %\begin{lstlisting}
@@ -175,9 +181,9 @@ On donne deux fonctions permettant de constuire la ligne << clé >> de la table 
 %        decide = decode + j
 %    return decode
 %\end{lstlisting}
-%%\begin{pyverbatim}
+%%\begin{lstlisting}
 %%def decode_vigenere(ch):
-%%\end{pyverbatim}  
+%%\end{lstlisting}  
 %%%    decode=""
 %%    for i in range(len(ch)):
 %%        d=i

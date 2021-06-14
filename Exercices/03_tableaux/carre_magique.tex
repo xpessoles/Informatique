@@ -1,3 +1,6 @@
+\exer{}
+\setcounter{numques}{0}
+
 %\section{Les carrés magiques}
 
 
@@ -12,7 +15,7 @@ Tout d'abord, qu'est ce qu'un carré magique ? Selon Wikipédia en voici la déf
 	\centering
 		\begin{tabular}{|*{5}{c|}cc}
 			\multicolumn{6}{r}{}                &$65$\\
-		  \multicolumn{6}{r}{$\nearrow$}      &   \\
+		  \multicolumn{6}{r}{$\mathbb{N}earrow$}      &   \\
 			\cline{1-5}
 			$17$&$24$&$1$&$8$&$15$&$\rightarrow$&$65$\\
 			\cline{1-5}
@@ -49,14 +52,15 @@ Dans le cas d'un carré magique normal et d'une valeur de $n$ impaire, il existe
 
 On prendra soin de représenter ce carré magique, qui est une matrice, à l'aide d'une liste de listes. Par exemple, pour le carré magique de taille 3 suivant on utilisera le code suivant :
 
-	\[\begin{array}{ccc}
-	\mbox{\textbf{Code :} \texttt{A=[[2,7,6],[9,5,1],[4,3,8]]}} & \mbox{et} &\mbox{\textbf{Résultat :} } A=\begin{pmatrix}
+\textbf{Code :} \texttt{A=[[2,7,6],[9,5,1],[4,3,8]]}
+
+\textbf{Résultat :}
+$$ A=\begin{pmatrix}
 			2 & 7 & 6 \\ 
 			9 & 5 & 1 \\ 
 			4 & 3 & 8 
 	\end{pmatrix}
-	\end{array}
-\]
+$$
 
 \begin{table}[h]
 \renewcommand{\arraystretch}{1.2}
@@ -81,11 +85,11 @@ On prendra soin de représenter ce carré magique, qui est une matrice, à l'aid
 
 \question{Continuez de compléter la carré magique de la table \ref{Carre5} en utilisant la méthode proposée. Testez les 3 propriétés du carré magique sur cet exemple.}
 
-\question{Proposer une fonction \pyv{def Carre_vide(n:int) -> list :} qui crée et renvoie un carré magique vide (n listes remplies de n $0$), et qui renvoie une liste vide si $n$ est pair.}
+\question{Proposer une fonction \texttt{def Carre\_vide(n:int) -> list :} qui crée et renvoie un carré magique vide (n listes remplies de n $0$), et qui renvoie une liste vide si $n$ est pair.}
 
 
-\question{Proposer une fonction \pyv{def Remplir_carre(CarreVide : list) -> None :} qui complète et renvoie un carré magique à partir d'un carré vide.}
+\question{Proposer une fonction \texttt{def Remplir\_carre(CarreVide : list) -> None :} qui complète et renvoie un carré magique à partir d'un carré vide.}
 
 
-\question{Proposer une fonction \pyv{def Verif_carre(Carre : list) -> bool : } qui vérifie les trois propriétés d'un carré magique et renvoie un booléen (\texttt{True} ou \texttt{False})}
+\question{Proposer une fonction \texttt{def Verif\_carre(Carre : list) -> bool : } qui vérifie les trois propriétés d'un carré magique et renvoie un booléen (\texttt{True} ou \texttt{False})}
 %}

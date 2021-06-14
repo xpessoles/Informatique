@@ -1,3 +1,6 @@
+\exer{}
+\setcounter{numques}{0}
+
 \begin{itemize}
 \item Ce devoir est à faire de façon individuelle.
 \item Utilisez Python, version 3.
@@ -32,12 +35,12 @@
 \end{itemize}
 
 
-\section{Analyse de tableaux}
+\section*{Analyse de tableaux}
 
-\subsection{Première partie}
+\subsection*{Première partie}
 
 
-Après avoir exécuter votre script \texttt{ds.py} (contenant la définition de la variable \pyv{alpha} avec votre valeur de $\alpha$)  exécutez \pyv{t = cree_tableau(alpha)}.
+Après avoir exécuter votre script \texttt{ds.py} (contenant la définition de la variable \texttt{alpha} avec votre valeur de $\alpha$)  exécutez \texttt{t = cree\_tableau(alpha)}.
 
 
 \question{
@@ -60,7 +63,7 @@ Après avoir exécuter votre script \texttt{ds.py} (contenant la définition de 
 
 On définit la suite $u$ par
 \begin{align*}
-\forall n\in \N \ u_{n+1} &= r(15091\cdot u_{n},64007)\\
+\forall n\in \mathbb{N} \ u_{n+1} &= r(15091\cdot u_{n},64007)\\
 \text{et }  u_{0} & = 10 + \alpha
 \end{align*}
 où $r(a,d)$ désigne le reste de la division euclidienne de $a$ par
@@ -99,7 +102,7 @@ contient un million de décimales (après la virgule) de $\zeta(5) =
 Voici les premières lignes du fichier (à gauche, on a noté en petit
 les numéros des lignes pour pouvoir en parler; attention: \textbf{ils n'apparaissent pas
 dans le fichier}):
-\begin{Verbatim}[numbers=left]
+\begin{lstlisting}%[numbers=left]
 zeta5_huvent with 1000000 digits : 
 zeta5_huvent = 1.
 0369277551 4336992633 1365486457 0341680570 8091950191  : 50
@@ -118,7 +121,7 @@ zeta5_huvent = 1.
 0507375081 3917876046 9541867836 6657122379 6259477937  : 650
 8931344280 5560465115 0585291073 6964334642 8934143397  : 700
 5231743713 3962434331 1485731093 6262213535 7253048207  : 750
-\end{Verbatim}
+\end{lstlisting}
 
 À partir  de la  ligne 3,  les décimales sont  rangées par  paquets de
 $10$, eux-mêmes rangés par lignes  de $5$ paquets, elles-mêmes rangées
@@ -139,7 +142,6 @@ de texte.
 \question{
 Donner le nombre d'occurrences de $2000 + \alpha$ dans les paquets de
 $10$ décimales.
-
 On pourra appliquer un algorithme du type: \og{}Pour chaque ligne $l$,
 on casse $l$ selon les espaces. S’il y a le bon nombre de blocs,
 alors pour chacun des blocs $b$, et pour chaque $i$ entre $0$ et $6$

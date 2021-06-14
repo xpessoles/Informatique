@@ -1,6 +1,9 @@
+\exer{}
+\setcounter{numques}{0}
 
 
-\question{Définir une fonction \python, \pyv{creationgrille(p, n)} à deux
+
+\question{Définir une fonction \texttt{Python}, \texttt{creationgrille(p, n)} à deux
 paramètres : un nombre réel $p$ (qu'on supposera dans l'intervalle
 $[0,1[$ et un entier naturel $n$, qui renvoie un tableau
 $(n,n)$ dans lequel chaque case sera ouverte avec la probabilité
@@ -17,7 +20,7 @@ def creation_grille(p, n):
 \end{lstlisting}
 
 
-\question{Écrire une fonction \pyv{afficher_grille(grille,nom_de_fichier)} qui prend en argument une variable grille qui correspond à une grille de percolation générée précédemment et ne renvoyant rien mais enregistrant dans \pyv{nom_de_fichier} le graphe obtenu. On pourra exporter une grille de $10\times 10$ cases avec l'échelle suggérée précédemment, l'enregistrer sous le nom "tp09$\_$q02$\_$vos$\_$noms.png" et l'envoyer à votre professeur.}
+\question{Écrire une fonction \texttt{afficher_grille(grille,nom_de_fichier)} qui prend en argument une variable grille qui correspond à une grille de percolation générée précédemment et ne renvoyant rien mais enregistrant dans \texttt{nom_de_fichier} le graphe obtenu. On pourra exporter une grille de $10\times 10$ cases avec l'échelle suggérée précédemment, l'enregistrer sous le nom "tp09$\_$q02$\_$vos$\_$noms.png" et l'envoyer à votre professeur.}
 
 \begin{lstlisting}
 echelle = ListedColormap(['black', 'aqua', 'white'])
@@ -30,7 +33,7 @@ def afficher_grille(grille,nom_de_fichier):
 
 
 
-\question{Écrire une fonction \pyv{percolation(grille)} qui prend en argument une
+\question{Écrire une fonction \texttt{percolation(grille)} qui prend en argument une
 grille et qui remplit de fluide celle-ci, en appliquant l'algorithme
 exposé ci-dessous :
 \begin{enumerate}
@@ -97,13 +100,13 @@ plt.savefig('tp09_Q04_durif.png')
 
 
 
-\question{Écrire une fonction \pyv{teste_percolation(p,n)} qui prend en argument
-un réel $p\in\left[0,1\right[$ et un entier $n\in \N^*$, crée une grille, effectue la percolation et
+\question{Écrire une fonction \texttt{teste_percolation(p,n)} qui prend en argument
+un réel $p\in\left[0,1\right[$ et un entier $n\in \mathbb{N}^*$, crée une grille, effectue la percolation et
 retourne :
 \begin{itemize}
-\item \pyv{True} lorsque la percolation est réussie, c'est-à-dire lorsque le bas
+\item \texttt{True} lorsque la percolation est réussie, c'est-à-dire lorsque le bas
   de la grille est atteint par le fluide ;
-\item \pyv{False} dans le cas contraire.
+\item \texttt{False} dans le cas contraire.
 \end{itemize}
 }
 
@@ -118,7 +121,7 @@ def teste_percolation(p, n):
 \end{lstlisting}
 
 
-\question{Rédiger la fonction \pyv{proba(p,k,n)} qui prend en argument le nombre d'essai $k$, la variable $p$ ainsi que le nombre de cases $n$ sur la largeur de la grille et qui renvoie $P(p)$.}
+\question{Rédiger la fonction \texttt{proba(p,k,n)} qui prend en argument le nombre d'essai $k$, la variable $p$ ainsi que le nombre de cases $n$ sur la largeur de la grille et qui renvoie $P(p)$.}
 
 \begin{lstlisting}
 def proba(p, k=20, n=128):
@@ -129,7 +132,7 @@ def proba(p, k=20, n=128):
     return s/k
 \end{lstlisting}
 
-\question{Ecrire une fonction \pyv{tracer_proba(n,nom_de_fichier)} qui prendre en argument une taille $n$  ne renvoyant rien mais enregistrant dans \pyv{nom_de_fichier} le graphe obtenu. On pourra traiter le cas d'une grille de $128\times 128$ cases et enregistrer la figure obtenue sous le nom "tp09$\_$q07$\_$vos$\_$noms.png" et l'envoyer à votre professeur.}
+\question{Ecrire une fonction \texttt{tracer_proba(n,nom_de_fichier)} qui prendre en argument une taille $n$  ne renvoyant rien mais enregistrant dans \texttt{nom_de_fichier} le graphe obtenu. On pourra traiter le cas d'une grille de $128\times 128$ cases et enregistrer la figure obtenue sous le nom "tp09$\_$q07$\_$vos$\_$noms.png" et l'envoyer à votre professeur.}
 
 \begin{lstlisting}
 def tracer_proba(n,nom_de_fichier):

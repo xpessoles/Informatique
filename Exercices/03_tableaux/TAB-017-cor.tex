@@ -1,3 +1,6 @@
+\exer{}
+\setcounter{numques}{0}
+
 \question\
 
 \begin{Verbatim}[gobble=0,numbers=left]
@@ -16,7 +19,7 @@ de \texttt{T[:i]} \fg.
 Au début du premier tour de boucle (initialisation), $i = 1$, $T[:i] = [T[0]]$ et $T[m] = T[0]$, donc l'invariant est  
 bien vérifié. 
 
-Au début du tour de boucle \no$i$, supposons que $P_i$ est vérifié. Alors, $T[m] = \max(T[:i])$. Si $T[i] > T[m]$, 
+Au début du tour de boucle \mathbb{N}o$i$, supposons que $P_i$ est vérifié. Alors, $T[m] = \max(T[:i])$. Si $T[i] > T[m]$, 
 alors $T[i] = \max(T[:i+1])$ et sinon $T[m] = \max(T[:i])$. 
 Ainsi, à la fin de ce tour de boucle, on a bien $T[m] = \max(T[:i+1])$. 
 

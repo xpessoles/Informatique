@@ -1,3 +1,6 @@
+\exer{}
+\setcounter{numques}{0}
+
 \question\
 Voici un algorithme répondant à la question. 
 \begin{Verbatim}[gobble=0,numbers=left]
@@ -58,14 +61,14 @@ def add_creuse(M,N):
 \end{Verbatim}
 Montrons que \texttt{add\_creuse(M,N)} renvoie bien le bon résultat. 
 \begin{description}
-  \item[Fonction lexico] \pyv{lexico((i,j,x),(a,b,y))} renvoie un booléen indiquant si \pyv{(i,j)} est strictement plus petit que \pyv{(a,b)} dans l'ordre lexicographique.
-  \item[Lignes 11-12] \pyv{M[:iM]} et \pyv{N[:iN]} sont vides donc \pyv{S} (vide) contient bien la somme des éléments de \pyv{M[:iM]} et \pyv{N[:iN]}.
-  \item[Ligne 14] Supposons que tous les éléments de \pyv{M[:iM]} et \pyv{N[:iN]} ont été ajoutés (leur somme se trouve dans \pyv{S}). 
-    Supposons de plus que tous les éléments de \pyv{M[:iM]} et \pyv{N[:iN]} sont strictement plus petits que tous les éléments de \pyv{M[iM:]} et \pyv{N[iN:]}.
+  \item[Fonction lexico] \texttt{lexico((i,j,x),(a,b,y))} renvoie un booléen indiquant si \texttt{(i,j)} est strictement plus petit que \texttt{(a,b)} dans l'ordre lexicographique.
+  \item[Lignes 11-12] \texttt{M[:iM]} et \texttt{N[:iN]} sont vides donc \texttt{S} (vide) contient bien la somme des éléments de \texttt{M[:iM]} et \texttt{N[:iN]}.
+  \item[Ligne 14] Supposons que tous les éléments de \texttt{M[:iM]} et \texttt{N[:iN]} ont été ajoutés (leur somme se trouve dans \texttt{S}). 
+    Supposons de plus que tous les éléments de \texttt{M[:iM]} et \texttt{N[:iN]} sont strictement plus petits que tous les éléments de \texttt{M[iM:]} et \texttt{N[iN:]}.
     On a trois cas possibles.
     \begin{itemize}
-      \item Le prochain élément à ajouter est \pyv{N[iN]}, à une case contenant un zéro de $M$.
-      \item Le prochain élément à ajouter est \pyv{M[iM]}, à une case contenant un zéro de $N$.
+      \item Le prochain élément à ajouter est \texttt{N[iN]}, à une case contenant un zéro de $M$.
+      \item Le prochain élément à ajouter est \texttt{M[iM]}, à une case contenant un zéro de $N$.
       \item Le prochain élément à ajouter correspond au cas où l'on ajoute deux cases non nulle de $M$ et de $N$, de mêmes indices : $M[iM]$ et $N[iN]$. 
     \end{itemize}
   \item[Lignes 15-17] On est dans le premier cas, soit $iM = m$, dans ce cas $M[iM:]$ est vide, soit $N[iN]$ est strictement plus petit que $M[iM]$ lexicographiquement. 
@@ -76,8 +79,8 @@ Montrons que \texttt{add\_creuse(M,N)} renvoie bien le bon résultat.
   \item[Ligne 21] On a donc $iM < m$ et $iN < n$, avec $M[iM][:2]  = N[iN][:2]$. On est donc dans le troisième cas, on additionne deux cases non nulles de $M$ et de $N$ de mêmes indices.
   \item[Lignes 22-23] Si la somme des cases est non nulle, on la rajoute à $S$, sinon cette case  \og disparaît \fg\ . 
   \item[Lignes 24-25] L'invariant de la ligne 14 est vérifié en ($iM+1$,$iN+1$).
-  \item[Ligne 26] \`A la sortie de la boucle \pyv{while}, on a donc $m = iM$ et $n = iN$, donc $M$ et $N$ ont bien été ajoutés dans $S$. Le résultat donné est donc correct. 
-  \item[Variant] Dans tous les cas, la quantité $m+n-iM-iN$ a diminué d'au moins 1 (et d'au plus deux). De plus, $iM < m$ ou $iN < n$ si et seulement si $m+n-iM-iN > 0$, donc la boucle \pyv{while} termine. 
+  \item[Ligne 26] \`A la sortie de la boucle \texttt{while}, on a donc $m = iM$ et $n = iN$, donc $M$ et $N$ ont bien été ajoutés dans $S$. Le résultat donné est donc correct. 
+  \item[Variant] Dans tous les cas, la quantité $m+n-iM-iN$ a diminué d'au moins 1 (et d'au plus deux). De plus, $iM < m$ ou $iN < n$ si et seulement si $m+n-iM-iN > 0$, donc la boucle \texttt{while} termine. 
 \end{description}
 
 \question\ 
@@ -85,19 +88,19 @@ On considère le modèle de complexité usuel.
 
 Comptons les opérations effectuées, on donne pour chacune une domination asymptotique du nombre d'opérations élémentaires effectuées, en fonction de $n$. 
 \begin{itemize}
-  \item Un calcul de taille de tableau par la fonction \pyv{len} : $O(1)$. 
+  \item Un calcul de taille de tableau par la fonction \texttt{len} : $O(1)$. 
   \item Création d'un tableau de taille $n$ : $n$ fois le temps de création de chaque élément de $S$. Chaque élément de $S$ est créé comme un tableau de taille $n$ et se fait en temps $O(n)$. 
     Ainsi, $S$ est créé en temps $O(n)$. 
-  \item Une création d'objet \pyv{range} : $O(1)$. 
-  \item Dans chaque tour de la boucle indicée par \pyv{i} ($n$ tours en tout) : 
+  \item Une création d'objet \texttt{range} : $O(1)$. 
+  \item Dans chaque tour de la boucle indicée par \texttt{i} ($n$ tours en tout) : 
     \begin{itemize}
-      \item Une création d'objet \pyv{range} : $O(1)$. 
-      \item Dans chaque tour de la boucle indicée par \pyv{j} ($n$ tours en tout) : deux lectures dans un tableau, une addition de nombres, une écriture dans un tableau : $O(1)$
+      \item Une création d'objet \texttt{range} : $O(1)$. 
+      \item Dans chaque tour de la boucle indicée par \texttt{j} ($n$ tours en tout) : deux lectures dans un tableau, une addition de nombres, une écriture dans un tableau : $O(1)$
     \end{itemize}
 \end{itemize}
 Ainsi, le nombre d'opérations élémentaires est en $O(n^2)$. Remarquons que l'on ne pouvait pas faire mieux (asymptotiquement) : chaque case de $M$ doit être parcourue et $M$ possède $n^2$ cases. 
 
-Notons $A_n$ le nombre d'opérations élémentaires effectuées pour calculer \pyv{add(M,N)}. Il existe donc une constante $K$ telle que, pour tout $n\in\N$, 
+Notons $A_n$ le nombre d'opérations élémentaires effectuées pour calculer \texttt{add(M,N)}. Il existe donc une constante $K$ telle que, pour tout $n\in\N$, 
 \begin{equation*}
   n^2 \leq A_n \leq K\times n^2.
 \end{equation*}
@@ -107,14 +110,14 @@ On considère le modèle de complexité usuel.
 
 Comptons les opérations effectuées, on donne pour chacune une domination asymptotique du nombre d'opérations élémentaires effectuées, en fonction de $p = \max(m,n)$.
 \begin{itemize}
-  \item Remarquons qu'un appel de \pyv{lexico} se fait en temps $O(1)$. 
-  \item On a deux calculs de longueurs par la fonction \pyv{len} et cinq affectations : $O(1)$.
-  \item Chaque tour dans la boucle \pyv{while} se fait en $O(1)$ : au plus $5$ comparaisons, $2$ appels à \pyv{lexico}, $12$ accès à des tableaux, $1$ ajout à une liste et deux incrémentations. 
+  \item Remarquons qu'un appel de \texttt{lexico} se fait en temps $O(1)$. 
+  \item On a deux calculs de longueurs par la fonction \texttt{len} et cinq affectations : $O(1)$.
+  \item Chaque tour dans la boucle \texttt{while} se fait en $O(1)$ : au plus $5$ comparaisons, $2$ appels à \texttt{lexico}, $12$ accès à des tableaux, $1$ ajout à une liste et deux incrémentations. 
   \item Comme, à chaque tour de boucle, $m+n-iM-iN$ est réduit de $1$ ou deux, on a au plus $m+n\leq 2p$ tours de boucle. 
 \end{itemize}
 Ainsi, le nombre d'opérations élémentaires est en $O(p^2)$. Remarquons que l'on ne pouvait pas faire mieux (asymptotiquement) : chaque case non vide de $M$ (et de $N$) doit être parcourue et $M$ (ou $N$) possède $p$ cases. 
 
-Notons $C_p$ le nombre d'opérations élémentaires effectuées pour calculer \pyv{add_creuse(M,N)}. Il existe donc une constante $K'$ telle que, pour tout $p\in\N$, 
+Notons $C_p$ le nombre d'opérations élémentaires effectuées pour calculer \texttt{add_creuse(M,N)}. Il existe donc une constante $K'$ telle que, pour tout $p\in\N$, 
 \begin{equation*}
   p \leq C_p \leq K'\times p.
 \end{equation*}

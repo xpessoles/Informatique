@@ -1,3 +1,6 @@
+\exer{}
+\setcounter{numques}{0}
+
 Un enjeu scientifique et technologique actuel est de savoir traiter des problèmes mettant en jeu un nombre très important de données.
 Un point crucial est souvent de pouvoir manipuler des matrices de très grandes dimensions, ce qui est \emph{a priori} très coûteux, en temps de calcul et en mémoire. 
 On peut cependant souvent considérer que les matrices manipulées ne contiennent que \og peu \fg\ d'éléments non nuls : c'est ce que l'on appelle les matrices \emph{creuses}. 
@@ -7,7 +10,7 @@ Nous nous intéressons ici à l'implémentation de deux algorithmes d'addition d
 Soit $n\in\N^\ast$, on note $\cM_n(\R)$ l'ensemble des matrices carrées d'ordre $n$, à coefficients dans $\R$.  
 
 On représentera classiquement une matrice $M\in \cM_n(\R)$ par un tableau à double entrées. 
-En \python, cela sera un tableau (type \texttt{list}) de longueur $n$, chaque élément de ce tableau représentant une ligne de $M$.
+En \texttt{Python}, cela sera un tableau (type \texttt{list}) de longueur $n$, chaque élément de ce tableau représentant une ligne de $M$.
 Chaque élément de ce tableau est donc un tableau de longeur $n$, dont tous les éléments sont des nombres (types \texttt{int} ou \texttt{float}).
 
 Cette même matrice $M$ sera représentée de manière creuse en ne décrivant que ses cases non vides par un tableau de triplets \texttt{(i,j,x)}, où \texttt{x} est l'élément de $M$ situé sur la $i\ieme$ ligne et la $j\ieme$ colonne. 

@@ -1,3 +1,6 @@
+\exer{}
+\setcounter{numques}{0}
+
 \question{} En entrée de boucle, on a toujours $m=0$ et le tableau $t[i:i+1]$ n'a qu'un élément, donc aucune ascensions, donc l'invariant est vérifié en entrée de boucle. 
 
 Supposons que cette propriété soit vraie au début d'un tour de boucle. 
@@ -28,7 +31,7 @@ En sortie de boucle, on a $i = n$, donc \texttt{M} est la hauteur de la plus hau
 
 
 \question{}
-\begin{pyverbatim}
+\begin{lstlisting}
 def nb_ascensions(t):
     """Nombre d'ascensions du tableau t.
     Préconditions : t est un tableau de nombres."""
@@ -39,4 +42,4 @@ def nb_ascensions(t):
             if t[j] > t[i]:
                 nb = nb + 1
     return nb
-\end{pyverbatim}
+\end{lstlisting}

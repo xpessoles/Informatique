@@ -1,3 +1,6 @@
+\exer{}
+\setcounter{numques}{0}
+
 Dans une pyramide de nombres, en partant du sommet, et en se dirigeant vers le bas à 
 chaque étape, on cherche à maximiser le total de la somme des nombres traversés.
 
@@ -37,7 +40,7 @@ dans un tableau. Par exemple, la pyramide de l'exemple sera représentée dans l
 \texttt{[ [ 2 ], [ 4, 5 ], [ 1, 7, 8 ], [ 2, 3, 1, 6 ], [ 9, 4, 6, 5, 2 ] ]}. 
 
 Vous pourrez utiliser la fonction suivante pour construire ces pyramides :
-\begin{pyverbatim}
+\begin{lstlisting}
 def pyramide(alpha,n):
     p = []
     x = alpha
@@ -49,7 +52,7 @@ def pyramide(alpha,n):
             x = (15091 * x) % 64007
         p.append(l)
     return p
-\end{pyverbatim}
+\end{lstlisting}
 
 Enfin, on rappelle que si $x\in\N$, on note $x\% 10$ le reste de la division euclidienne par 10.
 

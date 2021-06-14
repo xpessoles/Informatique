@@ -1,3 +1,6 @@
+\exer{}
+\setcounter{numques}{0}
+
 Beaucoup de problèmes technologiques actuels mettent en jeu des données de grandes dimensions et font souvent intervenir de grandes matrices.
 
 Beaucoup de ces matrices sont \emph{creuses}, c'est-à-dire qu'elles ne contiennent que peu de valeurs non nulles. Nous allons développer une méthode de codage de telles matrices et étudier leur intérêt. 
@@ -6,16 +9,16 @@ Dans tout ce problème, on s'interdira d'utiliser les opérations entre vecteurs
 
 Dans tout ce problème, on utilisera le type \texttt{array} de \texttt{numpy} pour représenter des vecteurs. 
 On pourra supposer que la ligne suivante a été écrite : 
-\begin{pyverbatim}
+\begin{lstlisting}
 from numpy import array, zeros
-\end{pyverbatim}
+\end{lstlisting}
 
 Dans tout ce problème, on veillera à l'optimalité des fonctions écrites en termes de complexité temporelle asymptotique. Les réponses clairement sous-optimales seront pénalisées. 
 
 \bigskip{}
 
 Soit une matrice réelle $A \in \mathcal{M}_{n,p}(\R)$ de dimension $n \times p$ et possédant $s$ coefficients non nuls. Ce coefficient $s$ est appelé \emph{niveau de remplissage} de la matrice $A$. 
-Comme toujours en \python{}, on numérotera les lignes et les colonnes en partant de $0$. 
+Comme toujours en \texttt{Python}{}, on numérotera les lignes et les colonnes en partant de $0$. 
 
 Une telle matrice se code usuellement comme un tableau de nombres de dimension $n\times p$. 
 
@@ -51,7 +54,7 @@ On remarquera qu'ajouter une colonne nulle à droite de $A$ ne change pas sa rep
     L &= [0,0,2,4], \\
     C &= [0,3,2,3].
 \end{align*}
-\question{} Soit $(V,L,C)$ la représentation CSR de $A$, soit $0 \leq i \leq n-1$. Combien y a-t-il de coefficients non nuls sur la ligne \no$i$ de $A$ ? Donner deux expressions \python{} (en fonction de $V$, $L$, $C$ et $i$) permettant d'obtenir respectivement la liste des valeurs de ces coefficients et la liste des indices colonnes de ces coefficients. 
+\question{} Soit $(V,L,C)$ la représentation CSR de $A$, soit $0 \leq i \leq n-1$. Combien y a-t-il de coefficients non nuls sur la ligne \no$i$ de $A$ ? Donner deux expressions \texttt{Python}{} (en fonction de $V$, $L$, $C$ et $i$) permettant d'obtenir respectivement la liste des valeurs de ces coefficients et la liste des indices colonnes de ces coefficients. 
 
 \bigskip{}
 
