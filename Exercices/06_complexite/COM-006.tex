@@ -1,5 +1,8 @@
+\exer{}
+\setcounter{numques}{0}
+
 On considère le code suivant, qui crée une liste aléatoire \texttt L et qui la trie ensuite par ordre croissant par la méthode du «tri par insertion». 
-\begin{Verbatim}[gobble=0,numbers=left]
+\begin{lstlisting}%[gobble=0,numbers=left]
 from random import randrange
 
 def liste_triee(n):
@@ -13,16 +16,16 @@ def liste_triee(n):
         # Idée : on fait redescendre L[i] pour l'insérer au bon endroit
         j = i
         while j >= 1 and L[j] < L[j-1]:
-            # On échange L[j-1] et L[j]
+            # On échange L[j-1] et L[j]
             L[j], L[j-1] = L[j-1], L[j]
             j = j-1
     return L
-\end{Verbatim}
+\end{lstlisting}
 Un appel de \texttt{randrange(100)} renvoie un nombre tiré aléatoirement et uniformément dans $\ii{0,100}$ et a une complexité en $O(1)$. 
 
 \medskip{}
 
-\question{} Peut-on donner explicitement et exactement une complexité pour la boucle \texttt{while} des lignes 13 à 16 ? 
+\question{} Peut-on donner explicitement et exactement une complexité pour la boucle \texttt{while} des lignes 13 à 16 ? 
 Que peut-on quand même proposer comme type de complexité pour cette boucle ? 
 
 Donner dans ce cas la complexité de cette boucle en fonction de \texttt{i}. 

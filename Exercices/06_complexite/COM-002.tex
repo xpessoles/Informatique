@@ -1,3 +1,6 @@
+\exer{}
+\setcounter{numques}{0}
+
   On considère la suite $u$ à valeurs dans $\ii{0;64~007}$ définie par 
   \begin{equation*}
     u_0 = 42,\quad \forall n \in\N,~ u_{n+1} = 15~091 u_n ~[64~007], 
@@ -7,7 +10,7 @@
   On propose l'algorithme suivant pour calculer les valeurs de $S$. 
 % v = 15091 * v % 64007
 %        # Inv : v = 15091*u_k % 64007 = u_k+1
-\begin{pyverbatim}
+\begin{lstlisting}
 def u(n):
     """u_n, n : entier naturel"""
     v = 42
@@ -29,7 +32,7 @@ def S(n):
         # Inv : v = S_k+u_k+1 = S_k+1
     # Inv : au dernier tour, k = n-1, donc s = S_n
     return s
-\end{pyverbatim}
+\end{lstlisting}
 \begin{enumerate}
   \item Étudier les complexités des fonctions \texttt{u} et \texttt{S}, en fonction de $n$.
   \item Écrire une fonction donnant la valeur de $S_n$ en temps $O(n)$. 

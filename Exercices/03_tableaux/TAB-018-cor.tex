@@ -1,5 +1,8 @@
+\exer{}
+\setcounter{numques}{0}
+
 \question{} 
-\begin{pyverbatim}
+\begin{lstlisting}
 def nb_pyramides_2(t):
     """Nombre de pyramides de hauteur 2 dans t"""
     nb = 0
@@ -8,10 +11,10 @@ def nb_pyramides_2(t):
         if t[i+1]>t[i] and t[i+1]>t[i+2] :
             nb = nb+1
     return nb
-\end{pyverbatim}
+\end{lstlisting}
 
 \question{}
-\begin{pyverbatim}
+\begin{lstlisting}
 def pyramide_a_partir(t,i):
     """Hauteur de la pyramide partant de i"""
     n = len(t)
@@ -30,10 +33,10 @@ def pyramide_a_partir(t,i):
         return 1
     else :
         return m
-\end{pyverbatim}
+\end{lstlisting}
 
 \question{} 
-\begin{pyverbatim}
+\begin{lstlisting}
 def plus_haute_pyramide(t):
     """Plus haute pyramide présente dans t"""
     n = len(t)
@@ -44,6 +47,6 @@ def plus_haute_pyramide(t):
         if h > M :
             M = h
     return M
-\end{pyverbatim}
+\end{lstlisting}
 
 

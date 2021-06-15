@@ -1,9 +1,12 @@
+\exer{}
+\setcounter{numques}{0}
+
 On considère la suite $u$ définie par 
 \begin{equation*}
   u_0 = 2,\quad \forall n \in \N,~ u_{n+1} = u_n^2.
 \end{equation*}
 On se considère la fonction suivante, permettant de calculer les valeurs de $u$. 
-\begin{pyverbatim}
+\begin{lstlisting}
 def u(n):
     """u_n, n : entier naturel"""
     v = 2
@@ -15,10 +18,10 @@ def u(n):
     # Inv : au dernier tour, 
     # k = n-1, donc v = u_n
     return v
-\end{pyverbatim}
+\end{lstlisting}
 
 Pour étudier le temps d'exécution d'une fonction, on pourra utiliser le morceau de code suivant. 
-\begin{pyverbatim}
+\begin{lstlisting}
 import timeit
 
 REPEAT=3
@@ -34,7 +37,7 @@ def duree(f, x):
   t = timeit.Timer(stmt=lambda : f(x))
   time = min(t.repeat(REPEAT, number=1))
   return time
-\end{pyverbatim}
+\end{lstlisting}
 
 \begin{enumerate}
   \item Étudier en fonction de $n$ la complexité asymptotique de la fonction \texttt{u}, dans le modèle standard.

@@ -1,4 +1,7 @@
-\section{Images en niveaux de gris}
+\exer{}
+\setcounter{numques}{0}
+
+\section*{Images en niveaux de gris}
 
 On cherche à représenter des  images. Pour simplifier, on ne cherchera
 pas  à  représenter les  couleurs  mais  seulement  la luminosité  des
@@ -58,18 +61,18 @@ décimal avec \texttt{int} et réciproquement, convertir un nombre en chaîne
 le représentant avec \texttt{str}.
 
 
-Enfin, on réprésentera une matrice (de nombres) à $n$ lignes et $p$ colonnes comme un tableau (ou liste Python) de longueur $n$, chacun de ses éléments étant un tableau de longueur $p$. On décrit donc la matrice ligne par ligne. 
+Enfin, on représentera une matrice (de nombres) à $n$ lignes et $p$ colonnes comme un tableau (ou liste Python) de longueur $n$, chacun de ses éléments étant un tableau de longueur $p$. On décrit donc la matrice ligne par ligne. 
 Ainsi, l'indice \og ligne \texttt{i} colonne \texttt{j} \fg\ de la matrice représentée par \texttt{M} sera \texttt{M[i][j]}.
 \begin{exemple}
-  La matrice $\begin{pmatrix} 0&1&2 \\ 3&4&5 \end{pmatrix}$ sera représentée par \pyv{[ [0,1,2] , [3,4,5] ]}.
+  La matrice $\begin{pmatrix} 0&1&2 \\ 3&4&5 \end{pmatrix}$ sera représentée par \texttt{[ [0,1,2] , [3,4,5] ]}.
 \end{exemple}
 
-\section{Travail demandé}
+\section*{Travail demandé}
 
-Commencez par recopier les fonctions  \pyv{image_noire}, \pyv{dim} et  \pyv{lit_valeurs} données ci dessous : ce sont des exemples utiles, utilisez les ! 
+Commencez par recopier les fonctions  \texttt{image\_noire}, \texttt{dim} et  \texttt{lit\_valeurs} données ci dessous : ce sont des exemples utiles, utilisez les ! 
 
 \begin{lstlisting}
-def image_noire(n, p):
+def image\_noire(n, p):
     """Construit la matrice n*p d'une image noire."""
     img = [0]*n
     for i in range(n):
@@ -84,12 +87,12 @@ def dim(img):
    p = len(img[0])
    return (n,p)
    
-def lit_valeurs(nom_de_fichier):
+def lit\_valeurs(nom\_de\_fichier):
     """Lit le contenu du fichier image f et renvoie la liste des
       valeurs lues (séparées par des blancs) sous forme d'une liste
       de chaines de caractères. La première valeur est normalement
       'P2'."""
-    with open(nom_de_fichier, 'r') as f:
+    with open(nom\_de\_fichier, 'r') as f:
         c = f.read()
     return c.split()
 \end{lstlisting}
@@ -98,47 +101,47 @@ def lit_valeurs(nom_de_fichier):
 N'hésitez pas à ouvrir l'image \texttt{degrade.pgm} et \texttt{joconde.pgm} dans un éditeur de texte puis dans un lecteur d'images, afin de comprendre le codage des images.
 
 
-\subsection{Sauvegarde d'images}
+\subsection*{Sauvegarde d'images}
 
-\question\ Écrire une fonction \pyv{sauve_image(img, N, nom_de_fichier)} prenant en argument
-  une matrice \pyv{img} représentant une image, l'entier \pyv{N} comme
-  niveau de gris maximal (dans $\ii{0,2^{16}}$) ainsi qu'une chaîne \pyv{nom_de_fichier} et
-  sauvant l'image dans le fichier nommé \pyv{nom_de_fichier}, au format PGM.
+\question\ Écrire une fonction \texttt{sauve\_image(img, N, nom\_de\_fichier)} prenant en argument
+  une matrice \texttt{img} représentant une image, l'entier \texttt{N} comme
+  niveau de gris maximal (dans $\ii{0,2^{16}}$) ainsi qu'une chaîne \texttt{nom\_de\_fichier} et
+  sauvant l'image dans le fichier nommé \texttt{nom\_de\_fichier}, au format PGM.
   
-\question\ Écrire une fonction \pyv{sauve_rectangle_noir(n, p, N, nom_de_fichier)}
-  sauvant dans le fichier \pyv{nom_de_fichier} un rectangle noir, de côté
+\question\ Écrire une fonction \texttt{sauve\_rectangle\_noir(n, p, N, nom\_de\_fichier)}
+  sauvant dans le fichier \texttt{nom\_de\_fichier} un rectangle noir, de côté
   $n$ pixels de hauteur et $p$ de largeur, où le blanc est
   d'intensité $N$. Vérifier que l'image produite par
    \begin{lstlisting}
-     sauve_rectangle_noir(100, 200, 255, 'rectangle_noir.pgm')
+     sauve\_rectangle\_noir(100, 200, 255, 'rectangle\_noir.pgm')
    \end{lstlisting}
   est bien ce que   vous attendiez grâce à GIMP ou la visionneuse d'images.
   
 \question\ Écrire une fonction
-   \pyv{sauve_rectangle_blanc(n, p, N, nom_de_fichier)}
-   sauvant dans le fichier   \pyv{nom_de_fichier} un rectangle blanc, de côté $n$ pixels de hauteur et $p$ de
+   \texttt{sauve\_rectangle\_blanc(n, p, N, nom\_de\_fichier)}
+   sauvant dans le fichier   \texttt{nom\_de\_fichier} un rectangle blanc, de côté $n$ pixels de hauteur et $p$ de
    largeur, où le blanc est d'intensité $N$. De même, vérifiez l'image
    produite par
    \begin{lstlisting}
-     sauve_rectangle_blanc(100, 200, 255, 'rectangle_blanc.pgm'). 
+     sauve\_rectangle\_blanc(100, 200, 255, 'rectangle\_blanc.pgm'). 
    \end{lstlisting}
    
-\question\ (Question facultative) Écrire une fonction \pyv{sauve_echiquier(p, N, nom_de_fichier)} produisant
-   dans le fichier \pyv{nom_de_fichier} l'image d'un échiquier, où chaque case de
+\question\ (Question facultative) Écrire une fonction \texttt{sauve\_echiquier(p, N, nom\_de\_fichier)} produisant
+   dans le fichier \texttt{nom\_de\_fichier} l'image d'un échiquier, où chaque case de
    l'échiquier a pour côté $p$ pixels et $N$ est le niveau d'intensité
    du blanc. Pour mémoire un échiquier a 64 cases, et dans sa
    représentation traditionnelle, la case en bas à droite est blanche.
 
 
- \subsection{Lecture et modification d'images}
+ \subsection*{Lecture et modification d'images}
  
  On pourra, pour tester les fonctions écrites ici, utiliser d'une part
  les images précédemment produites, d'autre part utiliser l'image
  disponible sur le site de la classe.
 
-\question\ Écrire une fonction \pyv{lit_image(nom_de_fichier)}, où
-   la chaîne \pyv{nom_de_fichier} représente le nom  d'un fichier PGM et renvoyant un couple \pyv{(img, N)} où \pyv{N} est
-   le niveau d'intensité du blanc de l'image et \pyv{img} la matrice des
+\question\ Écrire une fonction \texttt{lit\_image(nom\_de\_fichier)}, où
+   la chaîne \texttt{nom\_de\_fichier} représente le nom  d'un fichier PGM et renvoyant un couple \texttt{(img, N)} où \texttt{N} est
+   le niveau d'intensité du blanc de l'image et \texttt{img} la matrice des
    pixels. \\ 
    \emph{On suppose que le fichier respecte les contraintes données
    dans l'énoncé et on ne fera aucun effort particulier pour gérer les
@@ -148,15 +151,15 @@ N'hésitez pas à ouvrir l'image \texttt{degrade.pgm} et \texttt{joconde.pgm} da
    font plus de $70$ caractères. On suppose de plus que le fichier ne
    contient aucun commentaire.}\\
 \begin{rem}
-  On pourra utiliser la fonction \pyv{lit_valeurs}, que vous trouverez sur le site de classe.
+  On pourra utiliser la fonction \texttt{lit\_valeurs}, que vous trouverez sur le site de classe.
 \end{rem}
 
-\question\ Écrire une fonction \pyv{negatif(fichier_entree, fichier_sortie)} prenant en argument
-   deux noms de fichiers \pyv{fichier_entree} et \pyv{fichier_sortie}. La fonction lit d'abord le fichier
-   \pyv{fichier_entree} et crée le fichier \pyv{fichier_sortie} obtenu en remplaçant chaque pixel
+\question\ Écrire une fonction \texttt{negatif(fichier\_entree, fichier\_sortie)} prenant en argument
+   deux noms de fichiers \texttt{fichier\_entree} et \texttt{fichier\_sortie}. La fonction lit d'abord le fichier
+   \texttt{fichier\_entree} et crée le fichier \texttt{fichier\_sortie} obtenu en remplaçant chaque pixel
    de niveau de gris $k$ par un pixel de niveau $N-k$, où $N$ est l'intensité du blanc du fichier d'entrée.
    
-\question\ (Question facultative) Écrire une fonction \pyv{rotation90(fichier_entree, fichier_sortie)}
+\question\ (Question facultative) Écrire une fonction \texttt{rotation90(fichier\_entree, fichier\_sortie)}
    lisant le fichier 
-   \pyv{fichier_entree} et créant le fichier \pyv{fichier_sortie} obtenu en effectuant une rotation
+   \texttt{fichier\_entree} et créant le fichier \texttt{fichier\_sortie} obtenu en effectuant une rotation
    de $90$ degrés (dans le sens trigonométrique) de l'image originale.

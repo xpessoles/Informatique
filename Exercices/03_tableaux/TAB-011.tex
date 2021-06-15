@@ -1,3 +1,6 @@
+\exer{}
+\setcounter{numques}{0}
+
 On définit la fonction de Kaprekar comme suit (on la note $K$). 
 Si $n\in\mathbb{N}$, on écrit $n$ en base $10$ (sans zéros inutiles), on prend $c$ le nombre obtenu en écrivant les chiffres de $n$ dans l'ordre croissant et $d$ celui obtenu en écrivant les chiffres de $n$ dans l'ordre décroissant. 
 On pose alors $K(n) = d-c$.
@@ -6,10 +9,10 @@ On pose alors $K(n) = d-c$.
 \end{exemple}
 Toutes les suites récurrentes ainsi construites bouclent. Ici, nous avons un cas particulier : la suite est stationnaire.
 
-\question Construire une fonction \pyv{Kaprekar(n)} prenant en argument un entier \pyv{n} et donnant en sortie les valeurs de la suite décrite plus haut, jusqu'à ce qu'elle ne boucle. 
+\question Construire une fonction \texttt{Kaprekar(n)} prenant en argument un entier \texttt{n} et donnant en sortie les valeurs de la suite décrite plus haut, jusqu'à ce qu'elle ne boucle. 
 
 \begin{exemple}
-  L'appel de \pyv{Kaprekar(6384)} devra donner comme résultat\\ \pyv{[6384, 5175, 5994, 5355, 1998, 8082, 8532, 6174]}.
+  L'appel de \texttt{Kaprekar(6384)} devra donner comme résultat\\ \texttt{[6384, 5175, 5994, 5355, 1998, 8082, 8532, 6174]}.
 \end{exemple}
 
-\emph{Indice : on pourra écrire une fonction convertissant un entier en la liste de ses chiffres en base 10, une fonction convertissant une liste de chiffres en entier, une fonction calculant $K$ et utiliser la méthode \pyv{sort}}.
+\emph{Indice : on pourra écrire une fonction convertissant un entier en la liste de ses chiffres en base 10, une fonction convertissant une liste de chiffres en entier, une fonction calculant $K$ et utiliser la méthode \texttt{sort}}.

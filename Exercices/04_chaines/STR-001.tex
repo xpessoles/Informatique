@@ -1,10 +1,13 @@
+\exer{}
+\setcounter{numques}{0}
+
 Une chaîne de caractères $s_0s_1\dots s_{n-1}$ est un \emph{palindrome} si elle est \og symétrique\fg{} : $\forall k \in \{0,\dots,n-1\}, s_k = s_{n-1-k}$.
 
 
-\question\ \'Ecrire une fonction \pyv{est_pal(s)} qui, à une chaîne de caractères \pyv{s}, renvoie le booléen \pyv{True} si \pyv{s} est un palindrome et \pyv{False} sinon.
+\question\ \'Ecrire une fonction \texttt{est\_pal(s)} qui, à une chaîne de caractères \texttt{s}, renvoie le booléen \texttt{True} si \texttt{s} est un palindrome et \texttt{False} sinon.
 
-\question\ \'Ecrire une fonction \pyv{max_pal(s)} qui, à une chaîne de caractères \pyv{s}, renvoie la chaîne \pyv{p} où \pyv{p} est la plus grande sous chaîne palindromique centrée (c'est la plus grande sous-chaîne palindromique de la forme $s_ks_{k+1}\dots s_{n-1-k}$).
+\question\ \'Ecrire une fonction \texttt{max\_pal(s)} qui, à une chaîne de caractères \texttt{s}, renvoie la chaîne \texttt{p} où \texttt{p} est la plus grande sous chaîne palindromique centrée (c'est la plus grande sous-chaîne palindromique de la forme $s_ks_{k+1}\dots s_{n-1-k}$).
 %     \begin{itemize}
-%       \item \pyv{p} est la plus grande sous chaîne palindromique centrée (c'est la plus grande sous-chaîne palindromique de la forme $s_ks_{k+1}\dots s_{n-1-k}$) ; 
-%       \item \pyv{k} est l'indice du début de cette sous-chaîne dans \pyv{s} (dans le cas ou \pyv{p} est vide, on renverra n'importe quel nombre).
+%       \item \texttt{p} est la plus grande sous chaîne palindromique centrée (c'est la plus grande sous-chaîne palindromique de la forme $s_ks_{k+1}\dots s_{n-1-k}$) ; 
+%       \item \texttt{k} est l'indice du début de cette sous-chaîne dans \texttt{s} (dans le cas ou \texttt{p} est vide, on renverra n'importe quel nombre).
 %     \end{itemize}

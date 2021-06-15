@@ -1,4 +1,7 @@
-Soit $\texttt{t} = [t_0,\dots,t_{n-1}]$ un tableau de nombres de longueur $n\in\N^\ast$, soit $0 \leq i,j \leq n-1$. 
+\exer{}
+\setcounter{numques}{0}
+
+Soit $\texttt{t} = [t_0,\dots,t_{n-1}]$ un tableau de nombres de longueur $n\in\mathbb{N}^\ast$, soit $0 \leq i,j \leq n-1$. 
 
 On dit qu'il y a un \emph{ascension} dans le tableau \texttt{t} aux indices $i$ et $j$ si 
 \begin{equation*}
@@ -10,7 +13,7 @@ La \emph{hauteur} de cette ascension est alors $t_j - t_i$.
 
 On propose la fonction suivante. 
 
-\begin{Verbatim}[gobble=0,numbers=left]
+\begin{lstlisting}%[gobble=0,numbers=left]
 def plus_haute_ascension(t):
     """Plus haute ascension de t, ou 0 s'il n'y en a pas.
     Précondition : t est un tableau de nombres"""
@@ -24,7 +27,7 @@ def plus_haute_ascension(t):
         if m > M :
             M = m
     return M
-\end{Verbatim}
+\end{lstlisting}
 
 \bigskip{}
 

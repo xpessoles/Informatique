@@ -1,3 +1,6 @@
+\exer{}
+\setcounter{numques}{0}
+
 L'algorithme suivant répond à la question. 
 \begin{Verbatim}[gobble=0,numbers=left]
 def pascal_rapide(n):
@@ -25,15 +28,15 @@ def pascal(n):
 \end{rem}
 Notons, pour $n,p\in\Z$, $\displaystyle C(n,p) = \binom{n}{p}$.
 \begin{itemize}
-  \item[\textbullet] Ligne 3 : \pyv{t} vaut $[1]$, c'est bien le tableau $[C(0,0)]$.
-  \item[\textbullet] Ligne 4 : soit $\texttt{m} \in \ii{0,n}$, supposons que \pyv{t} contienne bien le tableau des $C(\texttt{m},p)$, pour $0\leq p \leq \texttt{m}$. 
-  \item[\textbullet] Ligne 5 : \pyv{nouv} est un tableau de longueur $\texttt{m}+2$, \pyv{nouv[0]} et \pyv{nouv[m+1]} valent $1$. 
-    Ainsi, \pyv{nouv[0]} vaut $C(\texttt{m}+1,0)$ et \pyv{nouv[m+1]} vaut $C(\texttt{m}+1,\texttt{m}+1)$.
-  \item[\textbullet] Ligne 9 : soit $\texttt{i} \in \ii{1,m+1}$, supposons que \pyv{nouv[:i]} soit le tableau des $C(\texttt{m}+1,j)$ pour $0\leq j < \texttt{i}$. 
-    Alors, par la formule du triangle de Pascal, $C(\texttt{m}+1,\texttt{i}) = C(\texttt{m},\texttt{i}) + C(\texttt{m},\texttt{i}-1)$, ce qui vaut \pyv{t[i]+t[i-1]}. 
-    On a donc bien \pyv{nouv[i]} qui vaut $C(\texttt{m}+1,\texttt{i})$. Ainsi, \pyv{nouv[:i+1]} est le tableau des $C(\texttt{m}+1,j)$ pour $0\leq j < \texttt{i}+1$. 
-  \item[\textbullet] Boucle des lignes 7-9 : en sortie la boucle, on a $\texttt{i} = \texttt{m}$ donc \pyv{nouv[:m+1]} est le tableau des $C(\texttt{m}+1,j)$ pour $0\leq j < \texttt{m}+1$. 
-  \item[\textbullet] Ligne 10 : comme \pyv{nouv[:m+1]} est le tableau des $C(\texttt{m}+1,j)$ pour $0\leq j < \texttt{m}+1$ et comme \pyv{nouv[m+1]} vaut $C(\texttt{m}+1,\texttt{m}+1)$, \pyv{t} est le tableau des $C(\texttt{m}+1,j)$ pour $0\leq j \leq \texttt{m}+1$
-  \item[\textbullet] Boucle des lignes 4-10 : en sortie de boucle, on a $\texttt{m} = \texttt{n-1}$ donc  \pyv{t} est le tableau des des $C(\texttt{n},j)$ pour $0\leq j \leq \texttt{n}$. 
+  \item[\textbullet] Ligne 3 : \texttt{t} vaut $[1]$, c'est bien le tableau $[C(0,0)]$.
+  \item[\textbullet] Ligne 4 : soit $\texttt{m} \in \ii{0,n}$, supposons que \texttt{t} contienne bien le tableau des $C(\texttt{m},p)$, pour $0\leq p \leq \texttt{m}$. 
+  \item[\textbullet] Ligne 5 : \texttt{nouv} est un tableau de longueur $\texttt{m}+2$, \texttt{nouv[0]} et \texttt{nouv[m+1]} valent $1$. 
+    Ainsi, \texttt{nouv[0]} vaut $C(\texttt{m}+1,0)$ et \texttt{nouv[m+1]} vaut $C(\texttt{m}+1,\texttt{m}+1)$.
+  \item[\textbullet] Ligne 9 : soit $\texttt{i} \in \ii{1,m+1}$, supposons que \texttt{nouv[:i]} soit le tableau des $C(\texttt{m}+1,j)$ pour $0\leq j < \texttt{i}$. 
+    Alors, par la formule du triangle de Pascal, $C(\texttt{m}+1,\texttt{i}) = C(\texttt{m},\texttt{i}) + C(\texttt{m},\texttt{i}-1)$, ce qui vaut \texttt{t[i]+t[i-1]}. 
+    On a donc bien \texttt{nouv[i]} qui vaut $C(\texttt{m}+1,\texttt{i})$. Ainsi, \texttt{nouv[:i+1]} est le tableau des $C(\texttt{m}+1,j)$ pour $0\leq j < \texttt{i}+1$. 
+  \item[\textbullet] Boucle des lignes 7-9 : en sortie la boucle, on a $\texttt{i} = \texttt{m}$ donc \texttt{nouv[:m+1]} est le tableau des $C(\texttt{m}+1,j)$ pour $0\leq j < \texttt{m}+1$. 
+  \item[\textbullet] Ligne 10 : comme \texttt{nouv[:m+1]} est le tableau des $C(\texttt{m}+1,j)$ pour $0\leq j < \texttt{m}+1$ et comme \texttt{nouv[m+1]} vaut $C(\texttt{m}+1,\texttt{m}+1)$, \texttt{t} est le tableau des $C(\texttt{m}+1,j)$ pour $0\leq j \leq \texttt{m}+1$
+  \item[\textbullet] Boucle des lignes 4-10 : en sortie de boucle, on a $\texttt{m} = \texttt{n-1}$ donc  \texttt{t} est le tableau des des $C(\texttt{n},j)$ pour $0\leq j \leq \texttt{n}$. 
   \item[\textbullet] Ligne 11 - conclusion : la fonction renvoie bien le résultat demandé.
 \end{itemize}

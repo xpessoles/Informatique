@@ -1,9 +1,12 @@
+\exer{}
+\setcounter{numques}{0}
+
 Les pythonistes confirmés apprécierons sans doute la fonction suivante. 
 \begin{Verbatim}[gobble=0,numbers=left]
 def doublon_rapide(t):
     return len(set(t)) != len(t)
 \end{Verbatim}
-Mais, ici, tout est caché dans les fonctions \pyv{set} et \pyv{len} ! Nous allons donc justifier l'algorithme suivant. 
+Mais, ici, tout est caché dans les fonctions \texttt{set} et \texttt{len} ! Nous allons donc justifier l'algorithme suivant. 
 \begin{Verbatim}[gobble=0,numbers=left]
 def doublon(t):
     """Renvoie un booléen indiquant s'il y a un doublon dans t"""
@@ -19,28 +22,28 @@ def doublon(t):
 \begin{rem}
   On ne vous demandait pas d'écrire les invariants, ils sont présents à titre d'exemple. 
 \end{rem}
-Rappelons qu'un tableau \pyv{t} de longueur \pyv{n} contient un doublon si et seulement s'il existe $\texttt{i},\texttt{j} \in \ii{0,\texttt{n}}$ tel que $\texttt{i}<\texttt{j}$ et $\texttt{t[i]} = \texttt{t[j]}$. 
-Remarquons qu'alors $\texttt{i} \leq n-2$. On dira que \pyv{i} est la \emph{première occurence} du doublon $(\texttt{i},\texttt{j})$, tandis que \pyv{j} est sa \emph{seconde occurence}.
+Rappelons qu'un tableau \texttt{t} de longueur \texttt{n} contient un doublon si et seulement s'il existe $\texttt{i},\texttt{j} \in \ii{0,\texttt{n}}$ tel que $\texttt{i}<\texttt{j}$ et $\texttt{t[i]} = \texttt{t[j]}$. 
+Remarquons qu'alors $\texttt{i} \leq n-2$. On dira que \texttt{i} est la \emph{première occurence} du doublon $(\texttt{i},\texttt{j})$, tandis que \texttt{j} est sa \emph{seconde occurence}.
 \begin{itemize}
-  \item[\textbullet] Ligne 3 : \pyv{n} contient le nombre d'éléments de \pyv{t}.
-  \item[\textbullet] Ligne 4 : le tableau \pyv{t[0:0]} est vide et ne contient donc pas de première occurence doublon.
-  \item[\textbullet] Ligne 5 : soit $\texttt{i} \in \ii{0,\texttt{n}-1}$, supposons que les éléments du tableau \pyv{t[:i]} ne contient pas de première occurence de doublon dans \pyv{t}. 
-  \item[\textbullet] Ligne 6 : le tableau \pyv{t[i+1,i+1]} est vide et ne contient donc pas \pyv{t[i]}. 
-  \item[\textbullet] Lignes 8-9 : soit $\texttt{j} \in \ii{\texttt{i}+1,\texttt{n}}$, supposons que \pyv{t[i]} ne se trouve pas dans \pyv{t[i+1,j]}. 
+  \item[\textbullet] Ligne 3 : \texttt{n} contient le nombre d'éléments de \texttt{t}.
+  \item[\textbullet] Ligne 4 : le tableau \texttt{t[0:0]} est vide et ne contient donc pas de première occurence doublon.
+  \item[\textbullet] Ligne 5 : soit $\texttt{i} \in \ii{0,\texttt{n}-1}$, supposons que les éléments du tableau \texttt{t[:i]} ne contient pas de première occurence de doublon dans \texttt{t}. 
+  \item[\textbullet] Ligne 6 : le tableau \texttt{t[i+1,i+1]} est vide et ne contient donc pas \texttt{t[i]}. 
+  \item[\textbullet] Lignes 8-9 : soit $\texttt{j} \in \ii{\texttt{i}+1,\texttt{n}}$, supposons que \texttt{t[i]} ne se trouve pas dans \texttt{t[i+1,j]}. 
     \begin{itemize}
-      \item Si $\texttt{t[i]} = \texttt{t[j]}$, alors la fonction renvoie le booléen $\pyv{False}$.
-      \item Sinon, \pyv{t[i]} ne se trouve donc pas dans \pyv{t[i+1:j+1]}.
+      \item Si $\texttt{t[i]} = \texttt{t[j]}$, alors la fonction renvoie le booléen $\texttt{False}$.
+      \item Sinon, \texttt{t[i]} ne se trouve donc pas dans \texttt{t[i+1:j+1]}.
     \end{itemize}
-  \item[\textbullet] Boucle des lignes 6-9 : en sortie de boucle, $\texttt{j} = \texttt{n}-1$ et donc \pyv{t[i]} ne se trouve pas dans \pyv{t[i+1,:]}. 
-    Remarquons que par hypothèse il ne se trouve pas dans \pyv{t[:i]}, donc \pyv{i} n'est pas la première occurence d'un doublon de \pyv{t}.
-  \item[\textbullet] Boucle des lignes 4-9 : en sortie de boucle, $\texttt{i} = \texttt{n}-2$ et donc \pyv{t[:n-1]} ne contient pas de première occurence d'un doublon de \pyv{t}.
+  \item[\textbullet] Boucle des lignes 6-9 : en sortie de boucle, $\texttt{j} = \texttt{n}-1$ et donc \texttt{t[i]} ne se trouve pas dans \texttt{t[i+1,:]}. 
+    Remarquons que par hypothèse il ne se trouve pas dans \texttt{t[:i]}, donc \texttt{i} n'est pas la première occurence d'un doublon de \texttt{t}.
+  \item[\textbullet] Boucle des lignes 4-9 : en sortie de boucle, $\texttt{i} = \texttt{n}-2$ et donc \texttt{t[:n-1]} ne contient pas de première occurence d'un doublon de \texttt{t}.
 \end{itemize}
 On peut donc montrer la correction de l'algorithme. 
 \begin{itemize}
-  \item Si \pyv{t} possède un doublon $(\texttt{i},\texttt{j})$, avec $\texttt{i}<\texttt{j}$, considérons le plus petit de ces doublons (selon l'ordre lexicographique). 
-    Alors, aucun des \pyv{t[:k]}, pour $\texttt{k}<\texttt{i}$ ne contient de première occurence de doublon, et \pyv{t[i]} ne se trouve pas dans \pyv{t[i+1:j]}, donc l'algorithme vérifie le test de la ligne 8 de l'algorithme pour ces valeurs de \pyv{i} et de \pyv{j}. 
-    Ainsi, l'algorithme renvoie le booléen \pyv{True}.
-  \item Si \pyv{t} ne possède pas de doublon, aucun des \pyv{t[:i]} ne contient de première occurence de doublon et, pour tout \pyv{i}, \pyv{t[i]} ne se trouve dans aucun des  \pyv{t[i+1:j]}, pour tout \pyv{j}. 
-    Ainsi, comme démontré plus haut, les boucles terminent et l'algorithme renvoie le booléen \pyv{False}.
+  \item Si \texttt{t} possède un doublon $(\texttt{i},\texttt{j})$, avec $\texttt{i}<\texttt{j}$, considérons le plus petit de ces doublons (selon l'ordre lexicographique). 
+    Alors, aucun des \texttt{t[:k]}, pour $\texttt{k}<\texttt{i}$ ne contient de première occurence de doublon, et \texttt{t[i]} ne se trouve pas dans \texttt{t[i+1:j]}, donc l'algorithme vérifie le test de la ligne 8 de l'algorithme pour ces valeurs de \texttt{i} et de \texttt{j}. 
+    Ainsi, l'algorithme renvoie le booléen \texttt{True}.
+  \item Si \texttt{t} ne possède pas de doublon, aucun des \texttt{t[:i]} ne contient de première occurence de doublon et, pour tout \texttt{i}, \texttt{t[i]} ne se trouve dans aucun des  \texttt{t[i+1:j]}, pour tout \texttt{j}. 
+    Ainsi, comme démontré plus haut, les boucles terminent et l'algorithme renvoie le booléen \texttt{False}.
 \end{itemize}
 En conclusion : l'algorithme renvoie bien le résultat demandé.

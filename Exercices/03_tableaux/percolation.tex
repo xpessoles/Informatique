@@ -1,3 +1,6 @@
+\exer{}
+\setcounter{numques}{0}
+
 
 La percolation \footnote{du latin \emph{percolare} : couler à travers.} désigne le passage d'un fluide à
 travers un solide poreux. Ce terme fait bien entendu référence au café
@@ -13,7 +16,7 @@ disciplines, allant des mathématiques à l'économie en passant par la
 physique et la géologie.
 
 \setcounter{section}{1}
-\subsection{Choix d'un modèle}\label{choix-dun-moduxe8le}
+\subsection*{Choix d'un modèle}\label{choix-dun-modele}
 
 
 Nous allons aborder certains phénomènes propres à la percolation par
@@ -42,12 +45,12 @@ réussite sont importantes. Nous auront l'occasion d'observer l'existence
 pour de grandes valeurs de $n$ d'un seuil critique $p_0$ au delà duquel la percolation a toutes les chances de réussir et en dessous duquel la percolation échoue presque à
 chaque fois.
 
-\subsection{Création et visualisation de la grille}\label{cruxe9ation-et-visualisation-de-la-grille}
+\subsection*{Création et visualisation de la grille}\label{cruxe9ation-et-visualisation-de-la-grille}
 
-\subsubsection{Préparation de la grille}
+\subsubsection*{Préparation de la grille}
 
 Les deux modules essentiels dont nous aurons besoin sont les modules
-\pyv{numpy} (manipulation de tableaux bi-dimensionnels) et \pyv{mathplotlib.pyplot}
+\texttt{numpy} (manipulation de tableaux bi-dimensionnels) et \texttt{mathplotlib.pyplot}
 (graphisme), qu'il convient d'importer :
 
 \begin{lstlisting}
@@ -55,10 +58,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 \end{lstlisting}
 
-Nous aurons aussi besoin de la fonction \textbf{\pyv{rand}} du module \pyv{numpy.random}
+Nous aurons aussi besoin de la fonction \textbf{\texttt{rand}} du module \texttt{numpy.random}
 (fonction qui retourne un nombre pseudo- aléatoire de l'intervalle
-$\left[0,1\right[$ et accessoirement de la fonction \pyv{ListedColormap} du
-module \pyv{matplotlib.colors} (pour choisir l'échelle chromatique à utiliser
+$\left[0,1\right[$ et accessoirement de la fonction \texttt{ListedColormap} du
+module \texttt{matplotlib.colors} (pour choisir l'échelle chromatique à utiliser
 pour la représentation graphique). Ces deux fonctions seront importées
 directement, puisque nous n'aurons pas besoin des modules entiers :
 
@@ -67,31 +70,31 @@ from numpy.random import rand
 from matplotlib.colors import ListedColormap
 \end{lstlisting}
 
-La grille de percolation sera représentée par le type \pyv{np.array}. La
-fonction \pyv{np.zeros((n, p))} renvoie un tableau de $n$ lignes et
+La grille de percolation sera représentée par le type \texttt{np.array}. La
+fonction \texttt{np.zeros((n, p))} renvoie un tableau de $n$ lignes et
 $p$ colonnes contenant dans chacune de ses cases le nombre flottant
-0.0. Une fois un tableau \pyv{tab} créé, la case d'indice $(i, j)$ est
-référencée indifféremment par \pyv{tab[i][j]} ou par \pyv{tab[i,j]} et
+0.0. Une fois un tableau \texttt{tab} créé, la case d'indice $(i, j)$ est
+référencée indifféremment par \texttt{tab[i][j]} ou par \texttt{tab[i,j]} et
 peut être lue et modifiée (comme d'habitude, les indices débutent à 0).
-Enfin, on notera que si tab est un tableau, l'attribut \pyv{tab.shape}
+Enfin, on notera que si tab est un tableau, l'attribut \texttt{tab.shape}
 retourne le couple $(n, p)$ de ses dimensions verticale et
-horizontale (le nombre de lignes et de colonnes, \pyv{tab} étant vu comme une
+horizontale (le nombre de lignes et de colonnes, \texttt{tab} étant vu comme une
 matrice).
 
 Dans la suite de ce document, on représentera une grille de percolation
 par un tableau $n\times n$, les cases fermées contenant le nombre
 flottant $0.0$ et les cases ouvertes le nombre flottant $1.0$.
 
-\question{Définir une fonction \python, \pyv{creationgrille(p, n)} à deux
+\question{Définir une fonction \texttt{Python}, \texttt{creationgrille(p, n)} à deux
 paramètres : un nombre réel $p$ (qu'on supposera dans l'intervalle
 $[0,1[$ et un entier naturel $n$, qui renvoie un tableau
 $(n,n)$ dans lequel chaque case sera ouverte avec la probabilité
 $p$ et fermée sinon.}
 
-\subsubsection{Visualisation de la grille}
+\subsubsection*{Visualisation de la grille}
 
 Pour visualiser simplement la grille, nous allons utiliser la fonction
-\pyv{plt.matshow} : appliquée à un tableau, celle-ci présente ce dernier sous
+\texttt{plt.matshow} : appliquée à un tableau, celle-ci présente ce dernier sous
 forme de cases colorées en fonction de leur valeur.
 
 Les couleurs sont choisies en fonction d'une échelle chromatique que
@@ -101,11 +104,11 @@ contiennent pour l'instant que les valeurs 0 ou 1, les cases fermées
 apparaîtrons en bleu, et les cases ouvertes, en rouge.
 %
 
-\subsubsection{Changer l'échelle chromatique}
+\subsubsection*{Changer l'échelle chromatique}
 
 
-L'argument par défaut \pyv{cmap} de la fonction \pyv{plt.matshow} permet de modifier
-l'échelle chromatique utilisée. La fonction \pyv{ListedColormap} va nous
+L'argument par défaut \texttt{cmap} de la fonction \texttt{plt.matshow} permet de modifier
+l'échelle chromatique utilisée. La fonction \texttt{ListedColormap} va nous
 permettre de créer l'échelle de notre choix. Puisque nous n'aurons que
 trois états possibles (une case pleine représentée par la valeur $0.0$),
 une case vide représentée par la valeur $1.0$ et plus tard une case
@@ -118,13 +121,18 @@ echelle = ListedColormap(['black', 'aqua', 'white'])
 
 
 
-\question{Écrire une fonction \pyv{afficher_grille(grille,nom_de_fichier)} qui prend en argument une variable grille qui correspond à une grille de percolation générée précédemment et ne renvoyant rien mais enregistrant dans \pyv{nom_de_fichier} le graphe obtenu. On pourra exporter une grille de $10\times 10$ cases avec l'échelle suggérée précédemment, l'enregistrer sous le nom "tp09$\_$q02$\_$vos$\_$noms.png" et l'envoyer à votre professeur.}
+\question{Écrire une fonction \texttt{afficher\_grille(grille,nom\_de\_fichier)} 
+qui prend en argument une variable grille qui correspond à une grille de 
+percolation générée précédemment et ne renvoyant rien mais enregistrant dans 
+\texttt{nom\_de\_fichier} le graphe obtenu. On pourra exporter une grille de
+ $10\times 10$ cases avec l'échelle suggérée précédemment, l'enregistrer sous 
+ le nom \texttt{tp09\_q02\_vos\_noms.png} et l'envoyer à votre professeur.}
 
 
 
 %\end{quote}
 %
-\subsection{Percolation}\label{percolation}
+\subsection*{Percolation}\label{percolation}
 %
 
 
@@ -143,9 +151,9 @@ chacune des cases ouvertes voisines d'une case contenant déjà le fluide jusqu'
 \end{center}
 \end{figure}
 
-\question{Écrire une fonction \pyv{percolation(grille)} qui prend en argument une
+\question{Écrire une fonction \texttt{percolation(grille)} qui prend en argument une
 grille et qui remplit de fluide celle-ci, en appliquant l'algorithme
-exposé ci-dessous :
+exposé ci-dessous :}
 \begin{enumerate}
 \item
   Créer une liste contenant initialement les coordonnées des cases
@@ -163,32 +171,32 @@ vides, et les remplir de liquide.
 
 L'algorithme se termine quand la liste est vide.
 
-}
+
 
 
 \question{Rédiger un script vous permettant de visualiser une grille avant et
 après remplissage, et faire l'expérience avec quelques valeurs de
 $p$ pour une grille de taille raisonnable (commencer avec $n
 = 10$ pour vérifier visuellement que votre algorithme est correct, puis
-augmenter la taille de la grille, par exemple avec $n = 64$). On pourra exporter et l'enregistrer sous le nom "tp09$\_$q04$\_$vos$\_$noms.png" et l'envoyer à votre professeur.}
+augmenter la taille de la grille, par exemple avec $n = 64$). On pourra exporter et l'enregistrer sous le nom  \texttt{tp09\_q04\_vos\_noms.png} et l'envoyer à votre professeur.}
 
 
 
 On dit que la percolation est réussie lorsqu'à la fin du processus au
 moins une des cases de la dernière ligne est remplie du fluide.
 
-\question{Écrire une fonction \pyv{teste_percolation(p,n)} qui prend en argument
-un réel $p\in\left[0,1\right[$ et un entier $n\in \N^*$, crée une grille, effectue la percolation et
-retourne :
+\question{Écrire une fonction \texttt{teste\_percolation(p,n)} qui prend en argument
+un réel $p\in\left[0,1\right[$ et un entier $n\in \mathbb{N}^*$, crée une grille, effectue 
+la percolation et
+retourne :}
 \begin{itemize}
-\item \pyv{True} lorsque la percolation est réussie, c'est-à-dire lorsque le bas
+\item \texttt{True} lorsque la percolation est réussie, c'est-à-dire lorsque le bas
   de la grille est atteint par le fluide ;
-\item \pyv{False} dans le cas contraire.
+\item \texttt{False} dans le cas contraire.
 \end{itemize}
-}
 
 %
-\subsection{Seuil critique}\label{seuil-critique}
+\subsection*{Seuil critique}\label{seuil-critique}
 %
 %\begin{quote}
 Nous allons désormais travailler avec des grilles de taille $128\times 128$ \footnote{Baisser cette valeur si le temps de calcul sur votre ordinateur est trop long.}
@@ -216,9 +224,13 @@ rapprocher du cas de la grille théorique infinie.
 
 Notons $P(p)$ la probabilité pour le fluide de traverser la grille. Pour déterminer une valeur approchée de la probabilité de traverser la grille, on se contente d'effectuer $k$ essais pour une valeur de $p$ puis de renvoyer le nombre moyen de fois où le test de percolation est vérifié.
 
-\question{Rédiger la fonction \pyv{proba(p,k,n)} qui prend en argument le nombre d'essai $k$, la variable $p$ ainsi que le nombre de cases $n$ sur la largeur de la grille et qui renvoie $P(p)$.}
+\question{Rédiger la fonction \texttt{proba(p,k,n)} qui prend en argument le nombre d'essai $k$, la variable $p$ ainsi que le nombre de cases $n$ sur la largeur de la grille et qui renvoie $P(p)$.}
 
-\question{Ecrire une fonction \pyv{tracer_proba(n,nom_de_fichier)} qui prendre en argument une taille $n$  ne renvoyant rien mais enregistrant dans \pyv{nom_de_fichier} le graphe obtenu. On pourra traiter le cas d'une grille de $128\times 128$ cases et enregistrer la figure obtenue sous le nom "tp09$\_$q07$\_$vos$\_$noms.png" et l'envoyer à votre professeur.}
+\question{Écrire une fonction \texttt{tracer\_proba(n,nom\_de\_fichier)}
+qui prendre en argument une taille $n$  ne renvoyant rien mais enregistrant 
+dans \texttt{nom\_de\_fichier} le graphe obtenu. On pourra traiter le 
+cas d'une grille de $128\times 128$ cases et enregistrer la figure obtenue 
+sous le nom \texttt{tp09\_q07\_vos\_noms.png} et l'envoyer à votre professeur.}
 
 
 %
@@ -279,4 +291,4 @@ Notons $P(p)$ la probabilité pour le fluide de traverser la grille. Pour déter
 %et chercher à le démontrer (en utilisant un argument de symétrie).
 %\end{quote}
 
-\end{document}
+
