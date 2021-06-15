@@ -49,7 +49,7 @@ partir de mesures réalisées par des capteurs de position à ultrasons.
 Dans cette partie on s'intéresse à la génération de la consigne de position à appliquer à chacun de ces pieds via un micro-controleur (type carte arduino).
 \end{minipage}
 \begin{minipage}{0.45\textwidth}
-\includegraphics[width=0.8\textwidth]{image14.png}
+\includegraphics[width=0.8\textwidth]{image14.jpeg}
 \caption{Carte Arduino Uno \label{fig3}}
 \end{minipage}
 \end{center}
@@ -76,14 +76,14 @@ On note pour la suite de l'étude (\textbf{figure \ref{fig15}}) :
 
 \begin{itemize}
 \item
-  \pyv{distance} : la variable, de type float, correspondant à la
+  \texttt{distance} : la variable, de type float, correspondant à la
   distance mesurée entre le sol et le capteur donnée en cm ;
 \item
-  \pyv{distance_verin} : la variable, de type float, correspondant à
+  \texttt{distance\_verin} : la variable, de type float, correspondant à
   la distance entre le capteur et l'extrémité de la tige du vérin donnée
   en cm ;
 \item
-  \pyv{rapide} et \pyv{lente} : variable globale avec des valeurs
+  \texttt{rapide} et \texttt{lente} : variable globale avec des valeurs
   prédéfinies (correspond aux consignes de la commande du vérin électrique : vitesse rapide, vitesse lente).
 \end{itemize}
 
@@ -96,9 +96,9 @@ On note pour la suite de l'étude (\textbf{figure \ref{fig15}}) :
 \end{figure}
 
 
-\question{Écrire une fonction \pyv{consigne(distance,distance\_verin)} qui calcule l'écart entre la
-tige du vérin et le sol et qui retourne la consigne \pyv{rapide} si
-cet écart est supérieur à 10 mm ou la consigne \pyv{lente} sinon.}
+\question{Écrire une fonction \texttt{consigne(distance,distance\_verin)} qui calcule l'écart entre la
+tige du vérin et le sol et qui retourne la consigne \texttt{rapide} si
+cet écart est supérieur à 10 mm ou la consigne \texttt{lente} sinon.}
 
 Le module SEIS est équipé de trois
 capteurs de positions, à ultrasons, associés à chaque vérin électrique.
