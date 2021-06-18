@@ -1,22 +1,25 @@
+\exer{[INT-003]}
+\setcounter{numques}{0}~\\
+
 La température dans le sol terrestre étant initialement constante, égale à 5\textdegree C , on cherche à déterminer
 à quelle profondeur minimale il est nécessaire d'enterrer une canalisation d'eau pour qu'une brusque
 chute de la température de sa surface à -15\textdegree C n'entraine pas le gel de cette canalisation après 10 jours.
 
 
 
-\begin{minipage}[c]{.6\linewidth}
+%\begin{minipage}[c]{.6\linewidth}
 Les hypothèses sont les suivantes :
 \begin{itemize}
 \item la température en un point quelconque du sol et de sa surface à tout instant $t < 0$ est constante et égale à $T_0=278\;K$ ( $\theta_0=5^oC$ ) ;
 \item la température à la surface du sol, confondue avec le plan d'équation $z = 0$, passe brutalement à l'instant $t = 0$ , de $T_0 = 278\;K$ à $T_1 =  258\; K$ ($\theta_1 = -15^o C$) et se maintient à cette valeur pendant
 $t_f= $10 jours.
 \end{itemize}
-\end{minipage}\hfill
-\begin{minipage}[c]{.35\linewidth}
+%\end{minipage}\hfill
+%\begin{minipage}[c]{.35\linewidth}
 \begin{center}
-\includegraphics[width=.95\textwidth]{canalisation}
+\includegraphics[width=.95\linewidth]{canalisation}
 \end{center}
-\end{minipage}
+%\end{minipage}
 
 On peut montrer que la température $T(z, t)$ à la profondeur $z$ et à l'instant $t$ est donnée par la relation suivante :
 
@@ -30,7 +33,7 @@ $$
 
 Données numériques : $D=2,8\cdot 10^{-7} \; m^2\cdot s^{-1}$ (diffusivité thermique du sol terrestre).
 
-\question{} Écrire une fonction Python, appelée $\text{trapeze}$, prenant en argument une fonction \pyv{f}, les variables \pyv{a} et \pyv{b} définissant le domaine d'intégration et le paramètre \pyv{n} définissant le nombre de subdivisions.
+\question{} Écrire une fonction Python, appelée $\text{trapeze}$, prenant en argument une fonction \texttt{f}, les variables \texttt{a} et \texttt{b} définissant le domaine d'intégration et le paramètre \texttt{n} définissant le nombre de subdivisions.
 
 \question{} Écrire une fonction Python, appelée $\text{erf}$, prenant en paramètre un nombre réel positif ou nul $x$, un entier $nb$ correspondant au nombre de subdivisions de la méthode d'intégration et
 retournant la valeur de $\text{erf(x)}$.

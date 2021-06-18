@@ -1,4 +1,8 @@
-\begin{Verbatim}[gobble=0,numbers=left]
+\exer{[PLT-001]}
+\setcounter{numques}{0}~\\
+
+
+\begin{lstlisting}%[gobble=0,numbers=left]
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -17,12 +21,12 @@ plt.ylabel('y')
 plt.legend(loc='0')
 plt.title('Fonction pseudo-périodique')
 plt.savefig('pseudo-harmonique.png')
-\end{Verbatim}
+\end{lstlisting}
 On pouvait aussi définir les variables \texttt{y1}, \texttt{y2} \emph{etc.} de la manière suivante. 
-\begin{verbatim}
+\begin{lstlisting}
 y1 = [np.sin(t) for t in x]
 y21 = [np.exp(-0.1*t) for t in x]
 y22 = [-np.exp(-0.1*t]) for t in x]
 y3 = [np.sin(t)*np.exp(-0.1*t) for t in x]
-\end{verbatim}
+\end{lstlisting}
 Les fonctions sinus, exponentielle et la constante $\pi$ pouvaient aussi être importées depuis la bibliothèque \texttt{math}.

@@ -1,3 +1,6 @@
+\exer{[FIC-011-cor]}
+\setcounter{numques}{0}~\\
+
 \question{} 
 
 La méthode read lit un caractère depuis la position courante, renvoie une chaine.
@@ -14,19 +17,19 @@ Ce sont les caractères \og tabulation\fg{} et \og nouvelle ligne\fg{} .
 
 \question{}
 
-\begin{pyverbatim}
+\begin{lstlisting}
 def carac(nom_de_fichier):
     """Renvoie une liste contenant le nombre de caractères
        de chaque ligne de nom_de_fichier"""
     with open(nom_de_fichier,'r',encoding='utf8') as f:
         lignes = f.readlines()
     return [len(x.strip('\n').strip('\t')) for x in lignes]
-\end{pyverbatim}
+\end{lstlisting}
 
 
 \question{}
 
-\begin{pyverbatim}
+\begin{lstlisting}
 def somme_carac(nom_de_fichier):
     """Renvoie la somme nombre de caractères
        du texte entier"""
@@ -35,7 +38,7 @@ def somme_carac(nom_de_fichier):
     for x in L:
         S+=x
     return S
-\end{pyverbatim}
+\end{lstlisting}
 
 \question{}
 \begin{lstlisting}
@@ -89,7 +92,7 @@ from numpy import arange
 
 \begin{lstlisting}
 def tracer_occurrences(nom_de_fichier):
-    ''' trace en fonction du numéro de la lettre dans l'alphabet son occurrence dans le fichier \pyv{nom_de_fichier}'''
+    ''' trace en fonction du numéro de la lettre dans l'alphabet son occurrence dans le fichier texttt{nom_de_fichier}'''
     y=stat_carac(nom_de_fichier)
     plt.clf()
     plt.plot(y,'ro')

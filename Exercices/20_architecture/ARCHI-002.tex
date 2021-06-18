@@ -1,6 +1,9 @@
+\exer{[ARCHI-002]}
+\setcounter{numques}{0}~\\
+
 
 Lancer PYZO ou IDLE. Un \emph{interpréteur de commandes}, ou \texttt{shell}, s'affiche. 
-Le symbole \texttt{>}\texttt{>}\texttt{>} signifie que \python{} attend vos instructions. 
+Le symbole \texttt{>}\texttt{>}\texttt{>} signifie que \texttt{Python}{} attend vos instructions. 
 
 Sitôt une instruction tapée et validée (par la touche \og Entrée \fg{}), le \texttt{shell} effectue le calcul demandé puis affiche un résultat, ou un message d'erreur. 
 Il est extrêmement important de bien lire ces messages d'erreur, et de les comprendre ! 
@@ -8,7 +11,7 @@ Il est extrêmement important de bien lire ces messages d'erreur, et de les comp
 \medskip{}
 
 \question{} Taper dans le \emph{shell} les instructions suivantes. 
-\begin{verbatim}
+\begin{lstlisting}
 x = 42
 y = 42.
 type(x)
@@ -16,7 +19,7 @@ type(y)
 x = x+y
 x
 type(x)
-\end{verbatim}
+\end{lstlisting}
 Que se passe-t-il ? Qu'est-ce que cela signifie ?
 
 \medskip{}
@@ -28,10 +31,10 @@ Que se passe-t-il ? Qu'est-ce que cela signifie ?
 
 
 \question{} Taper dans le \emph{shell} les instructions suivantes. 
-\begin{verbatim}
+\begin{lstlisting}
 B = 42 > 41.
 type(B)
-\end{verbatim}
+\end{lstlisting}
 Que se passe-t-il ? Qu'est-ce que cela signifie ?
 
 \medskip{}
@@ -44,17 +47,17 @@ Que se passe-t-il ? Qu'est-ce que cela signifie ?
 \medskip{}
 
 \question{} Taper dans le \emph{shell} les instructions suivantes. 
-\begin{verbatim}
+\begin{lstlisting}
 3/0 > 5
-\end{verbatim}
+\end{lstlisting}
 Que se passe-t-il ? Qu'est-ce que cela signifie ?
 \medskip{}
 
 \question{} Taper dans le \emph{shell} les instructions suivantes. 
-\begin{verbatim}
+\begin{lstlisting}
 B = (42 > 41) or ( 3/0 > 5).
 type(B)
-\end{verbatim}
+\end{lstlisting}
 Que se passe-t-il ? Qu'est-ce que cela signifie ?
 
 \medskip{}
@@ -68,31 +71,31 @@ Que se passe-t-il ? Qu'est-ce que cela signifie ?
 \medskip{}
 
 \question{} Taper dans le \emph{shell} les instructions suivantes. 
-\begin{verbatim}
+\begin{lstlisting}
 x = -3
 abs(x)
 help(abs)
-\end{verbatim}
+\end{lstlisting}
 Que se passe-t-il ? Qu'est-ce que cela signifie ?
 
 \medskip{}
 
 \question{} Taper dans le \emph{shell} les instructions suivantes. 
-\begin{verbatim}
+\begin{lstlisting}
 import math as m
 import numpy as np
 m.sin(m.pi)
 np.sin(np.pi)
 np.sin([0,np.pi])
 m.sin([0,m.pi])
-\end{verbatim}
+\end{lstlisting}
 Que se passe-t-il ? Qu'est-ce que cela signifie ?
 
 
 \medskip{}
 
 \question{} Taper dans le \emph{shell} les instructions suivantes. 
-\begin{verbatim}
+\begin{lstlisting}
 L = [0,1,2,3,4,5,6]
 type(L)
 L[0]
@@ -106,7 +109,7 @@ L.append(7)
 L
 L = L.append(8)
 L
-\end{verbatim}
+\end{lstlisting}
 Que se passe-t-il ? Qu'est-ce que cela signifie ?
 
 \medskip{}
@@ -138,4 +141,4 @@ Que se passe-t-il ? Qu'est-ce que cela signifie ?
 
 \medskip{}
 
-\question{} Comment peut-on utiliser la fonction écrite précédemment dans un \emph{autre} script \python{} ? 
+\question{} Comment peut-on utiliser la fonction écrite précédemment dans un \emph{autre} script \texttt{Python}{} ? 

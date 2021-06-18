@@ -1,7 +1,11 @@
+\exer{[INT-002]}
+\setcounter{numques}{0}~\\
+
+
 Le but est d'obtenir un encadrement de
 \quad $\displaystyle I=4\int_0^1\frac{\text{d}x}{1+x^2}$
 
-\begin{minipage}[c]{.5\linewidth}
+%\begin{minipage}[c]{.5\linewidth}
 \question{}
 Compléter cet algorithme et le coder en python afin d'obtenir une valeur approchée de $I$ par la méthode des rectangles à gauche en utilisant les champs suivants : \fbox{x+h}
 \fbox{(b-a)/n}
@@ -9,9 +13,9 @@ Compléter cet algorithme et le coder en python afin d'obtenir une valeur approc
 \fbox{somme+f(x)}
 \fbox{f(a)}.
 
-\question{} A partir de la question précédente, écrire une fonction que l'on appellera \pyv{rect_gauche}, qui prendra en argument une fonction \pyv{f}, les variables \pyv{a} et \pyv{b} définissant le domaine d'intégration et le paramètre \pyv{n} définissant le nombre de subdivisions. Cette fonction renverra la valeur approché de \pyv{I}.
-\end{minipage} \hfill
-\begin{minipage}[r]{.35\linewidth}
+\question{} A partir de la question précédente, écrire une fonction que l'on appellera \texttt{rect\_gauche}, qui prendra en argument une fonction \texttt{f}, les variables \texttt{a} et \texttt{b} définissant le domaine d'intégration et le paramètre \texttt{n} définissant le nombre de subdivisions. Cette fonction renverra la valeur approché de \texttt{I}.
+%\end{minipage} \hfill
+%\begin{minipage}[r]{.35\linewidth}
 \begin{lstlisting}
 a=0
 b=1
@@ -24,12 +28,12 @@ for k in range(1,n) :
     somme=
 print(somme*
 \end{lstlisting}
-\end{minipage}
+%\end{minipage}
 
 \question{}
-Modifier cet algorithme pour que la méthode soit celle des rectangles à droite. On appellera la fonction associée \pyv{rect_droit}, elle prendra les mêmes arguments et en renverra la valeur approché de \pyv{I}.
+Modifier cet algorithme pour que la méthode soit celle des rectangles à droite. On appellera la fonction associée \texttt{rect\_droit}, elle prendra les mêmes arguments et en renverra la valeur approché de \texttt{I}.
 
-\question{} Définir la fonction \pyv{f(x)} permettant d'utiliser les deux fonctions précédentes avec la fonction à intégrer. 
+\question{} Définir la fonction \texttt{f(x)} permettant d'utiliser les deux fonctions précédentes avec la fonction à intégrer. 
 
 
 \question{}
@@ -43,6 +47,6 @@ Justifier que la méthode des rectangles à droite donne un minorant de $I$ et q
 Pour tout $n\in\mathbb{N}$ soit l'intégrale : 
 $$I_n=\int_0^1\frac{x}{1+x^n} \text{d}x$$
 
-\question{} Écrire une fonction que l'on appellera \pyv{calcul_in} d'argument $n$ qui renvoie une valeur approchée de $I_n$ par une la méthodes des rectangles à gauche (avec une subdivision de 100 intervalles).
+\question{} Écrire une fonction que l'on appellera \texttt{calcul\_in} d'argument $n$ qui renvoie une valeur approchée de $I_n$ par une la méthodes des rectangles à gauche (avec une subdivision de 100 intervalles).
 
 \question{} A l'aide d'un graphe choisi judicieusement (que vous sauvegarderez sous le nom \textbf{"tp10$\_$q08$\_$vos$\_$noms.png"} et vous l'enverrez à votre professeur), afficher quelques valeurs de cette suite afin de conjecturer sa monotonie et son comportement asymptotique.

@@ -1,9 +1,12 @@
+\exer{[PLT-004]}
+\setcounter{numques}{0}~\\
+
 En préambule : 
-\begin{pyverbatim}
+\begin{lstlisting}
 import matplotlib.pyplot as plt
 from numpy import exp, linspace, pi, sin, cos
 from math import floor
-\end{pyverbatim}
+\end{lstlisting}
 
 
 \question{}
@@ -17,9 +20,9 @@ On indique les coordonnées des extrémités des segments en passant en argument
 Le tracé s'arrete au point d'abscisse 9,5. C'est bien le dernier élément de x.
 
 \question{}
-\begin{pyverbatim}
-def ex_sin(nom_de_fichier):
-    """Trace la courbe du sinus sur [0,10] et l'enregistre dans nom_de_fichier"""
+\begin{lstlisting}
+def ex_sin(nom\_de\_fichier):
+    """Trace la courbe du sinus sur [0,10] et l'enregistre dans nom\_de\_fichier"""
     x = linspace(0,10,200)
     y = [sin(t) for t in x]
 
@@ -28,13 +31,13 @@ def ex_sin(nom_de_fichier):
     plt.xlabel('x')
     plt.legend(loc=0)
     plt.title('Tracé du sinus sur [0,10]')
-    plt.savefig(nom_de_fichier)
-\end{pyverbatim}
+    plt.savefig(nom\_de\_fichier)
+\end{lstlisting}
 \question{}
-\begin{pyverbatim}
-def transitoire(A,nom_de_fichier):
+\begin{lstlisting}
+def transitoire(A,nom\_de\_fichier):
     """Trace les graphes de t->A(1-exp(t/tau)) pour tau = 2,4,6,8 sur [0,10].
-       Les sauvegarde dans nom_de_fichier."""
+       Les sauvegarde dans nom\_de\_fichier."""
     x = linspace(0,10,200)
     tau = [0.5,1,2,4,8]
     style = ['g-','b-','r-','b--','r--']
@@ -47,6 +50,6 @@ def transitoire(A,nom_de_fichier):
     plt.title('Régime transitoire, A={}'.format(A))
     plt.axis([0,10,0,A])
     plt.legend(loc=0)
-    plt.savefig(nom_de_fichier)
+    plt.savefig(nom\_de\_fichier)
     return None
-\end{pyverbatim}
+\end{lstlisting}

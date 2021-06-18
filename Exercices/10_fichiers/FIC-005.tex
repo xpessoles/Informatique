@@ -1,3 +1,7 @@
+\exer{[FIC-005]}
+\setcounter{numques}{0}~\\
+
+
 \section*{Analyse préliminaire : filtrage numérique}
 
 
@@ -45,7 +49,7 @@ On observe que lorsque la pulsation de coupure diminue, le signal est de plus en
 
 On donne l'algorithme permettant de réaliser ce filtre à partir d'un tableau "$signal$" contenant des valeurs pour chaque instant t correspondant au tableau "$t$" avec une fréquence de coupure "$freq$".
 
-\begin{pyverbatim}
+\begin{lstlisting}
 def filtrage_passe_bas(freq,t,signal):
     tau = 1/freq # Coupure du filtre
     K=1
@@ -54,7 +58,7 @@ def filtrage_passe_bas(freq,t,signal):
         h=t[i]-t[i-1]
         res.append((h*K*signal[i]+tau*res[-1])/(h+tau))
     return res
-\end{pyverbatim}
+\end{lstlisting}
 
 \subsection*{Filtrage numérique par moyenne glissante}
 Une autre solution pour lisser une courbe est de réaliser une moyenne glissante. Si on réalise ce filtrage en temps réel, cela signifie qu'un point lissé à l'échantillon $n$ est la moyenne des $n-1$ échantillons précédents et de l'élément en cours. 
@@ -86,14 +90,14 @@ Il faut donc attendre l'acquisition de $n-1$ échantillons avant de disposer de 
 
 On donne l'algorithme permettant de réaliser ce filtre à partir d'un tableau "$signal$" contenant des valeurs pour chaque instant t correspondant au tableau "$t$" avec une taille de fenêtre de filtrage "$freq$".
 
-\begin{pyverbatim}
+\begin{lstlisting}
 def filtrage_moyenne(signal,fenetre):
     filtrageg =signal[0:fenetre-1]
     for i in range(fenetre-1,len(signal)):
         s = sum(signal[i-fenetre+1:i+1])/fenetre
         filtrageg=np.concatenate([filtrageg,np.array([s])])
     return filtrageg
-\end{pyverbatim}
+\end{lstlisting}
 
 \subsection*{Références} 
 \begin{itemize}
@@ -157,29 +161,29 @@ Pour des traces petites (comme un parcours cycliste) on peu assimiler les longit
 
 Pour superposer cette trace à une carte, on peut utiliser le module "$folium$" qu'il faut installer avec la commande : 
 
-\begin{pyverbatim}
+\begin{lstlisting}
 pip install folium
-\end{pyverbatim}
+\end{lstlisting}
 
 Puis importer avec :
 
-\begin{pyverbatim}
+\begin{lstlisting}
 import folium
-\end{pyverbatim}
+\end{lstlisting}
 
 La fonction "$Map$" permet de créer un objet carte centrée avec en point possédant une latitude et une longitude. Dans les arguments de cette fonction, il faut préciser les coordonnées en latitude et en longitude (en $^{\circ}$) ainsi le niveau d'agrandissement initial avec l'entier $z$.
 
-\begin{pyverbatim}
+\begin{lstlisting}
 macarte = folium.Map(location=[lat,long], zoom_start=z)
-\end{pyverbatim}
+\end{lstlisting}
 
 Etant donnée une trace GPS comme celle importée précédemment, on peut connaître les latitudes min,max et les longitudes min,max qui lui correspondent. On peut se servir de ces dernière pour définir la carte initiale.
 
 Pour superposer à cette carte la trace gps extraite précédemment on peut utiliser la fonction "$PolyLine$" qui est utilisable de la façon suivante : 
 
-\begin{pyverbatim}
+\begin{lstlisting}
 folium.PolyLine(points).add_to(macarte)
-\end{pyverbatim}
+\end{lstlisting}
 
 Où la variable "$points$" est une liste de tuple contenant pour chaque coordonnée du fichier gpx respectivement la latitude et la longitude.
 
