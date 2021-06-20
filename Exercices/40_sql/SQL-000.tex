@@ -1,3 +1,6 @@
+\exer{[SQL-000]}
+\setcounter{numques}{0}~\\
+
 Les classes de MPSI du lycée LMM organisent un tournoi d'intelligences artificielles de morpion. 
 Une partie de morpion se déroule sur un damier de trois cases par trois cases. Un premier joueur choisit une case. 
 Puis, le deuxième joueur choisit une autre case. 
@@ -28,7 +31,7 @@ Cette base contient deux tables :
   \item une table contenant les informations des parties : identifiant de la partie, identifiant du joueur \no 1, identifiant du joueur \no 2, résultat de la partie, coups joués, date de la partie. 
 \end{itemize}
 Voici les instructions SQL ayant permis de créé ces deux tables. 
-\begin{verbatim}
+\begin{lstlisting}
 CREATE TABLE joueurs (
           idj INTEGER,
           pseudo VARCHAR(50),
@@ -48,7 +51,7 @@ CREATE TABLE parties (
           FOREIGN KEY(idj1) REFERENCES joueurs,
           FOREIGN KEY(idj2) REFERENCES joueurs
           );
-\end{verbatim}
+\end{lstlisting}
 Quelques conventions et rappels.
 \begin{itemize}
   \item Si le résultat d'une partie vaut 0, il y a match nul, s'il vaut 1 le joueur 1 a gagné et s'il vaut 2 le joueur 2 a gagné.
@@ -66,25 +69,25 @@ Quelques conventions et rappels.
   \item Les dates et dates-heures sont écrites comme des chaînes de caractères (exemple : \texttt{"1515-09-13"}) et peuvent être comparées entre elles. 
   \item Si une requête ne donne pas qu'une réponse (exemple : plusieurs lignes vérifient un critère), on inscrira toutes les réponses. 
   \item Pour effectuer une jointure d'une table \texttt{T} avec elle même, on pourra lui donner un alias avec l'instruction \texttt{AS}. Voici un exemple.
-\begin{verbatim}
+\begin{lstlisting}
 SELECT *
 FROM T
 JOIN T AS Tbis ON T.[...] = Tbis.[...] ;
-\end{verbatim}
+\end{lstlisting}
 \end{itemize}
 % Enfin, voici quelques rappels concernant le fonctionnement de \texttt{sqlite3}.
 % \begin{itemize}
 %   \item Ouvrez un terminal dans le dossier contenant la base de données. 
 %   \item Avec ce terminal, lancez \texttt{sqlite3} sur cette base de données avec la commande suivante.
-% \begin{verbatim}
+% \begin{lstlisting}
 % sqlite3 mabdd.sqlite
-% \end{verbatim}
+% \end{lstlisting}
 %   Vous pouvez aussi lancer \texttt{sqlite3} sans argument et ouvrir ensuite une base de donnée avec la fonction \texttt{.open}.
 %   \item Nous vous conseillons \emph{fortement} d'écrire vos requêtes SQL dans un script (fichier texte, via un éditeur de texte), enregistré dans le même dossier que votre base de données. 
 %     Vous pouvez ensuite exécuter ce script dans \texttt{sqlite3} par la commande suivante. 
-% \begin{verbatim}
+% \begin{lstlisting}
 % .read monscript.sql
-% \end{verbatim}
+% \end{lstlisting}
 % \end{itemize}
 
 \bigskip

@@ -1,7 +1,10 @@
+\exer{[SQL-003]}
+\setcounter{numques}{0}~\\
+
 On s'intéresse dans cet exercice à la gestion des données produites par la caisse enregistreuse d'une boulangerie (fictive), un jour donné. Sur chaque ticket produit par la caisse figure une ligne par produit vendu, indiquant notamment le nombre d'unités vendues par produit et le prix de chaque produit. 
 
 Chaque étudiant dispose d'un fichier \texttt{bdd\_boulangerie\_}$\alpha$\texttt{.sqlite}, possédant trois tables. Voici les commandes ayant permis de créer ces tables. 
-\begin{verbatim}
+\begin{lstlisting}
 CREATE TABLE tickets (
         -- table des tickets
         id INTEGER,
@@ -28,7 +31,7 @@ CREATE TABLE lignes_tickets (
         FOREIGN KEY (idt) REFERENCES tickets,
         FOREIGN KEY (idp) REFERENCES produits
         );
-\end{verbatim}
+\end{lstlisting}
 
 La table \texttt{produits} recence les produits vendus par la boulangerie et indique pour chaque produit son nom et son prix (en €). 
 

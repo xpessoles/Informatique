@@ -1,3 +1,6 @@
+\exer{[EQD-007]}
+\setcounter{numques}{0}~\\
+
 En préambule : 
 \begin{lstlisting}
 from math import sqrt, pi, sin, cos
@@ -70,7 +73,7 @@ def Fpo (Theta, t) :
 
 \question{}
 \begin{lstlisting}
-def trace_po (th0, n, nom_de_fichier) :
+def trace_po (th0, n, nom\_de\_fichier) :
     """Tracé des oscillations, approximation des petites oscillations
     CI : theta(0)  = th0, n segments"""
     pl.clf()
@@ -86,7 +89,7 @@ def trace_po (th0, n, nom_de_fichier) :
     y_list = [y[0] for y in Y]
     pl.plot(t_list,y_list,'b',label="Méthode d'Euler")
     pl.legend()
-    pl.savefig(nom_de_fichier)   
+    pl.savefig(nom\_de\_fichier)   
 \end{lstlisting}
 
 \question{}
@@ -113,7 +116,7 @@ def rk4(F, a, b, y0, h):
 
 \question{}
 \begin{lstlisting}
-def trace_po_rk4 (th0, n, nom_de_fichier) :
+def trace_po_rk4 (th0, n, nom\_de\_fichier) :
     """Tracé des oscillations, approximation des petites oscillations
     CI : theta(0)  = th0, n segments"""
     pl.clf()
@@ -132,7 +135,7 @@ def trace_po_rk4 (th0, n, nom_de_fichier) :
     y_list = [y[0] for y in Y]
     pl.plot(t_list,y_list,'g',label="rk4")
     pl.legend()
-    pl.savefig(nom_de_fichier)
+    pl.savefig(nom\_de\_fichier)
 \end{lstlisting}
 Même avec $n=50$, la solution approchée donnée par la méthode de Runge-Kutta est indiscernable de la soultion exacte, alors que l'approximation donnée par la méthode d'Euler s'en éloigne très rapidement. 
 
@@ -147,7 +150,7 @@ def Fsf (Theta, t) :
 
 \question{}
 \begin{lstlisting}
-def approx_po (th0, n, nom_de_fichier) :
+def approx_po (th0, n, nom\_de\_fichier) :
     """Approximation des petites oscillations vs simulation par la méthode d'Euler
     CI : theta(0) = th0, n segments"""    
     pl.clf()
@@ -163,7 +166,7 @@ def approx_po (th0, n, nom_de_fichier) :
     y_list = [y[0] for y in Y]
     pl.plot(t_list,y_list,'g',label="Méthode d'Euler")
     pl.legend()
-    pl.savefig(nom_de_fichier)   
+    pl.savefig(nom\_de\_fichier)   
 \end{lstlisting}
 Pour $\theta_0 = 2$, les deux solutions ont l'air périodiques mais n'ont pas la même période, celle donnée par la méthode d'Euler a une période plus longue.
 
@@ -206,7 +209,7 @@ def periode_pendule(n) :
 
 \question{}
 \begin{lstlisting}
-def trace_periode (n, nom_de_fichier) :
+def trace_periode (n, nom\_de\_fichier) :
     x = [(k*pi)/(2*n) for k in range(1,n+1)]
     y = periode_pendule(n)
     pl.clf()
@@ -215,7 +218,7 @@ def trace_periode (n, nom_de_fichier) :
     pl.xlabel('$\\theta(0)$')
     pl.ylabel('Période en $s$')
     pl.plot(x,y)
-    pl.savefig(nom_de_fichier)
+    pl.savefig(nom\_de\_fichier)
 \end{lstlisting}
 
 \question{} Cf. Q1.
@@ -231,7 +234,7 @@ def Ff (Theta, t) :
 
 \question{}
 \begin{lstlisting}
-def trace_trajectoire_f(th0,thp0,n,nom_de_fichier):
+def trace_trajectoire_f(th0,thp0,n,nom\_de\_fichier):
     """Trajectoire du pendule forcé, avec frottements, par la méthode d'Euler
     CI : theta(0)=th0, theta'(0)=thp0, n segments"""
     pl.clf()
@@ -245,12 +248,12 @@ def trace_trajectoire_f(th0,thp0,n,nom_de_fichier):
     y_list = [y[0] for y in Y]
     pl.plot(t_list,y_list,'b',label="Méthode d'Euler")
     pl.legend()
-    pl.savefig(nom_de_fichier)
+    pl.savefig(nom\_de\_fichier)
 \end{lstlisting}
 
 \question{}
 \begin{lstlisting}
-def trace_phase_f(th0,thp0,n,nom_de_fichier):
+def trace_phase_f(th0,thp0,n,nom\_de\_fichier):
     """Portrait de phase du pendule forcé, avec frottements, par la méthode d'Euler
     CI : theta(0)=th0, theta'(0)=thp0, n segments"""
     pl.clf()
@@ -265,7 +268,7 @@ def trace_phase_f(th0,thp0,n,nom_de_fichier):
     y_list = [y[1] for y in Y]
     pl.plot(t_list,y_list,'b',label="Méthode d'Euler")
     pl.legend()
-    pl.savefig(nom_de_fichier)
+    pl.savefig(nom\_de\_fichier)
 \end{lstlisting}
 
 \question{}
@@ -280,7 +283,7 @@ def odeint_f(th0, thp0, n):
 
 \question{}
 \begin{lstlisting}
-def trace_trajectoire_odeint(t_list,y_list,nom_de_fichier):
+def trace_trajectoire_odeint(t_list,y_list,nom\_de\_fichier):
     """Trajectoire du pendule forcé, avec frottements, par odeint
     CI : theta(0)=th0, theta'(0)=thp0, n segments"""
     pl.clf()
@@ -294,12 +297,12 @@ def trace_trajectoire_odeint(t_list,y_list,nom_de_fichier):
     theta_list = [y[0] for y in y_list]
     pl.plot(t_list,theta_list,'b',label="Solution d'odeint")
     pl.legend()
-    pl.savefig(nom_de_fichier)
+    pl.savefig(nom\_de\_fichier)
 \end{lstlisting}
 
 \question{}
 \begin{lstlisting}
-def trace_phase_odeint(t_list,y_list,nom_de_fichier):
+def trace_phase_odeint(t_list,y_list,nom\_de\_fichier):
     """Portrait de phase du pendule forcé, avec frottements, par odeint
     CI : theta(0)=th0, theta'(0)=thp0, n segments"""
     pl.clf()
@@ -314,5 +317,5 @@ def trace_phase_odeint(t_list,y_list,nom_de_fichier):
     thetap_list = [y[1] for y in y_list]
     pl.plot(theta_list,thetap_list,'b',label="Solution d'odeint")
     pl.legend()
-    pl.savefig(nom_de_fichier) 
+    pl.savefig(nom\_de\_fichier) 
 \end{lstlisting}

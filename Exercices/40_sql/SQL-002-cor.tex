@@ -1,3 +1,7 @@
+\exer{[SQL-002-cor]}
+\setcounter{numques}{0}~\\
+
+
 \question{} Le couple (\texttt{id\_etudiant}, \texttt{id\_interro}) est une clef primaire pour la table \texttt{interros}. 
   Ainsi, tout système de gestion de bases de données devrait refuser deux enregistrements ayant les mêmes valeurs pour ce couple d'attributs. 
   
@@ -6,68 +10,68 @@
 \medskip{}  
   
 \question{}
-\begin{verbatim}
+\begin{lstlisting}
 SELECT sujet
 FROM interros
 WHERE id = 1 ;
-\end{verbatim}
+\end{lstlisting}
 
   
 \medskip{}  
   
 \question{}
-\begin{verbatim}
+\begin{lstlisting}
 SELECT nom, prenom
 FROM etudiants ;
-\end{verbatim}
+\end{lstlisting}
   
 \medskip{}  
   
 \question{}
-\begin{verbatim}
+\begin{lstlisting}
 SELECT DISTINCT prenom
 FROM etudiants ;
-\end{verbatim}
+\end{lstlisting}
   
 \medskip{}  
   
 \question{}
-\begin{verbatim}
+\begin{lstlisting}
 SELECT id
 FROM etudiants
 WHERE nom = "reinedesneiges" ;
-\end{verbatim}
+\end{lstlisting}
   
 \medskip{}  
   
 \question{}
-\begin{verbatim}
+\begin{lstlisting}
 SELECT max(date_naissance)
 FROM etudiants ;
-\end{verbatim}
+\end{lstlisting}
   
 \medskip{}  
   
 \question{}
-\begin{verbatim}
+\begin{lstlisting}
 SELECT DISTINCT nom, prenom
 FROM etudiants, notes 
 WHERE id = id_etudiant
       AND
       note = 20 ;
-\end{verbatim}
+\end{lstlisting}
 Ou bien, avec une jointure : 
-\begin{verbatim}
+\begin{lstlisting}
 SELECT DISTINCT nom, prenom
 FROM etudiants JOIN notes ON id = id_etudiant
 WHERE note = 20 ;
-\end{verbatim}
+\end{lstlisting}
 
 \medskip{}  
   
 \question{}
 
-\begin{verbatim}
+\begin{lstlisting}
 SELECT nom, prenom, titre
 FROM etudiants, interros, notes
 WHERE etudiants.id = id_etudiant
@@ -75,82 +79,82 @@ WHERE etudiants.id = id_etudiant
       interros.id = id_interro
       AND 
       note = 0;
-\end{verbatim}
+\end{lstlisting}
 
 \medskip{}  
   
 \question{}
-\begin{verbatim}
+\begin{lstlisting}
 SELECT nom, prenom, AVG(note) AS moyenne
 FROM etudiants, notes
 WHERE id = id_etudiant
 GROUP BY id;
-\end{verbatim}
+\end{lstlisting}
 Ou bien, avec une jointure : 
-\begin{verbatim}
+\begin{lstlisting}
 SELECT nom, prenom, AVG(note) AS moyenne
 FROM etudiants JOIN notes ON id = id_etudiant
 GROUP BY id;
-\end{verbatim}
+\end{lstlisting}
 
 \medskip{}
 
 \question{}
-\begin{verbatim}
+\begin{lstlisting}
 SELECT nom, prenom, COUNT(*) AS nb_copies
 FROM etudiants notes
 WHERE etudiants.id = id_etudiant
 GROUP BY etudiants.id
-\end{verbatim}
+\end{lstlisting}
 Ou bien, avec une jointure : 
-\begin{verbatim}
+\begin{lstlisting}
 SELECT nom, prenom, COUNT(*) AS nb_copies
 FROM etudiants JOIN notes ON id = id_etudiant
 GROUP BY etudiants.id
-\end{verbatim}
+\end{lstlisting}
 
 \medskip{}  
   
 \question{}
-\begin{verbatim}
+\begin{lstlisting}
 SELECT nom, prenom, COUNT(*) AS nb_max_notes
 FROM etudiants, notes
 WHERE id = id_etudiant
 GROUP BY id
 ORDER BY nb_max_notes DESC
 LIMIT 1;
-\end{verbatim}
+\end{lstlisting}
 Ou bien, avec une jointure : 
-\begin{verbatim}
+\begin{lstlisting}
 SELECT nom, prenom, COUNT(*) AS nb_max_notes
 FROM etudiants JOIN notes ON id = id_etudiant
 GROUP BY id
 ORDER BY nb_max_notes DESC
 LIMIT 1;
-\end{verbatim}
+\end{lstlisting}
 
 \medskip{}  
   
 \question{}
-\begin{verbatim}
+\begin{lstlisting}
 SELECT nom, prenom, COUNT(*) AS nb_copies
 FROM etudiants, notes
 WHERE id = id_etudiant
 GROUP BY id
 HAVING nb_copies >= 10;
-\end{verbatim}
+\end{lstlisting}
 Ou bien, avec une jointure : 
-\begin{verbatim}
+\begin{lstlisting}
 SELECT DISTINCT titre, COUNT(*) AS nb_copies
 FROM etudiants JOIN notes ON id = id_etudiant
 GROUP BY id
 HAVING nb_copies >= 10;
-\end{verbatim}
+\end{lstlisting}
 
 \medskip{}
 
 \question{}
-\begin{verbatim}
+\begin{lstlisting}
 SELECT nom, prenom, COUNT(*) AS nb_copies_non_rendues
 FROM interros, etudiants,
 WHERE NOT EXISTS (SELECT *
@@ -160,12 +164,12 @@ WHERE NOT EXISTS (SELECT *
                         interros.id = id_interro
                  )
 GROUP BY interros.id;
-\end{verbatim}
+\end{lstlisting}
 
 \medskip{}
 
 \question{}
-\begin{verbatim}
+\begin{lstlisting}
 SELECT titre
 FROM interros
 
@@ -180,6 +184,6 @@ WHERE NOT EXISTS (SELECT *
                         interros.id = id_interro
                  )
 ;
-\end{verbatim}
+\end{lstlisting}
 
 

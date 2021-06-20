@@ -1,8 +1,11 @@
+\exer{[SQL-002]}
+\setcounter{numques}{0}~\\
+
 Un professeur d'informatique a créé une base de données pour gérer les notes de ses interrogations hebdomadaires. 
 Pour cela, il a créé trois tables : \texttt{etudiants}, \texttt{interros}, \texttt{notes}. 
 Voici les commandes SQL ayant permis de créer ces tables. 
 
-\begin{verbatim}
+\begin{lstlisting}
 CREATE TABLE etudiants (
     -- table des données des étudiants
     id INTEGER, -- identifiant de l'étudiant
@@ -11,9 +14,9 @@ CREATE TABLE etudiants (
     date_naissance DATE NOT NULL, -- date de naissance de l'étudiant, format AAAA-MM-JJ
     PRIMARY KEY (id)
     );
-\end{verbatim}
+\end{lstlisting}
 
-\begin{verbatim}
+\begin{lstlisting}
 CREATE TABLE interros (
     -- table des données des interros
     id INTEGER, -- identifiant de l'interro
@@ -22,9 +25,9 @@ CREATE TABLE interros (
     date DATE, -- date du jour où a été donnée l'interro, format AAAA-MM-JJ
     PRIMARY KEY (id)
     );
-\end{verbatim}
+\end{lstlisting}
 
-\begin{verbatim}
+\begin{lstlisting}
 CREATE TABLE notes (
     -- table des notes des étudiants aux interros
     id_etudiant INTEGER NOT NULL, -- identifiant de l'étudiant
@@ -34,7 +37,7 @@ CREATE TABLE notes (
     FOREIGN KEY (id_etudiant) REFERENCES etudiants,
     FOREIGN KEY (id_interro) REFERENCES interros
     );
-\end{verbatim}
+\end{lstlisting}
 
 \medskip{}
 
@@ -44,7 +47,7 @@ CREATE TABLE notes (
 
 \question{} Donner une requête SQL traduisant l'opération suivante, exprimée dans le vocabulaire d'algèbre relationnelle usuel : 
 \begin{equation*}
-  \pi_{\texttt{sujet}}\p{\sigma_{\texttt{id}=1}(\texttt{interros})}.
+  \pi_{\text{sujet}}\left(\sigma_{\text{id}=1}(\text{interros})\right).
 \end{equation*}
 
 \medskip{}

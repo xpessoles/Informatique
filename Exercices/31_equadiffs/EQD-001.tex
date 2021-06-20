@@ -1,9 +1,12 @@
-\section{Autour de la dynamique gravitationnelle}
+\exer{[EQD-001]}
+\setcounter{numques}{0}~\\
 
-\subsection{Présentation}
+\subsection*{Autour de la dynamique gravitationnelle}
+
+\subsubsection*{Présentation}
 Modéliser les interactions physiques entre un grand nombre de constituants mène à l'écriture de systèmes différentiels pour lesquels, en dehors de quelques situations particulières, il n'existe aucune solution analytique. Les problèmes de dynamique gravitationnelle et de dynamique moléculaire en sont deux exemples. Afin d'analyser le comportement temporel de tels systèmes, l'informatique peut apporter une aide substantielle en permettant leur simulation numérique. L'objet de ce sujet est l'étude de solutions algorithmiques en vue de simuler une dynamique gravitationnelle afin, par exemple, de prédire une éclipse ou le passage d'une comète.
 
-\subsection{Quelques fonctions utilitaires}
+\subsubsection*{Quelques fonctions utilitaires}
 
 \question{}Donner la valeur des expressions python suivantes :
 \begin{itemize}
@@ -18,7 +21,7 @@ Par exemple, \textit{smul(2, [1, 2, 3])} renvera \textit{[2, 4, 6]}.
 \question{} Déterminer la complexité de cet algorithme en fonction de la taille de la liste.
 
 
-\section{Étude de schémas numériques}
+\subsection*{Étude de schémas numériques}
 
 Soient $y$ une fonction de classe $\mathcal{C}^2$ sur $\R$ et $t_{min}$ et $t_{max}$ deux réels tels que $t_{min} < t_{max}$. On note $I$ l'intervalle $\left[t_{min}, t_{max}\right]$. 
 On s'intéresse à une équation différentielle du second ordre de la forme :
@@ -32,7 +35,7 @@ où $f$ est une fonction donnée, continue sur $\R$. De nombreux systèmes physi
 
 On suppose connues les valeurs $y_0 = y(t_{min})$ et $z_0 = y'(t_{min})$. 
 
-\subsection{Mise en forme du problème}
+\subsubsection*{Mise en forme du problème}
 
 Pour résoudre numériquement l'équation différentielle \eqref{eqn1}, on introduit la fonction $z$ : $I\to \R$ définie par 
 
@@ -61,7 +64,7 @@ Y(t_{i+1})=Y(t_i)+\int_{t_i}^{t_{i+1}}Y'(t)dt
 La suite du problème exploite les notations introduites dans cette partie et présente deux méthodes numériques
 dans lesquelles l'intégrale précédente est remplacée par une valeur approchée.
 
-\subsection{Schéma d'Euler explicite}
+\subsubsection*{Schéma d'Euler explicite}
 
 Dans le schéma d'Euler explicite, chaque terme sous le signe intégrale est remplacé par sa valeur prise en la borne inférieure.
 
@@ -78,7 +81,7 @@ Pour illustrer cette méthode, on considère l'équation différentielle,
 
 dans laquelle $\omega$ est un nombre réel.
 
-\question{} Expliciter en langage \python{} la fonction $F(Y,t)$ et la fonction $f(y)$ qui permettront de mettre en oeuvre ce problème.
+\question{} Expliciter en langage \texttt{Python} la fonction $F(Y,t)$ et la fonction $f(y)$ qui permettront de mettre en oeuvre ce problème.
 
 \bigskip
 
@@ -96,7 +99,7 @@ un système d'unités adapté, les calculs ont été menés en prenant $y_0 = 3$
 \end{figure}
 
 
-\subsection{Schéma de Verlet}
+\subsubsection*{Schéma de Verlet}
 
 
 %
@@ -118,7 +121,7 @@ On reprend l'exemple de l'oscillateur harmonique défini par l'équation~\eqref{
 
 \question{} \'Ecrire la suite d'instructions permettant à partir de la fonction $f$ et après avoir défini la fonction $verlet$ de la mettre en oeuvre et produire le tracé de la figure \ref{fig2}. 
 
-\subsection{Comparaison qualitative des schémas numériques.}
+\subsubsection*{Comparaison qualitative des schémas numériques.}
 
 On rappelle que l'énergie pour un tel oscillateur est proportionnelle à : 
 \begin{equation*}

@@ -1,3 +1,6 @@
+\exer{[EQD-001]}
+\setcounter{numques}{0}~\\
+
 \question{}
 
 \begin{itemize}
@@ -7,7 +10,7 @@
 
 \question{}
 
-\begin{pyverbatim}
+\begin{lstlisting}
 def smul(n,liste):
 	"""
 	Multiplie chaque élément de la liste par un nombre et renvoie une nouvelle liste
@@ -17,7 +20,7 @@ def smul(n,liste):
 		liste2.append(i*n) 
 	return liste2
 	
-\end{pyverbatim}
+\end{lstlisting}
 
 \question{}
 
@@ -26,7 +29,7 @@ On effectue $len(liste)$ tours de boucle. La complexité pour chaque tour de bou
 
 %\question{}
 %
-%\begin{pyverbatim}
+%\begin{lstlisting}
 %def vsom(liste1,liste2):
 %	"""
 %	Prend en paramètre deux listes de nombres de même longueur et renvoie une nouvelle
@@ -36,12 +39,12 @@ On effectue $len(liste)$ tours de boucle. La complexité pour chaque tour de bou
 %	for i in range(len(liste1)):
 %		liste3.append(liste1[i]+liste2[i])
 %	return liste3    
-%\end{pyverbatim}
+%\end{lstlisting}
 %
 %
 %\question{}
 %
-%\begin{pyverbatim}
+%\begin{lstlisting}
 %def vdif(liste1,liste2):
 %	"""
 %	Prend en paramètre deux listes de nombres de même longueur et qui renvoie une nouvelle
@@ -51,7 +54,7 @@ On effectue $len(liste)$ tours de boucle. La complexité pour chaque tour de bou
 %	for i in range(len(liste1)):
 %		liste3.append(liste1[i]-liste2[i]) 
 %	return liste3
-%\end{pyverbatim}
+%\end{lstlisting}
 
 \question{} 
 
@@ -107,7 +110,7 @@ f(y(t))
 
 
 
-\begin{pyverbatim}
+\begin{lstlisting}
 import numpy as np
 def euler(F, tmin, tmax, Y0, n):
     """Solution de Y'=F(Y,t) sur [a,b], y(a) = y0, pas h"""
@@ -123,7 +126,7 @@ def euler(F, tmin, tmax, Y0, n):
         les_z.append(Y[1])
         t += h
     return les_t, les_y, les_z
-\end{pyverbatim}
+\end{lstlisting}
 
 %\question{}
 %$y''(t)=-\omega^2.y(t)$
@@ -157,7 +160,7 @@ F : \begin{pmatrix} y \\ z \end{pmatrix} \longmapsto \begin{pmatrix} z \\ f(y) \
 \end{align*}
 
 Informatiquement, cela donne :
-\begin{pyverbatim}
+\begin{lstlisting}
 def f(x):
     return -w**2*x
     
@@ -166,10 +169,10 @@ def F(Y,t):
     y=Y[0]
     z=Y[1]
     return np.array([z,f(y)])
-\end{pyverbatim}
+\end{lstlisting}
 
 \question{}
-\begin{pyverbatim}
+\begin{lstlisting}
 tmin=0
 tmax=3
 w=2*np.pi
@@ -184,7 +187,7 @@ plt.xlabel('y(t)')
 plt.ylabel('z(t)')
 plt.grid()
 plt.savefig('figure1.png')
-\end{pyverbatim}
+\end{lstlisting}
 
 %
 %$$E(t_i)=\frac{1}{2} y'(t_i)^2 + g(y(t_i))=\frac{1}{2} z(t_i)^2 + g(y(t_i))$$
@@ -237,7 +240,7 @@ plt.savefig('figure1.png')
 Comme pour la méthode d'Euler, pour calculer tous les $y_i$ et $z_i$, il est nécessaire de connaître: $f,y_0,z_0,i$ et $h$. 
 
 
-\begin{pyverbatim}
+\begin{lstlisting}
 def verlet(f, tmin, tmax, Y0, n):
     y,z=Y0[0],Y0[1]
     valeursy =[ y ]
@@ -252,7 +255,7 @@ def verlet(f, tmin, tmax, Y0, n):
         valeursy . append ( y )
         valeursz . append ( z )
     return [les_t,valeursy , valeursz ]
-\end{pyverbatim}
+\end{lstlisting}
 
 
 
@@ -260,7 +263,7 @@ def verlet(f, tmin, tmax, Y0, n):
 
 
 
-\begin{pyverbatim}
+\begin{lstlisting}
 vt,vy,vz=verlet(f, tmin, tmax, np.array([y0,z0]), n)
 
 plt.clf()
@@ -270,10 +273,10 @@ plt.ylabel('z(t)')
 plt.axis([-15,20,-80,100])
 plt.grid()
 plt.savefig('fig2.png')
-\end{pyverbatim}
+\end{lstlisting}
 
 \question{} Le schéma de Verlet semble plus stable que le schéma d'Euler. 
-En effet l'équation différentielle traduit le comportement d'un système physique conservatif, c'est-à-dire que la quantité $\dfrac{(y')^2}{2} + \dfrac{\omega^2}{2}y^2$ doit être constante. 
+En effet l'équation différentielle traduit le comportement d'un système physique conservatif, c'est-à-nom\_de\_fichier que la quantité $\dfrac{(y')^2}{2} + \dfrac{\omega^2}{2}y^2$ doit être constante. 
 On devrait alors avoir un portrait de phase décrivant une ellipse. 
 On observe bien que c'est le cas du portrait de phase de Verlet mais pas celui obtenu avec la méthode d'Euler.
 La solution approchée donnée par la méthode d'Euler est absurde physiquement : il y aurait augmentation de l'énergie dans le système. 

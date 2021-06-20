@@ -1,3 +1,6 @@
+\exer{[EQD-003]}
+\setcounter{numques}{0}~\\
+
 % \subsection{Résolution d'équation différentielle : dynamique du bouchon flottant}
 
 Ce sujet concerne la dynamique d'un bouchon en liège flottant dans un verre d'eau (voir figure suivante).% On considère un bouchon en liège cylindrique de révolution flottant dans un verre d'eau. 
@@ -105,7 +108,7 @@ La force de frottement s'opposant au mouvement, si le bouchon remonte, la résul
 \end{itemize}
 
 Dans toute la suite de ce devoir, on pourra supposer que les grandeurs suivantes (et uniquement celles-ci) ont été définies.
-\begin{pyverbatim}
+\begin{lstlisting}
 R = 1E-2 # m, rayon minimum du bouchon de révolution
 H = 4.5*1E-2 # m, hauteur du bouchon
 rho_eau = 1000 # kg / m**3 masse volumique de l'eau
@@ -113,15 +116,15 @@ rho_b = 240 # kg / m**3, masse volumique du liège
 g = 9.81 # m / s**2, accélération de la pesanteur en
 Cx = 1 # Coefficient de trainée aérodynamique
 N = 1000 # Nombre de trapèzes pour les calculs d'intégrales
-\end{pyverbatim}
+\end{lstlisting}
 
-\question{} Écrire la fonction \pyv{T(f,a,b,N)} permettant de donner l'estimation de $\displaystyle{\int_{z=a}^b f(z)\mathrm{d}z}$ par la méthode des trapèzes, avec $N$ trapèzes sur le segment $\left[a,b\right]$.
+\question{} Écrire la fonction \texttt{T(f,a,b,N)} permettant de donner l'estimation de $\displaystyle{\int_{z=a}^b f(z)\mathrm{d}z}$ par la méthode des trapèzes, avec $N$ trapèzes sur le segment $\left[a,b\right]$.
 
-\question{} Écrire une fonction \pyv{volume_immerge(z)} qui renvoie le volume immergé du bouchon en fonction de la profondeur du bas du bouchon (noté $z$) en utilisant la fonction définie à la question précédente.
+\question{} Écrire une fonction \texttt{volume\_immerge(z)} qui renvoie le volume immergé du bouchon en fonction de la profondeur du bas du bouchon (noté $z$) en utilisant la fonction définie à la question précédente.
 
 \question{} Écrire l'instruction permettant de calculer le volume total du bouchon, que l'on affectera à la variable \texttt V.
 
-\question{} Écrire une fonction \pyv{Fv(z,zp)} qui renvoie la force de frottement visqueux $F_v\left(z_A(t),\dfrac{\mathrm{d}z_A}{\mathrm{d}t}(t)\right)$. 
+\question{} Écrire une fonction \texttt{Fv(z,zp)} qui renvoie la force de frottement visqueux $F_v\left(z_A(t),\dfrac{\mathrm{d}z_A}{\mathrm{d}t}(t)\right)$. 
 
 \question{} Exprimer $\dfrac{\mathrm{d}^2z_A}{\mathrm{d}t^2}(t)$ en fonction de $\rho_{e}$, $\rho_b$, $V_i(z_A(t))$, $F_v\left(z_A(t),\dfrac{\mathrm{d}z_A}{\mathrm{d}t}(t)\right)$ et $z_A(t)$. 
 
@@ -143,10 +146,10 @@ z_A(t=0)=-0,2\\
 \begin{equation}\tag{$\mathscr{F}$}\label{EQD-003:eq:eqn_Z}
     Z'(t)=F(Z(t),t)\quad\textrm{et}\quad Z(0) = Z_0.
 \end{equation}
-Écrire une suite d'instructions permettant de définir une telle fonction \pyv{F(Z,t)} ainsi que la condition initiale \texttt{Z0}.
+Écrire une suite d'instructions permettant de définir une telle fonction \texttt{F(Z,t)} ainsi que la condition initiale \texttt{Z0}.
  
 
-\question{} Écrire une fonction \pyv{euler(F, tmin, tmax, Z0, h)} prenant en argument la fonction \texttt F définie précédemment, \texttt{tmin} et \texttt{tmax} définissant l'intervalle de résolution, le vecteur \texttt{Z0} définissant les consitions initiales ainsi que \texttt h le pas de discrétisation temporelle et permettant de résoudre de manière approchée l'équation~\eqref{EQD-003:eq:eqn_Z} par la méthode d'Euler.
+\question{} Écrire une fonction \texttt{euler(F, tmin, tmax, Z0, h)} prenant en argument la fonction \texttt F définie précédemment, \texttt{tmin} et \texttt{tmax} définissant l'intervalle de résolution, le vecteur \texttt{Z0} définissant les consitions initiales ainsi que \texttt h le pas de discrétisation temporelle et permettant de résoudre de manière approchée l'équation~\eqref{EQD-003:eq:eqn_Z} par la méthode d'Euler.
 
 \bigskip{}
 

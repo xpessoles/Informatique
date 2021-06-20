@@ -1,5 +1,6 @@
-\section{}
-\subsection{Introduction}
+\exer{[SATIO-004]}
+\setcounter{numques}{0}~\\
+\subsection*{Introduction}
 
 On s'intéresse ici au problème de régression par moindres carrés, que l'on envisagera dans le cas particulier d'un problème de cinétique chimique. 
 
@@ -22,10 +23,10 @@ mesuré, expérimentalement, les données contenues dans la table~\ref{table:don
 
 \begin{rem}
   En préambule de votre script, vous aurez intérêt à créer deux listes, une pour les temps, une pour les concentrations, de la manière suivante. 
-\begin{verbatim}
+\begin{lstlisting}
 T = [0, 7, 18, 27, 37, 56, 102]
 C = [34.83, 32.14, 28.47, 25.74, 23.14, 18.54, 11.04]
-\end{verbatim}
+\end{lstlisting}
 
 \end{rem}
 
@@ -39,7 +40,7 @@ Pour quantifier cela, on considèrera le critère des moindres carrés, ce qui r
 Il exite une infinité de fonctions qui annulent cette quantité (penser par exemple à l'interpolation de Lagrange) et qui n'ont aucun rapport avec notre problème. 
 Nous allons donc nous restreindre à des ensembles réduits de fonctions : c'est ce que l'on appellera le \emph{modèle}.
 
-\subsubsection{Modèle cinétique d'ordre 1.}
+\subsubsection*{Modèle cinétique d'ordre 1.}
 
 Dans ce modèle, on considère que la concentration vérifie l'équation différentielle 
 \begin{equation*}
@@ -55,7 +56,7 @@ On cherche donc une fonction dans $\mathscr{M}_1$ minimisant \eqref{eq.mc}, ce q
   L^1(k) = \dfrac{1}{7} \sum_{i=0}^6 \left(C_i - C_0 \e^{-k t_i}\right)^2.
 \end{equation*}
 
-\subsubsection{Modèle cinétique d'ordre 2.}
+\subsubsection*{Modèle cinétique d'ordre 2.}
 
 Dans ce modèle, on considère que la concentration vérifie l'équation différentielle 
 \begin{equation*}
@@ -71,19 +72,19 @@ On cherche donc une fonction dans $\mathscr{M}_2$ minimisant \eqref{eq.mc}, ce q
   L^2(k) = \dfrac{1}{7} \sum_{i=0}^6 \left(C_i -\dfrac{C_0}{C_0kt_i + 1}\right)^2.
 \end{equation*}
 
-\subsection{Rendu graphique.}
+\subsection*{Rendu graphique.}
 
 
 \question{} \'Ecrire une fonction \texttt{trace\_fonction(xmin,xmax,f,nom\_de\_fichier)} qui trace la courbe de la fonction \texttt{f} de \texttt{xmin} à \texttt{xmax}, puis sauvegarde le résultat dans le fichier \texttt{nom\_de\_fichier}.
   
     Par exemple, les commandes successives
-\begin{verbatim}
+\begin{lstlisting}
 xmin = 0
 xmax = 20
 def f(x) : 
     return 0.02* x*(x-5)
 trace_fonction(xmin,xmax,f,'fig_ex_fonction.png')
-\end{verbatim}
+\end{lstlisting}
  devront produire (et sauvegarder) un graphique semblable (vous n'essaierez pas dans un premier temps de reproduire les titres, légendes etc.) à \texttt{fig\_ex\_fonction.png}, que vous trouverez sur le site de la classe.
     
 \question{} \'Ecrire une fonction \texttt{trace\_ajustement(X,Y,f,nom)} qui trace un nuage de points 
@@ -92,18 +93,18 @@ dont les abscisses sont données dans le vecteur \texttt{X} et les ordonnées da
 \texttt{min(X)} à \texttt{max(X)} et qui sauvegarde l'image produite dans le fichier \texttt{nom}.
     
     Par exemple, les commandes successives 
-\begin{verbatim}
+\begin{lstlisting}
 import numpy as np
 T = [0, 7, 18, 27, 37, 56, 102]
 C = [34.83, 32.14, 28.47, 25.74, 23.14, 18.54, 11.04]
 def g(x) : 
     return 34 - 0.2*x
 trace_ajustement(T,C,g,'fig_ex_ajustement.png')
-\end{verbatim}
+\end{lstlisting}
     devront produire (et sauvegarder) un graphique semblable (vous n'essaierez pas dans un premier temps de reproduire les titres, légendes etc.) à \texttt{fig\_ex\_ajustement.png}, que vous trouverez sur le site de la classe.
 
 
-\subsection{Régression pour le modèle d'ordre 1.}
+\subsection*{Régression pour le modèle d'ordre 1.}
 \label{sec.reg.o1}
 
 
@@ -139,7 +140,7 @@ Dans le script, vous écrirez une fonction \texttt{val\_k1()}, sans argument, ef
   Vous enverrez la figure tracée à votre enseignant. 
 
 
-\subsection{Régression pour le modèle d'ordre 2.}
+\subsection*{Régression pour le modèle d'ordre 2.}
 \label{sec.reg.o2}
 
 \question{} Écrire une fonction \texttt{L2(k)} prenant en argument un flottant positif \texttt{k} et renvoyant la valeur de $L^2(\texttt k)$.
@@ -180,13 +181,13 @@ Dans le script, vous écrirez une fonction \texttt{val\_k2()}, sans argument, ef
 Dans le script, vous écrirez une fonction \texttt{val\_k2\_bis()}, sans argument, effectuant ce calcul et renvoyant la valeur trouvée. 
 
 
-\subsection{Comparaison qualitative des deux modèles.}
+\subsection*{Comparaison qualitative des deux modèles.}
 
 
 \question{} Commenter les résultats des deux parties précédentes, ainsi que l'utilisation des méthodes de Newton et de la sécante.
 
 
-\subsection{Facultatif : régression linéaire.}
+\subsection*{Facultatif : régression linéaire.}
 \label{sec.papl.reglin}
 % La suite  est moins guidée : à vous de prendre des initiatives !  
 
