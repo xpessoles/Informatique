@@ -2,11 +2,13 @@
 \subsection*{Recherche séquentielle}
 
 \exer{Exercices d'échauffement}
+\setcounter{numques}{0}~\\
 
 \begin{obj}
 Rechercher séquentiellement un élément dans un tableau unidimensionnel ou dans un dictionnaire.
 \end{obj}
 
+\subsection*{Recherche d'un nombre dans une liste}
 Nous allons commencer par rechercher si un nombre est dans un tableau. 
 
 Commençons par définir la liste des entiers pairs compris entre 0 et \texttt{nb} exclus.
@@ -28,50 +30,100 @@ Recopier la fonction dans un terminal.
 
 \question{Écrire une fonction de signature  \texttt{generate\_pair\_02(nb: int) -> list} en utilisant une boucle \texttt{while}.}
 
+\question{Écrire une fonction de signature  \texttt{recherche\_nb\_01(nb: int, L: list) -> bool} qui renvoie \texttt{True} si \texttt{nb} est dans \texttt{L}, \texttt{False} sinon. On utilisera une boucle \texttt{for}.}
 
+\question{Écrire une fonction de signature  \texttt{recherche\_nb\_02(nb: int, L: list) -> bool} qui renvoie \texttt{True} si \texttt{nb} est dans \texttt{L}, \texttt{False} sinon. On utilisera une boucle \texttt{while}.}
 
-Il est possible de définir la fonction \texttt{generate\_tab\_alea} différemment.
+\question{Écrire une fonction de signature  \texttt{recherche\_nb\_03(nb: int, L: list) -> bool} qui renvoie \texttt{True} si \texttt{nb} est dans \texttt{L}, \texttt{False} sinon. On n'utilisera pas explicitement de boucles \texttt{for} ou \texttt{while}.}
+
+\question{Écrire une fonction de signature  \texttt{recherche\_first\_index\_nb\_01(nb: int, L: list) -> int} qui renvoie l'index de la première appartion du nombre \texttt{nb} dans la liste \texttt{L}. La fonction renverra \texttt{-1} si \texttt{nb} n'est pas dans la liste. On utilisera une boucle \texttt{for}.}
+
+\question{Écrire une fonction de signature  \texttt{recherche\_first\_index\_nb\_02(nb: int, L: list) -> int} qui renvoie l'index de la première appartion du nombre \texttt{nb} dans la liste \texttt{L}. La fonction renverra \texttt{-1} si \texttt{nb} n'est pas dans la liste. On utilisera une boucle \texttt{while}.}
+
+\question{Écrire une fonction de signature  \texttt{recherche\_last\_index\_nb\_01(nb: int, L: list) -> int} qui renvoie l'index de la dernière appartion du nombre \texttt{nb} dans la liste \texttt{L}. La fonction renverra \texttt{-1} si \texttt{nb} n'est pas dans la liste. On utilisera une boucle \texttt{for}.}
+
+\question{Écrire une fonction de signature  \texttt{recherche\_last\_index\_nb\_02(nb: int, L: list) -> int} qui renvoie l'index de la dernière appartion du nombre \texttt{nb} dans la liste \texttt{L}. La fonction renverra \texttt{-1} si \texttt{nb} n'est pas dans la liste. On utilisera une boucle \texttt{while}.}
+
+\question{Écrire une fonction de signature  \texttt{recherche\_index\_nb\_01(nb: int, L: list) -> list} qui renvoie la liste des index du nombre \texttt{nb} dans la liste \texttt{L}. La fonction renverra une liste vide si \texttt{nb} n'est pas dans la liste.}
+
+\subsection*{Recherche d'un caractère dans une chaîne (de caractères)}
+
+\question{Écrire une fonction de signature  \texttt{is\_char\_in\_str\_01(lettre: str, mot: str) -> int} qui renvoie \texttt{True} si \texttt{lettre} est dans \texttt{mot}, \texttt{False} sinon. On utilisera une boucle \texttt{for} ou \texttt{while}.}
+
+\question{Écrire une fonction de signature  \texttt{is\_char\_in\_str\_02(lettre: str, mot: str) -> int} qui renvoie \texttt{True} si \texttt{lettre} est dans \texttt{mot}, \texttt{False} sinon. On n'utilisera ni boucle \texttt{for} ni \texttt{while} explicite.}
+
+\question{Écrire une fonction de signature  \texttt{compte\_lettre\_01(lettre: str, mot: str) -> int} qui renvoie le nombre d’occurrences de \texttt{lettre} dans le \texttt{mot}.}
+
+Les instructions suivantes permettent de charger l'ensemble des mots du dictionnaire dans la variable \texttt{dictionnaire}. \texttt{dictionnaire} est une liste de mots. Chacune des lettres de l'alphabet sont stockées dans la variable \texttt{alphabet}.
+
 \begin{lstlisting}
-def generate_tab_alea_02(deb: int,fin: int,nb: int) -> list :
-    """
-	Génération d'une liste de nb entiers compris entre deb (inclus) et fin (exclus).
-    """
-    return [rd.randrange(deb,fin) for i in range(nb)]
-
+alphabet = 'abcdefghijklmnopqrstuvwxyz'
+def load_fichier(file):
+    fid = open(file,'r')
+    mots = fid.readlines()
+    fid.close()
+    return mots
+dictionnaire = load_file('liste_francais.txt')
 \end{lstlisting}
 
+\question{Écrire une fonction de signature  \texttt{compte\_lettre\_02(lettre: str, mots: list) -> int} qui renvoie le nombre d’occurrences de \texttt{lettre} dans une liste de mots \texttt{mots}.}
+
+\question{Quelle consonne apparaît le plus souvent ? Quelle consonne apparaît le moins souvent ? Indiquer le nombre d’occurrences dans chacun des mots}
+
+\question{Écrire une fonction de signature  \texttt{mots\_plus\_long( mots: list) -> str} qui renvoie le mot le plus long.}
+
+\question{Écrire une fonction de signature  \texttt{cherche\_mot\_in\_chaine\_01(mot: str, chaine: str) -> int} qui renvoie \texttt{True} si \texttt{mot} est dans \texttt{chaine}, \texttt{False} sinon. On utilisera des boucles \texttt{for} ou \texttt{while}.}
+
+\question{Écrire une fonction de signature  \texttt{cherche\_mot\_in\_chaine\_02(mot: str, chaine: str) -> int} qui renvoie \texttt{True} si \texttt{mot} est dans \texttt{chaine}, \texttt{False} sinon. On n'utilisera ni boucle \texttt{for} ni \texttt{while}.}
+
+\question{Écrire une fonction de signature  \texttt{cherche\_mot\_in\_dico(nb: int, dico: lst) -> str} qui permet de trouver le mot de \texttt{nb} lettres qui est le plus contenu dans d'autres mots.}
 
 
-Pour cela commençons par générer une liste d'entiers aléatoires.
+\subsection*{Recherche dans un dictionnaire}
 
 
 
 
-\begin{lstlisting}
-import random as rd # Permet de charger une bibliothèque permettant de générer des nombres aléatoires.
 
-def generate_tab_alea_01(deb: int,fin: int,nb: int) -> list :
-    """
-	Génération d'une liste de nb entiers compris entre deb (inclus) et fin (exclus).
-    """
-    res = []
-    for i in range(nb):
-        res.append(rd.randrange(deb,fin))
-    return res
-\end{lstlisting}
-
-
-Il est possible de définir la fonction \texttt{generate\_tab\_alea} différemment.
-\begin{lstlisting}
-def generate_tab_alea_02(deb: int,fin: int,nb: int) -> list :
-    """
-	Génération d'une liste de nb entiers compris entre deb (inclus) et fin (exclus).
-    """
-    return [rd.randrange(deb,fin) for i in range(nb)]
-
-\end{lstlisting}
-
-
-Recherche d'un élément 
-Recherche du maximum
-Recherche du second maximum
+%Il est possible de définir la fonction \texttt{generate\_tab\_alea} différemment.
+%\begin{lstlisting}
+%def generate_tab_alea_02(deb: int, fin: int,nb: int) -> list :
+%    """
+%	Génération d'une liste de nb entiers compris entre deb (inclus) et fin (exclus).
+%    """
+%    return [rd.randrange(deb,fin) for i in range(nb)]
+%
+%\end{lstlisting}
+%
+%
+%Pour cela commençons par générer une liste d'entiers aléatoires.
+%
+%
+%\begin{lstlisting}
+%import random as rd # Permet de charger une bibliothèque permettant de générer des nombres aléatoires.
+%
+%def generate_tab_alea_01(deb: int,fin: int,nb: int) -> list :
+%    """
+%	Génération d'une liste de nb entiers compris entre deb (inclus) et fin (exclus).
+%    """
+%    res = []
+%    for i in range(nb):
+%        res.append(rd.randrange(deb,fin))
+%    return res
+%\end{lstlisting}
+%
+%
+%Il est possible de définir la fonction \texttt{generate\_tab\_alea} différemment.
+%\begin{lstlisting}
+%def generate_tab_alea_02(deb: int,fin: int,nb: int) -> list :
+%    """
+%	Génération d'une liste de nb entiers compris entre deb (inclus) et fin (exclus).
+%    """
+%    return [rd.randrange(deb,fin) for i in range(nb)]
+%
+%\end{lstlisting}
+%
+%
+%Recherche d'un élément 
+%Recherche du maximum
+%Recherche du second maximum
