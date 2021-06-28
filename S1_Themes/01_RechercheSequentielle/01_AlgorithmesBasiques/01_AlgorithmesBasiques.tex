@@ -16,7 +16,7 @@ Commençons par définir la liste des entiers pairs compris entre 0 et \texttt{n
 \begin{lstlisting}
 def generate_pair_01(nb: int) -> list :
     """
-	Génération d'une liste de nb entiers compris entre 0 (exclus) et nb (exclus).
+    Génération d'une liste de nombres pairs compris entre 0 (exclus) et nb (exclus).
     """
     res = []
     for i in range(1,nb//2):
@@ -70,7 +70,7 @@ dictionnaire = load_file('liste_francais.txt')
 
 \question{Quelle consonne apparaît le plus souvent ? Quelle consonne apparaît le moins souvent ? Indiquer le nombre d’occurrences dans chacun des mots}
 
-\question{Écrire une fonction de signature  \texttt{mots\_plus\_long( mots: list) -> str} qui renvoie le mot le plus long.}
+\question{Écrire une fonction de signature  \texttt{mots\_plus\_long(mots: list) -> str} qui renvoie le mot le plus long.}
 
 \question{Écrire une fonction de signature  \texttt{cherche\_mot\_in\_chaine\_01(mot: str, chaine: str) -> int} qui renvoie \texttt{True} si \texttt{mot} est dans \texttt{chaine}, \texttt{False} sinon. On utilisera des boucles \texttt{for} ou \texttt{while}.}
 
@@ -81,8 +81,47 @@ dictionnaire = load_file('liste_francais.txt')
 
 \subsection*{Recherche dans un dictionnaire}
 
+Un dictionnaire (\texttt{dict}) est un type composite (au même titre que les chaînes, les listes ou les tuples). Les éléments d'un dictionnaire sont constitués d'une \textbf{clé} (alphabétique ou numérique par exemple) et d'une valeur. À la différence d'une liste par exemple, les éléments ne sont pas ordonnés.
 
+\begin{exemple}%[Création d'un dictionnaire]
+Dans le but de faire un comptage du nombre de lettres des mots du dictionnaire, nous allons créer un dictionnaire constitué des lettres de l'alphabet (clés) et de leur nombre d'apparitions (valeurs). 
+~\\
 
+\begin{minipage}[c]{.45\linewidth}
+\begin{lstlisting}
+nb_lettres = {}
+nb_lettres['a']=0
+nb_lettres['b']=0
+print(nb_lettres)
+    {'a': 0, 'b': 0}
+\end{lstlisting}
+\end{minipage}
+\hfill
+\begin{minipage}[c]{.45\linewidth}
+\begin{lstlisting}
+nb_lettres = {}
+for lettre in alphabet :
+    nb_lettres[lettre]=0
+print(nb_lettres["a"])
+    0
+\end{lstlisting}
+
+\end{minipage}
+
+Tester l'appartenance d'une clé à un dictionnaire : \texttt{"a" in nb\_lettres}.
+
+Supprimer une clé d'un dictionnaire : \texttt{del nb\_lettres["a"]}.
+
+Parcourir un dictionnaire : 
+\begin{lstlisting}
+for clef in nb_lettres :
+    print(clef)
+    print(clef,nb_lettres[clef])
+
+for clef,valeur in nb_lettres.items() :
+    print(clef,valeur)
+\end{lstlisting}
+\end{exemple}
 
 
 %Il est possible de définir la fonction \texttt{generate\_tab\_alea} différemment.
