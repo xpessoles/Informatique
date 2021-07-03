@@ -152,7 +152,7 @@ Une estimation grossière du nombre d'opérations réalisées en tout est donc  
 \section{Recherche de facteur dans un mot}
 Rechercher un facteur dans un mot signifie rechercher une (sous-)chaîne de caractères dans une chaîne de caractères (ou encore un mot dans une chaîne).
 \begin{lstlisting}
-def recherche(m,s):
+def recherche_01(m:str, s:str) -> bool:
     """Recherche le mot m dans la chaine s
        Préconditions : m et s sont des chaines de caractères"""
     long_s = len(s) # Longueur de s
@@ -172,7 +172,7 @@ def recherche(m,s):
 
 Cet algorithme est simplifiable en utilisant le slicing.
 \begin{lstlisting}
-def recherche(m,s):
+def recherche_02(m:str, s:str) -> bool:
     """Recherche le mot m dans la chaine s
        Préconditions : m et s sont des chaines de caractères"""
     long_s = len(s) # Longueur de s
@@ -187,7 +187,7 @@ def recherche(m,s):
 En utilisant les possibilités de \texttt{Python}, il est possible de simplifier encore l'algorithme. 
 
 \begin{lstlisting}
-def recherche(m,s):
+def recherche_03(m:str, s:str) -> bool:
     """Recherche le mot m dans la chaine s
        Préconditions : m et s sont des chaines de caractères"""
     return m in s
@@ -197,4 +197,4 @@ def recherche(m,s):
 
 
 \textbf{Pour réaliser l'activité associée à ce cours, suivre le lien suivant : }
-\url{https://bit.ly/3xew1Zz}
+\url{https://bit.ly/3AmRgdH}
