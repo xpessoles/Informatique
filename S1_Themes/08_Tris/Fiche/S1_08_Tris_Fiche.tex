@@ -142,7 +142,7 @@ def fusion(a:list, b:list) :
     """Fusionne les deux listes
     Entrée : deux listes a et b triées.
     Sortie : La liste b modifiée"""
-    P = 0
+    p = 0
     for x in a :
         p = placer(b, p, x)+1
     return b
