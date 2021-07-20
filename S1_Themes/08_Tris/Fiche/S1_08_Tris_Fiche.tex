@@ -1,0 +1,186 @@
+\fichetrue
+\proftrue
+\tdfalse
+\coursfalse
+
+\def\xxnumchapitre{Semestre 1 \vspace{.2cm}}
+\def\xxchapitre{\hspace{.12cm} Thèmes d'étude 9 -- Tris}
+\def\xxYCartouche{-2.25cm}
+\def\xxposongletx{2}
+\def\xxposonglettext{1.45}
+\def\xxposonglety{19}%16
+
+\def\xxonglet{\textsf{S1 -- Ch. 9}}
+
+\def\xxactivite{Fiche}
+
+
+\def\xxpied{%
+%Cycle 01 -- Modéliser le comportement des systèmes multiphysiques\\
+Fonctions récursives-- \xxactivite%
+}
+
+\setcounter{secnumdepth}{5}
+%---------------------------------------------------------------------------
+
+\input{\repStyle/new_pagegarde}
+%\iflivret
+%\input{../../style/new_pagegarde}
+%\else
+%\input{../../style/new_pagegarde}
+%\fi
+\vspace{1.5cm}
+\pagestyle{fancy}
+\thispagestyle{plain}
+\setcounter{section}{0}
+
+
+
+Thème : Tris.
+ 
+Commentaires :
+\begin{itemize}
+\item algorithmique quadratique : tri par insertion, par sélection;
+\item tri par partition-fusion;
+\item tri par comptage.
+\end{itemize}
+\textit{On fait observer différentes caractéristiques (par exemple stable ou non, en place ou non, comparatif ou non ...).}
+
+
+\section{Présentation}
+Le tri de données ou de valeurs est omniprésent en informatique. Pour cela, beaucoup d'algorithmes ont été développés afin de réaliser des tris rapidement, notamment lorsque le nombre de données est important.
+\begin{defi}\textbf{Stabilité}
+
+\end{defi}
+
+\begin{defi}\textbf{Tri en place} \\
+Un tri est effectué en place lorsque la liste à trier est modifiée jusqu'à devenir triée. Dans le cas contraire, la fonction de tri pourra renvoyer une novelle liste contenent les mêmes éléments, mais triés. 
+\end{defi}
+
+\begin{defi}\textbf{Tri comparatif} \\
+Un tri est dit comparatif lorsqu'il s'appuie uniqument sur la comparaison deux à deux des éléménts de la liste et pas sur la valeur ce ces éléments.
+\end{defi}
+
+
+\section{Tris}
+
+\begin{defi}\textbf{Tri par insertion} \\
+
+À partir d'une sous-liste triée, le tri par insertion consiste à parcourir les éléments non triés et de les insérer successivement dans la sous-liste déjà triée. 
+\end{defi}
+
+\begin{lstlisting}
+def insere(t, j):
+    k, a = j, t[j]
+    while k > 0 and a < t[k-1]:
+        t[k] = t[k-1]
+        k = k-1
+    t[k] = a
+    
+def insertionSort(t):
+    for j in range(1, len(t)):
+        insere(t, j)
+\end{lstlisting}
+
+
+\begin{defi}\textbf{Tri rapide} \\
+
+Soit une liste \texttt{L} non triée. Soit \texttt{p} un terme appelé pivot. Le tri rapide consiste à répartir les éléments strictement inférieur au pivot avant ce dernier et les termes plus grand après le pivot (segemntation). Le pivot est à ce stade trié correctement par rapport aux autres valeurs de la liste. Ce principe est alors appliqué récursivement aux deus-sous listes  séparées par le pivot.
+
+\end{defi}
+
+
+\begin{lstlisting}
+def segmente(t, i, j):
+    p = t[j-1] # On prend comme pivot le dernier élément de la sous liste. 
+    a = i
+    for b in range(i, j-1):
+        if t[b] < p:
+            t[a], t[b] = t[b], t[a]
+            a += 1
+    t[a], t[j-1] = t[j-1], t[a] # On positionne le pivot "à sa place".
+    return a # On retourne l'index du pivot. Le tableau a été modifié en place. 
+\end{lstlisting}
+
+\begin{lstlisting}
+def quickSort(t, i, j):
+    if i + 1 < j:
+        a = segmente(t, i, j)
+        quickSort(t, i, a)
+        quickSort(t, a + 1, j)
+\end{lstlisting}
+
+\begin{lstlisting}
+# Instruction pour trier une liste
+quickSort(t, 0, len(t))
+\end{lstlisting}
+\begin{defi}\textbf{Tri fusion} \\
+Il s'agit d'un tri s'appuyant sur la stratégie divisér pour régner. 
+
+L'algorithme est le suivant : 
+\begin{itemize}
+\item on divise la liste en deux listes de tailles quasi-identiques;
+\item on trie récursivement ces deux listes;
+\item on fusionne les deux listes triées.
+\end{itemize}
+\end{defi}
+
+\begin{lstlisting}
+def placer(L :list, p :int, x) :
+    """Place un élément x à sa place dans une liste L triée à partir de l'indice p
+    Entrée :
+        L : une liste, p : un entier, x : un élément
+    Sorties :
+        La liste est modifiée mais n'est pas renvoyée. k la valeur de l'indice de la liste où l'élément a été placé"""
+    k = p
+    while ( k < len(L) and x > L[k]) :
+        k = k+1
+    L.insert(k, x)
+    return k
+    
+def fusion(a:list, b:list) :
+    """Fusionne les deux listes
+    Entrée : deux listes a et b triées.
+    Sortie : La liste b modifiée"""
+    P = 0
+    for x in a :
+        p = placer(b, p, x)+1
+    return b
+
+def tri_fusion(t : list) :
+    """Trie la liste t
+    Entrée : une liste.
+    Sortie : la liste est modifiée."""
+    if len(t) < 2 :
+        return (t)
+    else :
+        m = len(t) // 2
+        return (fusion (tri_fusion(t[:m]) , tri_fusion(t[m:]) ))
+\end{lstlisting}
+
+\begin{proposition}\textbf{Complexité des algorithmes}
+On note $T(n)$ le nombre de comaraisons nécessaire pour trier une liste de longueur $n$. 
+On montre que dans le pire des cas, les complexités sont les suivantes :
+\begin{itemize}
+\item tri par insertion : $T_{\text{Max}}(n)=\mathcal{O}\left(n^2\right)$;
+\item tru rapide : $T_{\text{Max}}(n)=\mathcal{O}\left(n^2\right)$;
+\item tru partition-fusion : $T_{\text{Max}}(n)=\mathcal{O}\left(n\log n\right)$.
+\end{itemize}
+
+
+
+\end{proposition}
+
+
+
+
+\section{Acticité préparatoire}
+\textbf{Pour réaliser l'activité associée à ce cours, suivre le lien suivant : }
+\begin{itemize} 
+\item Sujet : %\url{https://bit.ly/36OLBiW}
+\item Corrige : %\url{https://bit.ly/3BjucwN}
+\end{itemize}
+
+\newpage
+\section{QCM}
+
