@@ -1,0 +1,160 @@
+\exer{Tris d'une base de données des films de cinéma}
+\setcounter{numques}{0}
+
+\begin{obj}
+Réaliser un tri numérique et un tri alphabétique à partir d'une base de données
+\end{obj}
+
+On donne le fichier \texttt{films\_martiniere\_2018.csv} dans lequel un peu plus de 2000 films sont référencés avec le titre, l'année de création, le réalisateur et le box office.
+
+Une proposition de lecture du fichier csv et de création de la liste de films est donnée ci-dessous et dans le fichier \texttt{lecture\_fichier\_csv.py} :
+
+\begin{lstlisting}
+f=open('films_martiniere.csv','r')
+ligne=f.readline()
+fichier=f.readlines()
+f.close()
+L=[]
+for ligne in fichier:
+    ligne=ligne.replace('"','')
+    ligne=ligne.split(';')
+    ligne[-1]=ligne[-1].rstrip('\n')
+    ligne[-1]=int(ligne[-1])
+    ligne[1]=int(ligne[1])
+    L.append(ligne)
+\end{lstlisting}
+%
+Avec le logiciel \texttt{Pyzo}, vous devez avoir votre dossier visible dans la fenêtre \texttt{file browser} ou alors exécuter le fichier en cliquant droit sur l'onglet de votre nom de fichier et sélectionner \textit{Exécuter en tant que script}. Votre fichier python et le fichier \texttt{films\_martiniere.csv} doivent être dans le même dossier.
+
+\question{Commenter chaque ligne du fichier \texttt{lecture\_fichier\_csv.py}. Copier vos tests dans le script python.}
+\ifprof
+Commentaires dans le code ci-dessous :
+\begin{lstlisting}
+def lectureCSV(nom) :
+    f=open(nom,'r') # ouverture du fichier texte
+    ligne1=f.readline() # on sauvegarde dans ligne1 la premiere ligne
+    fichier=f.readlines() # on stocke tout le contenu du fichier texte sans la premiere ligne dans fichier
+    f.close() #ne pas oublier de fermer l'acces a l'objet
+    
+    Lfilm=[]
+    for ligne in fichier:
+        ligne=ligne.replace('"','')# enlever les guillemets
+        ligne=ligne.split(';')# creation d'une liste en coupant au niveau des ;
+        ligne[-1]=ligne[-1].rstrip('\n')
+        ligne[-1]=int(ligne[-1]) # remplacer la chaine de caracteres par un entier
+        ligne[1]=int(ligne[1]) # remplacer la chaine de caracteres par un entier
+        Lfilm.append(ligne)
+    return(Lfilm)
+\end{lstlisting}
+\else
+\fi
+
+\question{Choisir l'algorithme de tri le plus efficace pour trier le fichier de 2000 films (autre que \texttt{sort}). Copier l'algorithme choisi dans votre script et modifier-le afin qu'il puisse trier une liste de listes.}
+\ifprof
+Le tri rapide propose un bon compromis élégance, complexité mémoire et temporelle.
+Il est donc nécessaire de modifier notre fonction de tri rapide afin de lui passer en argument sur quel critère le tri va être réalisé. La difficulté principale réside dans la re-construction de liste de liste (ne pas oublier les crochets). 
+\else
+\fi
+
+\question{Trier les films en fonction du box office. Quel est le film qui a été le plus vu au cinéma ?}
+\ifprof
+\begin{lstlisting}
+def tri_rapide_modif(liste,index):
+    # uniquement utilisable avec une liste de listes
+    if liste==[]:
+        return([])
+    grand=[]
+    petit=[]
+    pivot=liste[0][index] #modification pour acceder au bon element
+    for i in range(len(liste[1:])):#on change la maniere d'iterer (obligatoire)
+        elmt=liste[i+1][index] #on cherche l'element en cours
+        if elmt>pivot:
+            grand+=[liste[i+1]] # Ne pas oublier les crochets pour generer une liste
+        else:
+            petit+=[liste[i+1]] # Idem
+    return(tri_rapide_modif(petit,index)+[liste[0]]+tri_rapide_modif(grand,index))  # idem
+\end{lstlisting}
+
+\begin{lstlisting}
+Lfilm=tri_rapide_modif(Lfilm,3) 
+print(Lfilm[-1])
+Lfilm=tri_rapide_modif(Lfilm,0) 
+print(Lfilm[0])
+\end{lstlisting}
+La réponse à cette question est donc le film "INTOUCHABLES".
+
+\textit{Remarque :} si vous êtes bien attentifs notre fonction renvoie comme réalisateur 'ERIC TOLEDANO'. Cela ne sera pas le réalisateur renvoyé par les tris modifiés  précédemment.
+
+\else
+\fi
+
+\question{Définir la fonction \texttt{comparer(L:list)} qui a pour argument une liste \texttt{L} de deux mots \texttt{mot1:str} et \texttt{mot2:str} et qui renvoie cette liste triée par ordre alphabétique. Les mots de la liste seront écrits en lettres majuscules. Les titres de films peuvent comporter des chiffres.}
+\ifprof
+En fait cette question ne présente aucune difficulté puisque notre code vu en cours gère très bien l'ordre alphabétique, et même plus que ça, puisqu'est inclus un ordre alphanumérique grâce au codage ASCII ! Donc tout caractère pourra être géré. La seule ligne de commande \texttt{print(tri\_rapide\_modif(Lfilm,0)[0])} nous donne l'information recherchée : "71".
+\else
+\fi
+
+\question{Implémenter un algorithme de tri alphabétique adapté au fichier \texttt{films\_martiniere\_2018.csv}. Quel est le titre du premier film de la liste ?}
+\ifprof
+Voici le code pour le tri par insertion :
+\begin{lstlisting}
+def tri_insertion_modif(liste,index):
+    for inc in range(1,len(liste)):
+        encours=inc-1
+        temp=liste[inc]
+        tempindex=liste[inc][index] #sotckage de la valeur liee a l'index
+        while encours>=0 and liste[encours][index]>tempindex: #ici il faut modifier
+            liste[encours+1]=liste[encours]
+            encours-=1
+        liste[encours+1]=temp
+\end{lstlisting}
+Et celui pour le tri par fusion
+
+
+
+\begin{lstlisting}
+def fusion_modif(gauche,droite,index):
+    resultat = []
+    index_gauche, index_droite = 0, 0
+    while index_gauche < len(gauche) and index_droite < len(droite):        
+        if gauche[index_gauche][index] <= droite[index_droite][index]: # seule ligne a modifier 
+            resultat.append(gauche[index_gauche])
+            index_gauche += 1
+        else:
+            resultat.append(droite[index_droite])
+            index_droite += 1
+    if gauche:
+        resultat.extend(gauche[index_gauche:])
+    if droite:
+        resultat.extend(droite[index_droite:])
+    return resultat
+    
+def tri_fusion_modif(liste,index):
+    # modification uniquement sur les arguments des appels de fonctions
+    if len(liste) <= 1:
+        return liste
+    milieu = len(liste) // 2
+    gauche = liste[:milieu]
+    droite = liste[milieu:]
+    gauche = tri_fusion_modif(gauche,index)
+    droite = tri_fusion_modif(droite,index)
+    return list(fusion_modif(gauche, droite,index))
+\end{lstlisting}
+
+Et pour déterminer le film à succès ainsi que le premier de la liste :
+\begin{lstlisting}
+tri_insertion_modif(Lfilm,3)
+print(Lfilm[-1])
+tri_insertion_modif(Lfilm,0)
+print(Lfilm[0]) 
+
+Lfilm=tri_fusion_modif(Lfilm,3)
+print(Lfilm[-1])
+Lfilm=tri_fusion_modif(Lfilm,0)
+print(Lfilm[0])  
+\end{lstlisting}
+
+\textit{Remarque :} ici le réalisateur retourné est ici 'OLIVIER NAKACHE'...mince pourquoi cette différence ? Tout simplement à cause de la gestion différente des doublons selon les fonctions proposées. On pourrait  améliorer notre code en passant en argument une liste comme index...
+
+\else
+\fi

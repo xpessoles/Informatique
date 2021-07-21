@@ -1,0 +1,89 @@
+\exer{Tri à bulles}
+\setcounter{numques}{0}
+Pour trier une liste selon la méthode du tri à bulles, on réalise des balayages successifs : à chaque balayage, on compare les éléments du tableau 2 à 2 et on les réordonne. 
+
+\question{En utilisant la liste  \texttt{[10, 3, 7, 5, 9, 7, 8, 0, 8]}, écrire la séquence d'échanges permettant d'arriver à la liste triée.}
+\ifprof
+Première série de comparaison sur la liste faisant monter 10 : 
+[10, 3, 7, 5, 9, 7, 8, 0, 8],
+[3, 10, 7, 5, 9, 7, 8, 0, 8],
+[3, 7, 10, 5, 9, 7, 8, 0, 8],
+[3, 7, 5, 10, 9, 7, 8, 0, 8],
+[3, 7, 5, 9, 10, 7, 8, 0, 8],
+[3, 7, 5, 9, 7, 10, 8, 0, 8],
+[3, 7, 5, 9, 7, 8, 10, 0, 8],
+[3, 7, 5, 9, 7, 8, 0, 10, 8],
+[3, 7, 5, 9, 7, 8, 0, 8, 10]\\
+Deuxième série de comparaison à partir des deux premiers éléments :
+[3, 7, 5, 9, 7, 8, 0, 8, 10],
+[3, 5, 7, 9, 7, 8, 0, 8, 10],
+[3, 5, 7, 7, 9, 8, 0, 8, 10],
+[3, 5, 7, 7, 8, 9, 0, 8, 10],
+[3, 5, 7, 7, 8, 0, 9, 8, 10],
+[3, 5, 7, 7, 8, 0, 8, 9, 10]\\
+Troisième série de comparaison à partir des deux premiers éléments :
+[3, 5, 7, 7, 8, 0, 8, 9, 10],
+[3, 5, 7, 7, 0, 8, 8, 9, 10]\\
+Quatrième série de comparaison à partir des deux premiers éléments :
+[3, 5, 7, 7, 0, 8, 8, 9, 10],
+[3, 5, 7, 0, 7, 8, 8, 9, 10]\\
+Cinquième série de comparaison à partir des deux premiers éléments :
+[3, 5, 7, 0, 7, 8, 8, 9, 10],
+[3, 5, 0, 7, 7, 8, 8, 9, 10]\\
+Sixième série de comparaison à partir des deux premiers éléments :
+[3, 5, 0, 7, 7, 8, 8, 9, 10],
+[3, 0, 5, 7, 7, 8, 8, 9, 10]\\
+Septième série de comparaison à partir des deux premiers éléments :
+[3, 0, 5, 7, 7, 8, 8, 9, 10],
+[0, 3, 5, 7, 7, 8, 8, 9, 10]\\
+Huitième série de comparaison à partir des deux premiers éléments :
+[0, 3, 5, 7, 7, 8, 8, 9, 10]
+\else\fi
+
+\question{Donner un algorithme naïf permettant de trier un algorithme selon la méthode du tri à bulles.}
+\ifprof
+\begin{lstlisting}
+def tri_bulles_naif(l):
+    for i in range(len(l)):
+        for j in range(len(l)-1): #on ne peut pas comparer le dernier élément avec un suivant
+            if l[j]>l[j+1]:
+                l[j],l[j+1]=l[j+1],l[j]
+\end{lstlisting}
+\else\fi
+
+\question{Dans quel cas est-on dans le meilleur des cas ? Quelle alors la complexité de l'algorithme ?}
+\ifprof
+Quand la liste est triée, il n'y a pas d'échange d'élément. On a qu'en même les deux boucles \texttt{for} imbriquées.
+\else\fi
+
+\question{Dans quel cas est-on dans le pire des cas ? Quelle alors la complexité de l'algorithme ?}
+\ifprof
+Quand la liste est triée dans le sens inverse, il y a échange de tous les éléments. On a qu'en même les deux boucles \texttt{for} imbriquées.
+\else\fi
+
+\question{En remarquant qu'à l'étape $i$, les $i$ derniers éléments sont triés, proposer un nouvel algorithme du tri à bulles.}
+\ifprof
+\begin{lstlisting}
+def tri_bulles(l):
+    for i in range(0,len(l)-1):
+        for j in range(0,len(l)-i-1):
+            if l[j]>l[j+1]:
+                l[j],l[j+1]=l[j+1],l[j]
+\end{lstlisting}
+\else\fi
+
+\question{En remarquant qu'à l'itération $i$, il est possible d'arrêter le tri là où la dernière inversion a eu lieu à l'étape $i-1$, proposer un nouvel algorithme du tri à bulles.}
+\ifprof
+\begin{lstlisting}
+def tri_bulles_optimise(tableau):
+    permutation = True
+    passage = 0
+    while permutation == True:
+        permutation = False
+        passage = passage + 1
+        for en_cours in range(0, len(tableau) - passage):
+            if tableau[en_cours] > tableau[en_cours + 1]:
+                permutation = True
+                tableau[en_cours], tableau[en_cours + 1] = tableau[en_cours + 1],tableau[en_cours]
+\end{lstlisting}
+\else\fi
