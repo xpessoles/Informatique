@@ -1,0 +1,141 @@
+\section{Gestion des ressources de la machine \semUn \semTroisQuatre}
+
+Le programme vise à donner un premier aperçu des liens qu'assurent les systèmes
+d'exploitation (plus largement les plates-formes d'exécution) entre les
+programmes et les ressources offertes par les machines qui les exécutent. Le
+fonctionnement du matériel, l'architecture des ordinateurs, la conception des
+systèmes, la gestion des interfaces, les protocoles de communication, la
+virtualisation (de la mémoire, des processeurs, etc.) sont hors programme. Ce
+programme se focalise sur trois aspects de la gestion de la machine~:
+\begin{itemize}
+\item la mémoire au sein d'un processus qui exécute un programme~;
+\item les systèmes de fichiers qui permettent d'interagir avec un processus, en
+  entrée et sortie~;
+\item la concurrence au sein des processus par des fils
+  d'exécution, exploitant les possibilités d'exécution concurrente des
+  processeurs actuels.
+\end{itemize}
+Bien que ces notions soient indépendantes du système d'exploitation, le système
+Linux est le plus propice pour introduire les éléments de ce programme.
+
+\subsection{Gestion de la mémoire d'un programme \semUn}
+\noindent
+\begin{longtable}{|p{\lnotion}|p{\comment}|}
+  \hline
+  \textbf{Notions} & \textbf{Commentaires}\\
+  \hline \hline
+  Utilisation de la pile et du tas par un programme compilé.
+  &
+  On présente l'allocation des variables globales, le bloc d'activation d'un
+      appel. 
+  \\
+  \hline
+  Notion de portée syntaxique et durée de vie d'une variable. Allocation des
+  variables locales et paramètres sur la pile.
+  &
+  On indique la répartition selon la nature des variables~: globales, locales,
+    paramètres.
+  \\
+  \hline
+  Allocation dynamique.
+  &
+  On présente les notions en lien avec le langage C~: \texttt{malloc} et
+    \texttt{free}, pointeur nul, type \texttt{void*}, transtypage, relation avec
+    les tableaux, protection mémoire (\textit{segmentation violation}).
+  \\
+  \hline
+\end{longtable}
+
+
+\subsection{Gestion des fichiers et entrées-sorties \semUn}
+
+
+\noindent
+\begin{longtable}{|p{\lnotion}|p{\comment}|}
+  \hline
+  \textbf{Notions} & \textbf{Commentaires}\\
+  \hline \hline
+  Interface de fichiers~: taille, accès séquentiel.
+  &
+  \\
+  \hline
+  Implémentation interne~: blocs et n\oe uds d'index (\textit{inode}).
+  &
+  On présente le partage de blocs (avec liens physiques ou symboliques)
+    et l'organisation hiérarchique de l'espace de nommage.
+  \\
+  \hline
+  Accès, droits et attributs.
+  &
+On utilise sur des exemples les fonctions d'accès et d'écriture dans les différents modes.
+  \\
+  \hline
+  Fichiers spéciaux : flux standard (entrée standard \texttt{stdin}, sortie standard \texttt{stdout}, sortie d'erreur standard \texttt{stderr}) et
+  redirections dans l'interface système (\textit{shell}).
+  &
+On présente la notion de tube (\textit{pipe}).
+  \\
+
+  \hline\hline
+  \multicolumn{2}{|p{\lmoe}|}{\textbf{Mise en \oe uvre}} \\
+  \hline
+  \multicolumn{2}{|p{\lmoe}|}{
+Les seules notions exigibles sont celles permettant à un programme de gérer
+l'ouverture, la fermeture et l'accès à un ou plusieurs fichiers, selon les modalités précisées en annexes. 
+On attend toutefois d'un étudiant une expérience
+du montage d'un support de fichiers amovible, 
+de la gestion des droits d'accès à des parties de l'arborescence, 
+de la création et du déplacement des parties de l'aborescence 
+et de la gestion des liens physiques et symboliques. 
+Le professeur expose également ses étudiants à la réalisation d'enchaînements de programmes via des tubes (\textit{pipes}).
+  } \\
+  \hline
+\end{longtable}
+
+\clearpage
+
+\subsection{Gestion de la concurrence et synchronisation \semTroisQuatre}
+
+L'apprentissage des notions liées au parallélisme d'exécution se limite au cas
+de fils d'exécutions (\textit{threads}) internes à un processus, sur une machine. Les
+problèmes d'algorithmes répartis et les notions liées aux réseaux et à la
+communication asynchrone sont hors programme.
+
+\noindent
+\begin{longtable}{|p{\lnotion}|p{\comment}|}
+  \hline
+  \textbf{Notions} & \textbf{Commentaires}\\
+  \hline \hline
+  Notion de fils d'exécution. Non-déterminisme de l'exécution. 
+  &
+  Les notions sont présentées au tableau en privilégiant le pseudo-code~; elles sont mises en \oe uvre au cours de travaux pratiques en utilisant les bibliothèques POSIX
+   \£pthread£ (en langage C) ou \°Thread° (en langage OCaml), au choix du professeur, selon les modalités précisées en annexe. On s'en tient aux notions de base~: création, attente de
+    terminaison.
+  \\
+  \hline
+  Synchronisation de fils d'exécution. Algorithme de Peterson pour deux fils d'exécution. Algorithme de la boulangerie de Lamport pour plusieurs fils d'exécution.
+  &
+  On illustre l'importance de l'atomicité par quelques exemples et les dangers d’accès à une variable en l’absence de synchronisation. On présente les notions de mutex et sémaphores.
+  \\
+  \hline \hline
+  \multicolumn{2}{|p{\lmoe}|}{\textbf{Mise en \oe uvre}} \\
+  \hline
+  \multicolumn{2}{|p{\lmoe}|}{
+  Les concepts sont illustrés sur des schémas de synchronisation classiques~:
+  rendez-vous, producteur-consommateur. Les étudiants sont également
+  sensibilisés au non-déterminisme et aux problèmes d'interblocage et d'équité
+  d'accès, illustrables sur le problème classique du dîner des philosophes.
+  } \\
+  \hline
+\end{longtable}
+
+
+
+
+
+
+
+
+
+
+

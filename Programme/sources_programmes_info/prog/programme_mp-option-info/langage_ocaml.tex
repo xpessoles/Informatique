@@ -1,0 +1,80 @@
+\section{Langage OCaml}\label{annexe-ocaml}
+La présente annexe liste limitativement les éléments du langage OCaml (version 4 ou supérieure) dont la connaissance, selon les modalités de chaque sous-section, est exigible des étudiants. Aucun concept sous-jacent n'est exigible au titre de la présente annexe.
+
+
+\subsection{Traits et éléments techniques à connaitre}
+Les éléments et notations suivants du langage OCaml doivent pouvoir être compris et utilisés par les étudiants dès la fin de la première année sans faire l'objet d'un rappel, y compris lorsqu'ils n'ont pas accès à un ordinateur.
+
+\subsubsection*{Traits généraux}
+\begin{itemize}
+\item Typage statique, inférence des types par le compilateur. Idée naïve du polymorphisme.
+\item Passage par valeur.
+\item Portée lexicale~: lorsqu'une définition utilise une variable globale, c'est la valeur de cette variable au moment de la définition qui est prise en compte.
+\item Curryfication des fonctions. Fonction d'ordre supérieur.
+\item Gestion automatique de la mémoire.
+\item Les retours à la ligne et l'indentation ne sont pas signifiants mais sont nécessaires pour la lisibilité du code.
+\end{itemize}
+
+\subsubsection*{Définitions et types de base}
+\begin{itemize}
+\item \°let°, \°let rec° (pour des fonctions), \°let rec $\dots$ and $\dots$°. \°fun $x$ $y$ -> $e$°.
+\item \°let $v$ = $e$ in $e'$°, \°let rec $f$ $x$ = $e$ in $e'$°.
+\item Expression conditionnelle \°if $e$ then $e_V$ else $e_F$°.
+\item 
+Types de base~: \°int° et les opérateurs \°+°, \°-°, \°*°, \°/°, l'opérateur \°mod° quand toutes les grandeurs sont positives~; \°float° et les opérateurs \°+.°, \°-.°, \°*.°, \°/.°~; \°bool°, les constantes \°true° et \°false° et les opérateurs \°not°, \°&&°, \°||° (y compris évaluation paresseuse). Entiers et flottants sont sujets aux dépassements de capacité.
+\item Comparaisons sur les types de base~: \°=°, \°<>°, \°<°, \°>°, \°<=°, \°>=°.
+
+\end{itemize}
+
+\subsubsection*{Types structurés}
+\begin{itemize}
+\item n-uplets~; non-nécessité d'un \°match° pour récupérer les valeurs d'un n-uplet.
+\item Listes~: type \°'a list°, constructeurs \°[]° et \°::°, notation \°[$x$; $y$; $z$]°~; opérateur \°@° (y compris sa complexité)~; \°List.length°. Motifs de filtrage associés.
+
+\item Type \°'a option°.
+\item Déclaration de type, y compris polymorphe.
+\item Types énumérés (ou sommes, ou unions), récursifs ou non~; les constructeurs commencent par une majuscule, contrairement aux identifiants. Motifs de filtrage associés.
+
+\item Filtrage~: \°match $e$ with $p_0$ -> $v_0$ | $p_1$ -> $v_1$ $\dots$°~; les motifs sont exhaustifs, ils ne doivent pas comporter de variable utilisée antérieurement ni deux fois la même variable~; motifs plus ou moins généraux, notation \°_°, importance de l'ordre des motifs quand ils ont des instances communes.
+
+\end{itemize}
+
+\subsubsection*{Programmation impérative}
+\begin{itemize}
+\item Absence d'instruction~; la programmation impérative est mise en \oe uvre par des expressions impures~; \°unit°, \°()°.
+\item Références~: type \°'a ref°, notations \°ref°, \°!°, \°:=°. Les références doivent être utilisées à bon escient.
+\item Séquence \°;°. La séquence intervient entre deux expressions.
+\item Boucle \°while $c$ do $b$ done°~; boucle \°for $v$ = $d$ to $f$ do $b$ done° (on rappelle, quand cela est utile au problème étudié, que les deux bornes sont atteintes).
+\end{itemize}
+
+\subsubsection*{Divers}
+\begin{itemize}
+\item Usage de \°begin $…$ end°.
+\item Exceptions~: \°failwith°.
+\item Utilisation d'un module~: notation \°$M$.$f$°. Les noms des modules commencent par une majuscule.
+\item Syntaxe des commentaires, à l'exclusion de la nécessité d'équilibrer les délimiteurs dans un commentaire.
+\end{itemize}
+
+\subsection{Éléments techniques devant être reconnus et utilisables après rappel}
+Les éléments suivants du langage OCaml doivent pouvoir être utilisés par les étudiants pour écrire des programmes dès lors qu'ils ont fait l'objet d'un rappel et que la documentation correspondante est fournie.
+
+\subsubsection*{Définition et types de base}
+\begin{itemize}
+\item Types de base~: opérateur \°mod° avec opérandes de signes quelconques, opérateur \°**°.
+\item Types \°char° et \°string°~; \°'$x$'° quand $x$ est un caractère imprimable, \°"$x$"° quand $x$ est constituée de caractères imprimables, \°String.length°, \°$s$.[$i$]°, opérateur \°^°. Existence d'une relation d'ordre total sur \°char°. Immuabilité des chaines.
+\item Fonctions de conversion entre types de base.
+\item \°print_int°, \°print_string°, \°print_float°.
+\end{itemize}
+
+
+\subsubsection*{Types structurés et structures de données}
+\begin{itemize}
+\item Listes~: les fonctions \°mem°, \°exists°, \°for_all°, \°filter°, \°map° et \°iter° du module \°List°.
+\item Tableaux~: type \°'a array°, notations \°[|$\dots$|]°, \°$t$.($i$)°, \°$t$.($i$) <- $v$°~; les fonctions suivantes du module \°Array°~: \°length°, \°make°, \°make_matrix°, \°init°, \°copy°, \°mem°, \°exists°, \°for_all°, \°map° et \°iter°.
+\item Types enregistrements immuables et mutables, notations associées.
+\item Types mutuellement récursifs.
+
+\item Piles et files mutables~: fonctions \°create°, \°is_empty°, \°push° et \°pop° des modules \°Queue° et \°Stack°.
+\item 
+Dictionnaires mutables réalisés par tables de hachage sans liaison multiple ni randomisation par le module \°Hashtbl°~: fonctions \°create° (on élude toute considération sur la taille initiale), \°add°, \°remove°, \°mem°, \°find°, \°find_opt° et \°iter°.
+\end{itemize}

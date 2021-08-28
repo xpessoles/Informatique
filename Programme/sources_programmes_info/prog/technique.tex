@@ -1,0 +1,81 @@
+\usepackage{iftex}
+\RequireLuaTeX
+
+\usepackage[T1]{fontenc}
+
+\usepackage[margin=25mm]{geometry}
+\usepackage{multirow}
+\usepackage{color}
+\usepackage[francais]{babel}
+\usepackage{longtable}
+
+\usepackage{fancyhdr}\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand\footrulewidth{0.4pt}\fancyhf{}
+\usepackage{lastpage}
+
+\usepackage{graphicx} % pour les logos
+\usepackage{pifont} % pour les numéros cerclés
+\usepackage{fourier-otf}
+
+\usepackage{url}
+
+
+
+\usepackage{listings}
+\lstset{upquote=true,basicstyle=\ttfamily\NoAutoSpacing, keepspaces=true, columns=fullflexible, showstringspaces=false, commentstyle=\slshape, mathescape=true, stepnumber = 1, numberstyle=\scriptsize, numbersep=10pt, firstnumber=auto, breaklines=true, breakatwhitespace=true, includerangemarker=false}
+\lstdefinelanguage{mycaml}[Objective]{caml}
+{ morekeywords={raise}}
+\def\°{\lstinline[language={mycaml}]°} %°
+\lstdefinelanguage{mySQL}[]{SQL}{morekeywords={OFFSET, IS}}
+\def\§{\lstinline[language=mySQL]§} %§
+\def\£{\lstinline[language={[ANSI]C}]£} %£
+\def\|{\lstinline[language=python, keywords={[2]{}}, morekeywords={as}, deletekeywords={print}]|} %|
+
+
+\usepackage{relsize}
+\usepackage{tikz}
+\DeclareRobustCommand\circled[1]{\texorpdfstring{\tikz[baseline=(char.base)]{
+        \node[shape=rectangle, rounded corners,draw,inner sep=2pt] (char) {\textsmaller{#1}};}}{(#1)}}
+\def\semUn{\circled{S1}}
+\def\semDeux{\circled{S2}}
+\def\semTroisQuatre{\circled{S3-4}}
+
+
+\setlength{\parindent}{0cm}
+
+
+\newenvironment{compact-itemize}{
+\begin{itemize}
+\renewcommand{\labelitemi}{$\bullet$}
+     \setlength{\itemsep}{1pt}
+     \setlength{\parskip}{0pt}
+     \setlength{\parsep}{0pt}}
+{\end{itemize}
+}
+
+\newlength{\lnotion}
+\setlength{\lnotion}{5.8cm}
+\newlength{\comment}
+\setlength{\comment}{9.4cm}
+\newlength{\lmoe}
+\setlength{\lmoe}{\lnotion}
+\addtolength{\lmoe}{\comment}
+
+\setcounter{tocdepth}{2}
+
+\def\titrebdp#1{\gdef\TitreProgramme{#1}}
+
+\AtBeginDocument{%
+\fancyfoot[L]{\footnotesize © Ministère de l'enseignement supérieur, de la recherche et de l'innovation, 2021\\
+\url{https://www.enseignementsup-recherche.gouv.fr}}%
+\fancyfoot[R]{\footnotesize \textit{\TitreProgramme}\\
+\thepage/\pageref{LastPage}}%
+}
+
+\date{}
+
+\usepackage[bookmarks,bookmarksopen,bookmarksdepth=2,hidelinks]{hyperref}
+
+%\usepackage{draftwatermark}
+%\SetWatermarkText{PROJET}

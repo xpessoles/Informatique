@@ -1,0 +1,125 @@
+\section{Logique \semDeux \semTroisQuatre}
+
+\subsection{Syntaxe des formules logiques \semDeux}
+
+Le but de cette partie est de familiariser progressivement les étudiants avec
+la différence entre syntaxe et sémantique d'une part et de donner le
+vocabulaire permettant de modéliser une grande variété de situations (par
+exemple, satisfaction de contraintes, planification, diagnostic, vérification
+de modèles, etc.).
+
+L'étude des quantificateurs est l'occasion de formaliser les notions de
+variables libres et liées, et de portée, notions que l'on retrouve dans 
+la pratique de la programmation.
+
+\noindent
+\begin{longtable}{|p{\lnotion}|p{\comment}|}
+    \hline
+    \textbf{Notions} & \textbf{Commentaires} \\
+    \hline \hline
+    Variables propositionnelles, connecteurs logiques, arité. & 
+    Notations~: $\neg, \vee, \wedge, \rightarrow, \leftrightarrow$.
+    \\
+    Formules propositionnelles, définition par induction, représentation comme un arbre. Sous-formule.
+    & Les formules sont des données informatiques. On fait le lien entre les écritures d'une formule comme mot et les parcours d'arbres.
+    \\
+    Taille et hauteur d'une formule. &
+    \\
+    \hline 
+    Quantificateurs universel et existentiel. Variables liées, variables
+    libres, portée. Substitution d'une variable. 
+    & On ne soulève aucune difficulté technique sur la substitution.
+    L'unification est hors programme.
+    \\
+    \hline \hline
+    \multicolumn{2}{|p{\lmoe}|}{\textbf{Mise en \oe uvre}} \\
+    \hline
+    \multicolumn{2}{|p{\lmoe}|}{
+        On implémente uniquement les formules propositionnelles 
+        sous forme d'arbres.
+    } \\
+    \hline
+\end{longtable}
+
+
+\subsection{Sémantique de vérité du calcul propositionnel \semDeux}
+
+Par souci d'éviter trop de technicité, on ne présente la notion de valeur
+de vérité que pour des formules sans quantificateurs.
+
+\begin{longtable}{|p{\lnotion}|p{\comment}|}
+    \hline
+    \textbf{Notions} & \textbf{Commentaires} \\
+    \hline \hline
+    Valuations, valeurs de vérité d'une formule 
+    propositionnelle.
+    & Notations $V$ pour la valeur vraie, $F$ pour la valeur fausse. \\
+Satisfiabilité, modèle, ensemble de modèles, tautologie, antilogie. & Une formule est satisfiable si elle admet un modèle, tautologique si toute valuation en est un modèle. On peut être amené à ajouter à la syntaxe une formule tautologique et une formule antilogique~; elles sont en ce cas notées $\top$ et $\bot$. 
+    \\
+    \'Equivalence sur les formules. & On présente les lois de De Morgan, le tiers exclu
+    et la décomposition de l'implication. 
+    \\
+    Conséquence logique entre deux formules. & On étend la notion à celle de conséquence $\phi$ d'un ensemble de formules $\Gamma$~: on note $\Gamma\models\phi$. La compacité est hors programme. 
+    \\
+    \hline
+    Forme normale conjonctive, forme normale disjonctive. 
+    & Lien entre forme normale disjonctive complète et table de vérité. 
+    \\
+    Mise sous forme normale. & On peut représenter les formes normales
+    comme des listes de listes de littéraux. Exemple de formule dont la taille des formes
+    normales est exponentiellement plus grande. 
+    \\
+    \hline
+    Problème SAT, $n$-SAT, algorithme de Quine. & On incarne SAT par la modélisation d'un problème (par exemple la coloration des sommets d'un graphe). %On résout 2-SAT par le calcul de composantes fortement connexes d'un certain graphe orienté. 
+    \\
+    \hline 
+\end{longtable}
+
+\clearpage
+
+\subsection{Déduction naturelle \semTroisQuatre}
+
+Il s'agit de présenter les preuves comme permettant de pallier 
+deux problèmes de la présentation précédente du calcul propositionnel~: nature
+exponentielle de la vérification d'une tautologie, faible lien avec les preuves
+mathématiques.
+
+Il ne s'agit, en revanche, que d'introduire la notion d'arbre de preuve. La
+déduction naturelle est présentée comme un jeu de règles d'inférence simple
+permettant de faire un calcul plus efficace que l'étude de la table de vérité. Toute technicité dans
+les preuves dans ce système est à proscrire.
+
+\noindent
+\begin{longtable}{|p{\lnotion}|p{\comment}|}
+    \hline
+    \textbf{Notions} & \textbf{Commentaires} \\
+    \hline \hline
+    Règle d'inférence, dérivation. &
+    Notation $\vdash$. Séquent $H_1,\dots,H_n
+    \vdash C$. On présente des exemples tels que le \textit{modus ponens} ($p, p \rightarrow q \vdash q$) ou le syllogisme \textit{barbara} ($p \rightarrow q, q \rightarrow r \vdash p \rightarrow r$). 
+\\
+    Définition inductive d'un arbre de preuve. & On présente des exemples utilisant les règles précédentes. 
+\\ 
+    \hline
+    Règles d'introduction et d'élimination de la déduction naturelle pour les
+    formules propositionnelles. &
+    On présente les règles pour $\wedge, \vee, \neg$ et
+    $\rightarrow$. On écrit de petits exemples d'arbre de preuves (par exemple $\vdash (p \rightarrow q) \rightarrow \neg (p \wedge \neg q) $, etc.). \\
+    Correction de la déduction naturelle pour les formules propositionnelles. & 
+\\
+    \hline
+    Règles d'introduction et d'élimination pour les quantificateurs universels
+    et existentiels.
+    & On motive ces règles par une approche sémantique intuitive.
+    \\
+    \hline \hline 
+    \multicolumn{2}{|p{\lmoe}|}{\textbf{Mise en \oe uvre}} \\
+    \hline
+    \multicolumn{2}{|p{\lmoe}|}{
+        Il ne s'agit pas d'implémenter ces règles mais plutôt d'être
+        capable d'écrire de petites preuves dans ce système. On peut également présenter
+         d'autres utilisations de règles d'inférences pour raisonner.
+    } \\
+    \hline
+\end{longtable}
+

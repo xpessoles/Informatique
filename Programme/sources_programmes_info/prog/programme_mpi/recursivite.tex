@@ -1,0 +1,39 @@
+\section{Récursivité et induction \semUn \semDeux}
+
+La capacité d'un programme à faire appel à lui-même est un concept primordial en informatique. Historiquement, l'auto-référence est au c\oe ur du paradigme de programmation fonctionnelle. Elle imprègne aujourd'hui, de manière plus ou moins marquée, la plupart des langages de programmation contemporains. 
+Le principe d'induction est une notion fondamentale et transverse à l'ensemble de ce programme. Il permet d'écrire des démonstrations avec facilité dès que l'on s'intéresse à toute sorte de structures (arbres, formules de logiques, classes de langage, etc.). 
+
+\begin{longtable}{|p{\lnotion}|p{\comment}|}
+    \hline
+    \textbf{Notions} & \textbf{Commentaires} \\
+    \hline \hline
+    Récursivité d'une fonction. Récursivité croisée. Organisation des activations sous forme d'arbre en cas d'appels multiples. \semUn
+    & 
+    On se limite à une présentation pratique de la récursivité comme technique de programmation. Les récurrences usuelles~: $T(n) = T(n-1)+an$, $T(n) = aT(n/2) + b$, ou $T(n)= 2T(n/2)+f(n)$ sont introduites au fur et à mesure de l'étude de la complexité des différents algorithmes rencontrés. On utilise des encadrements élémentaires \textit{ad hoc} afin de les justifier~; on évite d'appliquer un théorème-maître général. 
+    \\
+    \hline
+    Ensemble ordonné, prédécesseur et successeur, prédécesseur et successeur immédiat. \'Element minimal. Ordre produit, ordre lexicographique. Ordre bien fondé. \semDeux
+    & 
+    On fait le lien avec la notion d'accessibilité dans un graphe orienté acyclique. L'objectif n'est pas d'étudier la théorie abstraite des ensembles ordonnés mais de poser les définitions et la terminologie.
+    \\
+    \hline
+    Ensemble inductif, défini comme le plus petit ensemble engendré par un système d'assertions et de règles d'inférence. Ordre induit. Preuve par induction structurelle. \semDeux
+    &
+    On insiste sur les aspects pratiques~: construction de structure de données et filtrage par motif. On présente la preuve par induction comme une généralisation de la preuve par récurrence.
+    \\
+    \hline \hline
+    \multicolumn{2}{|p{\lmoe}|}{\textbf{Mise en \oe uvre}} \\
+    \hline
+    \multicolumn{2}{|p{\lmoe}|}{
+    On met l'accent sur la gestion au niveau de la machine, en termes d'occupation mémoire, de la pile d'exécution, et de temps de calcul, en évoquant les questions de sauvegarde et de restauration de contexte.
+    
+    On évite de se limiter à des exemples informatiquement peu pertinents (factorielle, suite de Fibonacci, \dots). 
+    
+    Toute théorie générale de la dérécursification est hors programme.
+    
+    Un étudiant peut mener des raisonnements par induction structurelle.
+    } \\
+    \hline
+\end{longtable}
+
+
