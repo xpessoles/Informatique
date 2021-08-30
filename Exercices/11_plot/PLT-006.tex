@@ -1,0 +1,109 @@
+\exer{[PLT-005]}
+\setcounter{numques}{0}~\\
+
+
+
+On s'intéresse maintenant à l'approximation d'un signal périodique par des fonctions trigonométriques. 
+On considère sur $\R$ la fonction créneau, impaire et périodique de période 2, définie par $C(1) = 0$ et sur $\left]0,1\right[$ par 
+\begin{equation*}
+  C:t\mapsto 1.
+\end{equation*}
+Soit aussi la fonction triangle, définie sur $\R$, paire et périodique de période $2$, définie sur $[0,1]$ par  
+\begin{equation*}
+ T:t\mapsto 1-2t.
+\end{equation*}
+Ces deux fonctions sont représentées sur la figure~\ref{TP05:fig:creneau_triangle}.
+% \begin{minipage}{0.5\textwidth}
+\begin{figure}[!h]
+  \begin{center}
+    \begin{tikzpicture}
+      \draw[->] (-2.5,0) -- (2.5,0);
+      \draw[->] (0,-1.5) -- (0,1.5);
+      \draw (-0.1,1) node[anchor=east] {$1$} -- (0.1,1);
+      \draw (0.1,-1) node[anchor=west] {$-1$} -- (-0.1,-1);
+      \draw (1,0) node[anchor = north] {$1$};
+      \draw (-1,0) node[anchor = north] {$-1$};
+      \draw[-(,blue,thick] (-2.5,-1) -- (-2,-1);
+      \draw[)-(,blue,thick] (-2,1) -- (-1,1);
+      \draw[)-(,blue,thick] (-1,-1) -- (0,-1);
+      \draw[)-(,blue,thick] (0,1) -- (1,1);
+      \draw[)-(,blue,thick] (1,-1) -- (2,-1);
+      \draw[)-,blue,thick] (2,1) -- (2.5,1);
+      \draw[blue,thick] (-2,0) node {\textbullet};
+      \draw[blue,thick] (-1,0) node {\textbullet};
+      \draw[blue,thick] (0,0) node {\textbullet};
+      \draw[blue,thick] (1,0) node {\textbullet};
+      \draw[blue,thick] (2,0) node {\textbullet};
+      \draw[->] (4.5,0) -- (9.5,0) ;
+      \draw[->] (7,-1.5) -- (7,1.5) ;
+      \draw (6.9,1) node[anchor=east] {$1~$} -- (7.1,1);
+      \draw (7.1,-1) node[anchor=west] {$-1$} -- (6.9,-1);
+      \draw (8,0.1) node[anchor = south] {$1$} -- (8,-0.1);
+      \draw (6,0.1) node[anchor = south] {$-1$} -- (6,-0.1);
+      \draw[red,thick] (4.5,0) -- (5,1) -- (6,-1) -- (7,1) -- (8,-1) -- (9,1) -- (9.5,0);
+    \end{tikzpicture}
+    \caption{Signal créneau et signal triangulaire.}
+    \label{TP05:fig:creneau_triangle}
+  \end{center}
+\end{figure}
+% \end{minipage}
+
+
+On peut montrer que, en tout réel $t$ où $C$ est continue, 
+\begin{equation*}
+  C(t) = \dfrac{4}{\pi}\sum_{p=0}^{+\infty} \dfrac{1}{2p+1} \sin((2p+1)\pi t).
+\end{equation*}
+De même, pour tout $t\in\R$, 
+\begin{equation*}
+  T(t) = \dfrac{8}{\pi^2}\sum_{p=0}^{+\infty} \dfrac{1}{(2p+1)^2} \cos((2p+1)\pi t).
+\end{equation*}
+Ce symbole $\displaystyle \sum_{p=0}^{+\infty}$ doit être vu comme une limite et sera défini dans le cours de mathématiques. 
+On approche alors, pour tout $t\in\R$, $C(t)$ et $T(t)$ respectivement par les sommes 
+\begin{equation*}
+  C_n(t) = \dfrac{4}{\pi}\sum_{p=0}^{n} \dfrac{1}{2p+1} \sin((2p+1)\pi t)
+\end{equation*}
+et 
+\begin{equation*}
+   T_n(t) = \dfrac{8}{\pi^2}\sum_{p=0}^{n} \dfrac{1}{(2p+1)^2} \cos((2p+1)\pi t).
+\end{equation*}
+Les physiciens appellent le terme en $p=0$ le \emph{fondamental} et les autres termes les \emph{harmoniques}. 
+
+
+\medskip{}
+
+\question{} \'Ecrire une fonction \texttt{creneau(t)} renvoyant la valeur de $C(\texttt{t})$ (pour \texttt{t} réel). 
+
+\emph{Indication :} on pourra considérer la parité de la partie entière de \texttt{t}.
+
+
+\medskip{}
+
+\question{} \'Ecrire une fonction \texttt{sp\_creneau(n,t)} renvoyant la valeur de $C_{\texttt{n}}(\texttt{t})$ (pour \texttt{n} entier et \texttt{t} réel). 
+
+
+\question{}\label{tp05:qu:creneau} \'Ecrire une fonction \texttt{fourier\_creneau(nom\_de\_fichier)} ne renvoyant rien 
+et enregistrant dans \texttt{nom\_de\_fichier} le graphe sur l'intervalle $[0,4]$ de $C$, celui 
+de son fondamental (\emph{i.e}, $C_0$), ainsi que ceux de $C_3$, $C_5$ et $C_{100}$.
+Vous produirez une image, que vous enverrez à votre enseignant. 
+
+\bigskip
+
+\emph{Pour les plus rapides, voici des questions supplémentaires.}
+
+\bigskip
+
+
+
+\question{} \'Ecrire une fonction \texttt{triangle(t)} renvoyant la valeur de $T(\texttt{t})$ (pour 
+\texttt{t} réel).
+
+
+\medskip{}
+
+\question{} \'Ecrire une fonction \texttt{sp\_triangle(n,t)} renvoyant la valeur de $T_{\texttt{n}}(\texttt{t})$ (pour \texttt{n} entier et \texttt{t} réel). 
+
+
+\medskip{}
+
+\question{}\label{tp05:qu:triangle} \'Ecrire une fonction \texttt{fourier\_triangle(nom\_de\_fichier)} ne renvoyant rien et enregistrant dans \texttt{nom\_de\_fichier} le graphe sur l'intervalle $[0,4]$ de $T$, celui de son fondamental (\emph{i.e}, $T_0$), ainsi que ceux de $T_3$, $T_5$ et $T_{100}$.
+Vous produirez une image, que vous enverrez à votre enseignant. 
