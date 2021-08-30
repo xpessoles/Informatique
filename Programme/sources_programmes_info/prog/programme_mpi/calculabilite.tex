@@ -1,0 +1,45 @@
+
+\section{Décidabilité et classes de complexité \semTroisQuatre}
+On s'intéresse à la question de savoir ce qu'un algorithme peut ou ne peut pas faire, inconditionnellement ou sous condition de ressources en temps. Cette partie permet de justifier la construction, plus haut, d'algorithmes exhaustifs, approchés, probabilistes, etc. On s'appuie sur une compréhension pratique de ce qu'est un algorithme.
+
+\noindent
+\begin{longtable}{|p{\lnotion}|p{\comment}|}
+    \hline
+    \textbf{Notions} & \textbf{Commentaires} \\
+    \hline \hline
+    Problème de décision. Taille d'une instance. Complexité en ordre de grandeur en fonction de la taille d'une instance. Opération élémentaire. Complexité en temps d'un algorithme. Classe $\mathbf{P}$.
+    &
+    Les opérations élémentaires sont les lectures et écritures en mémoire, les opérations arithmétiques, etc. La notion de machine de Turing est hors programme. On s'en tient à une présentation intuitive du modèle de calcul (code exécuté avec une machine à mémoire infinie). On insiste sur le fait que la classe $\mathbf{P}$ concerne des problèmes de décision.
+    \\
+    \hline
+    Réduction polynomiale d'un problème de décision à un autre problème de décision.
+    &
+    On se limite à quelques exemples élémentaires.
+    \\
+    \hline
+    Certificat. Classe $\mathbf{NP}$ comme la classe des problèmes que l'on peut vérifier en temps polynomial. Inclusion $\mathbf{P} \subseteq \mathbf{NP}$.
+    &
+    Les modèles de calcul non-déterministes sont hors programme.
+    \\
+    \hline
+    NP-complétude. Théorème de Cook-Levin (admis)~: SAT est NP-complet.
+    &
+    On présente des exemples de réduction de problèmes NP-complets à partir de SAT. La connaissance d'un catalogue de problèmes NP-complets n'est pas un objectif du programme.
+    \\
+    \hline
+    Transformation d'un problème d'optimisation en un problème de décision à l'aide d'un seuil. &
+    \\
+    \hline
+    Notion de machine universelle. Problème de l'arrêt. 
+    & %On ne parle pas de codage de Gödel. Définition na\"ive~: une fonction calculable admet un algorithme de calcul qui termine toujours en temps fini. Une partie est décidable si sa fonction caractéristique est calculable. Exemple~: vérifier une formule de logique propositionnelle est décidable.
+    \\
+    \hline \hline
+    \multicolumn{2}{|p{\lmoe}|}{\textbf{Mise en \oe uvre}} \\
+    \hline
+    \multicolumn{2}{|p{\lmoe}|}{ 
+    On prend soin de distinguer la notion de complexité d'un algorithme de la notion de classe de complexité d'un problème.
+    Le modèle de calcul est une machine à mémoire infinie qui exécute un programme rédigé en OCaml ou en C. La maîtrise ou la technicité dans des formalismes avancés n'est pas un objectif du programme.
+    } \\
+    \hline
+\end{longtable}
+

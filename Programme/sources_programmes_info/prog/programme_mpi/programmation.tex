@@ -1,0 +1,104 @@
+\section{Méthodes de programmation \semUn \semDeux \semTroisQuatre}
+
+Le programme construit une progression à partir des acquis du lycée en matière d'algorithmique et programmation, dont on rappelle qu'ils ont permis, \textit{a minima}, de rencontrer les notions de variables, de type, d'affectation, d'instruction conditionnelle, de boucles conditionnelles ou inconditionnelles et de manipuler de façon simple les listes en Python. 
+
+
+\subsection{Algorithmes et programmes \semUn}
+Ce paragraphe introduit notamment le principe de validation d'un algorithme ou d'un programme et celui d'étude de son efficacité, qui sont pratiqués tout au long des deux années.
+
+\begin{longtable}{|p{\lnotion}|p{\comment}|}
+    \hline
+    \textbf{Notions} & \textbf{Commentaires} \\
+    \hline \hline
+    Notion de programme comme mise en \oe uvre d'un algorithme. Paradigme impératif structuré, paradigme déclaratif fonctionnel, paradigme logique.
+    & 
+    On ne présente pas de théorie générale sur les paradigmes de programmation, on se contente d'observer les paradigmes employés sur des exemples. La notion de saut inconditionnel (instruction \£GOTO£) est hors programme. On mentionne le paradigme logique uniquement à l'occasion de la présentation des bases de données. 
+    \\
+    \hline 
+    Caractère compilé ou interprété d'un langage.
+    & Transformation d'un fichier texte source en un fichier objet puis en un fichier exécutable. Différence entre fichiers d'interface et fichiers d'implémentation. 
+    \\
+    \hline
+        Représentation des flottants. Problèmes de précision des calculs flottants.
+        &
+        On illustre l'impact de la représentation par des exemples de divergence
+          entre le calcul théorique d'un algorithme et les valeurs calculées par un
+          programme. Les comparaisons entre flottants prennent en compte la
+          précision.
+        \\
+    \hline
+    Terminaison. Correction partielle. Correction totale. Variant. Invariant.
+    &
+    La correction est partielle quand le résultat est correct lorsque l'algorithme s'arrête, la correction est totale si elle est partielle et si l'algorithme termine.
+    \\
+    \hline
+    Analyse de la complexité d'un algorithme. Complexité dans le pire cas, dans le cas moyen. Notion de coût amorti. &
+    On limite l'étude de la complexité dans le cas moyen et du coût amorti à quelques exemples simples.
+    \\
+    \hline
+    \end{longtable}
+
+
+\subsection{Discipline de programmation \semUn \semDeux \semTroisQuatre}
+Ce paragraphe définit une discipline de programmation qui a vocation à être observée dès le début et durant toute la durée des deux années d'enseignement.
+
+\begin{longtable}{|p{\lnotion}|p{\comment}|}
+    \hline
+    \textbf{Notions} & \textbf{Commentaires} \\
+    \hline \hline
+    Spécification des données attendues en entrée, et fournies en sortie/retour.
+    &
+    On entraîne les étudiants à accompagner leurs programmes et
+      leurs fonctions d'une spécification. Les signatures des fonctions sont toujours précisées.
+    \\
+    \hline
+    Annotation d'un bloc d'instructions par une précondition, une postcondition, une propriété invariante.
+    & Ces annotations se font à l'aide de commentaires.
+    \\
+    \hline
+    Programmation défensive. Assertion. Sortie du programme ou exception levée en cas d'évaluation négative d'une assertion.
+    &
+    L'utilisation d'assertions est encouragée par exemple pour valider des entrées ou pour le contrôle de débordements. Plus généralement, les étudiants sont sensibilisés à réfléchir aux causes possibles (internes ou externes à leur programme) d'opérer sur des données invalides et à adopter un style de programmation défensif. Les étudiants sont sensibilisés à la différence de garanties apportées selon les langages, avec l'exemple d'un typage faible en C et fort en OCaml.
+    
+    On veille à ne pas laisser penser que les exceptions servent uniquement à gérer des erreurs.
+    \\
+    \hline
+    Explicitation et justification des choix de conception ou programmation.
+        &
+        Les parties complexes de codes ou d'algorithmes font l'objet de commentaires qui l'éclairent en évitant la paraphrase.
+    \\
+    \hline
+\end{longtable}
+
+\subsection{Validation, test \semUn}
+
+La validation de code par sa soumission à des jeux de tests est une phase essentielle du cycle de développement logiciel. On en fait percevoir l'importance dès le début et durant toute la durée des deux années d'enseignement.
+
+\begin{longtable}{|p{\lnotion}|p{\comment}|}
+    \hline
+    \textbf{Notions} & \textbf{Commentaires} \\
+    \hline \hline
+    Jeu de tests associé à un programme.
+    &
+    Il n'est pas attendu de connaissances sur la génération automatique de jeux de tests~; un étudiant est capable d'écrire un jeu de tests à la main, donnant à la fois des entrées et les sorties correspondantes attendues. On sensibilise, par des exemples, à la notion de partitionnement des domaines d'entrée et au test des limites.
+    \\
+    \hline
+    Graphe de flot de contrôle. Chemins faisables. Couverture des sommets, des arcs ou des chemins (avec ou sans cycle) du graphe de flot de contrôle.
+    &
+    Les étudiants sont capables d'écrire un jeu de tests satisfaisant un critère de couverture des instructions (sommets) ou des branches (arcs) sur les chemins faisables.
+    \\
+    \hline
+    Test exhaustif de la condition d'une boucle ou d'une conditionnelle.
+    &
+    Il s'agit, lorsque la condition booléenne comporte des conjonctions ou
+    disjonctions, de ne pas se contenter de la traiter comme étant
+    globalement vraie ou fausse mais de formuler des tests qui réalisent
+    toutes les possibilités de la satisfaire. On se limite à des exemples
+    simples pour lesquels les cas possibles se décèlent dès la lecture du
+    programme.
+    \\
+    
+    
+    
+    \hline
+\end{longtable}

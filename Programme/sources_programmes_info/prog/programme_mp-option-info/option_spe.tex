@@ -1,0 +1,118 @@
+\section{Programme de deuxième année}
+    
+\subsection{Applications des arbres}
+
+On aborde les arbres comme support de pensée qui permet de donner du sens et de raisonner sur le flot de contrôle qui s'observe dans la mise en \oe uvre de stratégies algorithmiques ou de structures de données élaborées.
+
+\begin{longtable}{|p{\lnotion}|p{\comment}|}
+    \hline
+    \textbf{Notions} & \textbf{Commentaires} \\
+    \hline \hline
+    Retour sur trace (\textit{backtracking}). & 
+    On présente la notion à travers quelques exemples sans théorie générale (par exemple, problème des huit reines ou résolution d'un sudoku). La notion de retour sur trace est réinvestie par l'étudiant à l'occasion de l'étude de l'algorithme min-max présenté en tronc commun.
+    \\ \hline
+    File de priorité. &
+    Implémentation de la structure
+    mutable de file de priorité bornée à l'aide d'un tas
+    stocké dans un tableau.
+    On illustre l'intérêt d'une file de priorité pour améliorer l'implémentation sommaire de l'algorithme de Dijkstra vue dans le cadre du programme de tronc commun. On présente le tri par tas d'un tableau. Pour l'algorithme de Kruskal, l'utilisation d'une file de priorité est une alternative intéressante au tri des arêtes lorsqu'elles sont stockées dans un tableau.\\
+    \hline
+\end{longtable}
+
+
+\subsection{Graphes avancés}
+
+Le vocabulaire et les définitions relatives aux graphes, orientés ou non, tels que sommets, arcs, arêtes, degrés, ont été présentés dans le cadre du programme d'informatique de tronc commun.
+
+\begin{longtable}{|p{\lnotion}|p{\comment}|}
+    \hline
+    \textbf{Notions} & \textbf{Commentaires} \\
+    \hline \hline
+    Notion de parcours (sans contrainte). Parcours en largeur, en profondeur. Notion d'arborescence d'un parcours. 
+    &
+    On approfondit la notion de parcours de graphe dont l'étude a été entamée dans le cadre du programme de tronc commun et on en détaille quelques applications~: par exemple, recherche et construction d'un cycle, calcul des composantes connexes, bicolorabilité, états accessibles d'un automate.
+    On étudie l'intérêt d'un type de parcours dans le cadre d'applications. Par exemple~: plus courts chemins dans un graphe à distance unitaire ou tri topologique dans un graphe acyclique orienté. \\
+    &
+    On implémente ces parcours à l'aide d'une représentation du graphe en listes d'adjacence et on discute leur complexité.
+     \\
+    \hline
+   Arbre couvrant dans un graphe pondéré.&Algorithme de Kruskal. Les détails d'implémentation sont laissés à l'appréciation du professeur. On fait le lien avec la notion d'algorithme glouton étudiée dans le programme de tronc commun. \\ \hline
+   Graphe biparti. Couplage.& Recherche d'un couplage de cardinal maximum dans un graphe biparti par des chemins augmentants. On se limite à une approche élémentaire. L'algorithme de Hopcroft-Karp n'est pas au programme.\\
+   
+       \hline
+\end{longtable}
+
+
+\subsection{Déduction naturelle pour la logique propositionnelle}
+
+Il s'agit de présenter les preuves comme permettant de pallier 
+deux problèmes de la présentation du calcul propositionnel faite en première année~: nature
+exponentielle de la vérification d'une tautologie, faible lien avec les preuves
+mathématiques.
+
+Il ne s'agit, en revanche, que d'introduire la notion d'arbre de preuve. La
+déduction naturelle est présentée comme un jeu de règles d'inférence simple
+permettant de faire un calcul plus efficace que l'étude de la table de vérité. Toute technicité dans
+les preuves dans ce système est à proscrire.
+
+On s'abstient d'implémenter ces règles. L'ambition est d'être capable d'écrire de petites preuves dans ce système. 
+
+
+\begin{longtable}{|p{\lnotion}|p{\comment}|}
+    \hline
+    \textbf{Notions} & \textbf{Commentaires} \\
+    \hline \hline
+    Déduction naturelle. Règle d'inférence, dérivation. &
+    Notation $\vdash$. Séquent $H_1,\dots,H_n
+    \vdash C$. On présente des exemples tels que le \textit{modus ponens} ($p, p \rightarrow q \vdash q$) ou le syllogisme \textit{barbara} ($p \rightarrow q, q \rightarrow r \vdash p \rightarrow r$). 
+\\
+    Définition inductive d'un arbre de preuve. & On présente des exemples utilisant les règles précédentes. 
+\\ 
+    \hline
+    Règles d'introduction et d'élimination de la déduction naturelle pour les
+    formules propositionnelles. & 
+    On présente les règles pour $\wedge, \vee, \neg$ et
+    $\rightarrow$. On écrit de petits exemples d'arbre de preuves (par exemple $\vdash (p \rightarrow q) \rightarrow \neg (p \wedge \neg q) $, etc.).
+ \\
+    Correction de la déduction naturelle pour les formules propositionnelles. & 
+\\
+    \hline
+\end{longtable}	
+
+
+\subsection{Langages et automates}
+
+On introduit les expressions régulières comme formalisme dénotationnel pour spécifier un motif dans le cadre d'une recherche textuelle et les automates comme formalisme opérationnel efficace pour la recherche de motifs. On vérifie que le formalisme des automates coïncide exactement avec l'expressivité des expressions régulières.
+
+\noindent
+\begin{longtable}{|p{\lnotion}|p{\comment}|}
+    \hline
+    \textbf{Notions} & \textbf{Commentaires} \\
+    \hline\hline
+    Alphabet, mot, préfixe, suffixe, facteur, sous-mot. Langage comme ensemble de mots sur un alphabet.
+    &
+    Le mot vide est noté $\varepsilon$.
+    \\ \hline
+    Opérations régulières sur les langages (union, concaténation, étoile de Kleene). Définition inductive des langages réguliers. Expression régulière. Dénotation d'une expression régulière.
+    &
+    On introduit les expressions régulières comme un formalisme dénotationnel pour les motifs. On note l'expression dénotant le langage vide $\emptyset$, celle dénotant le langage réduit au mot vide $\varepsilon$, l'union par $|$, la concaténation par juxtaposition et l'étoile de Kleene par une étoile. 
+    \\
+    \hline 
+    Automate fini déterministe. \'Etat accessible, co-accessible. Automate émondé~; automate complet. Langage reconnu par un automate.
+    &
+ \\
+    \hline
+     Automate fini non déterministe. Transition spontanée (ou $\varepsilon$-transition). Déterminisation d'un automate non déterministe. & On aborde l'élimination des $\varepsilon$-transitions et plus généralement les constructions d'automates à la Thompson sur des exemples, sans chercher à formaliser complètement les algorithmes sous-jacents.
+    \\
+    \hline
+    Construction de l'automate de Glushkov associé à une expression régulière par l'algorithme de Berry-Sethi.
+    &
+    Les notions de langage local et d'expression régulière linéaire sont introduites dans cette seule perspective.
+    \\ \hline
+    Passage d'un automate à une expression régulière. Élimination des états. Théorème de Kleene.
+    & On se limite à la description du procédé d'élimination et à sa mise en œuvre sur des exemples d'automates de petite taille~; cela constitue la preuve du sens réciproque du théorème de Kleene.
+    \\ \hline
+    Stabilité de la classe des langages reconnaissables par union finie, intersection finie, complémentaire. & \\ \hline
+    Lemme de l'étoile. & Soit $L$ le langage reconnu par un automate à $n$ états~: pour tout $u\in L$ tel que $|u|\geq n$, il existe $x,y,z$ tels que $u=xyz$, $|xy|\leq n$, $y\neq\varepsilon$ et $xy^*z \subseteq L$.
+    \\ \hline
+\end{longtable}

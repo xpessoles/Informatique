@@ -1,0 +1,217 @@
+\section{Algorithmique \semDeux \semTroisQuatre}
+
+Les algorithmes sont présentés au tableau en spécifiant systématiquement les entrées et sorties et en étudiant, dans la mesure du possible, leur correction et leur complexité.
+
+\subsection{Algorithmes probabilistes, algorithmes d'approximation \semTroisQuatre}
+
+\noindent
+\begin{longtable}{|p{\lnotion}|p{\comment}|}
+    \hline
+    \textbf{Notions} & \textbf{Commentaires} \\
+    \hline \hline
+    Algorithme déterministe. Algorithme probabiliste (\textit{Las Vegas} et \textit{Monte Carlo}).
+    & On s'en tient aux définitions et à des exemples choisis par le professeur. On mentionne l'intérêt
+    d'une méthode \textit{Las Vegas} pour construire un objet difficile à produire par une méthode déterministe (par exemple, construction d'un nombre premier de taille cryptographique). Quelques exemples possibles~: $k$-ième minimum d'un tableau non trié, problème des huit reines, etc. 
+    \\
+    \hline
+    Problème de décision. Problème d'optimisation. Instance d'un problème, fonction de coût. Notion d'algorithme d'approximation.
+    & 
+    Seule la notion d'algorithme d'approximation est au programme. L'étude de techniques générales d'approximation est hors programme. On indique, par exemple sur le problème MAX2SAT, que la méthode probabiliste peut fournir de bons algorithmes d'approximation. 
+    \\
+    \hline 
+    
+\end{longtable}
+
+
+\subsection{Exploration exhaustive \semDeux \semTroisQuatre}
+
+
+\noindent
+\begin{longtable}{|p{\lnotion}|p{\comment}|}
+    \hline
+    \textbf{Notions} & \textbf{Commentaires} \\
+    \hline \hline
+    Recherche par force brute. Retour sur trace (\textit{Backtracking}). \semDeux
+    & 
+    On peut évoquer l'intérêt d'ordonner les données avant de les parcourir (par exemple par une droite de balayage).
+    \\
+    \hline
+    Algorithme par séparation et évaluation (\textit{Branch and bound}). \semTroisQuatre
+    & On peut évoquer sur des exemples quelques techniques d'évaluation comme les méthodes de relaxation (par exemple la relaxation continue). 
+    \\
+    \hline \hline
+    \multicolumn{2}{|p{\lmoe}|}{\textbf{Mise en \oe uvre}} \\
+    \hline
+    \multicolumn{2}{|p{\lmoe}|}{
+    L'objectif est de donner des outils  de conception d'algorithmes et de parvenir à ce que les étudiants puissent, dans une situation simple, sélectionner une stratégie pertinente par eux-mêmes et la mettre en \oe uvre de façon autonome. Dans les cas les plus complexes, les choix et les recommandations d'implémentation sont guidés.
+    } \\
+    \hline
+\end{longtable}
+
+
+
+
+\subsection{Décomposition d'un problème en sous-problèmes \semDeux \semTroisQuatre}
+
+
+\noindent
+\begin{longtable}{|p{\lnotion}|p{\comment}|}
+    \hline
+    \textbf{Notions} & \textbf{Commentaires} \\
+    \hline \hline
+    Algorithme glouton fournissant une solution exacte. \semDeux
+    & 
+    On peut traiter comme exemples d'algorithmes exacts~: codage de Huffman, sélection d'activité, ordonnancement de tâches unitaires avec pénalités de retard sur une machine unique.
+    \\
+    \hline
+    Exemple d'algorithme d'approximation fourni par la méthode gloutonne. \semTroisQuatre
+    & 
+    On peut traiter par exemple~: couverture des sommets dans un graphe, problème du sac à dos en ordonnant les objets.
+    \\ 
+    \hline
+    Diviser pour régner. Rencontre au milieu. Dichotomie. \semDeux
+    & 
+     On peut traiter un ou plusieurs exemples comme~: tri par partition-fusion, comptage du nombre d'inversions dans une liste, calcul des deux points les plus proches dans une ensemble de points~; recherche d'un sous-ensemble d'un ensemble d'entiers dont la somme des éléments est donnée~; recherche dichotomique dans un tableau trié. 
+    \\
+    \,
+    &
+    On présente un exemple de dichotomie où son recours n'est pas évident~: par exemple, la couverture de $n$ points de la droite par $k$ segments égaux de plus petite longueur.
+    \\
+    \hline
+    Programmation dynamique. Propriété de sous-structure optimale. Chevauchement de sous-problèmes. Calcul de bas en haut ou par mémoïsation. Reconstruction d'une solution optimale à partir de l'information calculée. \semDeux
+    &
+    On souligne les enjeux de complexité en mémoire. On peut traiter un ou plusieurs exemples comme~: problème de la somme d'un sous-ensemble, ordonnancement de tâches pondérées, plus longue sous-suite commune, distance d'édition (Levenshtein). 
+    \\
+    \hline \hline
+    \multicolumn{2}{|p{\lmoe}|}{\textbf{Mise en \oe uvre}} \\
+    \hline
+    \multicolumn{2}{|p{\lmoe}|}{
+    L'objectif est de donner des outils de conception d'algorithmes et de parvenir à ce que les étudiants puissent, dans une situation simple, sélectionner une stratégie pertinente par eux-mêmes et la mettre en \oe uvre de façon autonome. Dans les cas les plus complexes, les choix et les recommandations d'implémentation sont guidés. Les listes d'exemples cités en commentaires ne sont ni impératives ni limitatives.
+        } \\
+    \hline
+\end{longtable}
+
+\subsection{Algorithmique des textes \semDeux}
+
+
+\noindent
+\begin{longtable}{|p{\lnotion}|p{\comment}|}
+    \hline
+    \textbf{Notions} & \textbf{Commentaires} \\
+    \hline \hline
+    Recherche dans un texte. Algorithme de Boyer-Moore. Algorithme de Rabin-Karp. &
+    On peut se restreindre à une version simplifiée de l'algorithme de Boyer-Moore, avec une seule fonction de décalage. L'étude précise de la complexité de ces algorithmes n'est pas exigible.
+    \\ \hline
+    Compression. Algorithme de Huffman. Algorithme Lempel-Ziv-Welch. &
+    On explicite les méthodes de décompression associées.
+    \\
+    \hline
+\end{longtable}
+
+
+
+
+\subsection{Algorithmique des graphes \semDeux \semTroisQuatre}
+
+\noindent
+\begin{longtable}{|p{\lnotion}|p{\comment}|}
+    \hline
+    \textbf{Notions} & \textbf{Commentaires} \\
+    \hline \hline
+    Notion de parcours (sans contrainte). Notion de parcours en largeur, en profondeur. Notion d'arborescence d'un parcours. \semDeux
+    & On peut évoquer la recherche de cycle, la bicolorabilité d'un graphe, la recherche de plus courts chemins dans un graphe à distance unitaire.
+    \\
+    \hline
+    Accessibilité. Tri topologique d'un graphe orienté acyclique à partir de
+    parcours en profondeur. Recherche des composantes connexes d'un graphe non
+    orienté. \semDeux
+    & On fait le lien entre accessibilité dans un graphe orienté acyclique et ordre. 
+    \\
+    \hline
+    Recherche des composantes fortement connexes d'un graphe orienté par l'algorithme de Kosaraju. \semTroisQuatre
+    & On fait le lien entre composantes fortement connexes et le problème $2$-SAT.
+    \\
+    \hline
+    Notion de plus courts chemins dans un graphe pondéré.
+    Algorithme de Dijkstra.
+    Algorithme de Floyd-Warshall. \semDeux
+    &
+    On présente l'algorithme de Dijkstra avec une file de priorité en lien avec la représentation de graphes par listes d'adjacences. On présente l'algorithme de Floyd-Warshall en lien avec la représentation de graphes par matrice d'adjacence.
+    \\
+    \hline
+    Recherche d'un arbre couvrant de poids minimum par l'algorithme de Kruskal. \semTroisQuatre
+    &
+    On peut mentionner l'adaptation au problème du chemin le plus large dans un graphe non-orienté.
+    \\
+    \hline
+    Recherche d'un couplage de cardinal maximum dans un graphe biparti par des chemins augmentants. \semTroisQuatre
+    & 
+    On se limite à une approche élémentaire~; l'algorithme de Hopcroft-Karp n'est pas au programme. 
+    Les graphes bipartis et couplages sont introduits comme outils naturels de modélisation~; ils peuvent également constituer une introduction aux problèmes de flots.
+    \\
+    \hline 
+\end{longtable}
+
+\clearpage
+
+\begin{longtable}{|p{\lnotion}|p{\comment}|}
+\hline
+    \multicolumn{2}{|p{\lmoe}|}{\textbf{Mise en \oe uvre}} \\
+    \hline
+    \multicolumn{2}{|p{\lmoe}|}{
+    Une attention particulière est portée sur le choix judicieux du mode de représentation d'un graphe en fonction de l'application et du problème considéré. 
+    On étudie en conséquence l'impact de la représentation sur la conception d'un algorithme et sur sa complexité (en temps et en espace).
+    On se concentre sur l'approfondissement des algorithmes cités dans le programme et le ré-emploi de leurs idées afin de résoudre des problèmes similaires. La connaissance d'une bibliothèque d'algorithmes fonctionnant sur des principes différents mais résolvant un même problème n'est pas un objectif du programme.
+    } \\
+    \hline
+\end{longtable}
+
+\subsection{Algorithmique pour l'intelligence artificielle et l'étude des jeux \semTroisQuatre}
+Cette partie permet d'introduire les concepts d'apprentissage, de stratégie et d'heuristique. Ce dernier est abordé par des exemples où l'heuristique est précisément définie mais sans en évaluer la performance.
+
+\noindent
+\begin{longtable}{|p{\lnotion}|p{\comment}|}
+    \hline
+    \textbf{Notions} & \textbf{Commentaires} \\
+    \hline \hline
+    Apprentissage supervisé.&
+    Algorithme des $k$ plus proches voisins avec distance euclidienne. Arbres $k$ dimensionnels. Apprentissage d’arbre de décision~: algorithme ID3 restreint au cas d’arbres binaires.
+     \\
+    & Matrice de confusion. On observe des situations de sur-apprentissage sur des exemples.
+    \\
+    \hline
+    Apprentissage non-supervisé.
+    & Algorithme de classification hiérarchique ascendante. Algorithme des $k$-moyennes. La démonstration de la convergence n'est pas au programme. On observe des convergences vers des minima locaux.
+    \\
+    \hline
+    Jeux d’accessibilité à deux joueurs sur un graphe. Stratégie. Stratégie gagnante. Position gagnante.
+    
+      Détermination des positions gagnantes par le calcul des attracteurs. Construction de stratégies gagnantes.&
+    	
+    
+    On considère des jeux à deux joueurs ($J_1$ et $J_2$) modélisés par des graphes bipartis (l’ensemble des états contrôlés par $J_1$ et l’ensemble des états contrôlés par $J_2$). Il y a trois types d’états finals~: les états gagnants pour $J_1$, les états gagnants pour $J_2$ et les états de match nul.
+    
+    On ne considère que les stratégies sans mémoire.
+      \\
+    
+    \hline
+    
+    Notion d'heuristique. Algorithme min-max avec une heuristique. Élagage alpha-beta. &
+    	
+    \\ 
+    \hline 
+        Graphe d'états. Recherche informée~: algorithme A*.
+        & On souligne l'importance de l'admissibilité de l'heuristique, ainsi que le cas où l'heuristique est également monotone.
+     \\
+    \hline \hline
+        \multicolumn{2}{|p{\lmoe}|}{\textbf{Mise en \oe uvre}} \\
+        \hline 
+        \multicolumn{2}{|p{\lmoe}|}{
+    La connaissance des théories sous-jacentes aux algorithmes de cette section n'est pas un attendu du programme. Les étudiants acquièrent une familiarité avec les idées qu'ils peuvent réinvestir dans des situations où les modélisations et les recommandations d'implémentation sont guidées. %, notamment dans leurs aspects arborescents.
+            } \\
+            \hline
+    
+\end{longtable}
+
+
+

@@ -1,0 +1,100 @@
+\section{Programme du second semestre}
+\subsection{Méthodes de programmation et analyse des algorithmes}
+
+On formalise par des leçons et travaux pratiques le travail entrepris au premier semestre concernant la discipline et les méthodes de programmation.
+
+Même si on ne prouve pas systématiquement tous les algorithmes, on dégage l’idée qu’un algorithme doit se prouver et que sa programmation doit se tester.
+\medskip
+
+\begin{longtable}{|p{\lnotion}|p{\comment}|}
+    \hline
+    \textbf{Notions} & \textbf{Commentaires} \\
+    \hline \hline
+    Instruction et expression. Effet de bord. &
+    On peut signaler par exemple que le fait que l'affectation soit une instruction est un choix des concepteurs du langage Python et en expliquer les conséquences.
+    \\
+    \hline
+ Spécification des données attendues en entrée, et fournies en sortie/retour.
+    &
+    On entraîne les étudiants à accompagner
+    leurs programmes et
+      leurs fonctions d'une spécification. Les signatures des fonctions sont
+       toujours précisées.\\ \hline
+    Annotation d'un bloc d'instructions par une précondition, une postcondition, une propriété invariante.& Ces annotations se font à l'aide de commentaires. \\ \hline
+    Assertion.
+    &
+    L'utilisation d'assertions est encouragée par exemple pour valider des entrées. La levée d'une assertion entraîne l'arrêt du programme. Ni la définition ni le rattrapage des exceptions ne sont au programme. \\ \hline
+    Explicitation et justification des choix de conception ou programmation.
+    &
+    Les parties complexes de codes ou d'algorithmes font l'objet de commentaires qui l'éclairent en évitant la paraphrase. Le choix des collections employées (par exemple, liste ou dictionnaire) est un choix éclairé. \\ \hline
+    Terminaison. Correction partielle. Correction totale. Variant. Invariant.
+    &
+    La correction est partielle quand le résultat est correct lorsque l'algorithme s'arrête, la correction est totale si elle est partielle et si l'algorithme termine.
+
+    On montre sur plusieurs exemples que la terminaison peut se démontrer à l'aide d'un variant de boucle.
+
+    Sur plusieurs exemples, on explicite, sans insister sur aucun formalisme, des invariants de boucles en vue de montrer la correction des algorithmes.
+    \\ \hline
+    Jeu de tests associé à un programme.
+    &
+    Il n'est pas attendu de connaissances sur la génération automatique de jeux de tests~; un étudiant doit savoir écrire un jeu de tests à la main, donnant à la fois des entrées et les sorties correspondantes attendues. On sensibilise, par des exemples, à la notion de partitionnement des domaines d'entrée et au test des limites. \\ \hline
+
+    Complexité. & On aborde la notion de complexité temporelle dans le pire cas en ordre de grandeur. On peut, sur des exemples, aborder la notion de complexité en espace. \\ \hline
+\end{longtable}
+
+
+\subsection{Représentation des nombres}
+On présente sans formalisation théorique les enjeux de la
+représentation en mémoire des nombres. Ces notions permettent
+d'expliquer certaines difficultés rencontrées et précautions à prendre
+lors de la programmation ou de l'utilisation d'algorithmes de calcul
+numérique dans les disciplines qui y recourent.
+
+\begin{longtable}{|p{\lnotion}|p{\comment}|}
+    \hline
+    \textbf{Notions} & \textbf{Commentaires} \\
+    \hline \hline
+	Représentation des entiers positifs sur des mots de taille fixe.&
+	La conversion d'une base à une autre n'est pas un objectif de formation. \\ \hline
+	Représentation des entiers signés sur des mots de taille fixe.&
+	Complément à deux. \\ \hline
+	Entiers multi-précision de Python.&
+	On les distingue des entiers de taille fixe sans détailler leur implémentation. On signale la difficulté à évaluer la complexité des opérations arithmétiques sur ces entiers. \\ \hline
+	Distinction entre nombres réels, décimaux et flottants.&
+	On montre sur des exemples l'impossibilité de représenter certains nombres
+	réels ou décimaux dans un mot machine \\ \hline
+
+	Représentation des flottants sur des mots de taille fixe.
+
+	Notion de mantisse, d'exposant.&
+	On signale la représentation de 0 mais on n'évoque pas les nombres dénormalisés, les infinis ni les NaN.
+
+	Aucune connaissance liée à la norme IEEE-754 n'est au programme. \\ \hline
+	Précision des calculs en flottants.&
+	On insiste sur les limites de précision dans le calcul avec des flottants, en particulier pour les comparaisons. Le comparatif des différents modes d'arrondi n'est pas au programme.\\ \hline
+\end{longtable}
+
+\subsection{Bases des graphes, plus courts chemins}
+
+Il s'agit de définir le modèle des graphes, leurs représentations et leurs manipulations.
+
+On s'efforce de mettre en avant des applications importantes et si possible modernes~: réseau de transport, graphe du web, réseaux sociaux, bio-informatique. On précise autant que possible la taille typique de tels graphes.
+
+\begin{longtable}{|p{\lnotion}|p{\comment}|}
+    \hline
+    \textbf{Notions} & \textbf{Commentaires} \\
+    \hline \hline
+	Vocabulaire des graphes.&
+	Graphe orienté, graphe non orienté. Sommet (ou n\oe ud)~; arc, arête. Boucle. Degré (entrant et sortant). Chemin d'un sommet à un autre. Cycle. Connexité dans les graphes non orientés.
+
+	On présente l'implémentation des graphes à l'aide de listes d'adjacence (rassemblées par exemple dans une liste ou dans un dictionnaire) et de matrice d'adjacence.
+	 On n'évoque ni multi-arcs ni multi-arêtes.\\ \hline
+	Notations.& Graphe $G = (S,A)$, degrés $d(s)$ (pour un graphe non orienté), $d_+(s)$ et $d_-(s)$ (pour un graphe orienté). \\ \hline
+ Pondération d'un graphe. \'Etiquettes des arcs ou des arêtes d'un graphe.& On motive l'ajout d'information à un graphe par des exemples concrets.\\ \hline
+	Parcours d'un graphe. & On introduit à cette occasion les piles et les files~; on souligne les problèmes d'efficacité posés par l'implémentation des files par les listes de Python et l'avantage d'utiliser un module dédié tel que \|collections.deque|.
+
+  Détection de la présence de cycles ou de la connexité d'un graphe non orienté.\\ \hline
+	Recherche d'un plus court chemin dans un graphe pondéré avec des poids positifs.&
+	Algorithme de Dijkstra. On peut se contenter d'un modèle de file de priorité naïf pour extraire l'élément minimum d'une collection. Sur des exemples, on s'appuie sur l'algorithme A* vu comme variante de celui de Dijkstra pour une première sensibilisation à la notion d'heuristique.\\ \hline
+
+\end{longtable}

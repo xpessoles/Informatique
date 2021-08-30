@@ -1,0 +1,84 @@
+\section{Langage C}
+La présente annexe liste limitativement les éléments du langage C (norme C99 ou plus récente) dont la connaissance, selon les modalités de chaque sous-section, est exigible des étudiants à la fin de la première année. Ces éléments s'inscrivent dans la perspective de lire et d'écrire des programmes en C~; aucun concept sous-jacent n'est exigible au titre de la présente annexe.
+
+À l'écrit, on travaille toujours sous l'hypothèse que les entêtes suivants ont tous été inclus~: \£<assert.h>£, \£<stdbool.h>£, \£<stddef.h>£, \£<stdint.h>£, \£<stdio.h>£, \£<stdlib.h>£. Mais ces fichiers ne font pas en soi l'objet d'une étude et aucune connaissance particulière des fonctionnalités qu'ils apportent n'est exigible.
+
+\subsection{Traits et éléments techniques à connaître}
+Les éléments et notations suivants du langage C doivent pouvoir être compris et utilisés par les étudiants sans faire l'objet d'un rappel, y compris lorsqu'ils n'ont pas accès à un ordinateur.
+
+\subsubsection*{Traits généraux}
+\begin{itemize}
+\item Typage statique. Types indiqués par le programme lors de la déclaration ou définition.
+\item Passage par valeur.
+\item Délimitation des portées par les accolades. Les retours à la ligne et l'indentation ne sont pas signifiants mais sont nécessaires pour la lisibilité du code.
+\item Déclaration et définition de fonctions, uniquement dans le cas d'un nombre fixé de paramètres.
+\item Gestion de la mémoire~: pile et tas, allocation statique et dynamique, durée de vie des objets.
+\end{itemize}
+
+\subsubsection*{Définitions et types de base}
+\begin{itemize}
+\item Types entiers signés \£int8_t£, \£int32_t£ et \£int64_t£, types entiers
+    non signés \£uint8_t£, \£uint32_t£ et \£uint64_t£. Lorsque la spécification d'une taille précise pour le type n'apporte rien à l'exercice, on utilise les types signé \£int£ et non signé \£unsigned int£. Opérations arithmétiques \£+£, \£-£, \£/£, \£*£. Opération \£%£ entre opérandes positifs.
+Ces opérations sont sujettes à dépassement de capacité. À l'écrit, on élude les difficultés liées à la sémantique des constantes syntaxiques. On ne présente pas les opérateurs d'incrémentation.
+\item Le type \£char£ sert exclusivement à représenter des caractères codés sur un octet. Notation \£'\0'£ pour le caractère nul.
+\item Type \£double£ (on considère qu'il est sur 64 bits). Opérations \£+£, \£-£, \£*£, \£/£.
+\item Type \£bool£ et les constantes \£true£ et \£false£. Opérateurs \£!£, \£&&£, \£||£ (y compris évaluation paresseuse). Les entiers ne doivent pas être utilisés comme booléens, ni l'inverse.
+\item Opérateurs de comparaison \£==£, \£!=£, \£<£, \£>£, \£<=£, \£>=£.
+\item Les constantes du programme sont définies par \£const $\mathit{type}$ $c$ = $v$£. On n'utilise pas la directive du préprocesseur \£#define£ à cette fin.
+\end{itemize}
+
+\subsubsection*{Types structurés}
+\begin{itemize}
+\item Tableaux statiques~: déclaration par \£$\mathit{type}$ $T$[$s$]£ où $s$ est une constante littérale entière. Lecture et écriture d'un terme de tableau par son indice \£$T$[$i$]£~; le langage ne vérifie pas la licéité des accès. Tableaux statiques multidimensionnels.
+\item Définition d'un type structuré par \£struct $\mathit{nom\_s}$ {$\mathit{type}_1$ $\mathit{champ}_1$; $\dots$ $\mathit{type}_n$ $\mathit{champ}_n$;}£ et ensuite \£typedef struct $\mathit{nom\_s}$ $\mathit{nom}$£ (la syntaxe doit cependant être rappelée si les étudiants sont amenés à écrire de telles définitions). Lecture et écriture d'un champ d'une valeur de type structure par \£$v$.$\mathit{champ}$£ ainsi que \£$v$->$\mathit{champ}$£. L'organisation en mémoire des structures n'est pas à connaître.
+\item Chaînes de caractères vues comme des tableaux de caractères avec sentinelle nulle. Fonctions \£strlen£, \£strcpy£, \£strcat£.
+\end{itemize}
+
+\subsubsection*{Structures de contrôle}
+\begin{itemize}
+\item Conditionnelle \£if ($c$) $s_T$£, \£if ($c$) $s_T$ else $s_F$£.
+\item Boucle \£while ($c$) $s$£~; boucle \£for ($\mathit{init}$; $\mathit{fin}$; $\mathit{incr}$) $s$£, possibilité de définir une variable dans $\mathit{init}$~; \£break£.
+\item Définition et déclaration de fonction, passage des paramètres par valeur, y compris des pointeurs. Cas particuliers~: passage de paramètre de type tableau, simulation de valeurs de retour multiples.
+\end{itemize}
+
+\subsubsection*{Pointeurs et gestion de la mémoire}
+\begin{itemize}
+\item Pointeur vers un objet alloué, notation \£$\mathit{type}$* $p$ = &$v$£. On considère que les pointeurs sont sur 64 bits.
+\item Déréférencement d'un pointeur valide, notation \£*$p$£. On ne fait pas d'arithmétique des pointeurs.
+\item Pointeurs comme moyen de réaliser une structure récursive. Pointeur \£NULL£.
+\item Création d'un objet sur le tas avec \£malloc£ et \£sizeof£ (on peut présenter \£size_t£ pour cet usage mais sa connaissance n'est pas exigible). Libération avec \£free£.
+\item Transtypage de données depuis et vers le type \£void*£ dans l'optique stricte de l'utilisation de fonctions comme \£malloc£.
+\item En particulier~: gestion de tableaux de taille non statiquement connue~; linéarisation de tels tableaux quand ils sont multidimensionnels.
+\end{itemize}
+
+\subsubsection*{Divers}
+\begin{itemize}
+\item Utilisation de \£assert£ lors d'opérations sur les pointeurs, les tableaux, les chaînes.
+\item Flux standard.
+\item Utilisation élémentaire de \£printf£ et de \£scanf£. La syntaxe des chaînes de format n'est pas exigible.
+\item Notion de fichier d'en-tête. Directive \£#include "$\mathit{fichier.h}$"£.
+\item Commentaires \£/* ... */£ et commentaires ligne \£//£
+\end{itemize}
+
+\subsection{Éléments techniques devant être reconnus et utilisables après rappel}
+Les éléments suivants du langage C doivent pouvoir être utilisés par les étudiants pour écrire des programmes dès lors qu'ils ont fait l'objet d'un rappel et que la documentation correspondante est fournie.
+
+\subsubsection*{Traits généraux et divers}
+
+\begin{itemize}
+\item Utilisation de \£#define£, \£#ifndef£ et \£#endif£ lors de l'écriture d'un fichier d'en-tête pour rendre son inclusion idempotente. %on ne peut pas utiliser #pragma once qui n'est pas C99
+\item Rôle des arguments de la fonction \£int main(int argc, char* argv[])£ ; utilisation des arguments à partir de la ligne de commande.
+\item Fonctions de conversion de chaînes de caractères vers un type de base comme \£atoi£.
+\item Définition d'un tableau par un initialisateur \£{$t_0$, $t_1$, $\dots$, $t_{N-1}$}£.
+\item Définition d'une valeur de type structure par un initialisateur \£{.$c_1$ = $v_1$, .$c_2$ = $v_2$, $\dots$}£.
+\item Compilation séparée.
+\end{itemize}
+
+\subsubsection*{Gestions des ressources de la machine}
+
+\begin{itemize}
+\item Gestion de fichiers~: \£fopen£ (dans les modes \£r£ ou \£w£), \£fclose£, \£fscanf£, \£fprintf£ avec rappel de la syntaxe de formatage.
+\item Fils d'exécution~: inclusion de l'entête \£pthread.h£, type \£pthread_t£, commandes \£pthread_create£ avec attributs par défaut, \£pthread_join£ sans récupération des valeurs de retour.
+\item Mutex~: inclusion de l'entête \£pthread.h£, type \£pthread_mutex_t£, commandes \£pthread_mutex_lock£, \£pthread_mutex_unlock£, \£pthread_mutex_destroy£.
+\item Sémaphore~: inclusion de l'entête \£semaphore.h£, type \£sem_t£, commandes \£sem_init£, \£sem_destroy£, \£sem_wait£, \£sem_post£.
+\end{itemize}

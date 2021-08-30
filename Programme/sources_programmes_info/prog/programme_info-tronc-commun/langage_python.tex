@@ -1,0 +1,47 @@
+\section{Langage Python}
+Cette annexe liste limitativement les éléments du langage Python (version 3 ou supérieure) dont la connaissance est exigible des étudiants. Aucun concept sous-jacent n'est exigible au titre de la présente annexe.
+
+Aucune connaissance sur un module particulier n'est exigible des étudiants.
+
+Toute utilisation d'autres éléments du langage que ceux que liste cette annexe, ou d'une fonction d'un module, doit obligatoirement être accompagnée de la documentation utile, sans que puisse être attendue une quelconque maîtrise par les étudiants de ces éléments.
+
+\subsubsection*{Traits généraux}
+\begin{itemize}
+\item Typage dynamique~: l'interpréteur détermine le type à la volée lors de l'exécution du code.
+\item Principe d'indentation.
+\item Portée lexicale~: lorsqu'une expression fait référence à une variable à l'intérieur d'une fonction, Python cherche la valeur définie à l'intérieur de la fonction et à défaut la valeur dans l'espace global du module.
+\item Appel de fonction par valeur~: l'exécution de \|$f$($x$)|\! évalue d'abord $x$ puis exécute $f$ avec la valeur calculée.
+\end{itemize}
+
+\subsubsection*{Types de base}
+\begin{itemize}
+\item Opérations sur les entiers (\|int|)~: \|+|, \|-|, \|*|, \|//|, \|**|, \|%| avec des opérandes positifs.
+\item Opérations sur les flottants (\|float|)~: \|+|, \|-|, \|*|, \|/|, \|**|.
+\item Opérations sur les booléens (\|bool|)~: \|not|, \|or|, \|and| (et leur caractère paresseux).
+\item Comparaisons \|==|, \|!=|, \|<|, \|>|, \|<=|, \|>=|.
+\end{itemize}
+
+\subsubsection*{Types structurés}
+\begin{itemize}
+\item Structures indicées immuables (chaînes, tuples)~: \|len|, accès par indice positif valide, concaténation \|+|, répétition \|*|, tranche.
+\item Listes~: création par compréhension \|[$e$ for $x$ in $s$]|, par \|[$e$] * $n$|, par \|append| successifs~; \|len|, accès par indice positif valide~; concaténation \|+|, extraction de tranche, copie (y compris son caractère superficiel)~; \|pop| en dernière position.
+\item Dictionnaires~: création \|{$c_1$ : $v_1$, $\dots$, $c_n$ : $v_n$}|, accès, insertion, présence d'une clé \|$k$ in $d$|, \|len|, \|copy|.
+\end{itemize}
+
+\subsubsection*{Structures de contrôle}
+\begin{itemize}
+\item Instruction d'affectation avec \|=|. Dépaquetage de tuples.
+\item Instruction conditionnelle~: \|if|, \|elif|, \|else|.
+\item Boucle \|while| (sans \|else|). \|break|, \|return| dans un corps de boucle.
+\item Boucle \|for| (sans \|else|) et itération sur \|range($a$, $b$)|, une chaîne, un tuple, une liste, un dictionnaire au travers des méthodes \|keys| et \|items|.
+\item Définition d'une fonction \|def $f$($p_1$, $…$, $p_n$)|, \|return|.
+\end{itemize}
+
+\subsubsection*{Divers}
+\begin{itemize}
+\item Introduction d'un commentaire avec \|#|.
+\item Utilisation simple de \|print|, sans paramètre facultatif.
+\item Importation de modules avec \|import $\mathit{module}$|, \|import $\mathit{module}$ as $\mathit{alias}$|, \|from $\mathit{module}$ import $f, g, \ldots$|
+\item Manipulation de fichiers texte (la documentation utile de ces fonctions doit être rappelée~; tout problème relatif aux encodages est éludé)~: \|open|, \|read|, \|readline|, \|readlines|, \|split|, \|write|, \|close|.
+\item Assertion~: \|assert| (sans message d'erreur).
+\end{itemize}

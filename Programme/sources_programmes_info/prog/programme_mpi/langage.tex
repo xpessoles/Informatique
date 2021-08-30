@@ -1,0 +1,90 @@
+\section{Langages formels \semTroisQuatre}
+
+\subsection{Langages réguliers}
+
+On introduit les expressions régulières comme formalisme dénotationnel pour spécifier un motif dans le cadre d'une recherche textuelle.
+
+\noindent
+\begin{longtable}{|p{\lnotion}|p{\comment}|}
+    \hline
+    \textbf{Notions} & \textbf{Commentaires} \\
+    \hline \hline
+    Alphabet, mot, préfixe, suffixe, facteur, sous-mot.
+    &
+    Le mot vide est noté $\varepsilon$.
+    \\ \hline
+    Langage comme ensemble de mots sur un alphabet. Opérations régulières sur les langages (union, concaténation, étoile de Kleene). Définition inductive des langages réguliers. & \\
+    \hline
+    Expression régulière. Dénotation d'un langage régulier.
+    &
+    On introduit les expressions régulières comme un formalisme dénotationnel pour les motifs. On note l'expression dénotant le langage vide $\emptyset$, celle dénotant le langage réduit au mot vide $\varepsilon$, l'union par $|$, la concaténation par juxtaposition et l'étoile de Kleene par une étoile.
+    \\ \hline 
+    Expressions régulières étendues. & Le lien est fait avec les expressions régulières de la norme POSIX, mais on ne développe aucune théorie supplémentaire à leur sujet et aucune connaissance au sujet de cette norme n'est exigible.
+    \\
+    \hline
+\end{longtable}
+
+
+\subsection{Automates finis}
+
+Les automates constituent un modèle de calcul puissant qui irrigue de nombreuses branches de l'informatique. On voit ici les automates comme un formalisme opérationnel efficace pour la recherche de motifs. On vérifie que le formalisme des automates coïncide exactement avec l'expressivité des expressions régulières.
+
+\noindent
+\begin{longtable}{|p{\lnotion}|p{\comment}|}
+    \hline
+    \textbf{Notions} & \textbf{Commentaires} \\
+    \hline \hline
+    Automate fini déterministe. \'Etat accessible, co-accessible. Automate émondé. Langage reconnu par un automate.
+    &
+    On insiste sur la richesse de systèmes dont le fonctionnement peut être modélisé par un automate.
+   \\ \hline
+    Transition spontanée (ou $\varepsilon$-transition). Automate fini non déterministe.&
+    \\ 
+    \hline
+    Déterminisation d'un automate non déterministe.
+    & On fait le lien entre l'élimination des transitions spontanées et l'accessibilité dans un graphe. On aborde l'élimination des transitions spontanées et plus généralement les constructions d'automates à la Thompson sur des exemples, sans chercher à formaliser complètement les algorithmes sous-jacents.
+    \\
+    \hline
+    Construction de l'automate de Glushkov associé à une expression régulière par l'algorithme de Berry-Sethi.
+    & Les notions de langage local et d'expression régulière linéaire sont introduites dans cette seule perspective.
+    \\ \hline
+    Passage d'un automate à une expression régulière. Élimination des états. Théorème de Kleene.
+    & On se limite à la description du procédé d'élimination et à sa mise en œuvre sur des exemples d'automates de petite taille~; cela constitue la preuve du sens réciproque du théorème de Kleene.
+    \\ \hline
+     Stabilité de la classe des langages reconnaissables par union finie, intersection finie, complémentaire. & \\ \hline
+    Lemme de l'étoile. & Soit $L$ le langage reconnu par un automate à $n$ états~: pour tout $u\in L$ tel que $|u|\geq n$, il existe $x,y,z$ tels que $u=xyz$, $|xy|\leq n$, $y\neq\varepsilon$ et $xy^*z\subseteq L$.
+    \\ 
+    \hline
+\end{longtable}
+
+
+\subsection{Grammaires non contextuelles}
+
+Les grammaires formelles ont pour principal intérêt de définir des syntaxes structurées, en particulier celles des langages informatiques (langage de programmation, langage de requête, langage de balisage, etc.). On s'intéresse surtout à la manière dont les mots s'obtiennent par la grammaire et, de façon modeste, à la manière d'analyser un mot (un programme) en une structure de données qui le représente.
+
+\noindent
+\begin{longtable}{|p{\lnotion}|p{\comment}|}
+    \hline
+    \textbf{Notions} & \textbf{Commentaires} \\ \hline \hline
+    Grammaire non contextuelle. Vocabulaire~: symbole initial, symbole non-terminal, symbole terminal, règle de production, dérivation immédiate, dérivation. Langage engendré par une grammaire, langage non contextuel. Non contextualité des langages réguliers.
+    &
+    Notations~: règle de production $\rightarrow$, dérivation immédiate $\Rightarrow$, dérivation $\Rightarrow^*$. On montre comment définir une expression arithmétique ou une formule de la logique propositionnelle par une grammaire. On peut présenter comme exemple un mini-langage fictif de programmation ou un mini-langage de balisage. Sont hors programme~: les automates à pile, les grammaires syntagmatiques générales, la hiérarchie de Chomsky.
+ \\
+    \hline
+    Arbre d'analyse. Dérivation à gauche, à droite. Ambigu\"ité d'une grammaire. \'Equivalence faible.
+    & 
+    On présente le problème du \og sinon pendant \fg{} (\textit{dangling else}).
+\\
+    \hline
+    Exemple d'algorithme d'analyse syntaxique.
+    & 
+    On peut présenter au tableau un algorithme \textit{ad hoc} d'analyse syntaxique par descente récursive (algorithme \textit{top-down})   pour un langage de balisage fictif (par exemple, la grammaire de symbole initial $S$ et de règles de production $ S \rightarrow TS|c, T\rightarrow aSb$ sur l'alphabet $\{a,b,c\}$). On ne parle pas d'analyseur LL ou LR. On ne présente pas de théorie générale de l'analyse syntaxique.
+\\
+    \hline \hline
+    \multicolumn{2}{|p{\lmoe}|}{\textbf{Mise en \oe uvre}} \\
+    \hline
+    \multicolumn{2}{|p{\lmoe}|}{
+    On étudie surtout de petits exemples que l'on peut traiter à la main et qui modélisent des situations rencontrées couramment en informatique. On fait le lien avec la définition par induction de certaines structures de données (listes, arbres, formules de logique propositionnelle). 
+    } \\
+    \hline
+\end{longtable}

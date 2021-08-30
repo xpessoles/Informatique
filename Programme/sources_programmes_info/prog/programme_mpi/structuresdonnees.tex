@@ -1,0 +1,153 @@
+\section{Structures de données \semUn \semDeux \semTroisQuatre}
+
+On insiste sur le fait que le développement d'un algorithme va de pair avec la conception d'une structure de données taillée à la mesure du problème que l'on cherche à résoudre et des opérations sur les données que l'on est amené à répéter.
+
+
+
+\subsection{Types et abstraction \semUn}
+
+
+\begin{longtable}{|p{\lnotion}|p{\comment}|}
+    \hline
+    \textbf{Notions} & \textbf{Commentaires} \\
+    \hline \hline
+    Type prédéfini (booléen, entier, flottant). Pointeur. Type paramétré (tableau). Type composé. Tableaux statiques. Allocation (\texttt{malloc}) et désallocation (\texttt{free}) dynamique.
+    &
+    On se limite à une présentation pratique des types, en les illustrant avec les langages du programme. Un étudiant est capable d'inférer un type à la lecture d'un fragment de code, cependant toute théorie du typage est hors programme.
+    \\
+    \hline
+    Définition d'une structure de données abstraite comme un type muni d'opérations. 
+    & 
+    On parle de constructeur pour l'initialisation d'une structure, d'accesseur pour récupérer une valeur et de transformateur pour modifier l'état de la structure. On montre l'intérêt d'une structure de données abstraite en terme de modularité. On distingue la notion de structure de données abstraite de son implémentation. Plusieurs implémentations concrètes sont interchangeables.
+    La notion de classe et la programmation orientée objet sont hors programme. 
+    \\
+    \hline
+    Distinction entre structure de données mutable et immuable.
+    &
+    Illustrée en langage OCaml.
+    \\
+    \hline \hline
+    \multicolumn{2}{|p{\lmoe}|}{\textbf{Mise en œuvre}} \\
+    \hline
+    \multicolumn{2}{|p{\lmoe}|}{
+    Il s'agit de montrer l'intérêt et l'influence des structures de données sur les algorithmes et les méthodes de programmation. 
+    
+    On insiste sur la distinction entre une structure de données abstraite (un type muni d'opérations ou encore une interface) et son implémentation concrète. On montre l'intérêt d'une structure de données abstraite en terme de modularité.
+        
+    Grâce aux bibliothèques, on peut utiliser des structures de données avant d'avoir programmé leur réalisation concrète.
+    } \\
+    \hline
+\end{longtable}
+
+\subsection{Structures de données séquentielles \semUn \semDeux}
+
+
+\begin{longtable}{|p{\lnotion}|p{\comment}|}
+    \hline
+    \textbf{Notions} & \textbf{Commentaires} \\
+    \hline \hline
+    Structure de liste. Implémentation par un tableau, par des maillons chaînés. \semUn
+    & 
+    On insiste sur le coût des opérations selon le choix de l'implémentation. Pour l'implémentation par un tableau, on se fixe une taille maximale. On peut évoquer le problème du redimensionnement d'un tableau. 
+    \\
+    \hline
+    Structure de pile. Structure de file. Implémentation par un tableau, par des maillons chaînés. \semUn &
+    \\
+    \hline
+    Structure de tableau associatif implémenté par une table de hachage. \semDeux
+    &
+    La construction d'une fonction de hachage et les méthodes de gestion des collisions éventuelles ne sont pas des exigibles du programme.
+    \\ 
+    \hline
+    Sérialisation. \semDeux
+    &
+    On présente un exemple de sérialisation d'une structure hiérarchique et d'une structure relationnelle.
+    \\
+    \hline \hline
+    \multicolumn{2}{|p{\lmoe}|}{\textbf{Mise en œuvre}} \\
+    \hline
+    \multicolumn{2}{|p{\lmoe}|}{
+    On présente les structures de données construites à l'aide de pointeurs d'abord au tableau avant de guider les étudiants dans l'implémentation d'une telle structure.
+    } \\
+    \hline
+\end{longtable}
+
+\clearpage
+
+\subsection{Structures de données hiérarchiques \semDeux \semTroisQuatre}
+
+
+\begin{longtable}{|p{\lnotion}|p{\comment}|}
+    \hline
+    \textbf{Notions} & \textbf{Commentaires} \\
+    \hline \hline
+    Définition inductive du type arbre binaire. Vocabulaire~: n\oe ud, n\oe ud interne, racine, feuille, fils, père, hauteur d'un arbre, profondeur d'un n\oe ud, étiquette, sous-arbre. \semDeux
+    &  La hauteur de l'arbre vide est $-1$. On mentionne la représentation d'un arbre complet dans un tableau.
+    \\
+    \hline
+    Arbre. Conversion d'un arbre d'arité quelconque en un arbre binaire. \semDeux
+    &
+    La présentation donne lieu à des illustrations au choix du professeur. Il peut s'agir par exemple d'expressions arithmétiques, d'arbres préfixes (\textit{trie}), d'arbres de décision, de dendrogrammes, d'arbres de classification, etc.
+    \\
+    \hline
+    Parcours d'arbre. Ordre préfixe, infixe et postfixe. \semDeux & On peut évoquer le lien avec l'empilement de blocs d'activation lors de l'appel à une fonction récursive.
+    \\
+    \hline
+    Implémentation d'un tableau associatif par un arbre binaire de recherche. Arbre bicolore. \semDeux %Arbre $k$-dimensionnel.
+    &
+    On note l'importance de munir l'ensemble des clés d'un ordre total.
+    \\
+    \hline 
+    Propriété de tas. Structure de file de priorité implémentée par un arbre binaire ayant la propriété de tas. \semDeux
+    & Tri par tas.
+    \\
+    \hline
+    Structure unir \& trouver pour la représentation des classes d'équivalence d'un ensemble. Implémentation par des arbres. \semTroisQuatre
+    &
+    On commence par donner des implémentations naïves de la structure unir \& trouver qui privilégient soit l'opération unir, soit l'opération trouver, avant de donner une implémentation par des arbres qui permet une mise en {\oe}uvre efficace des deux opérations.
+    L'analyse de la complexité de cette structure est admise.
+    \\
+    \hline \hline
+    \multicolumn{2}{|p{\lmoe}|}{\textbf{Mise en œuvre}} \\
+    \hline
+    \multicolumn{2}{|p{\lmoe}|}{
+    On présente les manipulations usuelles sur les arbres en C et en OCaml.
+    %En C, on représente un arbre binaire par un tableau de fils ou de pères en numérotant les sommets, ou bien par des maillons chainés.
+    Il n'est pas attendu d'un étudiant une maîtrise technique de l'écriture du code d'une structure de données arborescente mutable à l'aide de pointeurs, mais il est attendu qu'il sache l'utiliser. %L'utilisation des pointeurs est présentée uniquement au tableau mais peut figurer dans une bibliothèque fournie à l'élève à l'occasion d'exercices et contenant des accesseurs, transformateurs, etc. déjà pré-écrits. 
+    } \\
+    \hline
+\end{longtable}
+
+
+\subsection{Structures de données relationnelles \semDeux}
+
+Il s'agit de définir le modèle des graphes, leurs représentations et leurs manipulations.
+
+On s'efforce de mettre en avant des applications importantes et si possibles modernes~: réseau de transport, graphe du web, réseaux sociaux, bio-informatique. On précise autant que possible la taille typique de tels graphes.
+
+\begin{longtable}{|p{\lnotion}|p{\comment}|}
+    \hline
+    \textbf{Notions} & \textbf{Commentaires} \\
+    \hline \hline
+    Graphe orienté, graphe non orienté. Sommet (ou n\oe ud)~; arc, arête. Boucle. Degré (entrant et sortant). Chemin d'un sommet à un autre. Cycle. Connexité, forte connexité. Graphe orienté acyclique. Arbre en tant que graphe connexe acyclique. Forêt. Graphe biparti.
+    &
+    Notation~: graphe $G = (S,A)$, degrés $d_+(s)$ et $d_-(s)$ dans le cas orienté. On n'évoque pas les multi-arcs. 
+    On représente un graphe orienté par une matrice d'adjacence ou par des listes d'adjacence.
+    \\
+    \hline
+    Pondération d'un graphe. \'Etiquettes des arcs ou des arêtes d'un graphe.
+    & On motive l'ajout d'information à un graphe par des exemples concrets~: graphe de distance, automate fini, diagramme de décision binaire.
+    \\
+    \hline \hline
+    \multicolumn{2}{|p{\lmoe}|}{\textbf{Mise en œuvre}} \\
+    \hline
+    \multicolumn{2}{|p{\lmoe}|}{
+     On présente les manipulations usuelles sur les graphes en C et en OCaml.
+    La présentation en C s'effectue à travers des tableaux statiques.
+    Pour la représentation en liste d'adjacence, on peut considérer un 
+    tableau à deux dimensions dont les lignes représentent chaque liste avec 
+    une sentinelle ou un indicateur de taille en premier indice. 
+    } \\
+    \hline
+\end{longtable}
+

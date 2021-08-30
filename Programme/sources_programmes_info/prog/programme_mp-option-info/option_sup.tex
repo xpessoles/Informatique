@@ -1,0 +1,116 @@
+\section{Programme de première année}
+
+
+\subsection{Programmation récursive}
+
+La capacité d'un programme à faire appel à lui-même est un concept primordial en informatique. Historiquement, l'auto-référence est au c\oe ur du paradigme de programmation fonctionnelle. Elle imprègne aujourd'hui, de manière plus ou moins marquée, la plupart des langages de programmation contemporains. Elle permet souvent d'écrire des algorithmes plus élégants et moins laborieux que leurs équivalents en programmation impérative.
+
+\begin{longtable}{|p{\lnotion}|p{\comment}|}
+    \hline
+    \textbf{Notions} & \textbf{Commentaires} \\
+    \hline\hline
+    Récursivité. Récursivité croisée. Organisation des activations sous forme d'arbre en cas d'appels multiples.& On approfondit la présentation purement expérimentale de l'appel récursif d'une fonction à elle-même, vue au premier semestre de tronc commun, en faisant le lien avec le principe de récurrence et les relations d'ordre. On insiste sur le problème de la terminaison et la notion d'ordre bien fondé. Toute théorie générale de la dérécursification est hors programme.
+    \\ 
+    \hline
+    Stratégie diviser pour régner. & On complète, si nécessaire, la présentation de tris élémentaires vue au premier semestre de tronc commun en présentant le tri par partition fusion. On ne se limite pas à des exemples dans lesquels la décomposition et la recomposition des résultats sont évidents. \\ \hline
+    Analyse de la complexité des algorithmes récursifs. & On étudie sur différents exemples la complexité dans le pire cas. Aucun théorème général de complexité n'est au programme. 
+    
+    Sur des exemples, on sensibilise les étudiants à l'existence d'autres analyses de complexité, comme la complexité en moyenne ou la complexité amortie.
+    
+    La notion de classe de complexité d'un problème de décision est hors programme.\\
+    \hline
+\end{longtable}
+
+\subsection{Types récursifs immuables et arbres}
+
+Les propriétés sur les structures récursives sont démontrées par des preuves par induction structurelle.
+
+\begin{longtable}{|p{\lnotion}|p{\comment}|}
+    \hline
+    \textbf{Notions} & \textbf{Commentaires} \\
+    \hline\hline
+    Type récursif de liste. & \\
+    \hline
+    Type récursif d'arbre binaire ou d'arbre binaire strict non vide.
+                                          &
+\°type 'a arbre_binaire = Vide | Noeud of 'a * 'a arbre_binaire * 'a arbre_binaire°
+
+\°type ('a, 'b) abs = Feuille of 'a | Noeud_interne of 'b * ('a, 'b) abs * ('a, 'b) abs°
+    \\
+    Vocabulaire~: n\oe ud, n\oe ud interne, racine, feuille, fils, père, hauteur d'un arbre, profondeur d'un n\oe ud, étiquette, sous-arbre. & La hauteur de l'arbre vide est $-1$. Relation entre le nombre de nœuds internes et de feuilles d'un arbre binaire strict.
+    \\ \hline
+    Définition inductive des arbres généraux non vides. & On illustre la notion d'arbre par des exemples, comme~: expression arithmétique, arbre préfixe (\textit{trie}), arbre de décision. \\ \hline
+    Parcours d'arbres. Ordre préfixe, infixe et postfixe. & On peut évoquer le lien avec l'empilement de blocs d'activation lors de l'appel à une fonction récursive. \\
+   \hline
+    
+    
+\end{longtable}
+
+\subsection{Structures de données}
+
+Le programme de l'option MP se distingue du tronc commun en ce qu'il appelle la maîtrise du concept de structure de données~: il dépasse l'idée que le langage de programmation fournisse une collection appropriée à ses besoins et insiste sur le fait que le développement d'un algorithme aille de pair avec la conception d'une structure de données taillée à la mesure du problème que l'on cherche à résoudre et des opérations sur les données que l'on est amené à répéter. Bien que la programmation orientée objet ne figure pas dans ce programme, on peut enseigner la notion de structure de données avec cette perspective à l'esprit.
+
+
+\begin{longtable}{|p{\lnotion}|p{\comment}|}
+    \hline
+    \textbf{Notions} & \textbf{Commentaires} \\
+    \hline\hline
+    Définition d’une structure de données
+    abstraite comme un type muni d'opérations. &
+On parle de constructeur pour l'initialisation d'une structure, d'accesseur pour récupérer une valeur et de transformateur pour modifier l'état de la structure. On montre l'intérêt d'une structure de données abstraite en terme de modularité. On distingue la notion de structure de données abstraite de son implémentation. Plusieurs implémentations concrètes sont interchangeables.
+                                                      \\ \hline
+    Distinction entre structure de données mutable et immuable. Référence. &\\ 
+    \hline
+    Tableau, liste, pile, file, dictionnaire. 
+    & On complète la présentation purement pratique faite de ces structures dans le cadre du programme de tronc commun en étudiant dans le détail leurs implémentations possibles et en s'attachant à dégager la complexité des opérations associées. On clarifie l'ambiguïté du terme \emph{liste} utilisé en tant que concept en informatique, tableau dynamique dans le langage Python et chaîne de maillons dans le langage OCaml. On présente des problèmes qui peuvent être résolus à l'aide de ces structures.
+    On peut présenter différentes implémentations de la même structure.
+    \\
+    \hline
+    Implémentation de la structure immuable de
+    dictionnaire avec un arbre binaire de recherche. & On ne cherche pas à équilibrer les arbres. En lien avec le programme de tronc commun de deuxième année, on peut présenter également une implémentation mutable des dictionnaires avec une table de hachage.\\
+    \hline
+    Utilisation d'une structure de données. & Grâce aux bibliothèques, on peut utiliser des structures de données sans avoir à programmer soi-même leur implémentation.\\ \hline 
+\end{longtable} 
+
+\subsection{Syntaxe puis sémantique de la logique propositionnelle}
+
+Le but de cette partie est de familiariser progressivement les étudiants avec
+la différence entre syntaxe et sémantique d'une part et de donner une base de 
+vocabulaire permettant de modéliser une grande variété de situations (par
+exemple, satisfaction de contraintes, planification, diagnostique, vérification
+de modèles, etc.).
+
+L'étude des quantificateurs est hors programme.
+
+\begin{longtable}{|p{\lnotion}|p{\comment}|}
+    \hline
+    \textbf{Notions} & \textbf{Commentaires} \\
+    \hline \hline
+    Variables propositionnelles, connecteurs logiques, arité. & 
+    Notations~: $\neg, \vee, \wedge, \rightarrow, \leftrightarrow$.
+    \\
+    Formules propositionnelles, définition inductive, représentation comme un arbre. Sous-formule.
+    & Les formules sont des données informatiques. On fait le lien entre les écritures d'une formule comme mot et les parcours d'arbres.
+    \\
+    Taille et hauteur d'une formule. & 
+    \\
+    \hline 
+    Valuations, valeurs de vérité d'une formule 
+    propositionnelle.
+    & Notations $V$ pour la valeur vraie, $F$ pour la valeur fausse.
+  \\
+    Satisfiabilité, modèle, ensemble de modèles, tautologie, antilogie. & Une formule est satisfiable si elle admet un modèle, tautologique si toute valuation en est un modèle. On peut être amené à ajouter à la syntaxe une formule tautologique et une formule antilogique~; elles sont en ce cas notées $\top$ et $\bot$. 
+    \\
+    \'Equivalence sur les formules. & On présente les lois de De Morgan, le tiers exclu
+    et la décomposition de l'implication. 
+    \\
+    Conséquence logique entre deux formules. & On étend la notion à celle de conséquence $\phi$ d'un ensemble de formules $\Gamma$~: on note $\Gamma\models\phi$. La compacité est hors programme. 
+    \\
+    \hline
+    Forme normale conjonctive, forme normale disjonctive. Problème SAT.
+    & Lien entre forme normale disjonctive complète et table de vérité. 
+    \\
+    \hline
+\end{longtable}
+
+
