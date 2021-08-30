@@ -1,0 +1,89 @@
+\input entete
+	
+	\large MPSI \hfill DICTIONNAIRE.
+	
+	\newcommand{\indente}{\hspace*{1cm}}
+	
+	\smallskip
+	\hline
+	
+	\bigskip
+	
+\newcommand{\indente}{\hspace*{1cm}}
+	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\vskip1cm
+	
+\bi\q Un dictionnaire est une suite de couple (clé, valeur) non ordonnée. Chaque élément est repéré par sa clé qui est donc unique.
+
+\q Le dictionnaire vide est \texttt{dico=\{\}}
+
+\q On peut définir un dictionnaire globalement:
+
+\texttt{dico=\{”MPSI”:46,”PCSI”:47,”PTSI”,45\}}	ou “MPSI” est une clé, 46 sa valeur.
+
+\q On peut ajouter des éléments à un dictionnaire:
+
+\texttt{dico[”MP”]=45}
+
+et afficher:
+
+\texttt{print(dico)} renvoie: \texttt{dico=\{”MPSI”:46,”PCSI”:47,”PTSI”,45,”MP”:45\}}}
+
+\texttt{print(dico[”MPSI”])} affiche 46
+
+\q Ecrire \texttt{dico[”MP”]=46} enverra un message d'erreur car la clé est unique.
+	
+\q On peut supprimer un élément:
+
+\texttt{del dico[”MP”]}	
+
+\texttt{print(dico}} renvoie \texttt{dico=\{”MPSI”:46,”PCSI”:47,”PTSI”,45\}}
+
+\q Test d'appartenance d'une clé:
+
+\texttt{print(“PCSI” in dico)} qui renvoie ici \texttt{True} (ou \texttt{False} dans le cas général)
+
+\q Nombre d'élémnts d'un dictionnaire:
+
+\texttt{len(dico)}
+
+\q Parcourir les éléments d'un dictionnaire:
+
+\texttt{for elt in dico.items():}
+
+\texttt{\indente a=elt[0]}  \# clé
+
+\texttt{\indente b=elt[1]}   \# valeur
+	
+OU
+
+\texttt{for clé, valeur in dico.items():}	
+
+\texttt{\indente ...}
+	
+\q Copie d'un dictionnaire:
+
+\texttt{import copy}
+
+\texttt{dico1=copy.deepcopy(dico)}	
+
+(\textit{et non \texttt{dico1=dico} qui va créer un alias seulement.})
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+
+
+
+	
+\end{document}
