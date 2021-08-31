@@ -1,1 +1,42 @@
-%
+\section{Valeur d'un polynôme par plusieurs méthodes}
+
+On se propose de calculer une valeur $x^n$ par un algorithme rapide et par la méthode de l'exponentiation rapide.
+
+\question{\'Ecrire une fonction \texttt{exponaif(x,n)} d'arguments un réel $x$ et un entier naturel $n$, qui renvoie la valeur de $x^n$ par la méthode $x^n=x\times x \times ... \times x$ ($n$ termes).}
+
+\question{Donner un équivalent du nombre d'opérations effectuées.}
+
+\question{La méthode de l'exponentiation rapide consiste à remarquer que 
+$$x^n=\left\{
+\begin{tabular}{ccc} ${(x^2)}^{n/2}$ &si &$n$ pair; \\ 
+${x\times (x^2)}^{(n-1)/2}$& si& $n$ impair.
+\end{tabular}\right.$$}
+
+\question{\'Ecrire une fonction \texttt{exporapide(x,n)} d'arguments un réel $x$ et un entier naturel $n$,  qui renvoie la valeur de $x^n$ par la méthode de l'exponentiation rapide.}
+
+\question{Donner un équivalent du nombre d'opérations effectuées.}
+
+On considère un polynôme $$P(x)=\displaystyle\sum_{k=0}^n a_k.x^k$$ que l'on modélisera en Python par la liste $P=[a_0,a_1,...,a_n]$. Dans la suite, on prendra pour tout $k\in\Nn$, $a_k=k$.
+
+\question{\'Ecrire une fonction \texttt{Pnaif(x,n)} qui renvoie $P(x)$ à l'aide de la fonction \texttt{exponaif}.}
+
+\question{Donner un équivalent du nombre d'opérations faites pour ce calcul et vérifier que la complexité est quadratique.}
+
+\question{Faire de même pour une fonction 	\texttt{Prapide(x,n)} qui renvoie $P(x)$ à l'aide de la fonction \texttt{exporapide}. On peut montrer dans ce cas que la complexité est dominée par $n.\ln(n)$ (on admettra ce résultat).}
+
+Une dernière méthode consiste à utiliser le schéma de Hörner:
+	\[P(x)= (\ldots((a_nx+a_{n-1})x+a_{n-2})x+...+a_1)x+a_0}.\]
+
+\question{\'Ecrire une fonction \texttt{horner(x,L)} de paramètres un réel $x$ et une liste $L$ représentant un polynôme $P$, renvoie la valeur de $P(x)$ par la méthode de Horner.}
+
+\question{Compter le nombre d'opérations au total pour calculer $P(x)$ et en donner un équivalent lorsque $n\to +\infty$.}
+
+On désire maintenant visualiser les temps d'éxécution des trois fonctions précédentes pour des grandes valeurs de $n$.
+
+\question{Définir la liste $N$ des entiers naturels compris entre 0 et 100.}
+\question{Grâce à la fonction \texttt{perf\_counter} de la bibliothèque \texttt{time},  écrire une fonction \texttt{Temps\_calcul(x)}qui :}
+\begin{itemize}
+\item définit 3 listes \texttt{Tn}, \texttt{Tr} et \texttt{Th} contenant les temps de calcul de $P(x)$ pour $P=\displaystyle\sum_{k=0}^n k.x^k$ lorsque $n$ décrit $N$ avec respectivement la méthode naïve, la méthode rapide puis la méthode de Horner;
+\item trace les trois courbes  \texttt{Tn}, \texttt{Tr} et \texttt{Th} en fonction de $N$ (on prendra $x=2$). Interpréter le résultat.
+\end{itemize}
+
