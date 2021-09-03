@@ -11,34 +11,34 @@ mensualités, il  ne vous  reste plus qu'à  vous acquitter  d'une toute
 petite dette, que vous rembourserez aussitôt.
 
 
-\question{} Écrire  une fonction  \texttt{reste\_a\_payer(p, t,  m, d)}
+\question{ Écrire  une fonction  \texttt{reste\_a\_payer(p, t,  m, d)}
 renvoyant  le montant  de cette  somme à  rembourser  immédiatement
 après le paiement de la dernière
 mensualité, où  $p$ est le  montant total du  prêt en euros (dans l'exemple, $400\,000$), $t$ son  taux mensuel (dans l'exemple, 
 $0,25 \times 10^{-2}$), $m$ le montant d'une mensualité en euros (dans l'exemple, $1431,93$) et $d$ la
-durée en années (dans l'exemple, $40$).
+durée en années (dans l'exemple, $40$).}
 
 \emph{Indice : dans le cas donné dans cet énoncé, vous devez trouver un montant
 restant d'un peu moins de $7,12$ euros.}
 
 
-\question{} Écrire une fonction \texttt{somme\_totale\_payee(p, t, m,
+\question{ Écrire une fonction \texttt{somme\_totale\_payee(p, t, m,
   d)} renvoyant la somme totale (mensualités plus le dernier
-paiement) que vous aurez payé au banquier.
+paiement) que vous aurez payé au banquier.}
 
 
-\question{}Écrire une fonction \texttt{cout\_total(p, t, m, d)} renvoyant
+\question{Écrire une fonction \texttt{cout\_total(p, t, m, d)} renvoyant
   le coût total  du crédit, c'est-à-dire le total de  ce que vous avez
-  payé moins le montant du prêt.
+  payé moins le montant du prêt.}
   
 Un banquier vous propose de vous prêter $p$ euros, à un taux de $12t\%$ par an ---  ce qui, dans  le langage commercial  des banquiers,
 veut  dire $t\%$  par mois  --- avec des  mensualités de  $m$ euros. Autrement  dit,  vous   contractez  une  dette  de  $p$
 euros. Chaque mois, cette dette  augmente de $t\%$ puis est diminuée du  montant  de  votre  mensualité. Lorsque votre dette, augmentée du taux, est inférieure à la mensualité, il suffit de régler le solde en une fois.
 
-\question{} \'Ecrire une fonction \texttt{duree\_mensualite(p,t,m)} renvoyant le nombre de mensualités nécessaires au remboursement total du prêt.
+\question{ \'Ecrire une fonction \texttt{duree\_mensualite(p,t,m)} renvoyant le nombre de mensualités nécessaires au remboursement total du prêt.}
 
-\question{} Attention : que se passe-t-il si la mensualité est trop petite ? 
+\question{ Attention : que se passe-t-il si la mensualité est trop petite ? }
 
 \emph{Indice : dans le cas où le prêt est $\texttt{p}=4\times10^5$, le taux est $\texttt{t}=0,25\times10^{-2}$ et la mensualité est $\texttt{m}=1431,93$, on trouvera une durée de remboursement de $480$ mois.}
 
-\question{} \'Ecrire une fonction \texttt{tracer\_mensualite(p,t,m)} permettant de tracer en fonction du numéro de la mensualité la dette restante (ou le capital restant dû) jusqu'à ce que le prêt soit remboursé. Cette fonction permettra également de tracer en fonction du numéro de la mensualité le montant de l'intérêt versé à la banque. 
+\question{ \'Ecrire une fonction \texttt{tracer\_mensualite(p,t,m)} permettant de tracer en fonction du numéro de la mensualité la dette restante (ou le capital restant dû) jusqu'à ce que le prêt soit remboursé. Cette fonction permettra également de tracer en fonction du numéro de la mensualité le montant de l'intérêt versé à la banque. }
