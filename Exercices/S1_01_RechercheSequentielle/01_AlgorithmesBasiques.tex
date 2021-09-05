@@ -1,8 +1,8 @@
 %
 %\subsection*{Recherche séquentielle}
 
-\exer{Exercices d'échauffement}
-\setcounter{numques}{0}~\\
+%\exer{Exercices d'échauffement}
+%\setcounter{numques}{0}~\\
 
 \begin{obj}
 Rechercher séquentiellement un élément dans un tableau unidimensionnel ou dans un dictionnaire.
@@ -63,7 +63,7 @@ def load_fichier(file):
     mots = fid.readlines()
     fid.close()
     return mots
-dictionnaire = load_file('liste_francais.txt')
+liste_mots = load_file('liste_francais.txt')
 \end{lstlisting}
 
 \question{Écrire une fonction de signature  \texttt{compte\_lettre\_02(lettre: str, mots: list) -> int} qui renvoie le nombre d’occurrences de \texttt{lettre} dans une liste de mots \texttt{mots}.}
@@ -72,11 +72,11 @@ dictionnaire = load_file('liste_francais.txt')
 
 \question{Écrire une fonction de signature  \texttt{mots\_plus\_long(mots: list) -> str} qui renvoie le mot le plus long.}
 
-\question{Écrire une fonction de signature  \texttt{cherche\_mot\_in\_chaine\_01(mot: str, chaine: str) -> int} qui renvoie \texttt{True} si \texttt{mot} est dans \texttt{chaine}, \texttt{False} sinon. On utilisera des boucles \texttt{for} ou \texttt{while}.}
-
-\question{Écrire une fonction de signature  \texttt{cherche\_mot\_in\_chaine\_02(mot: str, chaine: str) -> int} qui renvoie \texttt{True} si \texttt{mot} est dans \texttt{chaine}, \texttt{False} sinon. On n'utilisera ni boucle \texttt{for} ni \texttt{while}.}
-
-\question{Écrire une fonction de signature  \texttt{cherche\_mot\_in\_dico(nb: int, dico: lst) -> str} qui permet de trouver le mot de \texttt{nb} lettres qui est le plus contenu dans d'autres mots.}
+%\question{Écrire une fonction de signature  \texttt{cherche\_mot\_in\_chaine\_01(mot: str, chaine: str) -> int} qui renvoie \texttt{True} si \texttt{mot} est dans \texttt{chaine}, \texttt{False} sinon. On utilisera des boucles \texttt{for} ou \texttt{while}.}
+%
+%\question{Écrire une fonction de signature  \texttt{cherche\_mot\_in\_chaine\_02(mot: str, chaine: str) -> int} qui renvoie \texttt{True} si \texttt{mot} est dans \texttt{chaine}, \texttt{False} sinon. On n'utilisera ni boucle \texttt{for} ni \texttt{while}.}
+%
+%\question{Écrire une fonction de signature  \texttt{cherche\_mot\_in\_dico(nb: int, dico: lst) -> str} qui permet de trouver le mot de \texttt{nb} lettres qui est le plus contenu dans d'autres mots.}
 
 
 \subsection*{Recherche dans un dictionnaire}
@@ -124,6 +124,7 @@ for clef,valeur in nb_lettres.items() :
 \end{exemple}
 
 
+
 %Il est possible de définir la fonction \texttt{generate\_tab\_alea} différemment.
 %\begin{lstlisting}
 %def generate_tab_alea_02(deb: int, fin: int,nb: int) -> list :
@@ -166,3 +167,8 @@ for clef,valeur in nb_lettres.items() :
 %Recherche d'un élément 
 %Recherche du maximum
 %Recherche du second maximum
+\question{Écrire une fonction \texttt{init\_dictionnaire(chaine:str) -> dict} que crée, initialise et renvoie le dictionnaire dont les clés sont les lettres de l'alphabet et les valeurs sont initialisées à 0.}
+
+\question{Écrire une fonction \texttt{remplir\_dictionnaire(dico:dict, liste\_mots:list) -> dict} qui compte le nombre de lettres de chacun des mots du dictionnaire chargé précédemment en incrémentant chacune des valeurs du dictionnaire.}
+
+\question{Écrire une fonction \texttt{cherche\_podium(dico:dict) ->list} qui renvoie la liste des trois lettres les plus utilisées. La liste renvoyée sera sous la forme \texttt{[['a',5],['b',4],['c',3]].}}
