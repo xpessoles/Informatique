@@ -8,27 +8,53 @@
 Rechercher séquentiellement un élément dans un tableau unidimensionnel ou dans un dictionnaire.
 \end{obj}
 
-\subsection*{Recherche d'un nombre dans une liste}
-Nous allons commencer par rechercher si un nombre est dans un tableau. 
+\subsection*{Création et manpulation de listes}
+Rappels : 
+\begin{itemize}
+\item Une liste est une structure de données contenant une série de valeurs. Les valeurs sont séparées par des virgules et encadrées par des crochets. Par exemple \texttt{L = [1, 2, 3]}.
+\item Pour accéder au \ieme élément d'une liste on procède ainsi \texttt{L[i]}. Attention l'indexation commence à 0. 
+\item Pour accéder à la taille de liste on utilise \texttt{len[L]}.
+\item Pour ajouter un élément à une liste, on utilise \texttt{L.append(4)}.
+\end{itemize}
 
-Commençons par définir la liste des entiers pairs compris entre 0 et \texttt{nb} exclus.
+\question{\'Ecrire une fonction de signature \texttt{generer\_liste\_entiers\_01(n: int) -> list} renvoyant la liste des entiers compris entre 0 et n exclus. On utilisera une boucle \texttt{for}.}
+
+\question{\'Ecrire une fonction de signature \texttt{generer\_liste\_entiers\_02(n: int) -> list} renvoyant la liste des entiers compris entre 0 (inclus) et \texttt{n} exclus. On utilisera une boucle \texttt{while}.}
+
+\question{\'Ecrire une fonction de signature \texttt{generer\_liste\_entiers\_03(deb: int, fin:int) -> list} renvoyant la liste des entiers compris entre \texttt{deb} et \texttt{fin}  inclus. On utilisera une boucle \texttt{for}.}
+
+\question{\'Ecrire une fonction de signature \texttt{generer\_liste\_entiers\_04(deb: int, fin:int) -> list} renvoyant la liste des entiers compris entre \texttt{deb} et \texttt{fin}  inclus. On utilisera une boucle \texttt{while}.}
+
+\question{\'Ecrire une fonction de signature \texttt{generer\_liste\_pairs(n:int) -> list} renvoyant la liste des entiers pairs compris entre 0 et \texttt{n} exclus.}
+
+\question{\'Ecrire une fonction de signature \texttt{generer\_liste\_impairs(n:int) -> list} renvoyant la liste des entiers impairs compris entre 0 et \texttt{n} exclus.}
+
+\question{\'Ecrire une fonction de signature \texttt{is\_multiple(n:int, m:int) -> bool} renvoyant \texttt{True} si \texttt{n} est multiple de de \texttt{m}.}
+
+
+\question{\textbf{En utilisant la fonction précédente}, écrire une fonction de signature \texttt{genere\_liste\_multiple(n:int, m:int) -> bool} renvoyant les \texttt{n} premiers multiples de \texttt{m}.}
+
+
+\subsection*{Recherche d'un nombre dans une liste}
+
+
+Nous allons rechercher si un nombre est dans une liste. 
+
+Commençons par générer une liste de nombre alétoires. Pour cela recopier les lignes suivantes. 
 
 \begin{lstlisting}
-def generate_pair_01(nb: int) -> list :
+import random as rd
+def generer_alea(nb: int) -> list :
     """
-    Génération d'une liste de nombres pairs compris entre 0 (exclus) et nb (exclus).
+    Génération d'une liste nb de nombres aléatoires compris entre 0 inclus et nb exclus.
     """
     res = []
-    for i in range(1,nb//2):
-        res.append(2*i)
+    for i in range(nb):
+        res.append(rd.randrange(0,nb))
     return res
 \end{lstlisting}
 
-Recopier la fonction dans un fichier.
 
-\question{Vérifier que la fonction  \texttt{generate\_pair\_01} fonctionne pour \texttt{nb=0}, \texttt{nb=9}, \texttt{nb=10}.}
-
-\question{Écrire une fonction de signature  \texttt{generate\_pair\_02(nb: int) -> list} en utilisant une boucle \texttt{while}.}
 
 \question{Écrire une fonction de signature  \texttt{recherche\_nb\_01(nb: int, L: list) -> bool} qui renvoie \texttt{True} si \texttt{nb} est dans \texttt{L}, \texttt{False} sinon. On utilisera une boucle \texttt{for}.}
 
@@ -40,9 +66,8 @@ Recopier la fonction dans un fichier.
 
 \question{Écrire une fonction de signature  \texttt{recherche\_first\_index\_nb\_02(nb: int, L: list) -> int} qui renvoie l'index de la première appartion du nombre \texttt{nb} dans la liste \texttt{L}. La fonction renverra \texttt{-1} si \texttt{nb} n'est pas dans la liste. On utilisera une boucle \texttt{while}.}
 
-\question{Écrire une fonction de signature  \texttt{recherche\_last\_index\_nb\_01(nb: int, L: list) -> int} qui renvoie l'index de la dernière appartion du nombre \texttt{nb} dans la liste \texttt{L}. La fonction renverra \texttt{-1} si \texttt{nb} n'est pas dans la liste. On utilisera une boucle \texttt{for}.}
+\question{Écrire une fonction de signature  \texttt{recherche\_last\_index\_nb\_01(nb: int, L: list) -> int} qui renvoie l'index de la dernière appartion du nombre \texttt{nb} dans la liste \texttt{L}. La fonction renverra \texttt{-1} si \texttt{nb} n'est pas dans la liste.}
 
-\question{Écrire une fonction de signature  \texttt{recherche\_last\_index\_nb\_02(nb: int, L: list) -> int} qui renvoie l'index de la dernière appartion du nombre \texttt{nb} dans la liste \texttt{L}. La fonction renverra \texttt{-1} si \texttt{nb} n'est pas dans la liste. On utilisera une boucle \texttt{while}.}
 
 \question{Écrire une fonction de signature  \texttt{recherche\_index\_nb\_01(nb: int, L: list) -> list} qui renvoie la liste des index du nombre \texttt{nb} dans la liste \texttt{L}. La fonction renverra une liste vide si \texttt{nb} n'est pas dans la liste.}
 
@@ -168,7 +193,8 @@ for clef,valeur in nb_lettres.items() :
 %Recherche du maximum
 %Recherche du second maximum
 \question{Écrire une fonction \texttt{init\_dictionnaire(chaine:str) -> dict} que crée, initialise et renvoie le dictionnaire dont les clés sont les lettres de l'alphabet et les valeurs sont initialisées à 0.}
+%% --  %%
 
-\question{Écrire une fonction \texttt{remplir\_dictionnaire(dico:dict, liste\_mots:list) -> dict} qui compte le nombre de lettres de chacun des mots du dictionnaire chargé précédemment en incrémentant chacune des valeurs du dictionnaire.}
+\question{Écrire une fonction \texttt{remplir\_dictionnaire(dico:dict, liste\_mots:list) -> dict} qui compte le nombre de lettres de chacun des mots de la liste \texttt{liste\_mots} chargée précédemment en incrémentant chacune des valeurs du dictionnaire.}
 
 \question{Écrire une fonction \texttt{cherche\_podium(dico:dict) ->list} qui renvoie la liste des trois lettres les plus utilisées. La liste renvoyée sera sous la forme \texttt{[['a',5],['b',4],['c',3]].}}
