@@ -1,15 +1,33 @@
 %\exer{Trouver les deux valeurs les plus proches dans un tableau}
 %\setcounter{numques}{0}
 
-\begin{enumerate}
+On se donne une liste ou un tableau \texttt{L} constitué d'entiers et contenant au moins deux éléments.
 
-\item On se donne un tableau \texttt{T} unidimensionnel. \'Ecrire une fonction \texttt{distance\_min1(T)} qui renvoie les deux éléments qui sont les plus proches ie dont la valeur absolue de la différence est minimale. On indiquera les valeurs obtenues ainsi que les indices correspondants.
+On cherche à identifier un couple \texttt{L[p]} et \texttt{L[q]} d'éléments les plus proches parmi ceux de la liste, c'est-à-dire vérifiant les conditions:
 
-\item Pour un tableau à $n$ cases, montrer que le nombre de comparaisons $C(n)$ faites dans cette fonction est tel que la suite $\left(\dfrac{C(n)}{n^2}\right)$ est bornée: on dit que la  \textbf{complexité est quadratique}.
+- $0\<p<q\<\texttt{len(L)}-1$
 
-\item On représentera un tableau bidimensionnel par une liste dont les éléments sont des listes représentants les lignes du tableau. \texttt{T} sera donc une matrice pas nécessairement carrée par exemple de la forme $$\texttt{T=[[1,2,3],[6,4,3],[3,8,9],[3,-2,0]]}:$$ chaque élément de \texttt{T} désignera une ligne du tableau. Le nombre de ligne est le nombre d'éléments de \texttt{T}, le nombre de colonnes est le nombre d'éléments de \texttt{T[0]}.
-
-\'Ecrire pour un tableau bidimensionnel \texttt{T}  une fonction \texttt{distance\_min2(T)} qui renvoie les deux éléments qui sont les plus proches ie dont la valeur absolue de la différence est minimale. On indiquera les valeurs obtenues ainsi que les indices correspondants.
+- $|L[p]-L[q]|=\min\{|L[i]-L[j]\tq 0\<i<j\<\texttt{len(L)}-1\}$.
 
 
-\end{enumerate}
+\question{On appelle distance minimale, la distance entre deux éléments d'indices distincts les plus proches. 
+\'Ecrire une fonction \texttt{distance\_min1(T)} qui renvoie la distance minimale de \texttt{T}.}
+
+Par exemple, pour \texttt{T=[10, 8, 8, 0, 5,1, 9, 5, 9, 9]}. la fonction devra renvoyer 0.
+
+\question{\'Ecrire une fonction \texttt{distance\_min2(T)} qui renvoie la distance minimale strictement positive de \texttt{T}, et qui renvoie -1 si tous les éléments sont égaux.
+\\
+Par exemple, pour \texttt{T=[10, 8, 8, 0, 5,1, 9, 5, 9, 9]}. la fonction devra renvoyer 1.}
+
+\question{On revient au cas d'une distance positive ou nulle. Pour trouver un couple d'indices solution, nous allons procéder de la façon suivante:
+\\
+- Réserver un dictionnaire \texttt{D}.
+\\
+- Pour chaque indice $0\<i\<\texttt{len (L)}-1$, placer dans \texttt{D[i]} le couple $(j,|L[j]-L[i]|)$ qui réalise le minimum de la distance $|L[i]-L[j]|$ pour $j>i$.
+\\
+- Une fois ce dictionnaire construit, le parcourir pour déterminer un couple $(p,q)$ solution.
+\\
+\'Ecrire une fonction \texttt{plus\_proche(L)} qui, étant donnée une liste \texttt{L}, réalise ces opérations.}
+
+
+

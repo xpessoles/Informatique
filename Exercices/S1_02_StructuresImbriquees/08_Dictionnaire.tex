@@ -1,0 +1,69 @@
+\section*{Rappels sur les dictionnaires}
+
+- Un dictionnaire est une suite de couple (clé, valeur) non ordonnée. Chaque élément est repéré par sa clé qui est donc unique. Le type d'un dictionnaire est \texttt{dict}.
+
+- Le dictionnaire vide est \texttt{dico=\{\}}
+
+- On peut définir un dictionnaire globalement:
+
+\texttt{dico=\{”MPSI”:46,”PCSI”:47,”PTSI”,45\}}	ou “MPSI” est une clé, 46 sa valeur.
+
+- On peut ajouter des éléments à un dictionnaire:
+
+\texttt{dico[”MP”]=45}
+
+et afficher:
+
+\texttt{print(dico)} renvoie: \texttt{dico=\{”MPSI”:46,”PCSI”:47,”PTSI”,45,”MP”:45\}}}
+
+\texttt{print(dico[”MPSI”])} affiche 46
+
+- On peut supprimer un élément:
+
+\texttt{del dico[”MP”]}	
+
+\texttt{print(dico}} renvoie \texttt{dico=\{”MPSI”:46,”PCSI”:47,”PTSI”,45\}}
+
+ - Test d'appartenance d'une clé:
+
+\texttt{print(“PCSI” in dico)} qui renvoie ici \texttt{True} (ou \texttt{False} dans le cas général)
+
+- Nombre d'éléments d'un dictionnaire:
+
+\texttt{len(dico)}
+
+- Parcourir les éléments d'un dictionnaire avec \texttt{items()}:
+
+\texttt{for elt in dico.items():}
+
+\texttt{\ \qquad  a=elt[0]}  \# clé
+
+\texttt{\ \qquad  b=elt[1]}   \# valeur
+
+OU
+
+\texttt{for clé, valeur in dico.items():}	
+
+\texttt{\ \qquad  ...}
+
+- Copie d'un dictionnaire:
+
+\texttt{import copy}
+
+\texttt{dico1=copy.deepcopy(dico)}	
+
+(\textit{et non \texttt{dico1=dico} qui va créer un alias seulement.})
+
+
+\bigskip
+
+\textbf{Exercice:} On dispose d'un dictionnaire associant à des noms de commerciaux d'une société le nombre de ventes qu'ils ont réalisées:
+Par exemple:
+
+\texttt{ventes=$\{$”Dupont”:14,”Henry”:19,”Pierre”:15,”Lucas”:21$\}$}
+
+\question{Ecrire une fonction \texttt{Nb\_Ventes(ventes:dict)} qui prend en entrée un dictionnaire et renvoie le nombre total de 
+ventes dans la société.}
+
+\question{Ecrire une fonction \texttt{Nom\_vendeur(ventes:dict)} qui prend en entrée un dictionnaire et renvoie le nom du vendeur ayant réalisé le plus de ventes. Si plusieurs vendeurs sont ex-aequo, la fonction devra retourner le nom de l'un d'entre eux seulement.}
+
