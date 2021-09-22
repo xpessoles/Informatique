@@ -1,6 +1,7 @@
 %\exer{Trouver les deux valeurs les plus proches dans un tableau}
 %\setcounter{numques}{0}
 
+<<<<<<< HEAD
 On se donne une liste ou un tableau \texttt{L} constitué d'entiers et contenant au moins deux éléments.
 
 On cherche à identifier un couple \texttt{L[p]} et \texttt{L[q]} d'éléments les plus proches parmi ceux de la liste, c'est-à-dire vérifiant les conditions:
@@ -28,6 +29,21 @@ Par exemple, pour \texttt{T=[10, 8, 8, 0, 5,1, 9, 5, 9, 9]}. la fonction devra r
 - Une fois ce dictionnaire construit, le parcourir pour déterminer un couple $(p,q)$ solution.
 \\
 \'Ecrire une fonction \texttt{plus\_proche(L)} qui, étant donnée une liste \texttt{L}, réalise ces opérations.}
+
+=======
+
+
+
+\question{On se donne un tableau \texttt{T} unidimensionnel. \'Ecrire une fonction \texttt{distance\_min1(T)} qui renvoie les deux éléments qui sont les plus proches ie dont la valeur absolue de la différence est minimale. On indiquera les valeurs obtenues ainsi que les indices correspondants.}
+
+\question{Pour un tableau à $n$ cases, montrer que le nombre de comparaisons $C(n)$ faites dans cette fonction est tel que la suite $\left(\dfrac{C(n)}{n^2}\right)$ est bornée: on dit que la  \textbf{complexité est quadratique}.}
+>>>>>>> b4c7e2bf8aa2f4c28fff397ab3527a904b008203
+
+On représentera un tableau bidimensionnel par une liste dont les éléments sont des listes représentants les lignes du tableau. \texttt{T} sera donc une matrice pas nécessairement carrée par exemple de la forme $$\texttt{T=[[1,2,3],[6,4,3],[3,8,9],[3,-2,0]]}:$$ chaque élément de \texttt{T} désignera une ligne du tableau. Le nombre de ligne est le nombre d'éléments de \texttt{T}, le nombre de colonnes est le nombre d'éléments de \texttt{T[0]}.
+
+<<<<<<< HEAD
+=======
+\question{\'Ecrire pour un tableau bidimensionnel \texttt{T}  une fonction \texttt{distance\_min2(T)} qui renvoie les deux éléments qui sont les plus proches ie dont la valeur absolue de la différence est minimale. On indiquera les valeurs obtenues ainsi que les indices correspondants.}
 
 
 
