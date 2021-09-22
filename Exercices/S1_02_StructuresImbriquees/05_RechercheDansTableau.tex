@@ -1,15 +1,23 @@
 %\exer{Trouver les deux valeurs les plus proches dans un tableau}
 %\setcounter{numques}{0}
 
-\begin{enumerate}
-
-\item On se donne un tableau \texttt{T} unidimensionnel. \'Ecrire une fonction \texttt{distance\_min1(T)} qui renvoie les deux éléments qui sont les plus proches ie dont la valeur absolue de la différence est minimale. On indiquera les valeurs obtenues ainsi que les indices correspondants.
-
-\item Pour un tableau à $n$ cases, montrer que le nombre de comparaisons $C(n)$ faites dans cette fonction est tel que la suite $\left(\dfrac{C(n)}{n^2}\right)$ est bornée: on dit que la  \textbf{complexité est quadratique}.
-
-\item On représentera un tableau bidimensionnel par une liste dont les éléments sont des listes représentants les lignes du tableau. \texttt{T} sera donc une matrice pas nécessairement carrée par exemple de la forme $$\texttt{T=[[1,2,3],[6,4,3],[3,8,9],[3,-2,0]]}:$$ chaque élément de \texttt{T} désignera une ligne du tableau. Le nombre de ligne est le nombre d'éléments de \texttt{T}, le nombre de colonnes est le nombre d'éléments de \texttt{T[0]}.
-
-\'Ecrire pour un tableau bidimensionnel \texttt{T}  une fonction \texttt{distance\_min2(T)} qui renvoie les deux éléments qui sont les plus proches ie dont la valeur absolue de la différence est minimale. On indiquera les valeurs obtenues ainsi que les indices correspondants.
 
 
-\end{enumerate}
+
+\question{On se donne un tableau \texttt{T} unidimensionnel. \'Ecrire une fonction \texttt{distance\_min1(T)} qui renvoie les deux éléments qui sont les plus proches ie dont la valeur absolue de la différence est minimale. On indiquera les valeurs obtenues ainsi que les indices correspondants.}
+
+\question{Pour un tableau à $n$ cases, montrer que le nombre de comparaisons $C(n)$ faites dans cette fonction est tel que la suite $\left(\dfrac{C(n)}{n^2}\right)$ est bornée: on dit que la  \textbf{complexité est quadratique}.}
+
+On représentera un tableau bidimensionnel par une liste dont les éléments sont des listes représentants les lignes du tableau. \texttt{T} sera donc une matrice pas nécessairement carrée par exemple de la forme $$\texttt{T=[[1,2,3],[6,4,3],[3,8,9],[3,-2,0]]}:$$ chaque élément de \texttt{T} désignera une ligne du tableau. Le nombre de ligne est le nombre d'éléments de \texttt{T}, le nombre de colonnes est le nombre d'éléments de \texttt{T[0]}.
+
+\question{\'Ecrire pour un tableau bidimensionnel \texttt{T}  une fonction \texttt{distance\_min2(T)} qui renvoie les deux éléments qui sont les plus proches ie dont la valeur absolue de la différence est minimale. On indiquera les valeurs obtenues ainsi que les indices correspondants.}
+
+\subsection*{Remarques}
+\textcolor{blue}{
+\begin{itemize}
+\item Proposer un tableau pour encourager les élèves à tester leurs fonctions. Exemple : \texttt{T =  [10, 8, 8, 0, 5, 1, 9, 5, 9, 9]}
+\item Pour la question 1, je pense qu'il faut être plus précis, notamment sur le type de résultats attendus. Qu'attend-on comme résulat sur la liste précédente ? la distance min est 0. Que doit retourner la fonction ? 8,8, 5,5, 9,9,9 ?
+Peut-être scinder la question en 2 ou 3 ? (1. Retourner la distance mini ? 2. retourner la liste des couples (?) qui sont à distnace min ? 3. Retourner la liste des couples d'indices ?
+\item Q2. Résultat attendu ?
+\item Q3, meme remarque que 1. De plus, peut-on faire une distance entre deux valeurs de deux-sous tableaux différents etc.
+\end{itemize}}
