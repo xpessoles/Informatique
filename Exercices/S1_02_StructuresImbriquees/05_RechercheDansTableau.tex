@@ -1,14 +1,13 @@
 %\exer{Trouver les deux valeurs les plus proches dans un tableau}
 %\setcounter{numques}{0}
 
-<<<<<<< HEAD
 On se donne une liste ou un tableau \texttt{L} constitué d'entiers et contenant au moins deux éléments.
 
 On cherche à identifier un couple \texttt{L[p]} et \texttt{L[q]} d'éléments les plus proches parmi ceux de la liste, c'est-à-dire vérifiant les conditions:
 
-- $0\<p<q\<\texttt{len(L)}-1$
+- $0<p<q<\texttt{len(L)}-1$
 
-- $|L[p]-L[q]|=\min\{|L[i]-L[j]\tq 0\<i<j\<\texttt{len(L)}-1\}$.
+- $\vert L[p]-L[q]\vert=\min\{\vert L[i]-L[j]\tq 0 <i<j <\texttt{len(L)}-1\}$.
 
 
 \question{On appelle distance minimale, la distance entre deux éléments d'indices distincts les plus proches. 
@@ -24,7 +23,7 @@ Par exemple, pour \texttt{T=[10, 8, 8, 0, 5,1, 9, 5, 9, 9]}. la fonction devra r
 \\
 - Réserver un dictionnaire \texttt{D}.
 \\
-- Pour chaque indice $0\<i\<\texttt{len (L)}-1$, placer dans \texttt{D[i]} le couple $(j,|L[j]-L[i]|)$ qui réalise le minimum de la distance $|L[i]-L[j]|$ pour $j>i$.
+- Pour chaque indice $0<i <\texttt{len (L)}-1$, placer dans \texttt{D[i]} le couple $(j,|L[j]-L[i]|)$ qui réalise le minimum de la distance $\vert L[i]-L[j] \vert$ pour $j>i$.
 \\
 - Une fois ce dictionnaire construit, le parcourir pour déterminer un couple $(p,q)$ solution.
 \\
