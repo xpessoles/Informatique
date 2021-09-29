@@ -1,48 +1,106 @@
-%\exer{Trouver les deux valeurs les plus proches dans un tableau}
-%\setcounter{numques}{0}
+\begin{itemize}\item  Un dictionnaire est une suite de couple (clé, valeur) non ordonnée. Chaque élément est repéré par sa clé qui est donc unique. Le type d'un dictionnaire est \texttt{dict}.
+	
+	\item  Le dictionnaire vide est \texttt{dico=\{\}}
+	
+	\item  On peut définir un dictionnaire globalement:
+	
+	\texttt{dico=\{”MPSI”:46,”PCSI”:47,”PTSI”,45\}}	ou “MPSI” est une clé, 46 sa valeur.
+	
+	\item  On peut ajouter des éléments à un dictionnaire:
+	
+	\texttt{dico[”MP”]=45}
+	
+	et afficher:
+	
+	\texttt{print(dico)} renvoie: \texttt{dico=\{”MPSI”:46,”PCSI”:47,”PTSI”,45,”MP”:45\}}}
 
-On se donne une liste ou un tableau \texttt{L} constitué d'entiers et contenant au moins deux éléments.
+\texttt{print(dico[”MPSI”])} affiche 46
+
+\item On peut supprimer un élément:
+
+\texttt{del dico[”MP”]}	
+
+\texttt{print(dico}} renvoie \texttt{dico=\{”MPSI”:46,”PCSI”:47,”PTSI”,45\}}
+
+\item Test d'appartenance d'une clé:
+
+\texttt{print(“PCSI” in dico)} qui renvoie ici \texttt{True} (ou \texttt{False} dans le cas général)
+
+\item Nombre d'éléments d'un dictionnaire:
+
+\texttt{len(dico)}
+
+\item  Parcourir les éléments d'un dictionnaire avec \texttt{items()}:
+
+\texttt{for elt in dico.items():}
+
+\texttt{\ \qquad  a=elt[0]}  \# clé
+
+\texttt{\ \qquad  b=elt[1]}   \# valeur
+
+OU
+
+\texttt{for clé, valeur in dico.items():}	
+
+\texttt{\ \qquad  ...}
+
+\item  Copie d'un dictionnaire:
+
+\texttt{import copy}
+
+\texttt{dico1=copy.deepcopy(dico)}	
+
+(\textit{et non \texttt{dico1=dico} qui va créer un alias seulement.})
+
+\end{itemize}
+
+\subsection*{Exemple 1}
+
+On dispose d'un dictionnaire associant à des noms de commerciaux d'une société le nombre de ventes qu'ils ont réalisées:
+
+\medskip Par exemple:
+\[
+\texttt{ventes=$\{$”Dupont”:14,”Henry”:19,”Pierre”:15,”Lucas”:21$\}$}
+\]
+
+\question{Ecrire une fonction \texttt{Nb\_Ventes(ventes:dict)} qui prend en entrée un dictionnaire et renvoie le nombre total de 
+ventes dans la société.}
+
+\question{Ecrire une fonction \texttt{Nom\_vendeur(ventes:dict)} qui prend en entrée un dictionnaire et renvoie le nom du vendeur ayant réalisé le plus de ventes. Si plusieurs vendeurs sont ex-aequo, la fonction devra retourner le nom de l'un d'entre eux seulement.}
+
+
+\subsection*{Exemple 2}
+
+On se donne une liste (ou un tableau) \texttt{L} constituée d'entiers et contenant au moins deux éléments.
 
 On cherche à identifier un couple \texttt{L[p]} et \texttt{L[q]} d'éléments les plus proches parmi ceux de la liste, c'est-à-dire vérifiant les conditions:
 
-- $0<p<q<\texttt{len(L)}-1$
+\begin{itemize} \item $0\le p<q\le \texttt{len(L)}-1$
+	
+	\item  $|L[p]-L[q]|=\min\{|L[i]-L[j]\tq 0\le i<j\le \texttt{len(L)}-1\}$.
+	
+\end{itemize}
 
-- $\vert L[p]-L[q]\vert=\min\{\vert L[i]-L[j]\tq 0 <i<j <\texttt{len(L)}-1\}$.
+\medskip \question{On appelle distance minimale, la distance entre deux éléments  les plus proches (éventuellement égaux) et d'indices distincts. 
+	\'Ecrire une fonction \texttt{distance\_min(L)} qui renvoie la distance minimale de \texttt{L}.}
 
+Par exemple, pour \texttt{T=[10, 10,10, 8, 8, 0, 5,1, 9, 5, 9, 9]}. la fonction devra renvoyer 0.
 
-\question{On appelle distance minimale, la distance entre deux éléments d'indices distincts les plus proches. 
-\'Ecrire une fonction \texttt{distance\_min1(T)} qui renvoie la distance minimale de \texttt{T}.}
+\medskip \question{\'Ecrire une fonction \texttt{indices\_distance\_min2(L)} qui renvoie un couple d'indices réalisant la distance minimale}
 
-Par exemple, pour \texttt{T=[10, 8, 8, 0, 5,1, 9, 5, 9, 9]}. la fonction devra renvoyer 0.
+Par exemple, pour \texttt{T=[10, 10,10, 8, 8, 0, 5,1, 9, 5, 9, 9]}. la fonction pourra renvoyer $(0,8)$.
 
-\question{\'Ecrire une fonction \texttt{distance\_min2(T)} qui renvoie la distance minimale strictement positive de \texttt{T}, et qui renvoie -1 si tous les éléments sont égaux.
-\\
-Par exemple, pour \texttt{T=[10, 8, 8, 0, 5,1, 9, 5, 9, 9]}. la fonction devra renvoyer 1.}
+\bigskip 
 
-\question{On revient au cas d'une distance positive ou nulle. Pour trouver un couple d'indices solution, nous allons procéder de la façon suivante:
-\\
-- Réserver un dictionnaire \texttt{D}.
-\\
-- Pour chaque indice $0<i <\texttt{len (L)}-1$, placer dans \texttt{D[i]} le couple $(j,|L[j]-L[i]|)$ qui réalise le minimum de la distance $\vert L[i]-L[j] \vert$ pour $j>i$.
-\\
-- Une fois ce dictionnaire construit, le parcourir pour déterminer un couple $(p,q)$ solution.
-\\
-\'Ecrire une fonction \texttt{plus\_proche(L)} qui, étant donnée une liste \texttt{L}, réalise ces opérations.}
+Une autre méthode pour trouver un couple d'indices solution consiste à procéder de la façon suivante:
 
-=======
+\begin{itemize}\item Réserver un dictionnaire \texttt{D}.
+	
+	\item  Pour chaque indice $0\le i\le \texttt{len (L)}-1$, placer dans \texttt{D[i]} le couple $(j,|L[j]-L[i]|)$ qui réalise le minimum de la distance $|L[i]-L[j]|$ pour $j>i$.
+	
+	\item Une fois ce dictionnaire construit, le parcourir pour déterminer un couple $(p,q)$ solution.
+	
+\end{itemize}
 
-
-
-\question{On se donne un tableau \texttt{T} unidimensionnel. \'Ecrire une fonction \texttt{distance\_min1(T)} qui renvoie les deux éléments qui sont les plus proches ie dont la valeur absolue de la différence est minimale. On indiquera les valeurs obtenues ainsi que les indices correspondants.}
-
-\question{Pour un tableau à $n$ cases, montrer que le nombre de comparaisons $C(n)$ faites dans cette fonction est tel que la suite $\left(\dfrac{C(n)}{n^2}\right)$ est bornée: on dit que la  \textbf{complexité est quadratique}.}
->>>>>>> b4c7e2bf8aa2f4c28fff397ab3527a904b008203
-
-On représentera un tableau bidimensionnel par une liste dont les éléments sont des listes représentants les lignes du tableau. \texttt{T} sera donc une matrice pas nécessairement carrée par exemple de la forme $$\texttt{T=[[1,2,3],[6,4,3],[3,8,9],[3,-2,0]]}:$$ chaque élément de \texttt{T} désignera une ligne du tableau. Le nombre de ligne est le nombre d'éléments de \texttt{T}, le nombre de colonnes est le nombre d'éléments de \texttt{T[0]}.
-
-<<<<<<< HEAD
-=======
-\question{\'Ecrire pour un tableau bidimensionnel \texttt{T}  une fonction \texttt{distance\_min2(T)} qui renvoie les deux éléments qui sont les plus proches ie dont la valeur absolue de la différence est minimale. On indiquera les valeurs obtenues ainsi que les indices correspondants.}
-
-
+\medskip \question{\'Ecrire une fonction \texttt{indices\_distance\_min3(L)} qui, étant donnée une liste \texttt{L}, réalise ces opérations et renvoie un couple solution}
 
