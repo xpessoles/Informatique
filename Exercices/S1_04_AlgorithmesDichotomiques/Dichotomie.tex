@@ -1,0 +1,107 @@
+	
+%Etant donné deux suites $(u_n)$ et $(v_n)$  de réels strictement positifs, on dit que $(u_n)$ est dominée par la suite $(v_n)$ lorsque $\left(\Frac{u_n}{v_n}\right)$ est une suite bornée. On note alors $u_n=\O{n\to +\infty}(v_n)$.
+%
+%Par exemple:
+%
+%\bi\q Si $(u_n)$ converge alors $u_n=\O{n\to +\infty}(1)$. Réciproque fausse.
+%
+%\q  $3n=\O{n\to +\infty}(n^2)$, $5n^2=\O{n\to +\infty}(n^2)$, $\ln(n)=\O{n\to +\infty}(n\ln(n)^2)$, $an^2+bn+c\ln(n)=\O{n\to +\infty}(n^2)$ ...
+%
+%\q Pour tout polynôme de degré $p$, $P=a_px^p+a_{p-1}x^{p-1}+...+a_1x+a_0$, on a $P(n)=\O{n\to +\infty}(n^p)$.
+%
+%\ei 
+%
+%En programmation, on dira qu'un programme a:
+%
+%- une complexité linéaire lorsque le nombre d'opérations effectuées est en $\O{n\to +\infty}(n)$
+%
+%- une complexité logarithmique lorsque le nombre d'opérations effectuées est en $\O{n\to +\infty}(\log(n))$
+%
+%- une complexité quadratique lorsque le nombre d'opérations effectuées est en $\O{n\to +\infty}(n^2)$
+
+
+On se donne une liste \texttt{L} de nombres de longueur \texttt{n}, {triée dans l'ordre croissant}, et un nombre \texttt{x0}. 
+
+Pour chercher \texttt{x0}, on va couper la liste en deux moitiés et chercher dans la moitié qui encadre \texttt{x0} et ainsi de suite...
+
+On appelle \texttt{g} l'indice de l'élément du début de la sous-liste dans laquelle on travaille et \texttt{d} l'indice de l'élément de fin.
+
+Au début, \texttt{g =} {0} et \texttt{d = } {n - 1}
+
+%On souhaite construire un algorithme admettant l'invariant suivant:
+%\bigskip
+%
+%\centerline{\fbox{si \t{x0} est dans \t{L} alors \t{x0} est dans la sous-liste \t{L[g:d]} (\t{g} inclus et \t{d} exclu).}}
+
+%\bigskip
+%\newpage
+\medskip 
+On utilise la méthode suivante :
+
+\begin{itemize}
+	\item On compare \texttt{x0} à "l'élément du milieu"  \texttt{L[m]} avec \texttt{m = (g + d) // 2}}
+%son indice est \t{m} $=$\cache{\t{ n//2} (division euclidienne)}
+
+\item Si \texttt{x0 = L[m]}, on a trouvé \texttt{x0}, on peut alors s'arrêter.
+\item  Si \texttt{x0} $<$ \texttt{L[m]}, c'est qu'il faut chercher entre \texttt{L[g]} et  \texttt{L[m-1]}% (\texttt{L[m]} exclu).
+}%dans \cache{la première moitié de la liste \t{L[g:m]}}\\
+\item Si \texttt{x0} $>$ \texttt{L[m]}, c'est qu'il faut chercher  entre \texttt{L[m+1]} et \texttt{L[d]}% (\texttt{L[m]} exclu).
+}\\
+\end{enumerate}
+
+On poursuit jusqu'à ce qu'on a trouvé \texttt{x0} ou lorsque l'on a épuisé la liste \texttt{L}.
+
+%\emph{Remarque} : On verra plus tard que l'algorithme est tellement rapide que cela ne change pas grand chose de s'arrêter avant et cela simplifie son écriture.
+
+%En notant $g$ et $d$  les indices de gauche et de droite du morceau de la liste $l$ où l'on est en train de faire la %recherche, 
+
+\bigskip \question{Illustrer la méthode avec les deux exemples suivants en déterminant successivement les valeurs de $g$, de $d$ et de $m$:}
+
+
+-   \texttt{x0 = 5} et \texttt{L} $= \begin{array}{|c|c|c|c|c|c|c|c|c|} 
+\hline -3 & 5 & 7 & 10 & 11 & 14 & 17 & 21 & 30 \\ \hline
+\end{array}$
+
+% g=0\\d=8\\m=4,L[m]>x0
+% g=0\\d=3\\m=1,L[m]=x0
+
+\medskip 
+
+- \texttt{x0 = 11} et \texttt{L} $= \begin{array}{|c|c|c|c|c|c|c|c|c|} 
+\hline -2 & 1 & 2 & 7 & 8 & 10 & 13 & 16 & 17  \\ \hline
+\end{array}$
+
+
+%g=0\\d=8\\m=4,L[m]<x0
+%g=5\\d=8\\m=6,L[m]>x0
+%g=5\\d=5\\m=5,L[m]<x0
+%g=6\\d=5
+
+\bigskip \question{Si $x0$ n'est pas dans la liste $L$, donner un test d'arrêt du processus de dichotomie portant sur $g$ et $d$. }
+
+\question{\'Ecrire une fonction \texttt{dichotomie(x0,L)} qui renvoie \texttt{True} ou \texttt{False} selon que \texttt{x0} figure ou non dans \texttt{L} par cette méthode. On utilisera une boucle \texttt{while} que l'on interrompra soit lorsque l'on a trouvé $x0$, soit lorsque l'on a fini de parcourir la liste.}
+
+\question{Combien vaut $g-d$ au $i\ieme$ tour de boucle ? Si \texttt{x0} ne figure pas dans \texttt{L}, montrer que le nombre de tours de boucles nécessaires pour sortir de la fonction est de l'ordre de $\ln n$ où $n=len(L)$ (cela rend la fonction beaucoup plus efficace qu'une simple recherche séquentielle pour laquelle le nombre de comparaisons pour sortir de la boucle serait de l'ordre de $n$)}
+
+
+%\subsection{Recherche d'un indice satisfaisant une condition donnée}
+%
+%On se donne dans cette question une liste \texttt{L} strictement décroissante de réels contenant des termes strictement positifs et des termes strictement négatifs. Par exemple $L=[6,5,3,1.5,0.6,-0.3,-1,-3]$
+%
+%On cherche l'indice et la valeur du dernier élément positif ou nul $x0$. Sur cet exemple, on doit trouver $[4,0.6]$. Pour cela, on va adapter la méthode de dichotomie ci-dessus de la manière suivante:
+%
+%- On pose au départ $g=0$, $d=n-1$ avec $n=len(L)$.
+%
+%- On définit $m=(g+d)//2$. 
+%
+%Si $L[m]>0$, c'est que $x0$ est situé entre $L[m]$ et $L[n-1]$. On pose donc $g=m$, $d=n-1$.
+%
+%Si $L[m]<=0$, c'est que $x0$ est situé entre $L[0]$ et $L[m]$. On pose donc $g=0$, $d=m$.
+%
+%- On continue ainsi le processus.
+%
+%\be\q Quelle est la condition d'arrêt à la dernière étape ?
+%
+%\q \'Ecrire une fonction \texttt{recherche\_dicho(L)}, d'argument la liste \texttt{L}, qui renvoie l'indice ainsi que la valeur du dernier élément positif ou nul. On utilisera là encore une boucle \texttt{while}.
+%
+%\ee
