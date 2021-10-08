@@ -1,0 +1,338 @@
+\usepackage[utf8]{inputenc}   % permet l'utilisation de caractres ISO
+\usepackage[french]{babel}    % choix du francais
+\usepackage{fancyhdr}       % ncessaire pour \pagestyle{fancy}
+\usepackage{fancybox}
+\usepackage[dvips]{graphicx}       % gestion des images
+\usepackage{placeins}   % gestion de la position des images
+\usepackage{amsmath}        % modification des polices mathmatiques
+\usepackage{amssymb}
+\usepackage{mathrsfs}
+\usepackage[cyr]{aeguill}
+\usepackage{enumitem}
+\usepackage{pifont}
+\usepackage{psfrag}
+\usepackage{epsfig}
+\usepackage{supertabular}
+\usepackage{array}
+\usepackage{multicol}
+\usepackage{multirow} % Pour faire des tableaux contenant des lignes fusionnes
+\usepackage{hyperref}
+\usepackage{color}
+\usepackage[dvipsnames]{pstricks}
+\usepackage{pstricks-add,pst-plot,pst-node}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{enumerate}
+\usepackage{float}
+\usepackage{titlesec}
+\usepackage{textcomp}
+\usepackage{subfigure}
+\usepackage{sectsty}
+\usepackage{pdfpages}
+\usepackage{etex} % permet de charger plus de package 
+\usepackage{listings}
+
+%===============================
+% Mise en page chapitre ligne verticale TD
+%------------------------------------------
+\makeatletter
+\def\thickhrulefill{\leavevmode \leaders \hrule height 1ex \hfill \kern \z@}
+\def\@makechapterhead#1{%
+  \vspace*{10\p@}%
+  {\parindent \z@ 
+        \raggedleft
+        \reset@font\huge\bfseries
+        \begin{tabular}{l|p{13cm}}
+         \textcolor{rltred}{ { TD  }}
+          &\
+          \Huge #1
+        \end{tabular}
+        \par\nobreak
+    \vskip 70\p@
+  }}
+
+%===============================
+% Definition des couleurs 
+%------------------------------------------
+\definecolor{rltred}{rgb}{0.75,0,0}    
+\definecolor{rltgreen}{rgb}{0,0.5,0}
+\definecolor{oneblue}{rgb}{0,0,0.6}
+\definecolor{marron}{rgb}{0.64,0.16,0.16}
+\definecolor{forestgreen}{rgb}{0.13,0.54,0.13}
+\definecolor{purple}{rgb}{0.62,0.12,0.94}
+\definecolor{dockerblue}{rgb}{0.11,0.56,0.98}
+\definecolor{freeblue}{rgb}{0.25,0.41,0.88}
+\definecolor{freeblue2}{rgb}{0.25,0.41,0.77}
+\definecolor{myblue}{rgb}{0,0.2,0.4}
+
+%===============================
+% Definition de l'affichage des sections et sous sections
+%------------------------------------------
+\renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
+\renewcommand{\headrulewidth}{0.4pt}   % trait horizontal en dessous de l'entete
+\renewcommand{\footrulewidth}{0.4pt}     % trait horizontal au dessus du pied de page
+\renewcommand{\baselinestretch}{1.1} % augmente l'interligne  1.1
+    
+\renewcommand{\thesection}{\Roman{section}}
+\renewcommand{\thechapter}{\arabic{chapter}}
+
+\usepackage{geometry}
+\geometry{ hmargin=3cm, vmargin=2.5cm }
+\headheight=15pt
+\textwidth=170mm \oddsidemargin=-4mm %\evensidemargin=0mm
+
+%% Profondeur de \subsubsection = 3
+\setcounter{tocdepth}{2} % pour que les subsubsection apparaissent dans la table des matieres
+\setcounter{secnumdepth}{3} % pour que les subsubsection soient numrotes
+
+% Pouvoir afficher des URL correctement
+\usepackage{url}
+\let\urlorig\url
+\renewcommand{\url}[1]{%
+  \begin{otherlanguage}{english}\urlorig{#1}\end{otherlanguage}%
+}
+
+
+%===============================
+% Définition de nouvelles commandes de listes
+%------------------------------------------
+\newlist{coche}{itemize}{2}
+\setlist[coche, 1]{font=\color{rltred} , label=\ding{51}}
+\setlist[coche, 2]{font=\color{rltred}}
+
+\newlist{point}{itemize}{2}
+\setlist[point, 1]{label=\textbullet}
+\setlist[point, 2]{label=--}
+
+\newlist{tiret}{itemize}{2}
+\setlist[tiret, 1]{label=--}
+\setlist[tiret, 2]{label=-}
+
+%===============
+% Environnements 
+%--------------------
+\newcommand{\Obj}[1]{\noindent
+\rule[0.1cm]{1cm}{0.8pt} \textbf{Objectif} \rule[0.1cm]{14.1cm}{0.8pt}\\
+#1\\
+\rule[0.1cm]{17cm}{0.8pt} }
+
+\newcommand{\Pbm}[1]{\noindent
+\textcolor{rltred}{\rule[0.1cm]{1cm}{0.8pt}} \textbf{Problématique technique} \textcolor{rltred}{\rule[0.1cm]{11cm}{0.8pt}}\\
+#1\\
+\textcolor{rltred}{\rule[0.1cm]{17cm}{0.8pt}}}
+   
+\newcounter{Qu}
+\addtocounter{Qu}{+1}
+\newcommand{\Q}{\noindent \textbf{Q\theQu .\hspace{0,7mm}}\addtocounter{Qu}{+1}}
+
+\newcounter{Exem}
+\addtocounter{Exem}{+1}
+% \newcommand{\Exem}{\noindent \textbf{Exemple: \hspace{0,7mm}}\addtocounter{Exem}{+1}}
+\newcommand{\Exem}[1]{\noindent \fcolorbox{lightgray}{lightgray}{\begin{minipage}[c]{16.7cm}\textbf{Exemple\hspace{0,8mm} \theExem \hspace{0,8mm}}\addtocounter{Exem}{+1}:  \textit{#1}\end{minipage}}}
+
+
+\newcounter{Ex}
+\addtocounter{Ex}{+1}
+\newcommand{\E}{\noindent \textbf{Ex\theEx .\hspace{0,7mm}}\addtocounter{Ex}{+1}}
+
+\newcounter{Prop}
+\addtocounter{Prop}{+1}
+\newcommand{\Prop}[1]{\noindent \fcolorbox{lightgray}{lightgray}{\begin{minipage}[c]{16.7cm}\textbf{Propriété\hspace{0,8mm} \theProp \hspace{0,8mm}}\addtocounter{Prop}{+1} \textit{#1}\end{minipage}}}
+
+\newcounter{Def}
+\addtocounter{Def}{+1}
+\newcommand{\Def}[1]{\noindent \fcolorbox{lightgray}{lightgray}{\begin{minipage}[c]{16.75cm}\textbf{Définition\hspace{0,8mm} \theDef \hspace{0,8mm}}\addtocounter{Def}{+1} \textit{#1}\end{minipage}}}
+
+\newcounter{Thm}
+\addtocounter{Thm}{+1}
+\newcommand{\Thm}[1]{\noindent \fcolorbox{lightgray}{lightgray}{\begin{minipage}[c]{16.7cm}\textbf{Théorème\hspace{0,8mm} \theThm \hspace{0,8mm}}\addtocounter{Thm}{+1} \textit{#1}\end{minipage}}}
+
+\newcommand{\Man}[1]{\noindent
+\textcolor{blue}{\rule[0.1cm]{1cm}{0.8pt}} \textcolor{blue}{\textbf{Manipulation}} \textcolor{blue}{\rule[0.1cm]{13.2cm}{0.8pt}}\\ \textcolor{blue}{#1}\\
+\textcolor{blue}{\rule[0.1cm]{17cm}{0.8pt}}}
+
+
+\definecolor{gris25}{gray}{0.75}
+\definecolor{bleu}{RGB}{18,33,98}
+\definecolor{bleuf}{RGB}{42,94,171}
+\definecolor{bleuc}{RGB}{231,239,247}
+\definecolor{rougef}{RGB}{185,18,27}
+\definecolor{rougec}{RGB}{255,230,231}
+\definecolor{vertf}{RGB}{103,126,82}
+\definecolor{vertc}{RGB}{220,255,191}
+\definecolor{violetf}{RGB}{112,48,160}
+\definecolor{violetc}{RGB}{230,224,236}
+%
+
+\newenvironment{py}[1][\hsize]%
+{%
+    \def\FrameCommand%
+    {%
+%\rotatebox{90}{\textit{\textsf{Python}}} 
+\rotatebox{90}{\includegraphics[height=.6cm]{../images/logo_python}} 
+        {\color{violetf}\vrule width 3pt}%
+        \hspace{0pt}%must no space.
+        \fboxsep=\FrameSep\colorbox{violetc}%
+    }%
+    \MakeFramed{\hsize #1 \advance\hsize-\width\FrameRestore}%
+}%
+{\endMakeFramed}%
+
+
+%  Code python
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\definecolor{fond}{rgb}{1,1,1}			%Couleur du fond
+\definecolor{commentaires}{rgb}{0.5,0.5,0.5}	%Couleur des commentaires
+\definecolor{chaines}{rgb}{0,0.63,0}		%Couleur des chaines de caracteres
+\definecolor{fonctions}{rgb}{0,0,1}		%Couleur des fonctions de bases
+\definecolor{decoration}{rgb}{0.5,0.5,0.5}		%Couleur des fonctions autre (??)
+\definecolor{self}{rgb}{0,0,0}		%je sais pas. J'ai recopié d'internet
+\definecolor{numeros}{rgb}{0.7,0.7,0.7}		%numéros de ligne
+\definecolor{chevrons}{rgb}{1,0.,0.}		%chevrons
+
+
+\lstset{
+	%Langage
+		language=Python,	%Langage par défaut
+	%Mise en forme de l'environnement
+		xleftmargin=2em,	%marge a gauche
+		%frame=trBL,		%Cadre (double cadre)
+		backgroundcolor=\color{fond},	%Couleur d'arriere plan
+		framexleftmargin=5mm,
+		frame=shadowbox,
+		rulesepcolor=\color{black},
+		texcl=true,	%Activle les commandes LaTex dans le code
+		%escapechar=ø,	%Caractere a echapper
+		escapeinside={(*}{*)},
+	%Numeros de ligne
+		numbers=left,	%Rajoute des numéros de ligne
+		numberstyle=\footnotesize\color{numeros},	%Taille des numéros de ligne
+		numbersep=1em,			%Marge entre le code et les numéros de ligne
+	%Mise en forme du texte
+		columns=fixed,		%Largeur des lettres (fixed, flexible, fullflexible)
+		basicstyle=\ttfamily,	%Mise en forme de base
+		showspaces=false,	%Pour mettre des especes d'underscore sur les espaces
+		tabsize=8,	%Taille des tabulations	
+	%Commentaires
+		commentstyle=\color{commentaires}\slshape,	%Couleur des commentaires
+	%Chaine de caracteres
+		stringstyle=\color{chaines},
+		showstringspaces=false,
+		morecomment=[s][\color{chaines}]{"""}{"""},
+		morecomment=[s][\color{chaines}]{'''}{'''},
+	%Fonctions et mot clé de python
+		morekeywords={import,from,class,def,for,while,if,is,in,elif,else,not,and,or,print,break,continue,return,True,False,None,access,as,del,except,exec,finally,global,import,lambda,pass,print,raise,try,assert},
+		keywordstyle=\color{fonctions}\bfseries,
+		morekeywords={[3]>>>},
+		keywordstyle={[3]\color{chevrons}\bfseries},
+		morekeywords={[2]@invariant},
+		keywordstyle={[2]\color{decoration}\slshape},
+		emph={self},
+		emphstyle={\color{self}\slshape}
+	}
+\lstnewenvironment{codePython}
+		{	\footnotesize\setbox1=\vbox
+			\bgroup
+		}
+		{	\egroup	
+			\begin{center}
+				\begin{minipage}{0.8\linewidth}
+					%\begin{bclogo}[couleur=white,logo=\bcoutil,noborder = true]{Code Python}
+						\box1
+					%\end{bclogo}
+				\end{minipage}
+			\end{center}
+		}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% PseudoCode
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\definecolor{fond_pseudo}{RGB}{250,250,250} %Couleur du fond
+\definecolor{bord_pseudo}{RGB}{0,0,0} %Couleur du fond
+
+\newcounter{cptPseudo}
+
+\newenvironment{pseudoCode}[1][]	{\refstepcounter{cptPseudo}
+				\begin{center}
+					\begin{minipage}{0.95\linewidth}
+						\begin{bclogo}[couleur=fond_pseudo,couleurBord=bord_exemple,arrondi=0.2,logo=\bcbook]{pseudo code \ : \emph{#1}}}
+				{		\end{bclogo}
+					\end{minipage}
+				\end{center}}		
+		
+		
+% \lstnewenvironment{codepseudo}
+% 		{	\footnotesize\setbox1=\vbox
+% 			\bgroup
+% 		}
+% 		{	\egroup	
+% 			\begin{center}
+% 			\begin{minipage}{0.05\linewidth}
+% 			 {\includegraphics[angle=90,width=0.45\linewidth]{../image/pseudo_code_image.png}}
+% 			\end{minipage}\begin{minipage}{0.7\linewidth}
+% 					%\begin{bclogo}[couleur=white,logo=\bcoutil,noborder = true]{Code Python}
+% 						\box1
+% 					%\end{bclogo}
+% 				\end{minipage}
+% 			\end{center}
+% 		}		
+\lstnewenvironment{codePseudo}
+		{	\footnotesize\setbox1=\vbox
+			\bgroup
+		}
+		{	\egroup	
+			\begin{center}
+				\begin{minipage}{0.8\linewidth}
+					%\begin{bclogo}[couleur=white,logo=\bcoutil,noborder = true]{Code Python}
+						\box1
+					%\end{bclogo}
+				\end{minipage}
+			\end{center}
+		}
+		
+		
+		
+		
+		
+		
+\lstnewenvironment{pseudo}[1][]{
+% 		\rotatebox{90}{\textit{\textsf{Pseudo Code}}} 
+\lstset{
+language=pseudocode,
+basicstyle=\sffamily\footnotesize, 	
+stringstyle=\color{red}, 
+showstringspaces=false, 
+alsoletter={1234567890},
+otherkeywords={\ , \}, \{},
+keywordstyle=\color{blue},
+emph={pour, faire, varie, si, tant que, et, ou, Fonction, alors, sinon, fin si},
+emphstyle=\color{black}\bfseries,
+emph={[2]True, False, None, self},
+emphstyle=[2]\color{olive},
+emph={[3]from, import, as},
+emphstyle=[3]\color{blue},
+upquote=true,
+columns=flexible, % pour empecher d'avoir un espacement mono
+morecomment=[s]{"""}{"""},
+commentstyle=\color{Hellbraun}\backslash\backslash,
+%emph={[4]1, 2, 3, 4, 5, 6, 7, 8, 9, 0},
+emphstyle=[4]\color{blue},
+literate=*{:}{{\textcolor{blue}:}}{1}
+{=}{{\textcolor{blue}=}}{1}
+{-}{{\textcolor{blue}-}}{1}
+{+}{{\textcolor{blue}+}}{1}
+{*}{{\textcolor{blue}*}}{1}
+{!}{{\textcolor{blue}!}}{1}
+{(}{{\textcolor{blue}(}}{1}
+{)}{{\textcolor{blue})}}{1}
+{[}{{\textcolor{blue}[}}{1}
+{]}{{\textcolor{blue}]}}{1}
+{<}{{\textcolor{blue}<}}{1}
+{>}{{\textcolor{blue}>}}{1},
+%framexleftmargin=1mm, framextopmargin=1mm, frame=shadowbox, rulesepcolor=\color{blue},#1
+%backgroundcolor=\color{SourceHintergrund}, 
+%framexleftmargin=1mm, framexrightmargin=1mm, framextopmargin=1mm, frame=single, framerule=1pt, rulecolor=\color{black},#1
+}}{}
+
+				

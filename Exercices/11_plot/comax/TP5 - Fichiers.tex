@@ -1,0 +1,310 @@
+\documentclass[a4paper,11pt,titlepage]{report}
+\input{base/package}
+\input{base/schemabloc}
+
+%configure hyperref
+\hypersetup{
+backref=true, %permet d'ajouter des liens dans...
+pagebackref=true,%...les bibliographies
+hyperindex=true, %ajoute des liens dans les index.
+colorlinks=true, %colorise les liens
+breaklinks=true, %permet le retour  la ligne dans les liens trop longs
+urlcolor= black, %couleur des hyperliens
+linkcolor= black, %couleur des liens internes
+bookmarks=true, %cr des signets pour Acrobat
+bookmarksopen=true, %si les signets Acrobat sont crs les afficher completement.
+pdftitle={TP informatique}, %informations apparaissant
+pdfauthor={upsti}, %dans les informations du document
+pdfsubject={GT info} }%sous Acrobat.
+% \newcommand	{\competences}		{\begin{itemize}
+% \item A - compétences 1
+% \end{itemize}	}    
+%--------------------------------------------------------%
+%--------------------------------------------------------%
+
+\graphicspath{{image/}}
+\newcommand	{\partie}		{TP5}
+\newcommand  {\partiehaute}	{TP5}
+\newcommand	{\titre}		{TP5 -- Bibliothèques, fichiers, graphiques}
+\newcommand	{\numero}		{1}
+\newcommand	{\type}		{TP}
+\newcommand	{\version}		{V1}
+
+
+% \documentclass[a4paper,11pt]{article}
+% \input{base/package}
+% 
+% 
+% \title{TP5 -- Bibliothèques, fichiers, graphiques}
+% \date{\vspace{-5ex}}
+% 
+% 
+% \fancypagestyle{EnonceTP}{
+% \lhead{\includegraphics[width=.07\textwidth]{image/logo_upsti.jpg}} \rhead{   \textsc{TP informatique}}
+% \lfoot{\includegraphics[width=.07\textwidth]{image/logoCC.png}}\cfoot{\thepage}\rfoot{}
+% }
+% \pagestyle{EnonceTP}
+
+\begin{document}
+
+\input{base/page_de_garde.tex}
+\pagestyle{fancy}
+
+
+\lhead{Informatique commune} \rhead{ \type}
+\lfoot{\includegraphics[width=.03\textwidth]{upsti_2.png} \hspace{0.1cm}\small{www.upsti.fr}}\cfoot{\thepage/\pageref{LastPage}}\rfoot{\includegraphics[width=.07\textwidth]{logoCC.png}}
+
+\section{Mise en situation}
+On s'intéresse dans ce sujet aux Entrées/Sorties fichier, autrement dit à la lecture ou écriture d'un fichier, ainsi qu'à l'utilisation de modules ou bibliothèques, utiles par exemple dans la réalisation de courbes, graphiques, histogrammes, etc.
+
+\subsection{Répertoire de travail courant}
+
+En règle général, il peut s'avérer nécessaire de travailler dans un répertoire de travail commun où l'on regroupe es scripts python et le fichiers à exploiter (ou alors si les fichiers sont nombreux on peut les inclure dans un sous-dossier). Quoi qu'il en soit, il faut définir un répertoire de travail courant. 
+En effet, lorsque l'on cherche à accéder à un fichier dans un script ou dans la console, PYTHON ira chercher ce fichier dans le répertoire de travail courant (« current work directory »).
+
+Le module \texttt{os}, qui s'importe en faisant \texttt{import os}  contient deux fonctions permettant de connaitre et de modifier le répertoire de travail courant :
+\begin{itemize}
+\item La fonction \texttt{os.getcwd} (« get current work directory ») ne prend aucun argument et retourne une chaine de caractère donnant le chemin du répertoire de travail courant.
+\item La fonction \texttt{os.chdir} (« change directory ») prend comme argument une chaine de caractère correspondant à un chemin de répertoire et définit ce répertoire comme étant le répertoire de travail courant. 
+\end{itemize}
+On notera qu'il faut mettre deux \og\textbackslash\fg{} \, pour indiquer l'arborescence complète. Par exemple, pour indiquer que répertoire de travail courant est \og D:\textbackslash Dossier\textbackslash Sous-dossier\fg{}, on saisira :
+\begin{codePython}
+import os
+os.chdir("D:\\Dossier\\Sous-dossier")
+\end{codePython}
+
+\subsection{Lecture / écriture de fichiers}
+
+L'ouverture d'un fichier se fait grâce à la fonction : \texttt{open(nom, mode)}.
+\texttt{nom} : Chaîne de caractère, nom du fichier
+\texttt{mode} : Chaîne de caractère, mode accès au fichier (\texttt{'r'} : read, \texttt{'w'} : write)
+
+\textbf{La fonction open retourne un objet de type file \textit{itérable}.} 
+Les principales méthodes de la classe file sont les suivantes :
+ 
+\vspace{0.5cm}
+\begin{tabular}{|l|l|}
+    \hline
+     \texttt{.read()}  & retourne tout le fichier comme un \texttt{str}  \\
+    \hline
+     \texttt{.read(n)}  & retourne un \texttt{str} d'au moins \textit{n} octets  \\
+    \hline
+     \texttt{.readline()}  & retourne une ligne  \\
+    \hline
+     \texttt{.readlines()}  & retourne la liste de toutes les lignes du fichier  \\
+    \hline
+     \texttt{.writeslines(lines)}  & écrit \texttt{lines} (liste de \texttt{str}) dans le fichier  \\
+    \hline
+     \texttt{.close()}  & ferme le fichier  \\
+    \hline
+\end{tabular}
+\vspace{0.5cm}
+
+Afin de tester quelques fonctionnalités, on disposera du fichier \texttt{data1.txt}. On pourra l'ouvrir de la façon suivante et nommer l'objet associé \og MonFichier \fg{} :
+\begin{codePython}
+MonFichier = open("data1.txt",'r')
+\end{codePython}
+
+\Q{Tester et commenter les lignes de code suivantes, après avoir observé la structure du fichier \texttt{data1.txt} sous python ou tout autre éditeur de texte.}
+
+\begin{codePython}
+myFile = open("data1.txt",'r')
+data = []                  
+for lu in myFile:
+   if lu[0] != '#':
+      data.append(lu)
+myFile.close()
+\end{codePython}
+
+Afin de séparer les termes de chaque élément de la liste précédemment obtenue, nous allons utiliser la méthode \texttt{.split()} associée aux chaînes de caractères. Si on ne précise rien en paramètres de la méthode, tout espace blanc est séparateur (espaces, tabulations (\textbackslash t), retour à la ligne (\textbackslash n),...). Toutefois elle peut prendre deux paramètres optionnels : en chaîne de caractère, le symbole séparateur et un nombre, indiquant en combien de morceaux on souhaite scinder la chaîne au maximum.
+\vspace{0.5cm}
+
+\Q{Tester les lignes suivantes et les commenter :}
+\begin{codePython}
+t, temperature = [], []
+for lu in data:
+    (x1,x2)=lu.split()
+    t.append(float(x1))
+    temperature.append(float(x2))
+\end{codePython}
+
+Il est également possible d'écrire dans un fichier, mais nous ne développerons pas ici les techniques qui s'y rapportent.
+
+\subsection{Tracés de graphes}
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=0.7\textwidth]{image/matplotlib_site.png}
+\caption{Page d'accueil du site internet sur Matplotlib}
+\label{matplotlib_site}
+\end{figure}
+
+Le tracé de courbes est effectué grâce au très riche module matplotlib, qui propose des outils de tracés. Le site internet dédié à ce module (https://matplotlib.org/) vous montrera entre autre la galerie impressionnante de tracés possibles (cliquer sur l’ongle « Examples » sur la page d’accueil du site), ainsi que toute la documentation (onglet « Documentation »).
+
+\subsubsection{Premier exemple}
+
+Pour tracer une courbe, il faut dans un premier temps ouvrir une fenêtre graphique dans laquelle elle sera effectivement tracée. Voici un premier exemple :
+
+\begin{codePython}
+import matplotlib.pyplot as plt
+plt.figure() plt.title("Titre de la figure")
+plt.xlabel('axe des abcisses')
+plt.xlim(0,10)
+plt.ylabel('axe des ordonnees en bleu', color='b')
+plt.ylim(0,100)
+plt.show()
+\end{codePython}
+
+\Q{Tester les lignes précédentes et les commenter.}
+
+\vspace{5mm}
+Une courbe peut alors être tracée grâce à la ligne de commande \texttt{plt.plot(x,y)}. \texttt{x} et \texttt{y} représentent une liste de flottants (\texttt{y} ordonnées des abscisses de \texttt{x}). Bien entendu, le nombre d’éléments de chaque liste doit être identique. \texttt{x} et \texttt{y} peuvent également être des vecteurs. Enfin, on peut ajouter autant de courbes que l’on souhaite sur la même fenêtre, en saisissant à la suite la fonction \texttt{plt.plot}...
+
+\vspace{5mm}
+Il est possible d’ajouter sur la courbe tracée, des motifs, tels que des croix, points, etc…
+Pour connaître toutes les options, le mieux est de se référer à la documentation de matplotlib. Voyons ici quelques-unes d’entre elles :
+\begin{itemize}
+\item Création d'une nouvelle figure : on commence par créer une nouvelle figure pour y insérer des courbes ou autres graphes. Cela se fait avec \texttt{plt.figure()}. A noter que l'on peut éventuellement spécifier un numéro de figure ; par exemple \texttt{plt.figure(5)}. Il sera alors possible de tracer des courbes sur cette figure en appelant \texttt{plt.figure(5)}.
+\item bornes : spécifier un rectangle de représentation, ce qui permet un zoom, Permettant de restreindre la tracé sur une zone donnée, se fait via la commande \texttt{plt.axis([xmin,xmax,ymin,ymax])} ;
+\item couleur du trait : pour changer la couleur du tracé une lettre \texttt{g} vert (green), \texttt{r} rouge (red), \texttt{k} noir, \texttt{b} bleu, \texttt{c} cyan, \texttt{m} magenta, \texttt{y} jaune (yellow), \texttt{w} blanc (white). \texttt{plt.plot(...,'r')} tracera une courbe en rouge. Pour avoir encore plus de couleurs, on pourra utiliser le mot clé \texttt{color=[R,G,B]} avec les 3 paramètres flottants R (Red), G (Green) et B (Blue) flottants compris entre 0 et 1, pour indiquer leur niveau.
+\item symboles : mettre des symboles aux points tracés se fait via l’option \texttt{marker}. Les possibilités sont nombreuses parmi \texttt{'+'}, \texttt{'*'}, \texttt{','}, \texttt{‘.’}, et bien d'autres...
+\item style du trait : pointillés, absences de trait, etc se décident avec \texttt{linestyle}. Au choix \texttt{'-'}, ligne continue, \texttt{'--'} tirets, \texttt{'-.'} points-tirets, \texttt{':'} pointillés, etc.
+\item épaisseur du trait : \texttt{linewidth} = flottant (comme par exemple : \texttt{linewidth=2}).
+\item taille des symboles (markers) : \texttt{markersize} = flottant comme pour l’épaisseur du trait. D’autres paramètres sont modifiables, comme \texttt{markeredgecolor} pour la couleur du trait du pourtour du marker, \texttt{markerfacecolor} pour la couleur de l’intérieur (si le marker possède un intérieur comme \texttt{'o'}), \texttt{markeredgsize} = flottant pour l’épaisseur du trait du pourtour du \textit{marker}. On pourra remarquer que si la couleur n’est pas spécifiée pour chaque nouvel appel la couleur des \textit{markers} change de façon cyclique.
+\item étiquettes sur les axes des abcisses et ordonnées : Matplotlib décide tout seul des graduations sur les axes. Tout ceci se modifie via : \texttt{plt.xticks(tf)}, \texttt{plt.yticks(tf)} où \texttt{tf} est un vecteur de flottants ordonnés de façon croissante.
+\item ajouter un titre : \texttt{plt.title("Mon titre")}.
+\item légendes : il faut ajouter dans les arguments de chaque tracé, le mot clef \texttt{label} : \texttt{label='nom de la courbe'} : \texttt{plt.plot(x,y,label='nom')}. Puis : \texttt{plt.legend()}.
+\end{itemize}
+\vspace{5mm}
+\Q{Proposer une suite d'instructions permettant de tracer la courbe suivante, en respectant légendes et titres. La courbe est tracée en rouge.}
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=0.6\textwidth]{image/Figure_1.eps}
+\caption{Courbe à tracer}
+\label{Figure_1}
+\end{figure}
+
+\vspace{5mm}
+Il est également possible de tracer des histogrammes avec la commande \texttt{plt.hist} ou la commande \texttt{plt.bar}.
+
+\vspace{5mm}
+\Q{Tester et commenter les lignes de code suivantes :}
+\begin{codePython}
+import random as rd
+import matplotlib.pyplot as plt
+y=[]
+for i in range(1,201):
+    y.append((rd.randint(1,100)))
+plt.figure()
+plt.subplot(211)
+plt.hist(y, 10, color='r')
+plt.subplot(212)
+plt.bar([i for i in range(200)], y, color=[0.2,0.5,0.8])
+plt.show()
+\end{codePython}
+
+\newpage
+
+\section{Exploiter les données enregistrées sur le système Comax}
+Dans cette partie, on va s’appuyer sur un support de TP qui est utilisé aux oraux de concours : le système CoMax présenté sur la figure 1. Ce système est une adaptation pédagogique de la solution industrielle ZE de SAPELEM. Le principe de fonctionnement de ces deux systèmes repose sur l’utilisation d’un système de levage motorisé, associé à une poignée, équipée d'un capteur d’effort (voir Figure~\ref{sys_comax}).
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=0.8\textwidth]{image/sys_comax.png}
+\caption{Présentation du système Comax}
+\label{sys_comax}
+\end{figure}
+
+\subsection{Extraction des données expérimentales}
+Nous allons dans cette partie utiliser les résultats d’expérimentions sur le robot CoMax. Ces résultats sont fournis dans le fichier \textit{CoMax.txt}. Ils correspondent à un fichier brut avec les points de mesures expérimentales. 
+
+
+\vspace{5mm}
+\Q{Après avoir observé la structure du fichier \textit{CoMax.txt}, proposer des instructions permettant d'extraire sous deux listes distinctes \texttt{temps} et \texttt{q\_exp} les instants de prise d'échantillonnage et les positions codeur correspondantes en tops (nombre de points). Ces deux listes seront converties en tableaux Numpy (\texttt{import numpy as np}), grâce à la commande \texttt{liste=np.array(liste)}.}
+
+\vspace{5mm}
+La position de l'axe linéaire $X(t)$ [en mm] est liée à la position du moteur $q_m$ [en tops] renvoyée par le codeur selon la formule suivante : $X = \dfrac{3,41.q_m}{1000}$ 
+
+\vspace{5mm}
+\Q{Générer alors un tableau des positions verticales de l'axe nommé \texttt{X\_exp}, qui a une condition initiale nulle sur la position.}
+
+\vspace{5mm}
+\Q{Tracer l'évolution des positions mesurées expérimentales en fonction du temps, avec des croix bleues (+). On légendera correctement les axes, et on indiquera une légende du type : "points mesurés"}
+
+\subsection{Étude des performances attendues du système}
+Dans un second temps, nous allons modéliser le comportement attendu système. La modélisation du système est faite en amont du système réel, lors de la phase de conception, mais elle est importante pour comprendre un système réel afin de proposer des modifications affectant les performances.
+
+Les réponses attendues en vitesse V(t) et en position X(t) de l’axe linéaire sont représentées en Figure~\ref{lois_horaires} . Les caractéristiques de la loi en vitesse sont les suivantes :
+\begin{itemize}
+\item l’instant de début de mouvement : $t_0=0 s$ ;
+\item la position initiale et la vitesse initiale : $X(0)=X_0=0 m$ et $V(0)=0 m/s$;
+\item l’accélération : $A_{cmax}=2,83 m/s^2$ ;
+\item la vitesse maximale : $V_{max}=0,68 m/s$.
+\end{itemize}
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=0.9\textwidth]{image/lois_horaires.pdf}
+\caption{Lois d'évolution en position (à gauche) et en vitesse (à droite) du CoMax}
+\label{lois_horaires}
+\end{figure}
+
+On peut montrer par intégration successives, en tenant compte des conditions initiales que :
+
+\vspace{0.5cm}
+\begin{tabular}{|l|l|l|}
+    \hline
+     \textbf{Phase} &  \textbf{1} & \textbf{2}  \\
+    \hline
+     instant $t$  & $0\leq t <t_1$ & $t_1 \leq t \leq t_2$ \\
+    \hline
+     accélération $A(t)$  & $A_{cmax}$ & $-A_{cmax}$ \\
+    \hline
+     vitesse $V(t)$  & $A_{cmax}.t$ & $V_{max}-A_{cmax}.(t-t_1)$ \\
+    \hline
+     position $X(t)$  & $\dfrac{1}{2}.A_{cmax}.t^2$ & $X_1 + V_{max}.(t-t_1) - \dfrac{1}{2}.A_{cmax}.(t-t_1)^2$  \\
+    \hline
+\end{tabular}
+
+On notera que : $X_1 = X(t_1)$, à l'issue de la phase 1 et $X_2=X(t_2)$, à l'issue de la phase 2.
+
+\vspace{0.5cm}
+\Q{Trouver les expressions littérales de $t_1$, $t_2$, $X_1$ et de $X_2$ en fonction de $A_{cmax}$ et de $V_{max}$.}
+
+\vspace{0.5cm}
+\Q{Concevoir deux fonctions \texttt{Loi\_Vitesse} et \texttt{Loi\_position} prenant en argument un instant $t$ et permettant de retourner la vitesse, respectivement la position, à cet instant. (A noter que l'on pourra introduire des variables globales, comme $t_1$, $t_2$, etc.)}
+
+\vspace{0.5cm}
+On rappelle que la commande \texttt{y = np.zeros(n)} permet de générer un tableau de taille $n \times 1$ contenant des 0.  
+
+\vspace{0.5cm}
+\Q{Construire deux tableaux \texttt{X\_th} et \texttt{V\_th} où sont stockées les positions théoriques commandées, respectivement vitesses théoriques aux instants définis dans le tableau \texttt{temps}. Superposer la courbe d'évolution de la position théorique sur les points expérimentaux, obtenus précédemment (tracé en vert, ligne continue, avec légende explicite). Sur une nouvelle figure tracer en vert, trait continu, l'évolution de la vitesse théorique}.
+
+
+\subsection{Quantification et analyse des écarts}
+
+Nous allons quantifier l’écart de performance entre l’exigence du cahier des charges et le système réel. Pour cela, nous allons calculer les écarts et utiliser des outils de statistique pour quantifier ces écarts.
+
+On définit l'écart relatif en \% $\delta_\%$ entre une valeur théorique $x_{th}$ et une valeur expérimentale $x_{exp}$ : $\delta_\%=\displaystyle\left\lvert  \dfrac{x_{exp}-x_{th}}{x_{th}} \right\rvert$ 
+
+\vspace{0.5cm}
+\Q{Concevoir une fonction \texttt{Calcul\_ecarts} prenant en arguments deux tableaux à une dimension et retournant un tableau \texttt{Delta\_X} de même dimension où sont stockés les écarts relatifs entre chacune des valeurs des deux tableaux spécifiés en arguments d'entrée.}
+
+\vspace{0.5cm}
+\Q{Tracer un histogramme montrant l'évolution des écarts relatifs en position en fonction du numéro de la mesure (on utilisera \texttt{plt.bar} et \texttt{plt.subplot}). On n'évaluera pas l'écart relatif sur la première valeur (nulle).}
+
+\vspace{0.5cm}
+On rappelle ici quelques notions de statistiques :
+\begin{itemize}
+    \item La médiane d'un ensemble de valeurs (échantillon, population, distribution de probabilités) est une valeur qui partage la série en deux parties de même effectif.
+    \item L’écart type est défini comme la moyenne quadratique des écarts par rapport à la moyenne. Il a la même dimension que la variable statistique étudiée.
+\end{itemize}
+
+\vspace{0.5cm}
+\Q{Écrire une fonction \texttt{Calculs\_stats} permettant, à partir d'un tableau \texttt{T} passé en argument, de retourner un tuple de 3 valeurs : moyenne, médiane et écart type. \textit{Indication :} On pourra utiliser les fonctions de la bibliothèque numpy (\texttt{np.sum(T)}, pour faire la somme de tous les éléments du tableau \texttt{T}, \texttt{np.sort(T)}, pour trier le tableau \texttt{T} dans l'ordre croissant. Appliquer le résultat au tableau \texttt{Delta\_X}.}
+
+\vspace{0.5cm}
+\Q{Comparer les résultats en utilisant les fonctions suivantes : \texttt{np.mean}, pour la moyenne ; \texttt{np.median}, pour la médiane et \texttt{np.std}, pour l'écart type}
+\label{LastPage}
+\end{document}
