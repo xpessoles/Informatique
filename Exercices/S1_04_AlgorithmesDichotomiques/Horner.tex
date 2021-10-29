@@ -1,4 +1,4 @@
-	\question{Ecrire une fonction \texttt{exponaif(x,n)} d'arguments un réel $x$ et un entier naturel $n$, qui renvoie la valeur de $x^n$ par la méthode naïve $x^n=x\times x \times ... \times x$ ($n$ termes).}
+\question{Ecrire une fonction \texttt{exponaif(x,n)} d'arguments un réel $x$ et un entier naturel $n$, qui renvoie la valeur de $x^n$ par la méthode naïve $x^n=x\times x \times ... \times x$ ($n$ termes).}
 
 %\medskip  Montrer que le nombre d'opérations effectuées a une complexité linéaire.
 
@@ -6,16 +6,20 @@
 
 Le code itératif correspondant est le suivant:
 
-\bigskip \begin{minipage}{0.5\linewidth}
-	def expo\_rapide(x,n):\\
-	\textcolor{white}{aaaa}  p,res,y = n,1,x\\
-	\textcolor{white}{aaaa} while p>0:\\
-	\textcolor{white}{aaaa}\textcolor{white}{aaaa} if p\%2==1:\\
-	\textcolor{white}{aaaa}\textcolor{white}{aaaa}\textcolor{white}{aaaa}res=res*y\\
-	\textcolor{white}{aaaa}\textcolor{white}{aaaa} p=p//2\\
-	\textcolor{white}{aaaa}\textcolor{white}{aaaa} y=y*y\\
-	\textcolor{white}{aaaa} return(res)\end{minipage}
+\bigskip 
 
+\begin{lstlisting}
+def expo_rapide(x,n):
+      p,res,y = n,1,x
+      while p>0:
+          if p%2==1:
+              res=res*y
+          p=p//2
+          y=y*y
+     return(res)	
+\end{lstlisting}
+	
+	
 \vskip1cm 
 \question{Quel est le nom de la variable locale dont le contenu est retourné par la fonction ?}
 
@@ -51,7 +55,7 @@ Le code itératif correspondant est le suivant:
 %On peut montrer dans ce cas que la complexité est dominée par $n.\ln(n)$ (on admettra ce résultat).
 
 \bigskip Une dernière méthode consiste à utiliser le schéma de Hörner:
-\[P(x)= (\ldots((a_nx+a_{n-1})x+a_{n-2})x+...+a_1)x+a_0}\]
+$$P(x)= (\ldots((a_nx+a_{n-1})x+a_{n-2})x+...+a_1)x+a_0}$$
 
 \question{\'Ecrire une fonction \texttt{horner(x,L)} de paramètres un réel $x$ et une liste $L$ représentant un polynôme $P$, renvoie la valeur de $P(x)$ par la méthode de Hörner.}
 
@@ -59,6 +63,8 @@ Le code itératif correspondant est le suivant:
 
 \end{enumerate}
 
+
+\bigskip \large\textbf{Facultatif:} \normalsize
 
 \bigskip On désire maintenant visualiser les temps d'éxécution des trois fonctions précédentes pour des grandes valeurs de $n$.
 
