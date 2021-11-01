@@ -1,6 +1,147 @@
-\section{Introduction}
+\section{Anlayse des algorithmes}
+
+\subsection{Définition}
+
+\begin{defi}\textbf{Terminaison d'un algorithme} \\
+Prouver la terminaison d'un algorithme signifie montrer que cet algorithme se terminera en un temps fini. On utilise pour cela un \textbf{variant de boucle}.
+\end{defi}
+
+\begin{defi}\textbf{Correction d'un algorithme} \\
+Prouver la correction d'un algorithme signifie montrer que cet algorithme fournit bien la solution au problème qu'il est sensé résoudre. On utilise pour cela un \textbf{invariant de boucle}.
+\end{defi}
+
+\begin{defi}\textbf{Analyser} \\
+Prouver la correction d'un algorithme signifie montrer que cet algorithme fournit bien la solution au problème qu'il est sensé résoudre. On utilise pour cela un \textbf{invariant de boucle}.
+\end{defi}
+
+
+\subsection{Un exemple ...}
+On propose la fonction suivante sensée déterminer le plus petit entier \texttt{n} tel que $1 + 2 + . . . + n$ dépasse strictement la valeur entière strictement positive \texttt{v} .
+
+\begin{lstlisting}
+def foo(v:int) -> int:
+    r = 0
+    n = 0
+    while r < v : 
+        n = n+1
+        r = r+n
+    return n
+\end{lstlisting}
+
+\textit{Montrer intuitivement que \texttt{foo()} se termine.}
+L'algorithme se terminera si on sort de la boucle \texttt{while}. Il faut pour cela que la condition \texttt{r<v} devienne fausse (cette condition est vraie initialement). Pour cela, il faut que \texttt{r} devienne supérieure ou égale à \texttt{v} dont la valeur ne change jamais. 
+\texttt{n} étant incrémenter de 1 à chaque itération, la valeur de \texttt{r} augmente donc à chaque itération. Il y aura donc un rang \texttt{n} au-delà duquel \texttt{r} sera supérieur à \texttt{v}. L'algorithme donc se termine. 
+
+\bigskip
+
+\textit{Que renvoie \texttt{foo(9)} ? Cela répond-il au besoin ?}
+
+\begin{center}
+\begin{tabular}{llll}
+\hline
+Début de la i\ieme itération & \texttt{r} & \texttt{n} & \texttt{r < v} \\ \hline \hline
+Itération 1 & \texttt{0} & \texttt{0} & \texttt{0 < 9  } $\Rightarrow$ \texttt{  True} \\ \hline
+Itération 2& \texttt{1} & \texttt{1} & \texttt{1 < 9  } $\Rightarrow$ \texttt{  True} \\ \hline
+Itération 3 & \texttt{3} & \texttt{2} & \texttt{3 < 9  } $\Rightarrow$ \texttt{  True} \\ \hline
+Itération 4 & \texttt{6} & \texttt{3} & \texttt{6 < 9  } $\Rightarrow$ \texttt{  True} \\ \hline
+Itération 5 & \texttt{10} & \texttt{4} & \texttt{10< 9  } $\Rightarrow$ \texttt{  False} \\ \hline
+\end{tabular}
+\end{center}
+
+La fonction renvoie 4. On a $1+2+3+4 = 10$. On dépassement strictement la valeur 10. La fonction répond au besoin dans ce cas. 
+
+\bigskip
+
+\textit{Que renvoie \texttt{foo(10)} ? Cela répond-il au besoin ?}
+
+\begin{center}
+\begin{tabular}{llll}
+\hline
+Début de la i\ieme itération & \texttt{r} & \texttt{n} & \texttt{r < v} \\ \hline \hline
+Itération 1 & \texttt{0} & \texttt{0} & \texttt{0 < 10  } $\Rightarrow$ \texttt{  True} \\ \hline
+Itération 2& \texttt{1} & \texttt{1} & \texttt{1 < 10  } $\Rightarrow$ \texttt{  True} \\ \hline
+Itération 3 & \texttt{3} & \texttt{2} & \texttt{3 < 10  } $\Rightarrow$ \texttt{  True} \\ \hline
+Itération 4 & \texttt{6} & \texttt{3} & \texttt{6 < 10  } $\Rightarrow$ \texttt{  True} \\ \hline
+Itération 5 & \texttt{10} & \texttt{4} & \texttt{10< 10  } $\Rightarrow$ \texttt{  False} \\ \hline
+\end{tabular}
+\end{center}
+La fonction renvoie 4. On a $1+2+3+4 = 10$. On ne dépassement pas strictement la valeur 10. La fonction ne répond pas au besoin dans ce cas. 
+
+\bigskip
+
+\textbf{Bilan : } la fonction proposée ne remplit pas le cahier des charges. Aurait-on pu le prouver formellement ?
+
+\section{Terminaison d'un algorithme}
+
+\subsection{Variant de boucle}
+\begin{defi} \textbf{Variant de boucle} \\
+Un variant de boucle permet de prouver la terminaison d'une boucle conditionnelle.  Un variant de boucle est une \textbf{quantité entière positive} à l’entrée de chaque
+itération de la boucle et qui \textbf{diminue strictement à chaque itération}.
+\end{defi}
+
+\begin{theorem}
+Si une boucle admet un variant de boucle, elle termine.
+\end{theorem}
+
+\begin{rem}
+Un algorithme qui n’utilise ni boucles inconditionnelles ni récursivité termine toujours. Ainsi,
+la question de la terminaison n’est à considérer que dans ces deux cas.
+\end{rem}
+
+Reprenons l'exemple précédent. 
+\begin{lstlisting}
+def foo(v:int) -> int:
+    r = 0
+    n = 0
+    while r < v : 
+        n = n+1
+        r = r+n
+    return n
+\end{lstlisting}
+
+Dans cet exemple montrons que la quantité $u_n = v-r$ est un variant de boucle : 
+\begin{itemize}
+\item initialement, $r=0$ et $v>0$; donc  $u_0 > 0$;
+\item à la fin de l'itération $n$, on suppose que $u_n = v-r >0$ et que $u_n < u_{n-1}$. 
+\begin{itemize}
+\item cas 1 : $r\geq v$. Dans ce cas, $n$ et $r$ n'évoluent pas l'hypothèse de récurrence reste vraie. 
+\item cas 2 : $r < v$. Dans ce cas, à la fin de l'itération $n+1$,  montrons que  $u_{n+1} < u_{n}$ : $u_{n+1} = v - (r + n + 1) =  u_n -n - 1$ soit $u_{n+1} =u_n -n - 1$ et donc $u_{n+1} < u_{n}$. L'hypothèse de récurrence est donc vraie au rang $n+1$. 
+\end{itemize}
+\end{itemize}
+
+Au final, $u_n = v-r$ est donc un variant de boucle. La boucle se termine donc.
+
+
+\subsection{Un second exemple ressemblant...} 
+
+\footnotesize
+[\url{https://marcdefalco.github.io/pdf/complet_python.pdf}]
+\normalsize
+
+Considérons par l’algorithme suivant qui, étant donné un entier naturel $n$ strictement positif (inférieur à $2^{30}$), détermine le plus petit entier $k$ tel que $n \leq 2^k$.
+\begin{lstlisting}
+def plus_grande_puissance2(n):
+    k = 0
+    p = 1
+    while p < n:
+        k = k+1
+        p = p*2
+    return k
+\end{lstlisting}
+Dans l’exemple précédent, la quantité $n - p$ est un variant de boucle :
+\begin{itemize}
+\item au départ, $n > 0$ et $p = 1$ donc $n - p \geq 0$;
+\item comme il s’agit d’une différence de deux entiers, c’est un entier. Et tant que la condition
+de boucle est vérifiée $p < n$ donc $n - p > 0$.
+\item lorsqu’on passe d’une itération à la suivante, la quantité passe de $n-p$ à $n-2p$ or $2p-p > 0$
+car $p \geq 1$. Il y a bien une stricte diminution.
+\end{itemize}
+
+\newpage
+
+
 \begin{defi} 
-\textbf{\textsf{Preuve d'algorithme}}
+\textbf{Preuve d'algorithme}
 
 Une preuve d'algorithme est une démonstration montrant qu'un algorithme réalise la tâche pour laquelle il a été conçu. 
 
