@@ -16,7 +16,7 @@ Prouver la correction d'un algorithme signifie montrer que cet algorithme fourni
 
 
 \subsection{Un exemple ...}
-On propose la fonction suivante sensée déterminer le plus petit entier \texttt{n} tel que $1 + 2 + . . . + n$ dépasse strictement la valeur entière strictement positive \texttt{v} .
+On propose la fonction suivante sensée déterminer le plus petit entier \texttt{n} strictement positif tel que $1 + 2 + . . . + n$ dépasse strictement la valeur entière strictement positive \texttt{v} .
 
 \begin{lstlisting}
 def foo(v:int) -> int:
@@ -114,11 +114,13 @@ Au final, $u_n = v-r$ est donc un variant de boucle. La boucle se termine donc.
 
 \subsection{Un second exemple ressemblant...} 
 
+\begin{flushright}
 \footnotesize
 [\url{https://marcdefalco.github.io/pdf/complet_python.pdf}]
 \normalsize
+\end{flushright}
 
-Considérons par l’algorithme suivant qui, étant donné un entier naturel $n$ strictement positif (inférieur à $2^{30}$), détermine le plus petit entier $k$ tel que $n \leq 2^k$.
+Considérons l’algorithme suivant qui, étant donné un entier naturel $n$ strictement positif (inférieur à $2^{30}$), détermine le plus petit entier $k$ tel que $n \leq 2^k$.
 \begin{lstlisting}
 def plus_grande_puissance2(n):
     k = 0
@@ -128,6 +130,7 @@ def plus_grande_puissance2(n):
         p = p*2
     return k
 \end{lstlisting}
+\begin{demo}\textbf{[1]} $\quad$
 Dans l’exemple précédent, la quantité $n - p$ est un variant de boucle :
 \begin{itemize}
 \item au départ, $n > 0$ et $p = 1$ donc $n - p \geq 0$;
@@ -136,9 +139,113 @@ de boucle est vérifiée $p < n$ donc $n - p > 0$.
 \item lorsqu’on passe d’une itération à la suivante, la quantité passe de $n-p$ à $n-2p$ or $2p-p > 0$
 car $p \geq 1$. Il y a bien une stricte diminution.
 \end{itemize}
+\end{demo}
+
+\begin{demo}\textbf{[2]} $\quad$
+Montrons que, la quantité $u_j = n - p$ est un variant de boucle :
+\begin{itemize}
+\item intialement, $n > 0$ et $p = 1$ donc $n - p \geq 0$;
+\item à la fin de l'itération $j$, on suppose que $u_j = n - p >0 $ et$u_j < u_{j-1}$;
+\item à la fin de l'itération suivante, $u_{j+1}=n-2p = u_j - p$. $p$ est positif donc $u_{j+1}$ est un entier et $u_{j+1}<u_j$. Par suite, ou bien $u_{j+1}<0$ c'est à dire que $n-p<0$ soit $p>n$. On sort donc de la boucle. Ou bien, $u_{j+1}>0$, et la boucle continue..
+\end{itemize}
+$n - p$ est donc un variant de boucle.
+\end{demo}
+
+\section{Correction d'un algorithme}
+\subsection{Invariant de boucle}
+
+\begin{defi}\textbf{Invariant de boucle}
+Soit une boucle. Une propriété est appelée un invariant de boucle lorsque :
+\begin{itemize}
+\item cette propriété est vérifiée avant d'entrer dans la boucle;
+\item si cette propriété est vérifiée en entrée d'itération, alors elle est vérifiée en sortie de l'itération.
+\end{itemize}
+
+\end{defi}
+
+
+Reprenons un des exemples précédents. Reconsidérons l’algorithme suivant qui, étant donné un entier naturel $n$ strictement positif (inférieur à $2^{30}$), détermine le plus petit entier $k$ tel que $n \leq 2^k$.
+\begin{lstlisting}
+def plus_grande_puissance2(n):
+    k = 0
+    p = 1
+    while p < n:
+        k = k+1
+        p = p*2
+    return k
+\end{lstlisting}
+\begin{demo}
+Montrons que la propriété suivante est un invariant de boucle : $p=2^k$ et $2^{k-1}<n$.
+\begin{itemize}
+\item \textbf{Initialisation : }à l'entrée dans la boucle $k=0$ et $p=1$, $n\in\mathbb{N}^*$
+\begin{itemize}
+\item d'une part  on a bien $1=2^0$;
+\item d'autre part $2^{-1}<n$.
+\end{itemize}
+\item On considère que la propriété est vraie au $n$\ieme tour de bouclen c'est à dire $p=2^k$ et $2^{k-1}<n$.
+\item Au tour de boucle suivant : 
+\begin{itemize}
+\item \textbf{ou bien} $p>=n$. Dans ce cas, on sort de la boucle et on a toujours $p=2^k$ et $2^{k-1}<n$ (propriété d'invariance). La propriété est donc vraie au tour $n+1$.
+\item \textbf{ou bien} $p<n$. Dans ce cas, il faut montrer que  $p=2^{k+1}$ et $2^{k}<n$. Etant entrés dans la boucle, $p<n \Rightarrow 2^k<n$. De plus, en fin de boucle, $p\rightarrow p *2$ et $k\rightarrow k+1$. On a donc $p\leftarrow 2^k *2=2^{k+1}$. 
+\end{itemize}
+\end{itemize}
+La propriété citée est donc un invariant de boucle. 
+\end{demo}
+
+\subsection{Un << contre exemple >>}
+
+
+Reprenons le tout premier exemple où on cherche le plus petit entier \texttt{n} strictement positif tel que $1 + 2 + . . . + n$ dépasse strictement la valeur entière strictement positive \texttt{v} .
+\begin{lstlisting}
+def foo(v:int) -> int:
+    r = 0
+    n = 0
+    while r < v : 
+        n = n+1
+        r = r+n
+    return n
+\end{lstlisting}
+
+La propriété suivante est-elle un invariant de boucle : 
+$r=\sum\limits_{i=1}^n i$ et 
+$\sum\limits_{n=1}^{n-1} i < v$, 
+$n\in\mathbb{N}^*$ ?
+
+La réponse est directement NON, car la phase d'initialisation n'est pas vérifiée car $n=0$ et $n\notin\mathbb{N}^*$.
+Cela signifie donc que l'algorithme proposé en répond pas au cahier des charges. 
+
+Modifions donc l'algorithme ainsi.
+\begin{lstlisting}
+def foo2(v:int) -> int:
+    r = 1
+    n = 1
+    while r < v : 
+        r = r+n
+        n = n+1
+    return n
+\end{lstlisting}
+
+Montrons que la propriété suivante est un invariant de boucle : $r=\sum\limits_{i=0}^n i$ et 
+$\sum\limits_{n=0}^{n-1} i < v$, 
+$n\in\mathbb{N}^*$.
+
+\begin{itemize}
+\item \textbf{Initialisation : }à l'entrée dans la boucle $r=1$ et $n=1$, $n\in\mathbb{N}^*$
+\begin{itemize}
+\item d'une part  on a bien $i=\sum\limits_{i=0}^1 i$;
+\item d'autre part$  \sum\limits_{n=0}^{0}i =0 < v$.
+\end{itemize}
+\item On considère que la propriété est vraie au $n$\ieme tour de boucle c'est à dire $r=\sum\limits_{i=0}^n i$ et $\sum\limits_{n=0}^{n-1} i < v$.
+\item Au tour de boucle suivant : 
+\begin{itemize}
+\item ***** \textbf{ou bien} $p>=n$. Dans ce cas, on sort de la boucle et on a toujours $p=2^k$ et $2^{k-1}<n$ (propriété d'invariance). La propriété est donc vraie au tour $n+1$.
+\item \textbf{ou bien} $p<n$. Dans ce cas, il faut montrer que  $p=2^{k+1}$ et $2^{k}<n$. Etant entrés dans la boucle, $p<n \Rightarrow 2^k<n$. De plus, en fin de boucle, $p\leftarrow p *2$ et $k\leftarrow k+1$. On a donc $p\leftarrow 2^k *2=2^{k+1}$. 
+\end{itemize}
+\end{itemize}
+La propriété citée est donc un invariant de boucle. 
 
 \newpage
-
+\section{A TRIER}
 
 \begin{defi} 
 \textbf{Preuve d'algorithme}
