@@ -1,0 +1,32 @@
+%\section*{Fonctionnement du devoir}
+
+Vos réponses dépendent d'un paramètre $\alpha$, unique pour chaque étudiant, qui vous est donné en haut de votre fiche réponse. 
+On considère la suite $u$, définie comme suit. 
+\begin{equation*}
+  u_0 = \alpha ~\textrm{ et }~ \forall n\in\N,~ u_{n+1} = (15\,091 \times u_n) ~[64\,007]. 
+\end{equation*}
+Nous vous en proposons l'implémentation suivante. 
+\begin{lstlisting}
+def u(alpha,n):
+    """u_n, u_0 = alpha"""
+    x = alpha
+    for i in range(n):
+        x = (15091 * x) % 64007
+    return x
+\end{lstlisting}
+Pour s'assurer que vous avez bien codé la suite $u$, en voici quelques valeurs. \\
+\indent
+\begin{lstlisting}
+def u(alpha,n):
+    """u_n, u_0 = alpha"""
+    x = alpha
+    for i in range(n):
+        x = (15091 * x) % 64007
+    return x
+
+print('u(100,0) = ',u(100,0),'\n')
+print('u(1515,987) = ',u(1515,987),'\n')
+print('u(496,10**4) = ',u(496,10**4))
+\end{lstlisting}
+
+
