@@ -84,7 +84,7 @@ Si une boucle admet un variant de boucle, elle termine.
 \end{theorem}
 
 \begin{rem}
-Un algorithme qui n’utilise ni boucles inconditionnelles ni récursivité termine toujours. Ainsi,
+Un algorithme qui n’utilise ni boucles inconditionnelles (boucle \texttt{for}) ni récursivité termine toujours. Ainsi,
 la question de la terminaison n’est à considérer que dans ces deux cas.
 \end{rem}
 
@@ -109,7 +109,7 @@ Dans cet exemple montrons que la quantité $u_n = v-r$ est un variant de boucle 
 \end{itemize}
 \end{itemize}
 
-Au final, $u_n = v-r$ est donc un variant de boucle. La boucle se termine donc.
+Au final, $u_n = v-r$ est donc un variant de boucle et la boucle se termine.
 
 
 \subsection{Un second exemple ressemblant...} 
@@ -146,7 +146,7 @@ Montrons que, la quantité $u_j = n - p$ est un variant de boucle :
 \begin{itemize}
 \item intialement, $n > 0$ et $p = 1$ donc $n - p \geq 0$;
 \item à la fin de l'itération $j$, on suppose que $u_j = n - p >0 $ et$u_j < u_{j-1}$;
-\item à la fin de l'itération suivante, $u_{j+1}=n-2p = u_j - p$. $p$ est positif donc $u_{j+1}$ est un entier et $u_{j+1}<u_j$. Par suite, ou bien $u_{j+1}<0$ c'est à dire que $n-p<0$ soit $p>n$. On sort donc de la boucle. Ou bien, $u_{j+1}>0$, et la boucle continue..
+\item à la fin de l'itération suivante, $u_{j+1}=n-2p = u_j - p$. $p$ est positif donc $u_{j+1}$ est un entier et $u_{j+1}<u_j$. Par suite, ou bien $u_{j+1}<0$ c'est à dire que $n-p<0$ soit $p>n$. On sort donc de la boucle. Ou bien, $u_{j+1}>0$, et la boucle continue.
 \end{itemize}
 $n - p$ est donc un variant de boucle.
 \end{demo}
@@ -235,14 +235,19 @@ $n\in\mathbb{N}^*$.
 \item d'une part  on a bien $i=\sum\limits_{i=0}^1 i$;
 \item d'autre part$  \sum\limits_{n=0}^{0}i =0 < v$.
 \end{itemize}
-\item On considère que la propriété est vraie au $n$\ieme tour de boucle c'est à dire $r=\sum\limits_{i=0}^n i$ et $\sum\limits_{n=0}^{n-1} i < v$.
+\item On considère que la propriété est vraie au $n$\ieme  tour de boucle c'est-à-dire $r=\sum\limits_{i=0}^n i$ et $\sum\limits_{n=0}^{n-1} i < v$.
 \item Au tour de boucle suivant : 
 \begin{itemize}
-\item ***** \textbf{ou bien} $p>=n$. Dans ce cas, on sort de la boucle et on a toujours $p=2^k$ et $2^{k-1}<n$ (propriété d'invariance). La propriété est donc vraie au tour $n+1$.
+\item \textbf{ou bien} $p>=n$. Dans ce cas, on sort de la boucle et on a toujours $p=2^k$ et $2^{k-1}<n$ (propriété d'invariance). La propriété est donc vraie au tour $n+1$.
 \item \textbf{ou bien} $p<n$. Dans ce cas, il faut montrer que  $p=2^{k+1}$ et $2^{k}<n$. Etant entrés dans la boucle, $p<n \Rightarrow 2^k<n$. De plus, en fin de boucle, $p\leftarrow p *2$ et $k\leftarrow k+1$. On a donc $p\leftarrow 2^k *2=2^{k+1}$. 
 \end{itemize}
 \end{itemize}
 La propriété citée est donc un invariant de boucle. 
+
+\subsection{Correction partielle -- Correction totale}
+\begin{defi}\textbf{Correction partielle -- Correction totale}
+La correction est partielle quand le résultat est correct lorsque l'algorithme s'arrête, la correction est totale si elle est partielle et si l'algorithme termine.
+\end{defi}
 
 \newpage
 \section{A TRIER}
