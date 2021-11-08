@@ -1,0 +1,34 @@
+
+
+\question{Écrire une fonction \texttt{Nb\_Ventes(ventes:dict)} qui prend en entrée un dictionnaire et renvoie le nombre total de 
+ventes dans la société.}
+
+
+\begin{lstlisting}
+def Nb_Ventes(ventes):
+    """Renvoie le nombre total de ventes dans la societe"""
+    S=0
+    for elt in ventes.items():
+        S+=elt[1]
+    return S
+
+\end{lstlisting}
+
+\question{Écrire une fonction \texttt{Nom\_vendeur(ventes:dict)} qui prend en entrée un dictionnaire et renvoie le nom du vendeur ayant réalisé le plus de ventes. Si plusieurs vendeurs sont ex-aequo, la fonction devra retourner le nom de l'un d'entre eux seulement.}
+
+
+
+\begin{lstlisting}
+
+def Nom_vendeur(ventes):
+    """Renvoie le nombre total de ventes dans la societe"""
+    max=0
+    nom=''
+    for elt in ventes.items():
+        if elt[1]>max:
+            max=elt[1]
+            nom=elt[0]
+    return nom
+
+\end{lstlisting}
+
