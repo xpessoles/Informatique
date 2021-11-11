@@ -238,8 +238,11 @@ $n\in\mathbb{N}^*$.
 \item On considère que la propriété est vraie au $n$\ieme  tour de boucle c'est-à-dire $r=\sum\limits_{i=0}^n i$ et $\sum\limits_{n=0}^{n-1} i < v$.
 \item Au tour de boucle suivant : 
 \begin{itemize}
-\item \textbf{ou bien} $p>=n$. Dans ce cas, on sort de la boucle et on a toujours $p=2^k$ et $2^{k-1}<n$ (propriété d'invariance). La propriété est donc vraie au tour $n+1$.
-\item \textbf{ou bien} $p<n$. Dans ce cas, il faut montrer que  $p=2^{k+1}$ et $2^{k}<n$. Etant entrés dans la boucle, $p<n \Rightarrow 2^k<n$. De plus, en fin de boucle, $p\leftarrow p *2$ et $k\leftarrow k+1$. On a donc $p\leftarrow 2^k *2=2^{k+1}$. 
+\item \textbf{ou bien} $r\geq v$ et la propriété vraie au rang $n$ reste vraie;
+\item \textbf{ou bien} $r < v$. À la fin de l'itération, on a donc $r\leftarrow r+n+1 $ et $n\leftarrow n+1 +1$.
+Or $r=\sum\limits_{i=0}^n i$; donc $r\leftarrow \sum\limits_{i=0}^{n+1} i$. Par ailleurs, étant entrés dans la boucle, 
+$r=\sum\limits_{i=0}^n i < v$. Les deux assertions sont donc vraies au rang $n+1$. 
+%$p<n$. Dans ce cas, il faut montrer que  $p=2^{k+1}$ et $2^{k}<n$. Etant entrés dans la boucle, $p<n \Rightarrow 2^k<n$. De plus, en fin de boucle, $p\leftarrow p *2$ et $k\leftarrow k+1$. On a donc $p\leftarrow 2^k *2=2^{k+1}$. 
 \end{itemize}
 \end{itemize}
 La propriété citée est donc un invariant de boucle. 
