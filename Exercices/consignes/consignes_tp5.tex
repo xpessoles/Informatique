@@ -15,3 +15,24 @@ Dans ce fichier, vous respecterez les consignes suivantes.
 \end{itemize}
 Les figures seront sauvegardées sous le nom \texttt{tp05\_Qnum\_nom1\_nom2.png}, où Qnum est le numéro de la question, et nom1, nom2 les noms des membres du binôme.
 \end{itemize}
+
+
+\subsection*{Première approche de la complexité}
+	
+Étant donné deux suites $(u_n)$ et $(v_n)$  de réels strictement positifs, on dit que $(u_n)$ est dominée par la suite $(v_n)$ lorsque $\left(\Frac{u_n}{v_n}\right)$ est une suite bornée. On note alors $u_n=\O{n\to +\infty}(v_n)$.
+
+Par exemple:
+\begin{itemize}
+\item  si $(u_n)$ converge alors $u_n=\O{n\to +\infty}(1)$. Réciproque fausse;
+
+\item   $3n=\O{n\to +\infty}(n^2)$, $5n^2=\O{n\to +\infty}(n^2)$, $\ln(n)=\O{n\to +\infty}(n\ln(n)^2)$, $an^2+bn+c\ln(n)=\O{n\to +\infty}(n^2)$ ...
+
+\item  pour tout polynôme de degré $p$, $P=a_px^p+a_{p-1}x^{p-1}+...+a_1x+a_0$, on a $P(n)=\O{n\to +\infty}(n^p)$.
+\end{itemize}
+
+En programmation, on dira qu'un programme a:
+\begin{itemize}
+\item une complexité linéaire lorsque le nombre d'opérations effectuées est en $\O{n\to +\infty}(n)$;
+\item une complexité logarithmique lorsque le nombre d'opérations effectuées est en $\O{n\to +\infty}(\log(n))$;
+\item une complexité quadratique lorsque le nombre d'opérations effectuées est en $\O{n\to +\infty}(n^2)$.
+\end{itemize}
