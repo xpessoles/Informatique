@@ -38,11 +38,8 @@ On considère $m_0 = \dfrac{g_0+d_0}{2}$ et on évalue $f(m_0)$ :
 %\bigskip 
 
 \begin{itemize}
-	\item Si $f(m_0)\times f(d_0)\ge 0$, on va poursuivre la recherche d'un zéro dans l'intervalle $[g_1,d_1]=[g_0,m_0]$
-
+	\item Si $f(m_0)\times f(d_0)\ge 0$, on va poursuivre la recherche d'un zéro dans l'intervalle $[g_1,d_1]=[g_0,m_0]$.
 	\item Sinon,  on poursuit la recherche dans l'intervalle $[g_1,d_1]=[m_0,d_0]$. 
-
-
 	\item On recommence alors en considérant $m_1 = \dfrac{g_1+d_1}{2}$ ...\\
 \end{itemize}
 
@@ -52,6 +49,6 @@ On considère $m_0 = \dfrac{g_0+d_0}{2}$ et on évalue $f(m_0)$ :
 	
 \question{\'Ecrire une fonction \texttt{recherche\_zero(f,a,b,epsilon)} qui renvoie une valeur approchée du zéro de \texttt{f} sur \texttt{[a,b]} a epsilon près.}
 	
-\question{Tester la fonction avec $f:x\mapsto x^2-2$ sur $[0,2]$ et $\varepsilon=0.001$.}
+\question{Tester la fonction avec $f:x\mapsto x^2-2$ sur $[0,2]$ et $\varepsilon=0,001$.}
 	
 \question{Avec une erreur de $\varepsilon=\Frac 1{2^p}$, combien y a-t-il de comparaisons au final en fonction de $p$ ?}
