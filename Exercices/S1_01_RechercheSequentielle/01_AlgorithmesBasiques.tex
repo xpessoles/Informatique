@@ -88,7 +88,7 @@ def load_fichier(file):
     mots = fid.readlines()
     fid.close()
     return mots
-liste_mots = load_file('liste_francais.txt')
+liste_mots = load_fichier('liste_francais.txt')
 \end{lstlisting}
 
 \question{Écrire une fonction de signature  \texttt{compte\_lettre\_02(lettre: str, mots: list) -> int} qui renvoie le nombre d’occurrences de \texttt{lettre} dans une liste de mots \texttt{mots}.}

@@ -131,7 +131,7 @@ dictionnaire=load_fichier('liste_francais.txt')
 
 ## Q14
 
-def compte_lettre_02(lettre:str, mots:str):
+def compte_lettre_02(lettre:str, mots:list):
     nb=0
     for mot in mots:
         if lettre in mot:
