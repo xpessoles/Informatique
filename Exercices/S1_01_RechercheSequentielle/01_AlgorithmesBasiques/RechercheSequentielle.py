@@ -7,6 +7,13 @@ Created on Sun Aug 15 16:03:15 2021
 
 ## Q1
 
+
+def generate_pair_01(nb:int):
+    res=[]
+    for i in range(1,nb//2):
+        res.append(2*i)
+    return(res)
+
 def generate_pair_01(nb:int):
     res=[]
     for i in range(1,nb//2):
@@ -52,7 +59,7 @@ def recherche_first_index_nb_01(nb:int, L:list):
         if nb==L[i] and index==-1:
             index=i
     return(index)
-        
+
 def recherche_first_index_nb_02(nb:int, L:list):
     n=len(L)
     i=0
@@ -157,7 +164,7 @@ def nb_consonnes(mots):
     occ_consonnes_min=[compte_lettre_02(lettre_min,mot) for mot in mots]
     occ_consonnes_max=[compte_lettre_02(lettre_max,mot) for mot in mots]
     return('consonne_max: '+ lettre_max +' '+ str(M)+ ' fois; '+ 'consonne_min: '+ lettre_min+' '+ str(m)+ ' fois.')
-    
+
 ## Q 16
 
 def mots_plus_long(mots:list):
@@ -181,7 +188,7 @@ def cherche_mot_in_chaine_01(mot:str,chaine=str):
         test=(i==p)
         j=j+1
     return(test)
-        
+
 ## Q18
 
 def cherche_mot_in_chaine_02(mot:str,chaine=str):
@@ -206,6 +213,5 @@ def cherche_mot_in_dico(nb:int,dico:list):
             M=n
             mot_nb=l
     return(mot_nb)
-    
 
-        
+

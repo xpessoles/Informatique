@@ -20,15 +20,16 @@ for lu in Fichier:
 import numpy as np
 temps = np.array(temps)
 q_exp = np.array(q_exp)
-X_exp = (q_exp-q_exp[0])*(3.41/1000)
+X_exp = (q_exp-q_exp[0])*(3.41/1e6)
 
 import matplotlib.pyplot as plt
 
 plt.figure(1)
 plt.plot(temps,X_exp,'b+',label="points exp.")
 plt.legend()
-plt.xlabel('t [s]'); plt.ylabel('x [mm]')
+plt.xlabel('t [s]'); plt.ylabel('x [m]')
 plt.title("Evolution de la position de l'axe en fonction du temps")
+plt.savefig('tp04_durif_q08.png')
 
 """Donnees"""
 Acmax = 2.83; Vmax = 0.68
@@ -58,17 +59,21 @@ def Loi_Position(t):
 n = len(temps)
 X_th = np.zeros(n); V_th = np.zeros(n)
 for i in range(n):
-    X_th[i] = 1000*Loi_Position(temps[i])
+    X_th[i] = Loi_Position(temps[i])
     V_th[i] = Loi_Vitesse(temps[i])
+
 
 plt.plot(temps,X_th,'g',label="pos. commande")
 plt.legend()
+plt.savefig('tp04_durif_q11.png')
+
 
 plt.figure(2)
 plt.plot(temps,V_th,'g',label="vitesse theorique")
 plt.legend()
 plt.xlabel('t [s]'); plt.ylabel('v [m/s]')
 plt.title("Evolution de la vitesse de l'axe en fonction du temps")
+plt.savefig('tp04_durif_q12.png')
 
 def Calcul_ecarts(T1,T2):
     return 100*abs((T1-T2)/T2)
@@ -77,6 +82,7 @@ Delta_X = Calcul_ecarts(X_exp[1:n],X_th[1:n])
 
 plt.figure(3)
 plt.bar([i for i in range(1,n)],Delta_X,color=[0.5,0,1])
+plt.savefig('tp04_durif_q14.png')
 
 
 def Calculs_stats(T):
@@ -93,7 +99,7 @@ def Calculs_stats(T):
         med_T = T_trie[n//2]
     #Ecart type :
     sigma_T = np.sqrt(np.sum((T - moy_T)**2)/n)
-    
+
     return (moy_T, med_T, sigma_T)
 
 (a,b,c) = Calculs_stats(Delta_X)

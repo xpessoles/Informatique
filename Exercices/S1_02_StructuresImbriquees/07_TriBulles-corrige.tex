@@ -1,0 +1,88 @@
+
+
+\question{Appliquer l'algorithme de tri à Bulles <<à la main>> au tableau ci-dessous: \[\begin{array}{|c|c|c|c|c|c|}
+		\hline 2& 1 & 6 & 9 & 8 & 4 \\
+		\hline\end{array}\]}
+
+\question{Ecrire une fonction \texttt{est\_trie(T)} qui renvoie \texttt{True} ou \texttt{False} selon que le tableau \texttt{T} est trié ou pas.}
+
+\begin{lstlisting}
+def est_trie(T):
+    """Teste si T est trié ou pas"""
+    test=True
+    n=len(T)
+    i=0
+    while i<=n-2 and test:
+        test=(T[i]<=T[i+1])
+        i=i+1
+    return(test)
+\end{lstlisting}
+
+\question{Écrire une fonction \texttt{TriBulles(T)} triant le tableau \texttt{T} par l'algorithme de tri à
+	bulles}
+	
+	\begin{lstlisting}
+def TriBulles(T):
+    """tri du tableau T avec le tri à bulles"""
+    n=len(T)
+    for i in range(1,n):   # numéro du parcours
+        for k in range(n-i):
+            if T[k]>T[k+1]:
+                T[k],T[k+1]=T[k+1],T[k]
+        print(T)
+    return(T)
+\end{lstlisting}
+
+
+\question{Vérifier que la fonction ci-dessus est correcte en utilisant la fonction \texttt{EstTrie} sur un tel tableau de nombres aléatoires. }
+
+
+
+\question{Pour un tableau $T$ de longueur $n$, calculer le nombre de comparaisons $C(n)$ faites dans la fonction \texttt{TriBulles(T)} et vérifier que la suite $\left(\displaystyle C(n) \over {\displaystyle  n^2}\right)$ a une limite finie donc est bornée (on dit alors que la  \textbf{complexité est quadratique});}
+
+La première boucle k exécute n-1 opérations. Pour chaque k, il y a n-k boucles i et une comparaison pour chacune. Au total, il y a une complexité de Sum_{k=1...n-1}.Sum_{i=0..n-k} 1 = Sum_{k=1...n-1} (n-k) = Sum_{k=1...n-1} k = n(n-1)/2 = O(n**2): on obtient une complexité quadratique.
+
+\question{Ecrire une fonction améliorée \texttt{TriBulles2(T)} qui sort de la fonction dès que le tableau a été parcouru sans faire d'échange (auquel cas, il est trié et donc inutile de continuer).}
+
+\begin{lstlisting}
+def TriBulles2(T):
+    """tri du tableau T avec le tri à bulles"""
+    n=len(T)
+    i=1
+    echange=True
+    while i<=n-1 and echange:
+        echange=False
+        for k in range(n-i):
+            if T[k]>T[k+1]:
+                T[k],T[k+1]=T[k+1],T[k]
+                echange=True
+        i+=1
+        print(T)
+    return(T)
+\end{lstlisting}
+
+
+
+\question{\'Ecrire une fonction \texttt{TriCocktail(T)} qui étant donné un tableau \texttt{T} le renvoie trié selon la méthode du tri cocktail.}
+
+\begin{lstlisting}
+def TriCocktail(T):
+    n=len(T)
+    for k in range(1,(n-1)//2):
+        for i in range(k-1,n-k):  # Parcours des cases k-1 à n-k-1
+            if T[i]>T[i+1]:
+                T[i],T[i+1]=T[i+1],T[i]
+        print(T)
+        for i in range(n-k-1,k-2,-1):   # Parcours des cases n-k-1 à k-1
+            if T[i]>T[i+1]:
+                T[i],T[i+1]=T[i+1],T[i]
+        print(T)
+    return(T)
+\end{lstlisting}
+
+\question{Justifier en quoi cette variante peut être intéressante selon le type de tableau à trier mais vérifier néanmoins que la complexité reste quadratique.}
+
+
+Cette fonction est à privilégier lorsque le tableau contient des éléments minima en fin de tableau, notamment lorsque le tableau est décroissant par exemple.
+# Néanmoins, dans le pire des cas, le nombre de comparaison est la somme sur k variant de 1 à (n-1)//2 de (n-k-1)-(k-1)+1+(n-k-1)-(k-1)+1=2(n-2k+1). Cela donne encore une complexité quadratique car équivalent à un terme de la forme a.n**2.
+

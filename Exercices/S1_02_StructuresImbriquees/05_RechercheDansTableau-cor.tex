@@ -1,0 +1,64 @@
+\question{On appelle distance minimale, la distance entre deux éléments  les plus proches (éventuellement égaux) et d'indices distincts. 
+	\'Ecrire une fonction \texttt{distance\_min(L)} qui renvoie la distance minimale de \texttt{L}.}
+
+\begin{lstlisting}
+def distance_min(L):  # On cherche min |Ti-tj| pour i<j
+    n=len(L)
+    min=abs(L[1]-L[0])
+    for i in range(n):
+        for j in range(i+1,n):
+            if abs(L[j]-L[i])<min:
+                min=abs(L[j]-L[i])
+    return(min)
+
+
+\end{lstlisting}
+
+\question{\'Ecrire une fonction \texttt{indices\_distance\_min2(L)} qui renvoie un couple d'indices réalisant la distance minimale}
+
+
+\begin{lstlisting}
+def indices_distance_min2(L):  # On cherche min |Ti-tj| pour i<j
+    n=len(L)
+    min=abs(L[1]-L[0])
+    p,q=0,1
+    for i in range(n):
+        for j in range(i+1,n):
+            if abs(L[j]-L[i])<min:
+                min=abs(L[j]-L[i])
+                p,q=i,j
+    return p,q
+
+
+\end{lstlisting}
+
+
+
+\question{\'Ecrire une fonction \texttt{indices\_distance\_min3(L)} qui, étant donnée une liste \texttt{L}, réalise ces opérations et renvoie un couple solution}
+ 
+ 
+ \begin{lstlisting}
+ 
+ def indices_distance_min3(L):
+    D={}
+    n=len(L)
+    for i in range(n-1):
+        m=abs(L[i+1]-L[i])
+        j=i+1
+        for k in range(i+1,n):
+            if abs(L[k]-L[i])<m:
+                m=abs(L[k]-L[i])
+                j=k
+        D[str(i)]=[j,m]
+    p,q=0,D["0"][0]
+    min=D["0"][1]
+    for elt in D.items():
+    # elt de la forme ["3",[4,min {|Lk-L3|, k>4}]
+        if elt[1][1]<min:
+            p,q=int(elt[0]),elt[1][0]
+            min=elt[1][1]
+    return(p,q)
+
+
+\end{lstlisting}
+

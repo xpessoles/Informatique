@@ -1,0 +1,85 @@
+
+
+%\section*{Questions de cours.}
+
+\question{} Donner le reste et le quotient de la division euclidienne de $u_2\times u_3$ par $u_4$.
+
+\medskip
+
+\question{} Donner le plus petit entier $k \in \ii{0,1000}$ pour lequel $u_k$ est maximal. 
+
+\medskip 
+
+\question{} Donner $\log_{10} (u_2)$ (écrire juste dix décimales après la virgule).
+
+%\section*{Exercices.}
+
+\question{} Donner le plus petit entier naturel $n$ tel que $u_n = 100$.
+
+\medskip
+
+\question{} Donner le nombre d'entiers inférieurs ou égaux à $10\,000$ parmi les $u_k$, pour $k \in \ii{0,1\,000}$.
+
+\medskip
+
+On rappelle l'algorithme d'Euclide : si $a$, $b$ sont des entiers naturels, on considère la suite $r$ définie par : 
+\begin{itemize}
+  \item $r_0 = a$, $r_1 = b$ ; 
+  \item si $r_{n+1} \neq 0$, $r_{n+2}$ est le reste de la division euclidienne de $r_n$ par $r_{n+1}$.
+\end{itemize}
+Alors, si $r_n$ est le premier terme de $r$ non nul ($n\geq 1$), le pgcd de $a$ et de $b$ est $r_{n-1}$. 
+\medskip
+
+\question{} Donner le PGCD de $u_6$ et $u_7$.
+
+\medskip
+
+On appelle moyenne élaguée d'un tableau $T$ la moyenne du tableau que l'on obtient quand on a enlevé à $T$ toutes les occurences de son maximum ainsi que de son minimum.
+
+On note $x \% 100$ le reste de la division euclidienne de $x$ par $100$.
+
+\medskip
+
+\question{}  Donner la moyenne élaguée du tableau constitué des $u_k \% 100$, pour $k\in \ii{1\,000,2\,000}$.
+
+\medskip
+
+Soit la suite $S$ définie par 
+\begin{equation*}
+  \forall n \in \N,~ S_n = \sum_{k=0}^n \dfrac{1}{u_k^2}~.
+\end{equation*}
+On rappelle que la fonction \texttt{floor} donne la partie entière d'un nombre et peut être utilisée après avoir tapé 
+\begin{lstlisting}
+  from math import floor
+\end{lstlisting}
+
+\medskip
+
+\question{} Donner $S_{987}$ (écrire juste dix décimales après la virgule).
+
+\medskip
+
+\question{} Donner $S_{1\,000\,000} - \floor{S_{1\,000\,000}}$ (écrire juste dix décimales après la virgule).
+
+\medskip
+
+On considère la suite $v$ définie par :
+\begin{equation*}
+  v_0 = u_0 ~\textrm{ et }~ \forall n \in \N,~v_{n+1} = \sum_{k=0}^n (n+1-k) v_k~.
+\end{equation*}
+
+\question{} Donner $v_{15}$.
+
+\medskip
+
+On rappelle qu'une tranche d'un tableau est une suite de valeurs consécutives extraites de ce tableau. 
+
+Si $x$ est un entier, on note $x \% 5$ le reste de la division euclidienne de $x$ par $5$.
+
+\medskip
+
+\question{} Donner la taille de la plus grande tranche constituée uniquement de zéros dans le tableau des $u_k \% 5$, pour $k \in \ii{2\,000,3\,000}$.
+
+\medskip 
+
+\question{} Donner le nombre de nombres premiers dans le tableau des $u_k$, pour $k \in \ii{3\,000,4\,000}$.

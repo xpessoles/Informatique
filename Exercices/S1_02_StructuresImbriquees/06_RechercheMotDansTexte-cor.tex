@@ -1,0 +1,43 @@
+
+
+\question{\'Ecrire une fonction \texttt{est\_ici(texte,motif,i)} qui, étant données deux chaines de caractères \texttt{texte}, \texttt{motif} et un indice \texttt{i}, renvoie \texttt{True} ou \texttt{False} selon que \texttt{motif} est ou n'est pas dans \texttt{texte} au rang \texttt{i}. On utilisera une boucle \texttt{while}.}
+
+\begin{lstlisting}
+def est_ici(texte, motif, i):
+    p=len(motif)
+    j=0
+    while j<=p-1 and motif[j]==texte[i+j]:
+            j=j+1
+    return(j==p)
+
+
+\end{lstlisting}
+
+\question{\'Ecrire une fonction \texttt{est\_sous\_mot(texte,motif)} qui renvoie \texttt{True} ou \texttt{False} selon que \texttt{motif} est dans \texttt{texte} ou pas. On utilisera une boucle \texttt{while}.}
+
+\begin{lstlisting}
+def est_sous_mot(texte, motif):
+    n,p=len(texte), len(motif)
+    i=0
+    while i<=n-p and not est_ici(texte, motif, i):
+        i=i+1
+    return(i<=n-p)
+
+
+\end{lstlisting}
+
+\question{\'Ecrire une fonction \texttt{position\_sous\_mot(texte,motif)} qui renvoie la liste de toutes les occurences de l'indice de position de la première lettre du mot \texttt{motif} dans \texttt{texte}. On utilisera une boucle \texttt{for}.}
+
+\begin{lstlisting}
+def position_sous_mot(texte, motif):
+    n,p=len(texte), len(motif)
+    L=[]
+    for i in range(n-p+1):
+        if est_ici(texte, motif, i):
+            L.append(i)
+    return(L)
+
+
+\end{lstlisting}
+
+%\end{multicols}
