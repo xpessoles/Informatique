@@ -40,7 +40,8 @@ On poursuit jusqu'à ce qu'on a trouvé \texttt{x0} ou lorsque l'on a épuisé l
 %En notant $g$ et $d$  les indices de gauche et de droite du morceau de la liste $l$ où l'on est en train de faire la %recherche, 
 
 \question{Illustrer la méthode avec les deux exemples suivants :}
-\begin{itemize}  \texttt{x0 = 5} et \texttt{L} $= \begin{array}{|c|c|c|c|c|c|c|c|c|} 
+\begin{itemize} 
+\item  \texttt{x0 = 5} et \texttt{L} $= \begin{array}{|c|c|c|c|c|c|c|c|c|} 
 \hline -3 & 5 & 7 & 10 & 11 & 14 & 17 & 21 & 30 \\ \hline
 \end{array}$
 % g=0\\d=8\\m=4,L[m]>x0
@@ -55,7 +56,7 @@ On poursuit jusqu'à ce qu'on a trouvé \texttt{x0} ou lorsque l'on a épuisé l
 
 \question{\'Ecrire une fonction \texttt{dichotomie(x0,L)} qui renvoie \texttt{True} ou \texttt{False} selon que \texttt{x0} figure ou non dans \texttt{L} par cette méthode. On utilisera une boucle \texttt{while} que l'on interrompra soit lorsque l'on a trouvé $x0$, soit lorsque l'on a fini de parcourir la liste.}
 
-\question{Combien vaut $g-d$ au $i\ieme$ tour de boucle ? Si \texttt{x0} ne figure pas dans \texttt{L}, montrer que le nombre de tours de boucles nécessaires pour sortir de la fonction est de l'ordre de $\ln n$ où $\text{n=len(L)} (cela rend la fonction beaucoup plus efficace qu'une simple recherche séquentielle pour laquelle le nombre de comparaisons pour sortir de la boucle serait de l'ordre de $n$).}
+\question{Combien vaut $g-d$ au $i\ieme$ tour de boucle ? Si \texttt{x0} ne figure pas dans \texttt{L}, montrer que le nombre de tours de boucles nécessaires pour sortir de la fonction est de l'ordre de $\ln n$ où $\text{n=len(L)}$ (cela rend la fonction beaucoup plus efficace qu'une simple recherche séquentielle pour laquelle le nombre de comparaisons pour sortir de la boucle serait de l'ordre de $n$).}
 %
 %
 %\subsection{Recherche d'un indice satisfaisant une condition donnée}
