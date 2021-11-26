@@ -1,7 +1,7 @@
-\section{Valeur d'un polynôme par plusieurs méthodes}
+%\section{Valeur d'un polynôme par plusieurs méthodes}
 
 	
-	\question{Ecrire une fonction \texttt{exponaif(x,n)} d'arguments un réel $x$ et un entier naturel $n$, qui renvoie la valeur de $x^n$ par la méthode naïve $x^n=x\times x \times ... \times x$ ($n$ termes).}
+	\question{Ecrire une fonction \texttt{exponaif(x,n)} d'arguments un réel $x$ et un entier naturel $n$, qui renvoie la valeur de $x^n$ par la méthode naïve $x^n=x\times x \times ... \times x$ ($n$ termes). Compter le nombre d'opérations dans exponaïf.}
 
 	%\medskip  Montrer que le nombre d'opérations effectuées a une complexité linéaire.
 
@@ -21,7 +21,7 @@
 	
 	\question{Quel est le nom de la variable locale dont le contenu est retourné par la fonction ?}
 	
-	\question{Faire tourner \og{}à la main\fg{} la fonction pour $x=2$ et $n=10$:}
+	\question{Faire tourner \og{}à la main\fg{} la fonction pour $x=2$ et $n=10$ en complétant le tableau suivant puis encadrer le nombre d'opérations dans exporapide en fonction de $ln(n)/ln(2)$.}
 	
 	\begin{center}
 		\begin{tabular}{|l|p{1cm}|p{1cm}|p{1cm}|}
@@ -43,12 +43,12 @@
 
 	\bigskip On considère un polynôme $$P(x)=\displaystyle\sum_{k=0}^n a_k.x^k$$ que l'on modélisera en Python par la liste $P=[a_0,a_1,...,a_n]$. Dans la suite, on prendra pour tout $k\in\mathbb{N}$, $a_k=k$.
 
-	\question{Ecrire une fonction \texttt{Pnaif(x,n)} qui renvoie $P(x)$ à l'aide de la fonction \texttt{exponaif}.}
+	\question{Ecrire une fonction \texttt{Pnaif(x,n)} qui renvoie $P(x)$ à l'aide de la fonction \texttt{exponaif}. Compter le nombre d'opérations.}
 
 	%\medskip Donner un équivalent du nombre d'opérations faites pour ce calcul et vérifier que la complexité est quadratique.
 
 	\question{ Faire de même pour une fonction 
-	\texttt{Prapide(x,n)} qui renvoie $P(x)$ à l'aide de la fonction \texttt{exporapide}. }
+	\texttt{Prapide(x,n)} qui renvoie $P(x)$ à l'aide de la fonction \texttt{exporapide}. On admettra que la complexité est en O(n ln(n)).}
 	
 	%On peut montrer dans ce cas que la complexité est dominée par $n.\ln(n)$ (on admettra ce résultat).
 
@@ -57,7 +57,7 @@
 
 
 \ldots
-	\question{\'Ecrire une fonction \texttt{horner(x,L)} de paramètres un réel $x$ et une liste $L$ représentant un polynôme $P$, renvoie la valeur de $P(x)$ par la méthode de Hörner.}
+	\question{\'Ecrire une fonction \texttt{horner(x,L)} de paramètres un réel $x$ et une liste $L$ représentant un polynôme $P$, renvoie la valeur de $P(x)$ par la méthode de Hörner. Compter le nombre d'opérations.}
 
 	%\medskip Compter le nombre d'opérations au total pour calculer $P(x)$ et en donner que la complexité du programme est linéaire.
 

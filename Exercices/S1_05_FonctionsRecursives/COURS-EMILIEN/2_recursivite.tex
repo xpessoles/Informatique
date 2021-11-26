@@ -1,0 +1,786 @@
+
+%ENTETE / INCLUDES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[a4paper,10pt]{article}
+\input{../../../latex/packages.tex}	%Liste des packages
+%\import{../../../latex/}{notations.tex}	%Notations et commandes
+%\input{../../../latex/notations.tex}	%Notations et commandes
+
+
+\input{../../../latex/notations/notations_infos.tex}
+\input{../../../latex/notations/notations_math.tex}
+\input{../../../latex/notations/notations_unites.tex}
+\input{../../../latex/notations/notations_AF.tex}
+\input{../../../latex/notations/notations_asservissement.tex}
+\input{../../../latex/notations/notations_vecteurs.tex}
+\input{../../../latex/notations/notations_torseurs.tex}
+\input{../../../latex/notations/notations_cinematique.tex}
+\input{../../../latex/notations/notations_cotation.tex}
+\input{../../../latex/notations/notations_fab.tex}
+\input{../../../latex/notations/notations_statique.tex}
+\input{../../../latex/notations/boites.tex}
+
+\input{../../../latex/style.tex}		%Style, mise en page
+
+% Commandes générales
+%===============================
+
+
+%Lettres grecques oubliees
+\newcommand{\Mu}{M} %mu majuscule
+
+%Mise en forme
+\newcommand{\gras}[1]	{\textbf{#1}}
+\newcommand{\bouton}[1]	{\fbox{\footnotesize{\textsc{#1}}}}
+\newcommand{\toutpetit}[1]	{{\tiny{1}}}
+\newcommand{\PETIT}[1]		{{\scriptsize{#1}}}
+\newcommand{\Petit}[1]		{\footnotesize{#1}}
+\newcommand{\petit}[1]		{{\small{#1}}}
+\newcommand{\normal}[1]		{{\normalsize{#1}}}
+\newcommand{\grand}[1]		{{\large{#1}}}
+\newcommand{\Grand}[1]		{{\Large{#1}}}
+\newcommand{\GRAND}[1]		{{\LARGE{#1}}}
+\newcommand{\enorme}[1]		{{\huge{#1}}}
+\newcommand{\Enorme}[1]		{{\Huge{#1}}}
+
+\newcommand{\oeuvre}		{\oe uvre}
+\newcommand{\oeuvres}		{\oe uvres}
+
+\newcommand{\fig}[1]		{(fig.\ref{#1})}
+
+\newcommand{\miniCentre}[2][\linewidth]	{\begin{minipage}{#1}\begin{center}#2\end{center}\end{minipage}}
+
+%\graphicspath{{../../../latex/notations/notations_cotation/}}
+
+%Infos pages
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand	{\partie}		{Algorithmique}
+\renewcommand	{\titre}		{Récursivité}
+\renewcommand	{\numero}		{2}
+\renewcommand	{\auteur}		{Emilien DURIF}
+\renewcommand	{\etablissement}	{Lycée Roosevelt Reims}
+\renewcommand	{\discipline}		{Informatique Pour Tous}
+\renewcommand	{\classe}		{Classe préparatoire P.S.I.}
+\renewcommand	{\annee}		{2015 - 2016}
+\renewcommand	{\icone}		{../../../latex/images/logo_roosevelt.jpg}
+\renewcommand	{\competences}		{}
+\renewcommand	{\date}		{13 novembre 2015}
+
+
+%Commandes
+\setboolean{imageEnVectoriel}{True}	%Petite condition qui choisit entre 2 formats d'image
+\setTexteATrouOn				%Active le texte à trou
+\setboolean{corrige}{false}	%Petite condition pour mettre ou non la figure corrigée
+
+
+%DEBUT DU DOCUMENT
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+ 
+	%Page de garde
+	%----------------------
+	\input{../../../latex/page_de_garde.tex}
+	\newpage
+
+
+\section{Introduction}
+
+\subsection{Présentation et définition}
+
+La récursivité est un concept général qui peut être illustré dans (quasiment) tous les langages de programmation, et qui peut être utile dans de nombreuses situations.
+La définition la plus simple d'une fonction récursive est la suivante :
+
+\begin{definition}[Récurcivité]
+Une fonction est \textbf{récursive} si elle s'appelle elle-même. Si dans le corps (le contenu) de la fonction, elle est utilisée elle-même, alors elle est récursive.
+\end{definition}
+
+\subsection{Mise en oeuvre sur l'exemple de factorielle}
+
+La récursivité s'applique naturellement pour la fonction factorielle :
+
+La factorielle de $n$ notée $n!$ est le produit de tous les entiers de $1$ à $n$.
+Une méthode vue en première année consiste à programmer cette fonction de manière \textbf{itérative}. Voici ce que donne le programme écrit en langage Python :
+
+\begin{algorithme}[Écriture sous Python de la fonction factorielle en itératif]
+\begin{center}
+		\lstinputlisting{./programmes/fact_iteratif.py}
+\end{center}
+
+
+
+\begin{DDbox}{\linewidth}
+		\begin{Verbatim}
+>>> fact_iterative(6)
+720
+>>>
+		\end{Verbatim}
+	\end{DDbox}
+
+\end{algorithme}
+
+Pour montrer l'intérêt de la récursivité, nous allons maintenant essayer de coder cette fonction sans utiliser de fonctions prédéfinies ou boucles, mais seulement quelques opérations de base. Pour cela, on va utiliser \textbf{une propriété de récurrence} de la factorielle. 
+On a effectivement :
+
+\begin{align*}
+ n! = n.(n-1)!
+\end{align*}
+
+Cette propriété est très intéressante, car elle permet de calculer $n!$ à partir de $(n-1)!$.
+
+Or $(n-1)!$ Peut être calculé de la même manière à partir de $(n-2)!$ Etc...
+
+Cependant, si on ne fait que répéter à l'infini cette méthode, le calcul ne donnera jamais de résultat. Pour cela, il faut définir un cas pour lequel on donne immédiatement le résultat. C'est \textbf{l'initialisation de la récurrence}. 
+On dira donc que $1!=1$, et à partir de ce résultat, on peut calculer $n!$ pour tout $n\geq 1$.
+
+\begin{algorithme}[Écriture sous Python de la fonction factorielle en récursif]
+\begin{center}
+		\lstinputlisting{./programmes/fact_recursif.py}
+\end{center}
+
+
+
+\begin{DDbox}{\linewidth}
+		\begin{Verbatim}
+>>> fact_recursif(6)
+720
+>>>
+		\end{Verbatim}
+	\end{DDbox}
+
+\end{algorithme}
+
+Ainsi l'appel \textit{fact$\_$recursif(6)} entraîne l'appel \textit{fact$\_$recursif(5)}, qui entraîne lui-même l'appel \textit{fact$\_$recursif(4)} etc... et ainsi de suite, jusqu'à l'appel \textit{fact$\_$recursif(1)} qui renvoie 1. La façon dont tous ces appels sont gérés en mémoire sera vu dans un prochain chapitre (utilisation des piles).
+
+\begin{bilan}
+On dira qu'une fonction f est récursive si son exécution peut provoquer un ou plusieurs appels de f elle-même. On distinguera alors les appels récursifs à f, qui sont les appels provoqués par l'exécution de f, d'un appel principal, qui a lieu alors que f n'est pas en cours d'exécution. Un langage récursif est un langage dans lequel on peut programmer des fonctions récursives. La plupart des langages aujourd'hui sont récursifs à l'image de \textbf{Pyton} et \textbf{Scilab}.
+\end{bilan}
+
+
+\section{Présentation de la méthode}
+
+\subsection{Problèmes et sous-problèmes}
+
+\subsubsection{Intérêt d'une fonction récursive}
+
+Un programmeur doit écrire une fonction récursive quand c'est la solution la plus adaptée à son problème. La question peut donc se reformuler ainsi : \textit{à quels problèmes les fonctions récursives sont-elles adaptées ?}
+
+Les fonctions que l'on code servent en général à résoudre des problèmes. Le problème que résout la fonction factorielle est "étant donné un nombre, quelle est la valeur de sa factorielle ?" (ce problème se rencontre dans certains algorithmes numériques, comme le calcul approché de fonctions).
+
+Les fonctions récursives sont des fonctions qui s'appellent elles-mêmes. Elles doivent donc résoudre des problèmes qui "s'appellent eux-mêmes" ou qui se définissent par récurrence. Dans certains d'entre eux, la solution du problème général demande la résolution de plusieurs sous-problèmes particuliers, qui sont semblables au premier problème. Par exemple, on peut dire que pour résoudre le problème "combien vaut la factorielle de 4 ?", il faut résoudre le problème "combien vaut la factorielle de 3 ?".
+
+\subsubsection{Exemple}
+
+\begin{exemple}[Liste de matches de tennis]
+
+\begin{itemize}
+
+\item On dispose d'une liste de joueurs d'un tournoi de tennis sous phase de poules (exemple : \textit{Master cup}), et on veut créer une liste de matches, de telle sorte que chaque joueur joue contre tous les autres joueurs une seule fois (pas de phase retour).
+
+\begin{center}
+\includegraphics[width=.5\textwidth]{./images/nadal-federer.jpg}
+\end{center}
+
+\item Découpage de ce problème en sous-problèmes plus simples imbriqués les uns dans les autres :
+
+\item On peut ainsi remarquer que si on a une liste de 4 joueurs, on peut résoudre le problème en connaissant une liste de matches pour les 3 premiers joueurs seulement : on prend cette liste, et on y ajoute un match entre le quatrième joueur et chacun des trois autres.
+
+
+\item On peut programmer ce problème avec une fonction récursive dans Python :
+
+\begin{itemize}
+\item Soit la liste des joueurs notée "\textit{joueurs}"
+\item Il faut commencer par initialiser le problème :
+
+\begin{texteCache}
+s'il n'y a qu'un seul joueur, on n'organise aucun match.
+\end{texteCache}
+
+\item Il faut donner une relation de récurrence (récurcivité) :
+\begin{texteCache}
+on enlève le dernier joueur de la liste, et on demande les matches sans ce dernier.
+\end{texteCache}
+
+\item Ici il faut penser à ajouter les sous-problèmes en ajoutant un match entre lui et tous les autres joueurs et donc à construire une liste de matches.
+\item On remet le dernier joueur dans la liste des joueurs, et on renvoie la liste des matches.
+\end{itemize}
+\end{itemize}
+\end{exemple}
+
+\begin{algorithme}[Écriture sous Python de la fonction factoriel en récursif]
+
+\begin{itemize}
+\item On pourra utiliser la fonction .pop(), qui placée après une liste retire son dernier terme :
+
+\begin{DDbox2}{\linewidth}
+		\begin{Verbatim}
+>>> joueurs=list(range(1,5))
+>>> joueurs.pop()
+4
+>>> joueurs
+[1, 2, 3]
+		\end{Verbatim}
+\end{DDbox2}
+\item De la même manière, on pourra utiliser la fonction \textbf{.append()}, qui placée après une liste ajoute un terme :
+
+\begin{DDbox2}{\linewidth}
+		\begin{Verbatim}
+>>> joueurs=list(range(1,5))
+>>> joueurs.append(5)
+>>> joueurs
+[1, 2, 3, 4, 5]
+		\end{Verbatim}
+\end{DDbox2}
+\end{itemize}
+\begin{texteCache}
+\begin{center}
+		\lstinputlisting{./programmes/tennis.py}
+\end{center}
+\end{texteCache}
+
+En affichant ce qu'il se passe après chaque appel de la fonction "\textit{matches}", on obtient :
+
+\begin{DDbox}{\linewidth}
+		\begin{Verbatim}
+>>> joueurs=list(range(1,5))
+>>> matches(joueurs)
+[]
+[[1, 2]]
+[[1, 2], [1, 3], [2, 3]]
+[[1, 2], [1, 3], [2, 3], [1, 4], [2, 4], [3, 4]]
+>>> 
+		\end{Verbatim}
+	\end{DDbox}
+
+
+\end{algorithme}
+
+\subsection{Structure de la méthode}
+
+\begin{propriete}[Structure d'une méthode récurcive]
+Les deux exemples précédents utilisaient toujours la même structure :
+
+\begin{itemize}
+\item Initialisation : on gère le cas simple, c'est-à-dire celui qui ne nécessite pas de rappeler récursivement la fonction. 
+\begin{itemize}
+\item Pour la factorielle, c'est le cas où n vaut 1 (car on sait directement que \textit{fac$\_$recursive(1) = 1}). 
+\item Pour la liste des matches, c'est le cas où il y a un seul joueur (car il n'y a aucun match à organiser).
+\end{itemize}
+\item Ensuite, on gère le ou les sous-problèmes récursifs, en rappelant la fonction récursive pour chaque sous-problème à résoudre.
+\end{itemize}
+
+On peut énoncer le \textbf{principe fondamental suivant}, concernant les fonctions récursives : 
+
+\textit{"Comme une fonction récursive fait appel à elle-même, il est indispensable de s'assurer que le nombre d'appels à cette fonction sera fini."}
+
+\end{propriete}
+
+\begin{exemple}[Cas du calcul du factoriel]
+
+Dans l'exemple précédent du factoriel, il serait par exemple bien embêtant d'oublier les lignes permettant de renvoyer $1$ dans le cas $n=1$; En théorie, le programme ne s'arrêterait jamais. En pratique, Python renvoie un message d'erreur dès lors que le nombre maximal d'appels récursifs (de l'ordre de 1000) sera dépassé :
+
+\begin{center}
+		\lstinputlisting{./programmes/fact_recursif_infini.py}
+\end{center}
+
+\begin{DDbox2}{\linewidth}
+		\begin{Verbatim}
+RuntimeError: maximum recursion depth exceeded
+		\end{Verbatim}
+\end{DDbox2}
+
+\end{exemple}
+
+\section{Application aux suites numériques : comparaison entre itératif et récursif}
+
+\subsection{Définition explicite}
+
+\begin{definition}[Définition explicite]
+Une suite numérique peut dans certains cas être définie de manière \textbf{explicite} : 
+
+\begin{align*}
+u_n=f(n)
+\end{align*}
+
+La détermination du n\up{ème} terme est alors aisée. Il suffit d'évaluer $f(n)$ .
+\end{definition}
+
+\begin{exemple}[Puissance de 2]
+Il faut évaluer le nombre 2 à la puissance n de manière explicite.
+On définit de manière explicite la suite : 
+$$u_n = 2^n$$ 
+
+par le code Python suivant :
+
+\begin{center}
+		\lstinputlisting{./programmes/power2_explicite.py}
+\end{center}
+
+Malheureusement, toutes les suites numériques ne peuvent pas être définies de manière
+explicite.
+
+
+\end{exemple}
+
+\subsection{Relation de récurrence}
+
+\begin{definition}[Suite définie par récurrence]
+Une suite est définie par \textbf{récurrence} s'il est possible de calculer le terme $u_n$ de la suite en connaissant les termes précédents.
+
+Les égalité de la forme :
+
+\begin{align*}
+\left\{
+\begin{array}{c}
+u_n=f(u_{n-1})\\
+\mbox{ou}\\
+u_n=f(u_{n-1},u_{n-2})\\
+\end{array}
+\right.
+\end{align*}
+
+s'appellent relations de \textbf{récurrence}.
+
+Les égalités qui définissent les premiers termes d'une suite sont appelées \textbf{conditions de
+départ}. Une suite récursive est donc définie par
+\begin{itemize}
+\item une relation de récurrence et, 
+\item une (des) condition(s) de départ.
+\end{itemize} 
+
+\end{definition}
+
+\subsubsection{Premier exemple}
+
+\begin{exemple}[Estimation des puissances de 2]
+On définit de manière récursive la suite :
+
+\begin{align*}
+\left\{
+\begin{array}{c}
+u_0=1\\
+\mbox{et}\\
+u_n=2*u_{n-1}\\
+\end{array}
+\right.
+\end{align*}
+
+On propose de manière proche de la définition, de définir un \textbf{algorithme récursif} avec le langage
+Python (on écrira par exemple \textit{pow2$\_$recursive} cette fonction récursive) :
+
+\begin{texteCache}
+\begin{center}
+		\lstinputlisting{./programmes/pow2_recursive.py}
+\end{center}
+\end{texteCache}
+
+Il est aussi possible de proposer un \textbf{algorithme itératif} permettant d'aboutir au même résultat.
+Proposer une fonction \textit{pow2$\_$iterative} permettant d'aboutir au même résultat :
+
+
+\begin{texteCache}
+\begin{center}
+		\lstinputlisting{./programmes/pow2_iterative.py}
+\end{center}
+\end{texteCache}
+
+Nous verrons plus loin quels sont les avantages ou inconvénients d'une programmation récursive par rapport à une programmation itérative.
+
+\end{exemple}
+
+\subsubsection{Suite de Fibonacci}
+
+\begin{definition}[Suite de Fibonacci]
+
+La \textbf{suite de Fibonacci} permet de décrire l'évolution d'une population de lapins par exemple.
+
+\begin{center}
+\includegraphics[width=0.6\textwidth]{./images/fibonacci.png}
+\end{center}
+
+Cette suite est définie de la façon suivante : 
+
+\begin{align*}
+\left\{
+\begin{array}{c}
+F_0=0\\
+\\
+F_1=1\\
+\\
+F_{n+2}=F_{n+1}+F{n}\\
+\end{array}
+\right.
+\end{align*}
+
+\end{definition}
+
+
+On se propose de définir une procédure récursive $FibR$, qui à partir d'un seul argument d'entrée (un entier $n$) retourne la valeur de $F_n$ en sortie :
+
+\begin{algorithme}[Écriture sous Python de la suite de Fibonacci en récursif]
+
+\begin{texteCache}
+\begin{center}
+		\lstinputlisting{./programmes/FibR.py}
+\end{center}
+\end{texteCache}
+
+\end{algorithme}
+
+\begin{algorithme}[Écriture sous Python de la suite de Fibonacci en itératif]
+
+\begin{texteCache}
+\begin{center}
+		\lstinputlisting{./programmes/FibI.py}
+\end{center}
+\end{texteCache}
+
+\end{algorithme}
+
+\begin{bilan}
+On voit que si on demande un n très grand, le nombre d'appels de FibR devient vite très important. C'est ce que nous allons maintenant analyser.
+\end{bilan}
+
+\subsection{Comparaison des méthodes récursives et itératives}
+
+Basons-nous sur la suite de Fibonacci définie précédemment selon des procédures récursive et itérative. Représentons l'arbre des appels de la fonction \textit{FibR} pour $n=5$ :
+
+\begin{center}
+\includegraphics[width=0.9\textwidth]{./images/fibonacci_arbre.png}\\
+Arbre des appels de la procédure récursive de la suite de Fibonacci
+\end{center}
+
+On peut voir que cette méthode de calcul n'est pas très efficace.
+\begin{itemize}
+\item Par exemple, Fib(1) est calculé 5 fois, ce qui est inutile !
+\item De plus, l'espace de stockage des résultats intermédiaires est bien plus important que le strict nécessaire.
+\end{itemize}
+
+On peut calculer les nombres de Fibonacci de manière beaucoup plus \textbf{efficace de manière itérative}.
+Attention donc au fait qu'un algorithme facile à écrire n'est pas forcément le plus performant.
+
+La mise en oeuvre des algorithmes récursifs nécessite le plus souvent une pile (nous aborderons cette notion dans un prochain chapitre). C'est la difficulté d'implanter cette pile ou d'éviter son emploi qui a fait dire pendant longtemps que les programmes récursifs étaient moins efficaces que les programmes itératifs, mais la situation a changé. En fait, le débat sur le choix entre codage récursif ou itératif est aussi vieux que l'informatique et les progrès de la compilation des langages de programmation réduit encore la différence d'efficacité. Voici quelques arguments en faveur de la présentation récursive :
+\begin{itemize}
+\item La présentation récursive permet de présenter simplement des algorithmes beaucoup plus astucieux, comme avec son algorithme de tri rapide.
+\item Les compilateurs d'aujourd'hui sont tellement astucieux que plus le programme leur est présenté de façon abstraite et sans effets de bord, plus ils peuvent mettre en oeuvre leurs optimisations et aboutir à des codes objets efficaces.
+
+\item De manière plus générale, le choix même d'une version récursive ou itérative d'un programme doit se faire selon plusieurs critères :
+\begin{itemize}
+\item compréhension du programme,
+\item traduction au mieux de la nature du problème,
+\item souplesse d'utilisation, permettant la modification de l'algorithme par la suite.
+\end{itemize}
+\end{itemize}
+
+
+
+\begin{remarque}
+Il est nécessaire de s'habituer aux deux styles de programmation, pour pouvoir faire un choix le plus objectif ensuite : une personne qui n'aurait fait que de l'itératif aura toujours tendance à trouver la récursivité "compliquée", et passera à côté d'opportunités très intéressantes, tout comme un programmeur ne faisant que de la récursivité aura parfois une manière compliquée de coder ce qui se fait simplement avec une boucle.
+\end{remarque}
+
+\section{Analyse des programmes récursifs}
+\subsection{Présentation}
+
+\begin{definition}[But de l'analyse des programmes récursifs]
+Pour écrire ou analyser des programmes récursifs, nous serons amenés à nous poser un certain nombre de questions :
+\begin{itemize}
+\item Le programme se termine-t-il ? \textbf{Terminaison}
+\item Est-il conforme à sa spécification ? \textbf{Correction}
+\item Quelle est sa \textbf{complexité} (temps et mémoire) ?
+\end{itemize} 
+\end{definition}
+
+\subsection{Terminaison et correction}
+
+Nous nous intéressons ici à la fonction factorielle pour en démontrer sa terminaison et sa correction.
+
+\begin{center}
+		\lstinputlisting{./programmes/fact_recursif.py}
+\end{center}
+
+La correction repose sur le principe de démonstration par récurrence :
+On souhaite montrer par récurrence sur $n \geq 0$, la propriété suivante :
+
+\textbf{$H_n$ : \textit{factorielle(n)} termine et renvoie la valeur $n!$.}
+
+\begin{itemize}
+\item \textbf{initialisation} :
+
+\begin{texteCache}
+La propriété $H_0$ est vérifiée car \textit{factorielle(0)} se réduit à \textbf{return} $1$
+\end{texteCache}
+
+\item On suppose la propriété vrai au rang $n-1$ (avec $n>0$), et on cherche à démonter qu'elle est vrai au rang $n$ :
+
+\begin{texteCache}
+\begin{itemize}
+\item Le calcul de \textit{factorielle(n)} commence par un appel récursif à \textit{factorielle(n-1)}.
+\item Par hypothèse de récurrence, cet appel termine et renvoie la valeur $(n-1)!$.
+\item Ensuite l'appel à \textit{factorielle(n)} multiplie ce résultat par $n$ et renvoie le produit.
+Donc cet appel termine et renvoie bien $n\times(n-1)!$, ce qui démontre $H_n$.
+\end{itemize}
+\end{texteCache}
+\end{itemize}
+
+La \textbf{terminaison} de l'algorithme est vérifiée puisque l'indice $n$ suite aux différents appels décroît strictement jusqu'à atteindre la valeur $1$ qui permet de sortir du processus récursif.
+
+\subsection{Complexité d'un fonction récursive}
+
+Nous allons voir ici comment calculer le coût d'une fonction récursive, à savoir le nombre d'opérations élémentaires qu'elle effectue ou son occupation mémoire totale.
+
+\begin{exemple}
+Prenons par exemple la suite qui permet de calculer une approximation de $\sqrt{3}$ :
+
+\begin{align*}
+\left\{
+\begin{array}{c}
+u_0=2.0\\
+\\
+u_{n}=\frac{1}{2}\left(u_{n-1}+\frac{3}{u_{n-1}}\right)\\
+\end{array}
+\right.
+\end{align*}
+
+Une procédure récursive permettant de calculer le terme un peut être formulée ainsi sous Python :
+
+\begin{center}
+		\lstinputlisting{./programmes/algo_complexite.py}
+\end{center}
+
+\end{exemple}
+
+Nous allons évaluer le nombre d'opérations arithmétiques (addition, multiplication et division) que cette suite effectue.
+
+Si $n$ désigne la valeur de son argument, on note $C(n)$ son nombre d'opérations associées. En suivant la définition de la fonction $u$, on obtient les deux équations suivantes :
+
+\begin{texteCache}
+\begin{align*}
+C(0)=0\\
+\\
+C(n)=C(n-1)+3
+\end{align*}
+\end{texteCache}
+
+En effet, dans le cas $n=0$, on ne fait aucune opération arithmétique. Et dans le cas $n>0$, on fait d'une part un appel récursif sur la valeur $n-1$, d'où $C(n-1)$ opérations, puis trois opérations arithmétiques (une multiplication , une addition et une division). Il s'agit d'une suite arithmétique de raison 3, dont le terme général est :
+
+\begin{texteCache}
+\begin{align*}
+C(n)=3\;n
+\end{align*}
+\end{texteCache}
+
+Le nombre d'opérations arithmétiques effectuées par la fonction u est donc proportionnel à $n$, soit une complexité $O(n)$.
+
+\begin{exemple}
+Si en revanche, on avait écrit la fonction u de manière plus naïve, avec deux appels récursifs u(n-1) :
+
+
+\begin{center}
+		\lstinputlisting{./programmes/algo_complexite_naif.py}
+\end{center}
+
+\end{exemple}
+
+Alors les équations définissant $C(n)$ seraient les suivantes :
+
+\begin{texteCache}
+\begin{align*}
+C(0)=0\\
+\\
+C(n)=C(n-1)+C(n-1)+3
+\end{align*}
+\end{texteCache}
+
+En effet, il convient de prendre en compte le coût $C(n-1)$ des deux appels à $u(n-1)$. Il s'agit maintenant d'une suite arithmético-géométrique.
+
+\begin{remarque}[suite arithmético-géométrique]
+Une suite arithmético-géométrique se définit par :
+
+\begin{align*}
+\left\{
+\begin{array}{c}
+u_0\\
+\\
+u_n=a\cdot u_{n-1}+b
+\end{array}
+\right.
+\end{align*}
+
+
+On peut l'exprimer de manière générale $\forall n \in \mathbb{N}$ :
+
+
+\begin{align*}
+u_n=a^n(u_0-r)+r
+\end{align*}
+
+avec 
+
+\begin{align*}
+r=\frac{b}{1-a}
+\end{align*}
+
+
+\end{remarque}
+
+Le terme général de $C(n)$ est donc :
+
+\begin{texteCache}
+
+\begin{align*}
+C(n)=2^n\left(0-\frac{3}{1-2}\right)+\frac{3}{1-2}=3(2^n-1)
+\end{align*}
+
+\end{texteCache}
+
+\begin{bilan}
+
+
+Il s'agit donc ici d'une \textbf{complexité exponentielle}.
+
+\end{bilan}
+
+\section{Récursivité imbriquée et croisée}
+
+\subsection{Récursivité imbriquée}
+
+La récursivité imbriquée consiste à faire un appel récursif à l'intérieur d'un autre appel récursif. Un exemple permettant de bien illustrer le concept est la suite d'Ackermann, définie de la manière suivante sur $\mathbb{N}\times \mathbb{N}$ :
+
+\begin{align*}
+A(m,n)=
+\left\{
+\begin{array}{c}
+A(0,n)=n+1\\
+\\
+A(m,0)=A(m-1,1)\\
+\\
+A(m,n)=A(m-1,A(m,n-1)) \mbox{Si $m\neq 0$ et n$\neq$0}
+\end{array}
+\right.
+\end{align*}
+
+Cette suite se programme très facilement de manière récursive :
+
+\begin{center}
+		\lstinputlisting{./programmes/ackermann_prog.py}
+\end{center}
+
+
+\subsection{Récursivité croisée}
+
+La possibilité de déclarer une fonction sans la définir prend tout son intérêt à propos de la récursivité croisée.
+
+En effet, une fonction ne peut être utilisée qu'à condition qu'elle ait été définie (ou déclarée) or, dans le cas de la récursivité croisée, on ne pourrait pas s'en sortir juste à l'aide des définitions. La récursivité croisée consiste à écrire des fonctions qui s'appellent l'une l'autre.
+Prenons l'exemple simple suivant qui consiste à connaître la parité d'un entier naturel. Nous allons écrire deux fonctions :
+
+\begin{center}
+		\lstinputlisting{./programmes/pair_impair.py}
+\end{center}
+
+\section{Courbes définies récursivement}
+
+\subsection{Courbe du dragon}
+
+La courbe du dragon (ou "fractale du dragon" ou "courbe de Heighway") a été pour la première fois étudiée par les physiciens de la NASA John Heighway, Bruce Banks, et William Harter en 1960.
+On peut l'obtenir par pliage en utilisant la méthode suivante :
+
+\begin{center}
+\includegraphics[width=0.9\textwidth]{./images/pliage_dragon.png}
+\end{center}
+
+On peut obtenir le pliage en utilisant la méthode suivante
+\RestyleAlgo{boxed}
+\begin{algorithm}
+\DontPrintSemicolon
+\caption{Fractal du Dragon}
+Prendre une bande de papier
+\BlankLine
+\For{$n$ fois}{
+pliez là en son milieu}
+\KwOut{Déplier la bande en conservant les pliures à $90^{\circ}$}
+\end{algorithm}
+
+\subsubsection{Avec la méthode itérative}
+
+\RestyleAlgo{boxed}
+\begin{algorithm}
+\DontPrintSemicolon
+\caption{Fractal du Dragon itératif}
+Partir d'un segment de base
+\BlankLine
+\For{$n$ fois}{
+En suivant la courbe, remplacer chaque segment par 2 segments à angle à $90^{\circ}$ Jusqu'à fin}
+\KwOut{Forme du fractal}
+\end{algorithm}
+
+\begin{center}
+\includegraphics[width=1.0\textwidth]{./images/dragon_iteratif.png}
+\end{center}
+
+
+
+\subsubsection{Avec la méthode récursive}
+
+L'algorithme récursif écrit dans le langage Python est le suivant :
+
+
+\begin{algorithme}[Algorithme récursif du tracé du fractal du Dragon]
+
+\begin{center}
+		\lstinputlisting{./programmes/fractal_dragon.py}
+\end{center}
+
+\end{algorithme}
+
+\begin{remarque}[Utilisation du module graphique \textit{turtle}]
+Le module \textbf{turtle} permet de réaliser des tracés géométriques à l'aide d'un curseur appelé \textit{tortue}.
+La tortue est représenté par une flèche, dispose d'un crayon et d'une "tête" qui fixe sa direction. Partout où elle passe, elle laisse une un trait si son crayon est baissé.
+L'avantage de cette méthode est qu'elle réalise des tracé suffisamment lent pour suivre l'avancée des instructions.
+Différentes fonction de base sont présenté dans module \textbf{turtle} :
+
+\begin{itemize}
+\item \textbf{reset}() : efface le dessin ;
+\item \textbf{goto}() : aller au point de coordonnées $x$, $y$ sans tourner la tête ;
+\item \textbf{forward}(distance) : Avancer d'une distance donnée ;
+\item \textbf{backward}(distance) : reculer d'une distance donnée ;
+\item \textbf{up}() : lever le crayon (pour ne plus dessiner) ;
+\item \textbf{down}() : baisser le crayon (pour dessiner) ;
+\item \textbf{left}(angle) : tourner la tête à gauche d'un angle exprimé en dégrés ;
+\item \textbf{right}(angle) : tourner la tête à droite d'un angle exprimé en dégrés ;
+\end{itemize}
+\end{remarque}
+
+\begin{exemple}[Tracé du fractal du Dragon]
+	\begin{tabular}{cc}
+	\resizebox{0.5\columnwidth}{!}{\includegraphics{./programmes/dragon7.eps}} &
+\resizebox{0.5\columnwidth}{!}{\includegraphics{./programmes/dragon9.eps}}\\
+7 niveaux de récursivité & 9 niveaux de récursivité\\
+    \resizebox{0.5\columnwidth}{!}{\includegraphics{./programmes/dragon11.eps}} &
+\resizebox{0.5\columnwidth}{!}{\includegraphics{./programmes/dragon13.eps}}\\
+11 niveaux de récursivité & 13 niveaux de récursivité
+    \end{tabular}
+\end{exemple}
+
+
+\subsection{Courbes de Bézier}
+
+On se donne des points de $A_0$ à $A_N$. La courbe de Bézier associée à ces points est une courbe qui
+passe par les points extrêmes et s'approche des autres points comme si ceux-ci jouaient le rôle
+d'aimants. Ce genre de courbe a été inventé au cours des années 1960 par Pierre Bézier dans les
+usines Renault et Paul De Casteljau chez Citroën pour le dessin des carrosseries de voitures.
+Nous allons ici tracer seulement la courbe de Bézier de quatre points dans un plan, et sans
+entrer dans la théorie. On se donne 4 points A, B, C, D que l'on joint. Puis on prend le milieu ab
+du segment [AB], puis celui bc de [BC] et celui cd de [CD]. Ensuite on prend le milieu abc de
+[abbc] et celui bcd de [bccd]. Enfin on prend le milieu G de [abcbcd]. On vient d'obtenir un point
+de la courbe de Bézier, et même on montre que le segment [abcbcd] est tangent en G à cette
+courbe. Cette courbe passe par ailleurs par les points extrêmes A et D ou elle a pour tangentes
+respectives [AB] et [CD]. Notons que la ligne brisée obtenue avec les points A ab abc bcd cd D est
+assez proche de ce va être la courbe finale, et beaucoup plus que ne l'était la ligne brisée initiale
+A B C D.
+
+\begin{center}
+\includegraphics[width=.7\textwidth]{./images/bezier_automobile.png}\\
+\includegraphics[width=.7\textwidth]{./images/bezier.png}
+\end{center}
+
+
+\end{document}
