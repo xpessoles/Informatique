@@ -1,0 +1,37 @@
+\question{} Ecrire une fonction \texttt{matches(joueurs:list)->list} prenant en argument une liste de numéros de joueurs et renvoyant une listes de matchs sous la forme de couple de joueurs.
+
+\begin{center}
+\begin{lstlisting}
+def matches(joueurs): 
+    """ Fonction recursive qui renvoie une liste de matches
+    a partir d'une liste de joueurs """ 
+    #s'il n'y a qu'un seul joueur, on n'organise aucun match
+    if len(joueurs)==1: 
+        return [] 
+    #on enleve le dernier joueur de la liste, et on demande les matchs sans lui
+    else:
+        dernier_joueur = joueurs.pop()
+        vs=matches(joueurs) 
+        print(vs)
+    #on rajoute un match entre lui et tous les autres joueurs 
+        for j in joueurs:
+            vs.append([j,dernier_joueur]) 
+    #on le remet dans la liste des joueurs, et on renvoie 
+    #la liste des matchs 
+        joueurs.append(dernier_joueur) 
+        return vs
+    
+\end{lstlisting}
+\end{center}
+
+
+En affichant ce qu'il se passe après chaque appel de la fonction "\textit{matches}", on obtient :
+
+\begin{lstlisting}
+>>> joueurs=list(range(1,5))
+>>> matches(joueurs)
+[]
+[[1, 2]]
+[[1, 2], [1, 3], [2, 3]]
+[[1, 2], [1, 3], [2, 3], [1, 4], [2, 4], [3, 4]]
+\end{lstlisting}
