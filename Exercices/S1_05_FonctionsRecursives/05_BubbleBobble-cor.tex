@@ -1,0 +1,26 @@
+
+\question{Définir la fonction \texttt{bubble1(n:int, x:float, y:float, r:float) -> None} permettant de tracer la figure suivante.}
+
+\begin{lstlisting}
+def bubble1(n, x=0, y=0, r=8):
+    circle([x, y], r)
+    if n > 1:
+        bubble1(n-1, x+3*r/2, y, r/2)
+        bubble1(n-1, x, y-3*r/2, r/2)
+\end{lstlisting}
+
+\question{Définir la fonction \texttt{bubble2(n:int, x:float, y:float, r:float, d:str) -> None} permettant de tracer la figure suivante.}
+
+\begin{lstlisting}
+def bubble2(n, x=0, y=0, r=8, d=''):
+    circle([x, y], r)
+    if n > 1:
+        if d != 's':
+            bubble2(n-1, x, y+3*r/2, r/2, 'n')
+        if d != 'w':
+            bubble2(n-1, x+3*r/2, y, r/2, 'e')
+        if d != 'n':
+            bubble2(n-1, x, y-3*r/2, r/2, 's')
+        if d != 'e':
+            bubble2(n-1, x-3*r/2, y, r/2, 'w')
+\end{lstlisting}
