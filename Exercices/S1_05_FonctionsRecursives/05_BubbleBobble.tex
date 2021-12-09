@@ -20,7 +20,7 @@ def circle(coords:list, r:float) -> None :
 \fi
 
 \begin{multicols}{2}
-\question{Définir la fonction \texttt{bubble1(n:int, x:float, y:float, r:float) -> None} permettant de tracer la figure suivante.}
+\question{Définir la fonction \texttt{bubble1(n:int, x:float, y:float, r:float) -> None} permettant de tracer la figure suivante. Le rayon est divisé par 2 à chaque appel.}
 \ifprof
 \begin{lstlisting}
 def bubble1(n, x=0, y=0, r=8):
@@ -34,7 +34,7 @@ def bubble1(n, x=0, y=0, r=8):
 \includegraphics[width=.6\linewidth]{Images/Fig1}
 \end{center}
 \fi
-\question{Définir la fonction \texttt{bubble2(n:int, x:float, y:float, r:float, d:str) -> None} permettant de tracer la figure suivante.}
+\question{Définir la fonction \texttt{bubble2(n:int, x:float, y:float, r:float, d:str) -> None} permettant de tracer la figure suivante. \texttt{d} désigne la direction de propagation (par exemple \texttt{n} pour nord, \texttt{s}, pour sud etc...) }
 \ifprof
 \begin{lstlisting}
 def bubble2(n, x=0, y=0, r=8, d=''):
