@@ -1,3 +1,12 @@
+\question{Écrire une fonction \texttt{exponaif(x,n)} d'arguments un réel $x$ et un entier naturel $n$, qui renvoie la valeur de $x^n$ par la méthode naïve $x^n=x\times x \times ... \times x$ ($n$ termes). Compter le nombre d'opérations dans exponaïf.}
+
+	\begin{lstlisting}
+def exponaif(x,n):
+    p=1
+    for i in range(n):
+        p=p*x
+    return(p)
+\end{lstlisting}
 
 	
 	\question{Quel est le nom de la variable locale dont le contenu est retourné par la fonction ?}
