@@ -1,0 +1,114 @@
+
+	
+	\question{Quel est le nom de la variable locale dont le contenu est retourné par la fonction ?}
+	
+La variable locale est \texttt{res}.
+	
+	\question{Faire tourner \og{}à la main\fg{} la fonction pour $x=2$ et $n=10$ en complétant le tableau suivant puis encadrer le nombre d'opérations dans exporapide en fonction de $ln(n)/ln(2)$.}
+	
+	\begin{center}
+		\begin{tabular}{|l|p{1cm}|p{1cm}|p{1cm}|}
+			\hline & \texttt{p} & \texttt{res} & \texttt{y}\\
+			\hline &&&\\
+			sortie du 1{\textrm{er}} tour de boucle & 5 & 1 & 4\\
+sortie du 2{\textrm{er}} tour de boucle & 2 & 4 & 16\\
+sortie du 3{\textrm{er}} tour de boucle & 1 & 4 & 256\\
+sortie du 4{\textrm{er}} tour de boucle & 0 & 1024 & 65536\\
+		\end{tabular}
+		
+	\end{center}
+	
+	\begin{lstlisting}
+	# Le nombre d'opérations effectuées est exactement n (1 produit à chaque tour)
+\end{lstlisting}
+	
+
+	\question{Ecrire une fonction \texttt{Pnaif(x,P)} d'arguments un réel \texttt{x} et \texttt{P} la liste des coefficients du polynôme, qui renvoie $P(x)$ à l'aide de la fonction \texttt{exponaif}. Compter le nombre d'opérations.}
+
+\begin{lstlisting}
+
+def Pnaif(x,n):
+    S=0
+    for i in range(n):
+        S=S+i*exponaif(x,i)
+    return(S)
+
+# n+n(n+1)/2 ~ n**2/2 opérations. Quadratique
+
+\end{lstlisting}
+
+	\question{ Faire de même pour une fonction 
+	\texttt{Prapide(x,n)} qui renvoie $P(x)$ à l'aide de la fonction \texttt{exporapide}. On admettra que la complexité est en O(n ln(n)).}
+	
+\begin{lstlisting}
+
+def Prapide(x,n):
+    S=0
+    for i in range(n):
+        S=S+i*exporapide(x,i)
+    return(S)
+
+# O(log(i)) pour chaque i*x**i. Il reste la somme des n termes.
+# D'où n+somme des log(i)=O(n.ln(n)).
+
+\end{lstlisting}
+
+	\question{\'Ecrire une fonction \texttt{horner(x,L)} de paramètres un réel $x$ et une liste $L$ représentant un polynôme $P$, renvoie la valeur de $P(x)$ par la méthode de Hörner. Compter le nombre d'opérations.}
+	
+	
+	\begin{lstlisting}
+	def horner(x,L):
+    """L est la liste des coefficients"""
+    n=len(L)-1
+    S=0
+    for i in range(n+1):
+        S=S*x+L[n-i]
+    return(S)
+    
+    
+# 2n opérations. Linéaire mais plus intéressante que ci-dessus.
+
+\end{lstlisting}
+
+
+
+	\question{Définir la liste $N$ des entiers naturels compris entre 0 et 100.}
+	
+	
+\begin{lstlisting}
+N=[i for i in range(101)]
+\end{lstlisting}
+
+	\question{Grâce à la fonction \texttt{perf$\_$counter} de la bibliothèque \texttt{time},  écrire une fonction \texttt{Temps\_calcul(x)} qui:}
+\begin{itemize}
+\item définit 3 listes \texttt{Tn}, \texttt{Tr} et \texttt{Th} contenant les temps de calcul de $P(x)$ pour $P=\displaystyle\sum_{k=0}^n k.x^k$ lorsque $n$ décrit $N$ avec respectivement la méthode naïve, la méthode rapide puis la méthode de Hörner.\\
+\item trace les trois courbes  \texttt{Tn}, \texttt{Tr} et \texttt{Th} en fonction de $N$ (on prendra $x=2$). Interpréter le résultat (on pourrait démontrer que les temps d'exécution des trois programmes sont de l'ordre de $n**2$ pour la méthode naïve (on parle de complexité quadratique), de l'ordre de $n\ln(n)$ pour l'exporapide, et de l'ordre de $n$ pour la méthode de Hörner (complexité linéaire)). 
+\end{itemize}
+
+
+\begin{lstlisting}
+import time as t
+
+def Temps_calcul_P(x):
+    # Le polynôme est donné par une liste des coefficients.
+    Tn,Tr,Th=[],[],[]
+    for n in N:
+        L=[k for k in range(n+1)]
+        tps=t.perf_counter()
+        Pnaif(x,n)
+        Tn.append(t.perf_counter()-tps)
+        tps=t.perf_counter()
+        Sr=0
+        Prapide(x,n)
+        Tr.append(t.perf_counter()-tps)
+        tps=t.perf_counter()
+        Phorner(x,L)
+        Th.append(t.perf_counter()-tps)
+    plt.plot(N,Th,label='méthode horner')
+    plt.plot(N,Tr,label='méthode rapide')
+    plt.plot(N,Tn,label='méthode naïve')
+    plt.legend()
+    plt.show()
+
+\end{lstlisting}
+	

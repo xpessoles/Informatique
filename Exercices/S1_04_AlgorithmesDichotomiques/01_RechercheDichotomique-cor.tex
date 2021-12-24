@@ -1,0 +1,118 @@
+
+
+\question{Illustrer la méthode avec les deux exemples suivants :}
+
+\begin{lstlisting}
+# g=0, d=8
+# m=4, L[m]=11 et 5 < 11, on pose g=0, d=3
+# m=2, L[m]=5. On a trouvé x0
+
+# g=0, d=8
+# m=4, L[m]=8 et 8<11, on pose g=5, d=8
+# m=6, L[m]=13 et 11<13, on pose g=5, d=5
+# m=5, L[m]=10 et 10<11, on pose g=6, d=5. On s'arrête.
+\end{lstlisting}
+
+
+
+
+\question{Si $x0$ n'est pas dans la liste $L$, donner un test d'arrêt du processus de dichotomie portant sur $g$ et $d$. }
+
+\begin{lstlisting}
+g>d
+\end{lstlisting}
+
+\question{\'Ecrire une fonction \texttt{dichotomie(x0,L)} qui renvoie \texttt{True} ou \texttt{False} selon que \texttt{x0} figure ou non dans \texttt{L} par cette méthode. On utilisera une boucle \texttt{while} que l'on interrompra soit lorsque l'on a trouvé $x0$, soit lorsque l'on a fini de parcourir la liste.}
+
+\begin{lstlisting}
+def dichotomie(x0,L):
+    Test=False
+    n=len(L)
+    g,d=0,n-1
+    while g<=d and not Test:
+        m=(g+d)//2
+        if L[m]==x0:
+            Test=True
+        elif L[m]>x0:
+            d=m-1
+        else:
+            g=m+1
+        print(g,d)
+    return(Test)
+\end{lstlisting}
+
+\question{Combien vaut $g-d$ au $i\ieme$ tour de boucle ? Si \texttt{x0} ne figure pas dans \texttt{L}, montrer que le nombre de tours de boucles nécessaires pour sortir de la fonction est de l'ordre de $\ln n$ où $\text{n=len(L)}$ (cela rend la fonction beaucoup plus efficace qu'une simple recherche séquentielle pour laquelle le nombre de comparaisons pour sortir de la boucle serait de l'ordre de $n$).}
+
+
+\begin{lstlisting}
+# Si x0 n_est pas présent, on exécute la boucle tant que g<=d. On sort avec g=d+1.
+# A l_entrée du 1er tout de boucle, on a d-g+1=n. A chaque tour, la valeur d-g+1 diminue environ de moitié. Donc après k tours de boucles, la longueur de l_intervalle est de l_ordre de n/2**k.
+# De plus, à chaque tour de boucle, il y a 2 comparaisons.
+# Au dernier tour numéro k, on a g=d soit lorsque n/2**k = 1 d_ou k=log_2(n).
+# On obtient donc un nombre de comparaisons équivalent à 2*ln(n)/ln(2): complexité logarithmique.
+# Dans le cas séquentiel, on obtient une complexité linéaire, donc beaucoup moins intéressant.
+\end{lstlisting}
+%
+%
+%\subsection{Recherche d'un indice satisfaisant une condition donnée}
+%
+%On se donne dans cette question une liste \texttt{L} strictement décroissante de réels contenant des termes strictement positifs et des termes strictement négatifs. 
+%
+%\question{\'Ecrire une fonction \texttt{recherche\_dicho(L)}, d'argument la liste \texttt{L}, qui renvoie l'indice ainsi que la valeur du dernier élément positif ou nul par une méthode dichotomique adaptée de la précédente.}
+%
+%
+%
+%\subsection{Recherche d'un zéro d'une fonction}
+%
+%
+%Soit une fonction $f:[a,b]\to\Rr$ ($a<b$) vérifiant : 
+%$$\cond{$f$ continue sur $[a,b]$\\$f(a).f(b)\<0$ ie $f(a)$ et $f(b)$ de signes opposés.}.$$
+%
+%Le théorème des valeurs intermédiaires s'applique et assure que $f$ possède au moins un zéro $\ell$ entre $a$ et $b$. 
+%
+%%\medskip 
+%
+%\begin{center}
+%	\begin{tikzpicture}[scale=2]
+%		\shorthandoff{:};
+%		\draw[->] (-2.5,0)--(2.5,0);
+%		\draw[->] (-2.25,-1.5)--(-2.25,1.5);
+%		\fenetre
+%		\draw[domain=-2:2, samples=200, very thick]  plot ({\x},{((\x)^5+3*(\x)-7)/34});
+%		\draw (-2,0)node{$\cdot$};
+%		\draw (-1,0)node{$\cdot$};
+%		\draw (1,0)node{$\cdot$};
+%		\draw (0,0)node{$\cdot$};
+%		\draw (2,0)node{$\cdot$};
+%		\draw (-2 , 0) node[below] {$g_0=a$};
+%		\draw (2 , 0) node[below] {$d_0=b$};
+%		\draw (1 , 0.15) node[allow] {$g_2=m_1$};
+%		\draw (2 , 0.15) node[allow] {$d_2=b$};
+%		\draw (2 , -0.2) node[below] {$d_1=b$};
+%		\draw (0 , 0) node[below] {$g_1=m_0$};
+%		\draw (1.26 , 0) node[below] {$\ell$};
+%	\end{tikzpicture}
+%\end{center}
+%
+%L'idée consiste à créer une suite d'intervelles $[g_n,d_n]$ tels que pour tout entier naturel $n$, $$g_n\<\ell\<\d_n \textrm{ et } 0\< g_n-d_n=\Frac{g_{n-1}-d_{n-1}}2.$$
+%
+%%\medskip 
+%
+%On considère $m_0 = \dfrac{g_0+d_0}{2}$ et on évalue $f(m_0)$ : 
+%%\bigskip 
+%\begin{itemize}
+%	\item si $f(m_0)\times f(d_0)\> 0$, on va poursuivre la recherche d'un zéro dans l'intervalle $[g_1,d_1]=[g_0,m_0]$ ;	\item sinon,  on poursuit la recherche dans l'intervalle $[g_1,d_1]=[m_0,d_0]$;
+%	\item on recommence alors en considérant $m_1 = \dfrac{g_1+d_1}{2}$ ...\\
+%\end{itemize}
+%
+%%\bigskip
+%
+%\question{Si l'on souhaite que $g_n$ et $d_n$ soient des solutions approchées de $\ell$ à une précision $\varepsilon$, quelle est la condition d'arrêt de l'algorithme ? Préciser alors la valeur approchée de $\ell$ qui sera renvoyée par la fonction.}
+%	
+%\question{\'Ecrire une fonction \texttt{recherche\_zero(f,a,b,epsilon)} qui renvoie une valeur approchée du zéro de \texttt{f} sur \texttt{[a,b]} a epsilon près.}
+%	
+%\question{Tester la fonction avec $f:x\mapsto x^2-2$ sur $[0,2]$ et $\varepsilon=0.001$.}
+%	
+%\question{Avec une erreur de $\varepsilon=\Frac 1{2^p}$, combien y a-t-il de comparaisons au final en fonction de $p$ ?}
+%	
+	
