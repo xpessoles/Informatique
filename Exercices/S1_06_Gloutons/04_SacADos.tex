@@ -35,17 +35,16 @@ On suppose que la masse d’un unique fruit est négligeable par rapport à la m
 \subsection*{Présentation de l’algorithme et implémentation}
 \label{sec:PrésentationDeLAlgorithmeEtImplémentation}
 
-Le principe pour optimiser le chargement est de commencer par mettre dans le sac la quantité maximale de fruits les plus chers par unité de masse. S’il y a encore de la place dans le sac, on continue avec les fruits les plus chers par unité de masse parmi ceux restants, … et ainsi de suite jusqu’à ce que le sac soit plein. Il est possible qu’on ne puisse prendre qu’une fraction de la quantité de fruits disponible, si la capacité maximale du sac est atteinte. L’algorithme sera donc constitué d’une structure itérative, incluant une structure alternative.
+Le principe pour optimiser le chargement est de commencer par mettre dans le sac la quantité maximale de fruits les plus chers par unité de masse. S’il y a encore de la place dans le sac, on continue avec les fruits les plus chers par unité de masse parmi ceux restants... et ainsi de suite jusqu’à ce que le sac soit plein. Il est possible qu’on ne puisse prendre qu’une fraction de la quantité de fruits disponible, si la capacité maximale du sac est atteinte. %L’algorithme sera donc constitué d’une structure itérative, incluant une structure alternative.
 
-Dans \textbf{Algorithmes\_gloutons.py}, nous avons ébauché l’algorithme de résolution du problème et implémenté \texttt{cueillette} par la liste des fruits \textbf{triée} par prix au kilo décroissant.\\
-Un fruit est représenté par une liste \texttt{fruit=[prix au kilo,nom,quantité ramassée]}
-\begin{center}
-cueillette = [[24,"framboises",1], [16,"myrtilles",3], [6,"fraises",5], [3,"mures",2]]
-\end{center}
+%Dans \textbf{Algorithmes\_gloutons.py}, nous avons ébauché l’algorithme de résolution du problème et implémenté \texttt{cueillette} par la liste des fruits \textbf{triée} par prix au kilo décroissant.\\
+Un fruit est représenté par une liste \texttt{fruit=[prix au kilo,nom,quantité ramassée]} :
+
+\texttt{cueillette = [[24,"framboises",1], [16,"myrtilles",3], [6,"fraises",5], [3,"mures",2]]}
+
 
 \question{Implémenter la fonction \texttt{sac\_a\_dos(L:list, capacite:int)} qui prend en argument une liste de listes \texttt{L} modélisant la cueillette et la capacité du sac à dos, et appliquant la méthode décrite précédemment. Cette fonction renvoie :}
-\textit{
-\begin{itemize}
+\textit{\begin{itemize}
 \item une liste de listes des fruits contenus dans le sac à dos avec leur masse correspondante de façon à avoir le chargement de valeur maximale ;
 \item la valeur du chargement.
 \end{itemize}}
