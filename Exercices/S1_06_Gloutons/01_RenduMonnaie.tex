@@ -1,17 +1,20 @@
 %\exer{}
 \setcounter{numques}{0}
 
+\begin{wrapfigure}{r}{5cm}
+%\caption{A wrapped figure going nicely inside the text.}\label{wrap-fig:1}
+\centering
+\includegraphics[width=4cm]{sharp.png}
+\end{wrapfigure} 
+
 La société Sharp commercialise des caisses automatiques utilisées par exemple dans des boulangeries. Le client glisse directement les billets ou les pièces dans la machine qui se charge de rendre automatiquement la monnaie. 
 \begin{obj}
 Afin de satisfaire les clients, on cherche à déterminer un algorithme qui va permettre de rendre le moins de monnaie possible. 
 \end{obj}
 
-\begin{center}
-\includegraphics[width=.6\linewidth]{sharp.png}
-\end{center}
+La machine dispose de billets de 20\euro{}, 10\euro{} et 5\euro{} ainsi que des pièces de 2\euro{}, 1\euro{}, 50, 20, 10, 5, 2 et 1 centimes. 
 
-
-La machine dispose de billets de 20€, 10€ et 5€ ainsi que des pièces de 2€, 1€, 50, 20, 10, 5, 2 et 1 centimes. 
+\vspace{.5cm}
 
 On se propose donc de concevoir un algorithme qui demande à l'utilisateur du programme la somme totale à payer ainsi que le montant donné par l'acheteur. L'algorithme doit alors déterminer quels sont les billets et les pièces à rendre par le vendeur. 
 
@@ -19,9 +22,9 @@ On se propose donc de concevoir un algorithme qui demande à l'utilisateur du pr
 
 Le contenu de la caisse automatique et le contenu du porte-monnaie du client seront modélisés par un tableau ayant la forme suivante : 
 \begin{lstlisting}
-caisse = [[2000,10],[1000,10],[500,10],[200,10],[100,10],[50,10],[20,10],[10,10],[5,10],[2,10],[1,10]]
-\end{lstisting}
-Cela signifie que la caisse contient 10 billets de 20€, 10 billets de 10€... 
+caisse = [[2000,5],[1000,5],[500,5],[200,5],[100,5],[50,5],[20,5],[10,5],[5,5],[2,5],[1,5]]
+\end{lstlisting}
+Cela signifie que la caisse contient 10 billets de 20\euro{}, 10 billets de 10\euro{}... 
 %client = {"2000":10,"1000":0,"500":0,"200":0,"100":0,"50":0,"20:":0,"10":10,"5":10,"2":0,"1":0}
 
 %\question{}Créer une liste {valeurs} contenant toutes les valeurs des billets ou pièces.
@@ -29,42 +32,30 @@ Cela signifie que la caisse contient 10 billets de 20€, 10 billets de 10€...
 %\question{}
 %Pour un montant d'achat donné et pour une somme donnée par le client, proposer un algorithme en pseudo code permettant de rendre le minimum de monnaie au client. Cet algorithme devra détailler la somme à rendre (nombre de pièces et nombre de billets).
 
-\question{Mettre en place une structure de liste pour gérer les valeurs des billets ou des pièces et la nommer \texttt{valeurs}.
-
-
 
 \textbf{Dans la prochaine question, on fait l'hypothèse que la caisse contient suffisamment de billets et de pièces de chaque valeur.}
 
-\question{Écrire une fonction \texttt{rendre\_monnaie(caisse:list, cout:float, somme\_client:float)-> list} prenant en arguments deux flottants \texttt{cout} et \texttt{somme\_client} représentant le coût d'un produit et la somme donnée par le client en € ainsi que le contenu de la caisse. Cette fonction renvoie une liste ayant la même structure que la caisse, mais contenant le nombre de chaque billet (ou pièce) à rendre au client.}
+\question{Ecrire une fonction \texttt{rendre\_monnaie(caisse:list, cout:float, somme\_client:float)-> list} prenant en arguments deux flottants \texttt{cout} et \texttt{somme\_client} représentant le coût d'un produit et la somme donnée par le client en \euro{} ainsi que le contenu de la caisse. Cette fonction renvoie la liste des billets à rendre par le client.}
 
-Pour un coût de 15,99€, et une somme donnée par le client de 17,50€, la machine devra rendre les pièves ou les billets suivants : 
-\begin{itemize}
-\item 0 : billet de 20 euros;
-\item 0 : billet de 10 euros;
-\item 0 : billet de 5 euros;
-\item 0 : pièce de 2 euros;
-\item 1 : pièce de 1 euros;
-\item 1 : pièce de 50 centimes;
-\item 0 : pièce de 20 centimes;
-\item 0 : pièce de 10 centimes;
-\item 0 : pièce de 5 centimes;
-\item 0 : pièce de 2 centimes;
-\item 1 : pièce de 1 centimes.
-\end{itemize}
+Ainsi, l'instruction \texttt{rendre\_monnaie(caisse, 16, 20)} renvoie la liste \texttt{[200, 200]}. 
 
-\texttt{rendre\_monnaie} devra donc renvoyer 
-\texttt{[[2000,0],[1000,0],[500,0],[200,0],[100,1],[50,1],[20,0],[10,0],[5,0],[2,0],[1,1]]}.
+\texttt{rendre\_monnaie(caisse,15.92,20)} renvoie \texttt{[200, 200, 5, 2, 1]}
 
-\question{Écrire une fonction \texttt{rendre\_monnaie\_v2(caisse:list, cout:float, somme\_client:float)-> list ayant le même objectif que la précédente. En plus de la précédente, cette fonction devra mettre à jour la caisse. Elle devra prendre en compte que la caisse peut manquer de tels ou tels billets. Elle renverra une liste vide s'il n'est pas possible de rendre la monnaie.}
 
-%% DONNER DEUX EXEMPLES
+\question{Ecrire une fonction \texttt{rendre\_monnaie\_v2(caisse:list, cout:float, somme\_client:float)-> list} ayant le même objectif que la précédente. Cette fonction devra de plus mettre à jour la caisse. Elle devra prendre en compte que la caisse peut manquer de billets. Elle renverra une liste vide s'il n'est pas possible de rendre la monnaie.}
+
+Pour l'instruction \texttt{rendre\_monnaie\_v2(caisse, 15.99, 200)}, la liste renvoyées est la suivante :
+\texttt{[2000, 2000, 2000, 2000, 2000, 1000, 1000, 1000, 1000, 1000, 500, 500, 500, 500, 500, 200, 200, 200, 200, 100, 1]}. Le contenu de la caisse est alors : \texttt{[[2000, 0], [1000, 0], [500, 0], [200, 1], [100, 4], [50, 5], [20, 5], [10, 5], [5, 5], [2, 5], [1, 4]]}.
+
+L'instruction \texttt{rendre\_monnaie\_v2(caisse, 15.99, 200)} renvoie \texttt{[]}.
 
 On suppose que la caisse est maintenant la suivante. 
 \begin{lstlisting}
 caisse = [[5000,10],[2000,10],[1000,10],[800,10],[100,10]]
-\end{lstisting}
+\end{lstlisting}
 
-Le client achète un article de 36€ avec un billet de 50€.
+Le client achète un article de 34\euro{} avec un billet de 50\euro{}.
+
 \question{Que retourne la fonction \texttt{rendre\_monnaie} ? Est-ce le rendu optimal ?}
 
 \question{Conclure << qualitativement >>.}
