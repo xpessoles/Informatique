@@ -1,0 +1,81 @@
+%\exer{}
+\setcounter{numques}{0}
+
+\textit{D'après documents de Serge Bays.}
+
+Nous considérons la variante « entière » du problème du sac à dos.
+Nous sommes devant un ensemble de $n$ objets. Chaque objet noté $o_i$ a une valeur notée $v_i$ et un poids
+noté $p_i$. Il s’agit d’emporter dans son sac à dos l’ensemble d’objets qui a la plus grande valeur sachant que
+le sac supporte un poids maximum $P$. Comment résoudre ce problème, quels objets doit-on prendre ?
+
+Pour appliquer une stratégie gloutonne, nous devons définir ce que nous entendons par le meilleur
+choix à chaque étape.
+
+Il y a trois manières ici de définir un meilleur choix. Parmi les objets qui n’ont pas encore été pris,
+soit on choisit un objet qui a la valeur maximale, soit un objet qui a le poids minimal, soit un objet qui a le
+rapport valeur/poids maximal.
+
+Nous ne considérons que les objets ayant un poids $p_i \leq P$. L’algorithme glouton consiste, à chaque
+étape, à choisir parmi ces objets celui qui représente le choix optimal. Nous le notons $O_1$, sa valeur $V_1$ et
+son poids $P_1$. Ensuite, nous recommençons parmi les objets de poids $p_i \leq P - P_1$. Et ainsi de suite.
+
+Cette variante est dite entière parce que chaque objet est pris ou pas. Il existe une version fractionnaire.
+Le principe de base est le même, mais cette fois il est possible de prendre des fractions d’objets. Un
+algorithme glouton donne une solution optimale à cette variante fractionnaire.
+Prenons un exemple : le sac à dos peut contenir \SI{15}{kg}. Les poids des objets sont en \si{kg}, les valeurs
+en euro.
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+Objet & Valeur & Poids & Valeur/Poids \\ \hline \hline 
+Objet 1 & 126  & 14   & 9 \\ \hline
+Objet 2 & 32    & 2    & 16 \\ \hline
+Objet 3 & 20    & 5    & 4 \\ \hline
+Objet 4 & 5      & 1    & 5 \\ \hline
+Objet 5 & 18    & 6    & 3 \\ \hline
+Objet 6 & 80    & 8    & 10 \\ \hline
+\end{tabular}
+\end{center}
+
+
+Un objet est représenté par une liste comme \texttt{['objet 1', 126, 14]}.
+
+On a donc : 
+\begin{lstlisting}	
+objets = [[’objet 1’, 126, 14], [’objet 2’, 32, 2], [’objet 3’, 20, 5], [’objet 4’, 5, 1], [’objet 5’, 18, 6], [’objet 6’, 80, 8]]
+\end{lstlisting}
+
+\question{Définir la fonction \texttt{def valeur(objet:list) -> float} qui renvoie la valeur d'un objet.}
+
+\question{Définir la fonction \texttt{def poids(objet:list) -> float} qui renvoie le poids d'un objet.}
+
+\question{Définir la fonction \texttt{def rapport(objet:list) -> float} qui renvoie le rapport valeur/poids d'un objet.}
+
+L'algorithme glouton du sac à dos est défini ainsi : 
+\begin{itemize}
+\item définir la fonction \texttt{glouton} qui prend en paramètres une liste d’objets, un poids maximal (celui que peut supporter le sac à dos) et le type de choix utilisé (par valeur, par poids, ou par valeur/poids);
+\item trier la liste d'objets suivant le type de choix utilisé par ordre décroissant;
+\item définir la variable \texttt{reponse:list} sert à stocker les objets choisis;
+\item parcourir la liste triée et ajouter les noms des objets un par un tant que le poids ne dépasse pas le poids maximal. 
+\item stocker valeur totale et le poids total sont stockés dans deux variables \texttt{valeur} et \texttt{poids}.
+\end{itemize}
+
+\begin{rem}
+Tri d'une liste selon un critère : 
+\begin{lstlisting}
+copie = sorted(liste, key=critere, reverse=True)
+\end{lstlisting}
+\texttt{critere} peut être une des fonctions précédemment définies.
+\end{rem}
+
+\question{Implémenter la fonction \texttt{glouton} qui renvoie (dans l'ordre) \texttt{reponse} et \texttt{valeur}.}
+
+\question{Exécuter la fonction \texttt{glouton} pour les différents types de choix. On observant la nature des différents objets, le choix optimal est-il parmi les choix proposés ?}
+
+\question{Estimer le nombre de tours de boucle nécessaire pour exécuter l'algorithme \texttt{glouton} en fonction du nombre d'objets \texttt{n}.}
+
+On cherche maintenant à tester l'ensemble des combinaisons possibles permettant de remplir le sac à dos. 
+
+\question{Estimer (grossièrerement) le nombre de combinaisons possibles parmi la liste d'objets qui permettrait de remplir le sac à dos. Conclure sur l'intérêt d'un algorithme glouton.}
+
+\question{Proposer une variante récursive de l'algorithme glouton.}
