@@ -19,10 +19,12 @@ La programmation est un paradigme de programmation au même titre que la program
  
 
 
-\subsection{Exemples}
 
-\subsubsection{Suites récurrentes}
-Soit la suite $u_n$ définie par récurrence pour tout $n\in\mathbb{N}^*$ par 
+\section{Suites définies par récurrence}
+
+Les suite définies par récurrence pour les quelles $u_{n}=f\left(u_{n-1},u_{n-2},...\right)$ sont des cas d'application directs des fonctions récursives. 
+
+Par exemple, soit la suite $u_n$ définie par récurrence pour tout $n\in\mathbb{N}^*$ par 
 $
 \left\{
 \begin{array}{ll} 
@@ -30,7 +32,7 @@ u_1 = 1 \\
 u_{n+1} = \dfrac{u_n + 6}{u_n + 2} \\
 \end{array}
 \right.
-$.
+$. Il est possible de calculer le n\ieme terme par un algorithme itératif ou un algorithme récursif. 
 
 \noindent\begin{minipage}[c]{.45\linewidth}
 \begin{lstlisting}
@@ -54,82 +56,128 @@ def un_rec (n : int) -> float :
 \end{lstlisting}
 \end{minipage} 
 
-\subsubsection{Recheche dichotomique}
-\begin{lstlisting}
-def appartient_dicho(e : int , t : list) -> bool:
-    """Renvoie un booléen indiquant si e est dans t
-    Préconditions : t est un tableau de nombres trié par ordre croissant e est un nombre"""
-    g = 0 # Limite gauche de la tranche où l'on recherche e
-    d = len(t)-1 # Limite droite de la tranche où l'on recherche e
-    while g <= d: # La tranche où l'on cherche e n'est pas vide
-        m = (g+d)//2 # Milieu de la tranche où l'on recherche e
-        pivot = t[m]
-        if e == pivot: # On a trouvé e
-            return True
-        elif e < pivot:
-            d = m-1 # On recherche e dans la partie gauche de la tranche
-        else:
-            g = m+1 # On recherche e dans la partie droite de la tranche
-    return False
-\end{lstlisting}
+La figure suivante montre que dans le cas de l'algorithme récursif proposé plusieurs termes sont calculés à plusieurs reprises ce qui constitue une perte de temps et d'espace mémoire. 
 
-\begin{lstlisting}
-def appartient_dicho_rec(e : int , t : list) -> bool:
-    """Renvoie un booléen indiquant si e est dans t
-    Préconditions : t est un tableau de nombres trié par ordre croissant e est un nombre"""
-    g = 0 # Limite gauche de la tranche où l'on recherche e
-    d = len(t)-1 # Limite droite de la tranche où l'on recherche e
-    while g <= d: # La tranche où l'on cherche e n'est pas vide
-        m = (g+d)//2 # Milieu de la tranche où l'on recherche e
-        pivot = t[m]
-        if e == pivot: # On a trouvé e
-            return True
-        elif e < pivot:
-            d = m-1 # On recherche e dans la partie gauche de la tranche
-            appartient_dicho_rec(e,t[g:d])
-        else:
-            g = m+1 # On recherche e dans la partie droite de la tranche
-            appartient_dicho_rec(e,t[g:d])
-    return False
-\end{lstlisting}
+\begin{center}
+\includegraphics[width=.8\linewidth]{fig_01}
+\end{center}
 
-\subsection{Exponentiation rapide}
-L'exponentiation rapide est un algorithme permettant de calculer $x^n$ en utilisant l'algorithme récursif suivant : 
-$
-\text{puissance}(x,n) =
-\left\{
-\begin{array}{ll}
-x & \text{si }n=1 \\
-\text{puissance}(x^2,n/2) & \text{si } $n$ \text{ est pair} \\
-x\times \text{puissance}(x^2,(n-1)/2) & \text{si } $n$ \text{ est impar pair} \\
-\end{array}
-\right.
-.$
+Une autre formulation de l'algorithme récursif permet très simplement de diminuer le nombre de termes calculés. 
+
+
 
 \noindent\begin{minipage}[c]{.45\linewidth}
 \begin{lstlisting}
-def expo_it(x : float, n : int) -> float :
-    res=1
-    while n!=0:
-        if n%2==1:
-            res = res*x
-        x*=x
-        n//=2
-    return res
+def un_rec (n : int) -> float :
+    if n == 1 :
+        return 1
+    else : 
+        v = un_rec(n-1)
+        return (v+6)/(v+2)
 \end{lstlisting}
 \end{minipage} \hfill
 \begin{minipage}[c]{.45\linewidth}
-\begin{lstlisting}
-def expo_rec(x : float, n : int) -> float :
-    if n==0:
-        return 1
-    elif n%2==0:
-        return expo_rec(x*x,n//2)
-    else:
-        return x*expo_rec(x*x,n//2)
-\end{lstlisting}
-\end{minipage} 
+\begin{center}
+\includegraphics[width=.8\linewidth]{fig_02}
+\end{center}\end{minipage}
 
+\section{Algorithmes dichotomiques -- Divisier pour régner}
+
+Les algorithmes dichotomiques se prètent aussi à des formulations récursives. Prenons comme exemple la recherche d'un élément dans une liste triée. L'algorithme de gauche propose une version itérative. L'algorithme de droite une version récursive. 
+
+\noindent\begin{minipage}[c]{.49\linewidth}
+\begin{lstlisting}
+def appartient_dicho(e : int , t : list) -> bool:
+    """Renvoie un booléen indiquant si e est 
+    dans t. Préconditions : t est un tableau 
+    de nombres trié par ordre croissant e est 
+    un nombre"""
+    # Limite gauche de la tranche où l'on recherche e
+    g = 0 
+    # Limite droite de la tranche où l'on recherche e
+    d = len(t)-1 
+    # La tranche où l'on cherche e n'est pas vide
+    while g <= d: 
+        # Milieu de la tranche où l'on recherche e
+        m = (g+d)//2 
+        pivot = t[m]
+        if e == pivot: # On a trouvé e
+            return True
+        elif e < pivot:
+            # On recherche e dans la partie gauche de la tranche
+            d = m-1 
+        else:
+            # On recherche e dans la partie droite de la tranche
+            g = m+1 
+    return False
+\end{lstlisting}
+\end{minipage} \hfill
+\begin{minipage}[c]{.49\linewidth}
+\begin{lstlisting}
+def appartient_dicho_rec(e : int , t : list) -> bool:
+    """Renvoie un booléen indiquant si e est dans t. Préconditions : t est un tableau de nombres trié par ordre croissant e est un nombre"""
+    # Limite gauche de la tranche où l'on recherche e
+    g = 0 
+    # Limite droite de la tranche où l'on recherche e
+    d = len(t)-1 
+    # La tranche où l'on cherche e n'est pas vide
+    while g <= d:
+        # Milieu de la tranche où l'on recherche e 
+        m = (g+d)//2 
+        pivot = t[m]
+        if e == pivot: # On a trouvé e
+            return True
+        elif e < pivot:
+            # On recherche e dans la partie gauche de la tranche
+            d = m-1 
+            appartient_dicho_rec(e,t[g:d])
+        else :
+            # On recherche e dans la partie droite de la tranche
+            g = m+1
+            appartient_dicho_rec(e,t[g:d])
+    return False
+\end{lstlisting}
+\end{minipage}
+
+\section{Tracer de figures définies par récursivite}
+
+%\subsection{Exponentiation rapide}
+%L'exponentiation rapide est un algorithme permettant de calculer $x^n$ en utilisant l'algorithme récursif suivant : 
+%$
+%\text{puissance}(x,n) =
+%\left\{
+%\begin{array}{ll}
+%x & \text{si }n=1 \\
+%\text{puissance}(x^2,n/2) & \text{si } $n$ \text{ est pair} \\
+%x\times \text{puissance}(x^2,(n-1)/2) & \text{si } $n$ \text{ est impar pair} \\
+%\end{array}
+%\right.
+%.$
+%
+%\noindent\begin{minipage}[c]{.45\linewidth}
+%\begin{lstlisting}
+%def expo_it(x : float, n : int) -> float :
+%    res=1
+%    while n!=0:
+%        if n%2==1:
+%            res = res*x
+%        x*=x
+%        n//=2
+%    return res
+%\end{lstlisting}
+%\end{minipage} \hfill
+%\begin{minipage}[c]{.45\linewidth}
+%\begin{lstlisting}
+%def expo_rec(x : float, n : int) -> float :
+%    if n==0:
+%        return 1
+%    elif n%2==0:
+%        return expo_rec(x*x,n//2)
+%    else:
+%        return x*expo_rec(x*x,n//2)
+%\end{lstlisting}
+%\end{minipage} 
+%
 
 
 
