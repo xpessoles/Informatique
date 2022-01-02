@@ -140,7 +140,43 @@ def appartient_dicho_rec(e : int , t : list) -> bool:
 \end{minipage}
 
 \section{Tracer de figures définies par récursivite}
+Un grand nombre de figures peuvent être tracés en utilisant des algorithmes récursifs (flocon de Koch, courbe de Peano, courbe du dragon \textit{etc.}).
 
+
+\noindent\begin{minipage}[c]{.49\linewidth}
+\begin{lstlisting}
+import matplotlib.pyplot as plt
+import numpy as np
+def cercle(x,y,r):
+    #des points régulièrement espacés dans l'intervalle [0,2pi]
+    theta = np.linspace(0, 2*np.pi, 100) 
+    #abscisses de points du cercle C((x,y),r)
+    X = [x+r*np.cos(t) for t in theta] 
+    #ordonnées de points du cercle C((x,y),r)
+    Y = [y+r*np.sin(t) for t in theta] 
+    #tracé sans affichage
+    plt.plot(X,Y,"b") 
+def bubble(n, x, y, r, d):
+    cercle(x, y, r)
+    if n > 1:
+        if d != 's':
+            bubble(n-1,x,y+3*r/2,r/2,"n")
+        if d != 'w':
+            bubble(n-1,x+3*r/2,y,r/2,"e")
+        if d != 'n':
+            bubble(n-1,x,y-3*r/2,r/2,"s")
+        if d != 'e':
+            bubble(n-1,x-3*r/2,y,r/2,"w")
+bubble(4,0,0,8,"")
+plt.axis("equal")
+plt.show()
+\end{lstlisting}
+\end{minipage} \hfill
+\begin{minipage}[c]{.49\linewidth}
+\begin{center}
+\includegraphics[width=\linewidth]{fig_03}
+\end{center}
+\end{minipage}
 %\subsection{Exponentiation rapide}
 %L'exponentiation rapide est un algorithme permettant de calculer $x^n$ en utilisant l'algorithme récursif suivant : 
 %$
