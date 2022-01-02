@@ -143,19 +143,18 @@ def appartient_dicho_rec(e : int , t : list) -> bool:
 Un grand nombre de figures peuvent être tracés en utilisant des algorithmes récursifs (flocon de Koch, courbe de Peano, courbe du dragon \textit{etc.}).
 
 
-\noindent\begin{minipage}[c]{.49\linewidth}
 \begin{lstlisting}
 import matplotlib.pyplot as plt
 import numpy as np
 def cercle(x,y,r):
-    #des points régulièrement espacés dans l'intervalle [0,2pi]
-    theta = np.linspace(0, 2*np.pi, 100) 
-    #abscisses de points du cercle C((x,y),r)
-    X = [x+r*np.cos(t) for t in theta] 
-    #ordonnées de points du cercle C((x,y),r)
-    Y = [y+r*np.sin(t) for t in theta] 
-    #tracé sans affichage
-    plt.plot(X,Y,"b") 
+    theta = np.linspace(0, 2*np.pi, 100)  #des points régulièrement espacés dans l'intervalle [0,2pi]
+    X = [x+r*np.cos(t) for t in theta]      #abscisses de points du cercle C((x,y),r)
+    Y = [y+r*np.sin(t) for t in theta]       #ordonnées de points du cercle C((x,y),r)
+    plt.plot(X,Y,"b")     #tracé sans affichage
+\end{lstlisting}
+
+\noindent\begin{minipage}[c]{.49\linewidth}
+\begin{lstlisting}
 def bubble(n, x, y, r, d):
     cercle(x, y, r)
     if n > 1:
@@ -217,11 +216,11 @@ plt.show()
 
 
 
-\section{Acticité préparatoire}
+\section{Activité préparatoire}
 \textbf{Pour réaliser l'activité associée à ce cours, suivre le lien suivant : }
 \begin{itemize} 
-\item Sujet : \url{https://bit.ly/36OLBiW}
-\item Corrige : \url{https://bit.ly/3BjucwN}
+\item Sujet : \url{https://bit.ly/3zkiJgb}
+\item Corrige : \url{https://bit.ly/3zl7QKJ}
 \end{itemize}
 
 \newpage
