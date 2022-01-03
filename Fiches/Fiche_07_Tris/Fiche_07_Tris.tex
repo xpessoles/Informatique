@@ -12,6 +12,22 @@ Conséquence sur les algorithmes de tri : une fonction de tri ne renvoie rien la
 \end{defi}
 
 
+\begin{defi}\textbf{Tri en place} -- 
+Un tri est effectué en place lorsque la liste à trier est modifiée jusqu'à devenir triée. Dans le cas contraire, la fonction de tri pourra renvoyer une novelle liste contenent les mêmes éléments, mais triés. 
+\end{defi}
+
+
+\begin{defi}\textbf{Tri stable} -- 
+Un algorithme est dit stable si les positions relatives de deux éléments égaux ne sont pas
+modifiées par l’algorithme : c’est-à-dire que si deux éléments $x$ et $y$ égaux se trouvent aux positions $i_x$ et $i_y$ de
+la liste avant l’algorithme, avec $i_x < i_y$, alors c’est également le cas de leurs positions après l’algorithme.
+% Le caractère stable peut-être utile lorsqu’on utilise des pré-ordres.
+\end{defi}
+
+\begin{defi}\textbf{Tri comparatif} --
+Un tri est dit comparatif lorsqu'il s'appuie uniqument sur la comparaison deux à deux des éléménts de la liste et pas sur la valeur ce ces éléments.
+\end{defi}
+
 \section{Le tri par sélection}
 
 Supposons qu'on demande de trier une liste de $n$ (disons 10) élements. À un instant donné, supposons que les $k$ premiers (disons 4) soient triés. On sélectionne alors le plus petit des $n-k$ éléments restants (soient 6) qu'on place alors à la $k+1$\ieme position (5\ieme). Les $k+1$ premiers éléments sont donc triés. 
@@ -31,6 +47,7 @@ def tri_selection(L):
             L[i],L[imin]=L[imin],L[i]
         #Inv(i+1)
 \end{lstlisting}	
+
 
 \section{Le tri par insertion}
 Supposons qu'on demande de trier une liste de $n$ (disons 10) élements. À un instant donné, supposons que les $k$ premiers (disons 4) soient triés. On s'intéresse alors au $k+1$\ieme élément (le 5\ieme). On va l'insérer dans la liste des $k$ premiers éléments de telle sorte que les  $k+1$ éléments soient triés. 
@@ -111,13 +128,26 @@ def partition(L,g,d): #g inclus, d exclus.
         L[m],L[g]=L[g],L[m]
     return m
 
-def tri_rapide(L):
-    def aux(g,d):
+def tri_rapide(L,g,d):
         if g<d-1: #sinon il n'y a rien a faire.
             m=partition(L,g,d)
-            aux(g,m)
-            aux(m+1,d)
-    aux(0,len(L))
+            tri_rapide(L,g,m)
+            tri_rapide(L,m+1,d)
+
+# Exécution 
+tri_rapide(L,0,len(L))
 \end{lstlisting}	
+
+
+%\begin{lstlisting}	
+%
+%def tri_rapide(L):
+%    def aux(g,d):
+%        if g<d-1: #sinon il n'y a rien a faire.
+%            m=partition(L,g,d)
+%            aux(g,m)
+%            aux(m+1,d)
+%    aux(0,len(L))
+%\end{lstlisting}	
 
 
