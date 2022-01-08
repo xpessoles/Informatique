@@ -5,7 +5,7 @@ Une fonction récursive est une fonction qui s'appelle elle-même.
 On appelle récursion l'appel de la fonction à elle-même.
 \end{defi}
 
-La programmation récursive est un paradigme de programmation au même titre que la programmation itérative. Un programme écrit de manière récursive peut être traduit de manière itérative, même si dans certain cas, cela peut s'avérer délicat.
+La programmation récursive est un paradigme de programmation au même titre que la programmation itérative. Un programme écrit de manière récursive peut être traduit de manière itérative, même si dans certains cas, cela peut s'avérer délicat.
 
 
 \begin{methode}
@@ -22,7 +22,7 @@ La programmation récursive est un paradigme de programmation au même titre que
 
 \section{Suites définies par récurrence}
 
-Les suite définies par récurrence pour les quelles $u_{n}=f\left(u_{n-1},u_{n-2},...\right)$ sont des cas d'application directs des fonctions récursives. 
+Les suite définies par récurrence pour lesquelles $u_{n}=f\left(u_{n-1},u_{n-2},...\right)$ sont des cas d'application directs des fonctions récursives. 
 
 Par exemple, soit la suite $u_n$ définie par récurrence pour tout $n\in\mathbb{N}^*$ par 
 $
@@ -32,7 +32,7 @@ u_1 = 1 \\
 u_{n+1} = \dfrac{u_n + 6}{u_n + 2} \\
 \end{array}
 \right.
-$. Il est possible de calculer le n\ieme terme par un algorithme itératif ou un algorithme récursif. 
+$. Il est possible de calculer le n\ieme \, terme par un algorithme itératif ou un algorithme récursif. 
 
 \noindent\begin{minipage}[c]{.45\linewidth}
 \begin{lstlisting}
@@ -81,9 +81,12 @@ def un_rec (n : int) -> float :
 \includegraphics[width=.8\linewidth]{fig_02}
 \end{center}\end{minipage}
 
-\section{Algorithmes dichotomiques -- Divisier pour régner}
+\section{Slicing de tableau ou de chaînes de caractères}
 
-Les algorithmes dichotomiques se prètent aussi à des formulations récursives. Prenons comme exemple la recherche d'un élément dans une liste triée. L'algorithme de gauche propose une version itérative. L'algorithme de droite une version récursive. 
+
+\section{Algorithmes dichotomiques -- Diviser pour régner}
+
+Les algorithmes dichotomiques se prêtent aussi à des formulations récursives. Prenons comme exemple la recherche d'un élément dans une liste triée. L'algorithme de gauche propose une version itérative. L'algorithme de droite une version récursive. 
 
 \noindent\begin{minipage}[c]{.49\linewidth}
 \begin{lstlisting}
@@ -140,9 +143,9 @@ def appartient_dicho_rec(e : int , t : list) -> bool:
 \end{minipage}
 
 \section{Tracer de figures définies par récursivite}
-Un grand nombre de figures peuvent être tracés en utilisant des algorithmes récursifs (flocon de Koch, courbe de Peano, courbe du dragon \textit{etc.}).
+Un grand nombre de figures peuvent être tracées en utilisant des algorithmes récursifs (flocon de Koch, courbe de Peano, courbe du dragon \textit{etc.}).
 
-
+Ci-dessous un exemple de figure définie par récursivité où à chaque itération un cercle va se propager vers le haut, le bas, la gauche et la droite. À chaque itération, le rayon de cercle est divisé par 2. 
 \begin{lstlisting}
 import matplotlib.pyplot as plt
 import numpy as np
