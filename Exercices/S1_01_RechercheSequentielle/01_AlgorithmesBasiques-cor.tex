@@ -1,127 +1,281 @@
-%
-\subsection*{Recherche séquentielle}
 
-\exer{Exercices d'échauffement}
-\setcounter{numques}{0}~\\
-
-\begin{obj}
-Rechercher séquentiellement un élément dans un tableau unidimensionnel ou dans un dictionnaire.
-\end{obj}
-
-\subsection*{Recherche d'un nombre dans une liste}
-Nous allons commencer par rechercher si un nombre est dans un tableau. 
-
-Commençons par définir la liste des entiers pairs compris entre 0 et \texttt{nb} exclus.
+\question{\'Ecrire une fonction de signature \texttt{generer\_liste\_entiers\_01(n: int) -> list} renvoyant la liste des entiers compris entre 0 (inclus) et n (exclu). On utilisera une boucle \texttt{for}.}
 
 \begin{lstlisting}
-def generate_pair_01(nb: int) -> list :
+def cor_generer_liste_entiers_01(n):
+    L=[]
+    for i in range(n):
+        L.append(i)
+    return(L)
+
+\end{lstlisting}
+
+\question{\'Ecrire une fonction de signature \texttt{generer\_liste\_entiers\_02(n: int) -> list} renvoyant la liste des entiers compris entre 0 (inclus) et \texttt{n} (exclu). On utilisera une boucle \texttt{while}.}
+
+\begin{lstlisting}
+def cor_generer_liste_entiers_02(n):
+    L=[]
+    i=0
+    while i <n:
+        L.append(i)
+        i+=1
+    return(L)
+
+\end{lstlisting}
+
+\question{\'Ecrire une fonction de signature \texttt{generer\_liste\_entiers\_03(deb: int, fin:int) -> list} renvoyant la liste des entiers compris entre \texttt{deb} (inclus) et \texttt{fin} (inclus). On utilisera une boucle \texttt{for}.}
+
+\begin{lstlisting}
+def cor_generer_liste_entiers_03(deb,fin):
+    L=[]
+    for i in range(deb,fin+1):
+        L.append(i)
+    return L
+
+\end{lstlisting}
+
+\question{\'Ecrire une fonction de signature \texttt{generer\_liste\_entiers\_04(deb: int, fin:int) -> list} renvoyant la liste des entiers compris entre \texttt{deb} (inclus) et \texttt{fin}  (inclus). On utilisera une boucle \texttt{while}.}
+
+\begin{lstlisting}
+def cor_generer_liste_entiers_04(deb,fin):
+    L=[]
+    i = deb
+    while i<= fin :
+        L.append(i)
+        i=i+1
+    return L
+
+\end{lstlisting}
+
+\question{\'Ecrire une fonction de signature \texttt{generer\_liste\_pairs(n:int) -> list} renvoyant la liste des entiers pairs compris entre 0 (inclus) et \texttt{n} (exclu).}
+
+\begin{lstlisting}
+def cor_generer_liste_pairs(n):
+    L = []
+    for i in range(0,n,2):
+        L.append(i)
+    return L
+
+\end{lstlisting}
+
+\question{\'Ecrire une fonction de signature \texttt{generer\_liste\_impairs(n:int) -> list} renvoyant la liste des entiers impairs compris entre 0 (inclus) et \texttt{n} (exclu).}
+
+\begin{lstlisting}
+def cor_generer_liste_impairs(n):
+    L = []
+    for i in range(1,n,2):
+        L.append(i)
+    return L
+\end{lstlisting}
+
+\question{\'Ecrire une fonction de signature \texttt{is\_multiple(n:int, m:int) -> bool} renvoyant \texttt{True} si \texttt{n} est multiple de de \texttt{m}.}
+
+\begin{lstlisting}
+def cor_is_multiple(n,m):
+    return n%m == 0
+\end{lstlisting}
+
+
+\question{\textbf{En utilisant la fonction précédente}, écrire une fonction de signature \texttt{genere\_liste\_multiple(n:int, m:int) -> list} renvoyant les \texttt{n} premiers multiples de \texttt{m}.}
+
+
+\begin{lstlisting}
+def cor_genere_liste_multiple(n,m):
+    L = []
+    i = 1
+    while len(L)<n :
+        if cor_is_multiple(i,m) :
+            L.append(i)
+        i = i+1
+    return L
+
+\end{lstlisting}
+
+
+\subsection*{Recherche d'un nombre dans une liste}
+
+
+Nous allons rechercher si un nombre est dans une liste. 
+
+Commençons par générer une liste de nombre alétoires. Pour cela recopier les lignes suivantes. 
+
+\begin{lstlisting}
+import random as rd
+def generer_alea(nb: int) -> list :
     """
-    Génération d'une liste de nombres pairs compris entre 0 (exclus) et nb (exclus).
+    Génération d'une liste nb de nombres aléatoires compris entre 0 inclus et nb exclus.
     """
     res = []
-    for i in range(1,nb//2):
-        res.append(2*i)
+    for i in range(nb):
+        res.append(rd.randrange(0,nb))
     return res
 \end{lstlisting}
 
-Recopier la fonction dans un fichier.
 
-\question{Vérifier que la fonction  \texttt{generate\_pair\_01} fonctionne pour \texttt{nb=0}, \texttt{nb=9}, \texttt{nb=10}.}
-
-\question{Écrire une fonction de signature  \texttt{generate\_pair\_02(nb: int) -> list} en utilisant une boucle \texttt{while}.}
 
 \question{Écrire une fonction de signature  \texttt{recherche\_nb\_01(nb: int, L: list) -> bool} qui renvoie \texttt{True} si \texttt{nb} est dans \texttt{L}, \texttt{False} sinon. On utilisera une boucle \texttt{for}.}
 
+\begin{lstlisting}
+def cor_recherche_nb_01(nb:int,L:list):
+    test=False
+    for x in L:
+        if nb==x:
+            test=True
+    return(test)
+\end{lstlisting}
+
 \question{Écrire une fonction de signature  \texttt{recherche\_nb\_02(nb: int, L: list) -> bool} qui renvoie \texttt{True} si \texttt{nb} est dans \texttt{L}, \texttt{False} sinon. On utilisera une boucle \texttt{while}.}
+
+\begin{lstlisting}
+def cor_recherche_nb_02(nb:int,L:list):
+    n=len(L)
+    i=0
+    while i<=n-1 and nb!=L[i]:
+        i=i+1
+    return(i<n)
+\end{lstlisting}
 
 \question{Écrire une fonction de signature  \texttt{recherche\_nb\_03(nb: int, L: list) -> bool} qui renvoie \texttt{True} si \texttt{nb} est dans \texttt{L}, \texttt{False} sinon. On n'utilisera pas explicitement de boucles \texttt{for} ou \texttt{while}.}
 
+\begin{lstlisting}
+def cor_recherche_nb_03(nb:int,L:list):
+    return(nb in L)
+\end{lstlisting}
+
 \question{Écrire une fonction de signature  \texttt{recherche\_first\_index\_nb\_01(nb: int, L: list) -> int} qui renvoie l'index de la première appartion du nombre \texttt{nb} dans la liste \texttt{L}. La fonction renverra \texttt{-1} si \texttt{nb} n'est pas dans la liste. On utilisera une boucle \texttt{for}.}
+
+\begin{lstlisting}
+def cor_recherche_first_index_nb_01(nb:int, L:list):
+    n=len(L)
+    index=-1
+    for i in range(n):
+        if nb==L[i] and index==-1:
+            index=i
+    return(index)
+\end{lstlisting}
 
 \question{Écrire une fonction de signature  \texttt{recherche\_first\_index\_nb\_02(nb: int, L: list) -> int} qui renvoie l'index de la première appartion du nombre \texttt{nb} dans la liste \texttt{L}. La fonction renverra \texttt{-1} si \texttt{nb} n'est pas dans la liste. On utilisera une boucle \texttt{while}.}
 
-\question{Écrire une fonction de signature  \texttt{recherche\_last\_index\_nb\_01(nb: int, L: list) -> int} qui renvoie l'index de la dernière appartion du nombre \texttt{nb} dans la liste \texttt{L}. La fonction renverra \texttt{-1} si \texttt{nb} n'est pas dans la liste. On utilisera une boucle \texttt{for}.}
+\begin{lstlisting}
+def cor_recherche_first_index_nb_02(nb:int, L:list):
+    n=len(L)
+    i=0
+    while i<=n-1 and nb!=L[i]:
+        i=i+1
+    if i<n:
+        index=i
+    else:
+        index=-1
+    return(index)
 
-\question{Écrire une fonction de signature  \texttt{recherche\_last\_index\_nb\_02(nb: int, L: list) -> int} qui renvoie l'index de la dernière appartion du nombre \texttt{nb} dans la liste \texttt{L}. La fonction renverra \texttt{-1} si \texttt{nb} n'est pas dans la liste. On utilisera une boucle \texttt{while}.}
+\end{lstlisting}
+
+\question{Écrire une fonction de signature  \texttt{recherche\_last\_index\_nb\_01(nb: int, L: list) -> int} qui renvoie l'index de la dernière appartion du nombre \texttt{nb} dans la liste \texttt{L}. La fonction renverra \texttt{-1} si \texttt{nb} n'est pas dans la liste.}
+
+\begin{lstlisting}
+def cor_recherche_last_index_nb_01(nb:int, L:list):
+    n=len(L)
+    i=0
+    while i<=n-1 and nb!=L[i]:
+        i=i+1
+    if i<n:
+        index=i
+    else:
+        index=-1
+    return(index)
+
+\end{lstlisting}
+
 
 \question{Écrire une fonction de signature  \texttt{recherche\_index\_nb\_01(nb: int, L: list) -> list} qui renvoie la liste des index du nombre \texttt{nb} dans la liste \texttt{L}. La fonction renverra une liste vide si \texttt{nb} n'est pas dans la liste.}
+
+\begin{lstlisting}
+def cor_recherche_index_nb_01(nb:int, L:list):
+    n=len(L)
+    i=0
+    while i<=n-1 and nb!=L[i]:
+        i=i+1
+    if i<n:
+        index=i
+    else:
+        index=-1
+    return(index)
+
+\end{lstlisting}
 
 \subsection*{Recherche d'un caractère dans une chaîne (de caractères)}
 
 \question{Écrire une fonction de signature  \texttt{is\_char\_in\_str\_01(lettre: str, mot: str) -> int} qui renvoie \texttt{True} si \texttt{lettre} est dans \texttt{mot}, \texttt{False} sinon. On utilisera une boucle \texttt{for} ou \texttt{while}.}
 
+\begin{lstlisting}
+def cor_is_char_in_str_01(lettre:str,mot:str):
+    n=len(mot)
+    i=0
+    while i<=n-1 and lettre!=mot[i]:
+        i=i+1
+    return(i<n)
+\end{lstlisting}
+
 \question{Écrire une fonction de signature  \texttt{is\_char\_in\_str\_02(lettre: str, mot: str) -> int} qui renvoie \texttt{True} si \texttt{lettre} est dans \texttt{mot}, \texttt{False} sinon. On n'utilisera ni boucle \texttt{for} ni \texttt{while} explicite.}
+
+\begin{lstlisting}
+def cor_is_char_in_str_02(lettre:str,mot:str):
+    return(lettre in mot)
+\end{lstlisting}
 
 \question{Écrire une fonction de signature  \texttt{compte\_lettre\_01(lettre: str, mot: str) -> int} qui renvoie le nombre d’occurrences de \texttt{lettre} dans le \texttt{mot}.}
 
-Les instructions suivantes permettent de charger l'ensemble des mots du dictionnaire dans la variable \texttt{dictionnaire}. \texttt{dictionnaire} est une liste de mots. Chacune des lettres de l'alphabet sont stockées dans la variable \texttt{alphabet}.
 
-\begin{lstlisting}
-alphabet = 'abcdefghijklmnopqrstuvwxyz'
-def load_fichier(file):
-    fid = open(file,'r')
-    mots = fid.readlines()
-    fid.close()
-    return mots
-dictionnaire = load_file('liste_francais.txt')
+    \begin{lstlisting}
+def cor_compte_lettre_01(lettre:str, mot:str):
+    nb=0
+    for x in mot:
+        if x==lettre:
+            nb=nb+1
+    return(nb)
 \end{lstlisting}
+
+
 
 \question{Écrire une fonction de signature  \texttt{compte\_lettre\_02(lettre: str, mots: list) -> int} qui renvoie le nombre d’occurrences de \texttt{lettre} dans une liste de mots \texttt{mots}.}
 
+    \begin{lstlisting}
+def cor_compte_lettre_02(lettre:str, mots:list):
+    nb=0
+    for mot in mots:
+        if lettre in mot:
+            nb=nb+1
+    return(nb)
+\end{lstlisting}
+
 \question{Quelle consonne apparaît le plus souvent ? Quelle consonne apparaît le moins souvent ? Indiquer le nombre d’occurrences dans chacun des mots}
+
+    \begin{lstlisting}
+
+\end{lstlisting}
 
 \question{Écrire une fonction de signature  \texttt{mots\_plus\_long(mots: list) -> str} qui renvoie le mot le plus long.}
 
-\question{Écrire une fonction de signature  \texttt{cherche\_mot\_in\_chaine\_01(mot: str, chaine: str) -> int} qui renvoie \texttt{True} si \texttt{mot} est dans \texttt{chaine}, \texttt{False} sinon. On utilisera des boucles \texttt{for} ou \texttt{while}.}
+    \begin{lstlisting}
+    
+    def cor_mots_plus_long(mots:list):
+    M=0
+    for mot in mots:
+        if len(mot)>M:
+            max=mot
+            M=len(mot)
+    return(max)
 
-\question{Écrire une fonction de signature  \texttt{cherche\_mot\_in\_chaine\_02(mot: str, chaine: str) -> int} qui renvoie \texttt{True} si \texttt{mot} est dans \texttt{chaine}, \texttt{False} sinon. On n'utilisera ni boucle \texttt{for} ni \texttt{while}.}
-
-\question{Écrire une fonction de signature  \texttt{cherche\_mot\_in\_dico(nb: int, dico: lst) -> str} qui permet de trouver le mot de \texttt{nb} lettres qui est le plus contenu dans d'autres mots.}
-
-
-\subsection*{Recherche dans un dictionnaire}
-
-Un dictionnaire (\texttt{dict}) est un type composite (au même titre que les chaînes, les listes ou les tuples). Les éléments d'un dictionnaire sont constitués d'une \textbf{clé} (alphabétique ou numérique par exemple) et d'une valeur. À la différence d'une liste par exemple, les éléments ne sont pas ordonnés.
-
-\begin{exemple}%[Création d'un dictionnaire]
-Dans le but de faire un comptage du nombre de lettres des mots du dictionnaire, nous allons créer un dictionnaire constitué des lettres de l'alphabet (clés) et de leur nombre d'apparitions (valeurs). 
-~\\
-
-\begin{minipage}[c]{.45\linewidth}
-\begin{lstlisting}
-nb_lettres = {}
-nb_lettres['a']=0
-nb_lettres['b']=0
-print(nb_lettres)
-    {'a': 0, 'b': 0}
-\end{lstlisting}
-\end{minipage}
-\hfill
-\begin{minipage}[c]{.45\linewidth}
-\begin{lstlisting}
-nb_lettres = {}
-for lettre in alphabet :
-    nb_lettres[lettre]=0
-print(nb_lettres["a"])
-    0
 \end{lstlisting}
 
-\end{minipage}
+%\question{Écrire une fonction de signature  \texttt{cherche\_mot\_in\_chaine\_01(mot: str, chaine: str) -> int} qui renvoie \texttt{True} si \texttt{mot} est dans \texttt{chaine}, \texttt{False} sinon. On utilisera des boucles \texttt{for} ou \texttt{while}.}
+%
+%\question{Écrire une fonction de signature  \texttt{cherche\_mot\_in\_chaine\_02(mot: str, chaine: str) -> int} qui renvoie \texttt{True} si \texttt{mot} est dans \texttt{chaine}, \texttt{False} sinon. On n'utilisera ni boucle \texttt{for} ni \texttt{while}.}
+%
+%\question{Écrire une fonction de signature  \texttt{cherche\_mot\_in\_dico(nb: int, dico: lst) -> str} qui permet de trouver le mot de \texttt{nb} lettres qui est le plus contenu dans d'autres mots.}
 
-Tester l'appartenance d'une clé à un dictionnaire : \texttt{"a" in nb\_lettres}.
 
-Supprimer une clé d'un dictionnaire : \texttt{del nb\_lettres["a"]}.
 
-Parcourir un dictionnaire : 
-\begin{lstlisting}
-for clef in nb_lettres :
-    print(clef)
-    print(clef,nb_lettres[clef])
-
-for clef,valeur in nb_lettres.items() :
-    print(clef,valeur)
-\end{lstlisting}
-\end{exemple}
 
 
 %Il est possible de définir la fonction \texttt{generate\_tab\_alea} différemment.
@@ -166,3 +320,40 @@ for clef,valeur in nb_lettres.items() :
 %Recherche d'un élément 
 %Recherche du maximum
 %Recherche du second maximum
+\question{Écrire une fonction \texttt{init\_dictionnaire(chaine:str) -> dict} que crée, initialise et renvoie le dictionnaire dont les clés sont les lettres de l'alphabet et les valeurs sont initialisées à 0.}
+%% --  %%
+
+\begin{lstlisting}
+def cor_init_dictionnaire(chaine:str) -> dict :
+    alphabet = 'abcdefghijklmnopqrstuvwxyz'
+    dico = {}
+    for lettre in alphabet :
+        dico[lettre]=0
+    return dico
+
+\end{lstlisting}
+
+
+\question{Écrire une fonction \texttt{remplir\_dictionnaire(dico:dict, liste\_mots:list) -> dict} qui compte le nombre de lettres de chacun des mots de la liste \texttt{liste\_mots} chargée précédemment en incrémentant chacune des valeurs du dictionnaire.}
+
+\begin{lstlisting}
+def cor_remplir_dictionnaire(dico,mots):
+    for mot in mots :
+        for lettre in mot :
+            dico[lettre]=dico[lettre]+1
+    return dico
+\end{lstlisting}
+
+
+\question{Écrire une fonction \texttt{cherche\_podium(dico:dict) ->list} qui renvoie la liste des trois lettres les plus utilisées. La liste renvoyée sera sous la forme \texttt{[['a',5],['b',4],['c',3]].}}
+
+
+\begin{lstlisting}
+def cor_cherche_podium(dico: dict) -> list:
+    L = list(dico.items())
+    L.sort(key=lambda f: f[1], reverse=True)
+    res = []
+    for i in range(0, 3):
+        res.append(list(L[i]))
+    return res
+\end{lstlisting}

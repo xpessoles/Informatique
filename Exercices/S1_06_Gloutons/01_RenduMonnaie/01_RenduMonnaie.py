@@ -15,7 +15,7 @@ def rendre_monnaie(caisse:list, cout:float, somme_client:float) -> list :
     ----------
     caisse : list
         liste de liste contenant les valeurs des billets et leur quantité.
-        On utilise une liste (plutôt qu'un dictionnaire) car les valeurs 
+        On utilise une liste (plutôt qu'un dictionnaire) car les valeurs
         doivent être triées
     cout : float
         coût à payer en euros
@@ -24,7 +24,7 @@ def rendre_monnaie(caisse:list, cout:float, somme_client:float) -> list :
 
     Returns
     -------
-    list 
+    list
         DESCRIPTION.
 
     """
@@ -64,7 +64,7 @@ def rendre_monnaie_v2(caisse:list, cout:float, somme_client:float) -> list :
 caisse = [[2000,5],[1000,5],[500,5],[200,5],[100,5],\
     [50,5],[20,5],[10,5],[5,5],[2,5],[1,5]]
 
-    
+
 cout = 15.99
 somme_client = 200
 r = rendre_monnaie_v2(caisse, cout, somme_client)
@@ -73,4 +73,4 @@ print(caisse)
 
 caisse2 = [[5000,10],[2000,10],[1000,10],[800,10],[100,10]]
 r = rendre_monnaie_v2(caisse2, 34, 50)
-# L'optimal serait de 
+# L'optimal serait de
