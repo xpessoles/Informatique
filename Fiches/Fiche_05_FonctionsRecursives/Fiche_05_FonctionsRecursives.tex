@@ -68,11 +68,11 @@ Une autre formulation de l'algorithme récursif permet très simplement de dimin
 
 \noindent\begin{minipage}[c]{.45\linewidth}
 \begin{lstlisting}
-def un_rec (n : int) -> float :
+def un_rec_v2 (n : int) -> float :
     if n == 1 :
         return 1
     else : 
-        v = un_rec(n-1)
+        v = un_rec_v2(n-1)
         return (v+6)/(v+2)
 \end{lstlisting}
 \end{minipage} \hfill
@@ -81,8 +81,50 @@ def un_rec (n : int) -> float :
 \includegraphics[width=.8\linewidth]{fig_02}
 \end{center}\end{minipage}
 
-\section{Slicing de tableau ou de chaînes de caractères}
 
+Dans la même idée que les graphes précsentés ci-dessus, il est possible de représenter la pile des appels récursifs, c'est à dire la succession des appels qui vont être faits pour calculer le nième terme d'une suite. 
+
+\begin{center}
+\includegraphics[width=.95\linewidth]{fig_04}
+\end{center}
+
+\section{Slicing de tableau ou de chaînes de caractères}
+Il est possible d'agir par récurisivité sur des listes ou sur des chaînes de caractère. Pour cela, il peut être nécessaire d'utiliser le slicing. Pour rappel, \texttt{a = ch[i:j]} permet d'affecter à \texttt{a} la liste (ou le chaîne de caractéres) constitué des éléments de \texttt{i} à \texttt{j}. En écrivant \texttt{a = ch[i:]} on affecte à a tous les éléments du \ieme au dernier.
+
+
+\vspace{.5cm}
+
+\noindent\begin{minipage}[c]{.45\linewidth}
+
+Ainsi, pour réaliser la somme des éléments d'une liste \texttt{L} par récusivité : 
+\begin{itemize}
+\item commençons par déterminer le cas terminal : si la taille de la liste vaut 1, on renvoie \texttt{L[0]};
+\item sinon (si la taille vaut \texttt{n}), on peut choisir de renvoyer \texttt{L[0]}+\texttt{somme(L[1]+L[2]+...+L[n-1]}. 
+\end{itemize}
+Cela se traduit ainsi.
+\begin{lstlisting}
+def somme(L:list) -> float :
+    if len(L)==1 : 
+        return L[0]
+    else :
+        return L[0]+somme(L[1:])
+\end{lstlisting}
+\end{minipage} \hfill
+\begin{minipage}[c]{.45\linewidth}
+Pour une chaîne de caractères, si on souhaite renvoyer son miroir (par exemple, le miroir de \texttt{abc} serait \texttt{cba}) : 
+\begin{itemize}
+\item si la chaîne de caractère a une taille de 1, on renvoie le caractère;
+\item sinon, on renvoie 
+\end{itemize}
+\begin{lstlisting}
+def miroir(ch:str) -> str :
+    if len(ch)==1 : 
+        return ch[0]
+    else :
+        # Attention le + désigne la concaténation
+        return miroir(ch[1:])+ch[0]
+ \end{lstlisting}  
+\end{minipage} 
 
 \section{Algorithmes dichotomiques -- Diviser pour régner}
 
