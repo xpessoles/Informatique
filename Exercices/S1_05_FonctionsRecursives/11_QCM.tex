@@ -114,3 +114,101 @@ def copy(n,s):
 \item \texttt{'AAAAAAAA'}.
 \item \texttt{'3A'}.
 \end{enumerate}
+
+\question{Que retourne l'instruction : \texttt{mystere(3,'\$')} ?}
+\begin{lstlisting}
+def mystere(n,s):
+    if n==0:
+        return s
+    return s + mystere(n-1, s)
+\end{lstlisting}
+
+\begin{enumerate}
+\item \texttt{'\$\$\$'}.
+\item \texttt{'\$2\$'}.
+\item \texttt{'\$\$\$\$'}. %+
+\item L'exécution déclenche une erreur.
+\end{enumerate}
+
+\question{Que retourne la commande \texttt{f(3,4)} ?}
+\begin{lstlisting}
+def f(a,b):
+    if a == 0 :
+        return b
+    return f(a-1, b+1)
+\end{lstlisting}
+
+\begin{enumerate}
+\item 4.
+\item 5.
+\item 6.
+\item 7. %+
+\end{enumerate}
+
+\question{Que retourne la commande \texttt{mystere(3)} ?}
+\begin{lstlisting}
+def mystere(n):
+    if n>0 :
+        return mystere(n-2)
+    else :
+        return n==0
+\end{lstlisting}
+
+\begin{enumerate}
+\item True.
+\item False. %+
+\item RecursionError.
+\item 0.
+\end{enumerate}
+
+\question{On propose de créer une fonction récursive permettant de calculer  $x^n$. Compléter la fonction proposée.}
+\begin{lstlisting}
+def puissance(x,n):
+    if n > 0 : 
+        return .......
+    return 1
+\end{lstlisting}
+
+\begin{enumerate}
+\item \texttt{puissance(x,n-1)}.
+\item \texttt{x*puissance(x,n-1)}. %+
+\item Quoi que l'on écrive, cette fonction ne donnera pas le résultat attendu.
+\item \texttt{x**(n-1)*puissance(x,n-1)}.
+\end{enumerate}
+
+\question{Que renvoi ce programme en console ?}
+\begin{lstlisting}
+def ed(L,M=[]):
+    if len(L) == 0 : return M
+    a=L.pop()
+    if a not in M : M.append(a)
+    return ed(L,M)
+L=[2, 3, 2, 6, 8, 9, 9, 10, 9, 3, 6, 7, 8, 8, 9]
+print(ed(L))
+\end{lstlisting}
+
+\begin{enumerate}
+\item \texttt{None}.
+\item \texttt{[9, 8, 7, 6, 3, 10, 2]}. %+
+\item \texttt{[9, 8, 8, 7, 6, 3, 9, 10, 9, 9, 8, 6, 2, 3, 2]}.
+\item \texttt{[2, 10, 3, 6, 7, 8, 9]}.
+\end{enumerate}
+
+\question{Que retourne le programme suivant ?}
+\begin{lstlisting}
+def A(x):
+    if x <= 1 : return x
+    return B(x+1)
+
+def B(x) :
+    return A(x-2)+4
+
+print(A(4))
+\end{lstlisting}
+
+\begin{enumerate}
+\item 13. %+
+\item 1.
+\item 12.
+\item Une erreur de type : "RecursionError: maximum recursion depth exceeded in comparison".
+\end{enumerate}
