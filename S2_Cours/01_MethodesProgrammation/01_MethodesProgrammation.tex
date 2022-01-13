@@ -1,4 +1,23 @@
 \section{Contexte}
+Soit la fonction suivante : 
+\begin{lstlisting}
+def fonction(x,y = []) :
+    if x == [] : 
+        return y
+    else : 
+        z = x.pop(0)
+        if z not in y : 
+            y.append(z)
+        return fonction(x, y)
+\end{lstlisting}
+
+\textbf{Problèmes :}
+\begin{itemize}
+\item à quoi sert cette fonction ?
+\item quels sont les paramètres à donner ? leur type ?
+\item que renvoie la fonction ?
+\end{itemize}
+
 
 \section{Signature des fonctions -- Signature de type}
 \begin{defi}
