@@ -106,7 +106,7 @@ def dichotomie(f, a:float , b:float , epsilon:float) -> float :
     assert (f(a) * f(b) <= 0) and (epsilon > 0)
     c, d = a, b
     fc, fd = f(c), f(d)
-    while d - c > 2 * epsilon:
+    while d - c >  epsilon:
         m = (c + d) / 2.
         fm = f(m)
         if fc * fm <= 0:
@@ -163,5 +163,6 @@ def dichotomie(f, a:float , b:float , epsilon:float) -> float :
 a = [1, 1, 1]
 b = [1, 1, 1]
 c = [1,1]
-print(dichotomie(ff, 0, 1, 0.00001))
+eps = 0.00001
+print(dichotomie(ff, 0, 4, 0.00001))
 test = [1,2,3,1,2,3,4]
