@@ -1,22 +1,35 @@
-On suppose que la liste à trier est constituée d’entiers de l’intervalle  $\llbracket 0; k \llbracket$. L’algorithme
-fonctionne suivant le principe suivant. On parcourt une fois la liste et on comte  le nombre d’éléments de
-la liste égaux à 0, 1, ..., $k-1$. Pour ce faire on utilise une liste de taille $k$. On peut alors facilement procéder à une
+\exer{Tri par comptage d'une liste}
+\setcounter{numques}{0}
+
+On suppose que la liste à trier \texttt{L} est constituée d’entiers de l’intervalle  $\llbracket 0; k \llbracket$. L’algorithme
+fonctionne suivant le principe suivant. On parcourt une fois la liste et on comte le nombre d’éléments de
+la liste égaux à 0, 1, ..., $k-1$. Pour ce faire on utilise une liste \texttt{C} de taille $k$. On peut alors facilement procéder à une
 réécriture de la liste initiale, de sorte qu’en sortie elle soit constituée des mêmes éléments, mais triés dans l’ordre
 croissant.
+
+Ainsi, si on cherche à trier la liste \texttt{L=[2,1,4,1]}. Dans un premier temps on crée une liste \texttt{C} contenant cinq fois la valeu 0 : \texttt{C=[0,0,0,0,0]}. Une fois le comptage terminé on obtient la liste suivante : \texttt{C=[0,2,1,0,1]}. La liste triée sera donc constituée de 2 fois la valeur 1 pouis 1 fois la valeur 2 puis une fois la valeur 4.
+
 
 
 L’algorithme prend en entrée la liste $L$ à trier, ainsi qu’un entier $k$ tel que tous les éléments de la
 liste soient des entiers de l’intervalle $\llbracket 0; k \llbracket$. On procède en deux étapes : d’abord compter les éléments de chaque type,
 ensuite réécrire la liste $L$.
 
-\begin{lstlisting}
-def tri_comptage(L,k):
-    C=[0]*k
-    for i in range(len(L)):
-        C[L[i]]=C[L[i]]+1
-        p=0
-    for i in range(k):
-        for j in range(C[i]):
-            L[p]=i
-            p+=1
-\end{lstlisting}
+\question{Ecrire la fonction \texttt{tri\_comptage(L:list,k:int) -> list} permettant de réaliser un tri par comptage.}
+
+\question{La fonction proposée agit-elle avec effet de bord ? Sans effet de bord ?}
+
+\question{La fonction proposée réalise-t-elle un tri stable ? un tri en place ?}
+
+
+%\begin{lstlisting}
+%def tri_comptage(L,k):
+%    C=[0]*k
+%    for i in range(len(L)):
+%        C[L[i]]=C[L[i]]+1
+%    p=0
+%    for i in range(k):
+%        for j in range(C[i]):
+%            L[p]=i
+%            p+=1
+%\end{lstlisting}
