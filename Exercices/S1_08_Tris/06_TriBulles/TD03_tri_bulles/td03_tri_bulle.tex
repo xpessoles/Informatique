@@ -1,0 +1,275 @@
+\documentclass[10pt]{article}
+
+\input{My_style}
+\input{Macros}
+
+%----------------------------------------------------------------------------------------
+%	Packages francais
+%----------------------------------------------------------------------------------------
+\usepackage[utf8]{inputenc} 
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+%\usepackage[sf]{charter} % Style de police
+\usepackage{lmodern}
+
+
+
+%----------------------------------------------------------------------------------------
+%	Titre du document
+%----------------------------------------------------------------------------------------
+\newcommand{\DocMatiere}{Informatique} % Matiere du document
+\newcommand{\DocTitle}{Algorithmes de tri} % Titre du document
+\newcommand{\DocType}{TD3} % Type d'activité
+\newcommand{\DocNumber}{} % Numero du projet
+\newcommand{\DocCorrige}{Non} % Affiche le corrigé
+\newcommand{\DocDate}{} % Date
+\newcommand{\DocAuthorName}{Informatique PT - PT*} % Nom de l'auteur
+%----------------------------------------------------------------------------------------
+% Reglages des marges
+%----------------------------------------------------------------------------------------
+\usepackage{geometry}
+\geometry{a4paper}
+\geometry{top=2.5cm, bottom=2.5cm, left=2cm , right=2cm}
+%----------------------------------------------------------------------------------------
+%	Packages classiques
+%----------------------------------------------------------------------------------------
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{graphicx} % Required to insert images
+\usepackage{subfigure}
+\RequirePackage{algorithmic}
+
+%----------------------------------------------------------------------------------------
+%	Packages Maths
+%----------------------------------------------------------------------------------------
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{stmaryrd}
+%----------------------------------------------------------------------------------------
+%	Packages divers
+%----------------------------------------------------------------------------------------
+\usepackage{enumerate} % choix style enumeration
+%\usepackage[table]{xcolor}
+\usepackage{enumitem}
+\usepackage{amssymb} 	
+\usepackage{xargs}
+\usepackage{xinttools}
+\usepackage{tikz}
+\usepackage{multicol}
+%----------------------------------------------------------------------------------------
+%	Mise en forme code python
+%----------------------------------------------------------------------------------------
+% Default fixed font does not support bold face
+\DeclareFixedFont{\ttb}{T1}{txtt}{bx}{n}{8} % for bold
+\DeclareFixedFont{\ttm}{T1}{txtt}{m}{n}{8} % for normal
+% Custom colors
+\usepackage{color}
+\definecolor{deepblue}{rgb}{0,0,0.5}
+\definecolor{deepred}{rgb}{0.6,0,0}
+\definecolor{deepgreen}{rgb}{0,0.5,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mysoftgray}{rgb}{0.8,0.8,0.8}
+\definecolor{grisclair}{rgb}{0.95,0.95,0.95}
+%\definecolor{ocre}{rgb}{49,133,156} % Couleur ''bleue''
+%\definecolor{violetf}{rgb}{112,48,160} % Couleur ''violet''
+
+\usepackage{listings}
+
+
+
+% commandes d'espaces % Les espaces verticaux et horizontaux.
+\newcommand{\sk}{\smallskip}
+\newcommand{\mk}{\medskip}
+\newcommand{\bk}{\bigskip}
+\newcommand{\vk}{\vskip 1.5 cm}
+\newcommand{\hk}{\hskip 1 cm\relax}
+
+
+%----------------------------------------------------------------------------------------
+%	Mise en page du document
+%----------------------------------------------------------------------------------------
+\linespread{1.1} % Line spacing
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead{\DocMatiere} % Top left header
+\chead{\DocTitle} % Top center header
+\rhead{\DocType \ \DocNumber} % Top right header
+\lfoot{\DocAuthorName}% Bottom left footer
+\cfoot{Page\ \thepage\ /\ \pageref{LastPage}} % Bottom center footer
+\rfoot{\DocDate} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+
+%question exo
+\newcounter{cexo}
+\newenvironment{qexo}{
+\refstepcounter{cexo}
+\vspace{3 pt}
+\noindent
+\begin{minipage}[t]{0.15\textwidth}
+\textbf{\noindent Question \arabic{cexo}. }
+\end{minipage}\noindent
+\begin{minipage}[t]{0.85\textwidth}}{\vspace{3 pt}
+\end{minipage}}%\vspace{2 pt}
+	
+	
+
+%%titre
+%\newenvironment{rem}{\par\vspace{10pt} % Vertical white space above the remark and (\small pour smaller font size)
+%\begin{list}{}{
+%\leftmargin=35pt % Indentation on the left
+%\rightmargin=25pt}\item\ignorespaces % Indentation on the right
+%\makebox[-2.5pt]{\begin{tikzpicture}[overlay]
+%\node[draw=ocre!60,line width=1pt,circle,fill=ocre!25,font=\sffamily\bfseries,inner sep=2pt,outer sep=0pt] at (-15pt,0pt){\textcolor{ocre}{R}};\end{tikzpicture}} % Orange R in a circle
+%\advance\baselineskip -1pt}{\end{list}\vskip5pt} % Tighter line spacing and white space after remark
+%
+%%titre
+%\newenvironment{obj}{\par\vspace{10pt} % Vertical white space above the remark and (\small pour smaller font size)
+%\begin{list}{}{
+%\leftmargin=35pt % Indentation on the left
+%\rightmargin=25pt}\item\ignorespaces % Indentation on the right
+%\makebox[-2.5pt]{\begin{tikzpicture}[overlay]
+%\node[draw=deepblue!60,line width=1pt,circle,fill=deepblue!25,font=\sffamily\bfseries,inner sep=2pt,outer sep=0pt] at (-15pt,0pt){\textcolor{deepblue}{Obj}};\end{tikzpicture}} % Orange R in a circle
+%\advance\baselineskip -1pt}{\end{list}\vskip5pt} % Tighter line spacing and white space after remark
+
+%----------------------------------------------------------------------------------------
+%	Repertoire images
+%----------------------------------------------------------------------------------------
+\graphicspath{{figures/}}
+
+
+%----------------------------------------------------------------------------------------
+%	Début du document
+%----------------------------------------------------------------------------------------
+\begin{document}
+
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE & TABLE OF CONTENTS
+%----------------------------------------------------------------------------------------
+\begin{center}
+\vspace{1cm}\textbf{\Large \DocType \ \DocNumber: \DocTitle}\\
+\corrigebox{Corrigé}
+\end{center}
+
+
+
+%----------------------------------------------------------------------------------------
+%	Début du doc
+%----------------------------------------------------------------------------------------
+\section*{Tri à bulles}
+Pour trier une liste selon la méthode du tri à bulles, on réalise des balayages successifs : à chaque balayage, on compare deux éléments consécutifs du tableau et on les réordonne.\\
+Cette méthode doit son nom au fait qu'il déplace rapidement les plus grandes valeurs à la fin du tableau, comme une bulle d'air qui remonte à la surface d'un liquide.
+
+\begin{qexo}
+En utilisant la liste  \texttt{[10, 3, 7, 5, 9, 7, 8, 0, 8]}, écrire la séquence d'échanges permettant d'arriver à la liste triée.
+\end{qexo}
+
+%\corrigebox{
+%Première série de comparaison sur la liste faisant monter 10 : 
+%[10, 3, 7, 5, 9, 7, 8, 0, 8],
+%[3, 10, 7, 5, 9, 7, 8, 0, 8],
+%[3, 7, 10, 5, 9, 7, 8, 0, 8],
+%[3, 7, 5, 10, 9, 7, 8, 0, 8],
+%[3, 7, 5, 9, 10, 7, 8, 0, 8],
+%[3, 7, 5, 9, 7, 10, 8, 0, 8],
+%[3, 7, 5, 9, 7, 8, 10, 0, 8],
+%[3, 7, 5, 9, 7, 8, 0, 10, 8],
+%[3, 7, 5, 9, 7, 8, 0, 8, 10]\\
+%Deuxième série de comparaison à partir des deux premiers éléments :
+%[3, 7, 5, 9, 7, 8, 0, 8, 10],
+%[3, 5, 7, 9, 7, 8, 0, 8, 10],
+%[3, 5, 7, 7, 9, 8, 0, 8, 10],
+%[3, 5, 7, 7, 8, 9, 0, 8, 10],
+%[3, 5, 7, 7, 8, 0, 9, 8, 10],
+%[3, 5, 7, 7, 8, 0, 8, 9, 10]\\
+%Troisième série de comparaison à partir des deux premiers éléments :
+%[3, 5, 7, 7, 8, 0, 8, 9, 10],
+%[3, 5, 7, 7, 0, 8, 8, 9, 10]\\
+%Quatrième série de comparaison à partir des deux premiers éléments :
+%[3, 5, 7, 7, 0, 8, 8, 9, 10],
+%[3, 5, 7, 0, 7, 8, 8, 9, 10]\\
+%Cinquième série de comparaison à partir des deux premiers éléments :
+%[3, 5, 7, 0, 7, 8, 8, 9, 10],
+%[3, 5, 0, 7, 7, 8, 8, 9, 10]\\
+%Sixième série de comparaison à partir des deux premiers éléments :
+%[3, 5, 0, 7, 7, 8, 8, 9, 10],
+%[3, 0, 5, 7, 7, 8, 8, 9, 10]\\
+%Septième série de comparaison à partir des deux premiers éléments :
+%[3, 0, 5, 7, 7, 8, 8, 9, 10],
+%[0, 3, 5, 7, 7, 8, 8, 9, 10]\\
+%Huitième série de comparaison à partir des deux premiers éléments :
+%[0, 3, 5, 7, 7, 8, 8, 9, 10]
+%}
+
+\begin{qexo}
+\'Ecrire une fonction \texttt{triBullesNaif(L : list)->None} qui prend en argument une liste \texttt{L} et qui trie cette liste par une méthode naïve selon la méthode du tri à bulles.
+\end{qexo}
+
+%\corrigebox{\pythonexternal{bulles_naif.py}
+%}
+
+\begin{qexo}
+Pour quel type de tableau, est-on dans le meilleur des cas ? Quelle est alors la complexité de l'algorithme ?
+\end{qexo}
+
+%\corrigebox{Quand la liste est triée, il n'y a pas d'échange d'élément. On a qu'en même les deux boucles \texttt{for} imbriquées.
+%}
+
+
+\begin{qexo}
+Pour quel type de tableau, est-on dans le pire des cas ? Quelle est alors la complexité de l'algorithme ?
+\end{qexo}
+
+%\corrigebox{Quand la liste est triée dans le sens inverse, il y a échange de tous les éléments. On a qu'en même les deux boucles \texttt{for} imbriquées.
+%}
+
+\begin{qexo}
+En remarquant qu'à l'étape $i$, les $i$ derniers éléments sont triés, proposer une nouvelle fonction \texttt{triBulles(L : list)->None} nouvel algorithme du tri à bulles.
+\end{qexo}
+
+\corrigebox{\pythonexternal{bulles.py}
+}
+
+\begin{qexo}
+En remarquant qu'à l'itération $i$, il est possible d'arrêter le tri là où la dernière inversion a eu lieu à l'étape $i-1$, proposer une nouvelle fonction \texttt{triBullesOptimise(L : list)->None} du tri à bulles.
+\end{qexo}
+
+\corrigebox{\pythonexternal{bulles_optimise.py}
+}
+
+\section*{Tri cocktail, tri shaker}
+On remarque dans le tri à bulles que le premier balayage permet de faire remonter directement la bulle la plus grosse, cependant, les plus petites bulles ne descendent que d'un indice par balayage. Le tri cocktail propose donc de réaliser, à chaque itération, un balayage dans les deux sens. 
+
+\begin{qexo}
+En utilisant la liste donnée dans le tri à bulles, donne la séquence d'échanges permettant d'arriver à la liste triée.
+\end{qexo}
+
+\begin{qexo}
+\'Ecrire une fonction \texttt{triCocktailNaif(L : list)} qui prend en argument une liste \texttt{L} et qui trie cette liste par une méthode naïve selon la méthode du tri cocktail.
+\end{qexo}
+
+\begin{qexo}
+Partant des remarques du tri à bulles, proposer une amélioration du tri cocktail.
+\end{qexo}
+
+\begin{qexo}
+Donner la complexité de l'algorithme.
+\end{qexo}
+
+
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}

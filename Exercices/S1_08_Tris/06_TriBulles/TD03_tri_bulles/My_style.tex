@@ -1,0 +1,226 @@
+%----------------------------------------------------------------------------------------
+% Reglages des marges
+%----------------------------------------------------------------------------------------
+\usepackage{geometry}
+\geometry{a4paper}
+\geometry{top=2.5cm, bottom=2.5cm, left=2cm , right=2cm}
+
+
+%----------------------------------------------------------------------------------------
+%	Packages classiques
+%----------------------------------------------------------------------------------------
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{graphicx} % Required to insert images
+
+%----------------------------------------------------------------------------------------
+%	Packages francais
+%----------------------------------------------------------------------------------------
+\usepackage[utf8]{inputenc} 
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern} % Style de police
+
+
+
+%----------------------------------------------------------------------------------------
+%	PackagesMaths
+%----------------------------------------------------------------------------------------
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+
+%----------------------------------------------------------------------------------------
+%	Packages SI
+%----------------------------------------------------------------------------------------
+\usepackage{tikz}
+\usepackage{pgf}
+\usepackage{schemabloc}
+%\usepackage{bodegraph}
+
+
+
+% autres
+\usepackage{enumerate} % choix style enumeration
+\usepackage{multicol} % multicolonnes
+\usepackage{multirow} % multilignes
+
+\usepackage{xcolor} % couleurs
+
+\usepackage{placeins} %placer figure dans section
+
+
+\usepackage{pdflscape} %page en mode paysage
+
+\usepackage{textcomp}
+
+
+%----------------------------------------------------------------------------------------
+%	Mise en page du document
+%----------------------------------------------------------------------------------------
+\linespread{1.1} % Line spacing
+
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead{\DocMatiere} % Top left header
+\chead{\DocTitle} % Top center header
+\rhead{\DocType \ \DocNumber} % Top right header
+\lfoot{\DocAuthorName}% Bottom left footer
+\cfoot{Page\ \thepage\ /\ \pageref{LastPage}} % Bottom center footer
+\rfoot{\DocDate} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+
+
+
+
+% Différents types de document
+\newcommand{\Cours}{Cours}
+\newcommand{\TD}{TD}
+\newcommand{\Colle}{Colle}
+\newcommand{\Oui}{Oui}
+\newcommand{\Non}{Non}
+
+
+
+
+
+
+
+
+\newcommand{\Titre}{
+\ifx \DocType \Cours 
+\begin{center}
+\vspace*{4cm}
+	\textbf{\huge \DocMatiere}\\
+\vspace{1cm}\textbf{\Large \DocType \ \DocNumber: \DocTitle}
+\end{center}
+\vspace{4cm}
+%\setcounter{tocdepth}{1} % Uncomment this line if you don't want subsections listed in the ToC
+\newpage
+\tableofcontents
+\newpage
+\else
+\begin{center}
+%\vspace*{4cm}
+	%\textbf{\huge \DocMatiere}\\
+\vspace{1cm}\textbf{\Large \DocType \ \DocNumber: \DocTitle}
+\\
+\textbf{\Large\corrige{Corrig\'e}}
+\end{center}
+\fi
+}
+
+%----------------------------------------------------------------------------------------
+%	
+%----------------------------------------------------------------------------------------
+\newcounter{thequestion}
+\newcommand{\question}[1]{{\stepcounter{thequestion}  \textbf{Q \arabic{thequestion} :} #1}}
+
+
+\definecolor{corcolor}{rgb}{0.01,0.01,0.75}
+
+%\newcounter{thereponse}
+\newcommand{\reponse}[1]{
+\ifx \DocCorrige \Oui
+{ \textcolor{corcolor}{\textbf{R \arabic{thequestion} :} #1}}
+\else
+
+\fi
+}
+
+
+%\newcommand{\reponsebox}[2]{
+%\fbox{
+%\begin{minipage}[t][#1][t]{#2}
+%\textbf{R \arabic{thequestion} :}
+%\end{minipage}
+%}
+%}
+
+
+%\newcommand{\reponsebox}[2]{
+%\begin{center}
+%\begin{tikzpicture}
+%\node[draw,rectangle,rounded corners=4pt,line width =1.5pt,text width=#1,minimum width=5cm,minimum height=#2]{};
+%\end{tikzpicture}
+%\end{center}
+%}
+
+
+
+
+
+
+
+\newcommand{\corrige}[1]{
+\ifx \DocCorrige \Oui
+{ \textcolor{corcolor}{#1} }
+\else
+\fi
+}
+
+
+
+
+
+% Define box and box title style
+\tikzstyle{mybox} = [draw=black, fill=white, very thick,
+                        rectangle, rounded corners, inner sep=10pt, inner ysep=10pt]
+\tikzstyle{fancytitle} =[draw=black, rounded corners, fill=blue!20,text= black]
+
+
+
+
+\newcommand{\encadre}[1]{
+\begin{center}
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.95\textwidth}
+        #1
+    \end{minipage}
+};
+% \node[fancytitle, right=10pt] at (box.north west) {#1};
+% \node[fancytitle, rounded corners] at (box.east) {$\clubsuit$};
+\end{tikzpicture}%
+\end{center}
+}
+
+
+
+
+
+
+%\newcommand{\reponsebox}[1]{
+%\ifx \DocCorrige \Non
+%{ \encadre{#1} }
+%\else
+%\fi
+%}
+
+
+\newcommand{\corrigebox}[1]{
+\ifx \DocCorrige \Oui
+{ \encadre{\textcolor{corcolor}{#1}} }
+\else
+\fi
+}
+
+\newcommand{\reponsebox}[1]{
+\ifx \DocCorrige \Non
+{ \encadre{\textcolor{black}{\vspace{#1}}} }
+\else
+\fi
+}
+
+
+
+%----------------------------------------------------------------------------------------
+%	
+%----------------------------------------------------------------------------------------
+
+
