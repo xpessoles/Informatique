@@ -21,7 +21,7 @@ def fonction(x,y = []) :
 Lors de l'écriture d'une fonction, on peut être amener à l'utiliser, le jour même, le lendemain, une semaine plus tard, un mois plus tard... On peut être amener à la partager lorsqu'on travaille sur un projet. 
 Il est donc essentiel de les documenter, de les commenter.
 
-Présontons donc les choses ainsi. 
+Présentons donc les choses ainsi. 
 
 \begin{lstlisting}
 def supprimer_doublons_liste(L,y = []) :
@@ -48,7 +48,7 @@ En modifiant le nom de la fonction et en ajoutant une court commentaire, il devi
 Pour prouver qu'un algorithme on peut envisager deux méthodes : 
 \begin{itemize}
 \item une méthode empirique (expérimentale) se basant sur des tests, sur le contrôle, des données d'entrées. Cette méthode à l'avantage d'être relativement simple à mettre en \oe{}uvre. Elle a l'inconvénient de valider le comportement d'une fonction sur des cas << ponctuels >>. On ne montre donc pas qu'elle fonctionne dans le cas général. 
-\item une méthode formelle, dans le cadre de laquelle on va prouver mathématiquement qu'une fonction attent bien l'objectif fixé. On parle alors de de terminaison et de correction de l'algorithme.
+\item une méthode formelle, dans le cadre de laquelle on va prouver mathématiquement qu'une fonction atteint bien l'objectif fixé. On parle alors de de terminaison et de correction de l'algorithme.
 \end{itemize}
 
 La première méthode fait l'objet du présent chapitre. La seconde fera l'objet d'un chapitre ultérieur. 
@@ -93,7 +93,7 @@ Lorsque les commentaires d'une fonction sont déclarés ainsi après la déclara
 \subsection{Annotation d'une fonction-- Limite du programme}
 
 Depuis la version 3.5 de \texttt{Python} il est possible d'annoter les fonctions. 
-\begin{defi} Les anotations de type permettent de donner une information sur le type attendu d'une fonction. Ce ne sont que des indications pour le programmeur. Rien ne l'empêche de ne pas les respecter. 
+\begin{defi} Les annotations de type permettent de donner une information sur le type attendu d'une fonction. Ce ne sont que des indications pour le programmeur. Rien ne l'empêche de ne pas les respecter. 
 \end{defi}
 
 \begin{exemple}~\\
@@ -118,7 +118,7 @@ def addition(a:int, b:int) -> int :
 Comme précisé, les annotations ne sont que des indications. Mais il pourrait être intéressant de pouvoir s'assurer que l'utilisateur de la fonction respecte les conditions d'utilisation de la fonction que ce soit le type des arguments, ou d'autres conditions.
 
 \begin{rem}
-En Python, il est possible d'utiliser \texttt{mypy} qui permet de vérifier que lors de l'appel d'une fonction, le typage précisé dans les anotations est bien respecté. 
+En Python, il est possible d'utiliser \texttt{mypy} qui permet de vérifier que lors de l'appel d'une fonction, le typage précisé dans les annotations est bien respecté. 
 \end{rem}
 
 
@@ -177,7 +177,7 @@ def dichotomie(f, a:float , b:float , epsilon:float) -> float :
 \end{exemple}
 
 \subsection{Vers la gestion d'exceptions -- hors programme}
-L'avantage des assertions et leur facilité à être mise en \oe{}uvre. L'inconvénient et qu'il n'est pas possible de savoir précisément ce qui a génére l'erreur d'assertion : un problème de précondition ? de type ? autre ?
+L'avantage des assertions et leur facilité à être mise en \oe{}uvre. L'inconvénient et qu'il n'est pas possible de savoir précisément ce qui a généré l'erreur d'assertion : un problème de précondition ? de type ? autre ?
 
 Du fait de leur manque de précision, il peut être difficile de les gérer. 
 
@@ -214,6 +214,8 @@ def dichotomie(f, a:float , b:float , epsilon:float) -> float :
 \end{lstlisting}
 
 \section{Génération de tests}
+
+\subsection{Tests unitaires}
 
 On a vu comment vérifier que les données d'entrées d'une fonction sont compatibles avec ce qu'attendait le concepteur de la fonction. On va maintenant chercher, grâce à des tests unitaires, si le résultat attendu est bien celui déterminé par une fonction. 
 \begin{exemple}~\\
@@ -262,6 +264,34 @@ En modifiant l'algorithme, et en itérant une fois de plus, le test reste faux. 
 
 \subsection{Vers Pytest -- hors programme}
 
+Lorsqu'on connaît dans un grand nombre de cas le résultat qui est sensé être trouvé par une fonction, il est possible de faire passer une batterie de tests à cette fonction en recherchant si le résultat calculé et bien le résultat attendu. 
 
+Soit la fonction suivante permettant de calculer le produit scalaire entre deux vecteurs. 
+\begin{lstlisting}
+def produit_scalaire_v2(vecteur1, vecteur2):
+    somme = 0
+    for i in range(len(vecteur1)):
+        somme += vecteur1[i]*vecteur2[i]+1
+    return somme
+\end{lstlisting}
+
+\texttt{Pytest} permet de faire passer une batterie de tests à une fonction. Ces tests sont des fonctions commençant obligatoirement par \texttt{test\_}.
+
+\begin{lstlisting}
+def test_produit_scalaire_v2_01():
+    assert produit_scalaire_v2([1, 1, 1], [1, 1, 1]) == 3
+
+def test_produit_scalaire_v2_02():
+    assert produit_scalaire_v2([1, 2, 3, 4], [0, 1, 0, 0]) == 2
+\end{lstlisting}
+
+Le lancement de \texttt{Pytest} donne le résultat suivant. 
+
+\begin{center}
+\includegraphics[width=.8\linewidth]{pytest}
+\end{center}
+
+
+On peut lire que les deux tests ont échoué. La fonction ne remplit donc vraisemblablement pas son objectif. 
 
 % https://mypy.readthedocs.io/en/stable/cheat_sheet_py3.html

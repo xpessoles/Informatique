@@ -22,13 +22,13 @@ def supprimer_doublons_liste(L,y = []) :
     Sortie : 
      * list(int) : liste d'entiers ne comportant aucun doublons.
     """
-    if x == [] : 
+    if L == [] : 
         return y
     else : 
-        z = x.pop(0)
+        z = L.pop(0)
         if z not in y : 
             y.append(z)
-        return fonction(x, y)
+        return fonction(L, y)
 
 def supprimer_doublons_liste2(L,y = []) :
     """
@@ -134,12 +134,25 @@ def produit_scalaire(vecteur1, vecteur2):
         somme += vecteur1[i]*vecteur2[i]
     return somme
 
-def test_produit_scalaire():
+def utest_produit_scalaire():
     assert produit_scalaire([1, 1, 1], [1, 1, 1]) == 3
     assert produit_scalaire([1, 2, 3, 4], [0, 1, 0, 0]) == 2
+    
+def produit_scalaire_v2(vecteur1, vecteur2):
+    somme = 0
+    for i in range(len(vecteur1)):
+        somme += vecteur1[i]*vecteur2[i]+1
+    return somme
+
+def test_produit_scalaire_v2_01():
+    assert produit_scalaire_v2([1, 1, 1], [1, 1, 1]) == 3
+
+def test_produit_scalaire_v2_02():
+    assert produit_scalaire_v2([1, 2, 3, 4], [0, 1, 0, 0]) == 2
+    
 
 
-def dichotomie(f, a:float , b:float , epsilon:float) -> float :
+def dichotomie_v2(f, a:float , b:float , epsilon:float) -> float :
     """Zéro de f sur [a,b] à epsilon près, par dichotomie
         Préconditions : f(a) * f(b) <= 0
         f continue sur [a,b]
