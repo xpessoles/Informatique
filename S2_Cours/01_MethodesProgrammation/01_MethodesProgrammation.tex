@@ -29,13 +29,13 @@ def supprimer_doublons_liste(L,y = []) :
     Fonction permettant de renvoyer, à partir d'une liste d'entiers, une liste privée des doublons. 
     La liste initiale sera vidée. 
     """
-    if x == [] : 
+    if L == [] : 
         return y
     else : 
-        z = x.pop(0)
+        z = L.pop(0)
         if z not in y : 
             y.append(z)
-        return fonction(x, y)
+        return fonction(L, y)
 \end{lstlisting}
 
 En modifiant le nom de la fonction et en ajoutant une court commentaire, il devient plus simple de partager la fonction ou de la réutiliser plus tard. 
@@ -77,13 +77,13 @@ def supprimer_doublons_liste(L,y = []) :
     Sortie : 
      * list(int) : liste d'entiers ne comportant aucun doublons.
     """
-    if x == [] : 
+    if L == [] : 
         return y
     else : 
-        z = x.pop(0)
+        z = L.pop(0)
         if z not in y : 
             y.append(z)
-        return fonction(x, y)
+        return fonction(L, y)
 \end{lstlisting}
 
 Lorsque les commentaires d'une fonction sont déclarés ainsi après la déclaration d'une fonction (triples \texttt{"}), \texttt{Python} génère automatiquement une documentation en utilisant l'instruction \texttt{help(supprimer\_doublons\_liste)}. On parle de \texttt{docstring}.
