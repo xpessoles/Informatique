@@ -1,0 +1,9 @@
+\babel@toc {french}{}
+\babel@toc {french}{}
+\contentsline {section}{\numberline {\hspace {-0.6cm}1}Preuves des programmes}{1}{}%
+\contentsline {subsection}{\numberline {\hspace {-0.4cm}1.a}Introduction}{1}{}%
+\contentsline {subsection}{\numberline {\hspace {-0.4cm}1.b}Correction: introduction aux invariants de boucles}{1}{}%
+\contentsline {subsection}{\numberline {\hspace {-0.4cm}1.c}Pour s'entra\^{i}ner}{2}{}%
+\contentsline {subsection}{\numberline {\hspace {-0.4cm}1.d}Terminaison: introduction aux variants}{4}{}%
+\contentsline {section}{\numberline {\hspace {-0.6cm}2}Interrompre une boucle}{6}{}%
+\contentsline {section}{\numberline {\hspace {-0.6cm}3}Conseils généraux pour écrire des algorithmes}{7}{}%
