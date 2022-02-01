@@ -18,7 +18,13 @@
 \section{Introduction et objectifs}
 
 \begin{obj}
-On suppose dans toute la suite que l'on trie des tableaux dans l'ordre croissant. Les algorithmes présentés permettent de trier n'importe quel type d'éléments à partir du moment où ces éléments sont munis d'un ordre total. Cependant nous allons nous focaliser ici sur le tri d'entiers.
+%On suppose dans toute la suite que l'on trie des tableaux dans l'ordre croissant. Les algorithmes présentés permettent de trier n'importe quel type d'éléments à partir du moment où ces éléments sont munis d'un ordre total. Cependant nous allons nous focaliser ici sur le tri d'entiers.
+
+Un algorithme de tri est un algorithme permettant d'organiser une liste d'éléments selon un ordre fixé.  On peut dire que les éléments à trier feront partie d'un ensemble $E$ muni d'une relation d'ordre total noté $\leq$.
+
+Les ensembles $\mathbb{N}$, $\mathbb{R}$... sont munis de l'ordre $\leq$. 
+
+L'ensemble des chaînes de caractères peut être muni de l'ordre lexicographique (ordre du dictionnaire). Ainsi en Python, \texttt{'a'<'b'}, \texttt{'aa'<'b'}, \texttt{'A'<'a'} (les lettres majuscules sont avant les lettres minuscules).
 
 Les principales capacités développées ici sont :
 \begin{itemize}
@@ -31,34 +37,52 @@ Les principales capacités développées ici sont :
 \end{obj}
 
 
-%\begin{defi}\textbf{Stabilité}
-%
-%\end{defi}
 
-\begin{defi}\textbf{Tri en place} \\
-Un tri est effectué en place lorsque la liste à trier est modifiée jusqu'à devenir triée. Dans le cas contraire, la fonction de tri pourra renvoyer une nouvelle liste contenant les mêmes éléments, mais triés. 
+
+\begin{defi}\textbf{Effet de bord -- } On dit qu'une fonction est à effet de bord lorsqu'elle modifie une variable  en dehors de son environnement local. C'est par exemple le cas lorsqu'on donne une liste (objet mutable, passé par référénce) comme argument d'une fonction.
+
+Conséquence sur les algorithmes de tri : une fonction de tri ne renvoie rien la plupart du temps (on peut donc l'appeler une procédure). La liste passée en argument en entrée sera triée et cela, même en dehors du scope de la fonction. 
 \end{defi}
 
-\begin{defi}\textbf{Tri comparatif} \\
+
+\begin{defi}\textbf{Tri en place} -- 
+Un tri est effectué en place lorsque la liste à trier est modifiée jusqu'à devenir triée. Dans le cas contraire, la fonction de tri pourra renvoyer une novelle liste contenent les mêmes éléments, mais triés. 
+\end{defi}
+
+
+\begin{defi}\textbf{Tri stable} -- 
+Un algorithme est dit stable si les positions relatives de deux éléments égaux ne sont pas
+modifiées par l'algorithme : c'est-à-dire que si deux éléments $x$ et $y$ égaux se trouvent aux positions $i_x$ et $i_y$ de
+la liste avant l'algorithme, avec $i_x < i_y$, alors c'est également le cas de leurs positions après l'algorithme.
+% Le caractère stable peut-être utile lorsqu’on utilise des pré-ordres.
+\end{defi}
+
+\begin{defi}\textbf{Tri comparatif} --
 Un tri est dit comparatif lorsqu'il s'appuie uniquement sur la comparaison deux à deux des éléments de la liste et pas sur la valeur ce ces éléments.
 \end{defi}
-
 
 \subsection{Exemple d'application}
 
 \begin{exemple2}[tri d'avis sur un site marchand]
 
-On s'intéresse ici à l'algorithme permettant à un client de trier les résultats d'un site marchand.
-
-\begin{center}
-\includegraphics[width=.8\textwidth]{images/illustration.png}
-\end{center}
-
+\begin{minipage}{0.6\textwidth}
 On ne s'intéresse ici qu'à une version simplifiée de l'exemple. On ne se focalise que sur le critère note et plus précisément sur le nombre d'avis.
 
 Avant que l'utilisateur choisisse de classer par notes on a une liste non triée $T=[5,14,11,8,17,7]$ et l'on souhaite obtenir $T=[5,7,8,11,14,17]$.
 
-Pour ce type d'application c'est le temps maximum qu'il faut limiter. En effet une valeur moyenne pourrait permettre de garantir que sur tous les achats les temps d'attente soient raisonnables pour un ensemble de clients. Cependant, ceci ne pourrait garantir qu'aucun client n'ait pas une attente trop longue.
+%Pour ce type d'application c'est le temps maximum qu'il faut limiter. En effet une valeur moyenne pourrait permettre de garantir que sur tous les achats les temps d'attente soient raisonnables pour un ensemble de clients. Cependant, ceci ne pourrait garantir qu'aucun client n'ait pas une attente trop longue.
+\end{minipage}
+\begin{minipage}{0.35\textwidth}
+\begin{center}
+\includegraphics[width=.9\textwidth]{images/illustration.png}
+\end{center}
+\end{minipage}
+
+
+
+
+
+
 
 \end{exemple2}
 
@@ -237,7 +261,7 @@ On va chercher ici à évaluer la complexité théorique des tris comparatifs en
 Cet algorithme correspond au fonctionnement du tri insertion que nous verrons plus loin :
 
 \begin{center}
-\includegraphics[width=.8\textwidth]{images/C2.png}
+\includegraphics[width=.6\textwidth]{images/C2.png}
 \end{center}
 
 \textbf{Résultat :}\textit{ Tout algorithme comparatif fait dans le pire des cas au moins de l'ordre de
@@ -264,37 +288,37 @@ La clef est en bleu. Les données décalées sont en vert.
 \noindent\begin{tabular}{|p{12cm}|c|c|c|c|}
 \hline \rowcolor{white}
 \hline
-Tableau $T$ initial: 5 est la clef. & \cellcolor{bleu}5 & 14 & 11 & 8 \\ 
+Tableau $T$ initial: 5 est la clef. & \cellcolor{bleuc}5 & 14 & 11 & 8 \\ 
 \hline 
 \hline \rowcolor{white}
-La clef est comparée avec la liste des valeurs déjà triées (vide ici). & \cellcolor{rouge}5 & 14 & 11 & 8   \\ 
+La clef est comparée avec la liste des valeurs déjà triées (vide ici). & \cellcolor{rougec}5 & 14 & 11 & 8   \\ 
 \hline 
 \hline \rowcolor{white}
- La clef est 14 & \cellcolor{rouge}5 & \cellcolor{bleu}14 & 11 & 8  \\ 
+ La clef est 14 & \cellcolor{rougec}5 & \cellcolor{bleuc}14 & 11 & 8  \\ 
 \hline 
 \hline \rowcolor{white}
-On compare la clef aux valeurs déjà triées (ici 5). Elle est plus grande et reste donc à sa position. & \cellcolor{rouge}5 & \cellcolor{rouge}14 & 11 & 8  \\ 
+On compare la clef aux valeurs déjà triées (ici 5). Elle est plus grande et reste donc à sa position. & \cellcolor{rougec}5 & \cellcolor{rougec}14 & 11 & 8  \\ 
 \hline 
 \hline \rowcolor{white}
- La clef est 11. & \cellcolor{rouge}5 & \cellcolor{rouge}14 & \cellcolor{bleu}11 & 8  \\ 
+ La clef est 11. & \cellcolor{rougec}5 & \cellcolor{rougec}14 & \cellcolor{bleuc}11 & 8  \\ 
 \hline 
 \hline \rowcolor{white}
-On compare la clef aux valeurs déjà triées : la première valeur comparée est 14. 14 est plus grand donc on décale 14 vers la droite pour laisser une place à la clef. & \cellcolor{rouge}5 & \cellcolor{vert}14 & \cellcolor{vert}14 & 8 \\ 
+On compare la clef aux valeurs déjà triées : la première valeur comparée est 14. 14 est plus grand donc on décale 14 vers la droite pour laisser une place à la clef. & \cellcolor{rougec}5 & \cellcolor{vertc}14 & \cellcolor{vertc}14 & 8 \\ 
 \hline 
 \hline \rowcolor{white}
-On compare la clef aux valeurs déjà triées : la valeur suivante est 5. 5 est plus petit donc on a trouvé la place de la clef et on l'écrit. & \cellcolor{rouge}5 & \cellcolor{rouge}11 & \cellcolor{rouge}14 & 8  \\ 
+On compare la clef aux valeurs déjà triées : la valeur suivante est 5. 5 est plus petit donc on a trouvé la place de la clef et on l'écrit. & \cellcolor{rougec}5 & \cellcolor{rougec}11 & \cellcolor{rougec}14 & 8  \\ 
 \hline 
 \hline \rowcolor{white}
-La clef est 8. & \cellcolor{rouge}5 & \cellcolor{rouge}11 & \cellcolor{rouge}14 & \cellcolor{bleu}8  \\ 
+La clef est 8. & \cellcolor{rougec}5 & \cellcolor{rougec}11 & \cellcolor{rougec}14 & \cellcolor{bleuc}8  \\ 
 \hline 
 \hline \rowcolor{white}
-On compare la clef 8 à 14. 14 est plus grand donc on le décale en le copiant à la place de la clef. & \cellcolor{rouge}5 & \cellcolor{rouge}11 & \cellcolor{vert}14 & \cellcolor{vert}14  \\ 
+On compare la clef 8 à 14. 14 est plus grand donc on le décale en le copiant à la place de la clef. & \cellcolor{rougec}5 & \cellcolor{rougec}11 & \cellcolor{vertc}14 & \cellcolor{vertc}14  \\ 
 \hline 
 \hline \rowcolor{white}
-On compare la clef 8 à 11. 11 est plus grand donc on le décale en le copiant à la place de la valeur supérieure (on écrase donc une des occurrences de 14). & \cellcolor{rouge}5 & \cellcolor{vert}11 & \cellcolor{vert}11 & \cellcolor{rouge}14  \\ 
+On compare la clef 8 à 11. 11 est plus grand donc on le décale en le copiant à la place de la valeur supérieure (on écrase donc une des occurrences de 14). & \cellcolor{rougec}5 & \cellcolor{vertc}11 & \cellcolor{vertc}11 & \cellcolor{rougec}14  \\ 
 \hline 
 \hline \rowcolor{white}
-On compare la clef  8 à 5. 5 est plus petit donc on est à la bonne place pour copier la clef (on écrase donc l'occurrence de 11 en doublon). & \cellcolor{rouge}5 & \cellcolor{rouge}8 & \cellcolor{rouge}11 & \cellcolor{rouge}14  \\ 
+On compare la clef  8 à 5. 5 est plus petit donc on est à la bonne place pour copier la clef (on écrase donc l'occurrence de 11 en doublon). & \cellcolor{rougec}5 & \cellcolor{rougec}8 & \cellcolor{rougec}11 & \cellcolor{rougec}14  \\ 
 \hline 
 \end{tabular} 
 
@@ -318,7 +342,7 @@ $j\gets j-1$\;
 }
 $L[j]\gets clef$\;
 }
-\KwOut{$t$}
+\KwOut{$L$}
 \end{algorithm}
 \end{minipage}
 \begin{minipage}{0.5\textwidth}
@@ -499,44 +523,44 @@ On représente en :
 \noindent\begin{tabular}{|p{10.cm}|c|ccccc|}
 \hline
 \hline \rowcolor{white}
-Tableau $T$ initial: 5 est le pivot & \cellcolor{bleu}5 & 14 & 11 & 8 & 17 & 7 \\ 
+Tableau $T$ initial: 5 est le pivot & \cellcolor{bleuc}5 & 14 & 11 & 8 & 17 & 7 \\ 
 \hline 
 \hline \rowcolor{white}
-On partitionne pour trouver une partie droite (en jaune) et une partie gauche (en rouge). Sauf qu'ici il n'y aura pas de partie gauche car 5 est la plus petite valeur. 5 est donc à sa place définitive. & \cellcolor{bleu}5 &\cellcolor{jaune} 14 & \cellcolor{jaune}11 & \cellcolor{jaune}8 & \cellcolor{jaune}17 & \cellcolor{jaune}7 \\ 
+On partitionne pour trouver une partie droite (en jaune) et une partie gauche (en rouge). Sauf qu'ici il n'y aura pas de partie gauche car 5 est la plus petite valeur. 5 est donc à sa place définitive. & \cellcolor{bleuc}5 &\cellcolor{jaune} 14 & \cellcolor{jaune}11 & \cellcolor{jaune}8 & \cellcolor{jaune}17 & \cellcolor{jaune}7 \\ 
 \hline 
 \hline \rowcolor{white}
- & \cellcolor{vert}5 & & & & & \\ \cline{2-3} \rowcolor{white}
+ & \cellcolor{vertc}5 & & & & & \\ \cline{2-3} \rowcolor{white}
  \multirow{-2}{10.cm}{On traite de façon indépendante les partie gauche et droite. Ici pas de partie gauche. On cherche alors les nouveaux pivots (ici 14). }
-&&\cellcolor{bleu} 14 & \cellcolor{jaune}11 & \cellcolor{jaune}8 & \cellcolor{jaune}17 & \cellcolor{jaune}7 \\
+&&\cellcolor{bleuc} 14 & \cellcolor{jaune}11 & \cellcolor{jaune}8 & \cellcolor{jaune}17 & \cellcolor{jaune}7 \\
 \hline 
 \hline \rowcolor{white}
- & \cellcolor{vert}5  & &  & &&   \\ \cline{2-3} \rowcolor{white}
+ & \cellcolor{vertc}5  & &  & &&   \\ \cline{2-3} \rowcolor{white}
  \multirow{-2}{10.cm}{On segmente alors les parties droite et gauche autour du pivot 14 dont on a ainsi déterminé la position définitive. }
-&& \cellcolor{rouge}7 & \cellcolor{rouge}8 & \cellcolor{rouge}11&\cellcolor{vert} 14& \cellcolor{jaune}17  \\
+&& \cellcolor{rougec}7 & \cellcolor{rougec}8 & \cellcolor{rougec}11&\cellcolor{vertc} 14& \cellcolor{jaune}17  \\
 \hline 
 \hline \rowcolor{white}
- & \cellcolor{vert}5  & &  & &\cellcolor{vert} 14&   \\
+ & \cellcolor{vertc}5  & &  & &\cellcolor{vertc} 14&   \\
  \cline{2-3} \rowcolor{white}
-  &   & \cellcolor{bleu}7&\cellcolor{jaune}11 & \cellcolor{jaune}8&&   \\ \cline{2-3} \rowcolor{white}
+  &   & \cellcolor{bleuc}7&\cellcolor{jaune}11 & \cellcolor{jaune}8&&   \\ \cline{2-3} \rowcolor{white}
  \multirow{-3}{10.cm}{On traite de façon indépendante les partie gauche et droite. On recherche pour chacune le pivot (ici 7 et 17). }
-&&  &  & && \cellcolor{bleu}17  \\
+&&  &  & && \cellcolor{bleuc}17  \\
 \hline\hline
 \rowcolor{white}
- & \cellcolor{vert}5  & &  & &\cellcolor{vert} 14&   \\
+ & \cellcolor{vertc}5  & &  & &\cellcolor{vertc} 14&   \\
  \cline{2-3} \rowcolor{white}
-  &   & \cellcolor{vert}7&\cellcolor{jaune}11 & \cellcolor{jaune}8&&   \\ \cline{2-3} \rowcolor{white}
+  &   & \cellcolor{vertc}7&\cellcolor{jaune}11 & \cellcolor{jaune}8&&   \\ \cline{2-3} \rowcolor{white}
  \multirow{-3}{10.cm}{Pour la chaine de pivot 7 on segmente mais il n'y a pas de partie gauche. Le pivot 17 est seul dans sa chaine il est donc directement à la bonne position. }
-&&  &  & && \cellcolor{vert}17  \\
+&&  &  & && \cellcolor{vertc}17  \\
 \hline\hline
 \rowcolor{white}
- & \cellcolor{vert}5  &\cellcolor{vert} 7 &  &&\cellcolor{vert} 14&  \cellcolor{vert} 17 \\
+ & \cellcolor{vertc}5  &\cellcolor{vertc} 7 &  &&\cellcolor{vertc} 14&  \cellcolor{vertc} 17 \\
  \cline{2-3} \rowcolor{white}
- \multirow{-2}{10.cm}{On traite de façon indépendante les partie gauche et droite. Ici pas de partie gauche. On cherche alors les nouveaux pivots (ici 8). }  &   && \cellcolor{bleu}8 &  \cellcolor{jaune}11&&   \\ \cline{2-3} 
+ \multirow{-2}{10.cm}{On traite de façon indépendante les partie gauche et droite. Ici pas de partie gauche. On cherche alors les nouveaux pivots (ici 8). }  &   && \cellcolor{bleuc}8 &  \cellcolor{jaune}11&&   \\ \cline{2-3} 
 \hline\hline
 \rowcolor{white}
- & \cellcolor{vert}5  &\cellcolor{vert} 7 &  &&\cellcolor{vert} 14&  \cellcolor{vert} 17 \\
+ & \cellcolor{vertc}5  &\cellcolor{vertc} 7 &  &&\cellcolor{vertc} 14&  \cellcolor{vertc} 17 \\
  \cline{2-3} \rowcolor{white}
- \multirow{-2}{10.cm}{On classe le seul élément restant par rapport au pivot. }  &   & &\cellcolor{vert}8 &\cellcolor{jaune} 11 &&   \\ \cline{2-3} 
+ \multirow{-2}{10.cm}{On classe le seul élément restant par rapport au pivot. }  &   & &\cellcolor{vertc}8 &\cellcolor{jaune} 11 &&   \\ \cline{2-3} 
 \hline\hline
 \rowcolor{white}
 
@@ -742,70 +766,70 @@ On notera que pour chaque étape, on utilise deux tableaux, le tableau de dépar
 
 \noindent\begin{tabular}{|p{10.cm}|cccccc|}
 \hline \rowcolor{white}
-Tableau $T$ initial: On découpe en une deux moitiés (rouge et jaune). & \cellcolor{rouge}5 & \cellcolor{rouge}14 & \cellcolor{rouge}11 & \cellcolor{jaune}8 & \cellcolor{jaune}17 & \cellcolor{jaune}7 \\ 
+Tableau $T$ initial: On découpe en une deux moitiés (rouge et jaune). & \cellcolor{rougec}5 & \cellcolor{rougec}14 & \cellcolor{rougec}11 & \cellcolor{jaune}8 & \cellcolor{jaune}17 & \cellcolor{jaune}7 \\ 
 \hline 
 \hline \rowcolor{white}
-Chacune de ces deux listes est triée de façon indépendante (pas illustré ici) soit par un autre algorithme soit de façon récursive. & \cellcolor{rouge}5  & \cellcolor{rouge}11 &\cellcolor{rouge} 14 & \cellcolor{jaune}7 & \cellcolor{jaune}8 & \cellcolor{jaune}17  \\ 
+Chacune de ces deux listes est triée de façon indépendante (pas illustré ici) soit par un autre algorithme soit de façon récursive. & \cellcolor{rougec}5  & \cellcolor{rougec}11 &\cellcolor{rougec} 14 & \cellcolor{jaune}7 & \cellcolor{jaune}8 & \cellcolor{jaune}17  \\ 
 \hline 
 \hline 
 \rowcolor{white}
- & \cellcolor{bleu}5  & \cellcolor{rouge}11 &\cellcolor{rouge} 14 & \cellcolor{gris25}7 & \cellcolor{jaune}8 & \cellcolor{jaune}17 \\ \cline{2-3} \rowcolor{white}
+ & \cellcolor{bleuc}5  & \cellcolor{rougec}11 &\cellcolor{rougec} 14 & \cellcolor{gris25}7 & \cellcolor{jaune}8 & \cellcolor{jaune}17 \\ \cline{2-3} \rowcolor{white}
  \multirow{-2}{10.cm}{On procède alors à l'opération de fusion en comparant les premiers nombres de chaque bloc. On a besoin d'un second tableau que l'on}
 && &  &  & &  \\
 \hline 
 \hline 
 \rowcolor{white}
-  &   & \cellcolor{rouge}11 &\cellcolor{rouge} 14 & \cellcolor{gris25}7 & \cellcolor{jaune}8 & \cellcolor{jaune}17   \\ \cline{2-3} \rowcolor{white}
+  &   & \cellcolor{rougec}11 &\cellcolor{rougec} 14 & \cellcolor{gris25}7 & \cellcolor{jaune}8 & \cellcolor{jaune}17   \\ \cline{2-3} \rowcolor{white}
  \multirow{-2}{10.cm}{remplit après les comparaisons successives des éléments des listes $L_1$ (rouge) et $L_2$ (jaune). 5<7 on le stock de façon définitive dans $T_2$.}
-&\cellcolor{bleu}5& &  &  & &  \\
+&\cellcolor{bleuc}5& &  &  & &  \\
 \hline 
 \hline 
 \rowcolor{white}
-  &   & \cellcolor{bleu}11 &\cellcolor{rouge} 14 & \cellcolor{gris25}7 & \cellcolor{jaune}8 & \cellcolor{jaune}17   \\ \cline{2-3} \rowcolor{white}
+  &   & \cellcolor{bleuc}11 &\cellcolor{rougec} 14 & \cellcolor{gris25}7 & \cellcolor{jaune}8 & \cellcolor{jaune}17   \\ \cline{2-3} \rowcolor{white}
  \multirow{-2}{10.cm}{On continue la fusion en comparant les premiers nombres restants dans chaque bloc (ici 7 et 11).}
-&\cellcolor{vert}5& &  &  & &  \\
+&\cellcolor{vertc}5& &  &  & &  \\
 \hline 
 \hline 
 \rowcolor{white}
-  &   & \cellcolor{bleu}11 &\cellcolor{rouge} 14 &  & \cellcolor{jaune}8 & \cellcolor{jaune}17   \\ \cline{2-3} \rowcolor{white}
+  &   & \cellcolor{bleuc}11 &\cellcolor{rougec} 14 &  & \cellcolor{jaune}8 & \cellcolor{jaune}17   \\ \cline{2-3} \rowcolor{white}
  \multirow{-2}{10.cm}{7<11 on le stocke dans le deuxième tableau.}
-&\cellcolor{vert}5&\cellcolor{gris25}7 &  &  & &  \\
+&\cellcolor{vertc}5&\cellcolor{gris25}7 &  &  & &  \\
 \hline 
 \hline 
 \rowcolor{white}
-  &   & \cellcolor{bleu}11 &\cellcolor{rouge} 14 &  & \cellcolor{gris25}8 & \cellcolor{jaune}17   \\ \cline{2-3} \rowcolor{white}
+  &   & \cellcolor{bleuc}11 &\cellcolor{rougec} 14 &  & \cellcolor{gris25}8 & \cellcolor{jaune}17   \\ \cline{2-3} \rowcolor{white}
  \multirow{-2}{10.cm}{On continue la fusion en comparant les premiers nombres restants dans chaque bloc (8 et 11).}
-&\cellcolor{vert}5&\cellcolor{vert}7 &  &  & &  \\
+&\cellcolor{vertc}5&\cellcolor{vertc}7 &  &  & &  \\
 \hline 
 \hline 
 \rowcolor{white}
-  &   & \cellcolor{bleu}11 &\cellcolor{rouge} 14 &  &  & \cellcolor{jaune}17   \\ \cline{2-3} \rowcolor{white}
+  &   & \cellcolor{bleuc}11 &\cellcolor{rougec} 14 &  &  & \cellcolor{jaune}17   \\ \cline{2-3} \rowcolor{white}
  \multirow{-2}{10.cm}{8<11 on le stocke dans le deuxième tableau.}
-&\cellcolor{vert}5&\cellcolor{vert}7 &\cellcolor{gris25}8  &  & &  \\
+&\cellcolor{vertc}5&\cellcolor{vertc}7 &\cellcolor{gris25}8  &  & &  \\
 \hline 
 \hline 
 \rowcolor{white}
-  &   & \cellcolor{bleu}11 &\cellcolor{rouge} 14 &  &  & \cellcolor{gris25}17   \\ \cline{2-3} \rowcolor{white}
+  &   & \cellcolor{bleuc}11 &\cellcolor{rougec} 14 &  &  & \cellcolor{gris25}17   \\ \cline{2-3} \rowcolor{white}
  \multirow{-2}{10.cm}{On continu la fusion en comparant les premiers nombres restants dans chaque bloc (11 et 17).}
-&\cellcolor{vert}5&\cellcolor{vert}7 &\cellcolor{vert}8  &  & &  \\
+&\cellcolor{vertc}5&\cellcolor{vertc}7 &\cellcolor{vertc}8  &  & &  \\
 \hline 
 \hline 
 \rowcolor{white}
-  &   &  &\cellcolor{rouge} 14 &  &  & \cellcolor{gris25}17   \\ \cline{2-3} \rowcolor{white}
+  &   &  &\cellcolor{rougec} 14 &  &  & \cellcolor{gris25}17   \\ \cline{2-3} \rowcolor{white}
  \multirow{-2}{10.cm}{11<17 on le stocke dans le deuxième tableau.}
-&\cellcolor{vert}5&\cellcolor{vert}7 &\cellcolor{vert}8  &\cellcolor{bleu}11  & &  \\
+&\cellcolor{vertc}5&\cellcolor{vertc}7 &\cellcolor{vertc}8  &\cellcolor{bleuc}11  & &  \\
 \hline 
 \hline 
 \rowcolor{white}
-  &   &  &\cellcolor{bleu} 14 &  &  & \cellcolor{gris25}17   \\ \cline{2-3} \rowcolor{white}
+  &   &  &\cellcolor{bleuc} 14 &  &  & \cellcolor{gris25}17   \\ \cline{2-3} \rowcolor{white}
  \multirow{-2}{10.cm}{On continu la fusion en comparant les premiers nombres restants dans chaque bloc (14 et 17).}
-&\cellcolor{vert}5&\cellcolor{vert}7 &\cellcolor{vert}8  & \cellcolor{vert}11  & &  \\
+&\cellcolor{vertc}5&\cellcolor{vertc}7 &\cellcolor{vertc}8  & \cellcolor{vertc}11  & &  \\
 \hline 
 \hline 
 \rowcolor{white}
   &   &  & &  &  &    \\ \cline{2-3} \rowcolor{white}
  \multirow{-2}{10.cm}{14<17 on le stock dans le deuxième tableau et comme c'est le dernier restant on ajoute 17.}
-&\cellcolor{vert}5&\cellcolor{vert}7 &\cellcolor{vert}8  &\cellcolor{rouge}11  &\cellcolor{bleu} 14 & \cellcolor{gris25}17  \\
+&\cellcolor{vertc}5&\cellcolor{vertc}7 &\cellcolor{vertc}8  &\cellcolor{rougec}11  &\cellcolor{bleuc} 14 & \cellcolor{gris25}17  \\
 \hline 
  
 \end{tabular} 
@@ -964,7 +988,8 @@ Sans indication particulière, le tri se fait sur la première valeur puis sur l
 
 %\section{Conclusion et temps}
 
-\begin{prop}{Méthode}
+\begin{prop}
+
 \textsc{Distinguer par leurs complexités deux algorithmes résolvant
 un même problème :}
 
