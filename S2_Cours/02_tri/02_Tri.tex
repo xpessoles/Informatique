@@ -28,10 +28,10 @@ L'ensemble des chaînes de caractères peut être muni de l'ordre lexicographiqu
 
 Les principales capacités développées ici sont :
 \begin{itemize}
-\item Comprendre un algorithme de tri et expliquer ce qu'il fait.
-\item S'interroger sur l'efficacité algorithmique temporelle d'un algorithme.
+\item comprendre un algorithme de tri et expliquer ce qu'il fait;
+\item s'interroger sur l'efficacité algorithmique temporelle d'un algorithme;
 %\item Distinguer par leurs complexités deux algorithmes résolvant un même problème.
-\item Programmer un algorithme dans un langage de programmation moderne et général.
+\item programmer un algorithme dans un langage de programmation moderne et général.
 \end{itemize}
 
 \end{obj}
@@ -97,10 +97,10 @@ La complexité permet de donner un ordre de grandeur du nombre d'opérations qu'
 \item Elle s'estime en fonction d'une donné type d'un problème par exemple la taille d'une liste \texttt{n}.
 \item On parlera de complexité : 
 \begin{itemize}
-\item \textbf{linéaire} si le nombre d'opération de l'ordre de $n$ et on la notera $o(n)$ ;
-\item \textbf{quadratique} si le nombre d'opération de l'ordre de $n^2$ et on la notera $o(n^2)$ ;
-\item \textbf{cubique} si le nombre d'opération de l'ordre de $n^3$ et on la notera $o(n^3)$ ;
-\item \textbf{logarithmique} si le nombre d'opération de l'ordre de $log(n)$ et on la notera $log(n)$ ;
+\item \textbf{linéaire} si le nombre d'opération de l'ordre de $n$ et on la notera $O(n)$ ;
+\item \textbf{quadratique} si le nombre d'opération de l'ordre de $n^2$ et on la notera $O(n^2)$ ;
+\item \textbf{cubique} si le nombre d'opération de l'ordre de $n^3$ et on la notera $O(n^3)$ ;
+\item \textbf{logarithmique} si le nombre d'opération de l'ordre de $\log(n)$ et on la notera $O(\log(n))$.
 \end{itemize}
 \end{itemize}
 \end{definition2}
@@ -265,7 +265,7 @@ Cet algorithme correspond au fonctionnement du tri insertion que nous verrons pl
 \end{center}
 
 \textbf{Résultat :}\textit{ Tout algorithme comparatif fait dans le pire des cas au moins de l'ordre de
-\textbf{$n.log_2(n)$ comparaisons} soit une complexité de \textbf{$O(N\cdot log(N))$}}.
+\textbf{$n \log_2(n)$ comparaisons} soit une complexité de \textbf{$O(N\cdot \log(N))$}}.
 \end{exemple2}
 
 \section{Tri par insertion}
@@ -285,7 +285,7 @@ On représente en rouge les valeurs triées.
 La clef est en bleu. Les données décalées sont en vert.
 
 
-\noindent\begin{tabular}{|p{12cm}|c|c|c|c|}
+\noindent\begin{tabular}{|p{11.5cm}|c|c|c|c|}
 \hline \rowcolor{white}
 \hline
 Tableau $T$ initial: 5 est la clef. & \cellcolor{bleuc}5 & 14 & 11 & 8 \\ 
@@ -335,12 +335,12 @@ On compare la clef  8 à 5. 5 est plus petit donc on est à la bonne place pour 
 %\DontPrintSemicolon
 \For{$i \gets 1$ \KwTo $n-1$}{
 $j \gets i$\;
-$clef \gets L[i]$\;
-\While{$j>1$ and $clef<L[j-1]$}{
+clef $\gets L[i]$\;
+\While{$j>1$ and clef $<L[j-1]$}{
 $L[j]\gets L[j-1]$\;
 $j\gets j-1$\;
 }
-$L[j]\gets clef$\;
+$L[j]\gets$ clef\;
 }
 \KwOut{$L$}
 \end{algorithm}
@@ -357,10 +357,10 @@ $L[j]\gets clef$\;
 
 \begin{itemize}
 \item On stocke les données dans un tableau $L$ entre les indices $0$ et $n-1$.
-\item On utilise deux variables notées $i$,$j$ et une variable $clef$ (la clef) du même type que les données de la liste.
+\item On utilise deux variables notées $i$,$j$ et une variable \texttt{clef} (la clef) du même type que les données de la liste.
 \item On réalise une première boucle qui va permettre de parcourir tous les éléments $L[i]$ du tableau à trier.
 Chacun de ces éléments sera alors successivement la clef.
-\item La deuxième boucle (\textit{while}) va nous permettre pour chaque valeur de la clef de tester successivement les valeurs déjà triées jusqu'à trouver une valeur inférieure. On aura ainsi déterminé la place de la clef.
+\item La deuxième boucle (\texttt{while}) va nous permettre pour chaque valeur de la clef de tester successivement les valeurs déjà triées jusqu'à trouver une valeur inférieure. On aura ainsi déterminé la place de la clef.
 \item A chaque fois qu'une valeur est plus grande que la clef on la décale vers la droite pour laisser la place d'écrire la clef.
 Dès que l'on arrive sur une valeur inférieure on a trouvé la bonne place pour écrire la clef.
 \end{itemize}
@@ -378,7 +378,7 @@ Dès que l'on arrive sur une valeur inférieure on a trouvé la bonne place pour
 
 
 
-On insère les lignes $print$ pour réaliser l'affichage
+On insère les lignes \texttt{print} pour réaliser l'affichage
 
 
 	\begin{DDbox}{\linewidth}
@@ -447,7 +447,7 @@ i= 5 j= 1 v= 7 T= [5, 7, 8, 11, 14, 17]
 
 L'efficacité du tri par insertion est excellente lorsque le tableau est déjà trié ou « presque trié » $(C(n)=O(n))$. 
 
-Il surpasse alors toutes les autres méthodes de tri qui sont au mieux en $O(n \times ln(n))$.
+Il surpasse alors toutes les autres méthodes de tri qui sont au mieux en $O(n \times \ln(n))$.
 \end{prop}
 
 %
@@ -489,14 +489,14 @@ Il surpasse alors toutes les autres méthodes de tri qui sont au mieux en $O(n \
 %%L'efficacité du tri par insertion est excellente lorsque le tableau est déjà trié ou « presque trié » $(C(n)=O(n))$. Il surpasse alors toutes les autres méthodes de tri qui sont au mieux en $O(n \times ln(n))$.
 %%\end{prop}
 %
-\section{Tri rapide (ou "quicksort")}
+\section{Tri rapide (ou << quicksort >>)}
 
 \subsection{Principe}
 
 \begin{definition2}[Tri rapide]
 \textbf{L'algorithme de tri rapide} fait partie de la catégorie des algorithmes « diviser pour régner ».
 
-A chaque appel de la fonction tri on choisit une valeur \textbf{"pivot"}, par exemple le premier élément. On effectue une partition des élément à trier. Un premier groupe est constitué de valeurs inférieures au pivot  et un deuxième avec les valeurs supérieures.
+À chaque appel de la fonction tri on choisit une valeur \textbf{<< pivot >>}, par exemple le premier élément. On effectue une partition des élément à trier. Un premier groupe est constitué de valeurs inférieures au pivot  et un deuxième avec les valeurs supérieures.
 Le pivot est alors placé définitivement dans le tableau.
 
 On traite alors chacun des groupes de façon indépendante. On peut les traiter avec le même algorithme.
@@ -571,10 +571,10 @@ On partitionne pour trouver une partie droite (en jaune) et une partie gauche (e
 
 
 \begin{itemize}
-\item On crée tout d'abord une fonction "\textbf{partition}". 
+\item On crée tout d'abord une fonction <<\textbf{partition}>>. 
 \begin{itemize}
 \item Les arguments de cette fonction seront le tableau \textbf{$a$} et deux indices correspondant au début et à la fin de la partie à segmenter du tableau (par convention \textbf{$g$} inclus et $\textbf{d}$ exclu). En effet on ne segmente pas à chaque fois l'ensemble du tableau.
-\item On suppose qu'il y a au moins un élément dans ce segment ce que l'on peut vérifier avec \textbf{$assert$} : 
+\item On suppose qu'il y a au moins un élément dans ce segment ce que l'on peut vérifier avec \texttt{assert} : 
 
 
 	\begin{DDbox}{\linewidth}
@@ -632,7 +632,7 @@ assert g<d
 
 La fonction tri rapide est alors implémentée de façon récursive.
 \begin{itemize}
-\item On utilise pour cela une fonction \textbf{$tri\_rapide$} qui prend les même arguments que la fonction \textbf{$partition$}.
+\item On utilise pour cela une fonction \texttt{tri\_rapide} qui prend les même arguments que la fonction \texttt{partition}.
 \item \textbf{Si} \textbf{$g\geq d-1$}, il y a au plus un élément à trier donc rien à faire (initialisation de la récursivité),
 \item \textbf{Sinon} il faut
 \begin{itemize}
@@ -662,12 +662,12 @@ Pour trier un tableau il suffit d'appeler \textbf{$tri\_rapide$} sur la totalit�
 \subsection{Complexité}
 \begin{prop}{Efficacité de l'algorithme}
 \begin{itemize}
-\item Cette méthode de tri est très efficace lorsque les données sont distinctes et non ordonnées. La complexité est alors globalement en O(n ln(n)). Lorsque le nombre de données devient petit (<15) lors des appels récursifs de la fonction de tri, on peut avantageusement le remplacer par un tri par insertion dont la complexité est linéaire lorsque les données sont triées ou presque. \cite{Beynet}
+\item Cette méthode de tri est très efficace lorsque les données sont distinctes et non ordonnées. La complexité est alors globalement en $O(n \ln(n))$. Lorsque le nombre de données devient petit (<15) lors des appels récursifs de la fonction de tri, on peut avantageusement le remplacer par un tri par insertion dont la complexité est linéaire lorsque les données sont triées ou presque. \cite{Beynet}
 
 
 
 
-\item D'autre part si le tableau est déjà trié avec le code mis en place on tombe sur la complexité "dans le pire des cas". Une solution simple consiste à ne pas choisir systématiquement
+\item D'autre part si le tableau est déjà trié avec le code mis en place on tombe sur la complexité << dans le pire des cas >>. Une solution simple consiste à ne pas choisir systématiquement
 le premier élément du segment comme pivot, mais plutôt un élément au hasard. On peut par exemple choisir la valeur de façon aléatoire. \cite{wack}
 \end{itemize}
 
@@ -676,7 +676,7 @@ le premier élément du segment comme pivot, mais plutôt un élément au hasard
 \hline 
  meilleur cas &  pire cas \\ 
 \hline 
-$n log n$ & $n^2/2$ \\ 
+$n \log n$ & $n^2/2$ \\ 
 \hline 
 \end{tabular} 
 \end{center}
@@ -845,8 +845,7 @@ On souhaite trier un tableau $a$ :
 \begin{itemize}
 \item Le caractère récursif du tri fusion fait que l'on s'intéresse seulement à la partie de $a$ entre les indices $g$ (inclus) et $d$ (exclu).
 \item Afin de découper le groupe à trier en deux, on calcule l'indice médian :
-
-$$m = \frac{g+d}{2}$$ . 
+$m = \frac{g+d}{2}$ . 
 
 \item On trie alors récursivement les deux parties :
 \begin{itemize}
@@ -917,14 +916,14 @@ début du tri.
 %%
 \begin{prop}{Efficacité de l'algorithme}
 
-La colmplexité est \textbf{$nlog(n)$}
+La complexité est \textbf{$n\log(n)$}
 
 \begin{center}
 \begin{tabular}{|c|c|}
 \hline 
  meilleur cas &  pire cas \\ 
 \hline 
-$n log n$ & $n log n$ \\ 
+$n \log n$ & $n \log n$ \\ 
 \hline 
 \end{tabular} 
 \end{center}
@@ -934,7 +933,7 @@ $n log n$ & $n log n$ \\
 
 
 \section{Dans Python : sort et sorted}
-Les listes Python ont une méthode native \texttt{list.sort()} qui modifie les listes elles-mêmes et renvoie \textbf{None}.
+Les listes Python ont une méthode native \texttt{list.sort()} qui modifie les listes elles-mêmes et renvoie \texttt{None}.
 
 	\begin{DDbox}{\linewidth}
 		\begin{verbatim}
@@ -1175,7 +1174,7 @@ Après ce tri, quel est le contenu de la liste ?}
 \item \texttt{[(1,12,249),(2,11,250),(1,12,250),(2,12,250),(2,13,250),(1,12,251)]}.
 \end{enumerate}
 
-\question{Quelle valeur retourne la fonction "mystere" suivante ?}
+\question{Quelle valeur retourne la fonction \texttt{mystere} suivante ?}
 \begin{lstlisting}
 def mystere(liste):
      valeur_de_retour = True
