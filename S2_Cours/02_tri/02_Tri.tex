@@ -2,16 +2,16 @@
 
 
 
-Thème : Tris.
- 
-Commentaires :
-\begin{itemize}
-\item algorithmique quadratique : tri par insertion, par sélection;
-\item tri par partition-fusion;
-\item tri par comptage.
-\end{itemize}
-\textit{On fait observer différentes caractéristiques (par exemple2 stable ou non, en place ou non, comparatif ou non ...).}
-
+%Thème : Tris.
+% 
+%Commentaires :
+%\begin{itemize}
+%\item algorithmique quadratique : tri par insertion, par sélection;
+%\item tri par partition-fusion;
+%\item tri par comptage.
+%\end{itemize}
+%\textit{On fait observer différentes caractéristiques (par exemple2 stable ou non, en place ou non, comparatif ou non ...).}
+%
 
 
 
@@ -24,12 +24,27 @@ Les principales capacités développées ici sont :
 \begin{itemize}
 \item Comprendre un algorithme de tri et expliquer ce qu'il fait.
 \item S'interroger sur l'efficacité algorithmique temporelle d'un algorithme.
-\item Distinguer par leurs complexités deux algorithmes résolvant un même problème.
+%\item Distinguer par leurs complexités deux algorithmes résolvant un même problème.
 \item Programmer un algorithme dans un langage de programmation moderne et général.
 \end{itemize}
 
 \end{obj}
-\subsection{exemple d'application}
+
+
+%\begin{defi}\textbf{Stabilité}
+%
+%\end{defi}
+
+\begin{defi}\textbf{Tri en place} \\
+Un tri est effectué en place lorsque la liste à trier est modifiée jusqu'à devenir triée. Dans le cas contraire, la fonction de tri pourra renvoyer une nouvelle liste contenant les mêmes éléments, mais triés. 
+\end{defi}
+
+\begin{defi}\textbf{Tri comparatif} \\
+Un tri est dit comparatif lorsqu'il s'appuie uniquement sur la comparaison deux à deux des éléments de la liste et pas sur la valeur ce ces éléments.
+\end{defi}
+
+
+\subsection{Exemple d'application}
 
 \begin{exemple2}[tri d'avis sur un site marchand]
 
@@ -51,77 +66,173 @@ Pour ce type d'application c'est le temps maximum qu'il faut limiter. En effet u
 
 \subsection{Complément sur la complexité}
 
-\begin{prop}\textbf{Différents types d'opérations}
-
-Dans un algorithme on distinguera trois types d'opérations élémentaires différentes:
-
+\begin{definition2}[Notions de complexité]
+La complexité permet de donner un ordre de grandeur du nombre d'opérations qu'effectue un algorithme.
 \begin{itemize}
-\item les accès mémoire pour lire ou écrire la valeur d'une variable ;
-\item les opérations arithmétiques : addition, soustraction,
-multiplication, division ...
-\item les comparaisons entre deux entiers ou deux réels.
-\end{itemize}
-
-\end{prop}
-
-\begin{exemple2}[]
-
-exemple : si on considère l'instruction $c \leftarrow a + b$, on peut compter quatre opérations élémentaires :
+\item La complexité permet de comparer la performance des algorithmes.
+\item Elle s'estime en fonction d'une donné type d'un problème par exemple la taille d'une liste \texttt{n}.
+\item On parlera de complexité : 
 \begin{itemize}
- \item l'accès en mémoire pour lire la valeur de a,
- \item l'accès en mémoire pour lire la valeur de b,
- \item l'addition de a et b,
- \item l'accès en mémoire pour écrire la nouvelle valeur de c.
-\end{itemize}
-
-
-\end{exemple2}
-
-
-\begin{definition2}[Application de la complexité dans le cas d'algorithme de tri]
-\begin{itemize}
-\item Pour les algorithmes de tri on pourra par exemple exprimer la complexité en fonction du nombre de
-données à trier. 
-\item Néanmoins, il se peut qu'avec deux jeux de données différents correspondant
-aux mêmes paramètres, le nombre d'opérations effectuées ne soit pas le même. Par exemple,
-un algorithme de tri pourra être plus rapide s'il s'agit de trier des données déjà triées que s'il
-s'agit de données très désordonnées. On peut alors s'intéresser à :
-\begin{itemize}
-\item la complexité \textbf{dans le pire des cas} : les paramètres avec lesquels on exprime la
-complexité étant fixés, on considère le plus grand nombre d'opérations
-élémentaires effectuées sur l'ensemble des instances correspondant à ces
-paramètres ; on cherche ainsi un majorant de la complexité qui puisse être atteint
-dans certains cas ; c'est ce qu'on fait le plus généralement ;
-\item la complexité \textbf{dans le meilleur des cas} : les paramètres avec lesquels on exprime la
-complexité étant fixés, on considère le plus petit nombre d'opérations élémentaires
-effectuées sur l'ensemble des instances correspondant à ces paramètres ; cette
-complexité peut venir compléter la précédente mais ne sera jamais suffisante pour
-l'utilisateur.
+\item \textbf{linéaire} si le nombre d'opération de l'ordre de $n$ et on la notera $o(n)$ ;
+\item \textbf{quadratique} si le nombre d'opération de l'ordre de $n^2$ et on la notera $o(n^2)$ ;
+\item \textbf{cubique} si le nombre d'opération de l'ordre de $n^3$ et on la notera $o(n^3)$ ;
+\item \textbf{logarithmique} si le nombre d'opération de l'ordre de $log(n)$ et on la notera $log(n)$ ;
 \end{itemize}
 \end{itemize}
-
-
-
 \end{definition2}
 
-\begin{exemple2}[Choix du type de complexité pour le tri d'avis sur un site marchand]
+%\begin{prop}\textbf{Différents types d'opérations}
+%
+%Dans un algorithme on distinguera trois types d'opérations élémentaires différentes:
+%
+%\begin{itemize}
+%\item les accès mémoire pour lire ou écrire la valeur d'une variable ;
+%\item les opérations arithmétiques : addition, soustraction,
+%multiplication, division ...
+%\item les comparaisons entre deux entiers ou deux réels.
+%\end{itemize}
+%
+%\end{prop}
+%
+%\begin{exemple2}[]
+%
+%exemple : si on considère l'instruction $c \leftarrow a + b$, on peut compter quatre opérations élémentaires :
+%\begin{itemize}
+% \item l'accès en mémoire pour lire la valeur de a,
+% \item l'accès en mémoire pour lire la valeur de b,
+% \item l'addition de a et b,
+% \item l'accès en mémoire pour écrire la nouvelle valeur de c.
+%\end{itemize}
+%
+%
+%\end{exemple2}
+%
+%
+%\begin{definition2}[Application de la complexité dans le cas d'algorithme de tri]
+%\begin{itemize}
+%\item Pour les algorithmes de tri on pourra par exemple exprimer la complexité en fonction du nombre de
+%données à trier. 
+%\item Néanmoins, il se peut qu'avec deux jeux de données différents correspondant
+%aux mêmes paramètres, le nombre d'opérations effectuées ne soit pas le même. Par exemple,
+%un algorithme de tri pourra être plus rapide s'il s'agit de trier des données déjà triées que s'il
+%s'agit de données très désordonnées. On peut alors s'intéresser à :
+%\begin{itemize}
+%\item la complexité \textbf{dans le pire des cas} : les paramètres avec lesquels on exprime la
+%complexité étant fixés, on considère le plus grand nombre d'opérations
+%élémentaires effectuées sur l'ensemble des instances correspondant à ces
+%paramètres ; on cherche ainsi un majorant de la complexité qui puisse être atteint
+%dans certains cas ; c'est ce qu'on fait le plus généralement ;
+%\item la complexité \textbf{dans le meilleur des cas} : les paramètres avec lesquels on exprime la
+%complexité étant fixés, on considère le plus petit nombre d'opérations élémentaires
+%effectuées sur l'ensemble des instances correspondant à ces paramètres ; cette
+%complexité peut venir compléter la précédente mais ne sera jamais suffisante pour
+%l'utilisateur.
+%\end{itemize}
+%\end{itemize}
+%
+%
+%
+%\end{definition2}
+%
+%\begin{exemple2}[Choix du type de complexité pour le tri d'avis sur un site marchand]
+%
+%Dans notre exemple, c'est la complexité dans le pire des cas qui nous intéresse. En effet, même si les attentes longues sont rares, cela peut faire perdre quelques clients, ce qui n'est ici pas acceptable.
+%
+%\end{exemple2}
+%
+%
+%\subsection{Complexité d'un algorithme de tri}
+%
+%\begin{definition2}[Tri comparatif]
+%
+%Un \textbf{algorithme comparatif} (à opposer au non-comparatif comme le tri baquet ou par paquet) est basé sur des comparaisons successives entre les données pour déterminer la permutation correspondant à l'ordre croissant des données.
+%On va chercher ici à évaluer la complexité théorique des tris comparatifs en se basant sur le nombre de comparaisons.
+%\end{definition2}
+%
+%
+%
+%\begin{exemple2}[Algorithme de tri de trois données a, b, c]
+%
+%Cet algorithme correspond au fonctionnement du tri insertion que nous verrons plus loin :
+%
+%\begin{center}
+%\includegraphics[width=.8\textwidth]{images/C2.png}
+%\end{center}
+%
+%
+%Cet arbre signifie : 
+%\begin{enumerate}
+%\item la première comparaison faite est « a < b ? ».
+%\item Si la réponse est oui, la comparaison suivante est « b < c ? »,
+%\item si la réponse est non c'est « a < c ? ». 
+%\item Lorsqu'une permutation est déterminée, on est dans ce que l'on appelle une feuille de l'arbre.
+%\end{enumerate}
+%\end{exemple2}
+% 
+%On voit qu'on peut avoir plus ou moins de chance ; 
+%\begin{itemize}
+%\item pour deux des permutations, on fait deux comparaisons, 
+%\item pour les quatre autres, on fait trois comparaisons. 
+%\item Le plus grand nombre de comparaisons est 3,
+%\item le meilleur est 2,
+%\item le nombre moyen de comparaisons est : $(2 \times 2 + 4 \times 3) / 6 \approx 2,67$.
+%\end{itemize}
+%
+%
+%\begin{prop}{Principe}
+%Soit un tableau de $n$ données, la réponse cherchée par le tri est l'une des $n!$ permutations possibles des données. 
+%exemple : Pour trier $[a,b,c]$, il y a une seule possibilité parmi ces 6 permutations qui conviennent :
+%\begin{itemize}
+%\item $[a,b,c]$
+%\item $[a,c,b]$
+%\item $[b,a,c]$
+%\item $[b,c,a]$
+%\item $[c,a,b]$
+%\item $[c,b,a]$
+%\end{itemize}
+%
+%Pour tout algorithme de tri comparatif, la première comparaison faite consiste à prendre
+%deux des données a et b de la liste et à poser la question : "a-t-on a < b ?", ce qui divise les
+%$n!$ permutations envisageables en deux parties égales ;
+%\end{prop}
+%
+%\begin{rem}
+% les comparaisons suivantes ne garderont pas une telle symétrie : on aura de la chance quand il y aura moins de la moitié des
+%permutations restant possibles qui correspondent à la réponse obtenue et de la malchance
+%sinon. 
+%\end{rem}
+%
+%\begin{prop}{Complexité}
+%Si on s'intéresse à la complexité dans le \textbf{pire des cas} d'un algorithme (la permutation considérée correspond toujours à un cas où on n'a jamais de chance), alors chaque comparaison élimine au plus la moitié des permutations encore envisageables. Dans ce cas, 
+%
+%\begin{itemize}
+%\item après $k$ comparaisons, nombre de permutations envisageables : 
+%
+%\ifprof
+%$$n! / 2^k$$
+%\fi
+%
+%\item Condition pour avoir une permutation unique ;
+%
+%\ifprof
+%$$n! / 2^k < 2$$ 
+%\fi
+%
+%\item Nombre minimum de comparaisons :
+%
+%\ifprof
+%$$log_2(n!)$$ 
+%\fi
+%
+%
+%\item Comme $log_2(n!)$ est équivalent à $n.log_2(n)$, on a le résultat suivant:
+%\end{itemize}
 
-Dans notre exemple, c'est la complexité dans le pire des cas qui nous intéresse. En effet, même si les attentes longues sont rares, cela peut faire perdre quelques clients, ce qui n'est ici pas acceptable.
 
-\end{exemple2}
-
-
-\subsection{Complexité d'un algorithme de tri}
-
-\begin{definition2}[Tri comparatif]
+\begin{exemple2}[Tri comparatif]
 
 Un \textbf{algorithme comparatif} (à opposer au non-comparatif comme le tri baquet ou par paquet) est basé sur des comparaisons successives entre les données pour déterminer la permutation correspondant à l'ordre croissant des données.
 On va chercher ici à évaluer la complexité théorique des tris comparatifs en se basant sur le nombre de comparaisons.
-\end{definition2}
-
-
-
-\begin{exemple2}[Algorithme de tri de trois données a, b, c]
 
 Cet algorithme correspond au fonctionnement du tri insertion que nous verrons plus loin :
 
@@ -129,78 +240,9 @@ Cet algorithme correspond au fonctionnement du tri insertion que nous verrons pl
 \includegraphics[width=.8\textwidth]{images/C2.png}
 \end{center}
 
-
-Cet arbre signifie : 
-\begin{enumerate}
-\item la première comparaison faite est « a < b ? ».
-\item Si la réponse est oui, la comparaison suivante est « b < c ? »,
-\item si la réponse est non c'est « a < c ? ». 
-\item Lorsqu'une permutation est déterminée, on est dans ce que l'on appelle une feuille de l'arbre.
-\end{enumerate}
-\end{exemple2}
- 
-On voit qu'on peut avoir plus ou moins de chance ; 
-\begin{itemize}
-\item pour deux des permutations, on fait deux comparaisons, 
-\item pour les quatre autres, on fait trois comparaisons. 
-\item Le plus grand nombre de comparaisons est 3,
-\item le meilleur est 2,
-\item le nombre moyen de comparaisons est : $(2 \times 2 + 4 \times 3) / 6 \approx 2,67$.
-\end{itemize}
-
-
-\begin{prop}{Principe}
-Soit un tableau de $n$ données, la réponse cherchée par le tri est l'une des $n!$ permutations possibles des données. 
-exemple : Pour trier $[a,b,c]$, il y a une seule possibilité parmi ces 6 permutations qui conviennent :
-\begin{itemize}
-\item $[a,b,c]$
-\item $[a,c,b]$
-\item $[b,a,c]$
-\item $[b,c,a]$
-\item $[c,a,b]$
-\item $[c,b,a]$
-\end{itemize}
-
-Pour tout algorithme de tri comparatif, la première comparaison faite consiste à prendre
-deux des données a et b de la liste et à poser la question : "a-t-on a < b ?", ce qui divise les
-$n!$ permutations envisageables en deux parties égales ;
-\end{prop}
-
-\begin{rem}
- les comparaisons suivantes ne garderont pas une telle symétrie : on aura de la chance quand il y aura moins de la moitié des
-permutations restant possibles qui correspondent à la réponse obtenue et de la malchance
-sinon. 
-\end{rem}
-
-\begin{prop}{Complexité}
-Si on s'intéresse à la complexité dans le \textbf{pire des cas} d'un algorithme (la permutation considérée correspond toujours à un cas où on n'a jamais de chance), alors chaque comparaison élimine au plus la moitié des permutations encore envisageables. Dans ce cas, 
-
-\begin{itemize}
-\item après $k$ comparaisons, nombre de permutations envisageables : 
-
-\ifprof
-$$n! / 2^k$$
-\fi
-
-\item Condition pour avoir une permutation unique ;
-
-\ifprof
-$$n! / 2^k < 2$$ 
-\fi
-
-\item Nombre minimum de comparaisons :
-
-\ifprof
-$$log_2(n!)$$ 
-\fi
-
-
-\item Comme $log_2(n!)$ est équivalent à $n.log_2(n)$, on a le résultat suivant:
-\end{itemize}
-
 \textbf{Résultat :}\textit{ Tout algorithme comparatif fait dans le pire des cas au moins de l'ordre de
 \textbf{$n.log_2(n)$ comparaisons} soit une complexité de \textbf{$O(N\cdot log(N))$}}.
-\end{prop}
+\end{exemple2}
 
 \section{Tri par insertion}
 \subsection{Principe}
@@ -261,26 +303,38 @@ On compare la clef  8 à 5. 5 est plus petit donc on est à la bonne place pour 
 
 \subsection{Implémentation}
 
+
+\begin{figure}[!htb]
+\begin{minipage}{0.5\textwidth}
 \RestyleAlgo{boxed}
-\begin{algorithm}
-\DontPrintSemicolon
-\For{$i \gets 2$ \KwTo $n$}{
+\begin{algorithm}[H]
+%\DontPrintSemicolon
+\For{$i \gets 1$ \KwTo $n-1$}{
 $j \gets i$\;
-$v \gets T[i]$\;
-\While{$j>1$ and $v<T[j-1]$}{
-$T[j]\gets T[j-1]$\;
+$clef \gets L[i]$\;
+\While{$j>1$ and $clef<L[j-1]$}{
+$L[j]\gets L[j-1]$\;
 $j\gets j-1$\;
 }
-$T[j]\gets v$\;
+$L[j]\gets clef$\;
 }
 \KwOut{$t$}
 \end{algorithm}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{center}
+\includegraphics[width=0.7\textwidth]{images/algorigramme_insertion}
+\caption{Algorigramme du tri par insertion}
+\end{center}
+\end{minipage}
+\end{figure}
+
 
 
 \begin{itemize}
-\item On stocke les données dans un tableau $T$ entre les indices $1$ et $n$.
-\item On utilise deux variables notées $i$,$j$ et une variable $v$ (la clef) du même type que les données de la liste.
-\item On réalise une première boucle qui va permettre de parcourir tous les éléments $T[i]$ du tableau à trier.
+\item On stocke les données dans un tableau $L$ entre les indices $0$ et $n-1$.
+\item On utilise deux variables notées $i$,$j$ et une variable $clef$ (la clef) du même type que les données de la liste.
+\item On réalise une première boucle qui va permettre de parcourir tous les éléments $L[i]$ du tableau à trier.
 Chacun de ces éléments sera alors successivement la clef.
 \item La deuxième boucle (\textit{while}) va nous permettre pour chaque valeur de la clef de tester successivement les valeurs déjà triées jusqu'à trouver une valeur inférieure. On aura ainsi déterminé la place de la clef.
 \item A chaque fois qu'une valeur est plus grande que la clef on la décale vers la droite pour laisser la place d'écrire la clef.
@@ -289,11 +343,11 @@ Dès que l'on arrive sur une valeur inférieure on a trouvé la bonne place pour
 
 
 \begin{algorithme}{Écriture sous Python de l'algorithme tri par insertion}
-\ifprof
+
 \begin{center}
-		\lstinputlisting{./programmes/tri_insertion.py}
+		\lstinputlisting{programmes/tri_insertion.py}
 \end{center}
-\fi
+
 \end{algorithme}
 
 \begin{exemple2}[Application avec affichage pas a pas sur l'exemple]
@@ -331,25 +385,26 @@ i= 5 j= 1 v= 7 T= [5, 7, 8, 11, 14, 17]
 \end{exemple2}
 
 
-
 \subsection{Complexité}
 
 \begin{prop}{Complexité}
-\begin{itemize}
-\item La fonction $tri\_insertion$ effectue le même nombre de comparaisons et d'affectations. Lorsque la boucle while insère l'élément $T[i]$ à la position $i-k$, elle effectue $k+1$ comparaisons. 
+%\begin{itemize}
+%\item La fonction $tri\_insertion$ effectue le même nombre de comparaisons et d'affectations. Lorsque la boucle while insère l'élément $T[i]$ à la position $i-k$, elle effectue $k+1$ comparaisons. 
+%
+%
+%\item \textbf{Dans le meilleur des cas} le tableau est déjà trié. 
+%La valeur clef est donc forcément plus grande que toutes les précédentes. Dès la première comparaison on s'arrête: 
+%$k$ vaut $0$.
+%Soit une comparaison par boucle while réalisée, il y a donc $n-1$ comparaisons à effectuer au total. La complexité est donc de classe linéaire : $C(n)=O(n)$.
+%
+%\item \textbf{Dans le pire des cas}, le tableau est trié à l'envers. La valeur clef est donc forcément plus petite que toutes les précédentes.
+%Il faut donc comparer et décaler toutes les valeurs précédentes jusqu'à mettre la valeur clé en première position:  $k$ vaut $i$, avec $i$ qui varie de $1$ à
+%$n-1$.
+%\item On en déduit donc un nombre total de $\frac{n\times(n-1)}{2}$ comparaisons (somme d'une suite arithmétique).
+%\end{itemize}
 
 
-\item \textbf{Dans le meilleur des cas} le tableau est déjà trié. 
-La valeur clef est donc forcément plus grande que toutes les précédentes. Dès la première comparaison on s'arrête: 
-$k$ vaut $0$.
-Soit une comparaison par boucle while réalisée, il y a donc $n-1$ comparaisons à effectuer au total. La complexité est donc de classe linéaire : $C(n)=O(n)$.
-
-\item \textbf{Dans le pire des cas}, le tableau est trié à l'envers. La valeur clef est donc forcément plus petite que toutes les précédentes.
-Il faut donc comparer et décaler toutes les valeurs précédentes jusqu'à mettre la valeur clé en première position:  $k$ vaut $i$, avec $i$ qui varie de $1$ à
-$n-1$.
-\item On en déduit donc un nombre total de $\frac{n\times(n-1)}{2}$ comparaisons (somme d'une suite arithmétique).
-\end{itemize}
-\textbf{La complexité est donc de classe quadratique : $C(n)=O(n^2)$.}
+\textbf{La complexité est dans le pire des cas quadratique : $C(n)=O(n^2)$.}
 
 
 \begin{center}
@@ -357,18 +412,59 @@ $n-1$.
 \hline 
 \rule[-1ex]{0pt}{2.5ex}  & meilleur cas &  pire cas \\ 
 \hline 
-\rule[-1ex]{0pt}{2.5ex} comparaisons & $N$ & $N^2/2$ \\ 
+\rule[-1ex]{0pt}{2.5ex} comparaisons & $n$ & $n^2/2$ \\ 
 \hline 
-\rule[-1ex]{0pt}{2.5ex} affectations & $N$ & $N^2/2$ \\ 
+\rule[-1ex]{0pt}{2.5ex} affectations & $n$ & $n^2/2$ \\ 
 \hline 
 \end{tabular} 
 \end{center}
 
 
 
-L'efficacité du tri par insertion est excellente lorsque le tableau est déjà trié ou « presque trié » $(C(n)=O(n))$. Il surpasse alors toutes les autres méthodes de tri qui sont au mieux en $O(n \times ln(n))$.
+L'efficacité du tri par insertion est excellente lorsque le tableau est déjà trié ou « presque trié » $(C(n)=O(n))$. 
+
+Il surpasse alors toutes les autres méthodes de tri qui sont au mieux en $O(n \times ln(n))$.
 \end{prop}
 
+%
+%
+%%\subsection{Complexité}
+%%
+%%\begin{prop}{Complexité}
+%%\begin{itemize}
+%%\item La fonction $tri\_insertion$ effectue le même nombre de comparaisons et d'affectations. Lorsque la boucle while insère l'élément $T[i]$ à la position $i-k$, elle effectue $k+1$ comparaisons. 
+%%
+%%
+%%\item \textbf{Dans le meilleur des cas} le tableau est déjà trié. 
+%%La valeur clef est donc forcément plus grande que toutes les précédentes. Dès la première comparaison on s'arrête: 
+%%$k$ vaut $0$.
+%%Soit une comparaison par boucle while réalisée, il y a donc $n-1$ comparaisons à effectuer au total. La complexité est donc de classe linéaire : $C(n)=O(n)$.
+%%
+%%\item \textbf{Dans le pire des cas}, le tableau est trié à l'envers. La valeur clef est donc forcément plus petite que toutes les précédentes.
+%%Il faut donc comparer et décaler toutes les valeurs précédentes jusqu'à mettre la valeur clé en première position:  $k$ vaut $i$, avec $i$ qui varie de $1$ à
+%%$n-1$.
+%%\item On en déduit donc un nombre total de $\frac{n\times(n-1)}{2}$ comparaisons (somme d'une suite arithmétique).
+%%\end{itemize}
+%%\textbf{La complexité est donc de classe quadratique : $C(n)=O(n^2)$.}
+%%
+%%
+%%\begin{center}
+%%\begin{tabular}{|c|c|c|}
+%%\hline 
+%%\rule[-1ex]{0pt}{2.5ex}  & meilleur cas &  pire cas \\ 
+%%\hline 
+%%\rule[-1ex]{0pt}{2.5ex} comparaisons & $N$ & $N^2/2$ \\ 
+%%\hline 
+%%\rule[-1ex]{0pt}{2.5ex} affectations & $N$ & $N^2/2$ \\ 
+%%\hline 
+%%\end{tabular} 
+%%\end{center}
+%%
+%%
+%%
+%%L'efficacité du tri par insertion est excellente lorsque le tableau est déjà trié ou « presque trié » $(C(n)=O(n))$. Il surpasse alors toutes les autres méthodes de tri qui sont au mieux en $O(n \times ln(n))$.
+%%\end{prop}
+%
 \section{Tri rapide (ou "quicksort")}
 
 \subsection{Principe}
@@ -469,18 +565,48 @@ assert g<d
 \item On note $m$ l'indice qui correspond au partitionnement de $a$.
 \item On sortira de cette fonction $m$ et le tableau $a$.
 \end{itemize}
+\end{itemize}
 
+
+\begin{figure}[!htb]
+\begin{minipage}{0.5\textwidth}
+\RestyleAlgo{boxed}
 \begin{algorithme}[Algorithme de partitionnement pour le tri rapide]
-\ifprof
+
 \begin{center}
 		\lstinputlisting{./programmes/partition.py}
 \end{center}
-\fi
+
+
+\end{algorithme}
+
+\begin{algorithme}{Algorithme récursif du tri rapide}
+\begin{center}
+		\lstinputlisting{./programmes/tri_rapide_recursif.py}
+\end{center}
 \end{algorithme}
 
 
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{center}
+\includegraphics[width=0.9\textwidth]{images/algorigramme_rapide.jpg}
+\caption{Algorigramme du tri par insertion}
+\end{center}
+\end{minipage}
+\end{figure}
+%
+%%\begin{algorithme}[Algorithme de partitionnement pour le tri rapide]
+%%
+%%\begin{center}
+%%		\lstinputlisting{./programmes/partition.py}
+%%\end{center}
+%%
+%%\end{algorithme}
+%
+%
 
-\item La fonction tri rapide est alors implémentée de façon récursive.
+La fonction tri rapide est alors implémentée de façon récursive.
 \begin{itemize}
 \item On utilise pour cela une fonction \textbf{$tri\_rapide$} qui prend les même arguments que la fonction \textbf{$partition$}.
 \item \textbf{Si} \textbf{$g\geq d-1$}, il y a au plus un élément à trier donc rien à faire (initialisation de la récursivité),
@@ -492,84 +618,108 @@ assert g<d
 \end{itemize} 
 \end{itemize} 
 
-\begin{algorithme}{Algorithme récursif du tri rapide}
-\ifprof
-\begin{center}
-		\lstinputlisting{./programmes/tri_rapide_recursif.py}
-\end{center}
-\fi
-\end{algorithme}
-
-\item Pour trier un tableau il suffit d'appeler \textbf{$tri\_rapide$} sur la totalité des éléments.
-
-\end{itemize}
-
-\begin{exemple2}[Algorithme complet du tri rapide avec affichage des tris successifs]
-
-\ifprof
-\begin{center}
-		\lstinputlisting{./programmes/trie_rapide.py}
-\end{center}
-\fi
-
-\end{exemple2}
 
 
+Pour trier un tableau il suffit d'appeler \textbf{$tri\_rapide$} sur la totalité des éléments.
+
+
+%
+%%\begin{exemple2}[Algorithme complet du tri rapide avec affichage des tris successifs]
+%%
+%%
+%%\begin{center}
+%%		\lstinputlisting{./programmes/trie_rapide.py}
+%%\end{center}
+%%
+%%\end{exemple2}
+%
+%
+
+\subsection{Complexité}
 \begin{prop}{Efficacité de l'algorithme}
 \begin{itemize}
-\item\cite{Beynet} Cette méthode de tri est très efficace lorsque les données sont distinctes et non ordonnées. La complexité est alors globalement en O(n ln(n)). Lorsque le nombre de données devient petit (<15) lors des appels récursifs de la fonction de tri, on peut avantageusement le remplacer par un tri par insertion dont la complexité est linéaire lorsque les données sont triées ou presque.
+\item Cette méthode de tri est très efficace lorsque les données sont distinctes et non ordonnées. La complexité est alors globalement en O(n ln(n)). Lorsque le nombre de données devient petit (<15) lors des appels récursifs de la fonction de tri, on peut avantageusement le remplacer par un tri par insertion dont la complexité est linéaire lorsque les données sont triées ou presque. \cite{Beynet}
 
 
 
 
-\item \cite{wack} D'autre part si le tableau est déjà trié avec le code mis en place on tombe sur la complexité "dans le pire des cas". Une solution simple consiste à ne pas choisir systématiquement
-le premier élément du segment comme pivot, mais plutôt un élément au hasard. On peut par exemple choisir la valeur de façon aléatoire.
+\item D'autre part si le tableau est déjà trié avec le code mis en place on tombe sur la complexité "dans le pire des cas". Une solution simple consiste à ne pas choisir systématiquement
+le premier élément du segment comme pivot, mais plutôt un élément au hasard. On peut par exemple choisir la valeur de façon aléatoire. \cite{wack}
 \end{itemize}
-\end{prop}
-
-\subsection{Complexité \cite{wack}}
-
-
-Pour ce calcul de complexité nous ne considérerons ici que les comparaisons. 
-
-La fonction partition fait toujours exactement $d-g-2$ comparaisons. Si la fonction
-partition détermine un segment de longueur $K$ et un autre de longueur $N-1-K$, la fonction
-$tri\_rapide$ va donc effectuer $N-1$ comparaisons par l'intermédiaire de partition,
-puis d'autres comparaisons par l'intermédiaire des deux appels récursifs à $tri\_rapide$.
-
-\begin{itemize}
-\item \textbf{Le pire des cas} correspond à $K = 0$, ce qui donne, en notant $C(N)$ la complexité du tri d'un tableau
-de longueur $N$, l'équation de récurrence suivante:
-
-$$C(N) = N-1 + C(N-1)$$,
-
-Avec $C(1)=0$
-
-d'où $C(N) \sim \frac{N\times(N-1)}{2}$
-
-\item \textbf{Le meilleur des cas} correspond à un segment coupé en deux moitiés
-égales, c'est-à-dire $K = N/2$. L'équation de récurrence devient : 
-
-$$C(N) = N-1 + 2C(N/2).$$
-
-
-On peut montrer que $C(N) \sim N log N$.
-\end{itemize} 
-
-
 
 \begin{center}
-\begin{tabular}{|c|c|c|}
+\begin{tabular}{|c|c|}
 \hline 
-\rule[-1ex]{0pt}{2.5ex}  & meilleur cas & pire cas \\ 
+ meilleur cas &  pire cas \\ 
 \hline 
-\rule[-1ex]{0pt}{2.5ex} comparaisons & $N log N$  & $N^2/2$ \\ 
+$n log n$ & $n^2/2$ \\ 
 \hline 
 \end{tabular} 
 \end{center}
 
 
 
+\end{prop}
+
+%\begin{center}
+%\begin{tabular}{|c|c|c|}
+%\hline
+%\multicolumn{3}{|c|}{\textbfComplexité}}
+%\hline 
+%& meilleur cas & pire cas \\ 
+%\hline 
+%comparaisons & $N log N$  & $N^2/2$ \\ 
+%\hline 
+%\end{tabular} 
+%\end{center}
+
+
+
+
+
+%%\subsection{Complexité \cite{wack}}
+%%
+%%
+%%Pour ce calcul de complexité nous ne considérerons ici que les comparaisons. 
+%%
+%%La fonction partition fait toujours exactement $d-g-2$ comparaisons. Si la fonction
+%%partition détermine un segment de longueur $K$ et un autre de longueur $N-1-K$, la fonction
+%%$tri\_rapide$ va donc effectuer $N-1$ comparaisons par l'intermédiaire de partition,
+%%puis d'autres comparaisons par l'intermédiaire des deux appels récursifs à $tri\_rapide$.
+%%
+%%\begin{itemize}
+%%\item \textbf{Le pire des cas} correspond à $K = 0$, ce qui donne, en notant $C(N)$ la complexité du tri d'un tableau
+%%de longueur $N$, l'équation de récurrence suivante:
+%%
+%%$$C(N) = N-1 + C(N-1)$$,
+%%
+%%Avec $C(1)=0$
+%%
+%%d'où $C(N) \sim \frac{N\times(N-1)}{2}$
+%%
+%%\item \textbf{Le meilleur des cas} correspond à un segment coupé en deux moitiés
+%%égales, c'est-à-dire $K = N/2$. L'équation de récurrence devient : 
+%%
+%%$$C(N) = N-1 + 2C(N/2).$$
+%%
+%%
+%%On peut montrer que $C(N) \sim N log N$.
+%%\end{itemize} 
+%%
+%%
+%%
+%%\begin{center}
+%%\begin{tabular}{|c|c|c|}
+%%\hline 
+%%\rule[-1ex]{0pt}{2.5ex}  & meilleur cas & pire cas \\ 
+%%\hline 
+%%\rule[-1ex]{0pt}{2.5ex} comparaisons & $N log N$  & $N^2/2$ \\ 
+%%\hline 
+%%\end{tabular} 
+%%\end{center}
+%%
+%
+%
 \section{Tri par fusion}
 
 \subsection{Principe}
@@ -681,11 +831,10 @@ $$m = \frac{g+d}{2}$$ .
 \item \textbf{Si} \textbf{$g\geq d-1$}, il y a au plus un élément à trier donc rien à faire (initialisation de la récursivité).
 \end{itemize}
 
-\ifprof
-\begin{center}
-		\lstinputlisting{./programmes/tri_fusion_recursif.py}
-\end{center}
-\fi
+
+%\begin{center}
+%		\lstinputlisting{./programmes/tri_fusion_recursif.py}
+%\end{center}
 
 
 \item Il reste à effectuer la fusion. On utilise pour cela un second tableau $a_0$, alloué une et une seule fois au
@@ -700,49 +849,120 @@ début du tri.
 \item On traite aussi le cas ou une des deux listes est vide.
 \end{itemize}
 
-\ifprof
-\begin{center}
-		\lstinputlisting{./programmes/fusion.py}
-\end{center}
-\fi
+
+%\begin{center}
+%		\lstinputlisting{./programmes/fusion.py}
+%\end{center}
+
 
 \end{itemize}
-
+%
 
 
 \begin{exemple2}[Algorithme complet du tri par fusion]
 
-\ifprof
+
 \begin{center}
 		\lstinputlisting{./programmes/tri_fusion.py}
 \end{center}
-\fi
+
 
 \end{exemple2}
 
+%
+%
+\subsection{Complexité}
+%
+%
+%%Si on note $C(N)$ (resp. $f(N)$) le nombre total de comparaisons effectuées par $tri\_fusion$
+%%(resp. fusion) pour trier un tableau de longueur $N$, on a l'équation de récurrence
+%%
+%%$$C(N) = 2C(N/2) + f(N)$$
+%%
+%%car les deux appels récursifs se font sur deux segments de même longueur $N/2$. 
+%
+%\begin{itemize}
+%\item \textbf{Dans le meilleur des cas}, la fonction fusion n'examine que les éléments de l'un des deux segments
+%car ils sont tous plus petits que ceux de l'autre segment. Dans ce cas $f(N) = N/2$ et donc
+%$C(N) \sim \frac{1}{2} N log N$. 
+%
+%\item \textbf{Dans le pire des cas}, tous les éléments sont examinés par $fusion$ et
+%donc $f(N) = N-1$, d'où $C(N) \sim N logN$.
+%\end{itemize}
+%
+%%
+\begin{prop}{Efficacité de l'algorithme}
+
+La colmplexité est \textbf{$nlog(n)$}
+
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline 
+ meilleur cas &  pire cas \\ 
+\hline 
+$n log n$ & $n log n$ \\ 
+\hline 
+\end{tabular} 
+\end{center}
+
+\end{prop}
 
 
-\subsection{Complexité \cite{wack}}
+
+\section{Dans Python : sort et sorted}
+Les listes Python ont une méthode native \texttt{list.sort()} qui modifie les listes elles-mêmes et renvoie \textbf{None}.
+
+	\begin{DDbox}{\linewidth}
+		\begin{verbatim}
+>>> a=[25,94,89,113,67]
+>>> a.sort()
+>>> a
+25,67,89,94,113
+		\end{verbatim}
+	\end{DDbox}
 
 
-Si on note $C(N)$ (resp. $f(N)$) le nombre total de comparaisons effectuées par $tri\_fusion$
-(resp. fusion) pour trier un tableau de longueur $N$, on a l'équation de récurrence
+Il y a également une fonction native \texttt{sorted()} qui construit une nouvelle liste triée depuis un itérable (liste de listes, tuple, dictionnaires).
 
-$$C(N) = 2C(N/2) + f(N)$$
+	\begin{DDbox}{\linewidth}
+		\begin{verbatim}
+>>> sorted([25,94,89,113,67])
+25,67,89,94,113
+		\end{verbatim}
+	\end{DDbox}
 
-car les deux appels récursifs se font sur deux segments de même longueur $N/2$. 
-
-\begin{itemize}
-\item \textbf{Dans le meilleur des cas}, la fonction fusion n'examine que les éléments de l'un des deux segments
-car ils sont tous plus petits que ceux de l'autre segment. Dans ce cas $f(N) = N/2$ et donc
-$C(N) \sim \frac{1}{2} N log N$. 
-
-\item \textbf{Dans le pire des cas}, tous les éléments sont examinés par $fusion$ et
-donc $f(N) = N-1$, d'où $C(N) \sim N logN$.
-\end{itemize}
+On utilise l'indice de la "colonne" à trier en utilisant la fonction \texttt{lambda} associée à \texttt{key} :
 
 
-\section{Conclusion et temps}
+	\begin{DDbox}{\linewidth}
+		\begin{verbatim}
+		
+>>> etudiants=[('Julie','MPS1',15),('Elio','MPS2',14),('Jules','MPS1',17),('Adam','MPS2',16)]
+>>> sorted(etudiants, key=\textbf{lambda} etudiants : etudiants[2])
+('Elio','MPS2',14),('Julie','MPS1',15),('Adam','MPS2',16),('Jules','MPS1',17)
+>>> etudiants # etudiants est inchangé
+(Julie','MPS1',15),('Elio','MPS2',14),('Jules','MPS1',17),('Adam','MPS2',16)
+		\end{verbatim}
+	\end{DDbox}
+
+
+Sans indication particulière, le tri se fait sur la première valeur puis sur la suivante dans le cas où les premières valeurs sont identiques :
+
+	\begin{DDbox}{\linewidth}
+		\begin{verbatim}
+		>>> couple=[(3,3),(3,6),(3,1)]
+>>> sorted(couple)
+(3, 1), (3, 3), (3, 6)
+>>> le tri est dit stable
+		\end{verbatim}
+	\end{DDbox}
+
+%\section{Tri par comptage}
+
+\section{Conclusion et méthodes dans Python}
+
+
+%\section{Conclusion et temps}
 
 \begin{prop}{Méthode}
 \textsc{Distinguer par leurs complexités deux algorithmes résolvant
@@ -785,141 +1005,140 @@ d'algorithmique et programmation structurée avec Python. Nouveaux programmes
 
 \end{thebibliography}
 
-\section{Présentation}
-Le tri de données ou de valeurs est omniprésent en informatique. Pour cela, beaucoup d'algorithmes ont été développés afin de réaliser des tris rapidement, notamment lorsque le nombre de données est important.
-\begin{defi}\textbf{Stabilité}
+%\section{Présentation}
+%Le tri de données ou de valeurs est omniprésent en informatique. Pour cela, beaucoup d'algorithmes ont été développés afin de réaliser des tris rapidement, notamment lorsque le nombre de données est important.
+%\begin{defi}\textbf{Stabilité}
+%
+%\end{defi}
+%
+%\begin{defi}\textbf{Tri en place} \\
+%Un tri est effectué en place lorsque la liste à trier est modifiée jusqu'à devenir triée. Dans le cas contraire, la fonction de tri pourra renvoyer une novelle liste contenent les mêmes éléments, mais triés. 
+%\end{defi}
+%
+%\begin{defi}\textbf{Tri comparatif} \\
+%Un tri est dit comparatif lorsqu'il s'appuie uniqument sur la comparaison deux à deux des éléménts de la liste et pas sur la valeur ce ces éléments.
+%\end{defi}
+%
+%
+%\section{Tris}
+%
+%\begin{defi}\textbf{Tri par insertion} \\
+%
+%À partir d'une sous-liste triée, le tri par insertion consiste à parcourir les éléments non triés et de les insérer successivement dans la sous-liste déjà triée. 
+%\end{defi}
+%
+%\begin{lstlisting}
+%def insere(t, j):
+%    k, a = j, t[j]
+%    while k > 0 and a < t[k-1]:
+%        t[k] = t[k-1]
+%        k = k-1
+%    t[k] = a
+%    
+%def insertionSort(t):
+%    for j in range(1, len(t)):
+%        insere(t, j)
+%\end{lstlisting}
+%
+%
+%\begin{defi}\textbf{Tri rapide} \\
+%
+%Soit une liste \texttt{L} non triée. Soit \texttt{p} un terme appelé pivot. Le tri rapide consiste à répartir les éléments strictement inférieur au pivot avant ce dernier et les termes plus grand après le pivot (segemntation). Le pivot est à ce stade trié correctement par rapport aux autres valeurs de la liste. Ce principe est alors appliqué récursivement aux deus-sous listes  séparées par le pivot.
+%
+%\end{defi}
+%
+%
+%\begin{lstlisting}
+%def segmente(t, i, j):
+%    p = t[j-1] # On prend comme pivot le dernier élément de la sous liste. 
+%    a = i
+%    for b in range(i, j-1):
+%        if t[b] < p:
+%            t[a], t[b] = t[b], t[a]
+%            a += 1
+%    t[a], t[j-1] = t[j-1], t[a] # On positionne le pivot "à sa place".
+%    return a # On retourne l'index du pivot. Le tableau a été modifié en place. 
+%\end{lstlisting}
+%
+%\begin{lstlisting}
+%def quickSort(t, i, j):
+%    if i + 1 < j:
+%        a = segmente(t, i, j)
+%        quickSort(t, i, a)
+%        quickSort(t, a + 1, j)
+%\end{lstlisting}
+%
+%\begin{lstlisting}
+%# Instruction pour trier une liste
+%quickSort(t, 0, len(t))
+%\end{lstlisting}
+%\begin{defi}\textbf{Tri fusion} \\
+%Il s'agit d'un tri s'appuyant sur la stratégie divisér pour régner. 
+%
+%L'algorithme est le suivant : 
+%\begin{itemize}
+%\item on divise la liste en deux listes de tailles quasi-identiques;
+%\item on trie récursivement ces deux listes;
+%\item on fusionne les deux listes triées.
+%\end{itemize}
+%\end{defi}
+%
+%\begin{lstlisting}
+%def placer(L :list, p :int, x) :
+%    """Place un élément x à sa place dans une liste L triée à partir de l'indice p
+%    Entrée :
+%        L : une liste, p : un entier, x : un élément
+%    Sorties :
+%        La liste est modifiée mais n'est pas renvoyée. k la valeur de l'indice de la liste où l'élément a été placé"""
+%    k = p
+%    while ( k < len(L) and x > L[k]) :
+%        k = k+1
+%    L.insert(k, x)
+%    return k
+%    
+%def fusion(a:list, b:list) :
+%    """Fusionne les deux listes
+%    Entrée : deux listes a et b triées.
+%    Sortie : La liste b modifiée"""
+%    p = 0
+%    for x in a :
+%        p = placer(b, p, x)+1
+%    return b
+%
+%def tri_fusion(t : list) :
+%    """Trie la liste t
+%    Entrée : une liste.
+%    Sortie : la liste est modifiée."""
+%    if len(t) < 2 :
+%        return (t)
+%    else :
+%        m = len(t) // 2
+%        return (fusion (tri_fusion(t[:m]) , tri_fusion(t[m:]) ))
+%\end{lstlisting}
+%
+%\begin{proposition}\textbf{Complexité des algorithmes}
+%On note $T(n)$ le nombre de comaraisons nécessaire pour trier une liste de longueur $n$. 
+%On montre que dans le pire des cas, les complexités sont les suivantes :
+%\begin{itemize}
+%\item tri par insertion : $T_{\text{Max}}(n)=\mathcal{O}\left(n^2\right)$;
+%\item tru rapide : $T_{\text{Max}}(n)=\mathcal{O}\left(n^2\right)$;
+%\item tru partition-fusion : $T_{\text{Max}}(n)=\mathcal{O}\left(n\log n\right)$.
+%\end{itemize}
+%
+%
+%
+%\end{proposition}
+%
+%
+%
+%
+%\section{Acticité préparatoire}
+%\textbf{Pour réaliser l'activité associée à ce cours, suivre le lien suivant : }
+%\begin{itemize} 
+%\item Sujet : \url{https://bit.ly/3iAc5do}
+%\item Corrige : \url{https://bit.ly/3eFuHrt}
+%\end{itemize}
 
-\end{defi}
-
-\begin{defi}\textbf{Tri en place} \\
-Un tri est effectué en place lorsque la liste à trier est modifiée jusqu'à devenir triée. Dans le cas contraire, la fonction de tri pourra renvoyer une novelle liste contenent les mêmes éléments, mais triés. 
-\end{defi}
-
-\begin{defi}\textbf{Tri comparatif} \\
-Un tri est dit comparatif lorsqu'il s'appuie uniqument sur la comparaison deux à deux des éléménts de la liste et pas sur la valeur ce ces éléments.
-\end{defi}
-
-
-\section{Tris}
-
-\begin{defi}\textbf{Tri par insertion} \\
-
-À partir d'une sous-liste triée, le tri par insertion consiste à parcourir les éléments non triés et de les insérer successivement dans la sous-liste déjà triée. 
-\end{defi}
-
-\begin{lstlisting}
-def insere(t, j):
-    k, a = j, t[j]
-    while k > 0 and a < t[k-1]:
-        t[k] = t[k-1]
-        k = k-1
-    t[k] = a
-    
-def insertionSort(t):
-    for j in range(1, len(t)):
-        insere(t, j)
-\end{lstlisting}
-
-
-\begin{defi}\textbf{Tri rapide} \\
-
-Soit une liste \texttt{L} non triée. Soit \texttt{p} un terme appelé pivot. Le tri rapide consiste à répartir les éléments strictement inférieur au pivot avant ce dernier et les termes plus grand après le pivot (segemntation). Le pivot est à ce stade trié correctement par rapport aux autres valeurs de la liste. Ce principe est alors appliqué récursivement aux deus-sous listes  séparées par le pivot.
-
-\end{defi}
-
-
-\begin{lstlisting}
-def segmente(t, i, j):
-    p = t[j-1] # On prend comme pivot le dernier élément de la sous liste. 
-    a = i
-    for b in range(i, j-1):
-        if t[b] < p:
-            t[a], t[b] = t[b], t[a]
-            a += 1
-    t[a], t[j-1] = t[j-1], t[a] # On positionne le pivot "à sa place".
-    return a # On retourne l'index du pivot. Le tableau a été modifié en place. 
-\end{lstlisting}
-
-\begin{lstlisting}
-def quickSort(t, i, j):
-    if i + 1 < j:
-        a = segmente(t, i, j)
-        quickSort(t, i, a)
-        quickSort(t, a + 1, j)
-\end{lstlisting}
-
-\begin{lstlisting}
-# Instruction pour trier une liste
-quickSort(t, 0, len(t))
-\end{lstlisting}
-\begin{defi}\textbf{Tri fusion} \\
-Il s'agit d'un tri s'appuyant sur la stratégie divisér pour régner. 
-
-L'algorithme est le suivant : 
-\begin{itemize}
-\item on divise la liste en deux listes de tailles quasi-identiques;
-\item on trie récursivement ces deux listes;
-\item on fusionne les deux listes triées.
-\end{itemize}
-\end{defi}
-
-\begin{lstlisting}
-def placer(L :list, p :int, x) :
-    """Place un élément x à sa place dans une liste L triée à partir de l'indice p
-    Entrée :
-        L : une liste, p : un entier, x : un élément
-    Sorties :
-        La liste est modifiée mais n'est pas renvoyée. k la valeur de l'indice de la liste où l'élément a été placé"""
-    k = p
-    while ( k < len(L) and x > L[k]) :
-        k = k+1
-    L.insert(k, x)
-    return k
-    
-def fusion(a:list, b:list) :
-    """Fusionne les deux listes
-    Entrée : deux listes a et b triées.
-    Sortie : La liste b modifiée"""
-    p = 0
-    for x in a :
-        p = placer(b, p, x)+1
-    return b
-
-def tri_fusion(t : list) :
-    """Trie la liste t
-    Entrée : une liste.
-    Sortie : la liste est modifiée."""
-    if len(t) < 2 :
-        return (t)
-    else :
-        m = len(t) // 2
-        return (fusion (tri_fusion(t[:m]) , tri_fusion(t[m:]) ))
-\end{lstlisting}
-
-\begin{proposition}\textbf{Complexité des algorithmes}
-On note $T(n)$ le nombre de comaraisons nécessaire pour trier une liste de longueur $n$. 
-On montre que dans le pire des cas, les complexités sont les suivantes :
-\begin{itemize}
-\item tri par insertion : $T_{\text{Max}}(n)=\mathcal{O}\left(n^2\right)$;
-\item tru rapide : $T_{\text{Max}}(n)=\mathcal{O}\left(n^2\right)$;
-\item tru partition-fusion : $T_{\text{Max}}(n)=\mathcal{O}\left(n\log n\right)$.
-\end{itemize}
-
-
-
-\end{proposition}
-
-
-
-
-\section{Acticité préparatoire}
-\textbf{Pour réaliser l'activité associée à ce cours, suivre le lien suivant : }
-\begin{itemize} 
-\item Sujet : \url{https://bit.ly/3iAc5do}
-\item Corrige : \url{https://bit.ly/3eFuHrt}
-\end{itemize}
-
-\newpage
 \section{QCM}
 \question{On dispose d'une liste de triplets: t = [(1,12,250),(1,12,251), (2,12,250),(2,13,250),(2,11,250),(2,12,249)].
 On trie cette liste par ordre croissant des valeurs du second élément des triplets. En cas d'égalité, on trie par ordre croissant du troisième champ. Si les champs 2 et 3 sont égaux, on trie par ordre croissant du premier champ.
@@ -1033,183 +1252,183 @@ for i in range(len(table) - 1):
 \item $\mathcal{O}\left(\log n\right)$.
 \end{enumerate}
 
-\question{On souhaite écrire une fonction \texttt{tri\_selection(t)}, qui trie le tableau \texttt{t} dans l'ordre croissant : parmi les 4 programmes suivants, lequel est correct ?}
-\begin{lstlisting}
-def tri_selection(t) :
-     for i in range (len(t)-1) :
-          min = i		
-          for j in range(i+1,len(t)):
-               if t[j] < t[min]:
-                    min = j
-          tmp = t[i]
-          t[i] = t[min]
-          t[min] = tmp
-def tri_selection(t) :
-     for i in range (len(t)-1) :
-          min = i		
-          for j in range(i+1,len(t)-1):
-               if t[j] < t[min]:
-                    min = j
-          tmp = t[i]
-          t[i] = t[min]
-          t[min] = tmp
-def tri_selection(t) :
-     for i in range (len(t)-1) :
-          min = i		
-          for j in range(i+1,len(t)):
-               if t[j] < min:
-                    min = j
-          tmp = t[i]
-          t[i] = t[min]
-          t[min] = tmp
-def tri_selection(t) :
-     for i in range (len(t)-1) :
-          min = i		
-          for j in range(i+1,len(t)):
-               if t[j] < t[min]:
-                    min = j
-          tmp = t[i]
-          t[min] = t[i]
-          t[i] = tmp
-\end{lstlisting}
-\begin{enumerate}
-\item Fonction 1. %+
-\item Fonction 2.
-\item Fonction 3.
-\item Fonction 4.
-\end{enumerate}
-
-\question{De quel type de tri s'agit-il ?}
-\begin{lstlisting}
-def tri(lst):
-    for i in range(1,len(lst)):
-        valeur = lst[i]
-        j = i
-        while j>0 and lst[j-1]>valeur:
-            lst[j]=lst[j-1]
-            j = j-1
-        lst[j]=valeur
-\end{lstlisting}
-\begin{enumerate}
-\item Tri par insertion. %+
-\item Tri fusion.
-\item Tri par sélection.
-\item Tri à bulles.
-\end{enumerate}
-
-\question{De quel type de tri s'agit-il ?}
-\begin{lstlisting}
-def tri(lst):
-    nb = len(lst)
-    for i in range(0,nb):    
-        ind_plus_petit = i
-        for j in range(i+1,nb) :
-            if lst[j] < lst[ind_plus_petit] :
-                ind_plus_petit = j
-        if ind_plus_petit is not i :
-            temp = lst[i]
-            lst[i] = lst[ind_plus_petit]
-            lst[ind_plus_petit] = temp
-\end{lstlisting}
-\begin{enumerate}
-\item Tri par insertion. 
-\item Tri fusion.
-\item Tri par sélection. %+
-\item Tri à bulles.
-\end{enumerate}
-
-\question{Un algorithme est en complexité quadratique. Codé en python, son exécution pour des données de taille 100 prend 12 millisecondes. Si l'on fournit des données de taille 200 au programme, on peut s'attendre à un temps d'exécution d'environ :}
-\begin{lstlisting}
-\end{lstlisting}
-\begin{enumerate}
-\item 48 millisecondes. %+
-\item 24 millisecondes.
-\item 12 millisecondes.
-\item 96 millisecondes.
-\end{enumerate}
-
-\question{À quel type tri correspond l'invariant de boucle ci-dessous :}
-\begin{itemize}
-\item tous les éléments d'indices 0 à $i-1$ sont déjà triés,
-\item tous les éléments d'indices $i$ à $n$ sont de valeurs supérieures à ceux de la partie triée.
-\end{itemize}
-\begin{enumerate}
-\item Tri par insertion. 
-\item Tri fusion.
-\item Tri par sélection. %+
-\item Tri à bulles.
-\end{enumerate}
-
-\question{Quel est l'invariant de boucle qui correspond précisément à cet algorithme ?}
-
-On considère un algorithme de tri par sélection, dans lequel la fonction \texttt{echanger(tab[i], tab[j])}
-effectue l'échange des ième et jième valeurs du tableau \texttt{tab}.
-\begin{lstlisting}
-nom: tri_sélection
-
-paramètre: tab, tableau de n entiers, n>=2
-
-Traitement:
-pour i allant de 1 à n-1:
-    pour j allant de i+1 à n:
-        si tab[j] < tab[i]:
-            echanger(tab[i], tab[j])
-renvoyer tab
-\end{lstlisting}
-\begin{enumerate}
-\item Tous les éléments d'indice supérieur ou égal à i sont triés par ordre croissante.
-\item Tous les éléments d'indice compris entre 0 et i sont triés et les éléments d'indice supérieurs ou égal à i leurs sont tous supérieurs.
-\item Tous les éléments d'indice supérieur ou égal à i sont non triés.
-\item Tous les éléments d'indice compris entre 0 et i sont triés, on ne peut rien dire sur les éléments d'indice supérieur ou égal à i.
-\end{enumerate}
-
-\question{Quel est le type de tri qui correspond à cet algorithme ?}
-\begin{lstlisting}
-nom: tri_mystere
-
-paramètre: tab, tableau de n entiers, non trié, non vide
-
-Traitement:
-pour i allant de 1 à n-1:
-    pour j allant de i+1 à n:
-        si tab[j] < tab[i]:
-            echanger(tab[i], tab[j])
-renvoyer tab
-\end{lstlisting}
-\begin{enumerate}
-\item Tri par insertion. 
-\item Tri fusion.
-\item Tri par sélection. %+
-\item Tri rapide.
-\end{enumerate}
-
-\question{Quel est l'invariant de boucle qui correspond précisément à cet algorithme ?}
-\begin{lstlisting}
-nom: tri_insertion
-
-paramètre: tab, tableau de n entiers, n >= 2
-
-Traitement:
-pour i allant de 2 à n:
-    j = i
-    tant que j > 1  et tab[j-1] > tab[j]:
-        echanger(tab[j-1], tab[j])
-        j = j-1
-renvoyer tab
-\end{lstlisting}
-\begin{enumerate}
-\item Tous les éléments d'indice compris entre 0 et i sont triés et les éléments d'indice supérieurs ou égal à i leurs sont tous supérieurs.
-\item Tous les éléments d'indice supérieur ou égal à i sont triés par ordre croissant.
-\item Tous les éléments d'indice compris entre 0 et i sont triés, on ne peut rien dire sur les éléments d'indice supérieur ou égal à i. %+
-\item Tous les éléments d'indice supérieur ou égal à i sont non triés par ordre croissants.
-\end{enumerate}
-
-\question{Parmi les propositions suivantes, quelle est celle qui ne correspond pas à une méthode de tri ?}
-\begin{lstlisting}
-\end{lstlisting}
-\begin{enumerate}
-\item Par sélection.
-\item Par insertion.
-\item Par rotation. %+
-\item Par fusion.
-\end{enumerate}
+%\question{On souhaite écrire une fonction \texttt{tri\_selection(t)}, qui trie le tableau \texttt{t} dans l'ordre croissant : parmi les 4 programmes suivants, lequel est correct ?}
+%\begin{lstlisting}
+%def tri_selection(t) :
+%     for i in range (len(t)-1) :
+%          min = i		
+%          for j in range(i+1,len(t)):
+%               if t[j] < t[min]:
+%                    min = j
+%          tmp = t[i]
+%          t[i] = t[min]
+%          t[min] = tmp
+%def tri_selection(t) :
+%     for i in range (len(t)-1) :
+%          min = i		
+%          for j in range(i+1,len(t)-1):
+%               if t[j] < t[min]:
+%                    min = j
+%          tmp = t[i]
+%          t[i] = t[min]
+%          t[min] = tmp
+%def tri_selection(t) :
+%     for i in range (len(t)-1) :
+%          min = i		
+%          for j in range(i+1,len(t)):
+%               if t[j] < min:
+%                    min = j
+%          tmp = t[i]
+%          t[i] = t[min]
+%          t[min] = tmp
+%def tri_selection(t) :
+%     for i in range (len(t)-1) :
+%          min = i		
+%          for j in range(i+1,len(t)):
+%               if t[j] < t[min]:
+%                    min = j
+%          tmp = t[i]
+%          t[min] = t[i]
+%          t[i] = tmp
+%\end{lstlisting}
+%\begin{enumerate}
+%\item Fonction 1. %+
+%\item Fonction 2.
+%\item Fonction 3.
+%\item Fonction 4.
+%\end{enumerate}
+%
+%\question{De quel type de tri s'agit-il ?}
+%\begin{lstlisting}
+%def tri(lst):
+%    for i in range(1,len(lst)):
+%        valeur = lst[i]
+%        j = i
+%        while j>0 and lst[j-1]>valeur:
+%            lst[j]=lst[j-1]
+%            j = j-1
+%        lst[j]=valeur
+%\end{lstlisting}
+%\begin{enumerate}
+%\item Tri par insertion. %+
+%\item Tri fusion.
+%\item Tri par sélection.
+%\item Tri à bulles.
+%\end{enumerate}
+%
+%\question{De quel type de tri s'agit-il ?}
+%\begin{lstlisting}
+%def tri(lst):
+%    nb = len(lst)
+%    for i in range(0,nb):    
+%        ind_plus_petit = i
+%        for j in range(i+1,nb) :
+%            if lst[j] < lst[ind_plus_petit] :
+%                ind_plus_petit = j
+%        if ind_plus_petit is not i :
+%            temp = lst[i]
+%            lst[i] = lst[ind_plus_petit]
+%            lst[ind_plus_petit] = temp
+%\end{lstlisting}
+%\begin{enumerate}
+%\item Tri par insertion. 
+%\item Tri fusion.
+%\item Tri par sélection. %+
+%\item Tri à bulles.
+%\end{enumerate}
+%
+%\question{Un algorithme est en complexité quadratique. Codé en python, son exécution pour des données de taille 100 prend 12 millisecondes. Si l'on fournit des données de taille 200 au programme, on peut s'attendre à un temps d'exécution d'environ :}
+%\begin{lstlisting}
+%\end{lstlisting}
+%\begin{enumerate}
+%\item 48 millisecondes. %+
+%\item 24 millisecondes.
+%\item 12 millisecondes.
+%\item 96 millisecondes.
+%\end{enumerate}
+%
+%\question{À quel type tri correspond l'invariant de boucle ci-dessous :}
+%\begin{itemize}
+%\item tous les éléments d'indices 0 à $i-1$ sont déjà triés,
+%\item tous les éléments d'indices $i$ à $n$ sont de valeurs supérieures à ceux de la partie triée.
+%\end{itemize}
+%\begin{enumerate}
+%\item Tri par insertion. 
+%\item Tri fusion.
+%\item Tri par sélection. %+
+%\item Tri à bulles.
+%\end{enumerate}
+%
+%\question{Quel est l'invariant de boucle qui correspond précisément à cet algorithme ?}
+%
+%On considère un algorithme de tri par sélection, dans lequel la fonction \texttt{echanger(tab[i], tab[j])}
+%effectue l'échange des ième et jième valeurs du tableau \texttt{tab}.
+%\begin{lstlisting}
+%nom: tri_sélection
+%
+%paramètre: tab, tableau de n entiers, n>=2
+%
+%Traitement:
+%pour i allant de 1 à n-1:
+%    pour j allant de i+1 à n:
+%        si tab[j] < tab[i]:
+%            echanger(tab[i], tab[j])
+%renvoyer tab
+%\end{lstlisting}
+%\begin{enumerate}
+%\item Tous les éléments d'indice supérieur ou égal à i sont triés par ordre croissante.
+%\item Tous les éléments d'indice compris entre 0 et i sont triés et les éléments d'indice supérieurs ou égal à i leurs sont tous supérieurs.
+%\item Tous les éléments d'indice supérieur ou égal à i sont non triés.
+%\item Tous les éléments d'indice compris entre 0 et i sont triés, on ne peut rien dire sur les éléments d'indice supérieur ou égal à i.
+%\end{enumerate}
+%
+%\question{Quel est le type de tri qui correspond à cet algorithme ?}
+%\begin{lstlisting}
+%nom: tri_mystere
+%
+%paramètre: tab, tableau de n entiers, non trié, non vide
+%
+%Traitement:
+%pour i allant de 1 à n-1:
+%    pour j allant de i+1 à n:
+%        si tab[j] < tab[i]:
+%            echanger(tab[i], tab[j])
+%renvoyer tab
+%\end{lstlisting}
+%\begin{enumerate}
+%\item Tri par insertion. 
+%\item Tri fusion.
+%\item Tri par sélection. %+
+%\item Tri rapide.
+%\end{enumerate}
+%
+%\question{Quel est l'invariant de boucle qui correspond précisément à cet algorithme ?}
+%\begin{lstlisting}
+%nom: tri_insertion
+%
+%paramètre: tab, tableau de n entiers, n >= 2
+%
+%Traitement:
+%pour i allant de 2 à n:
+%    j = i
+%    tant que j > 1  et tab[j-1] > tab[j]:
+%        echanger(tab[j-1], tab[j])
+%        j = j-1
+%renvoyer tab
+%\end{lstlisting}
+%\begin{enumerate}
+%\item Tous les éléments d'indice compris entre 0 et i sont triés et les éléments d'indice supérieurs ou égal à i leurs sont tous supérieurs.
+%\item Tous les éléments d'indice supérieur ou égal à i sont triés par ordre croissant.
+%\item Tous les éléments d'indice compris entre 0 et i sont triés, on ne peut rien dire sur les éléments d'indice supérieur ou égal à i. %+
+%\item Tous les éléments d'indice supérieur ou égal à i sont non triés par ordre croissants.
+%\end{enumerate}
+%
+%\question{Parmi les propositions suivantes, quelle est celle qui ne correspond pas à une méthode de tri ?}
+%\begin{lstlisting}
+%\end{lstlisting}
+%\begin{enumerate}
+%\item Par sélection.
+%\item Par insertion.
+%\item Par rotation. %+
+%\item Par fusion.
+%\end{enumerate}
