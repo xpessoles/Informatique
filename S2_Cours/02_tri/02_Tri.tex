@@ -39,25 +39,25 @@ Les principales capacités développées ici sont :
 
 
 
-\begin{defi}\textbf{Effet de bord -- } On dit qu'une fonction est à effet de bord lorsqu'elle modifie une variable  en dehors de son environnement local. C'est par exemple le cas lorsqu'on donne une liste (objet mutable, passé par référénce) comme argument d'une fonction.
+\begin{defi}\small{\textsf{\textbf{Effet de bord }}}--  On dit qu'une fonction est à effet de bord lorsqu'elle modifie une variable  en dehors de son environnement local. C'est par exemple le cas lorsqu'on donne une liste (objet mutable, passé par référénce) comme argument d'une fonction.
 
 Conséquence sur les algorithmes de tri : une fonction de tri ne renvoie rien la plupart du temps (on peut donc l'appeler une procédure). La liste passée en argument en entrée sera triée et cela, même en dehors du scope de la fonction. 
 \end{defi}
 
 
-\begin{defi}\textbf{Tri en place} -- 
+\begin{defi}\small{\textsf{\textbf{Tri en place}}} -- 
 Un tri est effectué en place lorsque la liste à trier est modifiée jusqu'à devenir triée. Dans le cas contraire, la fonction de tri pourra renvoyer une novelle liste contenent les mêmes éléments, mais triés. 
 \end{defi}
 
 
-\begin{defi}\textbf{Tri stable} -- 
+\begin{defi}\small{\textsf{\textbf{Tri stable}}} -- 
 Un algorithme est dit stable si les positions relatives de deux éléments égaux ne sont pas
 modifiées par l'algorithme : c'est-à-dire que si deux éléments $x$ et $y$ égaux se trouvent aux positions $i_x$ et $i_y$ de
 la liste avant l'algorithme, avec $i_x < i_y$, alors c'est également le cas de leurs positions après l'algorithme.
 % Le caractère stable peut-être utile lorsqu’on utilise des pré-ordres.
 \end{defi}
 
-\begin{defi}\textbf{Tri comparatif} --
+\begin{defi}\small{\textsf{\textbf{Tri comparatif}}} --
 Un tri est dit comparatif lorsqu'il s'appuie uniquement sur la comparaison deux à deux des éléments de la liste et pas sur la valeur ce ces éléments.
 \end{defi}
 
@@ -90,7 +90,7 @@ Avant que l'utilisateur choisisse de classer par notes on a une liste non triée
 
 \subsection{Complément sur la complexité}
 
-\begin{definition2}[Notions de complexité]
+\begin{defi}\small{\textbf{\textsf{Notions de complexité}}}~\\
 La complexité permet de donner un ordre de grandeur du nombre d'opérations qu'effectue un algorithme.
 \begin{itemize}
 \item La complexité permet de comparer la performance des algorithmes.
@@ -103,7 +103,7 @@ La complexité permet de donner un ordre de grandeur du nombre d'opérations qu'
 \item \textbf{logarithmique} si le nombre d'opération de l'ordre de $\log(n)$ et on la notera $O(\log(n))$.
 \end{itemize}
 \end{itemize}
-\end{definition2}
+\end{defi}
 
 %\begin{prop}\textbf{Différents types d'opérations}
 %
@@ -271,13 +271,13 @@ Cet algorithme correspond au fonctionnement du tri insertion que nous verrons pl
 \section{Tri par insertion}
 \subsection{Principe}
 
-\begin{definition2}[Principe du tri par insertion]
+\begin{defi}\small{\textbf{\textsf{Principe du tri par insertion}}}
 Le \textbf{tri par insertion} est le tri que l'on effectue naturellement, par exemple pour trier un jeu de cartes. On trie les premières puis à chaque nouvelle carte on l'ajoute à l'ensemble déjà trié à la bonne place. 
 
 Ce trie s'effectue en place, c'est-à-dire qu'il ne demande pas d'autre tableau que celui que l'on trie. 
 
 Son coût en mémoire est donc constant si on ne compte pas la place occupée par les données.
-\end{definition2}
+\end{defi}
 
 \begin{exemple2}[Illustration du tri par insertion]
 
@@ -493,14 +493,14 @@ Il surpasse alors toutes les autres méthodes de tri qui sont au mieux en $O(n \
 
 \subsection{Principe}
 
-\begin{definition2}[Tri rapide]
+\begin{defi}\small{\textbf{\textsf{Tri rapide}}}
 \textbf{L'algorithme de tri rapide} fait partie de la catégorie des algorithmes « diviser pour régner ».
 
 À chaque appel de la fonction tri on choisit une valeur \textbf{<< pivot >>}, par exemple le premier élément. On effectue une partition des élément à trier. Un premier groupe est constitué de valeurs inférieures au pivot  et un deuxième avec les valeurs supérieures.
 Le pivot est alors placé définitivement dans le tableau.
 
 On traite alors chacun des groupes de façon indépendante. On peut les traiter avec le même algorithme.
-\end{definition2}
+\end{defi}
 
 
 
@@ -995,8 +995,8 @@ Sans indication particulière, le tri se fait sur la première valeur puis sur l
 
 \begin{prop}
 
-\textsc{Distinguer par leurs complexités deux algorithmes résolvant
-un même problème :}
+\small{\textbf{\textsf{Distinguer par leurs complexités deux algorithmes résolvant
+un même problème}}}
 
 La première étape consiste à vérifier que les algorithmes résolvent exactement le même problème.
 
@@ -1009,7 +1009,7 @@ La première étape consiste à vérifier que les algorithmes résolvent exactem
 
 \begin{exemple2}[Illustration de la comparaison]
 
-Pour comparer les temps globaux sur une même machine (Ici processeur	Intel Core i7-4510U Haswell (2 GHz, TDP 15W),Mémoire vive 4 Go) on génère des tableaux de dimensions différentes avec des nombres aléatoires.
+Pour comparer les temps globaux sur une même machine (Ici processeur Intel Core i7-4510U Haswell (2 GHz, TDP 15W),Mémoire vive 4 Go) on génère des tableaux de dimensions différentes avec des nombres aléatoires.
 On utilise le module time pour déterminer les temps. Ici c'est un temps global dépendant fortement de la machine utilisée.
 On fait varier la taille du tableau et on compare les temps mis par chacun des algorithmes (en rouge tri rapide, en bleu tri insertion, en vert tri fusion). 
 
