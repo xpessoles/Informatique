@@ -536,31 +536,37 @@ On partitionne pour trouver une partie droite (en jaune) et une partie gauche (e
 \hline \rowcolor{white}
  & \cellcolor{vertc}5  & &  & &&   \\ \cline{2-3} \rowcolor{white}
  \multirow{-2}{10.cm}{On segmente alors les parties droite et gauche autour du pivot 14 dont on a ainsi déterminé la position définitive. }
-&& \cellcolor{rougec}7 & \cellcolor{rougec}8 & \cellcolor{rougec}11&\cellcolor{vertc} 14& \cellcolor{jaune}17  \\
+&& \cellcolor{rougec}11 & \cellcolor{rougec}8 & \cellcolor{rougec}7&\cellcolor{vertc} 14& \cellcolor{jaune}17  \\
 \hline 
 \hline \rowcolor{white}
  & \cellcolor{vertc}5  & &  & &\cellcolor{vertc} 14&   \\
  \cline{2-3} \rowcolor{white}
-  &   & \cellcolor{bleuc}7&\cellcolor{jaune}11 & \cellcolor{jaune}8&&   \\ \cline{2-3} \rowcolor{white}
- \multirow{-3}{10.cm}{On traite de façon indépendante les partie gauche et droite. On recherche pour chacune le pivot (ici 7 et 17). }
+  &   & \cellcolor{bleuc}11&\cellcolor{jaune}8 & \cellcolor{jaune}7&&   \\ \cline{2-3} \rowcolor{white}
+ \multirow{-3}{10.cm}{On traite de façon indépendante les partie gauche et droite. On recherche pour chacune le pivot (ici 11 et 17). }
 &&  &  & && \cellcolor{bleuc}17  \\
 \hline\hline
 \rowcolor{white}
- & \cellcolor{vertc}5  & &  & &\cellcolor{vertc} 14&   \\
+ & \cellcolor{vertc}5  & &  & &\cellcolor{vertc} 14&  \cellcolor{vertc}17 \\
+ \cline{2-3} \rowcolor{white} 
+ &   & \cellcolor{rougec}8&\cellcolor{rougec}7 & \cellcolor{bleuc}11&&   \\  
+  \\
  \cline{2-3} \rowcolor{white}
-  &   & \cellcolor{vertc}7&\cellcolor{jaune}11 & \cellcolor{jaune}8&&   \\ \cline{2-3} \rowcolor{white}
- \multirow{-3}{10.cm}{Pour la chaine de pivot 7 on segmente mais il n'y a pas de partie gauche. Le pivot 17 est seul dans sa chaine il est donc directement à la bonne position. }
-&&  &  & && \cellcolor{vertc}17  \\
+\multirow{-3}{10.cm}{Pour la chaine de pivot 11 on segmente mais il n'y a pas de partie droite. Le pivot 17 est seul dans sa chaine il est donc directement à la bonne position. } &&&&&&\\
 \hline\hline
 \rowcolor{white}
- & \cellcolor{vertc}5  &\cellcolor{vertc} 7 &  &&\cellcolor{vertc} 14&  \cellcolor{vertc} 17 \\
+ & \cellcolor{vertc}5  & &  &\cellcolor{vertc}  11&\cellcolor{vertc} 14&  \cellcolor{vertc} 17 \\
  \cline{2-3} \rowcolor{white}
- \multirow{-2}{10.cm}{On traite de façon indépendante les partie gauche et droite. Ici pas de partie gauche. On cherche alors les nouveaux pivots (ici 8). }  &   && \cellcolor{bleuc}8 &  \cellcolor{jaune}11&&   \\ \cline{2-3} 
+ \multirow{-2}{10.cm}{8 est pivot de la partie gauche. Ici pas de partie droite donc 11 est placé.. }  &  & \cellcolor{bleuc}8 &  \cellcolor{jaune}7&&  & \\ \cline{2-3} 
 \hline\hline
 \rowcolor{white}
- & \cellcolor{vertc}5  &\cellcolor{vertc} 7 &  &&\cellcolor{vertc} 14&  \cellcolor{vertc} 17 \\
+ & \cellcolor{vertc}5  & &  &\cellcolor{vertc} 14&\cellcolor{vertc} 14&  \cellcolor{vertc} 17 \\
  \cline{2-3} \rowcolor{white}
- \multirow{-2}{10.cm}{On classe le seul élément restant par rapport au pivot. }  &   & &\cellcolor{vertc}8 &\cellcolor{jaune} 11 &&   \\ \cline{2-3} 
+ \multirow{-2}{10.cm}{On segmente la chaine de pivot 8 Seul 7 est dans la partie gauche}  &   &\cellcolor{rougec}7 &\cellcolor{bleuc} 8 &&&   \\ \cline{2-3} 
+\hline\hline
+\rowcolor{white}
+ & \cellcolor{vertc}5  & \cellcolor{vertc}7 &\cellcolor{vertc} 8  &\cellcolor{vertc} 14&\cellcolor{vertc} 14&  \cellcolor{vertc} 17 \\
+ \cline{2-3} \rowcolor{white}
+ \multirow{-2}{10.cm}{Pas de partie droite et un seul élément dans la partie gauche : 7 et 8 on trouvé leur place}  &   & & &&&   \\ \cline{2-3} 
 \hline\hline
 \rowcolor{white}
 
