@@ -1,0 +1,51 @@
+
+
+\question{Ecrire la fonction on pourra (au choix) utiliser l'une des signatures suivante : \texttt{tri\_comptage(L:list,k:int) -> None}  ou \texttt{tri\_comptage(L:list,k:int) -> list} permettant de réaliser un tri par comptage (avec ou sans effet de bord).}
+
+\begin{lstlisting}
+def tri_comptage(L:list,k:int):
+    C=k*[0]
+    a=[]
+    for x in L:
+        for i in range(k):
+            if x==i:
+                C[i]+=1
+    for i in range(k):
+        a+=C[i]*[i]
+    return a
+
+
+def tri_comptage2(L,k):
+    C=[0]*k
+    for i in range(len(L)):
+        C[L[i]]=C[L[i]]+1
+    p=0
+    for i in range(k):
+        for j in range(C[i]):
+            L[p]=i
+            p+=1
+\end{lstlisting}
+
+\question{La fonction proposée agit-elle avec effet de bord ? Sans effet de bord ?}
+
+Selon la version du code la méthode se fait avec ou sans effet de bord.
+La première méthode proposée est sans effet de bord alors que la deuxième oui.
+
+\question{La fonction proposée réalise-t-elle un tri stable ? un tri en place ?}
+
+\ifprof
+\begin{lstlisting}
+def tri_comptage(L,k):
+    C=[0]*k
+    for i in range(len(L)):
+        C[L[i]]=C[L[i]]+1
+    p=0
+    for i in range(k):
+        for j in range(C[i]):
+            L[p]=i
+            p+=1
+            
+# Il s'agit ici d'un tri avec effet de bord et non stable. 
+\end{lstlisting}
+\else
+\fi
