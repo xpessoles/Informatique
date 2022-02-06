@@ -30,13 +30,20 @@ Le fichier \texttt{classement\_general.txt} rassemble le classement général à
 
 \subsection*{Lecture des fichiers de résultat}
 
+On donne les fonctions suivante
+
+\begin{itemize}
+\item  \texttt{chargeClassement(fichier:str)->list} permettant de lire un fichier de classement 
+et de renvoyer une liste de la forme \texttt{[[Nom\_1, Dossard\_1, Temps\_1], [Nom\_2, Dossard\_2, Temps\_2], ...]}.
+%\tiny{[['JULIAN ALAPHILIPPE ', '21', "69h 39' 16''"]]
+\item \texttt{convertirTemps(temps:str)->int} qui évalue le temps exprimé en heure, minutes et secondes en une valeur en seconde.\\
+%\tiny{convertirTemps("69h 39' 16''")=250756s}}
+\item  \texttt{classement(fichier:str)->list}  permettant de lire un fichier de classement 
+et de renvoyer une liste de la forme \texttt{[[Nom\_1, Dossard\_1, Temps\_1], [Nom\_2, Dossard\_2, Temps\_2], ...]} les temps exprimés en seconde. Vous devez utiliser les deux fonctions précédentes.\\
+%\tiny{LG[:1] affiche [['JULIAN ALAPHILIPPE ', '21', 250756]] et L18[:] affiche [['NAIRO QUINTANA ', '61', 20055]]}}
+\end{itemize}
 
 
-\question{\'Ecrire la fonction \texttt{chargeClassement(fichier:str)->list} permettant de lire un fichier de classement 
-et de renvoyer une liste de la forme \texttt{[[Nom\_1, Dossard\_1, Temps\_1], [Nom\_2, Dossard\_2, Temps\_2], ...]}.\\
-\tiny{[['JULIAN ALAPHILIPPE ', '21', "69h 39' 16''"]]}
-}
-\ifprof
 \begin{lstlisting}
 def chargeClassement(fichier):
     f=open(fichier,'r')
@@ -52,12 +59,8 @@ def chargeClassement(fichier):
         L.append(L1)
     return L
 \end{lstlisting}
-\else\fi
 
 
-\question{\'Ecrire la fonction \texttt{convertirTemps(temps:str)->int} qui évalue le temps exprimé en heure, minutes et secondes en une valeur en seconde.\\
-\tiny{convertirTemps("69h 39' 16''")=250756s}}
-\ifprof
 \begin{lstlisting}
 def convertirTemps(temps:str):
     '''temps est un str de la forme "06h 09' 39''" '''
@@ -67,14 +70,9 @@ def convertirTemps(temps:str):
     duree=int(t_course2[1])+60*int(t_course2[0])+3600*heure
     return duree
 \end{lstlisting}
-\else\fi
 
 
 
-\question{\'Ecrire la fonction \texttt{classement(fichier:str)->list}  permettant de lire un fichier de classement 
-et de renvoyer une liste de la forme \texttt{[[Nom\_1, Dossard\_1, Temps\_1], [Nom\_2, Dossard\_2, Temps\_2], ...]} les temps exprimés en seconde. Vous devez utiliser les deux fonctions précédentes.\\
-\tiny{LG[:1] affiche [['JULIAN ALAPHILIPPE ', '21', 250756]] et L18[:] affiche [['NAIRO QUINTANA ', '61', 20055]]}}
-\ifprof
 \begin{lstlisting}
 def classement(fichier):
     L=chargeClassement(fichier)
@@ -82,11 +80,13 @@ def classement(fichier):
         element[2]=convertirTemps(element[2])
     return L
 \end{lstlisting}
-\else\fi
+
 
 
 \subsection*{Classement en fin d'étape}
-Dans une première approche, on souhaite réaliser le classement général après la fin de l'étape 18.
+
+
+On souhaite réaliser le classement général après la fin de l'étape 18.
 
 \begin{rem}
 Pour faire une copie complète d'une liste de listes, il faut utiliser la fonction \texttt{deepcopy} du module \texttt{copy}. C'est une fonction récursive (ou profonde) qui construit un nouvel objet composé, puis récursivement, insère dans l'objet composé des copies des objets trouvés dans l'objet original. Attention les objets récursifs (objets composés qui, directement ou indirectement, contiennent une référence à eux-mêmes) peuvent causer une boucle récursive infinie.
@@ -122,111 +122,154 @@ def ajoutTemps(L1,L2):
 \else\fi
 
 
+\question{Modifier un algorithme de tri au choix pour pouvoir trier la liste obtenue en sortie de la fonction \texttt{ajoutTemps(L1,L2)} selon la dernière colonne. On l'appellera \texttt{tri$\_$modifie(liste)->list}.}
 
 
 
-\question{Modifier les algorithmes de tris pour pouvoir trier la liste obtenue en sortie de la fonction \texttt{ajoutTemps(liste1:list,liste2:list)->list} suivant le temps de course d'un coureur. Le classement général a-t-il changé à l'issue de la dix huitième étape ?\\
-\tiny{[['JULIAN ALAPHILIPPE ', '21', 271129], ['EGAN BERNAL ', '2', 271219], ['GERAINT THOMAS ', '1', 271224]]}}
-\ifprof
-\begin{lstlisting}
-def tri_insertion_modifie(tab):
-    '''Trie la liste t
-    Entree :
-        Une liste
-    Sortie :
-        La liste est modifiee mais n est pas renvoyee'''
-    for i in range(1,len(t)) :
-        element=t[i]
-        x=t[i][-1]
-        k=0
-        while (k<i and x>t[k][-1]) :
-            k=k+1
-        for j in range(i,k,-1) :
-            t[j]=t[j-1]
-        t[k]=element
-\end{lstlisting}
-\else\fi
+\question{Ecrire une fonction \texttt{update$\_$classement$\_$general(liste1:list,liste2:list)->list} qui à partir des deux listes du classement de l'étape 18 et du classement général renvoie la liste de la forme  \texttt{[[Nom\_1, Dossard\_1, Temps\_1], [Nom\_2, Dossard\_2, Temps\_2], ...]} triée dans l'ordre du nouveau classement général. \tiny{[['JULIAN ALAPHILIPPE ', '21', 271129], ['EGAN BERNAL ', '2', 271219], ['GERAINT THOMAS ', '1', 271224]]}
+}
 
 
+
+
+%\ifprof
+%\begin{lstlisting}
+%def tri_insertion_modifie(tab):
+%    '''Trie la liste t
+%    Entree :
+%        Une liste
+%    Sortie :
+%        La liste est modifiee mais n est pas renvoyee'''
+%    for i in range(1,len(t)) :
+%        element=t[i]
+%        x=t[i][-1]
+%        k=0
+%        while (k<i and x>t[k][-1]) :
+%            k=k+1
+%        for j in range(i,k,-1) :
+%            t[j]=t[j-1]
+%        t[k]=element
+%\end{lstlisting}
+%\else\fi
+
+\subsection{Comparaison des temps de traitement}
 
 %\newline
 \begin{rem}
-Travaillant sur une liste de listes, la méthode \texttt{sort}  n'est plus adaptée. On peut donc utiliser la méthode \texttt{sorted} en utilisant une clef de tri (la clef correspondant à la colonne sur laquelle on souhaite trier la liste), tri de la liste \texttt{Liste} sur la colonne i :
+
+\begin{itemize}
+\item Travaillant sur une liste de listes, la méthode \texttt{sort}  n'est plus adaptée. On peut donc utiliser la méthode \texttt{sorted} en utilisant une clef de tri (la clef correspondant à la colonne sur laquelle on souhaite trier la liste), tri de la liste \texttt{Liste} sur la colonne i :
 
 \texttt{sorted(Liste, key=lambda colonnes: colonnes[i])}
+\item On peut utiliser le module \texttt{time} qui permet de mesurer le temps que met une fonction pour effectuer une tâche. Vous pourrez tester l'exemple suivant : 
+\begin{lstlisting}
+import time as t
+tic=t.time()
+for k in range(10):
+	print(k)
+toc=t.time()
+print(toc-tic)
+\end{lstlisting}
+\end{itemize}
+
+
+
 \end{rem}
 
 
 
-\subsection*{Classement en cours d'étape -- Implémentation d'une file}
-On cherche à reconstituer le classement général au fur et à mesure que les coureurs arrivent. Dans cette partie le classement de l'étape (liste de listes) sera vu comme une \textbf{file} FIFO (First In First Out) où le premier élément est le premier coureur arrivé et le dernier élément est le dernier coureur à avoir passé la ligne d'arrivée.  
+\question{Utiliser le module \texttt{time} pour comparer les temps de traitement pour trier le classement à l'issu de la dernière étape selon votre algorithme de tri modifié et selon la fonction \texttt{sorted}.}
 
-\question{Implémenter les fonctions élémentaires liées à la gestion des files : \texttt{enfiler}, \texttt{defiler}, \texttt{est\_vide}. À l'intérieur de ces fonctions, on s'autorise les méthodes liées aux listes (\texttt{append}, \texttt{pop}, ...).}
-\ifprof
-\begin{lstlisting}
-def enfiler(file, element):
-    return file.append(element)
-
-def defiler(file):
-    return file.pop(0)
-
-def est_vide(file):
-    return len(file)==0
-\end{lstlisting}
-\else\fi
+\question{Comparer les différentes méthodes de tri en traçant en fonction de la taille du tableau à traiter le temps nécessaire au tri des données. On pourra pourra pour cela utiliser un tranchage. Vous pourrez renvoyer la figure tracée à vos enseignants.}
 
 
-\question{Implémenter la fonction \texttt{ajout} ayant pour but d'ajouter le temps de l'étape d'un coureur dans le classement général et de mettre à jour ce classement. La gestion du classement de l'étape devra être réalisé grâce à une liste.}
-\ifprof
-\begin{lstlisting}
-def ajout(L_etape_triee,LG):
-    ''' ajout au classement general le temps de la nouvelle etape et refait le classement'''
-    new_classement=[]
-    while est_vide(L_etape_triee)==False: #tant que la file n'est pas vide
-        cycliste=defiler(L_etape_triee)# on prend le premier element et on l'enleve
-        i=0
-        new_classement.append(cycliste)# on place le nouvel arrivant a la queue de la liste
-                                        # triee du classement general
-        while cycliste[1]!=LG[i][1]: #on cherche le meme dossard de cycliste
-            i=i+1
-        new_classement[-1][-1]=new_classement[-1][-1]+LG[i][-1] #on additionne les temps du
-                                                # classement general et du classement d'etape
-        tri_insertion_modifie(new_classement) #on trie le nouveau classement
-    return new_classement
-\end{lstlisting}
-\else\fi
+On donne les instructions suivantes pour une liste d'entiers aléatoires.
 
-
-\question{Quelle pourrait être l'utilité de la fonction \texttt{enfiler} dans un tel contexte ?}
-\ifprof
-\begin{lstlisting}
-\end{lstlisting}
-\else\fi
-
-\vspace{1cm}
-
-
-\textit{ANNEXE : opérations et fonctions Python disponibles}
-
-
-Pour la copie de liste de listes, le module \texttt{copy} avec la fonction \texttt{deepcopy} sont efficaces.\\
-Ci-dessous un exemple avec la fonction \texttt{copy} du module \texttt{copy} et avec la fonction \texttt{deepcopy} du module \texttt{copy}.
 
 \begin{lstlisting}
-from copy import copy, deepcopy
+import random
+def generer_liste(n,N):
+    x = [random.randint(0, n) for p in range(0, N)]
+    return(x)
 
-L = [['JULIAN ALAPHILIPPE ', '21', 250756], ['GERAINT THOMAS ', '1', 250851],['STEVEN KRUIJSWIJK ', '81', 250863]]
+N=int(1e3)
 
-L_copy = copy(L)   # copie superficielle
-L_deepcopy = deepcopy(L)  # copie profonde
-
-L[1][0] = 5
-
-copy:  [['JULIAN ALAPHILIPPE ', '21', 250756], [5, '1', 250851],
-['STEVEN KRUIJSWIJK ', '81', 250863]]
-deepcopy:  [['JULIAN ALAPHILIPPE ', '21', 250756], ['GERAINT THOMAS ', '1', 250851],
-['STEVEN KRUIJSWIJK ', '81', 250863]]
+L=generer_liste(N,N)
 \end{lstlisting}
+
+
+\question{Facultatif : comparer les différentes méthodes de tri vues en cours appliquée sur une liste aléatoire (comme donnée précédemment) en traçant en fonction de la taille du tableau à traiter le temps nécessaire au tri des données. On pourra pourra pour cela utiliser un tranchage. Vous pourrez renvoyer la figure tracée à vos enseignants.}
+
+
+%\subsection*{Classement en cours d'étape -- Implémentation d'une file}
+%On cherche à reconstituer le classement général au fur et à mesure que les coureurs arrivent. Dans cette partie le classement de l'étape (liste de listes) sera vu comme une \textbf{file} FIFO (First In First Out) où le premier élément est le premier coureur arrivé et le dernier élément est le dernier coureur à avoir passé la ligne d'arrivée.  
+%
+%\question{Implémenter les fonctions élémentaires liées à la gestion des files : \texttt{enfiler}, \texttt{defiler}, \texttt{est\_vide}. À l'intérieur de ces fonctions, on s'autorise les méthodes liées aux listes (\texttt{append}, \texttt{pop}, ...).}
+%\ifprof
+%\begin{lstlisting}
+%def enfiler(file, element):
+%    return file.append(element)
+%
+%def defiler(file):
+%    return file.pop(0)
+%
+%def est_vide(file):
+%    return len(file)==0
+%\end{lstlisting}
+%\else\fi
+%
+%
+%\question{Implémenter la fonction \texttt{ajout} ayant pour but d'ajouter le temps de l'étape d'un coureur dans le classement général et de mettre à jour ce classement. La gestion du classement de l'étape devra être réalisé grâce à une liste.}
+%\ifprof
+%\begin{lstlisting}
+%def ajout(L_etape_triee,LG):
+%    ''' ajout au classement general le temps de la nouvelle etape et refait le classement'''
+%    new_classement=[]
+%    while est_vide(L_etape_triee)==False: #tant que la file n'est pas vide
+%        cycliste=defiler(L_etape_triee)# on prend le premier element et on l'enleve
+%        i=0
+%        new_classement.append(cycliste)# on place le nouvel arrivant a la queue de la liste
+%                                        # triee du classement general
+%        while cycliste[1]!=LG[i][1]: #on cherche le meme dossard de cycliste
+%            i=i+1
+%        new_classement[-1][-1]=new_classement[-1][-1]+LG[i][-1] #on additionne les temps du
+%                                                # classement general et du classement d'etape
+%        tri_insertion_modifie(new_classement) #on trie le nouveau classement
+%    return new_classement
+%\end{lstlisting}
+%\else\fi
+%
+%
+%\question{Quelle pourrait être l'utilité de la fonction \texttt{enfiler} dans un tel contexte ?}
+%\ifprof
+%\begin{lstlisting}
+%\end{lstlisting}
+%\else\fi
+%
+%\vspace{1cm}
+%
+%
+%\textit{ANNEXE : opérations et fonctions Python disponibles}
+%
+%
+%Pour la copie de liste de listes, le module \texttt{copy} avec la fonction \texttt{deepcopy} sont efficaces.\\
+%Ci-dessous un exemple avec la fonction \texttt{copy} du module \texttt{copy} et avec la fonction \texttt{deepcopy} du module \texttt{copy}.
+%
+%\begin{lstlisting}
+%from copy import copy, deepcopy
+%
+%L = [['JULIAN ALAPHILIPPE ', '21', 250756], ['GERAINT THOMAS ', '1', 250851],['STEVEN KRUIJSWIJK ', '81', 250863]]
+%
+%L_copy = copy(L)   # copie superficielle
+%L_deepcopy = deepcopy(L)  # copie profonde
+%
+%L[1][0] = 5
+%
+%copy:  [['JULIAN ALAPHILIPPE ', '21', 250756], [5, '1', 250851],
+%['STEVEN KRUIJSWIJK ', '81', 250863]]
+%deepcopy:  [['JULIAN ALAPHILIPPE ', '21', 250756], ['GERAINT THOMAS ', '1', 250851],
+%['STEVEN KRUIJSWIJK ', '81', 250863]]
+%\end{lstlisting}
 
 
 

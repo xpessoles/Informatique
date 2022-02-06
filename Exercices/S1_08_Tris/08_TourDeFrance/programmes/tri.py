@@ -1,4 +1,5 @@
-def tri_insertion(T,n):
+def tri_insertion(T):
+    n=len(T)
     for i in range(1,n):
         j=i
         v=T[i]
@@ -19,6 +20,16 @@ def tri_fusion(a,g,d):
         tri_fusion(a,m,d)
         a0[g:d]=a[g:d]
         fusion(a0,a,g,m,d)
+
+def fusion(a0,a,g,m,d):
+    i,j=g,m
+    for k in range(g,d):
+        if i<m and (j==d or a0[i]<=a0[j]):
+            a[k]=a0[i]
+            i=i+1
+        else:
+            a[k]=a0[j]
+            j=j+1
 
 
 
