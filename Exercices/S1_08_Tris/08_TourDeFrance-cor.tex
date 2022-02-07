@@ -1,3 +1,17 @@
+\question{Réaliser la fonction \texttt{ajoutTemps(liste1:list,liste2:list)->list} qui à partir des deux listes du classement de l'étape 18 et du classement général renvoie la liste de la forme  \texttt{[[Nom\_1, Dossard\_1, Temps\_1], [Nom\_2, Dossard\_2, Temps\_2], ...]} dont les temps sont la somme des temps des deux listes pour chaque coureur.\\
+\tiny{['NAIRO QUINTANA ', '61', 271381]}}
+
+
+\begin{lstlisting}
+def ajoutTemps(liste1:list,liste2:list)->list:
+    LGN=[]
+    for x in liste1:
+        for y in liste2:
+            if x[1]==y[1]:
+                LGN+=[[x[0],x[1],y[2]+x[2]]]
+    return LGN
+\end{lstlisting}
+
 
 \question{Quelle méthode de tri vous semble la mieux adaptée au tri du classement général ?}
 
