@@ -39,25 +39,25 @@ Les principales capacités développées ici sont :
 
 
 
-\begin{defi}\small{\textsf{\textbf{Effet de bord }}}--  On dit qu'une fonction est à effet de bord lorsqu'elle modifie une variable  en dehors de son environnement local. C'est par exemple le cas lorsqu'on donne une liste (objet mutable, passé par référénce) comme argument d'une fonction.
+\begin{defi}\textbf{Effet de bord -- } On dit qu'une fonction est à effet de bord lorsqu'elle modifie une variable  en dehors de son environnement local. C'est par exemple le cas lorsqu'on donne une liste (objet mutable, passé par référénce) comme argument d'une fonction.
 
 Conséquence sur les algorithmes de tri : une fonction de tri ne renvoie rien la plupart du temps (on peut donc l'appeler une procédure). La liste passée en argument en entrée sera triée et cela, même en dehors du scope de la fonction. 
 \end{defi}
 
 
-\begin{defi}\small{\textsf{\textbf{Tri en place}}} -- 
-Un tri est effectué en place lorsque la liste à trier est modifiée jusqu'à devenir triée. Dans le cas contraire, la fonction de tri pourra renvoyer une nouvelle liste contenent les mêmes éléments, mais triés. 
+\begin{defi}\textbf{Tri en place} -- 
+Un tri est effectué en place lorsque la liste à trier est modifiée jusqu'à devenir triée. Dans le cas contraire, la fonction de tri pourra renvoyer une novelle liste contenent les mêmes éléments, mais triés. 
 \end{defi}
 
 
-\begin{defi}\small{\textsf{\textbf{Tri stable}}} -- 
+\begin{defi}\textbf{Tri stable} -- 
 Un algorithme est dit stable si les positions relatives de deux éléments égaux ne sont pas
 modifiées par l'algorithme : c'est-à-dire que si deux éléments $x$ et $y$ égaux se trouvent aux positions $i_x$ et $i_y$ de
 la liste avant l'algorithme, avec $i_x < i_y$, alors c'est également le cas de leurs positions après l'algorithme.
 % Le caractère stable peut-être utile lorsqu’on utilise des pré-ordres.
 \end{defi}
 
-\begin{defi}\small{\textsf{\textbf{Tri comparatif}}} --
+\begin{defi}\textbf{Tri comparatif} --
 Un tri est dit comparatif lorsqu'il s'appuie uniquement sur la comparaison deux à deux des éléments de la liste et pas sur la valeur ce ces éléments.
 \end{defi}
 
@@ -90,7 +90,7 @@ Avant que l'utilisateur choisisse de classer par notes on a une liste non triée
 
 \subsection{Complément sur la complexité}
 
-\begin{defi}\small{\textbf{\textsf{Notions de complexité}}}~\\
+\begin{definition2}[Notions de complexité]
 La complexité permet de donner un ordre de grandeur du nombre d'opérations qu'effectue un algorithme.
 \begin{itemize}
 \item La complexité permet de comparer la performance des algorithmes.
@@ -103,7 +103,7 @@ La complexité permet de donner un ordre de grandeur du nombre d'opérations qu'
 \item \textbf{logarithmique} si le nombre d'opération de l'ordre de $\log(n)$ et on la notera $O(\log(n))$.
 \end{itemize}
 \end{itemize}
-\end{defi}
+\end{definition2}
 
 %\begin{prop}\textbf{Différents types d'opérations}
 %
@@ -271,13 +271,13 @@ Cet algorithme correspond au fonctionnement du tri insertion que nous verrons pl
 \section{Tri par insertion}
 \subsection{Principe}
 
-\begin{defi}\small{\textbf{\textsf{Principe du tri par insertion}}}
+\begin{definition2}[Principe du tri par insertion]
 Le \textbf{tri par insertion} est le tri que l'on effectue naturellement, par exemple pour trier un jeu de cartes. On trie les premières puis à chaque nouvelle carte on l'ajoute à l'ensemble déjà trié à la bonne place. 
 
 Ce trie s'effectue en place, c'est-à-dire qu'il ne demande pas d'autre tableau que celui que l'on trie. 
 
 Son coût en mémoire est donc constant si on ne compte pas la place occupée par les données.
-\end{defi}
+\end{definition2}
 
 \begin{exemple2}[Illustration du tri par insertion]
 
@@ -493,14 +493,14 @@ Il surpasse alors toutes les autres méthodes de tri qui sont au mieux en $O(n \
 
 \subsection{Principe}
 
-\begin{defi}\small{\textbf{\textsf{Tri rapide}}}
+\begin{definition2}[Tri rapide]
 \textbf{L'algorithme de tri rapide} fait partie de la catégorie des algorithmes « diviser pour régner ».
 
 À chaque appel de la fonction tri on choisit une valeur \textbf{<< pivot >>}, par exemple le premier élément. On effectue une partition des élément à trier. Un premier groupe est constitué de valeurs inférieures au pivot  et un deuxième avec les valeurs supérieures.
 Le pivot est alors placé définitivement dans le tableau.
 
 On traite alors chacun des groupes de façon indépendante. On peut les traiter avec le même algorithme.
-\end{defi}
+\end{definition2}
 
 
 
@@ -536,31 +536,37 @@ On partitionne pour trouver une partie droite (en jaune) et une partie gauche (e
 \hline \rowcolor{white}
  & \cellcolor{vertc}5  & &  & &&   \\ \cline{2-3} \rowcolor{white}
  \multirow{-2}{10.cm}{On segmente alors les parties droite et gauche autour du pivot 14 dont on a ainsi déterminé la position définitive. }
-&& \cellcolor{rougec}7 & \cellcolor{rougec}8 & \cellcolor{rougec}11&\cellcolor{vertc} 14& \cellcolor{jaune}17  \\
+&& \cellcolor{rougec}11 & \cellcolor{rougec}8 & \cellcolor{rougec}7&\cellcolor{vertc} 14& \cellcolor{jaune}17  \\
 \hline 
 \hline \rowcolor{white}
  & \cellcolor{vertc}5  & &  & &\cellcolor{vertc} 14&   \\
  \cline{2-3} \rowcolor{white}
-  &   & \cellcolor{bleuc}7&\cellcolor{jaune}11 & \cellcolor{jaune}8&&   \\ \cline{2-3} \rowcolor{white}
- \multirow{-3}{10.cm}{On traite de façon indépendante les partie gauche et droite. On recherche pour chacune le pivot (ici 7 et 17). }
+  &   & \cellcolor{bleuc}11&\cellcolor{jaune}8 & \cellcolor{jaune}7&&   \\ \cline{2-3} \rowcolor{white}
+ \multirow{-3}{10.cm}{On traite de façon indépendante les partie gauche et droite. On recherche pour chacune le pivot (ici 11 et 17). }
 &&  &  & && \cellcolor{bleuc}17  \\
 \hline\hline
 \rowcolor{white}
- & \cellcolor{vertc}5  & &  & &\cellcolor{vertc} 14&   \\
+ & \cellcolor{vertc}5  & &  & &\cellcolor{vertc} 14&  \cellcolor{vertc}17 \\
+ \cline{2-3} \rowcolor{white} 
+ &   & \cellcolor{rougec}8&\cellcolor{rougec}7 & \cellcolor{bleuc}11&&   \\  
+  \\
  \cline{2-3} \rowcolor{white}
-  &   & \cellcolor{vertc}7&\cellcolor{jaune}11 & \cellcolor{jaune}8&&   \\ \cline{2-3} \rowcolor{white}
- \multirow{-3}{10.cm}{Pour la chaine de pivot 7 on segmente mais il n'y a pas de partie gauche. Le pivot 17 est seul dans sa chaine il est donc directement à la bonne position. }
-&&  &  & && \cellcolor{vertc}17  \\
+\multirow{-3}{10.cm}{Pour la chaine de pivot 11 on segmente mais il n'y a pas de partie droite. Le pivot 17 est seul dans sa chaine il est donc directement à la bonne position. } &&&&&&\\
 \hline\hline
 \rowcolor{white}
- & \cellcolor{vertc}5  &\cellcolor{vertc} 7 &  &&\cellcolor{vertc} 14&  \cellcolor{vertc} 17 \\
+ & \cellcolor{vertc}5  & &  &\cellcolor{vertc}  11&\cellcolor{vertc} 14&  \cellcolor{vertc} 17 \\
  \cline{2-3} \rowcolor{white}
- \multirow{-2}{10.cm}{On traite de façon indépendante les partie gauche et droite. Ici pas de partie gauche. On cherche alors les nouveaux pivots (ici 8). }  &   && \cellcolor{bleuc}8 &  \cellcolor{jaune}11&&   \\ \cline{2-3} 
+ \multirow{-2}{10.cm}{8 est pivot de la partie gauche. Ici pas de partie droite donc 11 est placé.. }  &  & \cellcolor{bleuc}8 &  \cellcolor{jaune}7&&  & \\ \cline{2-3} 
 \hline\hline
 \rowcolor{white}
- & \cellcolor{vertc}5  &\cellcolor{vertc} 7 &  &&\cellcolor{vertc} 14&  \cellcolor{vertc} 17 \\
+ & \cellcolor{vertc}5  & &  &\cellcolor{vertc} 14&\cellcolor{vertc} 14&  \cellcolor{vertc} 17 \\
  \cline{2-3} \rowcolor{white}
- \multirow{-2}{10.cm}{On classe le seul élément restant par rapport au pivot. }  &   & &\cellcolor{vertc}8 &\cellcolor{jaune} 11 &&   \\ \cline{2-3} 
+ \multirow{-2}{10.cm}{On segmente la chaine de pivot 8 Seul 7 est dans la partie gauche}  &   &\cellcolor{rougec}7 &\cellcolor{bleuc} 8 &&&   \\ \cline{2-3} 
+\hline\hline
+\rowcolor{white}
+ & \cellcolor{vertc}5  & \cellcolor{vertc}7 &\cellcolor{vertc} 8  &\cellcolor{vertc} 14&\cellcolor{vertc} 14&  \cellcolor{vertc} 17 \\
+ \cline{2-3} \rowcolor{white}
+ \multirow{-2}{10.cm}{Pas de partie droite et un seul élément dans la partie gauche : 7 et 8 on trouvé leur place}  &   & & &&&   \\ \cline{2-3} 
 \hline\hline
 \rowcolor{white}
 
@@ -598,7 +604,21 @@ assert g<d
 \begin{algorithme}[Algorithme de partitionnement pour le tri rapide]
 
 \begin{center}
-		\lstinputlisting{./programmes/partition.py}
+\begin{lstlisting}
+def partition(a,g,d):
+    assert g<d
+    v=a[g]
+    ainf=[]
+    asup=[]
+    for x in a[g+1:d]:
+        if x<v:
+            ainf.append(x)
+        else:
+            asup.append(x)
+    a=a[0:g]+ainf+[v]+asup+a[d:len(a)]
+    m=len(ainf)+g
+    return m,a
+\end{lstlisting}
 \end{center}
 
 
@@ -749,7 +769,7 @@ $n \log n$ & $n^2/2$ \\
 \subsection{Principe}
 
 
-Cet algorithme fait aussi partie des algorithmes "diviser pour régner".
+Cet algorithme fait aussi partie des algorithmes << diviser pour régner >>.
 
 Le principe consiste à couper le tableau de départ en deux. On trie chacun des groupes indépendamment. Puis on fusionne les deux groupes en utilisant le fait que chacun des groupe est déjà ordonné.
 
@@ -780,7 +800,7 @@ Chacune de ces deux listes est triée de façon indépendante (pas illustré ici
 \hline 
 \rowcolor{white}
   &   & \cellcolor{rougec}11 &\cellcolor{rougec} 14 & \cellcolor{gris25}7 & \cellcolor{jaune}8 & \cellcolor{jaune}17   \\ \cline{2-3} \rowcolor{white}
- \multirow{-2}{10.cm}{remplit après les comparaisons successives des éléments des listes $L_1$ (rouge) et $L_2$ (jaune). 5<7 on le stock de façon définitive dans $T_2$.}
+ \multirow{-2}{10.cm}{remplit après les comparaisons successives des éléments des listes $L_1$ (rouge) et $L_2$ (jaune). 5<7 on le stocke de façon définitive dans $T_2$.}
 &\cellcolor{bleuc}5& &  &  & &  \\
 \hline 
 \hline 
@@ -828,7 +848,7 @@ Chacune de ces deux listes est triée de façon indépendante (pas illustré ici
 \hline 
 \rowcolor{white}
   &   &  & &  &  &    \\ \cline{2-3} \rowcolor{white}
- \multirow{-2}{10.cm}{14<17 on le stock dans le deuxième tableau et comme c'est le dernier restant on ajoute 17.}
+ \multirow{-2}{10.cm}{14<17 on le stocke dans le deuxième tableau et comme c'est le dernier restant on ajoute 17.}
 &\cellcolor{vertc}5&\cellcolor{vertc}7 &\cellcolor{vertc}8  &\cellcolor{rougec}11  &\cellcolor{bleuc} 14 & \cellcolor{gris25}17  \\
 \hline 
  
@@ -843,15 +863,15 @@ Chacune de ces deux listes est triée de façon indépendante (pas illustré ici
 
 On souhaite trier un tableau $a$ :
 \begin{itemize}
-\item Le caractère récursif du tri fusion fait que l'on s'intéresse seulement à la partie de $a$ entre les indices $g$ (inclus) et $d$ (exclu).
-\item Afin de découper le groupe à trier en deux, on calcule l'indice médian :
+\item le caractère récursif du tri fusion fait que l'on s'intéresse seulement à la partie de $a$ entre les indices $g$ (inclus) et $d$ (exclu);
+\item afin de découper le groupe à trier en deux, on calcule l'indice médian :
 $m = \frac{g+d}{2}$ . 
 
-\item On trie alors récursivement les deux parties :
+\item on trie alors récursivement les deux parties :
 \begin{itemize}
 \item délimitées par $g$ et $m$ d'une part,
 \item et $m$ et $d$ d'autre part.
-\item \textbf{Si} \textbf{$g\geq d-1$}, il y a au plus un élément à trier donc rien à faire (initialisation de la récursivité).
+\item \textbf{si} \textbf{$g\geq d-1$}, il y a au plus un élément à trier donc rien à faire (initialisation de la récursivité);
 \end{itemize}
 
 
@@ -860,16 +880,16 @@ $m = \frac{g+d}{2}$ .
 %\end{center}
 
 
-\item Il reste à effectuer la fusion. On utilise pour cela un second tableau $a_0$, alloué une et une seule fois au
+\item il reste à effectuer la fusion. On utilise pour cela un second tableau $a_0$, alloué une et une seule fois au
 début du tri.
-\item On réalise la fonction fusion :
+\item on réalise la fonction fusion :
 \begin{itemize}
-\item qui prend en arguments deux tableaux, $a0$ et $a$, et les trois indices $g$, $m$ et $d$. 
-\item Les portions $a0[g \cdots  m[$ et $a0[m \cdots d[$ sont supposées triées.
-\item On veut les fusionner dans $a[g\cdots d[$. 
-\item On va parcourir chacune des listes déjà triées en utilisant un indice $i$ pour $L_1$ et $j$ pour $L_2$.
-\item On compare à chaque itération de la boucle \textbf{for} $a0[i]$ et $a0[j]$ et on place la plus petite des valeurs dans $a[k]$ et on incrémente l'indice correspondant $i$ ou $j$ selon celui que l'on a déplacé.
-\item On traite aussi le cas ou une des deux listes est vide.
+\item qui prend en arguments deux tableaux, $a0$ et $a$, et les trois indices $g$, $m$ et $d$,
+\item les portions $a0[g \cdots  m[$ et $a0[m \cdots d[$ sont supposées triées,
+\item on veut les fusionner dans $a[g\cdots d[$,
+\item on va parcourir chacune des listes déjà triées en utilisant un indice $i$ pour $L_1$ et $j$ pour $L_2$,
+\item on compare à chaque itération de la boucle \textbf{for} $a0[i]$ et $a0[j]$ et on place la plus petite des valeurs dans $a[k]$ et on incrémente l'indice correspondant $i$ ou $j$ selon celui que l'on a déplacé,
+\item on traite aussi le cas ou une des deux listes est vide.
 \end{itemize}
 
 
@@ -989,8 +1009,8 @@ Sans indication particulière, le tri se fait sur la première valeur puis sur l
 
 \begin{prop}
 
-\small{\textbf{\textsf{Distinguer par leurs complexités deux algorithmes résolvant
-un même problème}}}
+\textsc{Distinguer par leurs complexités deux algorithmes résolvant
+un même problème :}
 
 La première étape consiste à vérifier que les algorithmes résolvent exactement le même problème.
 
@@ -1003,7 +1023,7 @@ La première étape consiste à vérifier que les algorithmes résolvent exactem
 
 \begin{exemple2}[Illustration de la comparaison]
 
-Pour comparer les temps globaux sur une même machine (Ici processeur Intel Core i7-4510U Haswell (2 GHz, TDP 15W),Mémoire vive 4 Go) on génère des tableaux de dimensions différentes avec des nombres aléatoires.
+Pour comparer les temps globaux sur une même machine (Ici processeur	Intel Core i7-4510U Haswell (2 GHz, TDP 15W),Mémoire vive 4 Go) on génère des tableaux de dimensions différentes avec des nombres aléatoires.
 On utilise le module time pour déterminer les temps. Ici c'est un temps global dépendant fortement de la machine utilisée.
 On fait varier la taille du tableau et on compare les temps mis par chacun des algorithmes (en rouge tri rapide, en bleu tri insertion, en vert tri fusion). 
 
