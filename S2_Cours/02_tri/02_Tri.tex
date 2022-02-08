@@ -769,7 +769,7 @@ $n \log n$ & $n^2/2$ \\
 \subsection{Principe}
 
 
-Cet algorithme fait aussi partie des algorithmes "diviser pour régner".
+Cet algorithme fait aussi partie des algorithmes << diviser pour régner >>.
 
 Le principe consiste à couper le tableau de départ en deux. On trie chacun des groupes indépendamment. Puis on fusionne les deux groupes en utilisant le fait que chacun des groupe est déjà ordonné.
 
@@ -800,7 +800,7 @@ Chacune de ces deux listes est triée de façon indépendante (pas illustré ici
 \hline 
 \rowcolor{white}
   &   & \cellcolor{rougec}11 &\cellcolor{rougec} 14 & \cellcolor{gris25}7 & \cellcolor{jaune}8 & \cellcolor{jaune}17   \\ \cline{2-3} \rowcolor{white}
- \multirow{-2}{10.cm}{remplit après les comparaisons successives des éléments des listes $L_1$ (rouge) et $L_2$ (jaune). 5<7 on le stock de façon définitive dans $T_2$.}
+ \multirow{-2}{10.cm}{remplit après les comparaisons successives des éléments des listes $L_1$ (rouge) et $L_2$ (jaune). 5<7 on le stocke de façon définitive dans $T_2$.}
 &\cellcolor{bleuc}5& &  &  & &  \\
 \hline 
 \hline 
@@ -848,7 +848,7 @@ Chacune de ces deux listes est triée de façon indépendante (pas illustré ici
 \hline 
 \rowcolor{white}
   &   &  & &  &  &    \\ \cline{2-3} \rowcolor{white}
- \multirow{-2}{10.cm}{14<17 on le stock dans le deuxième tableau et comme c'est le dernier restant on ajoute 17.}
+ \multirow{-2}{10.cm}{14<17 on le stocke dans le deuxième tableau et comme c'est le dernier restant on ajoute 17.}
 &\cellcolor{vertc}5&\cellcolor{vertc}7 &\cellcolor{vertc}8  &\cellcolor{rougec}11  &\cellcolor{bleuc} 14 & \cellcolor{gris25}17  \\
 \hline 
  
@@ -863,15 +863,15 @@ Chacune de ces deux listes est triée de façon indépendante (pas illustré ici
 
 On souhaite trier un tableau $a$ :
 \begin{itemize}
-\item Le caractère récursif du tri fusion fait que l'on s'intéresse seulement à la partie de $a$ entre les indices $g$ (inclus) et $d$ (exclu).
-\item Afin de découper le groupe à trier en deux, on calcule l'indice médian :
+\item le caractère récursif du tri fusion fait que l'on s'intéresse seulement à la partie de $a$ entre les indices $g$ (inclus) et $d$ (exclu);
+\item afin de découper le groupe à trier en deux, on calcule l'indice médian :
 $m = \frac{g+d}{2}$ . 
 
-\item On trie alors récursivement les deux parties :
+\item on trie alors récursivement les deux parties :
 \begin{itemize}
 \item délimitées par $g$ et $m$ d'une part,
 \item et $m$ et $d$ d'autre part.
-\item \textbf{Si} \textbf{$g\geq d-1$}, il y a au plus un élément à trier donc rien à faire (initialisation de la récursivité).
+\item \textbf{si} \textbf{$g\geq d-1$}, il y a au plus un élément à trier donc rien à faire (initialisation de la récursivité);
 \end{itemize}
 
 
@@ -880,16 +880,16 @@ $m = \frac{g+d}{2}$ .
 %\end{center}
 
 
-\item Il reste à effectuer la fusion. On utilise pour cela un second tableau $a_0$, alloué une et une seule fois au
+\item il reste à effectuer la fusion. On utilise pour cela un second tableau $a_0$, alloué une et une seule fois au
 début du tri.
-\item On réalise la fonction fusion :
+\item on réalise la fonction fusion :
 \begin{itemize}
-\item qui prend en arguments deux tableaux, $a0$ et $a$, et les trois indices $g$, $m$ et $d$. 
-\item Les portions $a0[g \cdots  m[$ et $a0[m \cdots d[$ sont supposées triées.
-\item On veut les fusionner dans $a[g\cdots d[$. 
-\item On va parcourir chacune des listes déjà triées en utilisant un indice $i$ pour $L_1$ et $j$ pour $L_2$.
-\item On compare à chaque itération de la boucle \textbf{for} $a0[i]$ et $a0[j]$ et on place la plus petite des valeurs dans $a[k]$ et on incrémente l'indice correspondant $i$ ou $j$ selon celui que l'on a déplacé.
-\item On traite aussi le cas ou une des deux listes est vide.
+\item qui prend en arguments deux tableaux, $a0$ et $a$, et les trois indices $g$, $m$ et $d$,
+\item les portions $a0[g \cdots  m[$ et $a0[m \cdots d[$ sont supposées triées,
+\item on veut les fusionner dans $a[g\cdots d[$,
+\item on va parcourir chacune des listes déjà triées en utilisant un indice $i$ pour $L_1$ et $j$ pour $L_2$,
+\item on compare à chaque itération de la boucle \textbf{for} $a0[i]$ et $a0[j]$ et on place la plus petite des valeurs dans $a[k]$ et on incrémente l'indice correspondant $i$ ou $j$ selon celui que l'on a déplacé,
+\item on traite aussi le cas ou une des deux listes est vide.
 \end{itemize}
 
 
