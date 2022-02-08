@@ -559,12 +559,12 @@ On partitionne pour trouver une partie droite (en jaune) et une partie gauche (e
  \multirow{-2}{10.cm}{8 est pivot de la partie gauche. Ici pas de partie droite donc 11 est placé.. }  &  & \cellcolor{bleuc}8 &  \cellcolor{jaune}7&&  & \\ \cline{2-3} 
 \hline\hline
 \rowcolor{white}
- & \cellcolor{vertc}5  & &  &\cellcolor{vertc} 14&\cellcolor{vertc} 14&  \cellcolor{vertc} 17 \\
+ & \cellcolor{vertc}5  & &  &\cellcolor{vertc} 11&\cellcolor{vertc} 14&  \cellcolor{vertc} 17 \\
  \cline{2-3} \rowcolor{white}
  \multirow{-2}{10.cm}{On segmente la chaine de pivot 8 Seul 7 est dans la partie gauche}  &   &\cellcolor{rougec}7 &\cellcolor{bleuc} 8 &&&   \\ \cline{2-3} 
 \hline\hline
 \rowcolor{white}
- & \cellcolor{vertc}5  & \cellcolor{vertc}7 &\cellcolor{vertc} 8  &\cellcolor{vertc} 14&\cellcolor{vertc} 14&  \cellcolor{vertc} 17 \\
+ & \cellcolor{vertc}5  & \cellcolor{vertc}7 &\cellcolor{vertc} 8  &\cellcolor{vertc} 11&\cellcolor{vertc} 14&  \cellcolor{vertc} 17 \\
  \cline{2-3} \rowcolor{white}
  \multirow{-2}{10.cm}{Pas de partie droite et un seul élément dans la partie gauche : 7 et 8 on trouvé leur place}  &   & & &&&   \\ \cline{2-3} 
 \hline\hline
@@ -577,7 +577,7 @@ On partitionne pour trouver une partie droite (en jaune) et une partie gauche (e
 
 
 \begin{itemize}
-\item On crée tout d'abord une fonction <<\textbf{partition}>>. 
+\item On crée tout d'abord une fonction << \textbf{partition} >>. 
 \begin{itemize}
 \item Les arguments de cette fonction seront le tableau \textbf{$a$} et deux indices correspondant au début et à la fin de la partie à segmenter du tableau (par convention \textbf{$g$} inclus et $\textbf{d}$ exclu). En effet on ne segmente pas à chaque fois l'ensemble du tableau.
 \item On suppose qu'il y a au moins un élément dans ce segment ce que l'on peut vérifier avec \texttt{assert} : 
@@ -588,12 +588,12 @@ On partitionne pour trouver une partie droite (en jaune) et une partie gauche (e
 assert g<d
 		\end{verbatim}
 	\end{DDbox}
-\item On choisit \textbf{$a[g]$} comme pivot que l'on peut stocker dans une variable $v$.
-\item Le principe consiste alors à parcourir le tableau de la gauche vers la droite, entre les indices \textbf{$g+1$} et \textbf{$d$} avec une boucle \textbf{$for$}.
-\item on stockera dans deux sous listes \textbf{$ainf$} et \textbf{$asup$} toutes les composantes respectivement inférieures ou supérieures au pivot.
-\item on rassemblera les deux sous listes ainsi que le pivot pour donner la liste \textbf{$a$} partitionnée (en assemblant également le reste de la liste $a$).
-\item On note $m$ l'indice qui correspond au partitionnement de $a$.
-\item On sortira de cette fonction $m$ et le tableau $a$.
+\item On choisit \texttt{a[g]} comme pivot que l'on peut stocker dans une variable \texttt{v}.
+\item Le principe consiste alors à parcourir le tableau de la gauche vers la droite, entre les indices \texttt{g+1} et \textbf{$d$} avec une boucle \texttt{for}.
+\item on stockera dans deux sous listes \texttt{ainf} et \texttt{asup} toutes les composantes respectivement inférieures ou supérieures au pivot.
+\item on rassemblera les deux sous listes ainsi que le pivot pour donner la liste \texttt{a} partitionnée (en assemblant également le reste de la liste \texttt{a}).
+\item On note \texttt{m} l'indice qui correspond au partitionnement de \texttt{a}.
+\item On sortira de cette fonction \texttt{m} et le tableau \texttt{a}.
 \end{itemize}
 \end{itemize}
 
@@ -664,7 +664,7 @@ La fonction tri rapide est alors implémentée de façon récursive.
 
 
 
-Pour trier un tableau il suffit d'appeler \textbf{$tri\_rapide$} sur la totalité des éléments.
+Pour trier un tableau il suffit d'appeler \texttt{tri\_rapide} sur la totalité des éléments.
 
 
 %
@@ -842,7 +842,7 @@ Chacune de ces deux listes est triée de façon indépendante (pas illustré ici
 \hline 
 \rowcolor{white}
   &   &  &\cellcolor{bleuc} 14 &  &  & \cellcolor{gris25}17   \\ \cline{2-3} \rowcolor{white}
- \multirow{-2}{10.cm}{On continu la fusion en comparant les premiers nombres restants dans chaque bloc (14 et 17).}
+ \multirow{-2}{10.cm}{On continue la fusion en comparant les premiers nombres restants dans chaque bloc (14 et 17).}
 &\cellcolor{vertc}5&\cellcolor{vertc}7 &\cellcolor{vertc}8  & \cellcolor{vertc}11  & &  \\
 \hline 
 \hline 
