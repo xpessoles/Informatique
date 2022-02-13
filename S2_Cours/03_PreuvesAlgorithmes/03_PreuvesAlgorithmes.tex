@@ -2,22 +2,26 @@
 
 \subsection{Définition}
 
-\begin{defi}\textbf{Terminaison d'un algorithme} \\
+\begin{defi}{Terminaison d'un algorithme} \\
 Prouver la terminaison d'un algorithme signifie montrer que cet algorithme se terminera en un temps fini. On utilise pour cela un \textbf{variant de boucle}.
 \end{defi}
 
-\begin{defi}\textbf{Correction d'un algorithme} \\
+\begin{defi}{Correction d'un algorithme} \\
 Prouver la correction d'un algorithme signifie montrer que cet algorithme fournit bien la solution au problème qu'il est sensé résoudre. On utilise pour cela un \textbf{invariant de boucle}.
 \end{defi}
 
-\begin{defi}\textbf{Analyser} \\
-Prouver la correction d'un algorithme signifie montrer que cet algorithme fournit bien la solution au problème qu'il est sensé résoudre. On utilise pour cela un \textbf{invariant de boucle}.
-\end{defi}
+%\begin{defi}\textbf{Analyser} \\
+%Prouver la correction d'un algorithme signifie montrer que cet algorithme fournit bien la solution au problème qu'il est sensé résoudre. On utilise pour cela un \textbf{invariant de boucle}.
+%\end{defi}
 
 
 \subsection{Un exemple ...}
-On propose la fonction suivante sensée déterminer le plus petit entier \texttt{n} strictement positif tel que $1 + 2 + . . . + n$ dépasse strictement la valeur entière strictement positive \texttt{v} .
+\begin{obj}
 
+L'objectif est ici de montrer la nécessité d'utiliser un invariant de boucle.
+
+Pour cela, on propose la fonction suivante sensée déterminer le plus petit entier \texttt{n} strictement positif tel que $1 + 2 + . . . + n$ dépasse strictement la valeur entière strictement positive \texttt{v}. Cette fonction renvoie-t-elle le bon résultat ? Desfois ? Toujours ?
+\end{obj}
 \begin{lstlisting}
 def foo(v:int) -> int:
     r = 0
@@ -28,9 +32,11 @@ def foo(v:int) -> int:
     return n
 \end{lstlisting}
 
-\textit{Montrer intuitivement que \texttt{foo()} se termine.}
+\textit{Montrer intuitivement que \texttt{foo(v)} se termine pour $v\in\mathbb{N}^*$.}
+
 L'algorithme se terminera si on sort de la boucle \texttt{while}. Il faut pour cela que la condition \texttt{r<v} devienne fausse (cette condition est vraie initialement). Pour cela, il faut que \texttt{r} devienne supérieure ou égale à \texttt{v} dont la valeur ne change jamais. 
-\texttt{n} étant incrémenter de 1 à chaque itération, la valeur de \texttt{r} augmente donc à chaque itération. Il y aura donc un rang \texttt{n} au-delà duquel \texttt{r} sera supérieur à \texttt{v}. L'algorithme donc se termine. 
+
+\texttt{n} étant incrémenté de 1 à chaque itération, la valeur de \texttt{r} augmente donc à chaque itération. Il y aura donc un rang \texttt{n} au-delà duquel \texttt{r} sera supérieur à \texttt{v}. L'algorithme se termine donc. 
 
 \bigskip
 
@@ -48,7 +54,7 @@ Itération 5 & \texttt{10} & \texttt{4} & \texttt{10< 9  } $\Rightarrow$ \texttt
 \end{tabular}
 \end{center}
 
-La fonction renvoie 4. On a $1+2+3+4 = 10$. On dépassement strictement la valeur 10. La fonction répond au besoin dans ce cas. 
+La fonction renvoie 4. On a $1+2+3+4 = 10$. On dépasse strictement la valeur 9. La fonction répond au besoin dans ce cas. 
 
 \bigskip
 
@@ -65,16 +71,18 @@ Itération 4 & \texttt{6} & \texttt{3} & \texttt{6 < 10  } $\Rightarrow$ \texttt
 Itération 5 & \texttt{10} & \texttt{4} & \texttt{10< 10  } $\Rightarrow$ \texttt{  False} \\ \hline
 \end{tabular}
 \end{center}
-La fonction renvoie 4. On a $1+2+3+4 = 10$. On ne dépassement pas strictement la valeur 10. La fonction ne répond pas au besoin dans ce cas. 
+La fonction renvoie 4. On a $1+2+3+4 = 10$. On ne dépasse pas strictement la valeur 10. La fonction ne répond pas au besoin dans ce cas. 
 
 \bigskip
 
-\textbf{Bilan : } la fonction proposée ne remplit pas le cahier des charges. Aurait-on pu le prouver formellement ?
+\begin{resultat}
+La fonction proposée ne remplit pas le cahier des charges. Aurait-on pu le prouver formellement ?
+\end{resultat}
 
 \section{Terminaison d'un algorithme}
 
 \subsection{Variant de boucle}
-\begin{defi} \textbf{Variant de boucle} \\
+\begin{defi}{Variant de boucle} \\
 Un variant de boucle permet de prouver la terminaison d'une boucle conditionnelle.  Un variant de boucle est une \textbf{quantité entière positive} à l’entrée de chaque
 itération de la boucle et qui \textbf{diminue strictement à chaque itération}.
 \end{defi}
@@ -83,10 +91,10 @@ itération de la boucle et qui \textbf{diminue strictement à chaque itération}
 Si une boucle admet un variant de boucle, elle termine.
 \end{theorem}
 
-\begin{rem}
+\begin{prop}
 Un algorithme qui n’utilise ni boucles inconditionnelles (boucle \texttt{for}) ni récursivité termine toujours. Ainsi,
 la question de la terminaison n’est à considérer que dans ces deux cas.
-\end{rem}
+\end{prop}
 
 Reprenons l'exemple précédent. 
 \begin{lstlisting}
@@ -102,9 +110,10 @@ def foo(v:int) -> int:
 Dans cet exemple montrons que la quantité $u_n = v-r$ est un variant de boucle : 
 \begin{itemize}
 \item initialement, $r=0$ et $v>0$; donc  $u_0 > 0$;
-\item à la fin de l'itération $n$, on suppose que $u_n = v-r >0$ et que $u_n < u_{n-1}$. 
+\item à la fin de l'itération $n$, on suppose que $u_n = v-r >0$ et que $u_n < u_{n-1}$;
+\item à l'itération $n+1$ : 
 \begin{itemize}
-\item cas 1 : $r\geq v$. Dans ce cas, $n$ et $r$ n'évoluent pas l'hypothèse de récurrence reste vraie. 
+\item cas 1 : $r\geq v$. Dans ce cas, $n$ et $r$ n'évoluent pas l'hypothèse de récurrence reste vraie. On sort de la boucle \texttt{while}. L'algorithme termine,
 \item cas 2 : $r < v$. Dans ce cas, à la fin de l'itération $n+1$,  montrons que  $u_{n+1} < u_{n}$ : $u_{n+1} = v - (r + n + 1) =  u_n -n - 1$ soit $u_{n+1} =u_n -n - 1$ et donc $u_{n+1} < u_{n}$. L'hypothèse de récurrence est donc vraie au rang $n+1$. 
 \end{itemize}
 \end{itemize}
@@ -154,7 +163,7 @@ $n - p$ est donc un variant de boucle.
 \section{Correction d'un algorithme}
 \subsection{Invariant de boucle}
 
-\begin{defi}\textbf{Invariant de boucle}
+\begin{defi}{Invariant de boucle}
 Soit une boucle. Une propriété est appelée un invariant de boucle lorsque :
 \begin{itemize}
 \item cette propriété est vérifiée avant d'entrer dans la boucle;
@@ -248,7 +257,7 @@ $r=\sum\limits_{i=0}^n i < v$. Les deux assertions sont donc vraies au rang $n+1
 La propriété citée est donc un invariant de boucle. 
 
 \subsection{Correction partielle -- Correction totale}
-\begin{defi}\textbf{Correction partielle -- Correction totale}
+\begin{defi}{Correction partielle -- Correction totale}
 La correction est partielle quand le résultat est correct lorsque l'algorithme s'arrête, la correction est totale si elle est partielle et si l'algorithme termine.
 \end{defi}
 
