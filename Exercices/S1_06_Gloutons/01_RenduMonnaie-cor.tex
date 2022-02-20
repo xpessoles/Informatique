@@ -1,0 +1,23 @@
+
+
+\question{Ecrire une fonction \texttt{rendre\_monnaie(caisse:list, cout:float, somme\_client:float)-> list} prenant en arguments deux flottants \texttt{cout} et \texttt{somme\_client} représentant le coût d'un produit et la somme donnée par le client en \euro{} ainsi que le contenu de la caisse. Cette fonction renvoie la liste des billets à rendre par le client.}
+
+\begin{lstlisting}
+
+\end{lstlisting}
+
+
+\question{Ecrire une fonction \texttt{rendre\_monnaie\_v2(caisse:list, cout:float, somme\_client:float)-> list} ayant le même objectif que la précédente. Cette fonction devra de plus mettre à jour la caisse. Elle devra prendre en compte que la caisse peut manquer de billets. Elle renverra une liste vide s'il n'est pas possible de rendre la monnaie.}
+
+\begin{lstlisting}
+
+\end{lstlisting}
+
+
+\question{Que retourne la fonction \texttt{rendre\_monnaie} ? Est-ce le rendu optimal ?}
+
+La solution optimale serait [2000,500,100] et l'algorithme \texttt{rendre\_monnaie\_v2(caisse, 34, 50)}, l'algorithme renverra \texttt{[1000, 100, 100, 100, 100, 100, 100]}.
+
+\question{Conclure << qualitativement >>.}
+
+L'algorithme glouton renvoie un optimum local et non pas un optimum global comme le montre l'exemple précédent.
