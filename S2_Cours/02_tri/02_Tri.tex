@@ -559,12 +559,12 @@ On partitionne pour trouver une partie droite (en jaune) et une partie gauche (e
  \multirow{-2}{10.cm}{8 est pivot de la partie gauche. Ici pas de partie droite donc 11 est placé.. }  &  & \cellcolor{bleuc}8 &  \cellcolor{jaune}7&&  & \\ \cline{2-3} 
 \hline\hline
 \rowcolor{white}
- & \cellcolor{vertc}5  & &  &\cellcolor{vertc} 14&\cellcolor{vertc} 14&  \cellcolor{vertc} 17 \\
+ & \cellcolor{vertc}5  & &  &\cellcolor{vertc} 11&\cellcolor{vertc} 14&  \cellcolor{vertc} 17 \\
  \cline{2-3} \rowcolor{white}
  \multirow{-2}{10.cm}{On segmente la chaine de pivot 8 Seul 7 est dans la partie gauche}  &   &\cellcolor{rougec}7 &\cellcolor{bleuc} 8 &&&   \\ \cline{2-3} 
 \hline\hline
 \rowcolor{white}
- & \cellcolor{vertc}5  & \cellcolor{vertc}7 &\cellcolor{vertc} 8  &\cellcolor{vertc} 14&\cellcolor{vertc} 14&  \cellcolor{vertc} 17 \\
+ & \cellcolor{vertc}5  & \cellcolor{vertc}7 &\cellcolor{vertc} 8  &\cellcolor{vertc} 11&\cellcolor{vertc} 14&  \cellcolor{vertc} 17 \\
  \cline{2-3} \rowcolor{white}
  \multirow{-2}{10.cm}{Pas de partie droite et un seul élément dans la partie gauche : 7 et 8 on trouvé leur place}  &   & & &&&   \\ \cline{2-3} 
 \hline\hline
@@ -577,7 +577,7 @@ On partitionne pour trouver une partie droite (en jaune) et une partie gauche (e
 
 
 \begin{itemize}
-\item On crée tout d'abord une fonction <<\textbf{partition}>>. 
+\item On crée tout d'abord une fonction << \textbf{partition} >>. 
 \begin{itemize}
 \item Les arguments de cette fonction seront le tableau \textbf{$a$} et deux indices correspondant au début et à la fin de la partie à segmenter du tableau (par convention \textbf{$g$} inclus et $\textbf{d}$ exclu). En effet on ne segmente pas à chaque fois l'ensemble du tableau.
 \item On suppose qu'il y a au moins un élément dans ce segment ce que l'on peut vérifier avec \texttt{assert} : 
@@ -588,12 +588,12 @@ On partitionne pour trouver une partie droite (en jaune) et une partie gauche (e
 assert g<d
 		\end{verbatim}
 	\end{DDbox}
-\item On choisit \textbf{$a[g]$} comme pivot que l'on peut stocker dans une variable $v$.
-\item Le principe consiste alors à parcourir le tableau de la gauche vers la droite, entre les indices \textbf{$g+1$} et \textbf{$d$} avec une boucle \textbf{$for$}.
-\item on stockera dans deux sous listes \textbf{$ainf$} et \textbf{$asup$} toutes les composantes respectivement inférieures ou supérieures au pivot.
-\item on rassemblera les deux sous listes ainsi que le pivot pour donner la liste \textbf{$a$} partitionnée (en assemblant également le reste de la liste $a$).
-\item On note $m$ l'indice qui correspond au partitionnement de $a$.
-\item On sortira de cette fonction $m$ et le tableau $a$.
+\item On choisit \texttt{a[g]} comme pivot que l'on peut stocker dans une variable \texttt{v}.
+\item Le principe consiste alors à parcourir le tableau de la gauche vers la droite, entre les indices \texttt{g+1} et \textbf{$d$} avec une boucle \texttt{for}.
+\item on stockera dans deux sous listes \texttt{ainf} et \texttt{asup} toutes les composantes respectivement inférieures ou supérieures au pivot.
+\item on rassemblera les deux sous listes ainsi que le pivot pour donner la liste \texttt{a} partitionnée (en assemblant également le reste de la liste \texttt{a}).
+\item On note \texttt{m} l'indice qui correspond au partitionnement de \texttt{a}.
+\item On sortira de cette fonction \texttt{m} et le tableau \texttt{a}.
 \end{itemize}
 \end{itemize}
 
@@ -664,7 +664,7 @@ La fonction tri rapide est alors implémentée de façon récursive.
 
 
 
-Pour trier un tableau il suffit d'appeler \textbf{$tri\_rapide$} sur la totalité des éléments.
+Pour trier un tableau il suffit d'appeler \texttt{tri\_rapide} sur la totalité des éléments.
 
 
 %
@@ -769,7 +769,7 @@ $n \log n$ & $n^2/2$ \\
 \subsection{Principe}
 
 
-Cet algorithme fait aussi partie des algorithmes "diviser pour régner".
+Cet algorithme fait aussi partie des algorithmes << diviser pour régner >>.
 
 Le principe consiste à couper le tableau de départ en deux. On trie chacun des groupes indépendamment. Puis on fusionne les deux groupes en utilisant le fait que chacun des groupe est déjà ordonné.
 
@@ -800,7 +800,7 @@ Chacune de ces deux listes est triée de façon indépendante (pas illustré ici
 \hline 
 \rowcolor{white}
   &   & \cellcolor{rougec}11 &\cellcolor{rougec} 14 & \cellcolor{gris25}7 & \cellcolor{jaune}8 & \cellcolor{jaune}17   \\ \cline{2-3} \rowcolor{white}
- \multirow{-2}{10.cm}{remplit après les comparaisons successives des éléments des listes $L_1$ (rouge) et $L_2$ (jaune). 5<7 on le stock de façon définitive dans $T_2$.}
+ \multirow{-2}{10.cm}{remplit après les comparaisons successives des éléments des listes $L_1$ (rouge) et $L_2$ (jaune). 5<7 on le stocke de façon définitive dans $T_2$.}
 &\cellcolor{bleuc}5& &  &  & &  \\
 \hline 
 \hline 
@@ -842,13 +842,13 @@ Chacune de ces deux listes est triée de façon indépendante (pas illustré ici
 \hline 
 \rowcolor{white}
   &   &  &\cellcolor{bleuc} 14 &  &  & \cellcolor{gris25}17   \\ \cline{2-3} \rowcolor{white}
- \multirow{-2}{10.cm}{On continu la fusion en comparant les premiers nombres restants dans chaque bloc (14 et 17).}
+ \multirow{-2}{10.cm}{On continue la fusion en comparant les premiers nombres restants dans chaque bloc (14 et 17).}
 &\cellcolor{vertc}5&\cellcolor{vertc}7 &\cellcolor{vertc}8  & \cellcolor{vertc}11  & &  \\
 \hline 
 \hline 
 \rowcolor{white}
   &   &  & &  &  &    \\ \cline{2-3} \rowcolor{white}
- \multirow{-2}{10.cm}{14<17 on le stock dans le deuxième tableau et comme c'est le dernier restant on ajoute 17.}
+ \multirow{-2}{10.cm}{14<17 on le stocke dans le deuxième tableau et comme c'est le dernier restant on ajoute 17.}
 &\cellcolor{vertc}5&\cellcolor{vertc}7 &\cellcolor{vertc}8  &\cellcolor{rougec}11  &\cellcolor{bleuc} 14 & \cellcolor{gris25}17  \\
 \hline 
  
@@ -863,15 +863,15 @@ Chacune de ces deux listes est triée de façon indépendante (pas illustré ici
 
 On souhaite trier un tableau $a$ :
 \begin{itemize}
-\item Le caractère récursif du tri fusion fait que l'on s'intéresse seulement à la partie de $a$ entre les indices $g$ (inclus) et $d$ (exclu).
-\item Afin de découper le groupe à trier en deux, on calcule l'indice médian :
+\item le caractère récursif du tri fusion fait que l'on s'intéresse seulement à la partie de $a$ entre les indices $g$ (inclus) et $d$ (exclu);
+\item afin de découper le groupe à trier en deux, on calcule l'indice médian :
 $m = \frac{g+d}{2}$ . 
 
-\item On trie alors récursivement les deux parties :
+\item on trie alors récursivement les deux parties :
 \begin{itemize}
 \item délimitées par $g$ et $m$ d'une part,
 \item et $m$ et $d$ d'autre part.
-\item \textbf{Si} \textbf{$g\geq d-1$}, il y a au plus un élément à trier donc rien à faire (initialisation de la récursivité).
+\item \textbf{si} \textbf{$g\geq d-1$}, il y a au plus un élément à trier donc rien à faire (initialisation de la récursivité);
 \end{itemize}
 
 
@@ -880,16 +880,16 @@ $m = \frac{g+d}{2}$ .
 %\end{center}
 
 
-\item Il reste à effectuer la fusion. On utilise pour cela un second tableau $a_0$, alloué une et une seule fois au
+\item il reste à effectuer la fusion. On utilise pour cela un second tableau $a_0$, alloué une et une seule fois au
 début du tri.
-\item On réalise la fonction fusion :
+\item on réalise la fonction fusion :
 \begin{itemize}
-\item qui prend en arguments deux tableaux, $a0$ et $a$, et les trois indices $g$, $m$ et $d$. 
-\item Les portions $a0[g \cdots  m[$ et $a0[m \cdots d[$ sont supposées triées.
-\item On veut les fusionner dans $a[g\cdots d[$. 
-\item On va parcourir chacune des listes déjà triées en utilisant un indice $i$ pour $L_1$ et $j$ pour $L_2$.
-\item On compare à chaque itération de la boucle \textbf{for} $a0[i]$ et $a0[j]$ et on place la plus petite des valeurs dans $a[k]$ et on incrémente l'indice correspondant $i$ ou $j$ selon celui que l'on a déplacé.
-\item On traite aussi le cas ou une des deux listes est vide.
+\item qui prend en arguments deux tableaux, $a0$ et $a$, et les trois indices $g$, $m$ et $d$,
+\item les portions $a0[g \cdots  m[$ et $a0[m \cdots d[$ sont supposées triées,
+\item on veut les fusionner dans $a[g\cdots d[$,
+\item on va parcourir chacune des listes déjà triées en utilisant un indice $i$ pour $L_1$ et $j$ pour $L_2$,
+\item on compare à chaque itération de la boucle \textbf{for} $a0[i]$ et $a0[j]$ et on place la plus petite des valeurs dans $a[k]$ et on incrémente l'indice correspondant $i$ ou $j$ selon celui que l'on a déplacé,
+\item on traite aussi le cas ou une des deux listes est vide.
 \end{itemize}
 
 
