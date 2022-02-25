@@ -1,0 +1,20 @@
+\exer{Recherche d’un élément dans une liste}
+Soit la fonction suivante.
+\begin{lstlisting}
+def recherche(L,x):
+    """ La fonction prend en entrée une liste L et un élément x,
+    et retourne True si x est dans L, False sinon."""
+    for i in range(len(L)):
+        if L[i]==x:
+            return True
+    return False
+\end{lstlisting}
+
+\question{Montrer la correction de la fonction \texttt{recherche}.}
+\ifprof
+\begin{corrige}
+#Inv(i): x ne se trouve pas dans L[0:i].
+#Inv(i+1)
+\end{corrige}
+\else
+\fi

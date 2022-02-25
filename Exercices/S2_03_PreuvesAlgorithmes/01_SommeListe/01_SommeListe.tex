@@ -1,0 +1,22 @@
+\exer{Somme des éléments d'une liste}
+Soit la fonction suivante.
+\begin{lstlisting}
+def somme(L,x):
+    """ La fonction prend en entrée une liste L de flottants ou d'entiers,
+    et retourne la somme de ses éléments. """
+    s=0
+    for i in range(len(L)):
+        #Inv(i): s est la somme des i premiers éléments de la liste.
+        s+=L[i]
+        #Inv(i+1): s est la somme des i+1 premiers éléments de la liste.
+    return s
+\end{lstlisting}
+
+\question{Montrer la terminaison et la correction de la fonction \texttt{somme}}
+\ifprof
+\begin{corrige}
+#Inv(i): s est la somme des i premiers éléments de la liste.
+#Inv(i+1): s est la somme des i+1 premiers éléments de la liste.
+\end{corrige}
+\else
+\fi

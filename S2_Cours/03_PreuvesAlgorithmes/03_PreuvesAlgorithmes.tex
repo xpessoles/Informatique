@@ -1,3 +1,5 @@
+% !TEX spellcheck = fr_FR
+
 \section{Anlayse des algorithmes}
 
 \subsection{Définition}
@@ -7,9 +9,15 @@ Prouver la terminaison d'un algorithme signifie montrer que cet algorithme se te
 \end{defi}
 
 \begin{defi}{Correction d'un algorithme} \\
-Prouver la correction d'un algorithme signifie montrer que cet algorithme fournit bien la solution au problème qu'il est sensé résoudre. On utilise pour cela un \textbf{invariant de boucle}.
-\end{defi}
+Un algorithme est dit (partiellement) correct s'il est correct dès qu'il termine. 
 
+\end{defi}
+Prouver la correction d'un algorithme signifie montrer que cet algorithme fournit bien la solution au problème qu'il est sensé résoudre. On utilise pour cela un \textbf{invariant de boucle}.
+
+\begin{defi}{Invariant de boucle}
+Un invariant de boucle est une propriété dépendant des variables de l’algorithme, qui est vérifiée à
+chaque passage dans la boucle.
+\end{defi}
 %\begin{defi}\textbf{Analyser} \\
 %Prouver la correction d'un algorithme signifie montrer que cet algorithme fournit bien la solution au problème qu'il est sensé résoudre. On utilise pour cela un \textbf{invariant de boucle}.
 %\end{defi}
@@ -163,14 +171,22 @@ $n - p$ est donc un variant de boucle.
 \section{Correction d'un algorithme}
 \subsection{Invariant de boucle}
 
-\begin{defi}{Invariant de boucle}
-Soit une boucle. Une propriété est appelée un invariant de boucle lorsque :
+\begin{methode}~\\
+Pour montrer qu'une propriété est un invariant de boucle dans une boucle \texttt{while} :
 \begin{itemize}
-\item cette propriété est vérifiée avant d'entrer dans la boucle;
-\item si cette propriété est vérifiée en entrée d'itération, alors elle est vérifiée en sortie de l'itération.
+\item le propriété doit être vérifiée avant d'entrer dans la boucle;
+\item la propriété doit être vraie en entrée de boucle;
+\item la propriété doit être vraie en fin de boucle.
 \end{itemize}
-
-\end{defi}
+\end{methode}
+%
+%\begin{defi}{Invariant de boucle}
+%Soit une boucle. Une propriété est appelée un invariant de boucle lorsque :
+%\begin{itemize}
+%\item cette propriété est vérifiée avant d'entrer dans la boucle;
+%\item si cette propriété est vérifiée en entrée d'itération, alors elle est vérifiée en sortie de l'itération.
+%\end{itemize}
+%\end{defi}
 
 
 Reprenons un des exemples précédents. Reconsidérons l’algorithme suivant qui, étant donné un entier naturel $n$ strictement positif (inférieur à $2^{30}$), détermine le plus petit entier $k$ tel que $n \leq 2^k$.
@@ -191,7 +207,7 @@ Montrons que la propriété suivante est un invariant de boucle : $p=2^k$ et $2^
 \item d'une part  on a bien $1=2^0$;
 \item d'autre part $2^{-1}<n$.
 \end{itemize}
-\item On considère que la propriété est vraie au $n$\ieme tour de bouclen c'est à dire $p=2^k$ et $2^{k-1}<n$.
+\item On considère que la propriété est vraie au $n$\ieme tour de boucle c'est à dire $p=2^k$ et $2^{k-1}<n$.
 \item Au tour de boucle suivant : 
 \begin{itemize}
 \item \textbf{ou bien} $p>=n$. Dans ce cas, on sort de la boucle et on a toujours $p=2^k$ et $2^{k-1}<n$ (propriété d'invariance). La propriété est donc vraie au tour $n+1$.
@@ -221,7 +237,7 @@ $\sum\limits_{n=1}^{n-1} i < v$,
 $n\in\mathbb{N}^*$ ?
 
 La réponse est directement NON, car la phase d'initialisation n'est pas vérifiée car $n=0$ et $n\notin\mathbb{N}^*$.
-Cela signifie donc que l'algorithme proposé en répond pas au cahier des charges. 
+Cela signifie donc que l'algorithme proposé ne répond pas au cahier des charges. 
 
 Modifions donc l'algorithme ainsi.
 \begin{lstlisting}
@@ -241,8 +257,8 @@ $n\in\mathbb{N}^*$.
 \begin{itemize}
 \item \textbf{Initialisation : }à l'entrée dans la boucle $r=1$ et $n=1$, $n\in\mathbb{N}^*$
 \begin{itemize}
-\item d'une part  on a bien $i=\sum\limits_{i=0}^1 i$;
-\item d'autre part$  \sum\limits_{n=0}^{0}i =0 < v$.
+\item d'une part  on a bien $r=\sum\limits_{i=0}^1 i$;
+\item d'autre part$  \sum\limits_{n=0}^{1}i =1 < v$.
 \end{itemize}
 \item On considère que la propriété est vraie au $n$\ieme  tour de boucle c'est-à-dire $r=\sum\limits_{i=0}^n i$ et $\sum\limits_{n=0}^{n-1} i < v$.
 \item Au tour de boucle suivant : 
@@ -255,133 +271,8 @@ $r=\sum\limits_{i=0}^n i < v$. Les deux assertions sont donc vraies au rang $n+1
 \end{itemize}
 \end{itemize}
 La propriété citée est donc un invariant de boucle. 
-
-\subsection{Correction partielle -- Correction totale}
-\begin{defi}{Correction partielle -- Correction totale}
-La correction est partielle quand le résultat est correct lorsque l'algorithme s'arrête, la correction est totale si elle est partielle et si l'algorithme termine.
-\end{defi}
-
-\newpage
-\section{A TRIER}
-
-\begin{defi} 
-\textbf{Preuve d'algorithme}
-
-Une preuve d'algorithme est une démonstration montrant qu'un algorithme réalise la tâche pour laquelle il a été conçu. 
-
-Il faut alors montrer sa \textbf{terminaison} c'est-à-dire montrer que l'algorithme se termine. On utilise pour cela un \textbf{variant de boucle}.
-
-Il faut ensuite montrer sa \textbf{correction} c'est-à-dire montrer que l'algorithme réalise la tâche attendue. On utilise pour cela un \textbf{invariant de boucle}.
-\end{defi}
-
-
-
-\subsection{Un premier exemple}
-
-\textit{Donner l'algorithme permettant de déterminer le plus petit entier n tel que 1 + 2 + . . . + n dépasse strictement 1000.}
-
-Proposons cet algorithme.
-\begin{lstlisting}
-res = 0
-n = 0
-while res < 1000 : 
-    n = n+1
-    res = res+n
-    
-print(n,res)
-\end{lstlisting}
-
-\subsection{Un deuxième exemple : $n!$}
-
-\begin{lstlisting}
-for i in range(1,n+1):
-    # en entrant dans le ième tour de boucle, p = (i-1)!
-    p=p*i
-    # en sortant du ième tour de boucle, p = i!
-
-print(p) #p = n!
-\end{lstlisting}
-
-Ici, l'invariant de boucle est << $p$ contient $(i-1)!$ >> : 
-\begin{enumerate}
-\item c'est bien une propriété qui est vraie pour $i=1$;
-\item supposons qu'au rang i, $p=(i-1)!$ à l'entrée de la boucle. Au cours de la boucle, $p$ va prendre la valeur $p=(i-1)!\times i=i!=((i+1)-1)!$ donc la propriété est vérifiée en sortie de boucle;
-\item enfin, au dernier tour de boucle, $i$ vaut $n$ donc $p=n!$ ce qui répond à la question.\\
-\end{enumerate}
-
-\subsection{Un troisième exemple : algorithme d'Euclide}
-\url{https://lgarcin.github.io/CoursPythonCPGE/preuve.html}
-
-\begin{lstlisting}
-def pgcd(a, b):
-  while b!= 0:
-      a, b = b, a % b
-  return a
-\end{lstlisting}
-
-On suppose que l'argument $b$ est un entier naturel. En notant $b_k$ la valeur de $b$ à la fin de la $k^\text{ème}$ itération ($b_0$ désigne la valeur de $b$ avant d'entrer dans la boucle), on a $0\leq b_{k+1}<b_k$ si $b_k>0$. La suite $(b_k)$ est donc une suite strictement décroissante d'entiers naturels : elle est finie et la boucle se termine.
-
-
-On note $a_k$ et $b_k$ les valeurs de a et b à la fin de la $k^\text{ème}$ itération ($a_0$ et $b_0$ désignent les valeurs de $a$ et $b$ avant d'entrer dans la boucle). Or, si $a=bq+r$, il est clair que tout diviseur commun de $a$ et $b$ est un diviseur commun de $b$ et $r$ et réciproquement. Notamment, $a\wedge b=b\wedge r$. Ceci prouve que $a_k\wedge b_k=a_{k+1}\wedge b_{k+1}$. La quantité $a_k\wedge b_k$ est donc bien un invariant de boucle. En particulier, à la fin de la dernière itération (numérotée $N$), $b_N=0$ de sorte que $a_0\wedge b_0=a_N\wedge b_N=a_N\wedge0=a_N$. La fonction \texttt{pgcd} renvoie donc bien le \texttt{pgcd} de $a$ et $b$.
-
-\subsection{Un troisième exemple (bis) : algorithme d'Euclide}
-\url{https://mathematice.fr/fichiers/cpge/infoprepaC8.pdf}
-
-On effectue la division euclidienne de $a$ par $b$ où $a $et $b$ sont deux entiers strictement positifs. Il s’agit
-donc de déterminer deux entiers $q$ et $r$ tels que $a = bq+r$ avec $0 \leq r < b$. Voici un algorithme déterminant
-$q$ et $r$ :
-
-\begin{lstlisting}
-q = 0
-r = a
-while r >= b :
-    q = q + 1
-    r = r -b
-\end{lstlisting}
-
-On choisit comme invariant de boucle la propriété $a = bq + r$.
-\begin{itemize}
-\item Initialisation : $q$ est initialisé à 0 et $r$ à $a$, donc la propriété $a = bq + r = b\cdot 0 + a$ est vérifiée avant le premier passage dans la boucle.
-\item Hérédité : avant une itération arbitraire, supposons que l’on ait $a = bq + r$ et montrons que cette propriété est encore vraie après cette itération. Soient $q'$ la valeur de $q$ à la fin de l’itération et $r'$ la valeur de $r$ à la fin de l’itération. Nous devons montrer que $a = bq' + r'$. On a $q'= q + 1$ et $r' = r- b$, alors $bq' + r' = b(q + 1) + (r - b) = bq + r = a$. La propriété est bien conservée.
-\end{itemize}
-
-
-\textbf{Terminaison}
-Nous reprenons l’exemple précédent.
-\begin{itemize}
-\item Commençons par montrer que le programme s’arrête : la suite formée par les valeurs de $r$ au cours
-des itérations est une suite d’entiers strictement décroissante : $r$ étant initialisé à $a$, si $a \geq b$ alors
-la valeur de $r$ sera strictement inférieure à celle de $b$ en un maximum de $a - b$ étapes.
-\item Ensuite, si le programme s’arrête, c’est que la condition du "tant que" n’est plus satisfaite, donc
-que $r < b$. Il reste à montrer que $r \geq 0$. Comme $r$ est diminué de $b$ à chaque itération, si $r < 0$,
-alors à l’itération précédente la valeur de $r$ était $r' = r + b$ ; or $r' < b$ puisque $r < 0$. Et donc la
-boucle se serait arrêtée à l’itération précédente, ce qui est absurde; on on déduit que $r \geq 0$.
-\end{itemize}
-En conclusion, le programme se termine avec $0 \leq r < b$ et la propriété $a = bq + r$ est vérifiée à chaque
-itération; ceci prouve que l’algorithme effectue bien la division euclidienne de $a$ par $b$.
-
-
-
-\subsection{Quatrième exemple }
-L’objectif est de calculer le produit de deux nombres entiers positifs $a$ et $b$ sans utiliser de multiplication.
-\begin{lstlisting}
-p = 0
-m = 0
-while m < a :
-    m = m + 1
-    p = p + b
-\end{lstlisting}
-
-Comme dans l’exemple précédent, le programme se termine car la suite des valeurs de $m$ est une suite
-d’entiers consécutifs strictement croissante, et atteint la valeur $a$ en $a$ étapes.
-
-Un invariant de boucle est ici : $p = m.b$.
-
-\begin{itemize}
-\item Initialisation : avant le premier passage dans la boucle, $p = 0$ et $m = 0$, donc $p = mb$.
-\item Hérédité : supposons que $p = mb$ avant une itération; les valeurs de $p$ et $m$ après l’itération sont
-$p'= p + b$ et $m' = m + 1$. Or $p'= (p + b) = m.b + b = (m + 1)b = m'b$. Donc la propriété
-reste vraie.
-\item Conclusion : à la sortie de la boucle $p = m.b$.
-\end{itemize}
-Puisqu’à la sortie de la boucle $m = a$, on a bien $p = ab$.
+%
+%\subsection{Correction partielle -- Correction totale}
+%\begin{defi}{Correction partielle -- Correction totale}
+%La correction est partielle quand le résultat est correct lorsque l'algorithme s'arrête, la correction est totale si elle est partielle et si l'algorithme termine.
+%\end{defi}

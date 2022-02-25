@@ -1,0 +1,38 @@
+\exer{Exponentiation rapide}
+\begin{lstlisting}
+def expo_rapide(x,n):
+    y = x
+    z = 1
+    m = n
+    # Invariant : x*y^m = x^n
+    while m>0:
+        q,r=m//2,m%2
+        if r==1:
+            z=z*y
+        y=y*y
+        m=q
+    return z
+\end{lstlisting}
+
+\question{Montrer que la fonction permet de calculer $x^n$.}
+\ifprof
+\begin{corrige}
+\textbf{A vérifier}
+
+Juste avant la boucle, on a $y = x$; $z = 1$ et $m = n$. Remarquez qu’ainsi, $z\times y^m = x^n$. Vérifions que si cette propriété est vraie en haut du corps de boucle, alors elle est vérifiée en bas du corps de boucle
+(là où se trouve le second). Si on se trouve en haut du corps de boucle, ceci signifie que la variable $m$ contient un entier
+strictement positif. On a deux cas à examiner, suivant la parité de $m$. Notons $x'$, $y'$ et $m'$ les valeurs des variables
+$z$; $y$; $m$ en bas de la boucle.
+\begin{itemize}
+\item si $m$ est pair, alors $q = \dfrac{m}{2}$, $r=0$, $y'=y^2$, et $m'=q=\dfrac{m}{2}z'=z$ est inchangé. On a alors
+$z'\times y'^{m'}=z\times \left(y^2\right)^{\dfrac{m}{2}} = z\times y^m$. Puisque $x\times y^m$ valait $x^n$ en haut de la boucle, c’est toujours le cas en bas du corps de boucle.
+\item si $m$ est impair, alors $q=\dfrac{m-1}{2}$, $r=1$. Dans ce cas, $z'$ prend la valeur $z\times y$, $y'=y^2$ et 
+$m'=\dfrac{m-1}{2}$. On a alors $z' \times z'^{m'} = z\times y \times \left(y^2)^{\dfrac{m-1}{2}}  = z\times y^m$.
+De même, puisque $z\times y^m$ valait $x^n$ en haut de la boucle, c’est toujours le cas en bas du corps de boucle.
+\end{itemize}
+Ainsi, la propriété $x\times y^m = x^n$ est maintenue à chaque passage dans la boucle, c’est donc un invariant de boucle.
+On en déduit en particulier que cette propriété est vérifiée également après la sortie de la boucle. Rappelons que l’on
+a montré qu’en sortie de boucle, m était nul. Or comme l’invariant est vérifié, cela signifie que $z=x^n$. Comme on renvoie $z$, l'algorithme renvoie bien $x^n$, et est donc correct.
+\end{corrige}
+\else
+\fi

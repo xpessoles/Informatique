@@ -1,0 +1,38 @@
+\exer{Recherche ddichotomique dans une liste triée}
+%Jules Svartz Masséna
+%
+Soit la fonction suivante.
+\begin{lstlisting}
+def recherche_dicho(L,x):
+    """ La fonction prend en entrée une liste L triée dans l'ordre croissant et un élément x,
+    et retourne True si x est dans L, False sinon."""
+    g=0
+    d=len(L)
+    while g<d:
+        #Inv: x ne se trouve ni dans L[0:g] ni dans L[d:len(L)].
+        m=(g+d)//2
+        if L[m]==x:
+            return True
+        elif L[m]<x:
+            g=m+1
+        else:
+            d=m
+        #Inv: x ne se trouve ni dans L[0:g] ni dans L[d:len(L)].
+    return False
+\end{lstlisting}
+
+\question{Montrer la correction de la fonction \texttt{recherche\_dicho}.}
+\ifprof
+\begin{corrige}
+\begin{itemize}
+\item La terminaison de l’algorithme repose sur celle de la boucle \texttt{while} : la quantité $d-g$ est à valeurs dans $\mathbb{N}$ et
+décroît strictement à chaque itération de la boucle : l’algorithme termine.
+\item La correction repose elle aussi sur celle de la boucle \texttt{while}. On se rend compte facilement qu’elle admet l’invariant
+indiqué : si \texttt{L[m]} est égal à \texttt{x}, on renvoie simplement \texttt{True} et la fonction est correcte. Sinon, si \texttt{L[m]<x}, comme
+la liste est triée cela signifie que \texttt{x} ne peut se trouver qu’à un indice strictement supérieur à \texttt{m} et strictement
+inférieur si \texttt{L[m]>x}.
+\item  Après la boucle, comme $g\geqd$ (en fait, $g = d$), l’invariant assure que \texttt{x} ne se trouve ni dans \texttt{L[0:g]} ni dans
+\texttt{L[d:len(L)]} donc en fait pas dans \texttt{L}. On renvoie \texttt{False} et la fonction est correcte.
+\end{corrige}
+\else
+\fi
