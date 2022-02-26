@@ -1,4 +1,4 @@
-\exer{Recherche ddichotomique dans une liste triée}
+\exer{Recherche dichotomique dans une liste triée}
 %Jules Svartz Masséna
 %
 Soit la fonction suivante.
@@ -31,8 +31,9 @@ décroît strictement à chaque itération de la boucle : l’algorithme termine
 indiqué : si \texttt{L[m]} est égal à \texttt{x}, on renvoie simplement \texttt{True} et la fonction est correcte. Sinon, si \texttt{L[m]<x}, comme
 la liste est triée cela signifie que \texttt{x} ne peut se trouver qu’à un indice strictement supérieur à \texttt{m} et strictement
 inférieur si \texttt{L[m]>x}.
-\item  Après la boucle, comme $g\geqd$ (en fait, $g = d$), l’invariant assure que \texttt{x} ne se trouve ni dans \texttt{L[0:g]} ni dans
+\item  Après la boucle, comme $g\geq d$ (en fait, $g = d$), l’invariant assure que \texttt{x} ne se trouve ni dans \texttt{L[0:g]} ni dans
 \texttt{L[d:len(L)]} donc en fait pas dans \texttt{L}. On renvoie \texttt{False} et la fonction est correcte.
+\end{itemize}
 \end{corrige}
 \else
 \fi
