@@ -1,0 +1,47 @@
+\exer{Recherche dichotomique dans un tableau trié -- Formulation récursive}
+% Svartz Massena
+\begin{lstlisting}
+def dicho_rec(L,x):
+    """L liste triée dans l'ordre croissant, x un élément. On renvoie True si x est dans L, False sinon"""
+    n=len(L)
+    if n==0:
+        return False
+    m=n//2
+    if L[m]==x:
+        return(True)
+    elif L[m]<x:
+        return dicho_rec(L[m+1:],x) #la partie à droite de L[m].
+    else:
+        return dicho_rec(L[:m],x) #la partie à gauche.
+\end{lstlisting}
+
+\question{Montrer que la fonction termine.}
+\ifprof
+\begin{corrige}
+La taille de la liste \texttt{L} est un variant de boucle.
+\end{corrige}
+\else
+\fi
+
+Soit la proposition suivante : 
+\textit{<< Si \texttt{L} est une liste triée dans l’ordre croissant et \texttt{x} un élément comparable à ceux de \texttt{L}, alors \texttt{dicho\_rec(L,x)} retourne \texttt{True} si et seulement si \texttt{x} est dans \texttt{L}, \texttt{False} sinon.>>}.
+
+\question{Montrer que la fonction termine.}
+\ifprof
+\begin{corrige}
+\begin{itemize}
+\item Initialisation : si la longueur du tableau est 1, alors la sortie de la fonction est correcte.
+\item Hérédité : si \texttt{L} est de longueur au moins 2, un et un seul des cas suivants se produit :
+\begin{itemize}
+\item \texttt{L[m]} est égal à \texttt{x}, auquel cas la sortie de la fonction est correcte.
+\item \texttt{L[m]} est inférieur strictement à \texttt{x}, auquel cas \texttt{x} ne peut se trouver qu’après \texttt{m} puisque \texttt{L} est trié dans l’ordre
+croissant. Le tableau \texttt{L[m:]} correspond aux éléments placés après m (inclus), triés également dans l’ordre
+croissant. Par hypothèse de récurrence, la sortie de la fonction \texttt{dicho\_rec} sur l’instance \texttt{(L[m:],x)} est
+correcte, donc également sur \texttt{(L,x)}.
+\item On procède de même,si \texttt{L[m]} est strictement supérieur à x avec le tableau \texttt{L[:m]}.
+\end{itemize}
+\item Par principe de récurrence, la fonction \texttt{dicho\_rec} est correcte.
+\end{itemize}
+\end{corrige}
+\else
+\fi
