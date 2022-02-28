@@ -1,0 +1,25 @@
+\exer{Maximum d'une liste}
+Soit la fonction suivante.
+\begin{lstlisting}
+def maximum(L):
+    """ La fonction prend en entrée une liste L non vide de flottants ou d'entiers,
+    et retourne le maximum de ses éléments. """
+    m=L[0]
+    for i in range(1,len(L)):
+        #Inv(i): m est le plus grand élément de L[0:i].
+        if L[i]>m:
+            m=L[i]
+        #Inv(i+1): m est le plus grand élément de L[0:i+1].
+    return m
+\end{lstlisting}
+
+\question{Montrer la terminaison et la correction de la fonction \texttt{maximum}}
+\ifprof
+\begin{corrige}~\\
+\begin{lstlisting}
+#Inv(i): m est le plus grand élément de L[0:i].
+#Inv(i+1): m est le plus grand élément de L[0:i+1].
+\end{lstlisting}
+\end{corrige}
+\else
+\fi

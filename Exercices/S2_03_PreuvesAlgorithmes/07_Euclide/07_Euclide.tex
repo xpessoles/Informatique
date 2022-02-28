@@ -1,0 +1,70 @@
+\exer{L'algorithme d'Euclide}
+\url{https://lgarcin.github.io/CoursPythonCPGE/preuve.html}
+
+\begin{lstlisting}
+def pgcd(a, b):
+  while b!= 0:
+      a, b = b, a % b
+  return a
+\end{lstlisting}
+
+\question{Monter la terminaison de la fonction \texttt{pgcd(a,b)}.}
+\ifprof
+\begin{corrige}
+On suppose que l'argument $b$ est un entier naturel. En notant $b_k$ la valeur de $b$ à la fin de la $k^\text{ème}$ itération ($b_0$ désigne la valeur de $b$ avant d'entrer dans la boucle), on a $0\leq b_{k+1}<b_k$ si $b_k>0$. La suite $(b_k)$ est donc une suite strictement décroissante d'entiers naturels : elle est finie et la boucle se termine.
+\end{corrige}
+\else
+\fi
+
+
+\question{Monter la correction de la fonction \texttt{pgcd(a,b)}.}
+\ifprof
+\begin{corrige}
+On note $a_k$ et $b_k$ les valeurs de a et b à la fin de la $k^\text{ème}$ itération ($a_0$ et $b_0$ désignent les valeurs de $a$ et $b$ avant d'entrer dans la boucle). Or, si $a=bq+r$, il est clair que tout diviseur commun de $a$ et $b$ est un diviseur commun de $b$ et $r$ et réciproquement. Notamment, $a\wedge b=b\wedge r$ ($\wedge$ = et ?). Ceci prouve que $a_k\wedge b_k=a_{k+1}\wedge b_{k+1}$. La quantité $a_k\wedge b_k$ est donc bien un invariant de boucle. En particulier, à la fin de la dernière itération (numérotée $N$), $b_N=0$ de sorte que $a_0\wedge b_0=a_N\wedge b_N=a_N\wedge0=a_N$. La fonction \texttt{pgcd} renvoie donc bien le \texttt{pgcd} de $a$ et $b$.
+\end{corrige}
+\else
+\fi
+
+
+%\subsection{Un troisième exemple (bis) : algorithme d'Euclide}
+%\url{https://mathematice.fr/fichiers/cpge/infoprepaC8.pdf}
+
+On donne une seconde version de l'algorithme d'Euclide. Pour cela on effectue la division euclidienne de $a$ par $b$ où $a $et $b$ sont deux entiers strictement positifs. Il s’agit
+donc de déterminer deux entiers $q$ et $r$ tels que $a = bq+r$ avec $0 \leq r < b$. Voici un algorithme déterminant
+$q$ et $r$ :
+
+\begin{lstlisting}
+q = 0
+r = a
+while r >= b :
+    q = q + 1
+    r = r -b
+\end{lstlisting}
+
+On choisit comme invariant de boucle la propriété $a = bq + r$.
+
+\question{Montrer la correction de l'algorithme.}
+\ifprof
+\begin{corrige}
+\begin{itemize}
+\item Initialisation : $q$ est initialisé à 0 et $r$ à $a$, donc la propriété $a = bq + r = b\cdot 0 + a$ est vérifiée avant le premier passage dans la boucle.
+\item Hérédité : avant une itération arbitraire, supposons que l’on ait $a = bq + r$ et montrons que cette propriété est encore vraie après cette itération. Soient $q'$ la valeur de $q$ à la fin de l’itération et $r'$ la valeur de $r$ à la fin de l’itération. Nous devons montrer que $a = bq' + r'$. On a $q'= q + 1$ et $r' = r- b$, alors $bq' + r' = b(q + 1) + (r - b) = bq + r = a$. La propriété est bien conservée.
+\end{itemize}
+
+
+\textbf{Terminaison}
+Nous reprenons l’exemple précédent.
+\begin{itemize}
+\item Commençons par montrer que le programme s’arrête : la suite formée par les valeurs de $r$ au cours
+des itérations est une suite d’entiers strictement décroissante : $r$ étant initialisé à $a$, si $a \geq b$ alors
+la valeur de $r$ sera strictement inférieure à celle de $b$ en un maximum de $a - b$ étapes.
+\item Ensuite, si le programme s’arrête, c’est que la condition du "tant que" n’est plus satisfaite, donc
+que $r < b$. Il reste à montrer que $r \geq 0$. Comme $r$ est diminué de $b$ à chaque itération, si $r < 0$,
+alors à l’itération précédente la valeur de $r$ était $r' = r + b$ ; or $r' < b$ puisque $r < 0$. Et donc la
+boucle se serait arrêtée à l’itération précédente, ce qui est absurde; on on déduit que $r \geq 0$.
+\end{itemize}
+En conclusion, le programme se termine avec $0 \leq r < b$ et la propriété $a = bq + r$ est vérifiée à chaque
+itération; ceci prouve que l’algorithme effectue bien la division euclidienne de $a$ par $b$.
+\end{corrige}
+\else
+\fi

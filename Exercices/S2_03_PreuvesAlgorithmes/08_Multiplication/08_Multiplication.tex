@@ -1,0 +1,46 @@
+\exer{Multiplication}
+
+L’objectif est de calculer le produit de deux nombres entiers positifs $a$ et $b$ sans utiliser de multiplication.
+\begin{lstlisting}
+p = 0
+m = 0
+while m < a :
+    m = m + 1
+    p = p + b
+\end{lstlisting}
+
+\question{Montrer la terminaison de l'algorithme.}
+\ifprof
+\begin{corrige}
+Le programme se termine car la suite des valeurs de $m$ est une suite
+d’entiers consécutifs strictement croissante, et atteint la valeur $a$ en $a$ étapes.
+\end{corrige}
+\else
+\fi
+
+\question{Proposer une propriété d'invariance.}
+\ifprof
+\begin{corrige}
+Un invariant de boucle est ici : $p = m.b$.
+\end{corrige}
+\else
+\fi
+
+
+\question{Montrer la correction de l'algorithme.}
+\ifprof
+\begin{corrige}
+
+Un invariant de boucle est ici : $p = m.b$.
+
+\begin{itemize}
+\item Initialisation : avant le premier passage dans la boucle, $p = 0$ et $m = 0$, donc $p = mb$.
+\item Hérédité : supposons que $p = mb$ avant une itération; les valeurs de $p$ et $m$ après l’itération sont
+$p'= p + b$ et $m' = m + 1$. Or $p'= (p + b) = m.b + b = (m + 1)b = m'b$. Donc la propriété
+reste vraie.
+\item Conclusion : à la sortie de la boucle $p = m.b$.
+\end{itemize}
+Puisqu’à la sortie de la boucle $m = a$, on a bien $p = ab$.
+\end{corrige}
+\else
+\fi
