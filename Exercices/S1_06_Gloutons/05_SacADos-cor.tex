@@ -1,0 +1,94 @@
+
+
+\question{Définir la fonction \texttt{def valeur(objet:list) -> float} qui renvoie la valeur d'un objet.}
+
+\begin{lstlisting}
+
+def valeur(obj):
+    return obj[1]
+
+\end{lstlisting}
+
+\question{Définir la fonction \texttt{def poids(objet:list) -> float} qui renvoie le poids d'un objet.}
+
+\begin{lstlisting}
+def poids(obj):
+    return obj[2]
+
+\end{lstlisting}
+
+\question{Définir la fonction \texttt{def rapport(objet:list) -> float} qui renvoie le rapport valeur/poids d'un objet.}
+
+
+\begin{lstlisting}
+def rapport(obj):
+    return obj[1] / obj[2]
+\end{lstlisting}
+
+
+\question{Implémenter la fonction \texttt{glouton} qui renvoie (dans l'ordre) \texttt{reponse} et \texttt{valeur}.}
+
+\begin{lstlisting}
+
+def glouton(liste, poids_max, choix):
+    copie = sorted(liste, key=choix, reverse=True)
+    reponse = []
+    valeur = 0
+    poids = 0
+    i = 0
+    while i < len(liste) and poids <= poids_max:
+        nom, val, pds = copie[i]
+        if poids + pds <= poids_max:
+            reponse.append(nom)
+            poids = poids + pds
+            valeur = valeur + val
+        i = i + 1
+    return reponse, valeur
+
+\end{lstlisting}
+
+\question{Exécuter la fonction \texttt{glouton} pour les différents types de choix. On observant la nature des différents objets, le choix optimal est-il parmi les choix proposés ?}
+
+\begin{lstlisting}
+>>>glouton(objets,15,valeur)
+(['objet 1', 'objet 4'], 131)
+
+>>> glouton(objets,15,poids)
+(['objet 1', 'objet 4'], 131)
+
+>>> glouton(objets,15,rapport)
+(['objet 2', 'objet 6', 'objet 4'], 117)
+
+\end{lstlisting}
+
+\question{Estimer le nombre de tours de boucle nécessaire pour exécuter l'algorithme \texttt{glouton} en fonction du nombre d'objets \texttt{n}.}
+
+
+
+Le nombre de tour de boucle dépend des valeurs présentent mais dans le pire des cas il correspond au nombre de terme. On est donc dans le cas d'une complexité linéaire
+
+
+\question{Estimer (grossièrerement) le nombre de combinaisons possibles parmi la liste d'objets qui permettrait de remplir le sac à dos. Conclure sur l'intérêt d'un algorithme glouton.}
+
+
+Le nombre de combinaison est en n!
+L'algorithme glouton est donc vraiment intéressant.
+
+
+
+\question{Proposer une variante récursive de l'algorithme glouton.}
+
+\begin{lstlisting}
+
+def glouton_rec(liste, poids_max, reponse, valeur, poids, i):
+    if i < len(liste) and poids <= poids_max:
+        nom, val, pds = liste[i]
+        if poids + pds <= poids_max:
+            reponse.append(nom)
+            poids = poids + pds
+            valeur = valeur + val
+        return glouton(liste, poids_max, reponse, valeur, poids, i+1)
+    else:
+        return reponse, valeur
+
+\end{lstlisting}
