@@ -232,8 +232,8 @@ def foo(v:int) -> int:
 \end{lstlisting}
 
 La propriété suivante est-elle un invariant de boucle : 
-$r=\sum\limits_{i=1}^n i$ et 
-$\sum\limits_{n=1}^{n-1} i < v$, 
+$r=\sum\limits_{i=0}^n i$ et 
+$\sum\limits_{i=0}^{n-1} i < v$, 
 $n\in\mathbb{N}^*$ ?
 
 La réponse est directement NON, car la phase d'initialisation n'est pas vérifiée car $n=0$ et $n\notin\mathbb{N}^*$.
@@ -251,16 +251,16 @@ def foo2(v:int) -> int:
 \end{lstlisting}
 
 Montrons que la propriété suivante est un invariant de boucle : $r=\sum\limits_{i=0}^n i$ et 
-$\sum\limits_{n=0}^{n-1} i < v$, 
+$\sum\limits_{i=0}^{n-1} i < v$, 
 $n\in\mathbb{N}^*$.
 
 \begin{itemize}
 \item \textbf{Initialisation : }à l'entrée dans la boucle $r=1$ et $n=1$, $n\in\mathbb{N}^*$
 \begin{itemize}
 \item d'une part  on a bien $r=\sum\limits_{i=0}^1 i$;
-\item d'autre part$  \sum\limits_{n=0}^{1}i =1 < v$.
+\item d'autre part$  \sum\limits_{i=0}^{1}i =1 < v$.
 \end{itemize}
-\item On considère que la propriété est vraie au $n$\ieme  tour de boucle c'est-à-dire $r=\sum\limits_{i=0}^n i$ et $\sum\limits_{n=0}^{n-1} i < v$.
+\item On considère que la propriété est vraie au $n$\ieme  tour de boucle c'est-à-dire $r=\sum\limits_{i=0}^n i$ et $\sum\limits_{i=0}^{n-1} i < v$.
 \item Au tour de boucle suivant : 
 \begin{itemize}
 \item \textbf{ou bien} $r\geq v$ et la propriété vraie au rang $n$ reste vraie;
