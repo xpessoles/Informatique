@@ -71,12 +71,12 @@ La fonction renvoie 4. On a $1+2+3+4 = 10$. On dépasse strictement la valeur 9.
 \begin{center}
 \begin{tabular}{llll}
 \hline
-Début de la i\ieme itération & \texttt{r} & \texttt{n} & \texttt{r < v} \\ \hline \hline
-Itération 1 & \texttt{0} & \texttt{0} & \texttt{0 < 10  } $\Rightarrow$ \texttt{  True} \\ \hline
-Itération 2& \texttt{1} & \texttt{1} & \texttt{1 < 10  } $\Rightarrow$ \texttt{  True} \\ \hline
-Itération 3 & \texttt{3} & \texttt{2} & \texttt{3 < 10  } $\Rightarrow$ \texttt{  True} \\ \hline
-Itération 4 & \texttt{6} & \texttt{3} & \texttt{6 < 10  } $\Rightarrow$ \texttt{  True} \\ \hline
-Itération 5 & \texttt{10} & \texttt{4} & \texttt{10< 10  } $\Rightarrow$ \texttt{  False} \\ \hline
+Début de la i\ieme itération & \texttt{r} & \texttt{n} & \texttt{r  < v} \\ \hline \hline
+Itération 1 & \texttt{0} & \texttt{0} & \texttt{0  < 10  } $\Rightarrow$ \texttt{  True} \\ \hline
+Itération 2& \texttt{1} & \texttt{1} & \texttt{1  < 10  } $\Rightarrow$ \texttt{  True} \\ \hline
+Itération 3 & \texttt{3} & \texttt{2} & \texttt{3  < 10  } $\Rightarrow$ \texttt{  True} \\ \hline
+Itération 4 & \texttt{6} & \texttt{3} & \texttt{6  < 10  } $\Rightarrow$ \texttt{  True} \\ \hline
+Itération 5 & \texttt{10} & \texttt{4} & \texttt{10 < 10  } $\Rightarrow$ \texttt{  False} \\ \hline
 \end{tabular}
 \end{center}
 La fonction renvoie 4. On a $1+2+3+4 = 10$. On ne dépasse pas strictement la valeur 10. La fonction ne répond pas au besoin dans ce cas. 
@@ -223,9 +223,10 @@ La propriété citée est donc un invariant de boucle.
 Reprenons le tout premier exemple où on cherche le plus petit entier \texttt{n} strictement positif tel que $1 + 2 + . . . + n$ dépasse strictement la valeur entière strictement positive \texttt{v} .
 \begin{lstlisting}
 def foo(v:int) -> int:
+    assert v>0
     r = 0
     n = 0
-    while r < v : 
+    while r <= v : 
         n = n+1
         r = r+n
     return n
@@ -233,42 +234,51 @@ def foo(v:int) -> int:
 
 La propriété suivante est-elle un invariant de boucle : 
 $r=\sum\limits_{i=0}^n i$ et 
-$\sum\limits_{i=0}^{n-1} i < v$, 
+$\sum\limits_{i=0}^{n-1} i \leq v$, 
 $n\in\mathbb{N}^*$ ?
 
 La réponse est directement NON, car la phase d'initialisation n'est pas vérifiée car $n=0$ et $n\notin\mathbb{N}^*$.
 Cela signifie donc que l'algorithme proposé ne répond pas au cahier des charges. 
 
-Modifions donc l'algorithme ainsi.
+Modifions alors l'algorithme ainsi.
 \begin{lstlisting}
 def foo2(v:int) -> int:
+    assert v>0
     r = 1
     n = 1
-    while r < v : 
-        r = r+n
+    while r <= v : 
         n = n+1
+        r = r+n
     return n
 \end{lstlisting}
 
 Montrons que la propriété suivante est un invariant de boucle : $r=\sum\limits_{i=0}^n i$ et 
-$\sum\limits_{i=0}^{n-1} i < v$, 
+$\sum\limits_{i=0}^{n-1} i \leq v$, 
 $n\in\mathbb{N}^*$.
 
 \begin{itemize}
 \item \textbf{Initialisation : }à l'entrée dans la boucle $r=1$ et $n=1$, $n\in\mathbb{N}^*$
 \begin{itemize}
-\item d'une part  on a bien $r=\sum\limits_{i=0}^1 i$;
-\item d'autre part$  \sum\limits_{i=0}^{1}i =1 < v$.
+\item d'une part  on a bien $r=\sum\limits_{i=0}^1 i = 1$;
+\item d'autre part$  \sum\limits_{i=0}^{0}i =0 < v$ et $v>0$ (spécification de la fonction).
 \end{itemize}
-\item On considère que la propriété est vraie au $n$\ieme  tour de boucle c'est-à-dire $r=\sum\limits_{i=0}^n i$ et $\sum\limits_{i=0}^{n-1} i < v$.
-\item Au tour de boucle suivant : 
+\item On considère que la propriété est vraie au début du $n$\ieme  tour de boucle c'est-à-dire $r=\sum\limits_{i=0}^n i$ et $\sum\limits_{i=0}^{n-1} i \leq v$.
+\item \'A la fin du $n$\ieme  tour de boucle, $n_{n+1} = n_n+1$ et 
+$r_{n+1} = r_n + n_{n+1}=r_n+n_n+1 = \sum\limits_{i=0}^n \left(i\right)+n_n+1  = \sum\limits_{i=0}^{n+1} i$ ( car $n_n = n$). 
+On a alors, 
 \begin{itemize}
-\item \textbf{ou bien} $r\geq v$ et la propriété vraie au rang $n$ reste vraie;
-\item \textbf{ou bien} $r < v$. À la fin de l'itération, on a donc $r\leftarrow r+n+1 $ et $n\leftarrow n+1 +1$.
-Or $r=\sum\limits_{i=0}^n i$; donc $r\leftarrow \sum\limits_{i=0}^{n+1} i$. Par ailleurs, étant entrés dans la boucle, 
-$r=\sum\limits_{i=0}^n i < v$. Les deux assertions sont donc vraies au rang $n+1$. 
-%$p<n$. Dans ce cas, il faut montrer que  $p=2^{k+1}$ et $2^{k}<n$. Etant entrés dans la boucle, $p<n \Rightarrow 2^k<n$. De plus, en fin de boucle, $p\leftarrow p *2$ et $k\leftarrow k+1$. On a donc $p\leftarrow 2^k *2=2^{k+1}$. 
+\item ou bien $r_{n+1}>v$ et on sort de la boucle; on peut renvoyer $n$.
+\item ou bien $r_{n+1}\leq v$ et donc $\sum\limits_{i=0}^{n} i \leq v$. 
 \end{itemize}
+%
+%\item Au tour de boucle suivant : 
+%\begin{itemize}
+%\item \textbf{ou bien} $r\geq v$ et la propriété vraie au rang $n$ reste vraie;
+%\item \textbf{ou bien} $r < v$. À la fin de l'itération, on a donc $r\leftarrow r+n+1 $ et $n\leftarrow n+1 +1$.
+%Or $r=\sum\limits_{i=0}^n i$; donc $r\leftarrow \sum\limits_{i=0}^{n+1} i$. Par ailleurs, étant entrés dans la boucle, 
+%$r=\sum\limits_{i=0}^n i < v$. Les deux assertions sont donc vraies au rang $n+1$. 
+%%$p<n$. Dans ce cas, il faut montrer que  $p=2^{k+1}$ et $2^{k}<n$. Etant entrés dans la boucle, $p<n \Rightarrow 2^k<n$. De plus, en fin de boucle, $p\leftarrow p *2$ et $k\leftarrow k+1$. On a donc $p\leftarrow 2^k *2=2^{k+1}$. 
+%\end{itemize}
 \end{itemize}
 La propriété citée est donc un invariant de boucle. 
 %
