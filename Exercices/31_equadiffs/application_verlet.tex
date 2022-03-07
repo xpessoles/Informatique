@@ -1,0 +1,39 @@
+%\section{Application}
+
+Dans cet exercice, on souhaite étudier une fonction $t\mapsto y(t)$ sur un intervalle $[a,b]$. La fonction $y$ est solution de l'équation différentielle $$y''=-\displaystyle\frac 1{y^2}$$ avec les conditions initiales $$y(a)=y0 \textrm{ et } y'(a)=yp0.$$
+
+\question{Mettre l'équation différentielle considérée sous forme d'un système de deux équations différentielles du premier ordre en introduisant une fonction auxilliaire $z(t)=y'(t)$.}
+	
+\question{Compte tenu du système d'équations différentielles, comment exprimer $z(t+h)$ et $y(t+h)$ en fonction de $h$, $y(t)$ et $z(t)$ (ou $h$ est la pas de la subdivision) ?}
+	
+
+
+\bigskip On souhaite résoudre l'équation différentielle  sur l'intervalle $[a,b]$ en utilisant $N$ intervalles, soit $N+1$ points du segment $[a,b]$ (le premier vaut $a$, le dernier vaut $b$).
+
+\question{En supposant $N$, $a$ et $b$ préalablement définis dans le programme, écrire des lignes de code pour calculer le pas \texttt{h} ainsi que la liste \texttt{les\_t} des $N+1$ instants équirépartis entre $a$ et $b$.}
+	
+\question{\'Ecrire une fonction \texttt{euler2(a,b,N,y0,yp0)} qui calcule et renvoie les listes \texttt{les\_t}, \texttt{les\_y} et \texttt{les\_z} correspondant aux différents instants et aux valeurs approximées par la \textbf{méthode d'Euler} des fonctions $y$ et $z$ à ces différents instants.}
+	
+
+
+\bigskip On peut montrer (la justification n'est pas demandée ici) à l'aide de développements limités à l'ordre 2 que $$y(t+h)-2y(t)+y(t-h)=y''(t).h^2+O(h^3).$$
+Une méthode appelée \textbf{méthode de Verlet} consiste à négliger le terme en $O(h^3)$ et à écrire:
+$$y(t+h)-2y(t)+y(t-h)=y''(t).h^2.$$
+
+\question{ Compte tenu de l'approximation de la méthode de Verlet et de l'équation différentielle, exprimer $y(t+h)$ en fonction de $y(t)$, $y(t-h)$ et $h$ uniquement.}
+	
+\question{Pourquoi ne peut-on pas utiliser cette expression pour le calcul du premier point (c'est-à-dire pour le calcul de $y$ en $t_1=a+h$) ?}
+	
+\question{A l'aide d'un développement limité à l'ordre 2 et en négligeant le terme en $O(h^3)$, exprimer $y(a+h)$ en fonction de $h, y0, yp0$ et $y''(a)$.}
+	
+\question{En tenant compte de l'équation différentielle, modifier l'expression précédente pour exprimer $y(a+h)$ en fonction de $h, y0, yp0$ uniquement.}
+	
+\question{Ecrire une fonction \texttt{verlet(a,b,N,y0,yp0)} qui calcule et renvoie les listes \texttt{les\_t}, \texttt{les\_y}, \texttt{les\_z} par la méthode de Verlet.}
+	
+
+\bigskip Pour comparer les méthodes, on se propose de trouver une intégrale première du mouvement. Pour cela, on multiplie l'équation différentielle par $y'$ et on prend une primitive.
+
+\question{Montrer que $E(t)=\displaystyle\frac 12 y'(t)^2-\displaystyle\frac 1{y(t)}$ est une constante (indépendante de $t$).}
+	
+\question{Ecrire les lignes de code permettant de tracer la courbe $E(t)$ obtenue avec la méthode d'Euler et celle obtenue avec la méthode de Verlet sur le même graphique ($a=0, b=20, y0=10, yp0=0.03$ et on se limitera à une graduation des ordonnées comprise entre -0.1 et -0.0975)}
+	
