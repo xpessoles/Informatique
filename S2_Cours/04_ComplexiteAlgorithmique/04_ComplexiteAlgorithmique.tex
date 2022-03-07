@@ -2,7 +2,7 @@
 
 \ldots{}ou plutôt des ordres de grandeur des durées.
 
-On choisit comme unité la seconde\footnote{D'ailleurs, c'est l'unité de temps du système international}, on donne des logarithmes décimaux des durées étudiées.
+On choisit comme unité la seconde\footnote{D'ailleurs, c'est l'unité de temps du système international} et on donne des logarithmes décimaux des durées étudiées.
 
 Quelques repères à connaître.
 \begin{enumerate}
@@ -14,52 +14,30 @@ $10^{n}\leq t < 10^{n+1}$ où $n = \floor{x}$.
 \end{enumerate}
 
 \begin{center}
-%\begin{table}
-  %\caption{Durées : ordre de grandeur ($t$ en secondes).}\\
-  \begin{tabular}{rl}
-%  \toprule{}
- % $\log_{10}(t)$ & Durée\\
-  %\midrule
-   %\endfirsthead
+  \begin{tabular}{rl rl}
    %\caption{Durées : ordre de grandeur (suite).}\\
-   %\toprule{}
-  $\log_{10}(t)$ & Durée\\
-  %\midrule
-  % \endhead
-  $-9,0$ & exécution d'une instruction\\
-  $0,0$ & une seconde\\
-  $1,8$ & une minute \\
-  $3,6$ & une heure\\
-  $4,9$ & un jour\\
-  $5,8$ & une semaine\\
-  $6,4$ & un mois (30 jours)\\
-  $7,5$ & un an\\
+  $\log_{10}(t)$ & Durée &   $\log_{10}(t)$ & Durée \\
+  $-9,0$ & exécution d'une instruction &  $10,5$ & un millénaire\\
+  $0,0$ & une seconde &  $13,1$ & âge de la maîtrise du feu\\
+  $1,8$ & une minute &  $13,5$ & un million d'années\\
+  $3,6$ & une heure &  $14,0$ & âge de Lucy\\
+  $4,9$ & un jour &  $16,5$ & un milliard d'années\\
+  $5,8$ & une semaine&  $17,0$ & âge de la vie sur Terre\\
+  $6,4$ & un mois (30 jours)&  $17,6$ & âge de l'univers\\
+  $7,5$ & un an &  $34,0$ & temps avant extinction des dernières étoiles\\
   $9,5$ & un siècle\\
-  $10,5$ & un millénaire\\
-  $13,1$ & âge de la maîtrise du feu\\
-  $13,5$ & un million d'années\\
-  $14,0$ & âge de Lucy\\
-  $16,5$ & un milliard d'années\\
-  $17,0$ & âge de la vie sur Terre\\
-  $17,6$ & âge de l'univers\\
-  $34,0$ & temps avant extinction des dernières étoiles\\
 \end{tabular}
-%\end{table}
 \end{center}
-%\clearslide{}
+
 
 \section{Introduction}
 
-\begin{defi}[Complexité]
-  La complexité algorithmique est l'étude des ressources requises pour
-  exécuter un algorithme, en fonction d'un paramètre (souvent, la
-  taille des données d'entrée). Les deux
-  ressources en général étudiées sont:
-  \begin{enumerate}
-  \item Le temps nécessaire à l'exécution de l'algorithme
-  \item La mémoire nécessaire à l'exécution de l'algorithme (en plus
-    des données d'entrée).
-  \end{enumerate}
+\begin{defi}{Complexité}
+  La complexité algorithmique est l'étude des ressources requises pour exécuter un algorithme, en fonction d'un paramètre (souvent, la taille des données d'entrée). Les deux ressources en général étudiées sont :
+\begin{itemize}
+\item le temps nécessaire à l'exécution de l'algorithme;
+\item la mémoire nécessaire à l'exécution de l'algorithme (en plus des données d'entrée).
+\end{itemize}
 \end{defi}
 
 %\clearslide{}
@@ -70,7 +48,7 @@ $10^{n}\leq t < 10^{n+1}$ où $n = \floor{x}$.
 
 \subsection{Rappels d'arithmétique : le petit théorème de Fermat}
 
-\begin{theorem}{de Fermat}
+\begin{theorem}{Théorème de Fermat.}
   Soit $p$ un nombre premier et $a \in \ii{1,p}$, alors $a^{p-1} = 1 [p]$.
 \end{theorem}
 
@@ -112,6 +90,8 @@ def expo2(p):
 \end{lstlisting}
   \item Une troisième idée est de voir que si $n = 2k$, alors $2^n = \croch{\p{2^k}}^2$ et si $n = 2k+1$, alors $2^n = 2\croch{\p{2^k}}^2$. 
   Pour calculer une puissance (ici, de $2$), il suffit donc de calculer une puissance bien plus petite, suivie d'une mise au carré et d'une multiplication éventuelle. C'est l'idée de l'algorithme \emph{d'exponentiation rapide}.
+
+\end{enumerate}
 \begin{lstlisting}
 def expo3(p):
     """Renvoie 2**(p-1) mod p par exponentiation rapide"""
@@ -130,7 +110,7 @@ def expo3(p):
     # n == 0 et y = 2 ** (p-1) modulo p
     return y
 \end{lstlisting}
-\end{enumerate}
+
 
 On a donc construit les \og tests \fg\ suivants.
 
@@ -218,10 +198,8 @@ Ainsi, étudier expérimentalement le temps de calcul d'un algorithme est :
 Comment faire cette étude théorique?
 
 \begin{enumerate}
-\item On se donne un \emph{modèle} de l'exécution des programmes. Ce
-  modèle précise le temps de calcul de chaque opération élémentaire.
-\item Il ne reste plus à regarder, pour un programme donné, combien
-  d'instructions élémentaires il effectue.
+\item On se donne un \emph{modèle} de l'exécution des programmes. Ce modèle précise le temps de calcul de chaque opération élémentaire.
+\item Il ne reste plus qu'à regarder, pour un programme donné, combien d'instructions élémentaires il effectue.
 \end{enumerate}
 
 %\clearslide{}
@@ -231,17 +209,14 @@ Comment faire cette étude théorique?
 \subsection{Deux mauvaises nouvelles}
 
 \begin{enumerate}
-\item Compter exactement le nombre d'opérations faites par le
-  programme est pénible voire difficile (mathématiquement).
-\item Savoir précisément combien de temps met chaque opération
-  élémentaire est difficile et change suivant les machines.
+\item Compter exactement le nombre d'opérations faites par le programme est pénible voire difficile (mathématiquement).
+\item Savoir précisément combien de temps met chaque opération élémentaire est difficile et change suivant les machines.
 \end{enumerate}
 
 \subsection{Deux bonnes nouvelles}
 
 \begin{enumerate}
-\item Il n'est pas nécessaire d'être extrêmement précis: on se
-  contente d'un ordre de grandeur quand le paramètre devient grand. On
+\item Il n'est pas nécessaire d'être extrêmement précis : on se  contente d'un ordre de grandeur quand le paramètre devient grand. On
   parle d'\textbf{estimation asymptotique de la complexité}.
 \item Les principes de cette estimation étaient déjà
   valables il y a $70$ ans\footnote{Le Harvard Mark III, construit en
@@ -304,9 +279,7 @@ Appelons alors
 \end{itemize}
 
 Cela donne,
-\begin{equation*}
-  T_{2}(p) = c_{1} + (p-1) (c_{2} + c_{3} + c_{1}) + c_{4}
-\end{equation*}
+$ \quad   T_{2}(p) = c_{1} + (p-1) (c_{2} + c_{3} + c_{1}) + c_{4}$.
 
 %\clearslide{}
 
@@ -315,40 +288,29 @@ Ces constantes dépendent de la machine sur lequel on  exécutera le programme.
 
 On a quand même une information intéressante : $T_{2}(p)$ n'augmente pas plus vite que $p$ multipliée par une constante.
 
-Montrons ce second point. Pour $p\geq 1$:
-\begin{align*}
+Montrons ce second point. Pour $p\geq 1$ : 
+$ \begin{array}{ll}
   T_{2}(p) &\leq c_{1}p + p(c_{2}+c_{3}+c_{1})+c_{4}p\\
   &\leq (2c_{1}+c_{2}+c_{3}+c_{4})p
-\end{align*}
+  \end{array}$.
+  
 
 %\clearslide{}
 
 On a donc montré qu'il existait un entier $p_{0}$ et un réel $C>0$ tel que
-\begin{equation*}
-  \forall p\geq p_0 \qquad T_{2}(p)\leq Cp
-\end{equation*}
+$  \forall p\geq p_0 \qquad T_{2}(p)\leq Cp$.
 
 On dit alors que $T_{2}(p)$ est \emph{dominé} par $p$ et on note
-\begin{equation*}
-  T_{2}(p) = O(p)
-\end{equation*}
+$  T_{2}(p) = O(p)$.
 
 %\clearslide{}
-\begin{defi}
+\begin{defi}{}
   On dit qu'une suite $(u_{n})$ est dominée par une suite $(v_{n})$ et
   on note $u_{n} = O(v_{n})$ si,  à partir d'un certain rang, la suite
   $(u_{n}/v_{n})$ est bien définie et bornée.  
 \end{defi}
 
-Ici, on a, pour $p\geq 1$:
-\begin{equation*}
-  0 \leq T_{2}(p) \leq C p
-\end{equation*}
-Donc
-\begin{equation*}
-  \abs{\frac{T_{2}(p)}{p}} \leq C
-\end{equation*}
-donc $T_{2}(p)=O(p)$.
+Ici, on a, pour $p\geq 1$: $0 \leq T_{2}(p) \leq C p$; donc $ \abs{\frac{T_{2}(p)}{p}} \leq C$ et $T_{2}(p)=O(p)$.
 
 \begin{rem}
   Bien entendu, on a aussi $T_2(p) = O(p^2)$, même si cela ne nous intéresse pas ... Nous aimerions donc bien aussi certifier qu'il existe une constante $C'$ telle que, pour tout $p\geq 1$, $C'p \leq T_2(p)$. 
@@ -377,21 +339,12 @@ Il suffit de dire:
 
 %\clearslide{}
 \subsection{Étude expérimentale de \texttt{premierprobable2}}
-  Pour $p = \floor{\dfrac{p_0}{q^k}}$, avec $q = 1,35$, $p_0 = 10^7$ et $k\in\ii{0,20}$, on calcule $T_2(p)$ et l'on effectue ensuite une régression linéaire par moindres carrés. Cette étude expérimentale (voir figure~\ref{fig.pp2}) nous donne :
-\begin{equation*}
-  T_{2}(p)\approx b_{2} p^{\alpha_{2}}
-  \text{ où }\alpha_{2}\approx 1,005
-  \text{ et }b_{2} = 10^{\beta_{2}} \approx 10^{-7,16}\approx 6,9\times 10^{-8}.
-\end{equation*}
+Pour $p = \floor{\dfrac{p_0}{q^k}}$, avec $q = 1,35$, $p_0 = 10^7$ et $k\in\ii{0,20}$, on calcule $T_2(p)$ et l'on effectue ensuite une régression linéaire par moindres carrés.
 
-\begin{figure}[!h]
-  \begin{center}
-    \includegraphics[width=\textwidth]{pp2.png}
-    \caption{Tracé expérimental de $T_2$ en échelle logarithmique décimale.}
-    \label{fig.pp2}
-  \end{center}
-\end{figure}
-
+\begin{minipage}[c]{.48\linewidth}
+Cette étude expérimentale (voir figure ci-contre)%~\ref{fig.pp2})  
+  nous donne :$ T_{2}(p)\approx b_{2} p^{\alpha_{2}}$ où $\alpha_{2}\approx 1,005$ 
+   et $b_{2} = 10^{\beta_{2}}$ $\approx 10^{-7,16}$ $\approx 6,9\times 10^{-8}$.
 
 \begin{itemize}
 \item[\textbullet] La constante $b_{2}$ ne pouvait de toute façon pas être prédite
@@ -402,18 +355,28 @@ Il suffit de dire:
   un temps $t = 10^{-9}s$, l'étude expérimentale semble montrer que
   $T_{2}(p)\approx 70 p \times t$.
 \end{itemize}
+\end{minipage}\hfill
+\begin{minipage}[c]{.48\linewidth}
+%\begin{figure}%[!h]
+  \begin{center}
+%\centering
+    \includegraphics[width=\linewidth]{pp2.png}
+    %\caption{Tracé expérimental de $T_2$ en échelle logarithmique décimale.}
+%    \label{fig.pp2}
+ \end{center}
+%\end{figure}
+\end{minipage}
 
 \begin{rem}
   Ce n'est pas toujours la quantité $p$ qui est pertinente, mais plutôt la taille qu'occupe l'entier $p$ en mémoire, qui est de l'ordre de $\log_2(p)$.
 \end{rem}
 
-\newpage
 %\clearslide{}
 
 \subsection{Étude théorique de \texttt{premierprobable3}}
 
 \begin{lstlisting}
-def expo3(p):
+def expo3(p):     
     """Renvoie 2**(p-1) mod p par exponentiation rapide"""
     y = 1
     n = p-1
@@ -429,7 +392,6 @@ def expo3(p):
         n = n // 2
     # n == 0 et y = 2 ** (p-1) modulo p
     return y
-
 def premierprobable3(p):
     return expo3(p) == 1
 \end{lstlisting}
@@ -448,32 +410,22 @@ boucle.
   est divisé (au moins) par deux à chaque tour de boucle. Donc
   $\floor{\log_{2}(n)}$ est un variant de boucle.
 \item[\textbullet] Donc on effectue au
-  plus $1+ \floor{\log_{2}(p-1)} = O(\log_{2}(p)) = O(\log p)$ tours de boucle.
+  plus $1+ \floor{\log_{2}(p-1)}$ $= O(\log_{2}(p)) =$ $ O(\log p)$ tours de boucle.
 \end{itemize}
-Donc
-\begin{equation*}
-  T_{3}(p) = O(\log p).
-\end{equation*}
+Donc $T_{3}(p) = O(\log p)$.
+
 
 %\clearslide{}
 \subsection{Comparaison avec l'étude expérimentale}
 
-Pour $p = \floor{\dfrac{p_0}{q^k}}$, avec $q = 140$, $p_0 = 10^{140}$ (!!) et $k\in\ii{0,20}$, on calcule $T_3(p)$ et l'on effectue ensuite une régression linéaire par moindres carrés. Cette étude expérimentale (voir figure~\ref{fig.pp3}) nous donne :
+\begin{minipage}[c]{.48\linewidth}
+Pour $p = \floor{\dfrac{p_0}{q^k}}$, avec $q = 140$, $p_0 = 10^{140}$ (!!) et $k\in\ii{0,20}$, on calcule $T_3(p)$ et l'on effectue ensuite une régression linéaire par moindres carrés. Cette étude expérimentale 
+(voir figure ci-contre) 
+%(voir figure~\ref{fig.pp3}) 
+nous donne :
 $T_{3}(p)$ et $\log p$ une relation affine :
-\begin{equation*}
-  T_{3}(p) \approx \alpha_{3}\log_{10} p + \beta_{3}.
-\end{equation*}
-Donc $T_{3}(p)$ semble bien être un $O(\log p)$.
+$  T_{3}(p) \approx \alpha_{3}\log_{10} p + \beta_{3}$. Donc $T_{3}(p)$ semble bien être un $O(\log p)$.
 
-\begin{figure}[!h]
-  \begin{center}
-    \includegraphics[width=\textwidth]{pp3.png}
-    \caption{Tracé expérimental de $T_3$ en échelle semi-logarithmique décimale.}
-    \label{fig.pp3}
-  \end{center}
-\end{figure}
-
-%\clearslide{}
 NB: en général, quand on note $\log$, il faut comprendre
 \begin{itemize}
 \item $\ln$ si c'est dans un texte de mathématiques en anglais;
@@ -481,16 +433,22 @@ NB: en général, quand on note $\log$, il faut comprendre
   physique en français ;
 \item $\log_{2}$ si c'est dans un texte d'informatique.
 \end{itemize}
-Mais de toute façon, ici on cela n'a pas d'importance car pour tout $x>0$,
-\begin{equation*}
- \ln x = \ln 2 \, \log_{2} x = \ln 10\, \log_{10}x.
-\end{equation*}
-Donc
-\begin{equation*}
-  O(\ln n) = O(\log_{2} n) = O(\log_{10} n).
-\end{equation*}
- 
-%\clearslide{}
+
+\end{minipage} \hfill
+\begin{minipage}[c]{.48\linewidth}
+%\begin{figure}[!h]
+  \begin{center}
+    \includegraphics[width=\textwidth]{pp3.png}
+    %\caption{Tracé expérimental de $T_3$ en échelle semi-logarithmique décimale.}
+   % \label{fig.pp3}
+  \end{center}
+%\end{figure}
+\end{minipage}
+
+Mais de toute façon, ici on cela n'a pas d'importance car pour tout $x>0$, $ \ln x = \ln 2 \, \log_{2} x = \ln 10\, \log_{10}x$.
+
+Donc $ O(\ln n) = O(\log_{2} n) = O(\log_{10} n)$.
+
 \subsection{Étude théorique de \texttt{premierprobable1}}
 
 
@@ -520,30 +478,35 @@ def premierprobable1(p):
 
 %\clearslide{}
 \subsection{Étude expérimentale de \texttt{premierprobable1}}
-Pour $p = \floor{\dfrac{p_0}{q^k}}$, avec $q = 1,35$, $p_0 = 3\times 10^5$ et $k\in\ii{0,20}$, on calcule $T_1(p)$ et l'on effectue ensuite une régression linéaire par moindres carrés. Cette étude expérimentale (voir figure~\ref{fig.pp2}) nous donne :
-\begin{equation*}
-  T_{1}(p)\approx b_{1} p^{\alpha_{1}}
-  \text{ où }\alpha_{1}\approx 1,76
-  \text{ et }b_{1} = 10^{\beta_{1}} \approx 10^{-9,52}
-  \approx 3,02 \times 10^{-10}
-\end{equation*}
-\begin{figure}[!h]
-  \begin{center}
-    \includegraphics[width=\textwidth]{pp1.png}
-    \caption{Tracé expérimental de $T_1$ en échelle logarithmique décimale.}
-    \label{fig.pp1}
-  \end{center}
-\end{figure}
 
+\begin{minipage}[c]{.48\linewidth}
+Pour $p = \floor{\dfrac{p_0}{q^k}}$, avec $q = 1,35$, $p_0 = 3\times 10^5$ et $k\in\ii{0,20}$, on calcule $T_1(p)$ et l'on effectue ensuite une régression linéaire par moindres carrés. Cette étude expérimentale 
+(voir figure ci-contre)
+%(voir figure~\ref{fig.pp2}) 
+nous donne :
+$  T_{1}(p)\approx b_{1} p^{\alpha_{1}}$ où $\alpha_{1}\approx 1,76$
+et  $b_{1} = 10^{\beta_{1}} \approx 10^{-9,52}  \approx 3,02 \times 10^{-10}$.
 
 Il semble alors que $T_1(p)$ n'est pas en $O(p)$ !!!
 
 Les causes possibles:
 \begin{itemize}
-\item[\textbullet] Cela peut provenir d'erreurs expérimentales. Mais ici, l'erreur paraît vraiment 
-élevée.
-\item[\textbullet] Le modèle peut être erroné : les opérations sont-elles vraiment de temps constant?
+\item[\textbullet] cela peut provenir d'erreurs expérimentales. Mais ici, l'erreur paraît vraiment 
+élevée;
+\item[\textbullet] le modèle peut être erroné : les opérations sont-elles vraiment de temps constant~?
 \end{itemize}
+\end{minipage} \hfill
+\begin{minipage}[c]{.48\linewidth}
+%\begin{figure}[!h]
+  \begin{center}
+    \includegraphics[width=\textwidth]{pp1.png}
+    %\caption{Tracé expérimental de $T_1$ en échelle logarithmique décimale.}
+%    \label{fig.pp1}
+  \end{center}
+\end{minipage} 
+
+
+
 
 Ici, les nombres manipulés sont très grands puisqu'on calcule
 $2^{p-1}$. Or, $2^{p-1}$ possède environ $\log_{10} (2^{p-1}) =
@@ -554,10 +517,7 @@ Une hypothèse : chaque multiplication de \texttt{y} par $2$ coûte un temps pro
 %\clearslide{}
 Au $i\ieme$ tour de boucle, \texttt{y} vaut $2^{i}$, donc le temps de
 calcul de la multiplication est $C i \log 2$. Donc le temps de calcul
-de l'ensemble de la boucle est
-\begin{equation*}
-  \sum_{i=0}^{p-2} C i \log 2 \leq (p-1) C (p-2)\log 2\leq p^{2}C\log 2
-\end{equation*}
+de l'ensemble de la boucle est $\quad   \sum_{i=0}^{p-2} C i \log 2 \leq (p-1) C (p-2)\log 2\leq p^{2}C\log 2$.
 Donc le temps de calcul de l'ensemble de la boucle est un $O(p^{2})$.
 
 %\clearslide{}
@@ -651,6 +611,9 @@ Voir la table~\ref{table.complexites.usuelles}.
    & \multicolumn{6}{c}{$f(n)$} \\ \cmidrule(l){2-7}
    $n$   & $\log_{2} n$ & $n$      & $n\log n$& $n^2$    & $n^3$     &
    $2^n$\\
+  
+& logarithmique & linéaire &quasi-linéaire & quadratique & cubique & exponentielle \\  \cmidrule(l){2-7}
+   
    ($\log_{10}$) & \multicolumn{6}{c}{($\log_{10}$ de la
      durée en secondes)}\\
    \midrule
