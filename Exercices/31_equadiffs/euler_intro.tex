@@ -1,9 +1,10 @@
 %\setcounter{subsection}{1}
 \subsection*{Principe de la méthode de la méthode d'Euler}
 
-Soit $y$ l'unique solution de$$\begin{cases}
-	y'(t)=F(t,y(t))\\y(t_0)=y_0
-\end{cases}$$ avec $(t_0,y_0)$ fixé.
+Soit $y$ l'unique solution de 
+$\begin{cases}
+y'(t)=F(t,y(t))\\y(t_0)=y_0
+\end{cases}$ avec $(t_0,y_0)$ fixé.
 
 On souhaite obtenir une approximation de la fonction $y$ sur l'intervalle $[a,b]$.
 
@@ -11,8 +12,7 @@ Soit $n\in\N^*$.
 
 \begin{itemize}\item  On découpe l'intervalle $[a,b]$ en $n$ sous-segments de même longueur $h=\dfrac{b-a}{n}$.
 	
-	\item On pose: 
-	\[t_0=a\quad t_1=t_0+h\quad t_2=t_0+2h\quad \dots \quad t_k=t_0+kh\quad t_n=t_0+nh=b\]
+	\item On pose:  $t_0=a\quad t_1=t_0+h\quad t_2=t_0+2h\quad \dots \quad t_k=t_0+kh\quad t_n=t_0+nh=b$.
 	On part de $t_0$.
 	
 	\item On approche la portion de courbe entre $t_0$ et $t_1$ par la tangente à la courbe au point d'abscisse $t_0$.
@@ -62,9 +62,7 @@ Soit $n\in\N^*$.
 	
 	%On recommence le procédé à partir du point $M_1(t_1,y_1)$.
 	
-	\item De manière générale, on pose :
-	
-	\[\forall k\in\{0,\dots,n-1\},\qquad y_{k+1}=y_k+hF(t_k,y_k)\]
+	\item De manière générale, on pose : $ k\in\{0,\dots,n-1\},\qquad y_{k+1}=y_k+hF(t_k,y_k)$.
 	
 	Ce qui amène à construire successivement les points $M_k$ de coordonnées $(t_k,y_k)$. La ligne polygonale reliant ces points est alors une approximation de la courbe représentative de la solution.
 	
@@ -73,6 +71,6 @@ Soit $n\in\N^*$.
 \subsection*{Programmation de la méthode }
 
 
-\question{Considérant l'équation différentielle d'ordre 1 $y'(t)=F(t,y(t))$, écrire en python une fonction \texttt{Euler(F, a, b, n)} d'arguments la fonction $F$, les bornes $a$ et $b$ de l'intervalle d'étude, la condition initiale $y0$ et le nombre d'étapes $n$. Cette fonction renverra une liste de temps et une liste de valeurs approchées par la méthode d'Euler.}
+\question{Considérant l'équation différentielle d'ordre 1 $y'(t)=F(t,y(t))$, écrire en python une fonction \texttt{Euler(F, a, b, y0,n)} d'arguments la fonction $F$, les bornes $a$ et $b$ de l'intervalle d'étude, la condition initiale $y0$ et le nombre d'étapes $n$. Cette fonction renverra une liste de temps et une liste de valeurs approchées par la méthode d'Euler.}
 	
 \question{Tracer la solution analytique et la solution approchée donnée par la méthode d'Euler pour l'équation différentielle:$$y'(t)+ty(t)=0$$ avec $y(0)=1$. On prendra $a=0$, $b=1$, $n=100$.}
