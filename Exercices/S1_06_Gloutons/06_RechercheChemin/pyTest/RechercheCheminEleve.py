@@ -12,7 +12,7 @@ ques_1 = 0  # Modifier le 0 par votre réponse
 
 # Question 2
 ############
-ques_2 = 0  # Modifier le 0 par votre réponse (en fonction de n)
+ques_2 = 0  # Modifier le 0
 
 # Question 3
 ############
@@ -47,7 +47,7 @@ def Q5_test():
 
 # Question 6
 ############
-ques_2 = 0  # Modifier le 0 par votre réponse (en fonction de n)
+ques_6 = 0  # Modifier le 0 par votre réponse pour n = 10)
 
 # Question 7
 ############

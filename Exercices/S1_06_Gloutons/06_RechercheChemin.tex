@@ -38,7 +38,7 @@ Chemin $A\to P_2 \to P_3 \to P_1$
 \else
 \fi
 
-\question{Dénombrer le nombre de chemins possibles démarrant par $A$ et passant par $n$ points.}
+\question{Dénombrer le nombre de chemins possibles démarrant par $A$ et passant par $10$ points.}
 \ifprof
 \begin{corrige}
 $n!$
@@ -141,7 +141,7 @@ def distances(pts, dep):
 \fi
 
 
-\question{En prenant compte de la note précédente, estimer le nombre de distances à calculer par l'algorithme.}
+\question{En prenant compte de la note précédente, estimer le nombre de distances à calculer par l'algorithme. (Réaliser l'application numérique poiy}
 \ifprof
 \begin{corrige}
 Le tableau des distances contient  $n+1$ lignes et colonnes soit  $(n+1)\times (n+1)$ valeurs. 
@@ -163,7 +163,7 @@ Ainsi si \texttt{chemin = [n,4,0,n-1]} alors c'est qu'on a parcouru le chemin $A
 
 
 
-\question{Écrire la fonction \texttt{longueur(chemin:list, tab:list) -> float} où \texttt{tab} est un tableau de distances tel que défini précédemment.}
+\question{Écrire la fonction \texttt{longueur(chemin:list, tab:list) -> float} où \texttt{tab} est un tableau de distances déterminé par la fonction \texttt{distances}.}
 \ifprof
 \begin{corrige}~\\ \vspace{-.5cm}
 \begin{lstlisting}
@@ -180,7 +180,7 @@ def longueur(chemin, dist):
 \fi
 
 
-\question{Proposer une version récursive de cet algorithme.}
+\question{Proposer une version récursive de cet algorithme. On la notera \texttt{longueur\_rec(chemin:list, tab:list) -> float}.}
 \ifprof
 \begin{corrige}~\\  \vspace{-.5cm}
 \begin{lstlisting}
@@ -231,7 +231,7 @@ On ne visite pas la case où on est ...
 \else
 \fi
 
-\question{Écrire une fonction \texttt{indice(i:int, dist:list, dispo:list)->int} permettant de déterminer l'index du point le plus proche du point d'index \texttt{i}, parmi les points disponibles. \texttt{dist} désigne la liste des distances auparavant crée avec la fonction \texttt{distances}.}
+\question{Écrire une fonction \texttt{indice(i:int, tab:list, dispo:list)->int} permettant de déterminer l'index du point le plus proche du point d'index \texttt{i}, parmi les points disponibles. \texttt{tab} désigne le tableau des distances créé avec la fonction \texttt{distances}.}
 \ifprof
 \begin{corrige}~\\ \vspace{-.5cm}
 \begin{lstlisting}
@@ -276,28 +276,28 @@ def plus_court_chemin(dist):
 
 \subsection*{Représentation du chemin}
 
-\question{Commenter chacune des lignes suivantes (on pourra faire des regroupements de lignes pour les commentaires).}
-
- \lstset{numbers=left,
-    stepnumber=1}
-
-\begin{lstlisting}
-import matplotlib.pyplot as plt
-
-x = [u[0] for u in pts]
-y = [u[1] for u in pts]
-plt.plot(x, y, "x")
-plt.plot(depart[0], depart[1], "+")
-plt.show()
-
-tableau = distances(pts, depart)
-ch = plus_court(tableau)
-print(longueur(ch, tableau))
-
-xliste = [depart[0]] + [pts[k][0] for k in ch]
-yliste = [depart[1]] + [pts[k][1] for k in ch]
-plt.plot(x, y, "x") # affichage des points
-plt.plot(depart[0], depart[1], "+")
-plt.plot(xliste, yliste) # affichage du chemin
-plt.show()
-\end{lstlisting}
+\question{Tester le fonction \texttt{plot\_chemin()}. Commenter l'ensemble des lignes en effectuant les regroupements vous paraissant nécessaires.}
+%
+% \lstset{numbers=left,
+%    stepnumber=1}
+%
+%\begin{lstlisting}
+%import matplotlib.pyplot as plt
+%
+%x = [u[0] for u in pts]
+%y = [u[1] for u in pts]
+%plt.plot(x, y, "x")
+%plt.plot(depart[0], depart[1], "+")
+%plt.show()
+%
+%tableau = distances(pts, depart)
+%ch = plus_court(tableau)
+%print(longueur(ch, tableau))
+%
+%xliste = [depart[0]] + [pts[k][0] for k in ch]
+%yliste = [depart[1]] + [pts[k][1] for k in ch]
+%plt.plot(x, y, "x") # affichage des points
+%plt.plot(depart[0], depart[1], "+")
+%plt.plot(xliste, yliste) # affichage du chemin
+%plt.show()
+%\end{lstlisting}
