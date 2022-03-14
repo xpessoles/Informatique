@@ -1,0 +1,43 @@
+%Calcul de frontière par dichotomie
+L'objectif de cette partie est d'adapter le principe de recherche dichotomique à un problème
+voisin : la recherche d'un plus petit  élément plus grand qu'une borne donnée.
+
+On utilisera la fonction \texttt{Lu} qui à partir de \texttt{alpha} et pour \texttt{n=100} vous génèrera une liste à traiter dans cette partie.
+
+
+\begin{lstlisting}
+def Lu(alpha,n):
+    """u_n, u_0 = alpha"""
+    x = alpha
+    M=[]
+    n=100+(-1)**alpha*2*alpha%97
+    a=137
+    c=187
+    m=2**8
+    for i in range(n):
+        x = (a * x+c) % m
+        xi=x-128
+        if xi not in M:
+            M.append(xi)
+    M.sort()
+    return M
+    
+L=Lu(alpha,100)
+\end{lstlisting}
+
+
+\question{Écrire une fonction \texttt{frontiere(L:list,x:int)->int} prenant en argument une liste L (générée par \texttt{Lu(alpha,100)}, supposée triée, et un élément x, et renvoyant
+le plus petit indice i tel que x est inférieur ou égal à \texttt{L[i]}, ou \texttt{len(L)} si un tel indice n'existe pas. Renvoyer le résultat de  \texttt{frontiere(L=Lu(alpha,100),alpha)}. Il est conseillé de raisonner en itératif ici.}
+
+Par exemple :
+\begin{itemize}
+\item \texttt{frontiere([1,3,4,6],4)} doit renvoyer 2 ;
+\item \texttt{frontiere([1,3,4,6],7)} doit renvoyer 4.
+\end{itemize}
+
+La fonction devra avoir une structure dichotomique, de façon à être en coût logarithmique (en la longueur de L).
+
+\question{Donner le nombre d'itérations pour la fonction \texttt{frontiere(Lu(alpha,100),alpha)}.}
+
+%
+%\question{Concevoir un jeu de test permettant de vérifier tous les cas limites pour votre fonction.}

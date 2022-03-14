@@ -1,32 +1,19 @@
-\subsubsection{Suite de Fibonacci}
+\question{Pour votre valeur de $\alpha$ donner \texttt{n=u(alpha,10).}}
+
+\begin{lstlisting}
+def u(alpha,n):
+    """u_n, u_0 = alpha"""
+    x = alpha
+    for i in range(n):
+        x = (7 * x) % 20
+    return x+5
+
+n=u(alpha,10)
+\end{lstlisting}
 
 
 
-La \textbf{suite de Fibonacci} permet de décrire par exemple l'évolution d'une population de lapins par exemple.
-
-\begin{center}
-\includegraphics[width=0.6\textwidth]{fibonacci.png}
-\end{center}
-
-Cette suite est définie de la façon suivante : 
-
-\begin{align*}
-\left\{
-\begin{array}{c}
-F_0=0\\
-\\
-F_1=1\\
-\\
-F_{n+2}=F_{n+1}+F{n}\\
-\end{array}
-\right.
-\end{align*}
-
-
-
-
-
-\question{Écriture sous Python \texttt{fib_it(n:int)->F(n)} calculant le terme de rang $n$ ($F_n$) de la suite de Fibonacci par une méthode itérative.}
+\question{Écriture sous Python \texttt{fib$\_$it(n:int)->F(n)} calculant le terme de rang $n$ ($F_n$) de la suite de Fibonacci par une méthode itérative. Donner la valeur de $F(n)$.}
 
 
 
@@ -39,17 +26,94 @@ def fib_it(n):
     for k in range(2,n+1):
         u,v=v,u+v
     return v
+
 \end{lstlisting}
 
-\question{Écriture sous Python \texttt{fib_rec(n:int)->F(n)} calculant le terme de rang $n$ ($F_n$) de la suite de Fibonacci par une méthode recursive.}
+
+\question{Écriture sous Python \texttt{fib$\_$rec(n:int)->F(n)} calculant le terme de rang $n$ ($F_n$) de la suite de Fibonacci par une méthode récursive naïve. Donner la valeur de $F(n)$.}
 
 \begin{lstlisting}
 def fib_rec(n):
-    u=0
-    v=1
-    if n<=1:
-        v=n
-    for k in range(2,n+1):
-        u,v=v,u+v
-    return v
+    if n==0 or n==1:
+        return n
+    else:
+        Fn1=fib_rec(n-1)
+        Fn2=fib_rec(n-2)
+        return Fn1+Fn2
+
+\end{lstlisting}
+
+
+
+\question{Exécuter cette suite d'instruction et donner la valeur de C dans votre cas.}
+
+\begin{lstlisting}
+C=0
+def compte_appel():
+    global C
+    C+=1
+
+alpha=100
+
+n=u(alpha,10)
+
+for k in range(n):
+    compte_appel()
+
+print(n,C)
+
+\end{lstlisting}
+
+
+
+\question{En vous inspirant de la question précédente et avec la forme récursive Donner le nombre d'appel à la fonction \texttt{fib$\_$rec(n:int)->F(n)} par une méthode récursive "naïve" avec \texttt{n=u(alpha,10)}..}
+
+\begin{lstlisting}
+S=0
+def fib_rec(n):
+    global S
+    S+=1
+    if n==0 or n==1:
+        return n
+    else:
+        Fn1=fib_rec(n-1)
+        Fn2=fib_rec(n-2)
+        return Fn1+Fn2
+        
+fib_rec(n)
+print(S)
+\end{lstlisting}
+
+
+\question{Proposer un nouvelle fonction de signature \texttt{fib$\_$rec2(n:int)->int} en modifiant l'algorithme
+précédent en y ajoutant la déclaration d'une liste. On ne calcule le n\up{ème} terme que si celui-ci n'a jamais été calculé. On pourra
+commencer par déclarer une liste contenant n + 1 fois la valeur 0. Donner le nombre d'appel à la fonction \texttt{fib$\_$rec2(n:int)->F(n)} par cette méthode avec \texttt{n=u(alpha,10)}.}
+
+
+\begin{lstlisting}
+Lrec=(n+1)*[0]
+
+S=0
+def fib_rec2(n):
+    global S,Lrec
+    S+=1
+    if n==0 or n==1:
+        return n
+    else:
+        if Lrec[n-1]==0:
+            Fn1=fib_rec2(n-1)
+            Lrec[n-1]=Fn1
+        else:
+            Fn1=Lrec[n-1]
+        if Lrec[n-2]==0:
+            Fn2=fib_rec2(n-2)
+            Lrec[n-2]=Fn2
+        else:
+            Fn2=Lrec[n-2]
+        if Lrec[n]==0:
+            Lrec[n]=Fn1+Fn2
+        return Lrec[n]
+
+print(fib_rec2(n),n,S)
+
 \end{lstlisting}

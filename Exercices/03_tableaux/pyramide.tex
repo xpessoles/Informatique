@@ -36,7 +36,7 @@ un tableau, dont les éléments sont les lignes de la pyramide, représentées e
 dans un tableau. Par exemple, la pyramide de l'exemple sera représentée dans le tableau 
 \texttt{[ [ 2 ], [ 4, 5 ], [ 1, 7, 8 ], [ 2, 3, 1, 6 ], [ 9, 4, 6, 5, 2 ] ]}. 
 
-Vous pourrez utiliser la fonction suivante pour construire ces pyramides :
+Vous pourrez utiliser la fonction suivante pour construire ces pyramides avec n lignes pour votre valeur de alpha  :
 \begin{lstlisting}
 def pyramide(alpha,n):
     p = []
@@ -53,8 +53,11 @@ def pyramide(alpha,n):
 
 Enfin, on rappelle que si $x\in\N$, on note $x\% 10$ le reste de la division euclidienne par 10.
 
-\question{Donner la somme maximale pour la pyramide ayant $20$ lignes, définie par les $u_k \% 10$ (lus de haut en bas, de gauche à droite, la première ligne est $[u_0\%10]$, la seconde $[u_1\%10$, $u_2\%10]$ \emph{etc}.).}
+\question{Donner la somme maximale pour la pyramide ayant $20$ lignes, définie par \texttt{pyramide(alpha,20)}.}
 
 \medskip
 
-\question{Donner la somme maximale pour la pyramide ayant $100$ lignes, définie par les $u_k \% 10$ (lus de haut en bas, de gauche à droite, la première ligne est $[u_0\%10]$, la seconde $[u_1\%10$, $u_2\%10]$ \emph{etc}.).}
+\question{Donner la somme maximale pour la pyramide ayant $100$ lignes, définie par définie par \texttt{pyramide(alpha,100)}.}
+
+
+

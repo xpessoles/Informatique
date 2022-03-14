@@ -1,0 +1,59 @@
+
+
+
+
+\question{Écrire une fonction \texttt{frontiere(L:list,x:int)->int} prenant en argument une liste L (générée par \texttt{L=Lu(alpha,100)}, supposée triée, et un élément x, et renvoyant
+le plus petit indice i tel que x est inférieur ou égal à \texttt{L[i]}, ou \texttt{len(L)} si un tel indice n'existe pas. Renvoyer le résultat de  \texttt{frontiere(L=Lu(alpha,100),alpha)}. Il est conseillé de raisonner en itératif ici.}
+
+\begin{lstlisting}
+def frontiere(Lf,x):
+    a=0
+    b=len(Lf)-1
+    i=0
+    if x>Lf[-1]:
+        return b+1,i
+    while b>=a and i<10:
+        m=(b+a)//2
+        #print(a,b,m,Lf[m])
+        if Lf[m]==x:
+            return m,i
+        elif Lf[m]>x:
+            b=m-1
+        else:
+            a=m+1
+        i+=1
+    return m
+    
+    
+print(frontiere(Lu(alpha,100),alpha))
+\end{lstlisting}
+
+
+\question{Donner le nombre d'itérations pour la fonction \texttt{frontiere(L=Lu(alpha,100),alpha)}.}
+
+
+\begin{lstlisting}
+def frontiere(Lf,x):
+    a=0
+    b=len(Lf)-1
+    i=0
+    if x>Lf[-1]:
+        return b+1,i
+    while b>=a and i<10:
+        m=(b+a)//2
+        #print(a,b,m,Lf[m])
+        if Lf[m]==x:
+            return m,i
+        elif Lf[m]>x:
+            b=m-1
+        else:
+            a=m+1
+        i+=1
+    return m,i
+    
+it=frontiere(Lu(alpha,100),alpha)[1]
+\end{lstlisting}
+
+
+%
+%\question{Concevoir un jeu de test permettant de vérifier tous les cas limites pour votre fonction.}

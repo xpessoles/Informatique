@@ -74,7 +74,7 @@ def Snaif(alpha,n):
 
 
 a = 1
-    
+
 def v(alpha,n):
     """Calcule v_n"""
     L = [0]*(n+1)
