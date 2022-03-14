@@ -1,4 +1,4 @@
-\exer{}
+\exer{Conversion d'entier en binaire}
 \setcounter{numques}{0}
 
 \question{ \'Etudier la complexité théorique de la fonction \texttt{conv\_b2}}
@@ -19,7 +19,7 @@ et \texttt{calc\_b2\_horner}. Les comparer.}
 
 \begin{lstlisting}
 def calc_b2_naif(s):
-    """Renvoie l'entier p représente en binaire par s"""
+    """Renvoie l'entier p représeté en binaire par s"""
     p = 0
     x = 1 ## 2**0
     for i in range(len(s)):
@@ -31,7 +31,7 @@ def calc_b2_naif(s):
 
 \begin{lstlisting}
 def calc_b2_horner(s):
-    """Renvoie l'entier p représente en binaire par s"""
+    """Renvoie l'entier p représenté en binaire par s"""
     p = int(s[0])
     for i in range(1,len(s)):
         p = int(s[i])+2*p

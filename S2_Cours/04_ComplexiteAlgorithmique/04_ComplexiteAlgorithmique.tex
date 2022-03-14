@@ -288,17 +288,29 @@ Ces constantes dépendent de la machine sur lequel on  exécutera le programme.
 
 On a quand même une information intéressante : $T_{2}(p)$ n'augmente pas plus vite que $p$ multipliée par une constante.
 
-Montrons ce second point. Pour $p\geq 1$ : 
-$ \begin{array}{ll}
-  T_{2}(p) &\leq c_{1}p + p(c_{2}+c_{3}+c_{1})+c_{4}p\\
-  &\leq (2c_{1}+c_{2}+c_{3}+c_{4})p
-  \end{array}$.
+%Montrons ce second point. Pour $p\geq 1$ : 
+%
+%$ \left |\begin{array}{ll}
+%\text{On a vu que } & T_{2}(p) = c_{1} + (p-1) (c_{2} + c_{3} + c_{1}) + c_{4}. \\
+%\text{De plus} & pc_{1}> c_{1}, p (c_{2} + c_{3} + c_{1}) > (p-1) (c_{2} + c_{3} + c_{1}) \text{ et  } pc_{4}>c_4. \\
+%\text{Au final }&    T_{2}(p) \leq c_{1}p + p(c_{2}+c_{3}+c_{1})+c_{4}p\\
+%\text{et }  & T_{2}(p)\leq (2c_{1}+c_{2}+c_{3}+c_{4})p.
+%  \end{array}\right.$
+%  
+  
+Montrons ce second point. Pour $p_0\geq 1$ : 
+$ \left |\begin{array}{ll}
+\text{On a vu que } & T_{2}(p) = c_{1} + (p-1) (c_{2} + c_{3} + c_{1}) + c_{4}. \\
+\text{De plus} & p_0c_{1}> c_{1}, p_0 (c_{2} + c_{3} + c_{1}) > (p-1) (c_{2} + c_{3} + c_{1}) \text{ et  } p_0c_{4}>c_4. \\
+\text{Au final }&    T_{2}(p) \leq c_{1}p_0 + p_0(c_{2}+c_{3}+c_{1})+c_{4}p_0\\
+\text{et }  & T_{2}(p)\leq (2c_{1}+c_{2}+c_{3}+c_{4})p_0.
+  \end{array}\right.$
   
 
 %\clearslide{}
 
 On a donc montré qu'il existait un entier $p_{0}$ et un réel $C>0$ tel que
-$  \forall p\geq p_0 \qquad T_{2}(p)\leq Cp$.
+$  \forall p\geq p_0 \qquad T_{2}(p)\leq Cp_0$.
 
 On dit alors que $T_{2}(p)$ est \emph{dominé} par $p$ et on note
 $  T_{2}(p) = O(p)$.
