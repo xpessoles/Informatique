@@ -34,6 +34,13 @@ On note $x\to y$ l'arc $(x,y)$. $x$ est l'extrémité initiale de l'arc, $y$ est
 \end{figure}
 \end{multicols}
 
+\begin{rem}
+On peut noter le graphe non orienté $G=\left(\llbracket 1,6\rrbracket,E\right)$ où $E=\left(
+\left\{1,2\right\},\left\{2,3\right\},\left\{3,4\right\},\left\{1,4\right\},\left\{1,3\right\},\left\{1,5\right\},\left\{1,6\right\}\right)$ désigne les arêtes. 
+
+On peut noter le graphe orienté $G=\left(\llbracket 1,6\rrbracket,E\right)$ où $E=\left(
+\left(1,2\right),\left(2,3\right),\left(3,4\right),\left(1,4\right),\left(1,3\right),\left(1,5\right),\left(1,6\right)\right)$ désigne les arcs. 
+\end{rem}
 
 \begin{defi}{Adjacence}
 Deux arcs (resp. arêtes) d'un graphe orienté (resp. non orienté) sont dits adjacents s'ils ont au moins une extrémité commune. 
@@ -96,13 +103,144 @@ Dans ce cas, on a  $d\degres\left(s\right)=d_{-}\left(s\right)+d_{+}\left(s\righ
 
 \subsection{Implémentation des graphes}
 
-\subsection{Implémentation << creuse >> }
-
 \subsubsection{Liste d'adjacence}
+\begin{defi}{Liste d'adjacence}
+Soit un graphe de $n$ sommets d'indices $i \in \llbracket 0, n-1\rrbracket$. Pour implémenter le graphe, on utilise une liste \texttt{G} de taille $n$ pour laquelle, \texttt{G[i]} est la liste des voisins de \texttt{i}.
+\end{defi}
+\begin{rem}
+Cette implémentation est plutôt réservée au graphes << creux >> ayant peu d'arêtes.
+\end{rem}
 
-\subsubsection{Implémentation << dense >> -- Matrice d'adjacence}
+\begin{exemple} ~\\
+\begin{minipage}[b]{.47\linewidth}
+\begin{center}
+\includegraphics[width=.7\linewidth]{fig_05}
+\end{center}
+\begin{lstlisting}
+G = [[1,5,6],[0,2,6],[1,3],[2,4],[3,5],
+      [4,0],[1,0]]
+\end{lstlisting}
+\end{minipage}\hfill
+\begin{minipage}[b]{.47\linewidth}
+\begin{center}
+\includegraphics[width=.7\linewidth]{fig_06}
+\end{center}
+Dans ca cas, le graphe est orienté. La liste d'adjacence contient la liste des successeurs. 
+\begin{lstlisting}
+G = [[1,5,6],[],[1],[6],[3,5],[],[0,1]]
+\end{lstlisting}
+\end{minipage}
+\end{exemple}
+
+Dans la même idée, il est aussi possible d'utiliser des dictionnaires d'adjacence dans lequel les clés sont les sommets, et les valeurs sont des listes de voisins ou de sucesseurs. 
+\begin{lstlisting}
+# Graphe non orienté 
+G = {"S0":["S1","S5","S6"],"S1":["S0","S2","S6"],"S2":["S1","S3"],"S3":["S2","S4"],"S4":["S3","S5"],"S5":["S4","S0"],"S6":["S1","S0"]}
+# Graphe orienté 
+G = {"S0":["S1","S5","S6"],"S1":[],"S2":["S1"],"S3":["S6"],"S4":["S3","S5"],"S5":[],"S6":["S1","S0"]}
+\end{lstlisting}
 
 
+\subsubsection{Matrice d'adjacence}
+\begin{defi}{Matrice d'adjacence}
+Soit un graphe de $n$ sommets d'indices $i \in \llbracket 0, n-1\rrbracket$ et $E$ l'ensemble des arêtes 
+(on notera $G=\left( \llbracket 0, n-1\rrbracket,E\right)$. Pour implémenter le graphe, on utilise la matrice d'adjacence carrée de taille $n$, $\mathcal{M}_n$ \texttt{G} de taille $n$ pour laquelle,
+$m_{i,j}=\left\{
+\begin{array}{l}
+\texttt{True } \text{ si } \{i,j\}\in E\\
+\texttt{False } \text{ sinon } 
+\end{array}
+\right.$ avec $i,j\in \llbracket 0, n-1\rrbracket$. 
+
+
+\end{defi}
+\begin{rem}
+Cette implémentation est plutôt réservée au graphes << denses >> ayant << beaucoup >> d'arêtes.
+\end{rem}
+
+
+\begin{exemple} ~\\
+\begin{minipage}[b]{.47\linewidth}
+\begin{center}
+\includegraphics[width=.7\linewidth]{fig_05}
+\end{center}
+
+On a dans ce cas 
+
+\footnotesize{$
+M = $
+
+$
+\begin{pmatrix}
+\texttt{False} & \texttt{True} & \texttt{False} & \texttt{False} & \texttt{False} & \texttt{True} & \texttt{True} \\
+\texttt{True} & \texttt{False} & \texttt{True} & \texttt{False} & \texttt{False} & \texttt{False} & \texttt{True} \\ 
+\texttt{False} & \texttt{True} & \texttt{False} & \texttt{True} & \texttt{False} & \texttt{False} & \texttt{False} \\
+\texttt{False} & \texttt{False} & \texttt{True} & \texttt{False} & \texttt{True} & \texttt{False} & \texttt{False} \\
+\texttt{False} & \texttt{False} & \texttt{False} & \texttt{True} & \texttt{False} & \texttt{True} & \texttt{False} \\
+\texttt{True} & \texttt{False} & \texttt{False} & \texttt{False} & \texttt{True} & \texttt{False} & \texttt{False} \\
+\texttt{True} & \texttt{True} & \texttt{False} & \texttt{False} & \texttt{False} & \texttt{False} & \texttt{False} \\
+\end{pmatrix}$}
+
+ou 
+
+\footnotesize{$
+M = 
+\begin{pmatrix}
+\texttt{0} & \texttt{1} & \texttt{0} & \texttt{0} & \texttt{0} & \texttt{1} & \texttt{1} \\
+\texttt{1} & \texttt{0} & \texttt{1} & \texttt{0} & \texttt{0} & \texttt{0} & \texttt{1} \\ 
+\texttt{0} & \texttt{1} & \texttt{0} & \texttt{1} & \texttt{0} & \texttt{0} & \texttt{0} \\
+\texttt{0} & \texttt{0} & \texttt{1} & \texttt{0} & \texttt{1} & \texttt{0} & \texttt{0} \\
+\texttt{0} & \texttt{0} & \texttt{0} & \texttt{1} & \texttt{0} & \texttt{1} & \texttt{0} \\
+\texttt{1} & \texttt{0} & \texttt{0} & \texttt{0} & \texttt{1} & \texttt{0} & \texttt{0} \\
+\texttt{1} & \texttt{1} & \texttt{0} & \texttt{0} & \texttt{0} & \texttt{0} & \texttt{0} \\
+\end{pmatrix}$}
+
+
+\end{minipage}\hfill
+\begin{minipage}[b]{.47\linewidth}
+\begin{center}
+\includegraphics[width=.7\linewidth]{fig_06}
+\end{center}
+Dans ca cas, le graphe est orienté. On a 
+On a dans ce cas 
+
+\footnotesize{$
+M = $
+
+$
+\begin{pmatrix}
+\texttt{False} & \texttt{True} & \texttt{False} & \texttt{False} & \texttt{False} & \texttt{False} & \texttt{True} \\
+\texttt{False} & \texttt{False} & \texttt{False} & \texttt{False} & \texttt{False} & \texttt{False} & \texttt{False} \\ 
+\texttt{False} & \texttt{True} & \texttt{False} & \texttt{False} & \texttt{False} & \texttt{False} & \texttt{False} \\
+\texttt{False} & \texttt{False} & \texttt{False} & \texttt{False} & \texttt{False} & \texttt{False} & \texttt{True} \\
+\texttt{False} & \texttt{False} & \texttt{False} & \texttt{True} & \texttt{False} & \texttt{True} & \texttt{False} \\
+\texttt{False} & \texttt{False} & \texttt{False} & \texttt{False} & \texttt{False} & \texttt{False} & \texttt{False} \\
+\texttt{True} & \texttt{True} & \texttt{False} & \texttt{False} & \texttt{False} & \texttt{False} & \texttt{False} \\
+\end{pmatrix}$}
+
+ou 
+\footnotesize{$
+M =
+\begin{pmatrix}
+\texttt{0} & \texttt{1} & \texttt{0} & \texttt{0} & \texttt{0} & \texttt{0} & \texttt{1} \\
+\texttt{0} & \texttt{0} & \texttt{0} & \texttt{0} & \texttt{0} & \texttt{0} & \texttt{0} \\ 
+\texttt{0} & \texttt{1} & \texttt{0} & \texttt{0} & \texttt{0} & \texttt{0} & \texttt{0} \\
+\texttt{0} & \texttt{0} & \texttt{0} & \texttt{0} & \texttt{0} & \texttt{0} & \texttt{1} \\
+\texttt{0} & \texttt{0} & \texttt{0} & \texttt{1} & \texttt{0} & \texttt{1} & \texttt{0} \\
+\texttt{0} & \texttt{0} & \texttt{0} & \texttt{0} & \texttt{0} & \texttt{0} & \texttt{0} \\
+\texttt{1} & \texttt{1} & \texttt{0} & \texttt{0} & \texttt{0} & \texttt{0} & \texttt{0} \\
+\end{pmatrix}$}
+
+\end{minipage}
+\end{exemple}
+
+
+\begin{rem}
+\begin{itemize}
+\item Dans le cas d'un graphe non orienté, la matrice est symétrique. 
+\item Si on avait un bouclage sur un sommet, il y aurait des valeurs non nulles sur la diagonale. 
+\end{itemize}
+\end{rem}
 
 \section{Parcours d'un graphe}
 \subsection{Piles et files}

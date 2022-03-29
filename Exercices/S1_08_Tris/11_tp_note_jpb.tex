@@ -1,0 +1,34 @@
+\question{Ecrire une fonction \texttt{counting\_sort(k, t)} prenant en argument une liste t généré par \texttt{liste\_u} et retournant une copie trié de ce tableau. On utilisera impérativement
+l'algorithme suivant :
+\begin{itemize}
+\item On construit un tableau \texttt{u} de taille \texttt{k} initialisé avec des 0.
+\item On parcourt \texttt{t}. Pour chaque valeur x trouvée, on incrémente \texttt{u[x]}. A la fin du parcours,
+pour tout entier \texttt{i} de \texttt{range(k)}, \texttt{u[i]} contient donc le nombre d'occurrences de \texttt{i}
+dans \texttt{t}.
+\item Il est alors facile de construire un tableau \texttt{r} trié répondant à la question posée.
+\end{itemize}
+}
+%— 
+%3.  crire suivant le m me principe une fonction bucket_sort(f, k, t) retournant une
+%copie de t tri e suivant le crit re f. Plus pr cis ment, f doit  tre une fonction prenant ses
+%valeurs dans range(k) et les  l ments de la liste r sultat sont tri s par ordre croissant de
+%leurs images par f.
+%De plus, on fera en sorte que le tri soit stable, c’est- -dire que pour tout couple de valeurs x
+%et y ayantm me image par f, x et y apparaissent dans le m me ordre dans t et dans la liste
+%tri e.
+%4. On se donne la fonction suivante pour trier une liste d’entiers.
+%PYTHON
+%def radix_sort(k, t) :
+%"""Retourne une copie de t tri e par ordre croissant.
+%t doit contenir des entiers appartenant   range(k**2) """
+%def lp(x) :
+%return x // k
+%def rp(x) :
+%return x % k
+%u = bucket_sort(rp, k, t)
+%r = bucket_sort(lp, k, u)
+%return r
+%V rifier (exp rimentalement) sur une petite liste d’entier que cette fonction trie effectivement.
+%5.  crire une fonction radix_sort2(k,t) inspir e de la fonction radix_sort qui, pour
+%un tableau t contenant des entiers appartenant   range(k**3) renvoie une copie de t
+%tri e par ordre croissant.
