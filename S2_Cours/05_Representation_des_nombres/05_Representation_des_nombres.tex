@@ -1,0 +1,1400 @@
+\section{Base de numération}
+\subsection{Rappel de CP : la base dix}
+Chiffre : symbole utilisé pour représenter certains entiers.
+
+Les chiffres «usuels» : $0$, $1$, $2$, $3$, $4$, $5$, $6$, $7$, $8$,
+$9$.
+
+%%\clearslide{}
+Le nombre dix joue un rôle particulier.
+\begin{itemize}
+\item C'est le plus petit entier naturel non représentable uniquement par un chiffre.
+\item Pour compter des objets en grand nombre, on les regroupe par paquets de dix.
+\end{itemize}
+
+Exemple : Pour compter $||||||||||||||||||||||||$, on obtient
+\begin{equation*}
+ ||||||||||\quad ||||||||||\quad |||| 
+\end{equation*}
+Deux paquets (deux dizaines), reste quatre unités.
+
+Quand il y a trop de dizaines, on regroupe les dizaines par paquets de
+dix (centaines), les centaines par paquets de dix (milliers), etc.
+
+\subsection{Numération de position en base 10}
+
+
+On décompose un entier en dizaines, centaines, milliers, etc. 
+L'essentiel est alors qu'il y ait strictement moins de dix éléments dans chaque type de paquet. Ce nombre d'éléments peut être représenté par un chiffre.
+On écrit alors tous les chiffres à la suite. À gauche, on place les \emph{chiffres de poids fort} (gros paquets). À droite, les \emph{chiffres de poids faible}.
+
+Ainsi $2735$ représente deux milliers plus sept centaines plus trois
+dizaines plus cinq unités.
+
+De manière générale, avec $B=10$ et $n\in\N$,
+$$\displaystyle\underline{a_{n}a_{n-1}\ldots a_{1}a_{0}}_{~B} =
+\sum_{k=0}^{n}a_{k}B^{k},~ \textrm{ et }~\forall k \in \iif{0;n},~ a_k\in\ii{0;B}.$$ 
+
+%\clearslide{}
+
+\subsection{Pourquoi dix?}
+
+Pourquoi regrouper par dix pas plutôt par deux? ou trois? ou six? ou
+huit?
+
+\begin{itemize}
+\item Raison anthropomorphique (dix doigts) et poids de l'histoire.
+\item À peu près aucune raison mathématique.
+\end{itemize}
+
+On peut choisir une autre base.
+
+\begin{itemize}
+\item Deux: Amérique du Sud et Océanie.
+\item Cinq: Afrique, Romains et Maya (partiellement).
+\item Six: Papouasie Nouvelle-Guinée.
+\item Huit: certains dialectes amérindiens (Pame, Mexique; Yuki,
+  Californie), proposition de Charles XII de Suède.
+\item Douze: Népal, Europe.
+\item Vingt: Bhoutan, Aztèques, Maya, Gaulois (?), Basques (?).
+\item Soixante: Babyloniens, Indiens et Arabes (trigo)
+\end{itemize}
+(source: Wikipédia, article \textit{Numération})
+
+\`A chaque fois, le principe est identique : on change juste $B$ dans l'écriture précédente.
+
+%\clearslide{}
+%\subsection{Un premier exemple : la base huit (octale)}
+%
+%En pratique, on ne l'utilisera pas ...
+%
+%On a besoin de huit symboles pour représenter les huit chiffres (représentant les nombres de zéro inclus à huit exclu). On prendra naturellement $0$, \ldots{}, $7$.
+%Pour compter, on regroupe les unités par huitaine puis par
+%  huitaines de huitaines, etc. On note les nombres sur le même principe que l'écriture décimale :
+%$\oct{2735}$ représente cinq unités plus trois huitaines
+%plus sept huitaines de huitaines, plus deux huitaines de huitaines de
+%huitaines (soit $1501$, exprimé ici en base 10 !).
+%
+%De manière générale, avec $B=8$ et $n\in\N$,
+%$$\displaystyle\underline{a_{n}a_{n-1}\ldots a_{1}a_{0}}_{~B} =
+%\sum_{k=0}^{n}a_{k}B^{k},~ \textrm{ et }~\forall k \in \iif{0;n},~ a_k\in\ii{0;B}.$$ 
+%
+%Vous remarquerez la forte similitude avec la formule précédente ...
+%
+%Comptons en octal:
+%
+%\begin{minipage}[t]{0.18\linewidth}
+%\begin{align*}
+%\oct{0} &= 0\\
+%\oct{1} &= 1\\
+%\oct{2} &= 2\\
+%\oct{3} &= 3\\
+%\oct{4} &= 4\\
+%\oct{5} &= 5\\
+%\oct{6} &= 6\\
+%\oct{7} &= 7\\
+%\end{align*}
+%\end{minipage}
+%\begin{minipage}[t]{0.18\linewidth}
+%\begin{align*}
+%\oct{10} &= 8\\
+%\oct{11} &= 9\\
+%\oct{12} &= 10\\
+%\oct{13} &= 11\\
+%\oct{14} &= 12\\
+%\oct{15} &= 13\\
+%\oct{16} &= 14\\
+%\oct{17} &= 15\\
+%\end{align*}
+%\end{minipage}
+%\begin{minipage}[t]{0.18\linewidth}
+%\begin{align*}  
+%\oct{20} &= 16\\
+%\oct{21} &= 17\\
+%\oct{22} &= 18\\
+%\oct{23} &= 19\\
+%\oct{24} &= 20\\
+%\oct{25} &= 21\\
+%\oct{26} &= 22\\
+%\oct{27} &= 23\\
+%\end{align*}
+%\end{minipage}
+%\begin{minipage}[t]{0.18\linewidth}
+%\begin{align*}
+%\oct{30} &= 24\\
+%\oct{40} &= 32\\
+%\oct{50} &= 40\\
+%\oct{60} &= 48\\
+%\oct{70} &= 56\\
+%\end{align*}
+%\end{minipage}
+%\begin{minipage}[t]{0.18\linewidth}
+%  \begin{align*}
+%\oct{100} &= 64\\
+%\oct{200} &= 128\\
+%\oct{1\,000} &= 512\\
+%\oct{10\,000} &= 4096\\
+%\oct{100\,000} &= 32768\\
+%\end{align*}
+%\end{minipage}
+%
+%%\clearslide{}
+%\begin{minipage}[c]{.48\linewidth}
+%\begin{center}
+%  \input{images/table-add-8.tex}\\
+%  Table d'addition en octal
+%\end{center}
+%\end{minipage} \hfill
+%\begin{minipage}[c]{.48\linewidth}
+%\begin{center}
+%  \input{images/table-mul-8.tex}\\
+%  Table de multiplication en octal
+%\end{center}
+%\end{minipage}
+%
+%%\clearslide{}
+%Comment faire une addition de nombres à plusieurs chiffres?
+%
+%Exactement comme en base 10, mais en utilisant la table d'addition de
+%la base 8.
+%
+%Pour la multiplication: aussi.
+
+\subsection{La base seize (hexadécimale)}
+
+On reprend le même principe que précédemment, avec $B = 16$ (on forme des paquets de $16$ etc.). Mais cette fois on manque de chiffres pour représenter les nombres de zéro inclus à
+seize exclu (il en manque six).
+
+On rajoute de nouveaux \og chiffres \fg{}:
+\begin{description}
+\item[a] dix
+\item[b] onze
+\item[c] douze
+\item[d] treize
+\item[e] quatorze
+\item[f] quinze
+\end{description}
+On peut alors se mettre à compter en hexadécimal !
+%\clearslide{}
+\vskip-1pt
+\noindent\begin{minipage}[t]{0.18\linewidth}
+\footnotesize{}
+\begin{align*}
+\hex{0} &= 0\\
+\hex{1} &= 1\\
+% \hex{2} &= 2\\
+&\vdots\\
+% \hex{4} &= 4\\
+% \hex{5} &= 5\\
+% \hex{6} &= 6\\
+% \hex{7} &= 7\\
+% \hex{8} &= 8\\
+\hex{9} &= 9\\
+\hex{a} &= 10\\
+\hex{b} &= 11\\
+\hex{c} &= 12\\
+\hex{d} &= 13\\
+\hex{e} &= 14\\
+\hex{f} &= 15\\
+\end{align*}
+\end{minipage}
+\begin{minipage}[t]{0.18\linewidth}
+\footnotesize{}
+\begin{align*}
+\hex{10} &= 16\\
+\hex{11} &= 17\\
+&\vdots\\
+\hex{19} &= 25\\
+\hex{1a} &= 26\\
+\hex{1b} &= 27\\
+\hex{1c} &= 28\\
+\hex{1d} &= 29\\
+\hex{1e} &= 30\\
+\hex{1f} &= 31\\
+\end{align*}
+\end{minipage}
+\begin{minipage}[t]{0.18\linewidth}
+\footnotesize{}
+\begin{align*}
+\hex{20} &= 32\\
+\hex{21} &= 33\\
+&\vdots\\
+\hex{29} &= 41\\
+\hex{2a} &= 42\\
+\hex{2b} &= 43\\
+\hex{2c} &= 44\\
+\hex{2d} &= 45\\
+\hex{2e} &= 46\\
+\hex{2f} &= 47\\
+\end{align*}
+\end{minipage}
+\begin{minipage}[t]{0.18\linewidth}
+\footnotesize{}
+\begin{align*}
+\hex{30} &= 48\\
+\hex{40} &= 64\\
+&\vdots\\
+\hex{90} &= 144\\
+\hex{a0} &= 160\\
+\hex{b0} &= 176\\
+\hex{c0} &= 192\\
+\hex{d0} &= 208\\
+\hex{e0} &= 224\\
+\hex{f0} &= 240\\
+\end{align*}
+\end{minipage}
+\begin{minipage}[t]{0.18\linewidth}
+\footnotesize{}
+\begin{align*}
+\hex{100} &= 256\\
+\hex{200} &= 512\\
+\hex{1\,000} &= 4096\\
+\hex{10\,000} &= 65536\\
+\end{align*}
+\end{minipage}
+%\clearslide{}
+
+%
+%\begin{center}
+%  \tiny{}
+%  \input{images/table-add-16.tex}\\
+%  Table d'addition en hexadécimal
+%\end{center}
+%
+%%\clearslide{}
+%\begin{center}
+%  \tiny{}
+%  \input{images/table-mul-16.tex}\\
+%  Table de multiplication en hexadécimal
+%\end{center}
+
+
+%\clearslide{}
+\subsection{Enfin : la base deux !}
+
+C'est toujours le même principe, mais avec $B=2$ ; on représente les nombres \og par paquets de deux \fg{}. 
+Pas de problème pour les chiffres, nous n'en avons besoin que de deux. Par convention : $0$ et $1$.
+
+\begin{minipage}[t]{0.18\linewidth}
+\begin{align*}
+\bin{0} &= 0\\
+\bin{1} &= 1\\
+\end{align*}
+\end{minipage}
+\begin{minipage}[t]{0.18\linewidth}
+\begin{align*}
+\bin{10} &= 2\\
+\bin{11} &= 3\\
+\end{align*}
+\end{minipage}
+\begin{minipage}[t]{0.18\linewidth}
+\begin{align*}  
+\bin{100} &= 4\\
+\bin{101} &= 5\\
+\bin{110} &= 6\\
+\bin{111} &= 7\\
+\end{align*}
+\end{minipage}
+\begin{minipage}[t]{0.18\linewidth}
+\begin{align*}
+\bin{1000} &= 8\\
+\bin{1\,0000} &= 16\\
+\bin{10\,0000} &= 32\\
+\bin{100\,0000} &= 64\\
+\bin{1000\,0000} &= 128\\
+\bin{1\,0000\,0000} &= 256\\
+\end{align*}
+\end{minipage}
+
+
+
+  \begin{minipage}{0.5\textwidth}
+  \begin{center}
+    \input{images/table-add-2.tex}\\
+  Table d'addition en binaire
+  \end{center}
+  \end{minipage}
+  \begin{minipage}{0.5\textwidth}
+  \begin{center}
+    \input{images/table-mul-2.tex}\\
+  Table de multiplication en binaire
+  \end{center}
+  \end{minipage}
+
+%\clearslide{}
+\subsubsection{Intérêts du binaire}
+Les nombres binaires sont facilement représentables par un dispositif
+  mécanique/électrique/électronique/optique/électromagnétique etc.
+De plus, les tables d'opérations très simples et sont facilement calculables par un
+  dispositif mécanique/électrique/électronique etc.
+
+C'est le système utilisé pour représenter les nombres en interne dans
+un ordinateur.
+
+%\clearslide{}
+\subsubsection{Écriture d'un naturel $p$ en binaire}
+
+Donnons d'abord un algorithme par divisions successives.
+Si $p = \underline{a_n\dots a_0}_{~2}$, alors 
+$$ p = \sum_{k=0}^n a_k 2^k = 2\sum_{k=1}^n a_k2^{k-1} + a_0.$$
+Ainsi, $a_0$ est le reste de la division euclidienne de $p$ par $2$ et, si $p\neq a_0$, $\underline{a_n\dots a_1}_{~2}$ est le quotient de la division euclidienne de $p$ par $2$.
+
+On peut donc écrire la fonction suivante.
+
+
+
+\begin{lstlisting}
+def conv_b2(p):
+ """Convertit l'entier p en base 2 (renvoie une chaîne)"""
+    x = p
+    s = ""
+    while x > 1 :
+        s = str(x%2) + s
+        x = x // 2
+    return str(x)+s
+
+print('0='+conv_b2(0)+' et 1='+conv_b2(1)+' et 42='+conv_b2(42))
+\end{lstlisting}
+
+
+
+Cela renvoie alors :
+\begin{quote}
+\begin{lstlisting}
+def conv_b2(p):
+    x = p
+    s = ""
+    while x > 1 :
+        s = str(x%2) + s
+        x = x // 2
+    return str(x)+s
+
+print('0='+conv_b2(0)+' et 1='+conv_b2(1)+' et 42='+conv_b2(42))
+\end{lstlisting}
+\end{quote}
+
+
+Voici une autre idée : calculer $2^{k}$ pour $k=0, \ldots$ jusqu'à avoir $2^{k} >
+  p$. Alors, $p$ s'écrit sur $k$ bits et le bit de poids fort est
+  $1$. Le reste des bits est donné par la représentation en binaire de
+  $p-2^{k-1}$.
+
+
+\subsubsection{Calcul d'entier représenté en binaire}
+
+On veut calculer l'entier $p$, représenté par une suite de bits
+$\underline{a_{n}a_{n-1}\ldots a_{1}a_{0}}_{2}$, \emph{i.e.}
+$\displaystyle\sum_{k=0}^{n}a_{k}2^{k}$.
+
+On peut effectuer le calcul naïvement, en pensant bien à calculer les puissances de proche en proche. 
+
+\begin{lstlisting}
+def calc_b2_naif(s):
+    """Renvoie l'entier p représente en binaire par s"""
+    p = 0
+    x = 1 ## 2**0
+    for i in range(len(s)):
+        p = p+int(s[len(s)-i-1])*x
+        x = 2*x
+    return p
+
+print(0==calc_b2_naif("0"))
+print(1==calc_b2_naif("1"))
+print(42==calc_b2_naif("101010"))
+\end{lstlisting}
+
+
+Cela renvoie alors :
+\begin{quote}
+\begin{lstlisting}
+def calc_b2_naif(s):
+    p = 0
+    x = 1 ## 2**0
+    for i in range(len(s)):
+        # Invariant : p = s[len(s)-i:]
+        p = p+int(s[len(s)-i-1])*x
+        x = 2*x
+    return p
+
+print(0==calc_b2_naif("0"))
+print("\n")
+print(1==calc_b2_naif("1"))
+print("\n")
+print(42==calc_b2_naif("101010"))
+\end{lstlisting}
+\end{quote}
+
+On peut faire mieux en mettant en {\oe}uvre l'algorithme de Horner. Il suffit de remarquer que 
+\begin{equation*}
+  p = \sum_{k=0}^{n}a_{k}2^{k} = a_0 + 2\p{\sum_{k=1}^{n}a_{k}2^{k-1}} = a_0 + 2\p{a_1+2\p{a_2 + 2\p{\ldots + 2a_n}}}
+\end{equation*}
+
+\begin{lstlisting}
+def calc_b2_horner(s):
+    """Renvoie l'entier p représente en binaire par s"""
+    p = int(s[0])
+    for i in range(1,len(s)):
+        p = int(s[i])+2*p
+    return p
+    
+print(0==calc_b2_naif("0"))
+print(1==calc_b2_naif("1"))
+print(42==calc_b2_naif("101010"))
+\end{lstlisting}
+
+
+Cela renvoie alors :
+\begin{quote}
+\begin{lstlisting}
+def calc_b2_horner(s):
+    p = int(s[0])
+    for i in range(1,len(s)):
+        p = int(s[i])+2*p
+    return p
+    
+print(0==calc_b2_naif("0"))
+print("\n")
+print(1==calc_b2_naif("1"))
+print("\n")
+print(42==calc_b2_naif("101010"))
+\end{lstlisting}
+\end{quote}
+
+\begin{rem}
+\begin{enumerate}
+\item S'ils sont bien mis en œuvre, ces algorithmes de conversion demandent
+un temps de calcul de l'ordre de $n$ opérations pour un nombre de $n$ chiffres
+(binaires ou décimaux), soit de l'ordre de $\log p$ opérations.
+\item Il existe des algorithmes plus efficaces. Meilleure complexité
+  connue: complexité d'une multiplication de nombres de $n$ chiffres,
+  soit $O(n\log n \log \log n)$ [Knuth].
+\item Peu importe la base dans laquelle vous faites vos calculs, ces
+  algorithmes permettent de convertir entre la base $2$ et votre base
+  habituelle. 
+\end{enumerate}
+\end{rem}
+
+\section{Représentation des entiers sur ordinateur}
+\subsection{Cadre}
+Sur un ordinateur récent :
+\begin{itemize}
+\item[\textbullet] on travaille sur des mots-machine de $64$ bits ($8$ octets) ;
+\item[\textbullet] les opérations d'addition et de multiplication d'entiers internes au
+  processeur se font sur $64$ bits.
+\end{itemize}
+
+De manière générale, on s'intéressera au fonctionnement sur des
+ordinateurs travaillant sur des mots de $n$ bits ($n\geq 2$), mais pour les
+exemples, on prendra systématiquement $n=16$.
+
+\subsection{Somme d'entiers naturels}
+\sloppy
+
+Sur un processeur $n$ bits, un registre du processeur a $n$ bits et peut
+  représenter tout entier (naturel) de $\ii{0,2^{n}}$.
+
+ Lorsqu'on effectue l'addition de deux registres $r_{1}$ et
+  $r_{2}$ pour stocker le résultat dans $r_{3}$, le registre fait $n$
+  bits : s'il y a une retenue, elle est perdue.\footnote{En fait une
+    trace en est généralement gardée dans un autre registre du
+    processeur.}
+
+\begin{exemple}
+  Après addition de $\bin{1111\,0000\,1111\,0000}$ et
+  $\bin{0011\,0011\,0011\,0011}$ sur $16$ bits, le registre résultat contient :
+  $\bin{0010\,0100\,0010\,0011}$.
+\end{exemple}
+   
+\subsection{Entiers relatifs}
+
+On veut maintenant pouvoir travailler avec des entiers relatifs et notamment les additionner et les soustraire !
+
+\subsubsection{Avec signe et valeur absolue}
+
+Première possibilité de codage d'un entier relatif sur $n$ bits : on utilise $n-1$ bits pour la valeur absolue et
+$1$ bit pour le signe.
+\begin{exemple}
+
+\begin{minipage}{0.45\textwidth}
+Représentons les entiers relatifs sur 3 bits avec cette méthode :
+\begin{itemize}
+\item On utilise $3-1=2 bits$ pour la valeur absolue et 1 bit pour le signe.
+\item On représenta alors les entiers de $-3$ à $+3$ avec deux fois la représentation de 0.
+\item Avec cette représentation l'addition est compliquée à mettre en oeuvre et incohérente avec la méthode habituelle :  $2+(-1)=\bin{010}+\bin{101}=\bin{111}$.
+\end{itemize} 
+\end{minipage}
+\begin{minipage}{0.45\textwidth}
+\begin{tabular}{|p{0.1\textwidth}|p{0.13\textwidth}|p{0.28\textwidth}|p{0.28\textwidth}|}
+\hline 
+Signe & Valeur absolue & Représentation binaire & Représentation décimale \\ 
+\hline 
+$0$ & $00$ & $\bin{000}$ & $+0$ \\ 
+$0$ & $01$ & $\bin{001}$ & $+1$ \\ 
+$0$ & $10$ & $\bin{010}$ & $+2$ \\ 
+$0$ & $11$ & $\bin{011}$ & $+3$ \\ 
+$1$ & $00$ & $\bin{100}$ & $-0$ \\ 
+$1$ & $01$ & $\bin{101}$ & $-1$ \\ 
+$1$ & $10$ & $\bin{110}$ & $-2$ \\ 
+$1$ & $11$ & $\bin{111}$ & $-3$ \\ 
+\hline 
+\end{tabular} 
+\end{minipage}
+
+%\begin{itemize}
+%\item[\textbullet] On représente $-4$ par $\bin{1000\,0000\,0000\,0100}$.
+%\item[\textbullet] On représente $4$ par $\bin{0000\,0000\,0000\,0100}$.
+%\end{itemize}  
+\end{exemple}
+
+%Mais cela a deux inconvénients majeurs.
+%\begin{enumerate}
+%\item On a deux représentations pour zéro ($\bin{1000\,0000\,0000\,0000}$
+%  et $\bin{0000\,0000\,0000\,0000}$).
+%\item L'addition est compliquée à mettre en {\oe}uvre, notamment par rapport à celle définie par les entiers naturels.
+%\end{enumerate}
+
+Ainsi, cette représentation n'est quasiment jamais utilisée pour les nombres
+\emph{entiers} d'un processeur.
+%\clearslide{}
+\subsubsection{Complément à deux}
+
+On va utiliser l'idée suivante. Remarquons que l'addition d'entiers naturels sur le processeur n'est pas correcte mais l'est modulo $2^{n}$. De plus, pour tout $p\in \Z$, $p\mmod 2^{n} \in \ii{0,2^{n}}$. 
+  Ainsi, $p\mmod 2^{n}$ est représentable sur $n$ bits.
+  
+C'est donc la \emph{représentation en complément à deux} qui est le plus souvent utilisée : un entier relatif $p$ est représenté sur $n$ bits comme l'entier naturel $p\mmod 2^n$. 
+
+Ainsi sur $n$ bits on représentera tous les entiers relatifs compris dans l'intervalle  $\ii{-2^{n-1},2^{n-1}}$
+
+\begin{rem}
+  L'addition d'entiers relatifs (on dit aussi \emph{signés}) sera correcte modulo $2^{n}$ et utilisera les mêmes circuits que l'addition d'entiers naturels.
+\end{rem}
+
+\begin{exemple} ~\\
+
+\begin{minipage}{0.4\textwidth}
+sur 3 bits :
+\begin{itemize}
+\item  2 est codé par $2\mmod 2^3=2=\bin{001}$ ;
+\item -2 est code par $-2\mmod 2^3=6=\bin{110}$ car $-2=-1\times 2^3+6$ 
+\end{itemize}
+
+\item Avec cette représentation l'addition est cohérente : $2+(-1)=\bin{010}+\bin{111}=\bin{001}=1$.
+
+On trouve donc la table ci-contre : 
+\end{minipage}
+\begin{minipage}{0.4\textwidth}
+
+\begin{tabular}{|p{0.4\textwidth}|p{0.4\textwidth}|}
+\hline 
+Entier relatif en décimal & entier relatif en binaire \\ 
+\hline 
+-4 & $\bin{100}$ \\ 
+\hline 
+-3 & $\bin{101}$ \\ 
+\hline 
+-2 & $\bin{110}$ \\ 
+\hline 
+-1 & $\bin{111}$ \\ 
+\hline 
+0 & $\bin{000}$ \\ 
+\hline 
+1 & $\bin{001}$ \\ 
+\hline 
+2 & $\bin{010}$ \\ 
+\hline 
+3 & $\bin{011}$ \\ 
+\hline 
+\end{tabular} 
+\end{minipage}
+
+\end{exemple}
+
+
+%\begin{exemple}[Sur 16 bits]
+%\begin{itemize}
+%\item[\textbullet] $-5$ est codé par $-5 \mmod 2^{16} = 65531 =
+%  \bin{1111\,1111\,1111\,1011}$.
+%\item[\textbullet] $3$ est codé par $3 \mmod 2^{16} = 3 =
+%  \bin{0000\,0000\,0000\,0011}$.
+%\item[\textbullet] La somme obtenue par le processeur est
+%  \begin{equation*}
+%    \bin{1111\,1111\,1111\,1110} = 65534 = 2^{16}-2 = -2 \mmod 65536
+%  \end{equation*}
+%\end{itemize}
+%
+%\begin{itemize}
+%\item[\textbullet] $-4$ est codé par $-4 \mmod 2^{16} = 65532 =
+%  \bin{1111\,1111\,1111\,1100}$.
+%\item[\textbullet] $6$ est codé par $6 \mmod 2^{16} = 6 =
+%  \bin{0000\,0000\,0000\,0110}$.
+%\item[\textbullet] La somme obtenue par le processeur est
+%  \begin{equation*}
+%   \bin{0000\,0000\,0000\,0010} = 2 = 2 \mmod 65536
+%  \end{equation*}
+%\end{itemize}
+%\end{exemple}
+
+\subsubsection{Soustraction d'entiers relatifs}
+
+Elle peut se faire relativement facilement (voir annexe).
+
+
+
+\subsection{Dans les langages de programmation}
+
+Dans de nombreux langages (C, Java, \ldots):
+\begin{equation*}
+  \text{Entiers du langage} = \text{Entiers sur $n$ bits}
+\end{equation*}
+Dans ces langages, sur une machine $64$ bits,
+\texttt{4 * 2**62} vaut \texttt{0}.
+%\clearslide{}
+
+Dans d'autres langages, les entiers ne sont pas les entiers machines. Plusieurs
+  représentation sont possibles. Parmis celles classiques : on utilise un tableau dont les
+  éléments sont des octets/mots machines/chiffres dans une base $B$  (avec $B$ puissance de $2$ ou $10$).
+ Des fonctions internes  au langage prennent alors soin d'effectuer les
+  opérations correctement (en utilisant le fait que le processeur sait
+  calculer sur $n$ bits). Python est dans ce cas.
+
+\section{Représentation des réels}
+
+L'essentiel à savoir :
+\begin{itemize}
+\item[\textbullet] Le principe de la représentation des nombres \emph{normalisés}.
+\item[\textbullet] Les origines des problèmes de précision.
+\item[\textbullet] Les conséquences de ces problèmes.
+\end{itemize}
+\subsection{Généralités}
+Mathématiquement, il y a de nombreuses façons de voir les réels.
+
+Une façon particulière : c'est la donnée d'un entier relatif, donnant la partie entière, et d'une
+suite (infinie) de chiffres, donnant la partie fractionnaire.
+
+Peut-on représenter une suite de chiffres infinies ? Oui, par un algorithme.
+
+Peut-on représenter toutes les suites de chiffres infinies ? Non (cela découle des travaux de Cantor et de  Turing).
+
+%\clearslide{}
+Pour des besoins de calcul scientifique, nous n'avons pas besoin de représenter tous les réels. On travaille avec des approximations des réels : ici, les nombres décimaux.
+\begin{rem}
+  Qui dit approximation dit \emph{erreur}.
+\end{rem}
+\begin{defi}
+Soit $(a,x)\in\R^2$. On distingue deux notions d'erreurs dans l'approximation de $x$ par $a$.
+\begin{description}
+\item[Erreur absolue :] $|x-a|$ 
+\item[Erreur relative :]  $\displaystyle\frac{|x-a|}{|x|}$ (non définie si $x=0$)
+\end{description}
+\end{defi}
+%\clearslide{}
+On a aussi besoin d'avoir une représentation des nombres de taille réduite :
+\begin{itemize}
+\item[\textbullet] pour prendre une place réduite (en mémoire, sur disque, sur le réseau) ;
+\item[\textbullet] pour calculer vite.
+\end{itemize}
+
+\subsection{Virgule fixe}
+
+On représente tous les nombres décimaux avec un nombre $n$ fixé de chiffres après la virgule.
+
+\begin{description}
+  \item[Avantage :] on comprend bien comment ça marche. 
+  \item[Inconvénient:]
+\begin{itemize}
+\item[\textbullet] On a parfois besoin de beaucoup de chiffres après la virgule 
+(masse de l'électron: $9\times{}10^{-31}$kg, $h\approx 6\times10^{-34}$J.s).
+\item[\textbullet] Garder $30$ chiffres après la virgule est parfois inutile pour manipuler
+  un grand nombre (durée de vie moyenne de l'électron: $10^{34}$s).
+\end{itemize}
+\end{description}
+
+
+Dans cette représentation, l'erreur absolue est au plus $10^{-n}$. Mais l'important est souvent l'erreur \emph{relative}.
+
+\subsection{Virgule flottante}
+On utilise plutôt l'idée de la notation scientifique des nombres. Un nombre est représenté sous la forme $s\times m \times 10^{e}$, avec $(s,m,e)$ définis comme suit. 
+\begin{itemize} 
+\item[\textbullet] $s\in\{-1;+1\}$ est le \emph{signe}.
+\item[\textbullet] $m\in [1,10[$ est un nombre décimal, avec $n$ chiffres après la virgule ($n$ fixé). C'est la \emph{mantisse}.
+\item[\textbullet] $e$: entier (relatif) appartenant à une plage de valeurs fixée. C'est \emph{l'exposant}.
+\end{itemize}
+%\clearslide{}
+\begin{exemple}
+  Sur une  calculatrice HP48SX (d'après tests personnels) :
+\begin{itemize}
+\item[\textbullet] la mantisse $m$ a $11$ chiffres après la virgule,
+\item[\textbullet] l'exposant $e\in \ii{-499,500}$.
+\end{itemize}
+Cela permet de représenter :
+\begin{itemize}
+\item[\textbullet] de très grands nombres: jusqu'à $9,999\,999\,999\,99\times 10^{499}$ ;
+\item[\textbullet] de très petits (en valeur absolue): jusqu'à $10^{-499}$ ;
+\item[\textbullet] et leurs opposés: $-9,999\,999\,999\,99\times 10^{499}$ et $-10^{-499}$ ;
+\item[\textbullet] avec une erreur relative inférieure à $10^{-11}$.
+\end{itemize}
+avec seulement $12$ chiffres décimaux, un signe et trois chiffres pour
+l'exposant. 
+\end{exemple}
+
+\subsection{Virgule flottante en binaire}
+
+La notation scientifique présentée plus haut utilise la base $10$. 
+C'est souvent cohérent, mais pas toujours en informatique où l'on préférera utiliser la base $2$.
+On a alors l'équivalent de la notion de nombre décimal, dans la base $2$.
+
+\begin{defi}
+ Un nombre (ou fraction) décimal est un nombre de la forme $\displaystyle\frac{n}{10^k}$, avec $n\in \Z$ et $k\in \N$.
+\end{defi}
+
+\begin{defi} 
+  Un nombre (ou fraction) dyadique est un nombre de la forme $\displaystyle\frac{n}{2^k}$, avec $n\in
+    \Z$ et $k\in \N$.
+\end{defi}
+%\clearslide{}
+\begin{exemple}
+En décimal le nombre $12345 / 10^{3}$ s'écrit $12,345$.
+\end{exemple}
+\begin{exemple}
+En binaire, le nombre $\dfrac{\bin{10101011}}{\bin{10}^{\bin{101}}}$ s'écrit
+$\bin{101,01011}$. Il vaut $\dfrac{171}{2^5}= 5,34375$.
+
+Autre façon de calculer:
+\begin{equation*}
+  \bin{101,01011} =2^2+ 0\times 2^1+2^0 + \dfrac{0}{2} + \dfrac{1}{2^2} + \dfrac{0}{2^3} + \dfrac{1}{2^4} + \dfrac{1}{2^5}= 5 + \frac{1}{2^{2}} + \frac{1}{2^{4}}
+  +\frac{1}{2^{5}}
+\end{equation*}
+\end{exemple}
+%\clearslide{}
+
+Un nombre sera donc représenté en virgule flottante en base $2$ sous la forme $s\times m \times 2^{e}$, avec $(s,m,e)$ comme suit.
+\begin{itemize}
+\item[\textbullet] $s\in\{-1;+1\}$ est le \emph{signe}.
+\item[\textbullet] $m\in [1,2[$ est un nombre dyadique, avec $n$ chiffres après la virgule ($n$ fixé). C'est la \emph{mantisse}.
+\item[\textbullet] $e$: entier (relatif) appartenant à une plage de valeurs fixée. C'est \emph{l'exposant}.
+\end{itemize}
+
+On commet au plus une erreur relative de $2^{-n}$ en représentant un réel ainsi. 
+
+
+\subsection{Norme IEEE 754}
+
+La norme IEEE 754 est utilisée dans tous les ordinateurs pour les nombres à
+  virgule flottante. Elle existe en plusieurs versions (simple précision, double précision, double
+  précision étendue). On ne parlera ici que de la double précision (la plus répandue).
+
+%\clearslide{}
+
+Les nombres réels seront donc représentés en virgule flottante avec double précision. Chaque nombre est  représenté sur $64$ bits, utilisés comme suit.
+\begin{itemize}
+\item[\textbullet] $1$ bit pour le signe ($0$ pour $+$, $1$ pour $-$).
+\item[\textbullet] $11$ bits pour l'exposant décalé $e$ (exposant plus $1023$).
+\item[\textbullet] $52$ bits pour les $52$ chiffres après la virgule de la mantisse
+  (inutile de garder le premier bit de $m$: c'est $1$).
+\end{itemize}
+
+%\clearslide{}
+On interprète donc la suit de bits $se_{10}\ldots e_{0}m_{1}\ldots m_{52}$ comme le nombre $x$ défini comme suit. 
+
+Notons $\displaystyle e  = \underline{e_{10}\ldots e_{0}} = \sum_{k=0}^{10} e_k2^k$. 
+\begin{itemize}
+  \item Si $e\in\ii{1,2047}$, $x$ est le  nombre \emph{normalisé}:
+\begin{equation*}
+  x = s \times \underline{1,m_{1}\ldots m_{52}}\times
+  2^{\p{-1023+\underline{e_{10}\ldots  e_{0}}}}
+  = 
+  s \times \p{1+\sum_{k=1}^{52} \frac{m_{k}}{2^{k}}}
+  \times 2^{\p{-1023 + \sum_{k=0}^{10} e_{k}2^{k}}}
+\end{equation*}
+
+\item Si $e = 0$ et $m_{1}=\dots=m_{52}=0$ : $x=0$ (deux
+  versions : $+0$ et $-0$).
+
+\item  Si $e = 0$ et $m_{1},\ldots,m_{52}$ non tous nuls, $x$ est le nombre
+\emph{dénormalisé}:
+\begin{equation*}
+  x = s \times \underline{0,m_{1}\ldots m_{52}}\times
+  2^{-1022}
+  = 
+  s \times \p{\sum_{k=1}^{52} \frac{m_{k}}{2^{k}}}
+  \times 2^{-1022}
+\end{equation*}
+
+\item  Si $e= 2047$ et $m_{1}=\ldots= m_{52}=0$ : $x = s\infty$ ($+\infty$
+ou $-\infty$).
+
+\item  Si $e = 2047$ et $m_{1},\ldots, m_{52}$ non tous nuls: $x=NaN$.
+\end{itemize}
+%\clearslide{}
+\begin{rem}
+  On ne rentrera pas dans le détail des signification de $+\infty$, $-\infty$ et de $NaN$.
+\end{rem}
+
+
+Les nombres normalisés permettent de représenter de façon précise les
+réels de
+$[-M,-m]\cup [m, M]$ 
+avec
+\begin{align*}
+  m &\approx2^{-1022}\approx 2\times 10^{-308}\\
+\text{et }  M &\approx 2^{1024}\approx 1,8 \times 10^{308}
+\end{align*}
+Les nombres dénormalisés ne respectent pas la convention de la notation scientifique standard, mais permettent de représenter des nombres plus petits que les nombres normalisés ne peuvent. 
+%\clearslide{}
+
+
+%\clearslide{}
+
+\subsection{En Python}
+
+Avec Python, on peut accéder à la représentation d'un nombre flottant par la méthode \texttt{.hex()}. Attention, le nombre est écrit en hexadécimal. 
+
+\begin{exemple}
+  Avec \texttt{5.5}. 
+\begin{lstlisting}
+>>>5.5.hex()
+'0x1.6000000000000p+2'
+\end{lstlisting}
+En effet, on a 
+\begin{equation*}
+  5,5 = \dfrac{11}{8} \times 4 = \left(1 + \dfrac{1}{4} + \dfrac{1}{8} \right) \times 2^2.
+\end{equation*}
+En binaire, on écrit $1,375 = 1+\dfrac{1}{4} + \dfrac{1}{8}$ comme 
+\begin{equation*}
+  1,\,\underbrace{0110}\,\underbrace{0000}\,\underbrace{0000}\,\underbrace{0000}\,\underbrace{0000}\,\underbrace{0000}\,\underbrace{0000}\,\underbrace{0000}\,\underbrace{0000}\,\underbrace{0000}\,\underbrace{0000}\,\underbrace{0000}\,\underbrace{0000}.
+\end{equation*}
+Le regroupement indiqué par les accolades donne l'écriture hexadécimale 
+\begin{equation*}
+  1,6000000000000.
+\end{equation*}
+\end{exemple}
+
+
+\subsection{Problèmes de précision}
+
+On rencontre différents types de problèmes de précision.
+\begin{enumerate}
+\item Les problèmes liés aux arrondis des calculs.
+\item Les problèmes liés au passage à la représentation binaire.
+\end{enumerate}
+%\clearslide{}
+
+\subsubsection{Problèmes liés aux arrondis}
+Supposons que l'on veuille effectuer des calculs avec des chiffres décimaux n'ayant que deux chiffres après la virgule.
+\begin{exemple}
+Pour la multiplication:
+$1,23\times 1,56 = 1,9188$
+\end{exemple}
+\begin{exemple}
+Pour l'addition:
+$1,23\times 10^{3} + 4,56\times 10^{0} = 1,23456\times 10^{3}$
+\end{exemple}
+Pour garder deux chiffres après la virgule, on arrondit le résultat et l'on introduit donc une erreur d'approximation.
+
+Ce problème se pose en décimal, comme en binaire !
+
+%\clearslide{}
+\subsubsection{Problèmes liés au passage à la représentation binaire}
+
+\textbf{Attention:}
+Les représentations binaires et décimales partagent les \emph{mêmes} problèmes d'arrondis. 
+Cependant, on crée des erreurs d'arrondis lors du \emph{passage} d'une représentation à l'autre.
+\begin{exemple}
+En Python, on rentrera dans la console des nombres en écriture décimale mais le calcul interne se fera en binaire. Cela donne la chose suivante.
+\begin{lstlisting}
+0.1+0.2 == 0.3
+0.1+0.2
+0.1+0.2-0.3
+\end{lstlisting}
+\end{exemple}
+
+
+\begin{center}
+\textbf{Que se passe-t-il ???}
+\end{center}
+
+%\clearslide{}
+\subsubsection{Origine de ce problème}
+
+\begin{theoremeT}
+Soit $p/q$ un nombre rationnel écrit sous forme irréductible, c'est-à-dire avec $p$
+et $q$ entiers, premiers entre eux et $q>0$. Alors :
+\begin{enumerate}
+\item $p/q$ est un nombre décimal si et seulement
+  si $q$ est de la forme $2^{\alpha}5^{\beta}$ où $(\alpha,\beta)\in
+  \N\times \N$ ;
+\item $p/q$ est un nombre dyadique si et seulement
+  si $q$ est de la forme $2^{\alpha}$ où $\alpha\in \N$.
+\end{enumerate}
+\end{theoremeT}
+
+%\clearslide{}
+Ainsi, $\frac{1}{10}$ n'est pas un nombre dyadique.  En écriture décimale, 
+$$1/10 = 0,1$$ 
+alors qu'en écriture binaire, 
+$$1/10 = \bin{0,00011001100110011001100110011...}.$$
+
+Le flottant\footnote{On comprendra : représentation normalisée à virgule flottante en double précision.} (arrondi par défaut) $x$ représentant $\frac{1}{10}$ est donc
+\begin{equation*}
+ \bin{1,1001100110011001100110011001100110011001100110011001}\times 2^{-4}.
+\end{equation*}
+L'approximation dyadique au plus près de $0,1$ vaut donc
+\begin{equation*}
+ \bin{1,1001100110011001100110011001100110011001100110011010}\times 2^{-4},
+\end{equation*}
+qui est la représentation exacte de
+\begin{equation*}
+ 0,1000000000000000055511151231257827021181583404541015625 
+\end{equation*}
+De même, le flottant $y$ (arrondi au plus proche) représentant
+$\frac{2}{10}$ est
+\begin{equation*}
+ \bin{1,1001100110011001100110011001100110011001100110011010}\times 2^{-3} .
+\end{equation*}
+
+Ainsi, si on effectue le calcul de $x+y$, on obtient :
+\small
+\begin{align*}
+&~~\bin{0},  \bin{11001100110011001100110011001100110011001100110011010}.
+2^{-3}\\
++&~~\bin{1}, \bin{1001100110011001100110011001100110011001100110011010}.2^{-3}\\
+=&\bin{10},\bin{01100110011001100110011001100110011001100110011001110}.
+2^{-3}
+\end{align*}
+\normalsize
+Arrondi au flottant le plus proche, cela donne :
+\begin{equation*}
+\bin{1},  \bin{0011001100110011001100110011001100110011001100110100}.2^{-2},
+\end{equation*}
+soit
+\begin{equation*}
+0,3000000000000000444089209850062616169452667236328125.
+\end{equation*}
+
+Cela explique bien ce que donne Python.
+\begin{lstlisting}
+>>>0.1+0.2
+0.30000000000000004
+\end{lstlisting}
+Quand on effectue le calcul \texttt{0.1 + 0.2 - 0.3}, on crée de nouvelles erreurs d'arrondi. Ces dernières sont «négligeables» devant $0,1$, mais pas négligable $4\times 10^{-17}$ !
+D'où le résultat final de l'ordre de $6\times 10^{-17}$ : 
+\begin{lstlisting}
+>>>0.1+0.2-0.3
+5.551115123125783e-17
+\end{lstlisting}
+
+
+\subsection{Erreurs d'arrondis: conséquences}
+
+\fbox{\begin{minipage}{\textwidth} \begin{center} \textsc{Un test de la forme}
+\texttt{x == 0} ou \texttt{x == y} \textsc{pour des flottants n'a aucun sens !} \end{center}\end{minipage}}
+
+\vspace{0.5cm}
+
+ La seule possibilité parfois raisonnable est  le \og test de petitesse\fg.
+\begin{exemple}
+  On peut tester \texttt{abs(x)< epsilon} avec \texttt{epsilon = 1e-6}.
+\end{exemple}
+
+ La question qui se pose alors est : quelle valeur de \texttt{epsilon} choisir? Il n'y a pas de réponse universelle,  cela dépend du problème étudié \ldots{}
+
+
+De même, on se méfiera des tests du type \texttt{x<y} ou \texttt{x<=y}.
+
+%\clearslide{}
+
+\begin{exemple}
+  
+\end{exemple}
+ Construisons une équation du second degré.
+
+\begin{lstlisting}
+>>>r1 = 1 + 1.2e-16
+>>>r1
+>>>r2 = 1
+>>>a, b, c = 1, -(r1+r2), r1 * r2
+\end{lstlisting}
+Normalement \texttt{r1} et \texttt{r2} sont les deux racines réelles distinctes de
+$\text{\texttt{a}}X^2+\text{\texttt{b}}X+\text{\texttt{c}}$, qui a donc un discriminant strictement positif.
+%\clearslide{}
+Vérifions cela.
+\begin{lstlisting}
+>>>Delta = b**2 - 4*a*c
+>>>Delta
+\end{lstlisting}
+Oups...
+\begin{lstlisting}
+>>>a*r1**2 + b*r1 + c
+>>>a*r2**2 + b*r2 + c
+\end{lstlisting}
+
+On peut aussi trouver des cas où \texttt{Delta} est nul avec le polynôme
+qui s'annule au moins sur deux flottants, dont l'un n'est pas supposé
+être une racine...
+
+%\section{Exercices}
+%
+%%\begin{exo}
+%%    \input{NBR-003}
+%%\end{exo}
+%
+
+\section{Annexe : représentation détaillé des entiers}
+
+\subsection*{Conversion d'un entier en base 2}
+\sloppy
+On s'intéresse à la démonstration de l'algorithme de converion par divisions successives.
+Si $p = \underline{a_n\dots a_0}_{~2}$, alors 
+$$ p = \sum_{k=0}^n a_k 2^k = 2\sum_{k=1}^n a_k2^{k-1} + a_0.$$
+Ainsi, $a_0$ est le reste de la division euclidienne de $p$ par $2$ et, si $p\neq a_0$, $\underline{a_n\dots a_1}_{~2}$ est le quotient de la division euclidienne de $p$ par $2$.
+
+On peut donc écrire la fonction suivante.
+
+\begin{lstlisting}
+def conv_b2(p):
+    """Convertit l'entier p en base 2 (renvoie une chaine)"""
+    x = p # On copie p
+    s = ""
+    i=0
+    while x > 1 : 
+        s = str(x%2) + s
+        x = x // 2
+        i=i+1
+    return str(x)+s
+
+print('0='+conv_b2(0)+' et 1='+conv_b2(1)+' et 42='+conv_b2(42))
+\end{lstlisting}
+
+
+\begin{lstlisting}
+def conv_b2(p):
+    x = p # On copie p
+    s = ""
+    i=0
+    while x > 1 : 
+        s = str(x%2) + s
+        x = x // 2
+        i=i+1
+    return str(x)+s
+
+print('0='+conv_b2(0)+' et 1='+conv_b2(1)+' et 42='+conv_b2(42))
+\end{lstlisting}
+\begin{itemize}
+\item \textbf{Invariant : } $p=x+s$, avec : 
+\begin{itemize}
+\item \textbf{s : } $s=\underline{a_{i-1}\dots a_1a_0}_2$
+\item \textbf{x : } $x=\displaystyle{\sum_{k=i}^n a_k2^{k-i}}$
+\end{itemize}
+\item \textbf{Initialisation : $i=0$}
+\begin{itemize}
+\item \textbf{s : } $s$ est vide
+\item \textbf{x : } $x=\displaystyle{\sum_{k=i=0}^n a_k2^{k-0}=p}$
+\end{itemize}
+\item On suppose l'hypothèse vrai au rang $i$, montrons qu'elle est vrai au rang $i+1$ : 
+\item $x=\displaystyle{\sum_{k=i}^n a_k2^{k-i}=a_i+\sum_{k=i+1}^n a_k2^{k-i}=a_i+2\cdot \sum_{k=i+1}^n a_k2^{k-(i+1)}}$
+\begin{itemize}
+\item $x\%2\rightarrow a_i$
+\item $x//2\rightarrow \displaystyle{\sum_{k=i+1}^n a_k2^{k-(i+1)}}$
+\end{itemize}
+\item \textbf{Terminaison : }
+à la sortie de la boucle $x\leq 1$ ce qui donne :
+\begin{align*}
+x=\displaystyle{\sum_{k=i+1}^n a_k2^{k-(i+1)}}\leq 1
+\end{align*}
+obtenue pour $i=n$ donc à la fin de la boucle $x=a_n$ et $s=\underline{a_{n-1}\dots a_1a_0}_2$, il faut donc bien ajouter $a_n$ à $s$.
+\end{itemize}
+
+\subsection*{Somme de naturels}
+\sloppy
+
+Dans un processeur $n$ bits:
+
+\begin{enumerate}
+\item Un registre du processeur a $n$ bits et peut
+  représenter tout entier de $\ii{0,2^{n}}$.
+\item Lorsqu'on effectue l'addition de deux registres $r_{1}$ et
+  $r_{2}$ pour stocker le résultat dans $r_{3}$, le registre fait $n$
+  bits: s'il y a une retenue, elle est perdue.\footnote{En fait une
+    trace en est généralement gardée dans un autre registre du
+    processeur.}
+
+  Exemple: après addition de $\bin{1111\,0000\,1111\,0000}$ et
+  $\bin{0011\,0011\,0011\,0011}$ sur $16$ bits, registre résultat:
+  $\bin{0010\,0100\,0010\,0011}$.
+\end{enumerate}
+
+Troncature d'un entier $p$ à ses $n$ bits de poids faibles: valeur du
+reste de la division de $p$ par $2^{n}$ (noté $p \mmod 2^{n}$).
+
+Définitions:
+\begin{enumerate}
+\item Soit $p\in\N$. $p$ \emph{représentable comme
+    entier non signé sur $n$ bits} si $p\in\ii{0,2^{n}}$.
+\item \emph{Représentation de $p$ comme entier non signé sur $n$
+    bits}:
+  suite des $n$ chiffres de son écriture en binaire.
+\item Abus de notation: on identifie $\ii{0,2^{n}}$ et les
+  représentations sur $n$ bits.
+\item Soit $(p,q)\in \ii{0,2^{n}}^{2}$.
+  \emph{somme (non signée) de $p$ et $q$ sur $n$ bits}: $(p+q) \mmod
+  2^{n}$, notée $p+_{n}q$ (notation non canonique).
+\end{enumerate}
+
+Remarques pour $(p,q)\in \ii{0,2^{n}}^{2}$:
+  \begin{enumerate}
+  \item $p+_{m}q \equiv p+q\ [2^{n}]$.
+  \item $p+_{n}q = p+q$ si $p+q< 2^{n}$.
+  \item $p+_{n}q = p+q - 2^{n}$ si $p+q \geq 2^{n}$.
+  \end{enumerate}
+\subsection*{Entiers relatifs}
+
+\subsubsection*{Avec signe et valeur absolue}
+Première possibilité: $n-1$ bits pour la valeur absolue et
+$1$ bit pour le signe, par ex.:
+\begin{itemize}
+\item on représente $-4$ par $\bin{1000\,0000\,0000\,0100}$;
+\item on représente $4$ par $\bin{0000\,0000\,0000\,0100}$.
+\end{itemize}
+
+Inconvénients:
+\begin{enumerate}
+\item Deux représentations pour zéro ($\bin{1000\,0000\,0000\,0000}$
+  et $\bin{0000\,0000\,0000\,0000}$).
+\item Plus compliqué à additionner que les entiers
+  naturels.
+\end{enumerate}
+
+Représentation quasiment jamais utilisée pour les nombres
+\emph{entiers} d'un processeur.
+%\clearslide{}
+\subsubsection*{Complément à deux}
+Idée géniale:
+\begin{enumerate}
+\item L'addition d'entiers naturels sur le processeur n'est pas
+  correcte mais l'est modulo $2^{n}$;
+\item pour tout $p\in \Z$, $p\mmod 2^{n} \in \ii{0,2^{n}}$;
+\item donc $p\mmod 2^{n}$ représentable sur $n$ bits;
+\item l'addition de ces entiers relatifs sera correcte modulo $2^{n}$.
+\end{enumerate}
+%\clearslide{}
+
+Exemples:
+\begin{enumerate}
+\item $-5$ est codé par $-5 \mmod 2^{16} = 65531 =
+  \bin{1111\,1111\,1111\,1011}$.
+\item $3$ est codé par $3 \mmod 2^{16} = 3 =
+  \bin{0000\,0000\,0000\,0011}$.
+\item La somme obtenue par le processeur est
+  \begin{equation*}
+    \bin{1111\,1111\,1111\,1110} = 65534 = 2^{16}-2 = -2 \mmod 65536
+  \end{equation*}
+\item $-4$ est codé par $-4 \mmod 2^{16} = 65532 =
+  \bin{1111\,1111\,1111\,1100}$.
+\item $6$ est codé par $6 \mmod 2^{16} = 6 =
+  \bin{0000\,0000\,0000\,0110}$.
+\item La somme obtenue par le processeur est
+  \begin{equation*}
+   \bin{0000\,0000\,0000\,0010} = 2 = 2 \mmod 65536
+  \end{equation*}
+\end{enumerate}
+
+Définitions:
+\begin{enumerate}
+\item Soit $p\in \ii{0,2^{n}}$. \emph{Complément à deux de $p$ sur $n$
+    bits}: $(-p) \mmod 2^{n}$, noté $c_{n}(p)$ (non canonique).
+\item Soit $p\in\Z$. $p$ est \emph{représentable comme
+    entier signé sur $n$ bits} si $p\in\ii{-2^{n-1},2^{n-1}}$.
+\item Soit $p\in\ii{-2^{n-1},2^{n-1}}$. \emph{Représentation en
+    complément à deux de $p$}: $p\mmod 2^{n}$, notée $r_{n}(p)$ (non
+  canonique).
+\end{enumerate}
+%\clearslide{}
+
+Remarques:
+\begin{enumerate}
+\item $c_{n}$ involution\footnote{Bijection
+    d'un ensemble sur lui-même qui est sa propre bijection
+    réciproque.}
+  de $\ii{0,2^{n}}$.
+\item Soit $p\in \ii{0,2^{n}}$. $c_{n}(p)=2^{n}-p$ si $p\neq 0$, $0$
+  si $p=0$.
+\item $r_{n}$  bijection de $\ii{-2^{n-1},2^{n-1}}$ sur
+  $\ii{0,2^{n}}$.
+\item $\forall p\in \ii{-2^{n-1}+1,2^{n-1}}\quad r_{n}(-p) = c_{n}(r_{n}(p))$.
+\item Pour tout $(p,q)\in\ii{-2^{n-1},2^{n-1}}^{2}$ on a
+  $r_{n}^{-1}\p{r_{n}(p)+_{n}r_{n}(q)} \equiv p+q \ [2^{n}]$.
+\item On a l'égalité si $p+q\in \ii{-2^{n-1},2^{n-1}}$ (en
+  particulier si $p$ et $q$ de signes différents).
+\item Le bit de poids fort de $r_{n}(p)$
+  vaut $1$ si et seulement si $p<0$.
+\end{enumerate}
+
+Intérêt du complément à deux: Pour calculer une addition, on utilise
+exactement les mêmes circuits électroniques que pour des entiers non
+signés!
+
+\subsubsection*{Calcul de la représentation en complément à deux}
+
+\begin{description}
+\item[Définition] \emph{Complément à un sur $n$ bits de
+  $\underline{a_{n-1}\ldots a_{0}}_{2}$}:
+  $\underline{b_{n-1}\ldots b_{0}}_{2}$ où $b_{k}=1-a_{k}$ pour
+  $k\in\ii{0,n}$. On note $c'_{n}(p)$ cette valeur.
+\item[Proposition] Pour tout $p\in\ii{0,2^{n}}$,
+  \begin{equation*}
+   p + c'_{n}(p) = \sum_{k\in\ii{0,n}}2^{k}= 2^{n}-1 
+  \end{equation*}
+\item[Conséquence] Pour tout $p$ entier non signé sur $n$ bits,
+  \begin{equation*}
+    c_{n}(p) = c'_{n}(p) +_{n} 1 
+  \end{equation*}
+\item[Conséquence (bis)] Pour tout $p\in\ii{-2^{n-1}+1,2^{n-1}}$
+  \begin{equation*}
+    r_{n}(-p) = c'_{n}(r_{n}(p)) +_{n} 1
+  \end{equation*}
+\end{description}
+%\clearslide{}
+
+Exemple (sur $16$ bits):
+\begin{enumerate}
+\item Représentation  de $5$ en tant qu'entier non signé?
+\item Complément à un de $5$?
+\item Complément à deux de $5$?
+\item Représentation de $-5$ sur $16$ bits?
+\item Calcul de l'opposé de l'entier signé $\underline{1111\,1111\,1111\,1000}$?
+\item Que vaut l'entier signé $\underline{1111\,1111\,1111\,1000}$?
+\end{enumerate}
+
+\subsubsection*{Soustraction}
+
+Soit $(p,q)\in\ii{2^{n-1}-1,2^{n-1}}$.
+\begin{description}
+\item[Définition] \emph{Différence sur $n$ bits de $p$ et $q$}: $(p-
+  q)\mmod 2^{n}$, notée $p-_{n}q$ (non canonique).
+\item[Proposition] $p -_{n} q = p +_{n} c_{n}(q)$.
+\end{description}
+
+\begin{enumerate}
+\item Complément à deux facile à calculer.
+\item Addition/Soustraction: utilisation du même circuit!
+\end{enumerate}
+
+
+\subsection*{Octal et hexadécimal en informatique}
+
+\begin{enumerate}
+\item Représenter des données par une succession de chiffres binaires
+  est bien adapté à l'utilisation de l'électronique pour construire des
+  ordinateurs.
+\item C'est également bien adapté au calcul sur les entiers.
+\end{enumerate}
+%\clearslide{}
+
+Exemple de représentation par du binaire:
+
+\begin{itemize}
+\item Une adresse IPv6 est une suite de $128$ bits. Exemple d'adresse:
+  \begin{equation*}
+    \begin{array}{r}
+  0010 0000 0000 0001 % 2001
+  0000 0110 0111 1100\\ % 67c
+  0000 0010 1110 1000 % 2e8
+  0000 0000 0010 0010\\ % 22
+  0000 0000 0000 0000 %
+  0000 0000 0000 0000\\ % ::
+  1100 0001 0000 0000 % c100
+  0000 0110 1000 1011 % 68b
+  %2001:67c:2e8:22::c100:68b
+    \end{array}
+  \end{equation*}
+\item Une adresse IPv4 est une suite de $32$ bits. Exemple:
+  \begin{equation*}
+  % 129.175.15.11
+  1000 0001 % 129
+  1010 1111 % 175
+  0000 1111 % 15
+  0000 1011 % 11
+  \end{equation*}
+\end{itemize}
+
+Ce n'est pas très pratique à manipuler\ldots{}
+
+Comment trouver une représentation plus simple à manipuler?
+%\clearslide{}
+
+Deux possibilités:
+
+\begin{enumerate}
+\item Considérer ces suites de bits comme des entiers binaires et
+  convertir en décimal (difficile à faire de tête)
+\item Grouper ces suites de bits, par exemple par octet, remplacer
+  chaque octet par sa représentation décimale.
+\end{enumerate}
+
+Adresses IPv4: 2\up{e} solution. Sur l'adresse précédente:
+$129.175.15.11$
+
+2\up{e}  solution: pas  pratique si  la  suite de  bits représente  un
+entier (difficile ensuite de calculer sur la représentation).
+
+%\clearslide{}
+Autre solution:
+\begin{enumerate}
+\item Grouper les chiffres binaires par $4$ (en partant de la droite)
+\item Remplacer chaque groupement par le chiffre hexadécimal
+  correspondant.
+\end{enumerate}
+
+Avantages:
+\begin{enumerate}
+\item Facile à faire à la main et même de tête.
+\item A du sens mathématiquement: le nombre hexadécimal obtenu a la
+  même valeur que le nombre binaire de départ.
+\end{enumerate}
+%\clearslide{}
+
+Solution prise pour les adresses IPv6.
+
+Exemples:
+\begin{itemize}
+\item traduire en hexadécimal le nombre
+$\bin{11 0101 0010 1010 1110}$
+\item traduire en binaire le nombre
+$\hex{90f5e56712}$
+\end{itemize}
+
+Pour l'octal: même principe mais en groupant par $3$.
+%\clearslide{}
+
+\begin{enumerate}
+\item Binaire, octal et hexadécimal sont très utilisés en informatique.
+\item En Python, notations autorisées:
+  \begin{lstlisting}
+>>> 0b101010
+42
+>>> 0o52
+42
+>>> 0x2a
+42
+  \end{lstlisting}
+\item Écriture d'un entier \texttt{n} en décimal, binaire, octal ou
+  hexadécimal: \texttt{str(n)}, \texttt{bin(n)},\texttt{oct(n)}, \texttt{hex(n)}.
+\end{enumerate}
+%\clearslide{}
+
+Danger, ancienne notation encore autorisée en Python 2 mais à
+  ne plus utiliser:
+  \begin{lstlisting}
+>>> 052
+42
+  \end{lstlisting}
+
+En python 3:
+  \begin{lstlisting}
+>>> 052
+  File "<stdin>", line 1
+    052
+      ^
+SyntaxError: invalid token
+  \end{lstlisting}
+  
