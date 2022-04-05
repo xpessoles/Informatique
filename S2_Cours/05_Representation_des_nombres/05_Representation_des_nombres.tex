@@ -344,7 +344,7 @@ On peut donc écrire la fonction suivante.
 
 
 \begin{lstlisting}
-def conv_b2(p):
+def conv_b2(p:int) -> str:
  """Convertit l'entier p en base 2 (renvoie une chaîne)"""
     x = p
     s = ""
@@ -359,9 +359,9 @@ print('0='+conv_b2(0)+' et 1='+conv_b2(1)+' et 42='+conv_b2(42))
 
 
 Cela renvoie alors :
-\begin{quote}
+
 \begin{lstlisting}
-def conv_b2(p):
+def conv_b2(p:int) -> str:
     x = p
     s = ""
     while x > 1 :
@@ -371,7 +371,7 @@ def conv_b2(p):
 
 print('0='+conv_b2(0)+' et 1='+conv_b2(1)+' et 42='+conv_b2(42))
 \end{lstlisting}
-\end{quote}
+
 
 
 Voici une autre idée : calculer $2^{k}$ pour $k=0, \ldots$ jusqu'à avoir $2^{k} >
@@ -444,7 +444,7 @@ print(42==calc_b2_naif("101010"))
 
 
 Cela renvoie alors :
-\begin{quote}
+
 \begin{lstlisting}
 def calc_b2_horner(s):
     p = int(s[0])
@@ -458,7 +458,7 @@ print(1==calc_b2_naif("1"))
 print("\n")
 print(42==calc_b2_naif("101010"))
 \end{lstlisting}
-\end{quote}
+
 
 \begin{rem}
 \begin{enumerate}
@@ -513,12 +513,12 @@ On veut maintenant pouvoir travailler avec des entiers relatifs et notamment les
 
 Première possibilité de codage d'un entier relatif sur $n$ bits : on utilise $n-1$ bits pour la valeur absolue et
 $1$ bit pour le signe.
-\begin{exemple}
+\begin{exemple} ~\\
 
 \begin{minipage}{0.45\textwidth}
 Représentons les entiers relatifs sur 3 bits avec cette méthode :
 \begin{itemize}
-\item On utilise $3-1=2 bits$ pour la valeur absolue et 1 bit pour le signe.
+\item On utilise $3-1=\SI{2}{bits}$ pour la valeur absolue et 1 bit pour le signe.
 \item On représenta alors les entiers de $-3$ à $+3$ avec deux fois la représentation de 0.
 \item Avec cette représentation l'addition est compliquée à mettre en oeuvre et incohérente avec la méthode habituelle :  $2+(-1)=\bin{010}+\bin{101}=\bin{111}$.
 \end{itemize} 
@@ -680,12 +680,12 @@ Pour des besoins de calcul scientifique, nous n'avons pas besoin de représenter
 \begin{rem}
   Qui dit approximation dit \emph{erreur}.
 \end{rem}
-\begin{defi}
-Soit $(a,x)\in\R^2$. On distingue deux notions d'erreurs dans l'approximation de $x$ par $a$.
-\begin{description}
-\item[Erreur absolue :] $|x-a|$ 
-\item[Erreur relative :]  $\displaystyle\frac{|x-a|}{|x|}$ (non définie si $x=0$)
-\end{description}
+\begin{defi}{}
+Soit $(a,x)\in\R^2$. On distingue deux notions d'erreurs dans l'approximation de $x$ par $a$ :
+\begin{itemize}
+\item erreur absolue : $|x-a|$;
+\item erreur relative :  $\displaystyle\frac{|x-a|}{|x|}$ (non définie si $x=0$).
+\end{itemize}
 \end{defi}
 %\clearslide{}
 On a aussi besoin d'avoir une représentation des nombres de taille réduite :
@@ -740,14 +740,14 @@ l'exposant.
 \subsection{Virgule flottante en binaire}
 
 La notation scientifique présentée plus haut utilise la base $10$. 
-C'est souvent cohérent, mais pas toujours en informatique où l'on préférera utiliser la base $2$.
-On a alors l'équivalent de la notion de nombre décimal, dans la base $2$.
+C'est souvent cohérent, mais pas toujours en informatique où l'on préférera utiliser la base~$2$.
+On a alors l'équivalent de la notion de nombre décimal, dans la base~$2$.
 
-\begin{defi}
+\begin{defi}{}
  Un nombre (ou fraction) décimal est un nombre de la forme $\displaystyle\frac{n}{10^k}$, avec $n\in \Z$ et $k\in \N$.
 \end{defi}
 
-\begin{defi} 
+\begin{defi}{} 
   Un nombre (ou fraction) dyadique est un nombre de la forme $\displaystyle\frac{n}{2^k}$, avec $n\in
     \Z$ et $k\in \N$.
 \end{defi}
@@ -823,11 +823,11 @@ Notons $\displaystyle e  = \underline{e_{10}\ldots e_{0}} = \sum_{k=0}^{10} e_k2
 \item  Si $e= 2047$ et $m_{1}=\ldots= m_{52}=0$ : $x = s\infty$ ($+\infty$
 ou $-\infty$).
 
-\item  Si $e = 2047$ et $m_{1},\ldots, m_{52}$ non tous nuls: $x=NaN$.
+\item  Si $e = 2047$ et $m_{1},\ldots, m_{52}$ non tous nuls: $x=\text{NaN}$.
 \end{itemize}
 %\clearslide{}
 \begin{rem}
-  On ne rentrera pas dans le détail des signification de $+\infty$, $-\infty$ et de $NaN$.
+  On ne rentrera pas dans le détail des signification de $+\infty$, $-\infty$ et de $\text{NaN}$.
 \end{rem}
 
 
@@ -916,7 +916,7 @@ En Python, on rentrera dans la console des nombres en écriture décimale mais l
 %\clearslide{}
 \subsubsection{Origine de ce problème}
 
-\begin{theoremeT}
+\begin{theorem}
 Soit $p/q$ un nombre rationnel écrit sous forme irréductible, c'est-à-dire avec $p$
 et $q$ entiers, premiers entre eux et $q>0$. Alors :
 \begin{enumerate}
@@ -926,13 +926,10 @@ et $q$ entiers, premiers entre eux et $q>0$. Alors :
 \item $p/q$ est un nombre dyadique si et seulement
   si $q$ est de la forme $2^{\alpha}$ où $\alpha\in \N$.
 \end{enumerate}
-\end{theoremeT}
+\end{theorem}
 
 %\clearslide{}
-Ainsi, $\frac{1}{10}$ n'est pas un nombre dyadique.  En écriture décimale, 
-$$1/10 = 0,1$$ 
-alors qu'en écriture binaire, 
-$$1/10 = \bin{0,00011001100110011001100110011...}.$$
+Ainsi, $\frac{1}{10}$ n'est pas un nombre dyadique.  En écriture décimale, $1/10 = 0,1$ alors qu'en écriture binaire,  $1/10 = \bin{0,00011001100110011001100110011...}$.
 
 Le flottant\footnote{On comprendra : représentation normalisée à virgule flottante en double précision.} (arrondi par défaut) $x$ représentant $\frac{1}{10}$ est donc
 \begin{equation*}
@@ -976,7 +973,7 @@ Cela explique bien ce que donne Python.
 >>>0.1+0.2
 0.30000000000000004
 \end{lstlisting}
-Quand on effectue le calcul \texttt{0.1 + 0.2 - 0.3}, on crée de nouvelles erreurs d'arrondi. Ces dernières sont «négligeables» devant $0,1$, mais pas négligable $4\times 10^{-17}$ !
+Quand on effectue le calcul \texttt{0.1 + 0.2 - 0.3}, on crée de nouvelles erreurs d'arrondi. Ces dernières sont «~négligeables~» devant $0,1$, mais pas négligable $4\times 10^{-17}$ !
 D'où le résultat final de l'ordre de $6\times 10^{-17}$ : 
 \begin{lstlisting}
 >>>0.1+0.2-0.3
