@@ -1,0 +1,28 @@
+\exer{Obserations}
+
+\subsection*{Absorption}
+
+\question{Tester dans le shell ces 3 propositions et discuter les résultats.}
+\begin{lslisting}
+>>> 1.0 + (2**53 - 2**53)
+>>> (1.0 + 2**53) - 2**53
+>>> (1 + 2**53) - 2**53
+\end{lstlisting}
+
+\subsection*{Des erreurs d'arrondi.}
+\question{Tester dans le shell cette proposition et discuter le résultat.}
+
+\begin{lslisting}
+>>> (0.1+0.2) - 0.3 == 0
+\end{lstlisting}
+
+\subsection*{Phénomène de cancellation}
+\question{Tester dans le shell ces 2 propositions et discuter les résultats.}
+
+\begin{lslisting}
+>>> 1/1000-1/1001\\
+>>> 1/(1000*1001)
+\end{lstlisting}
+
+\textbf{Recommandation : ne jamais tester l'égalité entre deux nombres flottants, mais tester si leur distance est inférieure à un nombre très petit.}
+
