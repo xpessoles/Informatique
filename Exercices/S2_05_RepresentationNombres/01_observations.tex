@@ -1,25 +1,25 @@
 \exer{Obserations}
 
-\subsection*{Absorption}
+\subsubsection*{Absorption}
 
 \question{Tester dans le shell ces 3 propositions et discuter les résultats.}
-\begin{lslisting}
+\begin{lstlisting}
 >>> 1.0 + (2**53 - 2**53)
 >>> (1.0 + 2**53) - 2**53
 >>> (1 + 2**53) - 2**53
 \end{lstlisting}
 
-\subsection*{Des erreurs d'arrondi.}
+\subsubsection*{Des erreurs d'arrondi.}
 \question{Tester dans le shell cette proposition et discuter le résultat.}
 
-\begin{lslisting}
+\begin{lstlisting}
 >>> (0.1+0.2) - 0.3 == 0
 \end{lstlisting}
 
-\subsection*{Phénomène de cancellation}
+\subsubsection*{Phénomène de cancellation}
 \question{Tester dans le shell ces 2 propositions et discuter les résultats.}
 
-\begin{lslisting}
+\begin{lstlisting}
 >>> 1/1000-1/1001\\
 >>> 1/(1000*1001)
 \end{lstlisting}
