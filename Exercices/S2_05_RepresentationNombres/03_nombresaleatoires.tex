@@ -42,15 +42,16 @@ Nous allons travailler avec l'algorithme de génération de nombres pseudo aléa
 \begin{center}
 $U_{n+1}=(a \times U_n+c)\text{ mod }(m)$.
 \end{center}
-Le premier terme $U_0$ est appelé "graine" (seed en anglais). Les choix du multiplicateur \texttt{a}, de l'incrément \texttt{c}, du module \texttt{m}, et de $U_0$ conditionnent la pertinence des nombres obtenus.\\
+Le premier terme $U_0$ est appelé << graine >> (seed en anglais). Les choix du multiplicateur \texttt{a}, de l'incrément \texttt{c}, du module \texttt{m}, et de $U_0$ conditionnent la pertinence des nombres obtenus.\\
 
 Pour la suite du TP, nous prendrons les valeurs suivantes :
-$\left\{ \begin{array}{l}
+
+$$\left\{ \begin{array}{l}
    U_0=13  \\
    U_{n+1}=f( U_{n})\\
 \mbox{où f est une fonction qui a } x \mbox{ associe }
 (16805 \times x+1)\texttt{ mod }2^{15}  \\
-\end{array} \right.$
+\end{array} \right.$$
 
 \begin{center}
 a mod b désigne le reste dans la division euclidienne de a par b.
@@ -75,9 +76,7 @@ Si ce bit est à "1" alors le tirage est \texttt{pile}, \texttt{face} dans l'aut
 Cette fonction aura pour argument l'entier \texttt{e} à convertir et retournera une chaine de caractère constituée de 0 et de 1.\\
 Vérifier votre travail en comparant avec la fonction \texttt{bin} de \texttt{python} sur plusieurs exemples.}
 
-\question{\'Ecrire une fonction \texttt{booleen(e:int,n:int)->str} qui convertit un entier en base 2 et renvoie le n\up{ième} bit sous la forme '0' ou '1' (n\up{ième} bit compté à partir de la droite).
-Cette fonction aura pour argument un entier \texttt{e} et la position \texttt{n} du bit à extraire.\\
-Attention, il faut traiter les cas où le nombre obtenu est codé sur moins de n bits !}
+\question{\'Ecrire une fonction \texttt{booleen(e:int,n:int)->str} qui convertit un entier \texttt{e} en base 2 et renvoie le n\up{ième} bit sous la forme '0' ou '1' (n\up{ième} bit compté à partir de la droite). \texttt{n} est la position du bit à extraire. Attention, il faut traiter les cas où le nombre obtenu est codé sur moins de \texttt{n} bits !}
 
 %\ifProf \begin{commentaire}
 %possibilité d'un if
@@ -101,7 +100,7 @@ Conclure quant à la pertinence du choix du bit de poids le plus faible.}
 En déduire la période (apparente) de la suite.}
 
 
-\question{Vérifier que chacun des nombres de l'intervalle des entiers \verb![!0,32768\verb![! n'apparaissent qu'une seule fois sur une période. Pour cela, réaliser un programme qui affiche le nombre d'apparitions s'il est différent de 1, et qui affiche \textbf{Tous les nombres apparaissent une seule fois} si c'est le cas.\\ Conclure quant à l'équiprobabilité.}
+\question{Vérifier que chacun des nombres de l'intervalle des entiers $\llbracket 0,32768 \llbracket$  n'apparaissent qu'une seule fois sur une période. Pour cela, réaliser un programme qui affiche le nombre d'apparitions s'il est différent de 1, et qui affiche \textbf{Tous les nombres apparaissent une seule fois} si c'est le cas.\\ Conclure quant à l'équiprobabilité.}
 
 Remarque : Pour créer une liste ne contenant que des zéros, on peut utiliser la syntaxe suivante:
 
