@@ -51,17 +51,73 @@ Dans un graphe orienté, le sommet $y$ est dit adjacent au sommet $x$ s'il exist
 \end{defi}
 
 
-\begin{defi}{Sommet (ou n\oe{}uds)}
+\begin{defi}{Graphes pondérés}
+Étiqueter les arêtes d’un graphe $(S, A)$ (orienté ou non), c’est se donner une fonction
+$f : A \to V$ (où $V$ est un ensemble de valeurs). On dit qu’un graphe est pondéré si ses arêtes sont étiquetées par des nombres. On parlera alors du poids d’une arête.
+\end{defi}
+%
+%\begin{defi}{Sommet (ou n\oe{}uds)}
+%\end{defi}
+%
+%\begin{defi}{Arc, arête}
+%\end{defi}
+
+\subsection{Chermins}
+
+\begin{defi}{Chemin dans un graphe}
+On appelle chemin dans un graphe une suite finie $\{S_0, \ldots , S_{n-1}\}$ de $n$ sommets tels que pour tout
+$i \in \llbracket 0, n-1\llbracket$, une arête relie $S_i$ à $S_{i+1}$. On dit que ce chemin relie le sommet de départ $S_0$ au sommet de fin $S_{n-1}$. 
+
+Dans le cas d'un graphe non orienté, les arêtes sont notées $\{S_i, S_{i+1}\}$ pour $i \in \llbracket 0, n-1\llbracket$.
+
+Dans le cas d'un graphe orienté, les arêtes sont notées $(S_i, S_{i+1})$ pour $i \in \llbracket 0, n-1\llbracket$.
 \end{defi}
 
-\begin{defi}{Arc, arête}
+
+\begin{defi}{Chemin fermé}
+Chemin dont le sommet de départ et le sommet d'arrivé sont identiques.
 \end{defi}
 
-\begin{defi}{Chemin d'un sommet à un autre}
+\begin{defi}{Chemin élémentaire}
+Chemin n'empruntant que des arêtes distinctes.
 \end{defi}
+
+\begin{defi}{Chemin simple}
+Chemin tel que les $n - 2$ sommets intermédiaires si, pour $i \in \llbracket 1, n-1\llbracket$ soient
+deux à deux distincts et tous distincts du sommet de départ $S_0$ et du sommet d’arrivée $S_{n-1}$ et tels
+que ce chemin n’est pas de la forme $a, b, a$ dans le cas non-orienté.
+\end{defi}
+
+\begin{defi}{Circuit}
+Chemin fermé de longueur non nulle.
+\end{defi}
+
 
 \begin{defi}{Cycle}
+Circuit élémentaire (chemin fermé de longueur non nulle dont toutes les arêtes sont distinctes).
 \end{defi}
+
+\begin{defi}{Cycle simple} 
+Chemin fermé et simple de longueur non nulle.
+\end{defi}
+
+\begin{defi}{Chemin et cycle eulérien}
+Chemin (resp. cycle) contenant une et une seule fois toutes les arêtes du graphe.
+%Graphe eulérien : contenant un circuit eulérien.
+%Graphe acyclique : ne contenant aucun cycle.
+\end{defi}
+
+\begin{rem}
+Pour certains auteurs, un chemin élémentaire est ce que nous avons appelé un chemin simple et réciproquement. Pour d’autres, un cycle est ce que nous avons appelé un cycle simple.
+\end{rem}
+
+%\begin{defi}{}
+%\end{defi}
+%
+%\begin{defi}{}
+%\end{defi}
+
+
 
 \begin{defi}{Connexité dans les graphes non orientés}
 \end{defi}
