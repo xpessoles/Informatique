@@ -307,8 +307,19 @@ M =
 
 \subsusection{Pile}
 \begin{defi}{Pile}
-Une pile est une structure de données dans laquelle le dernier élément stocké est le premier à en sortir. On parle de principe \textit{LIFO} pour \textit{Last In First Out}. Le dernier élément stocké est appelé \textbf{Sommet}
+Une pile est une structure de données dans laquelle le dernier élément stocké est le premier à en sortir. On parle de principe \textit{LIFO} pour \textit{Last In First Out}. Le dernier élément stocké est appelé \textbf{sommet}.
 \end{defi}
+
+Pour gérer une pile, indépendamment de la façon dont elle est implémentée, on suppose exister les opérations élémentaire suivantes : 
+\begin{itemize}
+\item création d'une pile vide;
+\item test si une est vide;
+\item rajout d'un élément au sommet de la pile;
+\item accès au sommet d'une pile non vide;
+\item suppression (et renvoi) du sommet d'une pile non vide.
+\end{itemize}
+
+Théoriquement, chacune de ces opérations doit se faire à \textbf{temps constant}. 
 
 \subsection{Parcours générique d'un graphe}
 
