@@ -319,7 +319,25 @@ Pour gérer une pile, indépendamment de la façon dont elle est implémentée, 
 \item suppression (et renvoi) du sommet d'une pile non vide.
 \end{itemize}
 
-Théoriquement, chacune de ces opérations doit se faire à \textbf{temps constant}. 
+Théoriquement, chacune de ces opérations doit se faire à \textbf{temps constant}.
+
+Une des possiblités pour implémenter les piles est d'utiliser le module \texttt{deque}.
+
+\begin{lstlisting} 
+from collections import deque
+
+# Création d'une pile vide
+pile = deque() 
+
+# Test si une pile est vide
+len(pile) == 0
+
+# Ajout de l'élément Truc au sommet de la pile
+pile.append("Truc")
+
+# Suppression (et renvoi) du sommet d'une pile non vide
+sommet = pile.pop()
+\end{lstlisting}
 
 \subsection{Parcours générique d'un graphe}
 
