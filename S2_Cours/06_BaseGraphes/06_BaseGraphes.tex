@@ -1,5 +1,7 @@
 \section{Introduction aux graphes}
 
+\subsection{Exemple de graphes}
+
 \subsection{Vocabulaire des graphes}
 
 \begin{defi}{Graphe}%\cite{ref_01}
@@ -20,6 +22,8 @@ Un graphe orienté $G$ est un couple $G=(S,A)$, où $S$ est un ensemble fini de 
 On note $x\to y$ l'arc $(x,y)$. $x$ est l'extrémité initiale de l'arc, $y$ est son extrémité terminale. On dit que $y$ est successeur de $x$ et que $x$ est prédécesseur de $y$. 
 \end{defi}
 
+\begin{exemple}~\\
+
 \begin{multicols}{2}
 \begin{figure}[H]
 \includegraphics[width=.8\linewidth]{fig_02}
@@ -27,12 +31,15 @@ On note $x\to y$ l'arc $(x,y)$. $x$ est l'extrémité initiale de l'arc, $y$ est
 \caption{Graphe non orienté \label{fig_02}}
 \end{figure}
 
+
 \begin{figure}[H]
 \includegraphics[width=.8\linewidth]{fig_03}
 \captionsetup{justification=centering}
 \caption{Graphe orienté}
 \end{figure}
 \end{multicols}
+
+\end{exemple}
 
 \begin{rem}
 On peut noter le graphe non orienté $G=\left(\llbracket 1,6\rrbracket,E\right)$ où $E=\left(
@@ -111,6 +118,40 @@ Chemin (resp. cycle) contenant une et une seule fois toutes les arêtes du graph
 Pour certains auteurs, un chemin élémentaire est ce que nous avons appelé un chemin simple et réciproquement. Pour d’autres, un cycle est ce que nous avons appelé un cycle simple.
 \end{rem}
 
+
+\begin{exemple} ~\\
+\begin{multicols}{2}
+\begin{figure}[H]
+\centering
+\includegraphics[height = 4cm]{chemin}
+\captionsetup{justification=centering}
+\caption{Chemin}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[height = 4cm]{chemin_eulerien}
+\captionsetup{justification=centering}
+\caption{Chemin eulérien}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[height = 4cm]{cycle_simple}
+\captionsetup{justification=centering}
+\caption{Cycle simple}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[height = 4cm]{cycle_eulerien}
+\captionsetup{justification=centering}
+\caption{Cycle eulérien}
+\end{figure}
+\end{multicols}
+\end{exemple}
+
+
 %\begin{defi}{}
 %\end{defi}
 %
@@ -120,7 +161,17 @@ Pour certains auteurs, un chemin élémentaire est ce que nous avons appelé un 
 
 
 \begin{defi}{Connexité dans les graphes non orientés}
+Un graphe $G=(S,A)$ est dit connexe si, pour deux sommets quelquonques $S_i$ et $S_j$ de $S$, il existe un chemin de $S_i$ à $S_j$.
 \end{defi}
+
+\begin{exemple}
+\begin{figure}[H]
+\centering
+\includegraphics[height = 4cm]{connexite}
+\captionsetup{justification=centering}
+\caption{Graphe ayant 2 composantes connexes}
+\end{figure}
+\end{exemple}
 
 \subsection{Notations}
 \begin{defi}{Degré d'un sommet}
@@ -302,8 +353,14 @@ M =
 \end{rem}
 
 \section{Parcours d'un graphe}
-\subsection{Piles et files}
 
+Une fois un graphe implémenté, se pose la question du parcours de ce graphe. Par exemple, pour aller de Mpnplaisir à La Part-Dieu en transport en commun, quel sera le parcours le plus rapide ? le plus court ? le moins énergivore ?
+
+Il faudrait alors tester tous les chemins possibles entre deux points, puis les comparer selon des critères prédéfinis. 
+
+Afin de créer, gérer, stocker ces parcours, on pourra implémenter les chemins parcourus sous forme de \textbf{file} ou \textbf{pile}.
+
+\subsection{Piles et files}
 
 \subsubsection{Pile}
 \begin{defi}{Pile}
@@ -351,12 +408,12 @@ Pour gérer une file, indépendamment de la façon dont elle est implémentée, 
 \item création d'une file vide;
 \item test si une file est vide;
 \item rajout d'un élément dans la file;
-\item suppression (et renvoi) du premier élément innsérér dans la file.
+\item suppression (et renvoi) du premier élément innséré dans la file.
 \end{itemize}
 
 Théoriquement, chacune de ces opérations doit se faire à \textbf{temps constant}.
 
-Une des possiblités pour implémenter les piles est d'utiliser le module \texttt{deque}. Chacun des éléments de la pile peut être un objet de type différent.
+Une des possiblités pour implémenter les piles est d'utiliser le module \texttt{deque}. Chacun des éléments de la file peut être un objet de type différent. Dans cette vision des files, les éléments sont ajoutés << à droite >> et sortent de la file << par la gauche >>.
 
 \begin{lstlisting} 
 from collections import deque
@@ -364,13 +421,13 @@ from collections import deque
 # Création d'une file vide
 file = deque() 
 
-# Test si une pile est vide
+# Teste si une pile est vide
 len(file) == 0
 
-# Ajout de l'élément Truc dans la file
+# Ajoute l'élément Truc dans la file 
 file.append("Truc")
 
-# Suppression (et renvoi) du premier inséré dans la file.
+# Suppression (et renvoi) du premier élément inséré dans la file
 sommet = pile.popleft()
 
 \end{lstlisting}
