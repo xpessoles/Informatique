@@ -49,12 +49,9 @@ def arretes(G:list)->list:
 # ===========
 def plot_graphe(G):
     edges = arretes(G)
-    noms = [str(i) for i in range(len(G))]
     Gx = nx.Graph()
     Gx.add_edges_from(edges)
-    for n in Gx.nodes:
-        Gx.nodes[n]["name"]=noms[n]
-    nx.draw(Gx)
+    nx.draw(Gx,with_labels = True)
     plt.show()
 plot_graphe(M)
     
