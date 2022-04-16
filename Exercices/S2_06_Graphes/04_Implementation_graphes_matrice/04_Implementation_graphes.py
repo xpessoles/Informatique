@@ -105,14 +105,15 @@ def supprime_sommet(G,i):
     for j in range(len(G)):
         G[j].pop(i)
 
-LL = [4]
-poids = [99]
-plot_graphe(M)
-ajout_sommet(M,LL,poids)
-plot_graphe(M)
+# LL = [4]
+# poids = [99]
+# plot_graphe(M)
+# ajout_sommet(M,LL,poids)
+# plot_graphe(M)
 
 
               
+
 chemin = [1,2,3,1,4]
 print(longueur(M,chemin))
         

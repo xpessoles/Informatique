@@ -1,6 +1,5 @@
-\exer{Implémentation des graphes}
+\exer{Implémentation des graphes par une matrice d'adjacence}
 
-\subsubsection*{Implémentation d'un graphe par une matrice d'adjacence}
 
 On considère le graphe \texttt{G} suivant, où le nombre situé sur l'arête joignant deux sommets est leur distance, supposée entière. 
 
@@ -46,20 +45,20 @@ plot_graphe(M)
 
 \question{Écrire la fonction \texttt{ajout\_sommet(G:list, L:list, poids : list) -> None} permettant d'ajouter un sommet au graphe. \texttt{L} désigne la liste des sommets auxquels le nouveau sommet est relié, \texttt{poids} la liste des poids respectifs. \texttt{ajout\_sommet} agit avec effet de bord sur \texttt{G}.}
 
-\question{Écrire la fonction \texttt{supprime\_sommet(G:list, i: int) -> None} permettant de supprimer le sommet $i$ du graphe.}
-
-
-\subsubsection*{Implémentation d'un graphe par une liste d'adjacence}
-Pour implémenter le graphe, on utilise une liste \texttt{G} qui a pour taille le nombre de sommets. Chaque élément \texttt{G[i]} est la liste des voisins de \texttt{i}. 
-
-On s'intéresse au graphe précédent, \textbf{sans les pondérations}.  Dans ce cas, \texttt{G[0]=[1,2,4]} car Les sommets 1, 2 et 4 sont des voisins de 0.
-
-\question{Construire la liste d'adjacence \texttt{G} en utilisant la méthode énoncée ci-dessus.}
-
-\question{Écrire une fonction \texttt{voisins\_l(G:list, i:int) -> list}, d'argument la liste d'adjacence \texttt{G} et un sommet $i$, renvoyant la liste des voisins du sommet~$i$.}
-
-\question{Écrire une fonction \texttt{degre\_l(G:list, i:int) -> int}, d'argument un sommet $i$, renvoyant le nombre des voisins du sommet $i$, c'est-à-dire le nombre d’arêtes issues de $i$.}
-
-\question{Écrire la fonction \texttt{ajout\_sommet\_l(G:list, L:list) -> None} permettant d'ajouter un sommet au graphe. Cette fonction prendra comme argument \texttt{G} liste d'adjacence du graphe et \texttt{L} la liste des sommets auxquels le nouveau sommet est relié. \texttt{ajout\_sommet} agit avec effet de bord sur \texttt{G}.}
-
-\question{Écrire la fonction \texttt{supprime\_sommet\_l(G:list, i: int) -> None} permettant de supprimer le sommet $i$ du graphe.}
+%\question{Écrire la fonction \texttt{supprime\_sommet(G:list, i: int) -> None} permettant de supprimer le sommet $i$ du graphe.}
+%
+%
+%\subsubsection*{Implémentation d'un graphe par une liste d'adjacence}
+%Pour implémenter le graphe, on utilise une liste \texttt{G} qui a pour taille le nombre de sommets. Chaque élément \texttt{G[i]} est la liste des voisins de \texttt{i}. 
+%
+%On s'intéresse au graphe précédent, \textbf{sans les pondérations}.  Dans ce cas, \texttt{G[0]=[1,2,4]} car Les sommets 1, 2 et 4 sont des voisins de 0.
+%
+%\question{Construire la liste d'adjacence \texttt{G} en utilisant la méthode énoncée ci-dessus.}
+%
+%\question{Écrire une fonction \texttt{voisins\_l(G:list, i:int) -> list}, d'argument la liste d'adjacence \texttt{G} et un sommet $i$, renvoyant la liste des voisins du sommet~$i$.}
+%
+%\question{Écrire une fonction \texttt{degre\_l(G:list, i:int) -> int}, d'argument un sommet $i$, renvoyant le nombre des voisins du sommet $i$, c'est-à-dire le nombre d’arêtes issues de $i$.}
+%
+%\question{Écrire la fonction \texttt{ajout\_sommet\_l(G:list, L:list) -> None} permettant d'ajouter un sommet au graphe. Cette fonction prendra comme argument \texttt{G} liste d'adjacence du graphe et \texttt{L} la liste des sommets auxquels le nouveau sommet est relié. \texttt{ajout\_sommet} agit avec effet de bord sur \texttt{G}.}
+%
+%\question{Écrire la fonction \texttt{supprime\_sommet\_l(G:list, i: int) -> None} permettant de supprimer le sommet $i$ du graphe.}
