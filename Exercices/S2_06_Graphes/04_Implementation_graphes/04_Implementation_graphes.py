@@ -53,7 +53,6 @@ def plot_graphe(G):
     Gx.add_edges_from(edges)
     nx.draw(Gx,with_labels = True)
     plt.show()
-plot_graphe(M)
     
 # print(voisins(M,0))
 # print(voisins(M,1))
@@ -61,7 +60,7 @@ plot_graphe(M)
 # print(voisins(M,3))
 # print(voisins(M,4))
 
-# Question 4
+# Question 5
 # ==========
 def degre(M,i):
     """
@@ -73,9 +72,8 @@ def degre(M,i):
     """
     return len(voisins(M,i))
 
-# Question 5
+# Question 6
 # ==========
-
 def longueur(M,chemin):
     l = 0
     for i in range(len(chemin)-1):
@@ -84,7 +82,37 @@ def longueur(M,chemin):
         else :
             l=l+M[chemin[i]][chemin[i+1]]
     return l
+
+
+def ajout_sommet(G:list, L:list, poids : list)-> None :
+    n = len(G)
+    # On ajoute un élément à chaque ligne 
+    for i in range(n):
+        G[i].append(-1)
+    # On ajoute une ligne
+    ligne = [-1 for i in range(n+1)]
+    G.append(ligne)
     
+    # On ajoute les aretes avec les poids
+    for k in range(len(L)) :
+        i,j = L[k],len(G)-1
+        G[i][j] = poids[k]
+        G[j][i] = poids[k]
+
+def supprime_sommet(G,i):
+    # On supprimer la ième ligne
+    G.pop(i)
+    for j in range(len(G)):
+        G[j].pop(i)
+
+LL = [4]
+poids = [99]
+plot_graphe(M)
+ajout_sommet(M,LL,poids)
+plot_graphe(M)
+
+
+              
 chemin = [1,2,3,1,4]
 print(longueur(M,chemin))
         
