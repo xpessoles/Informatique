@@ -62,7 +62,7 @@ def corriger_eleve(file_py,rep_travail):
     
     commande = 'pytest >> '+nom
     print(commande)
-    os.system(commande)
+    #os.system(commande)
 
 
 files_eleves = make_list_files(REP_ELEVE)

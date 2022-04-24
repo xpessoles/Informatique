@@ -4,7 +4,7 @@
 On considère le graphe \texttt{G} suivant, où le nombre situé sur l'arête joignant deux sommets est leur distance, supposée entière. 
 
 \begin{center}
-\includegraphics[width=.75\linewidth]{02_application}
+\includegraphics[width=.7cm]{02_application}
 \end{center}
 
 
@@ -14,9 +14,9 @@ Dans ce cas, \texttt{G[0]=[1,2,4]} car Les sommets 1, 2 et 4 sont des voisins de
 
 \question{Construire la liste d'adjacence \texttt{G} en utilisant la méthode énoncée ci-dessus.}
 
-
-On convient que, lorsque les sommets ne sont pas reliés, cette distance vaut $-1$. La distance du
-sommet $i$ à lui-même est égale à 0.
+%
+%On convient que, lorsque les sommets ne sont pas reliés, cette distance vaut $-1$. La distance du
+%sommet $i$ à lui-même est égale à 0.
 
 %\question{Écrire une suite d'instructions permettant de dresser à partir de la matrice \texttt{M} la liste des voisins du sommet 4.}
 
@@ -48,4 +48,9 @@ plot_graphe(M)
 \question{Écrire la fonction \texttt{ajout\_sommet\_l(G:list, L:list) -> None} permettant d'ajouter un sommet au graphe. \texttt{L} désigne la liste des sommets auxquels le nouveau sommet est relié. \texttt{ajout\_sommet} agit avec effet de bord sur \texttt{G}.}
 
 \question{Écrire la fonction \texttt{supprime\_sommet\_l(G:list, i: int) -> None} permettant de supprimer le sommet $i$ du graphe.}
+
+
+\question{Écrire la fonction \texttt{from\_list\_to\_matrix(G:list, i: int) -> list} permettant de convertir un graphe implémenté sous forme de liste d'adjacence en matrice d'adjacence.}
+
+\question{Écrire la fonction \texttt{from\_matrix\_to\_listmatrix(G:list, i: int) -> list} permettant de convertir un graphe implémenté sous forme de matrice d'adjacence en liste d'adjacence.}
 
