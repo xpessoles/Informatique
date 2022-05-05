@@ -69,7 +69,7 @@ $f : A \to V$ (où $V$ est un ensemble de valeurs). On dit qu’un graphe est po
 %\begin{defi}{Arc, arête}
 %\end{defi}
 
-\section{Chermins}
+\section{Chemins}
 
 \begin{defi}{Chemin dans un graphe}
 On appelle chemin dans un graphe une suite finie $\{S_0, \ldots , S_{n-1}\}$ de $n$ sommets tels que pour tout
@@ -161,7 +161,7 @@ Pour certains auteurs, un chemin élémentaire est ce que nous avons appelé un 
 
 
 \begin{defi}{Connexité dans les graphes non orientés}
-Un graphe $G=(S,A)$ est dit connexe si, pour deux sommets quelquonques $S_i$ et $S_j$ de $S$, il existe un chemin de $S_i$ à $S_j$.
+Un graphe $G=(S,A)$ est dit connexe si, pour deux sommets quelconques $S_i$ et $S_j$ de $S$, il existe un chemin de $S_i$ à $S_j$.
 \end{defi}
 
 \begin{exemple}
@@ -241,7 +241,7 @@ G = [[1,5,6],[],[1],[6],[3,5],[],[0,1]]
 \end{minipage}
 
 
-Dans la même idée, il est aussi possible d'utiliser des dictionnaires d'adjacence dans lequel les clés sont les sommets, et les valeurs sont des listes de voisins ou de sucesseurs. 
+Dans la même idée, il est aussi possible d'utiliser des dictionnaires d'adjacence dans lequel les clés sont les sommets, et les valeurs sont des listes de voisins ou de successeurs. 
 \begin{lstlisting}
 # Graphe non orienté 
 G = {"S0":["S1","S5","S6"],"S1":["S0","S2","S6"],"S2":["S1","S3"],"S3":["S2","S4"],"S4":["S3","S5"],"S5":["S4","S0"],"S6":["S1","S0"]}
@@ -311,7 +311,7 @@ M =
 \begin{center}
 \includegraphics[width=.7\linewidth]{fig_06}
 \end{center}
-Dans ca cas, le graphe est orienté. On a 
+Dans ce cas, le graphe est orienté. On a 
 On a dans ce cas 
 
 \footnotesize{$
