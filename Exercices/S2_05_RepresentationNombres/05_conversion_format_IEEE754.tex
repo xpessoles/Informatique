@@ -1,0 +1,24 @@
+\exer{Conversion vers le format IEEE-754 simple précision}
+
+Vous trouverez dans votre espace des classes 2 fichiers à copier dans votre dossier de travail~: \texttt{representation\_binaire.py} et \texttt{conversion\_etudiant.py}. 
+
+\question{Démarrer le script \texttt{conversion\_etudiant.py} (raccourci \texttt{ctrl+shif+E}) et constater l'apparition dans la console d'une représentation binaire de $\pi$ au format simple précision (bit de signe en rouge, bits d'exposant en bleu, bits de mantisse en vert). }
+
+Rappel~: 
+\begin{itemize}
+	\item la mantisse doit être positive et doit être comprise entre $1$ inclus et $2$ exclu~;
+	\item le signe doit être égal à $1$ si $x<0$ et $0$ sinon~;
+	\item l'exposant doit être positif si $x\geq 2$ et négatif si $x<1$.
+\end{itemize}
+
+\question{Écrire une fonction \texttt{nb2sme(x)} qui renvoie un triplet de nombres \texttt{s, m, e} correspondant au signe ($0$ ou $1$), à la mantisse (un flottant) et à l'exposant du nombre non-nul $x$ (un entier signé).}
+
+Rappel~: 
+\begin{itemize}
+	\item la mantisse possède une taille de 24\,bits pour un flottant simple précision  (23\,bits mémoires et 1 implicite)~;
+	\item le décalage de l'exposant est de 127 pour qu'il soit toujours codé par un nombre positif sur 8 bits.
+\end{itemize}
+ 
+\question{En vous servant de la fonction \texttt{int2bin}, qui converti les entiers en chaine de caractères binaire, convertissez chacun des champs (s, m et e) en chaine de caractère binaire correspondant à la norme IEEE-754.}
+
+\question{Vérifiez la compatibilité avec la fonction \texttt{show\_float("f", np.float32(x))} pour différentes valeurs de \texttt{x} (en particulier très grand et très petit).}

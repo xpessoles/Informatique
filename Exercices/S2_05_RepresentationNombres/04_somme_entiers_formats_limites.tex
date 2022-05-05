@@ -1,0 +1,22 @@
+%\section{Exercice~2~: somme d'entiers sur des formats limités}
+\exer{Somme d'entiers sur des formats limités}
+
+
+Commencer votre script par \texttt{import numpy as np}. Pour la suite on va travailler sur les entiers non signés \texttt{np.uint~8} et \texttt{np.uint~16}.
+
+\question{Mettre en place une fonction~\texttt{somme\_ui8(L)} qui prend en entrée une liste d'entiers non signés sur 8~bits et renvoie leur somme sous forme d'un entier non signé sur 8~bits. On souhaite que la somme le long de la procédure soit bien un entier non signé sur 8~bits. }
+
+\begin{rem}
+	Pour créer une liste d'entiers de type \texttt{np.uint8} à partir d'une liste d'entiers de type \texttt{int}, vous pouvez utiliser les commandes suivantes~:
+	 
+	\texttt{L0 = [12, 57, 255] }
+	
+	\texttt{L1 = [np.uint8(x) for x in L0] }
+\end{rem}
+
+\question{Constater les problèmes discutés en cours et proposer des solutions.}
+
+\question{Mettre en place une fonction~\texttt{somme\_ui8\_vers\_ui16(L)} qui prend en entrée une liste d'entiers non signés sur 8~bits et renvoie leur somme sous forme d'un entier non signé sur 16~bits. On souhaite que la somme le long de la procédure soit bien un entier non signé sur 16~bits.}
+
+ 
+\question{Combien de $255$ peuvent être sommés avec la fonction précédente sans atteindre le phénomène de dépassement d'entier~? Tester ces limites. }
