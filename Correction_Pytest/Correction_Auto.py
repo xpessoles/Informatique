@@ -66,5 +66,9 @@ def corriger_eleve(file_py,rep_travail):
 
 
 files_eleves = make_list_files(REP_ELEVE)
-file_py = files_eleves[0]
-corriger_eleve(file_py, REP_COR)
+
+for f in files_eleves :
+    sh.copy(f,"fichiers_py")
+    
+#file_py = files_eleves[0]
+#corriger_eleve(file_py, REP_COR)
