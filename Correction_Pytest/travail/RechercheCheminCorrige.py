@@ -93,4 +93,4 @@ def plot_chemin():
     plt.axis("equal")
     plt.show()
 
-plot_chemin()
+#plot_chemin()

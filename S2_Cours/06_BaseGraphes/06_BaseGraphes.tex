@@ -1,8 +1,8 @@
-\section{Introduction aux graphes}
+%\section{Introduction aux graphes}
 
-\subsection{Exemple de graphes}
+\section{Exemple de graphes}
 
-\subsection{Vocabulaire des graphes}
+\section{Vocabulaire des graphes}
 
 \begin{defi}{Graphe}%\cite{ref_01}
 Un graphe est un ensemble de \textbf{sommets} et  \textbf{relations} entre ces sommets.
@@ -69,7 +69,7 @@ $f : A \to V$ (où $V$ est un ensemble de valeurs). On dit qu’un graphe est po
 %\begin{defi}{Arc, arête}
 %\end{defi}
 
-\subsection{Chermins}
+\section{Chemins}
 
 \begin{defi}{Chemin dans un graphe}
 On appelle chemin dans un graphe une suite finie $\{S_0, \ldots , S_{n-1}\}$ de $n$ sommets tels que pour tout
@@ -161,7 +161,7 @@ Pour certains auteurs, un chemin élémentaire est ce que nous avons appelé un 
 
 
 \begin{defi}{Connexité dans les graphes non orientés}
-Un graphe $G=(S,A)$ est dit connexe si, pour deux sommets quelquonques $S_i$ et $S_j$ de $S$, il existe un chemin de $S_i$ à $S_j$.
+Un graphe $G=(S,A)$ est dit connexe si, pour deux sommets quelconques $S_i$ et $S_j$ de $S$, il existe un chemin de $S_i$ à $S_j$.
 \end{defi}
 
 \begin{exemple}
@@ -208,9 +208,9 @@ Dans ce cas, on a  $d\degres\left(s\right)=d_{-}\left(s\right)+d_{+}\left(s\righ
 
 \end{exemple}
 
-\subsection{Implémentation des graphes}
+\section{Implémentation des graphes}
 
-\subsubsection{Liste d'adjacence}
+\subsection{Liste d'adjacence}
 \begin{defi}{Liste d'adjacence}
 Soit un graphe de $n$ sommets d'indices $i \in \llbracket 0, n-1\rrbracket$. Pour implémenter le graphe, on utilise une liste \texttt{G} de taille $n$ pour laquelle, \texttt{G[i]} est la liste des voisins de \texttt{i}.
 \end{defi}
@@ -241,7 +241,7 @@ G = [[1,5,6],[],[1],[6],[3,5],[],[0,1]]
 \end{minipage}
 
 
-Dans la même idée, il est aussi possible d'utiliser des dictionnaires d'adjacence dans lequel les clés sont les sommets, et les valeurs sont des listes de voisins ou de sucesseurs. 
+Dans la même idée, il est aussi possible d'utiliser des dictionnaires d'adjacence dans lequel les clés sont les sommets, et les valeurs sont des listes de voisins ou de successeurs. 
 \begin{lstlisting}
 # Graphe non orienté 
 G = {"S0":["S1","S5","S6"],"S1":["S0","S2","S6"],"S2":["S1","S3"],"S3":["S2","S4"],"S4":["S3","S5"],"S5":["S4","S0"],"S6":["S1","S0"]}
@@ -251,7 +251,7 @@ G = {"S0":["S1","S5","S6"],"S1":[],"S2":["S1"],"S3":["S6"],"S4":["S3","S5"],"S5"
 
 \end{exemple}
 
-\subsubsection{Matrice d'adjacence}
+\subsection{Matrice d'adjacence}
 \begin{defi}{Matrice d'adjacence}
 Soit un graphe de $n$ sommets d'indices $i \in \llbracket 0, n-1\rrbracket$ et $E$ l'ensemble des arêtes 
 (on notera $G=\left( \llbracket 0, n-1\rrbracket,E\right)$. Pour implémenter le graphe, on utilise la matrice d'adjacence carrée de taille $n$, $\mathcal{M}_n$ \texttt{G} de taille $n$ pour laquelle,
@@ -311,7 +311,7 @@ M =
 \begin{center}
 \includegraphics[width=.7\linewidth]{fig_06}
 \end{center}
-Dans ca cas, le graphe est orienté. On a 
+Dans ce cas, le graphe est orienté. On a 
 On a dans ce cas 
 
 \footnotesize{$
@@ -352,121 +352,122 @@ M =
 \end{itemize}
 \end{rem}
 
-\section{Parcours d'un graphe}
 
-Une fois un graphe implémenté, se pose la question du parcours de ce graphe. Par exemple, pour aller de Monplaisir à La Part-Dieu en transport en commun, quel sera le parcours le plus rapide ? le plus court ? le moins énergivore ?
-
-Il faudrait alors tester tous les chemins possibles entre deux points, puis les comparer selon des critères prédéfinis. 
-
-Afin de créer, gérer, stocker ces parcours, on pourra implémenter les chemins parcourus sous forme de \textbf{file} ou \textbf{pile}.
-
-\subsection{Piles et files}
-
-\subsubsection{Pile}
-\begin{defi}{Pile}
-Une pile est une structure de données dans laquelle le dernier élément stocké est le premier à en sortir. On parle de principe \textit{LIFO} pour \textit{Last In First Out}. Le dernier élément stocké est appelé \textbf{sommet}.
-\end{defi}
-
-Pour gérer une pile, indépendamment de la façon dont elle est implémentée, on suppose exister les opérations élémentaires suivantes : 
-\begin{itemize}
-\item création d'une pile vide;
-\item test si une pile est vide;
-\item rajout d'un élément au sommet de la pile;
-\item accès au sommet d'une pile non vide;
-\item suppression (et renvoi) du sommet d'une pile non vide.
-\end{itemize}
-
-Théoriquement, chacune de ces opérations doit se faire à \textbf{temps constant}.
-
-Une des possiblités pour implémenter les piles est d'utiliser le module \texttt{deque}. Chacun des éléments de la pile peut être un objet de type différent.
-
-\begin{lstlisting} 
-from collections import deque
-
-# Création d'une pile vide
-pile = deque() 
-
-# Test si une pile est vide
-len(pile) == 0
-
-# Ajout de l'élément Truc au sommet de la pile
-pile.append("Truc")
-
-# Suppression (et renvoi) du sommet d'une pile non vide
-sommet = pile.pop()
-\end{lstlisting}
-
-
-
-\subsubsection{File}
-\begin{defi}{File}
-Une file est une structure de données dans laquelle le premier élément stocké est le premier à en sortir. On parle de principe \textit{FIFO} pour \textit{First In First Out}. 
-\end{defi}
-
-Pour gérer une file, indépendamment de la façon dont elle est implémentée, on suppose exister les opérations élémentaires suivantes : 
-\begin{itemize}
-\item création d'une file vide;
-\item test si une file est vide;
-\item rajout d'un élément dans la file;
-\item suppression (et renvoi) du premier élément innséré dans la file.
-\end{itemize}
-
-Théoriquement, chacune de ces opérations doit se faire à \textbf{temps constant}.
-
-Une des possiblités pour implémenter les piles est d'utiliser le module \texttt{deque}. Chacun des éléments de la file peut être un objet de type différent. Dans cette vision des files, les éléments sont ajoutés << à droite >> et sortent de la file << par la gauche >>.
-
-\begin{lstlisting} 
-from collections import deque
-
-# Création d'une file vide
-file = deque() 
-
-# Teste si une pile est vide
-len(file) == 0
-
-# Ajoute l'élément Truc dans la file 
-file.append("Truc")
-
-# Suppression (et renvoi) du premier élément inséré dans la file
-sommet = pile.popleft()
-
-\end{lstlisting}
-
-
-\subsection{Parcours générique d'un graphe}
-
-\begin{defi}{Parcours générique}
-Soit in graphe $G=(S,A)$. On parle de parcours générique d'un graphe lorsqu'on souhaite savoir, à partir du sommet $S_i$, quels sont les sommets accessibles. 
-\end{defi}
-
-\subsection{Parcours en largeur}
-
-\subsection{Parcours en profondeur}
-
-\subsection{Détection de la présence des cycles}
-
-\subsection{Connexité d'un graphe non orienté}
-
-\section{Pondération d'un graphe}
-
-
-
-\section{Recheche du plus court chemin}
-\subsection{Algorithme de Dijkstra}
-
-\subsection{Algorithme A$\star$}
-
-\begin{defi}{}
-\end{defi}
-
-\begin{defi}{}
-\end{defi}
-
-\begin{defi}{}
-\end{defi}
-
-\begin{defi}{}
-\end{defi}
-
-\begin{defi}{}
-\end{defi}
+%\section{Parcours d'un graphe}
+%
+%Une fois un graphe implémenté, se pose la question du parcours de ce graphe. Par exemple, pour aller de Monplaisir à La Part-Dieu en transport en commun, quel sera le parcours le plus rapide ? le plus court ? le moins énergivore ?
+%
+%Il faudrait alors tester tous les chemins possibles entre deux points, puis les comparer selon des critères prédéfinis. 
+%
+%Afin de créer, gérer, stocker ces parcours, on pourra implémenter les chemins parcourus sous forme de \textbf{file} ou \textbf{pile}.
+%
+%\subsection{Piles et files}
+%
+%\subsubsection{Pile}
+%\begin{defi}{Pile}
+%Une pile est une structure de données dans laquelle le dernier élément stocké est le premier à en sortir. On parle de principe \textit{LIFO} pour \textit{Last In First Out}. Le dernier élément stocké est appelé \textbf{sommet}.
+%\end{defi}
+%
+%Pour gérer une pile, indépendamment de la façon dont elle est implémentée, on suppose exister les opérations élémentaires suivantes : 
+%\begin{itemize}
+%\item création d'une pile vide;
+%\item test si une pile est vide;
+%\item rajout d'un élément au sommet de la pile;
+%\item accès au sommet d'une pile non vide;
+%\item suppression (et renvoi) du sommet d'une pile non vide.
+%\end{itemize}
+%
+%Théoriquement, chacune de ces opérations doit se faire à \textbf{temps constant}.
+%
+%Une des possiblités pour implémenter les piles est d'utiliser le module \texttt{deque}. Chacun des éléments de la pile peut être un objet de type différent.
+%
+%\begin{lstlisting} 
+%from collections import deque
+%
+%# Création d'une pile vide
+%pile = deque() 
+%
+%# Test si une pile est vide
+%len(pile) == 0
+%
+%# Ajout de l'élément Truc au sommet de la pile
+%pile.append("Truc")
+%
+%# Suppression (et renvoi) du sommet d'une pile non vide
+%sommet = pile.pop()
+%\end{lstlisting}
+%
+%
+%
+%\subsubsection{File}
+%\begin{defi}{File}
+%Une file est une structure de données dans laquelle le premier élément stocké est le premier à en sortir. On parle de principe \textit{FIFO} pour \textit{First In First Out}. 
+%\end{defi}
+%
+%Pour gérer une file, indépendamment de la façon dont elle est implémentée, on suppose exister les opérations élémentaires suivantes : 
+%\begin{itemize}
+%\item création d'une file vide;
+%\item test si une file est vide;
+%\item rajout d'un élément dans la file;
+%\item suppression (et renvoi) du premier élément innséré dans la file.
+%\end{itemize}
+%
+%Théoriquement, chacune de ces opérations doit se faire à \textbf{temps constant}.
+%
+%Une des possiblités pour implémenter les piles est d'utiliser le module \texttt{deque}. Chacun des éléments de la file peut être un objet de type différent. Dans cette vision des files, les éléments sont ajoutés << à droite >> et sortent de la file << par la gauche >>.
+%
+%\begin{lstlisting} 
+%from collections import deque
+%
+%# Création d'une file vide
+%file = deque() 
+%
+%# Teste si une pile est vide
+%len(file) == 0
+%
+%# Ajoute l'élément Truc dans la file 
+%file.append("Truc")
+%
+%# Suppression (et renvoi) du premier élément inséré dans la file
+%sommet = pile.popleft()
+%
+%\end{lstlisting}
+%
+%
+%\subsection{Parcours générique d'un graphe}
+%
+%\begin{defi}{Parcours générique}
+%Soit in graphe $G=(S,A)$. On parle de parcours générique d'un graphe lorsqu'on souhaite savoir, à partir du sommet $S_i$, quels sont les sommets accessibles. 
+%\end{defi}
+%
+%\subsection{Parcours en largeur}
+%
+%\subsection{Parcours en profondeur}
+%
+%\subsection{Détection de la présence des cycles}
+%
+%\subsection{Connexité d'un graphe non orienté}
+%
+%\section{Pondération d'un graphe}
+%
+%
+%
+%\section{Recheche du plus court chemin}
+%\subsection{Algorithme de Dijkstra}
+%
+%\subsection{Algorithme A$\star$}
+%
+%\begin{defi}{}
+%\end{defi}
+%
+%\begin{defi}{}
+%\end{defi}
+%
+%\begin{defi}{}
+%\end{defi}
+%
+%\begin{defi}{}
+%\end{defi}
+%
+%\begin{defi}{}
+%\end{defi}
