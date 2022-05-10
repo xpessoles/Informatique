@@ -7,6 +7,8 @@ Created on Sat Apr 23 15:29:40 2022
 
 import os
 import shutil as sh
+import codecs
+
 
 # Répetoire contenant les scripts des élèves
 REP_ELEVE = "scripts_eleves" 
@@ -66,9 +68,54 @@ def corriger_eleve(file_py,rep_travail):
 
 
 files_eleves = make_list_files(REP_ELEVE)
+files_eleves_py = make_list_files("fichiers_py")
 
-for f in files_eleves :
-    sh.copy(f,"fichiers_py")
+# Génération des PDF des élèves
+def make_pdf(files_eleves_py):
+    for f in files_eleves_py : 
+        print(f)
+        nom_fichier = f.split("/")[-1]
+        sh.copy("fichiers_py/"+nom_fichier,"compil/eleve.py")
+        os.chdir("compil")
+        os.system("pdflatex PythonEleve")
+        os.chdir("..")
+    
+        sh.copy("compil/PythonEleve.pdf","pdf_eleves/"+nom_fichier+".pdf")
+
+def make_pytest(files_eleves_py):
+    for f in files_eleves_py : 
+        print(f)
+        nom_fichier = f.split("/")[-1]
+        sh.copy("fichiers_py/"+nom_fichier,"travail/eleve.py")
+        os.chdir("travail")
+        
+        file_diff = "test4.diff"
+        print("Pytest")
+        os.system("pytest >> "+file_diff)
+        
+        print("Conversion")
+        #read input file
+        with codecs.open(file_diff, 'r', encoding = 'ansi') as file:
+            lines = file.read()
+
+        #write output file
+        with codecs.open(file_diff, 'w', encoding = 'utf8') as file:
+            file.write("``` diff \n")
+            file.write(lines)
+            file.write("```")
+            
+        print("Pandoc")
+        os.system("pandoc -o file_diff.pdf "+file_diff)
+        os.remove(file_diff)
+        os.chdir("..")     
+    
+        sh.copy("travail/file_diff.pdf","pdf_eleves/"+nom_fichier+"_diff.pdf")
+        
+    
+make_pytest(files_eleves_py)
+
+#for f in files_eleves :
+    #sh.copy(f,"fichiers_py")
     
 #file_py = files_eleves[0]
 #corriger_eleve(file_py, REP_COR)

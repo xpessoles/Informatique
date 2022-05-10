@@ -7,9 +7,9 @@ Created on Thu Jan  6 15:55:01 2022
 
 """
 
-import RechercheCheminEleve as ref
-import RechercheCheminEleve as eleve
-#import RechercheCheminCorrige as eleve
+import RechercheCheminCorrige as ref
+import eleve as eleve
+
 
 
 from random import randint
@@ -136,4 +136,4 @@ def test_Q12():
     assert ch_eleve == ch_ref
     
     
-    
+ 
