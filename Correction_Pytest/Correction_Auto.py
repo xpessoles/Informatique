@@ -89,11 +89,11 @@ def make_pytest(files_eleves_py):
         sh.copy("fichiers_py/"+nom_fichier,"travail/eleve.py")
         os.chdir("travail")
         
-        file_diff = "test4.diff"
+        file_diff = "test.diff"
         print("Pytest")
         os.system("pytest >> "+file_diff)
         
-        print("Conversion")
+        print("Conversion du diff en utf8")
         #read input file
         with codecs.open(file_diff, 'r', encoding = 'ansi') as file:
             lines = file.read()
