@@ -7,7 +7,7 @@ Created on Thu Jan  6 15:55:01 2022
 
 """
 
-from math import sqrt
+from math import sqrt,factorial
 dim= 20
 
 def distance(p1, p2):
@@ -27,6 +27,14 @@ def distances(pts, dep):
     return tab
 
 def longueur(chemin, dist):
+    d = 0
+    id_pt = len(dist) - 1
+    for point in chemin:
+        d = d + dist[id_pt][point]
+        id_pt = point
+    return d
+
+def longueur_rec(chemin, dist):
     d = 0
     id_pt = len(dist) - 1
     for point in chemin:
@@ -93,4 +101,12 @@ def plot_chemin():
     plt.axis("equal")
     plt.show()
 
+ques_1 = 6
+ques_2 = factorial(10)
+ques_3 = ""
+ques_6 = 10*9/2
+ques_9_pts = 5
+ques_9_pts_parc = 3 
+ques_9_pts_parc_liste = "a,p3,p4"
+ques_10 = ""
 #plot_chemin()
