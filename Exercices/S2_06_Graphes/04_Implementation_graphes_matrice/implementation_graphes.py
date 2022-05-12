@@ -9,7 +9,7 @@ import networkx as nx
 # Question 1
 # ==========
 # Matrices avec des listes
-M=[[0,9,3,-1,7],[9,0,1,8,-1],[3,1,0,4,2],[-1,8,4,0,-1],[7,-1,2,-1,0]]
+G=[[0,9,3,-1,7],[9,0,1,8,-1],[3,1,0,4,2],[-1,8,4,0,-1],[7,-1,2,-1,0]]
 
 # Question 2 & 3
 # ==============
@@ -115,7 +115,7 @@ def supprime_sommet(G,i):
               
 
 chemin = [1,2,3,1,4]
-print(longueur(M,chemin))
+print(longueur(G,chemin))
         
 chemin = [0,4,2,1,0]
-print(longueur(M,chemin))
+print(longueur(G,chemin))
