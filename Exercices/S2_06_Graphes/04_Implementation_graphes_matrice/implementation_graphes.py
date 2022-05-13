@@ -31,7 +31,7 @@ def voisins(M:list, i:int) -> list:
 
 # Question 3
 # ===========
-def arretes(G:list)->list:
+def aretes(G:list)->list:
     """
     Renvoie la liste des arêtes sous forme de tuples.
     """
@@ -48,7 +48,7 @@ def arretes(G:list)->list:
 # Question 4
 # ===========
 def plot_graphe(G):
-    edges = arretes(G)
+    edges = aretes(G)
     Gx = nx.Graph()
     Gx.add_edges_from(edges)
     nx.draw(Gx,with_labels = True)
@@ -114,8 +114,8 @@ def supprime_sommet(G,i):
 
               
 
-chemin = [1,2,3,1,4]
-print(longueur(G,chemin))
+# chemin = [1,2,3,1,4]
+# print(longueur(G,chemin))
         
-chemin = [0,4,2,1,0]
-print(longueur(G,chemin))
+# chemin = [0,4,2,1,0]
+# print(longueur(G,chemin))

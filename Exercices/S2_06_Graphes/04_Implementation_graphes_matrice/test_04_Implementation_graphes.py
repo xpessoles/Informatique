@@ -6,6 +6,7 @@ Created on Thu May 12 15:57:49 2022
 """
 
 
+from copy import deepcopy
 import implementation_graphes as ref
 import implementation_graphes as eleve
 #import eleve as eleve
@@ -38,6 +39,61 @@ def test_Q2_03():
     # TODO : les voisins sont pas forcément dans le meme ordre
     n = len(GG)-1
     assert eleve.voisins(GG,n) == ref.voisins(GG,n)
+
+def test_Q2_04():
+    # On regarde si le nombre de voisins est le meme
+    for i in range(len(GG)):
+        assert len(eleve.voisins(GG,i)) == len(ref.voisins(GG,i))
+
     
 def test_Q3_01():
-    assert eleve.aretes(G)
+    # On vérifie que les listes d'arêtes sont identiques
+    ea = eleve.aretes(GG)
+    ea.sort()
+    
+    ra = ref.aretes(GG)
+    ra.sort()
+    assert ea == ra
+    
+def test_Q5():
+    # On vérifie que chacun des sommets du graphe GG ont les mêmes degrés
+    for i in range(len(GG)):
+        assert eleve.degre(GG,i) == ref.degre(GG,i)
+        
+def test_Q6_01():
+    chemin = [1,2,3]
+    assert eleve.longueur(GG, chemin) == ref.longueur(GG, chemin)
+    
+def test_Q6_02():
+    chemin = [4,5]
+    assert eleve.longueur(GG, chemin) == ref.longueur(GG, chemin)
+    
+
+def test_Q7_01():
+    # On ajoute un sommet et on vérifie que les graphes sont les memes
+    sommet = [4,3]
+    poids = [10,20]
+    A = deepcopy(GG)
+    B = deepcopy(GG)
+    ref.ajout_sommet(A, sommet, poids)
+    eleve.ajout_sommet(B, sommet, poids)
+    assert A == B
+    
+
+def test_Q8_01():
+    # On supprime le dernier sommet
+    A = deepcopy(GG)
+    B = deepcopy(GG)
+    ref.supprime_sommet(A, 0)
+    eleve.supprime_sommet(B, 0)
+    assert A == B
+    
+def test_Q8_02():
+    # On supprime le dernier sommet
+    A = deepcopy(GG)
+    B = deepcopy(GG)
+    n = len(A)-1
+    ref.supprime_sommet(A, n)
+    eleve.supprime_sommet(B, n)
+    assert A == B
+    
