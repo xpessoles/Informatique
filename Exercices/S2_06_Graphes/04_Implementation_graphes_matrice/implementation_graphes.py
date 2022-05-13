@@ -93,6 +93,8 @@ def ajout_sommet(G:list, L:list, poids : list)-> None :
     ligne = [-1 for i in range(n+1)]
     G.append(ligne)
     
+    #On met a 0 G[n][n]
+    G[n][n] = 0
     # On ajoute les aretes avec les poids
     for k in range(len(L)) :
         i,j = L[k],len(G)-1

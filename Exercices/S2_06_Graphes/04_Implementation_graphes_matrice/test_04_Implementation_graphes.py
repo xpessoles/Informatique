@@ -9,6 +9,8 @@ Created on Thu May 12 15:57:49 2022
 from copy import deepcopy
 import implementation_graphes as ref
 import implementation_graphes as eleve
+import tp14_graphe_PB as eleve
+
 #import eleve as eleve
 
 # Création d'une autre matrice d'adjacences

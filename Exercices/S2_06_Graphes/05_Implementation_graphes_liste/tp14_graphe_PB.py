@@ -36,8 +36,8 @@ def plot_graphe_l(G):
     plt.show()
 
 
-#plt.figure('graphe non pondéré')
-#plot_graphe_l(G)
+plt.figure('graphe non pondéré')
+plot_graphe_l(G)
 
 
 ### question 5
@@ -61,8 +61,8 @@ def ajout_sommet_l(G,L):
 ajout_sommet_l(G,[0,1])
 # >>> G
 # [[1, 2, 4, 5], [2, 3, 0, 5], [0, 1, 3, 4], [1, 2], [0, 2], [0, 1]]
-#plt.figure('graphe non pondéré + un sommet')
-#plot_graphe_l(G)
+plt.figure('graphe non pondéré + un sommet')
+plot_graphe_l(G)
 
 
 ### question 7
@@ -139,8 +139,8 @@ def plot_graphe(G):
     plt.show()
 
 
-#plt.figure('graphe pondéré')
-#plot_graphe(MG)
+plt.figure('graphe pondéré')
+plot_graphe(MG)
 
 
 ### pour aller plus loin, mettre le poids de chaque arête
