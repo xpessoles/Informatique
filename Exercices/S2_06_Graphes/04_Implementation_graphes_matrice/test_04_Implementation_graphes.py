@@ -83,7 +83,7 @@ def test_Q7_01():
     
 
 def test_Q8_01():
-    # On supprime le dernier sommet
+    # On supprime le premier sommet
     A = deepcopy(GG)
     B = deepcopy(GG)
     ref.supprime_sommet(A, 0)
