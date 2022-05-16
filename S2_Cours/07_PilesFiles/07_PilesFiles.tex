@@ -9,7 +9,7 @@ Une pile est une structure de données dans laquelle le dernier élément stock�
 
 Pour gérer une pile, indépendamment de la façon dont elle est implémentée, on suppose exister les opérations élémentaires suivantes : 
 \begin{itemize}
-\item \texttt{cree\_pile()} qui créeune pile vide;
+\item \texttt{cree\_pile()} qui crée une pile vide;
 \item \texttt{empile(p,x)} qui empile l'élément \texttt{x} au sommet de la pile \texttt{p};
 \item \texttt{depile(p)} qui supprime le sommet de la pile \texttt{p} et renvoie sa valeur;
 \item \texttt{est\_vide(p)} qui teste si la pile \texttt{p}est vide.
@@ -122,18 +122,96 @@ pile.append("Truc")
 sommet = pile.pop()
 \end{lstlisting}
 
-
 \subsection{Applications directes}
 
 \begin{exemple}
-En utilisant le module \texttt{deque} et uniquement les 4 opérations précédemment définies, donner l'implémentation de la fonction \texttt{hauteur(p : pile) -> int} renvoyant la hauteur de la pile. Attention, la pile initiale ne doit pas être perdue.
+\begin{enumerate}
+\item \textit{En utilisant le module \texttt{deque} et uniquement les 4 opérations précédemment définies, donner l'implémentation de la fonction \texttt{copy\_pile(p: pile) -> pile}, permettant de faire une copie de la pile.}
+\item {Donner la complexité de cette fonction.}
+\end{enumerate}
 
-Donner la complexité de cette fonction.
+\ifprof
+\begin{lstlisting}
+from collections import deque
+
+pile = deque()
+for i in range(10):
+    pile.append(i)
+
+
+def copy_pile(pile):
+    pile_tmp = deque()
+    pile_copy = deque()
+    
+    while pile : 
+        pile_tmp.append(pile.pop())
+        
+    while pile_tmp : 
+        el= pile_tmp.pop()
+        pile.append(el)
+        pile_copy.append(el)
+    return pile_copy
+\end{lstlisting}
+\else
+\vspace{5cm}
+\fi
+
 \end{exemple}
 
 
+
+
+
 \begin{exemple}
-En utilisant le module \texttt{deque} et uniquement les 4 opérations précédemment définies, donner l'implémentation de la procédure \texttt{reverse(p : pile) -> None}, procédure pour laquelle les éléments de la pile sont inversés. Donner la complexité de cette fonction.
+\begin{enumerate}
+\item \textit{En utilisant le module \texttt{deque} et uniquement les 4 opérations précédemment définies, donner l'implémentation de la fonction \texttt{hauteur(p: pile) -> int} renvoyant la hauteur de la pile. Attention, la pile initiale ne doit pas être perdue.}
+
+\item \textit{En utilisant le module \texttt{deque} et uniquement les 4 opérations précédemment définies, donner l'implémentation de la fonction récursive \texttt{hauteur\_rec(p: pile) -> int} renvoyant la hauteur de la pile. La pile initiale peut être perdue, l'utilisateur de la fonction pourra avoir fait  une copie préalable.}
+
+\item \textit{Donner la complexité de cette fonction.}
+\end{enumerate}
+\ifprof
+\begin{lstlisting}
+def hauteur(pile) -> int : 
+    pile_temp = deque()
+    h = 0
+    while pile : 
+        pile_temp.append(pile.pop())
+        h = h+1
+    while pile_temp : 
+        pile.append(pile_temp.pop())
+    return h
+    
+def hauteur_rec(pile):
+    if not pile : 
+        return 0
+    else :
+        pile.pop()
+        return 1+hauteur_rec(pile)
+\end{lstlisting}
+\else
+\vspace{10cm}
+\fi
+
+\end{exemple}
+
+
+
+\begin{exemple}
+\textit{En utilisant le module \texttt{deque} et uniquement les 4 opérations précédemment définies, donner l'implémentation de la procédure \texttt{reverse(p: pile) -> None}, procédure pour laquelle les éléments de la pile sont inversés. Donner la complexité de cette fonction.}
+
+\begin{lstlisting}
+def reverse(pile):
+    pile_tmp = deque()
+    pile_tmp2 = deque()
+
+    while pile : 
+        pile_tmp.append(pile.pop())
+    while pile_tmp : 
+        pile_tmp2.append(pile_tmp.pop())
+    while pile_tmp2 : 
+        pile.append(pile_tmp2.pop())
+\end{lstlisting}
 \end{exemple}
 
 
@@ -153,7 +231,7 @@ Pour gérer une file, indépendamment de la façon dont elle est implémentée, 
 
 Théoriquement, chacune de ces opérations doit se faire à \textbf{temps constant}.
 
-Une des possiblités pour implémenter les piles est d'utiliser le module \texttt{deque}. Chacun des éléments de la file peut être un objet de type différent. Dans cette vision des files, les éléments sont ajoutés << à droite >> et sortent de la file << par la gauche >>.
+Une des possiblités pour implémenter les files est d'utiliser le module \texttt{deque}. Chacun des éléments de la file peut être un objet de type différent. Dans cette vision des files, les éléments sont ajoutés <<~à droite~>> et sortent de la file <<~par la gauche~>>.
 
 \begin{lstlisting} 
 from collections import deque
@@ -172,3 +250,65 @@ sommet = pile.popleft()
 
 \end{lstlisting}
 
+
+\subsection{Applications directes}
+
+\begin{exemple}
+\begin{enumerate}
+\item \textit{En utilisant le module \texttt{deque} et uniquement les 4 opérations précédemment définies, donner l'implémentation de la fonction \texttt{copy\_file(f: file) -> file}, permettant de faire une copie de la file.}
+\item {Donner la complexité de cette fonction.}
+\end{enumerate}
+
+\ifprof
+\begin{lstlisting}
+def copy_file(file):
+    file_tmp = deque()
+    file_copy = deque()
+    while file : 
+        file_tmp.append(file.popleft())
+        
+    while file_tmp : 
+        el= file_tmp.popleft()
+        file.append(el)
+        file_copy.append(el)
+    return file_copy
+\end{lstlisting}
+\else
+\vspace{5cm}
+\fi
+
+\end{exemple}
+
+
+
+
+
+\begin{exemple}
+\begin{enumerate}
+\item \textit{En utilisant le module \texttt{deque} et uniquement les 4 opérations précédemment définies, donner l'implémentation de la fonction \texttt{longueur(f: file) -> int} renvoyant la longueur de la file. Attention, la file initiale ne doit pas être perdue.}
+
+\item \textit{Donner la complexité de cette fonction.}
+\end{enumerate}
+\ifprof
+\begin{lstlisting}
+def longueur(file) -> int : 
+    file_tmp = deque()
+    l = 0
+    while file : 
+        file_tmp.append(file.popleft())
+        l = l+1
+    while file_tmp : 
+        file.append(file_tmp.popleft())
+    return l
+\end{lstlisting}
+\else
+\vspace{5cm}
+\fi
+
+\end{exemple}
+
+
+
+\begin{exemple}
+\textit{En utilisant le module \texttt{deque} et uniquement les 4 opérations précédemment définies, donner l'implémentation de la procédure \texttt{reverse(f: file) -> None}, procédure pour laquelle les éléments de la file sont inversés. Donner la complexité de cette fonction.}
+\end{exemple}
