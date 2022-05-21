@@ -39,15 +39,46 @@ def bfs(G, s):
             for v in G[u]:
                 q.appendleft(v)
 
-graphe = {"S0":["S1"],"S1":["S0","S3","S3","S4","S5"],"S2":["S1","S3"],"S3":["S1","S2","S4"],"S4":["S1","S3"],"S5":["S1"]}
+graphe = {"S0":["S1"],\
+          "S1":["S0","S2","S3","S4","S5"],\
+          "S2":["S1","S3"],\
+          "S3":["S1","S2","S4"],\
+          "S4":["S1","S3","S6"],\
+          "S5":["S1"],\
+          "S6":["S4"]}
 
 
 def bfs_pr(G, s):
-    visited = [False]*len(G)
+    visited = {}
+    for sommet,voisins in G.items():
+        visited[sommet]=False
     q = deque([s])
     while len(q) > 0:
+        print('================')
+        print(q)
+        print(visited)
         u = q.pop()
+        print(u)
         if not visited[u]:
             visited[u] = True
             for v in G[u]:
                 q.appendleft(v)
+        
+
+def bfs_parcours(G, s):
+    visited = {}
+    for sommet,voisins in G.items():
+        visited[sommet]=False
+    q = deque([s])
+    chemin = []
+    while len(q) > 0:
+        u = q.pop()
+        if not visited[u]:
+            chemin.append(u)
+            visited[u] = True
+            for v in G[u]:
+                q.appendleft(v)
+    return chemin
+             
+bfs(graphe, "S0")
+bfs_pr(graphe, "S0")
