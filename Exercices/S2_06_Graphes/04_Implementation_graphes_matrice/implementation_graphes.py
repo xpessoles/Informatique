@@ -107,6 +107,36 @@ def supprime_sommet(G,i):
     for j in range(len(G)):
         G[j].pop(i)
 
+### question 17
+def from_list_to_matrix(G:list)->list:
+    '''Construit une matrice d'adjacence à partir d'une liste d'adjacence avec 0 et 1
+    '''
+    M=[]
+    for i in range(len(G)):
+        L=[0]*len(G)
+        for element in G[i]:
+            L[element]=1
+        M.append(L)
+    return M
+
+# >>> from_list_to_matrix(G)
+# [[0, 1, 1, 0, 1, 1], [1, 0, 1, 1, 0, 1], [1, 1, 0, 1, 1, 0], [0, 1, 1, 0, 0, 0], [1, 0, 1, 0, 0, 0], [1, 1, 0, 0, 0, 0]]
+
+### question 18
+def from_matrix_to_list(M:list)->list:
+    '''Construit une liste d'adjacence à partir d'une matrice d'adjacence avec 0 et 1
+    '''
+    G=M[:]
+    for i in range(len(G)):
+        for j in range(len(G)):
+            if G[i][j]==0:
+                G[i][j]='autre'
+            else:
+                G[i][j]=j
+        G[i]=list(set(G[i])) # enlève les doublons
+        G[i].remove('autre')
+    return G
+
 # LL = [4]
 # poids = [99]
 # plot_graphe(M)

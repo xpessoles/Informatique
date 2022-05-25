@@ -9,7 +9,7 @@ import networkx as nx
 # Question 1
 # ==========
 # Matrices avec des listes
-M=[[1,2,4],[0,2,3],[0,1,3,4],[1,2],[0,2]]
+#M=[[1,2,4],[0,2,3],[0,1,3,4],[1,2],[0,2]]
 
 # Question 2
 # ==========
@@ -40,8 +40,7 @@ def arretes_l(G:list)->list:
                 edges.append(e)
     
     return edges
-
-            
+        
 # Question 4
 # ===========
 def plot_graphe_l(G):
@@ -51,12 +50,6 @@ def plot_graphe_l(G):
     nx.draw(Gx,with_labels = True)
     plt.show()
     
-# print(voisins(M,0))
-# print(voisins(M,1))
-# print(voisins(M,2))
-# print(voisins(M,3))
-# print(voisins(M,4))
-
 # Question 5
 # ==========
 def degre_l(M,i):
@@ -80,7 +73,6 @@ def ajout_sommet_l(G:list, L:list)-> None :
    
 
 
-# A REFAIRE CA MARCHE PAS
 def supprime_sommet_l(G,i):
     # Suppression des voisins i dans chaque voisins
     for j in range(len(G)):
@@ -88,6 +80,11 @@ def supprime_sommet_l(G,i):
             G[j].remove(i)
     #Suppression du sommet
     G.pop(i)
+    # Décalage de la valeur de chacun des sommets
+    for j in range(len(M)):
+        for k in range(len(M[j])):
+            if M[j][k]>i :
+                M[j][k] = M[j][k]-1
     
         
 

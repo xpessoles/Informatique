@@ -117,13 +117,24 @@ Une des difficultés du parcours de graphe est d'éviter de tourner en rond. C'e
 On propose ci-dessous un algorithme de parcours en largeur en utilisant un graphe implémenté sous forme de liste d'adjacence ainsi qu'un sommet \texttt{s} de départ. 
 
 \begin{lstlisting}
-def bfs(G, s):
-    visited = [False]*len(G)
+def bfs(G, s) -> None:
+    """
+    G : graphe sous forme de dictionnaire d'adjacence
+    s : sommet du graphe (Chaine de caractere du type "S1").
+    """
+    visited = {}
+    for sommet,voisins in G.items():
+        visited[sommet]=False
+    # Le premier sommet à visiter entre dans la file
     q = deque([s])
     while len(q) > 0:
+        # On visite la tête de file
         u = q.pop()
+        # On vérifier qu'elle n'a pas été visitée
         if not visited[u]:
-            visited[u] = True
+            # Si on l'avait pas visité, maintenant c'est le cas :)
+            visited[u] = True            
+            # On met les voisins de u dans la file
             for v in G[u]:
                 q.appendleft(v)
 \end{lstlisting}
@@ -141,6 +152,7 @@ Dans cet algorithme :
 \subsubsection{Applications}
 \begin{exemple}
 \textit{Comment connaître la distance d’un sommet \texttt{s} aux autres?}
+\ifprof
 \begin{lstlisting}
 def distances(G, s):
     dist = [-1]*len(G)
@@ -153,11 +165,14 @@ def distances(G, s):
                 q.appendleft((v, d + 1))
     return dist
 \end{lstlisting}
+\else
+\vspace{5cm}
+\fi
 \end{exemple}
 
 \begin{exemple}
-\textit{Comment connaître un plus court chemin d’un sommet s à un autre?
-}
+\textit{Comment connaître un plus court chemin d’un sommet s à un autre ? }
+\ifprof
 \begin{lstlisting}
 def bfs(G, s):
     pred = [-1]*len(G)
@@ -178,6 +193,9 @@ def path(pred, s, v):
     L.append(s)
     return L[::-1] # inverse le chemin
 \end{lstlisting}
+\else
+\vspace{10cm}
+\fi
 \end{exemple}
 
 
@@ -230,4 +248,6 @@ Dans cet algorithme :
 \item Cours de Quentin Fortier \url{https://fortierq.github.io/itc1/}.
 \item Cours de JB Bianquis. Chapitre 5 : Parcours de graphes. Lycée du Parc. Lyon.
 \item Cours de T. Kovaltchouk. Graphes : parcours. Lycée polyvalent Franklin Roosevelt, Reims.
+\item \url{https ://perso.liris.cnrs.fr/vincent.nivoliers/lifap6/Supports/Cours/graph_traversal.html}
+\item \url{http ://mpechaud.fr/scripts/parcours/index.html}
 \end{itemize}
