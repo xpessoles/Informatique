@@ -79,6 +79,41 @@ def bfs_parcours(G, s):
             for v in G[u]:
                 q.appendleft(v)
     return chemin
-             
-bfs(graphe, "S0")
-bfs_pr(graphe, "S0")
+
+
+def dfs(G, s): 
+    visited = {}
+    for sommet,voisins in G.items():
+        visited[sommet]=False
+        
+    pile = [s]
+    while len(pile) > 0:
+        u = pile.pop()
+        if not visited[u]:
+            visited[u] = True
+            for v in G[u]:
+                pile.append(v)
+
+def dfs_pr(G, s): 
+    visited = {}
+    for sommet,voisins in G.items():
+        visited[sommet]=False
+        
+    pile = [s]
+    while len(pile) > 0:
+        u = pile.pop()
+        if not visited[u]:
+            visited[u] = True
+            print(u)
+            for v in G[u]:
+                pile.append(v)
+
+
+graphe2 = {"S0":["S1","S2","S3"],\
+          "S1":["S0","S3"],\
+          "S2":["S0"],\
+          "S3":["S0","S1"]}
+
+                
+dfs_pr(graphe2, "S0")
+#bfs_pr(graphe, "S0")
