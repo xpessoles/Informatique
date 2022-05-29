@@ -37,13 +37,36 @@ def parcours_largeur(g,s:str) -> None :
     for key,value in g.items():
         visited[key]=False
     
-    q = deque([s])
-    while len(q) > 0:
-        u = q.pop()
+    file = deque([s])
+    while len(file) > 0:
+        u = file.pop()
         # On vérifie que le sommet n'a pas été visité
         if not visited[u]:
             # Si on l'avait pas visité, maintenant c'est le cas :)
             visited[u] = True
             # On met les voisins de u dans la file
             for v in g[u]:
-                q.appendleft(v)
+                file.appendleft(v)
+
+def parcours_largeur_distances(g,s:str) :
+
+    visited = {}
+    distances = {}
+    for key,value in g.items():
+        visited[key]=False
+        distances[key]=float("inf")
+    
+    # Initialisation de la distance de départ
+    distances[s]=0
+    
+    file = deque([s])
+    while len(file) > 0:
+        u = file.pop()
+        if not visited[u]:
+            visited[u] = True
+            for v in g[u]:
+                if distances[v]==float('inf'):
+                    file.appendleft(v)
+                    distances[v]=1+distances[u]
+    return distances
+    

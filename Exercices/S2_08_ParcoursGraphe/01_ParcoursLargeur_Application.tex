@@ -20,16 +20,15 @@ Soit le graphe ci-dessous.
 On souhaite disposer de la fontion  \texttt{parcours\_largeur\_distances(graphe,s) -> dict}. Cette fonction renverra le disctionnaire contenant toutes les distances à \texttt{s} en nombre de sommets. On va pour cela modifier la procédure précédente ainsi :
 \begin{itemize}
 \item  les sommets visités seront stockés dans un dictionnaire \texttt{distances} où les clés seront les \texttt{n} sommets du graphe. Chacune des valeurs sera initialisée à l'infini (\texttt{float('inf')}), sauf la valeur associée au sommet de départ qui sera \texttt{0};
-\item à chaque fois que le voisin \texttt{v} d'un sommet \texttt{s} est ajouté à la file d'attente des sommets à traiter, \texttt{distances[v]} prendra la valeur 1+\texttt{distances[s]} .
+\item à chaque fois que le voisin \texttt{v} d'un sommet \texttt{u} est ajouté à la file d'attente des sommets à traiter, 
+si \texttt{distances[v]=inf} alors \texttt{distances[v]} prendra la valeur 1+\texttt{distances[u]} .
 \end{itemize}
 
 \question{Implémenter  la fontion  \texttt{parcours\_largeur\_distances(graphe,s) -> dict}.}
-%\begin{lstlisting}
-%>>> parcours_largeur(G1, 0)
-%[0, 1, 2, 3, 1, 2, 2, 3]
-%>>> parcours_largeur(G1, 2)
-%[inf, inf, 0, 1, inf, inf, 1, 2]
-%\end{lstlisting}
+\begin{lstlisting}
+>>> parcours_largeur_distances(G1,"0")
+	{'0': 0, '1': 1, '2': 2, '3': 3, '4': 1, '5': 2, '6': 2, '7': 3}
+\end{lstlisting}
 On souhaite maintenant connaître la liste des prédécesseurs de chaque sommet dans le cadre d'un parcours en largeur. On dit que $u$ est le prédécesseur de $v$ dans la parcours en largeur si $v$ est découvert pour la première fois dans la liste d'adjacence de $u$. Dans ce cas, on a donc \texttt{distances[v]=distances[u]+1}.  On pourra initialiser un dictionnaire  \texttt{predecesseurs} de taille \texttt{n} ayant uniquement des \texttt{-1} comme valeur. À la fin du parcours on aura \texttt{predecesseurs[v]=-1} si \texttt{v} est le sommet de départ ou si \texttt{v} n'est pas accessible depuis le sommet de départ. 
 
 \question{Implémenter  la fontion  \texttt{parcours\_largeur\_predecesseurs(graphe,s) -> dict} renvoyant le dictionnaire des prédécesseurs du sommet \texttt{s}.}
