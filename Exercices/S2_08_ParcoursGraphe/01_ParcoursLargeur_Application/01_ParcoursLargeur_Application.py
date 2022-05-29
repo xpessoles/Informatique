@@ -69,4 +69,58 @@ def parcours_largeur_distances(g,s:str) :
                     file.appendleft(v)
                     distances[v]=1+distances[u]
     return distances
+
+
+def parcours_largeur_predecesseurs(g,s:str) :
+
+    visited = {}
+    distances = {}
+    predecesseurs = {}
+    for key,value in g.items():
+        visited[key] = False
+        distances[key] = float("inf")
+        predecesseurs[key] = -1
     
+    # Initialisation de la distance de départ
+    distances[s]=0
+    
+    file = deque([s])
+    while len(file) > 0:
+        u = file.pop()
+        if not visited[u]:
+            visited[u] = True
+            for v in g[u]:
+                if distances[v] == float('inf'):
+                    file.appendleft(v)
+                    distances[v] = 1+distances[u]
+                    predecesseurs[v] = u
+    return predecesseurs
+
+def chemin(g,s,v):
+    """
+
+    Parameters
+    ----------
+    g : dict
+        graphe.
+    s : str
+        sommet de départ.
+    v : str
+        sommet d'arrivée.
+
+    liste de sommets
+    -------
+    list.
+
+    """
+    pred = parcours_largeur_predecesseurs(g, s)
+    
+    chemin = [v]
+    while v!=s and v!=-1:
+        v = pred[v]
+        chemin.append(v)
+    
+    if v == -1 : chemin = []
+    chemin.reverse()
+    return chemin    
+chemin(G1,"0","2")
