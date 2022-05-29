@@ -13,7 +13,7 @@ Ainsi, si un algorithme est linéaire en la taille du graphe, on pourra utilisé
 
 \subsection{Formule des degrés}
 \begin{defi}{Formule des degrés}
-Soit un graphe $G=\left(V,E\right)$ un graphe, alors : $\Sigma_{v \in V} deg(v) = 2|E|$.
+Soit un graphe $G=\left(V,E\right)$, alors : $\displaystyle{\Sigma_{v \in V}} deg(v) = 2|E|$.
 \end{defi}
 
 \subsection{Graphe complet}
@@ -25,7 +25,7 @@ Un graphe complet est un graphe possédant toutes les arêtes possibles.
 \begin{rem}
 \begin{itemize}
 \item Le nombre maximal d'arêtes d'un graphe à $n$ sommets est donné par : $\begin{pmatrix} n \\ 2\end{pmatrix}$.
-\item Chaque sommet $v$ on a $d\degres (v) = n-1$.
+\item Pour chaque sommet $v$ on a $d\degres (v) = n-1$.
 \item Le nombre d'arêtes est en $\mathcal{O}\left(|V|^2\right)$.
 \end{itemize}
 \end{rem}
@@ -105,7 +105,7 @@ Une fois que nous sommes en présence d'un graphe, il va falloir le parcourir po
 
 Les deux algorithmes principaux sont les suivants :
 \begin{itemize}
-\item le parcours en largeur -- \textit{Breadth-First Search} (BFS) -- pour lequel on va commencer par visiter les sommets les plus proches du sommet initial (sommets de niveau 1), puis les plus procjes des sommets de niveau 1 \textit{etc.};
+\item le parcours en largeur -- \textit{Breadth-First Search} (BFS) -- pour lequel on va commencer par visiter les sommets les plus proches du sommet initial (sommets de niveau 1), puis les plus proches des sommets de niveau 1 \textit{etc.};
 \item le parcours en profondeur  -- \textit{Depth-First Search} (DFS) -- pour lequel on part d'un sommet initial jusqu'au sommet le plus loin. On remonte alors la pile pour explorer les ramifications.
 \end{itemize}
 
@@ -141,7 +141,7 @@ def bfs(G, s) -> None:
 
 Dans cet algorithme : 
 \begin{itemize}
-\item on commence par créer une liste ayant pour taile le nombre de sommets. Cette liste va permettre de savoir si un sommet a été visité ou non;
+\item on commence par créer une liste ayant pour taille le nombre de sommets. Cette liste va permettre de savoir si un sommet a été visité ou non;
 \item dans la file, on va commencer par ajouter le sommet initial;
 \item on commence alors à traiter la file en extrayant l'indice du sommet initial;
 \item si ce sommet n'a pas été visité, il devient visité;
@@ -151,7 +151,7 @@ Dans cet algorithme :
 
 \subsubsection{Applications}
 \begin{exemple}
-\textit{Comment connaître la distance d’un sommet \texttt{s} aux autres?}
+\textit{Comment connaître la distance d'un sommet \texttt{s} aux autres?}
 \ifprof
 \begin{lstlisting}
 def distances(G, s):
