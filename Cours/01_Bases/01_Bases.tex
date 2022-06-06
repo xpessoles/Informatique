@@ -1,9 +1,48 @@
+%%%% Paramétrage du cours %%%%
+\def\xxactivite{Cours}
+
+\fichefalse \proftrue \tdfalse \courstrue
+
+\def\xxnumchapitre{Chapitre 1 \vspace{.2cm}}
+\def\xxchapitre{\hspace{.12cm} Découverte de l'algorithmique et de la programmation}
+
+\def\xxcompetences{%
+\textsl{%
+\textbf{Savoirs et compétences :}\\
+\begin{itemize}[label=\ding{112},font=\color{bleuxp}] 
+\item \textit{Mod2.C1 : }Chaîne d’énergie et d'information
+\item \textit{Mod2.C8 : }Linéarisation des systèmes non linéaires	
+\item \textit{Mod3.C1 : }Point de fonctionnement : non-linéarités (hystérésis, saturation, seuil)
+\end{itemize}
+}}
+
+\def\xxfigures{
+%\includegraphics[width=\linewidth]{matlab}
+%\\
+%\textit{Modèle du pilote hydraulique avec pilotage interactif.}
+}%figues de la page de garde
+
+\input{\repRel/Style/pagegarde_cours}
+
+\setlength{\columnseprule}{.1pt}
+
+\vspace{2cm}
+\pagestyle{fancy}
+\thispagestyle{plain}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+
 \section{Environnement de programmation}
 
 \section{Variables, Types}
 
 \subsection{Quelques définitions}
-\begin{defi} \textbf{\textsf{\small Valeurs -- }}
+\begin{defi}{Valeurs}
 Les valeurs désignent les données manipulées par un algorithme ou une fonction. Une valeur 
 peut ainsi être  : un nombre, un caractère, une chaîne de caractères, une valeur de vérité 
 (\texttt{Vrai} ou \texttt{Faux}) \textit{etc}.
@@ -12,7 +51,7 @@ En Python, comme dans la plupart des langages de programmation, ces valeurs sont
 cherche à traduire.
 \end{defi}
 
-\begin{defi}\textbf{\textsf{\small Expression -- }}
+\begin{defi}{Expression }
 Une expression est une suite de caractères faisant intervenir des valeurs et des 
 opérations, afin d'obtenir une nouvelle valeur. Pour calculer cette nouvelle valeur,
 la machine doit {évaluer} l'expression. Voici des exemples d'expressions : \texttt{42 , 1+4 , 
@@ -34,7 +73,7 @@ calcule et affiche alors la valeur qu'il a calculée.
 
 
 
-\begin{defi}\textbf{\textsf{\small \small Variable -- }}
+\begin{defi}{Variable}
 Une \textbf{variable} désigne une zone mémoire de l'ordinateur dans la RAM.
 Il s'agit d'un endroit où l'on peut \textbf{stocker} une valeur, y \textbf{accéder} et 
 \textbf{changer} cette valeur.
@@ -86,7 +125,7 @@ Pour afficher le type d'une valeur ou d'une expression après l'avoir évaluée,
 
 
 \subsubsection{Entiers}
-\begin{defi}\textbf{\textsf{\small Entiers -- }}
+\begin{defi}{Entiers}
 Ce type est noté \texttt{int} en Python .\\
 \begin{itemize}
 \item \textbf{Constantes :} ce sont les entiers relatifs écrits en base 10. Ils ne sont pas 
@@ -111,7 +150,7 @@ Les {règles de précédence}, autrement dit les règles de priorité entre opé
 similaires aux règles mathématiques usuelles.
 \end{defi}
 \subsubsection{Flottants}
-\begin{defi}\textbf{\textsf{\small Flottants -- }}
+\begin{defi}{Flottants}
 Ce type est noté \texttt{float} en Python .
 \begin{itemize}
 \item  \textbf{Constantes :} ce sont les {nombres à virgule flottante}. Nous en
@@ -132,7 +171,7 @@ l'instant que ce sont des nombres à virgule, avec un nombre borné de chiffres 
 \subsubsection{Booléens}
 
 
-\begin{defi}\textbf{\textsf{\small Expression -- Booléen}}
+\begin{defi}{Expression -- Booléen}
 %\footnote{Le mot {booléen} a été donné en hommage au mathématicien  britannique George Boole.} }}
 Ce type est noté \texttt{bool} en Python.
 \begin{itemize}
@@ -172,7 +211,7 @@ mesure : \texttt{float(2)} renvoie \texttt{2.0}, \texttt{int(2.0)} renvoie \text
 La fonction \texttt{int} appliquée à un nombre flottant procède donc à une troncature, ce n'est pas la fonction donnant la partie entière d'un nombre flottant (fonction \texttt{floor} du module \texttt{math}).
 
 \subsection{Types composés}
-\begin{defi}
+\begin{defi}{}
 On dit qu'une valeur est de type composé si elle est formée à partir de plusieurs autres 
 valeurs de types plus simples. De nombreuses constructions sont définies sur tous les types 
 composés.
@@ -180,7 +219,7 @@ composés.
 
 \subsubsection{$n$-uplets ou tuples}
 
-\begin{defi}\textbf{\textsf{\small Tuple --}}
+\begin{defi}{Tuple}
 Ce type est noté \texttt{tuple} en Python .
 \begin{itemize}
 \item \textbf{Construction et composantes :} les $n$-uplets généralisent les couples. Un couple s'écrira \texttt{(a,b)}, un triplet 
@@ -206,7 +245,7 @@ renvoie \texttt{(2,6,7,8)} (attention à la borne de droite !).\\
 \end{defi}
 
 \subsubsection{Chaînes de caractères}
-\begin{defi}\textbf{\textsf{\small Chaînes de caractères --}}
+\begin{defi}{Chaînes de caractères}
 Ce type est noté \texttt{str} en Python , pour {string} en anglais.
 \begin{itemize}
 \item \textbf{Construction et composantes :} ce sont des suites finies de caractères, un caractère étant en python un caractère du clavier. On 
@@ -218,7 +257,7 @@ On accède aux composantes d'une chaîne de la même manière que pour un tuple.
 \end{itemize}
 \end{defi}
 \subsection{Listes}
-\begin{defi}\textbf{\textsf{\small Listes --}}
+\begin{defi}{Listes}
 Ce type est noté \texttt{list} en Python .
 
 Comme les tuples, les {listes} sont des suites finies de valeurs arbitraires, mais cette fois 
@@ -1811,14 +1850,14 @@ L'utilisation de guillemets simples permet d'utiliser des guillemets doubles dan
 "Ja, aber 'not in germany' ..."
 \end{lstlisting}
 
-On peut signaler une tabulation par \texttt{\\t} et créer une nouvelle ligne par \texttt{\\n}.
+On peut signaler une tabulation par \texttt{\textbackslash t} et créer une nouvelle ligne par \texttt{\textbackslash n}.
 
 \begin{lstlisting}
 s = u"\t Il faut une science politique nouvelle à un monde tout nouveau.\n[...]"
 print(s)
 \end{lstlisting}
 
-\footnote{Alexis de Tocqueville, De la démocratie en Amérique (1835-1840)}
+%\footnote{Alexis de Tocqueville, De la démocratie en Amérique (1835-1840)}
 
 \begin{rem}
 La présence de \texttt{u} devant les guillements permet de s'assurer de prendre les comptes les caractères spéciaux liés à l'encodage utf-8.
