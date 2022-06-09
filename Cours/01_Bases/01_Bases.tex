@@ -37,7 +37,44 @@
 
 
 
-\section{Environnement de programmation}
+\section{Avant-Propos}
+\subsection{Définitions}
+
+\begin{defi}{Informatique -- Wikipedia}
+L'informatique est un domaine d'activité scientifique, technique, et industriel concernant le traitement automatique de l'information numérique par l'exécution de programmes informatiques hébergés par des dispositifs électriques-électroniques : des systèmes embarqués, des ordinateurs, des robots, des automates, etc.
+\end{defi}
+
+\begin{defi}{Algorithmique -- Wikipedia}
+Un algorithme est une méthode générale pour résoudre un type de problèmes. Il est dit correct lorsque, pour chaque instance du problème, il se termine en produisant la bonne sortie, c'est-à-dire qu'il résout le problème posé.
+\end{defi}
+
+L'efficacité d'un algorithme est mesurée notamment par :
+\begin{itemize}
+\item sa durée de calcul ;
+\item sa consommation de mémoire vive (en partant du principe que chaque instruction a un temps d'exécution constant) ;
+\item la précision des résultats obtenus (par exemple avec l'utilisation de méthodes probabilistes) ;
+\item sa scalabilité (son aptitude à être efficacement parallélisé) ;
+\item etc.
+\end{itemize}
+
+Les ordinateurs sur lesquels s'exécutent ces algorithmes ne sont pas infiniment rapides, car le temps de machine reste une ressource limitée, malgré une augmentation constante des performances des ordinateurs. Un algorithme sera donc dit performant s'il utilise avec parcimonie les ressources dont il dispose, c'est-à-dire le temps CPU, la mémoire vive et (aspect objet de recherches récentes) la consommation électrique. L’analyse de la complexité algorithmique permet de prédire l'évolution en temps calcul nécessaire pour amener un algorithme à son terme, en fonction de la quantité de données à traiter.
+
+\begin{defi}{Programmation -- Wikipedia}
+La programmation, appelée aussi codage dans le domaine informatique, désigne l'ensemble des activités qui permettent l'écriture des programmes informatiques. C'est une étape importante du développement de logiciels.
+
+L'écriture d'un programme se fait dans un langage de programmation. Un logiciel est un ensemble de programmes (qui peuvent être écrits dans des langages de programmation différents) dédié à la réalisation de certaines tâches par un (ou plusieurs) utilisateurs du logiciel.
+
+\end{defi}
+
+La programmation représente donc ici la rédaction du code source d'un logiciel. On utilise plutôt le terme développement pour dénoter l'ensemble des activités liées à la création d'un logiciel et des programmes qui le composent. Cela inclut la spécification du logiciel, sa conception, puis son implémentation proprement dite au sens de l'écriture des programmes dans un langage de programmation bien défini, ainsi que la vérification de sa correction, etc.
+
+\subsection{Environnement de développement}
+Pour répondre à un problème informatique, on pourra réfléchir à l'algorithme permettant de le résoudre. Une des premières approches consiste donc à utiliser un papier et un crayon pour proposer une réponse structurée au problème.
+
+Il faudra ensuite traduire cet algorithme dans un langage de programmation. Nous utiliserons pour cela \texttt{Python}.
+
+Pour programmer en \texttt{Python} il est nécessaire d'utiliser un éditeur de texte (pour écrire le code) et un interpréteur pour exécuter le code. 
+En règle générale, on utilise pour cela un environnement de développement (IDE). On pourra \textbf{Pyzo} ou \textbf{Spyder} (ou tout autre environnement vous paraissant satisfaisant). 
 
 \section{Variables, Types}
 
