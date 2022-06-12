@@ -2,7 +2,7 @@ L'algorithme de Dijkstra est un parcours en largeur d'un graphe \textbf{pondér�
 
 Pour modéliser le graphe, on utilisera une matrice d'adjacence $M$ pour laquelle $M_{ij}=w(i,j)$ et $w(i,j)$ représente le poids de l'arête de $i$ vers $j$. Lorsqu'il n'y a pas d'arc entre deux sommets, on aura $M_{ij}=\infty$.
 
-\begin{exemple}~\\
+\begin{exemple} \[Jules Svartz\]~\\
 
 \includegraphics[width=.8\linewidth]{graphe_01}
 \end{exemple}
@@ -15,3 +15,109 @@ On appelle poids du chemin $C$ et on note $w(C)$ la somme des poids des arêtes 
 
 Un chemin de $u\in V$ à $v\in V$ est un plus court chemin s'il n'existe pas de chemin de poids plus petit. 
 \end{defi}
+
+
+\begin{defi} {Distance}
+La distance $d\left(u,v\right)$ est le poids d'un plus court chemin de $u$ à $v$. On peut alors noter 
+$d(u,v)=\inf\left\{
+w(C) | C \text{ est un chemin de } u \text{ à } v
+\right\}$.
+
+Si $v$  n'est pas atteignable depuis $u$ on poser $d(u,v)=\infty$.
+
+\end{defi}
+
+\begin{prop}
+\textbf{Sous-optimalité} -- Soit $C$ un plus court chemin de $u$ à $v$ ainsi que $u'$ et $v'$ deux sommets de $C$. Alors le sous-chemin de $C$ de $u'$ à $v'$ est aussi un plus court chemin.
+\end{prop}
+
+
+\begin{obj}
+Soit un graphe pondéré $G=\left(V, E, w\right)$ où $V$ désigne l'ensemble des sommets, $E$ l'ensemble des arêtes et 
+$w$, la fonction poids.
+
+Soit $s$ un sommet de $V$. L'objectif est de déterminer la liste de l'ensemble des distances entre $s$ et l'ensemble des sommets de $V$.
+\end{obj}
+
+
+Pour répondre à l'objectif, on peut formuler l'algorithme de Dijkstra ainsi. 
+
+
+\begin{center}
+\begin{tabular}{|p{1cm}p{1cm}p{1cm}p{10cm}}
+\multicolumn{4}{|p{15cm}}{\textbf{Entrées : }  un graphe pondéré donné par liste ou marrice d'adjacence, un sommet \texttt{s} du graphe}\\
+\multicolumn{4}{|p{15cm}}{\textbf{Sortie : } \texttt{D} liste des distances entre \texttt{s} et chacun des sommets}\\
+\multicolumn{4}{|p{15cm}}{Initialisation de \texttt{D} : \texttt{D[i] = }$\infty$ }\\
+\multicolumn{4}{|p{15cm}}{Initialisation de \texttt{D} : \texttt{D[s] = 0 }}\\
+\multicolumn{4}{|p{15cm}}{Initialisation de \texttt{T} : \texttt{D[i] = False } liste des sommets traités }\\
+\multicolumn{4}{|p{15cm}}{Initialisation d'une file de priorité avec le sommet de départ \texttt{F = \{s\}}}\\
+\multicolumn{4}{|p{15cm}}{\textbf{Tant que} \texttt{F} n'est pas vide :  }\\
+& \multicolumn{3}{|p{15cm}}{Recherche du sommet \texttt{u} tel que \texttt{d[u]} minimal parmi les sommets de \texttt{F}}\\
+& \multicolumn{3}{|p{15cm}}{\textbf{Pour} tout voisin $v$ de $u$ \textbf{faire} :}\\
+&& \multicolumn{2}{|p{15cm}}{\textbf{Si} $v$ n'est ni dans $F$ ni dans $H$ \textbf{alors}}\\
+&&& \multicolumn{1}{|p{15cm}}{Ajouter $v$ à $F$}\\
+&& \multicolumn{2}{|p{15cm}}{\texttt{D=}$\min \left(d[v],d[u]+w(u,v)\right)$}\\
+& \multicolumn{3}{|p{15cm}}{Ajouter $u$ à $H$}\\
+\multicolumn{4}{|p{15cm}}{Renvoyer \texttt{D}}\\
+%&&& \multicolumn{1}{|p{15cm}}{}\\
+%&& \multicolumn{2}{|p{15cm}}{}\\
+%& \multicolumn{3}{|p{15cm}}{}\\
+%\multicolumn{4}{|p{15cm}}{}\\
+\end{tabular}
+\end{center}
+
+Une des étapes qui diffère avec le parcours en largeur notamment, est l'utilisation d'une file de priorité et la recherche du sommet vérifiant $d[u]$ minimal. Cela signifie que lorsqu'on partira d'un sommet \texttt{s}. On déterminera alors l'ensemble des distances permettant d'atteindre les voisins de \texttt{s}. \'A l'itération suivante, on vistera alors le sommet ayant la distance la plus faible.
+
+\begin{exemple}
+La figure suivante représente le déroulement de l’algorithme de Dijkstra sur un graphe à 5 sommets, depuis 
+la source $s$. Pour chaque sommet $u$ on a fait figurer la valeur $d[u]$ à l’intérieur du cercle. Les arcs en gras représentent
+l’évolution de la liste des prédecesseurs.
+
+\begin{center}
+\includegraphics[width=15cm]{dijkstra}
+\end{center}
+\end{exemple}
+
+On peut donc commencer par implémenter une fonction \texttt{cherche\_min} permettant de trouver le sommet \texttt{i} vérifiant \texttt{d[i]} minimal
+parmi les sommets tels que \texttt{traites[i]} est faux (s’il existe un tel sommet vérifiant \texttt{d[i] <}$+\infty$ , sinon $-1$ est renvoyé.
+
+
+\begin{lstlisting}
+def cherche_min(d, traites):
+    """ Renvoie le sommet i vérifiant d[i] minimal et traites[i] faux, s'il existe un tel sommet
+    tel que d[i] != inf. Sinon, renvoie -1 """
+    n=len(d)
+    x=-1
+    for i in range(n):
+        if not traites[i] and d[i] != float('inf') and (x==-1 or d[x]>d[i]):
+            x=i
+    return x
+\end{lstlisting}
+
+
+On donne alors l'algorithme de Dijkstra.
+
+\begin{lstlisting}
+def dijkstra_mat(G,s):
+    """ G donné par matrice d'adjacence. Renvoie les poids chemins de plus petits poids depuis s. """
+    n=len(G)
+    d = [float('inf')]*n
+    d[s]=0
+    traites = [False]*n
+    while True:
+        x=cherche_min(d,traites)
+        if x==-1:
+            return d
+        for i in range(n):
+            d[i]=min(d[i], d[x]+G[x][i])
+        traites[x]=True
+\end{lstlisting}
+
+%https ://www.youtube.com/watch ?v=GC-nBgi9r0U
+%%https://www.youtube.com/watch?v=g024lzsknDo
+\vfill
+\textbf{Sources}
+\begin{itemize}
+\item Cours de Quentin Fortier.
+\item Cours de Jules Svartz, Lycée Masséna.
+\end{itemize}
