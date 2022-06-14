@@ -20,7 +20,7 @@ def cherche_min(d, traites):
 
 def dijkstra_mat(G,s):
     """ 
-    G donnÃ© par matrice d'adjacence. 
+    G donné par matrice d'adjacence. 
     Renvoie les poids chemins de plus petits poids depuis s. 
     """
     n=len(G)
