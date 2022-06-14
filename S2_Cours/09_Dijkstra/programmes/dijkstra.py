@@ -1,3 +1,9 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Jun 14 10:52:36 2022
+
+@author: xpess
+"""
 def cherche_min(d, traites):
     """ Renvoie le sommet i vérifiant d[i] minimal et traites[i] faux, 
     s'il existe un tel sommet tel que d[i] != inf. 
@@ -14,7 +20,7 @@ def cherche_min(d, traites):
 
 def dijkstra_mat(G,s):
     """ 
-    G donné par matrice d'adjacence. 
+    G donnÃ© par matrice d'adjacence. 
     Renvoie les poids chemins de plus petits poids depuis s. 
     """
     n=len(G)
