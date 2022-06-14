@@ -52,4 +52,4 @@ GG = [[0,9,float("inf"),5,float("inf")],
       [float("inf"),3,9,0,2],
       [7,float("inf"),6,float("inf"),0]]
 
-       
+dijkstra_mat(GG,1)    
