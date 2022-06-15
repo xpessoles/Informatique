@@ -65,17 +65,17 @@ Pour répondre à l'objectif, on peut formuler l'algorithme de Dijkstra ainsi.
 \begin{tabular}{|p{1cm}p{1cm}p{1cm}p{10cm}}
 \multicolumn{4}{|p{15cm}}{\textbf{Entrées : }  un graphe pondéré donné par liste ou marrice d'adjacence, un sommet \texttt{s} du graphe}\\
 \multicolumn{4}{|p{15cm}}{\textbf{Sortie : } \texttt{D} liste des distances entre \texttt{s} et chacun des sommets}\\
-\multicolumn{4}{|p{15cm}}{Initialisation de \texttt{D} : \texttt{D[i] = }$\infty$ }\\
-\multicolumn{4}{|p{15cm}}{Initialisation de \texttt{D} : \texttt{D[s] = 0 }}\\
-\multicolumn{4}{|p{15cm}}{Initialisation de \texttt{T} : \texttt{D[i] = False } liste des sommets traités }\\
+\multicolumn{4}{|p{15cm}}{Initialisation de \texttt{D} : \texttt{D = n}$\times [\infty]$ }\\
+\multicolumn{4}{|p{15cm}}{Initialisation de \texttt{D} : \texttt{D[s] =}$[0]$ }\\
+\multicolumn{4}{|p{15cm}}{Initialisation de \texttt{T} : \texttt{T = n x [False] } liste des sommets traités }\\
 \multicolumn{4}{|p{15cm}}{Initialisation d'une file de priorité avec le sommet de départ \texttt{F = \{s\}}}\\
 \multicolumn{4}{|p{15cm}}{\textbf{Tant que} \texttt{F} n'est pas vide :  }\\
 & \multicolumn{3}{|p{15cm}}{Recherche du sommet \texttt{u} tel que \texttt{d[u]} minimal parmi les sommets de \texttt{F}}\\
 & \multicolumn{3}{|p{15cm}}{\textbf{Pour} tout voisin $v$ de $u$ \textbf{faire} :}\\
-&& \multicolumn{2}{|p{15cm}}{\textbf{Si} $v$ n'est ni dans $F$ ni dans $H$ \textbf{alors}}\\
+&& \multicolumn{2}{|p{15cm}}{\textbf{Si} $v$ n'est ni dans $T$ ni dans $F$ \textbf{alors}}\\
 &&& \multicolumn{1}{|p{15cm}}{Ajouter $v$ à $F$}\\
 && \multicolumn{2}{|p{15cm}}{\texttt{D=}$\min \left(d[v],d[u]+w(u,v)\right)$}\\
-& \multicolumn{3}{|p{15cm}}{Ajouter $u$ à $H$}\\
+& \multicolumn{3}{|p{15cm}}{\texttt{T[u] =  True}}\\
 \multicolumn{4}{|p{15cm}}{Renvoyer \texttt{D}}\\
 %&&& \multicolumn{1}{|p{15cm}}{}\\
 %&& \multicolumn{2}{|p{15cm}}{}\\
@@ -87,8 +87,13 @@ Pour répondre à l'objectif, on peut formuler l'algorithme de Dijkstra ainsi.
 Une des étapes qui diffère avec le parcours en largeur notamment, est l'utilisation d'une file de priorité et la recherche du sommet vérifiant $d[u]$ minimal. Cela signifie que lorsqu'on partira d'un sommet \texttt{s}, on déterminera alors l'ensemble des distances permettant d'atteindre les voisins de \texttt{s}. \`A l'itération suivante, on visitera alors le sommet ayant la distance la plus faible.
 
 \begin{defi}{File de priorité}
-Une file de priorité est une structure de données permettant d’ajouter
-un élément et d’obtenir le minimum.
+Une file de priorité est une structure de données sur laquelle on peut effectuer les opérations suivantes : 
+\begin{itemize}
+\item insérer un élement;
+\item extraire l'élément ayant, dans notre cas, la plus petite valeur;
+\item tester si la file de priorité est vide ou pas.
+\end{itemize}
+
 \end{defi}
 
 \begin{exemple}
