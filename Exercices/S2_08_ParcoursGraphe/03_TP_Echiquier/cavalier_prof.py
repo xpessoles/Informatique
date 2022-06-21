@@ -111,6 +111,7 @@ def mvtsPossibles(i, j):
     L = []
     for ai in [1, 2]:
         aj = 3 - ai
+        print(ai,aj)
         for ei in [-1, 1]:
             for ej in [-1, 1]:
                 di = ei*ai

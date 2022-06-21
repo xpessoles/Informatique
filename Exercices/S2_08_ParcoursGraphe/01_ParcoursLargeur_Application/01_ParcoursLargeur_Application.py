@@ -29,14 +29,14 @@ def parcours_largeur(g,s:str) -> None :
 
     Returns
     -------
-    None 
+    None
 
     """
     # On défini le dictionnaire permettant gérant les visites des sommets
     visited = {}
     for key,value in g.items():
         visited[key]=False
-    
+
     file = deque([s])
     while len(file) > 0:
         u = file.pop()
@@ -55,10 +55,10 @@ def parcours_largeur_distances(g,s:str) :
     for key,value in g.items():
         visited[key]=False
         distances[key]=float("inf")
-    
+
     # Initialisation de la distance de départ
     distances[s]=0
-    
+
     file = deque([s])
     while len(file) > 0:
         u = file.pop()
@@ -80,10 +80,10 @@ def parcours_largeur_predecesseurs(g,s:str) :
         visited[key] = False
         distances[key] = float("inf")
         predecesseurs[key] = -1
-    
+
     # Initialisation de la distance de départ
     distances[s]=0
-    
+
     file = deque([s])
     while len(file) > 0:
         u = file.pop()
@@ -114,13 +114,15 @@ def chemin(g,s,v):
 
     """
     pred = parcours_largeur_predecesseurs(g, s)
-    
+
     chemin = [v]
     while v!=s and v!=-1:
         v = pred[v]
         chemin.append(v)
-    
+
     if v == -1 : chemin = []
     chemin.reverse()
-    return chemin    
+    return chemin
+
+
 chemin(G1,"0","2")
