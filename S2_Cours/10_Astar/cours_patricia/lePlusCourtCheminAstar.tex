@@ -1,9 +1,49 @@
+\renewcommand{\cache}[1]{\phantomchoix{#1}\hspace*{0.1mm}}
+
+%%% utilisation des algorithmes
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\renewcommand{\algorithmicrequire} {\textbf{\textsc{Entrées:}}}
+\renewcommand{\algorithmicensure}  {\textbf{\textsc{Sorties:}}}
+\renewcommand{\algorithmicwhile}   {\textbf{tantque}}
+\renewcommand{\algorithmicdo}      {\textbf{faire}}
+\renewcommand{\algorithmicendwhile}{\textbf{fin tantque}}
+\renewcommand{\algorithmicend}     {\textbf{fin}}
+\renewcommand{\algorithmicif}      {\textbf{si}}
+\renewcommand{\algorithmicendif}   {\textbf{finsi}}
+\renewcommand{\algorithmicelse}    {\textbf{sinon}}
+\renewcommand{\algorithmicthen}    {\textbf{alors}}
+\renewcommand{\algorithmicfor}     {\textbf{pour}}
+\renewcommand{\algorithmicforall}  {\textbf{pour tout}}
+\renewcommand{\algorithmicdo}      {\textbf{faire}}
+\renewcommand{\algorithmicendfor}  {\textbf{fin pour}}
+\renewcommand{\algorithmicloop}    {\textbf{boucler}}
+\renewcommand{\algorithmicendloop} {\textbf{fin boucle}}
+\renewcommand{\algorithmicrepeat}  {\textbf{répéter}}
+\renewcommand{\algorithmicuntil}   {\textbf{jusqu'à}}
+
+\floatname{algorithm}{Algorithme}
+
+\let\mylistof\listof
+\renewcommand\listof[2]{\mylistof{algorithm}{Liste des algorithmes}}
+
+% pour palier au problème de niveau des algos
+\makeatletter
+\providecommand*{\toclevel@algorithm}{0}
+\makeatother
+
+\begin{document}
+\entetecoursinfo
+
+
+
+
+
 
 
 \section{Problématique}
 
 Lorsque l'on cherche le plus court chemin entre deux sommets, départ et arrivée, le plus rapidement possible et en évitant les obstacles éventuels, l'algorithme A* (prononcer A star) est fait pour ça ! Cet algorithme est principalement utilisé dans les jeux vidéos :
-C'est un algorithme de recherche de chemin dans un graphe. C'est l'un des plus efficaces en la matière. Il ne donne pas toujours la solution optimale mais il donne très rapidement une bonne solution.\\
 
 %\begin{center}
 %\includegraphics[scale=0.5]{images/jeuVideo.jpg}
@@ -11,33 +51,24 @@ C'est un algorithme de recherche de chemin dans un graphe. C'est l'un des plus e
 %\end{center}
 
 \begin{figure}[!h]
-\begin{minipage}{0.6\textwidth}
+\centering
+\includegraphics[scale=0.5]{images/jeuVideo.jpg}
+\caption{Exemple de chemin}
+\end{figure}
 
+C'est un algorithme de recherche de chemin dans un graphe. C'est l'un des plus efficaces en la matière. Il ne donne pas toujours la solution optimale mais il donne très rapidement une bonne solution.\\
 Au premier abord, on pourrait se dire que pour trouver un chemin d'un point à un autre il faut commencer par se diriger vers la destination. Et bien... c'est justement cette idée qu'utilise l'algorithme A* ! L'idée est très simple : à chaque itération, on va tenter de se rapprocher de la destination. Pour cela, on va donc privilégier les possibilités directement les plus proches de la destination, en mettant de côté toutes les autres. Toutes les possibilités ne permettant pas de se rapprocher de la destination sont mises de côté, mais pas supprimées. Elles
 sont simplement mises dans une liste de possibilités à explorer si jamais la solution en cours s'avère mauvaise.
 En effet, on ne peut pas savoir à l'avance si un chemin va aboutir ou s'il sera le plus court. Il suffit que ce chemin amène à une impasse pour que cette solution devienne inexploitable.\\
 L'algorithme va donc d'abord se diriger vers les chemins les plus directs. Et si ces chemins n'aboutissent pas ou bien s'avèrent mauvais par la suite, il examinera les solutions mises de côté. C'est ce retour en arrière pour examiner les solutions mises de côté qui nous garantit que l'algorithme nous trouvera toujours une solution (si
 tenté qu'elle existe, bien sûr).
-\end{minipage}
-\begin{minipage}{0.4\textwidth}
-\begin{center}
-\includegraphics[width=0.95\textwidth]{images/jeuVideo.jpg}
-\caption{Exemple de chemin}
-\end{center}
-\end{minipage}
-\end{figure}
-
-
 
 
 \section{Comment fonctionne cet algorithme}
 
 Il est basé sur l'algorithme de \texttt{Dijkstra} auquel est ajouté une \texttt{heuristique}.\\
 
-
-\begin{defi} {Heuristique}
-
-En algorithmique, une \textbf{heuristique} est une méthode de calcul qui fournit rapidement une solution réalisable, pas nécessairement optimale ou exacte, pour un problème d'optimisation difficile (wikipédia).\\
+En algorithmique, une heuristique est une méthode de calcul qui fournit rapidement une solution réalisable, pas nécessairement optimale ou exacte, pour un problème d'optimisation difficile (wikipédia).\\
 
 Cette heuristique est définie dans la fonction :
 
@@ -48,8 +79,6 @@ Avec :
 \item $g(s)$ est le coût du chemin optimal partant du sommet initial jusqu'au sommet $s$ ;
 \item $h(s)$ le coût estimé du reste du chemin partant de $s$ jusqu'à un état satisfaisant de l'arrivée. $h(s)$ est une heuristique.
 \end{itemize}
-
-\end{defi}
 
 \subsection{Principe}
 
@@ -260,3 +289,5 @@ https://www.youtube.com/watch?v=-L-WgKMFuhE
 
 %UPSTI, \textit{Informatique Commune}
 
+
+\end{document}
