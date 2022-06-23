@@ -1,4 +1,4 @@
-L'algorithme de Dijkstra est un parcours en largeur d'un graphe \textbf{pondéré} et orienté. Il permet de calculer l'ensemble des plus courts chemins entre un sommet vers tous les autres sommets du graphe.
+L'algorithme de Dijkstra est un parcours en largeur d'un graphe \textbf{pondéré (poids positifs)} et orienté. Il permet de calculer l'ensemble des plus courts chemins entre un sommet vers tous les autres sommets du graphe.
 
 Pour modéliser le graphe, on utilisera une matrice d'adjacence $M$ pour laquelle $M_{ij}=w(i,j)$ et $w(i,j)$ représente le poids de l'arête de $i$ vers $j$. Lorsqu'il n'y a pas d'arc entre deux sommets, on aura $M_{ij}=\infty$.
 
@@ -157,7 +157,7 @@ def dijkstra_mat(G,s):
 \end{lstlisting}
 
 \begin{prop}
-Pour $n$ sommets et $a$ arcs, on peut montrer que, la complexité de l'algorithme est en $\mathcal{O}\left(a+n\log n\right)$.
+Pour $n$ sommets et $a$ arcs, il existe un algorithme de Dijkstra telle de complexité $\mathcal{O}\left(a+n\log n\right)$.
 \end{prop}
 
 \begin{exemple}
