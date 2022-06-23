@@ -7,7 +7,7 @@
 
 \begin{figure}[!h]
 \begin{minipage}{0.6\textwidth}
-Lorsque l'on cherche le plus court chemin entre deux sommets, départ et arrivée, le plus rapidement possible et en évitant les obstacles éventuels, l'algorithme A* (prononcer A star) est fait pour ça ! Cet algorithme est principalement utilisé dans les jeux vidéos :
+Lorsqu'on cherche le plus court chemin entre deux sommets, départ et arrivée, le plus rapidement possible et en évitant les obstacles éventuels, l'algorithme A* (prononcer A star) est fait pour ça ! Cet algorithme est par exemple utilisé dans les jeux vidéos.
 C'est un algorithme de recherche de chemin dans un graphe. C'est l'un des plus efficaces en la matière. Il ne donne pas toujours la solution optimale mais il donne très rapidement une bonne solution.\\
 \end{minipage}
 \begin{minipage}{0.4\textwidth}
@@ -19,7 +19,7 @@ C'est un algorithme de recherche de chemin dans un graphe. C'est l'un des plus e
 \end{figure}
 
 
-Au premier abord, on pourrait se dire que pour trouver un chemin d'un point à un autre il faut commencer par se diriger vers la destination. Et bien... c'est justement cette idée qu'utilise l'algorithme A* ! L'idée est très simple : à chaque itération, on va tenter de se rapprocher de la destination. Pour cela, on va donc privilégier les possibilités directement les plus proches de la destination, en mettant de côté toutes les autres. Toutes les possibilités ne permettant pas de se rapprocher de la destination sont mises de côté, mais pas supprimées. Elles
+Au premier abord, on pourrait se dire que pour trouver un chemin d'un point à un autre il faut commencer par se diriger vers la destination. Et bien... c'est justement cette idée qu'utilise l'algorithme A* ! À chaque itération, on va tenter de se rapprocher de la destination. Pour cela, on va donc privilégier les possibilités directement les plus proches de la destination, en mettant de côté toutes les autres. Toutes les possibilités ne permettant pas de se rapprocher de la destination sont mises de côté, mais pas supprimées. Elles
 sont simplement mises dans une liste de possibilités à explorer si jamais la solution en cours s'avère mauvaise.
 En effet, on ne peut pas savoir à l'avance si un chemin va aboutir ou s'il sera le plus court. Il suffit que ce chemin amène à une impasse pour que cette solution devienne inexploitable.\\
 L'algorithme va donc d'abord se diriger vers les chemins les plus directs. Et si ces chemins n'aboutissent pas ou bien s'avèrent mauvais par la suite, il examinera les solutions mises de côté. C'est ce retour en arrière pour examiner les solutions mises de côté qui nous garantit que l'algorithme nous trouvera toujours une solution (si
@@ -29,16 +29,14 @@ tenté qu'elle existe, bien sûr).
 
 \section{Comment fonctionne cet algorithme}
 
-Il est basé sur l'algorithme de \texttt{Dijkstra} auquel est ajouté une \texttt{heuristique}.\\
+Il est basé sur l'algorithme de \texttt{Dijkstra} auquel est ajouté une \texttt{heuristique}.
 
 
 \begin{defi} {Heuristique}
 
-En algorithmique, une \textbf{heuristique} est une méthode de calcul qui fournit rapidement une solution réalisable, pas nécessairement optimale ou exacte, pour un problème d'optimisation difficile (wikipédia).\\
+En algorithmique, une \textbf{heuristique} est une méthode de calcul qui fournit rapidement une solution réalisable, pas nécessairement optimale ou exacte, pour un problème d'optimisation difficile (wikipédia).
 
-Cette heuristique est définie dans la fonction :
-
-$$f(s)=g(s)+h(s) $$
+Cette heuristique est définie dans la fonction : $\quad \quad f(s)=g(s)+h(s) $.
 
 Avec :
 \begin{itemize}
@@ -56,7 +54,7 @@ Avec :
 Dans des applications de recherche de chemin sur une image ou un quadrillage par exemple, il est possible de connaître pour chaque sommet la distance « à vol d'oiseau » ou « à taxi-distance » de chaque sommet à l'arrivée. On peut utiliser une de ces heuristiques et, au lieu de choisir le sommet ayant la plus petite distance depuis le départ parmi les sommets visités, on peut choisir la relation :
 
 
-$$f(s)=d(depart,s)+d'(s,fin) $$
+$$f(s)=d(\text{depart},s)+d'(s,\text{fin}) $$
 
 On choisit alors la valeur \texttt{min} des f(s) des sommets visités.
 
@@ -64,8 +62,8 @@ On choisit alors la valeur \texttt{min} des f(s) des sommets visités.
 
 \begin{rem}
 \begin{itemize}
-\item la valeur calculée peut être mémorisée sous forme d'entier (voir exemple).\\
-\item vous pouvez calculer ces distances de la manière que vous voulez, distance euclidienne, distance de \texttt{Manhattan} ou autre, elles peuvent convenir.\\
+\item La valeur calculée peut être mémorisée sous forme d'entier (voir exemple).
+\item Vous pouvez calculer ces distances de la manière que vous voulez, distance euclidienne, distance de \texttt{Manhattan} ou autre, elles peuvent convenir.\\
 \end{itemize}
 \end{rem}
 
@@ -75,7 +73,6 @@ On choisit alors la valeur \texttt{min} des f(s) des sommets visités.
 \begin{defi}{Distance de Manhattan}
 \begin{itemize}
 \item La distance de \texttt{Manhattan}, appelée aussi \textit{taxi-distance}, est la distance entre deux points parcourue par un taxi lorsqu'il se déplace dans une ville où les rues sont agencées selon un réseau ou quadrillage (Fig. 2). 
-
 \item Un \textbf{taxi-chemin} est le trajet fait par un taxi lorsqu'il se déplace d'un sommet du réseau à un autre en utilisant les déplacements horizontaux et verticaux du réseau.
 \end{itemize}
 
@@ -84,7 +81,7 @@ On choisit alors la valeur \texttt{min} des f(s) des sommets visités.
 \begin{minipage}{0.4\textwidth}
 \begin{center}
 \includegraphics[width=0.7\textwidth]{images/manhattan.jpg}
-\caption{distance de Manhattan (Rouge, bleu, jaune contre distance euclidienne en vert)}
+\caption{Distance de Manhattan (rouge, bleu, jaune contre distance euclidienne en vert)}
 \end{center}
 \end{minipage}
 \end{figure}
@@ -92,7 +89,7 @@ On choisit alors la valeur \texttt{min} des f(s) des sommets visités.
 
 \subsection{Exemple de construction sur un quadrillage}
 
-\begin{minipage}[c]{.6\linewidth}
+\begin{minipage}[c]{.65\linewidth}
 Toutes les cases du quadrillage sont des sommets et les sommets voisins sont les cases ayant un côté ou un angle commun.\\
 Chaque case voisine par le côté est à une distance $10$ soit $1 \times 10$ et les cases en diagonale à une distance $14$ soit $\sqrt{2} \times 10$ arrondi à la valeur entière.\\
 \end{minipage}
@@ -110,39 +107,58 @@ On cherche à déterminer le plus court chemin entre D et A. Sur le quadrillage 
 \includegraphics[scale=0.8]{images/quadri2.jpg}
 \end{center}
 
-\'Etape 1 : On évalue la distance à l'origine, la distance de la fin et le coût global
-\begin{center}
-\includegraphics[scale=0.8]{images/quadri3.jpg}
-\end{center}
+\begin{multicols}{2}
 
-\'Etape 2 : On choisit le sommet dont le coût global est le plus faible. En cas d'égalité, on choisit le sommet le plus proche de l'arrivée.
 \begin{center}
-\includegraphics[scale=0.8]{images/quadri4.jpg}
+
+\textbf{\'Etape 1 :} On évalue la distance à l'origine, la distance de la fin et le coût global \\
+\vfill
+
+\includegraphics[width=8cm]{images/quadri3.jpg}
 \end{center}
+\begin{center}
+
+
+\textbf{\'Etape 2 :} On choisit le sommet dont le coût global est le plus faible. En cas d'égalité, on choisit le sommet le plus proche de l'arrivée.
+\includegraphics[width=8cm]{images/quadri4.jpg}
+\end{center}
+\end{multicols}
+
 
 \newpage
-\'Etapes 3, 4, 5 et 6:
+
+\begin{multicols}{2}
+
 \begin{center}
-\includegraphics[scale=0.8]{images/quadri4.jpg}
+
+\textbf{\'Etapes 3, 4, 5 et 6}
+
+\includegraphics[width=8cm]{images/quadri4.jpg}
 \end{center}
 
-\'Etape 7 :
 \begin{center}
-\includegraphics[scale=0.8]{images/quadri9.jpg}
+\textbf{\'Etape 7}
+\includegraphics[width=8cm]{images/quadri9.jpg}
+\end{center}
+\end{multicols}
+
+\begin{multicols}{2}
+
+\begin{center}
+
+\textbf{\'Etape 8}
+\includegraphics[width=8cm]{images/quadri10.jpg}
 \end{center}
 
 
-\'Etape 8 :
+
 \begin{center}
-\includegraphics[scale=0.8]{images/quadri10.jpg}
+\textbf{\'Etape 9 :}
+
+\includegraphics[width=8cm]{images/quadri11.jpg}
 \end{center}
 
-\newpage
-\'Etape 9 :
-\begin{center}
-\includegraphics[scale=0.8]{images/quadri11.jpg}
-\end{center}
-
+\end{multicols}
 Finalement le chemin le plus court :
 
 \begin{center}
