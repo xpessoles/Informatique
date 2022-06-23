@@ -1,0 +1,256 @@
+\renewcommand{\cache}[1]{\phantomchoix{#1}\hspace*{0.1mm}}
+
+%%% utilisation des algorithmes
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\renewcommand{\algorithmicrequire} {\textbf{\textsc{Entrées:}}}
+\renewcommand{\algorithmicensure}  {\textbf{\textsc{Sorties:}}}
+\renewcommand{\algorithmicwhile}   {\textbf{tantque}}
+\renewcommand{\algorithmicdo}      {\textbf{faire}}
+\renewcommand{\algorithmicendwhile}{\textbf{fin tantque}}
+\renewcommand{\algorithmicend}     {\textbf{fin}}
+\renewcommand{\algorithmicif}      {\textbf{si}}
+\renewcommand{\algorithmicendif}   {\textbf{finsi}}
+\renewcommand{\algorithmicelse}    {\textbf{sinon}}
+\renewcommand{\algorithmicthen}    {\textbf{alors}}
+\renewcommand{\algorithmicfor}     {\textbf{pour}}
+\renewcommand{\algorithmicforall}  {\textbf{pour tout}}
+\renewcommand{\algorithmicdo}      {\textbf{faire}}
+\renewcommand{\algorithmicendfor}  {\textbf{fin pour}}
+\renewcommand{\algorithmicloop}    {\textbf{boucler}}
+\renewcommand{\algorithmicendloop} {\textbf{fin boucle}}
+\renewcommand{\algorithmicrepeat}  {\textbf{répéter}}
+\renewcommand{\algorithmicuntil}   {\textbf{jusqu'à}}
+
+\floatname{algorithm}{Algorithme}
+
+\let\mylistof\listof
+\renewcommand\listof[2]{\mylistof{algorithm}{Liste des algorithmes}}
+
+% pour palier au problème de niveau des algos
+\makeatletter
+\providecommand*{\toclevel@algorithm}{0}
+\makeatother
+
+\begin{document}
+\entetecoursinfo
+
+
+
+
+
+
+
+\section{Problématique}
+
+Lorsque l'on cherche le plus court chemin entre deux sommets, départ et arrivée, le plus rapidement possible et en évitant les obstacles éventuels, l'algorithme A* (prononcer A star) est fait pour ça ! Cet algorithme est principalement utilisé dans les jeux vidéos :
+
+%\begin{center}
+%\includegraphics[scale=0.5]{images/jeuVideo.jpg}
+%%\caption{Exemple de chemin}
+%\end{center}
+
+\begin{figure}[!h]
+\centering
+\includegraphics[scale=0.5]{images/jeuVideo.jpg}
+\caption{Exemple de chemin}
+\end{figure}
+
+C'est un algorithme de recherche de chemin dans un graphe. C'est l'un des plus efficaces en la matière. Il ne donne pas toujours la solution optimale mais il donne très rapidement une bonne solution.\\
+Au premier abord, on pourrait se dire que pour trouver un chemin d'un point à un autre il faut commencer par se diriger vers la destination. Et bien... c'est justement cette idée qu'utilise l'algorithme A* ! L'idée est très simple : à chaque itération, on va tenter de se rapprocher de la destination. Pour cela, on va donc privilégier les possibilités directement les plus proches de la destination, en mettant de côté toutes les autres. Toutes les possibilités ne permettant pas de se rapprocher de la destination sont mises de côté, mais pas supprimées. Elles
+sont simplement mises dans une liste de possibilités à explorer si jamais la solution en cours s'avère mauvaise.
+En effet, on ne peut pas savoir à l'avance si un chemin va aboutir ou s'il sera le plus court. Il suffit que ce chemin amène à une impasse pour que cette solution devienne inexploitable.\\
+L'algorithme va donc d'abord se diriger vers les chemins les plus directs. Et si ces chemins n'aboutissent pas ou bien s'avèrent mauvais par la suite, il examinera les solutions mises de côté. C'est ce retour en arrière pour examiner les solutions mises de côté qui nous garantit que l'algorithme nous trouvera toujours une solution (si
+tant est qu'elle existe, bien sûr).
+
+
+\section{Comment fonctionne cet algorithme}
+
+Il est basé sur l'algorithme de \texttt{Dijkstra} auquel est ajouté une \texttt{heuristique}.\\
+
+En algorithmique, une heuristique est une méthode de calcul qui fournit rapidement une solution réalisable, pas nécessairement optimale ou exacte, pour un problème d'optimisation difficile (wikipédia).\\
+
+Cette heuristique est définie dans la fonction :
+
+$$f(s)=g(s)+h(s) $$
+
+Avec :
+\begin{itemize}
+\item $g(s)$ est le coût du chemin optimal partant du sommet initial jusqu'au sommet $s$ ;
+\item $h(s)$ le coût estimé du reste du chemin partant de $s$ jusqu'à un état satisfaisant de l'arrivée. $h(s)$ est une heuristique.
+\end{itemize}
+
+\subsection{Principe}
+
+Dans des applications de recherche de chemin sur une image ou un quadrillage par exemple, il est possible de connaître pour chaque sommet la distance « à vol d'oiseau » ou « à taxi-distance » de chaque sommet à l'arrivée. On peut utiliser une de ces heuristiques et, au lieu de choisir le sommet ayant la plus petite distance depuis le départ parmi les sommets visités, on peut choisir la relation :
+$$f(s)=d(depart,s)+d'(s,fin) $$
+
+On choisit alors la valeur \texttt{min} des f(s) des sommets visités.
+
+\textit{Remarque} : la valeur calculée peut être mémorisée sous forme d'entier (voir exemple).\\
+
+Vous pouvez calculer ces distances de la manière que vous voulez, distance euclidienne, distance de \texttt{Manhattan} ou autre, elles peuvent convenir.\\
+La distance de \texttt{Manhattan}, appelée aussi taxi-distance, est la distance entre deux points parcourue par un taxi lorsqu'il se déplace dans une ville où les rues sont agencées selon un réseau ou quadrillage (Fig. 2). Un taxi-chemin est le trajet fait par un taxi lorsqu'il se déplace d'un sommet du réseau à un autre en utilisant les déplacements horizontaux et verticaux du réseau.
+
+\begin{figure}[!h]
+\centering
+\includegraphics[scale=0.7]{images/manhattan.jpg}
+\caption{distance de Manhattan contre distance euclidienne}
+\end{figure}
+
+\subsection{Exemple de construction sur un quadrillage}
+
+\begin{minipage}[c]{.6\linewidth}
+Toutes les cases du quadrillage sont des sommets et les sommets voisins sont les cases ayant un côté ou un angle commun.\\
+Chaque case voisine par le côté est à une distance $10$ soit $1 \times 10$ et les cases en diagonale à une distance $14$ soit $\sqrt{2} \times 10$ arrondi à la valeur entière.\\
+\end{minipage}
+\hfill %
+\begin{minipage}[c]{.35\linewidth}
+\begin{center}
+\includegraphics[scale=0.7]{images/quadri1.jpg}
+\end{center}
+\end{minipage}
+
+
+On cherche à déterminer le plus court chemin entre D et A.
+\begin{center}
+\includegraphics[scale=0.6]{images/quadri2.jpg}
+\end{center}
+
+\'Etape 1 : On évalue la distance à l'origine, la distance de la fin et le coût global
+\begin{center}
+\includegraphics[scale=0.8]{images/quadri3.jpg}
+\end{center}
+
+\'Etape 2 : On choisit le sommet dont le coût global est le plus faible. En cas d'égalité, on choisit le sommet le plus proche de l'arrivée.
+\begin{center}
+\includegraphics[scale=0.8]{images/quadri4.jpg}
+\end{center}
+
+\newpage
+\'Etapes 3, 4, 5 et 6:
+\begin{center}
+\includegraphics[scale=0.8]{images/quadri4.jpg}
+\end{center}
+
+\'Etape 7 :
+\begin{center}
+\includegraphics[scale=0.8]{images/quadri9.jpg}
+\end{center}
+
+
+\'Etape 8 :
+\begin{center}
+\includegraphics[scale=0.8]{images/quadri10.jpg}
+\end{center}
+
+\newpage
+\'Etape 9 :
+\begin{center}
+\includegraphics[scale=0.8]{images/quadri11.jpg}
+\end{center}
+
+Finalement le chemin le plus court :
+\begin{center}
+\includegraphics[scale=0.8]{images/quadrifinal.jpg}
+\end{center}
+
+\section{Implémentation en python}
+
+\subsection{Structure de données}
+
+Un sommet du graphe peut être représenté sous forme d'une liste dans un dictionnaire avec :
+\begin{itemize}
+\item la valeur de \texttt{G} (de type \texttt{int}), c'est la distance pour aller du point de départ au sommet considéré ;
+\item la valeur de \texttt{H} (de type \texttt{int}), c'est la distance pour aller du sommet considéré au point d'arrivée ;
+\item la valeur de \texttt{F} (de type \texttt{int}), c'est la somme des deux précédents mémorisée pour ne pas la recalculer ;
+\item le parent, représenté par ses coordonnées.
+\end{itemize}
+
+Initialement, un sommet non visité prend comme valeurs :
+\{(l,c):\verb![!inf, None, inf, None\verb!]!\}\\
+Si le point O(0,0) est le point de départ et A(5,9) est le point d'arrivée, alors le sommet B(0,1) voisin de O prend comme valeurs :\\
+\{(0,1):\verb![!10, 106, 116, (0,0)\verb!]!\}\\
+On peut aussi choisir l'écriture suivante,\\
+\{(0,1):\{'G':10,'H':106,'F':116,'pred' :(0,0)\}\}
+
+
+\newpage
+\subsection{Fonctions à définir}
+\subsubsection{L'heuristique}
+
+\begin{python}
+\Cache{
+def heuristique(pt1:tuple,A:tuple)->int:\\
+'''Calcul de la valeur de l'heuristique avec la méthode du cours,
+    14 pour un déplacement diagonal et 10 pour un déplacement sur le côté\\
+    entrées : pt1, tuple ou list des coordonnées et A, tuple ou list des coordonnées\\
+    sortie : H : integer, valeur de l'heuristique '''\\
+\indente    a=abs(pt1[0]-A[0])\\
+\indente     b=abs(pt1[1]-A[1])\\
+\indente     if a<=b:\\
+\indente \indente         return (a*14+(b-a)*10)\\
+\indente     else:\\
+\indente \indente         return (b*14+(a-b)*10)
+}
+\end{python}
+
+
+\subsubsection{Le graphe pondéré}
+
+\begin{python}
+\Cache{
+G=np.ones((5,9))\\
+G[1,4]=-10\\
+G[1,5]=-10\\
+G[2,4]=-10\\
+G[3,4]=-10\\
+M=\{\}\\
+ligne,colonne=G.shape\\
+for i in range(ligne):\\
+\indente     for j in range(colonne):\\
+\indente \indente         if not G[i,j]==-10.0:\\
+\indente \indente \indente             M[i,j]=[np.inf,None,np.inf,None]
+}
+\end{python}
+
+    
+
+\subsubsection{L'algorithme A*}
+
+
+
+%\section{Algorithme de A*}
+
+%\vfill
+%\textbf{Références :}\\
+%P. BEYNET, \textit{Informatique Commune}, Upsti\\
+%UPSTI, \textit{Informatique Commune}
+
+
+
+\newpage
+\renewcommand{\contentsname}{Plan du cours}
+\tableofcontents
+
+%\begin{center}
+%Vidéo de comparaison des 4 algorithmes de parcours de graphes
+%\end{center}
+%\begin{center}
+%\includegraphics[scale=0.5]{images/qrcode.png}
+%\end{center}
+%\begin{center}
+%https://www.youtube.com/watch?v=GC-nBgi9r0U
+%\end{center}
+
+
+
+\vfill
+\textbf{Références :}\\
+https://khayyam.developpez.com/articles/algo/astar/\\
+https://www.youtube.com/watch?v=-L-WgKMFuhE
+
+%UPSTI, \textit{Informatique Commune}
+
+
+\end{document}

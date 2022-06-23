@@ -101,7 +101,8 @@ Chaque case voisine par le côté est à une distance $10$ soit $1 \times 10$ et
 \end{minipage}
 
 
-On cherche à déterminer le plus court chemin entre D et A. Sur le quadrillage ci-dessous, on peut reporter les distance de Manhattan de chaque case à \textbf{A}
+On cherche à déterminer le plus court chemin entre D et A. Sur le quadrillage ci-dessous, on peut reporter les distance de Manhattan de chaque case à \textbf{A} : 
+
 \begin{center}
 \includegraphics[scale=0.8]{images/quadri2.jpg}
 \end{center}
@@ -159,6 +160,7 @@ On cherche à déterminer le plus court chemin entre D et A. Sur le quadrillage 
 
 \end{multicols}
 Finalement le chemin le plus court :
+
 \begin{center}
 \includegraphics[scale=0.8]{images/quadrifinal.jpg}
 \end{center}
@@ -167,20 +169,32 @@ Finalement le chemin le plus court :
 
 \subsection{Structure de données}
 
-Un sommet du graphe peut être représenté sous forme d'une liste dans un dictionnaire avec :
+%Un sommet du graphe peut être représenté sous forme d'une liste dans un dictionnaire avec :
+%\begin{itemize}
+%\item la valeur de \texttt{G} (de type \texttt{int}), c'est la distance pour aller du point de départ au sommet considéré ;
+%\item la valeur de \texttt{H} (de type \texttt{int}), c'est la distance pour aller du sommet considéré au point d'arrivée ;
+%\item la valeur de \texttt{F} (de type \texttt{int}), c'est la somme des deux précédents mémorisée pour ne pas la recalculer ;
+%\item le parent, représenté par ses coordonnées.
+%\end{itemize}
+%
+%Initialement, un sommet non visité prend comme valeurs :
+%\{\verb![!l,c\verb!]!:\verb![!inf, None, inf, None\verb!]!\}\\
+%Si le point O(0,0) est le point de départ et A(5,9) est le point d'arrivée, alors\\
+%\{\verb![!0,1\verb!]!:\verb![!10, 106, 116, \verb![!0,0\verb!]!\verb!]!\}\\
+%On peut aussi choisir l'écriture suivante,\\
+%\{\verb![!0,1\verb!]!:\{'G':10,'H':106,'F':116,'pred' :\verb![!0,0\verb!]!\}\}
+
+
+\subsection{Affichage de la grille}
+
+Le module \texttt{Affichage.py}  permet de créer des grilles avec l'utilisation des fonctions  suivantes :
 \begin{itemize}
-\item la valeur de \texttt{G} (de type \texttt{int}), c'est la distance pour aller du point de départ au sommet considéré ;
-\item la valeur de \texttt{H} (de type \texttt{int}), c'est la distance pour aller du sommet considéré au point d'arrivée ;
-\item la valeur de \texttt{F} (de type \texttt{int}), c'est la somme des deux précédents mémorisée pour ne pas la recalculer ;
-\item le parent, représenté par ses coordonnées.
+\item \texttt{Affiche(fig,im,grille)}~: Affiche l'image d'étude
+\item \texttt{Affiche\_Save(fig,im,grille,chemin)}~: Enregistre l'image pour créer des
+animations (sans affichage sinon bug de redimensionnement)
 \end{itemize}
 
-Initialement, un sommet non visité prend comme valeurs :
-\{\verb![!l,c\verb!]!:\verb![!inf, None, inf, None\verb!]!\}\\
-Si le point O(0,0) est le point de départ et A(5,9) est le point d'arrivée, alors\\
-\{\verb![!0,1\verb!]!:\verb![!10, 106, 116, \verb![!0,0\verb!]!\verb!]!\}\\
-On peut aussi choisir l'écriture suivante,\\
-\{\verb![!0,1\verb!]!:\{'G':10,'H':106,'F':116,'pred' :\verb![!0,0\verb!]!\}\}
+
 
 
 \newpage
