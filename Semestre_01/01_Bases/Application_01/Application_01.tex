@@ -1,0 +1,90 @@
+%%%% Paramétrage du TD %%%%
+\def\xxnumchapitre{Chapitre 1 \vspace{.2cm}}
+\def\xxchapitre{\hspace{.12cm} Découverte de l'algorithmique et de la programmation}
+
+\def\xxcompetences{%
+\textsl{%
+\textbf{Savoirs et compétences :}\\
+\vspace{-.4cm}
+\begin{itemize}[label=\ding{112},font=\color{bleuxp}] 
+\item .
+%\item \textit{Mod3.C2 : } pôles dominants et réduction de l’ordre du modèle : principe, justification
+%\item \textit{Res2.C4 : } stabilité des SLCI : définition entrée bornée -- sortie bornée (EB -- SB)	
+%\item \textit{Res2.C5 : } stabilité des SLCI : équation caractéristique	
+%\item \textit{Res2.C6 : } stabilité des SLCI : position des pôles dans le plan complexe
+%\item \textit{Res2.C7 : } stabilité des SLCI : marges de stabilité (de gain et de phase)
+\end{itemize}
+}}
+
+
+\def\xxfigures{
+%\includegraphics[width=3cm]{fig_01}\\
+%\textit{}
+}%figues de la page de garde
+
+\def\xxtitreexo{Applications -- Bases}
+\def\xxsourceexo{}
+\def\xxactivite{{ Application 01} \ifprof  -- Corrigé \else \fi}
+
+%\iflivret
+\input{\repRel/Style/pagegarde_TD}
+%\else
+%\input{../../style/new_pagegarde}
+%\fi
+
+\setlength{\columnseprule}{.1pt}
+
+\pagestyle{fancy}
+\thispagestyle{plain}
+
+
+\vspace{4.5cm}
+
+\def\columnseprulecolor{\color{bleuxp}}
+\setlength{\columnseprule}{0.4pt} 
+
+%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+\ifprof
+\vspace{1cm}
+\else
+\begin{multicols}{2}
+\fi
+
+\subsection*{Initiation à l'implémentations de fonctions}
+
+\subsubsection*{Implémentations de fonctions prenant des listes en argument}
+\setcounter{numques}{0}
+
+\exer{Pour commencer}
+
+\question{Implémenter la fonction \textvtt{zeros\_01(n:int)->list} permettant de générer une liste de \texttt{n 0}. On utilisera une boucle \texttt{while}.}
+
+\question{Implémenter la fonction \textvtt{zeros\_02(n:int)->list} permettant de générer une liste de \texttt{n 0}. On utilisera une boucle \texttt{for}.}
+
+\question{Implémenter la fonction \textvtt{zeros\_03(n:int)->list} permettant de générer une liste de \texttt{n 0}. On utilisera une boucle \texttt{while}. On génera cette liste << en compréhension >> (sans boucle \texttt{for} ou \texttt{while} explicite).}
+
+\question{Implémenter la fonction \textvtt{entiers\_01(n:int)->list} permettant de générer la liste des entiers compris entre 0 inclus et \texttt{n} exclus. On utilisera une boucle \texttt{while}.}
+
+\question{Implémenter la fonction \textvtt{entiers\_02(n:int)->list} permettant de générer la liste des entiers compris entre 0 inclus et \texttt{n} exclus. On utilisera une boucle \texttt{for}.}
+
+\question{Implémenter la fonction \textvtt{entiers\_03(n:int)->list} permettant de générer la liste des entiers compris entre 0 inclus et \texttt{n} exclus. On génera cette liste << en compréhension >> (sans boucle \texttt{for} ou \texttt{while} explicite).}
+
+\exer{Suites d'entiers}
+
+\question{Implémenter la fonction \textvtt{impairs(n:int)->list} permettant de générer la liste des \texttt{n} premiers entiers naturels impairs.}
+
+\question{Implémenter la fonction \textvtt{multiples\_5(d:int, f:int)->list} permettant de générer la liste de tous les multuples de 5 compris entre \texttt{d} et \texttt{f} (bornes incluses si se sont des multiples de 5).}
+
+\question{Implémenter la fonction \textvtt{cube(f:int)->list} permettant de générer la liste de tous les cubes d'entiers naturels inférieurs ou égaux à \texttt{f} (inclus si \texttt{f} est un cube).}
+
+
+
+\ifprof
+\else
+\end{multicols}
+\fi
+
