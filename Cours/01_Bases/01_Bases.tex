@@ -328,9 +328,11 @@ Il est également possible de passer d'un type composé à un autre grâce aux f
 
 \subsection{Affectation}
 
+\begin{defi}{Affectation}
 Quand on stocke une valeur \texttt{d} dans une variable \texttt{var}, on dit que l'on 
 \textbf{affecte} \texttt{d} à la variable \texttt{var}. La valeur
 \texttt{d} est encore appelée \textbf{la donnée}.
+\end{defi}
 
 En Python , cette affectation est faite avec la commande \texttt{=}, comme suit.  
 
@@ -955,9 +957,11 @@ s'écrit de la manière suivante : \texttt{range(20)}.\\
 Précisément, si $a$ et $b$ sont deux entiers, \texttt{range(a,b)} contient les éléments de 
 l'intervalle semi-ouvert $\ii{a,b}$, dans l'ordre croissant. Avec un seul argument, 
 \texttt{range(b)} signifie \texttt{range(0,b)}.\\
+
+\textbf{
 Redisons-le, car c'est un fait important en Python : \texttt{range(a,b)} est intervalle 
 \textbf{fermé} à gauche, \textbf{ouvert} à
-droite\footnote{Voir \textit{Why numbering should start at zero}, E. W. Dijkstra,
+droite}\footnote{Voir \textit{Why numbering should start at zero}, E. W. Dijkstra,
   EWD831. Disponible en ligne.}.\\
   
 Avec \texttt{range}, nous pouvons maintenant itérer sur une liste d'entiers :
@@ -1291,19 +1295,23 @@ n
 Les données manipulées en informatique sont organisées, que ce soit dans la mémoire où dans la manière d'y accéder, de les manipuler. 
 Une telle organisation porte le nom de \textbf{structure de données}, en voici deux grandes.  
 
-\begin{description}
-  \item[Tableau] Les données sont stockées dans des cases contiguës de la mémoire de l'ordinateur, chaque emplacement étant souvent indicé par un entier. 
+\begin{defi}{}
+  
+  \textbf{Tableaux} --  
+  Les données sont stockées dans des cases contiguës de la mémoire de l'ordinateur, chaque emplacement étant souvent indicé par un entier. 
     A priori, il n'est pas possible d'en rajouter autant que possible : cette place a été pré-allouée. 
     Pour accéder au contenu de l'emplacement numéro $k$, la machine a seulement besoin de connaître 
 l'adresse de la première case mémoire et de la largeur de chaque case (faire un dessin). 
-    L'accès en lecture et en écriture à une donnée (à partir du numéro de son emplacement) se fait donc en temps constant (on dit $O(1)$).
+    L'accès en lecture et en écriture à une donnée (à partir du numéro de son emplacement) se fait donc en temps constant (on dit $\mathcal{O}(1)$).
     L'ajout d'une nouvelle donnée à un tableau peut alors être problématique !
-  \item[Liste (chaînée)] Les données ne sont pas stockées de manière organisée dans la mémoire, 
+
+
+  \textbf{Liste (chaînée)}  -- Les données ne sont pas stockées de manière organisée dans la mémoire, 
 mais de chaque emplacement on pointe l'emplacement suivant. 
     Ainsi, l'accès (en lecture ou en écriture) ne se fait plus en temps constant, mais l'ajout d'une nouvelle donnée se fait simplement en temps constant. 
-\end{description}
+\end{defi}
 
-\subsection{Réalisation en \texttt{python}}
+\subsection{Et en \texttt{python}...}
 
 Les objets de type \texttt{list} en Python sont des tableaux : c'est une 
 dénomination fâcheuse car, partout ailleurs en informatique, le terme
@@ -1423,15 +1431,12 @@ On peut ajouter un élément à un tableau avec la méthode \texttt{append}. Le 
 cette opération s'effectue en temps constant amorti.
 \begin{lstlisting}
 t.append(-42)
-t
 \end{lstlisting}
 \`A votre avis, pour un objet \texttt{x}, est-il équivalent d'effectuer \texttt{t+[x]} et \texttt{t.append(x)} ?
 
 On peut aussi enlever le dernier élément d'une liste Python avec la méthode \texttt{pop()}.
 \begin{lstlisting}
 x = t.pop()
-t
-x
 \end{lstlisting}
 
 Les autres méthodes disponibles sont rassemblées dans le tableau~\ref{tab.list.methodes}. Elles ne sont pas exigibles.
@@ -1502,9 +1507,8 @@ $
 par
 \begin{lstlisting}
 M = [[1,2,3],[4,5,6],[7,8,9]]
-M
-M[0][2]
 \end{lstlisting}
+On accède à la première ligne deuxième colonne par \texttt{M[0][2]}.
 Cependant, cela ne permet pas d'effectuer les opérations classiques sur les matrices. On préférera 
 utiliser les possibilités de la bibliothèque de calcul numérique \texttt{numpy}.
 
@@ -1523,10 +1527,7 @@ y = x
 x = 42
 \end{lstlisting}
 
-Que vaut alors \texttt{y} ? 
-\begin{lstlisting}
-y
-\end{lstlisting}
+\texttt{y} vaut alors 3. 
 
 Avec des listes Python, cela ne fonctionne pas exactement de cette façon : 
 \begin{lstlisting}
@@ -1534,10 +1535,8 @@ x = [0]*5
 y = x
 x[0] = 42
 \end{lstlisting}
-Que vaut alors \texttt{y} ? 
-\begin{lstlisting}
-y
-\end{lstlisting}
+\texttt{y} vaut alors \texttt{[42,0,0,0,0]}.
+
 Tâchons de donner une explication à ce phénomène.
 \begin{itemize}
   \item Pour les objets de type \textbf{non mutable} (on ne peut pas les modifier, comme les types 
