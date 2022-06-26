@@ -58,25 +58,46 @@
 \setcounter{numques}{0}
 
 \exer{Structures conditionnelles}
+
 \question{Implémenter une fonction \texttt{est\_plus\_grand(a:int,b:int)-> bool} renvoyant \texttt{True} si $a>b$, \texttt{False} sinon. }
 
-\begin{enumerate}[label = \emph{\alph*)}]
-  \item \'Ecrire une fonction \texttt{neg(b)} qui renvoie la négation du booléen \texttt{b} sans utiliser \texttt{not}.
-  \item \'Ecrire une fonction \texttt{ou(a,b)} qui renvoie le ou logique des booléen \texttt{a} et \texttt{b} sans utiliser \texttt{not}, \texttt{or} ni \texttt{and}.
-  \item \'Ecrire une fonction \texttt{et(a,b)} qui renvoie le et logique des booléen \texttt{a} et \texttt{b} sans utiliser \texttt{not}, \texttt{or} ni \texttt{and}.
-\end{enumerate}
+
+
+\question{\'Ecrire une fonction \texttt{neg(b)} qui renvoie la négation du booléen \texttt{b} sans utiliser \texttt{not}.}
+
+\question{\'Ecrire une fonction \texttt{ou(a,b)} qui renvoie le ou logique des booléen \texttt{a} et \texttt{b} sans utiliser \texttt{not}, \texttt{or} ni \texttt{and}.}
+
+\question{\'Ecrire une fonction \texttt{et(a,b)} qui renvoie le et logique des booléen \texttt{a} et \texttt{b} sans utiliser \texttt{not}, \texttt{or} ni \texttt{and}.}
+
 %\subsubsection*{Implémentations de fonctions prenant des listes en argument}
 
 \exer{Un tout petit peu d'arithmétique}
+
 \question{Implémenter la fonction \textvtt{unite(n:int)->int} renvoyant le chiffre des unités de l'entier \texttt{n}.}
 
+
+\begin{lstlisting}
+>>> unite(123)
+	3
+\end{lstlisting}
+
 \question{Implémenter la fonction \textvtt{dizaine(n:int)->int} renvoyant le chiffre des dizaines de l'entier \texttt{n}.}
+
+\begin{lstlisting}
+>>> dizaine(123)
+	2
+\end{lstlisting}
 
 \question{Implémenter la fonction  \\ \textvtt{unites\_base8(n:int)->int} renvoyant le chiffre des unités de l'entier \texttt{n} en base 8.}
 
 \exer{Liste de zéros}
 
 \question{Implémenter la fonction \textvtt{zeros\_01(n:int)->list} permettant de générer une liste de \texttt{n 0}. On utilisera une boucle \texttt{while}.}
+
+\begin{lstlisting}
+>>> zeros_01(4)
+	[0,0,0,0]
+\end{lstlisting}
 
 \question{Implémenter la fonction \textvtt{zeros\_02(n:int)->list} permettant de générer une liste de \texttt{n 0}. On utilisera une boucle \texttt{for}.}
 
@@ -86,7 +107,13 @@
 
 \question{Implémenter la fonction \textvtt{entiers\_01(n:int)->list} permettant de générer la liste des entiers compris entre 0 inclus et \texttt{n} exclus. On utilisera une boucle \texttt{while}.}
 
+\begin{lstlisting}
+>>> entiers_01(4)
+	[0,1,2,3]
+\end{lstlisting}
+
 \question{Implémenter la fonction \textvtt{entiers\_02(n:int)->list} permettant de générer la liste des entiers compris entre 0 inclus et \texttt{n} exclus. On utilisera une boucle \texttt{for}.}
+
 
 \question{Implémenter la fonction \textvtt{entiers\_03(n:int)->list} permettant de générer la liste des entiers compris entre 0 inclus et \texttt{n} exclus. On génera cette liste << en compréhension >> (sans boucle \texttt{for} ou \texttt{while} explicite).}
 
@@ -98,11 +125,32 @@
 
 On cherche à écrire une fonction prenant en argument une liste d'entiers (non vide) et incrémentant de $1$ le premier élément de cette liste.
 
-\question{\'Ecrire une telle fonction \textvtt{incr\_sans\_effet\_de\_bord}, qui ne modifie pas la liste initiale et renvoie en sortie une nouvelle liste.}
-\question{\'Ecrire une telle fonction \textvtt{incr\_avec\_effet\_de\_bord}, qui modifie la liste initiale et ne renvoie rien en sortie (ponctuer par un \texttt{return None}).}
+\question{\'Ecrire une telle fonction \textvtt{incr\_sans\_effet\_de\_bord(L:list)->list}, qui ne modifie pas la liste initiale et renvoie en sortie une nouvelle liste.}
+
+\begin{lstlisting}
+>>> L = [1,2,3]
+>>> LL = incr_sans_effet_de_bord(L)
+>>> print(L)
+    [1,2,3]
+>>> print(LL)
+    [2,2,3]
+\end{lstlisting}
+
+
+\question{\'Ecrire une telle fonction \textvtt{incr\_avec\_effet\_de\_bord(L:list)-> None}, qui modifie la liste initiale et ne renvoie rien en sortie (ponctuer par un \texttt{return None}).}
+
+\begin{lstlisting}
+>>> L = [1,2,3]
+>>> LL = incr_sans_effet_de_bord(L)
+>>> print(L)
+    [2,2,3]
+>>> print(LL)
+    None
+\end{lstlisting}
 
 
 \exer{Structures itératives}
+
 \question{\'Ecrire la fonction \textvtt{somme\_inverse(n:int)->float} calculant la somme des inverses des \texttt{n} premiers entiers non nuls.}
 
 
