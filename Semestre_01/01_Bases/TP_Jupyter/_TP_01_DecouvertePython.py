@@ -106,5 +106,12 @@ def puissance_while_test(foo,a,n):
     else :
         print(f"Test puissance_while({a,n}) : échoué")
 
+## Puissance de a 
 def puissance_corrige(a,n):
     return a**n
+
+def puissance__test(foo,a,n):
+    if foo(a,n) == a**n :
+        print(f"Test puissance_while({a,n}) : réussi")
+    else :
+        print(f"Test puissance_while({a,n}) : échoué")
