@@ -115,3 +115,47 @@ def puissance_test(foo,a,n):
         print(f"Test puissance_while({a,n}) : réussi")
     else :
         print(f"Test puissance_while({a,n}) : échoué")
+        
+
+# Factoriel while
+def factoriel_while_corrige(n:int)-> int : 
+    res = 1
+    if n==0 :
+        return 1
+    while n>1:
+        res = res*n
+        n = n-1
+    return res
+
+def factoriel_while_test(foo,n:int):
+    if foo(n) == factoriel_while_corrige(n) :
+        print(f"Test factoriel_while({n}) : réussi")
+    else :
+        print(f"Test factoriel_while({n}) : échoué")
+    
+# Factoriel for
+def factoriel_for_corrige(n:int)-> int : 
+    res = 1
+    if n==0 :
+        return 1
+    for i in range(1,n+1):
+        res = res*i
+    return res
+
+def factoriel_for_test(foo,n:int) :
+    if foo(n) == factoriel_for_corrige(n) :
+        print(f"Test factoriel_for({n}) : réussi")
+    else :
+        print(f"Test factoriel_for({n}) : échoué")
+    
+# Coefficient binomial
+def binomial_corrige(n:int,k:int) -> int:
+    return int(factoriel_for_corrige(n)/(factoriel_for_corrige(k)*factoriel_for_corrige(n-k)))
+
+def binomial_test(foo,n:int,k:int) :
+    if foo(n,k) == binomial_corrige(n,k) :
+        print(f"Test binomial({n,k}) : réussi")
+    else :
+        print(f"est binomial({n,k}) : échoué")
+
+        
