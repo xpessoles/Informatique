@@ -216,6 +216,11 @@ def max_tempsdarret_corrige():   # On se limite à c=4n+3
         n=n+1
     return(M,cmin)
 
+def max_tempsdarret_test(foo,a,b):
+    if foo(a,b) == max_tempsdarret_corrige(a,b):
+        print(f"Test max_tempsdarret({a,b}) : réussi")
+    else :
+        print(f"Test max_tempsdarret({a,b}) : échoué")
 ## Q8
 def record_corrige(a,b):
     liste=[]
