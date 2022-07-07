@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 
+## Listes d'entiers de [O à n[
 def generer_liste_entiers_01_corrige(n: int) -> list :
     res = []
     for i in range(n):
@@ -14,13 +15,99 @@ def generer_liste_entiers_01_test(foo,n):
         print(f"Test generer_liste_entiers_01({n}) : échoué")
 
 
+def generer_liste_entiers_02_corrige(n: int) -> list :
+    res = []
+    i = 0
+    while i<n :
+        res.append(i)
+        i = i+1
+    return res
 
-## Q1
-def generate_pair_01_corrige(nb:int):
+def generer_liste_entiers_02_test(foo,n):
+    if foo(n) == generer_liste_entiers_02_corrige(n):
+        print(f"Test generer_liste_entiers_02({n}) : réussi")
+    else :
+        print(f"Test generer_liste_entiers_02({n}) : échoué")
+
+
+def generer_liste_entiers_03_corrige(n: int) -> list :
+    return[ i for i in range(n)]
+
+def generer_liste_entiers_03_test(foo,n):
+    if foo(n) == generer_liste_entiers_03_corrige(n):
+        print(f"Test generer_liste_entiers_03({n}) : réussi")
+    else :
+        print(f"Test generer_liste_entiers_03({n}) : échoué")
+
+
+
+## Listes d'entiers de [a à b]
+def generer_liste_entiers_04_corrige(deb: int, fin: int) -> list :
+    res = []
+    for i in range(deb,fin+1):
+        res.append(i)
+    return res   
+    
+def generer_liste_entiers_04_test(foo,a,b):
+    if foo(a,b) == generer_liste_entiers_04_corrige(a,b):
+        print(f"Test generer_liste_entiers_04({a,b}) : réussi")
+    else :
+        print(f"Test generer_liste_entiers_04({a,b}) : échoué")
+
+
+
+def generer_liste_entiers_05_corrige(deb: int, fin: int) -> list :
+    res = []
+    i = deb
+    while i <=fin :
+        res.append(i)
+        i = i +1
+    return res   
+    
+def generer_liste_entiers_05_test(foo,a,b):
+    if foo(a,b) == generer_liste_entiers_05_corrige(a,b):
+        print(f"Test generer_liste_entiers_05({a,b}) : réussi")
+    else :
+        print(f"Test generer_liste_entiers_05({a,b}) : échoué")
+
+
+
+def generer_liste_entiers_06_corrige(deb: int, fin: int) -> list :
+     return [i for i in range(deb,fin)]
+    
+def generer_liste_entiers_06_test(foo,a,b):
+    if foo(a,b) == generer_liste_entiers_06_corrige(a,b):
+        print(f"Test generer_liste_entiers_06({a,b}) : réussi")
+    else :
+        print(f"Test generer_liste_entiers_06({a,b}) : échoué")
+
+
+
+## Liste d'entiers
+def generer_liste_pairs_corrige(nb:int):
     res=[]
-    for i in range(1,nb//2):
+    for i in range(nb//2):
         res.append(2*i)
     return(res)
+
+def generer_liste_pairs_test(foo,n):
+    if foo(n) == generer_liste_pairs_corrige(n):
+        print(f"Test generer_liste_pairs({n}) : réussi")
+    else :
+        print(f"Test generer_liste_pairs({n}) : échoué")
+        
+def generer_liste_impairs_corrige(nb:int):
+    res=[]
+    for i in range(nb//2):
+        res.append(2*i+1)
+    return(res)
+
+def generer_liste_impairs_test(foo,n):
+    if foo(n) == generer_liste_impairs_corrige(n):
+        print(f"Test generer_liste_impairs({n}) : réussi")
+    else :
+        print(f"Test generer_liste_impairs({n}) : échoué")
+
 
 
 ## Q2 à Q5
