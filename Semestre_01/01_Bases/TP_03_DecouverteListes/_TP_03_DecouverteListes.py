@@ -109,44 +109,80 @@ def generer_liste_impairs_test(foo,n):
         print(f"Test generer_liste_impairs({n}) : échoué")
 
 
-
-## Q2 à Q5
-
-def generate_pair_02(nb:int):
-    res=[]
-    i=1
-    while i<nb//2:
-        res.append(2*i)
-        i=i+1
-    return(res)
-
-def recherche_nb_01(nb:int,L:list):
+## Existence d'une valeur dans une liste
+def recherche_nb_01_corrige(nb:int,L:list):
     test=False
     for x in L:
         if nb==x:
             test=True
     return(test)
 
-def recherche_nb_02(nb:int,L:list):
+def recherche_nb_test(foo):
+    L = [0,1,2,3,4,3]
+    nb = 0
+    if foo(nb,L) == recherche_nb_01_corrige(nb,L):
+        print(f"Test recherche_nb({nb,L}) : réussi")
+    else :
+        print(f"Test recherche_nb({nb,L}) : échoué")
+    nb = 3
+    if foo(nb,L) == recherche_nb_01_corrige(nb,L):
+        print(f"Test recherche_nb({nb,L}) : réussi")
+    else :
+        print(f"Test recherche_nb({nb,L}) : échoué")
+    nb = 4
+    if foo(nb,L) == recherche_nb_01_corrige(nb,L):
+        print(f"Test recherche_nb({nb,L}) : réussi")
+    else :
+        print(f"Test recherche_nb({nb,L}) : échoué")
+    nb = 5
+    if foo(nb,L) == recherche_nb_01_corrige(nb,L):
+        print(f"Test recherche_nb({nb,L}) : réussi")
+    else :
+        print(f"Test recherche_nb({nb,L}) : échoué")
+
+def recherche_nb_02_corrige(nb:int,L:list):
     n=len(L)
     i=0
     while i<=n-1 and nb!=L[i]:
         i=i+1
     return(i<n)
 
-def recherche_nb_03(nb:int, L:list):
+def recherche_nb_03_corrige(nb:int, L:list):
     return(nb in L)
 
 
 ## Q6 à Q10
-
-def recherche_first_index_nb_01(nb:int, L:list):
+def recherche_first_index_nb_01_corrige(nb:int, L:list):
     n=len(L)
     index=-1
     for i in range(n):
         if nb==L[i] and index==-1:
             index=i
     return(index)
+
+def recherche_first_index_nb_test(foo):
+    L = [0,1,2,3,4,3]
+    nb = 0
+    if foo(nb,L) == recherche_first_index_nb_01_corrige(nb,L):
+        print(f"Test recherche_first_index_nb({nb,L}) : réussi")
+    else :
+        print(f"Test recherche_first_index_nb({nb,L}) : échoué")
+    nb = 3
+    if foo(nb,L) == recherche_first_index_nb_01_corrige(nb,L):
+        print(f"Test recherche_first_index_nb({nb,L}) : réussi")
+    else :
+        print(f"Test recherche_first_index_nb({nb,L}) : échoué")
+    nb = 4
+    if foo(nb,L) == recherche_first_index_nb_01_corrige(nb,L):
+        print(f"Test recherche_first_index_nb({nb,L}) : réussi")
+    else :
+        print(f"Test recherche_first_index_nb_01({nb,L}) : échoué")
+    nb = 5
+    if foo(nb,L) == recherche_first_index_nb_01_corrige(nb,L):
+        print(f"Test recherche_first_index_nb({nb,L}) : réussi")
+    else :
+        print(f"Test recherche_first_index_nb({nb,L}) : échoué")
+
 
 def recherche_first_index_nb_02(nb:int, L:list):
     n=len(L)
@@ -159,7 +195,9 @@ def recherche_first_index_nb_02(nb:int, L:list):
         index=-1
     return(index)
 
-def recherche_last_index_nb_01(nb:int, L:list):
+
+
+def recherche_last_index_nb_01_corrige(nb:int, L:list):
     n=len(L)
     index=-1
     for i in range(n):
@@ -167,7 +205,7 @@ def recherche_last_index_nb_01(nb:int, L:list):
             index=i
     return(index)
 
-def recherche_last_index_nb_02(nb:int, L:list):
+def recherche_last_index_nb_02_corrige(nb:int, L:list):
     n=len(L)
     i=n-1   # On part de la fin de la liste
     while i>=0 and nb!=L[i]:
@@ -179,7 +217,33 @@ def recherche_last_index_nb_02(nb:int, L:list):
     return(index)
 
 
-def recherche_index_nb_01(nb:int, L:list):
+
+def recherche_last_index_nb_test(foo):
+    L = [0,1,2,3,4,3]
+    nb = 0
+    if foo(nb,L) == recherche_last_index_nb_01_corrige(nb,L):
+        print(f"Test recherche_last_index_nb({nb,L}) : réussi")
+    else :
+        print(f"Test recherche_last_index_nb({nb,L}) : échoué")
+    nb = 3
+    if foo(nb,L) == recherche_last_index_nb_01_corrige(nb,L):
+        print(f"Test recherche_last_index_nb({nb,L}) : réussi")
+    else :
+        print(f"Test recherche_last_index_nb({nb,L}) : échoué")
+    nb = 4
+    if foo(nb,L) == recherche_last_index_nb_01_corrige(nb,L):
+        print(f"Test recherche_last_index_nb({nb,L}) : réussi")
+    else :
+        print(f"Test recherche_last_index_nb({nb,L}) : échoué")
+    nb = 5
+    if foo(nb,L) == recherche_last_index_nb_01_corrige(nb,L):
+        print(f"Test recherche_last_index_nb({nb,L}) : réussi")
+    else :
+        print(f"Test recherche_last_index_nb({nb,L}) : échoué")
+
+
+
+def recherche_index_nb_01_corrige(nb:int, L:list):
     res=[]
     n=len(L)
     for i in range(n):
@@ -188,27 +252,63 @@ def recherche_index_nb_01(nb:int, L:list):
     return(res)
 
 
+def recherche_index_nb_test(foo):
+    L = [0,1,2,3,4,3]
+    nb = 0
+    if foo(nb,L) == recherche_index_nb_01_corrige(nb,L):
+        print(f"Test recherche_index_nb({nb,L}) : réussi")
+    else :
+        print(f"Test recherche_index_nb({nb,L}) : échoué")
+    nb = 3
+    if foo(nb,L) == recherche_index_nb_01_corrige(nb,L):
+        print(f"Test recherche_index_nb({nb,L}) : réussi")
+    else :
+        print(f"Test recherche_index_nb({nb,L}) : échoué")
+    nb = 4
+    if foo(nb,L) == recherche_index_nb_01_corrige(nb,L):
+        print(f"Test recherche_index_nb({nb,L}) : réussi")
+    else :
+        print(f"Test recherche_index_nb({nb,L}) : échoué")
+    nb = 5
+    if foo(nb,L) == recherche_index_nb_01_corrige(nb,L):
+        print(f"Test recherche_index_nb({nb,L}) : réussi")
+    else :
+        print(f"Test recherche_index_nb({nb,L}) : échoué")
+
+
 ## Q11 et Q12
 
-def is_char_in_str_01(lettre:str,mot:str):
+def is_char_in_str_01_corrige(lettre:str,mot:str):
     n=len(mot)
     i=0
     while i<=n-1 and lettre!=mot[i]:
         i=i+1
     return(i<n)
 
+def is_char_in_str_test(foo,lettre,mot):
+    if foo(lettre,mot) == is_char_in_str_01_corrige(lettre,mot):
+        print(f"Test is_char_in_str({lettre,mot}) : réussi")
+    else :
+        print(f"Test is_char_in_str({lettre,mot}) : échoué")
+        
 
 def is_char_in_str_02(lettre:str,mot:str):
     return(lettre in mot)
 
 ## Q13
 
-def compte_lettre_01(lettre:str, mot:str):
+def compte_lettre_01_corrige(lettre:str, mot:str):
     nb=0
     for x in mot:
         if x==lettre:
             nb=nb+1
     return(nb)
+
+def compte_lettre_test(foo,lettre,mot):
+    if foo(lettre,mot) == compte_lettre_01_corrige(lettre,mot):
+        print(f"Test compte_lettre({lettre,mot}) : réussi")
+    else :
+        print(f"Test compte_lettre({lettre,mot}) : échoué")
 
 #######
 
@@ -226,18 +326,26 @@ dictionnaire=load_fichier('liste_francais.txt')
 
 ## Q14
 
-def compte_lettre_02(lettre:str, mots:list):
+def compte_lettre_02_corrige(lettre:str, mots:list):
     nb=0
     for mot in mots:
         if lettre in mot:
             nb=nb+1
     return(nb)
 
+
+def compte_lettre_02_test(foo,lettre,l_mots):
+    if foo(lettre,l_mots) == compte_lettre_02_corrige(lettre,l_mots):
+        print(f"Test compte_lettre_02({lettre},l_mots) : réussi")
+    else :
+        print(f"Test compte_lettre_02({lettre},l_mots) : échoué")
+
+
 ## Q15
 
 def nb_consonnes(mots):
     consonnes='bcdfghjklmnpqrstvwxz'
-    L=[compte_lettre_02(lettre,mots) for lettre in consonnes]
+    L=[compte_lettre_02_corrige(lettre,mots) for lettre in consonnes]
     m,M=L[0],L[0]   # Min et Max des occurrences
     lettre_min=consonnes[0]
     lettre_max=consonnes[0]
@@ -249,19 +357,25 @@ def nb_consonnes(mots):
         if L[i]>M:
             lettre_max=consonnes[i]
             M=L[i]
-    occ_consonnes_min=[compte_lettre_02(lettre_min,mot) for mot in mots]
-    occ_consonnes_max=[compte_lettre_02(lettre_max,mot) for mot in mots]
+    occ_consonnes_min=[compte_lettre_02_corrige(lettre_min,mot) for mot in mots]
+    occ_consonnes_max=[compte_lettre_02_corrige(lettre_max,mot) for mot in mots]
     return('consonne_max: '+ lettre_max +' '+ str(M)+ ' fois; '+ 'consonne_min: '+ lettre_min+' '+ str(m)+ ' fois.')
 
 ## Q 16
 
-def mots_plus_long(mots:list):
+def mots_plus_long_corrige(mots:list):
     M=0
     for mot in mots:
         if len(mot)>M:
             max=mot
             M=len(mot)
     return(max)
+
+def mots_plus_long_test(foo,l_mots):
+    if foo(l_mots) == mots_plus_long_corrige(l_mots):
+        print(f"Test mots_plus_long(l_mots) : réussi")
+    else :
+        print(f"Test mots_plus_long(l_mots) : échoué")
 
 ## Q17
 
