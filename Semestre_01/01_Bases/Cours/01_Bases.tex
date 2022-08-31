@@ -235,7 +235,9 @@ Ce type est noté \texttt{bool} en Python.
 
 
 \begin{exemple}
-\texttt{True or False} renvoie \texttt{True}. \texttt{not(False or True) and True} renvoie \texttt{False}.
+\texttt{True or False} renvoie \texttt{True}. 
+
+\texttt{not(False or True) and True} renvoie \texttt{False}.
 \end{exemple}
 
 \begin{rem}
@@ -246,8 +248,8 @@ Python \ permet les chaînes de comparaisons : \texttt{1<2<3} renvoie
 \subsection{Conversions \textit{-- Cast}}
 
 Il est possible de convertir en entier en flottant avec la fonction \texttt{float}. La réciproque est possible dans une certaine 
-mesure : \texttt{float(2)} renvoie \texttt{2.0}, \texttt{int(2.0)} renvoie \texttt{2}, mais \texttt{int(2.5)} renvoie \texttt{2} et 
-\texttt{int(-3.5)} renvoie \texttt{-3}.
+mesure : \texttt{float(2)} renvoie \texttt{2.0}, \texttt{int(2.0)} renvoie \texttt{2}, mais \texttt{int(2.6)} renvoie \texttt{2} et 
+\texttt{int(-3.6)} renvoie \texttt{-3}.
 
 La fonction \texttt{int} appliquée à un nombre flottant procède donc à une troncature, ce n'est pas la fonction donnant la partie entière d'un nombre flottant (fonction \texttt{floor} du module \texttt{math}).
 
@@ -264,7 +266,7 @@ composés.
 Ce type est noté \texttt{tuple} en Python .
 \begin{itemize}
 \item \textbf{Construction et composantes :} les $n$-uplets généralisent les couples. Un couple s'écrira \texttt{(a,b)}, un triplet 
-\texttt{(a,b,c)} ... etc. Il existe même des 1-uplets : il faut les écrire \texttt{(a,)}.¨\\%, et non  \texttt{(a)} : cette dernière écriture est équivalente à \texttt{a}, tout simplement.\\
+\texttt{(a,b,c)} ... etc. Il existe même des 1-uplets : il faut les écrire \texttt{(a,)}.\\%, et non  \texttt{(a)} : cette dernière écriture est équivalente à \texttt{a}, tout simplement.\\
 Il n'est pas obligatoire que les éléments d'un tuple soient de même type. Par exemple, 
 \texttt{(1,1.2,True)} est un triplet tout à fait valable.\\
 On accède à la $k\ieme$ coordonnée d'un tuple \texttt{t} par la commande \texttt{t[k]}. Attention : 
@@ -290,7 +292,7 @@ renvoie \texttt{(2,6,7,8)} (attention à la borne de droite !).\\
 Ce type est noté \texttt{str} en Python , pour {string} en anglais.
 \begin{itemize}
 \item \textbf{Construction et composantes :} ce sont des suites finies de caractères, un caractère étant en python un caractère du clavier. On 
-les note entre guillemets ou apostrophes : \texttt{``Ceci est un chaîne de caractères''} ou  
+les note entre guillemets ou apostrophes : \texttt{``Ceci est une chaîne de caractères''} ou  
 \texttt{'Ceci est une chaîne de caractères'}. La chaîne vide se note \texttt{``}\texttt{''} ou 
 \texttt{''}. Un caractère est une chaîne de longueur 1.\\
 On accède aux composantes d'une chaîne de la même manière que pour un tuple.
@@ -350,7 +352,7 @@ Les variables (et donc l'affectation) sont incontournables : si vous ne stockez 
 >>> x = 42                 # x prend la valeur 42.
 >>> x = x + 2	         # on additionne à la donnée stockée dans x le nombre 2 et on 
                  # stocke le résultat de nouveau dans x 
->>> x                  # on accède à la valeur qui est mémorisée dans x.
+>>> x                  # on accède à  la valeur qui est mémorisée dans x.
 	44
 \end{lstlisting}
 %\end{xxpyconsole}
@@ -818,10 +820,10 @@ Dans ce cas, voici comment procéder.
 \end{itemize}
 
 %\begin{exo}
-\begin{exemple}
-Écrire les deux séquences d'instructions de la remarque \textbf{\ref{rem-filtre}} en Python, et 
-constater que l'on obtient bien deux résultats différents.
-\end{exemple}
+%\begin{exemple}
+%Écrire les deux séquences d'instructions de la remarque \textbf{\ref{rem-filtre}} en Python, et 
+%constater que l'on obtient bien deux résultats différents.
+%\end{exemple}
 %\end{exo}
 
 %\begin{ex}
@@ -1302,7 +1304,7 @@ Une telle organisation porte le nom de \textbf{structure de données}, en voici 
   Les données sont stockées dans des cases contiguës de la mémoire de l'ordinateur, chaque emplacement étant souvent indicé par un entier. 
     A priori, il n'est pas possible d'en rajouter autant que possible : cette place a été pré-allouée. 
     Pour accéder au contenu de l'emplacement numéro $k$, la machine a seulement besoin de connaître 
-l'adresse de la première case mémoire et de la largeur de chaque case (faire un dessin). 
+l'adresse de la première case mémoire et de la largeur de chaque case. 
     L'accès en lecture et en écriture à une donnée (à partir du numéro de son emplacement) se fait donc en temps constant (on dit $\mathcal{O}(1)$).
     L'ajout d'une nouvelle donnée à un tableau peut alors être problématique !
 
@@ -1329,6 +1331,11 @@ nouveau. Cette opération est coûteuse, mais elle
 est rare. En moyenne, chaque ajout à un coût constant.
 
 On parle alors de \textbf{tableaux dynamiques}.
+
+
+\begin{rem}
+Les listes sont indexées à partir de 0 (c'est-à-dire que le premier élément de la liste est numéroté à partir de 0). 
+\end{rem}
 
 \begin{multicols}{2}
 Pour créer un tableau on peut le donner en extension.
