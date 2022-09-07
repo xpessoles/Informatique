@@ -134,18 +134,33 @@ L'opérateur \texttt{\^{}} renvoie-t-il le résultat attendu ? Que ce passe-t-il
 %%\end{donnees}
 
 Les fonctions \texttt{float} et \texttt{int} permettent d'obtenir une donnée du type voulu. Taper les instructions suivantes, où l'on voit des premiers exemples d'\emph{affectations}, ici des \emph{variables} \texttt{x} et \texttt{y} : 
+\ifprof
 \begin{lstlisting}
->>> x = 42\\
->>> x \\
-................. \textit{à compléter !}\cache{42}\\
->>> float(x)\\
-................. \cache{42.0} \\
+>>> x = 42
+>>> x 
+................. \textit{à compléter !}\cache{42}
+>>> float(x)
+................. \cache{42.0} 
 >>> y = -3.67\\
 >>> y \\
-.................\cache{-3.67} \\
+.................\cache{-3.67} 
 >>> int(y)\\
 ................. \cache{-3}
 \end{lstlisting}
+\else
+\begin{lstlisting}
+>>> x = 42
+>>> x 
+................. \textit{à compléter !}
+>>> float(x)
+................. 
+>>> y = -3.67\\
+>>> y \\
+.................
+>>> int(y)\\
+.................
+\end{lstlisting}
+\fi
 
 \begin{warn}
  \texttt{int} appliqué à un flottant ne fait pas un arrondi, ni ne calcule la partie entière : cela donne juste l'entier qui apparaît dans l'écriture décimale du flottant.\
