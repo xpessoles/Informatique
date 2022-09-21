@@ -1,0 +1,359 @@
+%%%% Paramétrage du TD %%%%
+\def\xxnumchapitre{Chapitre 1 \vspace{.2cm}}
+\def\xxchapitre{\hspace{.12cm} Découverte de l'algorithmique et de la programmation}
+
+\def\xxcompetences{%
+\textsl{%
+\textbf{Savoirs et compétences :}\\
+\vspace{-.4cm}
+\begin{itemize}[label=\ding{112},font=\color{bleuxp}] 
+\item .
+%\item \textit{Mod3.C2 : } pôles dominants et réduction de l’ordre du modèle : principe, justification
+%\item \textit{Res2.C4 : } stabilité des SLCI : définition entrée bornée -- sortie bornée (EB -- SB)	
+%\item \textit{Res2.C5 : } stabilité des SLCI : équation caractéristique	
+%\item \textit{Res2.C6 : } stabilité des SLCI : position des pôles dans le plan complexe
+%\item \textit{Res2.C7 : } stabilité des SLCI : marges de stabilité (de gain et de phase)
+\end{itemize}
+}}
+
+
+\def\xxfigures{
+%\includegraphics[width=3cm]{fig\_01}\\
+%\textit{}
+}%figues de la page de garde
+
+\def\xxtitreexo{Structures algorithmiques}
+\def\xxsourceexo{Lien Capytale \url{https://capytale2.ac-paris.fr/web/c/f807-628160/mcer}}
+\def\xxactivite{TP 02 \ifprof  -- Corrigé \else \fi}
+
+%\iflivret
+\input{\repRel/Style/pagegarde\_TD}
+%\else
+%\input{../../style/new\_pagegarde}
+%\fi
+
+\setlength{\columnseprule}{.1pt}
+
+\pagestyle{fancy}
+\thispagestyle{plain}
+
+\vspace{4.5cm}
+
+\def\columnseprulecolor{\color{bleuxp}}
+\setlength{\columnseprule}{0.4pt} 
+
+%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+\ifprof
+\vspace{1cm}
+\else
+\begin{multicols}{2}
+\fi
+
+
+\section*{Structures algorithmiques}
+\subsection*{Structures conditionnelles}
+\question{Écrire une fonction
+\texttt{val\_absolue(x:float) -> float } prenant un paramètre flottant \texttt{x } et retournant la valeur absolue de $x$ (sans utiliser la fonction \texttt{abs}).}
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi
+
+
+        Une agence de voyage propose un voyage organisé où l’on peut s’inscrire en groupe. Le prix par personne est
+dégressif selon le nombre de personnes dans le groupe :
+\begin{itemize}
+\item 80 euros (par personne) pour un groupe d'une ou deux personnes; 
+\item 70 euros (par personne) pour un groupe de 3 à 5 personnes; 
+\item 60 euros (par personne) pour un groupe de 6 à 9 personnes; 
+\item 50 euros (par personne) à partir de 10 personnes.  
+\end{itemize}
+ On appelle $n$ la variable
+contenant le nombre de personnes dans le groupe. 
+
+\question{Écrire une fonction \texttt{cout\_voyage(n:int)->int } qui renvoie le prix total pour l’ensemble
+du groupe.}
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi
+
+\question{ Écrire une fonction \texttt{compter\_for(n:int)-> None } qui affiche successivement tous les nombres de 0 inclus à $n$ exclus (boucle \texttt{for}).}
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi
+
+\question{Tester le bon fonctionnement de votre fonction.
+}
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi
+
+\question{Écrire une fonction \texttt{compter\_while(n:int)-> None } qui affiche successivement tous les nombres de 0 inclus à $n$ exclus (boucle \texttt{while}). }
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi
+
+\question{Tester le bon fonctionnement de votre fonction.
+}
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi
+
+\question{        Écrire une fonction \texttt{compter\_rebours\_for(n:int)-> None } qui affiche successivement tous les nombres de n inclus à 0 inclus (boucle \texttt{for}). 
+}
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi
+
+
+\question{Tester le bon fonctionnement de votre fonction.
+}
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi
+
+\question{Écrire une fonction \texttt{compter\_rebours\_while(n:int)-> None } qui affiche successivement tous les nombres de n inclus à 0 inclus (boucle \texttt{while}). }
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi
+
+\question{Tester le bon fonctionnement de votre fonction.
+}
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi
+
+
+\question{Écrire une fonction \texttt{epeler(mot:str)-> None } qui affiche successivement toutes les lettres du mot \texttt{mot}.}
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi
+
+\question{Tester le bon fonctionnement de votre fonction.
+}
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi
+
+\subsection*{Répétition conditionnelle}
+
+\question{Déterminer le plus petit entier $n$ tel que $1 + 2 + . . . + n$ dépasse strictement N. Pour cela on implémentera la fonction \texttt{plus\_petit\_entier(N:int)-> int}.}
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi
+
+\section*{Initiation à l'utilisation des listes}
+
+\subsection*{Applications directes}
+
+
+
+\question{Implémenter une fonction compter(n:int) -> list renvoyant la liste des entiers de 1 à n inclus.}
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi
+
+\question{Vérifier votre fonction en vous appuyant sur un exemple.}
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi
+
+\question{Implémenter une fonction \texttt{compter\_pairs(n)} renvoyant la liste des entiers pairs de 0 à n inclus.}
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi
+
+
+\question{Vérifier votre fonction en vous appuyant sur un exemple.}
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi
+
+\question{Implémenter une fonction \texttt{compter\_impairs(n)} renvoyant la liste des entiers impairs de 1 à n inclus.}
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi
+
+\question{Vérifier votre fonction en vous appuyant sur un exemple.}
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi
+
+
+\section*{Simulation d'un prêt bancaire}
+
+\begin{obj}
+L'objectif de ce TP est de comprendre comment sont calculées les mensualités d'un prêt bancaire à taux fixe. Vous souhaitez emprunter 100 000€ à la banque. La banque vous propose un taux annuel de 3\% sur 10 ans. Que cela signifie-t-il ?
+\end{obj}
+
+\subsection*{Cas 1 : remboursement annuel}
+
+On se place dans la situation où vous avez la possibilité de faire un remboursement à la banque par an. Pour se rétribuer, la banque vous fait donc payer, chaque année, 3\% de la somme restant à rembourser. C'est cette somme qu'on appelle les intérêts. Ainsi, la première année, il faudrait payer 3000 € d'intérêts.
+
+On cherche à savoir le montant annuel à rembourser à la banque. 
+
+Appelons :
+\begin{itemize}
+\item $t$ le taux annuel du prêt;
+\item $C_0$ le montant initial emprunté; 
+\item $C_i$ le montant restant à rembourser à la fin de l'année $i$;
+\item $A$ l'annuité qui se définit par le montant (inconnu) à rembourser chaque année;
+\item $I_i$ le montant des intérêts à rembourser à la fin de l'année $i$;
+\item $N$ la durée du prêt en années. 
+\end{itemize}
+
+À la fin de la première année :
+\begin{itemize}
+\item $I_1 = C_0\times t$
+\item $C_1 = C_0 - (A-I_1) = C_0 -A + I_1 = C_0 -A + C_0 \times t  = C_0(1+t)-A $.
+ \end{itemize}
+Remarque : $A$ doit être supérieur à $C_0\times t$.
+
+À la fin de la deuxième année :
+\begin{itemize}
+\item $I_2 = C_1\times t = C_0(1+t)t-At$
+\item $C_2 = C_1 - (A-I_2) = C_0(1+t)-A - A +C_0(1+t)t-At =C_0(1+t)^2 -A(2+t)$.
+ \end{itemize}
+Aini, au bout de la ième année, 
+\begin{itemize}
+\item $I_i = C_{i-1} t$;
+\item $C_i = C_{i-1}(1+t)-A$.
+ \end{itemize}
+On montre que $A=\frac{C_0 t (1+t)^N}{(1+t)^N -1}$.
+
+\question{Implémenter la fonction \texttt{calcul\_annuite(C0:float,t:float,N:int)} permettant de déterminer le montant d'une annuité. }
+
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi
+
+\question{Vérifier que dans le cas de l'exemple donné, les annuités s'élèvent à 11 723,05€.}
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi
+
+\question{Implémenter une fonction \texttt{reste\_a\_rembourser(C0,t,a,n)} où \texttt{C0} est le montant prêté, \texttt{t} le taux annuel du prêt, \texttt{a} le montant d'une annuité, \texttt{n} le nombre d'annuités. Cette fonction calculera le montant à rembourser après le versement de la nième annuité.}
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi
+
+
+\question{Vérifier qu'au bout de 10 ans, la somme globale a été payée. 
+}
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi
+
+\question{Écrire une fonction \texttt{cout\_total(C0,t,N) } renvoyant le coût total du crédit, c’est-à-dire le
+total de ce que vous avez payé moins le montant du prêt.}
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi
+
+\question{Vérifier que le cout total du prêt est de 17 230,50 €.}
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi
+
+\section*{Cas 2 : remboursement mensuel}
+
+\question{Donner le montant des mensualités du prêt.}
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi
+
+\question{Quel sera le reste à payer au bout de 10 ans ?}
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi
+
+\question{Déterminer le coût total du prêt.}
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi
+
+\subsection*{Tracer de courbes}
+
+\question{Dans le cas d'un remboursement annuel, écrire une fonction interet(C0:float,t:float,N:int) -> list renvoyant la liste des intérêts payés chaque année.}
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi
+
+\question{Dans le cas d'un remboursement annuel, écrire une fonction capital(C0:float,t:float,N:int) -> list renvoyant la liste du capital restant à rembourser en fin de chaque année.}
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi
+
+
+
+
+
+
+\ifprof
+\else
+\end{multicols}
+\fi
+
