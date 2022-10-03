@@ -84,11 +84,20 @@ def generer_liste_entiers_06_test(foo,a,b):
 
 
 ## Liste d'entiers
-def generer_liste_pairs_corrige(nb:int):
-    res=[]
-    for i in range(nb//2):
-        res.append(2*i)
-    return(res)
+#def generer_liste_pairs_corrige(nb:int):
+#    res=[]
+#    for i in range(nb//2):
+#        res.append(2*i)
+#    return(res)
+
+def generer_liste_pairs_corrige(n:int):
+    L=[]
+    for i in range(n):
+        if i%2==0:
+            L.append(i)
+    return L
+
+
 
 def generer_liste_pairs_test(foo,n):
     if foo(n) == generer_liste_pairs_corrige(n):
@@ -96,11 +105,18 @@ def generer_liste_pairs_test(foo,n):
     else :
         print(f"Test generer_liste_pairs({n}) : échoué")
         
-def generer_liste_impairs_corrige(nb:int):
-    res=[]
-    for i in range(nb//2):
-        res.append(2*i+1)
-    return(res)
+#def generer_liste_impairs_corrige(nb:int):
+#    res=[]
+#    for i in range(nb//2):
+#        res.append(2*i+1)
+#    return(res)
+
+def generer_liste_impairs_corrige(n:int):
+    L=[]
+    for i in range(n):
+        if i%2==0:
+            L.append(i)
+    return L
 
 def generer_liste_impairs_test(foo,n):
     if foo(n) == generer_liste_impairs_corrige(n):
