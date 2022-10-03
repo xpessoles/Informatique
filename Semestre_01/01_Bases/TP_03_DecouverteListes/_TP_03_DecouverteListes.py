@@ -73,7 +73,7 @@ def generer_liste_entiers_05_test(foo,a,b):
 
 
 def generer_liste_entiers_06_corrige(deb: int, fin: int) -> list :
-     return [i for i in range(deb,fin)]
+     return [i for i in range(deb,fin+1)]
     
 def generer_liste_entiers_06_test(foo,a,b):
     if foo(a,b) == generer_liste_entiers_06_corrige(a,b):
