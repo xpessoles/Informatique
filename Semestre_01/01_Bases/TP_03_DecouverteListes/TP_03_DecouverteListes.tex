@@ -1,0 +1,233 @@
+%%%% Paramétrage du TD %%%%
+\def\xxnumchapitre{Chapitre 1 \vspace{.2cm}}
+\def\xxchapitre{\hspace{.12cm} Découverte de l'algorithmique et de la programmation}
+
+\def\xxcompetences{%
+\textsl{%
+\textbf{Savoirs et compétences :}\\
+\vspace{-.4cm}
+\begin{itemize}[label=\ding{112},font=\color{bleuxp}] 
+\item .
+%\item \textit{Mod3.C2 :} pôles dominants et réduction de l’ordre du modèle : principe, justification
+%\item \textit{Res2.C4 :} stabilité des SLCI : définition entrée bornée -- sortie bornée (EB -- SB)	
+%\item \textit{Res2.C5 :} stabilité des SLCI : équation caractéristique	
+%\item \textit{Res2.C6 :} stabilité des SLCI : position des pôles dans le plan complexe
+%\item \textit{Res2.C7 :} stabilité des SLCI : marges de stabilité (de gain et de phase)
+\end{itemize}
+}}
+
+
+\def\xxfigures{
+%\includegraphics[width=3cm]{fig\_01}\\
+%\textit{}
+}%figues de la page de garde
+
+\def\xxtitreexo{Structures algorithmiques}
+\def\xxsourceexo{Lien Capytale \url{https://capytale2.ac-paris.fr/web/c/f807-628160/mcer}}
+\def\xxactivite{TP 03 \ifprof  -- Corrigé \else \fi}
+
+%\iflivret
+\input{\repRel/Style/pagegarde\_TD}
+%\else
+%\input{../../style/new\_pagegarde}
+%\fi
+
+\setlength{\columnseprule}{.1pt}
+
+\pagestyle{fancy}
+\thispagestyle{plain}
+
+\vspace{4.5cm}
+
+\def\columnseprulecolor{\color{bleuxp}}
+\setlength{\columnseprule}{0.4pt} 
+
+%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+\ifprof
+\vspace{1cm}
+\else
+\begin{multicols}{2}
+\fi
+
+
+
+Soit la liste suivante pour effectuer les tests : 
+\begin{lstlisting}
+les_notes=[13.5, 7.1, 14.0, 9.7, 5.9, 5.8, 6.5, 6.2, 9.1, 11.7, 8.6, 16.7, 12.0, 12.8, 9.8, 10.1, 8.3, 6.5, 11.4, 12.5, 7.0, 6.9, 7.9, 7.0, 10.1, 10.8, 9.1, 5.6, 8.2, 3.4, 10.8, 8.2, 13.3, 8.0, 14.9, 8.0, 8.2, 4.1, 6.5, 8.0, 8.2]
+\end{lstlisting}
+
+\subsection*{Moyenne et variance}
+
+Soit $a=\verb![!a_0,a_1,\dots,a_{n-1}\verb!]!$ une liste de nombres. On rappelle les définitions de la moyenne $m$ et de la variance $v$ : 
+$$m = \dfrac{1}{n} \sum_{i=0}^{n-1} a_i \qquad v = \dfrac{1}{n} \sum_{i=0}^{n-1} (a_i-m)^2.$$
+
+\question{Ecrire une fonction \texttt{moyenne(a:list) -> float} qui prend pour argument une liste de nombres \texttt{a} et qui renvoie la moyenne de \texttt{a}.}
+
+# votre fonction
+
+\question{        Faire un test avec la liste \texttt{a=[1,2,3,4,5]}.}
+
+# Tests de la fonction
+
+
+\question{Ecrire une fonction \texttt{variance(a:list)} qui prend pour argument une liste de nombres \texttt{a}, et qui renvoie la variance de \texttt{a}.}
+
+# votre fonction
+
+\question{Faire un test avec la liste \texttt{a=[1,2,3,4,5]}.}
+
+# Test
+
+\question{Calculer la moyenne et l'écart-type (racine carrée de la variance) de la liste \texttt{les_notes}.
+
+<i> Remarque </i>: On trouvera une moyenne d'environ $9.08$ et un écart-type d'environ $2.93$.
+    </span>
+</div>
+
+# Tests
+
+On souhaite évaluer la moyenne par élément de deux listes, de même taille, de nombres comme présenté ci-dessous :
+
+![image.png](attachment:image.png)
+
+\question{Ecrire une fonction \texttt{moyennes(a:list,b:list)->list} qui prend en entrée deux listes 
+	\texttt{a} et \texttt{b} de même taille (condition qui ne doit \texttt{pas} être vérifiée)
+	 et renvoie une liste de même taille contenant dans 
+	la case d'indice \texttt{i} la valeur moyenne des valeurs des flottants 
+	stockés dans les deux listes \texttt{a} et \texttt{b} à l'indice \texttt{i}.}
+
+# votre fonction
+
+\question{Tester le bon fonctionnement de votre fonction.}
+
+# test
+
+# test
+a=[i for i in range(1,11)]
+b=[i for i in range(10,0,-1)]
+test.moyennes_test(moyennes,a,b)
+
+Pour aller plus loin (difficulté ***), évaluation de la moyenne glissante sur n éléments consécutifs.
+
+Exemple avec n=3 :
+
+![image.png](attachment:image.png)
+
+\question{Ecrire une fonction \texttt{moyenneGlissante(a:list, n:int)->list} d'argument une liste \texttt{a} d'entiers ou flottants et un entier \texttt{n} et renvoyant la liste des moyennes glissantes sur \texttt{n} éléments consécutifs.<br/>
+        Vous pourrez avantageusement utiliser le slicing.<br/>
+        Faire un test avec la listes \texttt{les_notes}.}
+
+# votre fonction
+
+# test
+
+# test
+L=[12,13.5,11.2,11.7,12.1,13.05,11.6]
+test.moyenneGlissante_test(moyenneGlissante,L,3)
+test.moyenneGlissante_test(moyenneGlissante,L,4)
+
+\subsection*{Le maximum}
+
+\question{Ecrire une fonction \texttt{maximum(L:list)->float} qui à partir d'une liste de flottants ou entiers renvoie le max de cette liste. La fonction prédéfinie en Python \texttt{max} ne doit pas être utilisée.}
+# votre fonction
+
+\subsection*{Seuil}
+
+On souhaite maintenant, à partir d'une liste \texttt{a}
+ d'entiers (ou flottants) et d'un entier (ou flottant) appelé \texttt{seuil} obtenir le nombre 
+ d'éléments de \texttt{L} majorés, au sens strict, par \texttt{seuil}. <br/>
+ Voici un exemple d'utilisation de cette fonction :
+
+# majores_par([12,-5,10,9],10)
+# 2
+
+\question{Ecrire une fonction \texttt{majores_par(L:list,x:float)->int} réalisant cette opération.}
+
+# votre fonction        
+
+\question{Tester le bon fonctionnement de votre fonction.}
+
+# test
+majores_par([12,-5,10,9],10)
+
+\question{Modifier la fonction précédente pour obtenir une fonction \texttt{ elements_majores_par(L:list,x:float)->list}
+  retournant la liste des éléments majorés par le seuil \texttt{x.}}
+
+# votre fonction
+
+\question{Tester le bon fonctionnement de votre fonction.}
+
+# test
+
+\subsection*{Recherche séquentielle dans une liste}
+
+\question{Définir une fonction \texttt{sequentielle(a:list,x:float)->bool}, d'arguments
+  une liste \texttt{a}  et un entier ou un flottant \texttt{x}, et qui renvoie le booléen \texttt{True} ou \texttt{False} selon que l'élément
+  \texttt{x} est dans la liste  \texttt{x} ou non.<br/>
+  <i> On fera attention à arrêter la recherche dès que l'élément est trouvé.</i><br/>
+  Faire vos tests avec la liste \texttt{les_notes} en prenant pour \texttt{x} la première valeur de \texttt{les_notes}, puis la dernière et enfin une valeur au milieu. }
+
+# votre fonction
+
+\question{Tester le bon fonctionnement de votre fonction.}
+
+# test
+
+# test
+a=[1,2,5,4,3,9]
+test.sequentielle_test(sequentielle,a,1)
+test.sequentielle_test(sequentielle,a,4)
+test.sequentielle_test(sequentielle,a,9)
+test.sequentielle_test(sequentielle,a,6)
+
+\question{Définir une fonction \texttt{occurrenceElement(a:list,x:float)->int}, d'arguments
+  une liste \texttt{a} et un flottant \texttt{x}, et qui renvoie le nombre d'occurrence de l'entier ou flottant \texttt{x}.}
+# votre fonction
+
+\question{Tester le bon fonctionnement de votre fonction.}
+
+
+
+\question{Définir une fonction \texttt{occurrenceListe(a:list)->list}, d'argument
+  une liste \texttt{a} d'entiers compris dans l'intervalle [0,k] et de longueur \texttt{n} tel que $k<n$ et qui renvoie la liste des nombres d'occurrence des entiers de la liste \texttt{a}. Cette valeur est 0 si le nombre n'est pas dans la liste.<br/>
+<i>Remarque</i> : Une seule boucle for est acceptée.}
+
+# votre fonction
+
+\question{Tester le bon fonctionnement de votre fonction.}
+
+# votre test
+
+\subsection*{Création de listes aléatoires}
+
+Pour tester vos algorithmes, il peut être utile de créer des listes quelconques de nombres. On peut écrire une fonction qui crée des listes aléatoires à partir de la bibliothèque \texttt{random}.
+
+# import de la bibliothèque random
+import random as r
+# r est un alias
+
+\question{Comprendre le fonctionnement de la fonction \texttt{randrange} de cette bibliothèque (en utilisant l'aide et avec des exemples).}
+
+# Tests
+help (r.randrange)
+
+\question{Ecrire une fonction \texttt{hasard_liste(n:int,k:int)->list} d'arguments deux entiers \texttt{n} et \texttt{k} permettant de générer une liste de \texttt{n} entiers aléatoires appartenant à \texttt{range(k)}.}
+
+# votre fonction
+
+\question{Tester votre fonction avec $n=10$ et $k=7$.}
+
+
+\question{Créer une liste à partir de la fonction \texttt{hasard_liste(n:int,k:int)} et tester votre fonction \texttt{occurrenceListe(a:list)}.}
+
+
+
+\ifprof
+\else
+\end{multicols}
+\fi
+
