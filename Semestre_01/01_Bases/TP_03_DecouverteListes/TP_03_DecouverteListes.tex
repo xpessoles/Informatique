@@ -50,7 +50,7 @@
 \ifprof
 \vspace{1cm}
 \else
-\begin{multicols}{2}
+%\begin{multicols}{2}
 \fi
 
 
@@ -67,28 +67,27 @@ $$m = \dfrac{1}{n} \sum_{i=0}^{n-1} a_i \qquad v = \dfrac{1}{n} \sum_{i=0}^{n-1}
 
 \question{Ecrire une fonction \texttt{moyenne(a:list) -> float} qui prend pour argument une liste de nombres \texttt{a} et qui renvoie la moyenne de \texttt{a}.}
 
-# votre fonction
+%%# votre fonction
 
 \question{        Faire un test avec la liste \texttt{a=[1,2,3,4,5]}.}
 
-# Tests de la fonction
+%%# Tests de la fonction
 
 
 \question{Ecrire une fonction \texttt{variance(a:list)} qui prend pour argument une liste de nombres \texttt{a}, et qui renvoie la variance de \texttt{a}.}
 
-# votre fonction
+%%# votre fonction
 
 \question{Faire un test avec la liste \texttt{a=[1,2,3,4,5]}.}
 
-# Test
+%%# Test
 
-\question{Calculer la moyenne et l'écart-type (racine carrée de la variance) de la liste \texttt{les_notes}.
+\question{Calculer la moyenne et l'écart-type (racine carrée de la variance) de la liste \texttt{les\_notes}.}
 
-<i> Remarque </i>: On trouvera une moyenne d'environ $9.08$ et un écart-type d'environ $2.93$.
-    </span>
-</div>
+\begin{rem}On trouvera une moyenne d'environ $9.08$ et un écart-type d'environ $2.93$.
+  \end{rem}
 
-# Tests
+%%# Tests
 
 On souhaite évaluer la moyenne par élément de deux listes, de même taille, de nombres comme présenté ci-dessous :
 
@@ -100,68 +99,68 @@ On souhaite évaluer la moyenne par élément de deux listes, de même taille, d
 	la case d'indice \texttt{i} la valeur moyenne des valeurs des flottants 
 	stockés dans les deux listes \texttt{a} et \texttt{b} à l'indice \texttt{i}.}
 
-# votre fonction
+%%# votre fonction
 
 \question{Tester le bon fonctionnement de votre fonction.}
 
-# test
+%# test
 
-# test
-a=[i for i in range(1,11)]
-b=[i for i in range(10,0,-1)]
-test.moyennes_test(moyennes,a,b)
+%# test
+%a=[i for i in range(1,11)]
+%b=[i for i in range(10,0,-1)]
+%test.moyennes_test(moyennes,a,b)
 
-Pour aller plus loin (difficulté ***), évaluation de la moyenne glissante sur n éléments consécutifs.
+Pour aller plus loin, évaluation de la moyenne glissante sur n éléments consécutifs.
 
 Exemple avec n=3 :
 
-![image.png](attachment:image.png)
+%![image.png](attachment:image.png)
 
-\question{Ecrire une fonction \texttt{moyenneGlissante(a:list, n:int)->list} d'argument une liste \texttt{a} d'entiers ou flottants et un entier \texttt{n} et renvoyant la liste des moyennes glissantes sur \texttt{n} éléments consécutifs.<br/>
+\question{Ecrire une fonction \texttt{moyenneGlissante(a:list, n:int)->list} d'argument une liste \texttt{a} d'entiers ou flottants et un entier \texttt{n} et renvoyant la liste des moyennes glissantes sur \texttt{n} éléments consécutifs.
         Vous pourrez avantageusement utiliser le slicing.<br/>
-        Faire un test avec la listes \texttt{les_notes}.}
+        Faire un test avec la listes \texttt{les\_notes}.}
 
-# votre fonction
+%# votre fonction
 
-# test
+%# test
 
-# test
-L=[12,13.5,11.2,11.7,12.1,13.05,11.6]
-test.moyenneGlissante_test(moyenneGlissante,L,3)
-test.moyenneGlissante_test(moyenneGlissante,L,4)
+%# test
+%L=[12,13.5,11.2,11.7,12.1,13.05,11.6]
+%test.moyenneGlissante_test(moyenneGlissante,L,3)
+%test.moyenneGlissante_test(moyenneGlissante,L,4)
 
 \subsection*{Le maximum}
 
 \question{Ecrire une fonction \texttt{maximum(L:list)->float} qui à partir d'une liste de flottants ou entiers renvoie le max de cette liste. La fonction prédéfinie en Python \texttt{max} ne doit pas être utilisée.}
-# votre fonction
+%# votre fonction
 
 \subsection*{Seuil}
 
 On souhaite maintenant, à partir d'une liste \texttt{a}
  d'entiers (ou flottants) et d'un entier (ou flottant) appelé \texttt{seuil} obtenir le nombre 
- d'éléments de \texttt{L} majorés, au sens strict, par \texttt{seuil}. <br/>
- Voici un exemple d'utilisation de cette fonction :
+ d'éléments de \texttt{L} majorés, au sens strict, par \texttt{seuil}. %<br/>
+% Voici un exemple d'utilisation de cette fonction :
 
-# majores_par([12,-5,10,9],10)
-# 2
+%# majores\_par([12,-5,10,9],10)
+%# 2
 
-\question{Ecrire une fonction \texttt{majores_par(L:list,x:float)->int} réalisant cette opération.}
+\question{Ecrire une fonction \texttt{majores\_par(L:list,x:float)->int} réalisant cette opération.}
 
-# votre fonction        
+%# votre fonction        
 
 \question{Tester le bon fonctionnement de votre fonction.}
 
-# test
-majores_par([12,-5,10,9],10)
+%# test
+%majores\_par([12,-5,10,9],10)
 
-\question{Modifier la fonction précédente pour obtenir une fonction \texttt{ elements_majores_par(L:list,x:float)->list}
+\question{Modifier la fonction précédente pour obtenir une fonction \texttt{ elements\_majores\_par(L:list,x:float)->list}
   retournant la liste des éléments majorés par le seuil \texttt{x.}}
 
-# votre fonction
+%# votre fonction
 
 \question{Tester le bon fonctionnement de votre fonction.}
 
-# test
+%# test
 
 \subsection*{Recherche séquentielle dans une liste}
 
@@ -169,65 +168,66 @@ majores_par([12,-5,10,9],10)
   une liste \texttt{a}  et un entier ou un flottant \texttt{x}, et qui renvoie le booléen \texttt{True} ou \texttt{False} selon que l'élément
   \texttt{x} est dans la liste  \texttt{x} ou non.<br/>
   <i> On fera attention à arrêter la recherche dès que l'élément est trouvé.</i><br/>
-  Faire vos tests avec la liste \texttt{les_notes} en prenant pour \texttt{x} la première valeur de \texttt{les_notes}, puis la dernière et enfin une valeur au milieu. }
+  Faire vos tests avec la liste \texttt{les\_notes} en prenant pour \texttt{x} la première valeur de \texttt{les\_notes}, puis la dernière et enfin une valeur au milieu. }
 
-# votre fonction
+%# votre fonction
 
 \question{Tester le bon fonctionnement de votre fonction.}
 
-# test
+%# test
 
-# test
-a=[1,2,5,4,3,9]
-test.sequentielle_test(sequentielle,a,1)
-test.sequentielle_test(sequentielle,a,4)
-test.sequentielle_test(sequentielle,a,9)
-test.sequentielle_test(sequentielle,a,6)
+%# test
+%a=[1,2,5,4,3,9]
+%test.sequentielle_test(sequentielle,a,1)
+%test.sequentielle_test(sequentielle,a,4)
+%test.sequentielle_test(sequentielle,a,9)
+%test.sequentielle_test(sequentielle,a,6)
 
 \question{Définir une fonction \texttt{occurrenceElement(a:list,x:float)->int}, d'arguments
   une liste \texttt{a} et un flottant \texttt{x}, et qui renvoie le nombre d'occurrence de l'entier ou flottant \texttt{x}.}
-# votre fonction
+%# votre fonction
 
 \question{Tester le bon fonctionnement de votre fonction.}
 
 
 
 \question{Définir une fonction \texttt{occurrenceListe(a:list)->list}, d'argument
-  une liste \texttt{a} d'entiers compris dans l'intervalle [0,k] et de longueur \texttt{n} tel que $k<n$ et qui renvoie la liste des nombres d'occurrence des entiers de la liste \texttt{a}. Cette valeur est 0 si le nombre n'est pas dans la liste.<br/>
-<i>Remarque</i> : Une seule boucle for est acceptée.}
+  une liste \texttt{a} d'entiers compris dans l'intervalle [0,k] et de longueur \texttt{n} tel que $k<n$ et qui renvoie la liste des nombres d'occurrence des entiers de la liste \texttt{a}. Cette valeur est 0 si le nombre n'est pas dans la liste.}
+%\begin{rem}Remarque</i> : Une seule boucle for est acceptée.}
 
-# votre fonction
+%# votre fonction
 
 \question{Tester le bon fonctionnement de votre fonction.}
 
-# votre test
+%# votre test
 
 \subsection*{Création de listes aléatoires}
 
 Pour tester vos algorithmes, il peut être utile de créer des listes quelconques de nombres. On peut écrire une fonction qui crée des listes aléatoires à partir de la bibliothèque \texttt{random}.
 
+\begin{lstlisting}
 # import de la bibliothèque random
 import random as r
 # r est un alias
-
+\end{lstlisting}
 \question{Comprendre le fonctionnement de la fonction \texttt{randrange} de cette bibliothèque (en utilisant l'aide et avec des exemples).}
 
-# Tests
+%# Tests
 help (r.randrange)
 
-\question{Ecrire une fonction \texttt{hasard_liste(n:int,k:int)->list} d'arguments deux entiers \texttt{n} et \texttt{k} permettant de générer une liste de \texttt{n} entiers aléatoires appartenant à \texttt{range(k)}.}
+\question{Ecrire une fonction \texttt{hasard\_liste(n:int,k:int)->list} d'arguments deux entiers \texttt{n} et \texttt{k} permettant de générer une liste de \texttt{n} entiers aléatoires appartenant à \texttt{range(k)}.}
 
-# votre fonction
+%# votre fonction
 
 \question{Tester votre fonction avec $n=10$ et $k=7$.}
 
 
-\question{Créer une liste à partir de la fonction \texttt{hasard_liste(n:int,k:int)} et tester votre fonction \texttt{occurrenceListe(a:list)}.}
+\question{Créer une liste à partir de la fonction \texttt{hasard\_liste(n:int,k:int)} et tester votre fonction \texttt{occurrenceListe(a:list)}.}
 
 
 
 \ifprof
 \else
-\end{multicols}
+%\end{multicols}
 \fi
 
