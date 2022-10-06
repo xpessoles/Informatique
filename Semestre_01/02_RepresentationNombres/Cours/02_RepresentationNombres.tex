@@ -1,0 +1,68 @@
+%%%% Paramétrage du cours %%%%
+\def\xxactivite{Cours}
+
+\fichefalse \proftrue \tdfalse \courstrue
+
+\def\xxnumchapitre{Chapitre 1 \vspace{.2cm}}
+\def\xxchapitre{\hspace{.12cm} Représentation des nombres en mémoire}
+
+\def\xxcompetences{%
+\textsl{%
+\textbf{Savoirs et compétences :}\\
+\begin{itemize}[label=\ding{112},font=\color{bleuxp}] 
+\item Représentation des entiers positifs sur des mots de taille fixe.
+\item Représentation des entiers signés sur des mots de taille fixe.
+\item Entiers multi-précision de Python.
+\item Distinction entre nombres réels, décimaux et flottants.
+\item Représentation entre nombres réels, décimaux et flottants.
+\item Représentation des flottants sur des mots de taille fixe. Notion de mantisse, d'exposant. 
+\item Précision des calculs en flottants.
+\end{itemize}
+}}
+
+\def\xxfigures{
+%\includegraphics[width=\linewidth]{matlab}
+%\\
+%\textit{Modèle du pilote hydraulique avec pilotage interactif.}
+}%figues de la page de garde
+
+\input{\repRel/Style/pagegarde_cours_minitoc}
+\setlength{\columnseprule}{.1pt}
+
+\vspace{2cm}
+\pagestyle{fancy}
+\thispagestyle{plain}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Représentation des nombres entiers}
+
+On décompose un entier en dizaines, centaines, milliers, etc. 
+L'essentiel est alors qu'il y ait strictement moins de dix éléments dans chaque type de paquet. Ce nombre d'éléments peut être représenté par un chiffre.
+On écrit alors tous les chiffres à la suite. À gauche, on place les \emph{chiffres de poids fort} (gros paquets). À droite, les \emph{chiffres de poids faible}.
+
+Ainsi $2735$ représente deux milliers plus sept centaines plus trois dizaines plus cinq unités.
+
+\begin{defi}{Ecriture d'un nomre dans une base }
+De manière générale :%, avec $B=10$ et $n\in\N$,
+$$\displaystyle\underline{a_{n}a_{n-1}\ldots a_{1}a_{0}}_{~B} =
+\sum_{k=0}^{n}a_{k}B^{k},~ \textrm{ et }~\forall k \in \iif{0;n},~ a_k\in\ii{0;B}.$$ 
+On note $B$ la base, $a_k$ le chiffre de rang $k$.
+\end{defi}
+
+\begin{exemple}
+Décomposition de 247 en base 10 : $247_{(10)} = 2\cdot 10^2 + 4\cdot 10^1 + 7\cdot 10^0$.
+
+Décomposition de $1001_2$ en base 2 : $1001_2 = 1\cdot 2^{11_2} + 0\cdot 2^{10_2} + 0\cdot 2^{1_2} + 1\cdot 2^{0_2} 
+= 1\cdot 2^{3_{10}} + 0\cdot 2^{2_{10}} + 0\cdot 2^{1_{10}} + 1\cdot 2^{0_{10}}
+$.
+
+\end{exemple}
+
+\begin{rem}
+On appelle : 
+\begin{itemize}
+\item $2$ est appelé digit de poids fort (\textit{most significant digit});
+\item $7$ est appelé digit de poids faible (\textit{least significant digit}).
+\end{itemize}
+\end{rem}
