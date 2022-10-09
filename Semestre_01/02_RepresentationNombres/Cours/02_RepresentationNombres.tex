@@ -302,6 +302,197 @@ Pour représenter un nombre réel dans la machine, il faut préalablement écrir
 signe 1, mantisse x $2^{\text{exposant}}$.
 \end{center}
 
+
+
 \begin{exemple}
 En binaire, on a $-100110,10101 =  -1,0011010101\times 2^5$ avec $-$ le signe, 0011010101 la mantisse et 5 l'exposant.
 \end{exemple}
+
+\begin{minipage}[c]{.4\linewidth}
+Le tableau décrit la répartition des bits selon le type de précision : la taille de la mantisse ($m$ bits) donne la précision mais suivant la valeur de l'exposant, la précision sera totalement différente. 
+
+%Ainsi : 
+%\begin{itemize}
+%\item erreur relative : $2^{-m}$ (poids du dernier bit)
+%\item erreur absolue : erreur relative * $2^{\text{exposant}}$
+%\end{itemize}
+%
+%Simple précision :  	$2^{- 23} = 1,192 … * 10^{- 7}$ 
+%Double précision :  	$2^{- 52} = 2,220 … * 10^{- 16}$
+
+
+\end{minipage}\hfill
+\begin{minipage}[c]{.59\linewidth}
+\begin{center}
+\begin{tabular}{| l |c|c|c|}
+\hline
+
+& Signe & Exposant & Mantisse \\ \hline
+ Simple précision -- 32 bits & 1 & 8 & 23 \\ \hline
+ Double précision -- 64 bits & 1 & 11 & 52 \\ \hline
+ Précision étendue -- 80 bits & 1 & 15 & 64 \\ \hline
+\end{tabular}
+\end{center}
+\end{minipage}
+
+
+\begin{methode}
+\begin{enumerate}
+\item Convertir en binaire les partie entière et fractionnaire du nombre sans tenir compte du signe.
+\item Décaler la virgule vers la gauche pour le mettre sous la forme normalisée (IEEE 754).
+\item Codage du nombre réel avec les conventions suivantes : 
+\begin{itemize}
+\item signe = 1 : Nombre négatif 	(Signe = 0 : Nombre positif);
+\item le chiffre 1 avant la virgule étant invariant pour la forme normalisée, il n’est pas codé;
+\item on utilise un exposant décalé au lieu de l’exposant simple (complément sur octet). Ainsi, on ajoute à l’exposant simple la valeur 127 en simple précision et 1023 en double précision (c’est à dire $2^{n-1}-1$ où $n$ est le nombre de bits de l’exposant);
+\item la mantisse est complétée à droite avec des zéros.
+\end{itemize}
+\end{enumerate}
+\end{methode}
+
+
+\begin{exemple}
+On désire représenter le nombre - 243,25 en virgule flottante au format simple précision.
+
+\begin{enumerate}
+\item $\quad 243,25_{(10)} =  11110011,01_{(2)}$
+\item $\quad 243,25_{(10)} =  1,111001101_{(2)} \times  2^7$ : décalage de 7 bits vers la gauche
+\item Exposant décalé : $7 + 127 = 134_{(10)} = 1000\; 0110_{(2)}$ 	sur $n$ = 8 bits
+\item $111001101\quad 00000000000000$
+\end{enumerate}
+\end{exemple}
+
+%\begin{center}
+%\includegraphics[width=.7\textwidth]{images/reel_2}
+%\end{center}
+
+\footnotesize{
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+S & \multicolumn{8}{c|}{Exposant} & \multicolumn{23}{c|}{Exposant} \\
+\hline
+1 & 1 & 0 & 0 & 0 & 0 & 1 & 1 & 0 & 1 & 1 & 1 & 0 & 1 & 0 & 0 & 
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+\hline
+\multicolumn{4}{|c|}{C} & \multicolumn{4}{c|}{3} & \multicolumn{4}{c|}{7} & 
+\multicolumn{4}{|c|}{3} & \multicolumn{4}{|c|}{4} & \multicolumn{4}{c|}{0} & 
+\multicolumn{4}{c|}{0} & \multicolumn{4}{|c|}{0} \\
+\hline
+\end{tabular}
+\end{center}}
+
+\normalsize
+
+\subsection{Compléments sur la norme IEEE 754}
+
+
+On interprète donc la suite de bits $se_{10}\ldots e_{0}m_{1}\ldots m_{52}$ comme le nombre $x$ défini comme suit. 
+Notons $\displaystyle e  = \underline{e_{10}\ldots e_{0}} = \sum_{k=0}^{10} e_k2^k$. 
+
+\begin{itemize}
+  \item Si $e\in\ii{1,2047}$, $x$ est le  nombre \emph{normalisé}:
+$  x = s \times \underline{1,m_{1}\ldots m_{52}}\times
+  2^{\p{-1023+\underline{e_{10}\ldots  e_{0}}}}
+  = 
+  s \times \p{1+\sum_{k=1}^{52} \frac{m_{k}}{2^{k}}}
+  \times 2^{\p{-1023 + \sum_{k=0}^{10} e_{k}2^{k}}}
+$.
+\item Si $e = 0$ et $m_{1}=\dots=m_{52}=0$ : $x=0$ (deux
+  versions : $+0$ et $-0$).
+
+\item  Si $e = 0$ et $m_{1},\ldots,m_{52}$ non tous nuls, $x$ est le nombre
+\emph{dénormalisé}:
+$
+  x = s \times \underline{0,m_{1}\ldots m_{52}}\times
+  2^{-1022}
+  = 
+  s \times \p{\sum_{k=1}^{52} \frac{m_{k}}{2^{k}}}
+  \times 2^{-1022}
+$.
+\item  Si $e= 2047$ et $m_{1}=\ldots= m_{52}=0$ : $x = s\infty$ ($+\infty$
+ou $-\infty$).
+
+\item  Si $e = 2047$ et $m_{1},\ldots, m_{52}$ non tous nuls: $x=\text{NaN}$.
+\end{itemize}
+%\clearslide{}
+\begin{rem}
+  On ne rentrera pas dans le détail des signification de $+\infty$, $-\infty$ et de $\text{NaN}$.
+\end{rem}
+
+
+Les nombres normalisés permettent de représenter de façon précise les
+réels de $[-M,-m]\cup [m, M]$ 
+avec $ m \approx2^{-1022}\approx 2\times 10^{-308}$ et 
+$M \approx 2^{1024}\approx 1,8 \times 10^{308}$.
+
+Les nombres dénormalisés ne respectent pas la convention de la notation scientifique standard, mais permettent de représenter des nombres plus petits que les nombres normalisés ne peuvent. 
+%\clearslide{}
+
+
+%\clearslide{}
+
+\subsection{En Python}
+
+Avec Python, on peut accéder à la représentation d'un nombre flottant par la méthode \texttt{.hex()}. Attention, le nombre est écrit en hexadécimal. 
+
+\begin{exemple}
+  Avec \texttt{5.5}. 
+\begin{lstlisting}
+>>>5.5.hex()
+'0x1.6000000000000p+2'
+\end{lstlisting}
+%En effet, on a $  5,5 = \dfrac{11}{8} \times 4 = \left(1 + \dfrac{1}{4} + \dfrac{1}{8} \right) \times 2^2$.
+%En binaire, on écrit $1,375 = 1+\dfrac{1}{4} + \dfrac{1}{8}$ comme 
+%$
+% 1,\,\underbrace{0110}\,\underbrace{0000}\,\underbrace{0000}\,\underbrace{0000}\,\underbrace{0000}\,\underbrace{0000}\,\underbrace{0000}\,\underbrace{0000}\,\underbrace{0000}\,\underbrace{0000}\,\underbrace{0000}\,\underbrace{0000}\,\underbrace{0000}.
+%$
+%Le regroupement indiqué par les accolades donne l'écriture hexadécimale.
+%  1,6000000000000.
+%\end{equation*}
+\end{exemple}
+
+
+\subsection{Problèmes de précision}
+
+On rencontre différents types de problèmes de précision.
+\begin{enumerate}
+\item Les problèmes liés aux arrondis des calculs.
+\item Les problèmes liés au passage à la représentation binaire.
+\end{enumerate}
+%\clearslide{}
+
+\subsubsection{Problèmes liés aux arrondis}
+Supposons que l'on veuille effectuer des calculs avec des chiffres décimaux n'ayant que deux chiffres après la virgule.
+\begin{exemple}
+Pour la multiplication:
+$1,23\times 1,56 = 1,9188$
+\end{exemple}
+\begin{exemple}
+Pour l'addition:
+$1,23\times 10^{3} + 4,56\times 10^{0} = 1,23456\times 10^{3}$
+\end{exemple}
+Pour garder deux chiffres après la virgule, on arrondit le résultat et l'on introduit donc une erreur d'approximation.
+
+Ce problème se pose en décimal, comme en binaire !
+
+%\clearslide{}
+\subsubsection{Problèmes liés au passage à la représentation binaire}
+
+\textbf{Attention:}
+Les représentations binaires et décimales partagent les \emph{mêmes} problèmes d'arrondis. 
+Cependant, on crée des erreurs d'arrondis lors du \emph{passage} d'une représentation à l'autre.
+\begin{exemple}
+En Python, on rentrera dans la console des nombres en écriture décimale mais le calcul interne se fera en binaire. Cela donne la chose suivante.
+\begin{lstlisting}
+>>> 0.1+0.2 == 0.3
+	False
+>>> 0.1+0.2
+	0.30000000000000004
+>>> 0.1+0.2-0.3
+	5.551115123125783e-17
+\end{lstlisting}
+\end{exemple}
+
+\textbf{En conséquence, on ne teste jamais l'égalité entre deux flottants.}
+
