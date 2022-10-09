@@ -3,7 +3,7 @@
 
 \fichefalse \proftrue \tdfalse \courstrue
 
-\def\xxnumchapitre{Chapitre 1 \vspace{.2cm}}
+\def\xxnumchapitre{Chapitre 2 \vspace{.2cm}}
 \def\xxchapitre{\hspace{.12cm} Représentation des nombres en mémoire}
 
 \def\xxcompetences{%
@@ -197,11 +197,85 @@ Les nombres négatifs seront codés selon la méthode du complément à 2.
 Si les mots sont codés sur $n$ bits, si on souhaite coder $a<0$, $a$ sera codé comme l'entier naturel $a+2^n$. 
 \end{methode}
 
-\begin{exemple} Soit un système où les entiers relatifs sont codés sur 3 bits. On peut donc coder des nombres compris dans $\llbracket-4,3\rrbracket$.
+\begin{exemple} 
+\begin{multicols}{2}
+Soit un système où les entiers relatifs sont codés sur 3 bits. On peut donc coder des nombres compris dans $\llbracket-4,3\rrbracket$.
 \begin{itemize}
 \item 2 est codé par $2=(010)_2$;
 \item $-2$ est codé par $-2+2^3 = 6 = (110)_2$.
 \end{itemize}  
+\textit{Remarques :}
+\begin{itemize}
+\item les nombres négatifs commencent donc par $1$;
+\item pour convertir $a=(110)_2$ en base 10 lorsque le codage est sur 3 bits, on a :$a= (110)_2 - 2^3 = 6 - 8 = -2$.
+\end{itemize}  
+\end{multicols}
 \end{exemple}
 
-\section{Représentation des nombrés réels}
+\section{Représentation des nombres réels}
+\subsection{Conversion de la partie fractionnaire des nombres réels}
+
+En notation décimale, les chiffres à gauche de la virgule représentent des entiers, des dizaines, des centaines, etc. et ceux à droite de la virgule, des dizièmes, des centièmes, des millièmes, etc.
+
+
+\begin{exemple}
+$$
+3,3125_{ (10)}	=	3\cdot 10^0 + 3\cdot10^{- 1} + 1\cdot10^{- 2} + 2\cdot10^{ -3} + 5\cdot10^{ -4}
+$$
+\end{exemple}
+
+Par analogie, pour écrire un nombre binaire à virgule, on utilise les puissances négatives de 2.
+
+\begin{exemple}
+\begin{eqnarray*}
+11,0101_{(2)} &=&	1\cdot 2^{1} + 1\cdot 2^{0} + 0\cdot 2^{-1} + 1\cdot 2^{- 2} + 0\cdot 2^{-3} + 1\cdot 2^{- 4}\\
+		 &=&    2   +   1   +    0    +   0,25  +     0     +   0,0625\\
+		 &=&   3,3125_{(10)}\\
+\end{eqnarray*}
+\vspace{-1cm}
+\end{exemple}
+
+
+Le codage de la partie entière (3 dans l’exemple précédent) ne pose pas de problèmes particuliers. Pour la partie fractionnaire (0,3125), il est nécessaire d’adapter la procédure.
+
+\begin{methode}
+\textbf{Conversion d'une partie fractionnaire en binaire}
+
+\begin{enumerate}
+\item On multiplie la partie fractionnaire par 2. 
+\item La partie entière obtenue représente le poids binaire (limité aux seules valeurs 0 ou 1). 
+\item La partie fractionnaire restante est à nouveau multipliée par 2.
+\item On procède ainsi de suite jusqu’à ce qu’il n’y ait plus de partie fractionnaire ou que le nombre de bits obtenus correspond à la taille du mot mémoire dans lequel on stocke cette partie.
+\end{enumerate}
+\end{methode}
+
+
+\begin{exemple}
+\textit{Conversion de la partie fractionnaire 0,3125}
+
+\begin{center}
+\begin{tabular}{cccccc|c|cc}
+\cline{7-7}
+0,3125 & x & 2 & = & 0,625 & = & 0 & + & 0,625 \\
+0,6250 & x & 2 & = & 1,250 & = & 1 & + & 0,250 \\
+0,2500 & x & 2 & = & 0,500 & = & 0 & + & 0,500 \\
+0,5000 & x & 2 & = & 1,000 & = & 1 & + & 0,000 \\
+\cline{7-7}
+\end{tabular}
+\end{center}
+On considère les parties entières de haut en bas :
+$0,3125_{(10)}=0,0101_{(2)}$.
+%\begin{center}
+%\includegraphics[width=.7\textwidth]{images/reel_0}
+%\end{center}
+\end{exemple}
+
+%\begin{rem}
+%\textbf{Inconvénients}
+%
+%Savoir coder la partie fractionnaire d’un nombre à virgule ne suffit pas pour coder tous les nombres à virgule en binaire. En effet, la gestion d’une virgule virtuelle par programme n’est pas aisée. De plus, cette méthode ne permet pas de représenter des nombres très grands ou très petits comme le nombre d’Avogadro ($6,02214129.. \cdot  10^{23}$) ou la constante de Planck ($6,62606957 \cdot 10^{- 34}$).
+%\end{rem}
+
+\begin{exemple}
+\textit{Convertir la partie fractionnaire 0,1}
+\end{exemple}
