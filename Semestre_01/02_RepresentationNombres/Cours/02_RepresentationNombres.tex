@@ -279,3 +279,29 @@ $0,3125_{(10)}=0,0101_{(2)}$.
 \begin{exemple}
 \textit{Convertir la partie fractionnaire 0,1}
 \end{exemple}
+
+\subsection{Représentation d'un nombre réel en flottant en utilisant la norme IEEE-754}
+
+Pour représenter des réels, nombres pouvant être positifs, nuls, négatifs et non entiers, on utilise la représentation en virgule flottante (\textit{float} en anglais) qui fait correspondre au nombre 3 informations :
+
+$$
+-243,25_{(10)} = \underbrace{-}_{1}0,\underbrace{24325}_{2}\cdot10^{\underbrace{3}_{3}}
+$$
+On appelle alors : 
+\begin{enumerate}
+\item le signe (positif ou négatif);
+\item la mantisse (nombre de chiffres significatifs);
+\item l'exposant : puissance à laquelle la base est élevée. 
+\end{enumerate}
+
+Sous cette forme normalisée, il suffit de mémoriser le signe, l’exposant et la mantisse pour avoir une représentation du nombre en base 10. Il n’est pas utile de mémoriser le 0 avant la virgule puisque tous les nombres vont commencer par 0. En faisant varier l’exposant, on fait « flotter » la virgule décimale.
+
+Pour représenter un nombre réel dans la machine, il faut préalablement écrire les nombres sous la forme (norme IEEE 754 -- Institute of Electrical and Electronics Engineers) :
+
+\begin{center}
+signe 1, mantisse x $2^{\text{exposant}}$.
+\end{center}
+
+\begin{exemple}
+En binaire, on a $-100110,10101 =  -1,0011010101\times 2^5$ avec $-$ le signe, 0011010101 la mantisse et 5 l'exposant.
+\end{exemple}
