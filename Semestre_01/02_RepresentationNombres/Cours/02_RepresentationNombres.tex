@@ -58,9 +58,110 @@ Décomposition de $1001_2$ en base 2 : $1001_2 = 1\cdot 2^{11_2} + 0\cdot 2^{10_
 = 1\cdot 2^{3_{10}} + 0\cdot 2^{2_{10}} + 0\cdot 2^{1_{10}} + 1\cdot 2^{0_{10}}$.
 \end{exemple}
 
-\subsection{Représentation d'un nombre en base 2}
 
-\subsection{Représentation d'un nombre en base 16}
+
+\subsection{Les systèmes de numération}
+\subsubsection{Système décimal}
+Le système décimal est le système universellement utilisé. C'est la base de référence, ce qui signifie qu'un nombre est de manière implicite écrite en décimal, dès lors qu'il est écrit sans précision de base. 
+
+En python, les chiffres sont \textbf{affichés} par défaut dans le système décimal. 
+
+\subsubsection{Système binaire}
+
+C'est la base de numération couramment utilisée en électronique ou informatique. C'est un système en base 2, l'écriture des nombres est donc composée des caractères de 0 et 1. 
+
+\begin{exemple}~\\
+
+\begin{minipage}[c]{.4\linewidth}
+En binaire on compte de la manière suivante : 
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+Base 10 & Base 2 \\
+\hline \hline
+0 & 0000 \\ \hline
+1 & 0001 \\ \hline
+2 & 0010 \\ \hline
+3 & 0011 \\ \hline
+4 & 0100 \\ \hline
+\end{tabular}
+\end{center}
+\end{minipage} \hfill
+\begin{minipage}{.57\linewidth}
+\textit{Convertir $\left(11011001\right)_2$ en base 10.}
+
+\textit{Convertir $\left(42\right)_{10}$ en base 2.}
+\end{minipage}
+\end{exemple}
+
+En Python, il est possible de manipuler des nombres en binaires en utilisant le préfixe \texttt{0b}. Ainsi, \texttt{0b111} est interprété comme l'entier 7. 
+Il est aussi possible de convertir des entiers en binaires avec la fonction bin. Le résultat est une chaîne de caractère (\texttt{str}) de la forme \texttt{'0b111'}.
+
+\subsubsection{Système hexadécimal}
+Ce système à base 16 est le plus utilisé en électronique numérique car il permet une représentation compacte ce qui, dans les systèmes actuels à grande capacité mémoire, est un avantage non négligeable. 
+Ainsi, les chiffres de ce système de numération sont 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, A, B, C, D, E, F.  
+
+\begin{exemple} ~\\
+\begin{minipage}[c]{.6\linewidth}
+En hexadécimal on compte de la manière suivante : 
+\begin{center}
+\begin{tabular}{|c|c|c||c|c|c|}
+\hline
+Base 10 & Base 2 & Base 16 & Base 2 & Base 10 & Base 16 \\
+\hline \hline
+0 & 0000 & 00 & 10 & 1010 & 0A \\ \hline
+1 & 0001& 01 & 11  & 1011 & 0B \\ \hline
+2 & 0010& 02 & 12  & 1100 & 0C \\ \hline
+3 & 0011& 03 & 13  & 1101 & 0D \\ \hline
+4 & 0100& 04 & 14  & 1110 & 0E \\ \hline
+5 & 0101& 05 & 15  & 1111 & 0F \\ \hline
+6 & 0110& 06 & 16  & 1 0000 & 10\\ \hline
+7 & 0111& 07 & 17  & 1 0001 & 11 \\ \hline
+8 & 1000& 08 & 18  & 1 0010 & 12 \\ \hline
+9 & 1001& 09 & 19  & 1 0011 & 13 \\ \hline
+\end{tabular}
+\end{center}
+\end{minipage}% \hfill
+\begin{minipage}[t]{.37\linewidth}
+Convertir $\left(BC5 \right)_{16}$ en base 10.
+
+Convertir $192$ en base 16.
+\end{minipage}
+\end{exemple}
+
+
+En Python, il est possible de manipuler des nombres en hexadécimal en utilisant le préfixe \texttt{0x}. Ainsi, \texttt{0xA1} est interprété comme l'entier 162. 
+Il est aussi possible de convertir des entiers en hexadécimal avec la fonction \texttt{hex}. Le résultat est une chaîne de caractère (\texttt{str}) de la forme \texttt{'0xa1'}.
+
+
+\subsection{Algorithme de décomposition d'un entier dans une base}
+\begin{methode}
+La méthode générale pour décomposer un entier $n$ en base $k$ est la suivante :
+\begin{itemize}
+\item on effectue des divisions euclidiennes successives par k jusqu’à avoir un quotient nul ;
+\item on récupère les restes en remontant les calculs.
+\end{itemize}
+\end{methode}
+
+\begin{lstlisting}
+def decomposition(x:int, k:int)->str:
+    """Donne la décomposition de l'entier x dans la base k.
+    Entrées :
+        x(int) : le nombre entier à écrire dans une nouvelle base
+        k(int) la base de décomposition
+    Sortie :
+        le nombre dans la nouvelle base sous forme de chaine de caractères
+    """
+    n = x
+    chaine = ''
+    if n==0:
+        chaine='0'
+    while n > 0:
+        r = n % k
+        chaine = str(r) + chaine
+        n = n // k
+    return(chaine)
+\end{lstlisting}
 
 \section{Représentation des entiers sur un ordinateur}
 \subsection{Cadre}
@@ -75,7 +176,32 @@ De manière générale, on s’intéressera au fonctionnement sur des ordinateur
 ($n \geq 2$).
 
 
+Par ailleurs, sur les disques durs, les donées sont stockées sous forme binaire. Ainsi, 
+un octet = \SI{8}{bits}, un kilo octet~= \SI{1000}{octet} \textit{etc}.
+
+
 \subsection{Représentation des entiers}
-\subsection{Représentation des entiers relatifs}
+Les entiers sont directement codés en binaire. Lorsque les mots-machines sont codés sur $n$ bits, il est alors possible de coder des nombres compris entre 0 et $2^n-1$.
+\begin{rem}
+\begin{itemize}
+\item On peut alors observer des dépassements de capacité : si les mots sont codés sur 4 bits, $(1100)_2 + (1000)_2 = (0100)_2$ (et non $(10100)_2$). Dans ce cas, la retenue est perdue. 
+\item En Pyton, les entiers ne sont pas codés sur un nombre de bits défini. On est seulement limité par la mémoire de la machine.
+\end{itemize}
+\end{rem}
+\subsection{Représentation des entiers relatifs -- Complément à 2}
+
+Lorsque les mots sont codés sur $n$ bits et qu'on souhaite coder des entiers positifs et négatifs, on pourra coder des nombres compris dans l'intervalle $\llbracket-2^{n-1},2^{n-1}-1\rrbracket$. Les nombres positifs seront codés en binaire comme vu précédemment. 
+
+Les nombres négatifs seront codés selon la méthode du complément à 2. 
+\begin{methode}
+Si les mots sont codés sur $n$ bits, si on souhaite coder $a<0$, $a$ sera codé comme l'entier naturel $a+2^n$. 
+\end{methode}
+
+\begin{exemple} Soit un système où les entiers relatifs sont codés sur 3 bits. On peut donc coder des nombres compris dans $\llbracket-4,3\rrbracket$.
+\begin{itemize}
+\item 2 est codé par $2=(010)_2$;
+\item $-2$ est codé par $-2+2^3 = 6 = (110)_2$.
+\end{itemize}  
+\end{exemple}
 
 \section{Représentation des nombrés réels}
