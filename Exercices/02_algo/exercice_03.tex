@@ -1,0 +1,35 @@
+%\exer{Résolution d'une équation du second degré}
+
+On considère l'équation $ax^2 + bx+c = 0$. 
+
+\question{Ecrire la fonction \texttt{discriminant(a:float,b:float,c:float)-> float} permettant de calculer le discriminant de l'équation.}
+\ifprof
+\begin{corrige}~\\ \vspace{-.5cm}
+\begin{lstlisting}
+def discriminant(a,b,c):
+    delta = b**2-4*a*c
+    return delta
+\end{lstlisting}
+\end{corrige}
+\else
+\fi
+
+
+\question{Ecrire la fonction \texttt{solve(a:float,b:float,c:float)->list} permettant de calculer la ou les solutions de l'équation. La fonction renverra la liste des (ou de la solution) dans $\mathbb{R}$. Elle renverra une liste vide s'il n'y a pas de solutions dans $\mathbb{R}$.}
+\ifprof
+\begin{corrige}~\\ \vspace{-.5cm}
+\begin{lstlisting}
+def solve(a,b,c):
+    delta = discriminant(a, b, c)
+    if delta >= 0 : 
+        delta = delta**0.5
+        p1,p2 = (-b-delta)/2/a,(-b+delta)/2/a
+        return [p1,p2]
+    else :
+        return []
+\end{lstlisting}
+\end{corrige}
+\else
+\fi
+
+

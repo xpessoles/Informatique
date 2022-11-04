@@ -1,0 +1,33 @@
+%\exer{Sur les listes}
+
+\question{Ecrire une foction \texttt{maxi\_1(L:list)->int} renvoyant le maximum de la liste \texttt{L}. Les fonctions embarquées dans Python telles que \texttt{max} sont interdites.}
+\ifprof
+\begin{corrige}~\\ \vspace{-.5cm}
+\begin{lstlisting}
+def maxi_1(L):
+    m = L[0]
+    for e in L:
+        if e>m:
+            m = e
+    return m
+\end{lstlisting}
+\end{corrige}
+\else
+\fi
+
+
+\question{Ecrire une foction \texttt{maxi\_2(L:list)->int} renvoyant l'indice du maximum de la liste \texttt{L}. Les fonctions embarquées dans Python telles que \texttt{max} sont interdites.}
+\ifprof
+\begin{corrige}~\\ \vspace{-.5cm}
+\begin{lstlisting}
+def maxi_2(L):
+    m = 0
+    for i in range(len(L)): 
+        if L[i] > L[m]:
+            m = i
+    return m
+\end{lstlisting}
+\end{corrige}
+\else
+\fi
+

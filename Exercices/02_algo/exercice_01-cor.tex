@@ -1,0 +1,35 @@
+%\exer{L'algorithme d'Euclide}
+\ifprof 
+\else
+L'algorithme d'Euclide permet de trouver le plus grand commun diviseur (PGCD)  de deux nombres sans avoir besoin de faire leur décomposition en produit de facteurs premiers. Il est basé sur la propriété suivante.
+
+\begin{prop}
+Si $a$ et $b$ sont deux entiers naturels, avec par exemple $a\geq b$ si $r$ est le reste de $a$ par $b$, alors le PGCD de $a$ et $b$ vaut le PGCD de $b$ et $r$. 
+
+\end{prop}
+
+On fait donc des divisions euclidiennes, jusqu'à ce qu'on trouve un reste nul. Le dernier reste non nul est le PGCD de $a$ et $b$.
+\fi
+
+\question{Quelle instruction Python permet de déterminer le reste de la division euclidienne de $a$ par $b$.}
+\ifprof
+\begin{corrige}~\\ \vspace{-.5cm}
+\begin{lstlisting}
+a%b
+\end{lstlisting}
+\end{corrige}
+\else
+\fi
+
+\question{Ecrire une fonction \texttt{pgcd(a:int,b:int)-> int} calculant et renvoyant le PGCD de $a$ et de $b$ en utilisant l'algorithme d'Euclide.}
+\ifprof
+\begin{corrige}~\\ \vspace{-.5cm}
+\begin{lstlisting}
+def pgcd(a,b):
+    while b:
+        a,b=b,a%b
+    return(a)
+\end{lstlisting}
+\end{corrige}
+\else
+\fi

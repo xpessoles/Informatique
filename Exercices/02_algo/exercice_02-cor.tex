@@ -1,0 +1,42 @@
+%\exer{Une suite ...}
+\ifprof 
+\else
+On considère la suite $u_n$ définie pour $n \in \mathbb{N}$ par $u_n = 15\times 0,9^n +3$.
+\fi
+\question{Ecrire la fonction \texttt{terme\_n(n:int)-> float} permettant de calculer le nième terme de la suite~$u_n$.}
+\ifprof
+\begin{corrige}~\\ \vspace{-.5cm}
+\begin{lstlisting}
+def terme_n(n) :
+    return 15*0.9**n+3
+\end{lstlisting}
+\end{corrige}
+\else
+\fi
+
+\question{Ecrire la fonction \texttt{liste\_for(n:int)-> list} renvoyant la liste des $n$ premiers termes de la suite~$u_n$. Cette fonction devra utiliser la fonction \texttt{terme\_n} et une boucle \texttt{for}.}
+\ifprof
+\begin{corrige}~\\ \vspace{-.5cm}
+\begin{lstlisting}
+def liste_for(n):
+    L = []
+    for i in range(n):
+        L.append(terme_n(i))
+    return L
+\end{lstlisting}
+\end{corrige}
+\else
+\fi
+
+
+\question{Ecrire la fonction \texttt{liste\_c(n:int)-> list} renvoyant la liste des $n$ premiers termes de la suite $u_n$. Cette fonction devra utiliser la fonction \texttt{terme\_n}. La liste renvoyée sera une liste en comprehésion.}
+\ifprof
+\begin{corrige}~\\ \vspace{-.5cm}
+\begin{lstlisting}
+def liste_c(n):
+    return [terme_n(i) for i in range(n)]
+\end{lstlisting}
+\end{corrige}
+\else
+\fi
+

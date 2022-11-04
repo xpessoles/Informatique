@@ -1,0 +1,97 @@
+%\exer{Calendrier Gregorien}
+%[D'après Informatique Pour Tous, Vuibert]
+\ifprof 
+\else
+La manipulation des dates dans les logiciels de gestion, ou encore sur les sites internet de réservation, doit s'effectuer conformément au calendrier grégorien (entré en vigueur a la fin du XVI siècle en France), en précisant pour chaque date le jour de la semaine. Or, le calendrier est un format assez éloigné des formats habituels de stockage des nombres dans un ordinateur.
+
+Cet exercice vise à déterminer, pour une date donnée, sa position dans l'énumération des jours depuis le 01/01/1600, et le jour de la semaine correspondant.
+\fi
+
+
+\question{Proposer une fonction \texttt{nombre\_de\_jours (jour , mois, annee)} qui prend en entrée une date de la forme jour/mois/année postérieure au 1/1/1600, et renvoie dans le nombre de jours écoulés entre le 1/1/1600 et la date considérée, sans tenir compte des années bissextiles (c'est-à-dire en supposant que toutes les années ont 365 jours). On pourra utiliser la liste des nombres de jours de chaque mois, pour une année non bissextile.}
+\begin{lstlisting}
+m = [31,28,31,30,31,30,31,31,30,31,30,31]
+\end{lstlisting}
+\ifprof 
+\begin{corrige}~\\ \vspace{-.5cm}
+\begin{lstlisting}
+def nombre_de_jours (jour , mois, annee):
+    mois = mois -1 
+    m = [31,28,31,30,31,30,31,31,30,31,30,31]
+    nb_jours = (annee- 1600)*365
+    for i in range(mois) :
+        nb_jours = nb_jours + m[i]
+    return nb_jours + jour
+\end{lstlisting}
+\end{corrige}
+\else
+\fi
+
+\ifprof 
+\else
+Les années bissextiles sont déterminées par les règle suivantes :
+\begin{enumerate}
+\item si l'année est divisible par 4, passez à l'étape 2. Sinon passez à l'étape 5;
+\item si l'année est divisible par 100, passez à l'étape 3. Sinon, passez à l'étape 4.;
+\item si l'année est divisible par 400, passez à l'étape 4. Sinon, passez à l'étape 5;
+\item l'année est une année bissextile (elle a 366 jours);
+\item l'année n'est pas une année bissextile (elle a 365 jours).
+\end{enumerate}
+\fi
+
+\question{Proposer une fonction bissextile (année) renvoyant Vrai si l'année est bissextile et Faux sinon.}
+\ifprof
+\begin{corrige}~\\ \vspace{-.5cm}
+\begin{lstlisting}
+def bissextile(annee):
+    if annee%4 == 0:
+        if annee%100 == 0:
+            if annee%400 == 0:
+                bissex == True 
+            else :
+                bissex == False
+        else :
+            bissex == True 
+    else : 
+        bissex == False
+    return bissex
+\end{lstlisting}
+\end{corrige}
+\else
+\fi
+
+
+\question{Modifier le programme de la fonction \texttt{nombre\_de\_jours(jours,mois,annee)} pour tenir compte des années bissextiles.}
+
+%Par exemple, nombre_de_jours (1,2,1600) doit retourner la valeur 31, et nombre_de_jours (1,1, 1604) la valeur 1461 (366+365+365+365) puisque l'année 1600 est bissextile.
+\ifprof
+\begin{corrige}~\\ \vspace{-.5cm}
+\begin{lstlisting}
+def nombre_de_jours (jour , mois, annee):
+    mois = mois -1 
+    m = [31,28,31,30,31,30,31,31,30,31,30,31]
+    nb_jours = (annee- 1600)*365
+    for i in range(mois) :
+        print(i)
+        nb_jours = nb_jours + m[i]
+    return nb_jours + jour
+    
+\end{lstlisting}
+\end{corrige}
+\else
+\fi
+
+
+
+\question{Le 1\up{er} janvier 2001 était un lundi. Déterminer, en utilisant la fonction de la question précédente, quelle instruction permet de connaître quel jour de la semaine est tombé le 14 juillet 1789 ?}
+
+\ifprof
+\begin{corrige}~\\ \vspace{-.5cm}
+\begin{lstlisting}
+jours = [''Lundi'',''Mardi'',''Mercredi'',''Jeudi'',''Vendredi'',''Samedi'',''Dimanche'']
+print(jours[(nombre_de_jours(1,5,2040)-nombre_de_jours(1,1,2001))%7])
+print(jours[(nombre_de_jours(14,7,1789)-nombre_de_jours(1,1,2001))%7])
+\end{lstlisting}
+\end{corrige}
+\else
+\fi

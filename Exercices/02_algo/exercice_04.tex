@@ -1,0 +1,58 @@
+%\exer{Résolution d'une équation par dichotomie}
+
+\ifprof
+\else
+Soit l'équation \emph{E} : \quad $x\ln(x)-1=0$ .
+
+On admet que \emph{E} admet une unique solution $\alpha$ sur $\mathbb R$ et que
+$\alpha\in[1;\text{e}]$. On prendra e$\approx2.8$. On peut aussi noter qu'en python \texttt{e} est un attribut de la bibliothèque \texttt{math}. On y a donc accès par \texttt{math.e}.
+\fi
+
+\question{Ecrire la fonction \texttt{f(x)} calculant $x\ln(x)-1$. On considèrera qu'on dispose de la fonction \texttt{ln}.}
+\ifprof
+\begin{corrige}~\\ \vspace{-.5cm}
+\begin{lstlisting}
+import math as m
+def f(x):
+    return x*m.log(x)-1
+\end{lstlisting}
+\end{corrige}
+\else
+\fi
+
+\question{Dessiner un schéma illustrant la rechercher du 0 d'une fonction par une méthode dichotomique.}
+\ifprof
+\begin{corrige}~\\ \vspace{-.5cm}
+\begin{lstlisting}
+def dicho(f,a,b,epsilon):
+    m  = (a+b)/2
+    while (b-a)/2 > epsilon :
+        if f(a)*f(m) > 0 :
+            a=m
+        else :
+            b=m
+        m = (a+b)/2
+    return m 
+\end{lstlisting}
+\end{corrige}
+\else
+\fi
+
+\question{Ecrire la fonction \texttt{dichotomie(f,a,b,epsilon)} renvoyant une valeur approchée à \texttt{epsilon} près de cette solution par dichotomie.}
+
+\ifprof
+\begin{corrige}~\\ \vspace{-.5cm}
+\begin{lstlisting}
+def dicho(f,a,b,epsilon):
+    m  = (a+b)/2
+    while (b-a)/2 > epsilon :
+        if f(a)*f(m) > 0 :
+            a=m
+        else :
+            b=m
+        m = (a+b)/2
+    return m 
+\end{lstlisting}
+\end{corrige}
+\else
+\fi

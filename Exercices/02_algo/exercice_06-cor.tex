@@ -1,0 +1,57 @@
+%\exer{Fonction \texttt{mystere}}
+\ifprof 
+\else
+\begin{lstlisting}
+def mystere(n,p):
+    if p < 0 or p > n :
+        return 0
+    else :
+        f = 1
+        for i in range(p) :
+            f = f * (n + 1 - p + i) // (i + 1)
+    return f
+\end{lstlisting}
+\fi
+
+\question{Que renvoie la fonction \texttt{mystere(4,8)} ?}
+\ifprof
+\begin{corrige}
+\begin{lstlisting}
+0
+\end{lstlisting}
+\end{corrige}
+\else
+\fi
+
+\vspace{-.5cm}
+
+\question{Que renvoie la fonction \texttt{mystere(8,4)} ? Pour cela, on recopiera et on complètera le tableau suivant.}
+\ifprof 
+\else
+\vspace{-1cm}
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline 
+Valeur de \texttt{i} en entrée de boucle & Valeur de \texttt{f} en entrée de boucle \\
+\hline 
+0 & 1 \\
+\hline 
+... & ...\\
+\hline 
+\end{tabular}
+\end{center}
+\fi
+
+\ifprof
+\begin{corrige}
+\begin{lstlisting}
+0 1
+1 5
+2 15
+3 35
+
+70
+\end{lstlisting}
+\end{corrige}
+\else
+\fi
