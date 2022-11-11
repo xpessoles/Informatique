@@ -31,7 +31,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Définitions}
-\begin{defi}%Fonctions récusives]
+\begin{defi}{Fonctions récusives}
 Une fonction récursive est une fonction qui s'appelle elle-même.
 
 On appelle récursion l'appel de la fonction à elle-même.
@@ -78,7 +78,7 @@ def un_it (n : int) -> float :
         return u
 \end{lstlisting}
 \end{minipage} \hfill
-\begin{minipage}[c]{.45\linewidth}
+\begin{minipage}[c]{.5\linewidth}
 \begin{lstlisting}
 def un_rec (n : int) -> float :
     if n == 1 :
@@ -142,7 +142,7 @@ def somme(L:list) -> float :
         return L[0]+somme(L[1:])
 \end{lstlisting}
 \end{minipage} \hfill
-\begin{minipage}[c]{.45\linewidth}
+\begin{minipage}[c]{.53\linewidth}
 Pour une chaîne de caractères, si on souhaite renvoyer son miroir (par exemple, le miroir de \texttt{abc} serait \texttt{cba}) : 
 \begin{itemize}
 \item si la chaîne de caractère a une taille de 1, on renvoie le caractère;
@@ -162,7 +162,7 @@ def miroir(ch:str) -> str :
 
 Les algorithmes dichotomiques se prêtent aussi à des formulations récursives. Prenons comme exemple la recherche d'un élément dans une liste triée. L'algorithme de gauche propose une version itérative. L'algorithme de droite une version récursive. 
 
-\noindent\begin{minipage}[c]{.49\linewidth}
+%\noindent\begin{minipage}[c]{.49\linewidth}
 \begin{lstlisting}
 def appartient_dicho(e : int , t : list) -> bool:
     """Renvoie un booléen indiquant si e est 
@@ -188,8 +188,9 @@ def appartient_dicho(e : int , t : list) -> bool:
             g = m+1 
     return False
 \end{lstlisting}
-\end{minipage} \hfill
-\begin{minipage}[c]{.49\linewidth}
+
+%\end{minipage} \hfill
+%\begin{minipage}[c]{.49\linewidth}
 \begin{lstlisting}
 def appartient_dicho_rec(e : int , t : list) -> bool:
     """Renvoie un booléen indiquant si e est dans t. Préconditions : t est un tableau de nombres trié par ordre croissant e est un nombre"""
@@ -214,9 +215,9 @@ def appartient_dicho_rec(e : int , t : list) -> bool:
             appartient_dicho_rec(e,t[g:d])
     return False
 \end{lstlisting}
-\end{minipage}
+%\end{minipage}
 
-\section{Tracer de figures définies par récursivite}
+\section{Tracer de figures définies par récursivité}
 Un grand nombre de figures peuvent être tracées en utilisant des algorithmes récursifs (flocon de Koch, courbe de Peano, courbe du dragon \textit{etc.}).
 
 Ci-dessous un exemple de figure définie par récursivité où à chaque itération un cercle va se propager vers le haut, le bas, la gauche et la droite. À chaque itération, le rayon de cercle est divisé par 2. 
