@@ -19,11 +19,11 @@ f=open(nom_de_fichier,'w')
 \end{itemize}
 
 \begin{lstlisting}
-f.write(''blabla'')
+f.write('blabla')
 \end{lstlisting}
 
 \begin{itemize}
-\item Il ne faudra pas oublier de fermer le fichier avec 
+\item Enfin, on feremra le fichier avec 
 \end{itemize}
 
 \begin{lstlisting}
@@ -74,12 +74,15 @@ f.close()
 
 \begin{exemple}~\\
 \begin{lstlisting}
-f=open('essai.txt','r')
-c=f.read().split()
+>>> f=open('essai.txt','r')
+>>> c=f.read().split()
+>>> f.close()
+>>> print(c)
+        ['3/2', '=', '1.5', '3', '2', '1', '5']
 \end{lstlisting}
 \end{exemple}
 
-renvoie \texttt{['3/2', '=', '1.5', '3', '2', '1', '5']}
+
 
 
 
@@ -174,7 +177,7 @@ Ainsi, l'indice \og ligne \texttt{i} colonne \texttt{j} \fg\ de la matrice repr�
 
 \section*{Travail demandé}
 
-Commencez par recopier les fonctions  \texttt{image\_noire}, \texttt{dim} et  \texttt{lit\_valeurs} données ci dessous : ce sont des exemples utiles, utilisez les ! 
+Commencez par recopier les fonctions  \texttt{image\_noire}, \texttt{dim} et  \texttt{lit\_valeurs} données ci dessous : ce sont des exemples utiles, utilisez-les ! 
 
 \begin{lstlisting}
 def image_noire(n, p):
