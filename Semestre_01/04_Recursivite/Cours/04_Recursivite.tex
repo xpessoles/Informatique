@@ -5,7 +5,7 @@
 \fichefalse \proftrue \tdfalse \courstrue
 
 \def\xxnumchapitre{Chapitre 4 \vspace{.2cm}}
-\def\xxchapitre{\hspace{.12cm} Récurisivité}
+\def\xxchapitre{\hspace{.12cm} Récursivité}
 
 \def\xxcompetences{%
 \textsl{%
@@ -16,7 +16,7 @@
 }}
 
 \def\xxfigures{
-%\includegraphics[width=\linewidth]{matlab}
+\includegraphics[width=\linewidth]{fractale}
 %\\
 %\textit{Modèle du pilote hydraulique avec pilotage interactif.}
 }%figues de la page de garde
@@ -31,7 +31,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Définitions}
-\begin{defi}{Fonctions récusives}
+\begin{defi}{Fonctions récursives}
 Une fonction récursive est une fonction qui s'appelle elle-même.
 
 On appelle récursion l'appel de la fonction à elle-même.
@@ -49,6 +49,16 @@ La programmation récursive est un paradigme de programmation au même titre que
 \end{methode}
  
  
+
+Les avantages et inconvénients d'un algorithme récursif :
+\begin{itemize}
+\item simplicité de l'écriture récursive dans certains cas ;
+\item l'algorithme peut sembler plus aisé lors de sa lecture ;
+\item comme pour les algorithmes itératifs, il faut prêter attention à sa terminaison en utilisant un variant de boucle (à voir ultérieurement) ;
+\item comme pour les algorithmes itératifs, il est aussi nécessaire de vérifier la correction de l'algorithme en utilisant un invariant de boucle (à voir ultérieurement) ;
+\item les complexités algorithmiques temporelle et spatiale (à voir ultérieurement) d'un algorithme récursif peuvent être plus coûteuses que celles d'un algorithme itératif.
+\end{itemize}
+
 
 
 
@@ -128,7 +138,7 @@ Il est possible d'agir par récursivité sur des listes ou sur des chaînes de c
 
 \noindent\begin{minipage}[c]{.45\linewidth}
 
-Ainsi, pour réaliser la somme des éléments d'une liste \texttt{L} par récusivité : 
+Ainsi, pour réaliser la somme des éléments d'une liste \texttt{L} par récursivité : 
 \begin{itemize}
 \item commençons par déterminer le cas terminal : si la taille de la liste vaut 1, on renvoie \texttt{L[0]};
 \item sinon (si la taille vaut \texttt{n}), on peut choisir de renvoyer \texttt{L[0]}+\texttt{somme(L[1]+L[2]+...+L[n-1])}. 
@@ -146,7 +156,7 @@ def somme(L:list) -> float :
 Pour une chaîne de caractères, si on souhaite renvoyer son miroir (par exemple, le miroir de \texttt{abc} serait \texttt{cba}) : 
 \begin{itemize}
 \item si la chaîne de caractère a une taille de 1, on renvoie le caractère;
-\item sinon, on renvoie la concatanéation de  \texttt{miroir(ch[1:])+ch[0]}.
+\item sinon, on renvoie la concaténation de  \texttt{miroir(ch[1:])+ch[0]}.
 \end{itemize}
 \begin{lstlisting}
 def miroir(ch:str) -> str :
