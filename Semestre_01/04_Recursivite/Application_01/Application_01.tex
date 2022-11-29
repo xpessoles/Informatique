@@ -64,8 +64,7 @@
 \question{Ecrire une fonction récursive \code{mult\_rec(n:int, p:int)->int} permettant de multiplier deux entiers (sans utiliser \code{*}).}
 
 \ifprof
-\else
-\begin{py}
+\begin{py} ~\\ \vspace{-1cm}
 \begin{lstlisting}
 def mult(n, p):
     if p == 0:
@@ -74,6 +73,8 @@ def mult(n, p):
         return n+mult(n,p-1)
 \end{lstlisting}
 \end{py}
+
+\else
 \fi
 
 \question{Énoncer un variant de boucle et montrer la terminaison de l'algorithme.}
@@ -226,7 +227,7 @@ def reciproque(n):
 \setcounter{numques}{0}
 
 \question{Prouver la terminaison de la fonction $G$ de Hofstadter, définie sur $\mathbb{N}$ de la façon suivante :}
-\begin{py}
+\begin{py}  ~\\ \vspace{-1cm}
 \begin{lstlisting}
 def g(n) :
     if n== 0 : 
@@ -412,7 +413,7 @@ récursifs. Or, il y a au plus 2 multiplications par appel.
 
 
 On considère la fonction récursive suivante : 
-\begin{py}
+\begin{py} ~\\ \vspace{-1cm}
 \begin{lstlisting}
 def f(n) :
     if n>100 : 
