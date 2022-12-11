@@ -1,3 +1,40 @@
+%%%% Paramétrage du cours %%%%
+\def\xxactivite{Cours}
+
+\def\xxauteur{Xavier Pessoles}
+\fichefalse \proftrue \tdfalse \courstrue
+
+\def\xxnumchapitre{Chapitre 5 \vspace{.2cm}}
+\def\xxchapitre{\hspace{.12cm} Méthode de programmation}
+
+\def\xxcompetences{%
+\textsl{%
+\textbf{Savoirs et compétences :}\\
+\begin{itemize}[label=\ding{112},font=\color{bleuxp}] 
+\item Spécifications des données attentdues en entrée et fournie en sortie/retour.
+\item Annotation d'un bloc d'instructions par une précondition, une postcondition, une propriété invariante
+\item Assertion.
+\item Jeu de tests associé à un programme.
+\end{itemize}
+}}
+
+\def\xxfigures{
+%\includegraphics[width=\linewidth]{fractale}
+%\\
+%\textit{Modèle du pilote hydraulique avec pilotage interactif.}
+}%figues de la page de garde
+
+\input{\repRel/Style/pagegarde_cours_minitoc}
+\setlength{\columnseprule}{.1pt}
+
+\vspace{2cm}
+\pagestyle{fancy}
+\thispagestyle{plain}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
 \section{Contexte}
 Soit la fonction suivante : 
 \begin{lstlisting}
@@ -59,7 +96,7 @@ La première méthode fait l'objet du présent chapitre. La seconde fera l'objet
 \section{Spécification d'une fonction}
 
 \subsection{Spécification à l'aide de commentaires}
-\begin{defi}
+\begin{defi}{Signature}
 La \textbf{signature d'une fonction} définit les entrées et les sorties d'une fonction. 
 \end{defi}
 
@@ -93,7 +130,7 @@ Lorsque les commentaires d'une fonction sont déclarés ainsi après la déclara
 \subsection{Annotation d'une fonction-- Limite du programme}
 
 Depuis la version 3.5 de \texttt{Python} il est possible d'annoter les fonctions. 
-\begin{defi} Les annotations de type permettent de donner une information sur le type attendu d'une fonction. Ce ne sont que des indications pour le programmeur. Rien ne l'empêche de ne pas les respecter. 
+\begin{defi}{} Les annotations de type permettent de donner une information sur le type attendu d'une fonction. Ce ne sont que des indications pour le programmeur. Rien ne l'empêche de ne pas les respecter. 
 \end{defi}
 
 \begin{exemple}~\\
@@ -130,7 +167,7 @@ Comme suite au paragraphe précédent, en phase de debuggage (ou développement)
 En utilisant l’instruction \texttt{assert}, le programme s'interrompt quand une erreur est détectée. 
 
 \begin{exemple}
-Dans la lignée des anotations de type, on peut tester le type d'argument donné à une fonction. 
+Dans la lignée des annotations de type, on peut tester le type d'argument donné à une fonction. 
 \begin{minipage}[c]{.45\linewidth}
 \begin{lstlisting}
 def addition(a:int, b:int) -> int : 
