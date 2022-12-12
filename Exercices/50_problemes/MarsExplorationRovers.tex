@@ -1,0 +1,654 @@
+\ifprof
+\else
+\textit{Mars Exploration Rovers} (MER) est une mission de la NASA qui cherche à étudier le rôle joué par l’eau dans
+l’histoire de la planète Mars. Deux robots géologues, Spirit et Opportunity% (figure 1)
+, se sont posés sur cette
+planète, sur deux sites opposés, en janvier 2004. Leur mission est de rechercher et d’analyser différents types de
+roches et de sols qui peuvent contenir des indices sur la présence d’eau. 
+%Ils sont équipés de six roues et d’une
+%suspension spécialement conçue pour leur permettre de se déplacer quelle que soit la nature du terrain rencontré.
+%Leur cahier des charges prévoyait une durée de vie de 90 jours martiens (le jour martien est environ 40 minutes
+%plus long que le jour terrestre). Spirit a cessé d’émettre le 22 mars 2010, soit 2210 jours martiens après son
+%arrivée sur la planète. Début 2017, Opportunity est toujours en activité et il a parcouru plus de 44 km sur Mars.
+
+%\begin{figure}[H]
+%\centering
+%\includegraphics[width=.5\linewidth]{fig_01}
+%\caption{Vue d’artiste d’un robot géologue de la mission Mars Exploration Rovers (NASA/JPL – Caltech/
+%Cornell) \label{fig_01}}
+%\end{figure}
+%
+%
+
+Chaque robot est équipé de plusieurs instruments d’analyse (caméra, microscope, spectromètres) et d’un bras
+qui permet d’amener les instruments au plus près des roches et sols dignes d’intérêt. À partir de photographies de
+la surface de la planète, prises à plusieurs longueurs d’ondes par différents satellites et par le robot lui-même, les
+scientifiques de la NASA définissent une liste d’emplacements (\textit{points d’intérêt} ou PI) où effectuer des analyses.
+
+Cette liste est transmise au robot qui doit se rendre à chaque emplacement indiqué et y effectuer les analyses
+prévues. Chaque robot est capable d’effectuer un certain nombre de types d’analyses géologiques correspondant
+aux différents instruments dont il dispose. Une fois tous les points d’intérêts visités et les résultats des analyses
+transmis à la Terre, le robot reçoit une nouvelle liste de points d’intérêts et démarre une nouvelle exploration.
+Compte-tenu des contraintes de transmission entre la Terre et les robots (latence, périodes d’ombre, faible débit,
+etc.) il est prévu que les robots travaillent en autonomie pour planifier le parcours de chaque exploration. Ainsi,
+une fois la liste des points d’intérêt reçue, le robot analyse le terrain afin de détecter d’éventuels obstacles et
+détermine le meilleur chemin lui permettant de visiter l’ensemble de ces points en dépensant le moins d’énergie
+possible.
+
+%Après s’être intéressé à l’enregistrement des explorations, des points d’intérêts correspondants et des analyses
+%à y mener, ce sujet aborde trois algorithmes qui peuvent être utilisés par le robot pour déterminer le meilleur
+%parcours lui permettant de visiter chaque point d’intérêt une et une seule fois. Pour cela nous faisons quelques
+%hypothèses simplificatrices.
+%\begin{itemize}
+%\item La zone d’exploration est dépourvue d’obstacle : le robot peut rejoindre directement en ligne droite n’importe
+%quel point d’intérêt.
+%\item Le sol est horizontal et de nature constante : l’énergie utilisé pour se déplacer entre deux points ne dépend
+%que de leur distance, autrement dit le meilleur chemin est le plus court.
+%\item La courbure de la planète est négligée compte tenu de la dimension réduite de la zone d’exploration : nous
+%travaillerons en géométrie euclidienne et les points d’intérêts seront repérés par leurs coordonnées cartésiennes
+%à l’intérieur de la zone d’exploration.
+%\end{itemize}
+
+%Les seuls langages de programmation autorisés dans cette épreuve sont Python et SQL. 
+Toutes les questions
+sont indépendantes. Néanmoins, il est possible de faire appel à des fonctions ou procédures créées dans d’autres
+questions. Dans tout le sujet on suppose que les bibliothèques math %, numpy 
+et random ont été importées grâce
+aux instructions
+\begin{lstlisting}
+import math
+import random
+\end{lstlisting}
+
+
+%\begin{lstlisting}
+%import math
+%import numpy as np
+%import random
+%\end{lstlisting}
+% Si les candidats font appel à des fonctions d’autres bibliothèques ils doivent préciser les instructions d’importation
+% correspondantes.
+
+%Ce sujet utilise la syntaxe des annotations pour préciser le types des arguments et du résultat des fonctions à
+%écrire. Ainsi
+%\cde{def maFonction(n:int, x:float, d:str) -> list:}
+%signifie que la fonction \cde{maFonction} prend trois arguments, le premier est un entier, le deuxième un nombre à
+%virgule flottante et le troisième une chaine de caractères et qu’elle renvoie un tableau numpy.
+%Une liste de fonctions utiles est donnée à la fin du sujet.
+\fi
+
+
+\section{Création d’une exploration et gestion des points d’intérêt}
+\ifprof
+\else
+Une exploration est un ensemble de points d’intérêts à l’intérieur d’une zone géographique limitée, une série
+d’analyses étant associée à chaque point d’intérêt. Chaque type d’analyse que le robot peut effectuer est codifié
+et référencé par un nombre entier. Un point d’intérêt est repéré par deux entiers, positifs ou nuls, correspondant
+à ses coordonnées cartésiennes en millimètres à l’intérieur de la zone d’exploration. L’ensemble des points
+d’intérêts d’une exploration qui en contient $n$ est représenté par un objet de type 
+%\cde{numpy.ndarray}, 
+\cde{list}, 
+à éléments
+entiers, à 2 colonnes et $n$ lignes, l’élément d’indice \cde{i,0} correspondant à l’abscisse du point d’intérêt $i$ et l’élément
+d’indice \cde{i,1} à son ordonnée.
+
+\begin{figure}[H]
+\centering
+\begin{tabular} {c||cc} 
+
+ 	& x 		& y     \\ \hline 
+0 	& 345 	& 635 \\ %\hline 
+1 	& 1076 	& 415 \\ %\hline 
+2 	& 38 		& 859 \\ %\hline 
+3 	& 121 	& 582 \\ %\hline 
+\end{tabular}
+\caption{Exemple d’exploration avec quatre points d’intérêt \label{fig_02}}
+\end{figure}
+\fi
+\subsection{Génération d’une exploration d’essai}
+\subsubsection{Choix de points au hasard}
+\ifprof
+\else
+Afin de disposer de données pour tester les différents algorithmes de calcul de chemin qui seront développés plus tard, nous allons construire une exploration au hasard. 
+Pour disposer d'une valeur aléatoire comprise entre \cde{0} et \cde{cmax} (inclus) on peut procéder ainsi : 
+\begin{lstlisting}
+val = random.randrange(0,cmax+1)
+\end{lstlisting}
+\fi
+
+\question{Ecrire une fonction d’entête \cde{def générer\_PI(n:int, cmax:int) -> list}  
+qui prend en paramètres le nombre de points d’intérêts à générer et la largeur de la zone d’exploration (supposée
+carrée) et renvoie un objet de type \cde{list} %numpy.ndarray 
+contenant les coordonnées de $n$ choisis au hasard dans la zone d’exploration (\autoref{fig_02}).}
+\ifprof
+\begin{corrige}~\\ \vspace{-.7cm}
+\begin{lstlisting}
+def generer_PI(n,cmax):
+    L = []
+    for i in range(n):
+        x = random.randrange(0,cmax+1)
+        y = random.randrange(0,cmax+1)
+        pt = [x,y]
+        L.append(pt)
+    return L
+\end{lstlisting}
+\end{corrige}
+\else
+\fi
+
+\question{Proposer une nouvelle fonction d’entête \cde{def générer\_PI(n:int, cmax:int) -> list}  où les coordonnées des $n$ points seront deux à deux
+distincts.}
+\ifprof
+\begin{corrige}~\\ \vspace{-.7cm}
+\begin{lstlisting}
+def generer_PI_dis(n,cmax):
+    L = []
+    i = 0
+    while i < n :
+        x = random.randrange(0,cmax+1)
+        y = random.randrange(0,cmax+1)
+        pt = [x,y]
+        if pt not in L : 
+            L.append(pt)
+            i=i+1
+    return L
+\end{lstlisting}
+\end{corrige}
+\else
+\fi
+
+\question{Quelles contraintes doivent vérifier les arguments de la fonction \cde{générer\_PI} ?}
+\ifprof
+\begin{corrige}~\\
+On doit avoir $n<c_{\text{max}}^2$.
+\end{corrige}
+\else
+\fi
+
+
+\subsubsection{Calcul des distances}
+\ifprof
+\else
+On dispose de la fonction d’entête \cde{def position\_robot() -> list} qui renvoie une liste donnant les coordonnées actuelles du robot dans le système de coordonnées de l’exploration
+à planifier. Ainsi l’instruction \cde{p = position\_robot()} permet de récupérer le point où se trouve le robot.
+Afin de faciliter l’application des différents algorithmes de recherche de chemin, on souhaite construire un tableau
+des distances entre les différents points d’intérêt d’une exploration et entre ceux-ci et la position courante du
+robot au moment du calcul.
+\fi
+
+\question{Écrire une fonction d’entête \cde{def distance(pt1:list,pt2:list) -> float:} renvoyant la distance entre deux points \cde{pt1} et \cde{pt2} de coordonnées \cde{[x1,y1]} et \cde{[x2,y2]}.}
+\ifprof
+\begin{corrige}~\\ \vspace{-.7cm}
+\begin{lstlisting}
+def distance(p1,p2):
+    x1,y1 = p1       
+    x2,y2 = p2
+    return(math.sqrt((x2-x1)**2+(y2-y1)**2))
+\end{lstlisting}
+\end{corrige}
+\else
+\fi
+
+
+\question{Écrire une fonction d’entête \cde{def calculer\_distances(PI:list) -> list:} %\cde{def calculer\_distances(PI:np.ndarray) -> np.ndarray:}
+qui prend en paramètre un tableau de $n$ points d’intérêt tel que décrit précédemment et renvoie un tableau de
+nombres flottants, de dimension  $n \times n$, %$\left(n+1\right)\times\left(n+1\right)$, 
+tel que l’élément d’indice \cde{i}, \cde{j} fournit la distance entre les
+points d’intérêt $i$ et $j$, l’indice \cde{n} désignant le point de départ du robot.
+On commencera par créer un tableau de 0 de taille $n \times n$.}
+\ifprof
+\begin{corrige}~\\ \vspace{-.7cm}
+\begin{lstlisting}
+def calculer_distances(PI):
+    L = []
+    for i in range(len(PI)):
+        l = [0 for j in range(len(PI))]
+        L.append(l)
+    pr = (0,0) #position_robot()
+    for i in range(len(PI)):
+        for j in range(i):
+            L[i][j]=distance(pr,PI[i][j])
+            L[i][j]=L[j][i]    
+    return L
+\end{lstlisting}
+\end{corrige}
+\else
+\fi
+
+
+
+\subsection{Traitement d’image}
+\ifprof
+\else
+On dispose de photographies d’une zone d’exploration effectuées à différentes longueur d’onde. Chaque photographie
+a été mises à l’échelle de la zone d’exploration puis stockée dans une liste
+% tableau numpy (np.ndarray) 
+à deux dimensions. Les dimensions correspondent aux coordonnées géographiques du point photographié, chaque
+élément est un entier, compris entre 0 et 255, donnant l’intensité du point considéré sur l’image. Ainsi l’élément
+d’indice \cde{x,y} contient un entier, compris entre 0 et 255, correspondant à l’intensité sur la photographie considérée
+du point de coordonnées $(x,y)$. À partir de ces photographies, les géologues déterminent les endroits à analyser
+en filtrant ceux qui ont un profil d’émission caractéristique de certaines roches intéressantes.
+\fi
+%\subsubsection{Analyse d'une image}
+%La fonction \cde{F1} ci-dessous prend en paramètre une photographie représentée comme décrit plus haut. 
+%\begin{lstlisting}
+%def F1(photo:list) -> np.list:
+%    n = photo.min()
+%    b = photo.max()
+%    h = np.zeros(b - n + 1, np.int64)
+%    for p in photo.flat:
+%        h[p - n] += 1
+%    return h
+%\end{lstlisting}
+%\question{Expliquer ce que fait cette fonction et décrire son résultat.}
+
+\subsubsection{Sélection de points d’intérêts}
+
+\question{Écrire une fonction d’entête \cde{def sélectionner\_PI(photo:list, imin:int, imax:int) -> list:}
+où \cde{photo} est un tableau à deux dimensions représentant une photographie. Le résultat de la fonction  \cde{sélectionner\_PI} est un
+tableau à deux dimensions, de structure similaire à celui décrit \autoref{fig_02}, contenant les coordonnées des points
+dont l’intensité sur la photographie est comprise entre \cde{imin} et \cde{imax}.}
+\ifprof
+\begin{corrige}~\\ \vspace{-.7cm}
+\begin{lstlisting}
+def selectionner_PI(photo:list, imin:int, imax:int) -> list:
+    L = []
+    for i in range(len(photo)):
+        for j in range(len(photo)):
+            if photo[i][j] >= imin and photo[i][j] <= imax :
+                L.append([i,j])
+    return L
+\end{lstlisting}
+\end{corrige}\else
+\fi
+
+
+\section{Planification d’une exploration : première approche}
+\ifprof
+\else
+Avant de démarrer une nouvelle exploration, le robot doit déterminer un chemin qui lui permet de passer par
+tous les points d’intérêts une et une seule fois. L’enjeu de l’opération est de trouver le chemin le plus court
+possible afin de limiter la dépense d’énergie et de limiter l’usure du robot.
+Chaque point d’intérêt sera repéré par un entier positif ou nul correspondant à son indice dans le tableau des
+points d’intérêt. Un chemin d’exploration sera représenté par un objet de type list donnant les indices des
+points d’intérêt dans l’ordre de leur parcours.
+
+Exemple de matrice des distances entre les points d'intérêts $i$ et $j$.
+\begin{center}
+\begin{tabular}{|c||c|c|c|c|c|}
+\hline
+& 0 & 1 & 2 & ... & n \\
+\hline \hline 
+0 &  d(0,0) & d(0,1) & d(0,2) & & d(0,n)\\ \hline
+1 &  d(1,0) & d(1,1) & d(1,2) & & d(1,n)\\ \hline
+2 & d(2,0) & d(2,1) & d(2,2) & & d(2,n)\\ \hline
+... &  &&&&\\ \hline
+n &  d(n,0) & d(n,1) & d(n,2) & & d(n,n)\\ \hline
+\end{tabular}
+\end{center}
+\fi
+
+\subsection{Quelques fonctions utilitaires}
+
+%\subsubsection{Longueur d’un chemin}
+% II.A.1
+\question{Écrire une fonction d’entête \cde{def longueur\_chemin(chemin:list, d:list) -> float:}
+qui prend en paramètre un chemin à parcourir et la matrice des distances entre points d’intérêt (telle que
+renvoyée par la fonction \cde{calculer\_distances}) et renvoie la distance que doit effectuer le robot pour suivre
+ce chemin en partant de sa position courante (correspondant à la dernière ligne/colonne du tableau \cde{d}) et en
+visitant tous les points d’intérêt dans l’ordre indiqué.}
+\ifprof
+\begin{corrige}~\\ \vspace{-.7cm}
+\begin{lstlisting}
+def longueur_chemin(chemin:list, d:list) -> float :
+    n = len(d)
+    pt0 = n-1
+    pt1 = chemin[0]
+    dist = d[pt0][pt1] # On initialise la longueur du chemin avec la distance entre le dernier point de d et le premier point de chemin.
+    for i in range(len(chemin)-1):
+        pt0 = chemin[i]
+        pt1 = chemin[i+1]
+        dist = dist + d[pt0][pt1]
+    return dist
+\end{lstlisting}
+\end{corrige}\else
+\fi
+
+% II.A.2
+\question{Écrire une fonction d’entête \cde{def normaliser\_chemin(chemin:list, n:int) -> list:}
+qui prend en paramètre une liste d’entiers et renvoie une liste correspondant à un chemin valide, c’est-à-dire
+contenant une seule fois tous les entiers entre \cde{0} et \cde{n} (exclu). Pour cela cette fonction commence par supprimer
+les éventuels doublons (en ne conservant que la première occurrence) et les valeurs supérieures ou égales à \cde{n},
+sans modifier l’ordre relatif des éléments conservés, puis ajoute à la fin les éventuels éléments manquants en
+ordre croissant de numéros.}
+\ifprof
+\begin{corrige}~\\ \vspace{-.7cm}
+\begin{lstlisting}
+def normaliser_chemin(chemin:list, n:int) -> list :
+    chem = [S]
+    for c in chemin :
+        if c not in chem and c>= 0 and c < n : 
+            chem.append(c)
+    for i in range(n):
+        if i not in chem : 
+            chem.append(i)
+    return chem
+\end{lstlisting}
+\end{corrige}\else
+\fi
+
+\subsection{Force brute}
+Pour rechercher le plus court chemin, on peut imaginer de considérer tous les chemins possibles et de calculer
+leur longueur. On obtiendra ainsi à coup sûr le chemin le plus court.
+
+% II.B.1
+\question{Déterminer en fonction de $n$, nombre de points à visiter, le nombre de chemins possibles passant
+exactement une fois par chacun des points.}
+\ifprof
+\begin{corrige}
+$n!$ chemins possibles.
+\end{corrige}
+\else
+\fi
+
+% II.B.2
+\question{Cet algorithme est-il utilisable pour une zone d’exploration contenant 20 points d’intérêts ? Justifier.}
+\ifprof
+\begin{corrige}
+$20!$ chemins à calculer prendrait probablement trop de temps.
+\end{corrige}
+\else
+\fi
+
+\subsection{Algorithme du plus proche voisin}
+\ifprof
+\else
+Une idée simple pour obtenir un algorithme utilisable est de construire un chemin en choisissant systématiquement
+le point, non encore visité, le plus proche de la position courante.
+
+Au démarrage de l'algorithme, la position courante est le dernier point du tableau. On rappelle que \cde{float('inf')} désigne l'infini. 
+\fi
+
+\question{Écrire une fonction d’entête \cde{def plus\_proche(d:list, i:int, visites:list) -> int:}
+qui prend en paramètre le tableau des distances résultat \cde{d}, \cde{i} l'index d'un point et \cde{visites} la liste des points visités.  Cette fonction renvoie l'index du point non visité le plus proche de \cde{i}.}
+\ifprof
+\begin{corrige}~\\ \vspace{-.7cm}
+\begin{lstlisting}
+def plus_proche(d, i, visites):
+    dist = float('inf')
+    pt = none
+    for k in range(len(d)):
+        if k not in visites and d[i][k] < dist:
+            dist = d[i][k]
+            pt = k
+    return pt
+\end{lstlisting}
+\end{corrige}\else
+\fi
+
+
+
+% II.C.1
+\question{Écrire une fonction d’entête \cde{def plus\_proche\_voisin(d:list) -> list:}
+qui prend en paramètre le tableau des distances résultat de la fonction \cde{calculer\_distances} %(question ***I.A.2)
+et fournit un chemin d’exploration en appliquant l’algorithme du plus proche voisin. On pourra utiliser la fonction précédente en la considérant juste. La position initiale sera la dernière position du tableau des distances.}
+\ifprof
+\begin{corrige}~\\ \vspace{-.7cm}
+\begin{lstlisting}
+def plus_proche_voisin(d):
+    chemin = [len(d)-1]    
+    for i in range(len(d)-1):
+        pt = plus_proche(d,i,chemin)
+        chemin.append(pt)
+    return chemin
+\end{lstlisting}
+\end{corrige}\else
+\fi
+
+
+% II.C.2
+%\question{Quelle est la complexité temporelle de l’algorithme du plus proche voisin en considérant que cet
+%algorithme est constitué des deux fonctions \cde{calculer\_distances} et \cde{plus\_proche\_voisin} ?}
+
+% II.C.3
+\question{En considérant les trois points de coordonnées $(0, 0)$, $(0, 3000)$, $(0, 7000)$ et en choisissant un point de
+départ adéquat pour le robot, montrer que l’algorithme du plus proche voisin ne fournit pas nécessairement le
+plus court chemin.}
+\ifprof
+\begin{corrige}~\\ 
+En partant de $(0, 2000)$, le parcours est $(0, 2000)$ -- $(0, 3000)$ -- $(0, 0)$ -- $(0, 7000)$ soit une distance de 11 000. 
+
+Or le parcours $(0, 2000)$ -- $(0, 0)$ --$(0, 3000)$ --  $(0, 7000)$ a une distance de 9000.
+
+\end{corrige}\else
+\fi
+
+\ifprof
+\else
+Dans la pratique, on constate que, dès que le nombre de points d’intérêt devient important, l’algorithme du
+plus proche voisin fournit un chemin qui peut être 50\% plus long que le plus court chemin.
+\fi
+\section{Deuxième approche : algorithme génétique}
+
+\ifprof
+\else
+Les algorithmes génétiques s’inspirent de la théorie de l’évolution en simulant l’évolution d’une population. Ils
+font intervenir cinq traitements.
+\begin{enumerate}
+\item \textbf{Initialisation :} il s’agit de créer une population d’origine composée de $m$ individus (ici des chemins pour l’exploration à
+planifier). Généralement la population de départ est produite aléatoirement.
+\item \textbf{Évaluation :} cette étape consiste à attribuer à chaque individu de la population courante une note correspondant à sa
+capacité à répondre au problème posé. Ici la note sera simplement la longueur du chemin.
+\item \textbf{Sélection :} une fois tous les individus évalués, l’algorithme ne conserve que les « meilleurs » individus. Plusieurs méthodes
+de sélection sont possibles : choix aléatoire, ceux qui ont obtenu la meilleure note, élimination par
+tournoi, etc.
+\item \textbf{Croisement :} les individus sélectionnés sont croisés deux à deux pour produire de nouveaux individus et donc une nouvelle
+population. La fonction de croisement (ou reproduction) dépend de la nature des individus.
+\item \textbf{Mutation :} une proportion d’individus est choisie (généralement aléatoirement) pour subir une mutation, c’est-à-dire
+une transformation aléatoire. Cette étape permet d’éviter à l’algorithme de rester bloqué sur un optimum
+local.
+\end{enumerate}
+En répétant les étapes de sélection, croisement et mutation, l’algorithme fait ainsi évoluer la population, jusqu’à
+trouver un individu qui réponde au problème initial. Cependant dans les cas pratiques d’utilisation des
+algorithmes génétiques, il n’est pas possible de savoir simplement si le problème est résolu (le plus court chemin
+figure-t-il dans ma population ?). On utilise donc des conditions d’arrêt heuristiques basées sur un critère
+arbitraire.
+Le but de cette partie est de construire un algorithme génétique pour rechercher un meilleur chemin d’exploration
+que celui obtenu par l’algorithme du plus proche voisin.
+
+\fi
+
+\subsection{Initialisation et évaluation}
+
+\ifprof
+\else
+Une population est représentée par une liste d’individus, chaque individu étant représenté par un couple (longueur,
+chemin) dans lequel :
+\begin{itemize}
+\item chemin désigne un chemin représenté comme précédemment par une liste d’entiers correspondant aux indices
+des points d’intérêt dans le tableau des distances produit par la fonction \cde{calculer\_distances};
+\item longueur est un entier correspondant à la longueur du chemin, en tenant compte de la position de départ du
+robot.
+\end{itemize}
+
+À partir d'une liste d'entiers \cde{L}, \cde{random.shuffule(L)} permet de mélanger les élements de la liste 
+\cde{L}.
+\fi
+
+\question{Écrire une fonction d’entête \cde{def créer\_individu(d:list) -> list:}
+qui crée une population de $m$ individus aléatoires. Cette fonction prend en paramètre le tableau des distances entre points d’intérêt (et la position courante du robot) tel que produit par
+la fonction \cde{calculer\_distances}. Elle renvoie un individu, c’est-à-dire un couple \textit{(longueur, chemin)}.}
+\ifprof
+\begin{corrige}~\\ \vspace{-.7cm}
+\begin{lstlisting}
+def creer_individu(m:int, d:list) -> list:
+    individu = [i for i in range(len(d)-1)]
+    random.shuffle(individu)
+    return [longueur_chemin(individu,d),individu]
+\end{lstlisting}
+\end{corrige}\else
+\fi
+
+
+\question{Écrire une fonction d’entête \cde{def créer\_population(m:int, d:list) -> list:}
+qui crée une population de $m$ individus aléatoires. Cette fonction prend en paramètre le nombre d’individus à
+engendrer et le tableau des distances entre points d’intérêt (et la position courante du robot) tel que produit par
+la fonction \cde{calculer\_distances}. Elle renvoie une liste d’individus, c’est-à-dire de couples \textit{(longueur, chemin)}.}
+\ifprof
+\begin{corrige}~\\ \vspace{-.7cm}
+\begin{lstlisting}
+def creer_population(m:int, d:list) -> list:
+    population = []
+    for i in range(m):
+        population.append(creer_individu(m,d))
+    return population
+\end{lstlisting}
+\end{corrige}\else
+\fi
+
+
+\subsection{Sélection}
+\ifprof
+\else
+On rappelle que la méthode \cde{L.sort()} trie la liste \cde{L} (en se basant sur la première valeur de chaque sous-liste) et que \cde{sorted(L)} renvoie une nouvelle liste triée.
+\fi
+
+\question{Écrire une fonction d’entête \cde{def réduire(p:list) -> None:}
+qui réduit une population de moitié en ne conservant que les individus correspondant aux chemins les plus
+courts. On rappelle que \cde{p} est une liste de couples \textit{(longueur, chemin)}. La fonction \cde{réduire} ne renvoie pas de
+résultat mais modifie la liste passée en paramètre.}
+\ifprof
+\begin{corrige}~\\ \vspace{-.7cm}
+\begin{lstlisting}
+def reduire(p):
+    p.sort()
+    milieu = len(p)//2
+    for i in range(milieu):
+        p.pop()
+\end{lstlisting}
+\end{corrige}\else
+\fi
+
+\subsection{Mutation}
+\ifprof
+\else
+\cde{random.randint(a,b)} renvoie un entier compris dans l'intervalle $[a,b]$.
+\fi
+
+\question{Écrire une fonction d’entête \cde{def muter\_chemin(c:list) -> None:} qui prend en paramètre un chemin et le transforme en inversant aléatoirement deux de ses éléments.}
+\ifprof
+\begin{corrige}~\\ \vspace{-.7cm}
+\begin{lstlisting}
+def muter_chemin(c:list) -> None:
+    a = random.randint(0,len(c)-1)
+    b = random.randint(0,len(c)-1)
+    while a == b : 
+        a = random.randint(0,len(c)-1)
+        b = random.randint(0,len(c)-1)
+    c[a],c[b] = c[b],c[a]
+\end{lstlisting}
+\end{corrige}\else
+\fi
+
+\ifprof
+\else
+\cde{random.random()} permet de réaliser le tirage aléatoire d'un flottant dans l'intervalle $[0,1[$.
+\fi
+
+\question{Écrire une fonction d’entête 
+\cde{def muter\_population(p:list, proba:float, d:list) -> None:}
+qui prend en paramètre une population dont elle fait muter un certain nombre d’individus. Le paramètre \cde{proba}
+(compris entre 0 et 1) désigne la probabilité de mutation d’un individu. Le paramètre \cde{d} est la matrice des
+distances entre points d’intérêt.}
+\ifprof
+\begin{corrige}~\\ \vspace{-.7cm}
+\begin{lstlisting}
+def muter_population(p:list, proba:float, d:list) -> None :
+    for i in range(len(p)):
+        if random.random() <= proba :
+            chemin = p[i][1]
+            muter_chemin(chemin)
+            L = longueur_chemin(chemin,d)
+            p[i]=[L,chemin]
+\end{lstlisting}
+\end{corrige}\else
+\fi
+
+
+\subsection{Croisement}
+\question{Écrire une fonction d’entête
+\cde{def croiser(c1:list, c2:list) -> list:}
+qui crée un nouveau chemin à partir de deux chemins passés en paramètre. Ce nouveau chemin sera produit en
+prenant la première moitié du premier chemin suivi de la deuxième moitié du deuxième puis en « normalisant »
+le chemin ainsi obtenu.}
+\ifprof
+\begin{corrige}~\\ \vspace{-.7cm}
+\begin{lstlisting}
+def croiser(c1:list, c2:list) -> list: 
+    ch = c1[:len(c1//2)]+c2[len(c1//2):]
+    return normaliser(ch,len(ch))
+\end{lstlisting}
+\end{corrige}\else
+\fi
+
+\question{Écrire une fonction d’entête 
+\cde{def nouvelle\_génération(p:list, d:np.ndarray) -> None:}
+qui fait grossir une population en croisant ses membres pour en doubler l’effectif. Pour cela, la fonction fait se
+reproduire tous les couples d’individus qui se suivent dans la population \cde{(p[i], p[i+1]) et (p[m-1], p[0])}
+de façon à produire $m$ nouveaux individus qui s’ajoutent aux $m$ individus de la population de départ.}
+\ifprof
+\begin{corrige}~\\ \vspace{-.7cm}
+\begin{lstlisting}
+def nouvelle_generation(p:list, d:np.ndarray) -> None :
+    n = len(p)
+    for i in range(n) :
+        ch1, ch2 = p[i][1], p[(i+1)%n][1]
+        chemin = croiser(ch1,ch2)
+        longueur = longueur_chemin(chemin,d)
+        p.append([longueur,chemin])
+\end{lstlisting}
+\end{corrige}\else
+\fi
+
+\subsection{Algorithme complet}
+
+\question{Écrire une fonction d’entête 
+\cde{def algo\_génétique(PI:np.ndarray, m:int, proba:float, g:int) -> float, list:}
+qui prend en paramètre un tableau de points d’intérêts, la taille \cde{m} de la population, la probabilité
+de mutation \cde{proba} et le nombre de générations \cde{g}. Cette fonction implante un algorithme génétique à l’aide
+des différentes fonctions écrites jusqu’à présent et renvoie la longueur du plus court chemin d’exploration et le
+chemin lui-même obtenus au bout de \cde{g} générations.}
+\ifprof
+\begin{corrige}~\\ \vspace{-.7cm}
+\begin{lstlisting}
+def algo_genetique(PI, m, proba, g):
+    d = calculer_distances(PI)
+    p = creer_population(m, d)
+    for i in range(g):
+        reduire(p)
+        nouvelle_génération(p, d)
+        muter_population(p, proba, d)
+    return sorted(p)[0]
+\end{lstlisting}
+\end{corrige}\else
+\fi
+
+\question{Est-il possible avec l’implantation réalisée, qu’une itération de l’algorithme dégrade le résultat : le
+meilleur chemin obtenu à la génération $n+1$ est plus long que celui de la génération $n$ ?
+Dans l’affirmative, comment modifier le programme pour que cette situation ne puisse plus arriver ?}
+\ifprof
+\begin{corrige}~\\ %\vspace{-.7cm}
+Rien n'indique qu'une génération d'enfants sera moins longue que la génération de parents. Dans ce cas, on peut donc arrêter de reproduire les populations lorsque la la longueur du chemin stagne ou croît.
+\end{corrige}\else
+\fi
+
+\question{Quelles autres conditions d’arrêt peut-on imaginer ? Établir un comparatif présentant les avantages
+et inconvénients de chaque condition d’arrêt envisagée.}
+
+\ifprof
+\begin{corrige}~\\ %\vspace{-.7cm}
+\begin{itemize}
+\item Stagnation des améliorations du pire chemin
+\end{itemize}
+\end{corrige}\else
+\fi
