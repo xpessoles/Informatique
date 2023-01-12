@@ -1,0 +1,158 @@
+%%%% Paramétrage du TD %%%%
+%\def\xxnumchapitre{Chapitre 2 \vspace{.2cm}}
+%\def\xxchapitre{\hspace{.12cm} Représentation des nombres}
+
+\def\xxcompetences{%
+\textsl{%
+\textbf{Savoirs et compétences :}\\
+\vspace{-.4cm}
+\begin{itemize}[label=\ding{112},font=\color{bleuxp}] 
+\item .
+%\item \textit{Mod3.C2 : } pôles dominants et réduction de l’ordre du modèle : principe, justification
+%\item \textit{Res2.C4 : } stabilité des SLCI : définition entrée bornée -- sortie bornée (EB -- SB)	
+%\item \textit{Res2.C5 : } stabilité des SLCI : équation caractéristique	
+%\item \textit{Res2.C6 : } stabilité des SLCI : position des pôles dans le plan complexe
+%\item \textit{Res2.C7 : } stabilité des SLCI : marges de stabilité (de gain et de phase)
+\end{itemize}
+}}
+
+
+\def\xxfigures{
+%\includegraphics[width=3cm]{fig_01}\\
+%\textit{}
+}%figues de la page de garde
+
+\def\xxtitreexo{Applications -- Bases}
+\def\xxsourceexo{}
+\def\xxactivite{{ Application 01} \ifprof  -- Corrigé \else \fi}
+
+%\iflivret
+\input{\repRel/Style/pagegarde_TD}
+%\else
+%\input{../../style/new_pagegarde}
+%\fi
+
+\setlength{\columnseprule}{.1pt}
+
+\pagestyle{fancy}
+\thispagestyle{plain}
+
+
+\vspace{4.5cm}
+
+\def\columnseprulecolor{\color{bleuxp}}
+\setlength{\columnseprule}{0.4pt} 
+
+%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+\ifprof
+\vspace{1cm}
+\else
+\begin{multicols}{2}
+\fi
+
+\exer{}
+\setcounter{numques}{0}
+
+On considère la fonction \texttt{mystere} suivante, qui étant donnés deux entiers \texttt{x} et \texttt{x}, renvoie un autre
+entier.
+\begin{lstlisting}
+def mystere(x :int, y :int) -> int :
+    a=0
+    while y>0 :
+        if y%2==1 :
+            a=a+x
+        x=x+x
+        y=y//2
+    return(a)
+\end{lstlisting}
+
+\question{Recopier et compléter les tableaux suivants donnant l’évolution des variables \texttt{x}, \texttt{y} et \texttt{a} ainsi
+que de la quantité \texttt{a+x*y} lors des appels \texttt{f(7,20)} et \texttt{f(3,85)}.}
+\ifprof
+\begin{corrige}
+\begin{center}
+\begin{tabular}{l c c c c }
+\hline
+Pour \texttt{mystere(7,20)} & x  & y & a & $a+x*y$ \\
+\hline
+\hline
+Fin du premier tour de boucle     &14 & 10 & 0 & 140 \\ \hline
+Fin du deuxième tour de boucle  & 28 & 5 & 0 & 140\\ \hline
+Fin du troisième tour de boucle   & 56 & 2 & 28 & 140\\ \hline
+Fin du quatrième tour de boucle &  112 & 1 & 28 & 140\\ \hline
+Fin du cinquième tour de boucle & 224 & 0 & 140 & 140\\ \hline
+\end{tabular}
+\end{center}
+\end{corrige}
+\else
+\fi
+
+\question{Montrer que la fonction \texttt{mystere} termine.}
+\ifprof
+\begin{corrige}
+\begin{tabular}{l c c c c }
+\hline
+Pour \texttt{mystere(3,85)} & x  & y & a & $a+x*y$ \\
+\hline
+\hline
+Fin du premier tour de boucle     & 6    & 42 & 3     & 255\\ \hline
+Fin du deuxième tour de boucle & 12   & 21 &3      & 255 \\ \hline
+Fin du troisième tour de boucle  & 24   & 10 & 15   & 255 \\ \hline
+Fin du quatrième tour de boucle & 48   & 5 & 15     & 255 \\ \hline
+Fin du cinquième tour de boucle & 96   & 2  & 63    & 255 \\ \hline
+Fin du sixième tour de boucle     & 192  & 1 & 63    & 255 \\ \hline
+Fin du septième tour de boucle   & 384 & 0 &  255 & 255 \\ \hline
+\end{corrige}
+\else
+\fi
+
+\question{Conjecturer la valeur de \texttt{mystere(x,y)} et démontrer cette conjecture à l’aide d’un invariant
+de boucle bien choisi (on pourra appeler $x_i$ , $y_i$ et $a_i$ les valeurs respectives de $x$, $y$ et $a$
+à l’entrée du \ieme  $i\geq 0$ tour de boucle).}
+\ifprof
+\begin{corrige}
+On conjecture que \texttt{mystere(x,y)} renvoie $xy$.
+Considérons l'invariant : << à l’entrée du \ieme tour de boucle, $a_i+x_i y_i = x *y $.
+\begin{itemize}
+\item Pour$ i=0$, on a $a_0 = 0$, $x_0 = x$, $y_0 = y$ donc $a_0 + x_0 y_0 = xy$.
+\item Soit  $i\geq 0$. On suppose qu’au rang $i$ , on a $a_i x_i y_i =xy$.
+\begin{itemize}
+\item Soit $y_i$  pair alors $x_{i+1}=x_i+x_i = 2x_i$, $y_{i+1}=\dfrac{y_i}{2}$ et $a_{i+1}=a_i +x_i$.
+Donc $a_{i+1}+x_{i+1}y_{i+1}=a_i+2x_i\dfrac{y_i}{2} = a_i +x_iy_i = xy$.
+\item Soit yi impair alors xiÅ1 Æ xi Åxi Æ 2xi , yiÅ1 Æ
+yi¡1
+2 et aiÅ1 Æ ai Åxi .
+Donc aiÅ1 ÅxiÅ1yiÅ1 Æ ai Åxi Å2xi . yi¡1
+2
+Æ ai Åxi Åxi (yi ¡1) Æ ai Åxi yi Æ x y.
+
+Cela prouve l’invariant de boucle.
+À la dernière étape, on a ai¡1 Åxi¡1yi¡1 Æ x y avec yi¡1 Æ 1 donc yi Æ 0, ai Æ ai¡1 Åxi¡1 Æ ai¡1 Åxi¡1yi¡1 Æ x y
+donc mystere(x,y) renvoie bien x.y ce qui achève la correction de programme
+\end{corrige}
+\else
+\fi
+
+\question{}
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi
+
+\exer{}
+\setcounter{numques}{0}
+
+\question{Écrire dans le format flottant simple précision (IEEE 754) les nombres 
+1,0 ; 	$-1,0$; 	15,25  et $-3,26$. Les résultats seront donnés en hexadécimal.}
+
+
+\ifprof
+\else
+\end{multicols}
+\fi
+

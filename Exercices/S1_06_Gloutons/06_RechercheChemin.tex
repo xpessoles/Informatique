@@ -28,31 +28,31 @@ Chemin $A\to P_2 \to P_3 \to P_1$
 \end{multicols}
 \fi
 
-\subsection*{Réflexions autour de la résolution du problème par force brute}
-
-\question{Dénombrer le nombre de chemins possibles démarrant par $A$ et passant par 3 points.}
-\ifprof
-\begin{corrige}
-6 chemins ($A-P_1-P_2-P_3$, $A-P_1-P_3-P_2$, $A-P_2-P_1-P_3$, $A-P_2-P_3-P_1$, $A-P_3-P_1-P_2$ et $A-P_3-P_2-P_1$).
-\end{corrige}
-\else
-\fi
-
-\question{Dénombrer le nombre de chemins possibles démarrant par $A$ et passant par $10$ points.}
-\ifprof
-\begin{corrige}
-$n!$
-\end{corrige}
-\else
-\fi
-
-\question{Conclure sur le nombre d'opérations (et donc sur le temps de calcul) nécessitant de déterminer la distance de l'ensemble des chemins passant par $n$ points.}
-\ifprof
-\begin{corrige}
-Beaucoup de temps !
-\end{corrige}
-\else
-\fi
+%\subsection*{Réflexions autour de la résolution du problème par force brute}
+%
+%\question{Dénombrer le nombre de chemins possibles démarrant par $A$ et passant par 3 points.}
+%\ifprof
+%\begin{corrige}
+%6 chemins ($A-P_1-P_2-P_3$, $A-P_1-P_3-P_2$, $A-P_2-P_1-P_3$, $A-P_2-P_3-P_1$, $A-P_3-P_1-P_2$ et $A-P_3-P_2-P_1$).
+%\end{corrige}
+%\else
+%\fi
+%
+%\question{Dénombrer le nombre de chemins possibles démarrant par $A$ et passant par $10$ points.}
+%\ifprof
+%\begin{corrige}
+%$n!$
+%\end{corrige}
+%\else
+%\fi
+%
+%\question{Conclure sur le nombre d'opérations (et donc sur le temps de calcul) nécessitant de déterminer la distance de l'ensemble des chemins passant par $n$ points.}
+%\ifprof
+%\begin{corrige}
+%Beaucoup de temps !
+%\end{corrige}
+%\else
+%\fi
 
 
 \subsection*{Résolution du problème}
@@ -141,7 +141,7 @@ def distances(pts, dep):
 \fi
 
 
-\question{En prenant compte de la note précédente, estimer le nombre de distances à calculer par l'algorithme. (Réaliser l'application numérique poiy}
+\question{En prenant compte de la note précédente, estimer le nombre de distances à calculer par l'algorithme. }%(Réaliser l'application numérique poiy}
 \ifprof
 \begin{corrige}
 Le tableau des distances contient  $n+1$ lignes et colonnes soit  $(n+1)\times (n+1)$ valeurs. 
