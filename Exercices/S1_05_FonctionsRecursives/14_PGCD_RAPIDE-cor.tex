@@ -1,0 +1,26 @@
+\ifprof
+\else
+On peut écrire un PGCD très rapide, uniquement à l'aide de soustractions
+et de divisions par deux ou de restes modulo 2 (très rapides).
+
+
+L'algorithme se base sur la parité des nombres : par exemple,
+
+\begin{itemize}
+\item si \emph{a} est pair et \emph{b} pair, \texttt{pgcd(\emph{a}, \emph{b}) =
+pgcd(\emph{a}/2, \emph{b}/2).}
+\item si \emph{a} est pair et \emph{b} impair, \texttt{pgcd(\emph{a}, \emph{b}) =
+pgcd(\emph{a}/2, \emph{b}).}
+\item si \emph{a} est imppair et \emph{b} pair, \texttt{pgcd(\emph{a}, \emph{b}) =
+pgcd(\emph{a}, \emph{b}/2).}
+\item si \emph{a} et \emph{b} sont
+impairs~; pgcd(a,b)=pgcd(M-m,m) avec m=min(a,b) et M=max(a,b)
+\end{itemize}
+
+
+En se basant sur ce type de constatations, et en traitant tous les cas
+possibles, on peut à chaque fois réduire le problème.
+\fi
+
+\question{Ecrire la fonction qui calcule le pgcd rapide que l'on appellera \texttt{pgcd$\_$rapide(a:int,b:int)->int} Donner le nombre d'appels récursifs de cette fonction avec \texttt{a=u(alpha,10)} et \texttt{b=u(alpha,100)} en utilisant la fonction \texttt{compte$\_$appel} en ayant bien réinitialisé la variable \texttt{C}.}
+
