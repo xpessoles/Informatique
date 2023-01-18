@@ -1,0 +1,135 @@
+\ifprof
+\else
+Nous vous en proposons l'implémentation suivante. 
+\begin{lstlisting}
+%def u(alpha,n):
+%    """u_n, u_0 = alpha"""
+%    x = alpha
+%    for i in range(n):
+%        x = (7 * x) % 20
+%    return x+5
+def u(alpha,n):
+    """u_n, u_0 = alpha"""
+    x = alpha
+    for i in range(n):
+        x = (15091 * x) % 64007
+    return x
+\end{lstlisting}
+
+
+On donne les instruction suivantes qui permettent de compter le nombre d'appel à une fonction : 
+
+
+\begin{lstlisting}
+C=0
+def compte_appel():
+    global C
+    C+=1
+
+a=u(alpha,10)
+b=u(alpha,100)
+
+for k in range(a):
+    compte_appel()
+\end{lstlisting}
+\fi
+
+\question{Exécuter cette suite d'instruction et donner la valeur de C dans votre cas.}
+
+\ifprof
+\begin{corrige}~\\ \vspace{-.7cm}
+\begin{lstlisting}
+C=
+\end{lstlisting}
+\end{corrige}
+\else
+\fi
+
+
+\question{Pour votre valeur de $alpha$ donner \texttt{a=u(alpha,10)} et \texttt{b=u(alpha,100)}.}
+\ifprof
+\begin{corrige}~\\ \vspace{-.7cm}
+\begin{lstlisting}
+def generer_PI(n,cmax):
+    L = []
+    for i in range(n):
+        x = random.randrange(0,cmax+1)
+        y = random.randrange(0,cmax+1)
+        pt = [x,y]
+        L.append(pt)
+    return L
+\end{lstlisting}
+\end{corrige}
+\else
+\fi
+
+\ifprof
+\else
+L'algorithme d'Euclide permet, étant donnés deux entiers \emph{a} et
+\emph{b}, de calculer leur plus grand commun diviseur (pgcd) \emph{d}.
+Cet algorithme se base sur la propriété suivante~:
+
+\[\left\{ \begin{matrix}
+\text{pgcd}\left( a,b \right) = a,\ si\ b = 0 \\
+\text{pgcd}\left( a,b \right) = pgcd\left( b,a\ \%\ b \right),\ sinon \\
+\end{matrix} \right.\ \]
+
+où \emph{a} \% \emph{b} représente le reste de la division euclidienne
+de \emph{a} par \emph{b}.
+\fi
+
+\question{Ecrire une fonction récursive \texttt{pgcd(a,b)} qui calcule le plus grand
+  commun diviseur de deux entiers en utilisant l'algorithme d'Euclide. Donner le PGCD de a et b.}
+  
+  \question{Donner le nombre d'appel récursif de la fonction \texttt{pgcd(a,b)} avec \texttt{a=u(alpha,10)}
+ et \texttt{b=u(alpha,100)} en utilisant la fonction \texttt{compte$\_$appel} et en ayant bien réinitialisé la variable \texttt{C}..}
+
+
+\ifprof
+\else
+Le théorème de Bézout nous assure également l'existence de deux entiers
+\emph{u} et \emph{v} tels que~:
+
+\begin{align*}
+a\cdot u+b\cdot v=d
+\end{align*}
+
+(\emph{u} et \emph{v} sont des
+coefficients de Bézout de \emph{a} et \emph{b}).
+
+Une version étendue de l'algorithme d'Euclide permet de calculer, en
+plus du pgcd \emph{d} des valeurs possibles pour les coefficients de
+Bézout \emph{u} et \emph{v}.
+
+Cet algorithme prend en entrée deux entiers \emph{a} et \emph{b}. Il
+procède de la manière suivante :
+
+\begin{itemize}
+\item
+  Si \emph{b} = 0 alors \emph{d} = \emph{a}, \emph{u} = 1 et \emph{v} =
+  0.
+\item
+  Sinon, on applique récursivement l'algorithme sur les entiers \emph{b}
+  et (\emph{a} \% \emph{b}).
+\end{itemize}
+
+On obtient ainsi \emph{d}', \emph{u}' et \emph{v}' tels que :
+
+\emph{d}' = pgcd(\emph{b}, \emph{a} \% b) ; et : \emph{b.u}' + (\emph{a}
+\% \emph{b}).\emph{v'} = \emph{d'}
+
+On en déduit la solution pour \emph{a} et b grâce aux égalités :
+
+\emph{d} = \emph{d'}, \emph{u} = \emph{v'} et \emph{v} = \emph{u}' --
+(\emph{a}//\emph{b}).\emph{v'}
+\fi
+
+\question{
+  En déduire une fonction \texttt{bezout(a:int,b:int)->d:int,u:int,v:int} qui étant donnés deux entiers \emph{a}
+  et \emph{b} calcule le triplet (\emph{d},\emph{u},\emph{v}) comme
+  expliqué ci-dessus. Donner les valeurs de $d$, $u$ et $v$ pour \texttt{a=u(alpha,10)}
+ et \texttt{b=u(alpha,100)}}
+  
+  
+    \question{Donner le nombre d'appel récursif de la fonction \texttt{bezout(a,b)} avec \texttt{a=u(alpha,10)}
+ et \texttt{b=u(alpha,100)} en utilisant la fonction \texttt{compte$\_$appel} dans la fonction \texttt{bezout(a,b)} et en ayant bien réinitialisé la variable \texttt{C}..}

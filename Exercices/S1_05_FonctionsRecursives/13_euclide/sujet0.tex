@@ -1,0 +1,115 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifluatex
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\author{}
+\date{}
+
+\begin{document}
+
+L'algorithme d'Euclide permet, étant donnés deux entiers \emph{a} et
+\emph{b}, de calculer leur plus grand commun diviseur (pgcd) \emph{d}.
+Cet algorithme se base sur la propriété suivante~:
+
+\[\left\{ \begin{matrix}
+\text{pgcd}\left( a,b \right) = a,\ si\ b = 0 \\
+\text{pgcd}\left( a,b \right) = pgcd\left( b,a\ \%\ b \right),\ sinon \\
+\end{matrix} \right.\ \]
+
+où \emph{a} \% \emph{b} représente le reste de la division euclidienne
+de \emph{a} par \emph{b}.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Ecrire une fonction récursive pgcd(a,b) qui calcule le plus grand
+  commun diviseur de deux entiers en utilisant l'algorithme d'Euclide.
+\end{enumerate}
+
+Le théorème de Bézout nous assure également l'existence de deux entiers
+\emph{u} et \emph{v} tels que~:
+
+\emph{a.u} + \emph{b.v} = \emph{d} (\emph{u} et \emph{v} sont des
+coefficients de Bézout de \emph{a} et \emph{b}).
+
+Une version étendue de l'algorithme d'Euclide permet de calculer, en
+plus du pgcd \emph{d} des valeurs possibles pour les coefficients de
+Bézout \emph{u} et \emph{v}.
+
+Cet algorithme prend en entrée deux entiers \emph{a} et \emph{b}. Il
+procède de la manière suivante :
+
+\begin{itemize}
+\item
+  Si \emph{b} = 0 alors \emph{d} = \emph{a}, \emph{u} = 1 et \emph{v} =
+  0.
+\item
+  Sinon, on applique récursivement l'algorithme sur les entiers \emph{b}
+  et (\emph{a} \% \emph{b}).
+\end{itemize}
+
+On obtient ainsi \emph{d}', \emph{u}' et \emph{v}' tels que :
+
+\emph{d}' = pgcd(\emph{b}, \emph{a} \% b) ; et : \emph{b.u}' + (\emph{a}
+\% \emph{b}).\emph{v'} = \emph{d'}
+
+On en déduit la solution pour \emph{a} et b grâce aux égalités :
+
+\emph{d} = \emph{d'}, \emph{u} = \emph{v'} et \emph{v} = \emph{u}' --
+(\emph{a}//\emph{b}).\emph{v'}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\item
+  En déduire une fonction bezout qui étant donnés deux entiers \emph{a}
+  et \emph{b} calcule le triplet (\emph{d},\emph{u},\emph{v}) comme
+  expliqué ci-dessus.
+\end{enumerate}
+
+\end{document}
