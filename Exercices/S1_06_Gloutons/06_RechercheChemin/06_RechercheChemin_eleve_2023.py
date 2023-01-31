@@ -16,7 +16,7 @@ def distance(p1:list, p2:list) -> float:
     return 0.
 
 def Q1_test():
-    """ Fonction de test pour la question 4."""
+    """ Fonction de test pour la question 1."""
     A, p1, p2 = [0,0], [2,4], [6,5]
     return (distance(A,p1) > 4.472135) and (distance(p1,p2) < 4.472136)
  
@@ -28,7 +28,7 @@ def distances(pts, dep):
     return []
 
 def Q2_test():
-    """ Fonction de test pour la question 5."""
+    """ Fonction de test pour la question 2."""
     A, p1, p2, p3 = [0,0], [2,4], [6,5], [5,1]
     pts = [p1,p2,p3]
     dist = distances(pts, A)
@@ -78,7 +78,7 @@ def indice(position, dist, dispo):
     return 0
 
 def Q8_test():
-    """ Fonction de test pour la question 11."""
+    """ Fonction de test pour la question 8."""
     dispo = [False, True, True, False]
     tab_dist = [[0, 4.123105625617661, 4.242640687119285, 4.47213595499958], [4.123105625617661, 0, 4.123105625617661, 7.810249675906654], [4.242640687119285, 4.123105625617661, 0, 5.0990195135927845], [4.47213595499958, 7.810249675906654, 5.0990195135927845, 0]]
     return 1 == indice(0, tab_dist, dispo)
@@ -90,7 +90,7 @@ def plus_court(dist):
     return []
 
 def Q9_test():
-    """ Fonction de test pour la question 12."""
+    """ Fonction de test pour la question 9."""
     tab_dist = [[0, 4.123105625617661, 4.242640687119285, 4.47213595499958], [4.123105625617661, 0, 4.123105625617661, 7.810249675906654], [4.242640687119285, 4.123105625617661, 0, 5.0990195135927845], [4.47213595499958, 7.810249675906654, 5.0990195135927845, 0]]
     return  plus_court(tab_dist) == [0, 1, 2]
 
