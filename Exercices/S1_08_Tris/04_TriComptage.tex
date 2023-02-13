@@ -1,13 +1,16 @@
 %\exer{Tri par comptage d'une liste}
-%ù\setcounter{numques}{0}
+%\setcounter{numques}{0}
 
 On suppose que la liste à trier \texttt{L} est constituée d’entiers de l’intervalle  $\llbracket 0; k \llbracket$. L’algorithme
-fonctionne suivant le principe suivant. On parcourt une fois la liste et on compte le nombre d’éléments de
-la liste égaux à 0, 1, ..., $k-1$. Pour ce faire on utilise une liste \texttt{C} de taille $k$. On peut alors facilement procéder à une
-réécriture de la liste initiale, de sorte qu’en sortie elle soit constituée des mêmes éléments, mais triés dans l’ordre
+fonctionne suivant le principe suivant: 
+\begin{enumerate}
+\item on parcourt une fois la liste et on compte le nombre d’éléments de
+la liste égaux à 0, 1, ..., $k-1$. Pour ce faire on utilise une liste \texttt{C} de taille $k$;
+\item on procéde alors à une réécriture de la liste initiale, de sorte qu’en sortie elle soit constituée des mêmes éléments, mais triés dans l’ordre
 croissant.
+\end{enumerate}
 
-Ainsi, si on cherche à trier la liste \texttt{L=[2,1,4,1]}. Dans un premier temps on crée une liste \texttt{C} contenant cinq fois la valeur 0 : \texttt{C=[0,0,0,0,0]}. Une fois le comptage terminé on obtient la liste suivante : \texttt{C=[0,2,1,0,1]}. La liste triée sera donc constituée de 2 fois la valeur 1 puis 1 fois la valeur 2 puis une fois la valeur 4.
+Ainsi, si on cherche à trier la liste \texttt{L=[2,1,4,1]}. Dans un premier temps on crée une liste \texttt{C} contenant cinq fois la valeur 0 : \texttt{C=[0,0,0,0,0]}. Une fois le comptage terminé on obtient la liste suivante : \texttt{C=[0,2,1,0,1]}. La liste triée sera donc constituée de 2 fois la valeur 1 puis 1 fois la valeur 2 puis une fois la valeur 4 soit \texttt{C=[0,0,1,1,2]}.
 
 
 
@@ -15,11 +18,18 @@ L’algorithme prend en entrée la liste $L$ à trier, ainsi qu’un entier $k$ 
 liste soient des entiers de l’intervalle $\llbracket 0; k \llbracket$. On procède en deux étapes : d’abord compter les éléments de chaque type,
 ensuite réécrire la liste $L$.
 
-\question{Ecrire la fonction on pourra (au choix) utiliser l'une des signatures suivante : \texttt{tri\_comptage(L:list,k:int) -> None}  ou \texttt{tri\_comptage(L:list,k:int) -> list} permettant de réaliser un tri par comptage (avec ou sans effet de bord).}
+\question{Ecrire la fonction  \texttt{tri\_comptage(L:list,k:int) -> None} permettant de réaliser un tri par comptage avec effet de bord.}
 
-\question{La fonction proposée agit-elle avec effet de bord ? Sans effet de bord ?}
+\question{Ecrire la fonction  \texttt{tri\_comptage\_02(L:list,k:int) -> list} permettant de réaliser un tri par comptage sans effet de bord.}
 
-\question{La fonction proposée réalise-t-elle un tri stable ? un tri en place ?}
+\begin{defi}{Tri en place -- Wikipedia}
+Un tri est dit en place s'il n'utilise qu'un nombre très limité de variables et qu’il modifie directement la structure qu’il est en train de trier. Ceci nécessite l’utilisation d'une structure de donnée adaptée (un tableau par exemple). Ce caractère peut être très important si on ne dispose pas de beaucoup de mémoire.
+\end{defi}
+
+\begin{defi}{Tri stable  -- Wikipedia}
+Un tri est dit stable s'il préserve l’ordonnancement initial des éléments que l'ordre considère comme égaux.
+\end{defi}
+\question{Les fonctions proposées réalisent-t-elles un tri stable ? un tri en place ?}
 
 \ifprof
 \begin{lstlisting}

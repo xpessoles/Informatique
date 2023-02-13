@@ -1,1 +1,63 @@
-%
+%\exer{Tri fusion d'une liste d'entiers}
+%\setcounter{numques}{0}
+
+Le tri fusion d'une liste se base sur le principe suivant : 
+\begin{enumerate}
+\item on sépare la liste en 2 listes de longueurs quasi-égales (à un élément près);
+\item on trie ces deux listes en utilisant le tri fusion (par un appel récursif);
+\item à partir de deux listes triées, on les fusionne en une seule liste en conservant l'ordre croissant.
+\end{enumerate}
+
+\question{Implémenter la fonction \texttt{separe(L : list) -> tuple[list,list]} renvoyant deux listes de longueurs quasi-égales.}
+\ifprof
+\begin{lstlisting}
+def separe(L: list) -> tuple[list,list]:
+    return L[:len(L) // 2], L[len(L) // 2:]
+\end{lstlisting}
+\else
+\fi
+
+\question{Proposer 3 tests unitaires permettant de vérifier le bon fonctionnement de votre fonction.}
+
+\question{Implémenter la fonction \texttt{fusion(L1 : list, L2 : list) -> list} réalisant la fusion de deux listes triées. Pour cela on procèdera ainsi :}
+\itshape
+\begin{enumerate}
+\item si une des listes est vides on renvoie l'autre;
+\item sinon : 
+\begin{enumerate}
+\item si \texttt{L1[0] <L2[0]} on fusionne, par récursivité, \texttt{L1[0]}, \texttt{L[1:]} et \texttt{L2};
+\item sinon, on réfléchit et on fusionne ce qu'il y a fusionner ;).
+\end{enumerate}
+\end{enumerate}
+\normalshape
+
+\ifprof
+\begin{lstlisting}
+def fusion(L1: list, L2: list) -> list:
+    if not L1 or not L2: # si l'une des listes est vide (éventuellement les 2)
+        return L1 or L2 # alors on renvoie l'autre (éventuellement vide aussi)
+    else:
+        a, b = L1[0], L2[0] 
+        if a < b : # sinon on compare leurs premiers éléments
+            return [a] + fusion(L1[1:], L2) # on place le plus petit en tête et on fusionne le reste
+        else:
+            return [b] + fusion(L1, L2[1:])
+\end{lstlisting}
+\else
+\fi
+
+\question{Proposer 3 tests unitaires permettant de vérifier le bon fonctionnement de votre fonction.}
+
+
+\question{Implémenter la fonction \texttt{tri\_fusion(L : list) -> list} réalisant par récursivité le tri de la liste \texttt{L}.}
+
+\ifprof
+\begin{lstlisting}
+def tri_fusion(L: list) -> list:
+    if len(L) < 2: # cas d'arrêt
+        return L
+    L1, L2 = separe(L) # sinon on sépare
+    return fusion(tri_fusion(L1), tri_fusion(L2)) # et on fusionne les sous-listes triées
+\end{lstlisting}
+\else
+\fi
