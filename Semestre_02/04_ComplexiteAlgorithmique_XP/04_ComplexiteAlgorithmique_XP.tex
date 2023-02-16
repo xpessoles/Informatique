@@ -474,20 +474,26 @@ La complexité dépend notamment :
 
 Intuitivement, une solution est de parcourir la liste d'élément et de déterminer le plus grand élément par comparaisons successives.
 
+\noindent
+\begin{minipage}[c]{.48\linewidth}
+\begin{lstlisting}
+def cherche_max(L : list) -> int :
+    maxi = L[0]
+    for i in range(1,len(L)):
+        if tab[i] > maxi : 
+            maxi = tab[i]
+    return maxi
+\end{lstlisting}
 
-\begin{pseudo}
-\begin{algorithm}[H]
-\KwData{$tab$ tableau de taille $n$}
-$max  \leftarrow -\infty$\\
-\For{$i=1$ \KwTo $n$}{
-\If{$tab[i]>max$}{
-$max  \leftarrow tab[i]$\\
-}}
-\end{algorithm}
-\end{pseudo}
-
+\end{minipage} \hfill 
+\begin{minipage}[c]{.48\linewidth}
 Dans ce cas, le coût temporel est :
 $C_T(n) = C_e + n\left(2 C_e \right)$. Ici encore, la complexité de cet algorithme est linéaire car $C_T(n) \underset{+\infty}{\sim} 2 C_e n$.
+
+Par ailleurs, en comptant le nombre de compairaisons, on observe aussi qu'il y a environ $n$ comparaisons. On a donc $C_T(n) = \mathcal{O}(n)$.
+\end{minipage} 
+
+
 \end{exemple}
 
 \subsubsection{Tri d'une liste}
