@@ -611,43 +611,43 @@ On parlera ici de complexité logarithmique.
 
 
 
-\subsection{Complexité algorithmique}
-\begin{defi}{}
- [Bournez]
-Soient $f$ et $g$ deux fonctions $f,g : \mathbb{N} \rightarrow \mathbb{R}^{+}_{*}$. On note $f(n)=\mathcal{O}(g(n))$ lorsqu'il existe $c\in\mathbb{R}^+$ et $n_0\in\mathbb{N}$ tels que pour tout $n\geq n_0$, 
-$$
-f(n) \leq c\cdot g(n)
-$$
-
-Intuitivement, cela signifie que $f$ est inférieur à $g$ à une constante multiplicative près pour les données suffisamment grandes. 
-
-\end{defi}
-
-\begin{exemple}
-Ainsi, l'algorithme de recherche du maximum dans une liste non trié (présenté précédemment) est de complexité $\mathcal{O}(n)$ où $n$ est le nombre d'éléments de la liste. Cet algorithme est proportionnel au nombre d'éléments.
-
-L'algorithme de tri naïf est de complexité $\mathcal{O}(n^2)$. On parle d'algorithme quadratique. Le temps d'exécution devient très grand lorsque le nombre de données et très important. 
-
-
-Par ordre de complexité croissante on a donc :
-\begin{itemize}
-\item $\mathcal{O}(1)$ : algorithme s'exécutant en temps constant, quelle que soit la taille des données;
-\item $\mathcal{O}(\log(n))$ : algorithme rapide (complexité logarithmique) (Exemple : recherche par dichotomie dans un tableau trié);
-\item $\mathcal{O}(n)$ : algorithme linéaire;
-\item $\mathcal{O}(n\cdot \log(n))$ : complexité $n \log n$;
-\item $\mathcal{O}(n^2)$ : complexité quadratique;
-\item $\mathcal{O}(2^n)$ : complexité exponentielle. 
-\end{itemize}
-\end{exemple}
-
-\begin{exemple}
-\begin{itemize}
-\item Le coût temporel de l'algorithme pour calculer une factorielle est $4C_e n$ et on a  $4C_e n \leq c n$. La complexité de l'algorithme est en $\mathcal{O}(n)$.
-\item Le coût temporel de l'algorithme de recherche d'un maximum est $2C_e n$ et on a  $2C_e n \leq c n$. La complexité de l'algorithme est en $\mathcal{O}(n)$.
-\item Le coût temporel de l'algorithme de tri dans une liste en utilisant l'algorithme naïf est $C_e n^2$ et on a  $C_e n^2 \leq c n^2$.  La complexité de l'algorithme est en $\mathcal{O}(n^2)$.
-\item Le coût temporel de l'algorithme de recherche dichotomique est de l'ordre de $C_w \dfrac{\ln(n)}{\ln(2)}$ et on a  $C_w \dfrac{\ln(n)}{\ln(2)} \leq c \ln (n)$. La complexité de l'algorithme est en $\mathcal{O}(\log (n))$.
-\end{itemize}
-\end{exemple}
+%\subsection{Complexité algorithmique}
+%\begin{defi}{}
+% [Bournez]
+%Soient $f$ et $g$ deux fonctions $f,g : \mathbb{N} \rightarrow \mathbb{R}^{+}_{*}$. On note $f(n)=\mathcal{O}(g(n))$ lorsqu'il existe $c\in\mathbb{R}^+$ et $n_0\in\mathbb{N}$ tels que pour tout $n\geq n_0$, 
+%$$
+%f(n) \leq c\cdot g(n)
+%$$
+%
+%Intuitivement, cela signifie que $f$ est inférieur à $g$ à une constante multiplicative près pour les données suffisamment grandes. 
+%
+%\end{defi}
+%
+%\begin{exemple}
+%Ainsi, l'algorithme de recherche du maximum dans une liste non trié (présenté précédemment) est de complexité $\mathcal{O}(n)$ où $n$ est le nombre d'éléments de la liste. Cet algorithme est proportionnel au nombre d'éléments.
+%
+%L'algorithme de tri naïf est de complexité $\mathcal{O}(n^2)$. On parle d'algorithme quadratique. Le temps d'exécution devient très grand lorsque le nombre de données et très important. 
+%
+%
+%Par ordre de complexité croissante on a donc :
+%\begin{itemize}
+%\item $\mathcal{O}(1)$ : algorithme s'exécutant en temps constant, quelle que soit la taille des données;
+%\item $\mathcal{O}(\log(n))$ : algorithme rapide (complexité logarithmique) (Exemple : recherche par dichotomie dans un tableau trié);
+%\item $\mathcal{O}(n)$ : algorithme linéaire;
+%\item $\mathcal{O}(n\cdot \log(n))$ : complexité $n \log n$;
+%\item $\mathcal{O}(n^2)$ : complexité quadratique;
+%\item $\mathcal{O}(2^n)$ : complexité exponentielle. 
+%\end{itemize}
+%\end{exemple}
+%
+%\begin{exemple}
+%\begin{itemize}
+%\item Le coût temporel de l'algorithme pour calculer une factorielle est $4C_e n$ et on a  $4C_e n \leq c n$. La complexité de l'algorithme est en $\mathcal{O}(n)$.
+%\item Le coût temporel de l'algorithme de recherche d'un maximum est $2C_e n$ et on a  $2C_e n \leq c n$. La complexité de l'algorithme est en $\mathcal{O}(n)$.
+%\item Le coût temporel de l'algorithme de tri dans une liste en utilisant l'algorithme naïf est $C_e n^2$ et on a  $C_e n^2 \leq c n^2$.  La complexité de l'algorithme est en $\mathcal{O}(n^2)$.
+%\item Le coût temporel de l'algorithme de recherche dichotomique est de l'ordre de $C_w \dfrac{\ln(n)}{\ln(2)}$ et on a  $C_w \dfrac{\ln(n)}{\ln(2)} \leq c \ln (n)$. La complexité de l'algorithme est en $\mathcal{O}(\log (n))$.
+%\end{itemize}
+%\end{exemple}
 
 
 \begin{resultat}
