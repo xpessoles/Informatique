@@ -423,7 +423,7 @@ La complexité en mémoire est donc constante : $C_M = \mathcal{O}(1)$.
 
 \textbf{Complexité en temps $C_T$ (1)}
 
-Compte-tenu d'un des réultats précédents, dans le pure des cas, on est dans le \texttt{else}. La boucle \texttt{while} est réalisée $n$ fois; donc on peut directement que $C_T(n)=\mathcal{O}(n)$.
+Compte-tenu d'un des réultats précédents, dans le pure des cas, on est dans le \texttt{else}. La boucle \texttt{while} est réalisée $n$ fois; donc on peut directement dire que que $C_T(n)$ est un $\mathcal{O}(n)$.
  
 \textbf{Complexité en temps $C_T$ (2)}
 Une justification plus exhaustive serait la suivante.
@@ -490,67 +490,121 @@ def cherche_max(L : list) -> int :
 Dans ce cas, le coût temporel est :
 $C_T(n) = C_e + n\left(2 C_e \right)$. Ici encore, la complexité de cet algorithme est linéaire car $C_T(n) \underset{+\infty}{\sim} 2 C_e n$.
 
-Par ailleurs, en comptant le nombre de compairaisons, on observe aussi qu'il y a environ $n$ comparaisons. On a donc $C_T(n) = \mathcal{O}(n)$.
+Par ailleurs, en comptant le nombre de compairaisons, on observe aussi qu'il y a environ $n$ comparaisons. On a donc $C_T(n)$ est en $\mathcal{O}(n)$.
 \end{minipage} 
 
 
 \end{exemple}
 
+\subsubsection{Suite}
+Soit la suite $u_n$ définie par récurrence pour tout $n\in\mathbb{N}^*$ par 
+$
+\left\{
+\begin{array}{ll} 
+u_1 = 1 \\
+u_{n+1} = \dfrac{u_n + 6}{u_n + 2} \\
+\end{array}
+\right.
+$.
+
+
+\noindent\begin{minipage}[t]{.32\linewidth}
+\begin{lstlisting}
+def un_it (n) :
+    if n == 1 :
+        return 1
+    else : 
+        u = 1
+        for i in range(2,n+1):
+            u = (u+6)/(u+2)
+        return u
+\end{lstlisting}
+
+La boucle \texttt{cor} s'exécute \texttt{n} fois. Cet algorithme est en $\mathcal{O}(n)$.
+\end{minipage} \hfill
+\begin{minipage}[t]{.32\linewidth}
+\begin{lstlisting}
+def un_rec (n) :
+    if n == 1 :
+        return 1
+    else : 
+        return (un_rec(n-1)+6)/(un_rec(n-1)+2)
+\end{lstlisting}
+
+A l'itération \texttt{n}, $C(n) = 2\times C(n-1)$.  Il s'agit donc d'une suite géométrique et $C(n)=C(0)\times 2^n$.
+On a donc une complexité exponentielle en $\mathcal{O}(2^n)$.
+\end{minipage} \hfill
+\begin{minipage}[t]{.32\linewidth}
+\begin{lstlisting}
+def un_rec_v2 (n):
+    if n == 1 :
+        return 1
+    else : 
+        v = un_rec_v2(n-1)
+        return (v+6)/(v+2)
+\end{lstlisting}
+
+A l'itération \texttt{n}, $C(n) = 1+C(n-1)$.  Il s'agit donc d'une suite arithmétique et $C(n)=C(0) + n$.
+On a donc une complexité linéaire en $\mathcal{O}(n)$.
+
+\end{minipage} 
+
+
 \subsubsection{Tri d'une liste}
-
-\begin{exemple}
-\textbf{Algorithme naïf}
-
-\textit{Soit une liste de nombre entiers désordonnés. Comment les trier par ordre croissant ?}
-
-Une méthode dite naïve pourrait être la suivante : 
-\begin{itemize}
-\item trouver le plus petit élément du tableau. Notons $min$ son indice;
-\item on permute alors le $min$\ieme élément avec le premier élément;
-\item ...
-\item on trouve le plus petit élément du tableau compris entre l'indice $i$ et $N$;
-\item on permute alors le $min$\ieme élément avec le $i$\ieme élément.
-\end{itemize}
-
-
-
-\begin{pseudo}
-\begin{algorithm}[H]
-\KwData{$tab$ tableau d'entiers désordonnés de taille $n$}
-\KwResult{$tab$ tableau d'entiers ordonnés}
-\For{$i=1$ \KwTo $n-1$}{
-$ min \leftarrow  i$\\
-\For{$j=i+1$ \KwTo $n$}{
-\If{$tab[j]<tab[min]$}{
-$min  \leftarrow j$\\
-}}
-$tmp  \leftarrow tab[i]$ \\
-$ tab[i] \leftarrow tab[min]$ \\
-$ tab[min] \leftarrow tmp$ \\
-}
-
-\end{algorithm}
-\end{pseudo}
-
-
-
-Ici les bornes de la boucle imbriquée dépendent de l'indice $i$. Ainsi :
-\begin{itemize}
-\item au rang $1$, $C_1 = C_e + \left(n-1\right)\left( 2 C_e\right) + 3 C_e$;
-\item au rang $2$, $C_2 = C_e + \left(n-2\right)\left( 2 C_e\right) + 3 C_e$;
-\item au rang $i$, $C_i = C_e + \left(n-i)\right)\left( 2 C_e\right) + 3 C_e$.
-\end{itemize}
-
-Le coût temporel peut donc s'exprimer ainsi : 
-\begin{eqnarray*}
-C_T(n) &=& \sum\limits_{i=0}^{n} \left(Ce + (n-i)\left( 2 C_e\right) + 3 C_e \right) = C_e\sum\limits_{i=0}^{n} \left( 1+2n-2i + 3 \right) \\
-&=&C_e\sum\limits_{i=0}^{n} \left( 4+2n-2i  \right) =  C_e \left( 4n+2n^2 -  2\dfrac{n(n+1)}{2}\right) = C_e\left( 3n+n^2\right)
-%C_e \left( 5n + n^2  \right)
-\end{eqnarray*}
-
-Dans ce cas, $C_T(n)\sim C_e n^2$. On parle de complexité quadratique. Lorsque la taille du tableau double, le temps de calcul est multiplié par 4.
-
-\end{exemple}
+%
+%\begin{exemple}
+%\textbf{Algorithme naïf}
+%
+%\textit{Soit une liste de nombre entiers désordonnés. Comment les trier par ordre croissant ?}
+%
+%Une méthode dite naïve pourrait être la suivante : 
+%\begin{itemize}
+%\item trouver le plus petit élément du tableau. Notons $min$ son indice;
+%\item on permute alors le $min$\ieme élément avec le premier élément;
+%\item ...
+%\item on trouve le plus petit élément du tableau compris entre l'indice $i$ et $N$;
+%\item on permute alors le $min$\ieme élément avec le $i$\ieme élément.
+%\end{itemize}
+%
+%
+%
+%\begin{pseudo}
+%\begin{algorithm}[H]
+%\KwData{$tab$ tableau d'entiers désordonnés de taille $n$}
+%\KwResult{$tab$ tableau d'entiers ordonnés}
+%\For{$i=1$ \KwTo $n-1$}{
+%$ min \leftarrow  i$\\
+%\For{$j=i+1$ \KwTo $n$}{
+%\If{$tab[j]<tab[min]$}{
+%$min  \leftarrow j$\\
+%}}
+%$tmp  \leftarrow tab[i]$ \\
+%$ tab[i] \leftarrow tab[min]$ \\
+%$ tab[min] \leftarrow tmp$ \\
+%}
+%
+%\end{algorithm}
+%\end{pseudo}
+%
+%
+%
+%Ici les bornes de la boucle imbriquée dépendent de l'indice $i$. Ainsi :
+%\begin{itemize}
+%\item au rang $1$, $C_1 = C_e + \left(n-1\right)\left( 2 C_e\right) + 3 C_e$;
+%\item au rang $2$, $C_2 = C_e + \left(n-2\right)\left( 2 C_e\right) + 3 C_e$;
+%\item au rang $i$, $C_i = C_e + \left(n-i)\right)\left( 2 C_e\right) + 3 C_e$.
+%\end{itemize}
+%
+%Le coût temporel peut donc s'exprimer ainsi : 
+%\begin{eqnarray*}
+%C_T(n) &=& \sum\limits_{i=0}^{n} \left(Ce + (n-i)\left( 2 C_e\right) + 3 C_e \right) = C_e\sum\limits_{i=0}^{n} \left( 1+2n-2i + 3 \right) \\
+%&=&C_e\sum\limits_{i=0}^{n} \left( 4+2n-2i  \right) =  C_e \left( 4n+2n^2 -  2\dfrac{n(n+1)}{2}\right) = C_e\left( 3n+n^2\right)
+%%C_e \left( 5n + n^2  \right)
+%\end{eqnarray*}
+%
+%Dans ce cas, $C_T(n)\sim C_e n^2$. On parle de complexité quadratique. Lorsque la taille du tableau double, le temps de calcul est multiplié par 4.
+%
+%\end{exemple}
 
 %\begin{rem}
 %Il existe d'autres algorithmes de tris plus performant que l'algorithme présenté ci-dessus : 
@@ -562,7 +616,7 @@ Dans ce cas, $C_T(n)\sim C_e n^2$. On parle de complexité quadratique. Lorsque 
 %\end{rem}
 
 \subsubsection{Diviser pour régner -- recherche dichotomique}
-\begin{exemple}
+\begin{exemple}~\\ \vspace{-.3cm}
 \begin{lstlisting}
 def recherche_dichotomique(x, a):
     g, d = 0, len(a)-1
@@ -676,6 +730,31 @@ $\mathcal{O}(2^n)$ \\
 \end{center}
 
 \end{resultat}
+
+\subsection{Trompe l'\oe il -- coûts cachés --}
+\begin{minipage}[t]{.31\linewidth}
+\begin{lstlisting}
+def recherche(e,L):
+    return e in L
+\end{lstlisting}
+\end{minipage} \hfill
+\begin{minipage}[t]{.31\linewidth}
+\begin{lstlisting}
+L1 = L.copy()
+\end{lstlisting}
+\end{minipage} \hfill
+\begin{minipage}[t]{.31\linewidth}
+\begin{lstlisting}
+L.append(e)
+\end{lstlisting}
+\end{minipage} 
+
+Il faut être vigilant lorsqu'on manipule des tableaux avec Python. En effet, de simples instructions cachent en effet des coûts pas toujours visibles. 
+Ainsi, l'instruction \texttt{e in L} est linéaire $\mathcal{O}(n)$ car Python dont inspecter chacun des éléments d'une liste de taille \texttt{n} pour savoir si \texttt{e} est dedans ou non.
+
+Il en est de même pour l'instruction \texttt{copy}. 
+
+Concernant la mathode \texttt{append} on pourra faire l'hypothèse que cela s'effectue en temps constant (\mathcal{O}(1)). Cepandant, lorsqu'on ajoute une liste Python préréserve des espaces d'allocations juxtaposés. Tant que la liste ne dépasse pas la taille de l'espace alloué, l'ajout d'un élément se fait à temps constant. Quand cette taille est dépassée, la liste est déplacée à un autre endroit en mémoire où plus d'espace est nécessaire. Cette copie se fait donc en temps linéaire. Ainsi, pour append on parle de temps amorti constant.
 
 \section{Profiling des algorithmes}
 
