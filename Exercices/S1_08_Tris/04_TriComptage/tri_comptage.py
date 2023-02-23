@@ -20,6 +20,17 @@ def tri_comptage2(L,k):
             L[p]=i
             p+=1
 
+
+def tri_comptage3(L:list,k:int):
+    C=k*[0]
+    a=[]
+    for i in range(len(L)):
+        C[L[i]]=C[L[i]]+1
+    for i in range(k):
+        a+=C[i]*[i]
+    return a
+
 L=[2,1,4,1]
 
 a=tri_comptage(L,5)
+a=tri_comptage3(L,5)

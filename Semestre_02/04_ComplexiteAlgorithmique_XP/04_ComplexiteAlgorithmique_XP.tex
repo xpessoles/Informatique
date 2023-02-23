@@ -106,7 +106,7 @@
 %\end{minipage}
 
 %\subsection{Deuxième exemple}
-Prienons l'exemple de la recherche d'un élément dans une liste : 
+Prenons l'exemple de la recherche d'un élément dans une liste : 
 
 
 \noindent
@@ -754,7 +754,7 @@ Ainsi, l'instruction \texttt{e in L} est linéaire $\mathcal{O}(n)$ car Python d
 
 Il en est de même pour l'instruction \texttt{copy}. 
 
-Concernant la mathode \texttt{append} on pourra faire l'hypothèse que cela s'effectue en temps constant ($\mathcal{O}(1)$). Cepandant, lorsqu'on ajoute une liste Python préréserve des espaces d'allocations juxtaposés. Tant que la liste ne dépasse pas la taille de l'espace alloué, l'ajout d'un élément se fait à temps constant. Quand cette taille est dépassée, la liste est déplacée à un autre endroit en mémoire où plus d'espace est nécessaire. Cette copie se fait donc en temps linéaire. Ainsi, pour append on parle de temps amorti constant.
+Concernant la méthode \texttt{append} on pourra faire l'hypothèse que cela s'effectue en temps constant ($\mathcal{O}(1)$). Cependant, lorsqu'on ajoute une liste Python préréserve des espaces d'allocations juxtaposés. Tant que la liste ne dépasse pas la taille de l'espace alloué, l'ajout d'un élément se fait à temps constant. Quand cette taille est dépassée, la liste est déplacée à un autre endroit en mémoire où plus d'espace est nécessaire. Cette copie se fait donc en temps linéaire. Ainsi, pour append on parle de temps amorti constant.
 
 \section{Profiling des algorithmes}
 
@@ -801,7 +801,7 @@ cProfile.run('crible(10000)')
 \end{lstlisting}
 
 
-On alors le bilan du temps passé à effectuer chacune des opérations. Ainsi pour améliorer notablement l'algorithme, le plus intéressant serait d'optimiser la méthode \texttt{remove}.
+On a alors le bilan du temps passé à effectuer chacune des opérations. Ainsi pour améliorer notablement l'algorithme, le plus intéressant serait d'optimiser la méthode \texttt{remove}.
 \end{exemple}
 
 
