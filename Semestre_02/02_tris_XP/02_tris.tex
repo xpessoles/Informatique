@@ -39,221 +39,31 @@ Les principales capacités développées ici sont :
 
 
 
-\begin{defi}\textbf{Effet de bord -- } On dit qu'une fonction est à effet de bord lorsqu'elle modifie une variable  en dehors de son environnement local. C'est par exemple le cas lorsqu'on donne une liste (objet mutable, passé par référénce) comme argument d'une fonction.
+\begin{defi}{Effet de bord} On dit qu'une fonction est à effet de bord lorsqu'elle modifie une variable  en dehors de son environnement local. C'est par exemple le cas lorsqu'on donne une liste (objet mutable, passé par référénce) comme argument d'une fonction.
 
 Conséquence sur les algorithmes de tri : une fonction de tri ne renvoie rien la plupart du temps (on peut donc l'appeler une procédure). La liste passée en argument en entrée sera triée et cela, même en dehors du scope de la fonction. 
 \end{defi}
 
 
-\begin{defi}\textbf{Tri en place} -- 
+\begin{defi}{Tri en place} 
 Un tri est effectué en place lorsque la liste à trier est modifiée jusqu'à devenir triée. Dans le cas contraire, la fonction de tri pourra renvoyer une novelle liste contenent les mêmes éléments, mais triés. 
 \end{defi}
 
 
-\begin{defi}\textbf{Tri stable} -- 
+\begin{defi}{Tri stable} 
 Un algorithme est dit stable si les positions relatives de deux éléments égaux ne sont pas
 modifiées par l'algorithme : c'est-à-dire que si deux éléments $x$ et $y$ égaux se trouvent aux positions $i_x$ et $i_y$ de
 la liste avant l'algorithme, avec $i_x < i_y$, alors c'est également le cas de leurs positions après l'algorithme.
 % Le caractère stable peut-être utile lorsqu’on utilise des pré-ordres.
 \end{defi}
 
-\begin{defi}\textbf{Tri comparatif} --
+\begin{defi}{Tri comparatif}
 Un tri est dit comparatif lorsqu'il s'appuie uniquement sur la comparaison deux à deux des éléments de la liste et pas sur la valeur ce ces éléments.
 \end{defi}
 
-\subsection{Exemple d'application}
-
-\begin{exemple2}[tri d'avis sur un site marchand]
-
-\begin{minipage}{0.6\textwidth}
-On ne s'intéresse ici qu'à une version simplifiée de l'exemple. On ne se focalise que sur le critère note et plus précisément sur le nombre d'avis.
-
-Avant que l'utilisateur choisisse de classer par notes on a une liste non triée $T=[5,14,11,8,17,7]$ et l'on souhaite obtenir $T=[5,7,8,11,14,17]$.
-
-%Pour ce type d'application c'est le temps maximum qu'il faut limiter. En effet une valeur moyenne pourrait permettre de garantir que sur tous les achats les temps d'attente soient raisonnables pour un ensemble de clients. Cependant, ceci ne pourrait garantir qu'aucun client n'ait pas une attente trop longue.
-\end{minipage}
-\begin{minipage}{0.35\textwidth}
-\begin{center}
-\includegraphics[width=.9\textwidth]{images/illustration.png}
-\end{center}
-\end{minipage}
 
 
-
-
-
-
-
-\end{exemple2}
-
-
-
-\subsection{Complément sur la complexité}
-
-\begin{definition2}[Notions de complexité]
-La complexité permet de donner un ordre de grandeur du nombre d'opérations qu'effectue un algorithme.
-\begin{itemize}
-\item La complexité permet de comparer la performance des algorithmes.
-\item Elle s'estime en fonction d'une donné type d'un problème par exemple la taille d'une liste \texttt{n}.
-\item On parlera de complexité : 
-\begin{itemize}
-\item \textbf{linéaire} si le nombre d'opération de l'ordre de $n$ et on la notera $O(n)$ ;
-\item \textbf{quadratique} si le nombre d'opération de l'ordre de $n^2$ et on la notera $O(n^2)$ ;
-\item \textbf{cubique} si le nombre d'opération de l'ordre de $n^3$ et on la notera $O(n^3)$ ;
-\item \textbf{logarithmique} si le nombre d'opération de l'ordre de $\log(n)$ et on la notera $O(\log(n))$.
-\end{itemize}
-\end{itemize}
-\end{definition2}
-
-%\begin{prop}\textbf{Différents types d'opérations}
-%
-%Dans un algorithme on distinguera trois types d'opérations élémentaires différentes:
-%
-%\begin{itemize}
-%\item les accès mémoire pour lire ou écrire la valeur d'une variable ;
-%\item les opérations arithmétiques : addition, soustraction,
-%multiplication, division ...
-%\item les comparaisons entre deux entiers ou deux réels.
-%\end{itemize}
-%
-%\end{prop}
-%
-%\begin{exemple2}[]
-%
-%exemple : si on considère l'instruction $c \leftarrow a + b$, on peut compter quatre opérations élémentaires :
-%\begin{itemize}
-% \item l'accès en mémoire pour lire la valeur de a,
-% \item l'accès en mémoire pour lire la valeur de b,
-% \item l'addition de a et b,
-% \item l'accès en mémoire pour écrire la nouvelle valeur de c.
-%\end{itemize}
-%
-%
-%\end{exemple2}
-%
-%
-%\begin{definition2}[Application de la complexité dans le cas d'algorithme de tri]
-%\begin{itemize}
-%\item Pour les algorithmes de tri on pourra par exemple exprimer la complexité en fonction du nombre de
-%données à trier. 
-%\item Néanmoins, il se peut qu'avec deux jeux de données différents correspondant
-%aux mêmes paramètres, le nombre d'opérations effectuées ne soit pas le même. Par exemple,
-%un algorithme de tri pourra être plus rapide s'il s'agit de trier des données déjà triées que s'il
-%s'agit de données très désordonnées. On peut alors s'intéresser à :
-%\begin{itemize}
-%\item la complexité \textbf{dans le pire des cas} : les paramètres avec lesquels on exprime la
-%complexité étant fixés, on considère le plus grand nombre d'opérations
-%élémentaires effectuées sur l'ensemble des instances correspondant à ces
-%paramètres ; on cherche ainsi un majorant de la complexité qui puisse être atteint
-%dans certains cas ; c'est ce qu'on fait le plus généralement ;
-%\item la complexité \textbf{dans le meilleur des cas} : les paramètres avec lesquels on exprime la
-%complexité étant fixés, on considère le plus petit nombre d'opérations élémentaires
-%effectuées sur l'ensemble des instances correspondant à ces paramètres ; cette
-%complexité peut venir compléter la précédente mais ne sera jamais suffisante pour
-%l'utilisateur.
-%\end{itemize}
-%\end{itemize}
-%
-%
-%
-%\end{definition2}
-%
-%\begin{exemple2}[Choix du type de complexité pour le tri d'avis sur un site marchand]
-%
-%Dans notre exemple, c'est la complexité dans le pire des cas qui nous intéresse. En effet, même si les attentes longues sont rares, cela peut faire perdre quelques clients, ce qui n'est ici pas acceptable.
-%
-%\end{exemple2}
-%
-%
-%\subsection{Complexité d'un algorithme de tri}
-%
-%\begin{definition2}[Tri comparatif]
-%
-%Un \textbf{algorithme comparatif} (à opposer au non-comparatif comme le tri baquet ou par paquet) est basé sur des comparaisons successives entre les données pour déterminer la permutation correspondant à l'ordre croissant des données.
-%On va chercher ici à évaluer la complexité théorique des tris comparatifs en se basant sur le nombre de comparaisons.
-%\end{definition2}
-%
-%
-%
-%\begin{exemple2}[Algorithme de tri de trois données a, b, c]
-%
-%Cet algorithme correspond au fonctionnement du tri insertion que nous verrons plus loin :
-%
-%\begin{center}
-%\includegraphics[width=.8\textwidth]{images/C2.png}
-%\end{center}
-%
-%
-%Cet arbre signifie : 
-%\begin{enumerate}
-%\item la première comparaison faite est « a < b ? ».
-%\item Si la réponse est oui, la comparaison suivante est « b < c ? »,
-%\item si la réponse est non c'est « a < c ? ». 
-%\item Lorsqu'une permutation est déterminée, on est dans ce que l'on appelle une feuille de l'arbre.
-%\end{enumerate}
-%\end{exemple2}
-% 
-%On voit qu'on peut avoir plus ou moins de chance ; 
-%\begin{itemize}
-%\item pour deux des permutations, on fait deux comparaisons, 
-%\item pour les quatre autres, on fait trois comparaisons. 
-%\item Le plus grand nombre de comparaisons est 3,
-%\item le meilleur est 2,
-%\item le nombre moyen de comparaisons est : $(2 \times 2 + 4 \times 3) / 6 \approx 2,67$.
-%\end{itemize}
-%
-%
-%\begin{prop}{Principe}
-%Soit un tableau de $n$ données, la réponse cherchée par le tri est l'une des $n!$ permutations possibles des données. 
-%exemple : Pour trier $[a,b,c]$, il y a une seule possibilité parmi ces 6 permutations qui conviennent :
-%\begin{itemize}
-%\item $[a,b,c]$
-%\item $[a,c,b]$
-%\item $[b,a,c]$
-%\item $[b,c,a]$
-%\item $[c,a,b]$
-%\item $[c,b,a]$
-%\end{itemize}
-%
-%Pour tout algorithme de tri comparatif, la première comparaison faite consiste à prendre
-%deux des données a et b de la liste et à poser la question : "a-t-on a < b ?", ce qui divise les
-%$n!$ permutations envisageables en deux parties égales ;
-%\end{prop}
-%
-%\begin{rem}
-% les comparaisons suivantes ne garderont pas une telle symétrie : on aura de la chance quand il y aura moins de la moitié des
-%permutations restant possibles qui correspondent à la réponse obtenue et de la malchance
-%sinon. 
-%\end{rem}
-%
-%\begin{prop}{Complexité}
-%Si on s'intéresse à la complexité dans le \textbf{pire des cas} d'un algorithme (la permutation considérée correspond toujours à un cas où on n'a jamais de chance), alors chaque comparaison élimine au plus la moitié des permutations encore envisageables. Dans ce cas, 
-%
-%\begin{itemize}
-%\item après $k$ comparaisons, nombre de permutations envisageables : 
-%
-%\ifprof
-%$$n! / 2^k$$
-%\fi
-%
-%\item Condition pour avoir une permutation unique ;
-%
-%\ifprof
-%$$n! / 2^k < 2$$ 
-%\fi
-%
-%\item Nombre minimum de comparaisons :
-%
-%\ifprof
-%$$log_2(n!)$$ 
-%\fi
-%
-%
-%\item Comme $log_2(n!)$ est équivalent à $n.log_2(n)$, on a le résultat suivant:
-%\end{itemize}
-
-
-\begin{exemple2}[Tri comparatif]
+\begin{exemple}%{Tri comparatif}
 
 Un \textbf{algorithme comparatif} (à opposer au non-comparatif comme le tri baquet ou par paquet) est basé sur des comparaisons successives entre les données pour déterminer la permutation correspondant à l'ordre croissant des données.
 On va chercher ici à évaluer la complexité théorique des tris comparatifs en se basant sur le nombre de comparaisons.
@@ -261,98 +71,27 @@ On va chercher ici à évaluer la complexité théorique des tris comparatifs en
 Cet algorithme correspond au fonctionnement du tri insertion que nous verrons plus loin :
 
 \begin{center}
-\includegraphics[width=.6\textwidth]{images/C2.png}
+\includegraphics[width=.6\textwidth]{C2.png}
 \end{center}
 
-\textbf{Résultat :}\textit{ Tout algorithme comparatif fait dans le pire des cas au moins de l'ordre de
-\textbf{$n \log_2(n)$ comparaisons} soit une complexité de \textbf{$O(N\cdot \log(N))$}}.
-\end{exemple2}
+%\textbf{Résultat :}\textit{ Tout algorithme comparatif fait dans le pire des cas au moins de l'ordre de
+%\textbf{$n \log_2(n)$ comparaisons} soit une complexité de \textbf{$O(N\cdot \log(N))$}}.
+\end{exemple}
 
 \section{Tri par insertion}
 \subsection{Principe}
 
-\begin{definition2}[Principe du tri par insertion]
+\begin{defi}{Principe du tri par insertion}
 Le \textbf{tri par insertion} est le tri que l'on effectue naturellement, par exemple pour trier un jeu de cartes. On trie les premières puis à chaque nouvelle carte on l'ajoute à l'ensemble déjà trié à la bonne place. 
 
-Ce trie s'effectue en place, c'est-à-dire qu'il ne demande pas d'autre tableau que celui que l'on trie. 
+Ce tri s'effectue en place, c'est-à-dire qu'il ne demande pas d'autre tableau que celui que l'on trie. 
 
 Son coût en mémoire est donc constant si on ne compte pas la place occupée par les données.
-\end{definition2}
+\end{defi}
 
-\begin{exemple2}[Illustration du tri par insertion]
-
-On représente en rouge les valeurs triées.
-La clef est en bleu. Les données décalées sont en vert.
-
-
-\noindent\begin{tabular}{|p{11.5cm}|c|c|c|c|}
-\hline \rowcolor{white}
-\hline
-Tableau $T$ initial: 5 est la clef. & \cellcolor{bleuc}5 & 14 & 11 & 8 \\ 
-\hline 
-\hline \rowcolor{white}
-La clef est comparée avec la liste des valeurs déjà triées (vide ici). & \cellcolor{rougec}5 & 14 & 11 & 8   \\ 
-\hline 
-\hline \rowcolor{white}
- La clef est 14 & \cellcolor{rougec}5 & \cellcolor{bleuc}14 & 11 & 8  \\ 
-\hline 
-\hline \rowcolor{white}
-On compare la clef aux valeurs déjà triées (ici 5). Elle est plus grande et reste donc à sa position. & \cellcolor{rougec}5 & \cellcolor{rougec}14 & 11 & 8  \\ 
-\hline 
-\hline \rowcolor{white}
- La clef est 11. & \cellcolor{rougec}5 & \cellcolor{rougec}14 & \cellcolor{bleuc}11 & 8  \\ 
-\hline 
-\hline \rowcolor{white}
-On compare la clef aux valeurs déjà triées : la première valeur comparée est 14. 14 est plus grand donc on décale 14 vers la droite pour laisser une place à la clef. & \cellcolor{rougec}5 & \cellcolor{vertc}14 & \cellcolor{vertc}14 & 8 \\ 
-\hline 
-\hline \rowcolor{white}
-On compare la clef aux valeurs déjà triées : la valeur suivante est 5. 5 est plus petit donc on a trouvé la place de la clef et on l'écrit. & \cellcolor{rougec}5 & \cellcolor{rougec}11 & \cellcolor{rougec}14 & 8  \\ 
-\hline 
-\hline \rowcolor{white}
-La clef est 8. & \cellcolor{rougec}5 & \cellcolor{rougec}11 & \cellcolor{rougec}14 & \cellcolor{bleuc}8  \\ 
-\hline 
-\hline \rowcolor{white}
-On compare la clef 8 à 14. 14 est plus grand donc on le décale en le copiant à la place de la clef. & \cellcolor{rougec}5 & \cellcolor{rougec}11 & \cellcolor{vertc}14 & \cellcolor{vertc}14  \\ 
-\hline 
-\hline \rowcolor{white}
-On compare la clef 8 à 11. 11 est plus grand donc on le décale en le copiant à la place de la valeur supérieure (on écrase donc une des occurrences de 14). & \cellcolor{rougec}5 & \cellcolor{vertc}11 & \cellcolor{vertc}11 & \cellcolor{rougec}14  \\ 
-\hline 
-\hline \rowcolor{white}
-On compare la clef  8 à 5. 5 est plus petit donc on est à la bonne place pour copier la clef (on écrase donc l'occurrence de 11 en doublon). & \cellcolor{rougec}5 & \cellcolor{rougec}8 & \cellcolor{rougec}11 & \cellcolor{rougec}14  \\ 
-\hline 
-\end{tabular} 
-
-\end{exemple2}
 
 
 \subsection{Implémentation}
-
-
-\begin{figure}[!htb]
-\begin{minipage}{0.5\textwidth}
-\RestyleAlgo{boxed}
-\begin{algorithm}[H]
-%\DontPrintSemicolon
-\For{$i \gets 1$ \KwTo $n-1$}{
-$j \gets i$\;
-clef $\gets L[i]$\;
-\While{$j>1$ and clef $<L[j-1]$}{
-$L[j]\gets L[j-1]$\;
-$j\gets j-1$\;
-}
-$L[j]\gets$ clef\;
-}
-\KwOut{$L$}
-\end{algorithm}
-\end{minipage}
-\begin{minipage}{0.5\textwidth}
-\begin{center}
-\includegraphics[width=0.7\textwidth]{images/algorigramme_insertion}
-\caption{Algorigramme du tri par insertion}
-\end{center}
-\end{minipage}
-\end{figure}
-
 
 
 \begin{itemize}
@@ -365,48 +104,8 @@ Chacun de ces éléments sera alors successivement la clef.
 Dès que l'on arrive sur une valeur inférieure on a trouvé la bonne place pour écrire la clef.
 \end{itemize}
 
+\lstinputlisting{programmes/tri_insertion.py}
 
-\begin{algorithme}{Écriture sous Python de l'algorithme tri par insertion}
-
-\begin{center}
-		\lstinputlisting{programmes/tri_insertion.py}
-\end{center}
-
-\end{algorithme}
-
-\begin{exemple2}[Application avec affichage pas a pas sur l'exemple]
-
-
-
-On insère les lignes \texttt{print} pour réaliser l'affichage
-
-
-	\begin{DDbox}{\linewidth}
-		\begin{verbatim}
-i= 1 j= 1 v= 14 T= [5, 14, 11, 8, 17, 7]
-i= 1 j= 1 v= 14 T= [5, 14, 11, 8, 17, 7]
-i= 2 j= 2 v= 11 T= [5, 14, 11, 8, 17, 7]
-i= 2 j= 1 v= 11 T= [5, 14, 14, 8, 17, 7]
-i= 2 j= 1 v= 11 T= [5, 11, 14, 8, 17, 7]
-i= 3 j= 3 v= 8 T= [5, 11, 14, 8, 17, 7]
-i= 3 j= 2 v= 8 T= [5, 11, 14, 14, 17, 7]
-i= 3 j= 1 v= 8 T= [5, 11, 11, 14, 17, 7]
-i= 3 j= 1 v= 8 T= [5, 8, 11, 14, 17, 7]
-i= 4 j= 4 v= 17 T= [5, 8, 11, 14, 17, 7]
-i= 4 j= 4 v= 17 T= [5, 8, 11, 14, 17, 7]
-i= 5 j= 5 v= 7 T= [5, 8, 11, 14, 17, 7]
-i= 5 j= 4 v= 7 T= [5, 8, 11, 14, 17, 17]
-i= 5 j= 3 v= 7 T= [5, 8, 11, 14, 14, 17]
-i= 5 j= 2 v= 7 T= [5, 8, 11, 11, 14, 17]
-i= 5 j= 1 v= 7 T= [5, 8, 8, 11, 14, 17]
-i= 5 j= 1 v= 7 T= [5, 7, 8, 11, 14, 17]
->>> 
-		\end{verbatim}
-	\end{DDbox}
-
-
-
-\end{exemple2}
 
 
 \subsection{Complexité}
@@ -430,25 +129,16 @@ i= 5 j= 1 v= 7 T= [5, 7, 8, 11, 14, 17]
 
 \textbf{La complexité est dans le pire des cas quadratique : $C(n)=O(n^2)$.}
 
-
-\begin{center}
-\begin{tabular}{|c|c|c|}
-\hline 
-\rule[-1ex]{0pt}{2.5ex}  & meilleur cas &  pire cas \\ 
-\hline 
-\rule[-1ex]{0pt}{2.5ex} comparaisons & $n$ & $n^2/2$ \\ 
-\hline 
-\rule[-1ex]{0pt}{2.5ex} affectations & $n$ & $n^2/2$ \\ 
-\hline 
-\end{tabular} 
-\end{center}
-
-
+\textbf{La complexité est dans le meileurs des cas linéaire : $C(n)=O(n)$.}
+ 
 
 L'efficacité du tri par insertion est excellente lorsque le tableau est déjà trié ou « presque trié » $(C(n)=O(n))$. 
 
 Il surpasse alors toutes les autres méthodes de tri qui sont au mieux en $O(n \times \ln(n))$.
 \end{prop}
+
+\subsection{Terminaison et correction}
+
 
 %
 %
@@ -634,7 +324,7 @@ def partition(a,g,d):
 \end{minipage}
 \begin{minipage}{0.5\textwidth}
 \begin{center}
-\includegraphics[width=0.9\textwidth]{images/algorigramme_rapide.jpg}
+\includegraphics[width=0.9\textwidth]{algorigramme_rapide.jpg}
 \caption{Algorigramme du tri par insertion}
 \end{center}
 \end{minipage}
@@ -1028,7 +718,7 @@ On utilise le module time pour déterminer les temps. Ici c'est un temps global 
 On fait varier la taille du tableau et on compare les temps mis par chacun des algorithmes (en rouge tri rapide, en bleu tri insertion, en vert tri fusion). 
 
 \begin{center}
-\includegraphics[width=.7\textwidth]{images/Fin.png}
+\includegraphics[width=.7\textwidth]{Fin.png}
 \end{center}
 
 \end{exemple2}
