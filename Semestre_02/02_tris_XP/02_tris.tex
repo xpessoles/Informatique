@@ -127,14 +127,14 @@ Dès que l'on arrive sur une valeur inférieure on a trouvé la bonne place pour
 %\end{itemize}
 
 
-\textbf{La complexité est dans le pire des cas quadratique : $C(n)=O(n^2)$.}
+\textbf{La complexité est dans le pire des cas quadratique : $C(n)=\mathcal{O}(n^2)$.}
 
-\textbf{La complexité est dans le meileurs des cas linéaire : $C(n)=O(n)$.}
+\textbf{La complexité est dans le meileurs des cas linéaire : $C(n)=\mathcal{O}(n)$.}
  
 
-L'efficacité du tri par insertion est excellente lorsque le tableau est déjà trié ou « presque trié » $(C(n)=O(n))$. 
+L'efficacité du tri par insertion est excellente lorsque le tableau est déjà trié ou « presque trié » $(C(n)=\mathcal{O}(n))$. 
 
-Il surpasse alors toutes les autres méthodes de tri qui sont au mieux en $O(n \times \ln(n))$.
+Il surpasse alors toutes les autres méthodes de tri qui sont au mieux en $\mathcal{O}(n \times \ln(n))$.
 \end{prop}
 
 \subsection{Terminaison et correction}
@@ -183,86 +183,86 @@ Il surpasse alors toutes les autres méthodes de tri qui sont au mieux en $O(n \
 
 \subsection{Principe}
 
-\begin{definition2}[Tri rapide]
+\begin{defi}{Tri rapide}
 \textbf{L'algorithme de tri rapide} fait partie de la catégorie des algorithmes « diviser pour régner ».
 
 À chaque appel de la fonction tri on choisit une valeur \textbf{<< pivot >>}, par exemple le premier élément. On effectue une partition des élément à trier. Un premier groupe est constitué de valeurs inférieures au pivot  et un deuxième avec les valeurs supérieures.
 Le pivot est alors placé définitivement dans le tableau.
 
 On traite alors chacun des groupes de façon indépendante. On peut les traiter avec le même algorithme.
-\end{definition2}
+\end{defi}
 
-
-
-
-
-
-\begin{exemple2}[Illustration du tri rapide]
-
-
-On représente en :
-\begin{itemize}
-\item bleu, le pivot;
-\item vert, les valeurs triées;
-\item rouge, les valeurs de gauche d'une segmentation;
-\item jaune, les valeurs de droite d'une segmentation. 
-\end{itemize}
-
-
-
-\noindent\begin{tabular}{|p{10.cm}|c|ccccc|}
-\hline
-\hline \rowcolor{white}
-Tableau $T$ initial: 5 est le pivot & \cellcolor{bleuc}5 & 14 & 11 & 8 & 17 & 7 \\ 
-\hline 
-\hline \rowcolor{white}
-On partitionne pour trouver une partie droite (en jaune) et une partie gauche (en rouge). Sauf qu'ici il n'y aura pas de partie gauche car 5 est la plus petite valeur. 5 est donc à sa place définitive. & \cellcolor{bleuc}5 &\cellcolor{jaune} 14 & \cellcolor{jaune}11 & \cellcolor{jaune}8 & \cellcolor{jaune}17 & \cellcolor{jaune}7 \\ 
-\hline 
-\hline \rowcolor{white}
- & \cellcolor{vertc}5 & & & & & \\ \cline{2-3} \rowcolor{white}
- \multirow{-2}{10.cm}{On traite de façon indépendante les partie gauche et droite. Ici pas de partie gauche. On cherche alors les nouveaux pivots (ici 14). }
-&&\cellcolor{bleuc} 14 & \cellcolor{jaune}11 & \cellcolor{jaune}8 & \cellcolor{jaune}17 & \cellcolor{jaune}7 \\
-\hline 
-\hline \rowcolor{white}
- & \cellcolor{vertc}5  & &  & &&   \\ \cline{2-3} \rowcolor{white}
- \multirow{-2}{10.cm}{On segmente alors les parties droite et gauche autour du pivot 14 dont on a ainsi déterminé la position définitive. }
-&& \cellcolor{rougec}11 & \cellcolor{rougec}8 & \cellcolor{rougec}7&\cellcolor{vertc} 14& \cellcolor{jaune}17  \\
-\hline 
-\hline \rowcolor{white}
- & \cellcolor{vertc}5  & &  & &\cellcolor{vertc} 14&   \\
- \cline{2-3} \rowcolor{white}
-  &   & \cellcolor{bleuc}11&\cellcolor{jaune}8 & \cellcolor{jaune}7&&   \\ \cline{2-3} \rowcolor{white}
- \multirow{-3}{10.cm}{On traite de façon indépendante les partie gauche et droite. On recherche pour chacune le pivot (ici 11 et 17). }
-&&  &  & && \cellcolor{bleuc}17  \\
-\hline\hline
-\rowcolor{white}
- & \cellcolor{vertc}5  & &  & &\cellcolor{vertc} 14&  \cellcolor{vertc}17 \\
- \cline{2-3} \rowcolor{white} 
- &   & \cellcolor{rougec}8&\cellcolor{rougec}7 & \cellcolor{bleuc}11&&   \\  
-  \\
- \cline{2-3} \rowcolor{white}
-\multirow{-3}{10.cm}{Pour la chaine de pivot 11 on segmente mais il n'y a pas de partie droite. Le pivot 17 est seul dans sa chaine il est donc directement à la bonne position. } &&&&&&\\
-\hline\hline
-\rowcolor{white}
- & \cellcolor{vertc}5  & &  &\cellcolor{vertc}  11&\cellcolor{vertc} 14&  \cellcolor{vertc} 17 \\
- \cline{2-3} \rowcolor{white}
- \multirow{-2}{10.cm}{8 est pivot de la partie gauche. Ici pas de partie droite donc 11 est placé.. }  &  & \cellcolor{bleuc}8 &  \cellcolor{jaune}7&&  & \\ \cline{2-3} 
-\hline\hline
-\rowcolor{white}
- & \cellcolor{vertc}5  & &  &\cellcolor{vertc} 11&\cellcolor{vertc} 14&  \cellcolor{vertc} 17 \\
- \cline{2-3} \rowcolor{white}
- \multirow{-2}{10.cm}{On segmente la chaine de pivot 8 Seul 7 est dans la partie gauche}  &   &\cellcolor{rougec}7 &\cellcolor{bleuc} 8 &&&   \\ \cline{2-3} 
-\hline\hline
-\rowcolor{white}
- & \cellcolor{vertc}5  & \cellcolor{vertc}7 &\cellcolor{vertc} 8  &\cellcolor{vertc} 11&\cellcolor{vertc} 14&  \cellcolor{vertc} 17 \\
- \cline{2-3} \rowcolor{white}
- \multirow{-2}{10.cm}{Pas de partie droite et un seul élément dans la partie gauche : 7 et 8 on trouvé leur place}  &   & & &&&   \\ \cline{2-3} 
-\hline\hline
-\rowcolor{white}
-
-\end{tabular} 
-
-\end{exemple2}
+%
+%
+%
+%
+%
+%\begin{exemple2}[Illustration du tri rapide]
+%
+%
+%On représente en :
+%\begin{itemize}
+%\item bleu, le pivot;
+%\item vert, les valeurs triées;
+%\item rouge, les valeurs de gauche d'une segmentation;
+%\item jaune, les valeurs de droite d'une segmentation. 
+%\end{itemize}
+%
+%
+%
+%\noindent\begin{tabular}{|p{10.cm}|c|ccccc|}
+%\hline
+%\hline \rowcolor{white}
+%Tableau $T$ initial: 5 est le pivot & \cellcolor{bleuc}5 & 14 & 11 & 8 & 17 & 7 \\ 
+%\hline 
+%\hline \rowcolor{white}
+%On partitionne pour trouver une partie droite (en jaune) et une partie gauche (en rouge). Sauf qu'ici il n'y aura pas de partie gauche car 5 est la plus petite valeur. 5 est donc à sa place définitive. & \cellcolor{bleuc}5 &\cellcolor{jaune} 14 & \cellcolor{jaune}11 & \cellcolor{jaune}8 & \cellcolor{jaune}17 & \cellcolor{jaune}7 \\ 
+%\hline 
+%\hline \rowcolor{white}
+% & \cellcolor{vertc}5 & & & & & \\ \cline{2-3} \rowcolor{white}
+% \multirow{-2}{10.cm}{On traite de façon indépendante les partie gauche et droite. Ici pas de partie gauche. On cherche alors les nouveaux pivots (ici 14). }
+%&&\cellcolor{bleuc} 14 & \cellcolor{jaune}11 & \cellcolor{jaune}8 & \cellcolor{jaune}17 & \cellcolor{jaune}7 \\
+%\hline 
+%\hline \rowcolor{white}
+% & \cellcolor{vertc}5  & &  & &&   \\ \cline{2-3} \rowcolor{white}
+% \multirow{-2}{10.cm}{On segmente alors les parties droite et gauche autour du pivot 14 dont on a ainsi déterminé la position définitive. }
+%&& \cellcolor{rougec}11 & \cellcolor{rougec}8 & \cellcolor{rougec}7&\cellcolor{vertc} 14& \cellcolor{jaune}17  \\
+%\hline 
+%\hline \rowcolor{white}
+% & \cellcolor{vertc}5  & &  & &\cellcolor{vertc} 14&   \\
+% \cline{2-3} \rowcolor{white}
+%  &   & \cellcolor{bleuc}11&\cellcolor{jaune}8 & \cellcolor{jaune}7&&   \\ \cline{2-3} \rowcolor{white}
+% \multirow{-3}{10.cm}{On traite de façon indépendante les partie gauche et droite. On recherche pour chacune le pivot (ici 11 et 17). }
+%&&  &  & && \cellcolor{bleuc}17  \\
+%\hline\hline
+%\rowcolor{white}
+% & \cellcolor{vertc}5  & &  & &\cellcolor{vertc} 14&  \cellcolor{vertc}17 \\
+% \cline{2-3} \rowcolor{white} 
+% &   & \cellcolor{rougec}8&\cellcolor{rougec}7 & \cellcolor{bleuc}11&&   \\  
+%  \\
+% \cline{2-3} \rowcolor{white}
+%\multirow{-3}{10.cm}{Pour la chaine de pivot 11 on segmente mais il n'y a pas de partie droite. Le pivot 17 est seul dans sa chaine il est donc directement à la bonne position. } &&&&&&\\
+%\hline\hline
+%\rowcolor{white}
+% & \cellcolor{vertc}5  & &  &\cellcolor{vertc}  11&\cellcolor{vertc} 14&  \cellcolor{vertc} 17 \\
+% \cline{2-3} \rowcolor{white}
+% \multirow{-2}{10.cm}{8 est pivot de la partie gauche. Ici pas de partie droite donc 11 est placé.. }  &  & \cellcolor{bleuc}8 &  \cellcolor{jaune}7&&  & \\ \cline{2-3} 
+%\hline\hline
+%\rowcolor{white}
+% & \cellcolor{vertc}5  & &  &\cellcolor{vertc} 11&\cellcolor{vertc} 14&  \cellcolor{vertc} 17 \\
+% \cline{2-3} \rowcolor{white}
+% \multirow{-2}{10.cm}{On segmente la chaine de pivot 8 Seul 7 est dans la partie gauche}  &   &\cellcolor{rougec}7 &\cellcolor{bleuc} 8 &&&   \\ \cline{2-3} 
+%\hline\hline
+%\rowcolor{white}
+% & \cellcolor{vertc}5  & \cellcolor{vertc}7 &\cellcolor{vertc} 8  &\cellcolor{vertc} 11&\cellcolor{vertc} 14&  \cellcolor{vertc} 17 \\
+% \cline{2-3} \rowcolor{white}
+% \multirow{-2}{10.cm}{Pas de partie droite et un seul élément dans la partie gauche : 7 et 8 on trouvé leur place}  &   & & &&&   \\ \cline{2-3} 
+%\hline\hline
+%\rowcolor{white}
+%
+%\end{tabular} 
+%
+%\end{exemple2}
 \subsection{Implémentation}
 
 
@@ -272,12 +272,9 @@ On partitionne pour trouver une partie droite (en jaune) et une partie gauche (e
 \item Les arguments de cette fonction seront le tableau \textbf{$a$} et deux indices correspondant au début et à la fin de la partie à segmenter du tableau (par convention \textbf{$g$} inclus et $\textbf{d}$ exclu). En effet on ne segmente pas à chaque fois l'ensemble du tableau.
 \item On suppose qu'il y a au moins un élément dans ce segment ce que l'on peut vérifier avec \texttt{assert} : 
 
-
-	\begin{DDbox}{\linewidth}
-		\begin{verbatim}
+\begin{lstlisting}
 assert g<d
-		\end{verbatim}
-	\end{DDbox}
+\end{lstlisting}
 \item On choisit \texttt{a[g]} comme pivot que l'on peut stocker dans une variable \texttt{v}.
 \item Le principe consiste alors à parcourir le tableau de la gauche vers la droite, entre les indices \texttt{g+1} et \textbf{$d$} avec une boucle \texttt{for}.
 \item on stockera dans deux sous listes \texttt{ainf} et \texttt{asup} toutes les composantes respectivement inférieures ou supérieures au pivot.
@@ -465,86 +462,86 @@ Le principe consiste à couper le tableau de départ en deux. On trie chacun des
 
 Il est possible pour réaliser l'ordonnancement de chacun des groupes d'utiliser à nouveau l'algorithme de tri de façon récursive.
 
-
-\begin{exemple2}[Illustration sur l'exemple]
-
-
-On représente en rouge le groupe de gauche, en jaune le groupe de droite, en bleu la valeur testée du groupe de gauche et en gris la valeur testée du groupe de droite. Les valeurs en vert sont les valeurs définitivement triées.
-
-On notera que pour chaque étape, on utilise deux tableaux, le tableau de départ sur la ligne supérieure et le tableau d'arrivée sur la ligne inférieure.
-
-
-\noindent\begin{tabular}{|p{10.cm}|cccccc|}
-\hline \rowcolor{white}
-Tableau $T$ initial: On découpe en une deux moitiés (rouge et jaune). & \cellcolor{rougec}5 & \cellcolor{rougec}14 & \cellcolor{rougec}11 & \cellcolor{jaune}8 & \cellcolor{jaune}17 & \cellcolor{jaune}7 \\ 
-\hline 
-\hline \rowcolor{white}
-Chacune de ces deux listes est triée de façon indépendante (pas illustré ici) soit par un autre algorithme soit de façon récursive. & \cellcolor{rougec}5  & \cellcolor{rougec}11 &\cellcolor{rougec} 14 & \cellcolor{jaune}7 & \cellcolor{jaune}8 & \cellcolor{jaune}17  \\ 
-\hline 
-\hline 
-\rowcolor{white}
- & \cellcolor{bleuc}5  & \cellcolor{rougec}11 &\cellcolor{rougec} 14 & \cellcolor{gris25}7 & \cellcolor{jaune}8 & \cellcolor{jaune}17 \\ \cline{2-3} \rowcolor{white}
- \multirow{-2}{10.cm}{On procède alors à l'opération de fusion en comparant les premiers nombres de chaque bloc. On a besoin d'un second tableau que l'on}
-&& &  &  & &  \\
-\hline 
-\hline 
-\rowcolor{white}
-  &   & \cellcolor{rougec}11 &\cellcolor{rougec} 14 & \cellcolor{gris25}7 & \cellcolor{jaune}8 & \cellcolor{jaune}17   \\ \cline{2-3} \rowcolor{white}
- \multirow{-2}{10.cm}{remplit après les comparaisons successives des éléments des listes $L_1$ (rouge) et $L_2$ (jaune). 5<7 on le stocke de façon définitive dans $T_2$.}
-&\cellcolor{bleuc}5& &  &  & &  \\
-\hline 
-\hline 
-\rowcolor{white}
-  &   & \cellcolor{bleuc}11 &\cellcolor{rougec} 14 & \cellcolor{gris25}7 & \cellcolor{jaune}8 & \cellcolor{jaune}17   \\ \cline{2-3} \rowcolor{white}
- \multirow{-2}{10.cm}{On continue la fusion en comparant les premiers nombres restants dans chaque bloc (ici 7 et 11).}
-&\cellcolor{vertc}5& &  &  & &  \\
-\hline 
-\hline 
-\rowcolor{white}
-  &   & \cellcolor{bleuc}11 &\cellcolor{rougec} 14 &  & \cellcolor{jaune}8 & \cellcolor{jaune}17   \\ \cline{2-3} \rowcolor{white}
- \multirow{-2}{10.cm}{7<11 on le stocke dans le deuxième tableau.}
-&\cellcolor{vertc}5&\cellcolor{gris25}7 &  &  & &  \\
-\hline 
-\hline 
-\rowcolor{white}
-  &   & \cellcolor{bleuc}11 &\cellcolor{rougec} 14 &  & \cellcolor{gris25}8 & \cellcolor{jaune}17   \\ \cline{2-3} \rowcolor{white}
- \multirow{-2}{10.cm}{On continue la fusion en comparant les premiers nombres restants dans chaque bloc (8 et 11).}
-&\cellcolor{vertc}5&\cellcolor{vertc}7 &  &  & &  \\
-\hline 
-\hline 
-\rowcolor{white}
-  &   & \cellcolor{bleuc}11 &\cellcolor{rougec} 14 &  &  & \cellcolor{jaune}17   \\ \cline{2-3} \rowcolor{white}
- \multirow{-2}{10.cm}{8<11 on le stocke dans le deuxième tableau.}
-&\cellcolor{vertc}5&\cellcolor{vertc}7 &\cellcolor{gris25}8  &  & &  \\
-\hline 
-\hline 
-\rowcolor{white}
-  &   & \cellcolor{bleuc}11 &\cellcolor{rougec} 14 &  &  & \cellcolor{gris25}17   \\ \cline{2-3} \rowcolor{white}
- \multirow{-2}{10.cm}{On continu la fusion en comparant les premiers nombres restants dans chaque bloc (11 et 17).}
-&\cellcolor{vertc}5&\cellcolor{vertc}7 &\cellcolor{vertc}8  &  & &  \\
-\hline 
-\hline 
-\rowcolor{white}
-  &   &  &\cellcolor{rougec} 14 &  &  & \cellcolor{gris25}17   \\ \cline{2-3} \rowcolor{white}
- \multirow{-2}{10.cm}{11<17 on le stocke dans le deuxième tableau.}
-&\cellcolor{vertc}5&\cellcolor{vertc}7 &\cellcolor{vertc}8  &\cellcolor{bleuc}11  & &  \\
-\hline 
-\hline 
-\rowcolor{white}
-  &   &  &\cellcolor{bleuc} 14 &  &  & \cellcolor{gris25}17   \\ \cline{2-3} \rowcolor{white}
- \multirow{-2}{10.cm}{On continue la fusion en comparant les premiers nombres restants dans chaque bloc (14 et 17).}
-&\cellcolor{vertc}5&\cellcolor{vertc}7 &\cellcolor{vertc}8  & \cellcolor{vertc}11  & &  \\
-\hline 
-\hline 
-\rowcolor{white}
-  &   &  & &  &  &    \\ \cline{2-3} \rowcolor{white}
- \multirow{-2}{10.cm}{14<17 on le stocke dans le deuxième tableau et comme c'est le dernier restant on ajoute 17.}
-&\cellcolor{vertc}5&\cellcolor{vertc}7 &\cellcolor{vertc}8  &\cellcolor{rougec}11  &\cellcolor{bleuc} 14 & \cellcolor{gris25}17  \\
-\hline 
- 
-\end{tabular} 
-
-\end{exemple2}
+%
+%\begin{exemple2}[Illustration sur l'exemple]
+%
+%
+%On représente en rouge le groupe de gauche, en jaune le groupe de droite, en bleu la valeur testée du groupe de gauche et en gris la valeur testée du groupe de droite. Les valeurs en vert sont les valeurs définitivement triées.
+%
+%On notera que pour chaque étape, on utilise deux tableaux, le tableau de départ sur la ligne supérieure et le tableau d'arrivée sur la ligne inférieure.
+%
+%
+%\noindent\begin{tabular}{|p{10.cm}|cccccc|}
+%\hline \rowcolor{white}
+%Tableau $T$ initial: On découpe en une deux moitiés (rouge et jaune). & \cellcolor{rougec}5 & \cellcolor{rougec}14 & \cellcolor{rougec}11 & \cellcolor{jaune}8 & \cellcolor{jaune}17 & \cellcolor{jaune}7 \\ 
+%\hline 
+%\hline \rowcolor{white}
+%Chacune de ces deux listes est triée de façon indépendante (pas illustré ici) soit par un autre algorithme soit de façon récursive. & \cellcolor{rougec}5  & \cellcolor{rougec}11 &\cellcolor{rougec} 14 & \cellcolor{jaune}7 & \cellcolor{jaune}8 & \cellcolor{jaune}17  \\ 
+%\hline 
+%\hline 
+%\rowcolor{white}
+% & \cellcolor{bleuc}5  & \cellcolor{rougec}11 &\cellcolor{rougec} 14 & \cellcolor{gris25}7 & \cellcolor{jaune}8 & \cellcolor{jaune}17 \\ \cline{2-3} \rowcolor{white}
+% \multirow{-2}{10.cm}{On procède alors à l'opération de fusion en comparant les premiers nombres de chaque bloc. On a besoin d'un second tableau que l'on}
+%&& &  &  & &  \\
+%\hline 
+%\hline 
+%\rowcolor{white}
+%  &   & \cellcolor{rougec}11 &\cellcolor{rougec} 14 & \cellcolor{gris25}7 & \cellcolor{jaune}8 & \cellcolor{jaune}17   \\ \cline{2-3} \rowcolor{white}
+% \multirow{-2}{10.cm}{remplit après les comparaisons successives des éléments des listes $L_1$ (rouge) et $L_2$ (jaune). 5<7 on le stocke de façon définitive dans $T_2$.}
+%&\cellcolor{bleuc}5& &  &  & &  \\
+%\hline 
+%\hline 
+%\rowcolor{white}
+%  &   & \cellcolor{bleuc}11 &\cellcolor{rougec} 14 & \cellcolor{gris25}7 & \cellcolor{jaune}8 & \cellcolor{jaune}17   \\ \cline{2-3} \rowcolor{white}
+% \multirow{-2}{10.cm}{On continue la fusion en comparant les premiers nombres restants dans chaque bloc (ici 7 et 11).}
+%&\cellcolor{vertc}5& &  &  & &  \\
+%\hline 
+%\hline 
+%\rowcolor{white}
+%  &   & \cellcolor{bleuc}11 &\cellcolor{rougec} 14 &  & \cellcolor{jaune}8 & \cellcolor{jaune}17   \\ \cline{2-3} \rowcolor{white}
+% \multirow{-2}{10.cm}{7<11 on le stocke dans le deuxième tableau.}
+%&\cellcolor{vertc}5&\cellcolor{gris25}7 &  &  & &  \\
+%\hline 
+%\hline 
+%\rowcolor{white}
+%  &   & \cellcolor{bleuc}11 &\cellcolor{rougec} 14 &  & \cellcolor{gris25}8 & \cellcolor{jaune}17   \\ \cline{2-3} \rowcolor{white}
+% \multirow{-2}{10.cm}{On continue la fusion en comparant les premiers nombres restants dans chaque bloc (8 et 11).}
+%&\cellcolor{vertc}5&\cellcolor{vertc}7 &  &  & &  \\
+%\hline 
+%\hline 
+%\rowcolor{white}
+%  &   & \cellcolor{bleuc}11 &\cellcolor{rougec} 14 &  &  & \cellcolor{jaune}17   \\ \cline{2-3} \rowcolor{white}
+% \multirow{-2}{10.cm}{8<11 on le stocke dans le deuxième tableau.}
+%&\cellcolor{vertc}5&\cellcolor{vertc}7 &\cellcolor{gris25}8  &  & &  \\
+%\hline 
+%\hline 
+%\rowcolor{white}
+%  &   & \cellcolor{bleuc}11 &\cellcolor{rougec} 14 &  &  & \cellcolor{gris25}17   \\ \cline{2-3} \rowcolor{white}
+% \multirow{-2}{10.cm}{On continu la fusion en comparant les premiers nombres restants dans chaque bloc (11 et 17).}
+%&\cellcolor{vertc}5&\cellcolor{vertc}7 &\cellcolor{vertc}8  &  & &  \\
+%\hline 
+%\hline 
+%\rowcolor{white}
+%  &   &  &\cellcolor{rougec} 14 &  &  & \cellcolor{gris25}17   \\ \cline{2-3} \rowcolor{white}
+% \multirow{-2}{10.cm}{11<17 on le stocke dans le deuxième tableau.}
+%&\cellcolor{vertc}5&\cellcolor{vertc}7 &\cellcolor{vertc}8  &\cellcolor{bleuc}11  & &  \\
+%\hline 
+%\hline 
+%\rowcolor{white}
+%  &   &  &\cellcolor{bleuc} 14 &  &  & \cellcolor{gris25}17   \\ \cline{2-3} \rowcolor{white}
+% \multirow{-2}{10.cm}{On continue la fusion en comparant les premiers nombres restants dans chaque bloc (14 et 17).}
+%&\cellcolor{vertc}5&\cellcolor{vertc}7 &\cellcolor{vertc}8  & \cellcolor{vertc}11  & &  \\
+%\hline 
+%\hline 
+%\rowcolor{white}
+%  &   &  & &  &  &    \\ \cline{2-3} \rowcolor{white}
+% \multirow{-2}{10.cm}{14<17 on le stocke dans le deuxième tableau et comme c'est le dernier restant on ajoute 17.}
+%&\cellcolor{vertc}5&\cellcolor{vertc}7 &\cellcolor{vertc}8  &\cellcolor{rougec}11  &\cellcolor{bleuc} 14 & \cellcolor{gris25}17  \\
+%\hline 
+% 
+%\end{tabular} 
+%
+%\end{exemple2}
 
 
 
@@ -644,51 +641,51 @@ $n \log n$ & $n \log n$ \\
 
 \section{Dans Python : sort et sorted}
 Les listes Python ont une méthode native \texttt{list.sort()} qui modifie les listes elles-mêmes et renvoie \texttt{None}.
-
-	\begin{DDbox}{\linewidth}
-		\begin{verbatim}
->>> a=[25,94,89,113,67]
->>> a.sort()
->>> a
-25,67,89,94,113
-		\end{verbatim}
-	\end{DDbox}
-
-
-Il y a également une fonction native \texttt{sorted()} qui construit une nouvelle liste triée depuis un itérable (liste de listes, tuple, dictionnaires).
-
-	\begin{DDbox}{\linewidth}
-		\begin{verbatim}
->>> sorted([25,94,89,113,67])
-25,67,89,94,113
-		\end{verbatim}
-	\end{DDbox}
-
-On utilise l'indice de la "colonne" à trier en utilisant la fonction \texttt{lambda} associée à \texttt{key} :
-
-
-	\begin{DDbox}{\linewidth}
-		\begin{verbatim}
-		
->>> etudiants=[('Julie','MPS1',15),('Elio','MPS2',14),('Jules','MPS1',17),('Adam','MPS2',16)]
->>> sorted(etudiants, key=\textbf{lambda} etudiants : etudiants[2])
-('Elio','MPS2',14),('Julie','MPS1',15),('Adam','MPS2',16),('Jules','MPS1',17)
->>> etudiants # etudiants est inchangé
-(Julie','MPS1',15),('Elio','MPS2',14),('Jules','MPS1',17),('Adam','MPS2',16)
-		\end{verbatim}
-	\end{DDbox}
-
-
-Sans indication particulière, le tri se fait sur la première valeur puis sur la suivante dans le cas où les premières valeurs sont identiques :
-
-	\begin{DDbox}{\linewidth}
-		\begin{verbatim}
-		>>> couple=[(3,3),(3,6),(3,1)]
->>> sorted(couple)
-(3, 1), (3, 3), (3, 6)
->>> le tri est dit stable
-		\end{verbatim}
-	\end{DDbox}
+%
+%	\begin{DDbox}{\linewidth}
+%		\begin{verbatim}
+%>>> a=[25,94,89,113,67]
+%>>> a.sort()
+%>>> a
+%25,67,89,94,113
+%		\end{verbatim}
+%	\end{DDbox}
+%
+%
+%Il y a également une fonction native \texttt{sorted()} qui construit une nouvelle liste triée depuis un itérable (liste de listes, tuple, dictionnaires).
+%
+%	\begin{DDbox}{\linewidth}
+%		\begin{verbatim}
+%>>> sorted([25,94,89,113,67])
+%25,67,89,94,113
+%		\end{verbatim}
+%	\end{DDbox}
+%
+%On utilise l'indice de la "colonne" à trier en utilisant la fonction \texttt{lambda} associée à \texttt{key} :
+%
+%
+%	\begin{DDbox}{\linewidth}
+%		\begin{verbatim}
+%		
+%>>> etudiants=[('Julie','MPS1',15),('Elio','MPS2',14),('Jules','MPS1',17),('Adam','MPS2',16)]
+%>>> sorted(etudiants, key=\textbf{lambda} etudiants : etudiants[2])
+%('Elio','MPS2',14),('Julie','MPS1',15),('Adam','MPS2',16),('Jules','MPS1',17)
+%>>> etudiants # etudiants est inchangé
+%(Julie','MPS1',15),('Elio','MPS2',14),('Jules','MPS1',17),('Adam','MPS2',16)
+%		\end{verbatim}
+%	\end{DDbox}
+%
+%
+%Sans indication particulière, le tri se fait sur la première valeur puis sur la suivante dans le cas où les premières valeurs sont identiques :
+%
+%	\begin{DDbox}{\linewidth}
+%		\begin{verbatim}
+%		>>> couple=[(3,3),(3,6),(3,1)]
+%>>> sorted(couple)
+%(3, 1), (3, 3), (3, 6)
+%>>> le tri est dit stable
+%		\end{verbatim}
+%	\end{DDbox}
 
 %\section{Tri par comptage}
 
