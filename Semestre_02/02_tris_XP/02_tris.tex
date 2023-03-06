@@ -473,6 +473,36 @@ def tri_rapide(L : list) -> list :
 %%\end{exemple2}
 %
 %
+\subsection{Terminaison}
+
+Prenons comme variant la longueur $n$ de la liste à trier.  Nous cherchons à trier des listes de tailles supérieure à $n$. 
+
+Initialement, \texttt{L} est de taille \texttt{n} supérieur ou égal à 1. \texttt{n} est un entier strictement positif. 
+
+Considérons qu'au début du ième appel de \texttt{tri\_rapide} \texttt{Li} est de taille \texttt{ni} strictement positif.
+
+\texttt{ei} est de taille strictement inférieure à \texttt{Li} car elle ne contient que les valeurs strictement inférieures au pivot.  
+
+\texttt{es} est de taille strictement inférieure à \texttt{Li} car elle ne contient que les valeurs supérieures ou égales au pivot, à l'exception du pivot lui-même. 
+
+L'appel à \texttt{tri\_rapide} se fait alors sur des listes de tailles strictement inférieures à \texttt{Li}.
+
+\texttt{n} est donc un variant de boucle et la fonction termine. 
+
+
+\subsection{Correction}
+Montrons la propriété suivante : << si \texttt{L} une liste de taille \texttt{inférieure ou égale} à $n$ alors  \texttt{tri\_rapide(L)} renvoie une liste triée >>.
+
+\textbf{Initialisation}
+La propriété de récurrence est vraie pour une liste vide et pour une liste de taille 1.
+
+\textbf{Hérédité}
+Soit une liste de taille \texttt{n+1}. Le pivot est alors \texttt{L[-1]}. \texttt{ei} et \texttt{es} ont une taille inférieure ou égale à $n$. 
+D'après la proprité de récurrence, \texttt{tri\_rapide(ei)} et \texttt{tri\_rapide(es)} trient donc \texttt{ei} et \texttt{es}.
+
+De plus, \texttt{tri\_rapide(ei) + [p] + tri\_rapide(es)} renvoie une liste triée. 
+
+La propriété de récurrence est donc vraie pour une liste de taille \texttt{n+1}.
 
 \subsection{Complexité}
 \begin{prop}{Efficacité de l'algorithme}
@@ -577,7 +607,7 @@ $$
 %%
 %
 %
-\section{Tri par fusion}
+\section{Tri fusion -- \textit{Merge sort}}
 
 \subsection{Principe}
 
@@ -673,80 +703,94 @@ Il est possible pour réaliser l'ordonnancement de chacun des groupes d'utiliser
 
 \subsection{Implémentation}
 
-
-On souhaite trier un tableau $a$ :
-\begin{itemize}
-\item le caractère récursif du tri fusion fait que l'on s'intéresse seulement à la partie de $a$ entre les indices $g$ (inclus) et $d$ (exclu);
-\item afin de découper le groupe à trier en deux, on calcule l'indice médian :
-$m = \frac{g+d}{2}$ . 
-
-\item on trie alors récursivement les deux parties :
-\begin{itemize}
-\item délimitées par $g$ et $m$ d'une part,
-\item et $m$ et $d$ d'autre part.
-\item \textbf{si} \textbf{$g\geq d-1$}, il y a au plus un élément à trier donc rien à faire (initialisation de la récursivité);
-\end{itemize}
+Le tri fusion d'une liste se base sur le principe suivant : 
+\begin{enumerate}
+\item on sépare la liste en 2 listes de longueurs quasi-égales (à un élément près);
+\item on trie ces deux listes en utilisant le tri fusion (par un appel récursif);
+\item à partir de deux listes triées, on les fusionne en une seule liste en conservant l'ordre croissant.
+\end{enumerate}
 
 
+\begin{lstlisting}
+def separe(L: list) -> tuple[list,list]:
+    return L[:len(L) // 2], L[len(L) // 2:]
+
+def fusion(L1: list, L2: list) -> list:
+    """
+    Fusion de deux listes triées. 
+    """
+    if not L1 or not L2: # si l'une des listes est vide (éventuellement les 2)
+        return L1 or L2 # alors on renvoie l'autre (éventuellement vide aussi)
+    else:
+        a, b = L1[0], L2[0] 
+        if a < b : # sinon on compare leurs premiers éléments
+            return [a] + fusion(L1[1:], L2) # on place le plus petit en tête et on fusionne le reste
+        else:
+            return [b] + fusion(L1, L2[1:])
+        
+def tri_fusion(L: list) -> list:
+    if len(L) < 2: # cas d'arrêt
+        return L
+    L1, L2 = separe(L) # sinon on sépare
+    return fusion(tri_fusion(L1), tri_fusion(L2)) # et on fusionne les sous-listes triées
+\end{lstlisting}
 %\begin{center}
 %		\lstinputlisting{./programmes/tri_fusion_recursif.py}
 %\end{center}
-
-
-\item il reste à effectuer la fusion. On utilise pour cela un second tableau $a_0$, alloué une et une seule fois au
-début du tri.
-\item on réalise la fonction fusion :
-\begin{itemize}
-\item qui prend en arguments deux tableaux, $a0$ et $a$, et les trois indices $g$, $m$ et $d$,
-\item les portions $a0[g \cdots  m[$ et $a0[m \cdots d[$ sont supposées triées,
-\item on veut les fusionner dans $a[g\cdots d[$,
-\item on va parcourir chacune des listes déjà triées en utilisant un indice $i$ pour $L_1$ et $j$ pour $L_2$,
-\item on compare à chaque itération de la boucle \textbf{for} $a0[i]$ et $a0[j]$ et on place la plus petite des valeurs dans $a[k]$ et on incrémente l'indice correspondant $i$ ou $j$ selon celui que l'on a déplacé,
-\item on traite aussi le cas ou une des deux listes est vide.
-\end{itemize}
-
-
+%
+%
+%\begin{exemple2}[Algorithme complet du tri par fusion]
+%
+%
 %\begin{center}
-%		\lstinputlisting{./programmes/fusion.py}
+%		\lstinputlisting{./programmes/tri_fusion.py}
 %\end{center}
-
-
-\end{itemize}
-%
-
-
-\begin{exemple2}[Algorithme complet du tri par fusion]
-
-
-\begin{center}
-		\lstinputlisting{./programmes/tri_fusion.py}
-\end{center}
-
-
-\end{exemple2}
-
 %
 %
+%\end{exemple2}
+%
+%%
+%%
+%\subsection{Complexité}
+%%
+%%
+%%%Si on note $C(N)$ (resp. $f(N)$) le nombre total de comparaisons effectuées par $tri\_fusion$
+%%%(resp. fusion) pour trier un tableau de longueur $N$, on a l'équation de récurrence
+%%%
+%%%$$C(N) = 2C(N/2) + f(N)$$
+%%%
+%%%car les deux appels récursifs se font sur deux segments de même longueur $N/2$. 
+%%
+%%\begin{itemize}
+%%\item \textbf{Dans le meilleur des cas}, la fonction fusion n'examine que les éléments de l'un des deux segments
+%%car ils sont tous plus petits que ceux de l'autre segment. Dans ce cas $f(N) = N/2$ et donc
+%%$C(N) \sim \frac{1}{2} N log N$. 
+%%
+%%\item \textbf{Dans le pire des cas}, tous les éléments sont examinés par $fusion$ et
+%%donc $f(N) = N-1$, d'où $C(N) \sim N logN$.
+%%\end{itemize}
+%%
+%%
+
+\subsection{Terminaison}
+\textbf{Terminaison de la fusion}
+Soit la suite définie par la somme successive des longueur de \texttt{L1} et \texttt{L2}.  	 
+
+À chaque itération on appelle \texttt{fusion} à des listes dont la taille d'une d'entre elle est diminuée de 1. La somme des longueurs est donc une suite d'entiers strictement décroissante. 
+
+La somme des longueurs est donc un vairant de boucle et la fonction termine. 
+
+\textbf{Terminaison du tri}
+
+Le tri fusion termine si les listes ont 0 ou 1 éléments. 
+On note $\left(u_n\right)$ la suite définie par $u_0=n$, taille de la liste à trier et $u_i$ longueur de la plus grande des listes. À chaque étape, la taille des listes est divisé par 2; donc $u_{i+1} = \left\lfloor\dfrac{u_i +1 }{2}\right\rfloor$. En conséquence, $u_{i+1}<u_i$ tant que $u_i>1$.  La fonction \texttt{tri\_fusion} termine donc. 
+
+
+
+\subsection{Correction}
+
 \subsection{Complexité}
-%
-%
-%%Si on note $C(N)$ (resp. $f(N)$) le nombre total de comparaisons effectuées par $tri\_fusion$
-%%(resp. fusion) pour trier un tableau de longueur $N$, on a l'équation de récurrence
-%%
-%%$$C(N) = 2C(N/2) + f(N)$$
-%%
-%%car les deux appels récursifs se font sur deux segments de même longueur $N/2$. 
-%
-%\begin{itemize}
-%\item \textbf{Dans le meilleur des cas}, la fonction fusion n'examine que les éléments de l'un des deux segments
-%car ils sont tous plus petits que ceux de l'autre segment. Dans ce cas $f(N) = N/2$ et donc
-%$C(N) \sim \frac{1}{2} N log N$. 
-%
-%\item \textbf{Dans le pire des cas}, tous les éléments sont examinés par $fusion$ et
-%donc $f(N) = N-1$, d'où $C(N) \sim N logN$.
-%\end{itemize}
-%
-%%
+
 \begin{prop}{Efficacité de l'algorithme}
 
 La complexité est \textbf{$n\log(n)$}
