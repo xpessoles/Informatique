@@ -104,8 +104,54 @@ Chacun de ces éléments sera alors successivement la clef.
 Dès que l'on arrive sur une valeur inférieure on a trouvé la bonne place pour écrire la clef.
 \end{itemize}
 
-\lstinputlisting{programmes/tri_insertion.py}
 
+\begin{lstlisting}
+def tri_insertion(L:list) -> list:
+    """
+    Tri par insertion d'une liste d'entiers L.
+    """
+    n = len(L)
+    for i in range(1,n):
+        # Invariant : en entrée de boucle L[0:i-1] est triée.
+        j = i
+        v = T[i]
+        while j>0 and v<L[j-1] :
+            L[j] = L[j-1]
+            j = j-1
+        L[j] = v
+        # Invariant : en fin de boucle L[0:i] est triée.
+    return L
+\end{lstlisting}    
+
+
+\subsection{Terminaison}
+
+Pour la boucle \texttt{while}, la quantité \texttt{j} est un variant de boucle. En effet :
+\begin{itemize}
+\item avant d'entrer dans la boucle, \texttt{j} est une quantité entière strictement positive;
+\item \texttt{j} est décrémenté de 1 à chaque itération, donc \texttt{j} décroit strictement à chaque itération. 
+\item \texttt{j} est donc un variant de boucle.
+\end{itemize}
+
+
+La boucle \texttt{for} termine au bout de \texttt{n-1} itérations. L'algorithme de tri par insertion termine donc.
+
+\subsection{Correction}
+Montrons que la propriété \texttt{L[0:i] est triée} est un invariant de boucle.
+
+\textbf{Initialisation} 
+En entrant dans la boucle : \texttt{i=1}; donc \texttt{L[0:1]} ne contient qu'un élément. \texttt{L[0:1]} est triée.
+
+\textbf{Hypothèse} : considérons qu'au début de l'itération \texttt{i}, \texttt{L[1:i-1]} est triée. 
+
+Montrons qu'à la fin de l'itération \texttt{i}, \texttt{L[1:i]} est triée. 
+\begin{itemize}
+\item \texttt{v = L[i]} est la valeur à insérer dans \texttt{L[0:i-1]}.
+\item \textbf{ou bien} \texttt{v>=L[i-1]}, on n'entre pas dans la boucle \texttt{while} et \texttt{L[i]=v}; donc \texttt{L[0:i]} est triée. 
+\item \textbf{ou bien} \texttt{v<L[i-1]} et on entre dans la boucle \texttt{while}.\texttt{j} décrémente alors et tous les éléments sont << décalés vers la droite >>  jusqu'à ce que \texttt{v>=L[j-1]}. On insère alors \texttt{v} en \texttt{L[j]}.
+\end{itemize}
+
+À la fin du \texttt{n-1} tour de boucle, \texttt{L[0:n]} est donc triée. 
 
 
 \subsection{Complexité}
@@ -129,7 +175,7 @@ Dès que l'on arrive sur une valeur inférieure on a trouvé la bonne place pour
 
 \textbf{La complexité est dans le pire des cas quadratique : $C(n)=\mathcal{O}(n^2)$.}
 
-\textbf{La complexité est dans le meileurs des cas linéaire : $C(n)=\mathcal{O}(n)$.}
+\textbf{La complexité est dans le meilleur des cas linéaire : $C(n)=\mathcal{O}(n)$.}
  
 
 L'efficacité du tri par insertion est excellente lorsque le tableau est déjà trié ou « presque trié » $(C(n)=\mathcal{O}(n))$. 
@@ -137,7 +183,23 @@ L'efficacité du tri par insertion est excellente lorsque le tableau est déjà 
 Il surpasse alors toutes les autres méthodes de tri qui sont au mieux en $\mathcal{O}(n \times \ln(n))$.
 \end{prop}
 
-\subsection{Terminaison et correction}
+
+Au vu de notre algorithme, le pire des cas que l'on peut rencontrer est celui où la liste \texttt{L} est triée dans l'ordre décroissant. En effet, dans ce cas, à l'itération \texttt{i}, la boucle while devra être réalisée \texttt{i} fois. 
+
+Comptons le nombre de comparaisons \texttt{j>0} réalisées par l'algorithme pour une liste de \texttt{n} éléments :
+\begin{itemize}
+\item à l'itération 1 : il y a 2 comparaisons; 
+\item à l'itération 2 : il y a 3 comparaisons; 
+\item ...
+\item à l'itération \texttt{n-1} : il y a \texttt{n} comparaisons.
+\end{itemize}
+
+Au final le nombre de comparaisons est égal à $C(n) = 2+3+...+n = \sum \limits_{i=1}^n \left(i\right)  -1 = \dfrac{1}{2}n\left(n+1\right) -1 = \mathcal{O}(n^2)$.
+
+
+
+
+
 
 
 %
@@ -266,66 +328,112 @@ On traite alors chacun des groupes de façon indépendante. On peut les traiter 
 \subsection{Implémentation}
 
 
-\begin{itemize}
-\item On crée tout d'abord une fonction << \textbf{partition} >>. 
-\begin{itemize}
-\item Les arguments de cette fonction seront le tableau \textbf{$a$} et deux indices correspondant au début et à la fin de la partie à segmenter du tableau (par convention \textbf{$g$} inclus et $\textbf{d}$ exclu). En effet on ne segmente pas à chaque fois l'ensemble du tableau.
-\item On suppose qu'il y a au moins un élément dans ce segment ce que l'on peut vérifier avec \texttt{assert} : 
+%\begin{itemize}
+%\item On crée tout d'abord une fonction << \textbf{partition} >>. 
+%\begin{itemize}
+%\item Les arguments de cette fonction seront le tableau \textbf{$a$} et deux indices correspondant au début et à la fin de la partie à segmenter du tableau (par convention \textbf{$g$} inclus et $\textbf{d}$ exclu). En effet on ne segmente pas à chaque fois l'ensemble du tableau.
+%\item On suppose qu'il y a au moins un élément dans ce segment ce que l'on peut vérifier avec \texttt{assert} : 
+%
+%\begin{lstlisting}
+%assert g<d
+%\end{lstlisting}
+%\item On choisit \texttt{a[g]} comme pivot que l'on peut stocker dans une variable \texttt{v}.
+%\item Le principe consiste alors à parcourir le tableau de la gauche vers la droite, entre les indices \texttt{g+1} et \textbf{$d$} avec une boucle \texttt{for}.
+%\item On stocke dans deux sous listes \texttt{ainf} et \texttt{asup} toutes les composantes respectivement inférieures ou supérieures au pivot.
+%\item On rassemble les deux sous listes ainsi que le pivot pour donner la liste \texttt{a} partitionnée (en assemblant également le reste de la liste \texttt{a}).
+%\item On note \texttt{m} l'indice qui correspond au partitionnement de \texttt{a}.
+%\item On sortira de cette fonction \texttt{m} et le tableau \texttt{a}.
+%\end{itemize}
+%\end{itemize}
+%
+%
 
-\begin{lstlisting}
-assert g<d
-\end{lstlisting}
-\item On choisit \texttt{a[g]} comme pivot que l'on peut stocker dans une variable \texttt{v}.
-\item Le principe consiste alors à parcourir le tableau de la gauche vers la droite, entre les indices \texttt{g+1} et \textbf{$d$} avec une boucle \texttt{for}.
-\item on stockera dans deux sous listes \texttt{ainf} et \texttt{asup} toutes les composantes respectivement inférieures ou supérieures au pivot.
-\item on rassemblera les deux sous listes ainsi que le pivot pour donner la liste \texttt{a} partitionnée (en assemblant également le reste de la liste \texttt{a}).
-\item On note \texttt{m} l'indice qui correspond au partitionnement de \texttt{a}.
-\item On sortira de cette fonction \texttt{m} et le tableau \texttt{a}.
+ Pour trier une liste, on procède ainsi :
+\begin{itemize}
+\item si la liste est vide, on renvoie la liste vide;
+\item sinon :
+\begin{itemize}
+\item on choisit un « pivot », à savoir une valeur de la liste. Dans notre cas, nous prendrons le dernier élément,
+\item on crée une liste \texttt{el\_inf} constituée des éléments strictements inférieurs au pivot,
+\item on crée une liste \texttt{el\_sup} constituée des éléments supérieurs ou égaux au pivot (en excluant la dernière valeur du tableau, ie le pivot),
+\item on renvoie la concatanation du tri rapide appliqué à \texttt{el\_inf}, du pivot ry du tri rapide appliqué à \texttt{el\_sup}.
 \end{itemize}
 \end{itemize}
 
-
-\begin{figure}[!htb]
-\begin{minipage}{0.5\textwidth}
-\RestyleAlgo{boxed}
-\begin{algorithme}[Algorithme de partitionnement pour le tri rapide]
-
-\begin{center}
 \begin{lstlisting}
-def partition(a,g,d):
-    assert g<d
-    v=a[g]
-    ainf=[]
-    asup=[]
-    for x in a[g+1:d]:
-        if x<v:
-            ainf.append(x)
-        else:
-            asup.append(x)
-    a=a[0:g]+ainf+[v]+asup+a[d:len(a)]
-    m=len(ainf)+g
-    return m,a
+def elts_inf(L : list, p : int) -> list :
+    """
+    Fonction renvoyant la liste des éléments de L stictements inférieurs à  p.
+    """
+    res = []
+    for e in L :
+        if e<p :
+            res.append(e)
+    return res
+    
+def elts_sup(L : list, p : int) -> list :
+    """
+    Fonction renvoyant la liste des éléments de L supérieurs ou égaux à  p.
+    """
+    res = []
+    for e in L :
+        if e>=p :
+            res.append(e)
+    return res
+
+def tri_rapide(L : list) -> list :
+    print(L)
+    if len(L) == 0 :
+        return []
+    else : 
+        p = L[-1]
+        ei = elts_inf(L,p)
+        es = elts_sup(L[:-1],p)
+        return tri_rapide(ei) + [p] + tri_rapide(es)
 \end{lstlisting}
-\end{center}
 
-
-\end{algorithme}
-
-\begin{algorithme}{Algorithme récursif du tri rapide}
-\begin{center}
-		\lstinputlisting{./programmes/tri_rapide_recursif.py}
-\end{center}
-\end{algorithme}
-
-
-\end{minipage}
-\begin{minipage}{0.5\textwidth}
-\begin{center}
-\includegraphics[width=0.9\textwidth]{algorigramme_rapide.jpg}
-\caption{Algorigramme du tri par insertion}
-\end{center}
-\end{minipage}
-\end{figure}
+%
+%\begin{figure}[!htb]
+%\begin{minipage}{0.5\textwidth}
+%\RestyleAlgo{boxed}
+%\begin{algorithme}[Algorithme de partitionnement pour le tri rapide]
+%
+%\begin{center}
+%\begin{lstlisting}
+%def partition(a,g,d):
+%    assert g<d
+%    v=a[g]
+%    ainf=[]
+%    asup=[]
+%    for x in a[g+1:d]:
+%        if x<v:
+%            ainf.append(x)
+%        else:
+%            asup.append(x)
+%    a=a[0:g]+ainf+[v]+asup+a[d:len(a)]
+%    m=len(ainf)+g
+%    return m,a
+%\end{lstlisting}
+%\end{center}
+%
+%
+%\end{algorithme}
+%
+%\begin{algorithme}{Algorithme récursif du tri rapide}
+%\begin{center}
+%		\lstinputlisting{./programmes/tri_rapide_recursif.py}
+%\end{center}
+%\end{algorithme}
+%
+%
+%\end{minipage}
+%\begin{minipage}{0.5\textwidth}
+%\begin{center}
+%\includegraphics[width=0.9\textwidth]{algorigramme_rapide.jpg}
+%\caption{Algorigramme du tri par insertion}
+%\end{center}
+%\end{minipage}
+%\end{figure}
 %
 %%\begin{algorithme}[Algorithme de partitionnement pour le tri rapide]
 %%
@@ -337,22 +445,22 @@ def partition(a,g,d):
 %
 %
 
-La fonction tri rapide est alors implémentée de façon récursive.
-\begin{itemize}
-\item On utilise pour cela une fonction \texttt{tri\_rapide} qui prend les même arguments que la fonction \texttt{partition}.
-\item \textbf{Si} \textbf{$g\geq d-1$}, il y a au plus un élément à trier donc rien à faire (initialisation de la récursivité),
-\item \textbf{Sinon} il faut
-\begin{itemize}
-\item partitionner les élément entre \textbf{$g$} et \textbf{$d$},
-\item faire un appel récursif pour trier $a[g\cdots m[$ (partie gauche),
-\item faire un appel récursif pour trier $a[m+1\cdots d[$ (partie droite),
-\end{itemize} 
-\end{itemize} 
+%La fonction tri rapide est alors implémentée de façon récursive.
+%\begin{itemize}
+%\item On utilise pour cela une fonction \texttt{tri\_rapide} qui prend les même arguments que la fonction \texttt{partition}.
+%\item \textbf{Si} \textbf{$g\geq d-1$}, il y a au plus un élément à trier donc rien à faire (initialisation de la récursivité),
+%\item \textbf{Sinon} il faut
+%\begin{itemize}
+%\item partitionner les élément entre \textbf{$g$} et \textbf{$d$},
+%\item faire un appel récursif pour trier $a[g\cdots m[$ (partie gauche),
+%\item faire un appel récursif pour trier $a[m+1\cdots d[$ (partie droite),
+%\end{itemize} 
+%\end{itemize} 
 
 
 
-Pour trier un tableau il suffit d'appeler \texttt{tri\_rapide} sur la totalité des éléments.
-
+%Pour trier un tableau il suffit d'appeler \texttt{tri\_rapide} sur la totalité des éléments.
+%
 
 %
 %%\begin{exemple2}[Algorithme complet du tri rapide avec affichage des tris successifs]
@@ -383,14 +491,32 @@ le premier élément du segment comme pivot, mais plutôt un élément au hasard
 \hline 
  meilleur cas &  pire cas \\ 
 \hline 
-$n \log n$ & $n^2/2$ \\ 
+$n \log n$ & $n^2$ \\ 
 \hline 
 \end{tabular} 
 \end{center}
 
-
-
 \end{prop}
+
+
+Pour un tableau de longueur $n$ :
+\begin{itemize}
+\item on crée une liste \texttt{ei} avec $k$ éléments et une liste \texttt{es} avec $n-k-1$ éléments (le dernier élément étant le pivot);
+\item la création de chacune de ces listes fait appel à \texttt{n} comparaisons (boucles \texttt{for} qui itèrent sur chaque élément de \texttt{L});
+\item on appelle alors récursivement la fonction \texttt{tri\_rapide} avec les listes de tailles précitées. 
+\end{itemize} 
+Le nombre de comparaisons à l'itération $n$ est donc approximativement de : 
+$C(n)=2n + C(k) + C(n-k-1)$. 
+
+Dans le pire des cas, $k=0$ (ou $k=n-1$). En conséquences,  $C(n)=2n + C(0) + C(n-1)$. Pour une liste de taille 0 ou 1, l'algorithme de tri est réalisé en un tant constant $C(0)=C(1)=1$.  
+
+On a donc $C(n)=2n + 1 + C(n-1) \Leftrightarrow C(n)- C(n-1)=2n + 1 $. De même à l'itération $i$, on a $ C(i)- C(i-1)=2i + 1 $. 
+
+
+Par sommation, on a alors 
+$$
+\sum_{i=1}^n \left(C(i)- C(i-1)\right)=\sum_{i=1}^n \left(2i + 1\right) \Rightarrow C(n)-C(0) = 2 \times \dfrac{1}{2} n (n+1) + n \Rightarrow C(n)=n^2 +2n -1 = \mathcal{O}(n^2).
+$$
 
 %\begin{center}
 %\begin{tabular}{|c|c|c|}
