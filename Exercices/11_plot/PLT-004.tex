@@ -21,21 +21,15 @@ plt.legend(loc=0)
 plt.title('Tracé du sinus sur [0,10]')
 plt.savefig('tp05_ex_sin.png')
 \end{lstlisting}
-\'Exécutez ce script et vérifiez que la figure créée est en tout point semblable à celle présente sur le site de classe. 
 
-\medskip{}
+\question{\'Exécutez ce script et vérifiez que la figure créée est en tout point semblable à celle présente sur le site de classe. }
 
-\question{} Quel est le type de \texttt{x} ?
+\question{Quel est le type de \texttt{x} ?}
 
-\medskip{}
+\question{Comment \texttt{Python}{} représente-t-il graphiquement une fonction ? }
 
-\question{} Comment \texttt{Python}{} représente-t-il graphiquement une fonction ? 
+\question{Où le tracé s'arrête-t-il ? Pourquoi ? }
 
-\medskip{}
-
-\question{} Où le tracé s'arrête-t-il ? Pourquoi ? 
-
-\medskip{}
 
 On rappelle que l'on peut simplement créer une liste d'abscisses en utilisant la fonction \texttt{linspace} de la bibliothèque de calcul \texttt{numpy}. 
 
@@ -45,17 +39,15 @@ from numpy import linspace
 \end{lstlisting}
 puis consultez son manuel par la commande \texttt{help(linspace)}. 
 
-\medskip{}
 
-\question{}\label{tp05:qu:sin2} Écrire une fonction \texttt{ex\_sin(nom\_de\_fichier)} permettant tracer de manière plus appropriée la courbe de l'exemple précédent et qui enregistre l'image produite dans le fichier \texttt{nom\_de\_fichier}. 
-Vous produirez alors une image, que vous enverrez à votre enseignant et que vous appellerez tp04$\_$nom1$\_$nom2$\_$Q04.png. 
+
+\question{\label{tp05:qu:sin2} Écrire une fonction \texttt{ex\_sin(nom\_de\_fichier)} permettant tracer de manière plus appropriée la courbe de l'exemple précédent et qui enregistre l'image produite dans le fichier \texttt{nom\_de\_fichier}. 
+Vous produirez alors une image, que vous enverrez à votre enseignant et que vous appellerez tp04$\_$nom1$\_$nom2$\_$Q04.png. }
 
 \emph{Indication :} Attention au type de \texttt{nom\_de\_fichier} ! Notamment, on supposera que l'extension du fichier est déjà présente dans \texttt{nom\_de\_fichier}.
 
-\medskip{}
-\emph{•}
-\question %\label{tp05:qu:transitoire}
- \'Ecrire une fonction \texttt{transitoire(A,nom\_de\_fichier)} qui enregistre dans le fichier \texttt{nom\_de\_fichier} le graphe des fonctions 
+
+\question{\label{tp05:qu:transitoire}\'Ecrire une fonction \texttt{transitoire(A,nom\_de\_fichier)} qui enregistre dans le fichier \texttt{nom\_de\_fichier} le graphe des fonctions }
 \begin{equation*}
   t \to A\left(1-e^{-\dfrac{t}{\tau}}\right)
 \end{equation*}
