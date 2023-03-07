@@ -50,26 +50,26 @@ Les réponses attendues en vitesse V(t) et en position X(t) de l’axe linéaire
 \end{figure}
 
 On peut montrer par intégrations successives, en tenant compte des conditions initiales que :
-
-\vspace{0.5cm}
-\begin{tabular}{|l|l|l|}
+\begin{center}
+\begin{tabular}{|l|c|c|}
     \hline
      \textbf{Phase} &  \textbf{1} & \textbf{2}  \\
     \hline
-     instant $t$  & $0\leq t <t_1$ & $t_1 \leq t \leq t_2$ \\
+     Instant $t$  & $0\leq t <t_1$ & $t_1 \leq t \leq t_2$ \\
     \hline
-     accélération $A(t)$  & $A_{cmax}$ & $-A_{cmax}$ \\
+     Accélération $A(t)$  & $\indice{A}{cmax}$ & $-\indice{A}{cmax}$ \\
     \hline
-     vitesse $V(t)$  & $A_{cmax}.t$ & $V_{max}-A_{cmax}.(t-t_1)$ \\
+     Vitesse $V(t)$  & $\indice{A}{cmax}t$ & $\indice{V}{max}-\indice{A}{cmax}(t-t_1)$ \\
     \hline
-     position $X(t)$  & $\dfrac{1}{2}.A_{cmax}.t^2$ & $X_1 + V_{max}.(t-t_1) - \dfrac{1}{2}.A_{cmax}.(t-t_1)^2$  \\
+     Position $X(t)$  & $\dfrac{1}{2}\indice{A}{cmax}t^2$ & $X_1 + \indice{V}{max}(t-t_1) - \dfrac{1}{2}\indice{A}{cmax}(t-t_1)^2$  \\
     \hline
 \end{tabular}
+\end{center}
 
 On notera que : $X_1 = X(t_1)$, à l'issue de la phase 1 et $X_2=X(t_2)$, à l'issue de la phase 2.
 
 \vspace{0.5cm}
-\question{Trouver les expressions littérales de $t_1$, $t_2$, $X_1$ et de $X_2$ en fonction de $A_{cmax}$ et de $V_{max}$.}
+\question{Trouver les expressions littérales de $t_1$, $t_2$, $X_1$ et de $X_2$ en fonction de $\indice{A}{cmax}$ et de $\indice{V}{max}$.}
 
 \vspace{0.5cm}
 \question{Concevoir deux fonctions \texttt{Loi\_Vitesse} et \texttt{Loi\_position} prenant en argument un instant $t$ et permettant de retourner la vitesse, respectivement la position, à cet instant. (A noter que l'on pourra introduire des variables globales, comme $t_1$, $t_2$, etc.)}
@@ -88,7 +88,7 @@ On rappelle que la commande \texttt{y = np.zeros(n)} permet de générer un tabl
 
 Nous allons quantifier l’écart de performance entre l’exigence du cahier des charges et le système réel. Pour cela, nous allons calculer les écarts et utiliser des outils de statistique pour quantifier ces écarts.
 
-On définit l'écart relatif en \% $\delta_\%$ entre une valeur théorique $x_{th}$ et une valeur expérimentale $x_{exp}$ : $\delta_\%=\displaystyle\left\lvert  \dfrac{x_{exp}-x_{th}}{x_{th}} \right\rvert$ 
+On définit l'écart relatif en \% $\delta_\%$ entre une valeur théorique $\indice{x}{th}$ et une valeur expérimentale $x_{\text{exp}}$ : $\delta_\%=\displaystyle\left\lvert  \dfrac{x_{\text{exp}}-x_{th}}{x_{\text{th}}} \right\rvert$ 
 
 \vspace{0.5cm}
 \question{Concevoir une fonction \texttt{Calcul\_ecarts} prenant en arguments deux tableaux à une dimension et retournant un tableau \texttt{Delta\_X} de même dimension où sont stockés les écarts relatifs entre chacune des valeurs des deux tableaux spécifiés en arguments d'entrée.}
