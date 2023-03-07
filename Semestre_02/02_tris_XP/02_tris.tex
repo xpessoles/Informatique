@@ -1,6 +1,33 @@
+\def\xxactivite{Tris}
+
+\def\xxauteur{Emilien Durif -- Xavier Pessoles}
+\fichefalse \proftrue \tdfalse \courstrue
+
+\def\xxnumchapitre{Chapitre 8 \vspace{.2cm}}
+
+\def\xxchapitre{Tris}
+
+\def\xxcompetences{%
+\textsl{%
+\textbf{Savoirs et compétences :}\\
+\begin{itemize}[label=\ding{112},font=\color{bleuxp}] 
+\item Tris.
+\end{itemize}
+}}
+
+\def\xxfigures{
+%\includegraphics[width=\linewidth]{fractale}
+%\\
+%\textit{Modèle du pilote hydraulique avec pilotage interactif.}
+}%figues de la page de garde
 
 
+\input{\repRel/Style/pagegarde_cours_minitoc}
+\setlength{\columnseprule}{.1pt}
 
+\vspace{2cm}
+\pagestyle{fancy}
+\thispagestyle{plain}
 
 %Thème : Tris.
 % 
@@ -1041,6 +1068,7 @@ d'algorithmique et programmation structurée avec Python. Nouveaux programmes
 %\end{itemize}
 
 \section{QCM}
+\begin{multicols}{2}
 \question{On dispose d'une liste de triplets: t = [(1,12,250),(1,12,251), (2,12,250),(2,13,250),(2,11,250),(2,12,249)].
 On trie cette liste par ordre croissant des valeurs du second élément des triplets. En cas d'égalité, on trie par ordre croissant du troisième champ. Si les champs 2 et 3 sont égaux, on trie par ordre croissant du premier champ.
 Après ce tri, quel est le contenu de la liste ?}
@@ -1152,6 +1180,8 @@ for i in range(len(table) - 1):
 \item $\mathcal{O}\left(2^n\right)$.
 \item $\mathcal{O}\left(\log n\right)$.
 \end{enumerate}
+
+\end{multicols}
 
 %\question{On souhaite écrire une fonction \texttt{tri\_selection(t)}, qui trie le tableau \texttt{t} dans l'ordre croissant : parmi les 4 programmes suivants, lequel est correct ?}
 %\begin{lstlisting}
