@@ -835,13 +835,35 @@ $n \log n$ & $n \log n$ \\
 \end{prop}
 
 \subsubsection{Complexité du tri fusion -- Petites remarques}
-%
-%Quel est le coût de l'algorithme de fusion précédent ?
-%
-%La première question à se poser est le coût de la concaténation 
 
+Quel est le coût de l'algorithme de fusion présenté précédemment ?
+En Python, concaténer deux listes nécessite de copier ces deux listes dans une nouvelle liste. Cette opération est donc en $\mathcal{O}(n)$. 
 
-\subsubsection{}
+Par ailleurs, la taille des listes à concaténer diminue de 1 à chaque itération. Il y aura donc $n$ appels récursifs. 
+
+L'algorithme de fusion présenté est donc en $\mathcal{O}(n^2)$.
+
+La séparation quant à elle est complexité $\mathcal{O}\log_2(n)$ (en effet, le nombre de fois que fois qu'on peut diviser notre liste de taille $n$ en 2 listes de taille $n//2$ est à peu près de $\log(n)$.
+
+L'algorithme proposé est donc en $\mathcal{O}\left(n^2 \log(n)\right)$... et pas en $n\log(n)$ !
+
+Il faudrait donc rechercher un algorithme de fusion de complexité linéaire...
+\subsubsection{Exemple de fusion linéaire...}
+\begin{lstlisting}
+def fusion(L1, L2):
+    L = []
+    i, j = 0, 0
+    while i < len(L1) and j < len(L2):
+        if L1[i] < L2[j]:
+            L.append(L1[i])
+            i += 1
+        else:
+            L.append(L2[j])
+            j += 1
+    L += L1[i:]
+    L += L2[j:]
+    return L
+\end{lstlisting}
 
 
 \section{Dans Python : sort et sorted}
