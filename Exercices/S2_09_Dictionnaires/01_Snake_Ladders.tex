@@ -43,9 +43,9 @@ Le jeu \emph{serpents et échelles} est un jeu de société où on espère monte
 	\end{itemize}
 \end{itemize}
 
-On utilisera les notations suivantes pour les complexités~: $N_{cases}$, le nombre de cases du plateau (100), et $N_{SeE}$ la somme du nombre de serpents et du nombre d'échelle (16 dans notre exemple).
+On utilisera les notations suivantes pour les complexités~: $\indice{N}{cases}$, le nombre de cases du plateau (100), et $\indice{N}{SeE}$ la somme du nombre de serpents et du nombre d'échelle (16 dans notre exemple).
 
-\section{Simulation du jeu}
+\subsection{Simulation du jeu}
 
 \question{\'Ecrire une fonction \texttt{lancerDe() -> int} qui renvoie un nombre entier compris entre 1 et 6 en utilisant une fonction du module \texttt{random}. Vous pourrez vous aider des documentations en annexe.}
 
@@ -114,7 +114,7 @@ L'algorithme glouton consistera à choisir la valeur du dé permettant de maximi
 
 Cette dernière fonction nous renvoie \texttt{[0, 38, 44, 50, 67, 91, 97, 100]}. 
 
-\question{Construire un exemple de plateau, contenant par exemple 2 échelles et pas de serpent, pour lequel notre algorithme ne trouve pas le chemin le plus court en nombre de coups~: vous préciserez le résultat de l'algorithme glouton et un exemple d'une partie strictement plus rapide.}
+%\question{Construire un exemple de plateau, contenant par exemple 2 échelles et pas de serpent, pour lequel notre algorithme ne trouve pas le chemin le plus court en nombre de coups~: vous préciserez le résultat de l'algorithme glouton et un exemple d'une partie strictement plus rapide.}
 
 %\UPSTIcorrection{
 %	Soit une échelle qui va de 12 à 100 (donc arriver à 12 termine la partie) et une échelle qui va de 1 à 22~: l'algorithme glouton choisira d'aller sur la case 21 au départ, et finir avec une partie à 14 lancers, au lieu de faire 2 fois 6 et terminer la partie en seulement 2 lancers. 
