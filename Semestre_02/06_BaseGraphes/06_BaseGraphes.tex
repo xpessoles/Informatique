@@ -44,7 +44,8 @@ concrets.
 
 
 \section{Introduction}
-
+Historiquement, le problème des septs ponts de Königsberg (Kaliningrad) était de déterminer s'il existe une promenade qui partait de n'importe quel quartier et qui y revenait, tout en passant une et une seule fois par chacun des ponts.
+Euler mis en forme le problème et le résolut... en montrant que dans ce cas, il n'existait pas de solution.
 \begin{center}
 \begin{tabular}{cccc}
 \includegraphics[width=0.2\linewidth]{konigsberg_01} &
@@ -53,6 +54,14 @@ concrets.
 \includegraphics[width=0.2\linewidth]{konigsberg_04} \\
 \end{tabular}
 \end{center}
+
+Les applications des graphes sont assez nombreuses :
+\begin{itemize}
+ \item recherche d'itinéraire pour aller d'un point à un autre;
+ \item rourage des paquets sur Internet;
+ \item analyse des réseaux sociaux...
+ \end{itemize}
+ 
 
 \section{Vocabulaire des graphes}
 
@@ -123,22 +132,40 @@ $f : A \to V$ (où $V$ est un ensemble de valeurs). On dit qu’un graphe est po
 
 \section{Chemins}
 
-\begin{defi}{Chemin dans un graphe}
+\begin{defi}{Chemin dans un graphe} \\
+
+\noindent\begin{minipage}{.7\linewidth}
 On appelle chemin dans un graphe une suite finie $\{S_0, \ldots , S_{n-1}\}$ de $n$ sommets tels que pour tout
 $i \in \llbracket 0, n-1\llbracket$, une arête relie $S_i$ à $S_{i+1}$. On dit que ce chemin relie le sommet de départ $S_0$ au sommet de fin $S_{n-1}$. 
 
 Dans le cas d'un graphe non orienté, les arêtes sont notées $\{S_i, S_{i+1}\}$ pour $i \in \llbracket 0, n-1\llbracket$.
 
 Dans le cas d'un graphe orienté, les arcs sont notées $(S_i, S_{i+1})$ pour $i \in \llbracket 0, n-1\llbracket$.
+\end{minipage}\hfill
+\begin{minipage}{.25\linewidth}
+\includegraphics[width=\linewidth]{chemin}
+\end{minipage}
 \end{defi}
 
+\begin{defi}{Chemin fermé} \\
 
-\begin{defi}{Chemin fermé}
+\noindent\begin{minipage}{.7\linewidth}
 Chemin dont le sommet de départ et le sommet d'arrivée sont identiques.
+\end{minipage}\hfill
+\begin{minipage}{.25\linewidth}
+\includegraphics[width=\linewidth]{cycle_simple}
+\end{minipage}
+
 \end{defi}
 
 \begin{defi}{Chemin élémentaire}
+
+\noindent\begin{minipage}{.7\linewidth}
 Chemin n'empruntant que des arêtes distinctes.
+\end{minipage} \hfill
+\begin{minipage}{.25\linewidth}
+\includegraphics[width=\linewidth]{chemin}
+\end{minipage}
 \end{defi}
 
 \begin{defi}{Chemin simple}
@@ -161,47 +188,57 @@ Chemin fermé et simple de longueur non nulle.
 \end{defi}
 
 \begin{defi}{Chemin et cycle eulérien}
+
+\noindent\begin{minipage}{.55\linewidth}
 Chemin (resp. cycle) contenant une et une seule fois toutes les arêtes du graphe.
 %Graphe eulérien : contenant un circuit eulérien.
 %Graphe acyclique : ne contenant aucun cycle.
+\end{minipage} \hfill
+\begin{minipage}{.2\linewidth}
+\includegraphics[width=\linewidth]{chemin_eulerien}
+\end{minipage}
+ \hfill
+\begin{minipage}{.2\linewidth}
+\includegraphics[width=\linewidth]{cycle_eulerien}
+\end{minipage}
 \end{defi}
 
 \begin{rem}
 Pour certains auteurs, un chemin élémentaire est ce que nous avons appelé un chemin simple et réciproquement. Pour d’autres, un cycle est ce que nous avons appelé un cycle simple.
 \end{rem}
 
-
-\begin{exemple} ~\\
-\begin{multicols}{2}
-\begin{figure}[H]
-\centering
-\includegraphics[height = 4cm]{chemin}
-\captionsetup{justification=centering}
-\caption{Chemin}
-\end{figure}
-
-\begin{figure}[H]
-\centering
-\includegraphics[height = 4cm]{chemin_eulerien}
-\captionsetup{justification=centering}
-\caption{Chemin eulérien}
-\end{figure}
-
-\begin{figure}[H]
-\centering
-\includegraphics[height = 4cm]{cycle_simple}
-\captionsetup{justification=centering}
-\caption{Cycle simple}
-\end{figure}
-
-\begin{figure}[H]
-\centering
-\includegraphics[height = 4cm]{cycle_eulerien}
-\captionsetup{justification=centering}
-\caption{Cycle eulérien}
-\end{figure}
-\end{multicols}
-\end{exemple}
+%
+%\begin{exemple} ~\\
+%\begin{multicols}{2}
+%\begin{figure}[H]
+%\centering
+%\includegraphics[height = 4cm]{chemin}
+%\captionsetup{justification=centering}
+%\caption{Chemin}
+%\end{figure}
+%
+%\begin{figure}[H]
+%\centering
+%\includegraphics[height = 4cm]{chemin_eulerien}
+%\captionsetup{justification=centering}
+%\caption{Chemin eulérien}
+%\end{figure}
+%
+%\begin{figure}[H]
+%\centering
+%\includegraphics[height = 4cm]{cycle_simple}
+%\captionsetup{justification=centering}
+%\caption{Cycle simple}
+%\end{figure}
+%
+%\begin{figure}[H]
+%\centering
+%\includegraphics[height = 4cm]{cycle_eulerien}
+%\captionsetup{justification=centering}
+%\caption{Cycle eulérien}
+%\end{figure}
+%\end{multicols}
+%\end{exemple}
 
 
 %\begin{defi}{}
