@@ -1,4 +1,39 @@
-\section{Compléments sur le chapitre 6}
+\def\xxactivite{Cours}
+
+\def\xxauteur{P. Bessonnat -- Xavier Pessoles}
+\fichefalse \proftrue \tdfalse \courstrue
+
+\def\xxnumchapitre{Chapitre 11 \vspace{.2cm}}
+
+\def\xxchapitre{Introduction aux graphes}
+
+\def\xxcompetences{%
+\textsl{%
+\textbf{Savoirs et compétences :}\\
+\begin{itemize}[label=\ding{112},font=\color{bleuxp}] 
+\item Vocabulaire des graphes : graphe orienté, graphe non orienté. Sommet (ou nœud); arc, arête. Boucle. Degré (entrant et sortant). Chemin d’un sommet à un autre. Cycle. Connexité dans les graphes non orientés.
+\item Notations : graphe $G=(S,A)$, degrés $d(s)$ (pour un graphe non orienté), $d_{+}(s)$ et  $d_{-}(s)$ (pour un graphe orienté).
+\item Pondération d’un graphe. Étiquettes des arcs ou des arêtes d’un graphe. On motive l’ajout d’information à un graphe par des exemples
+concrets.
+\end{itemize}
+}}
+
+\def\xxfigures{
+\includegraphics[width=4cm]{fig_0} \\
+\textit{Représentation ciculaire du métro parisien}
+}%figues de la page de garde
+
+
+\input{\repRel/Style/pagegarde_cours_minitoc}
+\setlength{\columnseprule}{.1pt}
+
+\vspace{2cm}
+\pagestyle{fancy}
+\thispagestyle{plain}
+
+%Thème : Tris.
+
+\section{Compléments sur le chapitre précédent}
 
 \subsection{Taille d'un graphe}
 
@@ -13,7 +48,7 @@ Ainsi, si un algorithme est linéaire en la taille du graphe, on pourra utilisé
 
 \subsection{Formule des degrés}
 \begin{defi}{Formule des degrés}
-Soit un graphe $G=\left(V,E\right)$, alors : $\displaystyle{\Sigma_{v \in V}} deg(v) = 2|E|$.
+Soit un graphe $G=\left(V,E\right)$, alors : $\displaystyle{\Sigma_{v \in V}} \text{deg}(v) = 2|E|$.
 \end{defi}
 
 \subsection{Graphe complet}
@@ -117,26 +152,26 @@ Une des difficultés du parcours de graphe est d'éviter de tourner en rond. C'e
 On propose ci-dessous un algorithme de parcours en largeur en utilisant un graphe implémenté sous forme de liste d'adjacence ainsi qu'un sommet \texttt{s} de départ. 
 
 \begin{lstlisting}
-def bfs(G, s) -> None:
+def bfs(G:dict, s:str) -> None:
     """
     G : graphe sous forme de dictionnaire d'adjacence
     s : sommet du graphe (Chaine de caractere du type "S1").
     """
     visited = {}
     for sommet,voisins in G.items():
-        visited[sommet]=False
+        visited[sommet] = False
     # Le premier sommet à visiter entre dans la file
-    q = deque([s])
-    while len(q) > 0:
+    file = deque([s])
+    while len(file) > 0:
         # On visite la tête de file
-        u = q.pop()
+        tete = file.pop()
         # On vérifier qu'elle n'a pas été visitée
-        if not visited[u]:
+        if not visited[tete]:
             # Si on l'avait pas visité, maintenant c'est le cas :)
-            visited[u] = True            
-            # On met les voisins de u dans la file
-            for v in G[u]:
-                q.appendleft(v)
+            visited[tete] = True            
+            # On met les voisins de tete dans la file
+            for v in G[tete]:
+                file.appendleft(v)
 \end{lstlisting}
 
 Dans cet algorithme : 
@@ -148,6 +183,11 @@ Dans cet algorithme :
 \item on ajoute alors dans la file l'ensemble des voisins du sommet initial;
 \item on continue alors de traiter la file. 
 \end{itemize}
+
+\begin{rem}
+En l'état, à quoi sert cet algorithme ?
+\end{rem}
+
 
 \subsubsection{Applications}
 \begin{exemple}
@@ -198,6 +238,7 @@ def path(pred, s, v):
 \fi
 \end{exemple}
 
+\subsubsection{Marquage de sommet}
 
 \subsection{Parcours en profondeur}
 \subsubsection{Un premier algorithme}
