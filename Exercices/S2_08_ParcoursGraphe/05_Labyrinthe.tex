@@ -7,7 +7,7 @@
 \setcounter{numques}{0}
 
 
-\subsection*{Génération d'un labyrinthe}
+\subsection*{Génération d'une grille}
 
 Soit une grille rectangulaire $n\times p$ constituée de $n$ lignes et de $p$ colonnes contenant toutes les arêtes possibles. On modélise cette grille par un graphe dont l'ensemble des sommets est donné par les couples $(i,j)$ tels que $i\in\llbracket 0,n \llbracket $ et $j\in\llbracket 0,p \llbracket $. Les voisins d'un sommet $(i,j)$ sont ceux situés en haut, en bas, à droite et à gauche s'ils existent (par exemple, le sommet $(0,0)$ a comme voisin les sommets $(0,1)$ et $(1,0)$).
 
@@ -21,3 +21,9 @@ Le graphe est implémenté par un dictionnaire d'adjacence ou les clés sont les
 Ainsi, la grille $ 2 \times 2$ sera modélisée par le graphe suivant
 
 \cde{\{(0,0):[(0,1),(1,0)], (0,1):[(0,0),(1,1)], (1,0):[(0,0),(1,1)], (1,1):[(0,1),(1,0)]\}}.
+
+\question{Écrire la fonction \cde{creer\_graphe(n:int, p:int) -> \{\}} permettant de créer une grille de \cde{} lignes et \cde{p} colonnes. }
+
+\question{En utilisant la fonction \cde{tracer\_graphe(G)}, vérifier que votre graphe a la bonne structure.}
+
+\subsection*{Génération d'un labyrinthe}
