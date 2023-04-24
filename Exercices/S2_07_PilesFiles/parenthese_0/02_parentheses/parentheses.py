@@ -46,6 +46,3 @@ print(verifPar1('{[()}'))   # }
 print(verifPar1('{[()]'))   # 1
 print(verifPar1('{[()]}'))  # 0
 
-
-print(verifPar1('{[()]}'))  # 0
-

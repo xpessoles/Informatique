@@ -41,21 +41,21 @@ def evalue2(lst):
     p = deque()
     for t in lst:
         if t in op_bin:
-            if p.empty():
+            if len(p)==0:
                 raise ValueError("expression incorrecte")
             y = p.pop()
-            if p.empty():
+            if len(p)==0:
                 raise ValueError("expression incorrecte")
             x = p.pop()
-            p.push(op_bin[t](x, y))
+            p.append(op_bin[t](x, y))
         elif t in op_uni:
-            if p.empty():
+            if len(p)==0:
                 raise ValueError("expression incorrecte")
             x = p.pop()
-            p.push(op_uni[t](x))
+            p.append(op_uni[t](x))
         else:
-            p.push(t)
+            p.append(t)
     s = p.pop()
-    if not p.empty():
+    if not len(p)==0:
         raise ValueError("expression incorrecte")
     return s

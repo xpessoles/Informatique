@@ -37,7 +37,7 @@ def mult(x, y):
 def div(x, y):
     return x / y
 
-op_bin = {'+': add, '-': sous, '*': mult, '/': div
+op_bin = {'+': add, '-': sous, '*': mult, '/': div}
 \end{lstlisting}
 
 
@@ -55,7 +55,7 @@ Si l’expression postfixe est correcte sur le plan syntaxique (et mathématique
 pile ne contient plus qu’un seul élément égal au résultat de l’évaluation de l’expression.
 On suppose donnés les deux dictionnaires \texttt{op\_uni} et \texttt{op\_bin}.
 
-\question{Rédiger une fonction qui évalue une expression postfixe donnée sous forme de liste. Dans un premier temps, on
-pourra supposer que l’expression est syntaxiquement correcte.}
+\question{Rédiger une fonction qui évalue une expression postfixe donnée sous forme de liste \texttt{evalue(lst:liste)->float}. Dans un premier temps, on
+pourra supposer que l'expression est syntaxiquement correcte.}
 
-\question{Rédiger une seconde fonction d’évaluation qui détecte les erreurs de syntaxe.}
+\question{Rédiger une seconde fonction d’évaluation qui détecte les erreurs de syntaxe. On l'a notera \texttt{evalue2(lst:liste)->float}}
