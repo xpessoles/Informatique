@@ -38,7 +38,7 @@ Chemin $A\to P_2 \to P_3 \to P_1$
 %\else
 %\fi
 %
-%\question{Dénombrer le nombre de chemins possibles démarrant par $A$ et passant par $10$ points.}
+%\question{* Dénombrer le nombre de chemins possibles démarrant par $A$ et passant par 3 points.}
 %\ifprof
 %\begin{corrige}
 %$n!$
@@ -187,9 +187,9 @@ def longueur(chemin, dist):
 def longueur(chemin, dist): A TESTER !!
     d = 0
     if len(chemin) == 2 :
-        return dist[chemin[0][chemin[1]]
+        return distance(chemin[0]chemin[1])
     else : 
-        return d=d + longueur(chemin([1:],dist))
+        return d + longueur(chemin([1:],dist))
 \end{lstlisting}
 \end{corrige}
 \else
