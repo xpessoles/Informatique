@@ -63,6 +63,8 @@ def div(x, y):
 op_bin = {'+': add, '-': sous, '*': mult, '/': div}
 
 
+evalue([3,2,'+',7,'*','sqrt'])
+
 def evalue(lst):
     p = deque()
     for t in lst:
