@@ -31,12 +31,13 @@ Les instructions suivantes permettent de tracer un graphe.
 import networkx as nx
 
 def plot_graphe_l(G):
+    plt.close()
     Gx = nx.Graph()
     edges = arretes_l(G)
     Gx.add_edges_from(edges)
     nx.draw(Gx,with_labels = True)
     plt.show()
-plot_graphe(M)
+plot_graphe_l(Gl)
 \end{lstlisting}
 
 \question{Écrire et tester la fonction \texttt{plot\_graphe\_l(G)}.}

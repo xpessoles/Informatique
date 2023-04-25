@@ -3,7 +3,7 @@
 Created on Mon May 16 14:18:12 2022
 
 
-@author: Jean-Pierre Becirspahi
+@author: Jean-Pierre Becirspahic
 @author: xavier.pessoles2
 """
 
