@@ -134,6 +134,35 @@ def dfs(G,s) -> None:
             visited[tete] = True
             # On met les voisins de tete dans la file
             voisins = G[tete]
+            #random.shuffle(voisins)
+            for v in voisins:
+                pile.append(v)
+                if v not in laby :
+                    ajouter_arete(laby, tete, v)
+        
+                
+    return laby
+
+def labyrinthe(G,s) -> None:
+    """
+    G : graphe sous forme de dictionnaire d'adjacence
+    s : sommet du graphe (Chaine de caractere du type "S1").
+    """
+    laby = {}
+    visited = {}
+    for sommet,voisins in G.items():
+        visited[sommet] = False
+    # Le premier sommet à visiter entre dans la file
+    pile = deque([s])
+    while len(pile) > 0:
+        # On visite la tête de file
+        tete = pile.pop()
+        # On vérifier qu'elle n'a pas été visitée
+        if not visited[tete]:
+            # Si on l'avait pas visité, maintenant c'est le cas :)
+            visited[tete] = True
+            # On met les voisins de tete dans la file
+            voisins = G[tete]
             random.shuffle(voisins)
             for v in voisins:
                 pile.append(v)
@@ -146,5 +175,8 @@ def dfs(G,s) -> None:
 l,c = 8,10
 G = creer_graphe(l,c)
 tracer_graphe(G)
-laby = dfs(G,(0,0))
+laby = bfs(G,(0,0))
 tracer_graphe(laby)
+
+labyrinthe = labyrinthe(G,(0,0))
+tracer_graphe(labyrinthe)
