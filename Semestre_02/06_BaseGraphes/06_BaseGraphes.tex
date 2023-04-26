@@ -569,6 +569,100 @@ terminale $s_j$ .
 %\begin{defi}{}
 %\end{defi}
 
+
+\subsection{Taille d'un graphe}
+
+\begin{defi}{Taille d'un graphe}
+Soit un graphe $G=\left(V,E\right)$ composé de sommets $V$ et d'arêtes $E$. On appelle taille du graphe la quantité $|V|+|E|$.
+\end{defi}
+
+\begin{rem}
+On retrouve dans des ouvrages la notation $|V|$ ou $|E|$ correpondant respectivement au nombre de sommets et d'arêtes. 
+Ainsi, si un algorithme est linéaire en la taille du graphe, on pourra utilisé la notation $\mathcal{O}\left(|V|+|E|\right)$.
+\end{rem}
+
+\subsection{Formule des degrés}
+\begin{defi}{Formule des degrés}
+Soit un graphe $G=\left(V,E\right)$, alors : $\displaystyle{\Sigma_{v \in V}} \text{deg}(v) = 2|E|$.
+\end{defi}
+
+\subsection{Graphe complet}
+
+\begin{defi}{Graphe complet}
+Un graphe complet est un graphe possédant toutes les arêtes possibles. 
+\end{defi}
+
+\begin{rem}
+\begin{itemize}
+\item Le nombre maximal d'arêtes d'un graphe à $n$ sommets est donné par : $\begin{pmatrix} n \\ 2\end{pmatrix}$.
+\item Pour chaque sommet $v$ on a $d\degres (v) = n-1$.
+\item Le nombre d'arêtes est en $\mathcal{O}\left(|V|^2\right)$.
+\end{itemize}
+\end{rem}
+
+\subsection{Matrices d'adjacences}
+
+\begin{minipage}[t]{.47\linewidth}
+\begin{center}
+\textbf{Avantages}
+\end{center}
+\begin{itemize}
+\item Le test d’adjacence de deux sommets se fait en temps constant.
+\item Dans le cas d’un graphe orienté, obtenir les prédécesseurs n’est pas plus compliqué (ni plus coûteux)
+que d’obtenir les successeurs.
+\item Rajouter ou supprimer une arête (ou un arc) peut se faire en temps constant.
+%\item Il est possible de n’utiliser qu’un bit par coefficient de la matrice : dans le cas d’un graphe dense,
+%une telle représentation est donc très compacte.
+\end{itemize}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{.47\linewidth}
+\begin{center}
+\textbf{Inconvénients}
+\begin{itemize}
+\item Ajouter ou supprimer un sommet nécessite un temps proportionnel à $n^2$.
+\item Pour récupérer les voisins/successeurs d’un noeud, il faut parcourir toute la ligne de la matrice :
+l’opération se fait donc en$\mathcal{O}(n)$\footnote{$\Theta(n)$}, ce qui est regrettable si le degré sortant du noeud est petit devant $n$.
+\item On consomme une mémoire proportionnelle à $|V|^2$, même quand la taille du graphe est de l’ordre de $n$ (graphe creux).
+\end{itemize}
+\end{center}
+\end{minipage}
+
+\subsection{Listes d'adjacences}
+
+\begin{minipage}[t]{.47\linewidth}
+\begin{center}
+\textbf{Avantages}
+\end{center}
+\begin{itemize}
+\item La mémoire utilisée est de l’ordre de $|E| + |V|$, ce qui est nettement mieux que $|V|^2$ si le graphe est
+creux.
+\item On a directement accès à la liste des voisins d’un noeud : la parcourir prend un temps proportionnel
+au degré sortant du noeud.% (et pas à $|V|$).
+\item Ajouter un noeud peut normalement se faire en temps $|V|$ (si l’ajout n’impose pas de renuméroter
+les noeuds déjà présents).
+\end{itemize}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{.47\linewidth}
+\begin{center}
+\textbf{Inconvénients}
+\begin{itemize}
+%\item  Si l’on a besoin d’un accès en temps raisonnable aux prédécesseurs d’un noeud (dans le cas orienté),
+%il faut stocker séparément le tableau de listes correspondant.
+\item Le test d’adjacence ne se fait plus en temps constant (mais en temps proportionnel au degré du
+noeud).
+\item Si le graphe est dense, on consommera plus de mémoire (d’un facteur constant) qu’avec une matrice
+d’adjacence.
+\item Ajouter ou supprimer une arête n’est pas aussi évident que dans une matrice d’adjacence : suivant
+l’opération précise que l’on souhaite faire, la complexité peut être unitaire ou proportionnelle aux
+degrés des noeuds impactés.
+\item  Supprimer un noeud n’est pas pratique : le plus simple est de reconstruire entièrement le graphe (en
+un temps $\mathcal{O}\left(|E| + |V|\right)$).
+\end{itemize}
+\end{center}
+\end{minipage}
+
 \section{Applications}
 
 \subsection{Exemple d'implémentation d'après un sujet de l'XENS 2015}
