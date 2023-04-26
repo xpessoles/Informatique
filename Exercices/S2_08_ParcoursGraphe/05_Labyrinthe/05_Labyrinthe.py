@@ -178,5 +178,59 @@ tracer_graphe(G)
 laby = bfs(G,(0,0))
 tracer_graphe(laby)
 
-labyrinthe = labyrinthe(G,(0,0))
-tracer_graphe(labyrinthe)
+l = labyrinthe(G,(0,0))
+tracer_graphe(l)
+ 
+
+s=(0,0)
+def bfs(G, s):
+    predecesseurs = {}
+    for sommet,voisins in G.items():
+        predecesseurs[sommet] = False
+    file = deque([(s, s)])
+    while len(file) > 0:
+        u, p = file.pop()
+        if predecesseurs[u] == False:
+            predecesseurs[u] = p
+            for v in G[u]:
+                file.appendleft((v, u))
+    return predecesseurs
+
+pred = bfs(l, s)
+v=(9,7)
+def path(pred, s, v):
+    L = []
+    while v != s:
+        L.append(v)
+        v = pred[v]
+    L.append(s)
+    return L[::-1] # inverse le chemin
+
+
+chemin = path(pred, s, v)
+def plot_chemin(G,chemin):
+    # On trace les arrêtes    
+    edges = get_edges(G)
+    for edge in edges : 
+        x = [edge[0][0],edge[1][0]]
+        y = [edge[0][1],edge[1][1]]
+        plt.plot(x,y,'lightcoral')
+    
+    # On trace les sommets
+    les_x,les_y = [],[]
+    for sommet in G.keys() : 
+        les_x.append(sommet[0])
+        les_y.append(sommet[1])
+    plt.plot(les_x,les_y,".",color="royalblue")
+    
+    plt.grid()
+    plt.axis("equal")
+    
+    
+    for i in range(len(chemin)-1):
+        seg_x = [chemin[i][0] , chemin[i+1][0]]
+        seg_y = [chemin[i][1] , chemin[i+1][1]]
+        plt.plot(seg_x,seg_y,"k")
+    plt.show()
+    
+plot_chemin(l,chemin)
