@@ -44,7 +44,7 @@ concrets.
 
 
 \section{Introduction}
-Historiquement, le problème des septs ponts de Königsberg (Kaliningrad) était de déterminer s'il existe une promenade qui partait de n'importe quel quartier et qui y revenait, tout en passant une et une seule fois par chacun des ponts.
+Historiquement, le problème des sept ponts de Königsberg (Kaliningrad) était de déterminer s'il existe une promenade qui partait de n'importe quel quartier et qui y revenait, tout en passant une et une seule fois par chacun des ponts.
 Euler mis en forme le problème et le résolut... en montrant que dans ce cas, il n'existait pas de solution.
 \begin{center}
 \begin{tabular}{cccc}
@@ -331,7 +331,7 @@ G = [[1,5,6],[],[1],[6],[3,5],[],[0,1]]
 \end{exemple}
 
 
-\subsection{Doctionnaire d'adjacence}
+\subsection{Dictionnaire d'adjacence}
 
 Dans la même idée, il est aussi possible d'utiliser des dictionnaires d'adjacence dans lequel les clés sont les sommets (qui peuvent être des entiers ou des chaînes de caractères), et les valeurs sont des listes de voisins ou de successeurs (qui peuvent donc être des listes d'entiers ou de chaînes de caractères).
 
@@ -577,7 +577,7 @@ Soit un graphe $G=\left(V,E\right)$ composé de sommets $V$ et d'arêtes $E$. On
 \end{defi}
 
 \begin{rem}
-On retrouve dans des ouvrages la notation $|V|$ ou $|E|$ correpondant respectivement au nombre de sommets et d'arêtes. 
+On retrouve dans des ouvrages la notation $|V|$ ou $|E|$ correspondant respectivement au nombre de sommets et d'arêtes. 
 Ainsi, si un algorithme est linéaire en la taille du graphe, on pourra utilisé la notation $\mathcal{O}\left(|V|+|E|\right)$.
 \end{rem}
 
@@ -621,7 +621,7 @@ que d’obtenir les successeurs.
 \textbf{Inconvénients}
 \begin{itemize}
 \item Ajouter ou supprimer un sommet nécessite un temps proportionnel à $n^2$.
-\item Pour récupérer les voisins/successeurs d’un noeud, il faut parcourir toute la ligne de la matrice :
+\item Pour récupérer les voisins/successeurs d’un nœud, il faut parcourir toute la ligne de la matrice :
 l’opération se fait donc en$\mathcal{O}(n)$\footnote{$\Theta(n)$}, ce qui est regrettable si le degré sortant du noeud est petit devant $n$.
 \item On consomme une mémoire proportionnelle à $|V|^2$, même quand la taille du graphe est de l’ordre de $n$ (graphe creux).
 \end{itemize}
@@ -651,12 +651,12 @@ les noeuds déjà présents).
 %\item  Si l’on a besoin d’un accès en temps raisonnable aux prédécesseurs d’un noeud (dans le cas orienté),
 %il faut stocker séparément le tableau de listes correspondant.
 \item Le test d’adjacence ne se fait plus en temps constant (mais en temps proportionnel au degré du
-noeud).
+nœud).
 \item Si le graphe est dense, on consommera plus de mémoire (d’un facteur constant) qu’avec une matrice
 d’adjacence.
 \item Ajouter ou supprimer une arête n’est pas aussi évident que dans une matrice d’adjacence : suivant
 l’opération précise que l’on souhaite faire, la complexité peut être unitaire ou proportionnelle aux
-degrés des noeuds impactés.
+degrés des nœuds impactés.
 \item  Supprimer un noeud n’est pas pratique : le plus simple est de reconstruire entièrement le graphe (en
 un temps $\mathcal{O}\left(|E| + |V|\right)$).
 \end{itemize}
@@ -762,17 +762,17 @@ plan1= [[5,4] ,
 \end{center}
 
 
-\question{ \'Ecrire une fonction \texttt{creerPlanSansRoute(n:int)} qui crée, remplit et renvoie le tableau de tableaux correspondant au plan à $n$ villes n'ayant aucune route.}
+\question{ Écrire une fonction \texttt{creerPlanSansRoute(n:int)} qui crée, remplit et renvoie le tableau de tableaux correspondant au plan à $n$ villes n'ayant aucune route.}
 
 
-\question{ \'Ecrire une fonction \texttt{estVoisine(plan,x,y)} qui renvoie \texttt{True} si les villes \texttt{x} et \texttt{y} sont voisines dans le plan codé par le tableau de tableaux \texttt{plan} et renvoie \texttt{False} sinon.}
+\question{ Écrire une fonction \texttt{estVoisine(plan,x,y)} qui renvoie \texttt{True} si les villes \texttt{x} et \texttt{y} sont voisines dans le plan codé par le tableau de tableaux \texttt{plan} et renvoie \texttt{False} sinon.}
 
 
-\question{\'Ecrire une procédure \texttt{ajouteRoute(plan,x,y)} qui modifie le tableau de tableaux plan pour ajouter une route 
+\question{Écrire une procédure \texttt{ajouteRoute(plan,x,y)} qui modifie le tableau de tableaux plan pour ajouter une route 
 entre les villes \texttt{x} et \texttt{y} si elle n'était pas déjà présente et ne fait rien sinon. On prendra garde à bien mettre à jour
 toutes les cases concernées dans le tableau de tableaux plan. Y a-t-il un risque de dépassement de la capacité des listes ?}
 
-\question{\'Ecrire une procédure \texttt{afficheToutesLesRoutes(plan)} qui affiche à l'écran la liste des routes du plan codé par le tableau de tableaux plan
+\question{Écrire une procédure \texttt{afficheToutesLesRoutes(plan)} qui affiche à l'écran la liste des routes du plan codé par le tableau de tableaux plan
 où chaque route n'apparaît qu'une seule fois. Par exemple, pour le graphe codé par le tableau de tableaux de la présentation votre procédure pourra afficher :}
 \begin{lstlisting}
 `Ce plan contient 4 route(s) : (1-2) (2-4) (2-3) (4-5)`
