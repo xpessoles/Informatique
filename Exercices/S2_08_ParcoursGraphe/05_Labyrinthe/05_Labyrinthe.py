@@ -8,7 +8,7 @@ from collections import deque
 import matplotlib.pyplot as plt
 import random
 
-def creer_graphe(n:int, p:int):
+def creer_graphe(n:int, p:int) -> dict:
     # n : lignes
     # p : colonnes
     G = {}
@@ -172,7 +172,8 @@ def labyrinthe(G,s) -> None:
                 
     return laby
 
-l,c = 8,10
+l,c = 2,2
+
 G = creer_graphe(l,c)
 tracer_graphe(G)
 laby = bfs(G,(0,0))
@@ -207,7 +208,7 @@ def path(pred, s, v):
     return L[::-1] # inverse le chemin
 
 
-chemin = path(pred, s, v)
+#chemin = path(pred, s, v)
 def plot_chemin(G,chemin):
     # On trace les arrêtes    
     edges = get_edges(G)
@@ -233,4 +234,10 @@ def plot_chemin(G,chemin):
         plt.plot(seg_x,seg_y,"k")
     plt.show()
     
-plot_chemin(l,chemin)
+#plot_chemin(l,chemin)
+
+G = {}
+def foo(G):
+    G[(2,2)]='edddfs'
+foo(G)
+print(G)

@@ -11,27 +11,29 @@
 
 Soit une grille rectangulaire $n\times p$ constituée de $n$ colonnes et de $p$ lignes contenant toutes les arêtes possibles. On modélise cette grille par un graphe dont l'ensemble des sommets est donné par les couples $(i,j)$ tels que $i\in\llbracket 0,n \llbracket $ et $j\in\llbracket 0,p \llbracket $. Les voisins d'un sommet $(i,j)$ sont ceux situés en haut, en bas, à droite et à gauche s'ils existent (par exemple, le sommet $(0,0)$ a comme voisin les sommets $(0,1)$ et $(1,0)$).
 
+
+
 \begin{center}
 \includegraphics[width=12cm]{fig_01}
 \captionof{figure}{Grille (5,3) et grille (2,2)}
 \end{center}
 
-Le graphe est implémenté par un dictionnaire d'adjacence ou les clés sont les tuples, coordonnées d'un sommet. La valeur associée est une liste des sommet voisins. 
+Le graphe est implémenté par un dictionnaire d'adjacence où les clés sont les tuples, coordonnées d'un sommet. La valeur associée est une liste des sommets voisins. 
 
 
 Ainsi, la grille $ 2 \times 2$ sera modélisée par le graphe suivant :
 
 \noindent\cde{G2 = \{(0,0):[(0,1),(1,0)], (0,1):[(0,0),(1,1)], (1,0):[(0,0),(1,1)], (1,1):[(0,1),(1,0)]\}}.
 
-\question{Écrire la fonction \cde{creer\_graphe(n:int, p:int) -> \{\}} permettant de créer une grille de \cde{n} colonnes et \cde{p} lignes. }
+\question{Écrire la fonction \cde{creer\_graphe(n:int, p:int) -> dict} permettant de créer le graphe d'une grille de \cde{n} colonnes et \cde{p} lignes.}
 
-On souhaite afficher ce graphe en utilisant \cde{matplotlib}. Pour cela, on va commencer par tracer chacune des arrêtes puis chacun des sommets. 
+On souhaite afficher ce graphe en utilisant \cde{matplotlib}. Pour cela, on va commencer par tracer chacune des arêtes puis chacun des sommets. 
 
-\question{Écrire la fonction \cde{get\_sommets(G:dict) -> list,list} renvoyant deux listes \cde{les\_x} et \cde{les\_y} contenant respectivement les abscisses des sommets et les ordonnées des sommets.}
+\question{Écrire la fonction \cde{get\_sommets(G:dict) -> (list,list)} renvoyant deux listes \cde{les\_x} et \cde{les\_y} contenant respectivement les abscisses des sommets et les ordonnées des sommets.}
 
 \question{Écrire la fonction \cde{trace\_sommets(G:dict) -> None} qui affiche les sommets en utilisant un point rouge (\cde{`r.`}) ou cercle rouge (\cde{`ro`}).}
 
-\question{Écrire la fonction \cde{get\_aretes(G:dict) -> list} renvoyant la liste des arêtes du graphe sous la forme d'une liste de listes de tuples. Une arête et donc une liste de sommets ou les sommets sont des tuples. Les arêtes ne devront être présentes qu'une fois. }
+\question{Écrire la fonction \cde{get\_aretes(G:dict) -> list} renvoyant la liste des arêtes du graphe sous la forme d'une liste de listes de tuples. Une arête est donc une liste de sommets où les sommets sont des tuples. Les arêtes ne devront être présentes qu'une fois. }
 
 Par exemple : \cde{get\_aretes(G2)} peut renvoyer la liste suivante : 
 
@@ -50,10 +52,14 @@ Par exemple : \cde{get\_aretes(G2)} peut renvoyer la liste suivante :
 \subsection*{Génération d'un labyrinthe}
 
 Dans notre cas, résoudre le labyrinthe consiste en partir du sommet (0,0) (sommet en bas à gauche) et à se déplacer sur les arêtes dans le but d'atteindre le sommet en haut à droite. 
-Pour générer un labyrinthe, nous allons réalisé un parcours de la grille (en largeur ou en profondeur). Le labyrinthe sera lui-même un graphe. Lors de ce parcours, à chaque fois qu'un sommet devra être visité. Ainsi à chaque fois qu'on découvrira un sommet à visiter, on ajoutera une arête entre le sommet père et ses voisins (s'ils ne sont pas dans le labyrinthe). 
+Pour générer un labyrinthe, nous allons réalisé un parcours de la grille \cde{G} (en largeur ou en profondeur). Le labyrinthe sera lui-même un graphe noté \cde{L}. À chaque fois qu'on découvrira un sommet à visiter, on ajoutera une arête entre le sommet père et ses voisins (s'ils ne sont pas dans le labyrinthe). 
+
+\textbf{A REFORMULER}
 
 
 \question{Écrire la fonction \cde{ajouter\_arete(G:dict, s1:tuple, s2: tuple) -> None} qui permet d'ajouter l'arête \cde([s1,s2]) au graphe \cde{G}. Il faudra vérifier que les sommets n'existent pas déjà...}
+
+\textbf{Donner un exemple}
 
 \question{Écrire la fonction \cde{parcours\_largeur(G:dict, s:tuple) -> dict} qui permet de créer un labyrinthe en largeur à partir d'un graphe \cde{G}. Tracer le labyrinthe obtenu.}
 
@@ -78,9 +84,9 @@ Il est possible de mélanger une liste en utilisant le module \cde{random} : \cd
 
 \subsection*{Résolution d'un labyrinthe}
 
-Il est possible de résoudre le labyrinthe en utilisant un parcours en longueur ou un parcours en profondeur. 
+Il est possible de résoudre le labyrinthe en utilisant un parcours en largeur ou un parcours en profondeur. 
 
-\question{Écrire les fonctions \cde{resolution\_largeur(G:dict, s:tuple) -> list} qui permet de résoudre le labyrinthe en utilisant un parcours en largeur. Cette fonction renvoie la liste des sommets permettant d'atteindre le sommet en haut à droite depuis le sommet en bas à gauche.}
+\question{Écrire la fonction \cde{resolution\_largeur(G:dict, s:tuple) -> list} qui permet de résoudre le labyrinthe en utilisant un parcours en largeur. Cette fonction renvoie la liste des sommets permettant d'atteindre le sommet en haut à droite depuis le sommet en bas à gauche.}
 
 \question{Afficher en trait épais noir la solution donnée par le parcours en largeur.}
 
