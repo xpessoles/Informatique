@@ -49,14 +49,14 @@ Par exemple : \cde{get\_aretes(G2)} peut renvoyer la liste suivante :
 \captionof{figure}{Grille 10 colonnes 8 lignes}
 \end{center}
 
-\end{document}
+
 
 \subsection*{Génération d'un labyrinthe}
 
-Dans notre cas, résoudre le labyrinthe consiste en partir du sommet (0,0) (sommet en bas à gauche) et à se déplacer sur les arêtes dans le but d'atteindre le sommet en haut à droite. 
-Pour générer un labyrinthe, nous allons réalisé un parcours de la grille \cde{G} (en largeur ou en profondeur). Le labyrinthe sera lui-même un graphe noté \cde{L}. À chaque fois qu'on découvrira un sommet à visiter, on ajoutera une arête entre le sommet père et ses voisins (s'ils ne sont pas dans le labyrinthe). 
+Dans notre cas, résoudre le labyrinthe consiste en partir du sommet \cde{(0,0)} (sommet en bas à gauche) et à se déplacer sur les arêtes dans le but d'atteindre le sommet en haut à droite. 
+Pour générer un labyrinthe, nous allons réalisé un parcours de la grille \cde{G} (en largeur ou en profondeur). Le labyrinthe sera lui-même un graphe noté \cde{L}. À chaque fois qu'on \textbf{empilera ou enfilera} un \textbf{sommet non visité}, on ajoutera une arête entre entre ce sommet et le sommet père à \cde{L}. 
 
-\textbf{A REFORMULER}
+
 
 
 \question{Écrire la fonction \cde{ajouter\_arete(G:dict, s1:tuple, s2: tuple) -> None} qui permet d'ajouter l'arête \cde([s1,s2]) au graphe \cde{G}. Il faudra vérifier que les sommets n'existent pas déjà...}

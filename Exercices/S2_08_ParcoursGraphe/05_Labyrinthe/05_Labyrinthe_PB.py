@@ -58,14 +58,22 @@ def trace_aretes(G:dict)->None:
     for a in A:
         plt.plot([a[0][1],a[1][1]],[a[0][0],a[1][0]],'b')
         plt.axis('equal')
-        plt.show()
+    plt.show()
 
 
 ### question 6
 def trace_graphe(G:dict)->None:
     plt.figure()
-    trace_aretes(G)
-    trace_sommets(G)
+    A=get_aretes(G)
+    for a in A:
+        plt.plot([a[0][1],a[1][1]],[a[0][0],a[1][0]],'b')
+        plt.axis('equal')
+    les_x,les_y=get_sommets(G)
+    plt.plot(les_x,les_y,'ro')
+    plt.axis('equal')
+    plt.show()  
+    #trace_aretes(G)
+    #trace_sommets(G)
 
 ### generation du labyrinthe
 ### question 7
@@ -232,7 +240,7 @@ def arbre_profondeur3(G:dict, s1:tuple)->dict:
             pile.append(s) # on remet le sommet dans la pile tant que tous les voisins n'ont pas été vus
         c=0
         i=0
-        random.shuffle(G[s])
+        #random.shuffle(G[s])
         while c==0 and i<len(G[s]):
             if not visited[G[s][i]]: # on ne cherche qu'un seul voisin
                 c=1

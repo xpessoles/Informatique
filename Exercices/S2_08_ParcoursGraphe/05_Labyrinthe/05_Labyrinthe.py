@@ -8,7 +8,7 @@ from collections import deque
 import matplotlib.pyplot as plt
 import random
 
-def creer_graphe(n:int, p:int) -> dict:
+def creer_graphe(p:int, n:int) -> dict:
     # n : lignes
     # p : colonnes
     G = {}
@@ -38,7 +38,6 @@ def get_edges(G):
                 if (v,sommet) not in edges : 
                     edges.append(edge)
     return edges
-    
 
 def tracer_graphe(G) :
     # On trace les arrêtes    
@@ -59,8 +58,6 @@ def tracer_graphe(G) :
     plt.axis("equal")
     plt.show()
     
-
-
 
 def ajouter_arete(G,s1,s2):
     
@@ -125,23 +122,37 @@ def dfs(G,s) -> None:
         visited[sommet] = False
     # Le premier sommet à visiter entre dans la file
     pile = deque([s])
+    tete = s
     while len(pile) > 0:
+        print(pile,tete)
         # On visite la tête de file
         tete = pile.pop()
         # On vérifier qu'elle n'a pas été visitée
         if not visited[tete]:
+            #print(tete,pile)
+            #print(laby)
             # Si on l'avait pas visité, maintenant c'est le cas :)
             visited[tete] = True
             # On met les voisins de tete dans la file
             voisins = G[tete]
             #random.shuffle(voisins)
             for v in voisins:
-                pile.append(v)
+                if visited[v] == False :
+                    pile.append(v)
                 if v not in laby :
+                    print(tete,v)
                     ajouter_arete(laby, tete, v)
         
                 
     return laby
+
+
+G = creer_graphe(3, 3)
+tracer_graphe(G)
+Ll = bfs(G,(0,0))
+tracer_graphe(Ll)
+Lp = dfs(G,(0,0))
+tracer_graphe(Lp)
 
 def labyrinthe(G,s) -> None:
     """
@@ -172,17 +183,17 @@ def labyrinthe(G,s) -> None:
                 
     return laby
 
-l,c = 10,10
-s=(0,0)
+# l,c = 10,10
+# s=(0,0)
 
 
-G = creer_graphe(l,c)
-tracer_graphe(G)
-laby = bfs(G,(0,0))
-tracer_graphe(laby)
-v=(l-1,c-1)
-l = labyrinthe(G,(0,0))
-tracer_graphe(l)
+# G = creer_graphe(l,c)
+# tracer_graphe(G)
+# laby = bfs(G,(0,0))
+# tracer_graphe(laby)
+# v=(l-1,c-1)
+# l = labyrinthe(G,(0,0))
+# tracer_graphe(l)
  
 
 def bfs(G, s):
@@ -198,7 +209,7 @@ def bfs(G, s):
                 file.appendleft((v, u))
     return predecesseurs
 
-pred = bfs(l, s)
+#pred = bfs(l, s)
 
 def path(pred, s, v):
     L = []
@@ -209,7 +220,7 @@ def path(pred, s, v):
     return L[::-1] # inverse le chemin
 
 
-chemin = path(pred, s, v)
+#chemin = path(pred, s, v)
 def plot_chemin(G,chemin):
     # On trace les arrêtes    
     edges = get_edges(G)
@@ -235,5 +246,5 @@ def plot_chemin(G,chemin):
         plt.plot(seg_x,seg_y,"k")
     plt.show()
     
-plot_chemin(l,chemin)
+#plot_chemin(l,chemin)
 
