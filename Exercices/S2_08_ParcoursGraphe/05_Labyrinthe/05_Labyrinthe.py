@@ -172,18 +172,19 @@ def labyrinthe(G,s) -> None:
                 
     return laby
 
-l,c = 2,2
+l,c = 10,10
+s=(0,0)
+
 
 G = creer_graphe(l,c)
 tracer_graphe(G)
 laby = bfs(G,(0,0))
 tracer_graphe(laby)
-
+v=(l-1,c-1)
 l = labyrinthe(G,(0,0))
 tracer_graphe(l)
  
 
-s=(0,0)
 def bfs(G, s):
     predecesseurs = {}
     for sommet,voisins in G.items():
@@ -198,7 +199,7 @@ def bfs(G, s):
     return predecesseurs
 
 pred = bfs(l, s)
-v=(9,7)
+
 def path(pred, s, v):
     L = []
     while v != s:
@@ -208,7 +209,7 @@ def path(pred, s, v):
     return L[::-1] # inverse le chemin
 
 
-#chemin = path(pred, s, v)
+chemin = path(pred, s, v)
 def plot_chemin(G,chemin):
     # On trace les arrêtes    
     edges = get_edges(G)
@@ -234,10 +235,5 @@ def plot_chemin(G,chemin):
         plt.plot(seg_x,seg_y,"k")
     plt.show()
     
-#plot_chemin(l,chemin)
+plot_chemin(l,chemin)
 
-G = {}
-def foo(G):
-    G[(2,2)]='edddfs'
-foo(G)
-print(G)
