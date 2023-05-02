@@ -8,6 +8,7 @@ from collections import deque
 import matplotlib.pyplot as plt
 import random
 
+## Question 1 ##
 def creer_graphe(p:int, n:int) -> dict:
     # n : lignes
     # p : colonnes
@@ -27,9 +28,19 @@ def creer_graphe(p:int, n:int) -> dict:
                 vv.append(v)
         G[sommet]=vv
     return G
+
+## Question 2 ##
+def get_sommets(G:{}) -> ([],[]):
+    # On trace les sommets
+    les_x,les_y = [],[]
+    for sommet in G.keys() : 
+        les_x.append(sommet[0])
+        les_y.append(sommet[1])
+    return les_x,les_y
                 
-    
-def get_edges(G):
+
+## Question 4 ##
+def get_aretes(G):
     edges = []
     for sommet,voisins in G.items():
         for v in voisins : 
@@ -39,9 +50,11 @@ def get_edges(G):
                     edges.append(edge)
     return edges
 
+
+## Question 6 ##
 def tracer_graphe(G) :
     # On trace les arrêtes    
-    edges = get_edges(G)
+    edges = get_aretes(G)
     for edge in edges : 
         x = [edge[0][0],edge[1][0]]
         y = [edge[0][1],edge[1][1]]
@@ -58,9 +71,8 @@ def tracer_graphe(G) :
     plt.axis("equal")
     plt.show()
     
-
+## Question 7 ##
 def ajouter_arete(G,s1,s2):
-    
     # s1 et s2 ne sont pas dans G
     if (s1 not in G) and (s2 not in G) :     
         G[s1]=[s2]
@@ -79,137 +91,146 @@ def ajouter_arete(G,s1,s2):
         G[s2].append(s1)
         G[s1].append(s2)
         
-# Parcours de graphe en largeur
-def bfs(G,s) -> None:
-    """
-    G : graphe sous forme de dictionnaire d'adjacence
-    s : sommet du graphe (Chaine de caractere du type "S1").
-    """
-    laby = {}
-    visited = {}
-    for sommet,voisins in G.items():
-        visited[sommet] = False
-    # Le premier sommet à visiter entre dans la file
-    file = deque([s])
+
+## Question 8 ##
+def parcours_largeur(G) :
+    labyrinthe = {}
+    predecesseurs = {}
+    
+    for sommet in G.keys():
+        predecesseurs[sommet] = False
+    
+    depart = (0,0)
+    
+    file = deque([(depart,depart)])
+    
     while len(file) > 0:
-        # On visite la tête de file
-        tete = file.pop()
-        # On vérifier qu'elle n'a pas été visitée
-        if not visited[tete]:
-            # Si on l'avait pas visité, maintenant c'est le cas :)
-            visited[tete] = True
-            # On met les voisins de tete dans la file
-            voisins = G[tete]
+        s1,s2 = file.pop()
+        if predecesseurs[s1] == False:
+            predecesseurs[s1] = s2
+            voisins = G[s1]
+            for v in voisins:
+                file.appendleft((v,s1))
+            ajouter_arete(labyrinthe, s1, s2)        
+    return labyrinthe
+    
+   
+# G = creer_graphe(10, 8)
+# tracer_graphe(G)
+# L = parcours_largeur(G)
+# tracer_graphe(L)
+
+## Question 9 ##
+def parcours_profondeur(G) :
+    labyrinthe = {}
+    predecesseurs = {}
+    
+    for sommet in G.keys():
+        predecesseurs[sommet] = False
+    
+    depart = (0,0)
+    
+    pile = deque([(depart,depart)])
+    
+    while len(pile) > 0:
+        s1,s2 = pile.pop()
+        if predecesseurs[s1] == False:
+            predecesseurs[s1] = s2
+            voisins = G[s1]
             #random.shuffle(voisins)
             for v in voisins:
-                file.appendleft(v)
-                if v not in laby :
-                    ajouter_arete(laby, tete, v)
-        
-                
-    return laby
+                pile.append((v,s1))
+            ajouter_arete(labyrinthe, s1, s2)        
+    return labyrinthe
+    
+   
+# G = creer_graphe(10, 8)
+# tracer_graphe(G)
+# L = parcours_profondeur(G)
+# tracer_graphe(L)
 
-
-# Parcours de graphe en profondeur
-def dfs(G,s) -> None:
-    """
-    G : graphe sous forme de dictionnaire d'adjacence
-    s : sommet du graphe (Chaine de caractere du type "S1").
-    """
-    laby = {}
-    visited = {}
-    for sommet,voisins in G.items():
-        visited[sommet] = False
-    # Le premier sommet à visiter entre dans la file
-    pile = deque([s])
-    tete = s
-    while len(pile) > 0:
-        print(pile,tete)
-        # On visite la tête de file
-        tete = pile.pop()
-        # On vérifier qu'elle n'a pas été visitée
-        if not visited[tete]:
-            #print(tete,pile)
-            #print(laby)
-            # Si on l'avait pas visité, maintenant c'est le cas :)
-            visited[tete] = True
-            # On met les voisins de tete dans la file
-            voisins = G[tete]
-            #random.shuffle(voisins)
-            for v in voisins:
-                if visited[v] == False :
-                    pile.append(v)
-                if v not in laby :
-                    print(tete,v)
-                    ajouter_arete(laby, tete, v)
-        
-                
-    return laby
-
-
-G = creer_graphe(3, 3)
-tracer_graphe(G)
-Ll = bfs(G,(0,0))
-tracer_graphe(Ll)
-Lp = dfs(G,(0,0))
-tracer_graphe(Lp)
-
-def labyrinthe(G,s) -> None:
-    """
-    G : graphe sous forme de dictionnaire d'adjacence
-    s : sommet du graphe (Chaine de caractere du type "S1").
-    """
-    laby = {}
-    visited = {}
-    for sommet,voisins in G.items():
-        visited[sommet] = False
-    # Le premier sommet à visiter entre dans la file
-    pile = deque([s])
-    while len(pile) > 0:
-        # On visite la tête de file
-        tete = pile.pop()
-        # On vérifier qu'elle n'a pas été visitée
-        if not visited[tete]:
-            # Si on l'avait pas visité, maintenant c'est le cas :)
-            visited[tete] = True
-            # On met les voisins de tete dans la file
-            voisins = G[tete]
+## Question 10 ##
+def labyrinthe_largeur(G) :
+    labyrinthe = {}
+    predecesseurs = {}
+    
+    for sommet in G.keys():
+        predecesseurs[sommet] = False
+    
+    depart = (0,0)
+    
+    file = deque([(depart,depart)])
+    
+    while len(file) > 0:
+        s1,s2 = file.pop()
+        if predecesseurs[s1] == False:
+            predecesseurs[s1] = s2
+            voisins = G[s1]
             random.shuffle(voisins)
             for v in voisins:
-                pile.append(v)
-                if v not in laby :
-                    ajouter_arete(laby, tete, v)
-        
-                
-    return laby
-
-# l,c = 10,10
-# s=(0,0)
-
-
-# G = creer_graphe(l,c)
+                file.appendleft((v,s1))
+            ajouter_arete(labyrinthe, s1, s2)        
+    return labyrinthe
+    
+   
+# G = creer_graphe(10, 8)
 # tracer_graphe(G)
-# laby = bfs(G,(0,0))
-# tracer_graphe(laby)
-# v=(l-1,c-1)
-# l = labyrinthe(G,(0,0))
-# tracer_graphe(l)
- 
+# L = labyrinthe_largeur(G)
+# tracer_graphe(L)
 
-def bfs(G, s):
+
+def labyrinthe_profondeur(G) :
+    labyrinthe = {}
     predecesseurs = {}
-    for sommet,voisins in G.items():
+    
+    for sommet in G.keys():
         predecesseurs[sommet] = False
-    file = deque([(s, s)])
+    
+    depart = (0,0)
+    
+    pile = deque([(depart,depart)])
+    
+    while len(pile) > 0:
+        s1,s2 = pile.pop()
+        if predecesseurs[s1] == False:
+            predecesseurs[s1] = s2
+            voisins = G[s1]
+            random.shuffle(voisins)
+            for v in voisins:
+                pile.append((v,s1))
+            ajouter_arete(labyrinthe, s1, s2)        
+    return labyrinthe
+    
+   
+# G = creer_graphe(10, 8)
+# tracer_graphe(G)
+# L = labyrinthe_profondeur(G)
+# tracer_graphe(L)
+
+
+## Question 11 ##
+def resolution_largeur(G) :
+    labyrinthe = {}
+    predecesseurs = {}
+    
+    for sommet in G.keys():
+        predecesseurs[sommet] = False
+    
+    depart = (0,0)
+    
+    file = deque([(depart,depart)])
+    
     while len(file) > 0:
-        u, p = file.pop()
-        if predecesseurs[u] == False:
-            predecesseurs[u] = p
-            for v in G[u]:
-                file.appendleft((v, u))
+        s1,s2 = file.pop()
+        if predecesseurs[s1] == False:
+            predecesseurs[s1] = s2
+            voisins = G[s1]
+            #random.shuffle(voisins)
+            for v in voisins:
+                file.appendleft((v,s1))
+            ajouter_arete(labyrinthe, s1, s2)        
     return predecesseurs
 
-#pred = bfs(l, s)
 
 def path(pred, s, v):
     L = []
@@ -223,7 +244,7 @@ def path(pred, s, v):
 #chemin = path(pred, s, v)
 def plot_chemin(G,chemin):
     # On trace les arrêtes    
-    edges = get_edges(G)
+    edges = get_aretes(G)
     for edge in edges : 
         x = [edge[0][0],edge[1][0]]
         y = [edge[0][1],edge[1][1]]
@@ -246,5 +267,12 @@ def plot_chemin(G,chemin):
         plt.plot(seg_x,seg_y,"k")
     plt.show()
     
-#plot_chemin(l,chemin)
+G = creer_graphe(10, 8)
+L = labyrinthe_profondeur(G)
+
+chemin_inv = resolution_largeur(L)
+chemin = path(chemin_inv,(0,0),(9,7))
+tracer_graphe(L)
+plot_chemin(L, chemin)
+
 

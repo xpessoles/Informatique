@@ -21,23 +21,46 @@ Soit une grille rectangulaire $n\times p$ constituée de $n$ colonnes et de $p$ 
 Le graphe est implémenté par un dictionnaire d'adjacence où les clés sont les tuples, coordonnées d'un sommet. La valeur associée est une liste des sommets voisins. 
 
 
-Ainsi, la grille $ 2 \times 2$ sera modélisée par le graphe suivant :
-
-\noindent\cde{G2 = \{(0,0):[(0,1),(1,0)], (0,1):[(0,0),(1,1)], (1,0):[(0,0),(1,1)], (1,1):[(0,1),(1,0)]\}}.
 
 \question{Écrire la fonction \cde{creer\_graphe(n:int, p:int) -> dict} permettant de créer le graphe d'une grille de \cde{n} colonnes et \cde{p} lignes.}
+\begin{exemple}
+La grille $ 2 \times 2$ sera modélisée par le graphe suivant :
+
+\begin{lstlisting}
+>>> G2 =  creer_graphe(2,2)
+>>> G2
+        {(0, 0): [(1, 0), (0, 1)],
+        (1, 0): [(1, 1), (0, 0)],
+        (0, 1): [(1, 1), (0, 0)],
+        (1, 1): [(0, 1), (1, 0)]}
+\end{lstlisting}
+\end{exemple}
 
 On souhaite afficher ce graphe en utilisant \cde{matplotlib}. Pour cela, on va commencer par tracer chacune des arêtes puis chacun des sommets. 
 
 \question{Écrire la fonction \cde{get\_sommets(G:dict) -> (list,list)} renvoyant deux listes \cde{les\_x} et \cde{les\_y} contenant respectivement les abscisses des sommets et les ordonnées des sommets.}
+\begin{exemple}
+Dans l'exemple qui suit, les coordonnées de sommets peuvent être dans un ordre différent. 
+\begin{lstlisting}
+>>> les_sx, les_sy = get_sommets(G2)
+>>> les_sx, les_sy
+        ([0, 1, 0, 1], [0, 0, 1, 1])
+\end{lstlisting}
+\end{exemple}
+
 
 \question{Écrire la fonction \cde{trace\_sommets(G:dict) -> None} qui affiche les sommets en utilisant un point rouge (\cde{`r.`}) ou cercle rouge (\cde{`ro`}).}
 
-\question{Écrire la fonction \cde{get\_aretes(G:dict) -> list} renvoyant la liste des arêtes du graphe sous la forme d'une liste de listes de tuples. Une arête est donc une liste de sommets où les sommets sont des tuples. Les arêtes ne devront être présentes qu'une fois. }
+\question{Écrire la fonction \cde{get\_aretes(G:dict) -> []} renvoyant la liste des arêtes du graphe sous la forme d'une liste de listes de tuples. Une arête est donc une liste de sommets où les sommets sont des tuples. Les arêtes ne devront être présentes qu'une fois. }
 
-Par exemple : \cde{get\_aretes(G2)} peut renvoyer la liste suivante : 
+\begin{exemple}
+Dans l'exemple qui suit, l'ordre des arêtes peut être dans un ordre différent. Pour une arête donnée, les sommets peuvent aussi être dans un ordre différent.
+\begin{lstlisting}
+>>> get_aretes(G2)
+        [((0, 0), (1, 0)), ((0, 0), (0, 1)), ((1, 0), (1, 1)), ((0, 1), (1, 1))]
+\end{lstlisting}
+\end{exemple}
 
-\cde{[[(0,0),(0,1)],[(0,0),(1,1)],[(0,1),(1,1)],[(1,0),(1,1)]]} (l'ordre des arêtes et des sommets peut être complètement différent).
 
 \question{Écrire la fonction \cde{trace\_aretes(G:dict) -> None} qui affiche les arêtes en utilisant un trait bleu. Exemple : pour tracer l'arête [(0,2),(1,2)], il faut utiliser l'instruction \cde{plt.plot([0,1],[2,2],'b')}.}
 
@@ -59,9 +82,20 @@ Pour générer un labyrinthe, nous allons réalisé un parcours de la grille \cd
 
 
 
-\question{Écrire la fonction \cde{ajouter\_arete(G:dict, s1:tuple, s2: tuple) -> None} qui permet d'ajouter l'arête \cde([s1,s2]) au graphe \cde{G}. Il faudra vérifier que les sommets n'existent pas déjà...}
+\question{Écrire la fonction \cde{ajouter\_arete(G:dict, s1:tuple, s2: tuple) -> None} qui permet d'ajouter l'arête \cde{([s1,s2])} au graphe \cde{G}. Il faudra vérifier que les sommets n'existent pas déjà...}
+\begin{exemple}
+On reprend le graphe noté \cde{G2} précédemment. 
+\begin{lstlisting}
+>>> ajouter_arete(G2,(1,0),(2,0))
+>>> G2
+        {(0, 0): [(1, 0), (0, 1)],
+        (1, 0): [(1, 1), (0, 0), (2, 0)],
+        (0, 1): [(1, 1), (0, 0)],
+        (1, 1): [(0, 1), (1, 0)],
+        (2, 0): [(1, 0)]}
+\end{lstlisting}
+\end{exemple}
 
-\textbf{Donner un exemple}
 
 \question{Écrire la fonction \cde{parcours\_largeur(G:dict, s:tuple) -> dict} qui permet de créer un labyrinthe en largeur à partir d'un graphe \cde{G}. Tracer le labyrinthe obtenu.}
 
@@ -93,3 +127,8 @@ Il est possible de résoudre le labyrinthe en utilisant un parcours en largeur o
 \question{Afficher en trait épais noir la solution donnée par le parcours en largeur.}
 
 \question{Répondre aux mêmes questions en utilisant un parcours en profondeur.}
+
+\begin{center}
+\includegraphics[width=6cm]{solution.png}
+\captionof{figure}{Solution d'un labyrinthe}
+\end{center}

@@ -1,6 +1,6 @@
 %\exer{Application: déplacement d'un cavalier sur un échiquier}
 \vspace{-0.5cm}
-\section*{Exercice 3 - Déplacement d'un cavalier sur un échiquier}
+\section*{Déplacement d'un cavalier sur un échiquier}
 
 
 Un cavalier se déplace, lorsque c'est possible, de 2 cases dans une direction verticale ou horizontale, et de 1 case dans l'autre direction (le trajet dessine une figure en L).
@@ -35,9 +35,9 @@ Tous ces résultats sont à l'ordre près.
 
 Le codage des cases d'échiquier se fait classiquement par une chaine de caractères comprenant~: une lettre minuscule pour l'abscisse (de \texttt{a} à \texttt{h}) et un chiffre pour l'ordonnée (de \texttt{1} à \texttt{8}). La case en bas à gauche de l'échiquier est donc de code \texttt{'a1'}.
 
-\begin{remarque}
+\begin{rem}
 	\texttt{ord(c)} retourne le codage Unicode correspondant au caractère \texttt{c} et \texttt{chr(n)} renvoie le caractère dont le codage Unicode est \texttt{n}. 
-\end{remarque} 
+\end{rem} 
 
 \question{\'Ecrire une fonction \texttt{codage(i:int, j:int)->str} qui renvoie le code correspondant à la case \texttt{(i, j)}. }
 
@@ -47,7 +47,7 @@ Le codage des cases d'échiquier se fait classiquement par une chaine de caract�
 
 \begin{figure}[h]
 	\begin{center}
-		\includegraphics[width=0.7\linewidth]{MouvementsCavalier/Graphe_final}
+		\includegraphics[width=0.7\linewidth]{Graphe_final}
 	\end{center}
 	\caption{Représentation graphique du graphe \texttt{G2}}
 \end{figure}
@@ -60,9 +60,23 @@ Le codage des cases d'échiquier se fait classiquement par une chaine de caract�
 \end{itemize}
 Tous ces résultats sont à l'ordre près. }
 
+\question{Écrire une fonction \cde{largeur\_dist(G:dict, dep:tuple)->dict:} qui prend en entrée un graphe
+codé par un dictionnaire d’adjacence \cde{G} et un sommet de départ dep et renvoie un dictionnaire de distance à
+partir du sommet \cde{dep}. Pour ce faire, vous vous inspirerez du parcours en largeur fourni. Si un sommet n’est
+pas atteignable depuis le depuis \cde{dep}, la valeur associée doit être de \cde{-1}.}
+
+\question{Vérifier que vous obtenez le même résultat que sur la figure suivante en affichant les différentes valeurs de
+distance depuis \cde{dep = (0, 0)} et \cde{dep = (4, 3)}. La fonction print peut ne pas revenir à la ligne si on précise un argument optionnel end différent de \cde{\\n}.}
 
 
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[width=0.45\linewidth]{distance_0_0}
+\hfill
+		\includegraphics[width=0.45\linewidth]{distance_4_3}
+	\end{center}
+	\caption{Distances depuis \texttt{(0, 0)} et \texttt{(4, 3)}}
+\end{figure}
 
 
-
-
+\question{Pourquoi le parcours en profondeur n’est pas adapté à la résolution de ce problème ?}
