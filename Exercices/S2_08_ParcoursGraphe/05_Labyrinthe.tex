@@ -82,7 +82,7 @@ Pour générer un labyrinthe, nous allons réalisé un parcours de la grille \cd
 
 
 
-\question{Écrire la fonction \cde{ajouter\_arete(G:dict, s1:tuple, s2: tuple) -> None} qui permet d'ajouter l'arête \cde{([s1,s2])} au graphe \cde{G}. Il faudra vérifier que les sommets n'existent pas déjà...}
+\question{Écrire la fonction \cde{ajouter\_arete(G:dict, s1:tuple, s2: tuple) -> None} qui permet d'ajouter l'arête \cde{([s1,s2])} au graphe \cde{G}. \textbf{On ajoutera cette arête uniquement si le sommet d'arrivée n'existe pas dans le graphe}. }
 \begin{exemple}
 On reprend le graphe noté \cde{G2} précédemment. 
 \begin{lstlisting}
@@ -97,7 +97,7 @@ On reprend le graphe noté \cde{G2} précédemment.
 \end{exemple}
 
 
-\question{Écrire la fonction \cde{parcours\_largeur(G:dict, s:tuple) -> dict} qui permet de créer un labyrinthe en largeur à partir d'un graphe \cde{G}. Tracer le labyrinthe obtenu.}
+\question{Écrire la fonction \cde{parcours\_largeur(G:dict, depart:tuple) -> dict} qui permet de créer un labyrinthe en largeur à partir d'un graphe \cde{G}. Tracer le labyrinthe obtenu. \cde{s} sera ici le point de départ du labyrinthe,\cde{(0,0)} par exemple.}
 
 \question{Écrire la fonction \cde{parcours\_profondeur(G:dict, s:tuple) -> dict} qui permet de créer un labyrinthe en profondeur à partir d'un graphe \cde{G}. Tracer le labyrinthe obtenu.}
 

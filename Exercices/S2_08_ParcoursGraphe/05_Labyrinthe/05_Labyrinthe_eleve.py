@@ -98,3 +98,33 @@ def tracer_graphe(G) :
 ## TEST ##
 G = creer_graphe(10,8)
 tracer_graphe(G)
+
+
+### PARCOURS ###
+def parcours_largeur(G,depart) :
+    visited = {}    
+    for sommet in G.keys():
+        visited[sommet] = False
+    file = deque([depart])
+    while len(file) > 0:
+        s = file.pop()
+        if visited[s] == False:
+            visited[s] = True
+            voisins = G[s]
+            for v in voisins:
+                file.appendleft(v)
+
+
+def parcours_profondeur(G,depart) :
+    visited = {}    
+    for sommet in G.keys():
+        visited[sommet] = False
+    pile = deque([depart])
+    
+    while len(pile) > 0:
+        s = pile.pop()
+        if visited[s] == False:
+            visited[s] = True
+            voisins = G[s]
+            for v in voisins:
+                pile.append(v)

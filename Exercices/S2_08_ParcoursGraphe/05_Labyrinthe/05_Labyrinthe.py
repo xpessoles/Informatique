@@ -93,14 +93,12 @@ def ajouter_arete(G,s1,s2):
         
 
 ## Question 8 ##
-def parcours_largeur(G) :
+def parcours_largeur(G,depart) :
     labyrinthe = {}
     predecesseurs = {}
     
     for sommet in G.keys():
         predecesseurs[sommet] = False
-    
-    depart = (0,0)
     
     file = deque([(depart,depart)])
     
@@ -121,14 +119,12 @@ def parcours_largeur(G) :
 # tracer_graphe(L)
 
 ## Question 9 ##
-def parcours_profondeur(G) :
+def parcours_profondeur(G,depart) :
     labyrinthe = {}
     predecesseurs = {}
     
     for sommet in G.keys():
         predecesseurs[sommet] = False
-    
-    depart = (0,0)
     
     pile = deque([(depart,depart)])
     
