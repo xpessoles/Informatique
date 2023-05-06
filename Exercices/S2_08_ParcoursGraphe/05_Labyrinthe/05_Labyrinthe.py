@@ -21,6 +21,7 @@ def creer_graphe(p:int, n:int) -> dict:
     for sommet in sommets : 
         (i,j) = sommet
         voisins = [(i+1,j),(i,j+1),(i-1,j),(i,j-1)]
+        #voisins = [(i+1,j),(i+1,j+1),(i,j+1),(i-1,j+1),(i-1,j),(i-1,j-1),(i,j-1),(i+1,j-1)]
         # On vérifie que les voisins sont dans les sommets
         vv = []
         for v in voisins : 

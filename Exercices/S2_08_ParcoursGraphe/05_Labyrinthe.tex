@@ -1,6 +1,6 @@
 %https://www.lama.univ-savoie.fr/mediawiki/index.php/G%C3%A9n%C3%A9ration_et_r%C3%A9solution_de_labyrinthes
 % https://cpge-itc.github.io/itc1/5_graph/3_traversal/labyrinth/#animation-du-dfs
-\exer{Génération et parcours de labyrinthe -- Travail préliminaire}
+%\exer{Génération et parcours de labyrinthe -- Travail préliminaire}
 %\begin{flushright}
 %
 %\end{flushright}
@@ -22,7 +22,7 @@ Le graphe est implémenté par un dictionnaire d'adjacence où les clés sont le
 
 
 
-\question{Écrire la fonction \cde{creer\_graphe(n:int, p:int) -> dict} permettant de créer le graphe d'une grille de \cde{n} colonnes et \cde{p} lignes.}
+\question{Écrire la fonction \cde{creer\_graphe(n:int, p:int) -> \{\}} permettant de créer le graphe d'une grille de \cde{n} colonnes et \cde{p} lignes.}
 \begin{exemple}
 La grille $ 2 \times 2$ sera modélisée par le graphe suivant :
 
@@ -49,9 +49,9 @@ Dans l'exemple qui suit, les coordonnées de sommets peuvent être dans un ordre
 \end{exemple}
 
 
-\question{Écrire la fonction \cde{trace\_sommets(G:dict) -> None} qui affiche les sommets en utilisant un point rouge (\cde{`r.`}) ou cercle rouge (\cde{`ro`}).}
+\question{Écrire la fonction \cde{trace\_sommets(G:\{\}) -> None} qui affiche les sommets en utilisant un point rouge (\cde{`r.`}) ou cercle rouge (\cde{`ro`}).}
 
-\question{Écrire la fonction \cde{get\_aretes(G:dict) -> []} renvoyant la liste des arêtes du graphe sous la forme d'une liste de listes de tuples. Une arête est donc une liste de sommets où les sommets sont des tuples. Les arêtes ne devront être présentes qu'une fois. }
+\question{Écrire la fonction \cde{get\_aretes(G:\{\}) -> []} renvoyant la liste des arêtes du graphe sous la forme d'une liste de listes de tuples. Une arête est donc une liste de sommets où les sommets sont des tuples. Les arêtes ne devront être présentes qu'une fois. }
 
 \begin{exemple}
 Dans l'exemple qui suit, l'ordre des arêtes peut être dans un ordre différent. Pour une arête donnée, les sommets peuvent aussi être dans un ordre différent.
@@ -62,10 +62,10 @@ Dans l'exemple qui suit, l'ordre des arêtes peut être dans un ordre différent
 \end{exemple}
 
 
-\question{Écrire la fonction \cde{trace\_aretes(G:dict) -> None} qui affiche les arêtes en utilisant un trait bleu. Exemple : pour tracer l'arête [(0,2),(1,2)], il faut utiliser l'instruction \cde{plt.plot([0,1],[2,2],'b')}.}
+\question{Écrire la fonction \cde{trace\_aretes(G:\{\}) -> None} qui affiche les arêtes en utilisant un trait bleu. Exemple : pour tracer l'arête [(0,2),(1,2)], il faut utiliser l'instruction \cde{plt.plot([0,1],[2,2],'b')}.}
 
 
-\question{Écrire la fonction \cde{trace\_graphe(G:dict) -> None} qui permet de tracer les sommets au dessus des arêtes.}
+\question{Écrire la fonction \cde{trace\_graphe(G:\{\}) -> None} qui permet de tracer les sommets au dessus des arêtes.}
 
 \begin{center}
 \includegraphics[width=6cm]{grille_10_8}
@@ -76,13 +76,13 @@ Dans l'exemple qui suit, l'ordre des arêtes peut être dans un ordre différent
 
 \subsection*{Génération d'un labyrinthe}
 
-Dans notre cas, résoudre le labyrinthe consiste en partir du sommet \cde{(0,0)} (sommet en bas à gauche) et à se déplacer sur les arêtes dans le but d'atteindre le sommet en haut à droite. 
-Pour générer un labyrinthe, nous allons réalisé un parcours de la grille \cde{G} (en largeur ou en profondeur). Le labyrinthe sera lui-même un graphe noté \cde{L}. À chaque fois qu'on \textbf{empilera ou enfilera} un \textbf{sommet non visité}, on ajoutera une arête entre entre ce sommet et le sommet père à \cde{L}. 
+Dans notre cas, résoudre le labyrinthe consiste en partir du sommet de départ \cde{(0,0)} (sommet en bas à gauche, par exemple) et à se déplacer sur les arêtes dans le but d'atteindre le sommet en haut à droite. 
+Pour générer un labyrinthe, nous allons réaliser un parcours de la grille \cde{G} (en largeur ou en profondeur). Le labyrinthe sera lui-même un graphe noté \cde{L}. À chaque fois qu'on \textbf{empilera ou enfilera} un \textbf{sommet non visité}, on ajoutera une arête entre entre ce sommet et le sommet père à \cde{L}. 
 
 
 
 
-\question{Écrire la fonction \cde{ajouter\_arete(G:dict, s1:tuple, s2: tuple) -> None} qui permet d'ajouter l'arête \cde{([s1,s2])} au graphe \cde{G}. \textbf{On ajoutera cette arête uniquement si le sommet d'arrivée n'existe pas dans le graphe}. }
+\question{Écrire la fonction \cde{ajouter\_arete(G:\{\}, s1:tuple, s2:tuple) -> None} qui permet d'ajouter l'arête \cde{([s1,s2])} au graphe \cde{G}. \textbf{Pour ajouter una arête, il est par exemple possible de traiter les cas deux suivants : on ajoute une arête si aucun des sommets appartient au graphe, ou si le le sommet d'arrivée n'existe pas dans le graphe}. }
 \begin{exemple}
 On reprend le graphe noté \cde{G2} précédemment. 
 \begin{lstlisting}
@@ -97,9 +97,10 @@ On reprend le graphe noté \cde{G2} précédemment.
 \end{exemple}
 
 
-\question{Écrire la fonction \cde{parcours\_largeur(G:dict, depart:tuple) -> dict} qui permet de créer un labyrinthe en largeur à partir d'un graphe \cde{G}. Tracer le labyrinthe obtenu. \cde{s} sera ici le point de départ du labyrinthe,\cde{(0,0)} par exemple.}
+\question{Écrire la fonction \cde{parcours\_largeur(G:\{\}, depart:tuple) -> dict} qui permet de créer un labyrinthe en largeur à partir d'un graphe \cde{G}. Tracer le labyrinthe obtenu. \cde{s} sera ici le point de départ du labyrinthe,\cde{(0,0)} par exemple.}
 
-\question{Écrire la fonction \cde{parcours\_profondeur(G:dict, s:tuple) -> dict} qui permet de créer un labyrinthe en profondeur à partir d'un graphe \cde{G}. Tracer le labyrinthe obtenu.}
+\question{Écrire la fonction \cde{parcours\_profondeur(G:\{\}, s:tuple) -> dict} qui permet de créer un labyrinthe en profondeur à partir d'un graphe \cde{G}. Tracer le labyrinthe obtenu.}
+
 
 \begin{center}
 \includegraphics[width=6cm]{grille_10_8_largeur.png}
@@ -107,10 +108,11 @@ On reprend le graphe noté \cde{G2} précédemment.
 \captionof{figure}{Labyrinthes en largeur et en profondeur}
 \end{center}
 
-Comme vous pouvez le constater, le coté aléatoire de ces labyrinthes est discutable :).
+
+Comme vous pouvez le constater, le coté aléatoire de ces labyrinthes est discutable :). Le labyrinthe que vous pourrez obtenir peut varier, notamment en fonction, de l'ordre dans lequel vous ajoutes les sommets dans le graphe dans la fonction \cde{creer\_graphe}. 
 Il est possible de mélanger une liste en utilisant le module \cde{random} : \cde{random.shuffle(voisins)} permet de mélanger la liste de tuples \cde{voisins}.
 
-\question{Écrire les fonctions \cde{labyrinthe\_largeur(G:dict, s:tuple) -> dict} et \cde{labyrinthe\_profondeur(G:dict, s:tuple) -> dict} permettant de prendre cette remarque en compte. Quelle fonction permet d'obtenir un labyrinthe acceptable ?}
+\question{Écrire les fonctions \cde{labyrinthe\_largeur(G:\{\}, s:tuple) -> \{\}} et \cde{labyrinthe\_profondeur(G:\{\}, s:tuple) -> \{\}} permettant de prendre cette remarque en compte. Quelle fonction permet d'obtenir un labyrinthe acceptable ?}
 
 \begin{center}
 \includegraphics[width=6cm]{labyrinthe_10_8_profondeur.png}
@@ -122,7 +124,7 @@ Il est possible de mélanger une liste en utilisant le module \cde{random} : \cd
 
 Il est possible de résoudre le labyrinthe en utilisant un parcours en largeur ou un parcours en profondeur. 
 
-\question{Écrire la fonction \cde{resolution\_largeur(G:dict, s:tuple) -> list} qui permet de résoudre le labyrinthe en utilisant un parcours en largeur. Cette fonction renvoie la liste des sommets permettant d'atteindre le sommet en haut à droite depuis le sommet en bas à gauche.}
+\question{Écrire la fonction \cde{resolution\_largeur(G:\{\}, s:tuple) -> []} qui permet de résoudre le labyrinthe en utilisant un parcours en largeur. Cette fonction renvoie la liste des sommets permettant d'atteindre le sommet en haut à droite depuis le sommet en bas à gauche.}
 
 \question{Afficher en trait épais noir la solution donnée par le parcours en largeur.}
 
