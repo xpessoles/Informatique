@@ -20,7 +20,7 @@ Dans un premier temps, les cases de l'échiquier sont représentées par des tup
 
 %\newpage
 \question{Vérifier que :}
-\vspace{-.5cm}
+\vspace{-.2cm}
 \begin{itemize}
 	\item \texttt{mvtsPossibles(0,0)} renvoie \texttt{[(1, 2), (2, 1)]},
 	\item \texttt{mvtsPossibles(3,5)} renvoie bien \texttt{[(1, 4), (1, 6), (2, 3), (2, 7), (4, 3), (4, 7), (5, 4), (5, 6)]},
@@ -64,6 +64,29 @@ Tous ces résultats sont à l'ordre près. }
 codé par un dictionnaire d’adjacence \cde{G} et un sommet de départ dep et renvoie un dictionnaire de distance à
 partir du sommet \cde{dep}. Pour ce faire, vous vous inspirerez du parcours en largeur fourni. Si un sommet n’est
 pas atteignable depuis le depuis \cde{dep}, la valeur associée doit être de \cde{-1}.}
+
+\begin{lstlisting}
+def bfs(G:dict, s) -> None:
+    """
+    G : graphe sous forme de dictionnaire d'adjacence
+    s : sommet du graphe objet non mutable quelconque.
+    """
+    visited = {}
+    for sommet,voisins in G.items():
+        visited[sommet] = False
+    # Le premier sommet à visiter entre dans la file
+    file = deque([s])
+    while len(file) > 0:
+        # On visite la tête de file
+        tete = file.pop()
+        # On vérifier qu'elle n'a pas été visitée
+        if not visited[tete]:
+            # Si on ne l'avait pas visité, maintenant c'est le cas :)
+            visited[tete] = True            
+            # On met les voisins de tete dans la file
+            for v in G[tete]:
+                file.appendleft(v)
+\end{lstlisting}
 
 \question{Vérifier que vous obtenez le même résultat que sur la figure suivante en affichant les différentes valeurs de
 distance depuis \cde{dep = (0, 0)} et \cde{dep = (4, 3)}. La fonction print peut ne pas revenir à la ligne si on précise un argument optionnel end différent de \cde{\\n}.}

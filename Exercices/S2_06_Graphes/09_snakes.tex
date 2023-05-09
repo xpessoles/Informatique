@@ -38,7 +38,7 @@ Le jeu \emph{serpents et échelles} est un jeu de société où on espère monte
 	\end{itemize}
 \end{itemize}
 
-On utilisera les notations suivantes pour les complexités~: $N_{cases}$, le nombre de cases du plateau (100), et $N_{SeE}$ la somme du nombre de serpents et du nombre d'échelle (16 dans notre exemple). Ces variables ne sont pas déclarées dans le script.
+On utilisera les notations suivantes pour les complexités~: $\indice{N}{cases}$, le nombre de cases du plateau (100), et $\indice{N}{SeE}$ la somme du nombre de serpents et du nombre d'échelle (16 dans notre exemple). Ces variables ne sont pas déclarées dans le script.
 
 \subsection*{Étude du graphe correspondant}
 
@@ -69,7 +69,7 @@ On utilisera les notations suivantes pour les complexités~: $N_{cases}$, le nom
 %}
 
 \question{\'Ecrire une fonction \texttt{eliminationDoublon\_tri(L: [int]) -> [int]:} ayant une complexité en \newline
-$O\left(len(L) \log (len(L)) \right)$ en utilisant un tri sur \texttt{L}.}
+$O\left(\text{len}(L) \log (\text{len}(L)) \right)$ en utilisant un tri sur \texttt{L}.}
 
 
 \question{Proposer une fonction \texttt{eliminationDoublon\_dict(L: [int]) -> [int]:} ayant une complexité linéaire en la longueur de la liste. Vous pourrez vous aider d'un dictionnaire.}
@@ -82,6 +82,15 @@ $O\left(len(L) \log (len(L)) \right)$ en utilisant un tri sur \texttt{L}.}
 
 On souhaite créer un graphe à partir du jeu~: chaque case stable est un sommet et il existe un arc de la case \texttt{case1} à la case \texttt{case2} si un lancer de dé permet d'aller de \texttt{case1} à \texttt{case2}. On notera que la case \texttt{100} n'a pas de successeurs (puisque le jeu s'arrête). De plus, une case \texttt{0} sera utilisée pour prendre en compte le départ. Une représentation de ce graphe est donnée sur la figure 5.
 
+On rappelle que les éléments ci-dessous avaient été donnés : 
+
+\begin{lstlisting}
+dSeE = {1: 38, 4: 14, 9: 31, 17: 7, 21: 42, 28: 84, 51: 67, 54: 34,
+        62: 19, 64: 60, 71: 91, 80: 99, 87: 24, 93: 73, 95: 75, 98: 79}
+
+def casesAccessibles(case: int) -> [int]:
+    return [avanceCase(case, de, "q") for de in range(1,7)]
+\end{lstlisting}
 \question{En vous aidant des fonctions \texttt{casesAccessibles()} et \texttt{eliminationDoublon\_dict()}, construire un graphe orienté \texttt{G} sous la forme d'un dictionnaire d'adjacence (dictionnaire de listes).}
 
 %\UPSTIcorrection{
@@ -94,7 +103,7 @@ On souhaite créer un graphe à partir du jeu~: chaque case stable est un sommet
 %Avec la méthode d'immobilisme pour la fin, plusieurs résultats de dé ont le même effet~: or, on ne souhaite pas qu'un même arc apparaisse plusieurs fois dans le dictionnaire d'adjacence. 
 %}
 
-\question{Quel est le nombre de sommets de ce graphe en fonction de $N_{cases}$ et $N_{seE}$.}
+\question{Quel est le nombre de sommets de ce graphe en fonction de $\indice{N}{cases}$ et $\indice{N}{seE}$.}
 
 %\UPSTIcorrection{
 %	$N_{cases} - N_{seE} + 1$~: on a autant de cases non stables que de serpents et d'échelles, mais il faut ajouter la case 0. 
