@@ -1,6 +1,6 @@
-\textit{D'apèrs ressources de Quentin Fortier}
+%\textit{D'après ressources de Quentin Fortier}
 
-\section{Définitions}
+\section*{Définitions}
 Soit $G = (V, E)$ un graphe non-orienté, où $V$ est un ensemble de sommets et $E$ un ensemble d’arêtes. Soit $k\in\mathbb{N}^*$. Un
 $k$-coloriage de $G$ est une fonction $c : V \mapsto \{0, ..., k - 1\}$ telle que :
 $\{u, v\} \in E\Rightarrow c(u) \neq c(v)$.
@@ -8,8 +8,10 @@ $\{u, v\} \in E\Rightarrow c(u) \neq c(v)$.
 Dit autrement, un $k$-coloriage donne une couleur (qu’on suppose être un entier entre 0 et $k-1$, pour simplifier) à chaque sommet,
 tel que deux sommets adjacents soient de couleurs différentes.
 Suivant les questions, on utilisera soit une matrice d’adjacence, soit une liste d’adjacence. Attention à ne pas les confondre.
-Soit $G_1$ le graphe suivant :
-
+Soit $G_1$ le graphe suivant.
+\begin{center}
+\includegraphics[width=5cm]{fig_01}
+\end{center}
 
 \question{Écrire une ou plusieurs instruction(s) Python pour définir $G_1$ par liste d’adjacence.}
 
@@ -30,7 +32,7 @@ Par exemple, si \lstinline{G1} est la liste d’adjacence de $G_1$, \lstinline{v
 
 
 
-\section{Degré}
+\section*{Degré}
 \question{Écrire une fonction \lstinline{deg(G, v)} renvoyant le degré d’un sommet dans le graphe \lstinline{G} représenté par liste d’adjacence.}
 
 \question{Écrire une fonction \lstinline{deg\_max(G)} calculant le degré maximum d’un sommet dans le graphe \lstinline{G} représenté par liste d’adjacence. On appelle $\Delta(G)$ ce nombre.}
@@ -41,7 +43,7 @@ Il existe un algorithme simple donnant une $(\Delta(G) + 1)$-coloration pour un 
 \question{Écrire une fonction \lstinline{delta\_color(G)} renvoyant une $(\Delta(G) + 1)$-coloration de \lstinline{G} représenté par matrice d’adjacence. Le
 résultat sera donc une liste \lstinline{C} telle que \lstinline{C[v]} est la couleur donnée à \lstinline{v}.}
 
-\section{Clique}
+\section*{Clique}
 Une clique d’un graphe \lstinline{G} est un sous-graphe complet, c’est-à-dire un ensemble de sommets contenant toutes les arêtes possibles
 entre deux sommets. La taille d’une clique est son nombre de sommets.
 Par exemple, l’ensemble de sommets \{1, 2, 5\} forme une clique de taille 3 de $G_1$, puisque ces 3 sommets sont tous reliés par des
@@ -54,7 +56,7 @@ arêtes.
 
 Par exemple, si \lstinline{G1} est la matrice d’adjacence de \lstinline{G1}, \lstinline{is\_clique(G1, [1, 2, 5])} doit renvoyer \lstinline{True} mais \lstinline{is\_clique(G1, [1, 2, 3])} doit renvoyer \lstinline{False}.
 
-\section{2-coloration par parcours en profondeur}
+\section*{2-coloration par parcours en profondeur}
 On veut écrire un algorithme pour obtenir une 2-coloration d’un graphe connexe $G$. Pour cela, on exécute un parcours en
 profondeur depuis un sommet $v$ quelconque (par exemple le sommet 0) de $G$, que l’on colorie avec la couleur 0, puis on colorie
 les voisins de $v$ avec la couleur 1, puis les voisins des voisins avec la couleur 0...
@@ -83,7 +85,7 @@ def 2_color(G):
 précédente pour le faire.}
 
 
-\section{Comptage du nombre de couleurs}    
+\section*{Comptage du nombre de couleurs}    
 Étant donnée une liste d’entiers (des couleurs), non forcément consécutifs, on veut savoir quel est le nombre d’entiers différents
 (le nombre de couleurs). Par exemple, le nombre de valeurs différentes de \lstinline{[1, 4, 0, 4, 1]} est 3 (il y a 3 entiers différents :
 0, 1, 4). Pour cela, on étudie trois méthodes différentes (et indépendantes).
