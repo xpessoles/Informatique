@@ -22,6 +22,8 @@ def mvtsPossibles(i, j):
                 L.append((i+di, j+dj))
     return L
 
+
+
 def codage(i, j):
     return chr(ord('a') + i) + str(j+1)
 
@@ -46,6 +48,29 @@ for i in range(8):
 
 G_repr = nx.from_dict_of_lists(G2, create_using=nx.Graph)
 dessinerGraphe(G_repr)
+
+
+
+def bfs(G:dict, s:str) -> None:
+    """
+    G : graphe sous forme de dictionnaire d'adjacence
+    s : sommet du graphe (Chaine de caractere du type "S1").
+    """
+    visited = {}
+    for sommet,voisins in G.items():
+        visited[sommet] = False
+        # Le premier sommet àvisiter entre dans la file
+        file = deque([s])
+        while len(file) > 0:
+            # On visite la tête de file
+            tete = file.pop()
+            # On vérifier qu'elle n'a pas été visitée
+            if not visited[tete]:
+            # Si on l'avait pas visité, maintenant c'est le cas :)
+                visited[tete] = True
+                # On met les voisins de tete dans la file
+                for v in G[tete]:
+                    file.appendleft(v)
 
 # G = nx.DiGraph()
 # G.add_nodes_from(sommets)
