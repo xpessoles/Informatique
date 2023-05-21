@@ -121,6 +121,16 @@ def mvtsPossibles(i, j):
     return L
 
 
+def calcul distance(G):
+    visited={}
+    distance={}
+    for i in range(8):
+        for j in range(8):
+            distance[(i,j)]=-1
+            visited[(i,j)]=False
+
+
+
 def largeur_dep(G, dep):
     def explorationLargeur(r):
         f = deque() # initialisation d'une deque vide
