@@ -1,3 +1,36 @@
+\def\xxactivite{Cours}
+
+\def\xxauteur{P. Bessonnat -- Xavier Pessoles}
+\fichefalse \proftrue \tdfalse \courstrue
+
+\def\xxnumchapitre{Chapitre 14 \vspace{.2cm}}
+
+\def\xxchapitre{Algorithme A$\star$}
+
+\def\xxcompetences{%
+%\textsl{%
+%\textbf{Savoirs et compétences :}\\
+%\begin{itemize}[label=\ding{112},font=\color{bleuxp}] 
+%\item Vocabulaire des graphes : graphe orienté, graphe non orienté. Sommet (ou nœud); arc, arête. Boucle. Degré (entrant et sortant). Chemin d’un sommet à un autre. Cycle. Connexité dans les graphes non orientés.
+%\item Notations : graphe $G=(S,A)$, degrés $d(s)$ (pour un graphe non orienté), $d_{+}(s)$ et  $d_{-}(s)$ (pour un graphe orienté).
+%\item Pondération d’un graphe. Étiquettes des arcs ou des arêtes d’un graphe. On motive l’ajout d’information à un graphe par des exemples
+%concrets.
+%\end{itemize}
+%}
+}
+
+\def\xxfigures{
+%\includegraphics[width=4cm]{fig_0} \\
+%\textit{Représentation ciculaire du métro parisien}
+}%figues de la page de garde
+
+
+\input{\repRel/Style/pagegarde_cours_minitoc}
+\setlength{\columnseprule}{.1pt}
+
+\vspace{2cm}
+\pagestyle{fancy}
+\thispagestyle{plain}
 
 
 \section{Problématique}
@@ -7,12 +40,12 @@
 
 \begin{figure}[!h]
 \begin{minipage}{0.6\textwidth}
-Lorsqu'on cherche le plus court chemin entre deux sommets, départ et arrivée, le plus rapidement possible et en évitant les obstacles éventuels, l'algorithme A* (prononcer A star) est fait pour ça ! Cet algorithme est par exemple utilisé dans les jeux vidéos.
+Lorsqu'on cherche le plus court chemin entre deux sommets, départ et arrivée, le plus rapidement possible et en évitant les obstacles éventuels, l'algorithme A$\star$ (prononcer A star) est fait pour ça ! Cet algorithme est par exemple utilisé dans les jeux vidéos.
 C'est un algorithme de recherche de chemin dans un graphe. C'est l'un des plus efficaces en la matière. Il ne donne pas toujours la solution optimale mais il donne très rapidement une bonne solution.\\
 \end{minipage}
 \begin{minipage}{0.4\textwidth}
 \begin{center}
-\includegraphics[width=0.95\textwidth]{images/jeuVideo.jpg}
+\includegraphics[width=0.95\textwidth]{jeuVideo.jpg}
 \caption{Exemple de chemin}
 \end{center}
 \end{minipage}
@@ -80,7 +113,7 @@ On choisit alors la valeur \texttt{min} des f(s) des sommets visités.
 \end{minipage}
 \begin{minipage}{0.4\textwidth}
 \begin{center}
-\includegraphics[width=0.7\textwidth]{images/manhattan.jpg}
+\includegraphics[width=0.7\textwidth]{manhattan.jpg}
 \caption{Distance de Manhattan (rouge, bleu, jaune contre distance euclidienne en vert)}
 \end{center}
 \end{minipage}
@@ -96,7 +129,7 @@ Chaque case voisine par le côté est à une distance $10$ soit $1 \times 10$ et
 \hfill %
 \begin{minipage}[c]{.35\linewidth}
 \begin{center}
-\includegraphics[scale=0.7]{images/quadri1.jpg}
+\includegraphics[scale=0.7]{quadri1.jpg}
 \end{center}
 \end{minipage}
 
@@ -104,7 +137,7 @@ Chaque case voisine par le côté est à une distance $10$ soit $1 \times 10$ et
 On cherche à déterminer le plus court chemin entre D et A. Sur le quadrillage ci-dessous, on peut reporter les distance de Manhattan de chaque case à \textbf{A} : 
 
 \begin{center}
-\includegraphics[scale=0.8]{images/quadri2.jpg}
+\includegraphics[scale=0.8]{quadri2.jpg}
 \end{center}
 
 \begin{multicols}{2}
@@ -114,13 +147,13 @@ On cherche à déterminer le plus court chemin entre D et A. Sur le quadrillage 
 \textbf{\'Etape 1 :} On évalue la distance à l'origine, la distance de la fin et le coût global \\
 \vfill
 
-\includegraphics[width=8cm]{images/quadri3.jpg}
+\includegraphics[width=8cm]{quadri3.jpg}
 \end{center}
 \begin{center}
 
 
 \textbf{\'Etape 2 :} On choisit le sommet dont le coût global est le plus faible. En cas d'égalité, on choisit le sommet le plus proche de l'arrivée.
-\includegraphics[width=8cm]{images/quadri4.jpg}
+\includegraphics[width=8cm]{quadri4.jpg}
 \end{center}
 \end{multicols}
 
@@ -133,12 +166,12 @@ On cherche à déterminer le plus court chemin entre D et A. Sur le quadrillage 
 
 \textbf{\'Etapes 3, 4, 5 et 6}
 
-\includegraphics[width=8cm]{images/quadri4.jpg}
+\includegraphics[width=8cm]{quadri4.jpg}
 \end{center}
 
 \begin{center}
 \textbf{\'Etape 7}
-\includegraphics[width=8cm]{images/quadri9.jpg}
+\includegraphics[width=8cm]{quadri9.jpg}
 \end{center}
 \end{multicols}
 
@@ -147,7 +180,7 @@ On cherche à déterminer le plus court chemin entre D et A. Sur le quadrillage 
 \begin{center}
 
 \textbf{\'Etape 8}
-\includegraphics[width=8cm]{images/quadri10.jpg}
+\includegraphics[width=8cm]{quadri10.jpg}
 \end{center}
 
 
@@ -155,15 +188,107 @@ On cherche à déterminer le plus court chemin entre D et A. Sur le quadrillage 
 \begin{center}
 \textbf{\'Etape 9 :}
 
-\includegraphics[width=8cm]{images/quadri11.jpg}
+\includegraphics[width=8cm]{quadri11.jpg}
 \end{center}
 
 \end{multicols}
 Finalement le chemin le plus court :
 
 \begin{center}
-\includegraphics[scale=0.8]{images/quadrifinal.jpg}
+\includegraphics[scale=0.8]{quadrifinal.jpg}
 \end{center}
+
+
+\section{L'algorithme A*}
+
+\begin{lstlisting}
+### les voisins sont les cases a côté du point considéré en ligne droite ou en diagonale
+def estVoisin(M:dict,pt1:tuple):
+    l,c=pt1
+    voisins=[]
+    for i in [-1,0,1]:
+        for j in [-1,0,1]:
+            if (l+i,c+j) in M:
+                voisins.append((l+i,c+j))
+    voisins.remove(pt1)
+    return voisins
+
+# >>> estVoisin(G,[1,2])
+# [[0, 1], [0, 2], [0, 3], [1, 1], [1, 3], [2, 1], [2, 2], [2, 3]]
+
+### on peut calculer la distance entre deux points voisins en dehors de Astar
+def distance(pt1:tuple,pt2:tuple):
+    '''pt1 et pt2 doivent être voisin en ligne ou en diagonale'''
+    ligne=0
+    colonne=0
+    i,j=pt1
+    l,c=pt2
+    if not i==l:
+        ligne=1
+    if not j==c:
+        colonne=1
+    if colonne==ligne:
+        return 14
+    else:
+        return 10
+
+# >>> distance([1,2],[0, 3])
+# 14
+
+def Astar(M:dict,depart,fin,visited=[]):
+    '''calcul le plus court chemin en partant de départ pour atteindre
+    arrivée par l'algorithme de Astar avec un heuristique de distance la plus courte
+    entrées :
+    M : dict, dictionnaire dont chaque sommet est un couple de coordonnées et sa valeur une liste de 4 éléments : G, H, F et le prédécesseur
+    départ : un sommet de M dont on connait les coordonnées
+    fin : un sommet de M dont on connait les coordonnées
+    sortie : None (ne renvoie rien)'''
+    if depart not in list(M.keys()):
+        raise TypeError('Le sommet de départ n\'est pas dans le graphe')
+    if fin not in list(M.keys()):
+        raise TypeError('Le sommet d\'arrivée n\'est pas dans le graphe')
+    # condition de sortie de la boucle récursive
+    if depart==fin:
+        # on construit le plus court chemin et on l'affiche
+        chemin=[]
+        pred=fin
+        while pred != None:
+            chemin.append(M[pred][-1])
+            pred=M[pred][-1]
+        chemin.reverse() # on retourne la liste dans le bon ordre
+        print ('chemin le plus court :'+str(chemin)+' cout='+str(M[fin][2]))
+    else : # au premier passage, on initialise le cout à 0
+        if visited==[] :
+            M[depart][0]=0 # changement
+        # on visite les successeurs de depart
+        voisins=estVoisin(M,depart) # changement
+        for voisin in voisins:
+            if voisin not in visited:
+                # heuristique
+                G = M[depart][0] + distance(depart,voisin)
+                H = heuristique(voisin,fin)
+                F = G + H
+                if F < M[voisin][2]:
+                    # les distances calculées
+                    M[voisin][0] = G
+                    M[voisin][1] = H
+                    M[voisin][2] = F
+                    # le prédécesseur
+                    M[voisin][3] = depart
+        # On marque comme "visited"
+        visited.append(depart)
+        # Une fois que tous les successeurs ont été visités : récursivité
+        # On choisit les sommets non visités avec la distance globale la plus courte
+        # On ré-exécute récursivement Astar en prenant depart='x'
+        not_visited={}
+        for k in M.keys():
+            if not k in visited :
+                not_visited[k] = M[k][2]
+        x=min(not_visited, key=not_visited.get)
+        Astar(M,x,fin,visited)
+
+
+\end{lstlisting}
 
 
 %Un sommet du graphe peut être représenté sous forme d'une liste dans un dictionnaire avec :
@@ -298,7 +423,7 @@ Finalement le chemin le plus court :
 %Vidéo de comparaison des 4 algorithmes de parcours de graphes
 %\end{center}
 %\begin{center}
-%\includegraphics[scale=0.5]{images/qrcode.png}
+%\includegraphics[scale=0.5]{qrcode.png}
 %\end{center}
 %\begin{center}
 %https://www.youtube.com/watch?v=GC-nBgi9r0U
