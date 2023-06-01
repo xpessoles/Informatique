@@ -41,28 +41,11 @@ def parcours_largeur(Gd):
                 file.append(voisins)
 
 
-def parcours_largeur_distance(Gd,s):
-    visited={}
-    distance={}
-    for sommet,voisins in Gd.items():
-        visited[sommet]=False
-        distance[sommet]=-1
-    file=deque([(s,0)])
-    while file:
-        tete,d=file.popleft()
-        print(tete,file,visited,distance,'\n')
-        if visited[tete]==False:
-            visited[tete]=True
-            distance[tete]=d
-            for voisins in Gd[tete]:
-                file.append((voisins,d+1))
-
 
 def parcours_profondeur(Gd,s):
     visited={}
     for sommet,voisins in Gd.items():
         visited[sommet]=False
-
     pile=deque([s])
     while pile:
         tete=pile.pop()
