@@ -25,12 +25,10 @@ def arretes_l(Gd:dict):
 plot_graphe_l(Gd)
 
 
-def parcours_largeur(Gd):
-    s=0
+def parcours_largeur(Gd,s):
     visited={}
     for sommet,voisins in Gd.items():
         visited[sommet]=False
-
     file=deque([s])
     while file:
         tete=file.popleft()
