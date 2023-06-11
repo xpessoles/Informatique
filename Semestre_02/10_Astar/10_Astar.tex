@@ -227,7 +227,56 @@ Finalement le chemin le plus court :
 
 
 \section{L'algorithme A*}
+\subsection{Structures de données}
 
+
+Un sommet du graphe peut être représenté sous forme d’une liste dans un dictionnaire avec :
+\begin{itemize}
+\item  la valeur de \texttt{G} (de type \texttt{int}), c’est la distance pour aller du point de départ au sommet considéré ;
+\item la valeur de \texttt{H} (de type \texttt{int}), c’est la distance pour aller du sommet considéré au point d’arrivée ;
+\item la valeur de \texttt{F} (de type \texttt{int}), c’est la somme des deux précédents mémorisée pour ne pas la recalculer ;
+\item le parent, représenté par ses coordonnées.
+\end{itemize}
+
+Initialement, un sommet non visité prend comme valeurs : \texttt{\{(l,c) :[inf, None, inf, None]\}}.
+
+Si le point $O(0,0)$ est le point de départ et $A(5,9)$ est le point d’arrivée, alors le sommet $B(0,1)$ voisin
+de $O$ prend comme valeurs :
+\texttt{\{(0,1) :[10, 106, 116, (0,0)]\}}
+On peut aussi choisir l’écriture suivante,
+\texttt{\{(0,1) :\{'G' :10,'H' :106,'F' :116,'pred' :(0,0)\}\}}
+
+\subsection{L'heuristique}
+\begin{lstlisting}
+def heuristique(pt1:tuple,A:tuple)->int:
+    """Calcul de la valeur de l’heuristique avec la méthode du cours, 14 pour un
+    déplacement diagonal et 10 pour un déplacement sur le côté
+    entrées : pt1, tuple ou list des coordonnées et A, tuple ou list des coordonnées
+    sortie : H : integer, valeur de l’heuristique. """
+    a=abs(pt1[0]-A[0])
+    b=abs(pt1[1]-A[1])
+    if a<=b:
+        return (a*14+(b-a)*10)
+    else:
+        return (b*14+(a-b)*10)
+\end{lstlisting}
+
+\subsection{Le graphe pondéré}
+\begin{lstlisting}
+G=np.ones((5,9))
+G[1,4]=-10
+G[1,5]=-10
+G[2,4]=-10
+G[3,4]=-10
+M={}
+ligne,colonne=G.shape
+for i in range(ligne):
+    for j in range(colonne):
+        if not G[i,j]==-10.0:
+            M[i,j]=[np.inf,None,np.inf,None]
+\end{lstlisting}
+
+\subsection{L'algorithme}
 \begin{lstlisting}
 ### les voisins sont les cases a côté du point considéré en ligne droite ou en diagonale
 def estVoisin(M:dict,pt1:tuple):
