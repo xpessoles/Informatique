@@ -9,33 +9,33 @@ Created on Thu Jul  6 12:47:07 2023
 def heure_to_sec_cor(h, m, s):
     return h * 3600 + m * 60 + s
 
-def test_q01():
+def test_q01(foo):
     pts = 0
     
     h,m,s = 1,1,1
     try :
-        if (heure_to_sec_cor(h, m, s) ==  heure_to_sec(h, m, s)):
+        if (heure_to_sec_cor(h, m, s) ==  foo(h, m, s)):
             pts +=1 
     except : 
         pass
    
     h,m,s = 1,0,1
     try :
-        if (heure_to_sec_cor(h, m, s) ==  heure_to_sec(h, m, s)):
+        if (heure_to_sec_cor(h, m, s) ==  foo(h, m, s)):
             pts +=1 
     except : 
         pass
     
     h,m,s = 0,1,1
     try :
-        if (heure_to_sec_cor(h, m, s) ==  heure_to_sec(h, m, s)):
+        if (heure_to_sec_cor(h, m, s) ==  foo(h, m, s)):
             pts +=1 
     except : 
         pass
     
     h,m,s = 12,11,8
     try :
-        if (heure_to_sec_cor(h, m, s) ==  heure_to_sec(h, m, s)):
+        if (heure_to_sec_cor(h, m, s) ==  foo(h, m, s)):
             pts +=1 
     except : 
         pass
