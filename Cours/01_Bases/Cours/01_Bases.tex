@@ -924,6 +924,9 @@ ligne non indenté.\\
 
 \subsubsection{Les intervalles d'entiers en Python}
 
+\marginnote{Voir \textit{Why numbering should start at zero}, E. W. Dijkstra,
+  EWD831. Disponible en ligne.}.
+
 Pour répondre à la première question, il suffit de remarquer que les entiers de 0 à 19 par exemple, 
 sont en fait les éléments d'une liste : \texttt{[0, 1, 2, $\cdots$ , 19]}. En Python, cette liste 
 s'écrit de la manière suivante : \texttt{range(20)}.\\
@@ -932,10 +935,9 @@ l'intervalle semi-ouvert $\ii{a,b}$, dans l'ordre croissant. Avec un seul argume
 \texttt{range(b)} signifie \texttt{range(0,b)}.\\
 
 
-\marginnote{Voir \textit{Why numbering should start at zero}, E. W. Dijkstra,
-  EWD831. Disponible en ligne.}.
+
   
-\textbf{
+\marginnote{
 Redisons-le, car c'est un fait important en Python : \texttt{range(a,b)} est intervalle 
 \textbf{fermé} à gauche, \textbf{ouvert} à
 droite}
@@ -1418,34 +1420,34 @@ x = t.pop()
 \end{lstlisting}
 
 Les autres méthodes disponibles sont rassemblées dans le tableau~\ref{tab.list.methodes}. Elles ne sont pas exigibles.
-%\begin{figure}[!h]
-  \begin{center}
-    \begin{tabular}{|c|c|}
+\begin{table}[!h]
+\centering
+    \begin{tabular}{lp{9cm}}
       \hline 
-      Méthode & Description \\
+      \textbf{Méthode} & \textbf{Description} \\
       \hline
       \texttt{append(x)} & Ajoute \texttt{x} en fin de liste \\
-      \hline
+      %\hline
       \texttt{extend(L)} & Concatène la liste \texttt{L} en fin de liste \\
-      \hline
+      %\hline
       \texttt{insert(i,x)} & Insère  \texttt{x} à la position \texttt{i} \\
-      \hline
+      %\hline
       \texttt{remove(x)} & Supprime la première occurence de \texttt{x} (erreur si impossible)\\
-      \hline
+      %\hline
       \texttt{pop(i)} & Supprime l'élément en position \texttt{i} (si vide, le dernier) \\
-      \hline 
+      %\hline 
       \texttt{index(x)} & Renvoie l'indice de la première occurence de \texttt{x} (erreur si impossible)\\
-      \hline
+      %\hline
       \texttt{count(x)} & Renvoie le nombre d'occurences de \texttt{x} \\
-      \hline
+      %\hline
       \texttt{sort(cmp,key,rev)} & Trie la liste (nombreuses options) \\
-      \hline
+      %\hline
       \texttt{reverse()} & Renverse la liste \\
       \hline
     \end{tabular}
-    \captionof{table}{Méthodes applicables aux listes.}
+    \caption{Méthodes applicables aux listes.}
   \label{tab.list.methodes}
-  \end{center}
+  \end{table}
 
 %
 %%%\clearslide{}
@@ -1455,7 +1457,7 @@ On peut directement accéder à une sous-liste Python (ou tranche ---\textbf{sli
 c'est-à-dire bloc de cases consécutives) d'une liste, c'est ce que l'on appelle le tranchage 
 (\textit{slicing}).
 
-On utilise les  syntaxes 
+On utilise les  syntaxes :
 \begin{itemize}
   \item \texttt{u[i:j]} pour accéder à la tranche de la liste \texttt{u} allant des indices \texttt{i} à \texttt{j-1} ;
   \item \texttt{u[i:]} pour accéder à la tranche allant de l'indice \texttt{i} à la fin de la liste \texttt{u} ;
@@ -1931,11 +1933,11 @@ On peut aussi chercher la présence d'un motif dans une chaîne avec \texttt{in}
 
 \subsection{Chaînes et méthodes}
 De nombreuses méthodes existent sur les chaînes, voici les plus utiles.
-\begin{table*}[!h]
+\begin{table}[!h]
   \begin{center}
-    \begin{tabular}{ll}
+    \begin{tabular}{lp{8cm}}
       \hline
-      \textbf{Méthode} & \textbf{Description} \\
+      \textbf{Méthode} & \textbf{Description} \\ \hline
       \texttt{count(m)}& Compte le nombre d'occurrences du motif \texttt{m}, sans chevauchement.\\
       \texttt{find(m)}& Renvoie la première occurrence du motif \texttt{m}.\\
       \texttt{islower() (et autres)}& Renvoie un booléen indiquant si la chaîne est en minuscules. \\
@@ -1949,7 +1951,7 @@ De nombreuses méthodes existent sur les chaînes, voici les plus utiles.
    \caption{Quelques méthodes sur les chaînes de caractères.}
     %\label{tab.str.methodes}
   \end{center}
-\end{table*}
+\end{table}
 
 \begin{lstlisting}
 s = "    que ; d'espaces ; mes ; amis ! ;   "

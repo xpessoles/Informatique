@@ -1,9 +1,15 @@
-\setchapterimage{Fond_ALG.png}
-\setchapterpreamble[u]{\margintoc}
-\chapter{Représentation des nombres en mémoire}
+%%%% Paramétrage du cours %%%%
+\def\xxactivite{Cours}
 
-\marginnote[5cm]{
-\begin{itemize} 
+\fichefalse \proftrue \tdfalse \courstrue
+
+\def\xxnumchapitre{Chapitre 2 \vspace{.2cm}}
+\def\xxchapitre{\hspace{.12cm} Représentation des nombres en mémoire}
+
+\def\xxcompetences{%
+\textsl{%
+\textbf{Savoirs et compétences :}\\
+\begin{itemize}[label=\ding{112},font=\color{bleuxp}] 
 \item Représentation des entiers positifs sur des mots de taille fixe.
 \item Représentation des entiers signés sur des mots de taille fixe.
 \item Entiers multi-précision de Python.
@@ -12,8 +18,22 @@
 \item Représentation des flottants sur des mots de taille fixe. Notion de mantisse, d'exposant. 
 \item Précision des calculs en flottants.
 \end{itemize}
-}
+}}
 
+\def\xxfigures{
+%\includegraphics[width=\linewidth]{matlab}
+%\\
+%\textit{Modèle du pilote hydraulique avec pilotage interactif.}
+}%figues de la page de garde
+
+\input{\repRel/Style/pagegarde_cours_minitoc}
+\setlength{\columnseprule}{.1pt}
+
+\vspace{2cm}
+\pagestyle{fancy}
+\thispagestyle{plain}
+
+%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Bases de numération}
 
@@ -24,7 +44,7 @@ On écrit alors tous les chiffres à la suite. À gauche, on place les \textbf{c
 
 Ainsi $2735$ représente deux milliers plus sept centaines plus trois dizaines plus cinq unités.
 
-\begin{defi}[Ecriture d'un nombre dans une base]
+\begin{defi}{Ecriture d'un nombre dans une base }
 De manière générale :%, avec $B=10$ et $n\in\N$,
 $$\displaystyle\underline{a_{n}a_{n-1}\ldots a_{1}a_{0}}_{~B} =
 \sum_{k=0}^{n}a_{k}B^{k},~ \textrm{ et }~\forall k \in \iif{0;n},~ a_k\in\ii{0;B}.$$ 
@@ -81,7 +101,8 @@ Il est aussi possible de convertir des entiers en binaires avec la fonction bin.
 Ce système à base 16 est le plus utilisé en électronique numérique car il permet une représentation compacte ce qui, dans les systèmes actuels à grande capacité mémoire, est un avantage non négligeable. 
 Ainsi, les chiffres de ce système de numération sont 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, A, B, C, D, E, F.  
 
-\begin{exemple}
+\begin{exemple} ~\\
+\begin{minipage}[c]{.6\linewidth}
 En hexadécimal on compte de la manière suivante : 
 \begin{center}
 \begin{tabular}{|c|c|c||c|c|c|}
@@ -100,12 +121,12 @@ Base 10 & Base 2 & Base 16 & Base 2 & Base 10 & Base 16 \\
 9 & 1001& 09 & 19  & 1 0011 & 13 \\ \hline
 \end{tabular}
 \end{center}
-
-
+\end{minipage}% \hfill
+\begin{minipage}[t]{.37\linewidth}
 Convertir $\left(BC5 \right)_{16}$ en base 10.
 
 Convertir $192$ en base 16.
-
+\end{minipage}
 \end{exemple}
 
 
@@ -161,12 +182,12 @@ un octet = \SI{8}{bits}, un kilo octet~= \SI{1000}{octet} \textit{etc}.
 
 \subsection{Représentation des entiers}
 Les entiers sont directement codés en binaire. Lorsque les mots-machines sont codés sur $n$ bits, il est alors possible de coder des nombres compris entre 0 et $2^n-1$.
-\begin{remarque}
+\begin{rem}
 \begin{itemize}
 \item On peut alors observer des dépassements de capacité : si les mots sont codés sur 4 bits, $(1100)_2 + (1000)_2 = (0100)_2$ (et non $(10100)_2$). Dans ce cas, la retenue est perdue. 
 \item En Pyton, les entiers ne sont pas codés sur un nombre de bits défini. On est seulement limité par la mémoire de la machine.
 \end{itemize}
-\end{remarque}
+\end{rem}
 \subsection{Représentation des entiers relatifs -- Complément à 2}
 
 Lorsque les mots sont codés sur $n$ bits et qu'on souhaite coder des entiers positifs et négatifs, on pourra coder des nombres compris dans l'intervalle $\llbracket-2^{n-1},2^{n-1}-1\rrbracket$. Les nombres positifs seront codés en binaire comme vu précédemment. 
@@ -217,7 +238,8 @@ Par analogie, pour écrire un nombre binaire à virgule, on utilise les puissanc
 
 Le codage de la partie entière (3 dans l’exemple précédent) ne pose pas de problèmes particuliers. Pour la partie fractionnaire (0,3125), il est nécessaire d’adapter la procédure.
 
-\begin{methode}[Conversion d'une partie fractionnaire en binaire]
+\begin{methode}
+\textbf{Conversion d'une partie fractionnaire en binaire}
 
 \begin{enumerate}
 \item On multiplie la partie fractionnaire par 2. 
@@ -229,7 +251,7 @@ Le codage de la partie entière (3 dans l’exemple précédent) ne pose pas de 
 
 
 \begin{exemple}
-Conversion de la partie fractionnaire 0,3125
+\textit{Conversion de la partie fractionnaire 0,3125}
 
 \begin{center}
 \begin{tabular}{cccccc|c|cc}
@@ -248,11 +270,11 @@ $0,3125_{(10)}=0,0101_{(2)}$.
 %\end{center}
 \end{exemple}
 
-%\begin{remarque}
+%\begin{rem}
 %\textbf{Inconvénients}
 %
 %Savoir coder la partie fractionnaire d’un nombre à virgule ne suffit pas pour coder tous les nombres à virgule en binaire. En effet, la gestion d’une virgule virtuelle par programme n’est pas aisée. De plus, cette méthode ne permet pas de représenter des nombres très grands ou très petits comme le nombre d’Avogadro ($6,02214129.. \cdot  10^{23}$) ou la constante de Planck ($6,62606957 \cdot 10^{- 34}$).
-%\end{remarque}
+%\end{rem}
 
 \begin{exemple}
 \textit{Convertir la partie fractionnaire 0,1}
@@ -260,19 +282,17 @@ $0,3125_{(10)}=0,0101_{(2)}$.
 
 \subsection{Représentation d'un nombre réel en flottant en utilisant la norme IEEE-754}
 
-\marginnote{
-On appelle alors : 
-\begin{enumerate}
-\item le signe (positif ou négatif);
-\item la mantisse (nombre de chiffres significatifs);
-\item l'exposant : puissance à laquelle la base est élevée. 
-\end{enumerate}}
-
 Pour représenter des réels, nombres pouvant être positifs, nuls, négatifs et non entiers, on utilise la représentation en virgule flottante (\textit{float} en anglais) qui fait correspondre au nombre 3 informations :
 
 $$
 -243,25_{(10)} = \underbrace{-}_{1}0,\underbrace{24325}_{2}\cdot10^{\underbrace{3}_{3}}
 $$
+On appelle alors : 
+\begin{enumerate}
+\item le signe (positif ou négatif);
+\item la mantisse (nombre de chiffres significatifs);
+\item l'exposant : puissance à laquelle la base est élevée. 
+\end{enumerate}
 
 Sous cette forme normalisée, il suffit de mémoriser le signe, l’exposant et la mantisse pour avoir une représentation du nombre en base 10. Il n’est pas utile de mémoriser le 0 avant la virgule puisque tous les nombres vont commencer par 0. En faisant varier l’exposant, on fait « flotter » la virgule décimale.
 
@@ -288,7 +308,7 @@ signe 1, mantisse x $2^{\text{exposant}}$.
 En binaire, on a $-100110,10101 =  -1,0011010101\times 2^5$ avec $-$ le signe, 0011010101 la mantisse et 5 l'exposant.
 \end{exemple}
 
-
+\begin{minipage}[c]{.4\linewidth}
 Le tableau décrit la répartition des bits selon le type de précision : la taille de la mantisse ($m$ bits) donne la précision mais suivant la valeur de l'exposant, la précision sera totalement différente. 
 
 %Ainsi : 
@@ -300,16 +320,20 @@ Le tableau décrit la répartition des bits selon le type de précision : la tai
 %Simple précision :  	$2^{- 23} = 1,192 … * 10^{- 7}$ 
 %Double précision :  	$2^{- 52} = 2,220 … * 10^{- 16}$
 
+
+\end{minipage}\hfill
+\begin{minipage}[c]{.59\linewidth}
 \begin{center}
-\begin{tabular}{llll}
-\cline{2-4}
+\begin{tabular}{| l |c|c|c|}
+\hline
+
 & Signe & Exposant & Mantisse \\ \hline
  Simple précision -- 32 bits & 1 & 8 & 23 \\ \hline
  Double précision -- 64 bits & 1 & 11 & 52 \\ \hline
  Précision étendue -- 80 bits & 1 & 15 & 64 \\ \hline
 \end{tabular}
 \end{center}
-
+\end{minipage}
 
 
 \begin{methode}
@@ -343,8 +367,7 @@ On désire représenter le nombre - 243,25 en virgule flottante au format simple
 %\end{center}
 
 \footnotesize{
-\begin{table*}[!h]
-\centering
+\begin{center}
 \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
 \hline
 S & \multicolumn{8}{c|}{Exposant} & \multicolumn{23}{c|}{Mantisse} \\
@@ -357,7 +380,7 @@ S & \multicolumn{8}{c|}{Exposant} & \multicolumn{23}{c|}{Mantisse} \\
 \multicolumn{4}{c|}{0} & \multicolumn{4}{|c|}{0} \\
 \hline
 \end{tabular}
-\end{table*}}
+\end{center}}
 
 \normalsize
 
@@ -393,9 +416,9 @@ ou $-\infty$).
 \item  Si $e = 2047$ et $m_{1},\ldots, m_{52}$ non tous nuls: $x=\text{NaN}$.
 \end{itemize}
 %\clearslide{}
-\begin{remarque}
+\begin{rem}
   On ne rentrera pas dans le détail des signification de $+\infty$, $-\infty$ et de $\text{NaN}$.
-\end{remarque}
+\end{rem}
 
 
 Les nombres normalisés permettent de représenter de façon précise les
