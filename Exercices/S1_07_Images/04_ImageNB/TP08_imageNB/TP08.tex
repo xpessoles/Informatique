@@ -1,0 +1,269 @@
+\documentclass[t,11pt,eleve]{article}
+\RequirePackage{geometry}
+\geometry{a4paper,top=2cm,bottom=2cm,left=2cm,right=2cm}
+\RequirePackage{amsmath,amssymb}
+\RequirePackage{amsfonts}
+\RequirePackage{graphicx}
+\usepackage[T1]{fontenc} 
+\usepackage[utf8]{inputenc}
+\usepackage[frenchb]{babel}
+\usepackage{pifont}
+\usepackage{colortbl}  
+\usepackage{lmodern} %%% ajoute cette ligne dans ton préambule
+
+\usepackage{multicol}
+\usepackage{ulem}
+\usepackage{url}
+\normalem
+
+\parindent=0pt
+
+\RequirePackage{framed}
+
+
+\newcommand{\FIG}[1]{\textsc{Figure} {\upshape\ref{#1}}}
+\usepackage{numprint} %affichage de nombres correctement avec \numprint{}
+
+%\usepackage{picins}    %permet d'insérer une image à coté d'un texte \parpic[r]{\includegraphics{}}texte...
+\usepackage{tikz}
+\usetikzlibrary{calc}
+% Unités
+\usepackage[locale = FR]{siunitx}
+\sisetup{inter-unit-product = \ensuremath{{}\cdot{}}}
+\usepackage{numprint} %affichage de nombres correctment avec \numprint{}
+\usepackage{multirow}
+\definecolor{gris_c}{gray}{0.9}
+\definecolor{gris_f}{gray}{0.25}
+\definecolor{gris_tc}{gray}{0.96}
+\definecolor{gris_ttc}{gray}{0.98}
+
+\newenvironment{activite}[1][\hsize]%
+{%
+    \def\FrameCommand%
+    {%
+\rotatebox{90}{\textit{\textsf{REMARQUE}}} 
+        {\color{blue}\vrule width 3pt}%
+        \hspace{0pt}%must no space.
+        \fboxsep=\FrameSep\colorbox{gris_c}%
+    }%
+    \MakeFramed{\hsize#1\advance\hsize-\width\FrameRestore}%
+}%
+{\endMakeFramed}%
+
+\newenvironment{donnees}[1][\hsize]%
+{%
+    \def\FrameCommand%
+    {%
+\rotatebox{90}{\textit{\textsf{DONNEES}}} 
+        {\color{blue}\vrule width 3pt}%
+        \hspace{0pt}%must no space.
+        \fboxsep=\FrameSep\colorbox{gris_c}%
+    }%
+    \MakeFramed{\hsize#1\advance\hsize-\width\FrameRestore}%
+}%
+{\endMakeFramed}%
+
+\newenvironment{objectif}[1][\hsize]%
+{%
+    \def\FrameCommand%
+    {%
+\rotatebox{90}{\textit{\textsf{OBJECTIF}}} 
+        {\color{blue}\vrule width 3pt}%
+        \hspace{0pt}%must no space.
+        \fboxsep=\FrameSep\colorbox{gris_c}%
+    }%
+    \MakeFramed{\hsize#1\advance\hsize-\width\FrameRestore}%
+}%
+{\endMakeFramed}%
+
+
+\input{base.tex}
+\geometry{a4paper,top=2cm,bottom=2cm,left=2cm,right=2cm}
+
+% A modifier pour chaque chapitre...
+\newcommand{\titre}{Traitement d'images en niveau de gris}
+\newcommand{\numero}{8}
+
+% Prof ou élève...
+% prof : 
+%\newcommand{\phantomchoix}[1]{\textcolor{red}{#1}}
+%\newcommand{\blanc}[1]{\textcolor{red}{#1}}
+% eleve : 
+\newcommand{\phantomchoix}[1]{\phantom{#1}}
+\newcommand{\blanc}[1]{\textcolor{white}{#1}}
+
+\renewcommand{\baselinestretch}{1.2}
+
+\newcommand{\site}{\textbf{ENT/Moodle/cours"infoPTSI"}}
+
+
+%%% numerotation des questions exo
+\newcounter{cexo}
+\newenvironment{qexo}{
+\refstepcounter{cexo}
+\vspace{3 pt}
+\noindent
+\begin{minipage}[t]{0.15\textwidth}
+\textbf{\noindent Question \arabic{cexo}. }
+\end{minipage}\noindent
+\begin{minipage}[t]{0.85\textwidth}}{\vspace{3 pt}
+\end{minipage}}%\vspace{2 pt}
+
+\graphicspath{{imagesTEX/}}
+
+%%% début du document
+\begin{document}
+\entetetpinfo
+
+Avant toute chose, créer un répertoire TP08 dans votre répertoire "Informatique", "TPsup" dans votre espace personnel.
+
+Sur le site \url{https://ptsilamartin.github.io/info/TP.html}, télécharger les 2  images \texttt{allium.png}, \texttt{ciel.png} ainsi que le script \texttt{TP08.py} que vous copiez dans votre répertoire TP08. Ouvrir le script \texttt{TP08.py} dans lequel vous travaillerez tout au long de ce TP.
+
+\section{Créer des images en niveau de gris}
+%%%\setcounter{cexo}{0}
+\begin{minipage}{.7\textwidth}%
+Dans ce TP nous utilisons sur des \textbf{images matricielles} (formées de points, les pixels). 
+
+Le codage d'une image se fait alors sous la forme d'une matrice. Chaque pixel de l'image correspond à un élément de la matrice.
+
+Ci-contre une image ne contenant que du noir (codé par un 0) et du blanc (codé par un 1).
+\end{minipage}
+\hspace{1cm}
+\begin{minipage}{.3\textwidth}%
+\includegraphics[width=0.7\textwidth]{codage1.png}
+\end{minipage}
+
+\vspace{0.3cm}
+
+Les images dites en "noir et blanc" sont en fait des images en dégradé de gris (ou niveaux de gris). Chaque élément de la matrice correspondra comme précédemment à un pixel, mais ces éléments seront des flottants (compris entre 0. et 1.) donnant l'intensité de gris voulue. On utilise ici le 0 pour le noir et le 1 pour le blanc. Une valeur de 0.5 sera un gris moyen, de 0.2 un gris foncé et de 0.8 un gris clair.
+
+\begin{qexo}
+Compléter les commentaires de la fonction \texttt{image\_noire} fournie dans le script \texttt{TP08.py}. Appeler ensuite cette fonction pour créer une image noire de largeur 6 pixels et de hauteur 3 pixels.
+\end{qexo}\\
+
+\begin{qexo}
+Afficher la matrice obtenue dans le script. Afficher ensuite  l'image obtenue dans une figure \texttt{matplotlib} comme indiqué ci-dessous.
+\end{qexo}\\
+
+\begin{lstlisting}
+import matplotlib.pyplot as plt  #importation de la bibliothèque matplotlib
+
+plt.figure("NOM de la figure")  #crée une nouvelle figure
+plt.imshow(im,cmap='gray',vmin=0, vmax=1)  #affiche l'image codée par la matrice im    / en niveau de gris, les pixels étant codés par des valeurs allant du 0 au 1 
+\end{lstlisting}
+
+
+\begin{qexo}
+Ecrire les fonctions \texttt{rayure\_hor} et \texttt{rayure\_ver} qui créent des images rayées horizontalement et verticalement. Tester ces fonctions sur des images de hauteur 9 et de largeur 14. Afficher les résultats obtenus.
+\end{qexo}\\
+
+\setcounter{cexo}{2}
+\begin{qexo}
+\textbf{BIS (OPTIONNELLE : si vous êtes en avance uniquement)} Ecrire la fonction \texttt{echiquier} qui crée une image avec un motif d'échiquier.Tester et afficher l'image obtenue.
+\end{qexo}\\
+
+\newpage
+\section {Eclaircir une image}
+Dans cette partie on souhaite éclaircir l'ensemble d'une image.
+
+\begin{qexo}
+Ecrire la fonction \texttt{eclaicir} qui prend pour argument la matrice-image \texttt{im} et le flottant \texttt{k} et qui modifie chaque pixel de l'image pour éclaircir d'une valeur \texttt{k} chaque pixel. (plus la valeur de \texttt{k} sera élevée plus l'éclaircissement sera conséquent).
+
+Tester ensuite votre fonction sur l'image rayée horizontalement que vous avez obtenue précédemment. Les bandes noires doivent devenir grises. 
+
+Afficher 3 figures : l'image rayée initiale, l'image rayée éclaicie et l'image rayée initiale après application de la fonction \texttt{eclaicir}.  
+\end{qexo}\\
+
+
+\textit{Si on ne prend pas de précautions particulières, le fait d'apliquer la fonction \texttt{eclaicir} modifie l'image source. Ceci peut être génant si ce n'est pas volontaire. Il faut bien veiller à créer une \textbf{copie indépendante} de la matrice-image source pour éviter ce problème.}\\
+
+\textbf{Copie indépendante}
+
+\begin{qexo}
+Réécrire la fonction \texttt{eclaicir2} en ajoutant les commandes permettant de réaliser une copie indépendante de la matrice-image source avant de la modifier. Tester en affichant les 3 figures de la question précédente.
+\end{qexo}\\
+
+\vspace{0.5cm}
+
+\textbf{Lecture d'une image contenue dans un fichier .png}\\
+On va maintenant appliquer cette fonction sur une autre image, contenue dans le fichier \textbf{allium.png}.
+
+Pour lire un fichier et obtenir la matrice-image correspondante on utilise l'instruction :
+\begin{lstlisting}
+import matplotlib.image as img     #import d'une autre bibliothèque de matplotlib
+imF=img.imread("nom_du_fichier.png")  #lecture du fichier
+\end{lstlisting}
+
+\textbf{Attention :} Il faut que le fichier lu se situe dans le même répertoire que le script. Veillez donc à ce que vos fichiers \texttt{allium.png} et \texttt{TP08.py} soient dans le même répertoire. Il faudra ensuite exécuter le script en effectuant un clic droit sur l'onglet de votre script puis \uline{"éxecuter en tant que script"}.\\
+
+ 
+\begin{qexo}
+Lire le fichier \textbf{allium.png} et stocker la matrice image obtenue dans la variable \textbf{imF}. Afficher cette image. Eclaircir l'image d'une valeur de 0.2 par exemple. Observer l'image obtenue. Vérifier que la matrice-image source \textbf{imF} n'est pas modifée. 
+\end{qexo}\\
+
+
+
+\section{Détecter les contours}
+
+\textit{La reconnaissance de formes dans une image est une composante importante de l'analyse d'images.
+Elle se décompose en plusieurs étapes qui consistent à extraire les contours des objets dans l'image afin
+de les reconnaitre ou d'en détecter le mouvement. La première de ces étapes est la mise en évidence
+des contours des objets dans l'image. C'est cette étape que nous allons aborder très succinctement.}
+\\
+
+\begin{figure}[!h]
+\includegraphics[width=1\textwidth]{edges.png}
+\end{figure}
+\newpage
+Un contour définit la limite d'un objet dans une image. Cette limite est caractérisée par un changement
+dans l'image : un changement de couleur ou de contraste. Ce changement se traduit dans la valeur des pixels qui sont localisés de part et d’autre de la limite.
+Nous sommes donc à la recherche d’un moyen de détecter et de localiser un changement.\\
+
+
+
+\begin{minipage}{.7\textwidth}%
+Considérons un pixel \textbf{p} dans une image. Ce pixel est-il semblable, de même teinte, que ses voisins ? Si non, quelle est la différence de teinte entre lui et ses voisins ? Est-elle grande, ce qui signifierait qu’il est situé à la limite d’un objet ?\\
+Le principe est pour chaque pixel de l'image, de récupérer la valeur de chaque pixel avoisinant ce pixel, puis de mesurer la différence, la ”distance” euclidienne, entre ces valeurs en utilisant une fonction de norme standard :
+\begin{equation}
+distance=\sqrt{(p_1-p_3)^2+(p_2-p_4)^2}
+\end{equation} 
+
+\end{minipage}
+\begin{minipage}{.3\textwidth}%
+\includegraphics[width=1\textwidth]{imagepixels.png}
+\end{minipage}
+
+
+ où $ p_1$, $p_2$, $ p_3$ et $ p_4$ sont les valeurs des 4 pixels voisins.\\
+
+
+Après avoir calculé la distance entre les valeurs des voisins du pixel courant, on compare cette distance à une valeur seuil :
+\begin{itemize}
+\item si la distance est plus petite ou égale que le seuil : la variation est faible : ce pixel n'est pas considéré sur un contour : on le laisse en noir ;
+\item si la distance est plus grande strictement que le seuil : la variation est grande : ce pixel est sur le contour : on le trace en blanc.
+\end{itemize}
+
+
+\begin{qexo}
+Lire l'image \texttt{ciel.png}. Afficher cette image dans une nouvelle figure en utilisant le module \texttt{matplotlib.pyplot}.
+\end{qexo}\\
+
+
+
+\begin{qexo}
+\'Ecrire une fonction \texttt{contour}, qui prend comme argument une image en niveaux de gris \texttt{im} ainsi qu'un flottant \texttt{seuil}, et qui renvoie une image noire sauf les pixels situés sur le contour qui seront en blanc.
+\end{qexo}\\
+
+\begin{qexo}
+Tester cette fonction sur l'image  \texttt{ciel.png}, avec un seuil de 0.2.
+\end{qexo}
+
+
+
+
+
+
+
+
+
+\end{document}
