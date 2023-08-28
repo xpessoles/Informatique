@@ -1,0 +1,83 @@
+\documentclass[t,11pt]{article}
+% A modifier selon la personne...
+\input{/Users/Delphine/1.BOULOT/2019_2020_PTSI_info/base.tex}
+\geometry{a4paper,top=2cm,bottom=2cm,left=2cm,right=2cm}
+
+\newcommand{\titre}{Compléments au TP4 : le chiffre de Vigenère\footnote{la présentation est issue du site \texttt{bibmath.net}}}
+\newcommand{\numero}{4}
+
+
+
+% Prof ou élève...
+% prof : 
+%\newcommand{\phantomchoix}[1]{\textcolor{red}{#1}}
+%\newcommand{\blanc}[1]{\textcolor{red}{#1}}
+% eleve : 
+\newcommand{\phantomchoix}[1]{\phantom{#1}}
+\newcommand{\blanc}[1]{\textcolor{white}{#1}}
+
+\renewcommand{\baselinestretch}{1.2}
+\newcommand{\site}{\texttt{delphine.sembely.free.fr/tp.html} }
+
+
+
+
+\begin{document}
+\enteteinfo
+
+L'idée de Vigenère est d'utiliser un chiffre de César, mais où le décalage utilisé change de lettres en lettres. Pour cela, on utilise une table composée de 26 alphabets, écrits dans l'ordre, mais décalés de ligne en ligne d'un caractère. On écrit encore en haut un alphabet complet, pour la clé, et à gauche, verticalement, un dernier alphabet, pour le texte à coder : 
+
+\begin{center}\includegraphics[width=7cm]{vigenere.png}\end{center}
+
+Pour coder un message, par exemple  \texttt{cryptographie de vigenere}, on choisit une clé qui sera un mot de longueur arbitraire ; prenons \texttt{mathweb}. On écrit ensuite cette clé sous le message à coder, en la répétant aussi souvent que nécessaire pour que sous chaque lettre du message à coder, on trouve une lettre de la clé :  
+\begin{center}
+\begin{tabular}{|*{25}{c|}}
+\hline
+c&r&y&p&t&o&g&r&a&p&h&i&e&d&e&v&i&g&e&n&e&r&e\\
+\hline
+m&a&t&h&w&e&b&m&a&t&h&w&e&b&m&a&t&h&w&e&b&m&a\\
+\hline
+\end{tabular}
+\end{center}
+
+~\newline
+
+\begin{minipage}{0.5\linewidth}
+Pour coder, on regarde dans le tableau l'intersection de la ligne de la lettre à coder avec la colonne de la lettre de la clé.\\
+
+Dans notre exemple, on commence par coder la lettre \texttt{c} ; la clé est donnée par la lettre  \texttt{m}.\\ On regarde dans le tableau l'intersection de  la "ligne" C et de la "colonne" M  : ainsi ce sera codé par  \texttt{o}.\\
+
+Ensuite, on code la lettre  \texttt{r}, dont la clé est  \texttt{a} ; la lecture du tableau donne la lettre  \texttt{r} (ligne R et colonne A). \\
+
+Ainsi de suite : notre message sera codé par \texttt{orrwpshdaioei eq vbnarfde}. 
+\end{minipage}
+\begin{minipage}{0.5\linewidth}
+\begin{center}\includegraphics[width=7cm]{vigenere2.png}\end{center}
+\end{minipage}
+\newpage
+L'intérêt par rapport au codage de César est qu'une même lettre sera codée par plusieurs lettre différentes ; par exemple ici \texttt{e} est codé par \texttt{i}, \texttt{q}, \texttt{a}, \texttt{f} et \texttt{e}. En conséquence, l'analyse des fréquences d'apparition n'a plus aucune utilité et ne permet pas de décoder le texte. \\
+
+
+\emph{Remarques}:
+\begin{dinglist}{72}
+\item Dans la suite, on supposera que les textes sont sans espaces, sans majuscules, sans accents et sans ponctuation.
+\item Récupérer le fichier \texttt{vigenere.py} disponible sur le site \site et le stocker dans le dossier \texttt{TP04}. Ouvrir \texttt{vigenere.py} puis copier-coller son contenu dans le ficher \texttt{TP04.py} à la suite de votre travail sur le code de César.
+\item On pourra bien sûr se servir avec profit des fonctions développées pour le décodage automatique de César.
+%Le but est de tester la fonction sur \texttt{message\_vigenere}. %Ce message a été codé par la méthode de Vigenère. Sachant que la clé possède $11$ lettres, déchiffrez le message.
+%Dans le script, on insérera \texttt{from vigenere import *}.
+\end{dinglist}
+
+\bigskip
+\begin{enumerate}
+\item \'Ecrire une fonction \texttt{codage\_vigenere} d'arguments une clé (chaîne de caractères) \texttt{cle} et un message en clair \texttt{texte}. Cette fonction renverra le message codé selon Vigenère avec la clé \texttt{cle}.
+\item \'Ecrire une fonction \texttt{decodage\_vigenere} d'arguments une clé (chaîne de caractères) \texttt{cle} et un message codé \texttt{texte} (selon Vigenère avec la clé \texttt{cle}) . Cette fonction renverra le message décodé.
+\item \'Ecrire une fonction \texttt{decodage\_vigenere\_ameliore} d'arguments la longueur de la clé \texttt{longueur} et un message codé \texttt{texte} (selon Vigenère et une clé inconnue de taille \texttt{longueur)}. Cette fonction renverra la clé et le message en clair.
+\item Décoder \texttt{message\_vigenere} qui a été codé avec la méthode de Vigenère, sachant que la clé possède $11$ lettres.%, déchiffrez le message.
+
+\end{enumerate}
+%\textit{Indication} : on pourra bien sûr se servir avec profit des fonctions développées pour le décodage automatique de César.\\
+%On testera la fonction sur \texttt{message\_vigenere}. Ce message a été codé par la méthode de Vigenère. Sachant que la clé possède $11$ lettres, déchiffrez le message.
+
+\end{document}
+
+
