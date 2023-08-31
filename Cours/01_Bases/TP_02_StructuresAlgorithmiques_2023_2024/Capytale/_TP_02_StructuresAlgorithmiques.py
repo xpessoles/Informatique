@@ -105,7 +105,76 @@ def is_rectangle_test(foo,a,b,c):
     assert b > 0
     assert c > 0
     if foo(a,b,c) == is_rectangle_corrige(a,b,c):
-        print(f"Test réussi")
+        print("Test réussi")
     else :
-        print(f"Test échoué")
+        print("Test échoué")
 
+
+## Q7 Triangle
+def triangle_corrige(a:int, b:int, c:int) -> bool :
+    if not is_exists_corrige(a,b,c):
+        return -1
+    if is_equilateral_corrige(a,b,c):
+        return 1
+    if is_isocele_corrige(a,b,c) and is_rectangle_corrige(a,b,c):
+        return 4
+    if is_isocele_corrige(a,b,c) :
+        return 2
+    if is_rectangle_corrige(a,b,c):
+        return 3
+    return 0
+    
+def triangle_test(foo,a,b,c):
+    assert a > 0     
+    assert b > 0
+    assert c > 0
+    if foo(a,b,c) == triangle_corrige(a,b,c):
+        print("Test réussi")
+    else :
+        print("Test échoué")    
+        
+## Q8 Legende
+def corrige_legende() -> int :
+    case = 1
+    res = 0
+    for i in range(64):
+        res = res + case
+        case = case*2
+    return res
+
+def test_legende(foo) :
+    if foo() == corrige_legende():
+        print("Test réussi")
+    else :
+        print("Test échoué")
+
+
+## Q9 Masse
+def corrige_calcul_masse():
+    grains = corrige_legende()
+    masse = grains *  0.02 / 1000
+    return masse # en kg
+
+def test_calcul_masse(foo) :
+    if foo() == calcul_masse():
+        print("Test réussi")
+    else :
+        print("Test échoué")    
+        
+## Q10  Nb jours
+def corrige_nb_jours():
+    # Masse annuelle kg
+    M = 757000000000
+    # Masse journaliere
+    mj = M/365
+    #Masse légende 
+    ml = corrige_legende()
+    nb_j = int(ml/mj)+1
+    return nb_j
+    
+def test_corrige_nb_jours(foo) :
+    if foo() == corrige_nb_jours():
+        print("Test réussi")
+    else :
+        print("Test échoué")    
+    
