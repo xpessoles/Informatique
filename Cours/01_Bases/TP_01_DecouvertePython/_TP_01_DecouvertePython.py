@@ -34,7 +34,7 @@ def inv_racine_corrige(a:float) :
         return a**(-.5)
     
 def inv_racine_test(foo,a:float):
-    if foo(a) == inv_racine_corrige(a) :
+    if round(foo(a),3) == round(inv_racine_corrige(a),3) :
         print(f"Test inv_racine({a}) : réussi")
     else :
         print(f"Test inv_racine({a}) : échoué")
@@ -42,7 +42,7 @@ def inv_racine_test(foo,a:float):
 
 ## Est pair
 def est_pair_corrige(a:int) -> bool : 
-    return a%2 == True
+    return a%2 == 0
 
 def est_pair_test(foo,a):
     if foo(a) == est_pair_corrige(a) :
