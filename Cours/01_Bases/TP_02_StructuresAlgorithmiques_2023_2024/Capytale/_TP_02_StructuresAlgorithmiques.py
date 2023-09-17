@@ -10,6 +10,44 @@ def val_absolue_corrige(x:float)-> float:
     else :
         return -x
         
+def test_q01(foo) :
+    pts,total = 0,0
+    
+    total +=1
+    x = 0
+    try :
+        if (val_absolue_corrige(x) ==  foo(x)):
+            pts +=1 
+    except : 
+        pass
+    
+    total +=1
+    x = 2
+    try :
+        if (val_absolue_corrige(x) ==  foo(x)):
+            pts +=1 
+    except : 
+        pass
+    
+    total +=1
+    x = -2
+    try :
+        if (val_absolue_corrige(x) ==  foo(x)):
+            pts +=1 
+    except : 
+        pass
+    
+    total +=1
+    x = -3.5
+    try :
+        if (val_absolue_corrige(x) ==  foo(x)):
+            pts +=1 
+    except : 
+        pass
+        
+    return pts,total
+    
+    
 def val_absolue_test(foo,x):
     if foo(x) == val_absolue_corrige(x):
         print(f"Test val_absolue({x}) : réussi")
@@ -37,7 +75,42 @@ def cout_voyage_test(foo,x):
     else :
         print(f"Test cout_voyage({x}) : échoué")
 
+def test_q02(foo) :
+    pts,total = 0,0
+    
+    total +=1
+    x = 1
+    try :
+        if (cout_voyage_corrige(x) ==  foo(x)):
+            pts +=1 
+    except : 
+        pass
+    
+    total +=1
+    x = 2
+    try :
+        if (cout_voyage_corrige(x) ==  foo(x)):
+            pts +=1 
+    except : 
+        pass
+        
+    total +=1
+    x = 3
+    try :
+        if (cout_voyage_corrige(x) ==  foo(x)):
+            pts +=1 
+    except : 
+        pass
+        
+    total +=1
+    x = 12
+    try :
+        if (cout_voyage_corrige(x) ==  foo(x)):
+            pts +=1 
+    except : 
+        pass
 
+    return pts,total
 
 ## Q3 
 def is_exists_corrige(a:int, b:int, c:int) -> bool :
@@ -45,6 +118,7 @@ def is_exists_corrige(a:int, b:int, c:int) -> bool :
     if (a <= b+c) and (b <= a+c) and (c <= b+a) :
         return True
     return False
+
 
 def is_exists_test(foo,a,b,c):
     assert a > 0     
@@ -54,6 +128,44 @@ def is_exists_test(foo,a,b,c):
         print(f"Test is_exists({a,b,c}) : réussi")
     else :
         print(f"Test is_exists({a,b,c}) : échoué")
+        
+def test_q03(foo) :
+    pts,total = 0,0
+    
+    total +=1
+    a,b,c = 10,1,1
+    try :
+        if (is_exists_corrige(a,b,c) ==  foo(a,b,c)):
+            pts +=1 
+    except : 
+        pass
+
+    total +=1
+    a,b,c = 10,9,8
+    try :
+        if (is_exists_corrige(a,b,c) ==  foo(a,b,c)):
+            pts +=1 
+    except : 
+        pass
+        
+    total +=1
+    a,b,c = 10,10,9
+    try :
+        if (is_exists_corrige(a,b,c) ==  foo(a,b,c)):
+            pts +=1 
+    except : 
+        pass
+        
+    total +=1
+    a,b,c = 10,10,10
+    try :
+        if (is_exists_corrige(a,b,c) ==  foo(a,b,c)):
+            pts +=1 
+    except : 
+        pass
+    
+    return pts,total
+    
 
 ## Q4
 def is_equilateral_corrige(a:int, b:int, c:int) -> bool :
@@ -73,6 +185,43 @@ def is_equilateral_test(foo,a,b,c):
     else :
         print(f"Test échoué")
 
+def test_q04(foo) :
+    pts,total = 0,0
+    
+    foo_corrige = is_equilateral_corrige
+    total +=1
+    a,b,c = 10,1,1
+    try :
+        if (foo_corrige(a,b,c) ==  foo(a,b,c)):
+            pts +=1 
+    except : 
+        pass
+
+    total +=1
+    a,b,c = 10,9,8
+    try :
+        if (foo_corrige(a,b,c) ==  foo(a,b,c)):
+            pts +=1 
+    except : 
+        pass
+        
+    total +=1
+    a,b,c = 10,10,9
+    try :
+        if (foo_corrige(a,b,c) ==  foo(a,b,c)):
+            pts +=1 
+    except : 
+        pass
+        
+    total +=1
+    a,b,c = 10,10,10
+    try :
+        if (foo_corrige(a,b,c) ==  foo(a,b,c)):
+            pts +=1 
+    except : 
+        pass
+    
+    return pts,total
 
 ## Q5
 def is_isocele_corrige(a:int, b:int, c:int) -> bool :
@@ -88,6 +237,45 @@ def is_isocele_test(foo,a,b,c):
         print(f"Test réussi")
     else :
         print(f"Test échoué")
+
+def test_q05(foo) :
+    pts,total = 0,0
+    
+    foo_corrige = is_isocele_corrige
+    total +=1
+    a,b,c = 10,1,1
+    try :
+        if (foo_corrige(a,b,c) ==  foo(a,b,c)):
+            pts +=1 
+    except : 
+        pass
+
+    total +=1
+    a,b,c = 10,9,8
+    try :
+        if (foo_corrige(a,b,c) ==  foo(a,b,c)):
+            pts +=1 
+    except : 
+        pass
+        
+    total +=1
+    a,b,c = 10,10,9
+    try :
+        if (foo_corrige(a,b,c) ==  foo(a,b,c)):
+            pts +=1 
+    except : 
+        pass
+        
+    total +=1
+    a,b,c = 10,10,10
+    try :
+        if (foo_corrige(a,b,c) ==  foo(a,b,c)):
+            pts +=1 
+    except : 
+        pass
+    
+    return pts,total
+
 
 ## Q6
 def is_rectangle_corrige(a:int, b:int, c:int) -> bool :
@@ -108,6 +296,44 @@ def is_rectangle_test(foo,a,b,c):
         print("Test réussi")
     else :
         print("Test échoué")
+
+def test_q06(foo) :
+    pts,total = 0,0
+    
+    foo_corrige = is_rectangle_corrige
+    total +=1
+    a,b,c = 10,1,1
+    try :
+        if (foo_corrige(a,b,c) ==  foo(a,b,c)):
+            pts +=1 
+    except : 
+        pass
+
+    total +=1
+    a,b,c = 10,9,8
+    try :
+        if (foo_corrige(a,b,c) ==  foo(a,b,c)):
+            pts +=1 
+    except : 
+        pass
+        
+    total +=1
+    a,b,c = 10,10,9
+    try :
+        if (foo_corrige(a,b,c) ==  foo(a,b,c)):
+            pts +=1 
+    except : 
+        pass
+        
+    total +=1
+    a,b,c = 10,10,10
+    try :
+        if (foo_corrige(a,b,c) ==  foo(a,b,c)):
+            pts +=1 
+    except : 
+        pass
+    
+    return pts,total
 
 
 ## Q7 Triangle
@@ -132,7 +358,45 @@ def triangle_test(foo,a,b,c):
         print("Test réussi")
     else :
         print("Test échoué")    
+
+def test_q07(foo) :
+    pts,total = 0,0
+    
+    foo_corrige = is_triangle_corrige
+    total +=1
+    a,b,c = 10,1,1
+    try :
+        if (foo_corrige(a,b,c) ==  foo(a,b,c)):
+            pts +=1 
+    except : 
+        pass
+
+    total +=1
+    a,b,c = 10,9,8
+    try :
+        if (foo_corrige(a,b,c) ==  foo(a,b,c)):
+            pts +=1 
+    except : 
+        pass
         
+    total +=1
+    a,b,c = 10,10,9
+    try :
+        if (foo_corrige(a,b,c) ==  foo(a,b,c)):
+            pts +=1 
+    except : 
+        pass
+        
+    total +=1
+    a,b,c = 10,10,10
+    try :
+        if (foo_corrige(a,b,c) ==  foo(a,b,c)):
+            pts +=1 
+    except : 
+        pass
+    
+    return pts,total
+
 ## Q8 Legende
 def corrige_legende() -> int :
     case = 1
@@ -148,6 +412,18 @@ def test_legende(foo) :
     else :
         print("Test échoué")
 
+def test_q08(foo) :
+    pts,total = 0,0
+    
+    foo_corrige = corrige_legende
+    total +=2
+    try :
+        if (foo_corrige() ==  foo()):
+            pts +=2 
+    except : 
+        pass
+    
+    return pts,total
 
 ## Q9 Masse
 def corrige_calcul_masse():
@@ -160,6 +436,20 @@ def test_calcul_masse(foo) :
         print("Test réussi")
     else :
         print("Test échoué")    
+
+def test_q09(foo) :
+    pts,total = 0,0
+    
+    foo_corrige = corrige_calcul_masse
+    total +=2
+    try :
+        if (foo_corrige() ==  foo()):
+            pts +=2 
+    except : 
+        pass
+    
+    return pts,total
+
         
 ## Q10  Nb jours
 def corrige_nb_jours():
@@ -177,4 +467,246 @@ def test_corrige_nb_jours(foo) :
         print("Test réussi")
     else :
         print("Test échoué")    
+
+def test_q10(foo) :
+    pts,total = 0,0
+    
+    foo_corrige = corrige_nb_jours
+    total +=2
+    try :
+        if (foo_corrige() ==  foo()):
+            pts +=2 
+    except : 
+        pass
+    
+    return pts,total
+    
+
+## Q11 Nb mots
+def corrige_nombre_lettres(mot:str) -> int:
+    return len(mot)
+
+def test_q11(foo) :
+    pts,total = 0,0
+    
+    foo_corrige = corrige_nombre_lettres
+    total +=1
+    mot = ""
+    try :
+        if (foo_corrige(mot) ==  foo(mot)):
+            pts +=1
+    except : 
+        pass
+    
+    total +=1
+    mot = "a"
+    try :
+        if (foo_corrige(mot) ==  foo(mot)):
+            pts +=1
+    except : 
+        pass
+    
+    total +=1    
+    mot = "ab"
+    try :
+        if (foo_corrige(mot) ==  foo(mot)):
+            pts +=1
+    except : 
+        pass
+    
+    total +=1    
+    mot = "a b"
+    try :
+        if (foo_corrige(mot) ==  foo(mot)):
+            pts +=1
+    except : 
+        pass
+    
+    return pts,total
+
+## Q12 Premiere lettre
+def corrige_premiere_lettre(mot:str) -> int:
+    return mot[0]
+
+def test_q12(foo) :
+    pts,total = 0,0
+    
+    foo_corrige = corrige_premiere_lettre
+    total +=1
+    mot = "aa"
+    try :
+        if (foo_corrige(mot) ==  foo(mot)):
+            pts +=1
+    except : 
+        pass
+    
+    total +=1
+    mot = "a"
+    try :
+        if (foo_corrige(mot) ==  foo(mot)):
+            pts +=1
+    except : 
+        pass
+
+    total +=1    
+    mot = "ab"
+    try :
+        if (foo_corrige(mot) ==  foo(mot)):
+            pts +=1
+    except : 
+        pass
+    
+    total +=1
+    mot = "a b"
+    try :
+        if (foo_corrige(mot) ==  foo(mot)):
+            pts +=1
+    except : 
+        pass
+    
+    return pts,total
+    
+## Q13 Derniere lettre
+def corrige_derniere_lettre(mot:str) -> int:
+    return mot[-1]
+
+def test_q13(foo) :
+    pts,total = 0,0
+    
+    foo_corrige = corrige_derniere_lettre
+    total +=1
+    mot = "aa"
+    try :
+        if (foo_corrige(mot) ==  foo(mot)):
+            pts +=1
+    except : 
+        pass
+    
+    total +=1
+    mot = "a"
+    try :
+        if (foo_corrige(mot) ==  foo(mot)):
+            pts +=1
+    except : 
+        pass
+    
+    total +=1
+    mot = "ab"
+    try :
+        if (foo_corrige(mot) ==  foo(mot)):
+            pts +=1
+    except : 
+        pass
+        
+    total +=1
+    mot = "a b"
+    try :
+        if (foo_corrige(mot) ==  foo(mot)):
+            pts +=1
+    except : 
+        pass
+    
+    return pts,total
+
+## Q14 miroir
+def corrige_miroir(mot:str) -> int:
+    tom = ''
+    for lettre in mot :
+        tom = lettre+tom
+    return tom
+    
+
+def test_q14(foo) :
+    pts,total = 0,0
+    
+    foo_corrige = corrige_miroir
+    total +=1
+    mot = "aa"
+    try :
+        if (foo_corrige(mot) ==  foo(mot)):
+            pts +=1
+    except : 
+        pass
+    
+    total +=1
+    mot = "a"
+    try :
+        if (foo_corrige(mot) ==  foo(mot)):
+            pts +=1
+    except : 
+        pass
+        
+    total +=1
+    mot = "ab"
+    try :
+        if (foo_corrige(mot) ==  foo(mot)):
+            pts +=1
+    except : 
+        pass
+    
+    total +=1
+    mot = "a b"
+    try :
+        if (foo_corrige(mot) ==  foo(mot)):
+            pts +=1
+    except : 
+        pass
+    
+    return pts,total
+    
+
+## Q15 remplace_lettre
+def corrige_remplace_lettre(mot:str, old_lettre:str, new_lettre:str) -> str:
+    new_mot = ""
+    for lettre in mot :
+        if lettre == old_lettre :
+            new_mot = new_mot+new_lettre
+        else :
+            new_mot = new_mot+lettre
+    return new_mot
+    
+
+def test_q15(foo) :
+    pts,total = 0,0
+    
+    foo_corrige = corrige_remplace_lettre
+    
+    total +=1
+    mot = "aa"
+    old,new = 'a','b' 
+    try :
+        if (foo_corrige(mot,old,new) ==  foo(mot,old,new)):
+            pts +=1
+    except : 
+        pass
+    
+    total +=1
+    mot = "aa"
+    old,new = 'c','c' 
+    try :
+        if (foo_corrige(mot,old,new) ==  foo(mot,old,new)):
+            pts +=1
+    except : 
+        pass
+    
+    total +=1
+    mot = "aba"
+    old,new = 'a','b' 
+    try :
+        if (foo_corrige(mot,old,new) ==  foo(mot,old,new)):
+            pts +=1
+    except : 
+        pass
+    
+    
+    total +=1
+    mot = "a a"
+    old,new = ' ','a' 
+    try :
+        if (foo_corrige(mot,old,new) ==  foo(mot,old,new)):
+            pts +=1
+    except : 
+        pass
+    
+    return pts,total
     
