@@ -362,7 +362,7 @@ def triangle_test(foo,a,b,c):
 def test_q07(foo) :
     pts,total = 0,0
     
-    foo_corrige = is_triangle_corrige
+    foo_corrige = triangle_corrige
     total +=1
     a,b,c = 10,1,1
     try :
@@ -710,3 +710,139 @@ def test_q15(foo) :
     
     return pts,total
     
+## GO
+def go(foo1,foo3,foo4,foo5,foo6,foo7,foo8,foo9,foo10,foo11,foo12,foo13,foo14,foo15):
+    i = 0
+    notes = {}
+    tot = 4
+    
+    pts = 0
+    i += 1
+    try :
+        pts,tot = test_q01(foo1)
+    except : 
+        pass
+    print("Question "+str(i)+" : ",str(pts),"/",str(tot))
+    notes[i] = (pts,tot)
+
+    
+    pts = 0
+    i = 3
+    try :
+        pts,tot = test_q03(foo3)
+    except : 
+        pass
+    print("Question "+str(i)+" : ",str(pts),"/",str(tot))
+    notes[i] = (pts,tot)
+
+    
+    pts = 0
+    i += 1
+    try :
+        pts,tot = test_q04(foo4)
+    except : 
+        pass
+    print("Question "+str(i)+" : ",str(pts),"/",str(tot))
+    notes[i] = (pts,tot)
+
+    
+    pts = 0
+    i += 1
+    try :
+        pts,tot = test_q05(foo5)
+    except : 
+        pass
+    print("Question "+str(i)+" : ",str(pts),"/",str(tot))
+    notes[i] = (pts,tot)
+    
+    pts = 0
+    i += 1
+    try :
+        pts,tot = test_q06(foo6)
+    except : 
+        pass
+    print("Question "+str(i)+" : ",str(pts),"/",str(tot))
+    notes[i] = (pts,tot)
+    
+    pts = 0
+    i += 1
+    try :
+        pts,tot = test_q07(foo7)
+    except : 
+        pass
+    print("Question "+str(i)+" : ",str(pts),"/",str(tot))
+    notes[i] = (pts,tot)
+    
+    pts = 0
+    i += 1
+    try :
+        pts,tot = test_q08(foo8)
+    except : 
+        pass
+    print("Question "+str(i)+" : ",str(pts),"/",str(tot))
+    notes[i] = (pts,tot)
+    
+    pts = 0
+    i += 1
+    try :
+        pts,tot = test_q09(foo9)
+    except : 
+        pass
+    print("Question "+str(i)+" : ",str(pts),"/",str(tot))
+    notes[i] = (pts,tot)
+    
+    pts = 0
+    i += 1
+    try :
+        pts,tot = test_q10(foo10)
+    except : 
+        pass
+    print("Question "+str(i)+" : ",str(pts),"/",str(tot))
+    notes[i] = (pts,tot)
+    
+    
+    pts = 0
+    i += 1
+    try :
+        pts,tot = test_q11(foo11)
+    except : 
+        pass
+    print("Question "+str(i)+" : ",str(pts),"/",str(tot))
+    notes[i] = (pts,tot)
+    
+    pts = 0
+    i += 1
+    try :
+        pts,tot = test_q12(foo12)
+    except : 
+        pass
+    print("Question "+str(i)+" : ",str(pts),"/",str(tot))
+    notes[i] = (pts,tot)
+    
+    pts = 0
+    i += 1
+    try :
+        pts,tot = test_q13(foo13)
+    except : 
+        pass
+    print("Question "+str(i)+" : ",str(pts),"/",str(tot))
+    notes[i] = (pts,tot)
+    
+    pts = 0
+    i += 1
+    try :
+        pts,tot = test_q14(foo14)
+    except : 
+        pass
+    print("Question "+str(i)+" : ",str(pts),"/",str(tot))
+    notes[i] = (pts,tot)
+    
+    pts = 0
+    i += 1
+    try :
+        pts,tot = test_q15(foo15)
+    except : 
+        pass
+    print("Question "+str(i)+" : ",str(pts),"/",str(tot))
+    notes[i] = (pts,tot)  
+
