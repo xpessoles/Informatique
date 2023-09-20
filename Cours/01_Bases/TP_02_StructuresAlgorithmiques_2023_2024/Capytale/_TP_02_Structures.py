@@ -711,7 +711,7 @@ def test_q15(foo) :
     return pts,total
     
 ## GO
-def go(foo1,foo2,foo3,foo4,foo5,foo6,foo7,foo8,foo9,foo10,foo11,foo12,foo13,foo14,foo15):
+def go(foo1,foo3,foo4,foo5,foo6,foo7,foo8,foo9,foo10,foo11,foo12,foo13,foo14,foo15):
     i = 0
     notes = {}
     tot = 4

@@ -1,0 +1,227 @@
+%%\setchapterimage{fig_00}
+%\chapter*{Colle \arabic{cptColle} \\
+%Préhenseur -- \ifprof Corrigé \else Sujet \fi}
+%
+%\addcontentsline{toc}{section}{Colle \arabic{cptTD} :  -- \ifprof Corrigé \else Sujet \fi}
+%
+%\iflivret \stepcounter{cptColle} \else
+%\ifprof  \stepcounter{cptColle} \else \fi
+%\fi
+%\setcounter{question}{0}
+
+%\setchapterimage{fig_00}
+\chapter*{TP 3 \\
+Cryptographie -- \ifprof Corrigé \else Sujet \fi}
+
+\addcontentsline{toc}{section}{TP 3 :  -- \ifprof Corrigé \else Sujet \fi}
+
+\iflivret \stepcounter{cptColle} \else
+\ifprof  \stepcounter{cptColle} \else \fi
+\fi
+\setcounter{question}{0}
+La cryptographie a pour but de cacher le contenu d'un message. Afin de le rendre incompréhensible, on brouille le message suivant un protocole mis au point préalablement par l'expéditeur et le destinataire. Ce dernier n'aura qu'à inverser le procédé pour rendre le message lisible, alors que l'ennemi, s'il ne connaît pas le protocole de brouillage, trouvera difficile, voire impossible, de rétablir le texte original \sidenote{Ceux que le sujet intéresse pourront lire \emph{Histoire des codes secrets} de Simon Singh.}. 
+
+
+
+Au premier siècle de notre ère est apparu un chiffrement par substitution, connu sous le nom de \emph{code de César}, car l'empereur en a été l'un des plus assidus utilisateurs. Le chiffre de César consiste à assigner à chaque lettre de l'alphabet une autre lettre, résultant du décalage de l'alphabet d'un certain nombre de lettres. Par exemple, avec le décalage suivant:
+\begin{center}
+\begin{tabular}{|*{26}{c|}}
+\hline
+a&b&c&d&e&f&g&h&i&j&k&l&m&n&o&p&q&r&s&t&u&v&w&x&y&z\\
+\hline
+f&g&h&i&j&k&l&m&n&o&p&q&r&s&t&u&v&w&x&y&z&a&b&c&d&e\\
+\hline
+\end{tabular}
+\end{center}
+le texte \texttt{'vous suivez le cours de python'} devient \texttt{'atzx xznaje qj htzwx ij udymts'}.\\ Pour connaître le code utilisé, il suffit de connaître la clé, c'est-à-dire la lettre qui correspond à la lettre \texttt{'a'} (dans l'exemple, la clé est donc \texttt{'f'}). 
+\bigskip
+
+Le but de ce TP est de coder un message par cette méthode, et également de déchiffrer un message codé. 
+\bigskip
+\begin{itemize}
+\item[\textbullet] Créez un dossier \texttt{TP03} puis, à l'intérieur, un fichier \texttt{TP03.py}. 
+Récupérez  le fichier \texttt{cesar.py} sur le site \url{https://ptsilamartin.github.io/info/TP.html}  et enregistrez-le dans votre dossier \texttt{TP03}.
+\item[\textbullet] Après avoir ouvert et parcouru \texttt{cesar.py}, copiez-collez son contenu au début de votre fichier \texttt{TP03.py}.
+\end{itemize}
+
+\bigskip
+%Pour commencer, créer un dossier \texttt{TP04} puis, à l'intérieur, un fichier \texttt{TP04.py}. 
+%Récupérer  le fichier \texttt{cesar.py} sur le site \site et l'enregistrer dans votre dossier \texttt{TP04}. \\
+%Ecrire au début du fichier \texttt{TP05.py}:  \texttt{from cesar import *}
+%(cela permettra d'utiliser le fichier \texttt{cesar.py} au cours du TP).
+%
+%\bigskip
+
+\emph{Remarque}: On prendra bien soin, dans tout le TP, de documenter les fonctions écrites et de les tester.
+
+
+
+\section{Faire correspondre les lettres et les entiers en python}
+
+%Tous les caractères et textes dans ce TP seront manipulés en python avec le type \texttt{string}.
+On rappelle que c'est le type \texttt{string} (chaîne de caractères) qui permet, en python, de manipuler les caractères et les textes : par exemple \texttt{'a'} et \texttt{'bonjour, ça va ?'} sont de type \texttt{string}.
+
+Nous allons utiliser deux fonctions prédéfinies en python : \texttt{ord} et \texttt{chr}. Elle permettent d'associer à chaque caractère un entier entre 0 et 255, et réciproquement.  Voici un exemple :
+\begin{lstlisting}
+>>> ord('a')
+97
+>>> chr(97)
+'a'
+\end{lstlisting}
+
+
+\begin{question}
+Afficher les lettres dont les entiers associés sont compris entre 97 et 122.
+\end{question}
+
+
+%Afficher le code de chaque lettre de l'alphabet (écrite en minuscule).
+Il serait plus pratique que l'entier associé à \texttt{'a'} soit $0$ et celui associé à \texttt{'z'} soit 25. 
+
+\begin{question}
+Nous allons donc définir notre propre fonction \texttt{ordre}, qui prend pour argument une lettre \texttt{c}, et qui renvoie l'entier entre $0$ et $25$ lui correspondant. Vérifier que \texttt{ordre('a')} donne \texttt{0} et que \texttt{ordre('z')} donne \texttt{25}.
+\end{question}
+
+\begin{question}
+\'Ecrire la fonction réciproque, c'est-à-dire la fonction \texttt{lettre}, qui prend pour argument un entier \texttt{nb} entre $0$ et $25$, et qui renvoie la lettre correspondante. Par exemple, \texttt{lettre(2)} donne \texttt{'c'}.
+\end{question}
+
+\section{Codage et décodage d'un caractère connaissant la clé}
+
+
+On reprend le tableau de l'introduction, en indiquant les entiers associés aux caractères (leurs ordres) :
+
+\begin{table*}[h!]
+\centering
+\begin{tabular}{|*{26}{c|}}
+\hline
+0&1&2&3&4&5&6&7&8&9&10&11&12&13&14&15&16&17&18&19&20&21&22&23&24&25\\
+\hline
+a&b&c&d&e&f&g&h&i&j&k&l&m&n&o&p&q&r&s&t&u&v&w&x&y&z\\
+\hline
+f&g&h&i&j&k&l&m&n&o&p&q&r&s&t&u&v&w&x&y&z&a&b&c&d&e\\
+\hline
+5&6&7&8&9&10&11&12&13&14&15&16&17&18&19&20&21&22&23&24&25&0&1&2&3&4\\
+\hline
+\end{tabular}
+\end{table*}
+\bigskip
+ On note $N$ l'ordre  d'une lettre écrite en clair, $P$ l'ordre  de cette même lettre après codage, et $K$ l'ordre de la clé. $N$, $P$ et $K$ sont donc des entiers entre $0$ et $25$.\\
+ Dans l'exemple ci-dessus,  la clé est \texttt{'f'} donc $K$ vaut $5$.\\
+
+\begin{question}
+ Exprimer $P$ en fonction de $N$ et $K$, puis $N$ en fonction de $P$ et $K$ (question sans ordinateur).
+\end{question}
+
+\begin{question}
+En déduire une fonction \texttt{crypte} qui prend pour arguments deux chaînes de caractères : la clé \texttt{cle} et le caractère en clair \texttt{c}. Cette fonction devra renvoyer le caractère codé.
+
+Vérifier, par exemple, qu'en prenant comme clé le caractère \texttt{'f'}, le caractère en clair \texttt{'x'} donne le caractère codé \texttt{'c'}.
+\end{question}
+
+\begin{question}
+Ecrire la fonction réciproque c'est-à-dire la fonction \texttt{clair} qui a pour arguments la clé \texttt{cle} et le caractère codé \texttt{c} et qui renvoie le caractère en clair.
+\end{question}
+
+\section{Codage et décodage d'un texte connaissant la clé}
+
+\begin{question}
+\'Ecrire une fonction \texttt{codage}, qui a pour arguments la clé \texttt{cle} et un message en clair \texttt{texte}, et qui renvoie le message codé suivant la clé \texttt{cle}. 
+\end{question}
+
+On supposera que, dans ce texte, il n'y a pas de caractère écrit en majuscule et qu'il n'y a pas de lettres accentuées. On laissera les éléments de ponctuation inchangés.
+
+\begin{question}
+Tester la fonction sur un message de votre choix.
+\end{question}
+
+%\emph{Remarque} : Si vous avez du temps à la fin du TP vous pourrez reprendre cette question en prenant en compte les majuscules et lettres accentuées.
+\begin{question}
+\'Ecrire une fonction \texttt{decodage}, qui a pour arguments la clé \texttt{cle} et un message codé \texttt{texte}, et qui renvoie le message en clair.
+\end{question}
+
+\begin{question}
+Tester la fonction sur le message codé de la question précédente et vérifier que l'on récupère le message initial.
+%\item Tester les deux fonctions précédentes en écrivant un texte, en le codant puis en le décodant (suivant la même clé).
+\end{question}
+
+\section{Déterminer la clé : méthode itérative}
+On intercepte un message codé par le chiffrement de César (mais dont on ignore la clé). On veut déterminer la clé et le message original. 
+Le codage de Cesar étant très basique (il n'y a que 26 clés possibles) il est très facile de décoder le message sans connaitre la clé.\\
+
+\begin{question}
+A l'aide d'une boucle sur les 26 clés possibles déterminer la clé utilisée pour les \texttt{message1, message2, message3} présents au début de votre script.
+%\item Tester les deux fonctions précédentes en écrivant un texte, en le codant puis en le décodant (suivant la même clé).
+\end{question}
+
+
+\section{Pour aller + loin : Déterminer la clé : méthode automatique}
+
+Même si la méthode itérative est très rapide car le code est très simple, nous pouvons aussi proposer une méthode automatique.
+Nous allons exploiter l'idée que, dans une langue donnée, la fréquence d'apparition de chacune des lettres de l'alphabet n'est pas la même. 
+
+Après la récupération de \texttt{cesar.py}, au début de votre fichier, il y a en particulier une liste \texttt{fr} des fréquences d'apparition %de référence 
+des lettres de l'alphabet en français.
+
+\emph{Remarque}: On notera bien que chaque fréquence est donnée en \%, et  qu'elle concerne les caractères alphabétiques uniquement. Par exemple, la lettre \texttt{'a'} apparaît, dans un texte comportant  $100$ caractères alphabétiques, en moyenne $8,4$ fois.
+%$9,42$ fois.\\
+
+Nous allons "comparer" cette liste \texttt{fr} à la liste \texttt{fc} des fréquences obtenues à partir d'un texte donné.
+
+\question{\'Ecrire une fonction \texttt{frequence}, qui a pour argument un message \texttt{texte}, et qui renvoie une liste de $26$ éléments contenant la fréquence d'apparition de chacune des lettres de l'alphabet dans le message \texttt{texte}.}
+
+\emph{Remarque} : \texttt{[0] * 26} est une liste de 26 éléments tous égaux à $0$.
+
+
+Pour trouver la clé, on va faire "tourner" le tableau \texttt{fc} des fréquences d'apparition des lettres du texte chiffré pour le faire coïncider le mieux possible avec le tableau \texttt{fr} des fréquences d'apparition de référence.
+
+\question{\'Ecrire une fonction \texttt{distance} qui a pour argument un message \texttt{texte} et qui renvoie la liste \texttt{d} telle que:
+\[\forall i\in\{0,\dots,25\},d_i=\sum_{j=0}^{25}|fr_j-fc_{(i+j)mod(26)}|\].}
+
+\emph{Remarque} : Pour un  entier $i$ donné, la quantité $|fr_j-fc_{(i+j)mod(26)}|$ est l'écart entre la fréquence de la lettre d'ordre $j$ en français et la fréquence de cette même lettre dans le texte chiffré, en faisant l'hypothèse que la clé est la lettre d'ordre $i$. 
+La quantité $d_i$ est la somme de tous ces écarts pour la clé d'ordre $i$ fixée. Donc, plus $d_i$ est petit, plus le tableau des fréquences avec la clé d'ordre $i$ est proche du tableau des fréquences de référence en français.
+
+
+%\begin{center}
+%\begin{tabular}{cc|*{4}{c|}c}
+%\cline{3-6}
+%d&$\to$&$d_0$&$d_1$&$\dots$&$d_{25}$&\\
+%\cline{3-6}
+%fr&$\to$&$fr_0$&$fr_1$&$\dots$&$fr_{25}$&liste des fréquence de référence\\
+%\cline{3-6}
+%fc&$\to$&$fc_0$&$fc_1$&$\dots$&$fc_{25}$&liste des fréquences du texte chiffré\\
+%\cline{3-6}
+%\end{tabular}
+%\end{center}
+
+\question{\'Ecrire une fonction \texttt{minimum\_distance} qui a pour argument un message \texttt{texte} et qui renvoie l'entier  \texttt{i0} tel que ${d_{i0}=\min\{d_i,i\in\{0,\dots,25\}\}}$.}
+
+\question{\'Ecrire une fonction \texttt{decodage\_auto} qui a pour argument un message \texttt{texte} et qui renvoie le message en clair.}
+
+\question{Vous testerez la fonction précédente sur les messages codés \texttt{message1, message2, message3} présents au début de votre script.}%dans \texttt{cesar.py}.
+
+
+\section{Amélioration}
+
+Nous allons faire en sorte que la méthode de codage fonctionne sur des textes écrits avec des majuscules et des accents.
+\smallskip
+
+\emph{Remarques}: 
+\begin{itemize}
+\item[\textbullet] On supposera, dans la suite, que les majuscules ne sont pas accentuées.
+\item[\textbullet] On n'utilisera pas de fonction prédéfinie en python pour répondre aux question suivantes.
+\end{itemize}
+\smallskip
+
+\begin{question}
+\'Ecrire une fonction \texttt{enleve\_majuscules} d'argument une chaîne \texttt{texte} qui renvoie la même chaîne en transformant les majuscules en minuscules.
+\end{question}
+
+\begin{question}
+\'Ecrire une fonction \texttt{enleve\_accents} d'arguments une chaîne \texttt{texte}  qui renvoie la même chaîne en enlevant les accents et en remplaçant les ç par des c.
+\end{question}
+
+\begin{question}
+Avec les fonctions suivantes, transformez \texttt{message4} pour ne plus avoir ni majuscules, ni accents. Proposez un codage du message obtenu avec la clé de votre choix puis effectuer un décodage automatique.
+\end{question}
+
