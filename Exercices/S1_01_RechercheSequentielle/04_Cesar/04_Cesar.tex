@@ -1,4 +1,4 @@
-%%\setchapterimage{fig_00}
+\setchapterimage{04_Cesar}
 %\chapter*{Colle \arabic{cptColle} \\
 %Préhenseur -- \ifprof Corrigé \else Sujet \fi}
 %
@@ -56,7 +56,7 @@ Récupérez  le fichier \texttt{cesar.py} sur le site \url{https://ptsilamartin.
 
 
 
-\section{Faire correspondre les lettres et les entiers en python}
+\section*{Faire correspondre les lettres et les entiers en python}
 
 %Tous les caractères et textes dans ce TP seront manipulés en python avec le type \texttt{string}.
 On rappelle que c'est le type \texttt{string} (chaîne de caractères) qui permet, en python, de manipuler les caractères et les textes : par exemple \texttt{'a'} et \texttt{'bonjour, ça va ?'} sont de type \texttt{string}.
@@ -86,7 +86,7 @@ Nous allons donc définir notre propre fonction \texttt{ordre}, qui prend pour a
 \'Ecrire la fonction réciproque, c'est-à-dire la fonction \texttt{lettre}, qui prend pour argument un entier \texttt{nb} entre $0$ et $25$, et qui renvoie la lettre correspondante. Par exemple, \texttt{lettre(2)} donne \texttt{'c'}.
 \end{question}
 
-\section{Codage et décodage d'un caractère connaissant la clé}
+\section*{Codage et décodage d'un caractère connaissant la clé}
 
 
 On reprend le tableau de l'introduction, en indiquant les entiers associés aux caractères (leurs ordres) :
@@ -123,7 +123,7 @@ Vérifier, par exemple, qu'en prenant comme clé le caractère \texttt{'f'}, le 
 Ecrire la fonction réciproque c'est-à-dire la fonction \texttt{clair} qui a pour arguments la clé \texttt{cle} et le caractère codé \texttt{c} et qui renvoie le caractère en clair.
 \end{question}
 
-\section{Codage et décodage d'un texte connaissant la clé}
+\section*{Codage et décodage d'un texte connaissant la clé}
 
 \begin{question}
 \'Ecrire une fonction \texttt{codage}, qui a pour arguments la clé \texttt{cle} et un message en clair \texttt{texte}, et qui renvoie le message codé suivant la clé \texttt{cle}. 
@@ -145,7 +145,7 @@ Tester la fonction sur le message codé de la question précédente et vérifier
 %\item Tester les deux fonctions précédentes en écrivant un texte, en le codant puis en le décodant (suivant la même clé).
 \end{question}
 
-\section{Déterminer la clé : méthode itérative}
+\section*{Déterminer la clé : méthode itérative}
 On intercepte un message codé par le chiffrement de César (mais dont on ignore la clé). On veut déterminer la clé et le message original. 
 Le codage de Cesar étant très basique (il n'y a que 26 clés possibles) il est très facile de décoder le message sans connaitre la clé.\\
 
@@ -155,7 +155,7 @@ A l'aide d'une boucle sur les 26 clés possibles déterminer la clé utilisée p
 \end{question}
 
 
-\section{Pour aller + loin : Déterminer la clé : méthode automatique}
+\section*{Pour aller + loin : Déterminer la clé : méthode automatique}
 
 Même si la méthode itérative est très rapide car le code est très simple, nous pouvons aussi proposer une méthode automatique.
 Nous allons exploiter l'idée que, dans une langue donnée, la fréquence d'apparition de chacune des lettres de l'alphabet n'est pas la même. 
@@ -201,7 +201,7 @@ La quantité $d_i$ est la somme de tous ces écarts pour la clé d'ordre $i$ fix
 \question{Vous testerez la fonction précédente sur les messages codés \texttt{message1, message2, message3} présents au début de votre script.}%dans \texttt{cesar.py}.
 
 
-\section{Amélioration}
+\section*{Amélioration}
 
 Nous allons faire en sorte que la méthode de codage fonctionne sur des textes écrits avec des majuscules et des accents.
 \smallskip

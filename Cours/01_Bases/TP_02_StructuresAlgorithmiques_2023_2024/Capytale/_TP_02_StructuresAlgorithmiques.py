@@ -457,6 +457,7 @@ def corrige_nb_jours():
     M = 757000000000
     # Masse journaliere
     mj = M/365
+
     #Masse légende 
     ml = corrige_legende()
     nb_j = int(ml/mj)+1
