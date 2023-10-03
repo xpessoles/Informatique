@@ -225,6 +225,8 @@ def test_q04(foo) :
 
 ## Q5
 def is_isocele_corrige(a:int, b:int, c:int) -> bool :
+    if not(is_exists_corrige(a,b,c)):
+        return False
     if a == b or a == c or b == c:
         return True
     return False
