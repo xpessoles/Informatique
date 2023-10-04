@@ -5,8 +5,9 @@ Created on Thu Jul  6 12:47:07 2023
 @author: xavier.pessoles2
 """
 
+    
 ## Question 1 ##
-def compter_lettres_cor(c,mot):
+def compter_lettre_cor(c,mot):
     cpt = 0
     for lettre in mot :
         if lettre == c :
@@ -20,7 +21,7 @@ def test_q01(foo):
     c,mot = "c","abde"
     total +=1
     try :
-        if (compter_lettres_cor(c,mot) ==  foo(c,mot)):
+        if (compter_lettre_cor(c,mot) ==  foo(c,mot)):
             pts +=1 
     except : 
         pass
@@ -28,7 +29,7 @@ def test_q01(foo):
     c,mot = "c","abccde"
     total +=1
     try :
-        if (compter_lettres_cor(c,mot) ==  foo(c,mot)):
+        if (compter_lettre_cor(c,mot) ==  foo(c,mot)):
             pts +=1 
     except : 
         pass
@@ -36,7 +37,7 @@ def test_q01(foo):
     c,mot = "c","cabccdec"
     total +=1
     try :
-        if (compter_lettres_cor(c,mot) ==  foo(c,mot)):
+        if (compter_lettre_cor(c,mot) ==  foo(c,mot)):
             pts +=1 
     except : 
         pass
@@ -44,7 +45,7 @@ def test_q01(foo):
     c,mot = "c","cabefgh"
     total +=1
     try :
-        if (compter_lettres_cor(c,mot) ==  foo(c,mot)):
+        if (compter_lettre_cor(c,mot) ==  foo(c,mot)):
             pts +=1 
     except : 
         pass
@@ -250,7 +251,7 @@ def test_q09(foo):
     mot1,mot2 = 'mot','mot'
     total +=1
     try :
-        if (is_egal(mot1,mot2) ==  foo(c,mot)):
+        if (is_egal(mot1,mot2) ==  foo(mot1,mot2)):
             pts +=1 
     except : 
         pass
@@ -258,7 +259,7 @@ def test_q09(foo):
     mot1,mot2 = 'mot','mot2'
     total +=1
     try :
-        if (is_egal(mot1,mot2) ==  foo(c,mot)):
+        if (is_egal(mot1,mot2) ==  foo(mot1,mot2)):
             pts +=1 
     except : 
         pass
@@ -266,7 +267,7 @@ def test_q09(foo):
     mot1,mot2 = 'mot1','mot'
     total +=1
     try :
-        if (is_egal(mot1,mot2) ==  foo(c,mot)):
+        if (is_egal(mot1,mot2) ==  foo(mot1,mot2)):
             pts +=1 
     except : 
         pass
@@ -274,7 +275,7 @@ def test_q09(foo):
     mot1,mot2 = 'm','m'
     total +=1
     try :
-        if (is_egal(mot1,mot2) ==  foo(c,mot)):
+        if (is_egal(mot1,mot2) ==  foo(mot1,mot2)):
             pts +=1 
     except : 
         pass
@@ -298,7 +299,7 @@ def test_q10(foo):
     mot1,mot2 = 'mot','mot'
     total +=1
     try :
-        if (is_egal(mot1,mot2) ==  foo(c,mot)):
+        if (indice_diff(mot1,mot2) == foo(mot1,mot2)):
             pts +=1 
     except : 
         pass
@@ -306,7 +307,7 @@ def test_q10(foo):
     mot1,mot2 = 'mot','mos'
     total +=1
     try :
-        if (is_egal(mot1,mot2) ==  foo(c,mot)):
+        if (indice_diff(mot1,mot2) == foo(mot1,mot2)):
             pts +=1 
     except : 
         pass
@@ -314,7 +315,7 @@ def test_q10(foo):
     mot1,mot2 = 'aot','mot'
     total +=1
     try :
-        if (is_egal(mot1,mot2) ==  foo(c,mot)):
+        if (indice_diff(mot1,mot2) == foo(mot1,mot2)):
             pts +=1 
     except : 
         pass
@@ -322,7 +323,7 @@ def test_q10(foo):
     mot1,mot2 = 'mat','mot'
     total +=1
     try :
-        if (is_egal(mot1,mot2) ==  foo(c,mot)):
+        if (indice_diff(mot1,mot2) == foo(mot1,mot2)):
             pts +=1 
     except : 
         pass
@@ -402,3 +403,10 @@ def go(foo1,foo2,foo3,foo6,foo8,foo9,foo10):
         pass
     print("Question "+str(i)+" : ",str(pts),"/",str(tot))
     notes[i] = (pts,tot)
+    
+    #bilan : 
+    points,total = 0,0
+    for n in notes.values() :
+        points = points + n[0]
+        total = total + n[1]
+    print(points,total)
