@@ -35,6 +35,14 @@ Pour exécuter le programme on utilisera la combinison de touche \texttt{Ctrl + 
 
 
 \subsection*{Questions préliminaires}
+
+\begin{marginfigure}
+\centering
+\includegraphics[width=\linewidth]{fig_01}
+\caption{Profil de la randonnée}
+\end{marginfigure}
+
+
 La variable \texttt{les\_x} contient l'abscisse d'un profil.
 La variable \texttt{les\_y} contient l'altitude d'un profil. Saisir les instruction suivantes. 
 
@@ -117,12 +125,6 @@ def deniveles(alt:list) -> list:
 \ifprof
 \else
 Dans cette partie, nous allons chercher à découper le profil de la randonnée en tentant de retrouver les différentes montagnes franchies par le randonneur.
-
-\begin{marginfigure}
-\centering
-\includegraphics[width=\linewidth]{fig_01}
-\caption{Profil de la randonnée}
-\end{marginfigure}
 \fi
 
 \question{Écrire la fonction \texttt{moyenne(alt:list) -> float} permettant de calculer la moyenne des altitudes mesurées par le GPS (l'utilisation de \texttt{sum} est interdite).}
@@ -147,7 +149,7 @@ def moyenne(alt:list):
 
 \ifprof
 \else
-
+\fi
 
 On note PND les points de passages par le niveau moyen en descente et PNM les points de passage par le niveau moyen en montée. 
 
@@ -155,7 +157,7 @@ On note PND les points de passages par le niveau moyen en descente et PNM les po
 \includegraphics[width=\linewidth]{fig_03}
 \caption{Points de passage par le niveau moyen en montée [PNM]}
 \end{marginfigure}
-\fi
+
 
 \question{Écrire la fonction \texttt{indice\_premier\_PNM(alt:list) -> int} renvoyant, s’il existe, l’indice \texttt{i}
 du premier élément de la liste tel que cet élément soit inférieur à la moyenne et l’élément suivant
@@ -177,7 +179,7 @@ def indice_premier_PNM(alt:list):
 \else
 \fi
 
-\question{Vérifier \texttt{indice\_premier\_PNM(les\_y)} renvoie \texttt{53} et  
+\question{Vérifier que \texttt{indice\_premier\_PNM(les\_y)} renvoie \texttt{53} et  
 \texttt{indice\_premier\_PNM(les\_y[200:250])} renvoie \texttt{-1}.}
 
 
@@ -201,7 +203,7 @@ def indices_PNM(alt:list):
 \else
 \fi
 
-\question{Vérifier \texttt{indices\_PNM(les\_y)} renvoie \texttt{[53, 449, 889]}.}
+\question{Vérifier que \texttt{indices\_PNM(les\_y)} renvoie \texttt{[53, 449, 889]}.}
 
 
 \question{Dans le but de séparer les différents profils, nous allons chercher les indices des altitudes minimales entre deux PNM successifs. Écrire la fonction \texttt{liste\_alt\_mini(alt:list) -> list} qui répond à ce besoin. En utilisant le profil donné, cette fonction renverrait la liste  \texttt{[300,826]}.}
@@ -226,12 +228,15 @@ def liste_alt_min(alt:list):
 
 \ifprof
 \else
-On appelle \texttt{pam} la liste des indices des points ayant une altitude minimale.
 
 \begin{marginfigure}
 \includegraphics[width=\linewidth]{fig_04}
 \caption{Points avec altitude minimale [pam]}
 \end{marginfigure}
+
+
+On appelle \texttt{pam} la liste des indices des points ayant une altitude minimale.
+
 
 On souhaite maintenant décomposer le profil mesuré en plusieurs << montagnes >>. 
 Une montagne est une liste constituée d'altitudes successives.
@@ -269,13 +274,14 @@ def creer_montagnes(alt):
 \fi
 
 
-\question{Tracer chacun des montagnes afin d'obtenir le graphiqu suivant.}
+\question{Tracer chacun des montagnes afin d'obtenir le graphique suivant.}
 \ifprof
 \else
-\begin{marginfigure}
-\includegraphics[width=\linewidth]{fig_05}
+\begin{figure}[H]
+\centering
+\includegraphics[width=.7\linewidth]{fig_05}
 \caption{Découpage en montagnes}
-\end{marginfigure}
+\end{figure}
 \fi
 
 %
