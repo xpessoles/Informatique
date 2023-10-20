@@ -1,15 +1,4 @@
-%\setchapterimage{04_Cesar}
-%\chapter*{Colle \arabic{cptColle} \\
-%Préhenseur -- \ifprof Corrigé \else Sujet \fi}
-%
-%\addcontentsline{toc}{section}{Colle \arabic{cptTD} :  -- \ifprof Corrigé \else Sujet \fi}
-%
-%\iflivret \stepcounter{cptColle} \else
-%\ifprof  \stepcounter{cptColle} \else \fi
-%\fi
-%\setcounter{question}{0}
-
-%\setchapterimage{fig_00}
+\setchapterimage{panorama2}
 \chapter*{TP 4 \\
 Analyse d'un profil de randonnée -- \ifprof Corrigé \else Sujet \fi}
 
@@ -24,9 +13,9 @@ Analyse d'un profil de randonnée -- \ifprof Corrigé \else Sujet \fi}
 \ifprof
 \else
 
-On souhaite réaliser différentes opérations sur un parcours de randonnée effectué lors d'un weekend  à la montagne. 
+On a réussi à récupérer partiellement la trace GPS lors d'une sortie VTT de M. Martin. Nous allons chercher à analyser le profil suivi.
 
-Pour s'entraîner nous allons nous entrainer sur un profil fictif.  On téléchargera le fichier \texttt{DecoupageMontagnes\_eleve.py} sur le site de la classe. On enregistrera ce fichier dans vos documents personnel (lecteur \texttt{U:}, répertoire \texttt{Informatique/TP\_04}). On ouvrira ce fichier avec \texttt{Pyzo}.
+On téléchargera le fichier \texttt{TP\_04.py} sur le site de la classe. On enregistrera ce fichier dans vos documents personnel (lecteur \texttt{U:}, répertoire \texttt{Informatique/TP\_04}). On ouvrira ce fichier avec \texttt{Pyzo}.
 Pour exécuter le programme on utilisera la combinison de touche \texttt{Ctrl + E}.
 \fi
 
@@ -44,7 +33,7 @@ Pour exécuter le programme on utilisera la combinison de touche \texttt{Ctrl + 
 
 
 La variable \texttt{les\_x} contient l'abscisse d'un profil.
-La variable \texttt{les\_y} contient l'altitude d'un profil. Saisir les instruction suivantes. 
+La variable \texttt{les\_y} contient l'altitude d'un profil. Les instructions suivantes permettent de tracer le profil.
 
 \begin{lstlisting}
 plt.ylabel("Altitude [m]")
