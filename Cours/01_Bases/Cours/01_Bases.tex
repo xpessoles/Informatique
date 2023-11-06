@@ -277,19 +277,23 @@ On accède aux composantes d'une chaîne de la même manière que pour un tuple.
 \item \textbf{Opérateurs :} ce sont les mêmes que pour les tuples.
 \end{itemize}
 \end{defi}
+
 \subsection{Listes}
+\marginnote{
+$>>>$\texttt{ L = [1,2,3] } \\
+$>>>$\texttt{ L[0] = 4 } \\
+$>>>$\texttt{ L } \\
+$\quad $ \texttt{[4,2,3]}
+%\end{lstlisting}
+}
+
 \begin{defi}[Listes]
 Ce type est noté \texttt{list} en Python .
 
 Comme les tuples, les {listes} sont des suites finies de valeurs arbitraires, mais cette fois 
 ils sont \textbf{mutables} : on peut changer la valeur d'une composante d'une liste.\\
 Les listes s'écrivent entre crochets. On change la valeur de la $k\ieme$ composante d'une liste 
-\texttt{L} grâce à la commande \texttt{L[k] = n}, où \texttt{n} est la nouvelle valeur. Ainsi :
-\begin{lstlisting}
-L = [1,2,3] 
-L[0] = 4  
-L 
-\end{lstlisting}
+\texttt{L} grâce à la commande \texttt{L[k] = n}, où \texttt{n} est la nouvelle valeur.
 
 Les autres opérateurs sont les mêmes que pour les tuples et les chaînes. Nous reviendrons plus tard sur les listes.
 \end{defi}
@@ -315,7 +319,7 @@ Quand on stocke une valeur \texttt{d} dans une variable \texttt{var}, on dit que
 \texttt{d} est encore appelée \textbf{la donnée}.
 \end{defi}
 
-En Python , cette affectation est faite avec la commande \texttt{=}, comme suit.  
+En Python , cette affectation est faite avec la commande \lstinline{=}, comme suit.  
 
 \begin{lstlisting}
 >>> var  = 1
@@ -1362,6 +1366,27 @@ Enfin, il y a une liste Python particulière : la liste vide~\texttt{[]}.
 
 
 \subsection{Opérations usuelles}
+
+\subsubsection{Parcours de listes}
+
+\begin{minipage}[c]{.47\linewidth}
+Il est possible de parcourir les listes par valeurs. 
+\begin{lstlisting}
+L = [3,1,2,5,4,6]
+for v in L : 
+    print(v)
+\end{lstlisting}
+\end{minipage}
+\hfill
+\begin{minipage}[c]{.47\linewidth}
+On peut aussi faire un parcours par index (ou par indice).
+\begin{lstlisting}
+L = [3,1,2,5,4,6]
+for i in range(len(L)) : 
+    print(L[i])
+\end{lstlisting}
+\end{minipage}
+
 
 \subsubsection{Concaténation}
 Concaténer deux tableaux revient à les mettre bout à bout, on l'effectue en Python avec 
