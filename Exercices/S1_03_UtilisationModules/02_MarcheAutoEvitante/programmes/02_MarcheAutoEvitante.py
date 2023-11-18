@@ -130,5 +130,5 @@ def genere_chemin_pivot(n,n_rot):
                 bloque = False # on sort de la boucle while
     return chemin
 
-c = genere_chemin_pivot(50,2000)
-plot_chemin(c)
+#c = genere_chemin_pivot(50,2000)
+#plot_chemin(c)
