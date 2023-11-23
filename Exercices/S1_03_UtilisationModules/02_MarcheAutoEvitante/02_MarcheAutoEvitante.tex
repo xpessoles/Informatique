@@ -51,7 +51,7 @@ plt.plot(les_x,les_y,'-or')	# On affiche le tracé en rouge (r). Les points
 
 plt.grid()
 plt.axis('equal')
-plt.show() 						# Affiche aléatoirement 1, 2, 3 ou 4
+plt.show() 						# Affiche la courbe
 
 \end{lstlisting}
 
@@ -101,7 +101,7 @@ suivant et on en sélectionne une au hasard. En l’absence de positions accessi
 
 
 
-\question{Implémenter la fonction \lstinline{positions_possibles(p:[int], atteints:[[int]]) -> [[int]]} qui construit la liste des positions suivantes possibles à partir du point \lstinline{p}. La liste \lstinline{atteints} contient les points déjà atteints par le chemin.}
+\question{Implémenter la fonction \lstinline{positions_possibles(p:[int], chemin:[[int]]) -> [[int]]} qui construit la liste des positions suivantes possibles à partir du point \lstinline{p}. La liste \lstinline{chemin} contient les points déjà atteints.}
 
 \begin{test}
 \lstinline{positions_possibles([0,0],[])} doit renvoyer \lstinline{[[0, 1], [1, 0], [0, -1], [-1, 0]]}.
