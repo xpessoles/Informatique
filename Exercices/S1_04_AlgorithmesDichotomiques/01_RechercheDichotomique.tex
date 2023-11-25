@@ -5,13 +5,15 @@
 
 %\subsection*{Recherche d'un élément dans une liste triée}
 
-On se donne une liste \texttt{L} de nombres de longueur \texttt{n}, {triée dans l'ordre croissant}, et un nombre \texttt{x0}. 
+\subsection*{Recherche dichotomique dans une liste triée}
 
-Pour chercher \texttt{x0}, on va couper la liste en deux moitiés et chercher dans la moitié de tableau qui encadre \texttt{x0} et ainsi de suite...
+On se donne une liste \lstinline{L} de nombres de longueur \lstinline{n}, {triée dans l'ordre croissant}, et un nombre \lstinline{x0}. 
 
-On appelle \texttt{g} l'indice de l'élément du début de la sous-liste dans laquelle on travaille et \texttt{d} l'indice de l'élément de fin.
+Pour chercher \lstinline{x0}, on va couper la liste en deux moitiés et chercher dans la moitié de tableau qui encadre \lstinline{x0} et ainsi de suite...
 
-Au début, \texttt{g = 0} et \texttt{d = n - 1}.
+On appelle \lstinline{g} l'indice de l'élément du début de la sous-liste dans laquelle on travaille et \lstinline{d} l'indice de l'élément de fin.
+
+Au début, \lstinline{g = 0} et \lstinline{d = n-1}.
 
 %On souhaite construire un algorithme admettant l'invariant suivant:
 %\bigskip
@@ -23,17 +25,17 @@ Au début, \texttt{g = 0} et \texttt{d = n - 1}.
 %\medskip 
 On utilise la méthode suivante :
 \begin{itemize}
-\item on compare \texttt{x0} à << l'élément du milieu >>  \texttt{L[m]} avec \texttt{m = (g + d) // 2};
+\item on compare \lstinline{x0} à << l'élément du milieu >>  \lstinline{L[m]} avec \lstinline{m = (g + d) // 2};
 %son indice est \t{m} $=$\cache{\t{ n//2} (division euclidienne)}
-\item si \texttt{x0 = L[m]}, on a trouvé \texttt{x0}, on peut alors s'arrêter;
-\item si \texttt{x0} $<$ \texttt{L[m]}, c'est qu'il faut chercher entre \texttt{L[g]} et  \texttt{L[m-1]};% (\texttt{L[m]} exclu).
+\item si \lstinline{x0 = L[m]}, on a trouvé \lstinline{x0}, on peut alors s'arrêter;
+\item si \lstinline{x0} $<$ \lstinline{L[m]}, c'est qu'il faut chercher entre \lstinline{L[g]} et  \lstinline{L[m-1]};% (\lstinline{L[m]} exclu).
 %dans \cache{la première moitié de la liste \t{L[g:m]}}\\
-\item si \texttt{x0} $>$ \texttt{L[m]}, c'est qu'il faut chercher  entre \texttt{L[m+1]} et \texttt{L[d]}.% (\texttt{L[m]} exclu).
+\item si \lstinline{x0} $>$ \lstinline{L[m]}, c'est qu'il faut chercher  entre \lstinline{L[m+1]} et \lstinline{L[d]}.% (\lstinline{L[m]} exclu).
 %}\\
 %\finli
 \end{itemize}
 
-On poursuit jusqu'à ce qu'on a trouvé \texttt{x0} ou lorsque l'on a épuisé la liste \texttt{L}.
+On poursuit jusqu'à ce qu'on a trouvé \lstinline{x0} ou lorsque l'on a épuisé la liste \lstinline{L}.
 
 %\emph{Remarque} : On verra plus tard que l'algorithme est tellement rapide que cela ne change pas grand chose de s'arrêter avant et cela simplifie son écriture.
 
@@ -41,29 +43,29 @@ On poursuit jusqu'à ce qu'on a trouvé \texttt{x0} ou lorsque l'on a épuisé l
 
 \question{Illustrer la méthode avec les deux exemples suivants :}
 \begin{itemize} 
-\item  \texttt{x0 = 5} et \texttt{L} $= \begin{array}{|c|c|c|c|c|c|c|c|c|} 
+\item  \lstinline{x0 = 5} et \lstinline{L} $= \begin{array}{|c|c|c|c|c|c|c|c|c|} 
 \hline -3 & 5 & 7 & 10 & 11 & 14 & 17 & 21 & 30 \\ \hline
 \end{array}$
 % g=0\\d=8\\m=4,L[m]>x0
 % g=0\\d=3\\m=1,L[m]=x0
 %\medskip 
-\item \texttt{x0 = 11} et \texttt{L} $= \begin{array}{|c|c|c|c|c|c|c|c|c|} 
+\item \lstinline{x0 = 11} et \lstinline{L} $= \begin{array}{|c|c|c|c|c|c|c|c|c|} 
 \hline -2 & 1 & 2 & 7 & 8 & 10 & 13 & 16 & 17  \\ \hline
 \end{array}$.
 \end{itemize}
 
-\question{Si $x0$ n'est pas dans la liste $L$, donner un test d'arrêt du processus de dichotomie portant sur $g$ et $d$. }
+\question{Si \lstinline{x0} n'est pas dans la liste \lstinline{L}, donner un test d'arrêt du processus de dichotomie portant sur \lstinline{g} et \lstinline{d}. }
 
-\question{\'Ecrire une fonction \texttt{dichotomie(x0,L)} qui renvoie \texttt{True} ou \texttt{False} selon que \texttt{x0} figure ou non dans \texttt{L} par cette méthode. On utilisera une boucle \texttt{while} que l'on interrompra soit lorsque l'on a trouvé $x0$, soit lorsque l'on a fini de parcourir la liste.}
+\question{\'Ecrire une fonction \lstinline{dichotomie(x0,L)} qui renvoie \lstinline{True} ou \lstinline{False} selon que \lstinline{x0} figure ou non dans \lstinline{L} par cette méthode. On utilisera une boucle \lstinline{while} que l'on interrompra soit lorsque l'on a trouvé \lstinline{x0}, soit lorsque l'on a fini de parcourir la liste.}
 
-\question{Combien vaut $g-d$ au $i\ieme$ tour de boucle ? Si \texttt{x0} ne figure pas dans \texttt{L}, montrer que le nombre de tours de boucles nécessaires pour sortir de la fonction est de l'ordre de $\ln n$ où $\text{n=len(L)}$ (cela rend la fonction beaucoup plus efficace qu'une simple recherche séquentielle pour laquelle le nombre de comparaisons pour sortir de la boucle serait de l'ordre de $n$).}
+\question{Combien vaut \lstinline{g-d} au $i\ieme$ tour de boucle ? Si \lstinline{x0} ne figure pas dans \lstinline{L}, montrer que le nombre de tours de boucles nécessaires pour sortir de la fonction est de l'ordre de $\ln n$ où \lstinline{n=len(L)} (cela rend la fonction beaucoup plus efficace qu'une simple recherche séquentielle pour laquelle le nombre de comparaisons pour sortir de la boucle serait de l'ordre de $n$).}
 %
 %
 %\subsection{Recherche d'un indice satisfaisant une condition donnée}
 %
-%On se donne dans cette question une liste \texttt{L} strictement décroissante de réels contenant des termes strictement positifs et des termes strictement négatifs. 
+%On se donne dans cette question une liste \lstinline{L} strictement décroissante de réels contenant des termes strictement positifs et des termes strictement négatifs. 
 %
-%\question{\'Ecrire une fonction \texttt{recherche\_dicho(L)}, d'argument la liste \texttt{L}, qui renvoie l'indice ainsi que la valeur du dernier élément positif ou nul par une méthode dichotomique adaptée de la précédente.}
+%\question{\'Ecrire une fonction \lstinline{recherche\_dicho(L)}, d'argument la liste \lstinline{L}, qui renvoie l'indice ainsi que la valeur du dernier élément positif ou nul par une méthode dichotomique adaptée de la précédente.}
 %
 %
 %
@@ -114,7 +116,7 @@ On poursuit jusqu'à ce qu'on a trouvé \texttt{x0} ou lorsque l'on a épuisé l
 %
 %\question{Si l'on souhaite que $g_n$ et $d_n$ soient des solutions approchées de $\ell$ à une précision $\varepsilon$, quelle est la condition d'arrêt de l'algorithme ? Préciser alors la valeur approchée de $\ell$ qui sera renvoyée par la fonction.}
 %	
-%\question{\'Ecrire une fonction \texttt{recherche\_zero(f,a,b,epsilon)} qui renvoie une valeur approchée du zéro de \texttt{f} sur \texttt{[a,b]} a epsilon près.}
+%\question{\'Ecrire une fonction \lstinline{recherche\_zero(f,a,b,epsilon)} qui renvoie une valeur approchée du zéro de \lstinline{f} sur \lstinline{[a,b]} a epsilon près.}
 %	
 %\question{Tester la fonction avec $f:x\mapsto x^2-2$ sur $[0,2]$ et $\varepsilon=0.001$.}
 %	

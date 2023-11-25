@@ -1,4 +1,4 @@
-%\section{Valeur d'un polynôme par plusieurs méthodes}
+\subsection*{Valeur d'un polynôme par plusieurs méthodes}
 	
 \question{Écrire une fonction \texttt{exponaif(x,n)} d'arguments un réel $x$ et un entier naturel $n$, qui renvoie la valeur de $x^n$ par la méthode naïve $x^n=x\times x \times ... \times x$ ($n$ termes). Compter le nombre d'opérations dans exponaïf.}
 
@@ -8,16 +8,27 @@ Une autre méthode, celle de l'exponentiation rapide consiste à remarquer que $
 
 Le code itératif correspondant est le suivant:
 
-\bigskip 
-\begin{minipage}{0.5\linewidth}
-def expo\_rapide(x,n):\\
-	\textcolor{white}{aaaa}  p,res,y = n,1,x\\
-	\textcolor{white}{aaaa} while p>0:\\
-	\textcolor{white}{aaaa}\textcolor{white}{aaaa} if p\%2==1:\\
-	\textcolor{white}{aaaa}\textcolor{white}{aaaa}\textcolor{white}{aaaa}res=res*y\\
-	\textcolor{white}{aaaa}\textcolor{white}{aaaa} p=p//2\\
-	\textcolor{white}{aaaa}\textcolor{white}{aaaa} y=y*y\\
-	\textcolor{white}{aaaa} return(res)\end{minipage}
+\begin{lstlisting}
+def expo_rapide(x,n) :
+    p,res,y = n,1,x
+    while p>0 :
+        if p%2==1 :
+            res=res*y
+        p=p//2
+        y=y*y
+    return(res)
+\end{lstlisting}
+
+%\bigskip 
+%\begin{minipage}{0.5\linewidth}
+%def expo\_rapide(x,n):\\
+%	\textcolor{white}{aaaa}  p,res,y = n,1,x\\
+%	\textcolor{white}{aaaa} while p>0:\\
+%	\textcolor{white}{aaaa}\textcolor{white}{aaaa} if p\%2==1:\\
+%	\textcolor{white}{aaaa}\textcolor{white}{aaaa}\textcolor{white}{aaaa}res=res*y\\
+%	\textcolor{white}{aaaa}\textcolor{white}{aaaa} p=p//2\\
+%	\textcolor{white}{aaaa}\textcolor{white}{aaaa} y=y*y\\
+%	\textcolor{white}{aaaa} return(res)\end{minipage}
 	
 	\question{Quel est le nom de la variable locale dont le contenu est retourné par la fonction ?}
 	
@@ -26,22 +37,18 @@ def expo\_rapide(x,n):\\
 	\begin{center}
 		\begin{tabular}{|l|p{1cm}|p{1cm}|p{1cm}|}
 			\hline & \texttt{p} & \texttt{res} & \texttt{y}\\
-			\hline &&&\\
 			sortie du 1{\textrm{er}} tour de boucle && & \\[3mm]
 			sortie du 2\ieme\  tour de boucle && & \\[3mm]
 			\ldots && & \\[3mm]
 			\ldots&& & \\[3mm]
-			&& & \\[3mm]
-			&& & \\[3mm]
 		\end{tabular}
-		
 	\end{center}
 	
 	
 	%\q Montrer que le nombre d'opérations effectuées a une complexité logarithmique.
 
 
-	\bigskip On considère un polynôme $$P(x)=\displaystyle\sum_{k=0}^n a_k.x^k$$ que l'on modélisera en Python par la liste $P=[a_0,a_1,...,a_n]$. Dans la suite, on prendra pour tout $k\in\mathbb{N}$, $a_k=k$.
+On considère un polynôme $P(x)=\sum_{k=0}^n a_k.x^k$ que l'on modélisera en Python par la liste $P=[a_0,a_1,...,a_n]$. Dans la suite, on prendra pour tout $k\in\mathbb{N}$, $a_k=k$.
 
 	\question{Ecrire une fonction \texttt{Pnaif(x,P)} d'arguments un réel \texttt{x} et \texttt{P} la liste des coefficients du polynôme, qui renvoie $P(x)$ à l'aide de la fonction \texttt{exponaif}. Compter le nombre d'opérations.}
 
