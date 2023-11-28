@@ -8,11 +8,8 @@
 \subsection*{Recherche dichotomique dans une liste triée}
 
 On se donne une liste \lstinline{L} de nombres de longueur \lstinline{n}, {triée dans l'ordre croissant}, et un nombre \lstinline{x0}. 
-
 Pour chercher \lstinline{x0}, on va couper la liste en deux moitiés et chercher dans la moitié de tableau qui encadre \lstinline{x0} et ainsi de suite...
-
 On appelle \lstinline{g} l'indice de l'élément du début de la sous-liste dans laquelle on travaille et \lstinline{d} l'indice de l'élément de fin.
-
 Au début, \lstinline{g = 0} et \lstinline{d = n-1}.
 
 %On souhaite construire un algorithme admettant l'invariant suivant:
@@ -58,7 +55,14 @@ On poursuit jusqu'à ce qu'on a trouvé \lstinline{x0} ou lorsque l'on a épuis�
 
 \question{\'Ecrire une fonction \lstinline{dichotomie(x0,L)} qui renvoie \lstinline{True} ou \lstinline{False} selon que \lstinline{x0} figure ou non dans \lstinline{L} par cette méthode. On utilisera une boucle \lstinline{while} que l'on interrompra soit lorsque l'on a trouvé \lstinline{x0}, soit lorsque l'on a fini de parcourir la liste.}
 
-\question{Combien vaut \lstinline{g-d} au $i\ieme$ tour de boucle ? Si \lstinline{x0} ne figure pas dans \lstinline{L}, montrer que le nombre de tours de boucles nécessaires pour sortir de la fonction est de l'ordre de $\ln n$ où \lstinline{n=len(L)} (cela rend la fonction beaucoup plus efficace qu'une simple recherche séquentielle pour laquelle le nombre de comparaisons pour sortir de la boucle serait de l'ordre de $n$).}
+
+
+\question{\'Ecrire une fonction \lstinline{dichotomie_indice(x0,L)} qui renvoie l'indice de \lstinline{x0} s'il existe, \lstinline{-1}sinon.}
+
+
+\question{Tester votre fonction sur les exemples de listes ci-dessus.}
+
+\question[Facultatif]{Combien vaut \lstinline{g-d} au $i\ieme$ tour de boucle ? Si \lstinline{x0} ne figure pas dans \lstinline{L}, montrer que le nombre de tours de boucles nécessaires pour sortir de la fonction est de l'ordre de $\ln n$ où \lstinline{n=len(L)} (cela rend la fonction beaucoup plus efficace qu'une simple recherche séquentielle pour laquelle le nombre de comparaisons pour sortir de la boucle serait de l'ordre de $n$).}
 %
 %
 %\subsection{Recherche d'un indice satisfaisant une condition donnée}
