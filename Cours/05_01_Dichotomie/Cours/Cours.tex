@@ -23,7 +23,7 @@ Ce cours vous présente deux algorithmes dichotomiques :
 \item la détermination de la racine d'une fonction quand elle existe.
 \end{itemize}
 
-\section{Recherche dichotomique dans une liste {triée}: Principe}
+\section{Recherche dichotomique dans une liste {triée}}
 
 Lorsque vous cherchez le mot <<~hippocampe~>> dans le dictionnaire, vous ne vous amusez pas à parcourir chaque page depuis la lettre a jusqu'à tomber sur le mot <<~hippocampe~>>...\\
 Dans une liste triée, il y a plus efficace ! Par exemple dans le dictionnaire, vous ouvrez à peu près au milieu, et suivant si le mot trouvé est \og inférieur \fg \ ou \og supérieur \fg \ à <<~hippocampe~>> (pour l'ordre alphabétique), vous poursuivez votre recherche dans l'une ou l'autre moitié du dictionnaire.
@@ -70,9 +70,16 @@ On poursuit jusqu'à ce qu'on a trouvé \lstinline{x0} ou lorsque l'on a épuis�
 
 
 
-\section{Exemples d'application}
+\subsection{Exemples d'application}
 %\begin{enumerate}
 %\item %En notant $g$ et $d$  les indices de gauche et de droite du morceau de la liste $l$ où l'on est en train de faire la %recherche, 
+
+
+Indiquer pour les deux exemples suivants les valeurs successives de \lstinline{g} et \lstinline{d} :
+\begin{enumerate}
+\item \lstinline{x0 = 5} et \lstinline{L} $= \begin{array}{|c|c|c|c|c|c|c|c|c|} 
+\hline -3 & 5 & 7 & 10 & 11 & 14 & 17 & 21 & 30 \\ \hline
+\end{array}$
 
 \marginnote{Cas 1 :
 $\begin{cases}
@@ -95,13 +102,6 @@ g=6\\d=5
 \end{cases}$.
 C'est fini, on a épuisé la liste \lstinline{L} et on n'a pas trouvé $x0$.}
 
-Indiquer pour les deux exemples suivants les valeurs successives de \lstinline{g} et \lstinline{d} :
-\begin{enumerate}
-\item \lstinline{x0 = 5} et \lstinline{L} $= \begin{array}{|c|c|c|c|c|c|c|c|c|} 
-\hline -3 & 5 & 7 & 10 & 11 & 14 & 17 & 21 & 30 \\ \hline
-\end{array}$
-
-
 
 \item \lstinline{x0 = 11} et \lstinline{L} $= \begin{array}{|c|c|c|c|c|c|c|c|c|} 
 \hline -2 & 1 & 2 & 7 & 8 & 10 & 13 & 16 & 17  \\ \hline
@@ -115,7 +115,7 @@ Indiquer pour les deux exemples suivants les valeurs successives de \lstinline{g
  %- si \lstinline{L[m]} $\leq$ \lstinline{x0}, \lstinline{d} est inchangé et \lstinline{g} prend la valeur de \lstinline{m}
  
 
-\section{Implémentation en Python}
+\subsection{Implémentation en Python}
 
 
 La fonction \lstinline{recherche dichotomie} d'arguments une liste \lstinline{L} et un élément \lstinline{x0} renvoyant un booléen disant si \lstinline{x0} est dans la liste \lstinline{L} est proposée :
@@ -123,22 +123,22 @@ La fonction \lstinline{recherche dichotomie} d'arguments une liste \lstinline{L}
 
 
 \begin{lstlisting}
-def recherche dichotomie(L:list, x0:int)-> bool:
-     n = len(L)
-     g_ind = 0 # c'est l'indice de gauche
-     d_ind = n - 1 # c'est l'indice de droite
-     rep = False
-     while g ind <= d_ind and rep == False:
-         # si x0 est dans L alors L[g ind] <= x0 <= L[d ind]     {invariant}
-         m = (d ind + g ind) // 2 
-         if x0 == L[m]:
-             rep = True
-         elif x0 < L[m]:
-             d_ind = m - 1
-          else:
-             g_ind = m + 1
-           # si x0 est dans L alors L[g_ind] <= x0 <= L[d_ind]     {invariant}
-     return(rep)
+def recherche_dichotomie(L:list, x0:int)-> bool:
+    n = len(L)
+    g = 0 # c'est l'indice de gauche
+    d = n - 1 # c'est l'indice de droite
+    rep = False
+    while g <= d and rep == False :
+        # si x0 est dans L alors L[g] <= x0 <= L[d]     {invariant}
+        m = (g+d) // 2 
+        if x0 == L[m]:
+            rep = True
+        elif x0 < L[m]:
+            d= m - 1
+        else:
+            g = m + 1
+            # si x0 est dans L alors L[g] <= x0 <= L[d]     {invariant}
+    return(rep)
 \end{lstlisting} 
 
 
@@ -163,28 +163,16 @@ def recherche dichotomie(L:list, x0:int)-> bool:
 \section{Détermination de la racine d'une fonction par dichotomie}
 
 \subsection{Principe théorique de la méthode par dichotomie}
+%
+\begin{marginfigure}
+\includegraphics[width=\linewidth]{courbe}
+\end{marginfigure}
+% 
 On considère une fonction $f$ vérifiant : 
 \begin{center} $f$ continue sur $\verb![!a,b\verb!]!$ ;  $f(a)$ et $f(b)$ de signes opposés.
 \end{center} Le théorème des valeurs intermédiaires nous assure que $f$ possède au moins un zéro $\ell$ entre $a$ et $b$. La preuve, vue en cours de mathématiques, repose sur la méthode de dichotomie. Prenons le cas $f(a)<0$ et $f(b)>0$ et posons $g_0=a$, $d_0=b$. 
-%\begin{center}
-%\begin{tikzpicture}%[scale=2,xmin=-2.5,xmax=2.5,ymin=-1.5,ymax=1.5]
-%\shorthandoff{:};
-%%\draw[->] (\xmin,0)--(\xmax,0);
-%\draw[->] (-2.5,0)--(2.5,0);
-%%\draw[->] (-2.25,\ymin)--(-2.25,\ymax);
-%\draw[->] (-2.25,-1.5)--(-2.25,1.5);
-%\fenetre
-%\draw[domain=-2:2, samples=200, very thick]  plot ({\x},{((\x)^5+3*(\x)-7)/34});
-%\draw (-2,0)node{$\cdot$};
-%\draw (-1,0)node{$\cdot$};
-%\draw (1,0)node{$\cdot$};
-%\draw (0,0)node{$\cdot$};
-%\draw (2,0)node{$\cdot$};
-%\draw (-2 , 0) node[below] {$a$};
-%\draw (2 , 0) node[below] {$b$};
-%\draw (1.26 , 0) node[below] {$\ell$};
-% \end{tikzpicture}
-% \end{center}
+
+
  On considère $m_0 = \dfrac{g_0+d_0}{2}$ et on évalue $f(m_0)$ : 
 \begin{itemize}
  \item Si $f(m_0)\geq 0$, on va poursuivre la recherche d'un zéro dans l'intervalle  {$[g_0,m_0]$} \\On pose donc  : 
@@ -194,35 +182,35 @@ On considère une fonction $f$ vérifiant :
  \item On recommence alors en considérant $m_1 = \dfrac{g_1+d_1}{2}$...\\
  \end{itemize}
 
-
- \begin{enumerate}
- \item Par quoi peut-on remplacer la condition "$f(m_k)\geq 0$" dans le cas général où $f(a)$ et $f(b)$ sont de signes contraires (pas forcément $f(a)<0$ et $f(b)>0$) ?
-
- \item \`A quelle condition sur $g_n$ et $d_n$ s'arrête-t-on, si l'on souhaite que $g_n$ et $d_n$ soient des solutions approchées de $\ell$ à une précision $\varepsilon$ ?
-
- \item  Au lieu de renvoyer $g_n$ et/ou $d_n$ comme valeurs approchées de $\ell$, que pourrait-on prendre ? 
- 
- Que mettre comme condition d'arrêt pour avoir une précision $\varepsilon$  ? 
-
- \item Un étudiant propose de tester si $f(m_k)=0$.  Qu'en pensez-vous ?
-
-\end{enumerate}
+%
+% \begin{enumerate}
+% \item Par quoi peut-on remplacer la condition "$f(m_k)\geq 0$" dans le cas général où $f(a)$ et $f(b)$ sont de signes contraires (pas forcément $f(a)<0$ et $f(b)>0$) ?
+%
+% \item \`A quelle condition sur $g_n$ et $d_n$ s'arrête-t-on, si l'on souhaite que $g_n$ et $d_n$ soient des solutions approchées de $\ell$ à une précision $\varepsilon$ ?
+%
+% \item  Au lieu de renvoyer $g_n$ et/ou $d_n$ comme valeurs approchées de $\ell$, que pourrait-on prendre ? 
+% 
+% Que mettre comme condition d'arrêt pour avoir une précision $\varepsilon$  ? 
+%
+% \item Un étudiant propose de tester si $f(m_k)=0$.  Qu'en pensez-vous ?
+%
+%\end{enumerate}
 
 
 \subsection{Implémentation en Python et avec scipy}
-\'Ecrivons une fonction \lstinline{zero dichotomie(f:function,a:float,b:float,epsilon:float)->float} d'arguments une fonction \lstinline{f}, des flottants \lstinline{a} et \lstinline{b} (tels que \lstinline{a < b}), et  la précision voulue \lstinline{epsilon} (flottant strictement positif). Cette fonction renverra une valeur approchée à \lstinline{epsilon} près d'un zéro de \lstinline{f}, compris entre \lstinline{a} et \lstinline{b}, obtenue par la méthode de dichotomie.
+\'Ecrivons une fonction \lstinline{zero_dichotomie(f:callable, a:float, b:float, epsilon:float) -> float} d'arguments une fonction \lstinline{f}, des flottants \lstinline{a} et \lstinline{b} (tels que \lstinline{a < b}), et  la précision voulue \lstinline{epsilon} (flottant strictement positif). Cette fonction renverra une valeur approchée à \lstinline{epsilon} près d'un zéro de \lstinline{f}, compris entre \lstinline{a} et \lstinline{b}, obtenue par la méthode de dichotomie.
 
 \begin{lstlisting}
-def zero dichotomie(f:function, a:float, b:float, epsilon:float):
-     g = a # c'est un flottant
-     d = b # c'est un flottant
-     while d - g > 2 * epsilon :
-          m = (g + d) / 2
-          if f(g) * f(m) <= 0:
-               d = m
-          else:
-               g = m
-     return ((g + d) / 2)
+def zero_dichotomie(f:callable, a:float, b:float, epsilon:float):
+    g = a # c'est un flottant
+    d = b # c'est un flottant
+    while d-g > 2*epsilon :
+        m = (g + d) / 2
+        if f(g)*f(m) <= 0:
+            d = m
+        else:
+            g = m
+    return ((g + d)/2)
 \end{lstlisting}
 
 Effectuons un test avec la fonction $f : x \mapsto x^2-2$ sur l'intervalle $\verb![!1,2\verb!]!$, avec une précision de $10^{-6}$ :
@@ -257,7 +245,7 @@ print (zero dichotomie(f, 1, 2, 10**(-6)))
 % 
 
 %\subsection{Fonction prédéfinie dans scipy}
-Une telle fonction est déjà prédéfinie dans la bibliothèque \lstinline{scipy.optimize}, la fonction \lstinline{bisect} \linebreak (la méthode de dichotomie s'appelle aussi la méthode de la \textit{bisection}) : 
+Une telle fonction est déjà prédéfinie dans la bibliothèque \lstinline{scipy.optimize}, la fonction \lstinline{bisect}\sidenote{La méthode de dichotomie s'appelle aussi la méthode de la \textit{bisection}.} : 
 \begin{lstlisting}
 import scipy.optimize as spo
 print (spo.bisect(f, 1, 2)) 
