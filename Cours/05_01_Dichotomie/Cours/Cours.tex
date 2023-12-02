@@ -118,26 +118,26 @@ C'est fini, on a épuisé la liste \lstinline{L} et on n'a pas trouvé $x0$.}
 \subsection{Implémentation en Python}
 
 
-La fonction \lstinline{recherche dichotomie} d'arguments une liste \lstinline{L} et un élément \lstinline{x0} renvoyant un booléen disant si \lstinline{x0} est dans la liste \lstinline{L} est proposée :
+La fonction \lstinline{recherche_dichotomie} d'arguments une liste \lstinline{L} et un élément \lstinline{x} renvoyant un booléen disant si \lstinline{x} est dans la liste \lstinline{L} est proposée :
 
 
 
 \begin{lstlisting}
-def recherche_dichotomie(L:list, x0:int)-> bool:
+def recherche_dichotomie(L:list, x:int)-> bool:
     n = len(L)
     g = 0 # c'est l'indice de gauche
     d = n - 1 # c'est l'indice de droite
     rep = False
     while g <= d and rep == False :
-        # si x0 est dans L alors L[g] <= x0 <= L[d]     {invariant}
+        # si x est dans L alors L[g] <= x <= L[d]     {invariant}
         m = (g+d) // 2 
-        if x0 == L[m]:
+        if x == L[m]:
             rep = True
-        elif x0 < L[m]:
-            d= m - 1
+        elif x < L[m]:
+            d = m - 1
         else:
             g = m + 1
-            # si x0 est dans L alors L[g] <= x0 <= L[d]     {invariant}
+        # si x est dans L alors L[g] <= x <= L[d]     {invariant}
     return(rep)
 \end{lstlisting} 
 
@@ -159,6 +159,33 @@ def recherche_dichotomie(L:list, x0:int)-> bool:
 \textbf{Remarque :} La terminaison de l'algorithme est obtenue avec $d-g$ qui est un entier positif qui décro\^{i}t strictement à chaque passage dans la boucle \lstinline{while} et joue le rôle de variant.
 %\end{enumerate}
 
+\subsection{Terminaison}
+
+\subsection{Preuve de correction}
+
+Montrons que \lstinline{x} $\in$ \lstinline{L} $\Rightarrow$ \lstinline{x} $\in$ \lstinline{[g:d+1]}.\sidenote{Cela signifie que $x\in\llbracket g,d\rrbracket$.}
+
+\begin{itemize}
+\item En entrant dans la boucle, $g=0$ et $d+1=n-1+1=n$. Si \lstinline{x} $\in$ \lstinline{L} alors, \lstinline{x} $\in$ \lstinline{[0:n]}. La propriété d'invariance est donc vérifiée.
+
+\item Considérons la propriété 
+\lstinline{x} $\in$ \lstinline{L} $\Rightarrow$ \lstinline{x} $\in$ \lstinline{[g:d+1]}
+est vraie à la \ieme itération.
+
+\item On calcule \lstinline{m}.
+
+\item Si \lstinline{x = L[m]}, on a bien \lstinline{x} $\in$ \lstinline{[g:d+1]}. La propriété d'invariance est vérifiée à la fin de l'itération et on sort de la boucle (car \lstinline{rep} est \lstinline{True}). 
+
+\item Si \lstinline{x < L[m]}, on a déjà vérifié que \lstinline{x} était différent de \lstinline{L[m]} et alors \lstinline{d=m-1}. Donc $g=g$ et $d+1=m-1+1=m$.
+\lstinline{x} $\in$ \lstinline{L} alors \lstinline{x} $\in$ \lstinline{[g:m]}. La propriété d'invariance est donc vérifiée.
+
+\item Si \lstinline{x > L[m]}, on a déjà vérifié que \lstinline{x} était différent de \lstinline{L[m]} et alors \lstinline{g=m+1}. Donc $g=m+1$ et $d+1$ est inchangé.
+ Donc si 
+\lstinline{x} $\in$ \lstinline{L} alors \lstinline{x} $\in$ \lstinline{[m+1:d+1]}. La propriété d'invariance est donc vérifiée.
+\end{itemize}
+Dans chacun des cas, la propriété d'invariance est vérifiée à la fin de la \ieme itération. C'est donc bien un invariant de boucle. 
+
+\subsection{Analyse de la complexité}
 
 \section{Détermination de la racine d'une fonction par dichotomie}
 
