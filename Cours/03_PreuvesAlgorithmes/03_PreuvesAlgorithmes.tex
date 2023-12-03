@@ -5,7 +5,7 @@
 
 \chapter{Méthode de programmation}
 
-\marginnote{
+\marginnote[4cm]{
 \begin{itemize}
 \item Terminaison.
 \item Correction partielle. 
@@ -14,16 +14,6 @@
 \end{itemize}}
 
 
-\def\xxcompetences{%
-\textsl{%
-\textbf{Savoirs et compétences :}\\
-\begin{itemize}[label=\ding{112},font=\color{bleuxp}] 
-\item Terminaison.
-\item Correction partielle. 
-\item Correction totale.
-\item Variant. Invariant.
-\end{itemize}
-}}
 
 
 \section{Anlayse des algorithmes}
@@ -79,11 +69,11 @@ L'algorithme se terminera si on sort de la boucle \texttt{while}. Il faut pour c
 \begin{center}
 \begin{tabular}{llll}
 \hline
-Début de la i\ieme itération & \texttt{r} & \texttt{n} & \texttt{r < v} \\ \hline \hline
-Itération 1 & \texttt{0} & \texttt{0} & \texttt{0 < 9  } $\Rightarrow$ \texttt{  True} \\ \hline
-Itération 2& \texttt{1} & \texttt{1} & \texttt{1 < 9  } $\Rightarrow$ \texttt{  True} \\ \hline
-Itération 3 & \texttt{3} & \texttt{2} & \texttt{3 < 9  } $\Rightarrow$ \texttt{  True} \\ \hline
-Itération 4 & \texttt{6} & \texttt{3} & \texttt{6 < 9  } $\Rightarrow$ \texttt{  True} \\ \hline
+Début de la i\ieme itération & \texttt{r} & \texttt{n} & \texttt{r < v} \\ \hline 
+Itération 1 & \texttt{0} & \texttt{0} & \texttt{0 < 9  } $\Rightarrow$ \texttt{  True} \\    %\hline
+Itération 2& \texttt{1} & \texttt{1} & \texttt{1 < 9  } $\Rightarrow$ \texttt{  True} \\     %\hline
+Itération 3 & \texttt{3} & \texttt{2} & \texttt{3 < 9  } $\Rightarrow$ \texttt{  True} \\    %\hline
+Itération 4 & \texttt{6} & \texttt{3} & \texttt{6 < 9  } $\Rightarrow$ \texttt{  True} \\    %\hline
 Itération 5 & \texttt{10} & \texttt{4} & \texttt{10< 9  } $\Rightarrow$ \texttt{  False} \\ \hline
 \end{tabular}
 \end{center}
@@ -97,12 +87,12 @@ La fonction renvoie 4. On a $1+2+3+4 = 10$. On dépasse strictement la valeur 9.
 \begin{center}
 \begin{tabular}{llll}
 \hline
-Début de la i\ieme itération & \texttt{r} & \texttt{n} & \texttt{r  < v} \\ \hline \hline
-Itération 1 & \texttt{0} & \texttt{0} & \texttt{0  < 10  } $\Rightarrow$ \texttt{  True} \\ \hline
-Itération 2& \texttt{1} & \texttt{1} & \texttt{1  < 10  } $\Rightarrow$ \texttt{  True} \\ \hline
-Itération 3 & \texttt{3} & \texttt{2} & \texttt{3  < 10  } $\Rightarrow$ \texttt{  True} \\ \hline
-Itération 4 & \texttt{6} & \texttt{3} & \texttt{6  < 10  } $\Rightarrow$ \texttt{  True} \\ \hline
-Itération 5 & \texttt{10} & \texttt{4} & \texttt{10 < 10  } $\Rightarrow$ \texttt{  False} \\ \hline
+Début de la i\ieme itération & \texttt{r} & \texttt{n} & \texttt{r  < v} \\ \hline %\hline
+Itération 1 & \texttt{0} & \texttt{0} & \texttt{0  < 10  } $\Rightarrow$ \texttt{  True} \\    %\hline
+Itération 2& \texttt{1} & \texttt{1} & \texttt{1  < 10  } $\Rightarrow$ \texttt{  True} \\     %\hline
+Itération 3 & \texttt{3} & \texttt{2} & \texttt{3  < 10  } $\Rightarrow$ \texttt{  True} \\    %\hline
+Itération 4 & \texttt{6} & \texttt{3} & \texttt{6  < 10  } $\Rightarrow$ \texttt{  True} \\    %\hline
+Itération 5 & \texttt{10} & \texttt{4} & \texttt{10 < 10  } $\Rightarrow$ \texttt{  False} \\ %\hline
 \end{tabular}
 \end{center}
 La fonction renvoie 4. On a $1+2+3+4 = 10$. On ne dépasse pas strictement la valeur 10. La fonction ne répond pas au besoin dans ce cas. 
@@ -116,7 +106,7 @@ La fonction proposée ne remplit pas le cahier des charges. Aurait-on pu le prou
 \section{Terminaison d'un algorithme}
 
 \subsection{Variant de boucle}
-\begin{defi}{Variant de boucle} \\
+\begin{defi}[Variant de boucle]
 Un variant de boucle permet de prouver la terminaison d'une boucle conditionnelle.  Un variant de boucle est une \textbf{quantité entière positive} à l’entrée de chaque
 itération de la boucle et qui \textbf{diminue strictement à chaque itération}.
 \end{defi}
@@ -155,13 +145,10 @@ Dans cet exemple montrons que la quantité $u_n = v-r$ est un variant de boucle 
 Au final, $u_n = v-r$ est donc un variant de boucle et la boucle se termine.
 
 
-\subsection{Un second exemple ressemblant...} 
+\subsection{Un second exemple ressemblant...\sidenote{\url{https://marcdefalco.github.io/pdf/complet_python.pdf}}} 
 
-\begin{flushright}
-\footnotesize
-[\url{https://marcdefalco.github.io/pdf/complet_python.pdf}]
-\normalsize
-\end{flushright}
+
+
 
 Considérons l’algorithme suivant qui, étant donné un entier naturel $n$ strictement positif (inférieur à $2^{30}$), détermine le plus petit entier $k$ tel que $n \leq 2^k$.
 \begin{lstlisting}
@@ -173,7 +160,8 @@ def plus_grande_puissance2(n):
         p = p*2
     return k
 \end{lstlisting}
-\begin{demo}\textbf{[1]} $\quad$
+%\begin{demo}%
+\textbf{[1]} $\quad$
 Dans l’exemple précédent, la quantité $n - p$ est un variant de boucle :
 \begin{itemize}
 \item au départ, $n > 0$ et $p = 1$ donc $n - p \geq 0$;
@@ -182,9 +170,10 @@ de boucle est vérifiée $p < n$ donc $n - p > 0$.
 \item lorsqu’on passe d’une itération à la suivante, la quantité passe de $n-p$ à $n-2p$ or $2p-p > 0$
 car $p \geq 1$. Il y a bien une stricte diminution.
 \end{itemize}
-\end{demo}
+%\end{demo}
 
-\begin{demo}\textbf{[2]} $\quad$
+%\begin{demo}
+\textbf{[2]} $\quad$
 Montrons que, la quantité $u_j = n - p$ est un variant de boucle :
 \begin{itemize}
 \item intialement, $n > 0$ et $p = 1$ donc $n - p \geq 0$;
@@ -192,7 +181,7 @@ Montrons que, la quantité $u_j = n - p$ est un variant de boucle :
 \item à la fin de l'itération suivante, $u_{j+1}=n-2p = u_j - p$. $p$ est positif donc $u_{j+1}$ est un entier et $u_{j+1}<u_j$. Par suite, ou bien $u_{j+1}<0$ c'est à dire que $n-p<0$ soit $p>n$. On sort donc de la boucle. Ou bien, $u_{j+1}>0$, et la boucle continue.
 \end{itemize}
 $n - p$ est donc un variant de boucle.
-\end{demo}
+%\end{demo}
 
 \section{Correction d'un algorithme}
 \subsection{Invariant de boucle}
@@ -225,7 +214,8 @@ def plus_grande_puissance2(n):
         p = p*2
     return k
 \end{lstlisting}
-\begin{demo}
+
+%\begin{demo}
 Montrons que la propriété suivante est un invariant de boucle : $p=2^k$ et $2^{k-1}<n$.
 \begin{itemize}
 \item \textbf{Initialisation : }à l'entrée dans la boucle $k=0$ et $p=1$, $n\in\mathbb{N}^*$
@@ -241,7 +231,7 @@ Montrons que la propriété suivante est un invariant de boucle : $p=2^k$ et $2^
 \end{itemize}
 \end{itemize}
 La propriété citée est donc un invariant de boucle. 
-\end{demo}
+%\end{demo}
 
 \subsection{Un << contre exemple >>}
 
