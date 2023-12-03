@@ -1,18 +1,17 @@
 % !TEX spellcheck = fr_FR
-%\setchapterimage{.png}
-\setchapterpreamble[u]{\margintoc}
-%\setcounter{chapter}{1}
 
-\chapter{Méthode de programmation}
+%%%% Paramétrage du cours %%%%
+\def\xxactivite{Cours}
 
-\marginnote{
-\begin{itemize}
-\item Terminaison.
-\item Correction partielle. 
-\item Correction totale.
-\item Variant. Invariant.
-\end{itemize}}
+\def\xxauteur{Xavier Pessoles}
+\fichefalse \proftrue \tdfalse \courstrue
 
+\def\xxnumchapitre{Chapitre 6 \vspace{.2cm}}
+%<<<<<<< HEAD
+\def\xxchapitre{\hspace{.12cm} Méthode de programmation -- Suite }
+%=======
+\def\xxchapitre{\hspace{.12cm} Méthodes de programmation}
+%>>>>>>> ddb0aa00d4adecdcdd02a0da61a9a6b57af68d1a
 
 \def\xxcompetences{%
 \textsl{%
@@ -25,22 +24,36 @@
 \end{itemize}
 }}
 
+\def\xxfigures{
+%\includegraphics[width=\linewidth]{fractale}
+%\\
+%\textit{Modèle du pilote hydraulique avec pilotage interactif.}
+}%figues de la page de garde
+
+\input{\repRel/Style/pagegarde_cours_minitoc}
+\setlength{\columnseprule}{.1pt}
+
+\vspace{2cm}
+\pagestyle{fancy}
+\thispagestyle{plain}
+%%%%%%%%%%%%%%%%%%%%%%%
+
 
 \section{Anlayse des algorithmes}
 
 \subsection{Définition}
 
-\begin{defi}[Terminaison d'un algorithme]
+\begin{defi}{Terminaison d'un algorithme} \\
 Prouver la terminaison d'un algorithme signifie montrer que cet algorithme se terminera en un temps fini. On utilise pour cela un \textbf{variant de boucle}.
 \end{defi}
 
-\begin{defi}[Correction d'un algorithme]
+\begin{defi}{Correction d'un algorithme} \\
 Un algorithme est dit (partiellement) correct s'il est correct dès qu'il termine. 
 
 \end{defi}
 Prouver la correction d'un algorithme signifie montrer que cet algorithme fournit bien la solution au problème qu'il est sensé résoudre. On utilise pour cela un \textbf{invariant de boucle}.
 
-\begin{defi}[Invariant de boucle]
+\begin{defi}{Invariant de boucle}
 Un invariant de boucle est une propriété dépendant des variables de l’algorithme, qui est vérifiée à
 chaque passage dans la boucle.
 \end{defi}
