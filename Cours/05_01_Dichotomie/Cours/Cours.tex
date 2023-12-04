@@ -116,10 +116,7 @@ C'est fini, on a épuisé la liste \lstinline{L} et on n'a pas trouvé $x0$.}
  
 
 \subsection{Implémentation en Python}
-
-
 La fonction \lstinline{recherche_dichotomie} d'arguments une liste \lstinline{L} et un élément \lstinline{x} renvoyant un booléen disant si \lstinline{x} est dans la liste \lstinline{L} est proposée :
-
 
 
 \begin{lstlisting}
@@ -158,6 +155,27 @@ def recherche_dichotomie(L:list, x:int)-> bool:
 %\end{python}
 \textbf{Remarque :} La terminaison de l'algorithme est obtenue avec $d-g$ qui est un entier positif qui décro\^{i}t strictement à chaque passage dans la boucle \lstinline{while} et joue le rôle de variant.
 %\end{enumerate}
+
+\subsection{Implémentation récursive}
+\begin{lstlisting}
+def recherche_dichotomie_recursive(L:list, x:int, g:int, d:int)-> bool:
+    n = len(L)
+    g = 0 # c'est l'indice de gauche
+    d = n - 1 # c'est l'indice de droite
+    rep = False
+    while g <= d and rep == False :
+        # si x est dans L alors L[g] <= x <= L[d]     {invariant}
+        m = (g+d) // 2 
+        if x == L[m]:
+            rep = True
+        elif x < L[m]:
+            d = m - 1
+        else:
+            g = m + 1
+        # si x est dans L alors L[g] <= x <= L[d]     {invariant}
+    return(rep)
+\end{lstlisting} 
+
 
 \subsection{Terminaison}
 
