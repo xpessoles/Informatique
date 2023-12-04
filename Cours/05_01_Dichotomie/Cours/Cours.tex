@@ -158,22 +158,16 @@ def recherche_dichotomie(L:list, x:int)-> bool:
 
 \subsection{Implémentation récursive}
 \begin{lstlisting}
-def recherche_dichotomie_recursive(L:list, x:int, g:int, d:int)-> bool:
-    n = len(L)
-    g = 0 # c'est l'indice de gauche
-    d = n - 1 # c'est l'indice de droite
-    rep = False
-    while g <= d and rep == False :
-        # si x est dans L alors L[g] <= x <= L[d]     {invariant}
-        m = (g+d) // 2 
-        if x == L[m]:
-            rep = True
-        elif x < L[m]:
-            d = m - 1
-        else:
-            g = m + 1
-        # si x est dans L alors L[g] <= x <= L[d]     {invariant}
-    return(rep)
+def recherche_dichotomique_recursive(L:[int], x0:int, g:int, d:int):
+    if g>d : 
+        return False # ou -1
+    m = (g+d)//2
+    if L[m] == x0 :
+        return True # ou m
+    elif L[m] > x0 :
+        return recherche_dichotomique_recursive(L, x0, g, d-1)
+    else :
+        return recherche_dichotomique_recursive(L, x0, g+1, d)
 \end{lstlisting} 
 
 
@@ -204,6 +198,15 @@ est vraie à la \ieme itération.
 Dans chacun des cas, la propriété d'invariance est vérifiée à la fin de la \ieme itération. C'est donc bien un invariant de boucle. 
 
 \subsection{Analyse de la complexité}
+Dans le pire des cas, le terme recherché n'est pas dans la liste. On divise donc la taille du tableau par 2 tant que la taille est supérieure ou égale à 1. 
+
+On note $n$ la taille du tableau. On cherche $k$ le nombre de fois qu'on peut diviser la taille du tableau par 2 : 
+$n\cdot\left(\dfrac{1}{2}\right)^k \geq 1$ 
+$\Rightarrow \cdot\left(\dfrac{1}{2}\right)^k \geq \dfrac{1}{n}$
+$\Rightarrow k \ln\left(\dfrac{1}{2}\right) \geq \ln\left(\dfrac{1}{n}\right)$
+$\Rightarrow k \geq \dfrac{\ln\left(\dfrac{1}{n}\right)}{\ln\left(\dfrac{1}{2}\right)}$
+$\Rightarrow k \geq \dfrac{\ln n}{\ln 2}$.
+Il y aura donc dans le pire des cas $\log_2 n$ opérations.  L'algorithme de recherche dichotomique est donc en $\mathcal{O}(\log_2(n))$.
 
 \section{Détermination de la racine d'une fonction par dichotomie}
 
