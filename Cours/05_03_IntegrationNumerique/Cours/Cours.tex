@@ -1,19 +1,20 @@
 %\setchapterimage{Fond_SLCI.png}
 \setchapterpreamble[u]{\margintoc}
-\chapter{Intégration numérique}
+\chapter{Culture algorithmique}
 
 %\marginnote[5cm]{
 %\UPSTIcompetence[2]{C1-02}
 %\UPSTIcompetence[2]{C2-04}
 %}
 
+\section{Intégration numérique}
 %\marginnote[4cm]{\textbf{Qui}, \textit{Quoi}, Où.}
 
 
 \begin{hypo}  $f:[a,b]\rightarrow \mathbb{R}$ est une fonction continue sur $[a,b]$. On note $I = \int\limits_a^{b} f(x) \mathrm{d}x $.
 \end{hypo}
 
-\section{Principe des méthodes des rectangles}
+\subsection{Principe des méthodes des rectangles}
 %\subsection{Principe}
 \begin{defi}
 Dans cette méthode, la fonction à intégrer est interpolée par un polynôme de degré 0, à savoir une fonction constante. Géométriquement, l'aire sous la courbe est alors approximée par un rectangle. Plusieurs choix sont possibles.
@@ -29,7 +30,7 @@ $I = \int\limits_a^{b} f(x) \mathrm{d}x \simeq \left(b-a\right) f(b) $
 
 \end{defi}
 
-\section{Interprétation graphique}
+\subsection{Interprétation graphique}
 
 \begin{figure*}[!h]
 \begin{minipage}[c]{.24\linewidth}
@@ -66,7 +67,7 @@ $I = \int\limits_a^{b} f(x) \mathrm{d}x \simeq \left(b-a\right) f(b) $
 \includegraphics[width=\textwidth]{pi_trap}
 \end{marginfigure}
 
-\section{Principe des méthodes des trapèzes}
+\subsection{Principe des méthodes des trapèzes}
 
 
 \begin{defi}
@@ -75,7 +76,7 @@ $I = \int\limits_a^{b} f(x) \mathrm{d}x \simeq \left(b-a\right) \dfrac{f(a)+f(b)
 \end{defi}
 
 
-\subsection{Notion d'erreur d'intégration}
+\subsubsection{Notion d'erreur d'intégration}
 \begin{resultat}
 Dans chaque cas,  on intègre $f$ sur $n$ subdivisions régulières de $I$. 
 
@@ -95,7 +96,7 @@ L'erreur commise$\varepsilon$ est telle qu'il existe un entier $M$ tel que $ \va
 \end{resultat}
 
 
-\subsection{Bibliothèque Python}
+\subsubsection{Bibliothèque Python}
 Il est possible d'intégrer une fonction en utilisant les modules de la bibliothèque \texttt{scipy} :
 \begin{lstlisting}
 from scipy.integrate import quad
@@ -109,8 +110,8 @@ I,erreur = quad(f,g,d)
 print(I,erreur)
 \end{lstlisting}
 
-\section{Implémentation des algorithmes d'intégration}
-\subsection{Méthode des rectangles à gauche}
+\subsection{Implémentation des algorithmes d'intégration}
+\subsubsection{Méthode des rectangles à gauche}
 
 \begin{lstlisting}
 def integrale_rectangles_gauche(f,a,b,nb):
@@ -132,7 +133,7 @@ def integrale_rectangles_gauche(f,a,b,nb):
     return res*pas
 \end{lstlisting}
 
-\subsection{Méthode des rectangles à droite}
+\subsubsection{Méthode des rectangles à droite}
 
 \begin{lstlisting}
 def integrale_rectangles_droite(f,a,b,nb):
@@ -154,7 +155,7 @@ def integrale_rectangles_droite(f,a,b,nb):
     return res*pas
 \end{lstlisting}
 
-\subsection{Méthode des rectangles -- Point milieu}
+\subsubsection{Méthode des rectangles -- Point milieu}
 \begin{lstlisting}
 def integrale_rectangles_milieu(f,a,b,nb):
     """
@@ -174,7 +175,7 @@ def integrale_rectangles_milieu(f,a,b,nb):
     return res*pas
 \end{lstlisting}
 
-\subsection{Méthode des trapèzes pour le calcul approché d'une intégrale sur un segment}
+\subsubsection{Méthode des trapèzes pour le calcul approché d'une intégrale sur un segment}
 
 \begin{lstlisting}
 def integrale_trapeze(f,a,b,nb):
