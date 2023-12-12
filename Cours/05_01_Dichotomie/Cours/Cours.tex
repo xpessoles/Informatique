@@ -1,16 +1,17 @@
-%\setchapterimage{Fond_SLCI.png}
-\setchapterpreamble[u]{\margintoc}
-\chapter{Algorithmes dichotomiques}
+%%\setchapterimage{Fond_SLCI.png}
+%\setchapterpreamble[u]{\margintoc}
+%\chapter{Algorithmes dichotomiques}
+%
+%%\marginnote[5cm]{
+%%\UPSTIcompetence[2]{C1-02}
+%%\UPSTIcompetence[2]{C2-04}
+%%}
+%
+%%\marginnote[4cm]{\textbf{Qui}, \textit{Quoi}, Où.}
 
-%\marginnote[5cm]{
-%\UPSTIcompetence[2]{C1-02}
-%\UPSTIcompetence[2]{C2-04}
-%}
-
-%\marginnote[4cm]{\textbf{Qui}, \textit{Quoi}, Où.}
-
-
-\section{Introduction}
+\newpage
+\section{Algorithmes dichotomiques}
+\subsection{Introduction}
 Les méthodes de résolutions par un algorithme dichotomique font partie des algorithmes basés sur le principe de << diviser pour régner >>.
 Elles utilisent la définition du terme \textbf{dichotomie} qui signifie diviser un tout en deux parties << opposées >>.
 Certains algorithmes de tris sont basés sur ce principe de diviser pour régner.
@@ -23,7 +24,7 @@ Ce cours vous présente deux algorithmes dichotomiques :
 \item la détermination de la racine d'une fonction quand elle existe.
 \end{itemize}
 
-\section{Recherche dichotomique dans une liste {triée}}
+\subsection{Recherche dichotomique dans une liste {triée}}
 
 Lorsque vous cherchez le mot <<~hippocampe~>> dans le dictionnaire, vous ne vous amusez pas à parcourir chaque page depuis la lettre a jusqu'à tomber sur le mot <<~hippocampe~>>...\\
 Dans une liste triée, il y a plus efficace ! Par exemple dans le dictionnaire, vous ouvrez à peu près au milieu, et suivant si le mot trouvé est \og inférieur \fg \ ou \og supérieur \fg \ à <<~hippocampe~>> (pour l'ordre alphabétique), vous poursuivez votre recherche dans l'une ou l'autre moitié du dictionnaire.
@@ -68,9 +69,10 @@ On poursuit jusqu'à ce qu'on a trouvé \lstinline{x0} ou lorsque l'on a épuis�
 
 
 
+\newpage
 
 
-\subsection{Exemples d'application}
+\subsubsection{Exemples d'application}
 %\begin{enumerate}
 %\item %En notant $g$ et $d$  les indices de gauche et de droite du morceau de la liste $l$ où l'on est en train de faire la %recherche, 
 
@@ -115,7 +117,7 @@ C'est fini, on a épuisé la liste \lstinline{L} et on n'a pas trouvé $x0$.}
  %- si \lstinline{L[m]} $\leq$ \lstinline{x0}, \lstinline{d} est inchangé et \lstinline{g} prend la valeur de \lstinline{m}
  
 
-\subsection{Implémentation en Python}
+\subsubsection{Implémentation en Python}
 La fonction \lstinline{recherche_dichotomie} d'arguments une liste \lstinline{L} et un élément \lstinline{x} renvoyant un booléen disant si \lstinline{x} est dans la liste \lstinline{L} est proposée :
 
 
@@ -156,9 +158,9 @@ def recherche_dichotomie(L:list, x:int)-> bool:
 \textbf{Remarque :} La terminaison de l'algorithme est obtenue avec $d-g$ qui est un entier positif qui décro\^{i}t strictement à chaque passage dans la boucle \lstinline{while} et joue le rôle de variant.
 %\end{enumerate}
 
-\subsection{Implémentation récursive}
+\subsubsection{Implémentation récursive}
 \begin{lstlisting}
-def recherche_dichotomique_recursive(L:[int], x0:int, g:int, d:int):
+def recherche_dichotomique_recursive(L:[int], x0:int, g:int, d:int) -> bool:
     if g>d : 
         return False # ou -1
     m = (g+d)//2
@@ -171,9 +173,26 @@ def recherche_dichotomique_recursive(L:[int], x0:int, g:int, d:int):
 \end{lstlisting} 
 
 
-\subsection{Terminaison}
+\subsubsection{Terminaison (Implémentation non récursive)}
 
-\subsection{Preuve de correction}
+Prenons comme variant de boucle la longeur de la zone de recherche, à savoir, à la n\ieme itération, 
+$\ell_n = d_n - g_n$. 
+
+À l'itération suivante, $ m_{n+1} =  \left\lfloor \dfrac{g_n+d_n}{2}  \right\rfloor$
+\begin{itemize}
+\item ou bien \lstinline{L[m]==x0} et l'alogrithme s'arrête;
+\item ou bien  $g_{n+1} = g_n$ et $d_{n+1} = m_{n+1}-1$. Ainsi, $\ell_{n+1} =  \left\lfloor \dfrac{g_n+d_n}{2}  \right\rfloor-1 -  g_n$ et 
+$\ell_{n+1} \leq   \dfrac{g_n+d_n}{2}  -1 -  g_n $ $ \leq   \dfrac{g_n+d_n - 2 - 2g_n }{2}  $ $ \leq   \dfrac{\ell_n- 2 }{2}  $  $< \ell_n$;
+\item ou bien  $g_{n+1} =  m_{n+1}+1$ et $d_{n+1} = d_n$.
+ Ainsi, $\ell_{n+1} =  d_n  - \left\lfloor \dfrac{g_n+d_n}{2}  \right\rfloor-1$ et 
+$\ell_{n+1} \leq   d_n  -  \dfrac{g_n+d_n}{2}  -1 $  
+$\leq   \dfrac{2 d_n - g_n - d_n}{2}  -1 $  
+$< \ell_n $.
+\end{itemize}
+
+La longueur $\ell_n$ est donc strictement décroissante. L'algorithme terminera donc. 
+
+\subsubsection{Preuve de correction (Implémentation non récursive)}
 
 Montrons que \lstinline{x} $\in$ \lstinline{L} $\Rightarrow$ \lstinline{x} $\in$ \lstinline{[g:d+1]}.\sidenote{Cela signifie que $x\in\llbracket g,d\rrbracket$.}
 
@@ -208,9 +227,9 @@ $\Rightarrow k \geq \dfrac{\ln\left(\dfrac{1}{n}\right)}{\ln\left(\dfrac{1}{2}\r
 $\Rightarrow k \geq \dfrac{\ln n}{\ln 2}$.
 Il y aura donc dans le pire des cas $\log_2 n$ opérations.  L'algorithme de recherche dichotomique est donc en $\mathcal{O}(\log_2(n))$.
 
-\section{Détermination de la racine d'une fonction par dichotomie}
+\subsection{Détermination de la racine d'une fonction par dichotomie}
 
-\subsection{Principe théorique de la méthode par dichotomie}
+\subsubsection{Principe théorique de la méthode par dichotomie}
 %
 \begin{marginfigure}
 \includegraphics[width=\linewidth]{courbe}
@@ -245,11 +264,11 @@ On considère une fonction $f$ vérifiant :
 %\end{enumerate}
 
 
-\subsection{Implémentation en Python et avec scipy}
+\subsubsection{Implémentation en Python et avec scipy}
 \'Ecrivons une fonction \lstinline{zero_dichotomie(f:callable, a:float, b:float, epsilon:float) -> float} d'arguments une fonction \lstinline{f}, des flottants \lstinline{a} et \lstinline{b} (tels que \lstinline{a < b}), et  la précision voulue \lstinline{epsilon} (flottant strictement positif). Cette fonction renverra une valeur approchée à \lstinline{epsilon} près d'un zéro de \lstinline{f}, compris entre \lstinline{a} et \lstinline{b}, obtenue par la méthode de dichotomie.
 
 \begin{lstlisting}
-def zero_dichotomie(f:callable, a:float, b:float, epsilon:float):
+def zero_dichotomie(f:callable, a:float, b:float, epsilon:float) -> float:
     g = a # c'est un flottant
     d = b # c'est un flottant
     while d-g > 2*epsilon :
