@@ -1,5 +1,6 @@
 \subsection*{Recherche d'un zéro d'une fonction}
-
+\ifprof
+\else
 Soit une fonction $f:[a,b]\to\mathbb{R}$ ($a<b$) vérifiant : 
 $f$ continue sur $[a,b]$ et $f(a)\cdot f(b)\<0$ c'est-à-dire que $f(a)$ et $f(b)$ de signes opposés.
 
@@ -44,12 +45,51 @@ On considère $m_0 = \dfrac{g_0+d_0}{2}$ et on évalue $f(m_0)$ :
 	\item On recommence alors en considérant $m_1 = \dfrac{g_1+d_1}{2}$ ...\\
 \end{itemize}
 
+\fi
 %\bigskip
 
 \question{Si l'on souhaite que $g_n$ et $d_n$ soient des solutions approchées de $\ell$ à une précision $\varepsilon$, quelle est la condition d'arrêt de l'algorithme ? Préciser alors la valeur approchée de $\ell$ qui sera renvoyée par la fonction.}
-	
+\ifprof
+\begin{corrige}
+\begin{lstlisting}
+# Pour une valeur à epsilon près, on s_arrete lorsque 0<d-g<2*epsilon et on renvoie (g+d)/2
+\end{lstlisting}
+\end{corrige}
+\else
+\fi
+
 \question{\'Ecrire une fonction \texttt{recherche\_zero(f,a,b,epsilon)} qui renvoie une valeur approchée du zéro de \texttt{f} sur \texttt{[a,b]} a epsilon près.}
-	
+	\ifprof
+\begin{corrige}
+\begin{lstlisting}
+def recherche_zero(f,a,b,epsilon):
+    g,d=a,b
+    while d-g>2*epsilon:
+        m=(g+d)/2
+        if f(m)*f(g)<=0:
+            d=m
+        else:
+            g=m
+    return((g+d)/2)
+
+\end{lstlisting}
+\end{corrige}
+\else
+\fi
+
 \question{Tester la fonction avec $f:x\mapsto x^2-2$ sur $[0,2]$ et $\varepsilon=0,001$.}
-	
+\ifprof
+\begin{corrige}
+\begin{lstlisting}
+def f(x):
+    return(x**2-2)
+\end{lstlisting}
+
+\begin{lstlisting}
+# Avec epsilon = 1/2**p, il faut compter combien il y a de tours de boucles. En sortie du kieme tour de boucle, d-g vaut (b-a)/2**k. Il y a donc k tours de boucles avec (b-a)/2**k<=1/2**(p-1) soit k>=p-1+log_2(b-a) soit une complexité logarithmique encore.
+\end{lstlisting}
+\end{corrige}
+\else
+\fi	
+
 %\question{Avec une erreur de $\varepsilon=\Frac 1{2^p}$, combien y a-t-il de comparaisons au final en fonction de $p$ ?}

@@ -6,7 +6,8 @@
 %\subsection*{Recherche d'un élément dans une liste triée}
 
 \subsection*{Recherche dichotomique dans une liste triée}
-
+\ifprof
+\else
 On se donne une liste \lstinline{L} de nombres de longueur \lstinline{n}, {triée dans l'ordre croissant}, et un nombre \lstinline{x0}. 
 Pour chercher \lstinline{x0}, on va couper la liste en deux moitiés et chercher dans la moitié de tableau qui encadre \lstinline{x0} et ainsi de suite...
 On appelle \lstinline{g} l'indice de l'élément du début de la sous-liste dans laquelle on travaille et \lstinline{d} l'indice de l'élément de fin.
@@ -37,6 +38,7 @@ On poursuit jusqu'à ce qu'on a trouvé \lstinline{x0} ou lorsque l'on a épuis�
 %\emph{Remarque} : On verra plus tard que l'algorithme est tellement rapide que cela ne change pas grand chose de s'arrêter avant et cela simplifie son écriture.
 
 %En notant $g$ et $d$  les indices de gauche et de droite du morceau de la liste $l$ où l'on est en train de faire la %recherche, 
+\fi
 
 \question{Illustrer la méthode avec les deux exemples suivants :}
 \begin{itemize} 
@@ -50,19 +52,85 @@ On poursuit jusqu'à ce qu'on a trouvé \lstinline{x0} ou lorsque l'on a épuis�
 \hline -2 & 1 & 2 & 7 & 8 & 10 & 13 & 16 & 17  \\ \hline
 \end{array}$.
 \end{itemize}
+\ifprof
+\begin{corrige}
+\begin{lstlisting}
+# g=0, d=8
+# m=4, L[m]=11 et 5 < 11, on pose g=0, d=3
+# m=2, L[m]=5. On a trouvé x0
+
+# g=0, d=8
+# m=4, L[m]=8 et 8<11, on pose g=5, d=8
+# m=6, L[m]=13 et 11<13, on pose g=5, d=5
+# m=5, L[m]=10 et 10<11, on pose g=6, d=5. On s'arrête.
+\end{lstlisting}
+\end{corrige}
+\else
+\fi
 
 \question{Si \lstinline{x0} n'est pas dans la liste \lstinline{L}, donner un test d'arrêt du processus de dichotomie portant sur \lstinline{g} et \lstinline{d}. }
+\ifprof
+\begin{corrige}
+\begin{lstlisting}
+g>d
+\end{lstlisting}
+\end{corrige}
+\else
+\fi
 
 \question{\'Ecrire une fonction \lstinline{dichotomie(x0,L)} qui renvoie \lstinline{True} ou \lstinline{False} selon que \lstinline{x0} figure ou non dans \lstinline{L} par cette méthode. On utilisera une boucle \lstinline{while} que l'on interrompra soit lorsque l'on a trouvé \lstinline{x0}, soit lorsque l'on a fini de parcourir la liste.}
+\ifprof
+\begin{corrige}
+\begin{lstlisting}
+def dichotomie(x0,L):
+    Test=False
+    n=len(L)
+    g,d=0,n-1
+    while g<=d and not Test:
+        m=(g+d)//2
+        if L[m]==x0:
+            Test=True
+        elif L[m]>x0:
+            d=m-1
+        else:
+            g=m+1
+        print(g,d)
+    return(Test)
+\end{lstlisting}
+\end{corrige}
+\else
+\fi
 
 
 
 \question{\'Ecrire une fonction \lstinline{dichotomie_indice(x0,L)} qui renvoie l'indice de \lstinline{x0} s'il existe, \lstinline{-1}sinon.}
-
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi
 
 \question{Tester votre fonction sur les exemples de listes ci-dessus.}
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi
 
 \question[Facultatif]{Combien vaut \lstinline{g-d} au $i\ieme$ tour de boucle ? Si \lstinline{x0} ne figure pas dans \lstinline{L}, montrer que le nombre de tours de boucles nécessaires pour sortir de la fonction est de l'ordre de $\ln n$ où \lstinline{n=len(L)} (cela rend la fonction beaucoup plus efficace qu'une simple recherche séquentielle pour laquelle le nombre de comparaisons pour sortir de la boucle serait de l'ordre de $n$).}
+\ifprof
+\begin{corrige}
+\begin{lstlisting}
+# Si x0 n_est pas présent, on exécute la boucle tant que g<=d. On sort avec g=d+1.
+# A l_entrée du 1er tout de boucle, on a d-g+1=n. A chaque tour, la valeur d-g+1 diminue environ de moitié. Donc après k tours de boucles, la longueur de l_intervalle est de l_ordre de n/2**k.
+# De plus, à chaque tour de boucle, il y a 2 comparaisons.
+# Au dernier tour numéro k, on a g=d soit lorsque n/2**k = 1 d_ou k=log_2(n).
+# On obtient donc un nombre de comparaisons équivalent à 2*ln(n)/ln(2): complexité logarithmique.
+# Dans le cas séquentiel, on obtient une complexité linéaire, donc beaucoup moins intéressant.
+\end{lstlisting}
+\end{corrige}
+\else
+\fi
 %
 %
 %\subsection{Recherche d'un indice satisfaisant une condition donnée}

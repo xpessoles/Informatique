@@ -1,9 +1,22 @@
 \subsection*{Valeur d'un polynôme par plusieurs méthodes}
 	
 \question{Écrire une fonction \lstinline{exponaif(x,n)} d'arguments un réel $x$ et un entier naturel $n$, qui renvoie la valeur de $x^n$ par la méthode naïve $x^n=x\times x \times ... \times x$ ($n$ termes). Compter le nombre d'opérations dans exponaïf.}
+\ifprof
+\begin{corrige}
+\begin{lstlisting}
+def exponaif(x,n):
+    p=1
+    for i in range(n):
+        p=p*x
+    return(p)
+\end{lstlisting}
+\end{corrige}
+\else
+\fi
 
 %\medskip  Montrer que le nombre d'opérations effectuées a une complexité linéaire.
-
+\ifprof
+\else
 Une autre méthode, celle de l'exponentiation rapide consiste à remarquer que 
 $x^n=\left\{\begin{tabular}{ccc} ${(x^2)}^{n/2}$ &si &$n$ pair \\ ${x\times (x^2)}^{(n-1)/2}$& si& $n$ impair\end{tabular}\right.$
 
@@ -19,7 +32,7 @@ def expo_rapide(x,n) :
         y=y*y
     return(res)
 \end{lstlisting}
-
+\fi
 %\bigskip 
 %\begin{minipage}{0.5\linewidth}
 %def expo\_rapide(x,n):\\
@@ -32,9 +45,15 @@ def expo_rapide(x,n) :
 %	\textcolor{white}{aaaa} return(res)\end{minipage}
 	
 	\question{Quel est le nom de la variable locale dont le contenu est retourné par la fonction ?}
-	
+\ifprof
+\begin{corrige}
+La variable locale est \texttt{res}.
+\end{corrige}
+\else
+\fi	
 	\question{Faire tourner \og{}à la main\fg{} la fonction pour $x=2$ et $n=10$ en complétant le tableau suivant puis encadrer le nombre d'opérations dans exporapide en fonction de $\ln(n)/\ln(2)$.}
-	
+\ifprof
+\else	
 	\begin{center}
 		\begin{tabular}{|l|p{1cm}|p{1cm}|p{1cm}|}
 			\hline & \texttt{p} & \texttt{res} & \texttt{y}\\
@@ -44,7 +63,26 @@ def expo_rapide(x,n) :
 			\ldots&& & \\[3mm]
 		\end{tabular}
 	\end{center}
-	
+\fi
+
+\ifprof
+\begin{corrige}
+\begin{center}
+\begin{tabular}{|l|p{1cm}|p{1cm}|p{1cm}|}
+\hline & \texttt{p} & \texttt{res} & \texttt{y}\\
+\hline &&&\\
+sortie du 1{\textrm{er}} tour de boucle & 5 & 1 & 4\\
+sortie du 2{\textrm{er}} tour de boucle & 2 & 4 & 16\\
+sortie du 3{\textrm{er}} tour de boucle & 1 & 4 & 256\\
+sortie du 4{\textrm{er}} tour de boucle & 0 & 1024 & 65536\\
+\end{tabular}
+\end{center}
+\begin{lstlisting}
+# Le nombre d'opérations effectuées est exactement n (1 produit à chaque tour)
+\end{lstlisting}
+\end{corrige}
+\else
+\fi	
 	
 	%\q Montrer que le nombre d'opérations effectuées a une complexité logarithmique.
 
@@ -52,31 +90,114 @@ def expo_rapide(x,n) :
 On considère un polynôme $P(x)=\sum_{k=0}^n a_k.x^k$ que l'on modélisera en Python par la liste $P=[a_0,a_1,...,a_n]$. Dans la suite, on prendra pour tout $k\in\mathbb{N}$, $a_k=k$.
 
 	\question{Ecrire une fonction \lstinline{Pnaif(x,P)} d'arguments un réel \lstinline{x} et \lstinline{P} la liste des coefficients du polynôme, qui renvoie $P(x)$ à l'aide de la fonction \lstinline{exponaif}. Compter le nombre d'opérations.}
+\ifprof
+\begin{corrige}
+\begin{lstlisting}
 
+def Pnaif(x,n):
+    S=0
+    for i in range(n):
+        S=S+i*exponaif(x,i)
+    return(S)
+
+# n+n(n+1)/2 ~ n**2/2 opérations. Quadratique
+
+\end{lstlisting}
+\end{corrige}
+\else
+\fi
 	%\medskip Donner un équivalent du nombre d'opérations faites pour ce calcul et vérifier que la complexité est quadratique.
 
 	\question{ Faire de même pour une fonction 
 	\lstinline{Prapide(x,n)} qui renvoie $P(x)$ à l'aide de la fonction \lstinline{exporapide}. On admettra que la complexité est en O(n ln(n)).}
+\ifprof
+\begin{corrige}
+\begin{lstlisting}
+def Prapide(x,n):
+    S=0
+    for i in range(n):
+        S=S+i*exporapide(x,i)
+    return(S)
+
+# O(log(i)) pour chaque i*x**i. Il reste la somme des n termes.
+# D'où n+somme des log(i)=O(n.ln(n)).
+\end{lstlisting}
+\end{corrige}
+\else
+\fi
 	
 	%On peut montrer dans ce cas que la complexité est dominée par $n.\ln(n)$ (on admettra ce résultat).
-
+\ifprof
+\else
  Une dernière méthode consiste à utiliser le schéma de Hörner: 	
  $P(x)= ({(a_nx+a_{n-1})x+a_{n-2})x+...+a_1)x+a_0}$
-
+\fi
 
 	\question{\'Ecrire une fonction \lstinline{horner(x,L)} de paramètres un réel $x$ et une liste $L$ représentant un polynôme $P$, renvoie la valeur de $P(x)$ par la méthode de Hörner. Compter le nombre d'opérations.}
-
+\ifprof
+\begin{corrige}
+\begin{lstlisting}
+def horner(x,L):
+    """L est la liste des coefficients"""
+    n=len(L)-1
+    S=0
+    for i in range(n+1):
+        S=S*x+L[n-i]
+    return(S)
+# 2n opérations. Linéaire mais plus intéressante que ci-dessus.
+\end{lstlisting}
+\end{corrige}
+\else
+\fi
 	%\medskip Compter le nombre d'opérations au total pour calculer $P(x)$ et en donner que la complexité du programme est linéaire.
 
 
-
+\ifprof
+\else
 	\bigskip On désire maintenant visualiser les temps d'exécution des trois fonctions précédentes pour des grandes valeurs de $n$.
+\fi
 
 	\question{Définir la liste $N$ des entiers naturels compris entre 0 et 100.}
-
+\ifprof
+\begin{corrige}
+\begin{lstlisting}
+N=[i for i in range(101)]
+\end{lstlisting}
+\end{corrige}
+\else
+\fi
 	\question{Grâce à la fonction \lstinline{perf_counter} de la bibliothèque \lstinline{time},  écrire une fonction \lstinline{Temps_calcul(x)} qui:}
 \begin{itemize}
 \item définit 3 listes \lstinline{Tn}, \lstinline{Tr} et \lstinline{Th} contenant les temps de calcul de $P(x)$ pour $P=\sum_{k=0}^n k.x^k$ lorsque $n$ décrit $N$ avec respectivement la méthode naïve, la méthode rapide puis la méthode de Hörner.\\
 \item trace les trois courbes  \lstinline{Tn}, \lstinline{Tr} et \lstinline{Th} en fonction de $N$ (on prendra $x=2$). Interpréter le résultat (on pourrait démontrer que les temps d'exécution des trois programmes sont de l'ordre de $n**2$ pour la méthode naïve (on parle de complexité quadratique), de l'ordre de $n\ln(n)$ pour l'exporapide, et de l'ordre de $n$ pour la méthode de Hörner (complexité linéaire)). 
 \end{itemize}
-	
+\ifprof
+\begin{corrige}
+\begin{lstlisting}
+import time as t
+
+def Temps_calcul_P(x):
+    # Le polynôme est donné par une liste des coefficients.
+    Tn,Tr,Th=[],[],[]
+    for n in N:
+        L=[k for k in range(n+1)]
+        tps=t.perf_counter()
+        Pnaif(x,n)
+        Tn.append(t.perf_counter()-tps)
+        tps=t.perf_counter()
+        Sr=0
+        Prapide(x,n)
+        Tr.append(t.perf_counter()-tps)
+        tps=t.perf_counter()
+        Phorner(x,L)
+        Th.append(t.perf_counter()-tps)
+    plt.plot(N,Th,label='méthode horner')
+    plt.plot(N,Tr,label='méthode rapide')
+    plt.plot(N,Tn,label='méthode naïve')
+    plt.legend()
+    plt.show()
+
+\end{lstlisting}
+\end{corrige}
+\else
+\fi	
