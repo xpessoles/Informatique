@@ -1,36 +1,34 @@
-%%%%% Paramétrage du cours %%%%
-%\def\xxactivite{Cours}
-%
-%\def\xxauteur{Emilien Durif -- Xavier Pessoles}
-%\fichefalse \proftrue \tdfalse \courstrue
-%
-%\def\xxnumchapitre{Chapitre 7 \vspace{.2cm}}
-%
-%\def\xxchapitre{Complexité algorithmique }
-%
-%\def\xxcompetences{%
-%\textsl{%
-%\textbf{Savoirs et compétences :}\\
-%\begin{itemize}[label=\ding{112},font=\color{bleuxp}] 
-%\item Complexité.
-%\end{itemize}
-%}}
-%
-%\def\xxfigures{
-%%\includegraphics[width=\linewidth]{fractale}
-%%\\
-%%\textit{Modèle du pilote hydraulique avec pilotage interactif.}
-%}%figues de la page de garde
-%
-%\input{\repRel/Style/pagegarde_cours_minitoc}
-%\setlength{\columnseprule}{.1pt}
-%
-%\vspace{2cm}
-%\pagestyle{fancy}
+%%%% Paramétrage du cours %%%%
+\def\xxactivite{Cours}
 
-%\thispagestyle{plain}
-\section{Complexité algorithmique }
-\subsection{Préliminaire: parlons du temps\ldots{}}
+\def\xxauteur{Emilien Durif -- Xavier Pessoles}
+\fichefalse \proftrue \tdfalse \courstrue
+
+\def\xxnumchapitre{Chapitre 7 \vspace{.2cm}}
+
+\def\xxchapitre{Complexité algorithmique }
+
+\def\xxcompetences{%
+\textsl{%
+\textbf{Savoirs et compétences :}\\
+\begin{itemize}[label=\ding{112},font=\color{bleuxp}] 
+\item Complexité.
+\end{itemize}
+}}
+
+\def\xxfigures{
+%\includegraphics[width=\linewidth]{fractale}
+%\\
+%\textit{Modèle du pilote hydraulique avec pilotage interactif.}
+}%figues de la page de garde
+
+\input{\repRel/Style/pagegarde_cours_minitoc}
+\setlength{\columnseprule}{.1pt}
+
+\vspace{2cm}
+\pagestyle{fancy}
+\thispagestyle{plain}
+\section{Préliminaire: parlons du temps\ldots{}}
 
 \ldots{}ou plutôt des ordres de grandeur des durées.
 
@@ -61,16 +59,16 @@ $10^{n}\leq t < 10^{n+1}$ où $n = \floor{x}$.
 \end{tabular}
 \end{center}
 
-%
-%\subsection{Définition}
-%
-%\begin{defi}[Complexité]
-%  La complexité algorithmique est l'étude des ressources requises pour exécuter un algorithme, en fonction d'un paramètre (souvent, la taille des données d'entrée). Les deux ressources en général étudiées sont :
-%\begin{itemize}
-%\item le temps nécessaire à l'exécution de l'algorithme;
-%\item la mémoire nécessaire à l'exécution de l'algorithme (en plus des données d'entrée).
-%\end{itemize}
-%\end{defi}
+
+\section{Introduction}
+
+\begin{defi}{Complexité}
+  La complexité algorithmique est l'étude des ressources requises pour exécuter un algorithme, en fonction d'un paramètre (souvent, la taille des données d'entrée). Les deux ressources en général étudiées sont :
+\begin{itemize}
+\item le temps nécessaire à l'exécution de l'algorithme;
+\item la mémoire nécessaire à l'exécution de l'algorithme (en plus des données d'entrée).
+\end{itemize}
+\end{defi}
 
 %\clearslide{}
 
@@ -280,34 +278,34 @@ Comment estimer le temps d'exécution de \texttt{premierprobable2(p)}?
 %\clearslide{}
 Les opérations effectuées dans \texttt{premierprobable2(p)} sont les suivantes.
 \begin{itemize}
-\item Une affectation.
-\item Une boucle effectuant $\texttt{p}-1$ tours. À chaque tour on
+\item[\textbullet] Une affectation.
+\item[\textbullet] Une boucle effectuant $\texttt{p}-1$ tours. À chaque tour on
   effectue les opérations suivantes :
   \begin{itemize}
   \item une multiplication ;
   \item un calcul de reste ;
   \item une affectation.
   \end{itemize}
-\item Une comparaison.
+\item[\textbullet] Une comparaison.
 \end{itemize}
 
 %\clearslide{}
 On considère le modèle usuel suivant.
 
 \begin{itemize}
-\item Le temps mis par une affectation est constante.
-\item Le temps mis par opération arithmétique (somme, produit,
+\item[\textbullet] Le temps mis par une affectation est constante.
+\item[\textbullet] Le temps mis par opération arithmétique (somme, produit,
   division, calcul de reste) est constant.
-\item Le temps mis par une comparaison de deux nombres est constant.
+\item[\textbullet] Le temps mis par une comparaison de deux nombres est constant.
 \end{itemize}
 
 %\clearslide{}
 Appelons alors
 \begin{itemize}
-\item $c_{1}$ le temps d'une affectation;
-\item $c_{2}$ le temps d'une multiplication;
-\item $c_{3}$ le temps d'un calcul de reste;
-\item $c_{4}$ le temps d'une comparaison.
+\item[\textbullet] $c_{1}$ le temps d'une affectation;
+\item[\textbullet] $c_{2}$ le temps d'une multiplication;
+\item[\textbullet] $c_{3}$ le temps d'un calcul de reste;
+\item[\textbullet] $c_{4}$ le temps d'une comparaison.
 \end{itemize}
 
 Cela donne,
@@ -356,12 +354,12 @@ $  T_{2}(p) = O(p)$.
 
 Ici, on a, pour $p\geq 1$: $0 \leq T_{2}(p) \leq C p$; donc $ \abs{\frac{T_{2}(p)}{p}} \leq C$ et $T_{2}(p)=O(p)$.
 
-\begin{remarque}
+\begin{rem}
   Bien entendu, on a aussi $T_2(p) = O(p^2)$, même si cela ne nous intéresse pas ... Nous aimerions donc bien aussi certifier qu'il existe une constante $C'$ telle que, pour tout $p\geq 1$, $C'p \leq T_2(p)$. 
   Cela se traduirait par $p = O(T_2(p))$. Conjugué avec $T_2(p) = O(p)$, cela se note $T_2(p) =\Theta(p)$. 
   
   Souvent, obtenir une telle borne inférieure est bien plus difficile qu'obtenir une majoration, nous ne nous en soucierons généralement pas. 
-\end{remarque}
+\end{rem}
 
 
 %\clearslide{}
@@ -385,35 +383,35 @@ Il suffit de dire:
 \subsection{Étude expérimentale de \texttt{premierprobable2}}
 Pour $p = \floor{\dfrac{p_0}{q^k}}$, avec $q = 1,35$, $p_0 = 10^7$ et $k\in\ii{0,20}$, on calcule $T_2(p)$ et l'on effectue ensuite une régression linéaire par moindres carrés.
 
-
-
-
-
-  \begin{marginfigure}
-%\centering
-    \includegraphics[width=\linewidth]{pp2.png}
-    \caption{Tracé expérimental de $T_2$ en échelle logarithmique décimale.}
-    \label{fig.pp2}
- \end{marginfigure}
-
+\begin{minipage}[c]{.48\linewidth}
 Cette étude expérimentale (voir figure ci-contre)%~\ref{fig.pp2})  
   nous donne :$ T_{2}(p)\approx b_{2} p^{\alpha_{2}}$ où $\alpha_{2}\approx 1,005$ 
    et $b_{2} = 10^{\beta_{2}}$ $\approx 10^{-7,16}$ $\approx 6,9\times 10^{-8}$.
 
 \begin{itemize}
-\item La constante $b_{2}$ ne pouvait de toute façon pas être prédite
+\item[\textbullet] La constante $b_{2}$ ne pouvait de toute façon pas être prédite
   par notre étude théorique.
-\item On est (à peu de choses près) sur du $O(p)$. La différence vient
+\item[\textbullet] On est (à peu de choses près) sur du $O(p)$. La différence vient
   d'erreurs liées à notre modèle et aux erreurs expérimentales.
-\item Si on prend comme référence qu'une instruction machine prend
+\item[\textbullet] Si on prend comme référence qu'une instruction machine prend
   un temps $t = 10^{-9}s$, l'étude expérimentale semble montrer que
   $T_{2}(p)\approx 70 p \times t$.
 \end{itemize}
+\end{minipage}\hfill
+\begin{minipage}[c]{.48\linewidth}
+%\begin{figure}%[!h]
+  \begin{center}
+%\centering
+    \includegraphics[width=\linewidth]{pp2.png}
+    %\caption{Tracé expérimental de $T_2$ en échelle logarithmique décimale.}
+%    \label{fig.pp2}
+ \end{center}
+%\end{figure}
+\end{minipage}
 
-
-\begin{remarque}
+\begin{rem}
   Ce n'est pas toujours la quantité $p$ qui est pertinente, mais plutôt la taille qu'occupe l'entier $p$ en mémoire, qui est de l'ordre de $\log_2(p)$.
-\end{remarque}
+\end{rem}
 
 %\clearslide{}
 
@@ -448,12 +446,12 @@ d'opérations de temps constant, puis une comparaison.
 Toute la difficulté est d'estimer le nombre de tours effectués par la
 boucle.
 \begin{itemize}
-\item Il est inférieur ou égal à $p$ ($n$ est un variant de la
+\item[\textbullet] Il est inférieur ou égal à $p$ ($n$ est un variant de la
   boucle et est initialisé à $p-1$), donc $T_{3}(p)=O(p)$.
-\item En fait $n$
+\item[\textbullet] En fait $n$
   est divisé (au moins) par deux à chaque tour de boucle. Donc
   $\floor{\log_{2}(n)}$ est un variant de boucle.
-\item Donc on effectue au
+\item[\textbullet] Donc on effectue au
   plus $1+ \floor{\log_{2}(p-1)}$ $= O(\log_{2}(p)) =$ $ O(\log p)$ tours de boucle.
 \end{itemize}
 Donc $T_{3}(p) = O(\log p)$.
@@ -462,15 +460,7 @@ Donc $T_{3}(p) = O(\log p)$.
 %\clearslide{}
 \subsection{Comparaison avec l'étude expérimentale}
 
-
-  \begin{marginfigure}
-    \includegraphics[width=\textwidth]{pp3.png}
-    \caption{Tracé expérimental de $T_3$ en échelle semi-logarithmique décimale.}
-   \label{fig.pp3}
-  \end{marginfigure}
-%\end{figure}
-%\end{minipage}
-%\begin{minipage}[c]{.48\linewidth}
+\begin{minipage}[c]{.48\linewidth}
 Pour $p = \floor{\dfrac{p_0}{q^k}}$, avec $q = 140$, $p_0 = 10^{140}$ (!!) et $k\in\ii{0,20}$, on calcule $T_3(p)$ et l'on effectue ensuite une régression linéaire par moindres carrés. Cette étude expérimentale 
 (voir figure ci-contre) 
 %(voir figure~\ref{fig.pp3}) 
@@ -486,7 +476,16 @@ NB: en général, quand on note $\log$, il faut comprendre
 \item $\log_{2}$ si c'est dans un texte d'informatique.
 \end{itemize}
 
-
+\end{minipage} \hfill
+\begin{minipage}[c]{.48\linewidth}
+%\begin{figure}[!h]
+  \begin{center}
+    \includegraphics[width=\textwidth]{pp3.png}
+    %\caption{Tracé expérimental de $T_3$ en échelle semi-logarithmique décimale.}
+   % \label{fig.pp3}
+  \end{center}
+%\end{figure}
+\end{minipage}
 
 Mais de toute façon, ici on cela n'a pas d'importance car pour tout $x>0$, $ \ln x = \ln 2 \, \log_{2} x = \ln 10\, \log_{10}x$.
 
@@ -509,27 +508,20 @@ def premierprobable1(p):
 
 %\clearslide{}
 \begin{itemize}
-\item On considère que les temps d'exécution d'une affectation, d'une
+\item[\textbullet] On considère que les temps d'exécution d'une affectation, d'une
   opération arithmétique et d'une comparaison sont constants.
-\item Dans \texttt{premierprobable1(p)}, on effectue une affectation, un
+\item[\textbullet] Dans \texttt{premierprobable1(p)}, on effectue une affectation, un
   calcul de reste et
   une comparaison ainsi que $(\texttt{p}-1)$ tours de boucle, avec un
   nombre constant d'opérations de temps constant à chaque tour.
-\item Donc le temps d'exécution de \texttt{premierprobable1(p)} est un
+\item[\textbullet] Donc le temps d'exécution de \texttt{premierprobable1(p)} est un
   $O(\texttt{p})$.
 \end{itemize}
 
 %\clearslide{}
 \subsection{Étude expérimentale de \texttt{premierprobable1}}
 
-  \begin{marginfigure}
-    \includegraphics[width=\textwidth]{pp1.png}
-    \caption{Tracé expérimental de $T_1$ en échelle logarithmique décimale.}
-%    \label{fig.pp1}
-  \end{marginfigure}
-%\end{minipage} 
-
-
+\begin{minipage}[c]{.48\linewidth}
 Pour $p = \floor{\dfrac{p_0}{q^k}}$, avec $q = 1,35$, $p_0 = 3\times 10^5$ et $k\in\ii{0,20}$, on calcule $T_1(p)$ et l'on effectue ensuite une régression linéaire par moindres carrés. Cette étude expérimentale 
 (voir figure ci-contre)
 %(voir figure~\ref{fig.pp2}) 
@@ -541,10 +533,19 @@ Il semble alors que $T_1(p)$ n'est pas en $O(p)$ !!!
 
 Les causes possibles:
 \begin{itemize}
-\item cela peut provenir d'erreurs expérimentales. Mais ici, l'erreur paraît vraiment 
+\item[\textbullet] cela peut provenir d'erreurs expérimentales. Mais ici, l'erreur paraît vraiment 
 élevée;
-\item le modèle peut être erroné : les opérations sont-elles vraiment de temps constant~?
+\item[\textbullet] le modèle peut être erroné : les opérations sont-elles vraiment de temps constant~?
 \end{itemize}
+\end{minipage} \hfill
+\begin{minipage}[c]{.48\linewidth}
+%\begin{figure}[!h]
+  \begin{center}
+    \includegraphics[width=\textwidth]{pp1.png}
+    %\caption{Tracé expérimental de $T_1$ en échelle logarithmique décimale.}
+%    \label{fig.pp1}
+  \end{center}
+\end{minipage} 
 
 
 
@@ -573,8 +574,8 @@ Au final, le temps de calcul serait donc un $O(p^{2})$.
 %\clearslide{}
 Retour sur l'expérimentation:
 \begin{itemize}
-\item On trouve un $O(p^{1,76})$, ce qui est déjà plus proche de $O(p^{2})$.
-\item Si on regarde la courbe expérimentale, on a l'impression qu'elle
+\item[\textbullet] On trouve un $O(p^{1,76})$, ce qui est déjà plus proche de $O(p^{2})$.
+\item[\textbullet] Si on regarde la courbe expérimentale, on a l'impression qu'elle
   est plutôt convexe. Comme ce qui nous intéresse est la pente pour
   $p$ élevé, on peut penser que nous l'avons expérimentalement sous-estimée.
 \end{itemize}
@@ -620,25 +621,25 @@ En première approche, vous pouvez considérer ceci.
 \subsection{Opérations en temps constant}
 
 \begin{itemize}
-  \item Affecter une variable à un objet.
-  \item Accéder (en lecture et en écriture) à un élément d'une liste \python, d'une chaîne de caractère ou d'un tuple. 
-  \item Calculer la longueur d'une liste \python, d'une chaîne de caractères ou d'un tuple par la fonction \texttt{len}.
-  \item Créer une liste, chaîne de caractères ou un tuple vide.
+  \item[\textbullet] Affecter une variable à un objet.
+  \item[\textbullet] Accéder (en lecture et en écriture) à un élément d'une liste \python, d'une chaîne de caractère ou d'un tuple. 
+  \item[\textbullet] Calculer la longueur d'une liste \python, d'une chaîne de caractères ou d'un tuple par la fonction \texttt{len}.
+  \item[\textbullet] Créer une liste, chaîne de caractères ou un tuple vide.
 \end{itemize}
 
 Les opérations suivantes peuvent être considérées comme étant en temps constant, même si elles ne le sont pas formellement.
 
 \begin{itemize}
-  \item Opérations usuelles sur les entiers (sauf sur de très très grands nombres ; la complexité réelle dépend des nombres de bits dans les écritures binaires des entiers considérés).
-  \item Ajouter un élément à une liste par la méthode \texttt{append()} (temps constant amorti).
+  \item[\textbullet] Opérations usuelles sur les entiers (sauf sur de très très grands nombres ; la complexité réelle dépend des nombres de bits dans les écritures binaires des entiers considérés).
+  \item[\textbullet] Ajouter un élément à une liste par la méthode \texttt{append()} (temps constant amorti).
 \end{itemize}
 
 \subsection{Les autres}
 
 \begin{itemize}
-  \item Concaténer deux listes \python, chaînes de caractères ou tuple avec \texttt{+} : en $O(n)$ où $n$ est la taille de la plus grande des deux listes.
-  \item Extraire une tranche d'une liste \python, d'une chaîne de caractères ou d'un tuple : en $O(k)$ où $k$ est la longueur de la tranche.
-  \item Copier une liste \python, chaînes de caractères ou tuple avec \texttt{copy()} : en $O(n)$ où $n$ est la taille de la plus grande des deux listes.
+  \item[\textbullet] Concaténer deux listes \python, chaînes de caractères ou tuple avec \texttt{+} : en $O(n)$ où $n$ est la taille de la plus grande des deux listes.
+  \item[\textbullet] Extraire une tranche d'une liste \python, d'une chaîne de caractères ou d'un tuple : en $O(k)$ où $k$ est la longueur de la tranche.
+  \item[\textbullet] Copier une liste \python, chaînes de caractères ou tuple avec \texttt{copy()} : en $O(n)$ où $n$ est la taille de la plus grande des deux listes.
 \end{itemize}
 
 \section{Complexités usuelles}

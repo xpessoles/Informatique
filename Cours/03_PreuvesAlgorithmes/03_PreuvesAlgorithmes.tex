@@ -4,12 +4,13 @@
 
 \chapter{Anlayse des algorithmes}
 
-\marginnote[4cm]{
+\marginnote[8cm]{
 \begin{itemize}
 \item Terminaison.
 \item Correction partielle. 
 \item Correction totale.
 \item Variant. Invariant.
+\item Complexité.
 \end{itemize}}
 
 
@@ -17,7 +18,7 @@
 
 \section{Anlayse des algorithmes}
 
-\subsection{Définition}
+\subsection{Définitions}
 
 \begin{defi}[Terminaison d'un algorithme]
 Prouver la terminaison d'un algorithme signifie montrer que cet algorithme se terminera en un temps fini. On utilise pour cela un \textbf{variant de boucle}.
@@ -37,6 +38,14 @@ chaque passage dans la boucle.
 %Prouver la correction d'un algorithme signifie montrer que cet algorithme fournit bien la solution au problème qu'il est sensé résoudre. On utilise pour cela un \textbf{invariant de boucle}.
 %\end{defi}
 
+
+\begin{defi}[Complexité]
+  La complexité algorithmique est l'étude des ressources requises pour exécuter un algorithme, en fonction d'un paramètre (souvent, la taille des données d'entrée). Les deux ressources en général étudiées sont :
+\begin{itemize}
+\item le temps nécessaire à l'exécution de l'algorithme;
+\item la mémoire nécessaire à l'exécution de l'algorithme (en plus des données d'entrée).
+\end{itemize}
+\end{defi}
 
 \subsection{Un exemple ...}
 \begin{obj}
@@ -91,7 +100,7 @@ Itération 1 & \texttt{0} & \texttt{0} & \texttt{0  < 10  } $\Rightarrow$ \textt
 Itération 2& \texttt{1} & \texttt{1} & \texttt{1  < 10  } $\Rightarrow$ \texttt{  True} \\     %\hline
 Itération 3 & \texttt{3} & \texttt{2} & \texttt{3  < 10  } $\Rightarrow$ \texttt{  True} \\    %\hline
 Itération 4 & \texttt{6} & \texttt{3} & \texttt{6  < 10  } $\Rightarrow$ \texttt{  True} \\    %\hline
-Itération 5 & \texttt{10} & \texttt{4} & \texttt{10 < 10  } $\Rightarrow$ \texttt{  False} \\ %\hline
+Itération 5 & \texttt{10} & \texttt{4} & \texttt{10 < 10  } $\Rightarrow$ \texttt{  False} \\ \hline
 \end{tabular}
 \end{center}
 La fonction renvoie 4. On a $1+2+3+4 = 10$. On ne dépasse pas strictement la valeur 10. La fonction ne répond pas au besoin dans ce cas. 
