@@ -36,17 +36,18 @@
 
 On choisit comme unité la seconde\footnote{D'ailleurs, c'est l'unité de temps du système international} et on donne des logarithmes décimaux des durées étudiées.
 
-Quelques repères à connaître.
+\marginnote{Quelques repères à connaître.
 \begin{enumerate}
 \item  $\log_{10} t = x$ signifie $t = 10^{x}$, en particulier
 $10^{n}\leq t < 10^{n+1}$ où $n = \floor{x}$.
 \item $10^{0,5} = \sqrt{10} \approx 3$.
 \item $10^{0,3} \approx 2$.
 \item Un an vaut environ $3,15\times 10^{7}$s, \emph{i.e.} $\pi \,\mathrm{s} \approx 1$ nano-siècle.
-\end{enumerate}
+\end{enumerate}}
+
 
 \begin{center}
-  \begin{tabular}{rl rl}
+  \begin{tabular}{rl rp{4cm}}
    %\caption{Durées : ordre de grandeur (suite).}\\
   $\log_{10}(t)$ & Durée &   $\log_{10}(t)$ & Durée \\
   $-9,0$ & exécution d'une instruction &  $10,5$ & un millénaire\\
@@ -80,9 +81,9 @@ $10^{n}\leq t < 10^{n+1}$ où $n = \floor{x}$.
 
 \subsection{Rappels d'arithmétique : le petit théorème de Fermat}
 
-\begin{theorem}{Théorème de Fermat.}
+\begin{theoreme}{Théorème de Fermat.}
   Soit $p$ un nombre premier et $a \in \ii{1,p}$, alors $a^{p-1} = 1 [p]$.
-\end{theorem}
+\end{theoreme}
 
 On s'intéresse au problème de l'étude de la primalité d'un entier naturel donné. 
 Plusieurs méthodes existent pour répondre de manière déterministe à cette question, mais elles ne sont pas nécessairement satisfaisantes. 
@@ -436,6 +437,9 @@ def expo3(p):
         n = n // 2
     # n == 0 et y = 2 ** (p-1) modulo p
     return y
+\end{lstlisting}
+
+\begin{lstlisting}
 def premierprobable3(p):
     return expo3(p) == 1
 \end{lstlisting}
@@ -502,7 +506,9 @@ def expo1(p):
     for i in range(p-1):
         y = 2*y
     return y % p
+\end{lstlisting}
 
+\begin{lstlisting}
 def premierprobable1(p):
     return expo1(p) == 1
 \end{lstlisting}
@@ -644,7 +650,8 @@ Les opérations suivantes peuvent être considérées comme étant en temps cons
 \section{Complexités usuelles}
 %%\clearslide{}
 Voir la table~\ref{table.complexites.usuelles}.
-\begin{figure}[!h]
+\begin{table*}[!h]
+\centering
 \begin{center}
 \begin{longtable}{rrrrrrr}
 \caption{Temps de calculs pour des instructions de $10^{-9}$s.}\label{table.complexites.usuelles}\\
@@ -683,7 +690,7 @@ $1000$ & $-5,5$ & & & & & \\
  \bottomrule  
 \end{longtable}
 \end{center}
-\end{figure}
+\end{table*}
 %\clearslide{}
 
 \section{Conclusion}
