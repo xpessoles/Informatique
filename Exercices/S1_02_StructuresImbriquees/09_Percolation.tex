@@ -113,13 +113,17 @@ On dispose de la fonction \lstinline{afficher_grille(grille:[[float]]) -> None} 
 %flottant $0.0$ et les cases ouvertes le nombre flottant $1.0$.
 
 
-\marginnote{
-On pourra utiliser \lstinline{import random as rd} pour imorter la bibliothèque \lstinline{random}
-puis utiliser \lstinline{rd.random()} pour générer un nombre aléatoire.}
-}
+
+
 
 On va maintenant créer une grille pour simuler la percolation. 
 Afin de remplir la grille, on dispose de la fonction \lstinline{random()} de la bibliothèque \lstinline{random} permettant de renvoyer un nombre aléatoire compris dans l'intervalle $\verb![!0,1\verb![!$. 
+\marginnote{Import de la bibliothèque \lstinline{random} :
+\lstinline{import random as rd} }
+
+\marginnote{Instruction pour générer un nombre aléatoire:
+\lstinline{rd.random()} }
+
 
 On souhaite remplir une grille de taille \lstinline{n} de la façon suivante : 
 \begin{itemize}
