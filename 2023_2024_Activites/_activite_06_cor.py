@@ -5,6 +5,7 @@ Created on Thu Jul  6 12:47:07 2023
 @author: xavier.pessoles2
 """
 
+import matplotlib.pyplot as plt
 import random as rd
 import numpy as np
 import math as m
