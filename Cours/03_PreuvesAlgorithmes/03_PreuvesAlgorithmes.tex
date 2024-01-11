@@ -129,6 +129,7 @@ la question de la terminaison n’est à considérer que dans ces deux cas.
 \end{prop}
 
 Reprenons l'exemple précédent. 
+\begin{marginfigure}
 \begin{lstlisting}
 def foo(v:int) -> int:
     r = 0
@@ -138,6 +139,8 @@ def foo(v:int) -> int:
         r = r+n
     return n
 \end{lstlisting}
+\end{marginfigure}
+
 
 Dans cet exemple montrons que la quantité $u_n = v-r$ est un variant de boucle : 
 \begin{itemize}
@@ -213,6 +216,8 @@ Pour montrer qu'une propriété est un invariant de boucle dans une boucle \text
 
 
 Reprenons un des exemples précédents. Reconsidérons l’algorithme suivant qui, étant donné un entier naturel $n$ strictement positif (inférieur à $2^{30}$), détermine le plus petit entier $k$ tel que $n \leq 2^k$.
+
+\begin{marginfigure}
 \begin{lstlisting}
 def plus_grande_puissance2(n):
     k = 0
@@ -222,6 +227,8 @@ def plus_grande_puissance2(n):
         p = p*2
     return k
 \end{lstlisting}
+\end{marginfigure}
+
 
 %\begin{demo}
 Montrons que la propriété suivante est un invariant de boucle : $p=2^k$ et $2^{k-1}<n$.
@@ -244,7 +251,7 @@ La propriété citée est donc un invariant de boucle.
 \subsection{Un << contre exemple >>}
 
 
-Reprenons le tout premier exemple où on cherche le plus petit entier \texttt{n} strictement positif tel que $1 + 2 + . . . + n$ dépasse strictement la valeur entière strictement positive \texttt{v} .
+\begin{marginfigure}
 \begin{lstlisting}
 def foo(v:int) -> int:
     assert v>0
@@ -255,6 +262,11 @@ def foo(v:int) -> int:
         r = r+n
     return n
 \end{lstlisting}
+\end{marginfigure}
+
+Reprenons le tout premier exemple où on cherche le plus petit entier \texttt{n} strictement positif tel que $1 + 2 + . . . + n$ dépasse strictement la valeur entière strictement positive \texttt{v}.
+
+
 
 La propriété suivante est-elle un invariant de boucle : 
 $r=\sum\limits_{i=0}^n i$ et 
@@ -265,6 +277,7 @@ La réponse est directement NON, car la phase d'initialisation n'est pas vérifi
 Cela signifie donc que l'algorithme proposé ne répond pas au cahier des charges. 
 
 Modifions alors l'algorithme ainsi.
+\begin{marginfigure}
 \begin{lstlisting}
 def foo2(v:int) -> int:
     assert v>0
@@ -275,6 +288,7 @@ def foo2(v:int) -> int:
         r = r+n
     return n
 \end{lstlisting}
+\end{marginfigure}
 
 Montrons que la propriété suivante est un invariant de boucle : $r=\sum\limits_{i=0}^n i$ et 
 $\sum\limits_{i=0}^{n-1} i \leq v$, 

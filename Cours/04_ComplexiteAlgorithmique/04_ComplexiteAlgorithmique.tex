@@ -167,7 +167,7 @@ On se doute bien que :
 \end{enumerate}
 
 %\clearslide{}
-\'Etudions cela plus précisément, pour $i \in \ens{1,2,3}$ on note $T_i(p)$ le temps d'exécution de \texttt{premierprobablei(p)}.
+\'Etudions cela plus précisément, pour $i \in \ens{1,2,3}$ on note $T_i(p)$ le temps d'exécution de \lstinline{premierprobablei(p)}.
 
 
 
@@ -262,7 +262,7 @@ Comment faire cette étude théorique?
 \end{enumerate}
 
 %\clearslide{}
-\subsection{Étude théorique de \texttt{premierprobable2}}
+\subsection{Étude théorique de \lstinline{premierprobable2}}
 
 \begin{lstlisting}
 def expo2(p):
@@ -276,13 +276,13 @@ def premierprobable2(p):
     return expo2(p) == 1
 \end{lstlisting}
 
-Comment estimer le temps d'exécution de \texttt{premierprobable2(p)}?
+Comment estimer le temps d'exécution de \lstinline{premierprobable2(p)}?
 
 %\clearslide{}
-Les opérations effectuées dans \texttt{premierprobable2(p)} sont les suivantes.
+Les opérations effectuées dans \lstinline{premierprobable2(p)} sont les suivantes.
 \begin{itemize}
 \item Une affectation.
-\item Une boucle effectuant $\texttt{p}-1$ tours. À chaque tour on
+\item Une boucle effectuant \lstinline{p}$-1$ tours. À chaque tour on
   effectue les opérations suivantes :
   \begin{itemize}
   \item une multiplication ;
@@ -331,7 +331,8 @@ On a quand même une information intéressante : $T_{2}(p)$ n'augmente pas plus 
 %  \end{array}\right.$
 %  
   
-Montrons ce second point. Pour $p_0\geq 1$ : 
+Montrons ce second point. Pour $p_0\geq 1$ :
+ 
 $ \left |\begin{array}{ll}
 \text{On a vu que } & T_{2}(p) = c_{1} + (p-1) (c_{2} + c_{3} + c_{1}) + c_{4}. \\
 \text{De plus} & p_0c_{1}> c_{1}, p_0 (c_{2} + c_{3} + c_{1}) > (p-1) (c_{2} + c_{3} + c_{1}) \text{ et  } p_0c_{4}>c_4. \\
@@ -367,7 +368,7 @@ Ici, on a, pour $p\geq 1$: $0 \leq T_{2}(p) \leq C p$; donc $ \abs{\frac{T_{2}(p
 
 %\clearslide{}
 \subsection{Rédaction}
-Nous avons détaillé l'étude de \texttt{premierprobable2}. On peut aller
+Nous avons détaillé l'étude de \lstinline{premierprobable2}. On peut aller
 beaucoup plus vite.
 
 Il suffit de dire:
@@ -375,15 +376,15 @@ Il suffit de dire:
 \begin{enumerate}
 \item On considère que les temps d'exécution d'une affectation, d'une
   opération arithmétique et d'une comparaison sont constant.
-\item Dans \texttt{premierprobable2(p)}, on effectue une affectation et
-  une comparaison ainsi que $(\texttt{p}-1)$ tours de boucle, avec un
+\item Dans \lstinline{premierprobable2(p)}, on effectue une affectation et
+  une comparaison ainsi que $($\lstinline{p}$-1)$ tours de boucle, avec un
   nombre constant d'opérations de temps constant à chaque tour.
-\item Donc le temps d'exécution de \texttt{premierprobable2(p)} est un
+\item Donc le temps d'exécution de \lstinline{premierprobable2(p)} est un
   $O(\texttt{p})$.
 \end{enumerate}
 
 %\clearslide{}
-\subsection{Étude expérimentale de \texttt{premierprobable2}}
+\subsection{Étude expérimentale de \lstinline{premierprobable2}}
 Pour $p = \floor{\dfrac{p_0}{q^k}}$, avec $q = 1,35$, $p_0 = 10^7$ et $k\in\ii{0,20}$, on calcule $T_2(p)$ et l'on effectue ensuite une régression linéaire par moindres carrés.
 
 
@@ -418,7 +419,7 @@ Cette étude expérimentale (voir figure ci-contre)%~\ref{fig.pp2})
 
 %\clearslide{}
 
-\subsection{Étude théorique de \texttt{premierprobable3}}
+\subsection{Étude théorique de \lstinline{premierprobable3}}
 
 \begin{lstlisting}
 def expo3(p):     
@@ -446,7 +447,7 @@ def premierprobable3(p):
 
 
 On effectue un nombre constant d'opérations de temps constant, puis
-une boucle \texttt{while} effectuant à chaque tour un nombre borné
+une boucle \lstinline{while} effectuant à chaque tour un nombre borné
 d'opérations de temps constant, puis une comparaison.
 
 Toute la difficulté est d'estimer le nombre de tours effectués par la
@@ -496,7 +497,7 @@ Mais de toute façon, ici on cela n'a pas d'importance car pour tout $x>0$, $ \l
 
 Donc $ O(\ln n) = O(\log_{2} n) = O(\log_{10} n)$.
 
-\subsection{Étude théorique de \texttt{premierprobable1}}
+\subsection{Étude théorique de \lstinline{premierprobable1}}
 
 
 \begin{lstlisting}
@@ -517,23 +518,17 @@ def premierprobable1(p):
 \begin{itemize}
 \item On considère que les temps d'exécution d'une affectation, d'une
   opération arithmétique et d'une comparaison sont constants.
-\item Dans \texttt{premierprobable1(p)}, on effectue une affectation, un
+\item Dans \lstinline{premierprobable1(p)}, on effectue une affectation, un
   calcul de reste et
   une comparaison ainsi que $(\texttt{p}-1)$ tours de boucle, avec un
   nombre constant d'opérations de temps constant à chaque tour.
-\item Donc le temps d'exécution de \texttt{premierprobable1(p)} est un
+\item Donc le temps d'exécution de \lstinline{premierprobable1(p)} est un
   $O(\texttt{p})$.
 \end{itemize}
 
 %\clearslide{}
-\subsection{Étude expérimentale de \texttt{premierprobable1}}
+\subsection{Étude expérimentale de \lstinline{premierprobable1}}
 
-  \begin{marginfigure}
-    \includegraphics[width=\textwidth]{pp1.png}
-    \caption{Tracé expérimental de $T_1$ en échelle logarithmique décimale.}
-%    \label{fig.pp1}
-  \end{marginfigure}
-%\end{minipage} 
 
 
 Pour $p = \floor{\dfrac{p_0}{q^k}}$, avec $q = 1,35$, $p_0 = 3\times 10^5$ et $k\in\ii{0,20}$, on calcule $T_1(p)$ et l'on effectue ensuite une régression linéaire par moindres carrés. Cette étude expérimentale 
@@ -542,6 +537,14 @@ Pour $p = \floor{\dfrac{p_0}{q^k}}$, avec $q = 1,35$, $p_0 = 3\times 10^5$ et $k
 nous donne :
 $  T_{1}(p)\approx b_{1} p^{\alpha_{1}}$ où $\alpha_{1}\approx 1,76$
 et  $b_{1} = 10^{\beta_{1}} \approx 10^{-9,52}  \approx 3,02 \times 10^{-10}$.
+
+
+  \begin{marginfigure}
+    \includegraphics[width=\textwidth]{pp1.png}
+    \caption{Tracé expérimental de $T_1$ en échelle logarithmique décimale.}
+%    \label{fig.pp1}
+  \end{marginfigure}
+%\end{minipage} 
 
 Il semble alors que $T_1(p)$ n'est pas en $O(p)$ !!!
 
@@ -559,10 +562,10 @@ Ici, les nombres manipulés sont très grands puisqu'on calcule
 $2^{p-1}$. Or, $2^{p-1}$ possède environ $\log_{10} (2^{p-1}) =
 (p-1)\log_{10} 2$ chiffres.
 
-Une hypothèse : chaque multiplication de \texttt{y} par $2$ coûte un temps proportionnel à la longueur de \texttt{y}, est en temps $C \log \texttt{y}$.
+Une hypothèse : chaque multiplication de \lstinline{y} par $2$ coûte un temps proportionnel à la longueur de \lstinline{y}, est en temps $C \log \texttt{y}$.
 
 %\clearslide{}
-Au $i\ieme$ tour de boucle, \texttt{y} vaut $2^{i}$, donc le temps de
+Au $i\ieme$ tour de boucle, \lstinline{y} vaut $2^{i}$, donc le temps de
 calcul de la multiplication est $C i \log 2$. Donc le temps de calcul
 de l'ensemble de la boucle est $\quad   \sum_{i=0}^{p-2} C i \log 2 \leq (p-1) C (p-2)\log 2\leq p^{2}C\log 2$.
 Donc le temps de calcul de l'ensemble de la boucle est un $O(p^{2})$.
@@ -601,19 +604,19 @@ def appartient(e, t):
     return False
 \end{lstlisting}
 
-Si l'on cherche à étudier la complexité d'une exécution \texttt{appartient(e, t)}, on tombe vite sur un écueil : le nombre de tour effectués dans la boucle \texttt{for} est variable ! 
-Il dépend en effet de la position de la première occurence de \texttt{e} dans \texttt{t}. 
+Si l'on cherche à étudier la complexité d'une exécution \lstinline{appartient(e, t)}, on tombe vite sur un écueil : le nombre de tour effectués dans la boucle \lstinline{for} est variable ! 
+Il dépend en effet de la position de la première occurence de \lstinline{e} dans \lstinline{t}. 
 
 Dans ce cas là, la notion de complexité n'est pas bien définie. On peut alors s'intéresser à d'autres notions de complexité. 
 
 \begin{description}
-  \item[Complexité en moyenne --] On suppose que \texttt{e} ou \texttt{t} sont tirés selon une certaine loi 
+  \item[Complexité en moyenne --] On suppose que \lstinline{e} ou \lstinline{t} sont tirés selon une certaine loi 
 de probabilité, et l'on compte \og en moyenne\footnote{D'un point de vue probabiliste, on calcule une 
 espérance.} \fg{} le nombre d'opérations effectuées. 
-    La loi utilisée est une hypothèse de modélisation. Par exemple, on peut supposer que \texttt{e} est un élément de \texttt{t} et que sa première occurrence est distribuée uniformément dans \texttt{t}. 
+    La loi utilisée est une hypothèse de modélisation. Par exemple, on peut supposer que \lstinline{e} est un élément de \lstinline{t} et que sa première occurrence est distribuée uniformément dans \lstinline{t}. 
     Ce type de calcul est souvent compliqué à mener (la modélisation en elle même n'étant souvent pas évidente), nous ne nous y intéresseront pas. 
-  \item[Complexité dans le pire des cas --] On suppose que \texttt{e} n'est pas dans \texttt{t} (ou qu'il apparaît uniquement en dernière position), on peut dans ce cas assez facilement calculer le nombre d'opérations : 
-    il y a \texttt{len(t)} tours de boucle, dans chaque tour de boucle il y a une comparaison. La complexité \emph{dans le pire des cas} est donc en $O($\texttt{len(t)}$)$.
+  \item[Complexité dans le pire des cas --] On suppose que \lstinline{e} n'est pas dans \lstinline{t} (ou qu'il apparaît uniquement en dernière position), on peut dans ce cas assez facilement calculer le nombre d'opérations : 
+    il y a \lstinline{len(t)} tours de boucle, dans chaque tour de boucle il y a une comparaison. La complexité \emph{dans le pire des cas} est donc en $O($\lstinline{len(t)}$)$.
 \end{description}
 
 Généralement, on vous signalera que l'on étudie une complexité dans le pire des cas. Si ce n'est pas précisé, vous devez signaler que vous prenez l'initiative d'étudier le pire des cas, tout autre choix étant souvent déraisonnable. 
@@ -628,7 +631,7 @@ En première approche, vous pouvez considérer ceci.
 \begin{itemize}
   \item Affecter une variable à un objet.
   \item Accéder (en lecture et en écriture) à un élément d'une liste \python, d'une chaîne de caractère ou d'un tuple. 
-  \item Calculer la longueur d'une liste \python, d'une chaîne de caractères ou d'un tuple par la fonction \texttt{len}.
+  \item Calculer la longueur d'une liste \python, d'une chaîne de caractères ou d'un tuple par la fonction \lstinline{len}.
   \item Créer une liste, chaîne de caractères ou un tuple vide.
 \end{itemize}
 
@@ -636,15 +639,15 @@ Les opérations suivantes peuvent être considérées comme étant en temps cons
 
 \begin{itemize}
   \item Opérations usuelles sur les entiers (sauf sur de très très grands nombres ; la complexité réelle dépend des nombres de bits dans les écritures binaires des entiers considérés).
-  \item Ajouter un élément à une liste par la méthode \texttt{append()} (temps constant amorti).
+  \item Ajouter un élément à une liste par la méthode \lstinline{append()} (temps constant amorti).
 \end{itemize}
 
 \subsection{Les autres}
 
 \begin{itemize}
-  \item Concaténer deux listes \python, chaînes de caractères ou tuple avec \texttt{+} : en $O(n)$ où $n$ est la taille de la plus grande des deux listes.
+  \item Concaténer deux listes \python, chaînes de caractères ou tuple avec \lstinline{+} : en $O(n)$ où $n$ est la taille de la plus grande des deux listes.
   \item Extraire une tranche d'une liste \python, d'une chaîne de caractères ou d'un tuple : en $O(k)$ où $k$ est la longueur de la tranche.
-  \item Copier une liste \python, chaînes de caractères ou tuple avec \texttt{copy()} : en $O(n)$ où $n$ est la taille de la plus grande des deux listes.
+  \item Copier une liste \python, chaînes de caractères ou tuple avec \lstinline{copy()} : en $O(n)$ où $n$ est la taille de la plus grande des deux listes.
 \end{itemize}
 
 \section{Complexités usuelles}

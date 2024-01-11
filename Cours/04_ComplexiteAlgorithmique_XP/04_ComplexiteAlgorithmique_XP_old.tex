@@ -1,6 +1,37 @@
+% !TEX spellcheck = fr_FR
 
-\section{Complexité algorithmique }
-\subsection{Mise en évidence du problème}
+%%%% Paramétrage du cours %%%%
+\def\xxactivite{Cours}
+
+\def\xxauteur{Emilien Durif -- Xavier Pessoles}
+\fichefalse \proftrue \tdfalse \courstrue
+
+\def\xxnumchapitre{Chapitre 7 \vspace{.2cm}}
+
+\def\xxchapitre{Complexité algorithmique }
+
+\def\xxcompetences{%
+\textsl{%
+\textbf{Savoirs et compétences :}\\
+\begin{itemize}[label=\ding{112},font=\color{bleuxp}] 
+\item Complexité.
+\end{itemize}
+}}
+
+\def\xxfigures{
+%\includegraphics[width=\linewidth]{fractale}
+%\\
+%\textit{Modèle du pilote hydraulique avec pilotage interactif.}
+}%figues de la page de garde
+
+\input{\repRel/Style/pagegarde_cours_minitoc}
+\setlength{\columnseprule}{.1pt}
+
+\vspace{2cm}
+\pagestyle{fancy}
+\thispagestyle{plain}
+%%%%%%%%%%%%%%%%%%%%%%%
+\section{Mise en évidence du problème}
 
 %\subsection{Premier exemple}
 %On introduit les algorithmes de tri suivant : 
@@ -78,8 +109,8 @@
 Prenons l'exemple de la recherche d'un élément dans une liste : 
 
 
-%\noindent
-%\begin{minipage}[c]{.49\linewidth}
+\noindent
+\begin{minipage}[c]{.49\linewidth}
 %
 %\begin{pseudo}
 %\begin{center}
@@ -121,7 +152,6 @@ def is_number_in_list(nb,tab):
     return False
 \end{lstlisting}
 
-\vspace{1cm}
 
 \begin{exemple}
 \`A partir de l'algorithme précédent, évaluer : 
@@ -131,10 +161,8 @@ def is_number_in_list(nb,tab):
 \end{itemize}
 \end{exemple}
 
-\vspace{1cm}
-
-%\end{minipage}\hfill
-%\begin{minipage}[c]{.49\linewidth}
+\end{minipage}\hfill
+\begin{minipage}[c]{.49\linewidth}
 \begin{lstlisting}
 def is_number_in_list_dicho(nb,tab):
     """ 
@@ -157,14 +185,20 @@ def is_number_in_list_dicho(nb,tab):
     return None
 \end{lstlisting}
 
-%\end{minipage}
 
-\begin{figure}[!h]
-\centering
+
+\end{minipage}
+
+
+
+
+
+
+\begin{center}
 \includegraphics[width=.95\textwidth]{figure_5}
 
-\caption{Évolution du nombre d'opérations pour rechercher un nombre dans une liste de 1 à 1000 nombres}
-\end{figure}
+\textit{Évolution du nombre d'opérations pour rechercher un nombre dans une liste de 1 à 1000 nombres}
+\end{center}
 
 
 
@@ -174,27 +208,26 @@ def is_number_in_list_dicho(nb,tab):
 Il existe souvent plusieurs façons de programmer un algorithme. Si le nombre d'opérations à effectuer est peu important et les données d'entrée de l'algorithme sont de faibles tailles, le choix de la solution importe peu. En revanche, lorsque le nombre d'opérations et la taille des données d'entrée deviennent importants, deux paramètres deviennent déterminants : le temps d'exécution et l'occupation mémoire. 
 
 
-\begin{defi}[Complexité en temps]
+\begin{defi}{Complexité en temps}
 
 La complexité en temps donne le nombre d'opérations effectuées lors de l'exécution d'un programme. On appelle $C_o$ le coût en temps d'une opération $o$.
 
 \end{defi}
 
-\begin{defi}[Complexité en mémoire (ou en espace)]
+\begin{defi}{Complexité en mémoire (ou en espace)}
 
 La complexité en mémoire donne le nombre d'emplacements mémoires occupés lors de l'exécution d'un programme.
 \end{defi}
 
-\begin{remarque}
+\begin{rem}
 
 On distingue la complexité dans le pire des cas, la complexité dans le meilleure des cas, ou la complexité en moyenne. En effet, pour un même algorithme, suivant les données à manipuler, le résultat sera déterminé plus ou moins rapidement. 
 
 Généralement, on s'intéresse au cas le plus défavorable à savoir, la complexité dans le pire des cas. 
-\end{remarque}
+\end{rem}
 
-\begin{defi}[Complexité algorithmique -- Notation $\mathcal{O}$ -- \cite{Bournez}]
- 
- 
+\begin{defi}{Complexité algorithmique -- Notation $\mathcal{O}$}
+ [Bournez]
 Soient $f$ et $g$ deux fonctions $f,g : \mathbb{N} \rightarrow \mathbb{R}^{+}_{*}$. On note $f(n)=\mathcal{O}(g(n))$ lorsqu'il existe $c\in\mathbb{R}^+$ et $n_0\in\mathbb{N}$ tels que pour tout $n\geq n_0$, 
 $$
 f(n) \leq c\cdot g(n)
@@ -203,8 +236,6 @@ $$
 Intuitivement, cela signifie que $f$ est inférieur à $g$ à une constante multiplicative près pour les données suffisamment grandes. 
 
 \end{defi}
-
-$\quad$
 
 \begin{exemple}
 Par ordre de complexité croissante on a :
@@ -219,7 +250,6 @@ Par ordre de complexité croissante on a :
 \end{itemize}
 \end{exemple}
 
-$ \quad $
 %\begin{resultat}
 %Soit une suite de deux instructions ayant un coût respectif de $C_1$ et $C_2$. Le coût total de la suite d'opération est donc $C=C_1 + C_2$.
 %
@@ -235,22 +265,21 @@ $ \quad $
 On considère que le coût élémentaire $C_e$ correspond au coût d'une affectation, d'une comparaison ou de l'évaluation d'une opération arithmétique. 
 \end{resultat}
 
-
-\begin{marginfigure}
+\begin{exemple}~\\ \vspace{-.3cm}
+\noindent\begin{minipage}[c]{.47\linewidth}
 \begin{lstlisting} 
 def foo():
     a=20
     a<=100
     a+a
 \end{lstlisting}
-\end{marginfigure}
-
-\begin{exemple}
-
-Chacune de ces 3 instructions ont le même coût temporel $C_e$.
+\end{minipage}\hfill
+\begin{minipage}[c]{.47\linewidth}
+Chacune de ces 3 opérations expressions ont le même coût temporel $C_e$.
 On a donc $\indice{C}{foo}(n) = 3 C_e$.
 
 \texttt{foo} prendra (a priori) toujours le même temps d'exécution. On a donc $\indice{C}{foo}(n) = \mathcal{O}(1)$. On parle de complexité constante. 
+\end{minipage}
 \end{exemple}
 
 
@@ -258,30 +287,33 @@ On a donc $\indice{C}{foo}(n) = 3 C_e$.
 Pour une séquence de deux instructions de coûts respectifs $C_1$ et $C_2$, le coût total est de la séquence est de $C_1 + C_2$.
 \end{resultat}
 
-\begin{marginfigure}
-\begin{lstlisting} 
+\begin{exemple}~\\ \vspace{-.3cm}
+\noindent\begin{minipage}[c]{.47\linewidth}
+Soit la fonction suivante.
+\begin{lstlisting}
 def foo():
     a=20
     print(a)
 \end{lstlisting}
-\end{marginfigure}
 
-\begin{exemple}
-Soit la fonction ci-contre.
-
+\end{minipage}\hfill
+\begin{minipage}[c]{.47\linewidth}
 Le coût temporel correspond à l'addition du coût élémentaire de l'affectation ajouté au coût de l'affichage.
 On a donc $\indice{C}{foo}(n) = C_e + \indice{C}{print}$. Le côut du \texttt{print} est variable en fonction, par exemple, de la longeur de la chaîne à afficher.
 
 \texttt{foo} prendra (a priori) toujours le même temps d'exécution. On a donc $\indice{C}{foo}(n) = \mathcal{O}(1)$. On parle de complexité constante. 
+
+\end{minipage}
 \end{exemple}
 
 
 \begin{resultat}
-Le coût d'un test \lstinline{if test : inst_1 else : inst_2 } est inférieur ou égal au maximum du coût de l'instruction 1 et du coût de l'instruction 2 additionné au coût du test (coût élémentaire). 
+Le coût d'un test \texttt{if test : inst\_1 else : inst\_2 } est inférieur ou égal au maximum du coût de l'instruction 1 et du coût de l'instruction 2 additionné au coût du test (coût élémentaire). 
 \end{resultat}
 
-
-\begin{marginfigure}
+\begin{exemple}~\\ \vspace{-.3cm}
+\noindent\begin{minipage}[c]{.47\linewidth}
+Soit le programme suivant (sans application réelle) :
 \begin{lstlisting}
 def foo(x) :
     if x<0 :
@@ -290,25 +322,23 @@ def foo(x) :
     else :
         x=x+1
 \end{lstlisting}
-\end{marginfigure}
 
-\begin{exemple}
-Soit le programme suivant (sans application réelle) :
-
-
+\end{minipage}\hfill
+\begin{minipage}[c]{.47\linewidth}
 La comparaison a un coût élémentaire $C_e$. Dans le <<~pire~>> des cas, on réalise deux additions et deux affectations. 
 Le coût temporel total est est donc $\indice{C}{foo}(n) = C_e + \max\left(4C_e, 2C_e \right) = 5C_e$.
-\lstinline{foo} prendra (a priori) toujours le même temps d'exécution. On a donc $\indice{C}{foo}(n) = \mathcal{O}(1)$. On parle de complexité constante. 
+\texttt{foo} prendra (a priori) toujours le même temps d'exécution. On a donc $\indice{C}{foo}(n) = \mathcal{O}(1)$. On parle de complexité constante. 
+\end{minipage}
 \end{exemple}
 
 
 \begin{resultat}
-Le coût d'une boucle \lstinline{for i in range(n) : inst}  est égal à : $n$ fois le coût de l'instruction \lstinline{inst} si elle est indépendante de la valeur de $i$.
+Le coût d'une boucle \texttt{for i in range(n) : inst}  est égal à : $n$ fois le coût de l'instruction \texttt{inst} si elle est indépendante de la valeur de $i$.
 \end{resultat}
 
-$\quad$
-
-\begin{marginfigure}
+\begin{exemple}~\\ \vspace{-.3cm}
+\noindent\begin{minipage}[c]{.47\linewidth}
+Soit la fonction suivante : 
 \begin{lstlisting}
 def foo(n) :
     res = 0
@@ -316,23 +346,19 @@ def foo(n) :
         res = res+i
     return res
 \end{lstlisting}
-\end{marginfigure}
 
-$\quad$
-
-\begin{exemple}
-On peut considérer que
- l'incrémentation de \lstinline{i} a un coût $C_e$. 
+\end{minipage}\hfill
+\begin{minipage}[c]{.47\linewidth}
+On peut considérer que l'incrémentation de \texttt{i} a un coût $C_e$. 
 $\indice{C}{foo}(n) = C_e + n\times 3C_e = \mathcal{O}(n)$.
 La durée de l'algorithme croît linéairement avec la valeur de $n$.
+\end{minipage}
 \end{exemple}
 
 
-$\quad$
-
 %\begin{minipage}[c]{.47\linewidth}
 \begin{resultat}
-Soit la boucle \lstinline{while cond : inst}, la condition \lstinline{cond} faisant intervenir un variant de boucle. Il est donc possible de connaître le nombre $n$ d'itérations de la boucle. 
+Soit la boucle \texttt{while cond : inst}, la condition \texttt{cond} faisant intervenir un variant de boucle. Il est donc possible de connaître le nombre $n$ d'itérations de la boucle. 
 %Le coût de la boucle est donc égal à n fois le coût de l'instruction \texttt{inst}.
 \end{resultat}
 %\end{minipage}\hfill
@@ -358,7 +384,8 @@ Dans la pratique, on cherche toujours à \textbf{majorer} le coût temporel d'un
 
 \subsection{Exemple}
 
-\begin{marginfigure}
+\begin{exemple}
+\textit{Calcul de factorielle}
 \begin{lstlisting}
 def factorielle(n) :
     if n == 0 : 
@@ -371,11 +398,6 @@ def factorielle(n) :
             i = i + 1
     return res
 \end{lstlisting}
-\end{marginfigure}
-
-
-\begin{exemple}[Calcul de factorielle]
-
 
 %\begin{pseudo}
 %\begin{algorithm}[H]
@@ -425,7 +447,11 @@ En conséquence, la complexité en temps s'élève à :
 $$C_T(n) = C_e + \max\left( C_r;  C_e + C_e + n\left( 4C_e\right) + C_r\right)$$
 
 Ainsi $C_T(n) = C_e (3 + 4n)  + C_r$ et $C_T(n)  \underset{+\infty}{\sim} 4C_e n$ lorsque $n$ tend vers l'infini. On parle d'une complexité algorithmique linéaire, notée $\mathcal{O}(n)$.
+
+
+
 \end{exemple}
+
 
 
 Il est fréquent que la complexité en temps soit améliorée au prix d'une augmentation de la complexité en espace, et vice-versa.
@@ -443,8 +469,13 @@ La complexité dépend notamment :
 
 \subsection{D'autres exemples}
 \subsubsection{Recherche d'un maximum}
+\begin{exemple}
+\textit{Soit une liste de nombre entiers désordonnés. Comment déterminer le plus grand nombre de la liste ?}
 
-\begin{marginfigure}
+Intuitivement, une solution est de parcourir la liste d'élément et de déterminer le plus grand élément par comparaisons successives.
+
+\noindent
+\begin{minipage}[c]{.48\linewidth}
 \begin{lstlisting}
 def cherche_max(L : list) -> int :
     maxi = L[0]
@@ -453,19 +484,15 @@ def cherche_max(L : list) -> int :
             maxi = tab[i]
     return maxi
 \end{lstlisting}
-\end{marginfigure}
 
-\begin{exemple}[Recherche d'un maximum]
-\textit{Soit une liste de nombre entiers désordonnés. Comment déterminer le plus grand nombre de la liste ?}
-
-Intuitivement, une solution est de parcourir la liste d'élément et de déterminer le plus grand élément par comparaisons successives.
-
-
-
+\end{minipage} \hfill 
+\begin{minipage}[c]{.48\linewidth}
 Dans ce cas, le coût temporel est :
 $C_T(n) = C_e + n\left(2 C_e \right)$. Ici encore, la complexité de cet algorithme est linéaire car $C_T(n) \underset{+\infty}{\sim} 2 C_e n$.
 
 Par ailleurs, en comptant le nombre de compairaisons, on observe aussi qu'il y a environ $n$ comparaisons. On a donc $C_T(n)$ est en $\mathcal{O}(n)$.
+\end{minipage} 
+
 
 \end{exemple}
 
@@ -481,6 +508,7 @@ u_{n+1} = \dfrac{u_n + 6}{u_n + 2} \\
 $.
 
 
+\noindent\begin{minipage}[t]{.32\linewidth}
 \begin{lstlisting}
 def un_it (n) :
     if n == 1 :
@@ -493,7 +521,8 @@ def un_it (n) :
 \end{lstlisting}
 
 La boucle \texttt{cor} s'exécute \texttt{n} fois. Cet algorithme est en $\mathcal{O}(n)$.
-
+\end{minipage} \hfill
+\begin{minipage}[t]{.32\linewidth}
 \begin{lstlisting}
 def un_rec (n) :
     if n == 1 :
@@ -504,7 +533,8 @@ def un_rec (n) :
 
 A l'itération \texttt{n}, $C(n) = 2\times C(n-1)$.  Il s'agit donc d'une suite géométrique et $C(n)=C(0)\times 2^n$.
 On a donc une complexité exponentielle en $\mathcal{O}(2^n)$.
-
+\end{minipage} \hfill
+\begin{minipage}[t]{.32\linewidth}
 \begin{lstlisting}
 def un_rec_v2 (n):
     if n == 1 :
@@ -517,7 +547,10 @@ def un_rec_v2 (n):
 A l'itération \texttt{n}, $C(n) = 1+C(n-1)$.  Il s'agit donc d'une suite arithmétique et $C(n)=C(0) + n$.
 On a donc une complexité linéaire en $\mathcal{O}(n)$.
 
-%\subsubsection{Tri d'une liste}
+\end{minipage} 
+
+
+\subsubsection{Tri d'une liste}
 %
 %\begin{exemple}
 %\textbf{Algorithme naïf}
@@ -581,11 +614,9 @@ On a donc une complexité linéaire en $\mathcal{O}(n)$.
 %\item tri rapide (\texttt{quick sort})...
 %\end{itemize}
 %\end{rem}
-$\quad$
 
 \subsubsection{Diviser pour régner -- recherche dichotomique}
-
-\begin{marginfigure}
+\begin{exemple}~\\ \vspace{-.3cm}
 \begin{lstlisting}
 def recherche_dichotomique(x, a):
     g, d = 0, len(a)-1
@@ -599,10 +630,6 @@ def recherche_dichotomique(x, a):
             d = m-1
     return None
 \end{lstlisting}
-\end{marginfigure}
-
-\begin{exemple}
-
 On peut montrer que la suite $d-g$ décroit strictement (car $d$ décroit et $g$ croit).
 Dans ce cas, la difficulté consiste en déterminer le nombre de fois que sera exécutée la boucle \texttt{while}. On note $C_w = C_e + \max\left(C_e + C_r ; 2 C_e + 2 C_e; 3 C_e + C_e \right) = C_e + \max\left(C_e + C_r ; 4 C_e  \right)$ le coût d'une itération de la boucle \texttt{while}.
 
@@ -705,28 +732,29 @@ $\mathcal{O}(2^n)$ \\
 \end{resultat}
 
 \subsection{Trompe l'\oe il -- coûts cachés --}
-
-
+\begin{minipage}[t]{.31\linewidth}
 \begin{lstlisting}
 def recherche(e,L):
     return e in L
 \end{lstlisting}
-
+\end{minipage} \hfill
+\begin{minipage}[t]{.31\linewidth}
 \begin{lstlisting}
 L1 = L.copy()
 \end{lstlisting}
-
+\end{minipage} \hfill
+\begin{minipage}[t]{.31\linewidth}
 \begin{lstlisting}
 L.append(e)
 \end{lstlisting}
-
+\end{minipage} 
 
 Il faut être vigilant lorsqu'on manipule des tableaux avec Python. En effet, de simples instructions cachent en effet des coûts pas toujours visibles. 
-Ainsi, l'instruction \lstinline{e in L} est linéaire $\mathcal{O}(n)$ car Python dont inspecter chacun des éléments d'une liste de taille \lstinline{n} pour savoir si \lstinline{e} est dedans ou non.
+Ainsi, l'instruction \texttt{e in L} est linéaire $\mathcal{O}(n)$ car Python dont inspecter chacun des éléments d'une liste de taille \texttt{n} pour savoir si \texttt{e} est dedans ou non.
 
-Il en est de même pour l'instruction \lstinline{copy}. 
+Il en est de même pour l'instruction \texttt{copy}. 
 
-Concernant la méthode \lstinline{append} on pourra faire l'hypothèse que cela s'effectue en temps constant ($\mathcal{O}(1)$). Cependant, lorsqu'on ajoute une liste Python préréserve des espaces d'allocations juxtaposés. Tant que la liste ne dépasse pas la taille de l'espace alloué, l'ajout d'un élément se fait à temps constant. Quand cette taille est dépassée, la liste est déplacée à un autre endroit en mémoire où plus d'espace est nécessaire. Cette copie se fait donc en temps linéaire. Ainsi, pour append on parle de temps amorti constant.
+Concernant la méthode \texttt{append} on pourra faire l'hypothèse que cela s'effectue en temps constant ($\mathcal{O}(1)$). Cependant, lorsqu'on ajoute une liste Python préréserve des espaces d'allocations juxtaposés. Tant que la liste ne dépasse pas la taille de l'espace alloué, l'ajout d'un élément se fait à temps constant. Quand cette taille est dépassée, la liste est déplacée à un autre endroit en mémoire où plus d'espace est nécessaire. Cette copie se fait donc en temps linéaire. Ainsi, pour append on parle de temps amorti constant.
 
 \section{Profiling des algorithmes}
 
@@ -750,9 +778,11 @@ def crible(n):
     
 import cProfile            
 cProfile.run('crible(10000)')
+
 \end{lstlisting}
 
-\lstinline{cProfile} renvoie alors le message suivant :
+\texttt{cProfile} renvoie alors le message suivant :
+
 
 \begin{lstlisting}
  28770 function calls in 1.957 seconds
@@ -771,13 +801,13 @@ cProfile.run('crible(10000)')
 \end{lstlisting}
 
 
-On a alors le bilan du temps passé à effectuer chacune des opérations. Ainsi pour améliorer notablement l'algorithme, le plus intéressant serait d'optimiser la méthode \lstinline{remove}.
+On a alors le bilan du temps passé à effectuer chacune des opérations. Ainsi pour améliorer notablement l'algorithme, le plus intéressant serait d'optimiser la méthode \texttt{remove}.
 \end{exemple}
 
 
 
 
-\begin{thebibliography}{9}
+\begin{thebibliography}{2}
 \bibitem{denis}{François Denis \url{http://pageperso.lif.univ-mrs.fr/~francois.denis/algoL2/chap1.pdf}}
 \bibitem{soyeur}{Alain Soyeur \url{http://asoyeur.free.fr/}}
 \bibitem{morain}{François Morain, Cours de l'Ecole Polytechnique, \url{http://www.enseignement.polytechnique.fr/profs/informatique/Francois.Morain/TC/X2004/Poly/www-poly009.html}.}
