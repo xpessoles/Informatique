@@ -3,6 +3,7 @@ import random as rd
 import numpy as np
 import math as m
 
+## Question 1
 def cor_new_image(nl,nc):
     # Pixel blanc : 1
     # Pixel noir : 0
@@ -13,27 +14,31 @@ def cor_new_image(nl,nc):
             L.append(1)
         im.append(L)
     return im
-	
+
+## Question 2	
 def cor_hauteur(im:[[int]]) :
     return len(im)
 
+## Question 3
 def cor_largeur(im:[[int]]) -> int :
     return len(im[0])
 
+## Question 4
 def cor_in_img(im:[[int]],pt:[int]) -> [[int]] :
     x,y = pt
-    ht = hauteur(im)
-    la = largeur(im)
+    ht = cor_hauteur(im)
+    la = cor_largeur(im)
     if x < 0 or y < 0 or x >= ht or y >= la :
         return False
     return True
-
+## Question 5
 def cor_trace_point(im:[[int]],pt:[int]) -> [[int]] :
     assert cor_in_img(im,pt)
     x,y = pt
     im[x][y] = 0
     return im
 
+## Question 6
 def cor_ligne_h(im:[[int]],pt1,pt2) -> [[int]] :
     assert cor_in_img(im,pt1)
     assert cor_in_img(im,pt2)
@@ -43,9 +48,10 @@ def cor_ligne_h(im:[[int]],pt1,pt2) -> [[int]] :
     jfin = max(pt1[1],pt2[1])
     i = pt1[0]
     for j in range(jdep,jfin+1) :
-        trace_point(im,[i,j])
+        cor_trace_point(im,[i,j])
     return im
 
+## Question 7
 def cor_ligne_v(im:[[int]],pt1,pt2) -> [[int]] :
     assert cor_in_img(im,pt1)
     assert cor_in_img(im,pt2)
@@ -55,7 +61,7 @@ def cor_ligne_v(im:[[int]],pt1,pt2) -> [[int]] :
     ifin = max(pt1[0],pt2[0])
     j = pt1[1]
     for i in range(idep,ifin+1) :
-        trace_point(im,[i,j])
+        cor_trace_point(im,[i,j])
     return im
 
 def cor_rectangle(im:[[int]],pt1,pt2) -> [[int]] :
@@ -293,7 +299,7 @@ def test_q07(foo):
             flag1 = None
             flag2 = None
             try :
-                L1 = cor_ligne_h(L,pt1,pt2)
+                L1 = cor_ligne_v(L,pt1,pt2)
             except AssertionError :
                 flag1 = True
             except :
