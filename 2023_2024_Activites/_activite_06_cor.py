@@ -23,16 +23,16 @@ def cor_creer_grille(n:int)-> [[int]] :
     L = []
     for i in range(n+1):
         for j in range(n+1):
-            L.append([i,j])
+            L.append([j,i])
     return L
     
 ## Question 3
 def cor_creer_distances(n:int)-> [[float]] :
     G = cor_creer_grille(n)
     tab_dist = []
-    for i in range(len(G)) :
+    for i in range(n) :
         L = []
-        for j in range(len(G)) :
+        for j in range(n) :
             L.append(cor_distance(G[i],G[j]))
         tab_dist.append(L)
     return tab_dist   
@@ -41,7 +41,8 @@ def cor_creer_distances(n:int)-> [[float]] :
 def cor_longueur(chemin:[int], tab:[[float]]) -> float :
     l = 0
     for i in range(len(chemin)-1) :
-        l = l + tab[i][i+1]
+        print(l)
+        l = l + tab[chemin[i]][chemin[i+1]]
     return l
 
     
