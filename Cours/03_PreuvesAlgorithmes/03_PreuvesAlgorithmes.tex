@@ -24,11 +24,21 @@
 Prouver la terminaison d'un algorithme signifie montrer que cet algorithme se terminera en un temps fini. On utilise pour cela un \textbf{variant de boucle}.
 \end{defi}
 
-\begin{defi}[Correction d'un algorithme]
-Un algorithme est dit (partiellement) correct s'il est correct dès qu'il termine. 
+\begin{defi}[Correction partielle d'un algorithme]
+Un algorithme est dit partiellement correct s'il est correct dès qu'il termine. 
 
 \end{defi}
-Prouver la correction d'un algorithme signifie montrer que cet algorithme fournit bien la solution au problème qu'il est sensé résoudre. On utilise pour cela un \textbf{invariant de boucle}.
+
+
+\begin{defi}[Correction totale d'un algorithme]
+Un algorithme est dit totalement correct s'il est partiellement correct et s'il termine. 
+
+\end{defi}
+
+
+
+Prouver la correction partielle d'un algorithme signifie montrer que cet algorithme fournit bien la solution au problème qu'il est sensé résoudre. On utilise pour cela un \textbf{invariant de boucle}.
+
 
 \begin{defi}[Invariant de boucle]
 Un invariant de boucle est une propriété dépendant des variables de l’algorithme, qui est vérifiée à
@@ -37,6 +47,7 @@ chaque passage dans la boucle.
 %\begin{defi}\textbf{Analyser} \\
 %Prouver la correction d'un algorithme signifie montrer que cet algorithme fournit bien la solution au problème qu'il est sensé résoudre. On utilise pour cela un \textbf{invariant de boucle}.
 %\end{defi}
+
 
 
 \begin{defi}[Complexité]
@@ -54,6 +65,8 @@ L'objectif est ici de montrer la nécessité d'utiliser un invariant de boucle.
 
 Pour cela, on propose la fonction suivante sensée déterminer le plus petit entier \texttt{n} strictement positif tel que $1 + 2 + . . . + n$ dépasse strictement la valeur entière strictement positive \texttt{v}. Cette fonction renvoie-t-elle le bon résultat ? Desfois ? Toujours ?
 \end{obj}
+
+\begin{marginfigure}[-2cm]
 \begin{lstlisting}
 def foo(v:int) -> int:
     r = 0
@@ -63,6 +76,7 @@ def foo(v:int) -> int:
         r = r+n
     return n
 \end{lstlisting}
+\end{marginfigure}
 
 \textit{Montrer intuitivement que \texttt{foo(v)} se termine pour $v\in\mathbb{N}^*$.}
 
