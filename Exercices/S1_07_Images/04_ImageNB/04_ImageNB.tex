@@ -1,7 +1,7 @@
 Avant toute chose, créer un répertoire \lstinline{TP08} dans votre répertoire \lstinline{Informatique}, \lstinline{TPsup} dans votre espace personnel.
 
 Sur le site \url{https://ptsilamartin.github.io/info/TP.html}, télécharger les 2  images \href{https://ptsilamartin.github.io/info/TP/allium.png}{allium.png}
-\lstinline{allium.png}, \href{https://ptsilamartin.github.io/info/TP/ciel.png}{ciel.png} ainsi que le script \href{https://ptsilamartin.github.io/info/TP/TP_08.py}{TP\_08.py}  que vous copiez dans votre répertoire TP08. Ouvrir le script \lstinline{TP08.py} dans lequel vous travaillerez tout au long de ce TP.
+et \href{https://ptsilamartin.github.io/info/TP/ciel.png}{ciel.png} ainsi que le script \href{https://ptsilamartin.github.io/info/TP/TP_08.py}{TP\_08.py}  que vous copiez dans votre répertoire TP08. Ouvrir le script \lstinline{TP08.py} dans lequel vous travaillerez tout au long de ce TP.
 
 \section*{Créer des images en niveau de gris}
 
@@ -31,7 +31,8 @@ Afficher la matrice obtenue dans le script. Afficher ensuite  l'image obtenue da
 import matplotlib.pyplot as plt  # importation de la bibliothèque matplotlib
 
 plt.figure("NOM de la figure")  # crée une nouvelle figure
-plt.imshow(im,cmap='gray',vmin=0, vmax=1)  # affiche l'image codée par la matrice im  /en niveau de gris, les pixels étant codés par des valeurs allant du 0 au 1 
+plt.imshow(im,cmap='gray',vmin=0, vmax=1)  # crée l'image codée par la matrice im  /en niveau de gris, les pixels étant codés par des valeurs allant du 0 au 1 
+plt.show() 	# affiche l'image. 
 \end{lstlisting}
 
 
