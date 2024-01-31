@@ -1,0 +1,122 @@
+%\setchapterimage{bandeau}
+\chapter*{TD \arabic{cptTD} \\ 
+Exercices d'application -- Calcul de complexité
+\ifprof Corrigé \else Sujet \fi}
+\addcontentsline{toc}{section}{TD \arabic{cptTD} :
+Exercices d'application -- Calcul de complexité
+\ifprof Corrigé \else Sujet \fi}
+
+\iflivret \stepcounter{cptTD} \else
+\ifprof  \stepcounter{cptTD} \else \fi
+\fi
+
+\setcounter{question}{0}
+%\marginnote{Sources}
+%\marginnote[1cm]{
+%\UPSTIcompetence[2]{C1-02}
+%\UPSTIcompetence[2]{C2-04}}
+
+
+
+\subsection*{Exercice }
+
+\question{Donner la complexité temporelle, dans le pire des cas et dans le meilleur des cas, de l'algorithme suivant.}
+\begin{lstlisting}
+def f(L):
+    x = 0
+    for i in range(len(L)) :
+        for j in range(len(L[0])) :
+            x = x+1
+    return x
+\end{lstlisting}
+\ifprof
+$\mathcal{O}(n\times m)$
+\else
+\fi
+
+\subsection*{Exercice }
+
+\question{Donner la complexité temporelle, dans le pire des cas et dans le meilleur des cas, de l'algorithme suivant.}
+\begin{lstlisting}
+def f2(n) :
+    x = 0
+    for i in range (n) :
+        for j in range (i) :
+            x += 1
+    return x
+\end{lstlisting}
+\ifprof
+$\mathcal{O}(n^2)$
+\else
+\fi
+
+\subsection*{Exercice }
+
+\question{Donner la complexité temporelle, dans le pire des cas et dans le meilleur des cas, de l'algorithme suivant.}
+\begin{lstlisting}
+def f3(n) :
+    x, i = 0 , n
+    while i > 1:
+        x += 1
+        i //= 2
+    return x
+\end{lstlisting}
+\ifprof
+$\mathcal{O}(\log n)$
+\else
+\fi
+
+\subsection*{Exercice }
+
+\question{Donner la complexité temporelle, dans le pire des cas et dans le meilleur des cas, de l'algorithme suivant.}
+\begin{lstlisting}
+def f4(n) :
+    x, i = 0 , n
+    while i > 1:
+        for j in range (n) :
+            x += 1
+        i //= 2
+    return x
+\end{lstlisting}
+\ifprof
+$\mathcal{O}(n \log n)$
+\else
+\fi
+
+\subsection*{Exercice }
+
+\question{Donner la complexité temporelle, dans le pire des cas et dans le meilleur des cas, de l'algorithme suivant.}
+\begin{lstlisting}
+f5(n) :
+    x, i = 0 , n
+    while i > 1:
+        for j in range (i) :
+            x += 1
+        i //= 2
+    return x
+\end{lstlisting}
+\ifprof
+$\mathcal{O}( n)$
+\else
+\fi
+
+\subsection*{Exercice }
+
+\question{Donner la complexité temporelle, dans le pire des cas et dans le meilleur des cas, de l'algorithme suivant.}
+\begin{lstlisting}
+def f6(n) :
+    x = 0
+    for i in range (n) :
+        j = 0
+        while j * j < i:
+            x += 1
+            j += 1
+    return x
+\end{lstlisting}
+\ifprof
+$\mathcal{O}( n\sqrt{n})$
+\else
+
+\end{multicols}
+\fi
+
