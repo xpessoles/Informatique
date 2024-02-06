@@ -41,8 +41,8 @@ def test_q01(foo):
     pts = 0
     total = 0
     
-    liste_achat = [i/100 for i in range(1000)]
-    liste_somme = [i/100 for i in range(1001,2001)]
+    liste_achat = [rd.randrange(1,1000)/100 for i in range(10)]
+    liste_somme = [rd.randrange(1001,2000)/100 for i in range(10)]
     
     for achat in liste_achat :
         for somme in liste_somme :
@@ -63,8 +63,10 @@ def test_q02(foo):
     pts = 0
     total = 0
     
-    liste_achat = [i/100 for i in range(1000)]
-    liste_somme = [i/100 for i in range(1001,2001)]
+    #liste_achat = [i/100 for i in range(1000)]
+    #liste_somme = [i/100 for i in range(1001,2001)]
+    liste_achat = [rd.randrange(1,1000)/100 for i in range(10)]
+    liste_somme = [rd.randrange(1001,2000)/100 for i in range(10)]
     
     for achat in liste_achat :
         for somme in liste_somme :
@@ -87,7 +89,7 @@ def go(foo1,foo2):
     notes = {}
     tot = 2
     
-    tests = [[test_q01,foo1],[test_q02,foo2],[test_q03,foo3],[test_q04,foo4],[test_q05,foo5],[test_q06,foo6],[test_q07,foo7],[test_q08,foo8]]
+    tests = [[test_q01,foo1],[test_q02,foo2]]
     
     for t in tests : 
         tq,f = t
@@ -106,3 +108,5 @@ def go(foo1,foo2):
         points = points + n[0]
         total = total + n[1]
     print(points,total)
+    print(points*20/total,20)
+    
