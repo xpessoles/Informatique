@@ -47,6 +47,16 @@ Ecrire une fonction \texttt{niveau\_gris2} qui convertit une image en niveau de 
 
 \textit{Pour des questions de protection de la vie privée, il est courant de devoir flouter les visages des personnes qui ne souhaitent pas apparaitre sur une photo. }
 
+Le floutage consiste à appliquer une transformation (appelée filtre) à toute ou partie d’une image numérique en  appliquant un opérateur.  Un filtre est une transformation mathématique (appelée produit de convolution) permettant, pour chaque pixel  de la zone à laquelle il s’applique, de modifier sa valeur en fonction des valeurs des pixels avoisinants, affectées de coefficients. 
+ Le filtre est représenté par un tableau (matrice), caractérisé par ses dimensions et ses coefficients, dont le centre
+ correspond au pixel concerné. Les coefficients du tableau déterminent les propriétés du filtre.
+
+\begin{marginfigure}%[!h]\centering
+\includegraphics[width=\textwidth]{filtrage.png}
+\end{marginfigure}
+
+Dans le cas d'un floutage on utilise la matrice $\begin{pmatrix}  1 &  1 & 1 \\1 &  1 & 1 \\1 &  1 & 1 \\\end{pmatrix}$. 
+Ainsi le pixel \texttt{p} de coordonnées \texttt{[i,j]} de l'image d'origine est remplacé par le pixel \lstinline{(p[i-1,j-1]+p[i-1,j]+p[i-1,j+1]+p[i,j-1]+p[i,j]+p[i,j+1]+p[i+1,j-1]+p[i+1,j]+p[i+1,j+1])*(1/9)} sur l'image d'arrivée.
 
 \subsection*{Flou avec une matrice 3x3}
 
@@ -55,7 +65,7 @@ Lire et afficher l'image \texttt{groupe.png}.
 \end{question}
 
 \begin{question}
-Créer une fonction \texttt{flou3} qui prend pour argument une image \texttt{im} et qui retourne l'image floutée en utilisant la matrice 3x3 de filtrage définie dans le cours.
+Créer une fonction \texttt{flou3} qui prend pour argument une image \texttt{im} et qui retourne l'image floutée en utilisant la matrice 3x3 de filtrage définie ci-dessus.
 \end{question}
 
 Pour cela :
