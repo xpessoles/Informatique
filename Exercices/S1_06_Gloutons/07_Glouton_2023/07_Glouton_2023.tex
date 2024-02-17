@@ -45,13 +45,13 @@ On suppose que la masse d’un unique fruit est négligeable par rapport à la m
 Le principe pour optimiser le chargement est de commencer par mettre dans le sac la quantité maximale de fruits les plus chers par unité de masse. S'il y a encore de la place dans le sac, on continue avec les fruits les plus chers par unité de masse parmi ceux restants, … et ainsi de suite jusqu'à ce que le sac soit plein.\\
 Il est possible qu'on ne puisse prendre qu'une fraction de la quantité de fruits disponible, si la capacité maximale du sac est atteinte. L'algorithme sera donc constitué d'une structure itérative, incluant une structure alternative.\\
 
-Dans \lstinline{Algorithmes_gloutons.py}, nous avons ébauché l'algorithme de résolution du problème et implémenté \lstinline{cueillette} par la liste des fruits \textbf{triée} par prix au kilo décroissant.\\
+Dans \lstinline{algorithmes_gloutons.py}, nous avons ébauché l'algorithme de résolution du problème et implémenté \lstinline{cueillette} par la liste des fruits \textbf{triée} par prix au kilo décroissant.\\
 Un fruit est représenté par une liste \lstinline{fruit=[prix au kilo,nom,quantité ramassée]}.
 
 \lstinline{cueillette = [[24,"framboises",1], [16,"myrtilles",3], [6,"fraises",5], [3,"mures",2]]}.
 
 \begin{question}
-Dans \lstinline{Algorithmes_gloutons.py}, compléter la fonction \lstinline{sac_a_dos(L:list, capacite:int)} qui prend en argument une liste de listes \lstinline{L} modélisant la cueillette et la capacité du sac à dos, et appliquant la méthode décrite précédemment. Cette fonction renvoie :
+Dans \lstinline{algorithmes_gloutons.py}, compléter la fonction \lstinline{sac_a_dos(L:list, capacite:int)} qui prend en argument une liste de listes \lstinline{L} modélisant la cueillette et la capacité du sac à dos, et appliquant la méthode décrite précédemment. Cette fonction renvoie :
 \begin{itemize}
 \item une liste de listes des fruits contenus dans le sac à dos avec leur masse correspondante de façon à avoir le chargement de valeur maximale ;
 \item la valeur du chargement.
@@ -61,12 +61,12 @@ Dans \lstinline{Algorithmes_gloutons.py}, compléter la fonction \lstinline{sac_
 La liste \lstinline{cueillette} ne doit pas être modifiée. Vous pourrez si nécessaire utiliser une copie de la liste  \lstinline{cueillette} que vous pourrez modifier. La copie de liste de listes se fait avec les instructions :
 
 \begin{lstlisting}
-import copy \# au début de votre script\\
-L=copy.deepcopy(votreListe) \# quand cela est nécessaire
+import copy # au début de votre script
+L=copy.deepcopy(votreListe) # quand cela est nécessaire
 \end{lstlisting}
 
 \begin{question}
-A la suite du script \lstinline{Algorithmes_gloutons.py}, taper les lignes de code permettant d’utiliser la fonction \lstinline{sac_a_dos( )} pour afficher les  fruits et les quantités à choisir pour remplir le sac à dos, à partir de la liste \lstinline{cueillette}. Exécuter votre programme et vérifier le résultat.
+A la suite du script \lstinline{algorithmes_gloutons.py}, taper les lignes de code permettant d’utiliser la fonction \lstinline{sac_a_dos()} pour afficher les  fruits et les quantités à choisir pour remplir le sac à dos, à partir de la liste \lstinline{cueillette}. Exécuter votre programme et vérifier le résultat.
 \end{question}
 
 
@@ -95,7 +95,7 @@ pastèque & 2 €/kg & 3 kg & 1 \\
 	\label{tab_fruit2}
 \end{table}
 
-Cet ensemble de fruits est modélisé dans \lstinline{Algorithmes_gloutons.py} par :
+Cet ensemble de fruits est modélisé dans \lstinline{algorithmes_gloutons.py} par :
 \begin{itemize}
 \item un fruit non fractionnable est représenté par une liste \lstinline{prix au kilo,nom,masse,quantité disponible}
 \item une liste de listes \lstinline{fruitsDisponibles = [[3,"melon de cavaillon",1,1], [2.5,"melon jaune",2,1], [2,"pastèque",3,1]]}.
@@ -110,12 +110,12 @@ On se propose de tester la méthode gloutonne pour cette nouvelle formulation.
  
 
 \begin{question}
-Dans \lstinline{Algorithmes_gloutons.py}, copier-coller \lstinline{sac_a_dos(L, capacite)} que vous renommerez \lstinline{sac_a_dos_V2(L, capacite)} et adapter la fonction de sorte qu’elle applique la méthode gloutonne à la version non fractionnaire du problème. Pour cela, il faut :
+Dans \lstinline{algorithmes_gloutons.py}, copier-coller \lstinline{sac_a_dos(L, capacite)} que vous renommerez \lstinline{sac_a_dos_V2(L, capacite)} et adapter la fonction de sorte qu’elle applique la méthode gloutonne à la version non fractionnaire du problème. %Pour cela, il faut :
 %\begin{itemize}
 %	\item {commenter la structure conditionnelle permettant de continuer à remplir le sac si sa capacité restante est inférieure à la masse du i-ème fruit,}
 %	\item {adapter la condition de la structure itérative de sorte à ne continuer à remplir le sac que si la capacité le permet.}
 %\end{itemize}
-Exécuter la fonction en utilisant la liste \lstinline{fruitsDisponibles}.
+
 
 \end{question}
 
@@ -128,7 +128,7 @@ De la propriété du choix glouton et de la propriété de la sous-structure opt
 \end{question}
 
  
-Cette version du problème du sac à dos n’est pas adaptée à la méthode gloutonne. Le cours de deuxième année vous permettra d’aborder la programmation dynamique qui offre une solution optimale à ce problème : son principe consiste en l’étude de toutes les combinaisons possibles afin de ne retenir que la combinaison optimale.
+%Cette version du problème du sac à dos n’est pas adaptée à la méthode gloutonne. %Le cours de deuxième année vous permettra d’aborder la programmation dynamique qui offre une solution optimale à ce problème : son principe consiste en l’étude de toutes les combinaisons possibles afin de ne retenir que la combinaison optimale.
 
 
 \section*{Le problème du choix d'activité}
