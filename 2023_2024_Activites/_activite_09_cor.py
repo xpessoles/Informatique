@@ -37,7 +37,7 @@ def cor_rendu_monnaie_2(achat:float,somme:float)->list :
     return (listRendu)
 
     
-def test_q01(foo):
+def test_q01(foo,verbose):
     pts = 0
     total = 0
     
@@ -53,13 +53,20 @@ def test_q01(foo):
                 L_eleve = foo(achat,somme)
                 if (np.allclose(L_cor,L_eleve)):
                     pts +=1 
+                else : 
+                    if verbose :
+                        print('Achat :',achat)
+                        print('Somme :',somme)
+                        print('Corrigé :',L_cor)
+                        print('Votre fonction :',L_eleve)
+                        print()
             except : 
                 pass
     
     return pts,total
 
 
-def test_q02(foo):
+def test_q02(foo,verbose):
     pts = 0
     total = 0
     
@@ -76,7 +83,14 @@ def test_q02(foo):
                 L_cor = cor_rendu_monnaie_2(achat,somme)
                 L_eleve = foo(achat,somme)
                 if (np.allclose(L_cor,L_eleve)):
-                    pts +=1 
+                    pts +=1
+                else : 
+                    if verbose :
+                        print('Achat :',achat)
+                        print('Somme :',somme)
+                        print('Corrigé :',L_cor)
+                        print('Votre fonction :',L_eleve)
+                        print()
             except : 
                 pass
     
@@ -85,6 +99,7 @@ def test_q02(foo):
 
 
 def go(foo1,foo2):
+    verbose = False
     i = 0
     notes = {}
     tot = 2
@@ -96,7 +111,34 @@ def go(foo1,foo2):
         pts = 0
         i +=1
         try :
-            pts,tot = tq(f)
+            pts,tot = tq(f,verbose)
+        except : 
+            pass
+        print("Question "+str(i)+" : ",str(pts),"/",str(tot))
+        notes[i] = (pts,tot)
+       
+    #bilan : 
+    points,total = 0,0
+    for n in notes.values() :
+        points = points + n[0]
+        total = total + n[1]
+    print(points,total)
+    print(points*20/total,20)
+
+def gov(foo1,foo2):
+    verbose = True
+    i = 0
+    notes = {}
+    tot = 2
+    
+    tests = [[test_q01,foo1],[test_q02,foo2]]
+    
+    for t in tests : 
+        tq,f = t
+        pts = 0
+        i +=1
+        try :
+            pts,tot = tq(f,verbose)
         except : 
             pass
         print("Question "+str(i)+" : ",str(pts),"/",str(tot))
