@@ -111,7 +111,7 @@ $n-i$ est un variant.
 \question{Proposer un invariant pour cet algorithme. Montrer que cet algorithme est correct.}
 \ifprof
 \begin{corrige}
-Au début de la \ieme itération, \texttt{x} n'appartient pas à \texttt{L[:i]}. 
+Proposition d'invariant : << Au début de la \ieme itération, \texttt{x} n'appartient pas à \texttt{L[:i]}. >>
 \end{corrige}
 \else
 \fi
@@ -260,29 +260,35 @@ def tri_par_selection(T):
 
 \question{Montrer que la propriété suivante est un invariant de boucle : au début de l'itération i, \texttt{T[0:i-1]} est trié et chacun des éléments de \texttt{T[0:i-1]} est inférieur ou égal aux éléments de \texttt{T[i:]}. }
 \ifprof
-Voici l’invariant de boucle (du for i) que l’on va utiliser pour prouver la correction :
-T[0..i-1] est trié et T[0..i-1]$\leq$T[i..n-1]
+\begin{corrige}
+
+Voici l’invariant de boucle (du \lstinline{for i}) que l’on va utiliser pour prouver la correction :
+\lstinline{T[0..i-1]} est trié et \lstinline{T[0..i-1]}$\leq$\lstinline{T[i..n-1]}.
+
 Autrement dit : « la partie de gauche est triée et tous les éléments de la partie de
 gauche déjà triés sont inférieurs à tous ceux de la partie de droite par encore triés ».
 
-INITIALISATION : Montrons que l’invariant est vrai avant l’entrée dans la boucle (for
-i), donc qu’il est vrai lorsque i = 0. Dans ce cas la partie de gauche est vide et est donc
-triée (T[0..0-1] est trié) et tous les éléments de la partie de droite sont supérieurs à ceux
-de la partie de gauche puisque cette dernière est vide (T[0..0-1]$\leq$T[0..n-1]).
+\paragraph*{Initialisation}
+ Montrons que l’invariant est vrai avant l’entrée dans la boucle (\lstinline{for i}), donc qu’il est vrai lorsque \lstinline{i = 0}. Dans ce cas la partie de gauche est vide et est donc
+triée (\lstinline{T[0..0-1]} est trié) et tous les éléments de la partie de droite sont supérieurs à ceux
+de la partie de gauche puisque cette dernière est vide (\lstinline{T[0..0-1]}$\leq$\lstinline{T[0..n-1]}).
 
-CONSERVATION : Montrons que l’invariant est conservé au cours d’une itération.
-Supposons donc qu’au début de l’itération i, on a T[0..i-1] est trié et T[0..i-1]$\leq$T[i..n-1]
-Au cours de l’itération, T[i] va être remplacé par l’élément minimum de T[i..n-1]. Donc
-T[i] sera supérieur à T[0..i-1] (d’après l’hypothèse) donc T[0..i] est trié. De plus, T[i] $\leq$
-T[i+1..n-1] donc on a T[0..i-1]$\leq$T[i]$\leq$T[i+1..n-1] et donc T[0..i]$\leq$T[i+1..n-1]
+\paragraph*{Conservation}
+ Montrons que l’invariant est conservé au cours d’une itération.
+Supposons donc qu’au début de l’itération \lstinline{i}, on a \lstinline{T[0..i-1]} est trié et \lstinline{T[0..i-1]}$\leq$\lstinline{T[i..n-1]}.
+Au cours de l’itération, \lstinline{T[i]} va être remplacé par l’élément minimum de \lstinline{T[i..n-1]}. Donc
+\lstinline{T[i]} sera supérieur à T\lstinline{[0..i-1]} (d’après l’hypothèse) donc \lstinline{T[0..i]} est trié. De plus, \lstinline{T[i]} $\leq$
+\lstinline{T[i+1..n-1]} donc on a \lstinline{T[0..i-1]}$\leq$T[i]$\leq$\lstinline{T[i+1..n-1]}et donc \lstinline{T[0..i]}$\leq$\lstinline{T[i+1..n-1]}.
 L’invariant reste donc vrai après l’itération.
-CORRECTION : L’invariant reste en particulier vrai après la dernière itération, lorsque i
-= n-1. On a donc en sortie de la boucle : T[0..n-1] esttrié (et T[0..n-1]$\leq$T[n..n-1] qui
+
+\paragraph*{Correction}
+L’invariant reste en particulier vrai après la dernière itération, lorsque \lstinline{i= n-1}. On a donc en sortie de la boucle : \lstinline{T[0..n-1]} est trié (et \lstinline{T[0..n-1]}$\leq$\lstinline{T[n..n-1]} qui
 est vraie puisque la partie de droite est vide). CQFD.
 
-TERMINAISON 
+\paragraph*{Terminaison}
 L’algorithme termine puisqu’il est composé de deux répétitives pour qui terminent
 nécessairement.
+\end{corrige}
 
 \else
 \fi
