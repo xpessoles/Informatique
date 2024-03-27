@@ -1,50 +1,14 @@
-\def\xxactivite{Cours}
+% !TEX spellcheck = fr_FR
+%\setchapterimage{.png}
+\setchapterpreamble[u]{\margintoc}
 
-\def\xxauteur{P. Bessonnat -- Xavier Pessoles}
-\fichefalse \proftrue \tdfalse \courstrue
-
-\def\xxnumchapitre{Chapitre 10 \vspace{.2cm}}
-
-\def\xxchapitre{Dictionnaires -- Mémo}
-
-\def\xxcompetences{%
-\textsl{%
-\textbf{Savoirs et compétences :}\\
-\begin{itemize}[label=\ding{112},font=\color{bleuxp}] 
-\item Dictionnaires.
-\end{itemize}
-}}
-
-\def\xxfigures{
-%\includegraphics[width=\linewidth]{fractale}
-%\\
-%\textit{Modèle du pilote hydraulique avec pilotage interactif.}
-}%figues de la page de garde
-
-
-\input{\repRel/Style/pagegarde_cours_minitoc}
-\setlength{\columnseprule}{.1pt}
-
-\vspace{2cm}
-\pagestyle{fancy}
-\thispagestyle{plain}
-
-%Thème : Tris.
-% 
-%Commentaires :
-%\begin{itemize}
-%\item algorithmique quadratique : tri par insertion, par sélection;
-%\item tri par partition-fusion;
-%\item tri par comptage.
-%\end{itemize}
-%\textit{On fait observer différentes caractéristiques (par exemple2 stable ou non, en place ou non, comparatif ou non ...).}
-%
+\chapter{Dictionnaires}
 
 
 
 \section{Introduction}
 
-Les dictionnaires sont composés d'un nombre fini d'éléments auxquels on peut accéder par une clé qui fait partie de l'élément.\\
+Les dictionnaires sont composés d'un nombre fini d'éléments auxquels on peut accéder par une clé qui fait partie de l'élément.
 Chaque élément est donc une paire : une clé et une valeur (\textit{key} et \textit{value} en anglais).\\
 Les dictionnaires ne sont pas ordonnés, on ne peut pas rechercher un élément à partir de sa position (indice) dans le dictionnaire mais seulement à partir de la clé.\\
 Comme les listes, ce sont des objets \textit{itérables} car on peut parcourir leurs éléments à l'aide d'une boucle \texttt{for}.
@@ -61,11 +25,10 @@ Comme les listes, ce sont des objets \textit{itérables} car on peut parcourir l
 \end{itemize}
 
 \begin{center}
-\texttt{dico=\{cle1 : valeur1, cle2: valeur2  ,cle3 : valeur3,..., clen : valeurn\}\\}
+\texttt{dico=\{cle1 : valeur1, cle2: valeur2  ,cle3 : valeur3,..., clen : valeurn\}}
 \end{center}
 
-\begin{exemple}~\\
-
+\begin{exemple}
 \begin{itemize}
 \item \texttt{velo=\{'guidon': 1, 'roue': 2, 'derailleur': 21, 'frein': 2\}}
 \item \texttt{pikachu=\{'pokemon':'souris', 'taille': 0.4, 'poids': 6, 'type':'electrik', 'talent':['statik','paratonnerre']\}}
@@ -74,16 +37,14 @@ Comme les listes, ce sont des objets \textit{itérables} car on peut parcourir l
 \end{exemple}
 
 \section{Manipulation des dictionnaires}
-Le dictionnaire vide est désigné par \{\}.
+Le dictionnaire vide est désigné par \texttt{\{\}}.
 \subsection*{Création}
 La création d'un dictionnaire se fait en choisissant un nom et par les signes d'accolades
-\begin{python}
-mon\_dico=\{\}
-\end{python}
+\texttt{mon\_dico=\{\}}.
 
 \subsection*{Taille}
-La taille du dictionnaire est donnée par la fonction prédéfinie \texttt{length} : 
-\texttt{len(mon\_dico)}.
+La taille du dictionnaire est donnée par la fonction prédéfinie \lstinline{length} : 
+\lstinline{len(mon_dico)}.
 
 
 \subsection*{Ajout d'un élément ou modification d'une valeur}
