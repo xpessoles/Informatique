@@ -1,37 +1,45 @@
-%%%% Paramétrage du cours %%%%
-\def\xxactivite{Cours}
+%%%%% Paramétrage du cours %%%%
+%\def\xxactivite{Cours}
+%
+%\def\xxauteur{Xavier Pessoles}
+%\fichefalse \proftrue \tdfalse \courstrue
+%
+%\def\xxnumchapitre{Chapitre 4 \vspace{.2cm}}
+%\def\xxchapitre{\hspace{.12cm} Récursivité}
+%
+%\def\xxcompetences{%
+%\textsl{%
+%\textbf{Savoirs et compétences :}\\
+%\begin{itemize}[label=\ding{112},font=\color{bleuxp}] 
+%\item Programmation récursive.
+%\end{itemize}
+%}}
+%
+%\def\xxfigures{
+%\includegraphics[width=\linewidth]{fractale}
+%%\\
+%%\textit{Modèle du pilote hydraulique avec pilotage interactif.}
+%}%figues de la page de garde
+%
+%\input{\repRel/Style/pagegarde_cours_minitoc}
+%\setlength{\columnseprule}{.1pt}
+%
+%\vspace{2cm}
+%\pagestyle{fancy}
+%\thispagestyle{plain}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%
 
-\def\xxauteur{Xavier Pessoles}
-\fichefalse \proftrue \tdfalse \courstrue
+% !TEX spellcheck = fr_FR
+%\setchapterimage{.png}
+\setchapterpreamble[u]{\margintoc}
 
-\def\xxnumchapitre{Chapitre 4 \vspace{.2cm}}
-\def\xxchapitre{\hspace{.12cm} Récursivité}
+\chapter{Programmation récursive}
+%
 
-\def\xxcompetences{%
-\textsl{%
-\textbf{Savoirs et compétences :}\\
-\begin{itemize}[label=\ding{112},font=\color{bleuxp}] 
-\item Programmation récursive.
-\end{itemize}
-}}
-
-\def\xxfigures{
-\includegraphics[width=\linewidth]{fractale}
-%\\
-%\textit{Modèle du pilote hydraulique avec pilotage interactif.}
-}%figues de la page de garde
-
-\input{\repRel/Style/pagegarde_cours_minitoc}
-\setlength{\columnseprule}{.1pt}
-
-\vspace{2cm}
-\pagestyle{fancy}
-\thispagestyle{plain}
-
-%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Définitions}
-\begin{defi}{Fonctions récursives}
+\begin{defi}[Fonctions récursives]
 Une fonction récursive est une fonction qui s'appelle elle-même.
 
 On appelle récursion l'appel de la fonction à elle-même.
@@ -49,14 +57,13 @@ La programmation récursive est un paradigme de programmation au même titre que
 \end{methode}
  
  
-
-Les avantages et inconvénients d'un algorithme récursif :
+Quelques  avantages et inconvénients d'un algorithme récursif :
 \begin{itemize}
 \item simplicité de l'écriture récursive dans certains cas ;
 \item l'algorithme peut sembler plus aisé lors de sa lecture ;
 \item comme pour les algorithmes itératifs, il faut prêter attention à sa terminaison en utilisant un variant de boucle (à voir ultérieurement) ;
 \item comme pour les algorithmes itératifs, il est aussi nécessaire de vérifier la correction de l'algorithme en utilisant un invariant de boucle (à voir ultérieurement) ;
-\item les complexités algorithmiques temporelle et spatiale (à voir ultérieurement) d'un algorithme récursif peuvent être plus coûteuses que celles d'un algorithme itératif.
+\item les complexités algorithmiques temporelle et spatiale (à voir ultérieurement) d'un algorithme récursif peuvent être plus coûteuses que celles d'un algorithme itératif suivant l'algorithme retenu.
 \end{itemize}
 
 
@@ -106,9 +113,21 @@ La figure suivante montre que dans le cas de l'algorithme récursif proposé plu
 
 Une autre formulation de l'algorithme récursif permet très simplement de diminuer le nombre de termes calculés. 
 
+\begin{remarque}[  -- Complexité]
+On peut estimer le coût temporel de la fonciton \lstinline{un_rec} ainsi :
+$C(n)=C(n-1)+C(n-1)+C_0$ car dans le \lstinline{else} il y a deux appels de \lstinline{un_rec} à l'itération \lstinline{n-1} et des opérations à temps constant (additions et division).
+
+$C(n)$ est une suite aritmético géométrique de terme général $u_n = a^n \left(u_0-r\right)+r$ avec 	$a =2$.
+On a donc $C(n)=\mathcal{O}\left(2^n\right)$.
+
+\end{remarque}
 
 
-\noindent\begin{minipage}[c]{.45\linewidth}
+
+\begin{marginfigure}
+\includegraphics[width=\linewidth]{fig_02}
+\end{marginfigure}
+
 \begin{lstlisting}
 def un_rec_v2 (n : int) -> float :
     if n == 1 :
@@ -117,11 +136,14 @@ def un_rec_v2 (n : int) -> float :
         v = un_rec_v2(n-1)
         return (v+6)/(v+2)
 \end{lstlisting}
-\end{minipage} \hfill
-\begin{minipage}[c]{.45\linewidth}
-\begin{center}
-\includegraphics[width=.8\linewidth]{fig_02}
-\end{center}\end{minipage}
+
+\begin{remarque}[  -- Complexité]
+On peut estimer le coût temporel de la fonciton \lstinline{un_rec_v2} ainsi :
+$C(n)=C(n-1)+C_0$ 
+$C(n)$ est une suite aritmético géométrique de terme général $u_n = a^n \left(u_0-r\right)+r$ avec 	$a =1$.
+On a donc $C(n)=\mathcal{O}\left(n\right)$.
+
+\end{remarque}
 
 
 Dans la même idée que les graphes présentés ci-dessus, il est possible de représenter la pile des appels récursifs, c'est à dire la succession des appels qui vont être faits pour calculer le nième terme d'une suite. 
@@ -134,9 +156,6 @@ Dans la même idée que les graphes présentés ci-dessus, il est possible de re
 Il est possible d'agir par récursivité sur des listes ou sur des chaînes de caractère. Pour cela, il peut être nécessaire d'utiliser le slicing. Pour rappel, \texttt{a = ch[i:j]} permet d'affecter à \texttt{a} la liste (ou le chaîne de caractéres) constitué des éléments de \texttt{i} (inclus) à \texttt{j} (exclus). En écrivant \texttt{a = ch[i:]} on affecte à \texttt{a} tous les éléments du ième au dernier.
 
 
-\vspace{.5cm}
-
-\noindent\begin{minipage}[c]{.45\linewidth}
 
 Ainsi, pour réaliser la somme des éléments d'une liste \texttt{L} par récursivité : 
 \begin{itemize}
@@ -151,8 +170,7 @@ def somme(L:list) -> float :
     else :
         return L[0]+somme(L[1:])
 \end{lstlisting}
-\end{minipage} \hfill
-\begin{minipage}[c]{.53\linewidth}
+
 Pour une chaîne de caractères, si on souhaite renvoyer son miroir (par exemple, le miroir de \texttt{abc} serait \texttt{cba}) : 
 \begin{itemize}
 \item si la chaîne de caractère a une taille de 1, on renvoie le caractère;
@@ -166,7 +184,7 @@ def miroir(ch:str) -> str :
         # Attention le + désigne la concaténation
         return miroir(ch[1:])+ch[0]
  \end{lstlisting}  
-\end{minipage} 
+
 
 \section{Algorithmes dichotomiques -- Diviser pour régner}
 
@@ -175,10 +193,8 @@ Les algorithmes dichotomiques se prêtent aussi à des formulations récursives.
 %\noindent\begin{minipage}[c]{.49\linewidth}
 \begin{lstlisting}
 def appartient_dicho(e : int , t : list) -> bool:
-    """Renvoie un booléen indiquant si e est 
-    dans t. Préconditions : t est un tableau 
-    de nombres trié par ordre croissant e est 
-    un nombre"""
+    """Renvoie un booléen indiquant si e est dans t. 
+    Préconditions : t est un tableau de nombres trié par ordre croissant e est  un nombre"""
     # Limite gauche de la tranche où l'on recherche e
     g = 0 
     # Limite droite de la tranche où l'on recherche e
@@ -235,7 +251,13 @@ def cercle(x,y,r):
     plt.plot(X,Y,"b")     #tracé sans affichage
 \end{lstlisting}
 
-\noindent\begin{minipage}[c]{.49\linewidth}
+
+
+\begin{marginfigure}
+\includegraphics[width=\linewidth]{fig_03}
+\end{marginfigure}
+
+
 \begin{lstlisting}
 def bubble(n, x, y, r, d):
     cercle(x, y, r)
@@ -252,12 +274,6 @@ bubble(4,0,0,8,"")
 plt.axis("equal")
 plt.show()
 \end{lstlisting}
-\end{minipage} \hfill
-\begin{minipage}[c]{.49\linewidth}
-\begin{center}
-\includegraphics[width=\linewidth]{fig_03}
-\end{center}
-\end{minipage}
 %\subsection{Exponentiation rapide}
 %L'exponentiation rapide est un algorithme permettant de calculer $x^n$ en utilisant l'algorithme récursif suivant : 
 %$

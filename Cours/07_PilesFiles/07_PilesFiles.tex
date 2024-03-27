@@ -1,61 +1,23 @@
-\def\xxactivite{Cours}
+% !TEX spellcheck = fr_FR
+%\setchapterimage{.png}
+\setchapterpreamble[u]{\margintoc}
 
-\def\xxauteur{Emilien Durif -- Xavier Pessoles}
-\fichefalse \proftrue \tdfalse \courstrue
-
-\def\xxnumchapitre{Chapitre 9 \vspace{.2cm}}
-
-\def\xxchapitre{Piles et files}
-
-\def\xxcompetences{%
-\textsl{%
-\textbf{Savoirs et compétences :}\\
-\begin{itemize}[label=\ding{112},font=\color{bleuxp}] 
-\item Piles et files.
-\end{itemize}
-}}
-
-\def\xxfigures{
-%\includegraphics[width=\linewidth]{fractale}
-%\\
-%\textit{Modèle du pilote hydraulique avec pilotage interactif.}
-}%figues de la page de garde
-
-
-\input{\repRel/Style/pagegarde_cours_minitoc}
-\setlength{\columnseprule}{.1pt}
-
-\vspace{2cm}
-\pagestyle{fancy}
-\thispagestyle{plain}
-
-%Thème : Tris.
-% 
-%Commentaires :
-%\begin{itemize}
-%\item algorithmique quadratique : tri par insertion, par sélection;
-%\item tri par partition-fusion;
-%\item tri par comptage.
-%\end{itemize}
-%\textit{On fait observer différentes caractéristiques (par exemple2 stable ou non, en place ou non, comparatif ou non ...).}
+\chapter{Piles et files}
 %
-
-
-
 
 
 \section{Pile}
 \subsection{Présentation}
-\begin{defi}{Pile}
+\begin{defi}[Pile]
 Une pile est une structure de données dans laquelle le dernier élément stocké est le premier à en sortir. On parle de principe \textit{LIFO} pour \textit{Last In First Out}. Le dernier élément stocké est appelé \textbf{sommet}.
 \end{defi}
 
 Pour gérer une pile, indépendamment de la façon dont elle est implémentée, on suppose exister les opérations élémentaires suivantes : 
 \begin{itemize}
-\item \texttt{cree\_pile()} qui crée une pile vide;
-\item \texttt{empile(p,x)} qui empile l'élément \texttt{x} au sommet de la pile \texttt{p};
-\item \texttt{depile(p)} qui supprime le sommet de la pile \texttt{p} et renvoie sa valeur;
-\item \texttt{est\_vide(p)} qui teste si la pile \texttt{p}est vide.
+\item \lstinline{cree_pile()} qui crée une pile vide;
+\item \lstinline{empile(p,x)} qui empile l'élément \lstinline{x} au sommet de la pile \lstinline{p};
+\item \lstinline{depile(p)} qui supprime le sommet de la pile \lstinline{p} et renvoie sa valeur;
+\item \lstinline{est_vide(p)} qui teste si la pile \lstinline{p}est vide.
 \end{itemize}
 
 On peut illustrer la structure de pile par l'image suivante.
@@ -151,16 +113,12 @@ Une des possibilités pour implémenter les piles est d'utiliser le module \text
 
 \begin{lstlisting} 
 from collections import deque
-
 # Création d'une pile vide
 pile = deque() 
-
 # Test si une pile est vide
 len(pile) == 0
-
 # Ajout de l'élément Truc au sommet de la pile
 pile.append("Truc")
-
 # Suppression (et renvoi) du sommet d'une pile non vide
 sommet = pile.pop()
 \end{lstlisting}
@@ -261,7 +219,7 @@ def reverse(pile):
 
 \section{File}
 \subsection{Présentation}
-\begin{defi}{File}
+\begin{defi}[File]
 Une file est une structure de données dans laquelle le premier élément stocké est le premier à en sortir. On parle de principe \textit{FIFO} pour \textit{First In First Out}. 
 \end{defi}
 

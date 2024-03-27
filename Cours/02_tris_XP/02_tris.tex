@@ -1,48 +1,20 @@
-\def\xxactivite{Tris}
-
-\def\xxauteur{Emilien Durif -- Xavier Pessoles}
-\fichefalse \proftrue \tdfalse \courstrue
-
-\def\xxnumchapitre{Chapitre 8 \vspace{.2cm}}
-
-\def\xxchapitre{Tris}
-
-\def\xxcompetences{%
-\textsl{%
-\textbf{Savoirs et compétences :}\\
-\begin{itemize}[label=\ding{112},font=\color{bleuxp}] 
-\item Tris.
-\end{itemize}
-}}
-
-\def\xxfigures{
-%\includegraphics[width=\linewidth]{fractale}
-%\\
-%\textit{Modèle du pilote hydraulique avec pilotage interactif.}
-}%figues de la page de garde
-
-
-\input{\repRel/Style/pagegarde_cours_minitoc}
-\setlength{\columnseprule}{.1pt}
-
-\vspace{2cm}
-\pagestyle{fancy}
-\thispagestyle{plain}
-
-%Thème : Tris.
-% 
-%Commentaires :
-%\begin{itemize}
-%\item algorithmique quadratique : tri par insertion, par sélection;
-%\item tri par partition-fusion;
-%\item tri par comptage.
-%\end{itemize}
-%\textit{On fait observer différentes caractéristiques (par exemple2 stable ou non, en place ou non, comparatif ou non ...).}
+%\def\xxactivite{Tris}
 %
+%\def\xxauteur{Emilien Durif -- Xavier Pessoles}
+%\fichefalse \proftrue \tdfalse \courstrue
+%
+%\def\xxnumchapitre{Chapitre 8 \vspace{.2cm}}
 
+\section{Tris}
+\subsection{Introduction et objectifs}
 
+\marginnote{
+\begin{itemize}
+\item algorithmique quadratique : tri par insertion, par sélection;
+\item tri par partition-fusion;
+\item tri par comptage.
+\end{itemize}}
 
-\section{Introduction et objectifs}
 
 \begin{obj}
 %On suppose dans toute la suite que l'on trie des tableaux dans l'ordre croissant. Les algorithmes présentés permettent de trier n'importe quel type d'éléments à partir du moment où ces éléments sont munis d'un ordre total. Cependant nous allons nous focaliser ici sur le tri d'entiers.
@@ -66,49 +38,50 @@ Les principales capacités développées ici sont :
 
 
 
-\begin{defi}{Effet de bord} On dit qu'une fonction est à effet de bord lorsqu'elle modifie une variable  en dehors de son environnement local. C'est par exemple le cas lorsqu'on donne une liste (objet mutable, passé par référénce) comme argument d'une fonction.
+\begin{defi}[Effet de bord] On dit qu'une fonction est à effet de bord lorsqu'elle modifie une variable  en dehors de son environnement local. C'est par exemple le cas lorsqu'on donne une liste (objet mutable, passé par référénce) comme argument d'une fonction.
 
 Conséquence sur les algorithmes de tri : une fonction de tri ne renvoie rien la plupart du temps (on peut donc l'appeler une procédure). La liste passée en argument en entrée sera triée et cela, même en dehors du scope de la fonction. 
 \end{defi}
 
 
-\begin{defi}{Tri en place} 
+\begin{defi}[Tri en place]
 Un tri est effectué en place lorsque la liste à trier est modifiée jusqu'à devenir triée. Dans le cas contraire, la fonction de tri pourra renvoyer une novelle liste contenent les mêmes éléments, mais triés. 
 \end{defi}
 
 
-\begin{defi}{Tri stable} 
+\begin{defi}[Tri stable]
 Un algorithme est dit stable si les positions relatives de deux éléments égaux ne sont pas
 modifiées par l'algorithme : c'est-à-dire que si deux éléments $x$ et $y$ égaux se trouvent aux positions $i_x$ et $i_y$ de
 la liste avant l'algorithme, avec $i_x < i_y$, alors c'est également le cas de leurs positions après l'algorithme.
 % Le caractère stable peut-être utile lorsqu’on utilise des pré-ordres.
 \end{defi}
 
-\begin{defi}{Tri comparatif}
+\begin{defi}[Tri comparatif]
 Un tri est dit comparatif lorsqu'il s'appuie uniquement sur la comparaison deux à deux des éléments de la liste et pas sur la valeur ce ces éléments.
 \end{defi}
 
 
 
+
+
+\begin{marginfigure}
+\includegraphics[width=\textwidth]{C2.png}
+\end{marginfigure}
 \begin{exemple}%{Tri comparatif}
 
 Un \textbf{algorithme comparatif} (à opposer au non-comparatif comme le tri baquet ou par paquet) est basé sur des comparaisons successives entre les données pour déterminer la permutation correspondant à l'ordre croissant des données.
 On va chercher ici à évaluer la complexité théorique des tris comparatifs en se basant sur le nombre de comparaisons.
 
-Cet algorithme correspond au fonctionnement du tri insertion que nous verrons plus loin :
-
-\begin{center}
-\includegraphics[width=.6\textwidth]{C2.png}
-\end{center}
+Cet algorithme correspond au fonctionnement du tri insertion que nous verrons plus loin.
 
 %\textbf{Résultat :}\textit{ Tout algorithme comparatif fait dans le pire des cas au moins de l'ordre de
 %\textbf{$n \log_2(n)$ comparaisons} soit une complexité de \textbf{$O(N\cdot \log(N))$}}.
 \end{exemple}
 
-\section{Tri par insertion}
-\subsection{Principe}
+\subsection{Tri par insertion}
+\subsubsection{Principe}
 
-\begin{defi}{Principe du tri par insertion}
+\begin{defi}[Principe du tri par insertion]
 Le \textbf{tri par insertion} est le tri que l'on effectue naturellement, par exemple pour trier un jeu de cartes. On trie les premières puis à chaque nouvelle carte on l'ajoute à l'ensemble déjà trié à la bonne place. 
 
 Ce tri s'effectue en place, c'est-à-dire qu'il ne demande pas d'autre tableau que celui que l'on trie. 
@@ -118,7 +91,7 @@ Son coût en mémoire est donc constant si on ne compte pas la place occupée pa
 
 
 
-\subsection{Implémentation}
+\subsubsection{Implémentation}
 
 
 \begin{itemize}
@@ -151,7 +124,7 @@ def tri_insertion(L:list) -> list:
 \end{lstlisting}    
 
 
-\subsection{Terminaison}
+\subsubsection{Terminaison}
 
 Pour la boucle \texttt{while}, la quantité \texttt{j} est un variant de boucle. En effet :
 \begin{itemize}
@@ -163,7 +136,7 @@ Pour la boucle \texttt{while}, la quantité \texttt{j} est un variant de boucle.
 
 La boucle \texttt{for} termine au bout de \texttt{n-1} itérations. L'algorithme de tri par insertion termine donc.
 
-\subsection{Correction}
+\subsubsection{Correction}
 Montrons que la propriété \texttt{L[0:i] est triée} est un invariant de boucle.
 
 \textbf{Initialisation} 
@@ -181,9 +154,9 @@ Montrons qu'à la fin de l'itération \texttt{i}, \texttt{L[1:i]} est triée.
 À la fin du \texttt{n-1} tour de boucle, \texttt{L[0:n]} est donc triée. 
 
 
-\subsection{Complexité}
+\subsubsection{Complexité}
 
-\begin{prop}{Complexité}
+\begin{prop}[Complexité]
 %\begin{itemize}
 %\item La fonction $tri\_insertion$ effectue le même nombre de comparaisons et d'affectations. Lorsque la boucle while insère l'élément $T[i]$ à la position $i-k$, elle effectue $k+1$ comparaisons. 
 %
@@ -268,11 +241,11 @@ Au final le nombre de comparaisons est égal à $C(n) = 2+3+...+n = \sum \limits
 %%L'efficacité du tri par insertion est excellente lorsque le tableau est déjà trié ou « presque trié » $(C(n)=O(n))$. Il surpasse alors toutes les autres méthodes de tri qui sont au mieux en $O(n \times ln(n))$.
 %%\end{prop}
 %
-\section{Tri rapide (ou << quicksort >>)}
+\subsection{Tri rapide (ou << quicksort >>)}
 
-\subsection{Principe}
+\subsubsection{Principe}
 
-\begin{defi}{Tri rapide}
+\begin{defi}[Tri rapide]
 \textbf{L'algorithme de tri rapide} fait partie de la catégorie des algorithmes « diviser pour régner ».
 
 À chaque appel de la fonction tri on choisit une valeur \textbf{<< pivot >>}, par exemple le premier élément. On effectue une partition des élément à trier. Un premier groupe est constitué de valeurs inférieures au pivot  et un deuxième avec les valeurs supérieures.
@@ -352,7 +325,7 @@ On traite alors chacun des groupes de façon indépendante. On peut les traiter 
 %\end{tabular} 
 %
 %\end{exemple2}
-\subsection{Implémentation}
+\subsubsection{Implémentation}
 
 
 %\begin{itemize}
@@ -500,7 +473,7 @@ def tri_rapide(L : list) -> list :
 %%\end{exemple2}
 %
 %
-\subsection{Terminaison}
+\subsubsection{Terminaison}
 
 Prenons comme variant la longueur $n$ de la liste à trier.  Nous cherchons à trier des listes de tailles supérieure à $n$. 
 
@@ -517,7 +490,7 @@ L'appel à \texttt{tri\_rapide} se fait alors sur des listes de tailles strictem
 \texttt{n} est donc un variant de boucle et la fonction termine. 
 
 
-\subsection{Correction}
+\subsubsection{Correction}
 Montrons la propriété suivante : << si \texttt{L} une liste de taille \texttt{inférieure ou égale} à $n$ alors  \texttt{tri\_rapide(L)} renvoie une liste triée >>.
 
 \textbf{Initialisation}
@@ -531,10 +504,10 @@ De plus, \texttt{tri\_rapide(ei) + [p] + tri\_rapide(es)} renvoie une liste tri�
 
 La propriété de récurrence est donc vraie pour une liste de taille \texttt{n+1}.
 
-\subsection{Complexité}
-\begin{prop}{Efficacité de l'algorithme}
+\subsubsection{Complexité}
+\begin{prop}[Efficacité de l'algorithme]
 \begin{itemize}
-\item Cette méthode de tri est très efficace lorsque les données sont distinctes et non ordonnées. La complexité est alors globalement en $O(n \ln(n))$. Lorsque le nombre de données devient petit (<15) lors des appels récursifs de la fonction de tri, on peut avantageusement le remplacer par un tri par insertion dont la complexité est linéaire lorsque les données sont triées ou presque. \cite{Beynet}
+\item Cette méthode de tri est très efficace lorsque les données sont distinctes et non ordonnées. La complexité est alors globalement en $\mathcal{O}(n \ln(n))$. Lorsque le nombre de données devient petit (<15) lors des appels récursifs de la fonction de tri, on peut avantageusement le remplacer par un tri par insertion dont la complexité est linéaire lorsque les données sont triées ou presque. \cite{Beynet}
 
 
 
@@ -544,11 +517,9 @@ le premier élément du segment comme pivot, mais plutôt un élément au hasard
 \end{itemize}
 
 \begin{center}
-\begin{tabular}{|c|c|}
-\hline 
- meilleur cas &  pire cas \\ 
-\hline 
-$n \log n$ & $n^2$ \\ 
+\begin{tabular}{llll}
+\hline
+Meilleur des cas : $n \log n$ &&&  Pire des cas $n^2$  \\ 
 \hline 
 \end{tabular} 
 \end{center}
@@ -570,10 +541,10 @@ Dans le pire des cas, $k=0$ (ou $k=n-1$). En conséquences,  $C(n)=2n + C(0) + C
 On a donc $C(n)=2n + 1 + C(n-1) \Leftrightarrow C(n)- C(n-1)=2n + 1 $. De même à l'itération $i$, on a $ C(i)- C(i-1)=2i + 1 $. 
 
 
-Par sommation, on a alors 
-$$
-\sum_{i=1}^n \left(C(i)- C(i-1)\right)=\sum_{i=1}^n \left(2i + 1\right) \Rightarrow C(n)-C(0) = 2 \times \dfrac{1}{2} n (n+1) + n \Rightarrow C(n)=n^2 +2n -1 = \mathcal{O}(n^2).
-$$
+Par sommation, on a alors :
+$\sum_{i=1}^n \left(C(i)- C(i-1)\right)$
+$=\sum_{i=1}^n \left(2i + 1\right) \Rightarrow C(n)-C(0) $
+$= 2 \times \dfrac{1}{2} n (n+1) + n \Rightarrow C(n)=n^2 +2n -1 = \mathcal{O}(n^2)$.
 
 %\begin{center}
 %\begin{tabular}{|c|c|c|}
@@ -634,9 +605,9 @@ $$
 %%
 %
 %
-\section{Tri fusion -- \textit{Merge sort}}
+\subsection{Tri fusion -- \textit{Merge sort}}
 
-\subsection{Principe}
+\subsubsection{Principe}
 
 
 Cet algorithme fait aussi partie des algorithmes << diviser pour régner >>.
@@ -799,7 +770,7 @@ def tri_fusion(L: list) -> list:
 %%
 %%
 
-\subsection{Terminaison}
+\subsubsection{Terminaison}
 \textbf{Terminaison de la fusion}
 Soit la suite définie par la somme successive des longueur de \texttt{L1} et \texttt{L2}.  	 
 
@@ -814,27 +785,17 @@ On note $\left(u_n\right)$ la suite définie par $u_0=n$, taille de la liste à 
 
 
 
-\subsection{Correction}
+\subsubsection{Correction}
 
-\subsection{Complexité}
+\subsubsection{Complexité}
 
-\begin{prop}{Efficacité de l'algorithme}
+\begin{prop}[Efficacité de l'algorithme]
 
-La complexité est \textbf{$n\log(n)$}
-
-\begin{center}
-\begin{tabular}{|c|c|}
-\hline 
- meilleur cas &  pire cas \\ 
-\hline 
-$n \log n$ & $n \log n$ \\ 
-\hline 
-\end{tabular} 
-\end{center}
+La complexité est \textbf{$n\log(n)$} dans le meilleur des cas et dans le pire des cas.
 
 \end{prop}
 
-\subsubsection{Complexité du tri fusion -- Petites remarques}
+\paragraph{Complexité du tri fusion -- Petites remarques}
 
 Quel est le coût de l'algorithme de fusion présenté précédemment ?
 En Python, concaténer deux listes nécessite de copier ces deux listes dans une nouvelle liste. Cette opération est donc en $\mathcal{O}(n)$. 
@@ -848,7 +809,7 @@ La séparation quant à elle est complexité $\mathcal{O}\log_2(n)$ (en effet, l
 L'algorithme proposé est donc en $\mathcal{O}\left(n^2 \log(n)\right)$... et pas en $n\log(n)$ !
 
 Il faudrait donc rechercher un algorithme de fusion de complexité linéaire...
-\subsubsection{Exemple de fusion linéaire...}
+\paragraph{Exemple de fusion linéaire...}
 \begin{lstlisting}
 def fusion(L1, L2):
     L = []
@@ -866,7 +827,7 @@ def fusion(L1, L2):
 \end{lstlisting}
 
 
-\section{Dans Python : sort et sorted}
+\subsection{Dans Python : sort et sorted}
 Les listes Python ont une méthode native \texttt{list.sort()} qui modifie les listes elles-mêmes et renvoie \texttt{None}.
 %
 %	\begin{DDbox}{\linewidth}
@@ -916,7 +877,7 @@ Les listes Python ont une méthode native \texttt{list.sort()} qui modifie les l
 
 %\section{Tri par comptage}
 
-\section{Conclusion et méthodes dans Python}
+\subsection{Conclusion et méthodes dans Python}
 
 
 %\section{Conclusion et temps}
@@ -935,17 +896,20 @@ La première étape consiste à vérifier que les algorithmes résolvent exactem
 \end{itemize}
 \end{prop}
 
-\begin{exemple2}[Illustration de la comparaison]
+
+\begin{marginfigure}
+\includegraphics[width=\textwidth]{Fin.png}
+\end{marginfigure}
+
+\begin{exemple}[Illustration de la comparaison]
 
 Pour comparer les temps globaux sur une même machine (Ici processeur	Intel Core i7-4510U Haswell (2 GHz, TDP 15W),Mémoire vive 4 Go) on génère des tableaux de dimensions différentes avec des nombres aléatoires.
 On utilise le module time pour déterminer les temps. Ici c'est un temps global dépendant fortement de la machine utilisée.
 On fait varier la taille du tableau et on compare les temps mis par chacun des algorithmes (en rouge tri rapide, en bleu tri insertion, en vert tri fusion). 
 
-\begin{center}
-\includegraphics[width=.7\textwidth]{Fin.png}
-\end{center}
 
-\end{exemple2}
+
+\end{exemple}
 
 
 
@@ -1096,300 +1060,300 @@ d'algorithmique et programmation structurée avec Python. Nouveaux programmes
 %\item Sujet : \url{https://bit.ly/3iAc5do}
 %\item Corrige : \url{https://bit.ly/3eFuHrt}
 %\end{itemize}
-
-\section{QCM}
-\begin{multicols}{2}
-\question{On dispose d'une liste de triplets: t = [(1,12,250),(1,12,251), (2,12,250),(2,13,250),(2,11,250),(2,12,249)].
-On trie cette liste par ordre croissant des valeurs du second élément des triplets. En cas d'égalité, on trie par ordre croissant du troisième champ. Si les champs 2 et 3 sont égaux, on trie par ordre croissant du premier champ.
-Après ce tri, quel est le contenu de la liste ?}
-\begin{enumerate}
-\item \texttt{[(1,12,249),(1,12,250),(1,12,251),(2,11,250),(2,12,250),(2,13,250)]}.
-\item \texttt{[(2,11,250),(1,12,249),(1,12,250),(2,12,250),(1,12,251),(2,13,250)]}.%+
-\item \texttt{[(2,11,250),(1,12,249),(1,12,250),(1,12,251),(2,12,250),(2,13,250)]}.
-\item \texttt{[(1,12,249),(2,11,250),(1,12,250),(2,12,250),(2,13,250),(1,12,251)]}.
-\end{enumerate}
-
-\question{Quelle valeur retourne la fonction \texttt{mystere} suivante ?}
-\begin{lstlisting}
-def mystere(liste):
-     valeur_de_retour = True
-     indice = 0
-     while indice < len(liste) - 1 :
-          if liste[indice] > liste[indice + 1]:
-               valeur_de_retour = False
-          indice = indice + 1
-     return valeur_de_retour
-\end{lstlisting}
-\begin{enumerate}
-\item Une valeur booléenne indiquant si la liste liste passée en paramètre est triée. %+
-\item La valeur du plus grand élément de la liste passée en paramètre.
-\item La valeur du plus petit élément de la liste passée en paramètre.
-\item Une valeur booléenne indiquant si la liste passée en paramètre contient plusieurs fois le même élément.
-\end{enumerate}
-
-\question{Combien d'échanges effectue la fonction Python suivante pour trier un tableau de 10 éléments au pire des cas ?}
-\begin{lstlisting}
-def tri(tab) :
-     for i in range (1, len(tab)) :
-          for j in range (len(tab) - i) :
-               if tab[j] > tab[j+1] :
-                    tab[j], tab[j+1] = tab[j+1], tab[j]
-\end{lstlisting}
-\begin{enumerate}
-\item 45. %+
-\item 100.
-\item 10.
-\item 55.
-\end{enumerate}
-
-\question{Que vaut l'expression \texttt{f([7, 3, 1, 8, 19, 9, 3, 5], 0)} ?}
-\begin{lstlisting}
-def f(t,i) :
-     im = i
-     m = t[i]
-     for k in range(i+1, len(t)) :
-          if t[k] < m :
-               im, m = k, t[k]
-     return im
-\end{lstlisting}
-\begin{enumerate}
-\item 1.
-\item 2. %+
-\item 3.
-\item 4.
-\end{enumerate}
-
-\question{Laquelle de ces listes de chaînes de caractères est triée en ordre croissant ?}
-\begin{lstlisting}
-\end{lstlisting}
-\begin{enumerate}
-\item \texttt{['Chat' , 'Cheval' , 'Chien' , 'Cochon']}. %+
-\item \texttt{['Cochon' , 'Chat' , 'Cheval' , 'Chien']}.
-\item \texttt{['Cheval' , 'Chien‘ , 'Chat' , 'Cochon']}.
-\item \texttt{['Chat' , 'Cochon' , 'Cheval' , 'Chien']}.
-\end{enumerate}
-
-\question{Laquelle de ces listes de chaînes de caractères est triée en ordre croissant ?}
-\begin{lstlisting}
-\end{lstlisting}
-\begin{enumerate}
-\item \texttt{['12','142','21','8']}. %+
-\item \texttt{['8','12','142','21']}.
-\item \texttt{['8','12','21','142']}.
-\item \texttt{['12','21','8','142']}.
-\end{enumerate}
-
-\question{Quelle est la valeur de la variable \texttt{table} après exécution du programme Python suivant ?}
-\begin{lstlisting}
-table = [12, 43, 6, 22, 37]
-for i in range(len(table) - 1):
-    if table [i] > table [i+1] :
-        table [i] ,table [i+1] = table [i+1] ,table [i]
-\end{lstlisting}
-\begin{enumerate}
-\item \texttt{[12, 6, 22, 37, 43]}.%+
-\item \texttt{[6, 12, 22, 37, 43]}.
-\item \texttt{[43, 12, 22, 37, 6]}.
-\item \texttt{[43, 37, 22, 12, 6]}.
-\end{enumerate}
-
-\question{Un algorithme cherche la valeur maximale d'une liste non triée de taille $n$. Combien de temps mettra cet algorithme sur une liste de taille $2n$ ?}
-
-\begin{enumerate}
-\item Le même temps que sur la liste de taille n si le maximum est dans la première moitié de la liste.
-\item On a ajouté $n$ valeurs, l'algorithme mettra donc n fois plus de temps que sur la liste de taille $n$.
-\item Le temps sera simplement doublé par rapport au temps mis sur la liste de taille $n$.%+
-\item On ne peut pas savoir, tout dépend de l'endroit où est le maximum.
-\end{enumerate}
-
-\question{Quel est le coût en temps dans le pire des cas du tri par insertion ?}
-
-\begin{enumerate}
-\item $\mathcal{O}(n)$.
-\item $\mathcal{O}\left(n^2\right)$.%+
-\item $\mathcal{O}\left(2^n\right)$.
-\item $\mathcal{O}\left(\log n\right)$.
-\end{enumerate}
-
-\end{multicols}
-
-%\question{On souhaite écrire une fonction \texttt{tri\_selection(t)}, qui trie le tableau \texttt{t} dans l'ordre croissant : parmi les 4 programmes suivants, lequel est correct ?}
-%\begin{lstlisting}
-%def tri_selection(t) :
-%     for i in range (len(t)-1) :
-%          min = i		
-%          for j in range(i+1,len(t)):
-%               if t[j] < t[min]:
-%                    min = j
-%          tmp = t[i]
-%          t[i] = t[min]
-%          t[min] = tmp
-%def tri_selection(t) :
-%     for i in range (len(t)-1) :
-%          min = i		
-%          for j in range(i+1,len(t)-1):
-%               if t[j] < t[min]:
-%                    min = j
-%          tmp = t[i]
-%          t[i] = t[min]
-%          t[min] = tmp
-%def tri_selection(t) :
-%     for i in range (len(t)-1) :
-%          min = i		
-%          for j in range(i+1,len(t)):
-%               if t[j] < min:
-%                    min = j
-%          tmp = t[i]
-%          t[i] = t[min]
-%          t[min] = tmp
-%def tri_selection(t) :
-%     for i in range (len(t)-1) :
-%          min = i		
-%          for j in range(i+1,len(t)):
-%               if t[j] < t[min]:
-%                    min = j
-%          tmp = t[i]
-%          t[min] = t[i]
-%          t[i] = tmp
-%\end{lstlisting}
+%
+%\section{QCM}
+%\begin{multicols}{2}
+%\question{On dispose d'une liste de triplets: t = [(1,12,250),(1,12,251), (2,12,250),(2,13,250),(2,11,250),(2,12,249)].
+%On trie cette liste par ordre croissant des valeurs du second élément des triplets. En cas d'égalité, on trie par ordre croissant du troisième champ. Si les champs 2 et 3 sont égaux, on trie par ordre croissant du premier champ.
+%Après ce tri, quel est le contenu de la liste ?}
 %\begin{enumerate}
-%\item Fonction 1. %+
-%\item Fonction 2.
-%\item Fonction 3.
-%\item Fonction 4.
+%\item \texttt{[(1,12,249),(1,12,250),(1,12,251),(2,11,250),(2,12,250),(2,13,250)]}.
+%\item \texttt{[(2,11,250),(1,12,249),(1,12,250),(2,12,250),(1,12,251),(2,13,250)]}.%+
+%\item \texttt{[(2,11,250),(1,12,249),(1,12,250),(1,12,251),(2,12,250),(2,13,250)]}.
+%\item \texttt{[(1,12,249),(2,11,250),(1,12,250),(2,12,250),(2,13,250),(1,12,251)]}.
 %\end{enumerate}
 %
-%\question{De quel type de tri s'agit-il ?}
+%\question{Quelle valeur retourne la fonction \texttt{mystere} suivante ?}
 %\begin{lstlisting}
-%def tri(lst):
-%    for i in range(1,len(lst)):
-%        valeur = lst[i]
-%        j = i
-%        while j>0 and lst[j-1]>valeur:
-%            lst[j]=lst[j-1]
-%            j = j-1
-%        lst[j]=valeur
+%def mystere(liste):
+%     valeur_de_retour = True
+%     indice = 0
+%     while indice < len(liste) - 1 :
+%          if liste[indice] > liste[indice + 1]:
+%               valeur_de_retour = False
+%          indice = indice + 1
+%     return valeur_de_retour
 %\end{lstlisting}
 %\begin{enumerate}
-%\item Tri par insertion. %+
-%\item Tri fusion.
-%\item Tri par sélection.
-%\item Tri à bulles.
+%\item Une valeur booléenne indiquant si la liste liste passée en paramètre est triée. %+
+%\item La valeur du plus grand élément de la liste passée en paramètre.
+%\item La valeur du plus petit élément de la liste passée en paramètre.
+%\item Une valeur booléenne indiquant si la liste passée en paramètre contient plusieurs fois le même élément.
 %\end{enumerate}
 %
-%\question{De quel type de tri s'agit-il ?}
+%\question{Combien d'échanges effectue la fonction Python suivante pour trier un tableau de 10 éléments au pire des cas ?}
 %\begin{lstlisting}
-%def tri(lst):
-%    nb = len(lst)
-%    for i in range(0,nb):    
-%        ind_plus_petit = i
-%        for j in range(i+1,nb) :
-%            if lst[j] < lst[ind_plus_petit] :
-%                ind_plus_petit = j
-%        if ind_plus_petit is not i :
-%            temp = lst[i]
-%            lst[i] = lst[ind_plus_petit]
-%            lst[ind_plus_petit] = temp
+%def tri(tab) :
+%     for i in range (1, len(tab)) :
+%          for j in range (len(tab) - i) :
+%               if tab[j] > tab[j+1] :
+%                    tab[j], tab[j+1] = tab[j+1], tab[j]
 %\end{lstlisting}
 %\begin{enumerate}
-%\item Tri par insertion. 
-%\item Tri fusion.
-%\item Tri par sélection. %+
-%\item Tri à bulles.
+%\item 45. %+
+%\item 100.
+%\item 10.
+%\item 55.
 %\end{enumerate}
 %
-%\question{Un algorithme est en complexité quadratique. Codé en python, son exécution pour des données de taille 100 prend 12 millisecondes. Si l'on fournit des données de taille 200 au programme, on peut s'attendre à un temps d'exécution d'environ :}
+%\question{Que vaut l'expression \texttt{f([7, 3, 1, 8, 19, 9, 3, 5], 0)} ?}
+%\begin{lstlisting}
+%def f(t,i) :
+%     im = i
+%     m = t[i]
+%     for k in range(i+1, len(t)) :
+%          if t[k] < m :
+%               im, m = k, t[k]
+%     return im
+%\end{lstlisting}
+%\begin{enumerate}
+%\item 1.
+%\item 2. %+
+%\item 3.
+%\item 4.
+%\end{enumerate}
+%
+%\question{Laquelle de ces listes de chaînes de caractères est triée en ordre croissant ?}
 %\begin{lstlisting}
 %\end{lstlisting}
 %\begin{enumerate}
-%\item 48 millisecondes. %+
-%\item 24 millisecondes.
-%\item 12 millisecondes.
-%\item 96 millisecondes.
+%\item \texttt{['Chat' , 'Cheval' , 'Chien' , 'Cochon']}. %+
+%\item \texttt{['Cochon' , 'Chat' , 'Cheval' , 'Chien']}.
+%\item \texttt{['Cheval' , 'Chien‘ , 'Chat' , 'Cochon']}.
+%\item \texttt{['Chat' , 'Cochon' , 'Cheval' , 'Chien']}.
 %\end{enumerate}
 %
-%\question{À quel type tri correspond l'invariant de boucle ci-dessous :}
-%\begin{itemize}
-%\item tous les éléments d'indices 0 à $i-1$ sont déjà triés,
-%\item tous les éléments d'indices $i$ à $n$ sont de valeurs supérieures à ceux de la partie triée.
-%\end{itemize}
-%\begin{enumerate}
-%\item Tri par insertion. 
-%\item Tri fusion.
-%\item Tri par sélection. %+
-%\item Tri à bulles.
-%\end{enumerate}
-%
-%\question{Quel est l'invariant de boucle qui correspond précisément à cet algorithme ?}
-%
-%On considère un algorithme de tri par sélection, dans lequel la fonction \texttt{echanger(tab[i], tab[j])}
-%effectue l'échange des ième et jième valeurs du tableau \texttt{tab}.
-%\begin{lstlisting}
-%nom: tri_sélection
-%
-%paramètre: tab, tableau de n entiers, n>=2
-%
-%Traitement:
-%pour i allant de 1 à n-1:
-%    pour j allant de i+1 à n:
-%        si tab[j] < tab[i]:
-%            echanger(tab[i], tab[j])
-%renvoyer tab
-%\end{lstlisting}
-%\begin{enumerate}
-%\item Tous les éléments d'indice supérieur ou égal à i sont triés par ordre croissante.
-%\item Tous les éléments d'indice compris entre 0 et i sont triés et les éléments d'indice supérieurs ou égal à i leurs sont tous supérieurs.
-%\item Tous les éléments d'indice supérieur ou égal à i sont non triés.
-%\item Tous les éléments d'indice compris entre 0 et i sont triés, on ne peut rien dire sur les éléments d'indice supérieur ou égal à i.
-%\end{enumerate}
-%
-%\question{Quel est le type de tri qui correspond à cet algorithme ?}
-%\begin{lstlisting}
-%nom: tri_mystere
-%
-%paramètre: tab, tableau de n entiers, non trié, non vide
-%
-%Traitement:
-%pour i allant de 1 à n-1:
-%    pour j allant de i+1 à n:
-%        si tab[j] < tab[i]:
-%            echanger(tab[i], tab[j])
-%renvoyer tab
-%\end{lstlisting}
-%\begin{enumerate}
-%\item Tri par insertion. 
-%\item Tri fusion.
-%\item Tri par sélection. %+
-%\item Tri rapide.
-%\end{enumerate}
-%
-%\question{Quel est l'invariant de boucle qui correspond précisément à cet algorithme ?}
-%\begin{lstlisting}
-%nom: tri_insertion
-%
-%paramètre: tab, tableau de n entiers, n >= 2
-%
-%Traitement:
-%pour i allant de 2 à n:
-%    j = i
-%    tant que j > 1  et tab[j-1] > tab[j]:
-%        echanger(tab[j-1], tab[j])
-%        j = j-1
-%renvoyer tab
-%\end{lstlisting}
-%\begin{enumerate}
-%\item Tous les éléments d'indice compris entre 0 et i sont triés et les éléments d'indice supérieurs ou égal à i leurs sont tous supérieurs.
-%\item Tous les éléments d'indice supérieur ou égal à i sont triés par ordre croissant.
-%\item Tous les éléments d'indice compris entre 0 et i sont triés, on ne peut rien dire sur les éléments d'indice supérieur ou égal à i. %+
-%\item Tous les éléments d'indice supérieur ou égal à i sont non triés par ordre croissants.
-%\end{enumerate}
-%
-%\question{Parmi les propositions suivantes, quelle est celle qui ne correspond pas à une méthode de tri ?}
+%\question{Laquelle de ces listes de chaînes de caractères est triée en ordre croissant ?}
 %\begin{lstlisting}
 %\end{lstlisting}
 %\begin{enumerate}
-%\item Par sélection.
-%\item Par insertion.
-%\item Par rotation. %+
-%\item Par fusion.
+%\item \texttt{['12','142','21','8']}. %+
+%\item \texttt{['8','12','142','21']}.
+%\item \texttt{['8','12','21','142']}.
+%\item \texttt{['12','21','8','142']}.
 %\end{enumerate}
+%
+%\question{Quelle est la valeur de la variable \texttt{table} après exécution du programme Python suivant ?}
+%\begin{lstlisting}
+%table = [12, 43, 6, 22, 37]
+%for i in range(len(table) - 1):
+%    if table [i] > table [i+1] :
+%        table [i] ,table [i+1] = table [i+1] ,table [i]
+%\end{lstlisting}
+%\begin{enumerate}
+%\item \texttt{[12, 6, 22, 37, 43]}.%+
+%\item \texttt{[6, 12, 22, 37, 43]}.
+%\item \texttt{[43, 12, 22, 37, 6]}.
+%\item \texttt{[43, 37, 22, 12, 6]}.
+%\end{enumerate}
+%
+%\question{Un algorithme cherche la valeur maximale d'une liste non triée de taille $n$. Combien de temps mettra cet algorithme sur une liste de taille $2n$ ?}
+%
+%\begin{enumerate}
+%\item Le même temps que sur la liste de taille n si le maximum est dans la première moitié de la liste.
+%\item On a ajouté $n$ valeurs, l'algorithme mettra donc n fois plus de temps que sur la liste de taille $n$.
+%\item Le temps sera simplement doublé par rapport au temps mis sur la liste de taille $n$.%+
+%\item On ne peut pas savoir, tout dépend de l'endroit où est le maximum.
+%\end{enumerate}
+%
+%\question{Quel est le coût en temps dans le pire des cas du tri par insertion ?}
+%
+%\begin{enumerate}
+%\item $\mathcal{O}(n)$.
+%\item $\mathcal{O}\left(n^2\right)$.%+
+%\item $\mathcal{O}\left(2^n\right)$.
+%\item $\mathcal{O}\left(\log n\right)$.
+%\end{enumerate}
+%
+%\end{multicols}
+%
+%%\question{On souhaite écrire une fonction \texttt{tri\_selection(t)}, qui trie le tableau \texttt{t} dans l'ordre croissant : parmi les 4 programmes suivants, lequel est correct ?}
+%%\begin{lstlisting}
+%%def tri_selection(t) :
+%%     for i in range (len(t)-1) :
+%%          min = i		
+%%          for j in range(i+1,len(t)):
+%%               if t[j] < t[min]:
+%%                    min = j
+%%          tmp = t[i]
+%%          t[i] = t[min]
+%%          t[min] = tmp
+%%def tri_selection(t) :
+%%     for i in range (len(t)-1) :
+%%          min = i		
+%%          for j in range(i+1,len(t)-1):
+%%               if t[j] < t[min]:
+%%                    min = j
+%%          tmp = t[i]
+%%          t[i] = t[min]
+%%          t[min] = tmp
+%%def tri_selection(t) :
+%%     for i in range (len(t)-1) :
+%%          min = i		
+%%          for j in range(i+1,len(t)):
+%%               if t[j] < min:
+%%                    min = j
+%%          tmp = t[i]
+%%          t[i] = t[min]
+%%          t[min] = tmp
+%%def tri_selection(t) :
+%%     for i in range (len(t)-1) :
+%%          min = i		
+%%          for j in range(i+1,len(t)):
+%%               if t[j] < t[min]:
+%%                    min = j
+%%          tmp = t[i]
+%%          t[min] = t[i]
+%%          t[i] = tmp
+%%\end{lstlisting}
+%%\begin{enumerate}
+%%\item Fonction 1. %+
+%%\item Fonction 2.
+%%\item Fonction 3.
+%%\item Fonction 4.
+%%\end{enumerate}
+%%
+%%\question{De quel type de tri s'agit-il ?}
+%%\begin{lstlisting}
+%%def tri(lst):
+%%    for i in range(1,len(lst)):
+%%        valeur = lst[i]
+%%        j = i
+%%        while j>0 and lst[j-1]>valeur:
+%%            lst[j]=lst[j-1]
+%%            j = j-1
+%%        lst[j]=valeur
+%%\end{lstlisting}
+%%\begin{enumerate}
+%%\item Tri par insertion. %+
+%%\item Tri fusion.
+%%\item Tri par sélection.
+%%\item Tri à bulles.
+%%\end{enumerate}
+%%
+%%\question{De quel type de tri s'agit-il ?}
+%%\begin{lstlisting}
+%%def tri(lst):
+%%    nb = len(lst)
+%%    for i in range(0,nb):    
+%%        ind_plus_petit = i
+%%        for j in range(i+1,nb) :
+%%            if lst[j] < lst[ind_plus_petit] :
+%%                ind_plus_petit = j
+%%        if ind_plus_petit is not i :
+%%            temp = lst[i]
+%%            lst[i] = lst[ind_plus_petit]
+%%            lst[ind_plus_petit] = temp
+%%\end{lstlisting}
+%%\begin{enumerate}
+%%\item Tri par insertion. 
+%%\item Tri fusion.
+%%\item Tri par sélection. %+
+%%\item Tri à bulles.
+%%\end{enumerate}
+%%
+%%\question{Un algorithme est en complexité quadratique. Codé en python, son exécution pour des données de taille 100 prend 12 millisecondes. Si l'on fournit des données de taille 200 au programme, on peut s'attendre à un temps d'exécution d'environ :}
+%%\begin{lstlisting}
+%%\end{lstlisting}
+%%\begin{enumerate}
+%%\item 48 millisecondes. %+
+%%\item 24 millisecondes.
+%%\item 12 millisecondes.
+%%\item 96 millisecondes.
+%%\end{enumerate}
+%%
+%%\question{À quel type tri correspond l'invariant de boucle ci-dessous :}
+%%\begin{itemize}
+%%\item tous les éléments d'indices 0 à $i-1$ sont déjà triés,
+%%\item tous les éléments d'indices $i$ à $n$ sont de valeurs supérieures à ceux de la partie triée.
+%%\end{itemize}
+%%\begin{enumerate}
+%%\item Tri par insertion. 
+%%\item Tri fusion.
+%%\item Tri par sélection. %+
+%%\item Tri à bulles.
+%%\end{enumerate}
+%%
+%%\question{Quel est l'invariant de boucle qui correspond précisément à cet algorithme ?}
+%%
+%%On considère un algorithme de tri par sélection, dans lequel la fonction \texttt{echanger(tab[i], tab[j])}
+%%effectue l'échange des ième et jième valeurs du tableau \texttt{tab}.
+%%\begin{lstlisting}
+%%nom: tri_sélection
+%%
+%%paramètre: tab, tableau de n entiers, n>=2
+%%
+%%Traitement:
+%%pour i allant de 1 à n-1:
+%%    pour j allant de i+1 à n:
+%%        si tab[j] < tab[i]:
+%%            echanger(tab[i], tab[j])
+%%renvoyer tab
+%%\end{lstlisting}
+%%\begin{enumerate}
+%%\item Tous les éléments d'indice supérieur ou égal à i sont triés par ordre croissante.
+%%\item Tous les éléments d'indice compris entre 0 et i sont triés et les éléments d'indice supérieurs ou égal à i leurs sont tous supérieurs.
+%%\item Tous les éléments d'indice supérieur ou égal à i sont non triés.
+%%\item Tous les éléments d'indice compris entre 0 et i sont triés, on ne peut rien dire sur les éléments d'indice supérieur ou égal à i.
+%%\end{enumerate}
+%%
+%%\question{Quel est le type de tri qui correspond à cet algorithme ?}
+%%\begin{lstlisting}
+%%nom: tri_mystere
+%%
+%%paramètre: tab, tableau de n entiers, non trié, non vide
+%%
+%%Traitement:
+%%pour i allant de 1 à n-1:
+%%    pour j allant de i+1 à n:
+%%        si tab[j] < tab[i]:
+%%            echanger(tab[i], tab[j])
+%%renvoyer tab
+%%\end{lstlisting}
+%%\begin{enumerate}
+%%\item Tri par insertion. 
+%%\item Tri fusion.
+%%\item Tri par sélection. %+
+%%\item Tri rapide.
+%%\end{enumerate}
+%%
+%%\question{Quel est l'invariant de boucle qui correspond précisément à cet algorithme ?}
+%%\begin{lstlisting}
+%%nom: tri_insertion
+%%
+%%paramètre: tab, tableau de n entiers, n >= 2
+%%
+%%Traitement:
+%%pour i allant de 2 à n:
+%%    j = i
+%%    tant que j > 1  et tab[j-1] > tab[j]:
+%%        echanger(tab[j-1], tab[j])
+%%        j = j-1
+%%renvoyer tab
+%%\end{lstlisting}
+%%\begin{enumerate}
+%%\item Tous les éléments d'indice compris entre 0 et i sont triés et les éléments d'indice supérieurs ou égal à i leurs sont tous supérieurs.
+%%\item Tous les éléments d'indice supérieur ou égal à i sont triés par ordre croissant.
+%%\item Tous les éléments d'indice compris entre 0 et i sont triés, on ne peut rien dire sur les éléments d'indice supérieur ou égal à i. %+
+%%\item Tous les éléments d'indice supérieur ou égal à i sont non triés par ordre croissants.
+%%\end{enumerate}
+%%
+%%\question{Parmi les propositions suivantes, quelle est celle qui ne correspond pas à une méthode de tri ?}
+%%\begin{lstlisting}
+%%\end{lstlisting}
+%%\begin{enumerate}
+%%\item Par sélection.
+%%\item Par insertion.
+%%\item Par rotation. %+
+%%\item Par fusion.
+%%\end{enumerate}
