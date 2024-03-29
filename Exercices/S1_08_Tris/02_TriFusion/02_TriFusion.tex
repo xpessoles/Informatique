@@ -1,4 +1,4 @@
-%\exer{Tri fusion d'une liste d'entiers}
+\section*{Tri fusion d'une liste d'entiers}
 %\setcounter{numques}{0}
 
 Le tri fusion d'une liste se base sur le principe suivant : 
@@ -8,7 +8,7 @@ Le tri fusion d'une liste se base sur le principe suivant :
 \item à partir de deux listes triées, on les fusionne en une seule liste en conservant l'ordre croissant.
 \end{enumerate}
 
-\question{Implémenter la fonction \texttt{separe(L : list) -> tuple[list,list]} renvoyant deux listes de longueurs quasi-égales.}
+\question{Implémenter la fonction \lstinline{separe(L : list) -> tuple[list,list]} renvoyant deux listes de longueurs quasi-égales.}
 \ifprof
 \begin{lstlisting}
 def separe(L: list) -> tuple[list,list]:
@@ -19,17 +19,15 @@ def separe(L: list) -> tuple[list,list]:
 
 \question{Proposer 3 tests unitaires permettant de vérifier le bon fonctionnement de votre fonction.}
 
-\question{Implémenter la fonction \texttt{fusion(L1 : list, L2 : list) -> list} réalisant la fusion de deux listes triées. Pour cela on procèdera ainsi :}
-\itshape
+\question{Implémenter la fonction \lstinline{fusion(L1 : list, L2 : list) -> list} réalisant la fusion de deux listes triées. Pour cela on procèdera ainsi :
 \begin{enumerate}
 \item si une des listes est vides on renvoie l'autre;
 \item sinon : 
 \begin{enumerate}
-\item si \texttt{L1[0] <L2[0]} on fusionne, par récursivité, \texttt{L1[0]}, \texttt{L1[1:]} et \texttt{L2};
+\item si \lstinline{L1[0] < L2[0]} on fusionne, par récursivité, \lstinline{L1[0]}, \lstinline{L1[1:]} et \lstinline{L2};
 \item sinon, on réfléchit et on fusionne ce qu'il y a à fusionner ;).
 \end{enumerate}
-\end{enumerate}
-\normalshape
+\end{enumerate}}
 
 \ifprof
 \begin{lstlisting}
@@ -49,7 +47,7 @@ def fusion(L1: list, L2: list) -> list:
 \question{Proposer 3 tests unitaires permettant de vérifier le bon fonctionnement de votre fonction.}
 
 
-\question{Implémenter la fonction \texttt{tri\_fusion(L : list) -> list} réalisant par récursivité le tri de la liste \texttt{L}.}
+\question{Implémenter la fonction \lstinline{tri_fusion(L : list) -> list} réalisant par récursivité le tri de la liste \lstinline{L}.}
 
 \ifprof
 \begin{lstlisting}
@@ -61,3 +59,5 @@ def tri_fusion(L: list) -> list:
 \end{lstlisting}
 \else
 \fi
+
+

@@ -1,53 +1,17 @@
-\def\xxactivite{Cours}
+% !TEX spellcheck = fr_FR
+%\setchapterimage{.png}
+\setchapterpreamble[u]{\margintoc}
 
-\def\xxauteur{P. Bessonnat -- Xavier Pessoles}
-\fichefalse \proftrue \tdfalse \courstrue
-
-\def\xxnumchapitre{Chapitre 10 \vspace{.2cm}}
-
-\def\xxchapitre{Dictionnaires -- Mémo}
-
-\def\xxcompetences{%
-\textsl{%
-\textbf{Savoirs et compétences :}\\
-\begin{itemize}[label=\ding{112},font=\color{bleuxp}] 
-\item Dictionnaires.
-\end{itemize}
-}}
-
-\def\xxfigures{
-%\includegraphics[width=\linewidth]{fractale}
-%\\
-%\textit{Modèle du pilote hydraulique avec pilotage interactif.}
-}%figues de la page de garde
-
-
-\input{\repRel/Style/pagegarde_cours_minitoc}
-\setlength{\columnseprule}{.1pt}
-
-\vspace{2cm}
-\pagestyle{fancy}
-\thispagestyle{plain}
-
-%Thème : Tris.
-% 
-%Commentaires :
-%\begin{itemize}
-%\item algorithmique quadratique : tri par insertion, par sélection;
-%\item tri par partition-fusion;
-%\item tri par comptage.
-%\end{itemize}
-%\textit{On fait observer différentes caractéristiques (par exemple2 stable ou non, en place ou non, comparatif ou non ...).}
-%
+\chapter{Dictionnaires}
 
 
 
 \section{Introduction}
 
-Les dictionnaires sont composés d'un nombre fini d'éléments auxquels on peut accéder par une clé qui fait partie de l'élément.\\
+Les dictionnaires sont composés d'un nombre fini d'éléments auxquels on peut accéder par une clé qui fait partie de l'élément.
 Chaque élément est donc une paire : une clé et une valeur (\textit{key} et \textit{value} en anglais).\\
 Les dictionnaires ne sont pas ordonnés, on ne peut pas rechercher un élément à partir de sa position (indice) dans le dictionnaire mais seulement à partir de la clé.\\
-Comme les listes, ce sont des objets \textit{itérables} car on peut parcourir leurs éléments à l'aide d'une boucle \texttt{for}.
+Comme les listes, ce sont des objets \textit{itérables} car on peut parcourir leurs éléments à l'aide d'une boucle \lstinline{for}.
 
 
 \section{Syntaxe}
@@ -55,17 +19,16 @@ Comme les listes, ce sont des objets \textit{itérables} car on peut parcourir l
 \begin{itemize}
 \item Un dictionnaire python est une succession de paires d'objets séparées par une virgule, délimité par des accolades \{ et \}.
 \item Une paire est composée d'une clé et d'une valeur.% qui sont des objets de type quelconque (\texttt{integer}, \texttt{float}, \texttt{string}, \texttt{list}, \texttt{tuple}, \texttt{boolean}).
-\item Un dictionnaire est dit \underline{mutable} c'est-à-dire que l'on peut en modifier (voire en supprimer) un ou plusieurs éléments.
-\item Les clés du dictionnaire doivent être non mutable (les types \texttt{list} et \texttt{dict} sont interdits).
-\item Les valeurs du dictionnaire peuvent être des objets de type quelconque (\texttt{integer}, \texttt{float}, \texttt{string}, \texttt{list}, \texttt{tuple}, \texttt{boolean}).
+\item Un dictionnaire est dit \textbf{mutable} c'est-à-dire que l'on peut en modifier (voire en supprimer) un ou plusieurs éléments.
+\item Les clés du dictionnaire doivent être non mutable (les types \lstinline{list} et \lstinline{dict} sont interdits).
+\item Les valeurs du dictionnaire peuvent être des objets de type quelconque (\lstinline{integer}, \lstinline{float}, \lstinline{string}, \lstinline{list}, \lstinline{tuple}, \lstinline{boolean}).
 \end{itemize}
 
 \begin{center}
-\texttt{dico=\{cle1 : valeur1, cle2: valeur2  ,cle3 : valeur3,..., clen : valeurn\}\\}
+\texttt{dico=\{cle1 : valeur1, cle2 : valeur2, ... , clen : valeurn\}}
 \end{center}
 
-\begin{exemple}~\\
-
+\begin{exemple}
 \begin{itemize}
 \item \texttt{velo=\{'guidon': 1, 'roue': 2, 'derailleur': 21, 'frein': 2\}}
 \item \texttt{pikachu=\{'pokemon':'souris', 'taille': 0.4, 'poids': 6, 'type':'electrik', 'talent':['statik','paratonnerre']\}}
@@ -74,50 +37,43 @@ Comme les listes, ce sont des objets \textit{itérables} car on peut parcourir l
 \end{exemple}
 
 \section{Manipulation des dictionnaires}
-Le dictionnaire vide est désigné par \{\}.
+Le dictionnaire vide est désigné par \texttt{\{\}}.
 \subsection*{Création}
 La création d'un dictionnaire se fait en choisissant un nom et par les signes d'accolades
-\begin{python}
-mon\_dico=\{\}
-\end{python}
+\texttt{mon\_dico=\{\}}.
 
 \subsection*{Taille}
-La taille du dictionnaire est donnée par la fonction prédéfinie \texttt{length} : 
-\texttt{len(mon\_dico)}.
+La taille du dictionnaire est donnée par la fonction prédéfinie \lstinline{length} : 
+\lstinline{len(mon_dico)}.
 
 
 \subsection*{Ajout d'un élément ou modification d'une valeur}
-L'ajout d'un élément \texttt{clé:valeur} ou la modification d'une valeur si la clé correspondante existe ont la même syntaxe.
-
-\texttt{
-mon\_dico['classe']='PTSI'}
-\textit{Remarque} : La clé n'est pas modifiable (non mutable) alors que la valeur l'est.
+L'ajout d'un élément \texttt{clé:valeur} ou la modification d'une valeur si la clé correspondante existe ont la même syntaxe : \texttt{mon\_dico['classe']='PTSI'}. 
+%\textit{Remarque} : La clé n'est pas modifiable (non mutable) alors que la valeur l'est.
 
 \subsection*{Suppression d'un élément}
 La suppression d'un élément du dictionnaire est réalisée par la fonction \texttt{del} en précisant la clé de l'élément à supprimer. La paire \texttt{clé:valeur} est alors supprimée.
-\begin{python}
-del(mon\_dico['classe'])
-\end{python}
+\texttt{del(mon\_dico['classe'])}
+
 
 \subsection*{Lecture d'une valeur}
 
-\begin{python}
-pikachu['taille'] \# renvoie la valeur associée à la clé 'taille' du dictionnaire pikachu.
-\end{python}
-Cette instruction peut être associée à \texttt{print} pour afficher la valeur ou affectée à une variable.
+\begin{lstlisting}
+pikachu['taille'] # renvoie la valeur associée à la clé 'taille' du dictionnaire pikachu.
+\end{lstlisting}
+%Cette instruction peut être associée à \texttt{print} pour afficher la valeur ou affectée à une variable.
 
 \subsection*{Parcours du dictionnaire}
 On peut parcourir un dictionnaire par ses clés, ses valeurs ou ses éléments \texttt{clé:valeur}. Pour parcourir la totalité du dictionnaire, on utilise une boucle bornée \texttt{for}.
 
 
 \begin{center}
-\begin{tabular}{|l|p{7cm}|}\hline Instruction & Effet \\
+\begin{tabular}{lp{7cm}}
+\hline \textbf{Instruction} & \textbf{Effet} \\
 \hline
-\texttt {for cle in velo.keys():} & parcourt les clés du dictionnaire\\
-\hline
-\texttt {for valeur in velo.values():} & parcourt les valeurs du dictionnaire\\
-\hline
-\texttt {for cle,valeur in velo.items():} & parcourt les éléments du dictionnaire\\
+\texttt {for cle in velo.keys():} & Parcours des clés du dictionnaire\\
+\texttt {for valeur in velo.values():} & Parcours des valeurs du dictionnaire\\
+\texttt {for cle,valeur in velo.items():} & Parcours des éléments du dictionnaire\\
 \hline
 \end{tabular}
 \end{center}
@@ -127,10 +83,11 @@ On peut parcourir un dictionnaire par ses clés, ses valeurs ou ses éléments \
 On peut récupérer les différentes clés ou les différentes valeurs du dictionnaire sous forme de liste.
 
 \begin{center}
-\begin{tabular}{|l|p{10cm}|}\hline Instruction & Effet \\
+\begin{tabular}{lp{7cm}}
+\hline \textbf{Instruction} & \textbf{Effet} \\
 \hline
 \texttt {LesCles=list(velo.keys())} & \texttt{['guidon','roue','derailleur','frein']} est affecté à \texttt{LesCles}\\
-\hline
+
 \texttt {LesValeurs=list(velo.values())} & \texttt{[1, 2, 21, 2]} est affecté à \texttt{LesValeurs}\\
 \hline
 \end{tabular}
@@ -141,10 +98,11 @@ On peut récupérer les différentes clés ou les différentes valeurs du dictio
 Pour vérifier qu'une clé existe ou non dans un dictionnaire, on utilise le terme d'appartenance \texttt{in}.
 
 \begin{center}
-\begin{tabular}{|l|p{11cm}|}\hline Instruction & Effet \\
+\begin{tabular}{lp{7cm}}
+\hline \textbf{Instruction} & \textbf{Effet} \\
 \hline
 \texttt{'guidon' in velo.keys()} & renvoie le booléen \texttt{True} si la clé 'guidon' est dans \texttt{velo}, \texttt{False} sinon\\
-\hline
+
 \texttt{'guidon' not in velo.keys()} & renvoie le booléen \texttt{False} si la clé 'guidon' est dans \texttt{velo}, \texttt{True} sinon\\
 \hline
 \end{tabular}
