@@ -1,35 +1,21 @@
-\def\xxactivite{Cours}
-
-\def\xxauteur{P. Bessonnat -- Xavier Pessoles}
-\fichefalse \proftrue \tdfalse \courstrue
-
-\def\xxnumchapitre{Chapitre 11 \vspace{.2cm}}
-
-\def\xxchapitre{Introduction aux graphes}
-
-\def\xxcompetences{%
-\textsl{%
-\textbf{Savoirs et compétences :}\\
-\begin{itemize}[label=\ding{112},font=\color{bleuxp}] 
+\setchapterimage{Fond_GRAPHE.jpg}
+\chapter*{Base des graphes} 
+ 
+\marginnote{
+\begin{itemize}
 \item Vocabulaire des graphes : graphe orienté, graphe non orienté. Sommet (ou nœud); arc, arête. Boucle. Degré (entrant et sortant). Chemin d’un sommet à un autre. Cycle. Connexité dans les graphes non orientés.
 \item Notations : graphe $G=(S,A)$, degrés $d(s)$ (pour un graphe non orienté), $d_{+}(s)$ et  $d_{-}(s)$ (pour un graphe orienté).
 \item Pondération d’un graphe. Étiquettes des arcs ou des arêtes d’un graphe. On motive l’ajout d’information à un graphe par des exemples
 concrets.
 \end{itemize}
-}}
+}
 
-\def\xxfigures{
-\includegraphics[width=4cm]{fig_00} \\
-\textit{Représentation ciculaire du métro parisien}
-}%figues de la page de garde
+\begin{marginfigure}
+\includegraphics[width=\linewidth]{fig_00} \\
+\caption{Représentation ciculaire du métro parisien}
+\end{marginfigure}%figues de la page de garde
 
 
-\input{\repRel/Style/pagegarde_cours_minitoc}
-\setlength{\columnseprule}{.1pt}
-
-\vspace{2cm}
-\pagestyle{fancy}
-\thispagestyle{plain}
 
 %Thème : Tris.
 % 
@@ -65,42 +51,42 @@ Les applications des graphes sont assez nombreuses :
 
 \section{Vocabulaire des graphes}
 
-\begin{defi}{Graphe}%\cite{ref_01}
+\begin{defi}[Graphe]%\cite{ref_01}
 Un graphe est un ensemble de \textbf{sommets} et  \textbf{relations} entre ces sommets.
 
 Lorsque deux sommets sont en relation, on dit qu'il existe une \textbf{arête} entre ces sommets.
 \end{defi}
 
-\begin{defi}{Graphe non orienté -- Arêtes}
+\begin{marginfigure}
+\includegraphics[width=\linewidth]{fig_02}
+
+\caption{Graphe non orienté \label{fig_02}}
+\end{marginfigure}
+
+
+\begin{defi}[Graphe non orienté -- Arêtes]
 Un graphe non orienté $G$ est un couple $G=(S,A)$, où $S$ est un ensemble fini de sommets (appelés aussi n\oe uds)  et où $A$ est un ensemble fini de paires ordonnées de sommets, appelées arêtes.
 
 On note $x - y$ l'arête $\{x,y\}$. $x$ et $y$ sont les deux extrémités de l'arête.
 \end{defi}
 
-\begin{defi}{Graphe orienté -- Arcs}\cite{ref_01}
+\begin{marginfigure}
+\includegraphics[width=\linewidth]{fig_03}
+
+\caption{Graphe orienté}
+\label{fig_03}
+\end{marginfigure}
+
+
+\begin{defi}[Graphe orienté -- Arcs]\cite{ref_01}
 Un graphe orienté $G$ est un couple $G=(S,A)$, où $S$ est un ensemble fini de sommets et où $A$ est un ensemble fini de paires ordonnées de sommets, appelées arcs.
 
 On note $x\to y$ l'arc $(x,y)$. $x$ est l'extrémité initiale de l'arc, $y$ est son extrémité terminale. On dit que $y$ est successeur de $x$ et que $x$ est prédécesseur de $y$. 
 \end{defi}
 
-\begin{exemple}~\\
-
-\begin{multicols}{2}
-\begin{figure}[H]
-\includegraphics[width=.8\linewidth]{fig_02}
-\captionsetup{justification=centering}
-\caption{Graphe non orienté \label{fig_02}}
-\end{figure}
 
 
-\begin{figure}[H]
-\includegraphics[width=.8\linewidth]{fig_03}
-\captionsetup{justification=centering}
-\caption{Graphe orienté}
-\end{figure}
-\end{multicols}
 
-\end{exemple}
 
 \begin{rem}
 On peut noter le graphe non orienté $G=\left(\llbracket 1,6\rrbracket,E\right)$ où $E=\left(
@@ -110,7 +96,7 @@ On peut noter le graphe orienté $G=\left(\llbracket 1,6\rrbracket,E\right)$ où
 \left(1,2\right),\left(2,3\right),\left(3,4\right),\left(1,4\right),\left(1,3\right),\left(1,5\right),\left(1,6\right)\right)$ désigne les arcs. 
 \end{rem}
 
-\begin{defi}{Adjacence}
+\begin{defi}[Adjacence]
 Deux arcs (resp. arêtes) d'un graphe orienté (resp. non orienté) sont dits adjacents s'ils ont au moins une extrémité commune. 
 
 Deux sommets d'un graphe non orienté sont dits adjacents s'il existe une arête les joignant. 
@@ -119,7 +105,7 @@ Dans un graphe orienté, le sommet $y$ est dit adjacent au sommet $x$ s'il exist
 \end{defi}
 
 
-\begin{defi}{Graphes pondérés}
+\begin{defi}[Graphes pondérés]
 Étiqueter les arêtes d’un graphe $(S, A)$ (orienté ou non), c’est se donner une fonction
 $f : A \to V$ (où $V$ est un ensemble de valeurs). On dit qu’un graphe est pondéré si ses arêtes sont étiquetées par des nombres. On parlera alors du poids d’une arête.
 \end{defi}
@@ -132,62 +118,59 @@ $f : A \to V$ (où $V$ est un ensemble de valeurs). On dit qu’un graphe est po
 
 \section{Chemins}
 
-\begin{defi}{Chemin dans un graphe} \\
 
-\noindent\begin{minipage}{.7\linewidth}
+\begin{marginfigure}
+\includegraphics[width=\linewidth]{chemin}
+\end{marginfigure}
+
+\begin{defi}[Chemin dans un graphe]
+
 On appelle chemin dans un graphe une suite finie $\{S_0, \ldots , S_{n-1}\}$ de $n$ sommets tels que pour tout
 $i \in \llbracket 0, n-1\llbracket$, une arête relie $S_i$ à $S_{i+1}$. On dit que ce chemin relie le sommet de départ $S_0$ au sommet de fin $S_{n-1}$. 
 
 Dans le cas d'un graphe non orienté, les arêtes sont notées $\{S_i, S_{i+1}\}$ pour $i \in \llbracket 0, n-1\llbracket$.
 
 Dans le cas d'un graphe orienté, les arcs sont notées $(S_i, S_{i+1})$ pour $i \in \llbracket 0, n-1\llbracket$.
-\end{minipage}\hfill
-\begin{minipage}{.25\linewidth}
-\includegraphics[width=\linewidth]{chemin}
-\end{minipage}
+
 \end{defi}
 
-\begin{defi}{Chemin fermé} \\
 
-\noindent\begin{minipage}{.7\linewidth}
+
+\begin{defi}[Chemin fermé]
 Chemin dont le sommet de départ et le sommet d'arrivée sont identiques.
-\end{minipage}\hfill
-\begin{minipage}{.25\linewidth}
-\includegraphics[width=\linewidth]{cycle_simple}
-\end{minipage}
-
 \end{defi}
 
-\begin{defi}{Chemin élémentaire}
 
-\noindent\begin{minipage}{.7\linewidth}
-Chemin n'empruntant que des arêtes distinctes.
-\end{minipage} \hfill
-\begin{minipage}{.25\linewidth}
+\begin{marginfigure}
 \includegraphics[width=\linewidth]{chemin}
-\end{minipage}
+\end{marginfigure}
+
+\begin{defi}[Chemin élémentaire]
+
+Chemin n'empruntant que des arêtes distinctes.
+
 \end{defi}
 
-\begin{defi}{Chemin simple}
+\begin{defi}[Chemin simple]
 Chemin tel que les $n - 2$ sommets intermédiaires si, pour $i \in \llbracket 1, n-1\llbracket$ soient
 deux à deux distincts et tous distincts du sommet de départ $S_0$ et du sommet d’arrivée $S_{n-1}$ et tels
 que ce chemin n’est pas de la forme $a, b, a$ dans le cas non-orienté.
 \end{defi}
 
-\begin{defi}{Circuit}
+\begin{defi}[Circuit]
 Chemin fermé de longueur non nulle.
 \end{defi}
 
 
-\begin{defi}{Cycle}
+\begin{defi}[Cycle]
 Circuit élémentaire (chemin fermé de longueur non nulle dont toutes les arêtes sont distinctes).
 \end{defi}
 
-\begin{defi}{Cycle simple} 
+\begin{defi}[Cycle simple]
 Chemin fermé et simple de longueur non nulle.
 \end{defi}
 
-\begin{defi}{Chemin et cycle eulérien}
+\begin{defi}[Chemin et cycle eulérien]
 
 \noindent\begin{minipage}{.55\linewidth}
 Chemin (resp. cycle) contenant une et une seule fois toutes les arêtes du graphe.
@@ -248,26 +231,24 @@ Pour certains auteurs, un chemin élémentaire est ce que nous avons appelé un 
 %\end{defi}
 
 
+\begin{marginfigure}
+\centering
+\includegraphics[width=\linewidth]{connexite}
+%\captionsetup{justification=centering}
+\caption{Graphe ayant 2 composantes connexes}
+\end{marginfigure}
 
-\begin{defi}{Connexité dans les graphes non orientés}
+\begin{defi}[Connexité dans les graphes non orientés]
 Un graphe $G=(S,A)$ est dit connexe si, pour deux sommets quelconques $S_i$ et $S_j$ de $S$, il existe un chemin de $S_i$ à $S_j$.
 \end{defi}
 
-\begin{exemple}
-\begin{figure}[H]
-\centering
-\includegraphics[height = 4cm]{connexite}
-\captionsetup{justification=centering}
-\caption{Graphe ayant 2 composantes connexes}
-\end{figure}
-\end{exemple}
 
 \subsection{Notations}
-\begin{defi}{Degré d'un sommet}
+\begin{defi}[Degré d'un sommet]
 On appelle degré d'un sommet $s$ et on note $d\left(s\right)$ le nombres d'arcs (ou d'arêtes) dont $s$ est une extrémité.
 \end{defi}
 
-\begin{defi}{Degré entrant et sortant}
+\begin{defi}[Degré entrant et sortant]
 On note $s$ le sommet d'un graphe orienté. On note : 
 \begin{itemize}
 \item $d_{+}\left(s\right)$ le demi-degré extérieur de $s$, c'est-à-dire le nombre d'arcs ayant leur extrémité initiale en $s$ (ces arcs sont dits incidents à $s$ vers l'extérieur);
@@ -278,56 +259,59 @@ Dans ce cas, on a  $d\degres\left(s\right)=d_{-}\left(s\right)+d_{+}\left(s\righ
 \end{defi}
 
 
-\begin{exemple}~\\
-
-\begin{multicols}{2}
-\begin{figure}[H]
-\centering
-\includegraphics[width=.8\linewidth]{fig_04}
-\captionsetup{justification=centering}
+\begin{marginfigure}
+\includegraphics[width=\linewidth]{fig_04}
 \caption{Graphe orienté \label{fig_04}}
-\end{figure}
+\end{marginfigure}
 
+
+\begin{exemple}
 \begin{itemize}
 \item $d_{-}\left(S_1\right)=3$.
 \item $d_{+}\left(S_1\right)=4$.
 \item $d\degres\left(S_1\right)=7$.
 \end{itemize}
-\end{multicols}
-
 \end{exemple}
+
+
 
 \section{Implémentation des graphes}
 
 \subsection{Liste d'adjacence}
-\begin{defi}{Liste d'adjacence}
+\begin{defi}[Liste d'adjacence]
 Soit un graphe de $n$ sommets d'indices $i \in \llbracket 0, n-1\rrbracket$. Pour implémenter le graphe, on utilise une liste \texttt{G} de taille $n$ pour laquelle, \texttt{G[i]} est la liste des voisins de \texttt{i}.
 \end{defi}
 \begin{rem}
 Cette implémentation est plutôt réservée au graphes << creux >>, c'est-à-dire ayant peu d'arêtes.
 \end{rem}
 
-\begin{exemple} ~\\
-\begin{minipage}[b]{.47\linewidth}
-\begin{center}
+\vspace{1cm}
+
+\begin{marginfigure}
 \includegraphics[width=.7\linewidth]{fig_05}
-\end{center}
+\caption{Graphe non orienté}
+\end{marginfigure}
+
+\begin{exemple}[Graphe non orienté]
 Dans ce cas $S_0$ est voisin de $S_1$, $S_5$ et $S_6$; donc \texttt{G[0]=[1,5,6]}. 
 $S_3$ est voisin de $S_2$ et $S_4$; donc \texttt{G[3]=[2,4]}.
 \begin{lstlisting}
-G = [[1,5,6],[0,2,6],[1,3],[2,4],[3,5],
-      [4,0],[1,0]]
+G = [[1,5,6],[0,2,6],[1,3],[2,4],[3,5], [4,0],[1,0]]
 \end{lstlisting}
-\end{minipage}\hfill
-\begin{minipage}[b]{.47\linewidth}
-\begin{center}
+\end{exemple}
+
+\vspace{1cm}
+
+\begin{marginfigure}
 \includegraphics[width=.7\linewidth]{fig_06}
-\end{center}
+\caption{Graphe orienté}
+\end{marginfigure}
+
+\begin{exemple} [Graphe  orienté]
 Dans ca cas, le graphe est orienté. La liste d'adjacence contient la liste des successeurs. Ainsi, les successeurs de $S_0$ sont $S_1$, $S_5$ et $S_6$; donc \texttt{G[0]=[1,5,6]}. $S_1$ n'a pas de successeur donc \texttt{G[1]=[]}.
 \begin{lstlisting}
 G = [[1,5,6],[],[1],[6],[3,5],[],[0,1]]
 \end{lstlisting}
-\end{minipage}
 \end{exemple}
 
 
@@ -343,7 +327,7 @@ G = {"S0":["S1","S5","S6"],"S1":[],"S2":["S1"],"S3":["S6"],"S4":["S3","S5"],"S5"
 \end{lstlisting}
 
 \subsection{Matrice d'adjacence}
-\begin{defi}{Matrice d'adjacence}
+\begin{defi}[Matrice d'adjacence]
 Soit un graphe de $n$ sommets d'indices $i \in \llbracket 0, n-1\rrbracket$ et $E$ l'ensemble des arêtes 
 (on notera $G=\left( \llbracket 0, n-1\rrbracket,E\right)$. Pour implémenter le graphe, on utilise la matrice d'adjacence carrée de taille $n$, $\mathcal{M}_n$ \texttt{G} de taille $n$ pour laquelle,
 $m_{i,j}=\left\{
@@ -360,18 +344,15 @@ Cette implémentation est plutôt réservée au graphes << denses >> ayant << be
 \end{rem}
 
 
-\begin{exemple} ~\\
-\begin{minipage}[b]{.47\linewidth}
-\begin{center}
+
+
+\begin{marginfigure}
 \includegraphics[width=.7\linewidth]{fig_05}
-\end{center}
+\end{marginfigure}
 
-On a dans ce cas 
-
+\begin{exemple} [Graphe non orienté]
 \footnotesize{$
-M = $
-
-$
+M =
 \begin{pmatrix}
 \texttt{False} & \texttt{True} & \texttt{False} & \texttt{False} & \texttt{False} & \texttt{True} & \texttt{True} \\
 \texttt{True} & \texttt{False} & \texttt{True} & \texttt{False} & \texttt{False} & \texttt{False} & \texttt{True} \\ 
@@ -380,12 +361,8 @@ $
 \texttt{False} & \texttt{False} & \texttt{False} & \texttt{True} & \texttt{False} & \texttt{True} & \texttt{False} \\
 \texttt{True} & \texttt{False} & \texttt{False} & \texttt{False} & \texttt{True} & \texttt{False} & \texttt{False} \\
 \texttt{True} & \texttt{True} & \texttt{False} & \texttt{False} & \texttt{False} & \texttt{False} & \texttt{False} \\
-\end{pmatrix}$}
-
-ou 
-
-\footnotesize{$
-M = 
+\end{pmatrix}
+=
 \begin{pmatrix}
 \texttt{0} & \texttt{1} & \texttt{0} & \texttt{0} & \texttt{0} & \texttt{1} & \texttt{1} \\
 \texttt{1} & \texttt{0} & \texttt{1} & \texttt{0} & \texttt{0} & \texttt{0} & \texttt{1} \\ 
@@ -395,20 +372,18 @@ M =
 \texttt{1} & \texttt{0} & \texttt{0} & \texttt{0} & \texttt{1} & \texttt{0} & \texttt{0} \\
 \texttt{1} & \texttt{1} & \texttt{0} & \texttt{0} & \texttt{0} & \texttt{0} & \texttt{0} \\
 \end{pmatrix}$}
+\end{exemple}
 
 
-\end{minipage}\hfill
-\begin{minipage}[b]{.47\linewidth}
-\begin{center}
+\begin{marginfigure}
 \includegraphics[width=.7\linewidth]{fig_06}
-\end{center}
-Dans ce cas, le graphe est orienté.
-On a dans ce cas 
+\end{marginfigure}
 
-\footnotesize{$
-M = $
 
-$
+\begin{exemple}  [Graphe orienté]
+
+\footnotesize{
+$M =
 \begin{pmatrix}
 \texttt{False} & \texttt{True} & \texttt{False} & \texttt{False} & \texttt{False} & \texttt{True} & \texttt{True} \\
 \texttt{False} & \texttt{False} & \texttt{False} & \texttt{False} & \texttt{False} & \texttt{False} & \texttt{False} \\ 
@@ -417,11 +392,8 @@ $
 \texttt{False} & \texttt{False} & \texttt{False} & \texttt{True} & \texttt{False} & \texttt{True} & \texttt{False} \\
 \texttt{False} & \texttt{False} & \texttt{False} & \texttt{False} & \texttt{False} & \texttt{False} & \texttt{False} \\
 \texttt{True} & \texttt{True} & \texttt{False} & \texttt{False} & \texttt{False} & \texttt{False} & \texttt{False} \\
-\end{pmatrix}$}
-
-ou 
-\footnotesize{$
-M =
+\end{pmatrix}
+=
 \begin{pmatrix}
 \texttt{0} & \texttt{1} & \texttt{0} & \texttt{0} & \texttt{0} & \texttt{1} & \texttt{1} \\
 \texttt{0} & \texttt{0} & \texttt{0} & \texttt{0} & \texttt{0} & \texttt{0} & \texttt{0} \\ 
@@ -432,8 +404,12 @@ M =
 \texttt{1} & \texttt{1} & \texttt{0} & \texttt{0} & \texttt{0} & \texttt{0} & \texttt{0} \\
 \end{pmatrix}$}
 
-\end{minipage}
 \end{exemple}
+
+
+
+
+
 
 
 \begin{rem}
@@ -582,13 +558,13 @@ Ainsi, si un algorithme est linéaire en la taille du graphe, on pourra utilisé
 \end{rem}
 
 \subsection{Formule des degrés}
-\begin{defi}{Formule des degrés}
+\begin{defi}[Formule des degrés]
 Soit un graphe $G=\left(V,E\right)$, alors : $\displaystyle{\Sigma_{v \in V}} \text{deg}(v) = 2|E|$.
 \end{defi}
 
 \subsection{Graphe complet}
 
-\begin{defi}{Graphe complet}
+\begin{defi}[Graphe complet]
 Un graphe complet est un graphe possédant toutes les arêtes possibles. 
 \end{defi}
 
@@ -602,10 +578,9 @@ Un graphe complet est un graphe possédant toutes les arêtes possibles.
 
 \subsection{Matrices d'adjacences}
 
-\begin{minipage}[t]{.47\linewidth}
-\begin{center}
+
 \textbf{Avantages}
-\end{center}
+
 \begin{itemize}
 \item Le test d’adjacence de deux sommets se fait en temps constant.
 \item Dans le cas d’un graphe orienté, obtenir les prédécesseurs n’est pas plus compliqué (ni plus coûteux)
@@ -614,26 +589,21 @@ que d’obtenir les successeurs.
 %\item Il est possible de n’utiliser qu’un bit par coefficient de la matrice : dans le cas d’un graphe dense,
 %une telle représentation est donc très compacte.
 \end{itemize}
-\end{minipage}
-\hfill
-\begin{minipage}[t]{.47\linewidth}
-\begin{center}
+
 \textbf{Inconvénients}
 \begin{itemize}
 \item Ajouter ou supprimer un sommet nécessite un temps proportionnel à $n^2$.
 \item Pour récupérer les voisins/successeurs d’un nœud, il faut parcourir toute la ligne de la matrice :
-l’opération se fait donc en$\mathcal{O}(n)$\footnote{$\Theta(n)$}, ce qui est regrettable si le degré sortant du noeud est petit devant $n$.
+l’opération se fait donc en $\mathcal{O}(n)$\sidenote{$\Theta(n)$}, ce qui est regrettable si le degré sortant du noeud est petit devant $n$.
 \item On consomme une mémoire proportionnelle à $|V|^2$, même quand la taille du graphe est de l’ordre de $n$ (graphe creux).
 \end{itemize}
-\end{center}
-\end{minipage}
+
 
 \subsection{Listes d'adjacences}
 
-\begin{minipage}[t]{.47\linewidth}
-\begin{center}
+
+
 \textbf{Avantages}
-\end{center}
 \begin{itemize}
 \item La mémoire utilisée est de l’ordre de $|E| + |V|$, ce qui est nettement mieux que $|V|^2$ si le graphe est
 creux.
@@ -642,10 +612,7 @@ au degré sortant du noeud.% (et pas à $|V|$).
 \item Ajouter un noeud peut normalement se faire en temps $|V|$ (si l’ajout n’impose pas de renuméroter
 les noeuds déjà présents).
 \end{itemize}
-\end{minipage}
-\hfill
-\begin{minipage}[t]{.47\linewidth}
-\begin{center}
+
 \textbf{Inconvénients}
 \begin{itemize}
 %\item  Si l’on a besoin d’un accès en temps raisonnable aux prédécesseurs d’un noeud (dans le cas orienté),
@@ -660,8 +627,9 @@ degrés des nœuds impactés.
 \item  Supprimer un noeud n’est pas pratique : le plus simple est de reconstruire entièrement le graphe (en
 un temps $\mathcal{O}\left(|E| + |V|\right)$).
 \end{itemize}
-\end{center}
-\end{minipage}
+
+
+\newpage
 
 \section{Applications}
 
@@ -750,11 +718,11 @@ plan1= [[5,4] ,
 \draw (A1)--(A2)--(A3) -- (A4) -- (A5) --(A2);
 \draw (A5)--(A3);
 \draw (-3,-1) node[above] {Plan1} ;
-\node[sommet] (B1) at (8,-1) {1};
-\node[sommet] (B2) at (8,1) {2};
-\node[sommet] (B3) at (10,1) {3};
-\node[sommet] (B4) at (10,-1) {4};
-\node[sommet] (B5) at (12,-1) {5};
+\node[sommet] (B1) at (4,-1) {1};
+\node[sommet] (B2) at (4,1) {2};
+\node[sommet] (B3) at (6,1) {3};
+\node[sommet] (B4) at (6,-1) {4};
+\node[sommet] (B5) at (8,-1) {5};
 \draw (6,0) node[above] {Plan2} ;
 \draw (B1) -- (B2) -- (B3) ;
 \draw (B2) -- (B4) -- (B5) ; 
