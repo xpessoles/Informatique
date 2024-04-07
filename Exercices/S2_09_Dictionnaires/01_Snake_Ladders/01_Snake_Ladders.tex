@@ -1,7 +1,7 @@
 
-\section{Snakes and ladders : le jeu}
+\section*{Snakes and ladders : le jeu}
 
-\textit{Extrait du travail de T. Kovaltchouk - UPSTI}
+\marginnote{Extrait du travail de T. Kovaltchouk - UPSTI}
 
 %\noindent \textbf{Notes}~: les importations des modules suivantes sont à réaliser~: \\
 %\texttt{
@@ -10,17 +10,17 @@
 %import numpy as np
 %}
 
-\subsection{Présentation du jeu}
+\subsection*{Présentation du jeu}
 
 Le jeu \emph{serpents et échelles} est un jeu de société où on espère monter les échelles en évitant de trébucher sur les serpents. Il provient d'Inde et est utilisé pour illustrer l'influence des vices et des vertus sur une vie.
 
-\begin{figure}[h]
-	\begin{center}
-		\includegraphics[width=0.6\linewidth]{snakesAndLadders}
-	\end{center}
+\begin{marginfigure}%[h]
+	%\begin{center}
+		\includegraphics[width=\linewidth]{snakesAndLadders.png}
+	%\end{center}
 	\caption{Exemple d'un plateau de serpents et échelles}
 	\label{fig:1}
-\end{figure}
+\end{marginfigure}
 
 \paragraph*{Le plateau}
 
@@ -45,7 +45,7 @@ Le jeu \emph{serpents et échelles} est un jeu de société où on espère monte
 
 On utilisera les notations suivantes pour les complexités~: $\indice{N}{cases}$, le nombre de cases du plateau (100), et $\indice{N}{SeE}$ la somme du nombre de serpents et du nombre d'échelle (16 dans notre exemple).
 
-\subsection{Simulation du jeu}
+\subsection*{Simulation du jeu}
  
 \question{\'Ecrire une fonction \texttt{lancerDe() -> int} qui renvoie un nombre entier compris entre 1 et 6 en utilisant une fonction du module \texttt{random}. Vous pourrez vous aider des documentations en annexe.}
 
@@ -86,7 +86,7 @@ dSeE = {  1: 38,  4: 14,  9: 31, 17:  7, 21: 42, 28: 84, 51: 67, 54: 34,
 
 
 %\FloatBarrier
-\subsection{Plus court chemin}
+\subsection*{Plus court chemin}
 
 On souhaite, dans cette partie, utiliser un algorithme glouton pour trouver la partie la plus courte. 
 
@@ -136,66 +136,65 @@ randint(a, b) method of random.Random instance
 choice(seq) method of random.Random instance
     Choose a random element from a non-empty sequence.
 \end{lstlisting}
-
-\subsection*{Complexité des opérations sur les listes et dictionnaires}
-
-\paragraph*{Principales opérations sur les listes}
-
-\texttt{n}, longueur de la liste \texttt{L}, \texttt{k}, un indice valide en négatif (\texttt{1} à \texttt{n}).
-
-\begin{longtable}{|m{9cm}|m{2.1cm}|} \hline
-	\bf \centering Opération & \bf \centering Moyen \tabularnewline
-	\hline
-	\endhead
-	Longueur (\texttt{len(L)}) &  $O(1)$ \tabularnewline
-	\hline
-	Accès en lecture d'un élément &  $O(1)$ \tabularnewline
-	\hline
-	Accès en écriture d'un élément &  $O(1)$ \tabularnewline
-	\hline
-	Copie (\texttt{L.copy()} ou \texttt{L[:]}) & $O(n)$ \tabularnewline
-	\hline
-	Ajout (\texttt{L.append(elt)} ou \texttt{L+=[elt]}) & $O(1)$ \tabularnewline
-	\hline
-	Extension (\texttt{L1.extend(L2)} ou \texttt{L1+=L2}) & $O(n_2)$ \tabularnewline
-	\hline
-	Concaténation (\texttt{L1 + L2}) &  $O(n_1 + n_2)$ \tabularnewline
-	\hline
-	Test de présence (\texttt{elt in L}) & $O(n)$ \tabularnewline
-	\hline
-	Désempiler dernier (\texttt{L.pop()}) &  $O(1)$ \tabularnewline
-	\hline
-	Désempiler autre (\texttt{L.pop(-k)}) &  $O(k)$ \tabularnewline
-	\hline
-	Maximum ou minimum (\texttt{max(L)} et \texttt{min(L)}) &  $O(n)$ \tabularnewline
-	\hline
-	Tri (\texttt{L.sort()} ou \texttt{sorted(L)}) &  $O(n \log(n))$ \tabularnewline
-	\hline
-\end{longtable}
-
-\paragraph*{Principales opérations sur les dictionnaires}
-
-\texttt{n}, longueur du dictionnaire \texttt{d}, \texttt{k}, une clé du dictionnaire.
-
-\begin{longtable}{|m{9cm}|m{2.1cm}|} \hline
-	\bf \centering Opération & \bf \centering Moyen \tabularnewline
-	\hline
-	\endhead
-	Longueur (\texttt{len(d)}) &  $O(1)$ \tabularnewline
-	\hline
-	Accès en lecture d'un élément (\texttt{x = d[k]})  &  $O(1)$ \tabularnewline
-	\hline
-	Accès en écriture d'un élément (\texttt{d[k] = x}) &  $O(1)$ \tabularnewline
-	\hline
-	Copie (\texttt{d.copy()}) & $O(n)$ \tabularnewline
-	\hline
-	Ajout (\texttt{d[k] = x} la première fois) & $O(1)$ \tabularnewline
-	\hline
-	Test de présence (\texttt{k in d}) & $O(1)$ \tabularnewline
-	\hline
-	Retrait d'un élément (\texttt{del d[k]} ou \texttt{d.pop(k)}) & $O(1)$ \tabularnewline
-	\hline
-\end{longtable}
+%
+%\subsection*{Complexité des opérations sur les listes et dictionnaires}
+%
+%\paragraph*{Principales opérations sur les listes}
+%
+%\texttt{n}, longueur de la liste \texttt{L}, \texttt{k}, un indice valide en négatif (\texttt{1} à \texttt{n}).
+%
+%\begin{tabular}{|m{9cm}|m{2.1cm}|} \hline
+%	Opération & Moyen \\
+%	\hline
+%	
+%	Longueur (\texttt{len(L)}) &  $O(1)$ \\
+%	\hline
+%	Accès en lecture d'un élément &  $O(1)$ \\
+%	\hline
+%	Accès en écriture d'un élément &  $O(1)$ \\
+%	\hline
+%	Copie (\texttt{L.copy()} ou \texttt{L[:]}) & $O(n)$ \\
+%	\hline
+%	Ajout (\texttt{L.append(elt)} ou \texttt{L+=[elt]}) & $O(1)$ \\
+%	\hline
+%	Extension (\texttt{L1.extend(L2)} ou \texttt{L1+=L2}) & $O(n_2)$ \\
+%	\hline
+%	Concaténation (\texttt{L1 + L2}) &  $O(n_1 + n_2)$ \\
+%	\hline
+%	Test de présence (\texttt{elt in L}) & $O(n)$ \\
+%	\hline
+%	Désempiler dernier (\texttt{L.pop()}) &  $O(1)$ \\
+%	\hline
+%	Désempiler autre (\texttt{L.pop(-k)}) &  $O(k)$ \\
+%	\hline
+%	Maximum ou minimum (\texttt{max(L)} et \texttt{min(L)}) &  $O(n)$ \\
+%	\hline
+%	Tri (\texttt{L.sort()} ou \texttt{sorted(L)}) &  $O(n \log(n))$ \\
+%	\hline
+%\end{tabular}
+%
+%\paragraph*{Principales opérations sur les dictionnaires}
+%
+%\texttt{n}, longueur du dictionnaire \texttt{d}, \texttt{k}, une clé du dictionnaire.
+%
+%\begin{tabular}{|m{9cm}|m{2.1cm}|} \hline
+%	 Opération & Moyen \\
+%	\hline
+%	Longueur (\texttt{len(d)}) &  $O(1)$ \\
+%	\hline
+%	Accès en lecture d'un élément (\texttt{x = d[k]})  &  $O(1)$ \\
+%	\hline
+%	Accès en écriture d'un élément (\texttt{d[k] = x}) &  $O(1)$ \\
+%	\hline
+%	Copie (\texttt{d.copy()}) & $O(n)$ \\
+%	\hline
+%	Ajout (\texttt{d[k] = x} la première fois) & $O(1)$ \\
+%	\hline
+%	Test de présence (\texttt{k in d}) & $O(1)$ \\
+%	\hline
+%	Retrait d'un élément (\texttt{del d[k]} ou \texttt{d.pop(k)}) & $O(1)$ \\
+%	\hline
+%\end{tabular}
 
  
 
