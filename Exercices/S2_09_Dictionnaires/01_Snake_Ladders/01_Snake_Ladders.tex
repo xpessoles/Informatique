@@ -4,7 +4,7 @@
 
 
 %\noindent \textbf{Notes}~: les importations des modules suivantes sont à réaliser~: \\
-%\texttt{
+%\lstinline{
 %import random as r \\
 %import math as m \\ 
 %import numpy as np
@@ -47,10 +47,23 @@ On utilisera les notations suivantes pour les complexités~: $\indice{N}{cases}$
 
 \subsection*{Simulation du jeu}
  
-\question{\'Ecrire une fonction \texttt{lancerDe() -> int} qui renvoie un nombre entier compris entre 1 et 6 en utilisant une fonction du module \texttt{random}. Vous pourrez vous aider des documentations en annexe.}
+% \marginnote{
+%\texttt{randint(a, b)} method of random.Random instance
+%    Return random integer in range \texttt{[a, b]}, including both end points.
+%	
+%\texttt{choice(seq)} method of \texttt{random.Random} instance
+%    Choose a random element from a non-empty sequence.}
+
+ \marginnote{\texttt{randint(a, b)} method of random.Random instance
+   Return random integer in range \texttt{[a, b]}, including both end points.}
+   
+   	
+\marginnote{\texttt{choice(seq)} method of \texttt{random.Random} instance
+    Choose a random element from a non-empty sequence.}
+\question{\'Ecrire une fonction \lstinline{lancerDe() -> int} qui renvoie un nombre entier compris entre 1 et 6 en utilisant une fonction du module \lstinline{random}.}
 
 
-Les serpents et les échelles sont représentés par un dictionnaire \texttt{dSeE} tel que, pour une case de départ numérotée \texttt{i}, \texttt{dSeE[i]} donne le numéro de la case d'arrivée.
+Les serpents et les échelles sont représentés par un dictionnaire \lstinline{dSeE} tel que, pour une case de départ numérotée \lstinline{i}, \lstinline{dSeE[i]} donne le numéro de la case d'arrivée.
 
 Avec l'exemple de la figure 1, on a~: 
 \begin{lstlisting}
@@ -58,7 +71,7 @@ dSeE = {  1: 38,  4: 14,  9: 31, 17:  7, 21: 42, 28: 84, 51: 67, 54: 34,
          62: 19, 64: 60, 71: 91, 80: 99, 87: 24, 93: 73, 95: 75, 98: 79}
 \end{lstlisting}
 
-\question{\'Ecrire la fonction \texttt{caseFuture(case: int) -> int} qui prend en argument le numéro de la case et qui renvoie le numéro de la case où va se trouver le joueur en atterrissant sur la case numérotée \texttt{case}. Par exemple, \texttt{caseFuture(5)} renvoie 5 (c'est un numéro de case stable), \texttt{caseFuture(1)} renvoie 38 (c'est un numéro de case avec échelle) et \texttt{caseFuture(17)} renvoie 7 (c'est un numéro de case avec une tête de serpent).}
+\question{\'Ecrire la fonction \lstinline{caseFuture(case: int) -> int} qui prend en argument le numéro de la case et qui renvoie le numéro de la case où va se trouver le joueur en atterrissant sur la case numérotée \lstinline{case}. Par exemple, \lstinline{caseFuture(5)} renvoie 5 (c'est un numéro de case stable), \lstinline{caseFuture(1)} renvoie 38 (c'est un numéro de case avec échelle) et \lstinline{caseFuture(17)} renvoie 7 (c'est un numéro de case avec une tête de serpent).}
 
 %\UPSTIcorrection{
 %	\lstinputlisting[firstline=22, lastline=26]{snakesAndLadder/simulationPartie.py}
@@ -67,17 +80,17 @@ dSeE = {  1: 38,  4: 14,  9: 31, 17:  7, 21: 42, 28: 84, 51: 67, 54: 34,
 \question{Quelle est la complexité de cette fonction ?}
 
 %\UPSTIcorrection{
-%	Complexité en $O(1)$~: en effet, sur un dictionnaire, la recherche d'un clé dans un dictionnaire (\texttt{case in dSeE.keys()}) est en $O(1)$. 
+%	Complexité en $O(1)$~: en effet, sur un dictionnaire, la recherche d'un clé dans un dictionnaire (\lstinline{case in dSeE.keys()}) est en $O(1)$. 
 %}
 
-\question{\'Ecrire une fonction \texttt{avanceCase(case: int, de: int, choix: str) -> int} qui renvoie la case d'arrivée lorsqu'on part de la case \texttt{case} et qu'on a comme résultat au lancer du dé la valeur \texttt{de}. La variable \texttt{choix} est une chaine de caractère correspondant à la stratégie de fin différente~: \texttt{"r"} pour le rebond, \texttt{"i"} pour l'immobilisme et \texttt{"q"} pour une fin rapide. \label{Q:casesAccessibles}.}
+\question{\'Ecrire une fonction \lstinline{avanceCase(case: int, de: int, choix: str) -> int} qui renvoie la case d'arrivée lorsqu'on part de la case \lstinline{case} et qu'on a comme résultat au lancer du dé la valeur \lstinline{de}. La variable \lstinline{choix} est une chaine de caractère correspondant à la stratégie de fin différente~: \lstinline{"r"} pour le rebond, \lstinline{"i"} pour l'immobilisme et \lstinline{"q"} pour une fin rapide. \label{Q:casesAccessibles}.}
 
 %\UPSTIcorrection{
 %	\lstinputlisting[firstline=28, lastline=38]{snakesAndLadder/simulationPartie.py}
 %}
 
 
-\question{Écrire une fonction \texttt{partie(choix: str) -> [int]} qui lance une partie à un joueur et renvoie la liste successive des cases visitées sur le plateau. Elle commencera donc forcément par \texttt{0} et finira forcément par \texttt{100}. Le choix du mode de fin est en argument, de façon similaire à la question précédente.} 
+\question{Écrire une fonction \lstinline{partie(choix: str) -> [int]} qui lance une partie à un joueur et renvoie la liste successive des cases visitées sur le plateau. Elle commencera donc forcément par \lstinline{0} et finira forcément par \lstinline{100}. Le choix du mode de fin est en argument, de façon similaire à la question précédente.} 
 
 %\UPSTIcorrection{
 %	\lstinputlisting[firstline=40, lastline=47]{snakesAndLadder/simulationPartie.py}
@@ -90,14 +103,14 @@ dSeE = {  1: 38,  4: 14,  9: 31, 17:  7, 21: 42, 28: 84, 51: 67, 54: 34,
 
 On souhaite, dans cette partie, utiliser un algorithme glouton pour trouver la partie la plus courte. 
 
-\question{\'Ecrire une fonction \texttt{casesAccessibles(case: int) -> [int]} qui renvoie la liste des 6 cases accessibles pour la case donnée en entrée. Vous utiliserez la fonction \texttt{avanceCase} de la question \ref{Q:casesAccessibles}. La liste renvoyée \texttt{cases} doit avoir le codage suivant~: \texttt{cases[i]} doit correspondre à la case d'arrivée avec le résultat de dé \texttt{i+1} (donc la liste retournée doit toujours avoir une longueur de 6). On prendra l'option de fin rapide.}
+\question{\'Ecrire une fonction \lstinline{casesAccessibles(case: int) -> [int]} qui renvoie la liste des 6 cases accessibles pour la case donnée en entrée. Vous utiliserez la fonction \lstinline{avanceCase} de la question \ref{Q:casesAccessibles}. La liste renvoyée \lstinline{cases} doit avoir le codage suivant~: \lstinline{cases[i]} doit correspondre à la case d'arrivée avec le résultat de dé \lstinline{i+1} (donc la liste retournée doit toujours avoir une longueur de 6). On prendra l'option de fin rapide.}
 
 %\UPSTIcorrection{
 %	\lstinputlisting[firstline=22, lastline=26]{snakesAndLadder/partieGlouton.py}
 %}
 
 
-\question{Écrire une fonction \texttt{meilleurChoix(case: int) -> int} qui renvoie la meilleure case accessible depuis \texttt{case}. Il est interdit d'utiliser la fonction \texttt{max} dans cette question. }
+\question{Écrire une fonction \lstinline{meilleurChoix(case: int) -> int} qui renvoie la meilleure case accessible depuis \lstinline{case}. Il est interdit d'utiliser la fonction \lstinline{max} dans cette question. }
 
 %\UPSTIcorrection{
 %	\lstinputlisting[firstline=28, lastline=34]{snakesAndLadder/partieGlouton.py}
@@ -106,13 +119,13 @@ On souhaite, dans cette partie, utiliser un algorithme glouton pour trouver la p
 
 L'algorithme glouton consistera à choisir la valeur du dé permettant de maximiser son déplacement à chaque coup.
 
-\question{Écrire une fonction \texttt{partieGloutonne() -> [int]} qui renvoie la liste des cases par lesquelles passe le pion dans l'algorithme glouton.}
+\question{Écrire une fonction \lstinline{partieGloutonne() -> [int]} qui renvoie la liste des cases par lesquelles passe le pion dans l'algorithme glouton.}
 
 %\UPSTIcorrection{
 %	\lstinputlisting[firstline=36, lastline=42]{snakesAndLadder/partieGlouton.py}
 %}
 
-Cette dernière fonction nous renvoie \texttt{[0, 38, 44, 50, 67, 91, 97, 100]}. 
+Cette dernière fonction nous renvoie \lstinline{[0, 38, 44, 50, 67, 91, 97, 100]}. 
 
 %\question{Construire un exemple de plateau, contenant par exemple 2 échelles et pas de serpent, pour lequel notre algorithme ne trouve pas le chemin le plus court en nombre de coups~: vous préciserez le résultat de l'algorithme glouton et un exemple d'une partie strictement plus rapide.}
 
@@ -123,76 +136,76 @@ Cette dernière fonction nous renvoie \texttt{[0, 38, 44, 50, 67, 91, 97, 100]}.
 
 %\newpage
 
-\section*{Annexe}
-
-\subsection*{Utilisation du module \texttt{random}}
-
-On vous donne les docstrings correspondant à deux fonctions du module \texttt{random}~: 
-
-\begin{lstlisting}
-randint(a, b) method of random.Random instance
-    Return random integer in range [a, b], including both end points.
-	
-choice(seq) method of random.Random instance
-    Choose a random element from a non-empty sequence.
-\end{lstlisting}
+%\section*{Annexe}
+%
+%\subsection*{Utilisation du module \lstinline{random}}
+%
+%On vous donne les docstrings correspondant à deux fonctions du module \lstinline{random}~: 
+%
+%\begin{lstlisting}
+%randint(a, b) method of random.Random instance
+%    Return random integer in range [a, b], including both end points.
+%	
+%choice(seq) method of random.Random instance
+%    Choose a random element from a non-empty sequence.
+%\end{lstlisting}
 %
 %\subsection*{Complexité des opérations sur les listes et dictionnaires}
 %
 %\paragraph*{Principales opérations sur les listes}
 %
-%\texttt{n}, longueur de la liste \texttt{L}, \texttt{k}, un indice valide en négatif (\texttt{1} à \texttt{n}).
+%\lstinline{n}, longueur de la liste \lstinline{L}, \lstinline{k}, un indice valide en négatif (\lstinline{1} à \lstinline{n}).
 %
 %\begin{tabular}{|m{9cm}|m{2.1cm}|} \hline
 %	Opération & Moyen \\
 %	\hline
 %	
-%	Longueur (\texttt{len(L)}) &  $O(1)$ \\
+%	Longueur (\lstinline{len(L)}) &  $O(1)$ \\
 %	\hline
 %	Accès en lecture d'un élément &  $O(1)$ \\
 %	\hline
 %	Accès en écriture d'un élément &  $O(1)$ \\
 %	\hline
-%	Copie (\texttt{L.copy()} ou \texttt{L[:]}) & $O(n)$ \\
+%	Copie (\lstinline{L.copy()} ou \lstinline{L[:]}) & $O(n)$ \\
 %	\hline
-%	Ajout (\texttt{L.append(elt)} ou \texttt{L+=[elt]}) & $O(1)$ \\
+%	Ajout (\lstinline{L.append(elt)} ou \lstinline{L+=[elt]}) & $O(1)$ \\
 %	\hline
-%	Extension (\texttt{L1.extend(L2)} ou \texttt{L1+=L2}) & $O(n_2)$ \\
+%	Extension (\lstinline{L1.extend(L2)} ou \lstinline{L1+=L2}) & $O(n_2)$ \\
 %	\hline
-%	Concaténation (\texttt{L1 + L2}) &  $O(n_1 + n_2)$ \\
+%	Concaténation (\lstinline{L1 + L2}) &  $O(n_1 + n_2)$ \\
 %	\hline
-%	Test de présence (\texttt{elt in L}) & $O(n)$ \\
+%	Test de présence (\lstinline{elt in L}) & $O(n)$ \\
 %	\hline
-%	Désempiler dernier (\texttt{L.pop()}) &  $O(1)$ \\
+%	Désempiler dernier (\lstinline{L.pop()}) &  $O(1)$ \\
 %	\hline
-%	Désempiler autre (\texttt{L.pop(-k)}) &  $O(k)$ \\
+%	Désempiler autre (\lstinline{L.pop(-k)}) &  $O(k)$ \\
 %	\hline
-%	Maximum ou minimum (\texttt{max(L)} et \texttt{min(L)}) &  $O(n)$ \\
+%	Maximum ou minimum (\lstinline{max(L)} et \lstinline{min(L)}) &  $O(n)$ \\
 %	\hline
-%	Tri (\texttt{L.sort()} ou \texttt{sorted(L)}) &  $O(n \log(n))$ \\
+%	Tri (\lstinline{L.sort()} ou \lstinline{sorted(L)}) &  $O(n \log(n))$ \\
 %	\hline
 %\end{tabular}
 %
 %\paragraph*{Principales opérations sur les dictionnaires}
 %
-%\texttt{n}, longueur du dictionnaire \texttt{d}, \texttt{k}, une clé du dictionnaire.
+%\lstinline{n}, longueur du dictionnaire \lstinline{d}, \lstinline{k}, une clé du dictionnaire.
 %
 %\begin{tabular}{|m{9cm}|m{2.1cm}|} \hline
 %	 Opération & Moyen \\
 %	\hline
-%	Longueur (\texttt{len(d)}) &  $O(1)$ \\
+%	Longueur (\lstinline{len(d)}) &  $O(1)$ \\
 %	\hline
-%	Accès en lecture d'un élément (\texttt{x = d[k]})  &  $O(1)$ \\
+%	Accès en lecture d'un élément (\lstinline{x = d[k]})  &  $O(1)$ \\
 %	\hline
-%	Accès en écriture d'un élément (\texttt{d[k] = x}) &  $O(1)$ \\
+%	Accès en écriture d'un élément (\lstinline{d[k] = x}) &  $O(1)$ \\
 %	\hline
-%	Copie (\texttt{d.copy()}) & $O(n)$ \\
+%	Copie (\lstinline{d.copy()}) & $O(n)$ \\
 %	\hline
-%	Ajout (\texttt{d[k] = x} la première fois) & $O(1)$ \\
+%	Ajout (\lstinline{d[k] = x} la première fois) & $O(1)$ \\
 %	\hline
-%	Test de présence (\texttt{k in d}) & $O(1)$ \\
+%	Test de présence (\lstinline{k in d}) & $O(1)$ \\
 %	\hline
-%	Retrait d'un élément (\texttt{del d[k]} ou \texttt{d.pop(k)}) & $O(1)$ \\
+%	Retrait d'un élément (\lstinline{del d[k]} ou \lstinline{d.pop(k)}) & $O(1)$ \\
 %	\hline
 %\end{tabular}
 
