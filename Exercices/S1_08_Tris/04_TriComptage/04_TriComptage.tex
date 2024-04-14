@@ -20,19 +20,8 @@ liste soient des entiers de l’intervalle $\llbracket 0; k \llbracket$. On proc
 ensuite réécrire la liste $L$.
 
 \question{Ecrire la fonction  \lstinline{tri_comptage(L : list, k : int) -> None} permettant de réaliser un tri par comptage avec effet de bord.}
-
-\question{Ecrire la fonction  \lstinline{tri_comptage_02(L : list, k : int) -> list} permettant de réaliser un tri par comptage sans effet de bord.}
-
-\begin{defi}[Tri en place -- Wikipedia]
-Un tri est dit en place s'il n'utilise qu'un nombre très limité de variables et qu’il modifie directement la structure qu’il est en train de trier. Ceci nécessite l’utilisation d'une structure de donnée adaptée (un tableau par exemple). Ce caractère peut être très important si on ne dispose pas de beaucoup de mémoire.
-\end{defi}
-
-\begin{defi}[Tri stable  -- Wikipedia]
-Un tri est dit stable s'il préserve l’ordonnancement initial des éléments que l'ordre considère comme égaux.
-\end{defi}
-\question{Les fonctions proposées réalisent-t-elles un tri stable ? un tri en place ?}
-
 \ifprof
+\begin{corrige}
 \begin{lstlisting}
 def tri_comptage(L,k):
     C=[0]*k
@@ -46,5 +35,26 @@ def tri_comptage(L,k):
             
 # Il s'agit ici d'un tri avec effet de bord et non stable. 
 \end{lstlisting}
+\end{corrige}
 \else
 \fi
+\question{Ecrire la fonction  \lstinline{tri_comptage_02(L : list, k : int) -> list} permettant de réaliser un tri par comptage sans effet de bord.}
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi
+\begin{defi}[Tri en place -- Wikipedia]
+Un tri est dit en place s'il n'utilise qu'un nombre très limité de variables et qu’il modifie directement la structure qu’il est en train de trier. Ceci nécessite l’utilisation d'une structure de donnée adaptée (un tableau par exemple). Ce caractère peut être très important si on ne dispose pas de beaucoup de mémoire.
+\end{defi}
+
+\begin{defi}[Tri stable  -- Wikipedia]
+Un tri est dit stable s'il préserve l’ordonnancement initial des éléments que l'ordre considère comme égaux.
+\end{defi}
+\question{Les fonctions proposées réalisent-t-elles un tri stable ? un tri en place ?}
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi
+
