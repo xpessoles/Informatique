@@ -1,0 +1,171 @@
+\begin{marginfigure}
+\includegraphics[width=\linewidth]{fig_00}
+\end{marginfigure}
+
+\section*{Activité préparatoire : Génération d'une grille -- Déjà fait sur Capytale}
+
+
+\section*{TP : Génération d'un labyrinthe}
+
+\begin{marginfigure}
+\includegraphics[width=\textwidth]{exemple_laby.png}
+\caption{Exemple de labyrinthe obtenu sur une grille 10*10}
+\end{marginfigure}
+
+
+L'objectif de ce TP est de générer un labyrinthe. Un labyrinthe est un graphe qui contient tous les sommets de la grille et un certain nombre d'arêtes pour les relier.
+Pour obtenir un labyrinthe aléatoirement on réalise un parcours de la grille obtenue dans l'activité préparatoire.
+Pour cela il faut visiter l'ensemble des sommets de la grille et conserver les chemins qui ont permis cette découverte. Sommets et arêtes seront stockés dans un graphe appelé labyrinthe.
+
+
+\begin{marginfigure}\centering
+	\includegraphics[width=\textwidth]{labyrinthe.png}
+            \includegraphics[width=\textwidth]{labyrinthe résolu.png}            
+\caption{Un labyrinthe et ce même labyrinthe résolu}
+\end{marginfigure}
+
+
+Viendra ensuite le moment de résoudre ce labyrinthe : ce sera l'objectif de la dernière partie. Il faudra alors être capable de trouver le chemin qui permet d'aller du coin inférieur gauche (départ) au coin supérieur droit (arrivée) en n'empruntant que les lignes (arêtes) du labyrinthe. 
+
+\subsection*{Ajouter une arête dans un graphe}
+Pour générer un labyrinthe il faut construire un graphe vide puis ajouter une arête à chaque fois que l'on découvre un sommet.
+
+
+
+\begin{question}
+Écrire la fonction \lstinline{ajouter_arete(G:dict, s1:tuple, s2:tuple) -> None} qui permet d'ajouter l'arête \lstinline{([s1,s2])} au graphe \lstinline{G}. 
+\end{question}
+
+\begin{exemple}
+On reprend le graphe noté \lstinline{G2} précédemment. 
+\begin{lstlisting}
+>>> ajouter_arete(G2,(1,0),(2,0))
+>>> G2
+        {(0, 0): [(1, 0), (0, 1)],
+        (1, 0): [(1, 1), (0, 0), (2, 0)],
+        (0, 1): [(1, 1), (0, 0)],
+        (1, 1): [(0, 1), (1, 0)],
+        (2, 0): [(1, 0)]}
+\end{lstlisting}
+\end{exemple}
+
+
+\textbf{Bien penser aux éléments suivants :} ajouter une arête entre les sommets \lstinline{s1} et \lstinline{s2} consiste :
+\begin{itemize}
+\item à ajouter le sommet \lstinline{s1} dans le graphe si ce sommet n'existait pas : dans ce cas il faut commencer une nouvelle liste de ses voisins avec son premier voisin \lstinline{s2};
+\item à ajouter le sommet \lstinline{s2} dans le graphe si ce sommet n'existait pas : dans ce cas il faut commencer une nouvelle liste de ses voisins avec son premier voisin \lstinline{s1};
+\item à ajouter \lstinline{s1} (respectivement \lstinline{s2}) dans la listes des voisins de \lstinline{s2} (resp. \lstinline{s1}) dans le cas où le sommet \lstinline{s2} (resp. \lstinline{s1}) existait déjà.
+\end{itemize}
+
+
+\subsection*{Marquages des noeuds visités}
+%La programmation des parcours peut s'avérer difficile la première fois. Pour mieux visualiser les choses on propose dans ce TP d'afficher au cours du parcours :
+%\begin{itemize}
+%\item la grille initiale (graphe initial) en rouge en trait fin;
+%\item les sommets déjà découverts avec des points noirs ou gris ;
+%\item la file des sommets à explorer avec des croix bleues, la tête de la file aparaissant en plus gros.
+%\end{itemize}
+
+%\subsection{Marquage des noeuds visités}
+On propose de marquer les sommets en utilisant un dictionnaire noté \lstinline{visited}:
+\begin{itemize}
+\item
+ Initialement, tous les sommets sont blancs. On dira qu’un sommet blanc n’a pas encore été
+découvert.
+\item Lorsqu’un sommet est “découvert” (autrement dit, quand on arrive pour la première fois sur
+ce sommet), il est colorié en gris. Le sommet reste gris tant qu’il reste des successeurs de ce
+sommet qui sont blancs (autrement dit, qui n’ont pas encore été découverts).
+\item Un sommet est colorié en noir lorsque tous ses successeurs sont gris ou noirs (autrement dit,
+lorsqu’ils ont tous été découverts).
+
+\end{itemize}
+
+
+Ce dictionnaire contiendra tous les sommets de la grille.
+
+On leur associera le caractère \textbf{'W'} pour blanc (\textbf{W}hite), \textbf{'G'} pour gris et \textbf{'K'} pour noir (blac\textbf{K}).
+
+\begin{question}
+Créer un graphe \lstinline{G} associé à une grille initiale de 5*5. L'afficher (épaisseur 1, en rouge).%
+\end{question}
+
+\begin{question}
+Créer un dictionnaire \lstinline{visited} associé à cette grille ayant ses valeurs toutes à \lstinline{'W'}.
+\end{question}
+
+\begin{question}
+Créer une fonction \lstinline{trace_visites} qui prend pour argument un dictionnaire \lstinline{v} des sommets découverts et trace les noeuds découverts en gris ou en noir.
+
+ (\textit{Rappel : tracé avec  points noirs : \lstinline{plt.plot(x,y,'ko')}     / avec des points gris : \lstinline{plt.plot(x,y,'o',color='grey')} )}
+\end{question}
+
+\begin{question}
+Test : Après avoir modifié arbitrairement le dictionnaire \lstinline{visited} pour le test (ajouter arbitrairement des noeuds en gris et en noir), le tracer sur la même figure que la grille.
+\end{question}
+
+
+%\subsection{Affichage des noeuds de la file}
+
+%On propose de tester l'affichage avec par exemple cette file : \lstinline{$file=deque([(1,0),(2,1),(4,3)]$}.
+
+%\begin{question}
+%Ecrire une fonction \lstinline{trace_file} qui prend pour argument une file \lstinline{f} et trace avec une croix bleue de taille 8 les noeuds de la file et avec une croix bleue de taille 16 la tête de file. Attention de ne pas modifier la file ! (\textit{Rappel : tracé avec croix bleues de taille 8 : \lstinline{plt.plot(x,y,'gx',markersize=8))}  )}
+%\end{question}
+
+%\begin{question}
+%Test : Tracer sur la même figure les noeuds de la file ci-dessus. Vérifier que la file n'est pas modifiée par le tracé.
+%\end{question}
+
+%\subsection{Affichage de l'état du graphe}
+%\begin{question}
+%En utilisant les fonctions précédentes écrire une fonction \lstinline{trace_etat} prenant pour argument un graphe \lstinline{G}, un dictionnaire \lstinline{v} des sommets découverts et une file \lstinline{f} qui efface la figure précédente (\texttt {plt.clf()}) puis trace le graphe en rouge, les noeuds visités en gris/noir et la file en bleu. 
+%\end{question}
+
+
+\section*{Génération d'un labyrinthe par parcours en largeur}
+
+
+On propose de travailler par étape en modifiant successivement la fonction pour aboutir à l'agorithme complet du parcours en largeur.
+La fonction aura pour argument systématiquement le graphe à parcourir \lstinline{G} et un noeud de départ \lstinline{depart}. Vous penserez à modifier la coloration des sommets (via le dictionnaire \lstinline{visited} (= dictionnaire des sommets découverts) au fur et à mesure.
+
+\subsection*{Initialisation}
+\begin{question}
+Ecrire une fonction \lstinline{parcours_largeur_init}, qui initialise le dictionnaire des sommets découverts (tout à 'W'), crée une file ne contenant que le noeud de départ et trace l'état obtenu en utilisant votre fonction \lstinline{trace_visites}.
+\end{question}
+
+
+\subsection*{Première étape : visite des voisins}
+\begin{question}
+Modifier la fonction précédente pour obtenir la fonction \lstinline{parcours_largeur_etape1}, qui explore le premier sommet (la tête de file). On entend ici par "explorer", découvrir ses voisins, les ajouter dans la file s'ils n'ont pas été déjà découverts. Tracer aussi l'état obtenu. 
+\end{question}
+
+\subsection*{Algorithme complet}
+\begin{question}
+Modifier la fonction précédente pour obtenir la fonction \lstinline{parcours_largeur_complet}, qui continuera à explorer les voisins tant que la file n'est pas vide. A chaque étape (à chaque tour de boucle) vous pouvez tracer l'état, tracer une arête pour indiquer le chemin parcouru, et ajouter l'instruction \lstinline{plt.pause(0.5)} de façon à voir progressivement le parcours du graphe.
+\end{question}
+
+\textit{Vous pouvez utiliser la note en bas de page pour ajouter de l'aléatoire au parcours.}
+
+\subsection*{Algorithme complet avec création du labyrinthe}
+Il est maintenant possible de créer le labyrinthe.
+
+\begin{marginfigure}\centering
+\includegraphics[width=\textwidth]{laby_larg.png}
+\caption{Exemple de labyrinthe obtenu sur une grille 10*10 par parcours en largeur}
+\end{marginfigure}
+
+\begin{question}
+Modifier la fonction précédente pour obtenir la fonction \lstinline{labyrinthe_largeur}, qui construit le graphe labyrinthe \lstinline{L} au fur et à mesure du parcours. Cette fonction retourne le graphe labyrinthe. Vous pouvez tracer à chaque étape le labyrinthe en trait plus épais noir. 
+\end{question}
+
+\textbf{Note :} Comme vous pouvez le constater, le coté aléatoire de ce labyrinthe est discutable :). Il est possible de mélanger une liste en utilisant le module \lstinline{random} : \lstinline{random.shuffle(voisins)} ce qui permet de mélanger la liste de tuples voisins.
+
+\section*{Génération d'un labyrinthe par parcours en profondeur}
+\begin{question}
+Modifier l'algorithme \lstinline{parcours_profondeur}  pour réaliser le marquage des sommets comme proposé (gris = sommet "découvert", noir = sommet dont tous les voisins ont été découverts).
+\end{question}
+
+\begin{question}
+Etablir la fonction \lstinline{labyrinthe_profondeur}, qui construit le graphe labyrinthe \lstinline{L} par un parcours en profondeur. Vous pouvez tracer à chaque étape le labyrinthe en trait plus épais noir. 
+\end{question}
+
