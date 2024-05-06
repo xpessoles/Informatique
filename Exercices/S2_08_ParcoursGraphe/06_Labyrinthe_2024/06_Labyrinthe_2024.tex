@@ -1,4 +1,9 @@
-\subsection*{Activité préparatoire : Génération d'une grille}
+\begin{marginfigure}
+\includegraphics[width=\linewidth]{fig_00}
+\end{marginfigure}
+
+\subsection*{Activité préparatoire : Génération d'une grille -- Déjà fait sur Capytale}
+
 
 Soit une grille rectangulaire $n\times p$ constituée de $n$ colonnes et de $p$ lignes contenant toutes les arêtes possibles. On modélise cette grille par un graphe dont l'ensemble des sommets est donné par les couples $(i,j)$ tels que : $i\in\llbracket 0,n \llbracket $ et $j\in\llbracket 0,p \llbracket $.
 
@@ -65,6 +70,13 @@ Dans l'exemple qui suit, l'ordre des arêtes peut être dans un ordre différent
 \end{lstlisting}
 \end{exemple}
 
+
+\begin{marginfigure}\centering
+\includegraphics[width=\linewidth]{grille_10_8}
+\caption{Tracé d'un graphe grille de 10 colonnes et 8 lignes}
+\end{marginfigure}
+
+
 \begin{question}
 Écrire la fonction \lstinline{trace_arete(s1:tuple, s2:tuple, couleur : str , epaisseur : int ) -> None} qui trace une arête reliant les sommets \lstinline{s1} et \lstinline{s2} sur la figure courante. 
 
@@ -76,14 +88,8 @@ Exemple : pour tracer l'arête [(0,2),(1,2)] en bleu avec une épaisseur de 2, i
 Écrire la fonction \lstinline{trace_graphe(G:dict,couleur : str,epaisseur : int) -> None} qui permet de tracer les sommets et les arêtes du graphe \lstinline{G} sur la figure courante. Tracer le graphe en rouge avec une épaisseur de 1 pour obtenir la figure ci-dessous.
 \end{question}
 
-\begin{marginfigure}\centering
-\includegraphics[width=\linewidth]{grille_10_8}
-\caption{Tracé d'un graphe grille de 10 colonnes et 8 lignes}
-\end{marginfigure}
-
-
 \newpage
-\subsection*{TP : Génération d'un labyrinthe}
+\section*{TP : Génération d'un labyrinthe}
 
 \begin{marginfigure}
 \includegraphics[width=\textwidth]{exemple_laby.png}
@@ -105,7 +111,7 @@ Pour cela il faut visiter l'ensemble des sommets de la grille et conserver les c
 
 Viendra ensuite le moment de résoudre ce labyrinthe : ce sera l'objectif de la dernière partie. Il faudra alors être capable de trouver le chemin qui permet d'aller du coin inférieur gauche (départ) au coin supérieur droit (arrivée) en n'empruntant que les lignes (arêtes) du labyrinthe. 
 
-\section*{Ajouter une arête dans un graphe}
+\subsection*{Ajouter une arête dans un graphe}
 Pour générer un labyrinthe il faut construire un graphe vide puis ajouter une arête à chaque fois que l'on découvre un sommet.
 
 
@@ -136,7 +142,7 @@ On reprend le graphe noté \lstinline{G2} précédemment.
 \end{itemize}
 
 
-\section*{Marquages des noeuds visités}
+\subsection*{Marquages des noeuds visités}
 %La programmation des parcours peut s'avérer difficile la première fois. Pour mieux visualiser les choses on propose dans ce TP d'afficher au cours du parcours :
 %\begin{itemize}
 %\item la grille initiale (graphe initial) en rouge en trait fin;
