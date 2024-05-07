@@ -1,16 +1,38 @@
-\setchapterimage{Fond_GRAPHE.jpg}
-\chapter*{Parcours de graphes} 
- 
-\marginnote{
-\begin{itemize}
-\item Parcours d'un graphe
-\end{itemize}
-}
+\def\xxactivite{Cours}
 
-\begin{marginfigure}
-\includegraphics[width=\linewidth]{fig_00} \\
-\caption{Représentation ciculaire du métro parisien}
-\end{marginfigure}%figues de la page de garde
+\def\xxauteur{P. Bessonnat -- Xavier Pessoles}
+\fichefalse \proftrue \tdfalse \courstrue
+
+\def\xxnumchapitre{Chapitre 12 \vspace{.2cm}}
+
+\def\xxchapitre{Parcours de graphes}
+
+\def\xxcompetences{%
+\textsl{%
+\textbf{Savoirs et compétences :}\\
+\begin{itemize}[label=\ding{112},font=\color{bleuxp}] 
+\item Vocabulaire des graphes : graphe orienté, graphe non orienté. Sommet (ou nœud); arc, arête. Boucle. Degré (entrant et sortant). Chemin d’un sommet à un autre. Cycle. Connexité dans les graphes non orientés.
+\item Notations : graphe $G=(S,A)$, degrés $d(s)$ (pour un graphe non orienté), $d_{+}(s)$ et  $d_{-}(s)$ (pour un graphe orienté).
+\item Pondération d’un graphe. Étiquettes des arcs ou des arêtes d’un graphe. On motive l’ajout d’information à un graphe par des exemples
+concrets.
+\end{itemize}
+}}
+
+\def\xxfigures{
+\includegraphics[width=4cm]{fig_0} \\
+\textit{Représentation ciculaire du métro parisien}
+}%figues de la page de garde
+
+
+\input{\repRel/Style/pagegarde_cours_minitoc}
+\setlength{\columnseprule}{.1pt}
+
+\vspace{2cm}
+\pagestyle{fancy}
+\thispagestyle{plain}
+
+%Thème : Tris.
+
 
 
 
