@@ -1,4 +1,31 @@
-\section{Algorithme de Dijkstra}
+\def\xxchapitre{Algorithme de Dijkstra}
+
+\def\xxcompetences{%
+%\textsl{%
+%\textbf{Savoirs et compétences :}\\
+%\begin{itemize}[label=\ding{112},font=\color{bleuxp}] 
+%\item Vocabulaire des graphes : graphe orienté, graphe non orienté. Sommet (ou nœud); arc, arête. Boucle. Degré (entrant et sortant). Chemin d’un sommet à un autre. Cycle. Connexité dans les graphes non orientés.
+%\item Notations : graphe $G=(S,A)$, degrés $d(s)$ (pour un graphe non orienté), $d_{+}(s)$ et  $d_{-}(s)$ (pour un graphe orienté).
+%\item Pondération d’un graphe. Étiquettes des arcs ou des arêtes d’un graphe. On motive l’ajout d’information à un graphe par des exemples
+%concrets.
+%\end{itemize}
+%}
+}
+
+\def\xxfigures{
+%\includegraphics[width=4cm]{fig_0} \\
+%\textit{Représentation ciculaire du métro parisien}
+}%figues de la page de garde
+
+
+\input{\repRel/Style/pagegarde_cours_minitoc}
+\setlength{\columnseprule}{.1pt}
+
+\vspace{2cm}
+\pagestyle{fancy}
+\thispagestyle{plain}
+
+
 
 
 L'algorithme de Dijkstra est un parcours en largeur d'un graphe \textbf{pondéré (poids positifs)} et orienté. Il permet de calculer l'ensemble des plus courts chemins entre un sommet vers tous les autres sommets du graphe.
@@ -9,7 +36,7 @@ Pour modéliser le graphe, on utilisera une matrice d'adjacence $M$ pour laquell
 \includegraphics[width=.8\linewidth]{graphe_01}
 \end{exemple}
 
-\begin{defi}[Poids d'un chemin]
+\begin{defi}{Poids d'un chemin}
 Soit un un graphe pondéré $G=\left(V, E, w\right)$ où $V$ désigne l'ensemble des sommets, $E$ l'ensemble des arêtes et 
 $w$, la fonction poids définie par $w : E \rightarrow \mathbb{R}$ ($w(u, v)$ est le poids de l’arête de $u$ vers $v$).
 
@@ -27,7 +54,7 @@ Pour le chemin $C' = 0, 1,3,4$, on a $w(C')=3$.
 C' est un plus court chemin. 
 \end{exemple}
 
-\begin{defi}[Distance]
+\begin{defi} {Distance}
 La distance $d\left(u,v\right)$ est le poids d'un plus court chemin de $u$ à $v$. On peut alors noter 
 $d(u,v)=\inf\left\{
 w(C) | C \text{ est un chemin de } u \text{ à } v
@@ -40,10 +67,12 @@ Si $v$  n'est pas atteignable depuis $u$ on poser $d(u,v)=\infty$.
 \begin{exemple}
 Dans le cas précédent, $d(0,4)=3$, 
 $d(2,4)=3$ et $d(4,1)=\infty$
+
+
 \end{exemple}
 
-\begin{prop}[Sous-optimalité]
-Soit $C$ un plus court chemin de $u$ à $v$ ainsi que $u'$ et $v'$ deux sommets de $C$. Alors le sous-chemin de $C$ de $u'$ à $v'$ est aussi un plus court chemin.
+\begin{prop}
+\textbf{Sous-optimalité} -- Soit $C$ un plus court chemin de $u$ à $v$ ainsi que $u'$ et $v'$ deux sommets de $C$. Alors le sous-chemin de $C$ de $u'$ à $v'$ est aussi un plus court chemin.
 \end{prop}
 
 
@@ -87,7 +116,7 @@ Pour répondre à l'objectif, on peut formuler l'algorithme de Dijkstra ainsi.
 
 Une des étapes qui diffère avec le parcours en largeur notamment, est l'utilisation d'une file de priorité et la recherche du sommet vérifiant $d[u]$ minimal. Cela signifie que lorsqu'on partira d'un sommet \texttt{s}, on déterminera alors l'ensemble des distances permettant d'atteindre les voisins de \texttt{s}. \`A l'itération suivante, on visitera alors le sommet ayant la distance la plus faible.
 
-\begin{defi}[File de priorité]
+\begin{defi}{File de priorité}
 Une file de priorité est une structure de données sur laquelle on peut effectuer les opérations suivantes : 
 \begin{itemize}
 \item insérer un élement;
@@ -114,11 +143,11 @@ Ainsi, \texttt{file.pop()} renvoie \texttt{(0,1)} et la file contient alors les 
 La figure suivante représente le déroulement de l’algorithme de Dijkstra sur un graphe à 5 sommets, depuis 
 la source $s$. Pour chaque sommet $u$ on a fait figurer la valeur $d[u]$ à l’intérieur du cercle. Les arcs en gras représentent
 l’évolution de la liste des prédecesseurs.
-\end{exemple}
 
 \begin{center}
-\includegraphics[width=\linewidth]{dijkstra}
+\includegraphics[width=15cm]{dijkstra}
 \end{center}
+\end{exemple}
 
 On peut donc commencer par implémenter une fonction \texttt{cherche\_min} permettant de trouver le sommet \texttt{i} vérifiant \texttt{d[i]} minimal
 parmi les sommets n'ayant pas été traités.% (s’il existe un tel sommet vérifiant \texttt{d[i] <}$+\infty$ , sinon $-1$ est renvoyé.

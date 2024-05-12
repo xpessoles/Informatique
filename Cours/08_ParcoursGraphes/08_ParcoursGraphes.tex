@@ -1,5 +1,5 @@
 \setchapterimage{Fond_GRAPHE.jpg}
-\chapter*{Parcours de graphes} 
+\chapter{Parcours de graphes} 
  
 \marginnote{
 \begin{itemize}
@@ -14,7 +14,7 @@
 
 
 
-\section{Parcours de graphe}
+\section{Introduction}
 Une fois que nous sommes en présence d'un graphe, il va falloir le parcourir pour répondre à différentes questions : 
 \begin{itemize}
 \item est-il possible de joindre un sommet $A$ et un sommet $B$ ?
@@ -32,9 +32,9 @@ Les deux algorithmes principaux sont les suivants :
 
 Une des difficultés du parcours de graphe est d'éviter de tourner en rond. C'est pour cela qu'on mémorisera l'information d'avoir visité ou non un sommet. 
 
-\subsection{Parcours en largeur}
+\section{Parcours en largeur}
 
-\subsubsection{Un premier algorithme}
+\subsection{Un premier algorithme}
 On propose ci-dessous un algorithme de parcours en largeur en utilisant un graphe implémenté sous forme de liste d'adjacence ainsi qu'un sommet \texttt{s} de départ. 
 
 \begin{lstlisting}
@@ -75,7 +75,7 @@ En l'état, à quoi sert cet algorithme ?
 \end{rem}
 
 
-\subsubsection{Applications}
+\subsection{Applications}
 \begin{exemple}
 \textit{Comment connaître la distance d'un sommet \texttt{s} aux autres?}
 \ifprof
@@ -126,8 +126,8 @@ def path(pred, s, v):
 
 %\subsubsection{Marquage de sommet}
 
-\subsection{Parcours en profondeur}
-\subsubsection{Un premier algorithme}
+\section{Parcours en profondeur}
+\subsection{Un premier algorithme}
 
 On propose ci-dessous un algorithme de parcours en profondeur en utilisant un graphe implémenté sous forme de liste d'adjacence ainsi qu'un sommet \texttt{s} de départ. 
 
@@ -154,7 +154,7 @@ Dans cet algorithme :
 \end{itemize}
 À la différence du parcours en largeur, lorsqu'on va traiter la pile, on va s'éloigner du sommet initial... avant d'y revenir quand toutes les voies auront été explorées. 
 
-\subsubsection{Applications}
+\subsection{Applications}
 \begin{exemple}
 \textit{Lister les sommets dans l'ordre de leur visite.}
 \end{exemple}
