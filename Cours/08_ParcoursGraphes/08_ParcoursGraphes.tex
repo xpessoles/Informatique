@@ -154,6 +154,21 @@ Dans cet algorithme :
 \end{itemize}
 À la différence du parcours en largeur, lorsqu'on va traiter la pile, on va s'éloigner du sommet initial... avant d'y revenir quand toutes les voies auront été explorées. 
 
+
+\subsection{Une autre formulation (récursive)}
+
+\begin{lstlisting}
+def dfs(G, s):
+    visited = [False]*len(G)
+    def aux(u):
+        if not visited[u]:
+            visited[u] = True
+            for v in G[u]:
+                aux(v)
+    aux(s)
+
+\end{lstlisting}
+
 \subsection{Applications}
 \begin{exemple}
 \textit{Lister les sommets dans l'ordre de leur visite.}
