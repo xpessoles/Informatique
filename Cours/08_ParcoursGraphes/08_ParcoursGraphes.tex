@@ -30,7 +30,7 @@ Les deux algorithmes principaux sont les suivants :
 \item le parcours en profondeur  -- \textit{Depth-First Search} (DFS) -- pour lequel on part d'un sommet initial jusqu'au sommet le plus loin. On remonte alors la pile pour explorer les ramifications.
 \end{itemize}
 
-Une des difficultés du parcours de graphe est d'éviter de tourner en rond. C'est pour cela qu'on mémorisera l'information d'avoir visité ou non un sommet. 
+Une des difficultés du parcours de graphe est d'éviter de tourner en rond. C'est pour cela qu'on mémorisera l'information d'avoir visité ou non un sommet.  On parle aussi de  marquage. 
 
 \section{Parcours en largeur}
 
@@ -154,6 +154,38 @@ Dans cet algorithme :
 \end{itemize}
 À la différence du parcours en largeur, lorsqu'on va traiter la pile, on va s'éloigner du sommet initial... avant d'y revenir quand toutes les voies auront été explorées. 
 
+\subsection{Une autre formulation}
+La formulation précédente du parcours en profondeur a l'avantage d'être très proche de celle du parcours en largeur. Cependant, si on traçait l'arbre permettant de visualiser les sommets visités, on constate que l'algorithme crée des ramifications qui ne correspondent pas vraiment à un parcours en profondeur \sidenote{\url{https://11011110.github.io/blog/2013/12/17/stack-based-graph-traversal.html}}. 
+Il s'agit alors de 
+
+\begin{minipage}[c]{.45\linewidth}
+\begin{lstlisting}
+def dfs(G, s): #
+    visited = [False]*len(G)
+    pile = [s]
+    while len(pile) > 0:
+        u = pile.pop()
+        if not visited[u]:
+            visited[u] = True
+            for v in G[u]:
+                pile.append(v)
+\end{lstlisting}
+\end{minipage}
+\hfill
+\begin{minipage}[c]{.45\linewidth}
+\begin{lstlisting}
+def dfs_2(G, s): # A VERIFIER :)
+    visited = [False]*len(G)
+    pile = [s]
+    while len(pile) > 0 :
+        u = pile.pop()
+        if not visited[u]:
+            visited[u] = True
+            pile.append(u)
+            for v in G[v] :
+                pile.append(v)
+\end{lstlisting}
+\end{minipage}
 
 \subsection{Une autre formulation (récursive)}
 
