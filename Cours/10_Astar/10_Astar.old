@@ -1,18 +1,55 @@
-\setchapterimage{Fond_GRAPHE.jpg}
-\chapter{Algorithme A$\star$} 
- 
- 
+\def\xxactivite{Cours}
+
+\def\xxauteur{P. Bessonnat -- Xavier Pessoles}
+\fichefalse \proftrue \tdfalse \courstrue
+
+\def\xxnumchapitre{Chapitre 14 \vspace{.2cm}}
+
+\def\xxchapitre{Algorithme A$\star$}
+
+\def\xxcompetences{%
+%\textsl{%
+%\textbf{Savoirs et compétences :}\\
+%\begin{itemize}[label=\ding{112},font=\color{bleuxp}] 
+%\item Vocabulaire des graphes : graphe orienté, graphe non orienté. Sommet (ou nœud); arc, arête. Boucle. Degré (entrant et sortant). Chemin d’un sommet à un autre. Cycle. Connexité dans les graphes non orientés.
+%\item Notations : graphe $G=(S,A)$, degrés $d(s)$ (pour un graphe non orienté), $d_{+}(s)$ et  $d_{-}(s)$ (pour un graphe orienté).
+%\item Pondération d’un graphe. Étiquettes des arcs ou des arêtes d’un graphe. On motive l’ajout d’information à un graphe par des exemples
+%concrets.
+%\end{itemize}
+%}
+}
+
+\def\xxfigures{
+%\includegraphics[width=4cm]{fig_0} \\
+%\textit{Représentation ciculaire du métro parisien}
+}%figues de la page de garde
+
+
+\input{\repRel/Style/pagegarde_cours_minitoc}
+\setlength{\columnseprule}{.1pt}
+
+\vspace{2cm}
+\pagestyle{fancy}
+\thispagestyle{plain}
+
+
 \section{Problématique}
 
 
-\begin{marginfigure}
-\includegraphics[width=\textwidth]{jeuVideo.jpg}
-\caption{Exemple de chemin}
-\end{marginfigure}
 
 
+\begin{figure}[!h]
+\begin{minipage}{0.6\textwidth}
 Lorsqu'on cherche le plus court chemin entre deux sommets, départ et arrivée, le plus rapidement possible et en évitant les obstacles éventuels, l'algorithme A$\star$ (prononcer A star) est fait pour ça ! Cet algorithme est par exemple utilisé dans les jeux vidéos.
 C'est un algorithme de recherche de chemin dans un graphe. C'est l'un des plus efficaces en la matière. Il ne donne pas toujours la solution optimale mais il donne très rapidement une bonne solution.\\
+\end{minipage}
+\begin{minipage}{0.4\textwidth}
+\begin{center}
+\includegraphics[width=0.95\textwidth]{jeuVideo.jpg}
+\caption{Exemple de chemin}
+\end{center}
+\end{minipage}
+\end{figure}
 
 
 Au premier abord, on pourrait se dire que pour trouver un chemin d'un point à un autre il faut commencer par se diriger vers la destination. Et bien... c'est justement cette idée qu'utilise l'algorithme A* ! À chaque itération, on va tenter de se rapprocher de la destination. Pour cela, on va donc privilégier les possibilités directement les plus proches de la destination, en mettant de côté toutes les autres. Toutes les possibilités ne permettant pas de se rapprocher de la destination sont mises de côté, mais pas supprimées. Elles
@@ -28,7 +65,7 @@ tenté qu'elle existe, bien sûr).
 Il est basé sur l'algorithme de \texttt{Dijkstra} auquel est ajouté une \texttt{heuristique}.
 
 
-\begin{defi}[Heuristique]
+\begin{defi} {Heuristique}
 
 En algorithmique, une \textbf{heuristique} est une méthode de calcul qui fournit rapidement une solution réalisable, pas nécessairement optimale ou exacte, pour un problème d'optimisation difficile (wikipédia).
 
@@ -45,7 +82,7 @@ Avec :
 \subsection{Principe}
 
 
-\begin{prop}[Principe de fonctionnement]
+\begin{prop}\textbf{Principe de fonctionnement}
 
 Dans des applications de recherche de chemin sur une image ou un quadrillage par exemple, il est possible de connaître pour chaque sommet la distance « à vol d'oiseau » ou « à taxi-distance » de chaque sommet à l'arrivée. On peut utiliser une de ces heuristiques et, au lieu de choisir le sommet ayant la plus petite distance depuis le départ parmi les sommets visités, on peut choisir la relation :
 
@@ -64,106 +101,129 @@ On choisit alors la valeur \texttt{min} des f(s) des sommets visités.
 \end{rem}
 
 
-
-\begin{marginfigure}
-\includegraphics[width=\textwidth]{manhattan.jpg}
-\caption{Distance de Manhattan (rouge, bleu, jaune contre distance euclidienne en vert)}
-\end{marginfigure}
-
+\begin{figure}[!h]
+\begin{minipage}{0.6\textwidth}
 \begin{defi}{Distance de Manhattan}
 \begin{itemize}
 \item La distance de \texttt{Manhattan}, appelée aussi \textit{taxi-distance}, est la distance entre deux points parcourue par un taxi lorsqu'il se déplace dans une ville où les rues sont agencées selon un réseau ou quadrillage (Fig. 2). 
 \item Un \textbf{taxi-chemin} est le trajet fait par un taxi lorsqu'il se déplace d'un sommet du réseau à un autre en utilisant les déplacements horizontaux et verticaux du réseau.
 \end{itemize}
-\end{defi}
 
+\end{defi}
+\end{minipage}
+\begin{minipage}{0.4\textwidth}
+\begin{center}
+\includegraphics[width=0.7\textwidth]{manhattan.jpg}
+\caption{Distance de Manhattan (rouge, bleu, jaune contre distance euclidienne en vert)}
+\end{center}
+\end{minipage}
+\end{figure}
 
 
 \subsection{Exemple de construction sur un quadrillage}
 
-
-\begin{marginfigure}
-\includegraphics[width=\linewidth]{quadri1.jpg}
-\end{marginfigure}
-
-
+\begin{minipage}[c]{.65\linewidth}
 Toutes les cases du quadrillage sont des sommets et les sommets voisins sont les cases ayant un côté ou un angle commun.\\
 Chaque case voisine par le côté est à une distance $10$ soit $1 \times 10$ et les cases en diagonale à une distance $14$ soit $\sqrt{2} \times 10$ arrondi à la valeur entière.\\
+\end{minipage}
+\hfill %
+\begin{minipage}[c]{.35\linewidth}
+\begin{center}
+\includegraphics[scale=0.7]{quadri1.jpg}
+\end{center}
+\end{minipage}
 
-
-\begin{marginfigure}
-\includegraphics[width=\linewidth]{quadri2.jpg}
-\end{marginfigure}
 
 On cherche à déterminer le plus court chemin entre D et A. Sur le quadrillage ci-dessous, on peut reporter les distance de Manhattan de chaque case à \textbf{A} : 
 
+\begin{center}
+\includegraphics[scale=0.8]{quadri2.jpg}
+\end{center}
 
+\begin{multicols}{2}
+
+\begin{center}
 
 \textbf{\'Etape 1 :} On évalue la distance à l'origine, la distance de la fin et le coût global \\
+\vfill
 
-\begin{marginfigure}
-\includegraphics[width=\linewidth]{quadri3.jpg}
-\end{marginfigure}
+\includegraphics[width=8cm]{quadri3.jpg}
+\end{center}
+\begin{center}
 
 
 \textbf{\'Etape 2 :} On choisit le sommet dont le coût global est le plus faible. En cas d'égalité, on choisit le sommet le plus proche de l'arrivée.
-
-\begin{marginfigure}
-\includegraphics[width=\linewidth]{quadri4.jpg}
-\end{marginfigure}
-
+\includegraphics[width=8cm]{quadri4.jpg}
+\end{center}
+\end{multicols}
 
 
+\newpage
 
+\begin{multicols}{2}
+
+\begin{center}
 
 \textbf{\'Etape 3}
-\begin{marginfigure}
-\includegraphics[width=\linewidth]{quadri5.jpg}
-\end{marginfigure}
+
+\includegraphics[width=8cm]{quadri5.jpg}
+\end{center}
 
 
-
+\begin{center}
 \textbf{\'Etape 4}
 
-\begin{marginfigure}
-\includegraphics[width=\linewidth]{quadri6.jpg}
-\end{marginfigure}
+\includegraphics[width=8cm]{quadri6.jpg}
+\end{center}
+
+\end{multicols}
+\begin{multicols}{2}
+\begin{center}
 
 \textbf{\'Etape 5}
 
-\begin{marginfigure}
-\includegraphics[width=\linewidth]{quadri7.jpg}
-\end{marginfigure}
+\includegraphics[width=8cm]{quadri7.jpg}
+\end{center}
 
+
+
+\begin{center}
 
 \textbf{\'Etape 6}
 
-\begin{marginfigure}
-\includegraphics[width=\linewidth]{quadri8.jpg}
-\end{marginfigure}
+\includegraphics[width=8cm]{quadri8.jpg}
+\end{center}
 
+\end{multicols}
+\begin{multicols}{2}
+
+\begin{center}
 \textbf{\'Etape 7}
-\begin{marginfigure}
-\includegraphics[width=\linewidth]{quadri9.jpg}
-\end{marginfigure}
+\includegraphics[width=8cm]{quadri9.jpg}
+\end{center}
+
+
+\begin{center}
 
 \textbf{\'Etape 8}
-\begin{marginfigure}
-\includegraphics[width=\linewidth]{quadri10.jpg}
-\end{marginfigure}
+\includegraphics[width=8cm]{quadri10.jpg}
+\end{center}
 
+\end{multicols}
+\begin{multicols}{2}
+
+\begin{center}
 \textbf{\'Etape 9 :}
 
-\begin{marginfigure}
-\includegraphics[width=\linewidth]{quadri11.jpg}
-\end{marginfigure}
+\includegraphics[width=8cm]{quadri11.jpg}
+\end{center}
 
 Finalement le chemin le plus court :
 
-\begin{marginfigure}
-\includegraphics[width=\linewidth]{quadrifinal.jpg}
-\end{marginfigure}
-
+\begin{center}
+\includegraphics[width=8cm]{quadrifinal.jpg}
+\end{center}
+\end{multicols}
 
 
 \section{L'algorithme A*}
@@ -189,10 +249,10 @@ On peut aussi choisir l’écriture suivante,
 \subsection{L'heuristique}
 \begin{lstlisting}
 def heuristique(pt1:tuple,A:tuple)->int:
-    """Calcul de la valeur de l'heuristique avec la méthode du cours, 14 pour un
+    """Calcul de la valeur de l’heuristique avec la méthode du cours, 14 pour un
     déplacement diagonal et 10 pour un déplacement sur le côté
     entrées : pt1, tuple ou list des coordonnées et A, tuple ou list des coordonnées
-    sortie : H : integer, valeur de l'heuristique. """
+    sortie : H : integer, valeur de l’heuristique. """
     a=abs(pt1[0]-A[0])
     b=abs(pt1[1]-A[1])
     if a<=b:
