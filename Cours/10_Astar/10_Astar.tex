@@ -58,7 +58,7 @@ On choisit alors la valeur \texttt{min} des f(s) des sommets visités.
 
 \begin{rem}
 \begin{itemize}
-\item La valeur calculée peut être mémorisée sous forme d'entier (voir exemple).
+\item La valeur calculée peut être mémorisée sous forme d'entier.% (voir exemple).
 \item Vous pouvez calculer ces distances de la manière que vous voulez, distance euclidienne, distance de \texttt{Manhattan} ou autre, elles peuvent convenir.\\
 \end{itemize}
 \end{rem}
@@ -67,12 +67,12 @@ On choisit alors la valeur \texttt{min} des f(s) des sommets visités.
 
 \begin{marginfigure}
 \includegraphics[width=\textwidth]{manhattan.jpg}
-\caption{Distance de Manhattan (rouge, bleu, jaune contre distance euclidienne en vert)}
+\caption{Distance de Manhattan (rouge, bleu, jaune contre distance euclidienne en vert) \label{fig_man}}
 \end{marginfigure}
 
-\begin{defi}{Distance de Manhattan}
+\begin{defi}[Distance de Manhattan]
 \begin{itemize}
-\item La distance de \texttt{Manhattan}, appelée aussi \textit{taxi-distance}, est la distance entre deux points parcourue par un taxi lorsqu'il se déplace dans une ville où les rues sont agencées selon un réseau ou quadrillage (Fig. 2). 
+\item La distance de \texttt{Manhattan}, appelée aussi \textit{taxi-distance}, est la distance entre deux points parcourue par un taxi lorsqu'il se déplace dans une ville où les rues sont agencées selon un réseau ou quadrillage (figure \ref{fig_man}). 
 \item Un \textbf{taxi-chemin} est le trajet fait par un taxi lorsqu'il se déplace d'un sommet du réseau à un autre en utilisant les déplacements horizontaux et verticaux du réseau.
 \end{itemize}
 \end{defi}
@@ -83,7 +83,7 @@ On choisit alors la valeur \texttt{min} des f(s) des sommets visités.
 
 
 \begin{marginfigure}
-\includegraphics[width=\linewidth]{quadri1.jpg}
+\includegraphics[width=.5\linewidth]{quadri1.jpg}
 \end{marginfigure}
 
 
@@ -95,73 +95,73 @@ Chaque case voisine par le côté est à une distance $10$ soit $1 \times 10$ et
 \includegraphics[width=\linewidth]{quadri2.jpg}
 \end{marginfigure}
 
-On cherche à déterminer le plus court chemin entre D et A. Sur le quadrillage ci-dessous, on peut reporter les distance de Manhattan de chaque case à \textbf{A} : 
+On cherche à déterminer le plus court chemin entre D et A. Sur le quadrillage ci-contre, on peut reporter les distance de Manhattan de chaque case à \textbf{A}.
+
+Ensuite, on évalue la distance à l'origine, la distance de la fin et le coût global (étape 1). On choisit le sommet dont le coût global est le plus faible. En cas d'égalité, on choisit le sommet le plus proche de l'arrivée (étape 2).
+
+\begin{figure*}[!h]
+\begin{tabular}{ccc}
+%\textbf{\'Etape 1 :} On évalue la distance à l'origine, la distance de la fin et le coût global & \textbf{\'Etape 2 :} On choisit le sommet dont le coût global est le plus faible. En cas d'égalité, on choisit le sommet le plus proche de l'arrivée. \\
+Etape 1 & Etape 2 & Etape 3 \\
+\includegraphics[width=5cm]{quadri3.jpg} & \includegraphics[width=5cm]{quadri4.jpg} & \includegraphics[width=5cm]{quadri5.jpg} \\ 
+
+Etape 4 & Etape 5 & Etape 6 \\
+\includegraphics[width=5cm]{quadri6.jpg} & \includegraphics[width=5cm]{quadri7.jpg} & \includegraphics[width=5cm]{quadri8.jpg} \\ 
+
+Etape 7 & Etape 8 & Etape 9 \\
+\includegraphics[width=5cm]{quadri9.jpg} & \includegraphics[width=5cm]{quadri10.jpg} & \includegraphics[width=5cm]{quadri11.jpg} \\ 
+
+\end{tabular}
+\end{figure*}
 
 
 
-\textbf{\'Etape 1 :} On évalue la distance à l'origine, la distance de la fin et le coût global \\
-
-\begin{marginfigure}
-\includegraphics[width=\linewidth]{quadri3.jpg}
-\end{marginfigure}
 
 
-\textbf{\'Etape 2 :} On choisit le sommet dont le coût global est le plus faible. En cas d'égalité, on choisit le sommet le plus proche de l'arrivée.
+%\begin{marginfigure}
+%\includegraphics[width=\linewidth]{quadri4.jpg}
+%\end{marginfigure}
+%
+%\textbf{\'Etape 3}
+%\begin{marginfigure}
+%\includegraphics[width=\linewidth]{quadri5.jpg}
+%\end{marginfigure}
+%
+%\textbf{\'Etape 4}
+%\begin{marginfigure}
+%\includegraphics[width=\linewidth]{quadri6.jpg}
+%\end{marginfigure}
+%
+%\textbf{\'Etape 5}
+%\begin{marginfigure}
+%\includegraphics[width=\linewidth]{quadri7.jpg}
+%\end{marginfigure}
+%
+%\textbf{\'Etape 6}
+%\begin{marginfigure}
+%\includegraphics[width=\linewidth]{quadri8.jpg}
+%\end{marginfigure}
+%
+%\textbf{\'Etape 7}
+%\begin{marginfigure}
+%\includegraphics[width=\linewidth]{quadri9.jpg}
+%\end{marginfigure}
+%
+%\textbf{\'Etape 8}
+%\begin{marginfigure}
+%\includegraphics[width=\linewidth]{quadri10.jpg}
+%\end{marginfigure}
+%
+%\textbf{\'Etape 9 :}
+%\begin{marginfigure}
+%\includegraphics[width=\linewidth]{quadri11.jpg}
+%\end{marginfigure}
 
-\begin{marginfigure}
-\includegraphics[width=\linewidth]{quadri4.jpg}
-\end{marginfigure}
-
-
-
-
-
-\textbf{\'Etape 3}
-\begin{marginfigure}
-\includegraphics[width=\linewidth]{quadri5.jpg}
-\end{marginfigure}
-
-
-
-\textbf{\'Etape 4}
-
-\begin{marginfigure}
-\includegraphics[width=\linewidth]{quadri6.jpg}
-\end{marginfigure}
-
-\textbf{\'Etape 5}
-
-\begin{marginfigure}
-\includegraphics[width=\linewidth]{quadri7.jpg}
-\end{marginfigure}
-
-
-\textbf{\'Etape 6}
-
-\begin{marginfigure}
-\includegraphics[width=\linewidth]{quadri8.jpg}
-\end{marginfigure}
-
-\textbf{\'Etape 7}
-\begin{marginfigure}
-\includegraphics[width=\linewidth]{quadri9.jpg}
-\end{marginfigure}
-
-\textbf{\'Etape 8}
-\begin{marginfigure}
-\includegraphics[width=\linewidth]{quadri10.jpg}
-\end{marginfigure}
-
-\textbf{\'Etape 9 :}
-
-\begin{marginfigure}
-\includegraphics[width=\linewidth]{quadri11.jpg}
-\end{marginfigure}
-
-Finalement le chemin le plus court :
+Finalement le chemin le plus court est donné figure \ref{fig_court}.
 
 \begin{marginfigure}
 \includegraphics[width=\linewidth]{quadrifinal.jpg}
+\caption{Chemin le plus court \label{fig_court}}.
 \end{marginfigure}
 
 
@@ -189,13 +189,11 @@ On peut aussi choisir l’écriture suivante,
 \subsection{L'heuristique}
 \begin{lstlisting}
 def heuristique(pt1:tuple,A:tuple)->int:
-    """Calcul de la valeur de l'heuristique avec la méthode du cours, 14 pour un
-    déplacement diagonal et 10 pour un déplacement sur le côté
-    entrées : pt1, tuple ou list des coordonnées et A, tuple ou list des coordonnées
+    """Calcul de la valeur de l'heuristique avec la méthode du cours, 14 pour un déplacement diagonal et 10 pour un déplacement sur le côté entrées : pt1, tuple ou list des coordonnées et A, tuple ou list des coordonnées 
     sortie : H : integer, valeur de l'heuristique. """
-    a=abs(pt1[0]-A[0])
-    b=abs(pt1[1]-A[1])
-    if a<=b:
+    a = abs(pt1[0]-A[0])
+    b = abs(pt1[1]-A[1])
+    if a <= b:
         return (a*14+(b-a)*10)
     else:
         return (b*14+(a-b)*10)
@@ -203,25 +201,25 @@ def heuristique(pt1:tuple,A:tuple)->int:
 
 \subsection{Le graphe pondéré}
 \begin{lstlisting}
-G=np.ones((5,9))
-G[1,4]=-10
-G[1,5]=-10
-G[2,4]=-10
-G[3,4]=-10
-M={}
+G = np.ones((5,9))
+G[1,4] = -10
+G[1,5] = -10
+G[2,4] = -10
+G[3,4] = -10
+M = {}
 ligne,colonne=G.shape
 for i in range(ligne):
     for j in range(colonne):
-        if not G[i,j]==-10.0:
-            M[i,j]=[np.inf,None,np.inf,None]
+        if not G[i,j] == -10:
+            M[i,j] = [np.inf,None,np.inf,None]
 \end{lstlisting}
 
 \subsection{L'algorithme}
 \begin{lstlisting}
 ### les voisins sont les cases a côté du point considéré en ligne droite ou en diagonale
 def estVoisin(M:dict,pt1:tuple):
-    l,c=pt1
-    voisins=[]
+    l,c = pt1
+    voisins = []
     for i in [-1,0,1]:
         for j in [-1,0,1]:
             if (l+i,c+j) in M:
@@ -231,38 +229,40 @@ def estVoisin(M:dict,pt1:tuple):
 
 # >>> estVoisin(G,[1,2])
 # [[0, 1], [0, 2], [0, 3], [1, 1], [1, 3], [2, 1], [2, 2], [2, 3]]
+\end{lstlisting}
 
+\begin{lstlisting}
 ### on peut calculer la distance entre deux points voisins en dehors de Astar
 def distance(pt1:tuple,pt2:tuple):
     '''pt1 et pt2 doivent être voisin en ligne ou en diagonale'''
-    ligne=0
-    colonne=0
-    i,j=pt1
-    l,c=pt2
-    if not i==l:
+    ligne = 0
+    colonne = 0
+    i,j = pt1
+    l,c = pt2
+    if not i == l:
         ligne=1
-    if not j==c:
-        colonne=1
-    if colonne==ligne:
+    if not j == c:
+        colonne = 1
+    if colonne == ligne:
         return 14
     else:
         return 10
 
 # >>> distance([1,2],[0, 3])
 # 14
+\end{lstlisting}
 
+\begin{lstlisting}
 def Astar(M:dict,depart,fin,visited=[]):
-    '''calcul le plus court chemin en partant de départ pour atteindre
-    arrivée par l'algorithme de Astar avec un heuristique de distance la plus courte
-    entrées :
+    '''calcul le plus court chemin en partant de départ pour atteindre arrivée par l'algorithme de Astar avec un heuristique de distance la plus courte entrées :
     M : dict, dictionnaire dont chaque sommet est un couple de coordonnées et sa valeur une liste de 4 éléments : G, H, F et le prédécesseur
     départ : un sommet de M dont on connait les coordonnées
     fin : un sommet de M dont on connait les coordonnées
     sortie : None (ne renvoie rien)'''
     if depart not in list(M.keys()):
-        raise TypeError('Le sommet de départ n\'est pas dans le graphe')
+        raise TypeError('Le sommet de départ n est pas dans le graphe')
     if fin not in list(M.keys()):
-        raise TypeError('Le sommet d\'arrivée n\'est pas dans le graphe')
+        raise TypeError('Le sommet d arrivée n est pas dans le graphe')
     # condition de sortie de la boucle récursive
     if depart==fin:
         # on construit le plus court chemin et on l'affiche
@@ -302,8 +302,6 @@ def Astar(M:dict,depart,fin,visited=[]):
                 not_visited[k] = M[k][2]
         x=min(not_visited, key=not_visited.get)
         Astar(M,x,fin,visited)
-
-
 \end{lstlisting}
 
 
