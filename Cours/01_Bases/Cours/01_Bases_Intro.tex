@@ -91,11 +91,25 @@ calcule et affiche alors la valeur qu'il a calculée.
 Une \textbf{variable} désigne une zone mémoire de l'ordinateur dans la RAM.
 Il s'agit d'un endroit où l'on peut \textbf{stocker} une valeur, y \textbf{accéder} et 
 \textbf{changer} cette valeur.
+\end{defi}
 
 Pour faire référence à une variable, on utilise un nom de variable, en général composé d'une ou 
 plusieurs lettres. Dans la mesure du possible, on choisit un nom explicite, ce qui permet une 
 meilleure lecture du programme.
+
+
+
+\begin{defi}[Affectation]
+Quand on stocke une valeur \texttt{d} dans une variable \texttt{var}, on dit que l'on 
+\textbf{affecte} \texttt{d} à la variable \texttt{var}. La valeur
+\texttt{d} est encore appelée \textbf{la donnée}.
 \end{defi}
+
+En Python , cette affectation est faite avec la commande \lstinline{=}, comme suit.  
+
+\begin{lstlisting}
+>>> var  = 1
+\end{lstlisting}
 
 
 
@@ -293,18 +307,18 @@ La fonction \texttt{int} appliquée à un nombre flottant procède donc à une t
 %Les autres opérateurs sont les mêmes que pour les tuples et les chaînes. Nous reviendrons plus tard sur les listes.
 %\end{defi}
 
-\subsection{Conversions}
-
-On peut convertir des types simples en chaînes avec la fonction \texttt{str} : \texttt{str(2.3)} 
-renvoie \texttt{'2.3'}.\\
-À l'inverse, \texttt{int, float} et \texttt{bool} permettent de faire l'inverse quand cela est 
-cohérent : \textbf{bool('True')} renvoie \texttt{True}, mais \texttt{int('2.3')} renvoie une 
-erreur.\\
-
-Il est également possible de passer d'un type composé à un autre grâce aux fonctions \texttt{str}, 
-\texttt{tuple} et \texttt{list} : \texttt{str((1,'a',[1,2]))} renvoie \texttt{''(1,'a',[1,2])''}, 
-\texttt{tuple([1,2,3] )} renvoie \texttt{(1,2,3)} et \texttt{list('Coucou ?')} renvoie 
-\texttt{['C', 'o', 'u', 'c', 'o', 'u', ' ', '?']}.
+%\subsection{Conversions}
+%
+%On peut convertir des types simples en chaînes avec la fonction \texttt{str} : \texttt{str(2.3)} 
+%renvoie \texttt{'2.3'}.\\
+%À l'inverse, \texttt{int, float} et \texttt{bool} permettent de faire l'inverse quand cela est 
+%cohérent : \textbf{bool('True')} renvoie \texttt{True}, mais \texttt{int('2.3')} renvoie une 
+%erreur.\\
+%
+%Il est également possible de passer d'un type composé à un autre grâce aux fonctions \texttt{str}, 
+%\texttt{tuple} et \texttt{list} : \texttt{str((1,'a',[1,2]))} renvoie \texttt{''(1,'a',[1,2])''}, 
+%\texttt{tuple([1,2,3] )} renvoie \texttt{(1,2,3)} et \texttt{list('Coucou ?')} renvoie 
+%\texttt{['C', 'o', 'u', 'c', 'o', 'u', ' ', '?']}.
 
 \subsection{Affectation}
 
@@ -350,36 +364,68 @@ des tuples. Ainsi : \texttt{a,b = (1,2)} affecte la valeur 1 à \texttt{a} et la
 \begin{remarque}
 En Python, le \textbf{typage} des variables est \textbf{dynamique}. Cela signifie que lorsqu'on affecte une valeur à une variable, Python reconnaît automatiquement le type de la valeur. Ce n'est pas le cas de tous les langages de programmation.
 %Par exemple, le \texttt{C} n'est pas typé dynamiquement. Il faut alors déclarer une variable avec un type, puis affecter la valeur. 
-
 \end{remarque}
+
+
+\begin{remarque}[ -- Affectation multiple]
+En Python, il est possible d'affecter plusieurs variables à la fois.
+
+\begin{lstlisting}
+>>> a,b,c = 1,2,3
+\end{lstlisting}
+
+est équivalent à 
+
+
+\begin{lstlisting}
+>>> a = 1
+>>> b = 2
+>>> c = 3
+\end{lstlisting}
+\end{remarque}
+
+\subsubsection*{Affichage d'une variable}
+Pour afficher une variable, on peut la saisir dans le shell ou utiliser la fonction \lstinline{print}.
+\begin{lstlisting}
+>>> a = 1
+>>> print(a)
+1
+\end{lstlisting}
+
+
 \subsubsection*{Notion d'adressage}
 
-En Python, le passage des variables se fait par \textbf{référence}. C'est-à-dire que lorsqu'on manipule une variable (qu'on l'envoie à une fonction par exemple), on ne donne pas comme argument la valeur de la fonction, mais son adresse mémoire. Pour les types non mutables (entiers, flottants, chaîne de caractères, tuples), le passage par référence ne pose pas de problèmes. Pour les types mutables (listes), le passage par référence peut conduire à des résultats <<~inattendus~>> notamment lors de la copie de listes. 
+En Python, le passage des variables se fait par \textbf{référence}. C'est-à-dire que lorsqu'on manipule une variable (qu'on l'envoie à une fonction par exemple), on ne donne pas comme argument la valeur de la fonction, mais son adresse mémoire. Pour les types non mutables (entiers, flottants, chaîne de caractères, tuples), le passage par référence ne pose pas de problèmes. Pour les types mutables (listes), le passage par référence peut conduire à des résultats <<~inattendus~>> notamment lors de la copie de listes. Nous en reparlerons ultérieurement.
 
+Pour savoir si  deux objets ont la même adresse, on peut utiliser la fonctiob \lstinline{id} donnant << l'identité >> d'un objet.
+C'est un nombre entier garanti unique et constant pour cet objet durant sa durée de vie. 
+Deux objets sont les durées de vie ne se chevauchent pas peuvent partager le même \lstinline{id()}.
 
-%\begin{xxpyconsole}~\\ \vspace{-.5cm}
-\begin{multicols}{2}
-\begin{lstlisting}
->>> a=2
->>> print(a)
-	2
->>> a=3
->>> print(a)
-	3
->>> a=[1,2]
-\end{lstlisting}
-
-\begin{lstlisting}
->>> print(a)
-	[1,2]
->>> b=a
->>> a[0]=2
->>> print(a,b)
-	[2,2] [2,2]
-\end{lstlisting}
-\end{multicols}
-Ici l'affectation \texttt{b=a} ne crée pas une nouvelle liste \texttt{b}. On crée juste une nouvelle variable \texttt{b} qui a la même adresse mémoire que \texttt{a}. Ainsi en modifiant \texttt{a}, on modifie \texttt{b}. 
-%\end{xxpyconsole}
+%
+%
+%%\begin{xxpyconsole}~\\ \vspace{-.5cm}
+%\begin{multicols}{2}
+%\begin{lstlisting}
+%>>> a=2
+%>>> print(a)
+%	2
+%>>> a=3
+%>>> print(a)
+%	3
+%>>> a=[1,2]
+%\end{lstlisting}
+%
+%\begin{lstlisting}
+%>>> print(a)
+%	[1,2]
+%>>> b=a
+%>>> a[0]=2
+%>>> print(a,b)
+%	[2,2] [2,2]
+%\end{lstlisting}
+%\end{multicols}
+%Ici l'affectation \texttt{b=a} ne crée pas une nouvelle liste \texttt{b}. On crée juste une nouvelle variable \texttt{b} qui a la même adresse mémoire que \texttt{a}. Ainsi en modifiant \texttt{a}, on modifie \texttt{b}. 
+%%\end{xxpyconsole}
 
 
 
