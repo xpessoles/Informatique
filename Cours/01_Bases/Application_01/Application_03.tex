@@ -16,11 +16,14 @@
 
 
 
+\section*{Initiation à l'implémentations de fonctions}
 
 
 \subsection*{Exercice -- Structures conditionnelles}
 
 \question{Implémenter une fonction \texttt{est\_plus\_grand(a:int,b:int)-> bool} renvoyant \texttt{True} si $a>b$, \texttt{False} sinon. }
+
+
 
 \question{\'Ecrire une fonction \texttt{neg(b)} qui renvoie la négation du booléen \texttt{b} sans utiliser \texttt{not}.}
 
@@ -62,6 +65,50 @@
 
 \question{Implémenter la fonction \texttt{zeros\_03(n:int)->list} permettant de générer une liste de \texttt{n 0}. On utilisera une boucle \texttt{while}. On génèrera cette liste <<~en compréhension~>> (sans boucle \texttt{for} ou \texttt{while} explicite).}
 
+\subsection*{Exercice -- Liste d'entiers}
+
+\question{Implémenter la fonction \texttt{entiers\_01(n:int)->list} permettant de générer la liste des entiers compris entre 0 inclus et \texttt{n} exclus. On utilisera une boucle \texttt{while}.}
+
+\begin{lstlisting}
+>>> entiers_01(4)
+	[0,1,2,3]
+\end{lstlisting}
+
+\question{Implémenter la fonction \texttt{entiers\_02(n:int)->list} permettant de générer la liste des entiers compris entre 0 inclus et \texttt{n} exclus. On utilisera une boucle \texttt{for}.}
+
+
+\question{Implémenter la fonction \texttt{entiers\_03(n:int)->list} permettant de générer la liste des entiers compris entre 0 inclus et \texttt{n} exclus. On génèrera cette liste << en compréhension >> (sans boucle \texttt{for} ou \texttt{while} explicite).}
+
+\question{\'Ecrire une fonction \texttt{carres(n:int)->list} qui prend en argument un entier naturel \texttt{n} et qui renvoie la liste des \texttt{n} premiers carrés d'entiers, en commençant par $0$.}
+
+\question{\'Ecrire une fonction \texttt{somme\_racine(n:int)->float} permettant de calculer la somme des racines carrées des n premiers entiers naturels non nuls.}
+
+\subsection*{Exercice -- Notion d'effet de bords}
+
+On cherche à écrire une fonction prenant en argument une liste d'entiers (non vide) et incrémentant de $1$ le premier élément de cette liste.
+
+\question{\'Ecrire une telle fonction \texttt{incr\_sans\_effet\_de\_bord(L:list)->list}, qui ne modifie pas la liste initiale et renvoie en sortie une nouvelle liste.}
+
+\begin{lstlisting}
+>>> L = [1,2,3]
+>>> LL = incr_sans_effet_de_bord(L)
+>>> print(L)
+    [1,2,3]
+>>> print(LL)
+    [2,2,3]
+\end{lstlisting}
+
+
+\question{\'Ecrire une telle fonction \texttt{incr\_avec\_effet\_de\_bord(L:list)-> None}, qui modifie la liste initiale et ne renvoie rien en sortie (ponctuer par un \texttt{return None}).}
+
+\begin{lstlisting}
+>>> L = [1,2,3]
+>>> LL = incr_sans_effet_de_bord(L)
+>>> print(L)
+    [2,2,3]
+>>> print(LL)
+    None
+\end{lstlisting}
 
 
 \subsection*{Exercice -- Structures itératives}
@@ -81,7 +128,7 @@
 
 \question{Implémenter la fonction \texttt{impairs(n:int)->list} permettant de générer la liste des \texttt{n} premiers entiers naturels impairs.}
 
-\question{Implémenter la fonction \texttt{multiples\_5(d:int, f:int)->list} permettant de générer la liste de tous les multiples de 5 compris entre \texttt{d} et \texttt{f} (bornes incluses si se sont des multiples de 5).}
+\question{Implémenter la fonction \texttt{multiples\_5(d:int, f:int)->list} permettant de générer la liste de tous les multuples de 5 compris entre \texttt{d} et \texttt{f} (bornes incluses si se sont des multiples de 5).}
 
 \question{Implémenter la fonction \texttt{cube(f:int)->list} permettant de générer la liste de tous les cubes d'entiers naturels inférieurs ou égaux à \texttt{f} (inclus si \texttt{f} est un cube).}
 
@@ -93,4 +140,11 @@
 \question{\'Ecrire une fonction \texttt{moyenne(L:list)->float} qui prend en argument une liste \texttt{L} et renvoie la moyenne des éléments de \texttt{L}.}
 
 \question{\'Ecrire une fonction \texttt{ecart\_type(L:list)->float} qui prend en argument une liste \texttt{L} et renvoie l'éacrt type des données : en notant $\overline{x}$ la moyenne des échantillons, on a  $\sigma = \sqrt{\dfrac{1}{n}\sum\limits_{i=1}^n \left(x_i^2  - \overline{x}\right)}$.}
+
+
+
+\subsection*{Exercice -- Chaînes de caractères}
+
+\question{\'Ecrire une fonction \texttt{lettre(i:int)->str} qui prend en argument un entier \texttt{i} et renvoie la \texttt{i}\ieme\ lettre de l'alphabet.}
+
 
