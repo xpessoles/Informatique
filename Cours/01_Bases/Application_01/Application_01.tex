@@ -27,17 +27,87 @@
 \item le résultat d'un test d'une inégalité;
 \item le nombre de secondes dans une journée.
 \end{enumerate}}
-
+\ifprof
+\begin{corrige}
+\begin{enumerate}
+\item le nombre de coté d'un polygones : \lstinline{int};
+\item le nombre $\pi$ \lstinline{float};
+\item le résultat d'un test d'égalité \lstinline{bool};
+\item le nombre de pays dans le monde \lstinline{int};
+\item la vitesse moyenne d'un véhicule en \si{m.s^{-1}} \lstinline{float};
+\item le résultat d'un test d'une inégalité \lstinline{bool};
+\item le nombre de secondes dans une journée \lstinline{int}.
+\end{enumerate}
+\end{corrige}
+\else\fi
 
 \section*{Fonctions}
 \question{Ecrire une fonction \lstinline{perimetre_rectangle(a:float, b:float) -> float} qui calcule le périmètre d'un rectangle.}
+\ifprof
+\begin{corrige}
+\begin{lstlisting}
+def perimetre_rectangle(a:float, b:float) -> float : 
+    return 2*(a+b)
+\end{lstlisting}
+\end{corrige}
+\else
+\fi
 
 \question{Ecrire une fonction \lstinline{aire_rectangle(a:float,b:float) -> float} qui calcule l'aire d'un rectangle.}
+\ifprof
+\begin{corrige}
+\begin{lstlisting}
+def aire_rectangle(a:float,b:float) -> float :
+    return a*b
+\end{lstlisting}
+\end{corrige}
+\else
+\fi
 
 \question{Ecrire une fonction \lstinline{perimetre_cercle(R:float) -> float} qui calcule le périmètre d'un cercle.}
+\ifprof
+\begin{corrige}
+\begin{lstlisting}
+import math as m
+def perimetre_cercle(R:float) -> float :
+    return 2*m.pi*R
+\end{lstlisting}
+\end{corrige}
+\else
+\fi
 
 \question{Ecrire une fonction \lstinline{aire_disque(R:float) -> float} qui calcule l'aire d'un disque.}
+\ifprof
+\begin{corrige}
+\begin{lstlisting}
+def aire_disque(R:float) -> float :
+    return m.pi*R**2
+\end{lstlisting}
+\end{corrige}
+\else
+\fi
 
 \question{Ecrire une fonction qui calcule l'aire d'un trapèze de hauteur $h$, de petite base $b$ et de grande base $B$.}
+\ifprof
+\begin{corrige}
+\begin{lstlisting}
+def aire_trapeze(h, b, B) -> float :
+    return 0.5 * (b+B)*h
+\end{lstlisting}
+\end{corrige}
+\else
+\fi
 
 \question{Ecrire une suite d'instructions qui permet de permuter les valeurs de deux variables \lstinline{a} et \lstinline{b}.}
+\ifprof
+\begin{corrige}
+\begin{lstlisting}
+a = 1
+b = 2
+c = a
+a = b 
+b = c
+\end{lstlisting}
+\end{corrige}
+\else
+\fi
