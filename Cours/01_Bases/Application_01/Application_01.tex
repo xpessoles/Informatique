@@ -16,135 +16,98 @@
 
 
 
-\section*{Initiation à l'implémentations de fonctions}
+\section*{Variables, types, affectations}
+\question{Dans chaque cas, indiquer le type que vous utiliseriez pour modéliser les grandeurs suivantes :
+\begin{enumerate}
+\item le nombre de coté d'un polygones;
+\item le nombre $\pi$;
+\item le résultat d'un test d'égalité;
+\item le nombre de pays dans le monde;
+\item la vitesse moyenne d'un véhicule en \si{m.s^{-1}};
+\item le résultat d'un test d'une inégalité;
+\item le nombre de secondes dans une journée.
+\end{enumerate}}
+\ifprof
+\begin{corrige}
+\begin{enumerate}
+\item le nombre de coté d'un polygones : \lstinline{int};
+\item le nombre $\pi$ \lstinline{float};
+\item le résultat d'un test d'égalité \lstinline{bool};
+\item le nombre de pays dans le monde \lstinline{int};
+\item la vitesse moyenne d'un véhicule en \si{m.s^{-1}} \lstinline{float};
+\item le résultat d'un test d'une inégalité \lstinline{bool};
+\item le nombre de secondes dans une journée \lstinline{int}.
+\end{enumerate}
+\end{corrige}
+\else\fi
 
-
-\subsection*{Exercice -- Structures conditionnelles}
-
-\question{Implémenter une fonction \texttt{est\_plus\_grand(a:int,b:int)-> bool} renvoyant \texttt{True} si $a>b$, \texttt{False} sinon. }
-
-
-
-\question{\'Ecrire une fonction \texttt{neg(b)} qui renvoie la négation du booléen \texttt{b} sans utiliser \texttt{not}.}
-
-\question{\'Ecrire une fonction \texttt{ou(a,b)} qui renvoie le ou logique des booléen \texttt{a} et \texttt{b} sans utiliser \texttt{not}, \texttt{or} ni \texttt{and}.}
-
-\question{\'Ecrire une fonction \texttt{et(a,b)} qui renvoie le et logique des booléen \texttt{a} et \texttt{b} sans utiliser \texttt{not}, \texttt{or} ni \texttt{and}.}
-
-%\subsection*{Implémentations de fonctions prenant des listes en argument}
-
-\subsection*{Exercice -- Un tout petit peu d'arithmétique}
-
-\question{Implémenter la fonction \texttt{unite(n:int)->int} renvoyant le chiffre des unités de l'entier \texttt{n}.}
-
-
+\section*{Fonctions}
+\question{Ecrire une fonction \lstinline{perimetre_rectangle(a:float, b:float) -> float} qui calcule le périmètre d'un rectangle.}
+\ifprof
+\begin{corrige}
 \begin{lstlisting}
->>> unite(123)
-	3
+def perimetre_rectangle(a:float, b:float) -> float : 
+    return 2*(a+b)
 \end{lstlisting}
+\end{corrige}
+\else
+\fi
 
-\question{Implémenter la fonction \texttt{dizaine(n:int)->int} renvoyant le chiffre des dizaines de l'entier \texttt{n}.}
-
+\question{Ecrire une fonction \lstinline{aire_rectangle(a:float,b:float) -> float} qui calcule l'aire d'un rectangle.}
+\ifprof
+\begin{corrige}
 \begin{lstlisting}
->>> dizaine(123)
-	2
+def aire_rectangle(a:float,b:float) -> float :
+    return a*b
 \end{lstlisting}
+\end{corrige}
+\else
+\fi
 
-\question{Implémenter la fonction  \texttt{unites\_base8(n:int)->int} renvoyant le chiffre des unités de l'entier \texttt{n} en base 8.}
-
-\subsection*{Exercice -- Liste de zéros}
-
-\question{Implémenter la fonction \texttt{zeros\_01(n:int)->list} permettant de générer une liste de \texttt{n 0}. On utilisera une boucle \texttt{while}.}
-
+\question{Ecrire une fonction \lstinline{perimetre_cercle(R:float) -> float} qui calcule le périmètre d'un cercle.}
+\ifprof
+\begin{corrige}
 \begin{lstlisting}
->>> zeros_01(4)
-	[0,0,0,0]
+import math as m
+def perimetre_cercle(R:float) -> float :
+    return 2*m.pi*R
 \end{lstlisting}
+\end{corrige}
+\else
+\fi
 
-\question{Implémenter la fonction \texttt{zeros\_02(n:int)->list} permettant de générer une liste de \texttt{n 0}. On utilisera une boucle \texttt{for}.}
-
-\question{Implémenter la fonction \texttt{zeros\_03(n:int)->list} permettant de générer une liste de \texttt{n 0}. On utilisera une boucle \texttt{while}. On génèrera cette liste <<~en compréhension~>> (sans boucle \texttt{for} ou \texttt{while} explicite).}
-
-\subsection*{Exercice -- Liste d'entiers}
-
-\question{Implémenter la fonction \texttt{entiers\_01(n:int)->list} permettant de générer la liste des entiers compris entre 0 inclus et \texttt{n} exclus. On utilisera une boucle \texttt{while}.}
-
+\question{Ecrire une fonction \lstinline{aire_disque(R:float) -> float} qui calcule l'aire d'un disque.}
+\ifprof
+\begin{corrige}
 \begin{lstlisting}
->>> entiers_01(4)
-	[0,1,2,3]
+def aire_disque(R:float) -> float :
+    return m.pi*R**2
 \end{lstlisting}
+\end{corrige}
+\else
+\fi
 
-\question{Implémenter la fonction \texttt{entiers\_02(n:int)->list} permettant de générer la liste des entiers compris entre 0 inclus et \texttt{n} exclus. On utilisera une boucle \texttt{for}.}
-
-
-\question{Implémenter la fonction \texttt{entiers\_03(n:int)->list} permettant de générer la liste des entiers compris entre 0 inclus et \texttt{n} exclus. On génèrera cette liste << en compréhension >> (sans boucle \texttt{for} ou \texttt{while} explicite).}
-
-\question{\'Ecrire une fonction \texttt{carres(n:int)->list} qui prend en argument un entier naturel \texttt{n} et qui renvoie la liste des \texttt{n} premiers carrés d'entiers, en commençant par $0$.}
-
-\question{\'Ecrire une fonction \texttt{somme\_racine(n:int)->float} permettant de calculer la somme des racines carrées des n premiers entiers naturels non nuls.}
-
-\subsection*{Exercice -- Notion d'effet de bords}
-
-On cherche à écrire une fonction prenant en argument une liste d'entiers (non vide) et incrémentant de $1$ le premier élément de cette liste.
-
-\question{\'Ecrire une telle fonction \texttt{incr\_sans\_effet\_de\_bord(L:list)->list}, qui ne modifie pas la liste initiale et renvoie en sortie une nouvelle liste.}
-
+\question{Ecrire une fonction qui calcule l'aire d'un trapèze de hauteur $h$, de petite base $b$ et de grande base $B$.}
+\ifprof
+\begin{corrige}
 \begin{lstlisting}
->>> L = [1,2,3]
->>> LL = incr_sans_effet_de_bord(L)
->>> print(L)
-    [1,2,3]
->>> print(LL)
-    [2,2,3]
+def aire_trapeze(h, b, B) -> float :
+    return 0.5 * (b+B)*h
 \end{lstlisting}
+\end{corrige}
+\else
+\fi
 
-
-\question{\'Ecrire une telle fonction \texttt{incr\_avec\_effet\_de\_bord(L:list)-> None}, qui modifie la liste initiale et ne renvoie rien en sortie (ponctuer par un \texttt{return None}).}
-
+\question{Ecrire une suite d'instructions qui permet de permuter les valeurs de deux variables \lstinline{a} et \lstinline{b}.}
+\ifprof
+\begin{corrige}
 \begin{lstlisting}
->>> L = [1,2,3]
->>> LL = incr_sans_effet_de_bord(L)
->>> print(L)
-    [2,2,3]
->>> print(LL)
-    None
+a = 1
+b = 2
+c = a
+a = b 
+b = c
 \end{lstlisting}
-
-
-\subsection*{Exercice -- Structures itératives}
-
-\question{\'Ecrire la fonction \texttt{somme\_inverse(n:int)->float} calculant la somme des inverses des \texttt{n} premiers entiers non nuls.}
-
-
-\subsection*{Exercice -- Un petit peu de géométrie}
-
-\question{Implémenter la fonction \texttt{norme(A:list,B:list)->float} permettant calculer la norme du vecteur $\vect{AB}$ dans $\mathbb{R}^3$. Chacun des points sera constitué de la liste de ses coordonnées (par exemple \texttt{A=[xA,yA,zA]}).}
-
-\question{Implémenter la fonction \texttt{prod\_vect(u:list, v:list)->float} permettant calculer le produit vectoriel $\vect{u}\wedge \vect{v}$ dans $\mathbb{R}^3$.}
-
-
-
-\subsection*{Exercice -- Suites d'entiers}
-
-\question{Implémenter la fonction \texttt{impairs(n:int)->list} permettant de générer la liste des \texttt{n} premiers entiers naturels impairs.}
-
-\question{Implémenter la fonction \texttt{multiples\_5(d:int, f:int)->list} permettant de générer la liste de tous les multuples de 5 compris entre \texttt{d} et \texttt{f} (bornes incluses si se sont des multiples de 5).}
-
-\question{Implémenter la fonction \texttt{cube(f:int)->list} permettant de générer la liste de tous les cubes d'entiers naturels inférieurs ou égaux à \texttt{f} (inclus si \texttt{f} est un cube).}
-
-
-\subsection*{Exercice -- Un petit peu de statistiques}
-
-\question{\'Ecrire une fonction \texttt{moy\_extr(L:list)->float} qui prend en argument une liste \texttt{L} et renvoie en sortie la moyenne du premier et du dernier élément de \texttt{L}.}
-
-\question{\'Ecrire une fonction \texttt{moyenne(L:list)->float} qui prend en argument une liste \texttt{L} et renvoie la moyenne des éléments de \texttt{L}.}
-
-\question{\'Ecrire une fonction \texttt{ecart\_type(L:list)->float} qui prend en argument une liste \texttt{L} et renvoie l'éacrt type des données : en notant $\overline{x}$ la moyenne des échantillons, on a  $\sigma = \sqrt{\dfrac{1}{n}\sum\limits_{i=1}^n \left(x_i^2  - \overline{x}\right)}$.}
-
-
-
-\subsection*{Exercice -- Chaînes de caractères}
-
-\question{\'Ecrire une fonction \texttt{lettre(i:int)->str} qui prend en argument un entier \texttt{i} et renvoie la \texttt{i}\ieme\ lettre de l'alphabet.}
-
-
+\end{corrige}
+\else
+\fi

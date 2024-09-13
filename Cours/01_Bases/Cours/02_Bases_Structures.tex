@@ -1,0 +1,755 @@
+\setchapterimage{Fond_ALG.png}
+\setchapterpreamble[u]{\margintoc}
+\chapter{Initiation aux structures algorithmiques}
+
+\marginnote[4cm]{
+\begin{itemize} 
+\item Choisir un type de variable.
+\item Concevoir un algorithme utilisant une structure conditionnelle (Si), une structure itérative (while), une structure itérative (for).
+\end{itemize}}
+
+
+\section{L'instruction conditionnelle}
+\subsection{Algorithme}
+Quand on veut écrire un programme, on souhaite établir des connections logiques
+entre les instructions. 
+Ainsi, l'instruction conditionnelle a pour objet
+d'intervenir dans le choix de l'instruction suivante en fonction d'une expression booléenne qu'on 
+désignera par \textbf{condition} : 
+
+%\vspace{1cm}
+\begin{center}
+\fbox{\begin{minipage}{12cm}
+
+\begin{center}
+\begin{tabular}{|l}
+\textbf{Si} condition\\
+\hspace{0.7cm}
+\begin{tabular}{l}
+\textbf{alors } bloc d'instructions 1\\
+\textbf{sinon} bloc d'instructions 2\\
+\end{tabular}\\
+\textbf{Fin-du-Si}
+\end{tabular}
+\end{center}
+
+
+
+\begin{center}
+signifie que 
+\end{center}
+
+\begin{itemize}
+\item \textbf{Si} la condition est vérifiée (expression booléenne=\texttt{True}) 
+
+\textbf{alors} le programme exécute les instructions du bloc 1;
+
+\item \textbf{si} la condition n'est pas vérifiée (expression booléenne=\texttt{False})
+
+\textbf{alors }le programme exécute les instructions du bloc 2.
+\end{itemize}
+\end{minipage}}
+
+\end{center}
+%\newpage
+
+
+\subsection{Syntaxe en Python}
+
+%\begin{lstlisting}
+\begin{lstlisting}
+if condition : 
+	bloc d instructions 1
+else :
+	bloc d instructions 2
+\end{lstlisting}
+
+
+ \begin{itemize}
+ \item \textbf{Si} et \textbf{Sinon} se traduisent par \texttt{if} et \texttt{else}. 
+ 
+ \item \textbf{Alors} se traduit par \og \textbf{:} \fg\ en bout de ligne et une indentation de toutes les 
+lignes du bloc 1.
+ 
+ \item \textbf{Fin-du-Si} se traduit par un retour à la ligne sans indentation. 
+ 
+ \end{itemize}
+
+ 
+\subsection{Exemple}
+
+On veut tester si un nombre $x$ est proche de 3 à $10^{-4}$ près. On peut alors écrire la fonction suivante. 
+
+\begin{lstlisting}
+def est_proche(x):
+    """x est proche de 3 à 10**-4 près ?"""
+    distance = abs(x-3)
+    if distance <= 10**(-4) : 
+        return True 
+    else : 
+        return False
+\end{lstlisting}
+
+
+
+\begin{remarque} 
+La partie \textbf{sinon} est optionnelle. Sans elle, si la condition n'est pas vérifiée, alors la 
+machine n'exécute rien.
+\end{remarque}
+
+\begin{remarque}
+  On pouvait très bien remplacer cette boucle conditionnelle avec un usage astucieux des booléens, comme suit.
+\begin{lstlisting}
+def est_proche(x):
+    """x est proche de 3 à 10**-4 près ?"""
+    distance = abs(x-3)
+    return distance <= 10**(-4)
+\end{lstlisting}
+La fonction est alors plus concise, mais plus difficilement lisible. 
+\end{remarque}
+
+
+\subsection{\`A propos des conditions}
+
+L'expression booléenne derrière le \textbf{si} joue le rôle de test. Pour exprimer cette condition, 
+on a besoin des \textbf{opérateurs de comparaison} (inférieur strict, supérieur strict, inférieur ou 
+égal, supérieur ou égal, égal à, différent de) et des \textbf{connecteurs logiques}
+(non, et, ou).
+
+%\begin{exs}
+
+\begin{itemize}
+
+\item Calcul du carré d'un nombre positif. 
+
+\begin{lstlisting}
+>>> x=4
+>>> if x >= 0 : 
+        car = x**2
+
+>>> car 
+	16
+\end{lstlisting}
+
+
+\item Condition avec un \og et \fg{}. 
+
+\begin{lstlisting}
+x = 0.5 
+if x >= -1 and x <= 1 :
+    print("Il existe un angle theta tel que x = cos(theta).") 
+
+\end{lstlisting}
+ \end{itemize}
+
+
+
+
+
+%\newpage
+\subsection{Imbrication de plusieurs conditions}
+
+On peut se trouver face à un problème qui se scinde en plus de deux cas (par exemple, dans le cas 
+des équations du second degré, on teste si le discriminant est strictement positif, nul ou 
+strictement négatif).
+Dans ce cas, voici comment procéder.
+%
+%\begin{center}
+%
+%
+%\fbox{\begin{minipage}{15cm}
+%
+%\begin{center}
+%\begin{tabular}{|l}
+%\textbf{Si} condition 1\\
+%\hspace{0.7cm}
+%\begin{tabular}{l}
+%\textbf{alors} bloc d'instructions 1\\
+%\textbf{sinon si} condition 2\\
+%\hspace{0.7cm}
+%\begin{tabular}{l}
+%\hspace{7ex}\textbf{alors} bloc d'instructions 2\\
+%\hspace{7ex}\textbf{sinon si} condition 3\\
+%\hspace{14ex}\textbf{alors} bloc d'instructions 3\\
+%\ldots\\
+%\hspace{14ex}\textbf{sinon} bloc final
+%\end{tabular}\\
+%\end{tabular}\\
+%\textbf{Fin-du-Si}
+%\end{tabular}
+%\end{center}
+%
+%\begin{center}
+%signifie que 
+%\end{center}
+%
+%\begin{itemize}
+%\item \textbf{Si} la condition 1 est vérifiée (expression booléenne=\textit{True}) 
+%
+%\textbf{alors} le programme exécute les instructions du bloc 1.
+%
+%\item \textbf{Si} la condition 1 n'est pas vérifiée (expression booléenne=\textit{False}) mais que 
+%la condition 2 est vérifiée
+%
+%\textbf{alors} le programme exécute les instructions du bloc 2.
+%
+%\item \textbf{Si} les conditions 1 et 2 ne sont pas vérifiées  mais que la condition 3 est vérifiée
+%
+%\textbf{alors} le programme exécute les instructions du bloc 3...
+%
+%\item \textbf{Si} aucune condition n'est vérifiée
+%
+%\textbf{alors} le programme exécute les instructions du bloc final.
+%\end{itemize}
+%\end{minipage}}
+%
+%\end{center}
+%
+%\vspace{0.5cm}
+%\begin{remarque}\label{rem-filtre}
+%\begin{itemize}
+%\item Si la \texttt{condition 1} est vérifiée, le programme ne se préoccupe pas des conditions 
+%suivantes.
+%\item Chaque \textbf{sinon si} agit comme un \textbf{filtre}. L'ordre de ces filtres est important. 
+%Ainsi, les séquences d'instructions :\\
+%
+%\begin{tabular}{|l}
+% $x \leftarrow$ 3 \\
+%\textbf{Si} $x >$ 6\\
+%\hspace{0.7cm}
+%\begin{tabular}{l}
+%\textbf{alors} renvoyer $x + 2$\\
+%\textbf{sinon si} $x > 4$\\
+%\hspace{0.7cm}
+%\begin{tabular}{l}
+%\hspace{7ex}\textbf{alors} renvoyer $x + 4$\\
+%\hspace{7ex}\textbf{sinon si}$ x > 2$\\
+%\hspace{14ex}\textbf{alors} renvoyer $x + 6$\\
+%\hspace{14ex}\textbf{sinon} renvoyer $x$
+%\end{tabular}\\
+%\end{tabular}\\
+%\textbf{Fin-du-Si}
+%\end{tabular}\\
+%
+%et \\
+%
+%\begin{tabular}{|l}
+% $x \leftarrow 3$\\
+%\textbf{Si} $x > 6$\\
+%\hspace{0.7cm}
+%\begin{tabular}{l}
+%\textbf{alors} renvoyer $x + 2$\\
+%\textbf{sinon si} $x > 2$\\
+%\hspace{0.7cm}
+%\begin{tabular}{l}
+%\hspace{7ex}\textbf{alors} renvoyer $x + 6$\\
+%\hspace{7ex}\textbf{sinon si} $x > 4$\\
+%\hspace{14ex}\textbf{alors} renvoyer $x + 4$\\
+%\hspace{14ex}\textbf{sinon} renvoyer $x$
+%\end{tabular}\\
+%\end{tabular}\\
+%\textbf{Fin-du-Si}
+%\end{tabular}\\
+%
+%
+%ne renvoient pas la même chose.
+%
+%\end{itemize}
+%\end{remarque}
+
+%\subsection{Syntaxe en Python}
+
+\begin{lstlisting}
+ if condition 1 :
+	bloc d instructions 1
+ elif condition 2 :
+	bloc d instructions 2
+ elif condition 3 :
+	bloc d instructions 3
+.
+.
+.
+ else :
+	bloc final
+\end{lstlisting}
+
+\begin{itemize}
+ \item \textbf{Sinon si} se traduit par \texttt{elif}. 
+\end{itemize}
+
+%\begin{exo}
+%\begin{exemple}
+%Écrire les deux séquences d'instructions de la remarque \textbf{\ref{rem-filtre}} en Python, et 
+%constater que l'on obtient bien deux résultats différents.
+%\end{exemple}
+%\end{exo}
+
+%\begin{ex}
+Voici une fonction qui calcule le maximum de trois entiers \texttt{a, b, c} :
+\begin{lstlisting}
+def max3 (a, b, c) :
+    """ renvoie le maximum de a, b ,c.
+    précondition : a, ,b et c sont 3 entiers """
+    if a <= c and b <= c :
+        return c
+    elif a <= b and c < b :
+        return b
+    else :
+        return a
+\end{lstlisting}
+
+%\end{ex} 
+
+
+\section{Boucles définies}
+
+%\subsection{Un programme très simple}
+%
+%Écrivons un programme pour saluer la classe (disons les 8 premiers
+%élèves) :
+%\begin{lstlisting}
+%print('Bonjour Baptiste')
+%print('Bonjour Lisa')
+%print('Bonjour Pierrick')
+%print('Bonjour Louise-Eugénie')
+%print('Bonjour Qasim')
+%print('Bonjour Lorenzo')
+%print('Bonjour Arthur')
+%print('Bonjour Ylies')
+%\end{lstlisting}
+%
+%Mais combien de travail faut-il faire si :
+%
+%\begin{itemize}
+%\item on veut dire bonsoir et non bonjour?
+%\item on veut dire «Baptiste, comment vas-tu? \textit{etc.}» et non
+%  «Bonjour Baptiste, \textit{etc.}» ?
+%\end{itemize}
+%
+%Et s'il y a 500 élèves ?
+%
+%
+%\section{Le principe DRY}
+%
+%«\textbf{D}on't \textbf{R}epeat \textbf{Y}ourself» est une philosophie en programmation 
+%informatique consistant à éviter la redondance de code au travers de l'ensemble d'une application 
+%afin de faciliter la maintenance, le test, le débogage et les évolutions de cette dernière.\\
+%La philosophie DRY est explicitée par la phrase suivante :\\
+%  \textit{«Dans un système, toute connaissance doit avoir une représentation
+%   unique, non-ambiguë, faisant autorité ».}
+%
+%Ici le programme devrait:
+%\begin{itemize}
+%\item définir la liste des prénoms auxquels dire bonjour;
+%\item dire qu'on veut effectuer un même traitement sur tous les prénoms;
+%\item dire que ce traitement consiste à afficher «Bonjour» suivi du prénom.
+%\end{itemize}
+%
+%
+%Nous avons déjà vu comment définir une liste :
+%
+%\begin{lstlisting}
+%prenoms = [ 'Baptiste', 'Lisa', 'Pierrick',\
+%'Louise-Eugénie', 'Qâsim', 'Lorenzo', 'Arthur', 'Ylies' ]
+%\end{lstlisting}
+%
+%Il faut maintenant s'occuper des deux points suivants : définir le traitement à effectuer sur 
+%chacun de ces 
+%prénoms, et l'\textbf{itérer}. Pour cela nous allons utiliser une \textbf{boucle itérative 
+%définie}, autrement dit nous allons \textbf{répéter} l'application d'une même séquences
+%d'instructions 
+%sur une liste \textbf{définie à l'avance}.
+
+
+\fbox{\begin{minipage}{12cm}
+
+\begin{center}
+\begin{tabular}{|l}
+\textbf{Pour} variable \textbf{dans} liste \textbf{répeter}\\
+\hspace{0.7cm}
+\begin{tabular}{l}
+bloc d'instructions b\\
+\end{tabular}\\
+\textbf{Fin-de-la-boucle}
+\end{tabular}
+\end{center}
+
+
+
+\begin{center}
+signifie que 
+\end{center}
+
+\textbf{pour} chaque élément de la liste \texttt{liste},
+
+le programme exécute les instructions du bloc b.
+
+\end{minipage}}
+
+
+\subsection{Syntaxe en Python}
+
+\begin{lstlisting}
+for variable in liste :
+    instructions
+\end{lstlisting}
+
+Ici encore, la ligne contenant le mot-clé \textbf{for} doit se finir par un \og \textbf{:} \fg\ et les 
+instructions du bloc doivent être indentées. La fin de la boucle est marquée par un retour à la 
+ligne non indenté.\\
+%
+%Maintenant que la liste \texttt{prenoms} est définie, dire bonjour à nos huit élèves s'écrit ainsi :
+%
+%
+%\begin{lstlisting}
+%for x in prenoms:
+%    print('Bonjour ' + x)
+%\end{lstlisting}
+%
+
+
+%\end{enumerate}
+
+\subsection{Les intervalles d'entiers en Python}
+
+\marginnote{Voir \textit{Why numbering should start at zero}, E. W. Dijkstra,
+  EWD831. Disponible en ligne.}.
+
+Pour répondre à la première question, il suffit de remarquer que les entiers de 0 à 19 par exemple, 
+sont en fait les éléments d'une liste : \texttt{[0, 1, 2, $\cdots$ , 19]}. En Python, cette liste 
+s'écrit de la manière suivante : \texttt{range(20)}.\\
+Précisément, si $a$ et $b$ sont deux entiers, \texttt{range(a,b)} contient les éléments de 
+l'intervalle semi-ouvert $\ii{a,b}$, dans l'ordre croissant. Avec un seul argument, 
+\texttt{range(b)} signifie \texttt{range(0,b)}.\\
+
+
+
+  
+\marginnote{
+Redisons-le, car c'est un fait important en Python : \texttt{range(a,b)} est intervalle 
+\textbf{fermé} à gauche, \textbf{ouvert} à
+droite}
+  
+Avec \texttt{range}, nous pouvons maintenant itérer sur une liste d'entiers :
+
+\begin{lstlisting}
+x = 5
+for k in range(20):
+    x = 2 * x - k - 3
+  
+print(x)
+#  Résultat obtenu : 1048600.
+\end{lstlisting}
+
+%
+%\begin{remarque}
+%Mais est-ce bien $u_{20}$ ? Pour cela on pourra montrer par récurrence que $x=u_k$ à l'entrée de la boucle et $x=u_{k+1}$ à la sortie de la boucle. C'est la notion \textbf{d'invariant de boucle} que l'on détaillera dans un chapitre ultérieur.
+%\end{remarque}
+
+%\section{Les invariants de boucle}
+%
+%Un \textbf{invariant de boucle} est une proposition vérifiée à chaque tour d'une boucle. Plus 
+%précisément, on distingue les invariants d'\textbf{entrée de boucle} et ceux de \textbf{sortie de 
+%boucle}. C'est en fait une proposition de récurrence, qui doit être vrai au début de la première 
+%boucle, puis se propager de tour de boucle en tour de boucle, jusqu'au dernier.\\
+%Les invariants de boucles ont essentiellement deux intérêts :
+%\begin{enumerate}
+% \item \textbf{Démontrer} l'algorithme, grâce au principe de récurrence ;
+% \item Répondre à notre question précédente : où commencer et où finir une boucle ?
+%\end{enumerate}
+%
+%Il est \textbf{fortement conseillé} de toujours indiquer les invariants de boucle en commentaire 
+%dans vos algorithmes.\\ 
+%
+%Par exemple :
+%
+%
+%\begin{lstlisting}
+%x = 5			# x = u_0 (initialisation)
+%for k in range(20): 	
+%    # x = u_k (invariant en entrée de boucle)
+%    x = 2 * x - k - 3	
+%    # x = u_{k+1} (invariant en sortie de boucle)	
+%# après la boucle for, k vaut 19, et x vaut donc u_{20}.
+%\end{lstlisting}
+%  
+
+
+%\section{Un exemple : test de primalité} 
+%
+%  On veut tester si un entier \texttt{n} est premier:
+%\begin{lstlisting}
+%def est_premier(n):
+%    """ Renvoie True si n est premier, False sinon
+%        Préconditon : n est un entier."""
+%    b = True
+%    for d in range(2,n):
+%        # b => n non divisible par 2, 3, ..., d-1.
+%        if n % d == 0:
+%            b = False
+%    # b <=> n premier
+%    return b
+%\end{lstlisting}
+%
+%Remarque: les derniers tours de boucle sont inutiles dès que la
+%variable \texttt{b} a été mise à \texttt{False}. Les éxécuter tout de même est une perte de temps. Il 
+%existe plusieurs possibilités pour améliorer cela~:
+%
+%L'instruction \texttt{break} :
+%\begin{lstlisting}
+%def est_premier(n):
+%    """ Renvoie True si n est premier, False sinon
+%        Préconditon : n est un entier."""
+%    b = True
+%    for d in range(2,n):
+%        # b => n pas divisible par 2, 3, ..., d-1.
+%        if n % d == 0:
+%            b = False
+%            break
+%    # b <=> n est premier
+%    return b
+%\end{lstlisting}
+%
+%L'utilisation d'un \texttt{return} en milieu de boucle, à favoriser en Python{} pour 
+%une question de style et d'élégance~:
+%
+%\begin{lstlisting}
+%def est_premier(n):
+%    """ Renvoie True si n est premier, False sinon
+%        Préconditon : n est un entier."""
+%    for d in range(2,n):
+%        # n n'est pas divisible par 2, 3, ..., d-1.
+%        if n % d == 0:
+%            return False
+%    return True
+%\end{lstlisting}
+
+\section{Boucles indéfinies ou conditionnelles}
+
+\subsection{Algorithme}
+
+On peut aussi être amené à répéter un bloc d'instructions sans savoir combien de fois on devra le 
+répéter. 
+
+%\begin{ex}
+Disposant d'une suite croissante, non majorée, on cherche à trouver le plus petit entier $p$ 
+tel que la valeur au rang $p$ dépasse 10000.
+%\end{ex}
+
+Dans ce cas, on utilise la boucle \textbf{Tant que} qui permet de répéter le bloc d'instructions 
+tant qu'une certaine condition est vérifiée.
+
+
+\vspace{1cm}
+
+
+\fbox{\begin{minipage}{12cm}
+\begin{center}
+\begin{tabular}{|l}
+\textbf{Tant que} condition\\
+\hspace{0.7cm}
+\begin{tabular}{l}
+\textbf{faire } bloc d'instructions \\
+\end{tabular}\\
+\textbf{Fin-du-Tant-que}
+\end{tabular}
+\end{center}
+
+\begin{center}
+signifie que 
+\end{center}
+
+\begin{description}
+\item[Tant que] la condition est vérifiée (expression booléenne=\textit{True}) 
+
+\item[Faire]  le bloc d'instructions.
+\end{description}
+\end{minipage}}
+
+\subsection{Syntaxe en Python}
+
+
+\begin{lstlisting}
+while condition :
+    instructions
+\end{lstlisting}
+
+
+
+\vspace{0.5cm}
+%\begin{ex}
+\label{ex-suite}
+Rechercher le premier entier $n$ tel que la somme des entiers de 1 à n dépasse 11.
+
+\begin{lstlisting}
+n = 1
+s = 1
+while s < 11 :
+    n = n + 1
+    s = s + n
+    
+n
+# REPONSE  : n=5  (dans ce cas s=15)
+\end{lstlisting}
+
+
+%\end{ex}
+
+
+%\begin{ex}
+%\label{ex-syracuse} Conjecture de Syracuse :\\
+%On note $f : \N^{*} \to \N^{*}$ l'application vérifiant, pour tout $n$ pair
+%$f(n)=n/2$ et tout $n$ impair et $f(n)=3n+1$.
+%
+%On conjecture que pour tout entier $n$, il existe $k$ tel que
+%$f^{k}(n)=1$.
+%
+%Voici un algorithme calculant, pour tout $n$ donné, le plus petit
+%entier $k$ vérifiant $f^{k}(n) = 1$ :
+%
+%\begin{lstlisting}
+%\begin{lstlisting}
+%def f(n):
+%    """Fonction de Syracuse.
+%    Précondition : n est un entier strictement positif"""
+%    if n % 2 == 0:
+%        return n // 2
+%    else:
+%        return 3 * n + 1
+%        
+%def syracuse(n):
+%    """Renvoie le premier entier k tel que  f\^k(n) = 0.
+%    Précondition : n est un entier strictement positif"""
+%    x = n
+%    k = 0
+%    while x != 1:
+%        x = f(x)
+%        k = k + 1
+%    return k
+%\end{lstlisting}
+%%\end{lstlisting}
+%
+%%\end{ex}
+%
+%
+%\begin{remarque}
+%\begin{itemize}
+%\item Comme pour les boucles définies, nous sommes confrontés à un problème : comment démontrer un 
+%algorithme reposant sur une boucle indéfinie ? Pour cela, nous utilisons encore les invariants de 
+%boucle, afin de prouver qu'après la boucle, le résultat est bien celui voulu.
+%\item Pour montrer que la boucle \textbf{while} va réellement se finir on utilisera un \textbf{variant} de boucle. Cette notion sera également détaillée dans un chapitre ultérieur. Dans un premier temps nous retiendrons que généralement il faudra s'assurer que la condition contenu dans la boucle \textbf{while} sera généralement une suite d'entiers strictement croissante ou décroissante.
+%\end{itemize}
+%\end{remarque}
+%Mais avant même cela, il y a un point épineux : la boucle \textbf{while} va-t-elle vraiment se 
+%finir ? Il faut démontrer ce que l'on appelle la \textbf{terminaison} de l'algorithme. C'est là que 
+%réside le danger des boucles \textbf{while} : si elles sont mal écrites, la condition de la boucle 
+%ne devient jamais fausse, et la boucle est infinie.\\
+%Pour montrer la terminaison d'un algorithme, on utilise cette fois un \textbf{variant} de boucle. 
+%Il consiste à mettre en avant une variable dont la valeur est modifiée au cours des tours de 
+%boucle, de telle sorte que cette modification finisse par rendre fausse la condition de la boucle.\\
+%Donnons ces invariant et variant pour l'algorithme de l'exemple \textbf{\ref{ex-suite}} (nous ne 
+%pouvons malheureusement pas le faire pour l'exemple \textbf{\ref{ex-syracuse}}, puisque comme son 
+%nom l'indique, la conjecture de Syracuse n'a jamais été demontrée) :\\
+
+
+%\begin{lstlisting}
+%n = 1
+%s = 1           # s = somme des i de 1 à n
+%while s < 11 :  # invariant : s = somme des i de 1 à n
+%    n = n + 1
+%    s = s + n   # variant : s, qui est entier et strictement croissant
+%\end{lstlisting}
+
+%\begin{exo}
+%Démontrer cet algorithme.
+%\end{exo}
+
+
+%\section{Exercices}
+%
+%\begin{exo}
+% Calculer $2^9$ à l'aide d'une boucle itérative.
+%\end{exo}
+%
+%
+%\begin{exo}
+% \'Ecrire un algorithme affichant la table de multiplication de 9.
+%\end{exo}
+%
+%\begin{exo}
+% Calculer $16!$ à l'aide d'une boucle itérative.
+%\end{exo}
+%
+%\begin{exo}
+% Calculer
+%  \begin{equation*}
+%    \sum_{k=0}^{15} \frac{1}{k!}
+%  \end{equation*}
+%\end{exo}
+%
+%\begin{exo}
+% Écrire une fonction calculant le nombre de chiffres d'un entier écrit en base 10.
+%\end{exo}
+%
+%\begin{exo}
+% On considère la suite $u$ définie par
+%\begin{equation*}
+%  \forall n\in \N^{*}\quad u_{n} = \sum_{k=1}^{n} \frac{1}{\sqrt{k}}
+%\end{equation*}
+%
+%Quel est la plus petite valeur $n$ pour laquelle $u_{n}\geq 1000$?
+%\end{exo}
+%
+%\begin{exo}
+% Écrire une fonction trouvant le plus petit nombre premier supérieur ou
+%égal à un entier donné.
+%\end{exo}
+%
+%\begin{exo}
+% Écrire une fonction calculant le nombre de diviseurs d'un entier $n$ donné.
+%\end{exo}
+%
+%%\begin{exo}
+% Calculer $p_{5}/q_{5}$ où $p$ et $q$ sont définies par:
+%  \begin{align*}
+%    p_{0} &= 1\\
+%    q_{0} &= 1\\
+%    \forall n\in \N \quad p_{n+1} &= p_{n}^{2} + 2q_{n}^{2}\\
+%    \forall n\in \N \quad q_{n+1} &= 2p_{n}q_{n}
+%  \end{align*}
+%\end{exo}
+%
+%\begin{exo}
+%  \input{PYB-510}
+%\end{exo}
+%
+%\begin{exo}
+%  \input{PYB-511}
+%\end{exo}
+%
+%\begin{exo}
+%  \input{PYB-402}
+%\end{exo}
+%
+%\begin{exo}
+%  \input{PYB-403}
+%\end{exo}
+%
+%
+%\begin{exo}
+%  \input{PYB-405}
+%\end{exo}
+%
+%
+%\begin{exo}
+%  \input{PYB-406}
+%\end{exo}
+%
+%\begin{exo}
+%  \input{PYB-407}
+%\end{exo}
+%
+%\begin{exo}
+%  \input{PYB-408}
+%\end{exo}
+
