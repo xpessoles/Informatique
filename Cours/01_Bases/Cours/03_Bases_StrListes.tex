@@ -11,7 +11,7 @@
 }
 
 
-\section{Tableaux et type \texttt{list} en \texttt{python}}
+\section{Tableaux et listes}
 
 \subsection{Deux structures de données en informatique.}
 
@@ -52,64 +52,136 @@ est rare. En moyenne, chaque ajout à un coût constant.
 On parle alors de \textbf{tableaux dynamiques}.
 
 
-\begin{remarque}
-Les listes sont indexées à partir de 0 (c'est-à-dire que le premier élément de la liste est numéroté à partir de 0). 
-\end{remarque}
 
-Pour créer un tableau on peut le donner en extension.
+\section{Les listes}
 
+\subsection{Déclaration et initialisation}
 \begin{lstlisting}
-t = [23, 41, 101]
-t
+# Déclaration d'une liste vide
+L = []
+# Déclaration d'une liste avec des éléments connus
+L = [10,-12,20,54,4]
 \end{lstlisting}
 
-On peut aussi le donner en compréhension.
+\subsection{Accès et modification aux éléments d'une liste}
+
+Les éléments d'une liste sont indexés. Cela signifie qu'ils sont numérotés par un numéro. Le premier élément de la liste est porte le numéro 0.
+\begin{center}
+\begin{tabular}{ccccccc}
+\texttt{L = [} & \texttt{10,} & \texttt{-12,} & \texttt{20,} & \texttt{54,} & \texttt{4]} \\
+& $\uparrow$& $\uparrow$& $\uparrow$& $\uparrow$& $\uparrow$\\
+
+Indice & 0& 1& 2 & 3 & 4 \\
+\end{tabular}
+\end{center}
+
+%\begin{remarque}
+%Les listes sont indexées à partir de 0 (c'est-à-dire que le premier élément de la liste est numéroté à partir de 0). 
+%\end{remarque}
+
+
+On peut alors accéder aux éléments par leurs indices. 
 
 \begin{lstlisting}
-u = [k**2 for k in range(10)]
-u
+>>> L[0] = 0
+>>> print(L)
+    [0,-12,20,54,4]
 \end{lstlisting}
-On peut alors accéder à ses éléments via leur indice.
-\begin{lstlisting}
-t[0]
-u[1]
-u[9]
-\end{lstlisting}
+
 
 Attention à utiliser un indice existant !
 \begin{lstlisting}
->>> t[3]
+>>> L[12]
+    Traceback (most recent call last):
+    File "<stdin>", line 1, in <module>
+    IndexError: list index out of range
 \end{lstlisting}
-%Traceback (most recent call last):
-%  File "<stdin>", line 1, in <module>
-%IndexError: list index out of range
+
+%
+%
+%Pour créer un tableau on peut le donner en extension.
+%
+%\begin{lstlisting}
+%t = [23, 41, 101]
+%t
+%\end{lstlisting}
+%
+%On peut aussi le donner en compréhension.
+%
+%\begin{lstlisting}
+%u = [k**2 for k in range(10)]
+%u
+%\end{lstlisting}
+%On peut alors accéder à ses éléments via leur indice.
+%\begin{lstlisting}
+%t[0]
+%u[1]
+%u[9]
+%\end{lstlisting}
+
+
 
 Les indices appartiennent à $\ii{0,\texttt{len(t)}}$.
 %\clearslide{}
-Mais on peut aussi compter les éléments à partir de la fin, en utilisant des indices négatifs !
+Mais on peut aussi compter les éléments à partir de la fin, en utilisant des indices négatifs (plutôt déconseillé pour le moment, à part pour avoir accès au dernier élément)
 \begin{lstlisting}
-t[-1] # dernier élément
-t[-2] # avant-dernier
-t[-3]
+L[-1] # dernier élément
+L[-2] # avant-dernier
 \end{lstlisting}
 
 Attention, là aussi, à ne pas sortir du tableau !
 
 \begin{lstlisting}
 >>> t[-4]
-Traceback (most recent call last):
-  File "<stdin>", line 1, in <module>
-IndexError: list index out of range
+    Traceback (most recent call last):
+    File "<stdin>", line 1, in <module>
+    IndexError: list index out of range
 \end{lstlisting}
 
-Enfin, il y a une liste Python particulière : la liste vide~\texttt{[]}.
+
+\subsection{Ajout et suppression des éléments d'une liste}
+On peut ajouter un élément à une liste. On utilise en priorité la méthode \lstinline{append}. Avec l'utilisation de cette méthode l'élément est ajouté à la << droite >> de la liste. 
+
+\begin{lstlisting}
+>>> L = [10,-12,20,54,4]
+>>> L.append(12)
+>>> print(L)
+    [10,-12,20,54,4,12]
+\end{lstlisting}
+
+On peut aussi concaténer des listes :
+\begin{lstlisting}
+>>> L = [10,-12,20,54,4]
+>>> L = L + [1,2,3]
+>>> print(L)
+    [10,-12,20,54,4,1,2,3]
+\end{lstlisting}
 
 
+Enfin, on peut insérer un élément à un index donné. Tous les les éléments suivant voient donc leur index décalé vers la droite.  
+\begin{lstlisting}
+>>> L = [10,-12,20,54,4]
+>>> L.insert(1,12) # Insertion de la valeur 12 au rang 1
+>>> print(L)
+    [10,1,-12,20,54,4]
+\end{lstlisting}
 
-\subsection{Opérations usuelles}
+
+Pour supprimer un élément, on peut utiliser son index (\lstinline(del)) ou sa valeur (\lstinline{(L.remove()}). Attention, après suppression d'un élément tous les éléments suviants sont décalés vers la guache.  
+\begin{lstlisting}
+>>> L = [10,-12,20,54,4]
+>>> L.remove(-12)
+>>> print(L)
+    [10,20,54,4]
+>>> del L[0]
+>>> print(L)
+    [20,54,4]
+\end{lstlisting}
+
 
 \subsubsection{Parcours de listes}
 
+Maîtriser le parcours d'une liste est essentiel.
 \begin{minipage}[c]{.47\linewidth}
 Il est possible de parcourir les listes par valeurs. 
 \begin{lstlisting}
@@ -129,14 +201,14 @@ for i in range(len(L)) :
 \end{minipage}
 
 
-\subsubsection{Concaténation}
-Concaténer deux tableaux revient à les mettre bout à bout, on l'effectue en Python avec 
-l'opérateur \texttt{+}.
-\begin{lstlisting}
-t+u
-u+t
-\end{lstlisting}
-Dans cette opération, les deux tableaux sont intégralement recopiés. 
+%\subsubsection{Concaténation}
+%Concaténer deux tableaux revient à les mettre bout à bout, on l'effectue en Python avec 
+%l'opérateur \texttt{+}.
+%\begin{lstlisting}
+%t+u
+%u+t
+%\end{lstlisting}
+%Dans cette opération, les deux tableaux sont intégralement recopiés. 
 
 \subsubsection{Quelques calculs}
 La longueur se calcule avec la fonction \texttt{len}. Pour des listes Python de nombres, le maximum 
@@ -166,26 +238,53 @@ t*4
 
 
 
-\subsubsection{Un peu de méthodes}
+
+
+%
+%%%\clearslide{}
+\subsection{Tranchage -- Slicing}
+
+On peut directement accéder à une sous-liste Python (ou tranche ---\textbf{slice} en anglais--- 
+c'est-à-dire bloc de cases consécutives) d'une liste, c'est ce que l'on appelle le tranchage 
+(\textit{slicing}).
+
+On utilise les  syntaxes :
+\begin{itemize}
+  \item \texttt{u[i:j]} pour accéder à la tranche de la liste \texttt{u} allant des indices \texttt{i} à \texttt{j-1} ;
+  \item \texttt{u[i:]} pour accéder à la tranche allant de l'indice \texttt{i} à la fin de la liste \texttt{u} ;
+  \item \texttt{u[:j]} pour accéder à la tranche allant du début de la liste \texttt{u} à l'indice \texttt{j-1};
+  \item \texttt{u[:]} pour accéder à la tranche complète (toute la liste \texttt{u}) ;
+  \item \texttt{u[i:j:p]} pour accéder à la tranche de la liste \texttt{u} allant des indices \texttt{i} à \texttt{j-1}, par pas de \texttt{p}.
+\end{itemize}
+
+\begin{lstlisting}
+u
+u[2:5]
+u[2:]
+u[:5]
+u[1:8:2]
+\end{lstlisting}
+
+\subsection{Autres méthodes}
 Python est un langage \textbf{orienté objet} : en \texttt{python}, tout est un \textbf{objet}, et ces objets 
 sont regroupées en \textbf{classes}. Une \textbf{méthode} est une fonction qui s'applique aux objets 
 d'une classe particulière. Si \texttt{method} est une méthode de la classe \texttt{c}, et si 
 \texttt{a} est un objet de cette classe, alors on applique \texttt{method} à \texttt{a} avec la 
 syntaxe suivante : \texttt{a.method()}, les parenthèses pouvant contenir des paramètres.\\
 
-On peut ajouter un élément à un tableau avec la méthode \texttt{append}. Le point important est que 
-cette opération s'effectue en temps constant amorti.
-\begin{lstlisting}
-t.append(-42)
-\end{lstlisting}
-\`A votre avis, pour un objet \texttt{x}, est-il équivalent d'effectuer \texttt{t+[x]} et \texttt{t.append(x)} ?
+%On peut ajouter un élément à un tableau avec la méthode \texttt{append}. Le point important est que 
+%cette opération s'effectue en temps constant amorti.
+%\begin{lstlisting}
+%t.append(-42)
+%\end{lstlisting}
+%\`A votre avis, pour un objet \texttt{x}, est-il équivalent d'effectuer \texttt{t+[x]} et \texttt{t.append(x)} ?
+%
+%On peut aussi enlever le dernier élément d'une liste Python avec la méthode \texttt{pop()}.
+%\begin{lstlisting}
+%x = t.pop()
+%\end{lstlisting}
 
-On peut aussi enlever le dernier élément d'une liste Python avec la méthode \texttt{pop()}.
-\begin{lstlisting}
-x = t.pop()
-\end{lstlisting}
-
-Les autres méthodes disponibles sont rassemblées dans le tableau~\ref{tab.list.methodes}. Elles ne sont pas exigibles.
+Les méthodes rassemblées dans le tableau~\ref{tab.list.methodes} ne sont pas exigibles.
 \begin{table}[!h]
 \centering
     \begin{tabular}{lp{9cm}}
@@ -214,32 +313,7 @@ Les autres méthodes disponibles sont rassemblées dans le tableau~\ref{tab.list
     \caption{Méthodes applicables aux listes.}
   \label{tab.list.methodes}
   \end{table}
-
-%
-%%%\clearslide{}
-\subsection{Tranchage -- Slicing}
-
-On peut directement accéder à une sous-liste Python (ou tranche ---\textbf{slice} en anglais--- 
-c'est-à-dire bloc de cases consécutives) d'une liste, c'est ce que l'on appelle le tranchage 
-(\textit{slicing}).
-
-On utilise les  syntaxes :
-\begin{itemize}
-  \item \texttt{u[i:j]} pour accéder à la tranche de la liste \texttt{u} allant des indices \texttt{i} à \texttt{j-1} ;
-  \item \texttt{u[i:]} pour accéder à la tranche allant de l'indice \texttt{i} à la fin de la liste \texttt{u} ;
-  \item \texttt{u[:j]} pour accéder à la tranche allant du début de la liste \texttt{u} à l'indice \texttt{j-1};
-  \item \texttt{u[:]} pour accéder à la tranche complète (toute la liste \texttt{u}) ;
-  \item \texttt{u[i:j:p]} pour accéder à la tranche de la liste \texttt{u} allant des indices \texttt{i} à \texttt{j-1}, par pas de \texttt{p}.
-\end{itemize}
-
-\begin{lstlisting}
-u
-u[2:5]
-u[2:]
-u[:5]
-u[1:8:2]
-\end{lstlisting}
-
+  
 \subsection{Tableaux multidimensionnels}
 
 On peut représenter une matrice avec des listes Python, par exemple en la décrivant ligne par 
