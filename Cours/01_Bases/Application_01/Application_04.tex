@@ -1,0 +1,111 @@
+%\setchapterimage{fig_00.jpg}
+\chapter*{Application \arabic{cptApplication} \\ 
+\ifprof Corrigé \else Sujet \fi}
+\addcontentsline{toc}{section}{Application \arabic{cptApplication} -- \ifprof Corrigé \else Sujet \fi}
+
+\iflivret \stepcounter{cptApplication} \else
+\ifprof  \stepcounter{cptApplication} \else \fi
+\fi
+
+\setcounter{question}{0}
+%%\marginnote{Concours Centrale -- MP 2019}
+%\marginnote[1cm]{
+%\UPSTIcompetence[2]{C1-01}
+%\UPSTIcompetence[2]{C2-03}
+%}
+
+
+
+
+\subsection*{Exercice -- Liste de zéros}
+
+\question{Implémenter la fonction \lstinline{zeros_01(n:int) -> []} permettant de générer une liste de \lstinline{n 0}. On utilisera une boucle \lstinline{while}.}
+
+\begin{lstlisting}
+>>> zeros_01(4)
+	[0,0,0,0]
+\end{lstlisting}
+
+\question{Implémenter la fonction \lstinline{zeros_02(n:int) -> []} permettant de générer une liste de \lstinline{n 0}. On utilisera une boucle \lstinline{for}.}
+
+\question{Implémenter la fonction \lstinline{zeros_03(n:int) -> []} permettant de générer une liste de \lstinline{n 0}. On génèrera cette liste <<~en compréhension~>> (sans boucle \lstinline{for} ou \lstinline{while} explicite).}
+
+\subsection*{Exercice -- Liste d'entiers}
+
+\question{Implémenter la fonction \lstinline{entiers_01(n:int) -> []} permettant de générer la liste des entiers compris entre 0 inclus et \lstinline{n} exclus. On utilisera une boucle \lstinline{while}.}
+
+\begin{lstlisting}
+>>> entiers_01(4)
+	[0,1,2,3]
+\end{lstlisting}
+
+\question{Implémenter la fonction \lstinline{entiers_02(n:int) -> []} permettant de générer la liste des entiers compris entre 0 inclus et \lstinline{n} exclus. On utilisera une boucle \lstinline{for}.}
+
+
+\question{Implémenter la fonction \lstinline{entiers_03(n:int) -> []} permettant de générer la liste des entiers compris entre 0 inclus et \lstinline{n} exclus. On génèrera cette liste << en compréhension >> (sans boucle \lstinline{for} ou \lstinline{while} explicite).}
+
+\question{\'Ecrire une fonction \lstinline{carres(n:int) -> []} qui prend en argument un entier naturel \lstinline{n} et qui renvoie la liste des \lstinline{n} premiers carrés d'entiers, en commençant par $0$.}
+
+\question{\'Ecrire une fonction \lstinline{somme_racine(n:int)->float} permettant de calculer la somme des racines carrées des n premiers entiers naturels non nuls.}
+
+\subsection*{Exercice -- Notion d'effet de bords}
+
+On cherche à écrire une fonction prenant en argument une liste d'entiers (non vide) et incrémentant de $1$ le premier élément de cette liste.
+
+\question{\'Ecrire une telle fonction \lstinline{incr_sans_effet_de_bord(L:[]) -> []}, qui ne modifie pas la liste initiale et renvoie en sortie une nouvelle liste.}
+
+\begin{lstlisting}
+>>> L = [1,2,3]
+>>> LL = incr_sans_effet_de_bord(L)
+>>> print(L)
+    [1,2,3]
+>>> print(LL)
+    [2,2,3]
+\end{lstlisting}
+
+
+\question{\'Ecrire une telle fonction \lstinline{incr_avec_effet_de_bord(L:[])-> None}, qui modifie la liste initiale et ne renvoie rien en sortie (ponctuer par un \lstinline{return None}).}
+
+\begin{lstlisting}
+>>> L = [1,2,3]
+>>> LL = incr_sans_effet_de_bord(L)
+>>> print(L)
+    [2,2,3]
+>>> print(LL)
+    None
+\end{lstlisting}
+
+
+
+\subsection*{Exercice -- Un petit peu de géométrie}
+
+\question{Implémenter la fonction \lstinline{norme(A:[],B:[])->float} permettant calculer la norme du vecteur $\vect{AB}$ dans $\mathbb{R}^3$. Chacun des points sera constitué de la liste de ses coordonnées (par exemple \lstinline{A=[xA,yA,zA]}).}
+
+\question{Implémenter la fonction \lstinline{prod_vect(u:[], v:[])->float} permettant calculer le produit vectoriel $\vect{u}\wedge \vect{v}$ dans $\mathbb{R}^3$.}
+
+
+
+\subsection*{Exercice -- Suites d'entiers}
+
+\question{Implémenter la fonction \lstinline{impairs(n:int) -> []} permettant de générer la liste des \lstinline{n} premiers entiers naturels impairs.}
+
+\question{Implémenter la fonction \lstinline{multiples_5(d:int, f:int) -> []} permettant de générer la liste de tous les multiples de 5 compris entre \lstinline{d} et \lstinline{f} (bornes incluses si se sont des multiples de 5).}
+
+\question{Implémenter la fonction \lstinline{cube(f:int) -> []} permettant de générer la liste de tous les cubes d'entiers naturels inférieurs ou égaux à \lstinline{f} (inclus si \lstinline{f} est un cube).}
+
+
+\subsection*{Exercice -- Un petit peu de statistiques}
+
+\question{\'Ecrire une fonction \lstinline{moy_extr(L:[])->float} qui prend en argument une liste \lstinline{L} et renvoie en sortie la moyenne du premier et du dernier élément de \lstinline{L}.}
+
+\question{\'Ecrire une fonction \lstinline{moyenne(L:[])->float} qui prend en argument une liste \lstinline{L} et renvoie la moyenne des éléments de \lstinline{L}.}
+
+\question{\'Ecrire une fonction \lstinline{ecart_type(L:[])->float} qui prend en argument une liste \lstinline{L} et renvoie l'éacrt type des données : en notant $\overline{x}$ la moyenne des échantillons, on a  $\sigma = \sqrt{\dfrac{1}{n}\sum\limits_{i=1}^n \left(x_i^2  - \overline{x}\right)}$.}
+
+
+
+\subsection*{Exercice -- Chaînes de caractères}
+
+\question{\'Ecrire une fonction \lstinline{lettre(i:int)->str} qui prend en argument un entier \lstinline{i} et renvoie la \lstinline{i}\ieme\ lettre de l'alphabet.}
+
+

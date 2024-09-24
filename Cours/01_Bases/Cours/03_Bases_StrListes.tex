@@ -1,6 +1,6 @@
 \setchapterimage{Fond_ALG.png}
 \setchapterpreamble[u]{\margintoc}
-\chapter{Introduction aux listes}
+\chapter{Introduction aux listes et aux chaînes de caractères}
 
 \marginnote[4cm]{
 \begin{itemize} 
@@ -181,7 +181,16 @@ Pour supprimer un élément, on peut utiliser son index (\lstinline(del)) ou sa 
 
 \subsubsection{Parcours de listes}
 
+\newcommand{\heart}{\ensuremath\heartsuit}
+
+
+   
+
 Maîtriser le parcours d'une liste est essentiel.
+
+\marginnote{
+\heartpar{A savoir, à savoir, à savoir, à savoir, à savoir, à savoir, à savoir, à savoir, à savoir, à savoir, à savoir, à savoir, à savoir, à savoir, à savoir, à savoir, à savoir, à savoir, à savoir, à savoir, à savoir, à savoir.}}
+
 \begin{minipage}[c]{.47\linewidth}
 Il est possible de parcourir les listes par valeurs. 
 \begin{lstlisting}
@@ -210,7 +219,7 @@ for i in range(len(L)) :
 %\end{lstlisting}
 %Dans cette opération, les deux tableaux sont intégralement recopiés. 
 
-\subsubsection{Quelques calculs}
+\subsubsection{Quelques opérations sur les listes}
 La longueur se calcule avec la fonction \texttt{len}. Pour des listes Python de nombres, le maximum 
 se calcule avec la fonction \texttt{max}, le minimum avec \texttt{min} et la somme des éléments de la 
 liste avec \texttt{sum}.
@@ -244,7 +253,7 @@ t*4
 %%%\clearslide{}
 \subsection{Tranchage -- Slicing}
 
-On peut directement accéder à une sous-liste Python (ou tranche ---\textbf{slice} en anglais--- 
+On peut directement accéder à une sous-liste Python (ou tranche -- \textbf{slice} en anglais -- 
 c'est-à-dire bloc de cases consécutives) d'une liste, c'est ce que l'on appelle le tranchage 
 (\textit{slicing}).
 
@@ -689,6 +698,37 @@ besoin.
 %%\begin{exo}
 %  Écrire une fonction \texttt{compte(e,t)} comptant le nombre d'occurences de l'élément \texttt{e} dans le tableau \texttt{t}.
 %%\end{exo}
+
+
+
+\subsection{Définir une liste en compréhension}
+
+Afin d'accélérer la création de listes en Python, il est possible de les créer \textit{en compréhension.} Il n'est pas indispensable de connaître cette syntaxe, mais elle peut s'avérer pratique de temps à autres.
+La syntaxe générique est la suivante :
+
+\begin{lstlisting}
+L = [fonction(i) fori in list if condition(i)]
+\end{lstlisting}
+
+
+Voici quelques exemples. 
+
+Créer la liste des 10 premiers entiers, compris entre 0 et 9 (inclus).
+\begin{lstlisting}
+L = [x for x in range(10)]
+\end{lstlisting}
+
+Créer la liste des entiers pairs, compris entre 0 et 9 (inclus).
+\begin{lstlisting}
+L = [x for x in range(10) if x%2 == 0]
+\end{lstlisting}
+
+
+Créer la liste des 10 premiers carrés, compris entre 0 et 9 (inclus).
+\begin{lstlisting}
+L = [x**2 for x in range(10)]
+\end{lstlisting}
+
 
 \section{Chaînes et type \texttt{str} en \texttt{python}}
 
