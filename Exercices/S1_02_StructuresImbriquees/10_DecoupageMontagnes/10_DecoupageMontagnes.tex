@@ -15,8 +15,8 @@ Analyse d'un profil de randonnée -- \ifprof Corrigé \else Sujet \fi}
 
 On a réussi à récupérer partiellement la trace GPS lors d'une sortie VTT de M. Martin. Nous allons chercher à analyser le profil suivi.
 
-On téléchargera le fichier \texttt{TP\_04.py} sur le site de la classe. On enregistrera ce fichier dans vos documents personnel (lecteur \texttt{U:}, répertoire \texttt{Informatique/TP\_04}). On ouvrira ce fichier avec \texttt{Pyzo}.
-Pour exécuter le programme on utilisera la combinison de touche \texttt{Ctrl + E}.
+On téléchargera le fichier \lstinline{TP_04.py} sur le site de la classe. On enregistrera ce fichier dans vos documents personnel (lecteur \lstinline{U:}, répertoire \lstinline{Informatique/TP_04}). On ouvrira ce fichier avec \lstinline{Pyzo}.
+Pour exécuter le programme on utilisera la combinison de touche \lstinline{Ctrl + E}.
 \fi
 
 %\subsection*{Analyse du profil global}
@@ -32,8 +32,8 @@ Pour exécuter le programme on utilisera la combinison de touche \texttt{Ctrl + 
 \end{marginfigure}
 
 
-La variable \texttt{les\_x} contient l'abscisse d'un profil.
-La variable \texttt{les\_y} contient l'altitude d'un profil. Les instructions suivantes permettent de tracer le profil.
+La variable \lstinline{les_x} contient l'abscisse d'un profil.
+La variable \lstinline{les_y} contient l'altitude d'un profil. Les instructions suivantes permettent de tracer le profil.
 
 \begin{lstlisting}
 plt.ylabel("Altitude [m]")
@@ -47,12 +47,12 @@ plt.show()
 \question{Vérifier qu'un profil de montagne s'affiche.}
 
 
-\question{Écrire la fonction \texttt{maximum(L:list) -> int} permettant de déterminer le maximum d'une liste (la fonction \texttt{max} sera ici interdite).}
+\question{Écrire la fonction \lstinline{maximum(L:[float]) -> int} permettant de déterminer le maximum d'une liste (la fonction \lstinline{max} sera ici interdite).}
 \ifprof
 \begin{corrige}~\\
 \vspace{-.5cm}
 \begin{lstlisting}
-def plus_haut(L:list) -> float :
+def plus_haut(L:[float]) -> float :
     maxi = L[0]
     for el in L : 
         if el>maxi :
@@ -63,14 +63,14 @@ def plus_haut(L:list) -> float :
 \else
 \fi
 
-\question{Vérifier que \texttt{maximum(les\_y[0:300])} renvoie \texttt{1855.99}.}
+\question{Vérifier que \lstinline{maximum(les_y[0:300])} renvoie \lstinline{1855.99}.}
 
-\question{Écrire la fonction \texttt{plus\_haut\_indice(L:list) -> float} permettant de déterminer l'indice de l'altitude la plus haute atteinte lors de la randonnée.}
+\question{Écrire la fonction \lstinline{plus_haut_indice(L:[float]) -> float} permettant de déterminer l'indice de l'altitude la plus haute atteinte lors de la randonnée.}
 \ifprof
 \begin{corrige}~\\
 \vspace{-.5cm}
 \begin{lstlisting}
-def plus_haut_indice(L:list) -> float :
+def plus_haut_indice(L:[float]) -> float :
     m = 0
     for i in range(len(L)):
         if L[i]>L[m] :
@@ -82,16 +82,15 @@ def plus_haut_indice(L:list) -> float :
 \fi
 
 
-\question{Vérifier que \texttt{plus\_haut\_indice(les\_y[300:500])} renvoie \texttt{199}.}
+\question{Vérifier que \lstinline{plus_haut_indice(les_y[300:500])} renvoie \lstinline{199}.}
 
 
-\question{Écrire la fonction \texttt{deniveles(alt:list) -> list} qui calcule les dénivelés cumulés positif et négatif (en mètres) de la randonnée, sous forme d’une liste de deux flottants. Le dénivelé positif est la somme des
-variations d’altitude positives sur le chemin, et inversement pour le dénivelé négatif.}
+\question{Écrire la fonction \lstinline{deniveles(alt:[float]) -> [float]} qui calcule les dénivelés cumulés positif et négatif (en mètres) de la randonnée, sous forme d’une liste de deux flottants. Le dénivelé positif est la somme des variations d’altitude positives sur le chemin, et inversement pour le dénivelé négatif.}
 \ifprof
 \begin{corrige}~\\
 \vspace{-.5cm}
 \begin{lstlisting}
-def deniveles(alt:list) -> list:
+def deniveles(alt:[float]) -> [float]:
     pos,neg = 0,0
     for i in range(1,len(alt)) : 
         delta = alt[i]-alt[i-1]
@@ -105,7 +104,7 @@ def deniveles(alt:list) -> list:
 \else
 \fi
 
-\question{Vérifier que \texttt{deniveles(les\_y)} renvoie \texttt{[3438.100, -2746.747]}.}
+\question{Vérifier que \lstinline{deniveles(les_y)} renvoie \lstinline{[3438.100, -2746.747]}.}
 
 
 
@@ -116,12 +115,12 @@ def deniveles(alt:list) -> list:
 Dans cette partie, nous allons chercher à découper le profil de la randonnée en tentant de retrouver les différentes montagnes franchies par le randonneur.
 \fi
 
-\question{Écrire la fonction \texttt{moyenne(alt:list) -> float} permettant de calculer la moyenne des altitudes mesurées par le GPS (l'utilisation de \texttt{sum} est interdite).}
+\question{Écrire la fonction \lstinline{moyenne(alt:[float]) -> float} permettant de calculer la moyenne des altitudes mesurées par le GPS (l'utilisation de \lstinline{sum} est interdite).}
 \ifprof
 \begin{corrige}~\\
 \vspace{-.5cm}
 \begin{lstlisting}
-def moyenne(alt:list):
+def moyenne(alt:[float]):
     somme = 0
     for a in alt : 
         somme = somme + a
@@ -131,10 +130,10 @@ def moyenne(alt:list):
 \else
 \fi
 
-\question{Vérifier que \texttt{moyenne(les\_y)} renvoie \texttt{1376.35}.}
+\question{Vérifier que \lstinline{moyenne(les_y)} renvoie \lstinline{1376.35}.}
 
 
-\question{On note \texttt{n} la taille du tableau \texttt{les\_y}. Créer une liste \texttt{les\_moy} contenant \texttt{n} fois la valeur \texttt{moyenne(les\_y)}. Tracer sur la même courbe le profil de la randonnée et la valeur moyenne sur tout le profil. }
+\question{On note \lstinline{n} la taille du tableau \lstinline{les_y}. Créer une liste \lstinline{les_moy} contenant \lstinline{n} fois la valeur \lstinline{moyenne(les_y)}. Tracer sur la même courbe le profil de la randonnée et la valeur moyenne sur tout le profil. }
 
 \ifprof
 \else
@@ -148,9 +147,9 @@ On note PND les points de passages par le niveau moyen en descente et PNM les po
 \end{marginfigure}
 
 
-\question{Écrire la fonction \texttt{indice\_premier\_PNM(alt:list) -> int} renvoyant, s’il existe, l’indice \texttt{i}
+\question{Écrire la fonction \lstinline{indice_premier_PNM(alt:list) -> int} renvoyant, s’il existe, l’indice \lstinline{i}
 du premier élément de la liste tel que cet élément soit inférieur à la moyenne et l’élément suivant
-soit supérieur à la moyenne. Cette fonction devra renvoyer \texttt{-1} si aucun élément vérifiant cette
+soit supérieur à la moyenne. Cette fonction devra renvoyer \lstinline{-1} si aucun élément vérifiant cette
 condition n’existe.}
 \ifprof
 \begin{corrige}~\\
@@ -168,13 +167,13 @@ def indice_premier_PNM(alt:list):
 \else
 \fi
 
-\question{Vérifier que \texttt{indice\_premier\_PNM(les\_y)} renvoie \texttt{53} et  
-\texttt{indice\_premier\_PNM(les\_y[200:250])} renvoie \texttt{-1}.}
+\question{Vérifier que \lstinline{indice_premier_PNM(les_y)} renvoie \lstinline{53} et  
+\lstinline{indice_premier_PNM(les_y[200:250])} renvoie \lstinline{-1}.}
 
 
 
 
-\question{Écrire la fonction \texttt{indices\_PNM(alt:list) -> list} retournant la liste des indices de tous les PNM.}
+\question{Écrire la fonction \lstinline{indices_PNM(alt:[float]) -> [float]} retournant la liste des indices de tous les PNM.}
 
 \ifprof
 \begin{corrige}~\\
@@ -192,10 +191,10 @@ def indices_PNM(alt:list):
 \else
 \fi
 
-\question{Vérifier que \texttt{indices\_PNM(les\_y)} renvoie \texttt{[53, 449, 889]}.}
+\question{Vérifier que \lstinline{indices_PNM(les_y)} renvoie \lstinline{[53, 449, 889]}.}
 
 
-\question{Dans le but de séparer les différents profils, nous allons chercher les indices des altitudes minimales entre deux PNM successifs. Écrire la fonction \texttt{liste\_alt\_mini(alt:list) -> list} qui répond à ce besoin. En utilisant le profil donné, cette fonction renverrait la liste  \texttt{[300,826]}.}
+\question{Dans le but de séparer les différents profils, nous allons chercher les indices des altitudes minimales entre deux PNM successifs. Écrire la fonction \lstinline{liste_alt_mini(alt:[float]) -> [float]} qui répond à ce besoin. En utilisant le profil donné, cette fonction renverrait la liste  \lstinline{[300,826]}.}
 \ifprof
 \begin{corrige}~\\
 \vspace{-.5cm}
@@ -224,18 +223,18 @@ def liste_alt_min(alt:list):
 \end{marginfigure}
 
 
-On appelle \texttt{pam} la liste des indices des points ayant une altitude minimale.
+On appelle \lstinline{pam} la liste des indices des points ayant une altitude minimale.
 
 
 On souhaite maintenant décomposer le profil mesuré en plusieurs << montagnes >>. 
 Une montagne est une liste constituée d'altitudes successives.
-La première montagne ira de la première altitude mesurée au premier \texttt{pam}. 
-On aura ensuite une montagne entre chaque \texttt{pam}. 
-La dernière montagne ira du dernier \texttt{pam} à la dernière altitude mesurée.
+La première montagne ira de la première altitude mesurée au premier \lstinline{pam}. 
+On aura ensuite une montagne entre chaque \lstinline{pam}. 
+La dernière montagne ira du dernier \lstinline{pam} à la dernière altitude mesurée.
 \fi
 
 
-\question{Écrire la fonction \texttt{creer\_montagnes(alt) -> list} renvoyant une liste constituée de la liste des montagnes élémentaires.}
+\question{Écrire la fonction \lstinline{creer_montagnes(alt) -> list} renvoyant une liste constituée de la liste des montagnes élémentaires.}
 \ifprof
 \begin{corrige}~\\
 \vspace{-.5cm}
@@ -262,6 +261,7 @@ def creer_montagnes(alt):
 \else
 \fi
 
+\clearpage
 
 \question{Tracer chacun des montagnes afin d'obtenir le graphique suivant.}
 %\ifprof
@@ -296,7 +296,7 @@ def creer_montagnes(alt):
 %
 %
 %Chaque point du chemin sera représenté par une liste à deux éléments entiers précisant les deux coordonnées
-%(par exemple $P_i = (5;4)$ est représenté par la liste \texttt{[5,-4]}). Le chemin lui-même est constitué de la liste
+%(par exemple $P_i = (5;4)$ est représenté par la liste \lstinline{[5,-4]}). Le chemin lui-même est constitué de la liste
 %des points, dans l’ordre dans lequel ils sont atteints. Les codes Python produits dans cette partie devront
 %manipuler exclusivement des coordonnées entières.
 %
@@ -316,13 +316,13 @@ def creer_montagnes(alt):
 %\item on itère l’étape 2 jusqu’à ce que le chemin possède la longueur désirée ou échoue.
 %\end{enumerate}
 %
-%Le module \texttt{random} fournit la fonction \texttt{randrange(a, b)} qui renvoie un entier compris entre $a$ et $b-1$
-%inclus, ainsi que la fonction \texttt{choice(L)} qui renvoie l’un des éléments de la liste \texttt{L}, dans les deux cas choisis
+%Le module \lstinline{random} fournit la fonction \lstinline{randrange(a, b)} qui renvoie un entier compris entre $a$ et $b-1$
+%inclus, ainsi que la fonction \lstinline{choice(L)} qui renvoie l’un des éléments de la liste \lstinline{L}, dans les deux cas choisis
 %aléatoirement avec une probabilité uniforme.
 %
-%L’expression \texttt{x in L} est une expression booléenne qui vaut \texttt{True} si \texttt{x} est l’un des éléments de \texttt{L} et \texttt{False} dans le cas contraire. On supposera que la méthode employée pour évaluer cette expression sur une liste est une recherche séquentielle.
-%La valeur spéciale \texttt{None} est utilisée en Python pour représenter une valeur invalide, inconnue ou indéfinie.
-%L’expression booléenne \texttt{v is None} indique si la valeur de \texttt{v} est cette valeur spéciale.
+%L’expression \lstinline{x in L} est une expression booléenne qui vaut \lstinline{True} si \lstinline{x} est l’un des éléments de \lstinline{L} et \lstinline{False} dans le cas contraire. On supposera que la méthode employée pour évaluer cette expression sur une liste est une recherche séquentielle.
+%La valeur spéciale \lstinline{None} est utilisée en Python pour représenter une valeur invalide, inconnue ou indéfinie.
+%L’expression booléenne \lstinline{v is None} indique si la valeur de \lstinline{v} est cette valeur spéciale.
 %
 %
 %*******En utilisant le canevas fourni en annexe et en ajoutant les import nécessaires :********
@@ -333,17 +333,17 @@ def creer_montagnes(alt):
 %Les points voisins sont de coordonnées $(1,0)$, $(0,1)$, $(-1,0)$ et $(0,-1)$.
 %\end{corrige}
 %\else
-%\fi\question{Soit un point $P$ de coordonnées $(x,y)$ (en Python, le point \texttt{p} sera modélisé par une liste de ses coordonnées : \texttt{[x,y]}), donner les coordonnées des points voisin de ce point.}
+%\fi\question{Soit un point $P$ de coordonnées $(x,y)$ (en Python, le point \lstinline{p} sera modélisé par une liste de ses coordonnées : \lstinline{[x,y]}), donner les coordonnées des points voisin de ce point.}
 %\ifprof
 %\begin{corrige}
-%Les points voisins sont de coordonnées $(x+1,y)$, $(x,y+1)$, $(x-1,y)$ et $(x,y-1)$ soit en python \texttt{[x+1,y]}, \texttt{[x,y+1]}, \texttt{[x-1,y]} et \texttt{[x,y-1]}.
+%Les points voisins sont de coordonnées $(x+1,y)$, $(x,y+1)$, $(x-1,y)$ et $(x,y-1)$ soit en python \lstinline{[x+1,y]}, \lstinline{[x,y+1]}, \lstinline{[x-1,y]} et \lstinline{[x,y-1]}.
 %\end{corrige}
 %\else
 %\fi
 %
 %
-%\question{Écrire la fonction \texttt{voisins(p:list) -> list} qui construit la liste des positions
-%voisines de~\texttt{p}.}
+%\question{Écrire la fonction \lstinline{voisins(p:list) -> list} qui construit la liste des positions
+%voisines de~\lstinline{p}.}
 %\ifprof
 %\begin{corrige}~\\
 %\vspace{-.5cm}
@@ -358,8 +358,8 @@ def creer_montagnes(alt):
 %\else
 %\fi
 %
-%\question{Écrire la fonction \texttt{positions\_possibles(p:list, atteints:list)-> list} qui construit la liste des positions
-%suivantes possibles à partir du point \texttt{p}. La liste atteints contient les points déjà atteints par le chemin.}
+%\question{Écrire la fonction \lstinline{positions_possibles(p:list, atteints:list)-> list} qui construit la liste des positions
+%suivantes possibles à partir du point \lstinline{p}. La liste atteints contient les points déjà atteints par le chemin.}
 %\ifprof
 %\begin{corrige}~\\
 %\vspace{-.5cm}
@@ -377,7 +377,7 @@ def creer_montagnes(alt):
 %\fi
 %
 %\question{Mettre en évidence graphiquement un exemple de CAE le plus court possible pour lequel, à une
-%étape donnée, la fonction  \texttt{positions\_possibles} va renvoyer une liste vide. En prenant en compte les symétries,
+%étape donnée, la fonction  \lstinline{positions_possibles} va renvoyer une liste vide. En prenant en compte les symétries,
 %combien de tels chemins distincts existent pour cette longueur minimale ?}
 %\ifprof
 %\begin{corrige}~\\
@@ -386,9 +386,9 @@ def creer_montagnes(alt):
 %\else
 %\fi
 %
-%\question{Écrire la fonction \texttt{genere\_chemin\_naif(n:int) -> list } qui construit la liste des points représentant le 
-%chemin auto-évitant de longueur \texttt{n} et renvoie le résultat, ou bien renvoie la valeur spéciale \texttt{None} si à une
-%étape \texttt{positions\_possibles} renvoie une liste vide.}
+%\question{Écrire la fonction \lstinline{genere_chemin_naif(n:int) -> list } qui construit la liste des points représentant le 
+%chemin auto-évitant de longueur \lstinline{n} et renvoie le résultat, ou bien renvoie la valeur spéciale \lstinline{None} si à une
+%étape \lstinline{positions_possibles} renvoie une liste vide.}
 %\ifprof
 %\begin{corrige}~\\
 %\vspace{-.5cm}
@@ -445,7 +445,7 @@ def creer_montagnes(alt):
 %méthode du pivot, proposée par Moti Lal en 1969. Son principe est le suivant :
 %\begin{enumerate}
 %\item on part d’un chemin auto-évitant arbitraire de longueur n. Ici, on choisira une initialisation très simple,
-%le chemin droit \texttt{[ [0, 0], [1, 0], [2, 0], ..., [n, 0] ]};
+%le chemin droit \lstinline{[ [0, 0], [1, 0], [2, 0], ..., [n, 0] ]};
 %\item on sélectionne au hasard un point, nommé pivot, entre le second et l’avant-dernier point du chemin,
 %et un angle aléatoire de rotation parmi $\pi$, $\dfrac{\pi}{2}$ et $-\dfrac{\pi}{2}$;
 %\item on laisse les points avant le pivot inchangés et on fait subir à l’ensemble des points situés strictement
@@ -465,19 +465,19 @@ def creer_montagnes(alt):
 %\end{figure}
 %
 %Dans cet algorithme, une étape importante est la vérification qu’un chemin donné est auto-évitant. Pour
-%vérifier cela on pourrait bien sûr s’y prendre comme dans la fonction \texttt{positions\_possibles}, mais on adopte
-%une méthode différente avec une fonction \texttt{est\_CAE(chemin)} qui trie les points du chemin puis met à profit
+%vérifier cela on pourrait bien sûr s’y prendre comme dans la fonction \lstinline{positions_possibles}, mais on adopte
+%une méthode différente avec une fonction \lstinline{est_CAE(chemin)} qui trie les points du chemin puis met à profit
 %ce tri pour vérifier efficacement que le chemin est auto-évitant.
 %
-%On utilise pour cela la fonction \texttt{sorted} qui renvoie une nouvelle liste triée par ordre croissant. Elle fonctionne
+%On utilise pour cela la fonction \lstinline{sorted} qui renvoie une nouvelle liste triée par ordre croissant. Elle fonctionne
 %sur tout type d’éléments disposant d’une relation d’ordre, y compris des listes pour lesquelles l’ordre lexicographique
 %(ordre du premier élément, en cas d’égalité du second, etc.) est appliqué. %On suppose de plus que
 %%la complexité temporelle asymptotique dans le pire des cas de cette fonction est la meilleure possible.
 %
 %
 %
-%\question{Écrire la fonction \texttt{est\_CAE(chemin)} qui vérifie si un chemin est auto-évitant en se basant sur sorted et renvoie un résultat booléen. Elle devra ne pas être de complexité temporelle asymptotique
-%dans le pire des cas supérieure à la fonction \texttt{sorted} : vous prouverez ce dernier point.}
+%\question{Écrire la fonction \lstinline{est_CAE(chemin)} qui vérifie si un chemin est auto-évitant en se basant sur sorted et renvoie un résultat booléen. Elle devra ne pas être de complexité temporelle asymptotique
+%dans le pire des cas supérieure à la fonction \lstinline{sorted} : vous prouverez ce dernier point.}
 %\ifprof
 %\begin{corrige}~\\
 %\vspace{-.5cm}
@@ -490,7 +490,7 @@ def creer_montagnes(alt):
 %\fi
 %
 %
-%\question{Écrire la fonction \texttt{rot(p, q, a)} qui renvoie le point image du point \texttt{q} par la rotation de centre \texttt{p} et d’angle défini par la valeur de \texttt{a} : 0 pour $\pi$, 1 pour $\dfrac{\pi}{2}$, 2  pour
+%\question{Écrire la fonction \lstinline{rot(p, q, a)} qui renvoie le point image du point \lstinline{q} par la rotation de centre \lstinline{p} et d’angle défini par la valeur de \lstinline{a} : 0 pour $\pi$, 1 pour $\dfrac{\pi}{2}$, 2  pour
 %$-\dfrac{\pi}{2}$.}
 %\ifprof
 %\begin{corrige}~\\
@@ -503,7 +503,7 @@ def creer_montagnes(alt):
 %\else
 %\fi
 %
-%\question{Écrire la fonction \texttt{rotation(chemin, i\_piv, a)} qui renvoie un nouveau chemin identique à chemin jusqu’au pivot d’indice \texttt{i\_piv}, et ayant subi une rotation de a autour du pivot (même codage que
+%\question{Écrire la fonction \lstinline{rotation(chemin, i_piv, a)} qui renvoie un nouveau chemin identique à chemin jusqu’au pivot d’indice \lstinline{i_piv}, et ayant subi une rotation de a autour du pivot (même codage que
 %la fonction précédente) sur la partie strictement après le pivot.}
 %\ifprof
 %\begin{corrige}~\\
@@ -516,7 +516,7 @@ def creer_montagnes(alt):
 %\else
 %\fi
 %
-%\question{Écrire la fonction \texttt{genere\_chemin\_pivot(n, n\_rot)} permettant de générer un chemin autoévitant de longueur \texttt{n} en appliquant \texttt{n\_rot} rotations. L’application d’une rotation peut nécessiter plusieurs tentatives.}
+%\question{Écrire la fonction \lstinline{genere_chemin_pivot(n, n_rot)} permettant de générer un chemin autoévitant de longueur \lstinline{n} en appliquant \lstinline{n_rot} rotations. L’application d’une rotation peut nécessiter plusieurs tentatives.}
 %\ifprof
 %\begin{corrige}~\\
 %\vspace{-.5cm}
