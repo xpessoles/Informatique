@@ -21,10 +21,8 @@ Dans ce sujet, on appellera chemin auto-évitant (CAE) de longueur $n$ tout ense
 
 
 Chaque point du chemin sera représenté par une liste à deux éléments entiers précisant les deux coordonnées
-(par exemple $P_i = \left(5, -4\right)$ est représenté par la liste $\left[5,-4\right]$). Le chemin lui-même est constitué de la liste
-des points, dans l’ordre dans lequel ils sont atteints. Les codes Python produits dans cette partie devront
-manipuler exclusivement des coordonnées entières.
-La figure \ref{02_CAE_fig_01} donne une représentation graphique de CAE de longueur 30 à partir de $\left(0, 0\right)$.
+(par exemple $P_i = \left(5, -4\right)$ est représenté par la liste \lstinline{[5,-4]}). Le chemin lui-même est constitué de la liste des points, dans l’ordre dans lequel ils sont atteints. Les codes Python produits dans cette partie devront manipuler exclusivement des coordonnées entières.
+La figure \ref{02_CAE_fig_01} donne une représentation graphique de CAE de longueur 30 à partir de \lstinline{[0, 0]}.
 
 \begin{marginfigure}
 \includegraphics[width=\linewidth]{fig_01}
@@ -55,6 +53,8 @@ plt.show() 						# Affiche la courbe
 
 \end{lstlisting}
 
+
+On appelle \lstinline{chemin} une liste de points, par exemple \lstinline{[[0,0],[1,0],[1,1],[2,1]]}.
 
 \question{Après avoir importé les bibliothèques nécessaires, implémenter la fonction  \lstinline{plot_chemin(chemin:[[int]]) -> None} qui trace le chemin \lstinline{chemin}. Il faudra, à l'intérieur de cette fonction, créer les listes \lstinline{les_x} et \lstinline{les_y} des abscisses et des ordonnées de chacun des points .}
 
@@ -194,11 +194,11 @@ sur tout type d’éléments disposant d’une relation d’ordre, y compris des
 \marginnote{
 On rappelle qu'un chemin de longueur $n$ est auto-évitant si pour $0 \leq i \leq n$ :
 \begin{itemize}[label=$\blacktriangleright$]
-\item $\forall i$, $||P_{i + 1} - P_i || = 1$;
+\item $\forall i$, $||\vect{P_i P_{i + 1}}|| = 1$;
 \item $\forall (i,j)$, $i\neq j \Rightarrow P_i \neq P_j$.
 \end{itemize}
 }
-\question{Implémenter la fonction \lstinline{ } qui vérifie si un chemin est auto-évitant en se basant sur \lstinline{sorted}.}% Elle devra ne pas être de complexité temporelle asymptotique dans le pire des cas supérieure à la fonction \lstinline{sorted} : vous prouverez ce dernier point.}
+\question{Implémenter la fonction \lstinline{est_CAE(chemin:[[int]]) -> bool} qui vérifie si un chemin est auto-évitant en se basant sur \lstinline{sorted}.}% Elle devra ne pas être de complexité temporelle asymptotique dans le pire des cas supérieure à la fonction \lstinline{sorted} : vous prouverez ce dernier point.}
 
 \question{Implémenter la fonction \lstinline{rot(p:[int], q:[int], a:int) -> [int]} qui renvoie le point image du point \lstinline{q} par la rotation de centre \lstinline{p} et d’angle défini par la valeur de \lstinline{a} : \lstinline{0} pour $\pi$, \lstinline{1} pour $\dfrac{\pi}{2}$, \lstinline{2} pour $-\dfrac{\pi}{2}$.}
 
