@@ -44,34 +44,33 @@ Décomposition de $1001_2$ en base 2 : $1001_2 = 1\cdot 2^{11_2} + 0\cdot 2^{10_
 \subsubsection{Système décimal}
 Le système décimal est le système universellement utilisé. C'est la base de référence, ce qui signifie qu'un nombre est de manière implicite écrite en décimal, dès lors qu'il est écrit sans précision de base. 
 
-En python, les chiffres sont \textbf{affichés} par défaut dans le système décimal. 
+En python, les nombres sont \textbf{affichés} par défaut dans le système décimal. 
 
 \subsubsection{Système binaire}
 
 C'est la base de numération couramment utilisée en électronique ou informatique. C'est un système en base 2, l'écriture des nombres est donc composée des caractères de 0 et 1. 
 
-\begin{exemple}~\\
 
-\begin{minipage}[c]{.4\linewidth}
+\marginnote{
 En binaire on compte de la manière suivante : 
 \begin{center}
-\begin{tabular}{|c|c|}
+\begin{tabular}{cc}
 \hline
 Base 10 & Base 2 \\
-\hline \hline
-0 & 0000 \\ \hline
-1 & 0001 \\ \hline
-2 & 0010 \\ \hline
-3 & 0011 \\ \hline
+\hline 
+0 & 0000 \\ 
+1 & 0001 \\ 
+2 & 0010 \\ 
+3 & 0011 \\ 
 4 & 0100 \\ \hline
 \end{tabular}
-\end{center}
-\end{minipage} \hfill
-\begin{minipage}{.57\linewidth}
+\end{center}} 
+
+\begin{exemple}~\\
+
 \textit{Convertir $\left(11011001\right)_2$ en base 10.}
 
 \textit{Convertir $\left(42\right)_{10}$ en base 2.}
-\end{minipage}
 \end{exemple}
 
 En Python, il est possible de manipuler des nombres en binaires en utilisant le préfixe \texttt{0b}. Ainsi, \texttt{0b111} est interprété comme l'entier 7. 
