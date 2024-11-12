@@ -12,9 +12,9 @@ Création d'un chemin auto-évitant -- \ifprof Corrigé \else Sujet \fi}
 \marginnote{\url{https://doi.org/10.1098/rspa.2018.0549}}
 Une marche auto-évitante est un processus au cours duquel un point décrit un chemin auto-évitant, c’est-à-dire qui ne se recoupe jamais lui-même. 
 
-Dans ce sujet, on appellera chemin auto-évitant (CAE) de longueur $n$ tout ensemble de $n+1$ points $P_i \in \mathbb{Z}^2$ pour $0 \leq i \leq n$ tels que :
+Dans ce sujet, on appellera chemin auto-évitant (CAE) de longueur $n$ tout ensemble de $n+1$ points $P_i = \left(x_i,y_i\right)\in \mathbb{Z}^2$ pour $0 \leq i \leq n$ tels que :
 \begin{itemize}[label=$\blacktriangleright$]
-\item $\forall i$, $||P_{i + 1} - P_i || = 1$;
+\item $\forall i$, $||\vect{P_i P_{i + 1}}|| = 1$;
 \item $\forall (i,j)$, $i\neq j \Rightarrow P_i \neq P_j$.
 \end{itemize}
 
