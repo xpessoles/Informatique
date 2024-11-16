@@ -92,6 +92,7 @@ suivant et on en sélectionne une au hasard. En l’absence de positions accessi
 
 \question{Implémenter la fonction \lstinline{positions_voisines(p:[int]) -> [[int]]} qui construit la liste des positions voisines possibles à partir du point \lstinline{p}.}
 
+\marginnote{L'ordre des voisins n'est pas important.}
 \begin{test}
 \lstinline{positions_voisines([0,0])} doit renvoyer \lstinline{[[0,1],[1,0],[0,-1],[-1,0]]}.
 \end{test}
@@ -103,6 +104,7 @@ suivant et on en sélectionne une au hasard. En l’absence de positions accessi
 
 \question{Implémenter la fonction \lstinline{positions_possibles(p:[int], chemin:[[int]]) -> [[int]]} qui construit la liste des positions suivantes possibles à partir du point \lstinline{p}. La liste \lstinline{chemin} contient les points déjà atteints.}
 
+\marginnote{L'ordre des positions possibles n'est pas important.}
 \begin{test}
 \lstinline{positions_possibles([0,0],[])} doit renvoyer \lstinline{[[0, 1], [1, 0], [0, -1], [-1, 0]]}.
 
@@ -154,7 +156,7 @@ Pour cela, pour des longueurs de chemin comprises entre 0 et 350, on peut calcul
 
 
 
-\question{En testant la possibilté de réaliser 1000 chemins pour chacune des longueurs comprises entre 1 et 350, tracer la probabilité qu'un chemin échoue en fonction de sa longueur (voir figure \ref{02_CAE_fig_04}).}
+\question{En testant la possibilté de réaliser 20 chemins pour chacune des longueurs comprises entre 1 et 350, tracer la probabilité qu'un chemin échoue en fonction de sa longueur (voir figure \ref{02_CAE_fig_04}). Une fois votre tracer fonctionnel, on pourra réaliser la courbe pour 200 chemins.}
 
 
 \question{Décrire ce que représente ce graphique et interpréter sa signification pour la méthode naïve.}
@@ -200,11 +202,17 @@ On rappelle qu'un chemin de longueur $n$ est auto-évitant si pour $0 \leq i \le
 }
 \question{Implémenter la fonction \lstinline{est_CAE(chemin:[[int]]) -> bool} qui vérifie si un chemin est auto-évitant en se basant sur \lstinline{sorted}.}% Elle devra ne pas être de complexité temporelle asymptotique dans le pire des cas supérieure à la fonction \lstinline{sorted} : vous prouverez ce dernier point.}
 
-\question{Implémenter la fonction \lstinline{rot(p:[int], q:[int], a:int) -> [int]} qui renvoie le point image du point \lstinline{q} par la rotation de centre \lstinline{p} et d’angle défini par la valeur de \lstinline{a} : \lstinline{0} pour $\pi$, \lstinline{1} pour $\dfrac{\pi}{2}$, \lstinline{2} pour $-\dfrac{\pi}{2}$.}
+\question{Implémenter la fonction \lstinline{rot(p:[int], q:[int], a:int) -> [int]} qui renvoie le point image du point \lstinline{q} par la rotation de centre \lstinline{p} et d’angle défini par la valeur de \lstinline{a} : \lstinline{0} pour $\pi$, \lstinline{1} pour $\dfrac{\pi}{2}$, \lstinline{2} pour $-\dfrac{\pi}{2}$. On pourra pour cela utiliser la figure \ref{02_CAE_fig_05}.}
 
 
 \question{Implémenter la fonction \lstinline{rotation(chemin:[[int]], i_piv:int, a:int) -> [[int]]} qui renvoie un nouveau chemin identique à \lstinline{chemin} jusqu’au pivot d’indice \lstinline{i_piv}, et ayant subi une rotation de \lstinline{a} autour du pivot (même codage que la fonction précédente) sur la partie strictement après le pivot.}
 
 \question{Implémenter la fonction \lstinline{genere_chemin_pivot(n:int, n_rot:int) -> [[int]]} permettant de générer un chemin autoévitant de longueur \lstinline{n} en appliquant \lstinline{n_rot} rotations. L’application d’une rotation peut nécessiter plusieurs tentatives.}
+
+\begin{figure}
+\centering
+\includegraphics[width=.8\linewidth]{fig_05}
+\caption{Illustration de la rotation d'un point \label{02_CAE_fig_05}}
+\end{figure}
 
 %\question{On considère un pivot, son point précédent et son point suivant. Quel est l’impact prévisible sur les rotations admissibles ? Suggérer un moyen de prendre en compte cette propriété pour améliorer l’algorithme.}
