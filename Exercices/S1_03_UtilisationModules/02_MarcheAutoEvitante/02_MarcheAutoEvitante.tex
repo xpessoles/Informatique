@@ -92,7 +92,7 @@ suivant et on en sélectionne une au hasard. En l’absence de positions accessi
 
 \question{Implémenter la fonction \lstinline{positions_voisines(p:[int]) -> [[int]]} qui construit la liste des positions voisines possibles à partir du point \lstinline{p}.}
 
-\marginnote{L'ordre des voisins n'est pas important.}
+\marginnote[1cm]{L'ordre des voisins n'est pas important. }
 \begin{test}
 \lstinline{positions_voisines([0,0])} doit renvoyer \lstinline{[[0,1],[1,0],[0,-1],[-1,0]]}.
 \end{test}
@@ -104,11 +104,13 @@ suivant et on en sélectionne une au hasard. En l’absence de positions accessi
 
 \question{Implémenter la fonction \lstinline{positions_possibles(p:[int], chemin:[[int]]) -> [[int]]} qui construit la liste des positions suivantes possibles à partir du point \lstinline{p}. La liste \lstinline{chemin} contient les points déjà atteints.}
 
-\marginnote{L'ordre des positions possibles n'est pas important.}
+\marginnote[1cm]{L'ordre des positions possibles n'est pas important. Attention, pou run chemin à un élément il y a bien \textbf{2 paires} de crochets.}
 \begin{test}
 \lstinline{positions_possibles([0,0],[])} doit renvoyer \lstinline{[[0, 1], [1, 0], [0, -1], [-1, 0]]}.
 
 \lstinline{positions_possibles([0,1],[[0,0]])} doit renvoyer \lstinline{[[0, 2], [1, 1], [-1, 1]]}.
+
+\lstinline{positions_possibles([1,0],[[0,0],[1,0]])} doit renvoyer \lstinline{[[1, 1], [2, 0], [1, -1]]}.
 \end{test}
 
 
@@ -181,7 +183,7 @@ effectuer pour obtenir un chemin non corrélé au chemin initial est laissé de 
 Cette méthode permet de générer de manière efficace des marches auto-évitantes de plusieurs milliers de
 points, comme la marche de longueur 2000 de la figure \ref{02_CAE_fig_02}.
 
-\begin{marginfigure}
+\begin{marginfigure}[-2cm]
 \includegraphics[width=\linewidth]{fig_02}
 \caption{Marche de longueur 2000\label{02_CAE_fig_02}}
 \end{marginfigure}
@@ -195,7 +197,7 @@ sur tout type d’éléments disposant d’une relation d’ordre, y compris des
 %\question{Rappeler, sans la justifier, la complexité temporelle asymptotique dans le pire des cas attendue de sorted en fonction de la longueur de la liste à trier. Donner le nom d’un algorithme possible pour son implémentation.}
 
 %En utilisant le canevas fourni en annexe et en ajoutant les import nécessaires :
-\marginnote{
+\marginnote[-1cm]{
 On rappelle qu'un chemin de longueur $n$ est auto-évitant si pour $0 \leq i \leq n$ :
 \begin{itemize}[label=$\blacktriangleright$]
 \item $\forall i$, $||\vect{P_i P_{i + 1}}|| = 1$;
