@@ -55,12 +55,15 @@ La variable locale est \texttt{res}.
 \ifprof
 \else	
 	\begin{center}
-		\begin{tabular}{|l|p{1cm}|p{1cm}|p{1cm}|}
-			\hline & \texttt{p} & \texttt{res} & \texttt{y}\\
-			sortie du 1{\textrm{er}} tour de boucle && & \\[3mm]
-			sortie du 2\ieme\  tour de boucle && & \\[3mm]
+		\begin{tabular}{lp{1cm}p{1cm}p{1cm}}
+		\hline
+			& \texttt{p} & \texttt{res} & \texttt{y}\\
+			\hline
+			Sortie du 1{\textrm{er}} tour de boucle && & \\[3mm]
+			Sortie du 2\ieme\  tour de boucle && & \\[3mm]
 			\ldots && & \\[3mm]
 			\ldots&& & \\[3mm]
+\hline
 		\end{tabular}
 	\end{center}
 \fi
@@ -109,7 +112,7 @@ def Pnaif(x,n):
 	%\medskip Donner un équivalent du nombre d'opérations faites pour ce calcul et vérifier que la complexité est quadratique.
 
 	\question{ Faire de même pour une fonction 
-	\lstinline{Prapide(x,n)} qui renvoie $P(x)$ à l'aide de la fonction \lstinline{exporapide}. On admettra que la complexité est en O(n ln(n)).}
+	\lstinline{Prapide(x,n)} qui renvoie $P(x)$ à l'aide de la fonction \lstinline{exporapide}. On admettra que la complexité est en $\mathcal{O}(n \ln(n))$.}
 \ifprof
 \begin{corrige}
 \begin{lstlisting}
@@ -129,7 +132,8 @@ def Prapide(x,n):
 	%On peut montrer dans ce cas que la complexité est dominée par $n.\ln(n)$ (on admettra ce résultat).
 \ifprof
 \else
- Une dernière méthode consiste à utiliser le schéma de Hörner: 	
+ Une dernière méthode consiste à utiliser le schéma de Hörner :
+ 
  $P(x)= ({(a_nx+a_{n-1})x+a_{n-2})x+...+a_1)x+a_0}$
 \fi
 
