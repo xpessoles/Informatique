@@ -238,29 +238,29 @@ def reciproque(n):
 
 
 
-
-\exer{Exercice}
-\setcounter{question}{0}
-
-\question{Prouver la terminaison de la fonction $G$ de Hofstadter, définie sur $\mathbb{N}$ de la façon suivante :}
-%\begin{py}  ~\\ \vspace{-1cm}
-\begin{lstlisting}
-def g(n) :
-    if n== 0 : 
-        return 0
-    return n-g(g(n-1))
-\end{lstlisting}
-%\end{py}
-
-
-\exer{}
-\setcounter{question}{0}
-
-On suppose donné un tableau $t[0,.., n-1]$ (contenant au moins trois éléments) qui possède la propriété suivante : $t_0\geq t_1$ et $t_{n-2}\leq t_{n-1}$. Soit $k\in[|1,n-2|]$; on dit que $t_k$ est un minimum local lorsque $t_k\leq t_{k-1}$ et $t_k\leq t_{k+1}$.
-
-\question{Justifier l'existence d'un minimum local dans $t$.}
-
-\question{Il est facile de déterminer un minimum local en coût linéaire : il suffit de procéder à un parcours de tableau. Pourriez-vous trouver un algorithme récursif qui en trouve un en réduisant le coût logarithmique?}
+%
+%\exer{Exercice}
+%\setcounter{question}{0}
+%
+%\question{Prouver la terminaison de la fonction $G$ de Hofstadter, définie sur $\mathbb{N}$ de la façon suivante :}
+%%\begin{py}  ~\\ \vspace{-1cm}
+%\begin{lstlisting}
+%def g(n) :
+%    if n== 0 : 
+%        return 0
+%    return n-g(g(n-1))
+%\end{lstlisting}
+%%\end{py}
+%
+%
+%\exer{}
+%\setcounter{question}{0}
+%
+%On suppose donné un tableau $t[0,.., n-1]$ (contenant au moins trois éléments) qui possède la propriété suivante : $t_0\geq t_1$ et $t_{n-2}\leq t_{n-1}$. Soit $k\in[|1,n-2|]$; on dit que $t_k$ est un minimum local lorsque $t_k\leq t_{k-1}$ et $t_k\leq t_{k+1}$.
+%
+%\question{Justifier l'existence d'un minimum local dans $t$.}
+%
+%\question{Il est facile de déterminer un minimum local en coût linéaire : il suffit de procéder à un parcours de tableau. Pourriez-vous trouver un algorithme récursif qui en trouve un en réduisant le coût logarithmique?}
 
 %\exer{}
 %\setcounter{question}{0}
@@ -291,14 +291,21 @@ On suppose donné un tableau $t[0,.., n-1]$ (contenant au moins trois éléments
 
 \exer{Tracé de cercles}
 \setcounter{question}{0}
-\begin{marginfigure}
-\includegraphics[width=\linewidth]{fig_03}
-% Le résultat des fonctions bubble1(4) et de bubble2(4).
-\end{marginfigure}
 On suppose disposer d’une fonction \lstinline{circle([x, y], r)} qui trace à l’écran un cercle de centre
 $(x;y)$ de rayon $r$. 
 
 \question{Définir deux fonctions récursives permettant de tracer les dessins présentés figure suivante (chaque cercle est de rayon moitié moindre qu’à la génération précédente).}
+%\begin{marginfigure}
+%\includegraphics[width=\linewidth]{fig_03}
+%% Le résultat des fonctions bubble1(4) et de bubble2(4).
+%\end{marginfigure}
+
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=.8\linewidth]{fig_03}
+\caption{Le résultat des fonctions bubble1(4) et de bubble2(4).}
+\end{figure}
 
 
 
