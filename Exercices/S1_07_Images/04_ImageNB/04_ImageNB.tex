@@ -17,7 +17,7 @@ Le codage d'une image se fait alors sous la forme d'une matrice. Chaque pixel de
 Ci-contre une image ne contenant que du noir (codé par un 0) et du blanc (codé par un 1).
 
 
-Les images dites en "noir et blanc" sont en fait des images en dégradé de gris (ou niveaux de gris). Chaque élément de la matrice correspondra comme précédemment à un pixel, mais ces éléments seront des flottants (compris entre 0. et 1.) donnant l'intensité de gris voulue. On utilise ici le 0 pour le noir et le 1 pour le blanc. Une valeur de 0.5 sera un gris moyen, de 0.2 un gris foncé et de 0.8 un gris clair.
+Les images dites en << noir et blanc >> peuvent être des images en dégradé de gris (ou niveaux de gris). Chaque élément de la matrice correspondra comme précédemment à un pixel, mais ces éléments seront des flottants (compris entre 0. et 1.) donnant l'intensité de gris voulue. On utilise ici le 0 pour le noir et le 1 pour le blanc. Une valeur de 0.5 sera un gris moyen, de 0.2 un gris foncé et de 0.8 un gris clair.
 
 \begin{question}
 Compléter les commentaires de la fonction \lstinline{image_noire} fournie dans le script \lstinline{TP08.py}. Appeler ensuite cette fonction pour créer une image noire de largeur 6 pixels et de hauteur 3 pixels.
@@ -28,46 +28,49 @@ Afficher la matrice obtenue dans le script. Afficher ensuite  l'image obtenue da
 \end{question}
 
 \begin{lstlisting}
-import matplotlib.pyplot as plt  # importation de la bibliothèque matplotlib
-
-plt.figure("NOM de la figure")  # crée une nouvelle figure
-plt.imshow(im,cmap='gray',vmin=0, vmax=1)  # crée l'image codée par la matrice im  /en niveau de gris, les pixels étant codés par des valeurs allant du 0 au 1 
-plt.show() 	# affiche l'image. 
+# import de la bibliothèque matplotlib
+import matplotlib.pyplot as plt 
+# crée une nouvelle figure
+plt.figure("NOM de la figure")  
+# crée l'image codée par la matrice im  /en niveau de gris, les pixels étant codés par des valeurs allant du 0 au 1
+plt.imshow(im,cmap='gray',vmin=0, vmax=1)   
+# affiche l'image.
+plt.show() 	 
 \end{lstlisting}
 
 
-\begin{question}
-\'Ecrire les fonctions \lstinline{rayure_hor} et \lstinline{rayure_ver} qui créent des images rayées horizontalement et verticalement. Tester ces fonctions sur des images de hauteur 9 et de largeur 14. Afficher les résultats obtenus.
-\end{question}
-
-
-\begin{question}
-\textbf{BIS (OPTIONNELLE : si vous êtes en avance uniquement)} \'Ecrire la fonction \lstinline{echiquier} qui crée une image avec un motif d'échiquier. Tester et afficher l'image obtenue.
-\end{question}
+%\begin{question}
+%\'Ecrire les fonctions \lstinline{rayure_hor} et \lstinline{rayure_ver} qui créent des images rayées horizontalement et verticalement. Tester ces fonctions sur des images de hauteur 9 et de largeur 14. Afficher les résultats obtenus.
+%\end{question}
+%
+%
+%\begin{question}
+%\textbf{BIS (OPTIONNELLE : si vous êtes en avance uniquement)} \'Ecrire la fonction \lstinline{echiquier} qui crée une image avec un motif d'échiquier. Tester et afficher l'image obtenue.
+%\end{question}
 
 
 \section*{Eclaircir une image}
 Dans cette partie on souhaite éclaircir l'ensemble d'une image.
 
 \begin{question}
-\'Ecrire la fonction \lstinline{eclaicir} qui prend pour argument la matrice-image \lstinline{im} et le flottant \lstinline{k} et qui modifie chaque pixel de l'image pour éclaircir d'une valeur \lstinline{k} chaque pixel. (plus la valeur de \lstinline{k} sera élevée plus l'éclaircissement sera conséquent).
-
-Tester ensuite votre fonction sur l'image rayée horizontalement que vous avez obtenue précédemment. Les bandes noires doivent devenir grises. 
-
-Afficher 3 figures : l'image rayée initiale, l'image rayée éclaicie et l'image rayée initiale après application de la fonction \lstinline{eclaicir}.  
+\'Ecrire la fonction \lstinline{eclaicir} qui prend pour argument la matrice-image \lstinline{im} et le flottant \lstinline{k} (compris entre 0 et 1) et qui modifie chaque pixel de l'image pour éclaircir d'une valeur \lstinline{k} chaque pixel (plus la valeur de \lstinline{k} sera élevée plus l'éclaircissement sera conséquent).
 \end{question}
 
+\question{Tester votre fonction sur l'image noire que vous avez obtenue précédemment. 
+Afficher 2 figures : l'image initiale et l'image éclaicie. }
 
 \textit{Si on ne prend pas de précautions particulières, le fait d'apliquer la fonction \lstinline{eclaicir} modifie l'image source. Ceci peut être génant si ce n'est pas volontaire. Il faut bien veiller à créer une \textbf{copie indépendante} de la matrice-image source pour éviter ce problème.}
 
-\textbf{Copie indépendante}
+%\textbf{Copie indépendante}
 
 \begin{question}
-Réécrire la fonction \lstinline{eclaicir2} en ajoutant les commandes permettant de réaliser une copie indépendante de la matrice-image source avant de la modifier. Tester en affichant les 3 figures de la question précédente.
+Réécrire la fonction \lstinline{eclaicir2} en ajoutant les commandes permettant de réaliser une copie indépendante de la matrice-image source avant de la modifier. Tester en affichant les 2 figures de la question précédente.
 \end{question}
 
 
-\textbf{Lecture d'une image contenue dans un fichier .png}
+%\textbf{Lecture d'une image contenue dans un fichier .png}
+\marginnote{\textbf{Attention :} Il faut que le fichier lu se situe dans le même répertoire que le script. Veillez donc à ce que vos fichiers \lstinline{allium.png} et \lstinline{TP08.py} soient dans le même répertoire. Il faudra ensuite exécuter le script en effectuant un clic droit sur l'onglet de votre script puis \textbf{Exécuter en tant que script}.}
+
 On va maintenant appliquer cette fonction sur une autre image, contenue dans le fichier \textbf{allium.png}.
 
 Pour lire un fichier et obtenir la matrice-image correspondante on utilise l'instruction :
@@ -76,7 +79,6 @@ import matplotlib.image as img   # import d'une autre bibliothèque de matplotli
 imF = img.imread("nom_du_fichier.png")  # lecture du fichier
 \end{lstlisting}
 
-\marginnote{\textbf{Attention :} Il faut que le fichier lu se situe dans le même répertoire que le script. Veillez donc à ce que vos fichiers \lstinline{allium.png} et \lstinline{TP08.py} soient dans le même répertoire. Il faudra ensuite exécuter le script en effectuant un clic droit sur l'onglet de votre script puis \textbf{Exécuter en tant que script}.}
 
  
 \begin{question}
@@ -91,7 +93,7 @@ Lire le fichier \textbf{allium.png} et stocker la matrice image obtenue dans la 
 Elle se décompose en plusieurs étapes qui consistent à extraire les contours des objets dans l'image afin
 de les reconnaitre ou d'en détecter le mouvement. La première de ces étapes est la mise en évidence
 des contours des objets dans l'image. C'est cette étape que nous allons aborder très succinctement.}
-\\
+
 
 \begin{figure}[!h]
 \centering
@@ -100,15 +102,17 @@ des contours des objets dans l'image. C'est cette étape que nous allons aborder
 
 Un contour définit la limite d'un objet dans une image. Cette limite est caractérisée par un changement
 dans l'image : un changement de couleur ou de contraste. Ce changement se traduit dans la valeur des pixels qui sont localisés de part et d’autre de la limite.
-Nous sommes donc à la recherche d’un moyen de détecter et de localiser un changement.\\
+Nous sommes donc à la recherche d’un moyen de détecter et de localiser un changement.
 
+Considérons un pixel \textbf{p} dans une image. Ce pixel est-il semblable, de même teinte, que ses voisins ? Si non, quelle est la différence de teinte entre lui et ses voisins ? Est-elle grande, ce qui signifierait qu’il est situé à 
+
+la limite d’un objet ?
 \begin{marginfigure}
 \centering
 \includegraphics[width=.8\textwidth]{imagepixels.png}
 \end{marginfigure}
 
 
-Considérons un pixel \textbf{p} dans une image. Ce pixel est-il semblable, de même teinte, que ses voisins ? Si non, quelle est la différence de teinte entre lui et ses voisins ? Est-elle grande, ce qui signifierait qu’il est situé à la limite d’un objet ?\\
 Le principe est pour chaque pixel de l'image, de récupérer la valeur de chaque pixel avoisinant ce pixel, puis de mesurer la différence, la ”distance” euclidienne, entre ces valeurs en utilisant une fonction de norme standard :
 $$
 \text{distance}=\sqrt{(p_1-p_3)^2+(p_2-p_4)^2}.
