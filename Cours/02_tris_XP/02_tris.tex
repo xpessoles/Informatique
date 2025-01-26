@@ -120,7 +120,8 @@ def tri_insertion(L:[int]) -> [int]:
             j = j-1
         L[j] = v
         # Invariant : en fin de boucle L[0:i] est triée.
-    return L
+	
+    return L # Le tri est en place, on n'est pas obligé de renvoyer L. 
 \end{lstlisting}    
 
 
