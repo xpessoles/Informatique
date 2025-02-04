@@ -56,7 +56,7 @@ Le floutage consiste à appliquer une transformation (appelée filtre) à toute 
 \end{marginfigure}
 
 Dans le cas d'un floutage on utilise la matrice $\begin{pmatrix}  1 &  1 & 1 \\1 &  1 & 1 \\1 &  1 & 1 \\\end{pmatrix}$. 
-Ainsi le pixel \texttt{p} de coordonnées \texttt{[i,j]} de l'image d'origine est remplacé par le pixel \lstinline{(p[i-1,j-1]+p[i-1,j]+p[i-1,j+1]+p[i,j-1]+p[i,j]+p[i,j+1]+p[i+1,j-1]+p[i+1,j]+p[i+1,j+1])*(1/9)} sur l'image d'arrivée.
+Ainsi le pixel \texttt{p} de coordonnées \texttt{[i,j]} de l'image d'origine est remplacé par le pixel \lstinline{(p[i-1][j-1]+p[i-1][j]+p[i-1][j+1]+p[i][j-1]+p[i][j]+p[i][j+1]+p[i+1][j-1]+p[i+1][j]+p[i+1][j+1])*(1/9)} sur l'image d'arrivée.
 
 \subsection*{Flou avec une matrice 3x3}
 
