@@ -50,6 +50,13 @@ def f2(n) :
 \ifprof
 \begin{corrige}
 $\mathcal{O}(n^2)$
+
+Pour montrer ce résultat, on pourrait compter le nombre d'incrémentations de $x$ :
+\begin{itemize}
+\item la boucle intérieure itère $\sum_{j=0}^{j=i} 1 = i$;
+\item cette boucle itère $\sum\limits_{i=0}^{i=n} i = \dfrac{n\left(n+1\right)}{2} $.
+\end{itemize}
+D'où le résultat.
 \end{corrige}
 \else
 \fi
@@ -126,6 +133,9 @@ def f6(n) :
 \ifprof
 \begin{corrige}
 $\mathcal{O}( n\sqrt{n})$
+
+
+La boucle \lstinline{while} s'exécute tant que $j^2<i$. Il y a donc approximativement 
 \end{corrige}
 \else
 
