@@ -218,12 +218,40 @@ def NombreDistinctsTri(L) :
 \end{lstlisting}
 
 \question{Donner la signature de cette fonction.}
+\ifprof
+\begin{corrige}
+Cette fonction a pour objectif de donner le nombre de valeurs distinctes de la liste. 
 
+Elle prend en entrée une liste triée. 
+
+Elle renvoie un entier.
+\end{corrige}
+\else
+\fi
 \question{Donner au moins une assertion permettant de valider que les entrées sont conformes aux attendus du concepteur.}
-
+\ifprof
+\begin{corrige}
+Il faut vérifier que la liste est triée.
+\end{corrige}
+\else
+\fi
 \question{Donner au moins un test permettant de valider la fonction.}
-
+\ifprof
+\begin{corrige}
+\begin{lstlisting}
+>>> assert NombreDistinctsTri([0,1])=2
+>>> assert NombreDistinctsTri([0,0])=1
+\end{lstlisting}
+\end{corrige}
+\else
+\fi
 \question{Montrer que cette fonction termine.}
+\ifprof
+\begin{corrige}
+Une boucle \lstinline{for} termine (voir cours).
+\end{corrige}
+\else
+\fi
 
 \question{Définir un invariant de la boucle constituant la fonction \texttt{NombreDistinctsTri(L)} et justifier la correction de cette fonction.}
 \ifprof

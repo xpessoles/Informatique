@@ -1,0 +1,235 @@
+\section*{Le voyageur de commerce}
+\marginnote{A partir du travail de E. Detrez \url{https://info.faidherbe.org/}.}
+
+Lors des vacances, Solal souhaite aller passer un moment avec tous ses collègues de PTSI répartis dans toute la région. Il cherche l'itinéraire minimisant la distance totale parcourue. À la fin du périple, il souhaite retourner à la ville de départ. 
+\begin{table*}[!h]
+\begin{center}
+\begin{tabular}{p{3.5cm}  cccccc}
+\hline 
+Villes 				& Lyon 	& Saint-Etienne 	& Grenoble & Clermont-Ferrand 	& Annecy 	& Valence 	\\
+\hline
+Lyon 				& 0 		& 64 			& 106 	& 165			& 138	& 102 	\\
+Saint-Etienne 		& 64		& 0			& 155	& 146 			& 186 	& 121 	\\	
+Grenoble 			& 106	& 155		& 0		& 270 			& 105 	& 94		\\
+Clermont-Ferrand 	& 165	& 146 		& 270	& 0				& 300 	& 263 	\\
+Annecy			& 138	& 186		& 105 	& 300			& 0		& 208 	\\
+Valence 			& 102	& 121 		& 94		& 263			& 208 	& 0\\
+\hline 
+\end{tabular}
+\end{center}
+\caption{Table des distances entre ville de la région Auvergne -- Rhône - Alpes \label{tab:dist}}
+\end{table*}
+
+\subsection*{Introduction}
+On appelle itinéraire un parcours de ville, par exemple : 
+Lyon $\rightarrow $ Saint-Etienne $\rightarrow $ Grenoble $\rightarrow $ Clermont-Ferrand $\rightarrow $ Annecy 	$\rightarrow $ Valence. 
+
+\question{Déterminer le nombre d'itinéraires possibles au départ de Lyon. Déterminer le nombre d'itinéraires possibles pour un passage par $n$ villes.}
+\ifprof
+\begin{corrige}
+Pour 3 villes :
+\begin{itemize}
+\item 1, 2, 3
+\item 1, 3, 2
+\end{itemize}
+
+Pour 4 villes :
+\begin{itemize}
+\item 1, 2, 3, 4
+\item 1, 2, 4, 3
+\item 1, 3, 2, 4
+\item 1, 3, 4, 2
+\item 1, 4, 2, 3
+\item 1, 4, 3, 2
+\end{itemize}
+
+Conjecture :
+\begin{itemize}
+\item pour 3 villes, on peut faire $2\times 1$ itinéraires;
+\item pour 4 villes, on peut faire $3\times 2\times 1$ itinéraires;
+\end{itemize}
+
+Pour n villes, il y a donc $(n-1)!$ itinéraires possibles.
+\end{corrige}
+\else
+\fi
+
+
+Pour un grand nombre de villes, il n'est pas possible d'évaluer toutes les distances de tous les itinéraires et de prendre le plus court. 
+
+\begin{defi}[Algorithmes gloutons]
+Les algorithmes gloutons déterminent une solution optimale en effectuant successivement des choix locaux, jamais remis en cause. Au cours de la construction de la solution, l’algorithme résout une partie du problème puis se focalise ensuite sur le sous-problème restant à résoudre et ainsi de suite.
+\end{defi}
+
+Dans notre cas la solution optimale consiste en visiter la ville la plus proche. 
+ 
+\question{Appliquer la stratégie gloutonne à la main et donner la distance correspondante. Cette solution vous semble-elle être la meilleure ?}
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi
+
+\subsection*{Résolution}
+
+On associe un nombre (indice) à chaque ville : 0 à Lyon, 1 à Saint-Etienne, 2 à Grenoble, 3 à Clermont-Ferrand, 4 à  Annecy, 5 à Valence.
+On appelle table des distances \lstinline{distance} la liste de liste modélisant la table \ref{tab:dist}.
+
+Ainsi \lstinline{distance[0][2]=distance[2][0]=106} la distance Lyon -- Grenoble. 
+
+\question{Ecrire une fonction \lstinline{enleve(L, e)} qui prend en paramètre une liste \lstinline{L} et un élément \lstinline{e} et renvoie une liste contenant les éléments de \lstinline{L} à l’exception de \lstinline{e}. }
+\ifprof
+\begin{corrige}
+\begin{lstlisting}
+def enleve (L , e ) :
+    # renvoie une liste correspondant à L sans l'élément e
+    L_modif = []
+    for elt in L :
+        if elt != e :
+            L_modif . append ( elt )
+    return L_modif
+
+def enleve (L , e ) :
+    # renvoie une liste correspondant à L sans l'élément e
+    i = L . index ( e )
+    return L [0: i ] + L [ i +1:]
+\end{lstlisting}
+\end{corrige}
+\else
+\fi
+
+
+\question{Ecrire une fonction récursive \lstinline{enleve_rec(L, e)} qui permet de réalise la même opération. }
+\ifprof
+\begin{corrige}
+\begin{lstlisting}
+def enleve_rec(L, e):
+    if len(L) == 0 :  # Si la liste est vide
+        return []
+    elif L[0] == e:  # Si le premier élément est égal à e
+        return enleve_rec(L[1:], e)
+    else:  # Sinon, conservez le premier élément
+        return [L[0]] + enleve_rec(L[1:], e)
+\end{lstlisting}
+\end{corrige}
+\else
+\fi
+
+\begin{exemple}
+Par exemple, \lstinline{enleve([7, 5, 9, 3, 5], 3)} donnera \lstinline{[7, 5, 9, 5]}.
+\end{exemple}
+
+
+\question{Écrire une fonction \lstinline{proche(v_actuelle, v_non_visit)} qui prend en paramètre la ville actuelle \lstinline{v_actuelle} et la liste des villes à visiter \lstinline{v_non_visit} et renvoie la ville la plus proche de \lstinline{v_actuelle} parmi les villes de \lstinline{v_non_visit} en prenant en compte les distances \lstinline{dist} entre villes.}
+\ifprof
+\begin{corrige}
+\begin{lstlisting}
+def proche ( v_actuelle , v_non_visit ) :
+    """ renvoie la ville la plus proche de la ville actuelle selon les distance dist et la liste des villes non encore visitées """
+    n = len(v_non_visit) # nombre des villes à visiter
+    v_proche = v_non_visit [0] # premi ère ville à visitée
+    d_min = dist [v_actuelle][v_proche] # intialisation de la distance minimale
+    for j in range (1, n) : # pour toutes les autres villes
+        d = dist [v_actuelle][v_non_visit [j]] # récupération de la distance
+        if d < d_min : # si on trouve une ville plus proche
+            v_proche = v_non_visit[j] # mise à jour de la ville la plus proche
+            d_min = d # mise à jour de la distance minimale.
+    return v_proche
+\end{lstlisting}
+\end{corrige}
+\else
+\fi
+
+\begin{exemple}
+Par exemple, la ville la plus proche de Lyon est Saint-Etienne et \lstinline{proche(0, [1, 2, 3, 4, 5])} qui donne \lstinline{1} : Saint-Etienne.
+\end{exemple}
+
+\question{Écrire une fonction \lstinline{glouton(depart)} qui prend en paramètre le numéro de la ville de départ, depart et qui renvoie l’itinéraire sous forme d’une liste ordonnée des numéros des villes à visiter. En appliquant cette fonction, répondre au problème de notre voyageur de commerce. Conclure.}
+\ifprof
+\begin{corrige}
+\begin{lstlisting}
+def glouton(depart) :
+    itineraire = [depart] # initialisation à la ville de départ
+    # ville actuelle, initialisation à la ville de départ
+    v_actuelle = depart 
+    v_non_visit = enleve(villes,depart) # on enlève la ville actuelle des villes à visiter
+    # Tant qu'il y a des villes à visiter
+    while len( v_non_visit ) != 0: 
+        # recherche de la ville la plus proche des villes à visiter
+        v_proche = proche(v_actuelle, v_non_visit) 
+        # ajout dans l'itinéraire 
+        itineraire.append (v_proche) 
+        
+        # on enlève la ville la plus proche des villes à visiter
+        v_non_visit = enleve(v_non_visit, v_proche) 
+       
+        # mise à jour de la ville actuelle par la ville la plus proche
+        v_actuelle = v_proche 
+    # fin de l'itinéraire avec retour à la ville de départ
+    itineraire.append(depart) 
+    return itineraire
+\end{lstlisting}
+
+
+Version récursive à vérifier
+\begin{lstlisting}
+def glouton_recursif(depart, v_non_visit, itineraire):
+    if not v_non_visit:  # Condition de base : plus de villes à visiter
+        itineraire.append(depart)  # Retour à la ville de départ
+        return itineraire
+
+    v_actuelle = itineraire[-1]  # La dernière ville ajoutée à l'itinéraire
+    v_proche = proche(v_actuelle, v_non_visit)  # Trouver la ville la plus proche
+    itineraire.append(v_proche)  # Ajouter la ville proche à l'itinéraire
+
+    # Mettre à jour les villes non visitées
+    v_non_visit = enleve(v_non_visit, v_proche)
+
+    # Appel récursif avec les paramètres mis à jour
+    return glouton_recursif(depart, v_non_visit, itineraire)
+\end{lstlisting}
+
+\begin{lstlisting}
+def glouton(depart):
+    v_non_visit = enleve(villes, depart)  # Initialiser les villes non visitées
+    itineraire = [depart]  # Initialiser l'itinéraire avec la ville de départ
+    return glouton_recursif(depart, v_non_visit, itineraire)
+\end{lstlisting}
+
+\end{corrige}
+\else
+\fi
+
+
+
+\question{Écrire une fonction \lstinline{distance(itineraire)} qui prend en paramètre un itinéraire sous forme d’une liste ordonnée des villes à visiter et renvoie la distance totale de l’itinéraire.}
+\ifprof
+\begin{corrige}
+\begin{lstlisting}
+def distance (itineraire) :
+    n = len(itineraire)
+    d = 0
+    for i in range (1, n) :
+        d = d + dist[itineraire[i - 1]][itineraire[i]]
+    return d
+\end{lstlisting}
+\end{corrige}
+\else
+\fi
+
+\question{Écrire une version récursive de la fonction précédente.}
+\ifprof
+\begin{corrige}
+Version récusive à tester.
+\begin{lstlisting}
+def distance_recursive(itineraire, dist):
+    # Cas de base : si l'itinéraire est vide ou ne contient qu'un seul point, la distance est 0
+    if len(itineraire) < 2:
+        return 0
+
+    # Calculer la distance entre le premier point et le reste de l'itinéraire
+    return dist[itineraire[0]][itineraire[1]] + distance_recursive(itineraire[1:], dist)
+\end{lstlisting}
+\end{corrige}
+\else
+\fi
