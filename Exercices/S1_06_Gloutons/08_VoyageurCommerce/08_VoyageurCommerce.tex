@@ -34,6 +34,7 @@ Pour 3 villes :
 \end{itemize}
 
 Pour 4 villes :
+\begin{multicols}{3}
 \begin{itemize}
 \item 1, 2, 3, 4
 \item 1, 2, 4, 3
@@ -42,6 +43,7 @@ Pour 4 villes :
 \item 1, 4, 2, 3
 \item 1, 4, 3, 2
 \end{itemize}
+\end{multicols}
 
 Conjecture :
 \begin{itemize}
@@ -66,6 +68,31 @@ Dans notre cas la solution optimale consiste en visiter la ville la plus proche.
 \question{Appliquer la stratégie gloutonne à la main et donner la distance correspondante. Cette solution vous semble-elle être la meilleure ?}
 \ifprof
 \begin{corrige}
+Lyon
+$\rightarrow$ Saint-Etienne  
+$\rightarrow$ Valence 
+$\rightarrow$ Grenoble 
+$\rightarrow$ Annecy
+$\rightarrow$ Clermont-Ferrand
+$\rightarrow$ Lyon.
+
+(Soit \lstinline{[0,1,5,2,4,3,0]}).
+
+$d = 64  + 121 + 94 + 105 + 300 + 165 = \SI{849}{km}$.
+
+
+
+Lyon
+$\rightarrow$ Clermont-Ferrand
+$\rightarrow$ Saint-Etienne  
+$\rightarrow$ Valence 
+$\rightarrow$ Grenoble 
+$\rightarrow$ Annecy
+$\rightarrow$ Lyon.
+
+$d = 165 +  146 + 121 +  94 + 105 + 138 = \SI{769}{km}$. (Minimum local... tant qu'on n'a pas prouvé qu'il était global).
+
+
 \end{corrige}
 \else
 \fi
@@ -81,18 +108,18 @@ Ainsi \lstinline{distance[0][2]=distance[2][0]=106} la distance Lyon -- Grenoble
 \ifprof
 \begin{corrige}
 \begin{lstlisting}
-def enleve (L , e ) :
+def enleve(L, e) :
     # renvoie une liste correspondant à L sans l'élément e
     L_modif = []
     for elt in L :
         if elt != e :
-            L_modif . append ( elt )
+            L_modif.append(elt)
     return L_modif
 
-def enleve (L , e ) :
+def enleve(L, e) :
     # renvoie une liste correspondant à L sans l'élément e
-    i = L . index ( e )
-    return L [0: i ] + L [ i +1:]
+    i = L.index (e)
+    return L[0: i] + L [i+1:]
 \end{lstlisting}
 \end{corrige}
 \else
@@ -124,9 +151,9 @@ Par exemple, \lstinline{enleve([7, 5, 9, 3, 5], 3)} donnera \lstinline{[7, 5, 9,
 \ifprof
 \begin{corrige}
 \begin{lstlisting}
-def proche ( v_actuelle , v_non_visit ) :
+def proche (v_actuelle, v_non_visit) :
     """ renvoie la ville la plus proche de la ville actuelle selon les distance dist et la liste des villes non encore visitées """
-    n = len(v_non_visit) # nombre des villes à visiter
+    n = len(v_non_visit) # nombre de villes à visiter
     v_proche = v_non_visit [0] # premi ère ville à visitée
     d_min = dist [v_actuelle][v_proche] # intialisation de la distance minimale
     for j in range (1, n) : # pour toutes les autres villes
