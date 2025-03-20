@@ -18,7 +18,7 @@ Comme les listes, ce sont des objets \textit{itérables} car on peut parcourir l
 
 \begin{itemize}
 \item Un dictionnaire python est une succession de paires d'objets séparées par une virgule, délimité par des accolades \{ et \}.
-\item Une paire est composée d'une clé et d'une valeur.% qui sont des objets de type quelconque (\texttt{integer}, \texttt{float}, \texttt{string}, \texttt{list}, \texttt{tuple}, \texttt{boolean}).
+\item Une paire est composée d'une clé et d'une valeur.% qui sont des objets de type quelconque (\lstinline{integer}, \lstinline{float}, \lstinline{string}, \lstinline{list}, \lstinline{tuple}, \lstinline{boolean}).
 \item Un dictionnaire est dit \textbf{mutable} c'est-à-dire que l'on peut en modifier (voire en supprimer) un ou plusieurs éléments.
 \item Les clés du dictionnaire doivent être non mutable (les types \lstinline{list} et \lstinline{dict} sont interdits).
 \item Les valeurs du dictionnaire peuvent être des objets de type quelconque (\lstinline{integer}, \lstinline{float}, \lstinline{string}, \lstinline{list}, \lstinline{tuple}, \lstinline{boolean}).
@@ -30,9 +30,9 @@ Comme les listes, ce sont des objets \textit{itérables} car on peut parcourir l
 
 \begin{exemple}
 \begin{itemize}
-\item \texttt{velo=\{'guidon': 1, 'roue': 2, 'derailleur': 21, 'frein': 2\}}
-\item \texttt{pikachu=\{'pokemon':'souris', 'taille': 0.4, 'poids': 6, 'type':'electrik', 'talent':['statik','paratonnerre']\}}
-%\item \texttt{altitudeRhone=\{(600,700):\verb![!'Joncin'\verb!]!,(700,800):\verb![!'Luere','Pin-Bouchain','Pilon'\verb!]!,(800,900):\verb![!'Brosses','Croix-Casard'\verb!]!\}}
+\item \texttt{velo={'guidon': 1, 'roue': 2, 'derailleur': 21, 'frein': 2}}
+\item \texttt{pikachu={'pokemon':'souris', 'taille': 0.4, 'poids': 6, 'type':'electrik', 'talent':['statik','paratonnerre']}}
+%\item \lstinline{altitudeRhone=\{(600,700):\verb![!'Joncin'\verb!]!,(700,800):\verb![!'Luere','Pin-Bouchain','Pilon'\verb!]!,(800,900):\verb![!'Brosses','Croix-Casard'\verb!]!\}}
 \end{itemize}
 \end{exemple}
 
@@ -48,12 +48,12 @@ La taille du dictionnaire est donnée par la fonction prédéfinie \lstinline{le
 
 
 \subsection*{Ajout d'un élément ou modification d'une valeur}
-L'ajout d'un élément \texttt{clé:valeur} ou la modification d'une valeur si la clé correspondante existe ont la même syntaxe : \texttt{mon\_dico['classe']='PTSI'}. 
+L'ajout d'un élément \lstinline{clé:valeur} ou la modification d'une valeur si la clé correspondante existe ont la même syntaxe : \lstinline{mon_dico['classe']='PTSI'}. 
 %\textit{Remarque} : La clé n'est pas modifiable (non mutable) alors que la valeur l'est.
 
 \subsection*{Suppression d'un élément}
-La suppression d'un élément du dictionnaire est réalisée par la fonction \texttt{del} en précisant la clé de l'élément à supprimer. La paire \texttt{clé:valeur} est alors supprimée.
-\texttt{del(mon\_dico['classe'])}
+La suppression d'un élément du dictionnaire est réalisée par la fonction \lstinline{del} en précisant la clé de l'élément à supprimer. La paire \lstinline{clé:valeur} est alors supprimée.
+\lstinline{del(mon_dico['classe'])}
 
 
 \subsection*{Lecture d'une valeur}
@@ -61,17 +61,17 @@ La suppression d'un élément du dictionnaire est réalisée par la fonction \te
 \begin{lstlisting}
 pikachu['taille'] # renvoie la valeur associée à la clé 'taille' du dictionnaire pikachu.
 \end{lstlisting}
-%Cette instruction peut être associée à \texttt{print} pour afficher la valeur ou affectée à une variable.
+%Cette instruction peut être associée à \lstinline{print} pour afficher la valeur ou affectée à une variable.
 
 \subsection*{Parcours du dictionnaire}
-On peut parcourir un dictionnaire par ses clés, ses valeurs ou ses éléments \texttt{clé:valeur}. Pour parcourir la totalité du dictionnaire, on utilise une boucle bornée \texttt{for}.
+On peut parcourir un dictionnaire par ses clés, ses valeurs ou ses éléments \lstinline{clé:valeur}. Pour parcourir la totalité du dictionnaire, on utilise une boucle bornée \lstinline{for}.
 
-
+\marginnote{\texttt{for cle in velo} fonctionne aussi.}
 \begin{center}
 \begin{tabular}{lp{7cm}}
 \hline \textbf{Instruction} & \textbf{Effet} \\
 \hline
-\texttt {for cle in velo.keys():} & Parcours des clés du dictionnaire\\
+\texttt{for cle in velo.keys():} & Parcours des clés du dictionnaire \\
 \texttt {for valeur in velo.values():} & Parcours des valeurs du dictionnaire\\
 \texttt {for cle,valeur in velo.items():} & Parcours des éléments du dictionnaire\\
 \hline
@@ -86,17 +86,17 @@ On peut récupérer les différentes clés ou les différentes valeurs du dictio
 \begin{tabular}{lp{7cm}}
 \hline \textbf{Instruction} & \textbf{Effet} \\
 \hline
-\texttt {LesCles=list(velo.keys())} & \texttt{['guidon','roue','derailleur','frein']} est affecté à \texttt{LesCles}\\
+\texttt{LesCles=list(velo.keys())} & \texttt{['guidon','roue','derailleur','frein']} est affecté à \texttt{LesCles}\\
 
-\texttt {LesValeurs=list(velo.values())} & \texttt{[1, 2, 21, 2]} est affecté à \texttt{LesValeurs}\\
+\texttt{LesValeurs=list(velo.values())} & \texttt{[1, 2, 21, 2]} est affecté à \texttt{LesValeurs}\\
 \hline
 \end{tabular}
 \end{center}
 
 
 \subsection*{Vérification d'une clé}
-Pour vérifier qu'une clé existe ou non dans un dictionnaire, on utilise le terme d'appartenance \texttt{in}.
-
+Pour vérifier qu'une clé existe ou non dans un dictionnaire, on utilise le terme d'appartenance \lstinline{in}.
+\sidenote{\texttt{'guidon' in velo} fonctionne aussi.}
 \begin{center}
 \begin{tabular}{lp{7cm}}
 \hline \textbf{Instruction} & \textbf{Effet} \\
@@ -107,4 +107,3 @@ Pour vérifier qu'une clé existe ou non dans un dictionnaire, on utilise le ter
 \hline
 \end{tabular}
 \end{center}
-
