@@ -8,11 +8,11 @@ Le tri fusion d'une liste se base sur le principe suivant :
 \item à partir de deux listes triées, on les fusionne en une seule liste en conservant l'ordre croissant.
 \end{enumerate}
 
-\question{Implémenter la fonction \lstinline{separe(L : list) -> tuple[list,list]} renvoyant deux listes de longueurs quasi-égales.}
+\question{Implémenter la fonction \lstinline{separe(L : []) -> ([],[])} renvoyant deux listes de longueurs quasi-égales.}
 \ifprof
 \begin{corrige}
 \begin{lstlisting}
-def separe(L: list) -> tuple[list,list]:
+def separe(L: []) ->([],[]):
     return L[:len(L) // 2], L[len(L) // 2:]
 \end{lstlisting}
 \end{corrige}
@@ -26,7 +26,7 @@ def separe(L: list) -> tuple[list,list]:
 \else
 \fi
 
-\question{Implémenter la fonction \lstinline{fusion(L1 : list, L2 : list) -> list} réalisant la fusion de deux listes triées. Pour cela on procèdera ainsi :
+\question{Implémenter la fonction \lstinline{fusion(L1:[], L2:[]) -> []} réalisant la fusion de deux listes triées. Pour cela on procèdera ainsi :
 \begin{enumerate}
 \item si une des listes est vides on renvoie l'autre;
 \item sinon : 
@@ -39,7 +39,7 @@ def separe(L: list) -> tuple[list,list]:
 \ifprof
 \begin{corrige}
 \begin{lstlisting}
-def fusion(L1: list, L2: list) -> list:
+def fusion(L1:[], L2:[]) -> []:
     if not L1 or not L2: # si l'une des listes est vide (éventuellement les 2)
         return L1 or L2 # alors on renvoie l'autre (éventuellement vide aussi)
     else:
@@ -62,12 +62,12 @@ def fusion(L1: list, L2: list) -> list:
 
 
 
-\question{Implémenter la fonction \lstinline{tri_fusion(L : list) -> list} réalisant par récursivité le tri de la liste \lstinline{L}.}
+\question{Implémenter la fonction \lstinline{tri_fusion(L : []) -> []} réalisant par récursivité le tri de la liste \lstinline{L}.}
 
 \ifprof
 \begin{corrige}
 \begin{lstlisting}
-def tri_fusion(L: list) -> list:
+def tri_fusion(L: []) -> []:
     if len(L) < 2: # cas d'arrêt
         return L
     L1, L2 = separe(L) # sinon on sépare
