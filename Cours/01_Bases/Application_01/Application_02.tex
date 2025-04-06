@@ -20,19 +20,19 @@
 
 \subsection*{Exercice -- Structures conditionnelles}
 
-\question{Implémenter une fonction \texttt{est\_plus\_grand(a:int,b:int)-> bool} renvoyant \texttt{True} si $a>b$, \texttt{False} sinon. }
+\question{Implémenter une fonction \lstinline{est_plus_grand(a:int,b:int)-> bool} renvoyant \texttt{True} si $a>b$, \texttt{False} sinon. }
 
-\question{\'Ecrire une fonction \texttt{neg(b)} qui renvoie la négation du booléen \texttt{b} sans utiliser \texttt{not}.}
+\question{\'Ecrire une fonction \lstinline{neg(b)} qui renvoie la négation du booléen \texttt{b} sans utiliser \texttt{not}.}
 
-\question{\'Ecrire une fonction \texttt{ou(a,b)} qui renvoie le ou logique des booléen \texttt{a} et \texttt{b} sans utiliser \texttt{not}, \texttt{or} ni \texttt{and}.}
+\question{\'Ecrire une fonction \lstinline{ou(a,b)} qui renvoie le ou logique des booléen \texttt{a} et \texttt{b} sans utiliser \texttt{not}, \texttt{or} ni \texttt{and}.}
 
-\question{\'Ecrire une fonction \texttt{et(a,b)} qui renvoie le et logique des booléen \texttt{a} et \texttt{b} sans utiliser \texttt{not}, \texttt{or} ni \texttt{and}.}
+\question{\'Ecrire une fonction \lstinline{et(a,b)} qui renvoie le et logique des booléen \texttt{a} et \texttt{b} sans utiliser \texttt{not}, \texttt{or} ni \texttt{and}.}
 
 %\subsection*{Implémentations de fonctions prenant des listes en argument}
 
 \subsection*{Exercice -- Un tout petit peu d'arithmétique}
 
-\question{Implémenter la fonction \texttt{unite(n:int)->int} renvoyant le chiffre des unités de l'entier \texttt{n}.}
+\question{Implémenter la fonction \lstinline{unite(n:int)->int} renvoyant le chiffre des unités de l'entier \texttt{n}.}
 
 
 \begin{lstlisting}
@@ -40,14 +40,14 @@
 	3
 \end{lstlisting}
 
-\question{Implémenter la fonction \texttt{dizaine(n:int)->int} renvoyant le chiffre des dizaines de l'entier \texttt{n}.}
+\question{Implémenter la fonction \lstinline{dizaine(n:int)->int} renvoyant le chiffre des dizaines de l'entier \texttt{n}.}
 
 \begin{lstlisting}
 >>> dizaine(123)
 	2
 \end{lstlisting}
 
-\question{Implémenter la fonction  \texttt{unites\_base8(n:int)->int} renvoyant le chiffre des unités de l'entier \texttt{n} en base 8.}
+\question{Implémenter la fonction  \lstinline{unites_base8(n:int)->int} renvoyant le chiffre des unités de l'entier \texttt{n} en base 8.}
 
 %\subsection*{Exercice -- Liste de zéros}
 %
@@ -66,7 +66,7 @@
 
 \subsection*{Exercice -- Structures itératives}
 
-\question{\'Ecrire la fonction \texttt{somme\_inverse(n:int)->float} calculant la somme des inverses des \texttt{n} premiers entiers non nuls.}
+\question{\'Ecrire la fonction \lstinline{somme_inverse(n:int)->float} calculant la somme des inverses des \texttt{n} premiers entiers non nuls.}
 
 
 %\subsection*{Exercice -- Un petit peu de géométrie}
@@ -79,18 +79,18 @@
 
 \subsection*{Exercice -- Suites d'entiers}
 
-\question{Implémenter la fonction \texttt{impairs(n:int)->list} permettant de générer la liste des \texttt{n} premiers entiers naturels impairs.}
+\question{Implémenter la fonction \lstinline{impairs(n:int)} permettant d'afficher la liste des \texttt{n} premiers entiers naturels impairs.}
 
-\question{Implémenter la fonction \texttt{multiples\_5(d:int, f:int)->list} permettant de générer la liste de tous les multiples de 5 compris entre \texttt{d} et \texttt{f} (bornes incluses si se sont des multiples de 5).}
+\question{Implémenter la fonction \lstinline{multiples_5(d:int, f:int)} permettant d'afficher la liste de tous les multiples de 5 compris entre \texttt{d} et \texttt{f} (bornes incluses si se sont des multiples de 5).}
 
-\question{Implémenter la fonction \texttt{cube(f:int)->list} permettant de générer la liste de tous les cubes d'entiers naturels inférieurs ou égaux à \texttt{f} (inclus si \texttt{f} est un cube).}
+\question{Implémenter la fonction \lstinline{cube(f:int)} permettant d'écire la liste de tous les cubes d'entiers naturels inférieurs ou égaux à \texttt{f} (inclus si \texttt{f} est un cube).}
 
-
-\subsection*{Exercice -- Un petit peu de statistiques}
-
-\question{\'Ecrire une fonction \texttt{moy\_extr(L:list)->float} qui prend en argument une liste \texttt{L} et renvoie en sortie la moyenne du premier et du dernier élément de \texttt{L}.}
-
-\question{\'Ecrire une fonction \texttt{moyenne(L:list)->float} qui prend en argument une liste \texttt{L} et renvoie la moyenne des éléments de \texttt{L}.}
-
-\question{\'Ecrire une fonction \texttt{ecart\_type(L:list)->float} qui prend en argument une liste \texttt{L} et renvoie l'éacrt type des données : en notant $\overline{x}$ la moyenne des échantillons, on a  $\sigma = \sqrt{\dfrac{1}{n}\sum\limits_{i=1}^n \left(x_i^2  - \overline{x}\right)}$.}
+%
+%\subsection*{Exercice -- Un petit peu de statistiques}
+%
+%\question{\'Ecrire une fonction \texttt{moy\_extr(L:list)->float} qui prend en argument une liste \texttt{L} et renvoie en sortie la moyenne du premier et du dernier élément de \texttt{L}.}
+%
+%\question{\'Ecrire une fonction \texttt{moyenne(L:list)->float} qui prend en argument une liste \texttt{L} et renvoie la moyenne des éléments de \texttt{L}.}
+%
+%\question{\'Ecrire une fonction \texttt{ecart\_type(L:list)->float} qui prend en argument une liste \texttt{L} et renvoie l'éacrt type des données : en notant $\overline{x}$ la moyenne des échantillons, on a  $\sigma = \sqrt{\dfrac{1}{n}\sum\limits_{i=1}^n \left(x_i^2  - \overline{x}\right)}$.}
 

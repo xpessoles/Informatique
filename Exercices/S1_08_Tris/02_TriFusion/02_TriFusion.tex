@@ -28,10 +28,10 @@ def separe(L: list) -> tuple[list,list]:
 
 \question{Implémenter la fonction \lstinline{fusion(L1 : list, L2 : list) -> list} réalisant la fusion de deux listes triées. Pour cela on procèdera ainsi :
 \begin{enumerate}
-\item si une des listes est vides on renvoie l'autre;
+\item si une des listes est vide on renvoie l'autre;
 \item sinon : 
 \begin{enumerate}
-\item si \lstinline{L1[0] < L2[0]} on fusionne, par récursivité, \lstinline{L1[0]}, \lstinline{L1[1:]} et \lstinline{L2};
+\item si \lstinline{L1[0] < L2[0]} on fusionne, par récursivité. Pour cela on concatène \lstinline{L1[0]} et la fusion de  \lstinline{L1[1:]} et \lstinline{L2};
 \item sinon, on réfléchit et on fusionne ce qu'il y a à fusionner ;).
 \end{enumerate}
 \end{enumerate}}
