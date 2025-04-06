@@ -1,6 +1,6 @@
 \setchapterimage{Fond_ALG.png}
 \setchapterpreamble[u]{\margintoc}
-\chapter{Introduction aux listes et aux chaînes de caractères}
+\chapter{Introduction aux séquences (tuples, listes et chaînes de caractères)}
 
 \marginnote[4cm]{
 \begin{itemize} 
@@ -51,6 +51,34 @@ est rare. En moyenne, chaque ajout à un coût constant.
 
 On parle alors de \textbf{tableaux dynamiques}.
 
+\section{Les tuples}
+Les tuples (ou n-uplets) sont des collections d'éléménts.
+\begin{lstlisting}
+# Déclaration d'un tuple vide
+t = ()
+# Déclaration d'un tuple avec des éléments connus
+t = (12,10,34)
+\end{lstlisting}
+
+Ces tuples sont immuables, ce qui signifie qu'ils ne peuvent pas être modifiés : on ne peut pas ajouter de valeurs, on ne peut pas modifier de valeurs. 
+
+Les élements sont indexés : pour un tuple de $n$ éléments, le premier est indexé à 0 et le dernier à \lstinline{n-1}. 
+\begin{lstlisting}
+t = (12,10,34)
+print(t[1])
+    10 
+\end{lstlisting}
+
+\lstinline{len(t)} permet de connaître la taille du tuple\sidenote{Un tuple de taille 4 a des éléments indexés de 0 à 3.}. On peut parcourir une liste par index, ou par valeur. 
+\begin{lstlisting}
+# Parcours par index
+for i in range(len(t)) :
+    print(t[i])
+    
+# Parcours par valeur
+for v in t :
+    print(v)
+\end{lstlisting}
 
 
 \section{Les listes}
