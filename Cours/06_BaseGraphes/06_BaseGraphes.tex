@@ -70,12 +70,6 @@ Un graphe non orienté $G$ est un couple $G=(S,A)$, où $S$ est un ensemble fini
 On note $x - y$ l'arête $\{x,y\}$. $x$ et $y$ sont les deux extrémités de l'arête.
 \end{defi}
 
-\begin{marginfigure}
-\includegraphics[width=\linewidth]{fig_03}
-
-\caption{Graphe orienté}
-\label{fig_03}
-\end{marginfigure}
 
 
 \begin{defi}[Graphe orienté -- Arcs]\cite{ref_01}
@@ -87,6 +81,12 @@ On note $x\to y$ l'arc $(x,y)$. $x$ est l'extrémité initiale de l'arc, $y$ est
 
 
 
+\begin{marginfigure}
+\includegraphics[width=\linewidth]{fig_03}
+
+\caption{Graphe orienté}
+\label{fig_03}
+\end{marginfigure}
 
 \begin{rem}
 On peut noter le graphe non orienté $G=\left(\llbracket 1,6\rrbracket,E\right)$ où $E=\left(
@@ -648,10 +648,10 @@ Nous disposons d'une fonction \texttt{creerListeVide(n:int)->list} qui permet de
         [0,None,None,None]
 \end{lstlisting}
 
-Nous disposons d'une fonction \texttt{estDansListe(liste:list,x)->bool} qui renvoie \texttt{True} si l'élément $x$ est dans la liste et \texttt{False} sinon.
+Nous disposons d'une fonction \lstinline{estDansListe(liste:list,x)->bool} qui renvoie \lstinline{True} si l'élément $x$ est dans la liste et \lstinline{False} sinon.
 
 La complexité de cette fonction est linéaire en fonction du nombre d'élément maximum que peut contenir la liste. 
-Nous disposons aussi d'une fonction \texttt{ajouteDansListe(liste:list,x)} qui modifie la liste pour ajouter l'élément $x$ s'il n'est pas présent et ne fait rien sinon. La complexité est aussi linéaire du nombre d'élément maximum que peut contenir la liste.
+Nous disposons aussi d'une fonction \lstinline{ajouteDansListe(liste:list,x)} qui modifie la liste pour ajouter l'élément $x$ s'il n'est pas présent et ne fait rien sinon. La complexité est aussi linéaire du nombre d'élément maximum que peut contenir la liste.
 
 Un plan $P$ est défini par un ensemble de $n$ villes numérotées de $1$ à $n$ et un ensemble de $m$ routes (toutes à double sens)
 reliant chacune deux villes. On dira que deux villes $x, y \in  n$ sont voisines lorsqu'elles sont reliées par une route, ce que l'on notera $(x, y)$. On appellera chemin de longueur $k-1$ toute suite de villes $\verb![!v_1, v_2 ... , v_k\verb!]!$. Un plan $P$ est alors un graphe dont les sommets sont les villes et les routes les arêtes.
@@ -730,17 +730,17 @@ plan1= [[5,4] ,
 \end{center}
 
 
-\question{ Écrire une fonction \texttt{creerPlanSansRoute(n:int)} qui crée, remplit et renvoie le tableau de tableaux correspondant au plan à $n$ villes n'ayant aucune route.}
+\question{ Écrire une fonction \lstinline{creerPlanSansRoute(n:int)} qui crée, remplit et renvoie le tableau de tableaux correspondant au plan à $n$ villes n'ayant aucune route.}
 
 
-\question{ Écrire une fonction \texttt{estVoisine(plan,x,y)} qui renvoie \texttt{True} si les villes \texttt{x} et \texttt{y} sont voisines dans le plan codé par le tableau de tableaux \texttt{plan} et renvoie \texttt{False} sinon.}
+\question{ Écrire une fonction \lstinline{estVoisine(plan,x,y)} qui renvoie \lstinline{True} si les villes \lstinline{x} et \lstinline{y} sont voisines dans le plan codé par le tableau de tableaux \lstinline{plan} et renvoie \lstinline{False} sinon.}
 
 
-\question{Écrire une procédure \texttt{ajouteRoute(plan,x,y)} qui modifie le tableau de tableaux plan pour ajouter une route 
-entre les villes \texttt{x} et \texttt{y} si elle n'était pas déjà présente et ne fait rien sinon. On prendra garde à bien mettre à jour
+\question{Écrire une procédure \lstinline{ajouteRoute(plan,x,y)} qui modifie le tableau de tableaux plan pour ajouter une route 
+entre les villes \lstinline{x} et \lstinline{y} si elle n'était pas déjà présente et ne fait rien sinon. On prendra garde à bien mettre à jour
 toutes les cases concernées dans le tableau de tableaux plan. Y a-t-il un risque de dépassement de la capacité des listes ?}
 
-\question{Écrire une procédure \texttt{afficheToutesLesRoutes(plan)} qui affiche à l'écran la liste des routes du plan codé par le tableau de tableaux plan
+\question{Écrire une procédure \lstinline{afficheToutesLesRoutes(plan)} qui affiche à l'écran la liste des routes du plan codé par le tableau de tableaux plan
 où chaque route n'apparaît qu'une seule fois. Par exemple, pour le graphe codé par le tableau de tableaux de la présentation votre procédure pourra afficher :}
 \begin{lstlisting}
 `Ce plan contient 4 route(s) : (1-2) (2-4) (2-3) (4-5)`
