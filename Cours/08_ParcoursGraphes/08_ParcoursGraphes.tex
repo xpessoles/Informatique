@@ -124,7 +124,46 @@ def path(pred, s, v):
 \fi
 \end{exemple}
 
-%\subsubsection{Marquage de sommet}
+\subsection{D'autres formulations}
+
+\begin{lstlisting}
+def parcoursLargeur(G):
+    parcouru = {}   # dictionnaire de booléens pour le marquage
+    for s in G:     # Itération sur les clés de G (dictionnaire de listes)
+        parcouru[s] = False
+    f = deque()     # initialisation d'une deque vide
+    for r in G:     # Itération sur les clés de G (dictionnaire de listes)
+        if not parcouru[r]:
+            parcouru[r] = True
+            f.append(r)
+            while f: # Vrai tant que f est non-vide
+                s = f.popleft()
+                for ss in G[s]: # G[s] liste des successeurs de s dans G
+                    if not parcouru[ss]:
+                        parcouru[ss] = True
+                        f.append(ss)
+\end{lstlisting}
+
+
+\begin{lstlisting}
+def parcoursLargeur(G):
+    def explorationLargeur(r):
+        f = deque() # initialisation d'une deque vide
+        f.append(r)
+        parcouru[r] = True
+        while f:    # Vrai tant que f est non-vide
+            s = f.popleft()
+            for ss in G[s]: # G[s] liste des successeurs de s dans G
+                if not parcouru[ss]:
+                    f.append(ss)
+                    parcouru[ss] = True
+    parcouru = {}   # dictionnaire de booléens pour le marquage
+    for s in G.keys(): # Itération sur les clés de G (dictionnaire de listes)
+        parcouru[s] = False # initialisation du marquage
+    for r in G.keys(): # Itération sur les clés de G (dictionnaire de listes)
+        if not parcouru[r]:
+            explorationLargeur(r)
+\end{lstlisting}
 
 \section{Parcours en profondeur}
 \subsection{Un premier algorithme}
