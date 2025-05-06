@@ -1,19 +1,26 @@
 \section*{Autour des listes et des dictionnaires}
+
+Soit une liste \lstinline{L} de chaînes de caractères. 
+
+\question{Implémenter une fonction \texttt{comptage\_lettres(L:[str]): -> \{str:int\} } renvoyant le dictionnaire de comptage dont les clefs sont les lettres de la liste \lstinline{L} et les valeurs le nombre d'occurences.}
+
+\begin{exemple}
+Si \lstinline{L=['a', 'b', 'a', 'a', 'c', 'e', 'z', 'z', 'a', 'a']}, \lstinline{comptage_lettres(L)} devra renvoyer \texttt{\{'a':5,'b':1,'c':1,'z':3\}}.
+\end{exemple}
+
+
 Soit une liste \lstinline{L} d'entiers. 
 
 \question{Implémenter une fonction \texttt{comptage(L:[int]): -> \{int:int\} } renvoyant le dictionnaire de comptage dont les clefs sont les entiers de la liste \lstinline{L} et les valeurs le nombre d'occurences.}
 
-\footnotesize{
 \begin{exemple}
 Si \lstinline{L=[0, 4, 6, 1, 4, 3, 3, 5, 3, 8]}, \lstinline{comptage(L)} devra renvoyer \texttt{\{0:1,4:2,6:1,1:1,3:3,5:1,8:1\}}.
-\end{exemple}}
+\end{exemple}
 
-\normalsize
-\question{Implémenter une fonction \lstinline{suppression_doublons(L:[int]): -> [int]} renvoyant une liste où tous les doublons auront été supprimés et ce, en conservant l'ordre initial.}
+\question{Implémenter une fonction \lstinline{suppression_doublons(L:[int]): -> []} renvoyant une liste où tous les doublons auront été supprimés et ce, en conservant l'ordre initial \sidenote{On pourra remarquer que la liste demandée correspond à la liste des clés du dictionnaire de comptage.}.}
 
-\footnotesize{
+
 \begin{exemple}
 Si \lstinline{L=[0, 4, 6, 1, 4, 3, 3, 5, 3, 8]}, \lstinline{suppression_doublons(L)} devra renvoyer \lstinline{L=[0, 4, 6, 1, 3, 5, 8]}.
-\end{exemple}}
+\end{exemple}
 
-\normalsize
