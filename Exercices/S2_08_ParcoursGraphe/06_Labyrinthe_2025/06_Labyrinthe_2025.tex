@@ -1,4 +1,4 @@
-\section{Principe du TP}
+\section*{Principe du TP}
 %\setcounter{cexo}{0}
 L'objectif de ce TP est de générer un labyrinthe. Un labyrinthe est un graphe qui contient tous les sommets de la grille et un certain nombre d'arêtes pour les relier.
 Pour obtenir un labyrinthe aléatoirement on réalise un parcours de la grille.
@@ -31,7 +31,7 @@ Viendra ensuite le moment de résoudre ce labyrinthe : ce sera l'objectif de la 
 \end{figure}
 
 
-\section{Préambule : génération d'une grille, affichage, test des fonctions proposées}
+\section*{Préambule : génération d'une grille, affichage, test des fonctions proposées}
 
 \textit{Le fichier \texttt{"TP15.py"}  contient des fonctions permettant de créer une grille, tracer une grille, ajouter des arrêtes à une grille... L'objectif de cette partie est de prendre connaissance de ces fonctions, d'apprendre à les utiliser, et de comprendre la structure des données manipulées.}\\
 
@@ -108,6 +108,11 @@ Ce dictionnaire contiendra tous les sommets de la grille.
 On leur associera le caractère \textbf{'W'} pour blanc (\textbf{W}hite), \textbf{'G'} pour gris et \textbf{'K'} pour noir (blac\textbf{K}).
 
 
+\begin{marginfigure}
+\includegraphics[width=\textwidth]{Tracé_2.png}
+\caption{Résultat du tracé 2, marquage de sommets arbitraire}
+\end{marginfigure}
+
 \begin{question}
 Créer un dictionnaire \texttt{visited} associé à la grille  \texttt{G1} ayant toutes ses valeurs à \texttt{'W'}.
 \end{question}
@@ -115,11 +120,6 @@ Créer un dictionnaire \texttt{visited} associé à la grille  \texttt{G1} ayant
 \begin{question}
 Modifier ce dictionnaire pour faire un test : on propose de marquer arbitrairement en gris le sommet en haut à gauche ('G') et en noir le sommet en haut à droite ('K'). Utiliser enuite la fonction \texttt{trace\_visites} fournie pour visualiser l'effet obtenu, toujours sur la même figure \textbf{"Tracé 2"}. 
 \end{question}
-
-\begin{figure}[!h]\centering
-\includegraphics[width=0.4\textwidth]{Tracé_2.png}
-\caption{Résultat du tracé 2, marquage de sommets arbitraire}
-\end{figure}
 
 
 %\subsection{Affichage des noeuds de la file}
@@ -140,24 +140,24 @@ Modifier ce dictionnaire pour faire un test : on propose de marquer arbitraireme
 %\end{question}
 
 
-\section{Génération d'un labyrinthe par parcours en largeur}
+\section*{Génération d'un labyrinthe par parcours en largeur}
 
 L'objectif est de \textbf{créer le labyrinthe (schéma à gauche de la figure 2)}.
 On propose de travailler par étape en modifiant successivement la fonction pour aboutir à l'agorithme complet du parcours en largeur.
 La fonction aura pour argument systématiquement le graphe à parcourir \texttt{G} et un noeud de départ \texttt{depart}. Vous penserez à modifier la coloration des sommets via le dictionnaire \texttt{visited} (= dictionnaire des sommets découverts) au fur et à mesure.
 
-\subsection{Initialisation}
+\subsection*{Initialisation}
 \begin{question}
 Compléter la fonction \texttt{parcours\_largeur\_init}, qui initialise le dictionnaire des sommets découverts (tout à 'W'), crée un dictionnaire vide \texttt{labyrinthe}, crée une file ne contenant que le sommet de départ et trace l'état obtenu.
 \end{question}
 
 
-\subsection{Première étape : visite des voisins}
+\subsection*{Première étape : visite des voisins}
 \begin{question}
 Compléter la fonction \texttt{parcours\_largeur\_etape1}, qui explore le premier sommet (la tête de file). On entend ici par "explorer", découvrir ses voisins, les ajouter dans la file s'ils n'ont pas été déjà découverts. Tracer aussi l'état obtenu. 
 \end{question}
 
-\subsection{Algorithme complet}
+\subsection*{Algorithme complet}
 \begin{question}
 Compléter la fonction \texttt{parcours\_largeur\_laby} qui continuera à explorer les voisins tant que la file n'est pas vide. A chaque étape (à chaque tour de boucle) vous ajouterez l'arête dans le labyrinthe, tracerez le graphe \texttt{labyrinthe}, afficherez le marquage des noeuds via \texttt{visited} et ajouterez l'instruction \texttt{plt.pause(0.5)} de façon à voir progressivement le parcours du graphe.
 \end{question}
@@ -172,7 +172,7 @@ Compléter la fonction \texttt{parcours\_largeur\_laby} qui continuera à explor
 
 \end{figure}
 
-\section{Génération d'un labyrinthe par parcours en profondeur}
+\section*{Génération d'un labyrinthe par parcours en profondeur}
 On rappelle les différentes étapes d'un parcours en profondeur.\\
 On initialise :
 \begin{itemize}
@@ -199,7 +199,7 @@ On répète ces instructions tant que la pile n'est pas vide.
 Compléter l'algorithme \texttt{parcours\_profondeur\_laby}, qui construit le graphe labyrinthe \texttt{L} par un parcours en profondeur.
 \end{question}
 
-\section{Résolution du labyrinthe}
+\section*{Résolution du labyrinthe}
 
 Il est possible de résoudre le labyrinthe en utilisant un parcours en largeur ou un parcours en profondeur.
 
