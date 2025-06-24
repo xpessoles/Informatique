@@ -1,5 +1,12 @@
 \section{Algorithme de Dijkstra}
 
+\marginnote{
+\textbf{Sources}
+\begin{itemize}
+\item Cours de Quentin Fortier.
+\item Cours de Jules Svartz, Lycée Masséna.
+\item \url{https ://www.youtube.com/watch ?v=GC-nBgi9r0U}
+\end{itemize}}
 
 L'algorithme de Dijkstra est un parcours en largeur d'un graphe \textbf{pondéré (poids positifs)} et orienté. Il permet de calculer l'ensemble des plus courts chemins entre un sommet vers tous les autres sommets du graphe.
 
@@ -64,7 +71,7 @@ Pour répondre à l'objectif, on peut formuler l'algorithme de Dijkstra ainsi.
 
 \begin{center}
 \begin{tabular}{|p{1cm}p{1cm}p{1cm}p{10cm}}
-\multicolumn{4}{|p{15cm}}{\textbf{Entrées : }  un graphe pondéré donné par liste ou marrice d'adjacence, un sommet \texttt{s} du graphe}\\
+\multicolumn{4}{|p{12cm}}{\textbf{Entrées : }  un graphe pondéré donné par liste ou marrice d'adjacence, un sommet \texttt{s} du graphe}\\
 \multicolumn{4}{|p{15cm}}{\textbf{Sortie : } \texttt{D} liste des distances entre \texttt{s} et chacun des sommets}\\
 \multicolumn{4}{|p{15cm}}{Initialisation de \texttt{D} : \texttt{D = n}$\times [\infty]$ }\\
 \multicolumn{4}{|p{15cm}}{Initialisation de \texttt{D} : \texttt{D[s] =}$[0]$ }\\
@@ -167,10 +174,3 @@ Reprendre le graphe précédent et utiliser l'algorithme de Dijkstra en partant 
 
 %https ://www.youtube.com/watch ?v=GC-nBgi9r0U
 %%https://www.youtube.com/watch?v=g024lzsknDo
-\vfill
-\textbf{Sources}
-\begin{itemize}
-\item Cours de Quentin Fortier.
-\item Cours de Jules Svartz, Lycée Masséna.
-\item \url{https ://www.youtube.com/watch ?v=GC-nBgi9r0U}
-\end{itemize}

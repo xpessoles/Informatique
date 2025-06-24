@@ -1,14 +1,22 @@
-\setchapterimage{Fond_GRAPHE.jpg}
-\chapter{Algorithme A$\star$} 
+%\setchapterimage{Fond_GRAPHE.jpg}
+%\chapter{Algorithme A$\star$} 
+% 
  
- 
-\section{Problématique}
+\section{Algorithme A$\star$ -- Problématique}
+
+\marginnote{\textbf{Références :}
+\begin{itemize}
+\item \url{https://khayyam.developpez.com/articles/algo/astar/}
+\item \url{https://www.youtube.com/watch?v=-L-WgKMFuhE}
+\end{itemize}
+}
 
 
 \begin{marginfigure}
 \includegraphics[width=\textwidth]{jeuVideo.jpg}
 \caption{Exemple de chemin}
 \end{marginfigure}
+
 
 
 Lorsqu'on cherche le plus court chemin entre deux sommets, départ et arrivée, le plus rapidement possible et en évitant les obstacles éventuels, l'algorithme A$\star$ (prononcer A star) est fait pour ça ! Cet algorithme est par exemple utilisé dans les jeux vidéos.
@@ -66,7 +74,7 @@ On choisit alors la valeur \texttt{min} des f(s) des sommets visités.
 
 
 \begin{marginfigure}
-\includegraphics[width=\textwidth]{manhattan.jpg}
+\includegraphics[width=.8\textwidth]{manhattan.jpg}
 \caption{Distance de Manhattan (rouge, bleu, jaune contre distance euclidienne en vert) \label{fig_man}}
 \end{marginfigure}
 
@@ -445,10 +453,7 @@ def Astar(M:dict,depart,fin,visited=[]):
 
 
 
-\vfill
-\textbf{Références :}\\
-https://khayyam.developpez.com/articles/algo/astar/\\
-https://www.youtube.com/watch?v=-L-WgKMFuhE
+
 
 %UPSTI, \textit{Informatique Commune}
 
