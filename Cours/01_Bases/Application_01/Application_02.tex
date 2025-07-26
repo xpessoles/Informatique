@@ -21,12 +21,73 @@
 \subsection*{Exercice -- Structures conditionnelles}
 
 \question{Implémenter une fonction \lstinline{est_plus_grand(a:int,b:int)-> bool} renvoyant \texttt{True} si $a>b$, \texttt{False} sinon. }
+\ifprof
+\begin{corrige}
+\begin{lstlisting}
+def est_plus_grand(a:int,b:int)-> bool : 
+    res = True
+    if a>b : 
+        res = True
+    else :
+        res = False
+    return res
 
+def est_plus_grand(a:int,b:int)-> bool : 
+    if a>b : 
+        return True
+    else :
+        return False
+
+def est_plus_grand(a:int,b:int)-> bool : 
+    return a>b
+\end{lstlisting}
+\end{corrige}
+\else
+\fi
 \question{\'Ecrire une fonction \lstinline{neg(b)} qui renvoie la négation du booléen \texttt{b} sans utiliser \texttt{not}.}
+\ifprof
+\begin{corrige}
+\begin{lstlisting}
+def neg(b) :
+    res = True
+    if b == True :
+        res = False
+    else : 
+        res = True
+    return res
+\end{lstlisting}
+\end{corrige}
+\else
+\fi
 
 \question{\'Ecrire une fonction \lstinline{ou(a,b)} qui renvoie le ou logique des booléen \texttt{a} et \texttt{b} sans utiliser \texttt{not}, \texttt{or} ni \texttt{and}.}
+\ifprof
+\begin{corrige}
+\begin{lstlisting}
+def ou(a,b):
+    if a == True :
+        return True
+    if b == True :
+        return True
+    return False
+\end{lstlisting}
+\end{corrige}
+\else
+\fi
 
 \question{\'Ecrire une fonction \lstinline{et(a,b)} qui renvoie le et logique des booléen \texttt{a} et \texttt{b} sans utiliser \texttt{not}, \texttt{or} ni \texttt{and}.}
+\ifprof
+\begin{corrige}
+\begin{lstlisting}
+def et(a,b):
+    if a == True :
+        if b == True :
+            return True
+    return False
+\end{lstlisting}
+\end{corrige}
+\else
+\fi
 
 %\subsection*{Implémentations de fonctions prenant des listes en argument}
 
@@ -34,11 +95,19 @@
 
 \question{Implémenter la fonction \lstinline{unite(n:int)->int} renvoyant le chiffre des unités de l'entier \texttt{n}.}
 
-
 \begin{lstlisting}
 >>> unite(123)
 	3
 \end{lstlisting}
+\ifprof
+\begin{corrige}
+\begin{lstlisting}
+def unite(n:int)->int :
+    return n%10
+\end{lstlisting}
+\end{corrige}
+\else
+\fi
 
 \question{Implémenter la fonction \lstinline{dizaine(n:int)->int} renvoyant le chiffre des dizaines de l'entier \texttt{n}.}
 
@@ -46,8 +115,28 @@
 >>> dizaine(123)
 	2
 \end{lstlisting}
+\ifprof
+\begin{corrige}
+\begin{lstlisting}
+def dizaine(n:int)->int :
+    # On récupere le nombre de dizaine grace à une division entiere
+    nb = n//10
+    return nb%10
+\end{lstlisting}
+\end{corrige}
+\else
+\fi
 
 \question{Implémenter la fonction  \lstinline{unites_base8(n:int)->int} renvoyant le chiffre des unités de l'entier \texttt{n} en base 8.}
+\ifprof
+\begin{corrige}
+\begin{lstlisting}
+def unites_base8(n:int)->int :
+    return n%8
+\end{lstlisting}
+\end{corrige}
+\else
+\fi
 
 %\subsection*{Exercice -- Liste de zéros}
 %
@@ -66,7 +155,19 @@
 
 \subsection*{Exercice -- Structures itératives}
 
-\question{\'Ecrire la fonction \lstinline{somme_inverse(n:int)->float} calculant la somme des inverses des \texttt{n} premiers entiers non nuls.}
+\question{\'Ecrire la fonction \lstinline{somme_inverse(n:int)->float} calculant la somme des inverses des \texttt{n} premiers entiers non nuls (\texttt{n} exclus).}
+\ifprof
+\begin{corrige}
+\begin{lstlisting}
+def somme_inverse(n:int)->float :
+    res = 0
+    for i in range(1,n) : 
+        res = res+1/i
+    return res
+\end{lstlisting}
+\end{corrige}
+\else
+\fi
 
 
 %\subsection*{Exercice -- Un petit peu de géométrie}
@@ -79,11 +180,52 @@
 
 \subsection*{Exercice -- Suites d'entiers}
 
-\question{Implémenter la fonction \lstinline{impairs(n:int)} permettant d'afficher la liste des \texttt{n} premiers entiers naturels impairs.}
+\question{Implémenter la fonction \lstinline{impairs(n:int)} permettant d'afficher la liste des \texttt{n} premiers entiers naturels impairs (\texttt{n} exclus).}
+\ifprof
+\begin{corrige}
+\begin{lstlisting}
+def impairs(n:int)->float :
+    res = 0
+    for i in range(1,n) : 
+        if i%2 == 1 : 
+            res = res + i
+    return res
 
-\question{Implémenter la fonction \lstinline{multiples_5(d:int, f:int)} permettant d'afficher la liste de tous les multiples de 5 compris entre \texttt{d} et \texttt{f} (bornes incluses si se sont des multiples de 5).}
+def impairs(n:int)->float :
+    res = 0
+    for i in range(1, n, 2) : 
+        res = res + i
+    return res
+\end{lstlisting}
+\end{corrige}
+\else
+\fi
+
+\question{Implémenter la fonction \lstinline{multiples_5(d:int, f:int)} permettant d'afficher la liste de tous les multiples de 5 compris entre \texttt{d} et \texttt{f} (bornes incluses si ce sont des multiples de 5).}
+\ifprof
+\begin{corrige}
+\begin{lstlisting}
+def multiples_5(d:int, f:int) :
+    for i in range(d,f+1):
+        if i%5 == 0 : 
+            print(i)
+\end{lstlisting}
+\end{corrige}
+\else
+\fi
 
 \question{Implémenter la fonction \lstinline{cube(f:int)} permettant d'écire la liste de tous les cubes d'entiers naturels inférieurs ou égaux à \texttt{f} (inclus si \texttt{f} est un cube).}
+\ifprof
+\begin{corrige}
+\begin{lstlisting}
+def cube(f:int) :
+    i = 0
+    while i*i*i <=f :
+        print(i*i*i)
+\end{lstlisting}
+\end{corrige}
+\else
+\fi
 
 %
 %\subsection*{Exercice -- Un petit peu de statistiques}

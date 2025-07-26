@@ -11,6 +11,12 @@
 \item Instruction et expression.
 \end{itemize}
 }
+\begin{center}
+En cas de besoin, je rappelle ici le site de la classe en informatique : 
+
+\url{https://ptsilamartin.github.io/}
+\end{center}
+
 
 \section{Avant-Propos}
 \subsection{Définitions}
@@ -46,9 +52,9 @@ La programmation représente donc ici la rédaction du code source d'un logiciel
 \subsection{Environnement de développement}
 Pour répondre à un problème informatique, on pourra réfléchir à l'algorithme permettant de le résoudre. Une des premières approches consiste donc à utiliser un papier et un crayon pour proposer une réponse structurée au problème.
 
-Il faudra ensuite traduire cet algorithme dans un langage de programmation. Nous utiliserons pour cela \texttt{Python}.
+Il faudra ensuite traduire cet algorithme dans un langage de programmation. Nous utiliserons pour cela \lstinline{Python}.
 
-Pour programmer en \texttt{Python} il est nécessaire d'utiliser un éditeur de texte (pour écrire le code) et un interpréteur pour exécuter le code. 
+Pour programmer en \lstinline{Python} il est nécessaire d'utiliser un éditeur de texte (pour écrire le code) et un interpréteur pour exécuter le code. 
 En règle générale, on utilise pour cela un environnement de développement (IDE). On pourra \textbf{Pyzo} ou \textbf{Spyder} (ou tout autre environnement vous paraissant satisfaisant). 
 
 \begin{figure}[H]
@@ -64,7 +70,7 @@ En règle générale, on utilise pour cela un environnement de développement (I
 \begin{defi}[Valeurs]
 Les valeurs désignent les données manipulées par un algorithme ou une fonction. Une valeur 
 peut ainsi être  : un nombre, un caractère, une chaîne de caractères, une valeur de vérité 
-(\texttt{Vrai} ou \texttt{Faux}) \textit{etc}.
+(\lstinline{Vrai} ou \lstinline{Faux}) \textit{etc}.
 
 En Python, comme dans la plupart des langages de programmation, ces valeurs sont \textbf{typées} selon l'objet qu'elles représentent : il y a ainsi des valeurs de \textbf{type} entier, flottant, chaîne de caractères, booléens ...   Leur représentation en mémoire varie beaucoup d'un langage à l'autre, mais ce sont souvent les mêmes objets que l'on 
 cherche à traduire.
@@ -73,8 +79,8 @@ cherche à traduire.
 \begin{defi}[Expression]
 Une expression est une suite de caractères faisant intervenir des valeurs et des 
 opérations, afin d'obtenir une nouvelle valeur. Pour calculer cette nouvelle valeur,
-la machine doit {évaluer} l'expression. Voici des exemples d'expressions : \texttt{42, 1+4, 
-1.2 / 3.0, x+3}.
+la machine doit {évaluer} l'expression. Voici des exemples d'expressions : \lstinline{42}, \lstinline{1+4}, 
+\lstinline{1.2 / 3.0}, \lstinline{x+3}.
 \end{defi}
 
 En Python, pour évaluer une expression, il suffit de la saisir dans un interpréteur (console, shell), qui
@@ -100,9 +106,9 @@ meilleure lecture du programme.
 
 
 \begin{defi}[Affectation]
-Quand on stocke une valeur \texttt{d} dans une variable \texttt{var}, on dit que l'on 
-\textbf{affecte} \texttt{d} à la variable \texttt{var}. La valeur
-\texttt{d} est encore appelée \textbf{la donnée}.
+Quand on stocke une valeur \lstinline{d} dans une variable \lstinline{var}, on dit que l'on 
+\textbf{affecte} \lstinline{d} à la variable \lstinline{var}. La valeur
+\lstinline{d} est encore appelée \textbf{la donnée}.
 \end{defi}
 
 En Python , cette affectation est faite avec la commande \lstinline{=}, comme suit.  
@@ -128,22 +134,22 @@ qu'une chaîne ne le pourra pas. Il sera également impossible d'additioner un e
 \end{itemize}
 
 Une expression n'a a priori pas de type, car le type de la valeur qu'elle renvoie dépend des types 
-des sous-expressions. Ainsi \texttt{a+b} sera un entier (resp. un flottant, une chaîne) si 
-\texttt{a} et \texttt{b} le sont, mais sera un flottant si \texttt{a} est un entier et \texttt{b} 
+des sous-expressions. Ainsi \lstinline{a+b} sera un entier (resp. un flottant, une chaîne) si 
+\lstinline{a} et \lstinline{b} le sont, mais sera un flottant si \lstinline{a} est un entier et \lstinline{b} 
 un flottant.
 
 
 %\begin{xxpyconsole}%~\\ \vspace{-.5cm}
 Pour afficher le type d'une valeur ou d'une expression après l'avoir évaluée, on utilise 
-\texttt{type}. 
+\lstinline{type}. 
 \begin{lstlisting}
 >>> type(42)
 	int
 >>> type(1.2/3.0)
 	float
 \end{lstlisting}
-%Le mot qui suit \texttt{class} indique le type de la valeur, entier (\texttt{int} en anglais) pour 
-%la première et flottant (\texttt{float} en anglais) pour la seconde. Le mot \texttt{class} fait 
+%Le mot qui suit \lstinline{class} indique le type de la valeur, entier (\lstinline{int} en anglais) pour 
+%la première et flottant (\lstinline{float} en anglais) pour la seconde. Le mot \lstinline{class} fait 
 %référence au fait que Python, est un langage {orienté objet}, ce que nous ignorerons pour 
 %l'instant.\\
 %\end{xxpyconsole}
@@ -154,24 +160,24 @@ Pour afficher le type d'une valeur ou d'une expression après l'avoir évaluée,
 
 %\subsubsection{Entiers}
 \begin{defi}[Entiers]
-Ce type est noté \texttt{int} en Python .\\
+Ce type est noté \lstinline{int} en Python .\\
 \begin{itemize}
 \item \textbf{Constantes :} ce sont les entiers relatifs écrits en base 10. Ils ne sont pas 
 bornés en Python .
 \item \textbf{Opérateurs :}
 \begin{enumerate}
  \item $+$ : addition usuelle;
- \item $-$ : soustraction usuelle (\texttt{15-9} renvoie \texttt{6}), mais aussi opposé (\texttt{-4});
-\item  $//$ : {division entière} : \texttt{a//b} correspond au quotient de la 
-division euclidienne de \texttt{a} par \textbf{b} si \texttt{b} est strictement positif 
-(\texttt{256 // 3} renvoie \texttt{85} car $256 = 85*3 + 1$). Mais si \texttt{b} est strictement 
-négatif, alors \texttt{a//b} renvoie ce quotient moins 1 ($15 = (-4)\times(-4)-1=(-4)\times(-3)+3$, 
-le quotient de la division euclidienne de 15 par $-4$ est $-3$, mais \texttt{15//-4} renvoie 
-\texttt{-4}). Cette division n'est pas définie si \texttt{b} est nul;
+ \item $-$ : soustraction usuelle (\lstinline{15-9} renvoie \lstinline{6}), mais aussi opposé (\lstinline{-4});
+\item  $//$ : {division entière} : \lstinline{a//b} correspond au quotient de la 
+division euclidienne de \lstinline{a} par \textbf{b} si \lstinline{b} est strictement positif 
+(\lstinline{256 // 3} renvoie \lstinline{85} car $256 = 85*3 + 1$). Mais si \lstinline{b} est strictement 
+négatif, alors \lstinline{a//b} renvoie ce quotient moins 1 ($15 = (-4)\times(-4)-1=(-4)\times(-3)+3$, 
+le quotient de la division euclidienne de 15 par $-4$ est $-3$, mais \lstinline{15//-4} renvoie 
+\lstinline{-4}). Cette division n'est pas définie si \lstinline{b} est nul;
 \item $\%$ : {modulo} : même remarque que dans le point précédent, relativement au reste de la 
-division euclidienne cette fois (\texttt{256 \% 3} renvoie 
-\texttt{1}, \texttt{15\%-4} renvoie \texttt{-1}).
-\item $**$ : exponentiation (\texttt{2\raisebox{0.3ex}{**}3} renvoie \texttt{8}).
+division euclidienne cette fois (\lstinline{256 \% 3} renvoie 
+\lstinline{1}, \lstinline{15\%-4} renvoie \lstinline{-1}).
+\item $**$ : exponentiation (\lstinline{2**3} renvoie \lstinline{8}).
 \end{enumerate}
 \end{itemize}
 Les {règles de précédence}, autrement dit les règles de priorité entre opérations, sont 
@@ -179,7 +185,7 @@ similaires aux règles mathématiques usuelles.
 \end{defi}
 %\subsubsection{Flottants}
 \begin{defi}[Flottants]
-Ce type est noté \texttt{float} en Python .
+Ce type est noté \lstinline{float} en Python .
 \begin{itemize}
 \item  \textbf{Constantes :} ce sont les {nombres à virgule flottante}. Nous en
 donnerons une définition précise dans un chapitre ultérieur : pour simplifier, disons pour 
@@ -187,13 +193,13 @@ l'instant que ce sont des nombres à virgule, avec un nombre borné de chiffres 
 \item \textbf{Opérateurs : }
 \begin{enumerate}
  \item $+$ : addition usuelle;
- \item $-$ : soustraction usuelle, et aussi opposé.
-\item  $/$ : division usuelle.
-\item $**$ : exponentiation. %Remarquer la différence entre \texttt{2\raisebox{0.3ex}{**}100} et  \texttt{2.\raisebox{0.3ex}{**}100} ou \texttt{2\raisebox{0.3ex}{**}100.}.
+ \item $-$ : soustraction usuelle, et aussi opposé;
+\item  $/$ : division usuelle;
+\item $**$ : exponentiation. %Remarquer la différence entre \lstinline{2\raisebox{0.3ex}{**}100} et  \lstinline{2.\raisebox{0.3ex}{**}100} ou \lstinline{2\raisebox{0.3ex}{**}100.}.
 \end{enumerate}
 \end{itemize}
 %\noindent\textbf{Avertissement :} ce qui précédé est valable en Python 3. Attention à l'opérateur 
-%\texttt{/} en Python 2 !!!!
+%\lstinline{/} en Python 2 !!!!
 \end{defi}
 
 %\subsubsection{Booléens}
@@ -201,44 +207,44 @@ l'instant que ce sont des nombres à virgule, avec un nombre borné de chiffres 
 
 \begin{defi}[Expression -- Booléen]
 %\footnote{Le mot {booléen} a été donné en hommage au mathématicien  britannique George Boole.} }}
-Ce type est noté \texttt{bool} en Python.
+Ce type est noté \lstinline{bool} en Python.
 \begin{itemize}
-\item \textbf{Constantes :} il y en a deux : \texttt{True} et \texttt{False}.
+\item \textbf{Constantes :} il y en a deux : \lstinline{True} et \lstinline{False}.
 \item \textbf{Opérateurs :}
 \begin{enumerate}
- \item \texttt{not} : négation usuelle;
- \item \texttt{and} : conjonction usuelle;
- \item \texttt{or} : disjonction usuelle.
+ \item \lstinline{not} : négation usuelle;
+ \item \lstinline{and} : conjonction usuelle;
+ \item \lstinline{or} : disjonction usuelle.
 \end{enumerate}
 \item \textbf{Opérateurs de comparaison :}
 \begin{enumerate}
- \item \texttt{==} : test d'égalité : \texttt{2==3} renvoie \texttt{False}, \texttt{4==4} renvoie 
-\texttt{True}. %Problème : \texttt{0.1+0.2==0.3} renvoie \texttt{False} ! Nous y reviendrons plus tard. Il ne faut pas confondre \texttt{==} avec \texttt{=}, symbole de l'{affectation}.
- \item \texttt{!=} : \texttt{a != b} est une écriture équivalente à \texttt{not (a == b)}.
- \item \texttt{<,>,<=,>=} : ce à quoi on s'attend.
+ \item \lstinline{==} : test d'égalité : \lstinline{2==3} renvoie \lstinline{False}, \lstinline{4==4} renvoie 
+\lstinline{True}; %Problème : \lstinline{0.1+0.2==0.3} renvoie \lstinline{False} ! Nous y reviendrons plus tard. Il ne faut pas confondre \lstinline{==} avec \lstinline{=}, symbole de l'{affectation}.
+ \item \lstinline{!=} : \lstinline{a != b} est une écriture équivalente à \lstinline{not (a == b)};
+ \item \lstinline{<,>,<=,>=} : ce à quoi on s'attend.
 \end{enumerate}
 \end{itemize}
 \end{defi}
 
 
 \begin{exemple}
-\texttt{True or False} renvoie \texttt{True}. 
+\lstinline{True or False} renvoie \lstinline{True}. 
 
-\texttt{not(False or True) and True} renvoie \texttt{False}.
+\lstinline{not(False or True) and True} renvoie \lstinline{False}.
 \end{exemple}
 
 \begin{remarque}
-Python \ permet les chaînes de comparaisons : \texttt{1<2<3} renvoie
-\texttt{True}, et \texttt{(1<2<-2) and (-5<2<6)} renvoie \texttt{False}.
+Python \ permet les chaînes de comparaisons : \lstinline{1<2<3} renvoie
+\lstinline{True}, et \lstinline{(1<2<-2) and (-5<2<6)} renvoie \lstinline{False}.
 \end{remarque}
 
 \subsection{Conversions \textit{-- Cast}}
 
-Il est possible de convertir en entier en flottant avec la fonction \texttt{float}. La réciproque est possible dans une certaine 
-mesure : \texttt{float(2)} renvoie \texttt{2.0}, \texttt{int(2.0)} renvoie \texttt{2}, mais \texttt{int(2.6)} renvoie \texttt{2} et 
-\texttt{int(-3.6)} renvoie \texttt{-3}.
+Il est possible de convertir en entier en flottant avec la fonction \lstinline{float}. La réciproque est possible dans une certaine 
+mesure : \lstinline{float(2)} renvoie \lstinline{2.0}, \lstinline{int(2.0)} renvoie \lstinline{2}, mais \lstinline{int(2.6)} renvoie \lstinline{2} et 
+\lstinline{int(-3.6)} renvoie \lstinline{-3}.
 
-La fonction \texttt{int} appliquée à un nombre flottant procède donc à une troncature, ce n'est pas la fonction donnant la partie entière d'un nombre flottant (fonction \texttt{floor} du module \texttt{math}).
+La fonction \lstinline{int} appliquée à un nombre flottant procède donc à une troncature, ce n'est pas la fonction donnant la partie entière d'un nombre flottant (fonction \lstinline{floor} du module \lstinline{math}).
 %
 %\subsection{Types composés}
 %\begin{defi}
@@ -250,38 +256,38 @@ La fonction \texttt{int} appliquée à un nombre flottant procède donc à une t
 %\subsubsection{$n$-uplets ou tuples}
 %
 %\begin{defi}[Tuple]
-%Ce type est noté \texttt{tuple} en Python .
+%Ce type est noté \lstinline{tuple} en Python .
 %\begin{itemize}
-%\item \textbf{Construction et composantes :} les $n$-uplets généralisent les couples. Un couple s'écrira \texttt{(a,b)}, un triplet 
-%\texttt{(a,b,c)} ... etc. Il existe même des 1-uplets : il faut les écrire \texttt{(a,)}.\\%, et non  \texttt{(a)} : cette dernière écriture est équivalente à \texttt{a}, tout simplement.\\
+%\item \textbf{Construction et composantes :} les $n$-uplets généralisent les couples. Un couple s'écrira \lstinline{(a,b)}, un triplet 
+%\lstinline{(a,b,c)} ... etc. Il existe même des 1-uplets : il faut les écrire \lstinline{(a,)}.\\%, et non  \lstinline{(a)} : cette dernière écriture est équivalente à \lstinline{a}, tout simplement.\\
 %Il n'est pas obligatoire que les éléments d'un tuple soient de même type. Par exemple, 
-%\texttt{(1,1.2,True)} est un triplet tout à fait valable.\\
-%On accède à la $k\ieme$ coordonnée d'un tuple \texttt{t} par la commande \texttt{t[k]}. Attention : 
+%\lstinline{(1,1.2,True)} est un triplet tout à fait valable.\\
+%On accède à la $k\ieme$ coordonnée d'un tuple \lstinline{t} par la commande \lstinline{t[k]}. Attention : 
 %\textbf{en Python , les coordonnées sont numérotées à partir de 0} ! On dit que $k$ est 
-%l'{indice} de \texttt{t[k]}. Ainsi, si \texttt{t = (1,2,3)}, \texttt{t[0]} vaut 1, 
-%\texttt{t[2]} vaut 3, et \texttt{t[3]} n'existe pas.\\
+%l'{indice} de \lstinline{t[k]}. Ainsi, si \lstinline{t = (1,2,3)}, \lstinline{t[0]} vaut 1, 
+%\lstinline{t[2]} vaut 3, et \lstinline{t[3]} n'existe pas.\\
 %On dit que les tuples sont \textbf{immuables} ou \textbf{non mutables}: il n'est pas possible de changer un élément d'un 
 %tuple.
 %\item \textbf{Opérateurs :}
 %\begin{enumerate}
-% \item $+$ : concaténation. \texttt{(1,2,3)+(1,4,5,6)} renvoie \texttt{(1,2,3,1,4,5,6)};
-% \item \texttt{len} : {longueur} du tuple. \texttt{len(1,2,3)} renvoie \texttt{3};
-% \item \texttt{in} : test d'appartenance. \texttt{3 in (1,2,3)} renvoie \texttt{True}, alors que 
-%\texttt{3 in (1,2,4,5)} renvoie \texttt{False};
-%\item le {slicing}, qui permet de construire des sous-tuples : \texttt{(5,2,6,7,8,9)[1:5]} 
-%renvoie \texttt{(2,6,7,8)} (attention à la borne de droite !).\\
+% \item $+$ : concaténation. \lstinline{(1,2,3)+(1,4,5,6)} renvoie \lstinline{(1,2,3,1,4,5,6)};
+% \item \lstinline{len} : {longueur} du tuple. \lstinline{len(1,2,3)} renvoie \lstinline{3};
+% \item \lstinline{in} : test d'appartenance. \lstinline{3 in (1,2,3)} renvoie \lstinline{True}, alors que 
+%\lstinline{3 in (1,2,4,5)} renvoie \lstinline{False};
+%\item le {slicing}, qui permet de construire des sous-tuples : \lstinline{(5,2,6,7,8,9)[1:5]} 
+%renvoie \lstinline{(2,6,7,8)} (attention à la borne de droite !).\\
 %\end{enumerate}
 %\end{itemize}
 %\end{defi}
 %
 %\subsubsection{Chaînes de caractères}
 %\begin{defi}[Chaînes de caractères]
-%Ce type est noté \texttt{str} en Python , pour {string} en anglais.
+%Ce type est noté \lstinline{str} en Python , pour {string} en anglais.
 %\begin{itemize}
 %\item \textbf{Construction et composantes :} ce sont des suites finies de caractères, un caractère étant en python un caractère du clavier. On 
-%les note entre guillemets ou apostrophes : \texttt{``Ceci est une chaîne de caractères''} ou  
-%\texttt{'Ceci est une chaîne de caractères'}. La chaîne vide se note \texttt{``}\texttt{''} ou 
-%\texttt{''}. Un caractère est une chaîne de longueur 1.\\
+%les note entre guillemets ou apostrophes : \lstinline{``Ceci est une chaîne de caractères''} ou  
+%\lstinline{'Ceci est une chaîne de caractères'}. La chaîne vide se note \lstinline{``}\lstinline{''} ou 
+%\lstinline{''}. Un caractère est une chaîne de longueur 1.\\
 %On accède aux composantes d'une chaîne de la même manière que pour un tuple.
 %\item \textbf{Opérateurs :} ce sont les mêmes que pour les tuples.
 %\end{itemize}
@@ -289,43 +295,43 @@ La fonction \texttt{int} appliquée à un nombre flottant procède donc à une t
 %
 %\subsection{Listes}
 %\marginnote{
-%$>>>$\texttt{ L = [1,2,3] } \\
-%$>>>$\texttt{ L[0] = 4 } \\
-%$>>>$\texttt{ L } \\
-%$\quad $ \texttt{[4,2,3]}
+%$>>>$\lstinline{ L = [1,2,3] } \\
+%$>>>$\lstinline{ L[0] = 4 } \\
+%$>>>$\lstinline{ L } \\
+%$\quad $ \lstinline{[4,2,3]}
 %%\end{lstlisting}
 %}
 %
 %\begin{defi}[Listes]
-%Ce type est noté \texttt{list} en Python .
+%Ce type est noté \lstinline{list} en Python .
 %
 %Comme les tuples, les {listes} sont des suites finies de valeurs arbitraires, mais cette fois 
 %ils sont \textbf{mutables} : on peut changer la valeur d'une composante d'une liste.\\
 %Les listes s'écrivent entre crochets. On change la valeur de la $k\ieme$ composante d'une liste 
-%\texttt{L} grâce à la commande \texttt{L[k] = n}, où \texttt{n} est la nouvelle valeur.
+%\lstinline{L} grâce à la commande \lstinline{L[k] = n}, où \lstinline{n} est la nouvelle valeur.
 %
 %Les autres opérateurs sont les mêmes que pour les tuples et les chaînes. Nous reviendrons plus tard sur les listes.
 %\end{defi}
 
 %\subsection{Conversions}
 %
-%On peut convertir des types simples en chaînes avec la fonction \texttt{str} : \texttt{str(2.3)} 
-%renvoie \texttt{'2.3'}.\\
-%À l'inverse, \texttt{int, float} et \texttt{bool} permettent de faire l'inverse quand cela est 
-%cohérent : \textbf{bool('True')} renvoie \texttt{True}, mais \texttt{int('2.3')} renvoie une 
+%On peut convertir des types simples en chaînes avec la fonction \lstinline{str} : \lstinline{str(2.3)} 
+%renvoie \lstinline{'2.3'}.\\
+%À l'inverse, \lstinline{int, float} et \lstinline{bool} permettent de faire l'inverse quand cela est 
+%cohérent : \textbf{bool('True')} renvoie \lstinline{True}, mais \lstinline{int('2.3')} renvoie une 
 %erreur.\\
 %
-%Il est également possible de passer d'un type composé à un autre grâce aux fonctions \texttt{str}, 
-%\texttt{tuple} et \texttt{list} : \texttt{str((1,'a',[1,2]))} renvoie \texttt{''(1,'a',[1,2])''}, 
-%\texttt{tuple([1,2,3] )} renvoie \texttt{(1,2,3)} et \texttt{list('Coucou ?')} renvoie 
-%\texttt{['C', 'o', 'u', 'c', 'o', 'u', ' ', '?']}.
+%Il est également possible de passer d'un type composé à un autre grâce aux fonctions \lstinline{str}, 
+%\lstinline{tuple} et \lstinline{list} : \lstinline{str((1,'a',[1,2]))} renvoie \lstinline{''(1,'a',[1,2])''}, 
+%\lstinline{tuple([1,2,3] )} renvoie \lstinline{(1,2,3)} et \lstinline{list('Coucou ?')} renvoie 
+%\lstinline{['C', 'o', 'u', 'c', 'o', 'u', ' ', '?']}.
 
 \subsection{Affectation}
 
 \begin{defi}[Affectation]
-Quand on stocke une valeur \texttt{d} dans une variable \texttt{var}, on dit que l'on 
-\textbf{affecte} \texttt{d} à la variable \texttt{var}. La valeur
-\texttt{d} est encore appelée \textbf{la donnée}.
+Quand on stocke une valeur \lstinline{d} dans une variable \lstinline{var}, on dit que l'on 
+\textbf{affecte} \lstinline{d} à la variable \lstinline{var}. La valeur
+\lstinline{d} est encore appelée \textbf{la donnée}.
 \end{defi}
 
 En Python , cette affectation est faite avec la commande \lstinline{=}, comme suit.  
@@ -353,17 +359,17 @@ Les variables (et donc l'affectation) sont incontournables : si vous ne stockez 
 Dans la variable affectée, la nouvelle donnée \og écrase\fg\ la donnée précédente : on perd son 
 ancienne valeur.
 
-Dans un programme Python, on utilisera l'instruction \texttt{print(x)}
-pour afficher dans la console la valeur de la variable \texttt{x}.
+Dans un programme Python, on utilisera l'instruction \lstinline{print(x)}
+pour afficher dans la console la valeur de la variable \lstinline{x}.
 
 Il est également possible d'affecter des valeurs à plusieurs variables en une fois, en utilisant 
-des tuples. Ainsi : \texttt{a,b = (1,2)} affecte la valeur 1 à \texttt{a} et la valeur 2 à 
-\texttt{b}.
+des tuples. Ainsi : \lstinline{a,b = (1,2)} affecte la valeur 1 à \lstinline{a} et la valeur 2 à 
+\lstinline{b}.
 
 
 \begin{remarque}
 En Python, le \textbf{typage} des variables est \textbf{dynamique}. Cela signifie que lorsqu'on affecte une valeur à une variable, Python reconnaît automatiquement le type de la valeur. Ce n'est pas le cas de tous les langages de programmation.
-%Par exemple, le \texttt{C} n'est pas typé dynamiquement. Il faut alors déclarer une variable avec un type, puis affecter la valeur. 
+%Par exemple, le \lstinline{C} n'est pas typé dynamiquement. Il faut alors déclarer une variable avec un type, puis affecter la valeur. 
 \end{remarque}
 
 
@@ -424,7 +430,7 @@ Deux objets sont les durées de vie ne se chevauchent pas peuvent partager le m�
 %	[2,2] [2,2]
 %\end{lstlisting}
 %\end{multicols}
-%Ici l'affectation \texttt{b=a} ne crée pas une nouvelle liste \texttt{b}. On crée juste une nouvelle variable \texttt{b} qui a la même adresse mémoire que \texttt{a}. Ainsi en modifiant \texttt{a}, on modifie \texttt{b}. 
+%Ici l'affectation \lstinline{b=a} ne crée pas une nouvelle liste \lstinline{b}. On crée juste une nouvelle variable \lstinline{b} qui a la même adresse mémoire que \lstinline{a}. Ainsi en modifiant \lstinline{a}, on modifie \lstinline{b}. 
 %%\end{xxpyconsole}
 
 
@@ -443,7 +449,7 @@ ces instructions classiques (dans le même programme ou dans un autre),
 on privilégie les programmes simples (ou sous-programmes) appelés \textbf{fonctions}.
 
 Dans chaque langage, il y a déjà un nombre incalculable de fonctions déjà construites (en Python, 
-par exemple, \texttt{print}) mais on s'aperçoit très vite que l'on a besoin de créer ses propres 
+par exemple, \lstinline{print}) mais on s'aperçoit très vite que l'on a besoin de créer ses propres 
 fonctions.
 
 
@@ -451,10 +457,10 @@ fonctions.
 %
 %\fbox{\begin{minipage}{15cm}
 %
-%On appelle \texttt{DefFonction} l'opération qui consiste à définir une nouvelle fonction nommée 
+%On appelle \lstinline{DefFonction} l'opération qui consiste à définir une nouvelle fonction nommée 
 %\textbf{nom-de-la-fonction} présentée comme suit : 
 %\begin{center}
-%\texttt{DefFonction} \begin{tabular}{|l}
+%\lstinline{DefFonction} \begin{tabular}{|l}
 %					\textbf{nom\_ de\_la\_fonction}(\textit{paramètres})\\
 % \hspace{5ex} \og commentaire expliquant la fonction \fg\\
 %\hspace{5ex}	bloc d'instructions\\
@@ -468,7 +474,7 @@ fonctions.
 %\begin{exemple}
 %On veut convertir en secondes une durée donnée en heures, minutes et secondes : 
 %
-%\texttt{DefFonction} 
+%\lstinline{DefFonction} 
 %\begin{tabular}{|l}
 %				\textbf{conversion}(h,m,s)\\
 %\hspace{5ex}  \og convertit en secondes une durée donnée en heures,  minutes et secondes \fg\\
@@ -502,7 +508,7 @@ un flottant, une liste...
 %
 %\begin{description}
 % \item[1er cas.] 
-%\texttt{DefFonction} 
+%\lstinline{DefFonction} 
 %\begin{tabular}{|l}
 %				\textbf{conversion}(h,m,s)\\
 % \hspace{5ex}  \og convertit en secondes une durée donnée en heures,  minutes et secondes \fg\\
@@ -511,12 +517,12 @@ un flottant, une liste...
 %				  \textbf{fin}
 %				  \end{tabular}
 %
-%Si on écrit \texttt{rep}=\textbf{conversion}(h,m,s), on trouvera dans \texttt{rep} un nombre entier.
+%Si on écrit \lstinline{rep}=\textbf{conversion}(h,m,s), on trouvera dans \lstinline{rep} un nombre entier.
 %
 %\item[2ème cas.] 
 %\
 %
-%\texttt{DefFonction} 
+%\lstinline{DefFonction} 
 %\begin{tabular}{|l}
 %				\textbf{conversion}(h,m,s)\\
 % \hspace{5ex}  \og convertit en secondes une durée donnée en heures, minutes et secondes \fg\\
@@ -525,7 +531,7 @@ un flottant, une liste...
 %				  \textbf{fin}
 %				  \end{tabular}
 %
-%Si on écrit \texttt{rep}=\textbf{conversion}(h,m,s), on  ne trouvera rien dans \texttt{rep} mais la 
+%Si on écrit \lstinline{rep}=\textbf{conversion}(h,m,s), on  ne trouvera rien dans \lstinline{rep} mais la 
 %valeur s'affichera à l'écran.
 %\end{description}
 
@@ -544,7 +550,7 @@ def nom_de_la_fonction(parametres):
 \end{lstlisting}
 
 \begin{remarque}
-En Python , l'indentation est {signifiante} : après le mot-clé \texttt{def}, chaque 
+En Python , l'indentation est {signifiante} : après le mot-clé \lstinline{def}, chaque 
 ligne indentée fait partie de la fonction. La première ligne non indentée rencontrée marque la 
 fin de la fonction : cette ligne ne fait plus partie de la fonction, mais celles qui précéde en 
 font partie. Il est donc {impératif} d'indenter quand il le faut, et seulement 
