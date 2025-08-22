@@ -198,15 +198,23 @@ def incr_sans_effet_de_bord(L:[]) -> [] :
 \ifprof
 \begin{corrige}~\\ \vspace{-.5cm} \vspace{-.5cm}
 \begin{lstlisting}
+def norme(A:[],B:[])->float :
+    x1,y1,z1 = A
+    x2,y2,z2 = B
+    return ((x1-x2)**2+(y1-y2)**2+(z1-z2)**2)**.5
 \end{lstlisting}
 \end{corrige}
 \else
 \fi
 
-\question{Implémenter la fonction \lstinline{prod_vect(u:[], v:[])->float} permettant calculer le produit vectoriel $\vect{u}\wedge \vect{v}$ dans $\mathbb{R}^3$.}
+\question{Implémenter la fonction \lstinline{prod_vect(u:[float], v:[float])->[float]} permettant calculer le produit vectoriel $\vect{u}\wedge \vect{v}$ dans $\mathbb{R}^3$.}
 \ifprof
 \begin{corrige}~\\ \vspace{-.5cm}
 \begin{lstlisting}
+def prod_vect(u:[], v:[])->[float] :
+    u1,u2,u3 = u
+    v1,v2,v3 = v
+    return [u2*v3-u3*v2,u3*v1-u1*v3,u1*v2-u2*v1]
 \end{lstlisting}
 \end{corrige}
 \else
@@ -220,6 +228,11 @@ def incr_sans_effet_de_bord(L:[]) -> [] :
 \ifprof
 \begin{corrige}~\\ \vspace{-.5cm}
 \begin{lstlisting}
+def impairs(n:int) -> [] :
+    L = []
+    for i in range(n) : 
+        L.append(2*i+1)
+    return L
 \end{lstlisting}
 \end{corrige}
 \else
@@ -229,6 +242,12 @@ def incr_sans_effet_de_bord(L:[]) -> [] :
 \ifprof
 \begin{corrige}~\\ \vspace{-.5cm}
 \begin{lstlisting}
+def multiples_5(d:int, f:int) -> [] :
+    L = []
+    for i in range(d,f+1):
+        if i%5 == 0 :
+            L.append(i)
+    return L
 \end{lstlisting}
 \end{corrige}
 \else
