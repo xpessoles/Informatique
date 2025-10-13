@@ -47,7 +47,7 @@ plt.show()
 \question{Vérifier qu'un profil de montagne s'affiche.}
 
 
-\question{Écrire la fonction \lstinline{maximum(L:[float]) -> int} permettant de déterminer le maximum d'une liste (la fonction \lstinline{max} sera ici interdite).}
+\question{Écrire la fonction \lstinline{maximum(L:[float]) -> float} permettant de déterminer le maximum d'une liste (la fonction \lstinline{max} sera ici interdite).}
 \ifprof
 \begin{corrige}~\\
 \vspace{-.5cm}
@@ -65,7 +65,7 @@ def plus_haut(L:[float]) -> float :
 
 \question{Vérifier que \lstinline{maximum(les_y[0:300])} renvoie \lstinline{1855.99}.}
 
-\question{Écrire la fonction \lstinline{plus_haut_indice(L:[float]) -> float} permettant de déterminer l'indice de l'altitude la plus haute atteinte lors de la randonnée.}
+\question{Écrire la fonction \lstinline{plus_haut_indice(L:[float]) -> int} permettant de déterminer l'indice de l'altitude la plus haute atteinte lors de la randonnée.}
 \ifprof
 \begin{corrige}~\\
 \vspace{-.5cm}
@@ -147,7 +147,7 @@ On note PND les points de passages par le niveau moyen en descente et PNM les po
 \end{marginfigure}
 
 
-\question{Écrire la fonction \lstinline{indice_premier_PNM(alt:list) -> int} renvoyant, s’il existe, l’indice \lstinline{i}
+\question{Écrire la fonction \lstinline{indice_premier_PNM(alt:[float]) -> int} renvoyant, s’il existe, l’indice \lstinline{i}
 du premier élément de la liste tel que cet élément soit inférieur à la moyenne et l’élément suivant
 soit supérieur à la moyenne. Cette fonction devra renvoyer \lstinline{-1} si aucun élément vérifiant cette
 condition n’existe.}
@@ -234,7 +234,7 @@ La dernière montagne ira du dernier \lstinline{pam} à la dernière altitude me
 \fi
 
 
-\question{Écrire la fonction \lstinline{creer_montagnes(alt) -> list} renvoyant une liste constituée de la liste des montagnes élémentaires.}
+\question{Écrire la fonction \lstinline{creer_montagnes(alt) -> [[]]} renvoyant une liste constituée de la liste des montagnes élémentaires.}
 \ifprof
 \begin{corrige}~\\
 \vspace{-.5cm}
