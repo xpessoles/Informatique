@@ -88,7 +88,7 @@ suivant et on en sélectionne une au hasard. En l’absence de positions accessi
 
 
 
-
+On appelle voisins (ou positions voisines) d'un point, les points situés au-dessus, à droite, au-dessous et à gauche de ce point. Comme dit précédemment, la distance entre 2 points est toujours égale à 1. 
 
 \question{Implémenter la fonction \lstinline{positions_voisines(p:[int]) -> [[int]]} qui construit la liste des positions voisines possibles à partir du point \lstinline{p}.}
 
@@ -104,7 +104,7 @@ suivant et on en sélectionne une au hasard. En l’absence de positions accessi
 
 \question{Implémenter la fonction \lstinline{positions_possibles(p:[int], chemin:[[int]]) -> [[int]]} qui construit la liste des positions suivantes possibles à partir du point \lstinline{p}. La liste \lstinline{chemin} contient les points déjà atteints.}
 
-\marginnote[1cm]{L'ordre des positions possibles n'est pas important. Attention, pou run chemin à un élément il y a bien \textbf{2 paires} de crochets.}
+\marginnote[1cm]{L'ordre des positions possibles n'est pas important. Attention, pour un chemin à un élément il y a bien \textbf{2 paires} de crochets.}
 \begin{test}
 \lstinline{positions_possibles([0,0],[])} doit renvoyer \lstinline{[[0, 1], [1, 0], [0, -1], [-1, 0]]}.
 
