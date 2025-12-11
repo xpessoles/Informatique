@@ -6,7 +6,7 @@
 
 
 \newcommand{\exer}{\subsection*}
-\exer{Multiplication}
+\exer{Multiplication récursive}
 \setcounter{question}{0}
 
 \question{Ecrire une fonction itérative \lstinline{mult(n:int, p:int)->int} permettant de multiplier deux entiers (sans utiliser \lstinline{*}).}
@@ -59,6 +59,36 @@ def mult(n, p):
 %\else
 %\fi
 
+\exer{Somme récursive }
+\setcounter{question}{0}
+\question{Écrire une fonction récursive \lstinline{somme_n(n)} permettant de calculer la somme des éléments de 1 à $n$.}
+\ifprof
+\begin{lstlisting}
+def somme(n):
+    if n == 0 :
+        return 0
+    return n + somme(n - 1)
+\end{lstlisting}
+
+\else
+\fi
+
+
+\exer{Somme récursive des éléments d'une liste}
+\setcounter{question}{0}
+\question{Écrire une fonction récursive \lstinline{somme(L)}, de paramètre une liste \lstinline{L} de nombres, qui calcule et renvoie
+la somme des éléments de \lstinline{L}. On précise que l’exécution de \lstinline{somme([])} doit renvoyer la valeur \lstinline{0} et que
+la liste \lstinline{L} n’est pas modifiée par la fonction (elle peut être modifiée momentanément mais, à la fin de
+l’exécution de la fonction, on doit retrouver la liste initiale.}
+
+
+
+\exer{Maximum récursif}
+\setcounter{question}{0}
+\question{Écrire une fonction récursive \lstinline{maximum(L)}, de paramètre une liste \lstinline{L} de nombres (supposée non vide),
+qui détermine et renvoie le maximum de \lstinline{L}. On précise que la liste \lstinline{L} n’est pas modifiée par la fonction
+et qu’il ne doit bien sûr pas être fait usage de la fonction native max pour les listes.}
+
 
 \exer{Exponentiation}
 \setcounter{question}{0}
@@ -107,23 +137,6 @@ $x^n=\left\{\begin{tabular}{ccc} ${(x^2)}^{n/2}$ &si &$n$ pair \\ ${x\times (x^2
 
 \question{Ecrire une fonction récursive \lstinline{expo_rap_rec(x:int, n:int)->int} permettant de calculer $x^n$ (sans utiliser \lstinline{**}).}
 
-
-\exer{Somme récursive}
-\setcounter{question}{0}
-\question{Écrire une fonction récursive \lstinline{somme(L)}, de paramètre une liste \lstinline{L} de nombres, qui calcule et renvoie
-la somme des éléments de \lstinline{L}. On précise que l’exécution de \lstinline{somme([])} doit renvoyer la valeur \lstinline{0} et que
-la liste \lstinline{L} n’est pas modifiée par la fonction (elle peut être modifiée momentanément mais, à la fin de
-l’exécution de la fonction, on doit retrouver la liste initiale.}
-
-
-
-\exer{Maximum récursif}
-\setcounter{question}{0}
-\question{Écrire une fonction récursive \lstinline{maximum(L)}, de paramètre une liste \lstinline{L} de nombres (supposée non vide),
-qui détermine et renvoie le maximum de \lstinline{L}. On précise que la liste \lstinline{L} n’est pas modifiée par la fonction
-et qu’il ne doit bien sûr pas être fait usage de la fonction native max pour les listes.}
-
-\newpage
 
 \exer{Dessins récursifs}
 \setcounter{question}{0}
