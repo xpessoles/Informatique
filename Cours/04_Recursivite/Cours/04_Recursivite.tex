@@ -165,7 +165,7 @@ Ainsi, pour réaliser la somme des éléments d'une liste \texttt{L} par récurs
 \end{itemize}
 Cela se traduit ainsi.
 \begin{lstlisting}
-def somme(L:list) -> float :
+def somme(L: []) -> float :
     if len(L)==1 : 
         return L[0]
     else :
@@ -193,7 +193,7 @@ Les algorithmes dichotomiques se prêtent aussi à des formulations récursives.
 
 %\noindent\begin{minipage}[c]{.49\linewidth}
 \begin{lstlisting}
-def appartient_dicho(e : int , t : list) -> bool:
+def appartient_dicho(e : int , t : []) -> bool:
     """Renvoie un booléen indiquant si e est dans t. 
     Préconditions : t est un tableau de nombres trié par ordre croissant e est  un nombre"""
     # Limite gauche de la tranche où l'on recherche e
