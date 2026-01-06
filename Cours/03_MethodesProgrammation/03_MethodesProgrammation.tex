@@ -230,9 +230,9 @@ def dichotomie(f, a:float , b:float , epsilon:float) -> float :
    Exception: f(a) et f(b) sont de même signe
 \end{lstlisting}
 
-\section{Génération de tests}
+\section{Génération de tests unitaires}
 
-\subsection{Tests unitaires}
+%\subsection{Tests unitaires}
 
 On a vu comment vérifier que les données d'entrées d'une fonction sont compatibles avec ce qu'attendait le concepteur de la fonction. On va maintenant chercher, grâce à des tests unitaires, si le résultat attendu est bien celui déterminé par une fonction. 
 \begin{exemple}~\\
@@ -277,38 +277,38 @@ Dans le cas de la recherche dichotomique, on peut se demander si la boucle \text
 
 En modifiant l'algorithme, et en itérant une fois de plus, le test reste faux. La condition d'arrêt de l'algorithme ne permet pas de trouver x tel que $f(x)<\varepsilon$ mais de trouver une valeur de $x$ telle que l'écart entre deux solutions consécutives est inférieur à $\varepsilon$. Il faut donc clarifier l'objectif de la fonction pour proposer un test plus adapté.
 
-
-
-\subsection{Vers Pytest -- hors programme}
-
-Lorsqu'on connaît dans un grand nombre de cas le résultat qui est sensé être trouvé par une fonction, il est possible de faire passer une batterie de tests à cette fonction en recherchant si le résultat calculé et bien le résultat attendu. 
-
-Soit la fonction suivante permettant de calculer le produit scalaire entre deux vecteurs. 
-\begin{lstlisting}
-def produit_scalaire_v2(vecteur1, vecteur2):
-    somme = 0
-    for i in range(len(vecteur1)):
-        somme += vecteur1[i]*vecteur2[i]+1
-    return somme
-\end{lstlisting}
-
-\texttt{Pytest} permet de faire passer une batterie de tests à une fonction. Ces tests sont des fonctions commençant obligatoirement par \texttt{test\_}.
-
-\begin{lstlisting}
-def test_produit_scalaire_v2_01():
-    assert produit_scalaire_v2([1, 1, 1], [1, 1, 1]) == 3
-
-def test_produit_scalaire_v2_02():
-    assert produit_scalaire_v2([1, 2, 3, 4], [0, 1, 0, 0]) == 2
-\end{lstlisting}
-
-Le lancement de \texttt{Pytest} donne le résultat suivant. 
-
-\begin{center}
-\includegraphics[width=.8\linewidth]{pytest}
-\end{center}
-
-
-On peut lire que les deux tests ont échoué. La fonction ne remplit donc vraisemblablement pas son objectif. 
+%
+%
+%\subsection{Vers Pytest -- hors programme}
+%
+%Lorsqu'on connaît dans un grand nombre de cas le résultat qui est sensé être trouvé par une fonction, il est possible de faire passer une batterie de tests à cette fonction en recherchant si le résultat calculé et bien le résultat attendu. 
+%
+%Soit la fonction suivante permettant de calculer le produit scalaire entre deux vecteurs. 
+%\begin{lstlisting}
+%def produit_scalaire_v2(vecteur1, vecteur2):
+%    somme = 0
+%    for i in range(len(vecteur1)):
+%        somme += vecteur1[i]*vecteur2[i]+1
+%    return somme
+%\end{lstlisting}
+%
+%\texttt{Pytest} permet de faire passer une batterie de tests à une fonction. Ces tests sont des fonctions commençant obligatoirement par \texttt{test\_}.
+%
+%\begin{lstlisting}
+%def test_produit_scalaire_v2_01():
+%    assert produit_scalaire_v2([1, 1, 1], [1, 1, 1]) == 3
+%
+%def test_produit_scalaire_v2_02():
+%    assert produit_scalaire_v2([1, 2, 3, 4], [0, 1, 0, 0]) == 2
+%\end{lstlisting}
+%
+%Le lancement de \texttt{Pytest} donne le résultat suivant. 
+%
+%\begin{center}
+%\includegraphics[width=.8\linewidth]{pytest}
+%\end{center}
+%
+%
+%On peut lire que les deux tests ont échoué. La fonction ne remplit donc vraisemblablement pas son objectif. 
 
 % https://mypy.readthedocs.io/en/stable/cheat_sheet_py3.html
