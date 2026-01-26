@@ -21,7 +21,7 @@ def tri_comptage2(L,k):
             p+=1
 
 
-def tri_comptage3(L:list,k:int):
+def tri_comptage3(L:[],k:int):
     C=k*[0]
     a=[]
     for i in range(len(L)):

@@ -5,21 +5,21 @@ Created on Mon Feb 13 14:21:12 2023
 @author: xpess
 """
 
-def separe(L: list) -> tuple[list,list]:
+def separe(L: []) -> ([],[]):
     return L[:len(L) // 2], L[len(L) // 2:]
 
-def fusion(L1: list, L2: list) -> list:
+def fusion(L1: [], L2: []) -> list:
     if not L1 or not L2: # si l'une des listes est vide (éventuellement les 2)
         return L1 or L2 # alors on renvoie l'autre (éventuellement vide aussi)
     else:
-        a, b = L1[0], L2[0] 
+        a, b = L1[0], L2[0]
         if a < b : # sinon on compare leurs premiers éléments
             return [a] + fusion(L1[1:], L2) # on place le plus petit en tête et on fusionne le reste
         else:
             return [b] + fusion(L1, L2[1:])
-        
 
-def tri_fusion(L: list) -> list:
+
+def tri_fusion(L: []) -> []:
     if len(L) < 2: # cas d'arrêt
         return L
     L1, L2 = separe(L) # sinon on sépare

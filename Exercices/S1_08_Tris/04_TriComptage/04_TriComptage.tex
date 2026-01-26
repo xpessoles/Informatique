@@ -19,7 +19,7 @@ L’algorithme prend en entrée la liste $L$ à trier, ainsi qu’un entier $k$ 
 liste soient des entiers de l’intervalle $\llbracket 0; k \llbracket$. On procède en deux étapes : d’abord compter les éléments de chaque type,
 ensuite réécrire la liste $L$.
 
-\question{Ecrire la fonction  \lstinline{tri_comptage(L:[], k:int) -> None} permettant de réaliser un tri par comptage avec effet de bord.}
+\question{Ecrire la fonction  \lstinline{tri_comptage(L:[], k:int) -> None}.}
 \ifprof
 \begin{corrige}
 \begin{lstlisting}
@@ -38,7 +38,7 @@ def tri_comptage(L,k):
 \end{corrige}
 \else
 \fi
-\question{Ecrire la fonction  \lstinline{tri_comptage_02(L:[], k:int) -> []} permettant de réaliser un tri par comptage sans effet de bord.}
+%\question{Ecrire la fonction  \lstinline{tri_comptage_02(L:[], k:int) -> []} permettant de réaliser un tri par comptage sans effet de bord.}
 \ifprof
 \begin{corrige}
 \end{corrige}
@@ -51,7 +51,7 @@ Un tri est dit en place s'il n'utilise qu'un nombre très limité de variables e
 \begin{defi}[Tri stable  -- Wikipedia]
 Un tri est dit stable s'il préserve l’ordonnancement initial des éléments que l'ordre considère comme égaux.
 \end{defi}
-\question{Les fonctions proposées réalisent-t-elles un tri stable ? un tri en place ?}
+\question{La fonctions proposé réalise-t-elle un tri stable ? un tri en place ?}
 \ifprof
 \begin{corrige}
 \end{corrige}
