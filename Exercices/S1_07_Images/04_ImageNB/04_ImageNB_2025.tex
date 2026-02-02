@@ -1,7 +1,9 @@
+%% SUR LA VERSION 2025, on ajoute la copie d'une imagz
+
 Avant toute chose, créer un répertoire \lstinline{TP09} dans votre répertoire \lstinline{Informatique}, \lstinline{TPsup} dans votre espace personnel.
 
-Sur le site \url{https://ptsilamartin.github.io/info/TP.html}, télécharger les 2  images \href{https://ptsilamartin.github.io/info/TP/allium.png}{allium.png}
-et \href{https://ptsilamartin.github.io/info/TP/ciel.png}{ciel.png} ainsi que le script \href{https://ptsilamartin.github.io/info/TP/TP_09.py}{TP\_09.py}  que vous copiez dans votre répertoire TP09. Ouvrir le script \lstinline{TP_09.py} dans lequel vous travaillerez tout au long de ce TP.
+Sur le site \url{https://ptsilamartin.github.io/}, télécharger les 2  images \href{https://ptsilamartin.github.io/TP/allium.png}{allium.png}
+et \href{https://ptsilamartin.github.io/TP/ciel.png}{ciel.png} ainsi que le script \href{https://ptsilamartin.github.io/TP/TP_09.py}{TP\_09.py}  que vous copiez dans votre répertoire TP09. Ouvrir le script \lstinline{TP_09.py} dans lequel vous travaillerez tout au long de ce TP.
 
 \section*{Créer des images en niveau de gris}
 
@@ -49,24 +51,32 @@ plt.show()
 %\end{question}
 
 \section*{Copier une image}
+Dans la suite du TP, nous allons modifier des images. Pour ne pas altérer l'image d'origine, on devra la copier puis modifier la copie. 
+
+\begin{question}
+\'Ecrire la fonction \lstinline{copie} qui prend pour argument la matrice-image \lstinline{im}  et qui crée une copie indépendante. 
+L'utilisation de \lstinline{copy} ou \lstinline{deepcopy} est strictement interdite.
+\end{question}
+
 
 \section*{Eclaircir une image}
 Dans cette partie on souhaite éclaircir l'ensemble d'une image.
 
 \begin{question}
 \'Ecrire la fonction \lstinline{eclaicir} qui prend pour argument la matrice-image \lstinline{im} et le flottant \lstinline{k} (compris entre 0 et 1) et qui modifie chaque pixel de l'image pour éclaircir d'une valeur \lstinline{k} chaque pixel (plus la valeur de \lstinline{k} sera élevée plus l'éclaircissement sera conséquent).
+Attention, l'image iniale ne devra pas être modifiée.
 \end{question}
 
 \question{Tester votre fonction sur l'image noire que vous avez obtenue précédemment. 
 Afficher 2 figures : l'image initiale et l'image éclaicie. }
-
-\textit{Si on ne prend pas de précautions particulières, le fait d'apliquer la fonction \lstinline{eclaicir} modifie l'image source. Ceci peut être génant si ce n'est pas volontaire. Il faut bien veiller à créer une \textbf{copie indépendante} de la matrice-image source pour éviter ce problème.}
-
-%\textbf{Copie indépendante}
-
-\begin{question}
-Réécrire la fonction \lstinline{eclaicir2} en ajoutant les commandes permettant de réaliser une copie indépendante de la matrice-image source avant de la modifier. Tester en affichant les 2 figures de la question précédente.
-\end{question}
+%
+%\textit{Si on ne prend pas de précautions particulières, le fait d'apliquer la fonction \lstinline{eclaicir} modifie l'image source. Ceci peut être génant si ce n'est pas volontaire. Il faut bien veiller à créer une \textbf{copie indépendante} de la matrice-image source pour éviter ce problème.}
+%
+%%\textbf{Copie indépendante}
+%
+%\begin{question}
+%Réécrire la fonction \lstinline{eclaicir2} en ajoutant les commandes permettant de réaliser une copie indépendante de la matrice-image source avant de la modifier. Tester en affichant les 2 figures de la question précédente.
+%\end{question}
 
 
 %\textbf{Lecture d'une image contenue dans un fichier .png}
