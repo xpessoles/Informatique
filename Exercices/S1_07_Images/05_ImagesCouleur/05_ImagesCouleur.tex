@@ -5,7 +5,9 @@ Avant toute chose, créer un répertoire TP10 dans votre répertoire "Informatiq
 \includegraphics[width=\textwidth]{vague.png}
 \end{marginfigure}
 
-Dans ce TP, comme dans le TP09 on utilise images matricielles. Contrairement au TP09 les images sont des images colorées. La teinte de chaque pixel est codée sous la forme d'un tableau \lstinline{[R,G,B]}, \lstinline{R} codant la valeur du rouge, \lstinline{G} du vert et \lstinline{B} du bleu. \lstinline{R}, \lstinline{G}, \lstinline{B} sont des nombres réels compris entre \lstinline{0} et \lstinline{1}. 
+Dans ce TP, comme dans le TP09 on utilise images matricielles. Contrairement au TP09 les images sont des images colorées. La teinte de chaque pixel est codée sous la forme d'un tableau \lstinline{[R,G,B]}, \lstinline{R} codant la valeur du rouge, \lstinline{G} du vert et \lstinline{B} du bleu. \lstinline{R}, \lstinline{G}, \lstinline{B} sont des nombres réels compris entre \lstinline{0} et \lstinline{1}. Certaines images peuvent avoir une 4ème couche (dite de transparence).
+
+
 
 
 
@@ -15,8 +17,9 @@ Dans ce TP, comme dans le TP09 on utilise images matricielles. Contrairement au 
 Lire l'image du fichier \texttt{vague.png} et l'afficher.
 \end{question}
 
+Pour copier une image on pourra utiliser l'instruction \lstinline{imc = np.array(im)}.
 \begin{question}
-Ecrire une fonction \lstinline{accentuation} qui prend pour argument une matrice-image codée au format RGB et un flottant \lstinline{k}, et qui accentue de \lstinline{k} la valeur de la composante rouge de chaque pixel. Afficher l'image obtenue avec une valeur de \lstinline{k} de~0.2. 
+Écrire une fonction \lstinline{accentuation} qui prend pour argument une matrice-image codée au format RGB et un flottant \lstinline{k}, et qui accentue de \lstinline{k} la valeur de la composante rouge de chaque pixel. Afficher l'image obtenue avec une valeur de \lstinline{k} de~0.2. 
 \end{question}
 
 
@@ -31,11 +34,11 @@ La CIE (Commission Internationale de l’Eclairage) normalise la répartition po
 \textit{Rappel : pour afficher une image en niveau de gris utiliser la fonction : \texttt{plt.imshow(im, cmap="gray", vmin=0, vmax=1)}}
 
 \begin{question}
-Ecrire une fonction \texttt{niveau\_gris} qui prend pour argument une matrice-image codée au format RGB et qui convertit cette image en niveau de gris en utilisant la moyenne des composantes.
+Écrire une fonction \texttt{niveau\_gris} qui prend pour argument une matrice-image codée au format RGB et qui convertit cette image en niveau de gris en utilisant la moyenne des composantes.
 \end{question}
 
 \begin{question} %\textbf{[OPTIONNELLE : uniquement si vous êtes en avance]}
-Ecrire une fonction \texttt{niveau\_gris2} qui convertit une image en niveau de gris en utilisant la norme 709.
+Écrire une fonction \texttt{niveau\_gris2} qui convertit une image en niveau de gris en utilisant la norme 709.
 \end{question}
 
 
@@ -101,7 +104,7 @@ Ce masque sera une image toute noire, sauf les pixels à traiter qui seront en b
 Créer une matrice image masque de la taille de l'image à traiter ne contenant que des pixels noirs, sauf pour les pixels situés sur les lignes allant de 80 à 179, et sur les colonnes allant de 370  à 449. Ces pixels seront blancs.
 \end{question}
 
-\textbf{Attention} : l'image masque doit avoir les mêmes caractéristiques que l'image traitée : la valeur d'un pixel blanc sera \verb![!1,1,1,1\verb!]! et celle d'un pixel noir \verb![!0,0,0,1\verb!]!, si l'image est codée sur 4 composantes (c'est le cas pour format \textbf{.png} qui gère la transparence en plus des 3 ccomposantes RGB).
+\textbf{Attention} : l'image masque doit avoir les mêmes caractéristiques que l'image traitée : la valeur d'un pixel blanc sera \verb![!1,1,1,1\verb!]! et celle d'un pixel noir \verb![!0,0,0,1\verb!]!, si l'image est codée sur 4 composantes (c'est le cas pour format \textbf{.png} qui gère la transparence en plus des 3 composantes RGB).
 
 A partir du masque, de l'image floutée et de l'image initiale, on peut obtenir ainsi l'image finale :
 
@@ -115,7 +118,7 @@ où $i$ et $j$ définissent la position du pixel et $c$ la composante considér�
 
 \begin{remarque}
 Les images sont des tableaux \texttt{Numpy} : on pourra donc utiliser les propriétés bien pratiques des tableaux \texttt{Numpy}.\\
-Il est ainsi possible de réaliser directement des opérations sur ces tableaux Numpy :  ces opéraions seront comprises comme des opérations "composantes par composantes".\\
+Il est ainsi possible de réaliser directement des opérations sur ces tableaux Numpy :  ces opérations seront comprises comme des opérations "composantes par composantes".\\
 \textbf{Exemple :} \texttt{ a=np.array([5, 2, 4]) ; b=np.array([4, 3, 6])}     \\
        Alors  : \texttt{c=a*b} donnera \texttt{array([20, 6, 24])} 
 
@@ -126,6 +129,10 @@ Il est ainsi possible de réaliser directement des opérations sur ces tableaux 
 \section*{Pour aller + loin : Application à une problématique d'imagerie médicale}
 %\setcounter{cexo}{0}
 
+
+\begin{marginfigure}
+\includegraphics[width=\textwidth]{Capture5.png}
+\end{marginfigure}
 
 \textit{
 Les applications des algorithmes de traitement d'images sont multiples. On étudie ici l'utilisation de ces techniques pour le diagnostic et le suivi de pathologies cardio-vasculaires.}
@@ -140,10 +147,7 @@ Les applications des algorithmes de traitement d'images sont multiples. On étud
 L'objectif est ici d'automatiser la détection des contours du ventricule gauche afin de pouvoir étudier la contraction pariétale.
 \end{obj}
 
-\begin{marginfigure}
-\includegraphics[width=\textwidth]{Capture5.png}
-\end{marginfigure}
-L'IRM cardiaque marquée permet de faire apparraitre de manière non invasive une grille (\textit{tags}) sur la zone ventriculaire gauche. Ces \textit{tags} disparaissent dans la cavité cardiaque : la cavité cardiaque est donc caractérisée par une zone homogène, la couronne mycardiqque, elle, est caractérisée par une texture en grille non homogène.
+L'IRM cardiaque marquée permet de faire apparaître de manière non invasive une grille (\textit{tags}) sur la zone ventriculaire gauche. Ces \textit{tags} disparaissent dans la cavité cardiaque : la cavité cardiaque est donc caractérisée par une zone homogène, la couronne myocardique, elle, est caractérisée par une texture en grille non homogène.
 
 %\end{minipage}%
 %\hfill
@@ -154,10 +158,11 @@ L'IRM cardiaque marquée permet de faire apparraitre de manière non invasive un
 
 On voit ci-dessous l'image issue de l'IRM marqué (a).\\
 L'image (b) est obtenue par création d'une carte de texture, dont chaque intensité de pixel s'obtient comme la somme pondérée de la moyenne (notée MOY) et de l'écart type (noté STD), d'un voisinage (de dimension T x T) autour du pixel considéré:
-\begin{equation}
+$$
 I(i,j)=10.MOY(i,j)-30.STD(i,j)
-\end {equation}
-Cette approche permet d'augmenter de manière significative le niveau de gris des pixels situés dans les zones homogènes dont l'écart type, sur le voisinage considéré, est plus faible que pour les pixels proches des \textit{tags}. Néanmoins, cette formule peut entrainer des valeurs négatives pour certains pixels : il conviendra alors de leur affecter une valeur nulle (noir).\\
+$$
+
+Cette approche permet d'augmenter de manière significative le niveau de gris des pixels situés dans les zones homogènes dont l'écart type, sur le voisinage considéré, est plus faible que pour les pixels proches des \textit{tags}. Néanmoins, cette formule peut entraîner des valeurs négatives pour certains pixels : il conviendra alors de leur affecter une valeur nulle (noir).\\
 
 Par un calcul de gradient on obtient l'image (c).\\
 L'image (d) montre le contour endocardique recherché.
@@ -167,11 +172,11 @@ L'image (d) montre le contour endocardique recherché.
 \end{minipage}
 
 \begin{question}
-Ecrire les fonctions \texttt{Moyenne} et \texttt{EcartType} qui calculent respectivement la moyenne et l'écart type des valeurs des pixels d'une image. 
+Écrire les fonctions \texttt{Moyenne} et \texttt{EcartType} qui calculent respectivement la moyenne et l'écart type des valeurs des pixels d'une image. 
 \end{question}
 
 \begin{question}
-Ecrire une fonction \texttt{CarteTexture}, qui réalise, à partir d'une image en niveau de gris, la carte de texture (b) comme expliqué ci-dessus. Tester sur l'image fournie \texttt{IRM.png} . Vous choisirez judicieusement le paramètre T le plus adapté en réalisant éventuellement plusieurs essais.   
+Écrire une fonction \texttt{CarteTexture}, qui réalise, à partir d'une image en niveau de gris, la carte de texture (b) comme expliqué ci-dessus. Tester sur l'image fournie \texttt{IRM.png} . Vous choisirez judicieusement le paramètre T le plus adapté en réalisant éventuellement plusieurs essais.   
 \end{question}
 
 \begin{question}
