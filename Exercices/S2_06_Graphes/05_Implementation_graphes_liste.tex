@@ -1,11 +1,12 @@
-\exer{Implémentation des graphes par une liste d'adjacence}
+\subsection*{Implémentation des graphes}
 
+\subsubsection*{Liste d'adjacence}
 
-On considère le graphe \texttt{G} suivant, où le nombre situé sur l'arête joignant deux sommets est leur distance, supposée entière. 
+On considère le graphe \texttt{G} ci-contre. 
 
-\begin{center}
-\includegraphics[width=7cm]{02_application}
-\end{center}
+\begin{marginfigure}
+\includegraphics[width=\linewidth]{05_Implementation_graphes_liste/02_application.png}
+\end{marginfigure}
 
 
 Pour implémenter le graphe, on utilise une liste \texttt{Gl} qui a pour taille le nombre de sommets. Chaque élément \texttt{Gl[i]} est la liste des voisins de \texttt{i}. 
@@ -25,22 +26,22 @@ Dans ce cas, \texttt{Gl[0]=[1,2,4]} car Les sommets 1, 2 et 4 sont des voisins d
 
 \question{Écrire une fonction \texttt{arretes\_l(G:list) -> list}, renvoyant la liste des arêtes. Les arêtes seront constitués de couples de sommets (l'arête entre les sommets 0 et 1 sera donnée par \texttt{(0,1)}.}
 
-Les instructions suivantes permettent de tracer un graphe. 
-
-\begin{lstlisting}
-import networkx as nx
-
-def plot_graphe_l(G):
-    plt.close()
-    Gx = nx.Graph()
-    edges = arretes_l(G)
-    Gx.add_edges_from(edges)
-    nx.draw(Gx,with_labels = True)
-    plt.show()
-plot_graphe_l(Gl)
-\end{lstlisting}
-
-\question{Écrire et tester la fonction \texttt{plot\_graphe\_l(G)}.}
+%Les instructions suivantes permettent de tracer un graphe. 
+%
+%\begin{lstlisting}
+%import networkx as nx
+%
+%def plot_graphe_l(G):
+%    plt.close()
+%    Gx = nx.Graph()
+%    edges = arretes_l(G)
+%    Gx.add_edges_from(edges)
+%    nx.draw(Gx,with_labels = True)
+%    plt.show()
+%plot_graphe_l(Gl)
+%\end{lstlisting}
+%
+%\question{Écrire et tester la fonction \texttt{plot\_graphe\_l(G)}.}
 
 \question{Écrire une fonction \texttt{degre\_l(G:list, i:int) -> int}, d'argument un sommet $i$, renvoyant le nombre des voisins du sommet $i$, c'est-à-dire le nombre d’arêtes issues de $i$.}
 
@@ -55,3 +56,5 @@ plot_graphe_l(Gl)
 
 \question{Écrire la fonction \texttt{from\_matrix\_to\_listmatrix(G:list) -> list} permettant de convertir un graphe implémenté sous forme de matrice d'adjacence en liste d'adjacence.}
 
+\subsubsection*{Dictionnaire d'adjacence}
+\question{Reprendre l'ensemble des fonctions précédentes en utilisant un dictionnaire d'adjacence à la place des listes d'adjacence.}

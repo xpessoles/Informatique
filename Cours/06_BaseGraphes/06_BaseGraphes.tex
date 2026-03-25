@@ -1,5 +1,5 @@
 \setchapterimage{Fond_GRAPHE.jpg}
-\chapter*{Base des graphes} 
+\chapter{Base des graphes} 
  
 \marginnote{
 \begin{itemize}
@@ -70,6 +70,8 @@ Un graphe non orienté $G$ est un couple $G=(S,A)$, où $S$ est un ensemble fini
 On note $x - y$ l'arête $\{x,y\}$. $x$ et $y$ sont les deux extrémités de l'arête.
 \end{defi}
 
+\newpage
+\clearpage
 
 
 \begin{defi}[Graphe orienté -- Arcs]\cite{ref_01}
@@ -87,6 +89,8 @@ On note $x\to y$ l'arc $(x,y)$. $x$ est l'extrémité initiale de l'arc, $y$ est
 \caption{Graphe orienté}
 \label{fig_03}
 \end{marginfigure}
+
+\vspace{1cm}
 
 \begin{rem}
 On peut noter le graphe non orienté $G=\left(\llbracket 1,6\rrbracket,E\right)$ où $E=\left(
@@ -134,41 +138,44 @@ Dans le cas d'un graphe orienté, les arcs sont notées $(S_i, S_{i+1})$ pour $i
 
 \end{defi}
 
-
-
-\begin{defi}[Chemin fermé]
-Chemin dont le sommet de départ et le sommet d'arrivée sont identiques.
-\end{defi}
-
-
-\begin{marginfigure}
-\includegraphics[width=\linewidth]{chemin}
-\end{marginfigure}
-
-\begin{defi}[Chemin élémentaire]
-
-Chemin n'empruntant que des arêtes distinctes.
-
-\end{defi}
-
-\begin{defi}[Chemin simple]
-Chemin tel que les $n - 2$ sommets intermédiaires si, pour $i \in \llbracket 1, n-1\llbracket$ soient
-deux à deux distincts et tous distincts du sommet de départ $S_0$ et du sommet d’arrivée $S_{n-1}$ et tels
-que ce chemin n’est pas de la forme $a, b, a$ dans le cas non-orienté.
-\end{defi}
-
-\begin{defi}[Circuit]
-Chemin fermé de longueur non nulle.
-\end{defi}
+%
+%
+%\begin{defi}[Chemin fermé]
+%Chemin dont le sommet de départ et le sommet d'arrivée sont identiques.
+%\end{defi}
+%
+%
+%\begin{marginfigure}
+%\includegraphics[width=\linewidth]{chemin}
+%\end{marginfigure}
+%
+%\begin{defi}[Chemin élémentaire]
+%
+%Chemin n'empruntant que des arêtes distinctes.
+%
+%\end{defi}
+%
+%\begin{defi}[Chemin simple]
+%Chemin tel que les $n - 2$ sommets intermédiaires si, pour $i \in \llbracket 1, n-1\llbracket$ soient
+%deux à deux distincts et tous distincts du sommet de départ $S_0$ et du sommet d’arrivée $S_{n-1}$ et tels
+%que ce chemin n’est pas de la forme $a, b, a$ dans le cas non-orienté.
+%\end{defi}
+%
+%\begin{defi}[Circuit]
+%Chemin fermé de longueur non nulle.
+%\end{defi}
 
 
 \begin{defi}[Cycle]
 Circuit élémentaire (chemin fermé de longueur non nulle dont toutes les arêtes sont distinctes).
 \end{defi}
+%
+%\begin{defi}[Cycle simple]
+%Chemin fermé et simple de longueur non nulle.
+%\end{defi}
 
-\begin{defi}[Cycle simple]
-Chemin fermé et simple de longueur non nulle.
-\end{defi}
+\newpage
+\clearpage
 
 \begin{defi}[Chemin et cycle eulérien]
 
@@ -189,6 +196,8 @@ Chemin (resp. cycle) contenant une et une seule fois toutes les arêtes du graph
 \begin{rem}
 Pour certains auteurs, un chemin élémentaire est ce que nous avons appelé un chemin simple et réciproquement. Pour d’autres, un cycle est ce que nous avons appelé un cycle simple.
 \end{rem}
+
+\vspace{2cm}
 
 %
 %\begin{exemple} ~\\
@@ -231,6 +240,8 @@ Pour certains auteurs, un chemin élémentaire est ce que nous avons appelé un 
 %\end{defi}
 
 
+\vspace{2cm}
+
 \begin{marginfigure}
 \centering
 \includegraphics[width=\linewidth]{connexite}
@@ -242,6 +253,8 @@ Pour certains auteurs, un chemin élémentaire est ce que nous avons appelé un 
 Un graphe $G=(S,A)$ est dit connexe si, pour deux sommets quelconques $S_i$ et $S_j$ de $S$, il existe un chemin de $S_i$ à $S_j$.
 \end{defi}
 
+\newpage
+\clearpage
 
 \subsection{Notations}
 \begin{defi}[Degré d'un sommet]
@@ -300,7 +313,9 @@ G = [[1,5,6],[0,2,6],[1,3],[2,4],[3,5], [4,0],[1,0]]
 \end{lstlisting}
 \end{exemple}
 
-\vspace{1cm}
+\newpage
+\clearpage
+
 
 \begin{marginfigure}
 \includegraphics[width=.7\linewidth]{fig_06}
@@ -375,9 +390,15 @@ M =
 \end{exemple}
 
 
+\newpage
+\clearpage
+
+
 \begin{marginfigure}
 \includegraphics[width=.7\linewidth]{fig_06}
 \end{marginfigure}
+
+
 
 
 \begin{exemple}  [Graphe orienté]
