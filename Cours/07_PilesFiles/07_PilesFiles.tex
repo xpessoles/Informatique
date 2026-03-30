@@ -144,10 +144,10 @@ def copy_pile(pile):
     pile_tmp = deque()
     pile_copy = deque()
     
-    while pile : 
+    while len(pile) != 0 : 
         pile_tmp.append(pile.pop())
         
-    while pile_tmp : 
+    while len(pile_tmp) != 0 : 
         el= pile_tmp.pop()
         pile.append(el)
         pile_copy.append(el)
@@ -176,15 +176,15 @@ def copy_pile(pile):
 def hauteur(pile) -> int : 
     pile_temp = deque()
     h = 0
-    while pile : 
+    while len(pile) != 0 : 
         pile_temp.append(pile.pop())
         h = h+1
-    while pile_temp : 
+    while len(pile_temp) !=0 : 
         pile.append(pile_temp.pop())
     return h
     
 def hauteur_rec(pile):
-    if not pile : 
+    if len(pile) == 0 : 
         return 0
     else :
         pile.pop()
