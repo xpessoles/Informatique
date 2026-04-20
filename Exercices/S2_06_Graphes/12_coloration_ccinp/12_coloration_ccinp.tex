@@ -1,0 +1,58 @@
+%\exer{Implémentation des graphes par une matrice d'adjacence d'un graphe pondéré}
+
+\section*{Coloration d'un graphe}
+\marginnote{D'après CCINP-TSI 2024.}
+
+\subsection*{Introduction}
+
+La coloration d'un graphe consiste à attribuer une couleur à chaque sommet.  Un $k$-coloriage donne une couleur (qui peut par exemple être un entier entre 0 et $k-1$, pour simplifier) à chaque sommet, tel que deux sommets adjacents soient de couleurs différentes.
+
+
+On peut appliquer ce problème au coloriage d'une carte de pays, ou d'un dessin d'ensemble (figure \label{12_coloration_fig_02}). 
+Ainsi le coloriage de la pince (ainsi que le premier graphe) n'est pas un $k$-coloriage valide. Le second graphe en est un.
+
+\begin{figure}[!h]
+\includegraphics[width=\linewidth]{fig_02}
+\caption{Coloriage de la pince Schrader \label{12_coloration_fig_02}}
+\end{figure}
+
+
+Dans un premier temps, on modèlise le graphe par un dictionnaire d'adjacence. Les clés sont les sommets, modélisés par des chaînes de caractères. Les valeurs sont des listes de chaînes de caractères.
+
+\question{Donner le dictionnaire d'adjacence \lstinline{Gex} associé au graphe de la figure \ref{12_coloration_fig_02}.}
+
+\question{Implémenter la fonction \lstinline|voisins(G:{}, s1:str, s2:str) -> bool}| renvoyant \lstinline{True} si \lstinline{s1} et \lstinline{s2} sont voisins, \lstinline{False} sinon.}
+
+Une $k$-coloration est représentée par un dictionnaire \lstinline{C} pour lequel les clés sont les sommet des graphes et les valeurs sont des entiers (entre 0 et $k-1$) qui représentent la couleur du sommet.
+
+On souhaite vérifier si une coloration est valide, c'est-à-dire que deux sommets du graphe reliés par une arête ne peuvent pas avoir la même couleur.
+
+\question{Implémenter la fonction \lstinline|coloration_valide(G:{}, C:{}) -> bool}| renvoyant \lstinline{True} si la coloration est valide, \lstinline{False} sinon.}
+
+
+\subsection*{Algorithme intuitif de colaration}
+
+L’attribution des couleurs à chaque sommet est caractérisée par un dictionnaire \lstinline{C} où \lstinline{C[i]} est la couleur attribuée au sommet \lstinline{i}. \lstinline{C[i]} vaut \lstinline{-1} si la couleur n’est pas encore attribuée. Le dictionnaire \lstinline{C} ne contient initialement que des \lstinline{-1} et ses valeurs sont modifiées progressivement, au fur et à mesure que les couleurs sont attribuées.
+
+\question{Ecrire l'instruction permettant de créer un dictionnaire de $n$ clés numérotées de 0 à $n-1$ associées à la valeur \lstinline{-1}.}
+
+\begin{question}
+Implémenter la fonction \lstinline|colore_sommet(G:{}, C:{}, s:str) -> None|. Cette fonction ne renvoie rien mais modifie le dictionnaire \lstinline{C} en donnant à \lstinline{C[s]} la plus petite couleur possible, en fonction des couleurs des sommets voisins qui sont déjà colorés.
+
+Par exemple, pour le graphe \lstinline{Gex} , prenons \lstinline{C = ["A":0,"B":1,"C":-1,"D":-1,"E":-1,"F":-1]}. Les sommets \lstinline{"A"} et \lstinline{"B"} ont donc déjà été colorés avec les couleurs \lstinline{C["A"] = 0} et \lstinline{C["B"] = 1}. L’appel \lstinline{colore_sommet(G,C,"C")} modifie le dictionnaire \lstinline{C} en \lstinline{C = ["A":0,"B":1,"C":0,"D":-1,"E":-1,"F":-1]}. Cela veut dire que le sommet \lstinline{"C"}, adjacent au sommet \lstinline{"B"} mais pas au sommet \lstinline{"A"}, a reçu la même couleur que le sommet \lstinline{"A"}.
+\end{question}
+
+\begin{question}
+Ecrire une fonction \lstinline{colorer1} avec pour argument un graphe (dictionnaore) \lstinline{G} caractérisant un graphe, qui crée et renvoie le dictionnaire \lstinline{C}des numéros des couleurs attribuées en colorant les sommets un par un par ordre croissant de leurs numéros. 
+\end{question}
+
+\begin{question}
+L’ordre de coloration imposé à la question précédente est arbitraire. On souhaite maintenant colorer le graphe en traitant les sommets selon un ordre arbitraire donné en argument. Écrire une fonction \lstinline{colorer2} analogue à \lstinline{colorer1} et avec un argument supplémentaire, une liste ordre fixant l’ordre de coloration des sommets.
+\end{question}
+
+\begin{question}
+Xxxx
+\end{question}
+
+
+La méthode que nous venons de décrire est rapide et fonctionne plutôt bien. Cependant, si on cherche à utiliser le nombre minimum de couleurs, l’efficacité de l’algorithme proposé ci-dessus dépend en grande partie de l’ordre dans lequel on choisit de colorer les sommets du graphe. L’objectif des sous parties suivantes est d’affiner la stratégie pour mieux choisir cet ordre de coloration.
