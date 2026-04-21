@@ -17,7 +17,7 @@ Ainsi le coloriage de la pince (ainsi que le premier graphe) n'est pas un $k$-co
 \end{figure}
 
 
-Dans un premier temps, on modèlise le graphe par un dictionnaire d'adjacence. Les clés sont les sommets, modélisés par des chaînes de caractères. Les valeurs sont des listes de chaînes de caractères.
+Dans un premier temps, on modèlise le graphe par un dictionnaire d'adjacence. Les clés sont les sommets, modélisés par des chaînes de caractères correspondant aux classes d'équivalences cinématiques. Les valeurs sont des listes de chaînes de caractères.
 
 \question{Donner le dictionnaire d'adjacence \lstinline{Gex} associé au graphe de la figure \ref{12_coloration_fig_02}.}
 
@@ -43,7 +43,7 @@ Par exemple, pour le graphe \lstinline{Gex} , prenons \lstinline{C = ["A":0,"B":
 \end{question}
 
 \begin{question}
-Ecrire une fonction \lstinline{colorer1} avec pour argument un graphe (dictionnaore) \lstinline{G} caractérisant un graphe, qui crée et renvoie le dictionnaire \lstinline{C}des numéros des couleurs attribuées en colorant les sommets un par un par ordre croissant de leurs numéros. 
+Ecrire une fonction \lstinline{colorer1} avec pour argument un graphe (dictionnaire) \lstinline{G} caractérisant un graphe, qui crée et renvoie le dictionnaire \lstinline{C} des numéros des couleurs attribuées en colorant les sommets un par un par ordre croissant de leurs numéros. 
 \end{question}
 
 \begin{question}
@@ -51,8 +51,68 @@ L’ordre de coloration imposé à la question précédente est arbitraire. On s
 \end{question}
 
 \begin{question}
-Xxxx
+Donner la liste des couleurs renvoyée par \lstinline{colorer2} pour colorer le graphe \lstinline{Gex} donné en exemple en prenant \lstinline{ordre=[7,6,5,4,3,2,1,0].}
+
+Combien de couleurs sont-elles été utilisées ?
 \end{question}
 
 
 La méthode que nous venons de décrire est rapide et fonctionne plutôt bien. Cependant, si on cherche à utiliser le nombre minimum de couleurs, l’efficacité de l’algorithme proposé ci-dessus dépend en grande partie de l’ordre dans lequel on choisit de colorer les sommets du graphe. L’objectif des sous parties suivantes est d’affiner la stratégie pour mieux choisir cet ordre de coloration.
+
+\subsection*{Variante de Welsh-Powell}
+Une alternative est donnée par la variante de Welsh-Powell. L’idée est de parcourir l’ensemble de ssommets du graphe par ordre décroissant de leurs degrés. Comme le degré d’un sommet est un entier positif, il est possible d’écrire un algorithme de tri efficace (dit par répartition).
+
+
+\begin{question}
+Écrire une fonction degre avec pour argument le dictionnaire d’adjacence \lstinline{G} d’un graphe quelconque, qui renvoie la liste des degrés des sommets du graphe.
+\end{question}
+
+\begin{question}
+Écrire une fonction \lstinline{init} avec pour argument un entier \lstinline{n}, qui renvoie une liste de listes \lstinline{R} de taille \lstinline{n}, telle que \lstinline{R[i]} soit une liste vide. Par exemple, \lstinline{init(3)} renverra \lstinline{[[],[],[]]}.
+\end{question}
+
+\begin{question}
+Écrire une fonction \lstinline{ranger} avec pour argument un dictionnaire d’adjacence G, qui renvoie une liste \lstinline{R} de même taille que \lstinline{G}, telle que \lstinline{R[i]} soit la liste des sommets de degré \lstinline{i}.
+\end{question}
+
+
+\begin{question}
+Écrire une fonction \lstinline{renverse} avec pour argument une liste \lstinline{L}, qui crée et renvoie une nouvelle liste obtenue en lisant \lstinline{L} dans l’ordre inverse. Par exemple, \lstinline{renverse([1,2,3,4])} renverra \lstinline{[4,3,2,1]}.
+\end{question}
+
+
+\begin{question}
+Écrire une fonction \lstinline{trier_sommets} avec pour argument un dictionnaire d’adjacence \lstinline{G}, qui renvoie la liste des sommets triés dans l’ordre décroissant de leur degré. 
+
+%Par exemple, pour un graphe de liste d’adjacence LA = [[1,2],[0,2,3],[0,1,3],[1,2,4],[3]], la fonction trier_sommets renverra la liste des ommets [1,2,3,0,4].
+\end{question}
+
+
+\begin{question}
+Pour un graphe à n sommets, quelle est la complexité temporelle de la fonction \lstinline{trier_sommets}
+dans le pire des cas ?
+\end{question}
+
+
+\begin{question}
+Écrire la fonction \lstinline{colorer3} avec pour argument un dictionnaire d’adjacence \lstinline{G}, qui crée et renvoie
+une liste de couleurs \lstinline{C}, telle que \lstinline{C[i]} soit la couleur à attribuer au sommet numéro \lstinline{i}, les
+sommets étant colorés dans l’ordre décroissant de leur degré.
+
+Quelle est la complexité de \lstinline{colorer3} dans le pire des cas pour un graphe à \lstinline{n} sommets ?
+\end{question}
+
+
+\begin{question}
+Pour le graphe \lstinline{Gex}, donner la liste \lstinline{C} des couleurs renvoyée par la fonction
+\lstinline{colorer3}.
+\end{question}
+
+
+L’amélioration proposée donne de bons résultats dans un grand nombre de cas. Cependant, il reste
+quelques cas où la coloration obtenue utilise trop de couleurs.
+
+La méthode suivante, proposée en 1979 par Danier Brélaz de l’École Polytechnique Fédérale de
+Lausanne, raffine la détermination de l’ordre de coloration. La priorité de coloration est ainsi recalculée
+après chaque traitement d’un sommet et non plus une fois pour toute au départ. Au final, cette
+approche fournit rapidement une coloration optimale dans un très grand nombre de cas.
