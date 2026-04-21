@@ -39,12 +39,6 @@ Le codage des cases d'échiquier se fait classiquement par une chaine de caract�
 	\texttt{ord(c)} retourne le codage Unicode correspondant au caractère \texttt{c} et \texttt{chr(n)} renvoie le caractère dont le codage Unicode est \texttt{n}. 
 \end{rem} 
 
-\question{\'Ecrire une fonction \texttt{codage(i:int, j:int)->str} qui renvoie le code correspondant à la case \texttt{(i, j)}. }
-
-
-\question{Créer un dictionnaire d'adjacence \texttt{G2} comme défini précédemment avec les cases maintenant nommées d'après leur code. }
-
-
 \begin{marginfigure}
 	%\begin{center}
 		\includegraphics[width=\linewidth]{Graphe_final}
@@ -52,13 +46,16 @@ Le codage des cases d'échiquier se fait classiquement par une chaine de caract�
 	\caption{Représentation graphique du graphe \texttt{G2}}
 \end{marginfigure}
 
-\question{ Vérifier que~:
+\question{\'Ecrire une fonction \texttt{codage(i:int, j:int)->str} qui renvoie le code correspondant à la case \texttt{(i, j)}. }
+
+\question{Créer un dictionnaire d'adjacence \texttt{G2} comme défini précédemment avec les cases maintenant nommées d'après leur code. }
+
+\question{ Vérifier que, à l'ordre près~:
 \begin{itemize}
 	\item \texttt{G2['a1']} renvoie \texttt{['b3', 'c2']},
 	\item \texttt{G2['d6']} renvoie bien \texttt{['b5', 'b7', 'c4', 'c8', 'e4', 'e8', 'f5', 'f7']},
 	\item \texttt{G2['h8']} renvoie bien \texttt{['f7', 'g6']}.
-\end{itemize}
-Tous ces résultats sont à l'ordre près. }
+\end{itemize} }
 %
 %\question{Écrire une fonction \cde{largeur\_dist(G:dict, dep:tuple)->dict:} qui prend en entrée un graphe
 %codé par un dictionnaire d’adjacence \cde{G} et un sommet de départ dep et renvoie un dictionnaire de distance à

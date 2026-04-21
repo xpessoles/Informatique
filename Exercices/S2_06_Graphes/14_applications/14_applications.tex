@@ -14,39 +14,40 @@ On donne la carte de la région Nouvelle Aquitaine.
 \subsection*{Dictionnaire}
 On souhaite créer un dictionnaire permettant de faire une correspondance entre le numéro des départements et leur nom.
 
-\question{Implémenter une fonction \lstinline|add_dpt(d:{}, dpt:int, nom:str -> None| qui ajoute un département au dictionnaire  \lstinline{d}.}
+\question{Implémenter une fonction \lstinline|add_dpt(d:{}, dpt:int, nom:str) -> None| qui ajoute un département au dictionnaire  \lstinline{d}.}
 
-\begin{exemple}[Tests]
-\begin{lstlisting}
->>> dico = {}
->>> add_dpt(dico,64,"Pyrénées-Atlantiques")
->>> print(dico)
-        {64:"Pyrénées-Atlantiques"}
-\end{lstlisting}
-\end{exemple}
+%\begin{exemple}[Tests]
+%\begin{lstlisting}
+%>>> dico = {}
+%>>> add_dpt(dico,64,"Pyrénées-Atlantiques")
+%>>> print(dico)
+%        {64:"Pyrénées-Atlantiques"}
+%\end{lstlisting}
+%\end{exemple}
 
 
 \subsection*{Dictionnaire d'adjacence}
 On souhaite modéliser la carte par un dictionnaire d'adjacence où les  sommets sont des numéros de départements et les valeurs sont la liste des départements limitrophes. 
 
-\question{Donner l'instruction permettant de créer un graphe avec les Pyrénées-Atlantiques (64) et les Landes uniquement (40).}
+\question{Donner l'instruction permettant de créer un graphe appelé \lstinline{aqui} avec les Pyrénées-Atlantiques (64) et les Landes uniquement (40).}
 
 \question{Implémenter la fonction \lstinline|add_dpt_d(G:{}, dpt:int, voisins : [int]) -> None| qui ajoute un département au graphe \lstinline{G}.}
-
-\begin{exemple}[Tests]
-\begin{lstlisting}
->>> aqui = {}
->>> add_dpt_d(aqui,64,[40])
->>> print(aqui)
-        {64:[40], 40:[64]}
->>> add_dpt_d(aqui,47,[40,33,24])
->>> print(aqui)
-        {64:[40], 40:[64,47], 47:[40,33,24]}
-\end{lstlisting}
-\end{exemple}
+%
+%\begin{exemple}[Tests]
+%\begin{lstlisting}
+%>>> aqui = {}
+%>>> add_dpt_d(aqui,64,[40])
+%>>> print(aqui)
+%        {64:[40], 40:[64]}
+%>>> add_dpt_d(aqui,47,[40,33,24])
+%>>> print(aqui)
+%        {64:[40], 40:[64,47], 47:[40,33,24]}
+%\end{lstlisting}
+%\end{exemple}
 
 \question{Implémenter la fonction \lstinline|add_arete_d(G:{}, dpt1:int, dpt2:int) -> None| qui ajoute une arête entre deux départements.}
 
+\question{Implémenter la fonction \lstinline|voisins_d(G:{}, dpt:int) -> [int]| qui renvoie la liste des départements voisins de \lstinline{dpt}.}
 
 \question{Implémenter la fonction \lstinline|del_arete_d(G:{}, dpt:int) -> None| qui supprime un département de la région.}
 
@@ -63,6 +64,7 @@ On souhaite modéliser la carte par un dictionnaire d'adjacence où les  sommets
 On souhaite modéliser la carte par une liste d'adjacence où les sommets sont des numéros de départements et les valeurs sont la liste des départements limitrophes.
 \begin{marginfigure}
 \includegraphics[width=\linewidth]{fig_02}
+\caption{Re-numérotation des sommets.}
 \end{marginfigure}
 La numérotation des départements est modifiée conformément à la figure ci-contre.
 
@@ -73,14 +75,16 @@ La numérotation des départements est modifiée conformément à la figure ci-c
 
 \question{Implémenter la fonction \lstinline|add_dpt_l(G:[], dpt:int, voisins : [int]) -> None| qui ajoute un département au graphe \lstinline{G}.}
 
-\begin{exemple}[Tests]
-\begin{lstlisting}
-
-
-\end{lstlisting}
-\end{exemple}
+%\begin{exemple}[Tests]
+%\begin{lstlisting}
+%
+%
+%\end{lstlisting}
+%\end{exemple}
 
 \question{Implémenter la fonction \lstinline|add_arete_l(G:[], dpt1:int, dpt2:int) -> None| qui ajoute une arête entre deux départements.}
+
+\question{Implémenter la fonction \lstinline|voisins_l(G:[], dpt:int) -> [int]| qui renvoie la liste des départements voisins de \lstinline{dpt}.}
 
 \question{Implémenter la fonction \lstinline|del_arete_l(G:[], dpt:int) -> None| qui supprime un département de la région.}
 
@@ -98,18 +102,21 @@ On souhaite modéliser la carte par une matrice d'adjacence. On conserve la num�
 
 \question{Implémenter la fonction \lstinline|add_dpt_m(G:[[]], dpt:int, voisins : [int]) -> None| qui ajoute un département au graphe \lstinline{G}.}
 
-\begin{exemple}[Tests]
-\begin{lstlisting}
-
-
-\end{lstlisting}
-\end{exemple}
+%\begin{exemple}[Tests]
+%\begin{lstlisting}
+%
+%
+%\end{lstlisting}
+%\end{exemple}
 
 \question{Implémenter la fonction \lstinline|add_arete_m(G:[[]], dpt1:int, dpt2:int) -> None| qui ajoute une arête entre deux départements.}
+
+
+\question{Implémenter la fonction \lstinline|voisins_l(G:[[]], dpt:int) -> [int]| qui renvoie la liste des départements voisins de \lstinline{dpt}.}
 
 \question{Implémenter la fonction \lstinline|del_arete_m(G:[[]], dpt:int) -> None| qui supprime un département de la région.}
 
 \question{Implémenter la fonction \lstinline|degre_d_m(G[[]], dpt:int) -> int| qui donne le degré d'un sommet.}
 
-\question{Implémenter la fonction \lstinline|degre_max_m(G:[[}]) -> int| qui renvoie le sommet de plus haut degré.}
+\question{Implémenter la fonction \lstinline|degre_max_m(G:[[]]) -> int| qui renvoie le sommet de plus haut degré.}
 
