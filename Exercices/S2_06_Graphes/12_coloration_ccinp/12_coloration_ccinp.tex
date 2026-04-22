@@ -21,20 +21,29 @@ Dans un premier temps, on modèlise le graphe par un dictionnaire d'adjacence. L
 
 \question{Donner le dictionnaire d'adjacence \lstinline{Gex} associé au graphe de la figure \ref{12_coloration_fig_02}.}
 
-\question{Implémenter la fonction \lstinline|voisins(G:{}, s1:str, s2:str) -> bool}| renvoyant \lstinline{True} si \lstinline{s1} et \lstinline{s2} sont voisins, \lstinline{False} sinon.}
+\question{Implémenter la fonction \lstinline|voisins(G:{}, s1:str, s2:str) -> bool| renvoyant \lstinline{True} si \lstinline{s1} et \lstinline{s2} sont voisins, \lstinline{False} sinon.}
+
+\question{Implémenter la fonction \lstinline|is_graphe_correct(G:{}) -> bool| renvoyant \lstinline{True} si lorsque \lstinline{s1} et \lstinline{s2} sont voisins alors \lstinline{s2} et \lstinline{s1} sont voisins, \lstinline{False} sinon.}
+
+\question{Vérifier que \lstinline{Gex} est correctement implémenté. Le cas échéant, vérifier si le problème vient du graphe oiu de la fonction \lstinline|is_graphe_correct| .}
+
+\question{Implémenter la fonction  \lstinline|liste_aretes(G:{}) -> [()]|  qui renvoie la liste des arêtes du graphe. Une arête sera modélisée par un couple (tuple) de deux sommets. Le graphe étant non orienté, si \lstinline{('A','B')} est dans la liste, \lstinline{('B','A')} ne devra pas y figurer.}
 
 Une $k$-coloration est représentée par un dictionnaire \lstinline{C} pour lequel les clés sont les sommet des graphes et les valeurs sont des entiers (entre 0 et $k-1$) qui représentent la couleur du sommet.
+Dans le cadre du graphe précédent, on a donc \lstinline|C = {'A':0, 'B':1, 'C':0, 'D':1, 'E':0, 'F':1}|.
 
 On souhaite vérifier si une coloration est valide, c'est-à-dire que deux sommets du graphe reliés par une arête ne peuvent pas avoir la même couleur.
 
-\question{Implémenter la fonction \lstinline|coloration_valide(G:{}, C:{}) -> bool}| renvoyant \lstinline{True} si la coloration est valide, \lstinline{False} sinon.}
+\question{Implémenter la fonction \lstinline|coloration_valide(G:{}, C:{}) -> bool}| renvoyant \lstinline{True} si la coloration est valide, \lstinline{False} sinon. Tester votre fonction sur le dictionnaire de coloration précédent.}
+
+
 
 
 \subsection*{Algorithme intuitif de colaration}
 
 L’attribution des couleurs à chaque sommet est caractérisée par un dictionnaire \lstinline{C} où \lstinline{C[i]} est la couleur attribuée au sommet \lstinline{i}. \lstinline{C[i]} vaut \lstinline{-1} si la couleur n’est pas encore attribuée. Le dictionnaire \lstinline{C} ne contient initialement que des \lstinline{-1} et ses valeurs sont modifiées progressivement, au fur et à mesure que les couleurs sont attribuées.
 
-\question{Ecrire l'instruction permettant de créer un dictionnaire de $n$ clés numérotées de 0 à $n-1$ associées à la valeur \lstinline{-1}.}
+\question{Ecrire une fonction \lstinline{inti_c(G:{}) -> {}| permettant de créer un dictionnaire dont les clés sont identiques à celle du graphe. Ces cles sont associées à la valeur \lstinline{-1}.}
 
 \begin{question}
 Implémenter la fonction \lstinline|colore_sommet(G:{}, C:{}, s:str) -> None|. Cette fonction ne renvoie rien mais modifie le dictionnaire \lstinline{C} en donnant à \lstinline{C[s]} la plus petite couleur possible, en fonction des couleurs des sommets voisins qui sont déjà colorés.
