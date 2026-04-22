@@ -1,3 +1,5 @@
+import random as rd
+
 Gex = {"A":["B","D","F"], "B":["A","C","E"],
         "C":["B","D"], "D":["A","C"],
         "E":["B","F"], "F":["A","E"]}
@@ -46,3 +48,38 @@ def init_c(G:{}) -> {} :
     for k in G :
         C[k] = -1
     return C
+
+def colore_sommet(G:{}, C:{}, s:str) -> None :
+    voisins = G[s]
+    coul = []
+    for v in voisins :
+        coul.append(C[v])
+    # On fait la liste des couleurs absentes
+    c_abs = []
+    for i in range(0,max(coul)+1) :
+        if i not in coul :
+            c_abs.append(i)
+    #print(c_abs,min(c_abs),s)
+    if len(c_abs) == 0 :
+        C[s] = max(coul)+1
+    else :
+        C[s] = min(c_abs)
+
+def colorer1(G):
+    C = init_c(G)
+    for s in G :
+        colore_sommet(G,C,s)
+    return C
+
+def colorer2(G,ordre):
+    C = init_c(G)
+    for s in ordre :
+        colore_sommet(G,C,s)
+    return C
+
+
+C3 = {'A':0, 'B':0, 'C':-1, 'D':-1, 'E':-1, 'F':-1}
+
+rd.shuffle(ordre)
+ordre = list(Gex.keys())
+colore_sommet(Gex,C3,"C")

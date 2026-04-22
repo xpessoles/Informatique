@@ -34,7 +34,7 @@ Dans le cadre du graphe précédent, on a donc \lstinline|C = {'A':0, 'B':1, 'C'
 
 On souhaite vérifier si une coloration est valide, c'est-à-dire que deux sommets du graphe reliés par une arête ne peuvent pas avoir la même couleur.
 
-\question{Implémenter la fonction \lstinline|coloration_valide(G:{}, C:{}) -> bool}| renvoyant \lstinline{True} si la coloration est valide, \lstinline{False} sinon. Tester votre fonction sur le dictionnaire de coloration précédent.}
+\question{Implémenter la fonction \lstinline|coloration_valide(G:{}, C:{}) -> bool| renvoyant \lstinline{True} si la coloration est valide, \lstinline{False} sinon. Tester votre fonction sur le dictionnaire de coloration précédent.}
 
 
 
@@ -43,7 +43,7 @@ On souhaite vérifier si une coloration est valide, c'est-à-dire que deux somme
 
 L’attribution des couleurs à chaque sommet est caractérisée par un dictionnaire \lstinline{C} où \lstinline{C[i]} est la couleur attribuée au sommet \lstinline{i}. \lstinline{C[i]} vaut \lstinline{-1} si la couleur n’est pas encore attribuée. Le dictionnaire \lstinline{C} ne contient initialement que des \lstinline{-1} et ses valeurs sont modifiées progressivement, au fur et à mesure que les couleurs sont attribuées.
 
-\question{Ecrire une fonction \lstinline{inti_c(G:{}) -> {}| permettant de créer un dictionnaire dont les clés sont identiques à celle du graphe. Ces cles sont associées à la valeur \lstinline{-1}.}
+\question{Ecrire une fonction \lstinline|init_c(G:{}) -> {}| permettant de créer un dictionnaire dont les clés sont identiques à celle du graphe. Ces cles sont associées à la valeur \lstinline{-1}.}
 
 \begin{question}
 Implémenter la fonction \lstinline|colore_sommet(G:{}, C:{}, s:str) -> None|. Cette fonction ne renvoie rien mais modifie le dictionnaire \lstinline{C} en donnant à \lstinline{C[s]} la plus petite couleur possible, en fonction des couleurs des sommets voisins qui sont déjà colorés.
@@ -52,7 +52,7 @@ Par exemple, pour le graphe \lstinline{Gex} , prenons \lstinline{C = ["A":0,"B":
 \end{question}
 
 \begin{question}
-Ecrire une fonction \lstinline{colorer1} avec pour argument un graphe (dictionnaire) \lstinline{G} caractérisant un graphe, qui crée et renvoie le dictionnaire \lstinline{C} des numéros des couleurs attribuées en colorant les sommets un par un par ordre croissant de leurs numéros. 
+Ecrire une fonction \lstinline{colorer1} avec pour argument un dictionnaire \lstinline{G} caractérisant un graphe, qui crée et renvoie le dictionnaire \lstinline{C} des numéros des couleurs attribuées en colorant les sommets un par un. 
 \end{question}
 
 \begin{question}
@@ -60,9 +60,9 @@ L’ordre de coloration imposé à la question précédente est arbitraire. On s
 \end{question}
 
 \begin{question}
-Donner la liste des couleurs renvoyée par \lstinline{colorer2} pour colorer le graphe \lstinline{Gex} donné en exemple en prenant \lstinline{ordre=[7,6,5,4,3,2,1,0].}
+Donner la liste des couleurs renvoyée par \lstinline{colorer2} pour colorer le graphe \lstinline{Gex} donné en exemple en prenant \lstinline{ordre = ['E', 'F', 'B', 'D', 'A', 'C']}.
 
-Combien de couleurs sont-elles été utilisées ?
+Combien de couleurs ont été utilisées ?
 \end{question}
 
 
@@ -81,7 +81,7 @@ Une alternative est donnée par la variante de Welsh-Powell. L’idée est de pa
 \end{question}
 
 \begin{question}
-Écrire une fonction \lstinline{ranger} avec pour argument un dictionnaire d’adjacence G, qui renvoie une liste \lstinline{R} de même taille que \lstinline{G}, telle que \lstinline{R[i]} soit la liste des sommets de degré \lstinline{i}.
+Écrire une fonction \lstinline{ranger} avec pour argument un dictionnaire d’adjacence \lstinline{G}, qui renvoie une liste \lstinline{R} de même taille que \lstinline{G}, telle que \lstinline{R[i]} soit la liste des sommets de degré \lstinline{i}.
 \end{question}
 
 
@@ -104,9 +104,7 @@ dans le pire des cas ?
 
 
 \begin{question}
-Écrire la fonction \lstinline{colorer3} avec pour argument un dictionnaire d’adjacence \lstinline{G}, qui crée et renvoie
-une liste de couleurs \lstinline{C}, telle que \lstinline{C[i]} soit la couleur à attribuer au sommet numéro \lstinline{i}, les
-sommets étant colorés dans l’ordre décroissant de leur degré.
+Écrire la fonction \lstinline{colorer3} avec pour argument un dictionnaire d’adjacence \lstinline{G}, qui crée et renvoie un dictionnaire de couleurs \lstinline{C}, telle que \lstinline{C[i]} soit la couleur à attribuer au sommet \lstinline{i}, les sommets étant colorés dans l’ordre décroissant de leur degré.
 
 Quelle est la complexité de \lstinline{colorer3} dans le pire des cas pour un graphe à \lstinline{n} sommets ?
 \end{question}
@@ -121,7 +119,7 @@ Pour le graphe \lstinline{Gex}, donner la liste \lstinline{C} des couleurs renvo
 L’amélioration proposée donne de bons résultats dans un grand nombre de cas. Cependant, il reste
 quelques cas où la coloration obtenue utilise trop de couleurs.
 
-La méthode suivante, proposée en 1979 par Danier Brélaz de l’École Polytechnique Fédérale de
-Lausanne, raffine la détermination de l’ordre de coloration. La priorité de coloration est ainsi recalculée
-après chaque traitement d’un sommet et non plus une fois pour toute au départ. Au final, cette
-approche fournit rapidement une coloration optimale dans un très grand nombre de cas.
+%La méthode suivante, proposée en 1979 par Danier Brélaz de l’École Polytechnique Fédérale de
+%Lausanne, raffine la détermination de l’ordre de coloration. La priorité de coloration est ainsi recalculée
+%après chaque traitement d’un sommet et non plus une fois pour toute au départ. Au final, cette
+%approche fournit rapidement une coloration optimale dans un très grand nombre de cas.
