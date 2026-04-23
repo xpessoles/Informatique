@@ -5,11 +5,12 @@
 
 \subsection*{Introduction}
 
-La coloration d'un graphe consiste à attribuer une couleur à chaque sommet.  Un $k$-coloriage donne une couleur (qui peut par exemple être un entier entre 0 et $k-1$, pour simplifier) à chaque sommet, tel que deux sommets adjacents soient de couleurs différentes.
+La coloration d'un graphe consiste à attribuer une couleur à chaque sommet.  Un $k$-coloriage donne une couleur (qui peut par exemple être un entier entre 0 et $k-1$, pour simplifier) à chaque sommet, tel que deux sommets adjacents soient de couleurs différentes. On cherche en général à minimiser le nombre de couleur utilisées. 
 
 
 On peut appliquer ce problème au coloriage d'une carte de pays, ou d'un dessin d'ensemble (figure \label{12_coloration_fig_02}). 
-Ainsi le coloriage de la pince (ainsi que le premier graphe) n'est pas un $k$-coloriage valide. Le second graphe en est un.
+
+Ainsi le coloriage de la pince (ainsi que le premier graphe) est un $k$-coloriage valide. Néanmoins, il ne minimise pas le nombre de couleurs utilisées. Le second graphe, quant à lui utilise un nomnbre minimal de couleurs. 
 
 \begin{figure}[!h]
 \includegraphics[width=\linewidth]{fig_02}
@@ -17,7 +18,7 @@ Ainsi le coloriage de la pince (ainsi que le premier graphe) n'est pas un $k$-co
 \end{figure}
 
 
-Dans un premier temps, on modèlise le graphe par un dictionnaire d'adjacence. Les clés sont les sommets, modélisés par des chaînes de caractères correspondant aux classes d'équivalences cinématiques. Les valeurs sont des listes de chaînes de caractères.
+On modélise le graphe par un dictionnaire d'adjacence. Les clés sont les sommets, modélisés par des chaînes de caractères correspondant aux classes d'équivalences cinématiques. Les valeurs sont des listes de chaînes de caractères.
 
 \question{Donner le dictionnaire d'adjacence \lstinline{Gex} associé au graphe de la figure \ref{12_coloration_fig_02}.}
 
@@ -39,7 +40,7 @@ On souhaite vérifier si une coloration est valide, c'est-à-dire que deux somme
 
 
 
-\subsection*{Algorithme intuitif de colaration}
+\subsection*{Algorithme intuitif de coloration}
 
 L’attribution des couleurs à chaque sommet est caractérisée par un dictionnaire \lstinline{C} où \lstinline{C[i]} est la couleur attribuée au sommet \lstinline{i}. \lstinline{C[i]} vaut \lstinline{-1} si la couleur n’est pas encore attribuée. Le dictionnaire \lstinline{C} ne contient initialement que des \lstinline{-1} et ses valeurs sont modifiées progressivement, au fur et à mesure que les couleurs sont attribuées.
 
@@ -69,11 +70,11 @@ Combien de couleurs ont été utilisées ?
 La méthode que nous venons de décrire est rapide et fonctionne plutôt bien. Cependant, si on cherche à utiliser le nombre minimum de couleurs, l’efficacité de l’algorithme proposé ci-dessus dépend en grande partie de l’ordre dans lequel on choisit de colorer les sommets du graphe. L’objectif des sous parties suivantes est d’affiner la stratégie pour mieux choisir cet ordre de coloration.
 
 \subsection*{Variante de Welsh-Powell}
-Une alternative est donnée par la variante de Welsh-Powell. L’idée est de parcourir l’ensemble de ssommets du graphe par ordre décroissant de leurs degrés. Comme le degré d’un sommet est un entier positif, il est possible d’écrire un algorithme de tri efficace (dit par répartition).
+Une alternative est donnée par la variante de Welsh-Powell. L’idée est de parcourir l’ensemble des sommets du graphe par ordre décroissant de leurs degrés. Comme le degré d’un sommet est un entier positif, il est possible d’écrire un algorithme de tri efficace (dit par répartition).
 
 
 \begin{question}
-Écrire une fonction degre avec pour argument le dictionnaire d’adjacence \lstinline{G} d’un graphe quelconque, qui renvoie la liste des degrés des sommets du graphe.
+Écrire une fonction \lstinline{degre} avec pour argument le dictionnaire d’adjacence \lstinline{G} d’un graphe quelconque, qui renvoie la liste des degrés des sommets du graphe.
 \end{question}
 
 \begin{question}

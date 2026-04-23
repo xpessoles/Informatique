@@ -82,4 +82,6 @@ C3 = {'A':0, 'B':0, 'C':-1, 'D':-1, 'E':-1, 'F':-1}
 
 rd.shuffle(ordre)
 ordre = list(Gex.keys())
-colore_sommet(Gex,C3,"C")
+#colore_sommet(Gex,C3,"C")
+
+cc  = colorer2(Gex,ordre)

@@ -144,7 +144,12 @@ def degre_max_d(G:{}) -> [int] :
             l.append(k)
     return l
 
+## Question 13
+def degre_max_dpt_d(G:{}, d:{}) -> [str] :
+    l = degre_max_d(G)
+    return [d[i] for i in l]
 
+print(degre_max_dpt_d(aqui_test,dico_dpt))
 # #
 # # def _add_dpt_d(G:{}, dpt:int, voisins : [int]) -> None :
 # #     # On ajoute les voisins à dpt
