@@ -5,7 +5,7 @@
 
 \subsection*{Introduction}
 
-La coloration d'un graphe consiste à attribuer une couleur à chaque sommet.  Un $k$-coloriage donne une couleur (qui peut par exemple être un entier entre 0 et $k-1$, pour simplifier) à chaque sommet, tel que deux sommets adjacents soient de couleurs différentes. On cherche en général à minimiser le nombre de couleur utilisées. 
+La coloration d'un graphe consiste à attribuer une couleur à chaque sommet.  Un $k$-coloriage donne une couleur (qui peut par exemple être un entier entre 0 et $k-1$, pour simplifier) à chaque sommet, tel que deux sommets adjacents soient de couleurs différentes. On cherche en général à minimiser le nombre de couleurs utilisées. 
 
 
 On peut appliquer ce problème au coloriage d'une carte de pays, ou d'un dessin d'ensemble (figure \label{12_coloration_fig_02}). 
@@ -24,13 +24,15 @@ On modélise le graphe par un dictionnaire d'adjacence. Les clés sont les somme
 
 \question{Implémenter la fonction \lstinline|voisins(G:{}, s1:str, s2:str) -> bool| renvoyant \lstinline{True} si \lstinline{s1} et \lstinline{s2} sont voisins, \lstinline{False} sinon.}
 
-\question{Implémenter la fonction \lstinline|is_graphe_correct(G:{}) -> bool| renvoyant \lstinline{True} si lorsque \lstinline{s1} et \lstinline{s2} sont voisins alors \lstinline{s2} et \lstinline{s1} sont voisins, \lstinline{False} sinon.}
-
-\question{Vérifier que \lstinline{Gex} est correctement implémenté. Le cas échéant, vérifier si le problème vient du graphe oiu de la fonction \lstinline|is_graphe_correct| .}
 
 \question{Implémenter la fonction  \lstinline|liste_aretes(G:{}) -> [()]|  qui renvoie la liste des arêtes du graphe. Une arête sera modélisée par un couple (tuple) de deux sommets. Le graphe étant non orienté, si \lstinline{('A','B')} est dans la liste, \lstinline{('B','A')} ne devra pas y figurer.}
 
-Une $k$-coloration est représentée par un dictionnaire \lstinline{C} pour lequel les clés sont les sommet des graphes et les valeurs sont des entiers (entre 0 et $k-1$) qui représentent la couleur du sommet.
+
+\question{Implémenter la fonction \lstinline|is_graphe_correct(G:{}) -> bool| renvoyant \lstinline{True} si,  pour chaque arête  \lstinline{(s1,s2)} du graphe, si \lstinline{s2} et \lstinline{s1} sont voisins alors \lstinline{s2} et \lstinline{s1} sont voisins. La fonction renvoie \lstinline{False} sinon.}
+
+\question{Vérifier que \lstinline{Gex} est correctement implémenté. Le cas échéant, vérifier si le problème vient du graphe ou de la fonction \lstinline|is_graphe_correct| .}
+
+Une $k$-coloration est représentée par un dictionnaire \lstinline{C} pour lequel les clés sont les sommets des graphes et les valeurs sont des entiers (entre 0 et $k-1$) qui représentent la couleur du sommet.
 Dans le cadre du graphe précédent, on a donc \lstinline|C = {'A':0, 'B':1, 'C':0, 'D':1, 'E':0, 'F':1}|.
 
 On souhaite vérifier si une coloration est valide, c'est-à-dire que deux sommets du graphe reliés par une arête ne peuvent pas avoir la même couleur.
@@ -57,11 +59,11 @@ Ecrire une fonction \lstinline{colorer1} avec pour argument un dictionnaire \lst
 \end{question}
 
 \begin{question}
-L’ordre de coloration imposé à la question précédente est arbitraire. On souhaite maintenant colorer le graphe en traitant les sommets selon un ordre arbitraire donné en argument. Écrire une fonction \lstinline{colorer2} analogue à \lstinline{colorer1} et avec un argument supplémentaire, une liste ordre fixant l’ordre de coloration des sommets.
+L’ordre de coloration imposé à la question précédente est arbitraire. On souhaite maintenant colorer le graphe en traitant les sommets selon un ordre défini, donné en argument. Écrire une fonction \lstinline{colorer2} analogue à \lstinline{colorer1} et avec un argument supplémentaire, une liste \lstinline{ordre} fixant l’ordre de coloration des sommets.
 \end{question}
 
 \begin{question}
-Donner la liste des couleurs renvoyée par \lstinline{colorer2} pour colorer le graphe \lstinline{Gex} donné en exemple en prenant \lstinline{ordre = ['E', 'F', 'B', 'D', 'A', 'C']}.
+Donner le dictionnaire des couleurs renvoyé par \lstinline{colorer2} pour colorer le graphe \lstinline{Gex} donné en exemple en prenant \lstinline{ordre = ['E', 'F', 'B', 'D', 'A', 'C']}.
 
 Combien de couleurs ont été utilisées ?
 \end{question}
@@ -112,7 +114,7 @@ Quelle est la complexité de \lstinline{colorer3} dans le pire des cas pour un g
 
 
 \begin{question}
-Pour le graphe \lstinline{Gex}, donner la liste \lstinline{C} des couleurs renvoyée par la fonction
+Pour le graphe \lstinline{Gex}, donner la liste \lstinline{C} des couleurs renvoyées par la fonction
 \lstinline{colorer3}.
 \end{question}
 

@@ -1,29 +1,16 @@
 import random as rd
 
+
+## Question 1
 Gex = {"A":["B","D","F"], "B":["A","C","E"],
         "C":["B","D"], "D":["A","C"],
         "E":["B","F"], "F":["A","E"]}
 
-
+## Question 2
 def voisins(G:{}, s1:str, s2:str) -> bool:
     return s1 in G[s2]
 
-def is_graphe_oriente_01(G:{}) -> bool :
-    for s in G :
-        for v in G[s] :
-            if s not in G[v] :
-                print(s,v)
-                return False
-    return True
-
-def is_graphe_oriente_02(G:{}) -> bool :
-    for s in G :
-        for v in G[s] :
-            if not(voisins(G,s,v)) or not(voisins(G,v,s)):
-                return False
-    return True
-
-
+## Question 3
 def liste_aretes(G:{}) -> [()] :
     L = []
     for s in G :
@@ -32,6 +19,31 @@ def liste_aretes(G:{}) -> [()] :
                 L.append((s,v))
     return L
 
+
+## Question 4
+def is_graphe_correct_01(G:{}) -> bool :
+    for s in G :
+        for v in G[s] :
+            if s not in G[v] :
+                print(s,v)
+                return False
+    return True
+
+def is_graphe_correct_02(G:{}) -> bool :
+    for s in G :
+        for v in G[s] :
+            if not(voisins(G,s,v)) or not(voisins(G,v,s)):
+                return False
+    return True
+
+def is_graphe_correct_03(G:{}) -> bool :
+    # TO DO EN UTILISANT Q3
+    
+    return None
+
+
+
+## Question 6
 def coloration_valide(G:{}, C:{}) -> bool :
     L = liste_aretes(G)
     for a in L :
@@ -43,12 +55,15 @@ def coloration_valide(G:{}, C:{}) -> bool :
 C = {'A':0, 'B':1, 'C':0, 'D':1, 'E':0, 'F':1}
 C2 = {'A':0, 'B':1, 'C':1, 'D':1, 'E':0, 'F':1}
 
+## Question 7
 def init_c(G:{}) -> {} :
     C = {}
     for k in G :
         C[k] = -1
     return C
 
+
+## Question 8
 def colore_sommet(G:{}, C:{}, s:str) -> None :
     voisins = G[s]
     coul = []
@@ -65,12 +80,15 @@ def colore_sommet(G:{}, C:{}, s:str) -> None :
     else :
         C[s] = min(c_abs)
 
+## Question 9
 def colorer1(G):
     C = init_c(G)
     for s in G :
         colore_sommet(G,C,s)
     return C
 
+
+## Question 10
 def colorer2(G,ordre):
     C = init_c(G)
     for s in ordre :
