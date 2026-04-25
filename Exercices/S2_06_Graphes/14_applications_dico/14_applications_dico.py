@@ -50,8 +50,8 @@ aqui_test = {33:[47], 47:[33]}
 def existe_d(G:{}, dpt:int) -> bool :
     return dpt in G
 
-print("Q3 :", existe_d(aqui_test,33))
-print("Q3 :", existe_d(aqui_test,64))
+print("Q3 (True):", existe_d(aqui_test,33))
+print("Q3 (False):", existe_d(aqui_test,64))
 
 ## Question 4
 def ajoute_dpt_d(G:{}, dpt:int) -> None :
@@ -60,7 +60,7 @@ def ajoute_dpt_d(G:{}, dpt:int) -> None :
 
 ajoute_dpt_d(aqui_test,64)
 ajoute_dpt_d(aqui_test,40)
-print("Q4 :",aqui_test)
+print("Q4 (True) :",aqui_test == {33: [47], 47: [33], 64: [], 40: []})
 
 
 ## Question 5
@@ -71,8 +71,8 @@ def sont_voisins_d(G:{}, dpt1:int, dpt2:int) -> bool :
         return True
     return False
 
-print("Q5 :",sont_voisins_d(aqui_test,33,47))
-print("Q5 :",sont_voisins_d(aqui_test,33,64))
+print("Q5 (True):",sont_voisins_d(aqui_test,33,47))
+print("Q5 (False):",sont_voisins_d(aqui_test,33,64))
 
 
 ## Question 6
@@ -83,7 +83,7 @@ def ajoute_une_frontiere_d(G:{}, s1: int, s2: int
     G[s2].append(s1)
 
 ajoute_une_frontiere_d(aqui_test,64,40)
-print("Q6 :",aqui_test)
+print("Q6 (True):",aqui_test == {33: [47], 47: [33], 64: [40], 40: [64]})
 
 
 ## Question 7
@@ -95,7 +95,7 @@ def ajoute_dpt_voisins_d(G:{}, dpt:int, voisins : [int]) -> None :
 
 
 ajoute_dpt_voisins_d(aqui_test,24,[16,17,33,47,19,87])
-print("Q7 :",aqui_test)
+print("Q7 (True):",aqui_test == {33: [47, 24], 47: [33, 24], 64: [40], 40: [64], 24: [16, 17, 33, 47, 19, 87], 16: [24], 17: [24], 19: [24], 87: [24]})
 
 
 ## Question 8
@@ -112,7 +112,7 @@ def suppr_dpt_d(G:{}, dpt:int) -> None :
             voisins.remove(dpt)
 
 suppr_dpt_d(aqui_test,24)
-print("Q9 :",aqui_test)
+print("Q9 (True):",aqui_test == {33: [47], 47: [33], 64: [40], 40: [64], 16: [], 17: [], 19: [], 87: []})
 
 ## Question 10
 def frontieres_d(G:{}) -> [()] :
@@ -125,7 +125,7 @@ def frontieres_d(G:{}) -> [()] :
     return f
 
 f = frontieres_d(aqui_test)
-print("Q10 :", f)
+print("Q10 (True):", f == [(33, 47), (64, 40)])
 
 
 ## Question 11
