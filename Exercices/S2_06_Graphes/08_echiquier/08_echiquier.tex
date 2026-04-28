@@ -12,49 +12,49 @@ Un cavalier se déplace, lorsque c'est possible, de 2 cases dans une direction v
 	\caption{Illustration du mouvement d'un cavalier sur un échiquier}
 \end{marginfigure}
 
-Dans un premier temps, les cases de l'échiquier sont représentées par des tuples~: le couple \texttt{(i,j)} désigne la case d'abscisse \texttt{i} et d'ordonnée \texttt{j}. Un échiquier possède 8 colonnes et 8 lignes, donc \texttt{i} et \texttt{j} seront compris entre \texttt{0} et \texttt{7}.
+Dans un premier temps, les cases de l'échiquier sont représentées par des tuples~: le couple \lstinline{(i,j)} désigne la case d'abscisse \lstinline{i} et d'ordonnée \lstinline{j}. Un échiquier possède 8 colonnes et 8 lignes, donc \lstinline{i} et \lstinline{j} seront compris entre \lstinline{0} et \lstinline{7}.
 
-\question{\'Ecrire une fonction \texttt{estDansEch(i:int, j:int)->bool} qui renvoie \texttt{True} si \texttt{(i, j)} correspond à une case valide de l'échiquier et \texttt{False} sinon. }
+\question{\'Ecrire une fonction \lstinline{estDansEch(i:int, j:int) -> bool} qui renvoie \lstinline{True} si \lstinline{(i, j)} correspond à une case valide de l'échiquier et \lstinline{False} sinon. }
 
-\question{\'Ecrire une fonction \texttt{mvtsPossibles(i:int, j:int)->list} qui renvoie la liste des cases où le cavalier peut se déplacer à partir de la case \texttt{(i,j)} à l'ordre près.}
+\question{\'Ecrire une fonction \lstinline{mvtsPossibles(i:int, j:int) -> [(int,int)]} qui renvoie la liste des cases où le cavalier peut se déplacer à partir de la case \lstinline{(i,j)} à l'ordre près.}
 
 %\newpage
 \question{Vérifier que :}
 \vspace{-.2cm}
 \begin{itemize}
-	\item \texttt{mvtsPossibles(0,0)} renvoie \texttt{[(1, 2), (2, 1)]},
-	\item \texttt{mvtsPossibles(3,5)} renvoie bien \texttt{[(1, 4), (1, 6), (2, 3), (2, 7), (4, 3), (4, 7), (5, 4), (5, 6)]},
-	\item \texttt{mvtsPossibles(7,7)} renvoie bien \texttt{[(5, 6), (6, 5)]}.
+	\item \lstinline{mvtsPossibles(0,0)} renvoie \lstinline{[(1, 2), (2, 1)]},
+	\item \lstinline{mvtsPossibles(3,5)} renvoie bien \lstinline{[(1, 4), (1, 6), (2, 3), (2, 7), (4, 3), (4, 7), (5, 4), (5, 6)]},
+	\item \lstinline{mvtsPossibles(7,7)} renvoie bien \lstinline{[(5, 6), (6, 5)]}.
 \end{itemize}
 
 Tous ces résultats sont à l'ordre près. 
 
-\question{Créer un graphe \texttt{G} sous la forme d'un dictionnaire d'adjacence avec pour sommets les différentes cases de l'échiquier et les arêtes qui correspondent à un mouvement possible du cavalier. }
+\question{Créer un graphe \lstinline{G} sous la forme d'un dictionnaire d'adjacence avec pour sommets les différentes cases de l'échiquier et les arêtes qui correspondent à un mouvement possible du cavalier. }
 
 \question{Vérifiez que vous avez un graphe avec 64 sommets et 168 arêtes.}
 
-Le codage des cases d'échiquier se fait classiquement par une chaine de caractères comprenant~: une lettre minuscule pour l'abscisse (de \texttt{a} à \texttt{h}) et un chiffre pour l'ordonnée (de \texttt{1} à \texttt{8}). La case en bas à gauche de l'échiquier est donc de code \texttt{'a1'}.
+Le codage des cases d'échiquier se fait classiquement par une chaine de caractères comprenant~: une lettre minuscule pour l'abscisse (de \lstinline{a} à \lstinline{h}) et un chiffre pour l'ordonnée (de \lstinline{1} à \lstinline{8}). La case en bas à gauche de l'échiquier est donc de code \lstinline{'a1'}.
 
 \begin{rem}
-	\texttt{ord(c)} retourne le codage Unicode correspondant au caractère \texttt{c} et \texttt{chr(n)} renvoie le caractère dont le codage Unicode est \texttt{n}. 
+	\lstinline{ord(c)} retourne le codage Unicode correspondant au caractère \lstinline{c} et \lstinline{chr(n)} renvoie le caractère dont le codage Unicode est \lstinline{n}. 
 \end{rem} 
 
 \begin{marginfigure}
 	%\begin{center}
 		\includegraphics[width=\linewidth]{Graphe_final}
 	%\end{center}
-	\caption{Représentation graphique du graphe \texttt{G2}}
+	\caption{Représentation graphique du graphe \lstinline{G2}}
 \end{marginfigure}
 
-\question{\'Ecrire une fonction \texttt{codage(i:int, j:int)->str} qui renvoie le code correspondant à la case \texttt{(i, j)}. }
+\question{\'Ecrire une fonction \lstinline{codage(i:int, j:int) -> str} qui renvoie le code correspondant à la case \lstinline{(i, j)}. }
 
-\question{Créer un dictionnaire d'adjacence \texttt{G2} comme défini précédemment avec les cases maintenant nommées d'après leur code. }
+\question{Créer un dictionnaire d'adjacence \lstinline{G2} comme défini précédemment avec les cases maintenant nommées d'après leur code. }
 
 \question{ Vérifier que, à l'ordre près~:
 \begin{itemize}
-	\item \texttt{G2['a1']} renvoie \texttt{['b3', 'c2']},
-	\item \texttt{G2['d6']} renvoie bien \texttt{['b5', 'b7', 'c4', 'c8', 'e4', 'e8', 'f5', 'f7']},
-	\item \texttt{G2['h8']} renvoie bien \texttt{['f7', 'g6']}.
+	\item \lstinline{G2['a1']} renvoie \lstinline{['b3', 'c2']},
+	\item \lstinline{G2['d6']} renvoie bien \lstinline{['b5', 'b7', 'c4', 'c8', 'e4', 'e8', 'f5', 'f7']},
+	\item \lstinline{G2['h8']} renvoie bien \lstinline{['f7', 'g6']}.
 \end{itemize} }
 %
 %\question{Écrire une fonction \cde{largeur\_dist(G:dict, dep:tuple)->dict:} qui prend en entrée un graphe
@@ -95,7 +95,7 @@ Le codage des cases d'échiquier se fait classiquement par une chaine de caract�
 %\hfill
 %		\includegraphics[width=0.45\linewidth]{distance_4_3}
 %	\end{center}
-%	\caption{Distances depuis \texttt{(0, 0)} et \texttt{(4, 3)}}
+%	\caption{Distances depuis \lstinline{(0, 0)} et \lstinline{(4, 3)}}
 %\end{figure}
 %
 %

@@ -2,6 +2,7 @@
 %\vspace{-0.5cm}
 \section*{Exercice d'application $\star$}
 
+\marginnote{Des exemples de graphes ou dictionnaires sont présents ici : \url{https://github.com/xpessoles/2025_2026_Enseignements/raw/main/PTSI_Informatique/TP/TP_13_ApplicationsGraphes/TP_13_ApplicationsGraphes.py}.}
 
 On donne la carte de la région Nouvelle Aquitaine.
 \begin{figure}[H]
@@ -16,14 +17,14 @@ On souhaite créer un dictionnaire permettant de faire une correspondance entre 
 
 \question{Implémenter une fonction \lstinline|add_dpt(d:{}, dpt:int, nom:str) -> None| qui ajoute un département au dictionnaire  \lstinline{d}.}
 
-%\begin{exemple}[Tests]
-%\begin{lstlisting}
-%>>> dico = {}
-%>>> add_dpt(dico,64,"Pyrénées-Atlantiques")
-%>>> print(dico)
-%        {64:"Pyrénées-Atlantiques"}
-%\end{lstlisting}
-%\end{exemple}
+\begin{exemple}[Tests]
+\begin{lstlisting}
+>>> dico = {}
+>>> add_dpt(dico,64,"Pyrénées-Atlantiques")
+>>> print(dico)
+        {64:"Pyrénées-Atlantiques"}
+\end{lstlisting}
+\end{exemple}
 
 
 \subsection*{Dictionnaire d'adjacence}
@@ -33,19 +34,25 @@ On souhaite modéliser la carte par un dictionnaire d'adjacence où les  sommets
 
 
 \begin{question}
-Implémenter la fonction \lstinline|existe_d(G:{}, dpt:int) -> bool| qui renvoie \lstinline{True} si le département est dans le graphe, \lstinline{False} sinon.
+Implémenter la fonction \lstinline|existe_d(G:{}, dpt:int) -> bool| qui renvoie \lstinline{True} si le département est dans le graphe, \lstinline{False} sinon. Tester votre fonction.
 \end{question}
 
-\question{Implémenter la fonction \lstinline|ajoute_dpt_d(G:{}, dpt:int) -> None| qui ajoute un département au graphe \lstinline{G}. }
+\question{Implémenter la fonction \lstinline|ajoute_dpt_d(G:{}, dpt:int) -> None| qui ajoute un département au graphe \lstinline{G}.  Tester votre fonction.}
+
 
 \begin{question}
 Implémenter la fonction \lstinline|sont_voisins_d(G:{}, dpt1:int, dpt2:int) -> bool| qui renvoie \lstinline{True} si les deux départements sont voisins, \lstinline{False} sinon.
+Tester votre fonction.
 \end{question}
 
 
-\question{Implémenter la fonction \lstinline|ajoute_une_frontiere_d(G:{}, s1: int, s2: int) -> None| qui ajoute une arête \lstinline{G} entre deux départements limitrophes. }
+\question{Implémenter la fonction \lstinline|ajoute_une_frontiere_d(G:{}, s1: int, s2: int) -> None| qui ajoute une arête \lstinline{G} entre deux départements limitrophes. 
+Tester votre fonction.
+}
 
-\question{Implémenter la fonction \lstinline|ajoute_dpt_voisins_d(G:{}, dpt:int, voisins : [int]) -> None| qui ajoute un département au graphe \lstinline{G}. \lstinline{dpt} désigne le département à ajouter et \lstinline{voisins} la liste des départements voisins.}
+
+\question{Implémenter la fonction \lstinline|ajoute_dpt_voisins_d(G:{}, dpt:int, voisins : [int]) -> None| qui ajoute un département au graphe \lstinline{G}. \lstinline{dpt} désigne le département à ajouter et \lstinline{voisins} la liste des départements voisins.
+Tester votre fonction.}
 %
 %\begin{exemple}[Tests]
 %\begin{lstlisting}
@@ -60,16 +67,29 @@ Implémenter la fonction \lstinline|sont_voisins_d(G:{}, dpt1:int, dpt2:int) -> 
 %\end{exemple}
 
 
+\question{Implémenter la fonction \lstinline|voisins_d(G:{}, dpt:int) -> [int]| qui renvoie la liste des départements voisins de \lstinline{dpt}.
+Tester votre fonction.}
 
-\question{Implémenter la fonction \lstinline|voisins_d(G:{}, dpt:int) -> [int]| qui renvoie la liste des départements voisins de \lstinline{dpt}.}
 
-\question{Implémenter la fonction \lstinline|suppr_dpt_d(G:{}, dpt:int) -> None| qui supprime un département de la région.}
+\question{Implémenter la fonction \lstinline|suppr_dpt_d(G:{}, dpt:int) -> None| qui supprime un département de la région.
+Tester votre fonction.}
 
-\question{Implémenter la fonction \lstinline|frontieres_d(G:{}) -> [()]| qui renvoie la listes des arêtes du graphe. Une arête sera une tuple (couple) de deux départements limitrophes. On supprimera les doublons.}
 
-\question{Implémenter la fonction \lstinline|degre_d(G:{}, dpt:int) -> int| qui donne le degré d'un sommet.}
+\question{Implémenter la fonction \lstinline|frontieres_d(G:{}) -> [()]| qui renvoie la listes des arêtes du graphe. Une arête sera une tuple (couple) de deux départements limitrophes. On supprimera les doublons.
+Tester votre fonction.}
 
-\question{Implémenter la fonction \lstinline|degre_max_d(G:{}) -> [int]| qui renvoie la liste des sommets de plus haut degré.}
 
-\question{Implémenter la fonction \lstinline|degre_max_dpt_d(G:{}, d:{}) -> [str]| prend en argument le graphe de la région ainsi que le dictionnaire des départements qui renvoie le nom du (ou des) départements ayant le plus de départements limitrophes.}
+\question{Implémenter la fonction \lstinline|degre_d(G:{}, dpt:int) -> int| qui donne le degré d'un sommet.
+Tester votre fonction.}
+
+
+\question{Implémenter la fonction \lstinline|degre_max_d(G:{}) -> int| qui donne le degré maximum du graphe.
+Tester votre fonction.}
+
+
+\question{Implémenter la fonction \lstinline|degre_max_l_d(G:{}) -> [int]| qui renvoie la liste des sommets de plus haut degré.
+Tester votre fonction.}
+
+
+\question{Implémenter la fonction \lstinline|degre_max_dpt_d(G:{}, d:{}) -> [str]| prend en argument le graphe de la région ainsi que le dictionnaire des départements qui renvoie le nom du (ou des) départements ayant le plus de départements limitrophes.Tester votre fonction.}
 
