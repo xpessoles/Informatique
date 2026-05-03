@@ -8,15 +8,18 @@ La première partie a déjà été traitée et elle porte sur l'algorithme glout
 \subsection*{Présentation du jeu}
 
 Le jeu \emph{serpents et échelles} est un jeu de société où on espère monter les échelles en évitant de trébucher sur les serpents. Il provient d'Inde et est utilisé pour illustrer l'influence des vices et des vertus sur une vie.
-
-\begin{figure}[h]
-	\begin{center}
-		\includegraphics[width=0.6\linewidth]{snakesAndLadders.png}
-	\end{center}
-	\caption{Exemple d'un plateau de serpents et échelles}
-	\label{fig:1}
-\end{figure}
-
+%
+%\begin{figure}[h]
+%	\begin{center}
+%		\includegraphics[width=0.6\linewidth]{snakesAndLadders.png}
+%	\end{center}
+%	\caption{Exemple d'un plateau de serpents et échelles}
+%	\label{fig:1}
+%\end{figure}
+\begin{marginfigure}
+\includegraphics[width=\linewidth]{snakesAndLadders.png}
+\caption{Exemple d'un plateau de serpents et échelles \label{fig:1}}
+\end{marginfigure}
 \paragraph*{Le plateau}
 
 \begin{itemize}
@@ -110,8 +113,20 @@ def casesAccessibles(case: int) -> [int]:
 %}
 
 Afin de résoudre le problème du parcours à nombre de coups minimum, on a mis au point une fonction qui trouve si un chemin existe entre un sommet de départ et un sommet d'arrivée~: 
-
-\noindent \lstinputlisting[firstline=55,lastline=65]{trouverCheminPlusCourt.py}
+\begin{lstlisting}
+def chemin(G, depart, arrivee):
+    predecesseur = {}
+    file = deque([depart])
+    predecesseur[depart] = None
+    while file:
+        sommet = file.popleft()
+        for successeurDeSommet in G[sommet]:
+            if successeurDeSommet not in predecesseur.keys():
+                file.append(successeurDeSommet)
+                predecesseur[successeurDeSommet] = sommet
+    return arrivee in predecesseur
+\end{lstlisting}
+%\noindent \lstinputlisting[firstline=55,lastline=65]{trouverCheminPlusCourt.py}
 
 \question{Sur quel type de parcours est basée la fonction \texttt{chemin}~? Justifiez cette réponse. Précisez l'intérêt d'utiliser ce parcours ?}
 
@@ -139,7 +154,27 @@ Cette dernière fonction nous renvoie \texttt{[0, 38, 39, 45, 67, 91, 94, 100]}.
 
 On souhaite faire une représentation schématique du plateau (voir figure 6) avec le code suivant~: 
 
-\noindent\lstinputlisting[firstline=13,lastline=29]{dessinerPlateau.py}
+\begin{lstlisting}
+for case in range(1, 101): # pour les cases 1 à 100
+    i, j = position(case)
+    plt.text(i, j, str(case),
+        horizontalalignment='center', verticalalignment='center')
+
+for caseD, caseA in dSeE.items(): # ligne 6
+    iD, jD = position(caseD)
+    iA, jA = position(caseA)
+    if caseA > caseD : # ligne 9
+        couleur = 'b'
+    else:
+        couleur = 'r'
+    plt.plot(iA, jA, '^', color=couleur)
+    plt.plot(iD, jD, 'o', color=couleur)
+    plt.plot([iA, iD], [jA, jD], color=couleur)
+plt.axis("equal")
+plt.show()
+\end{lstlisting}
+
+%\noindent\lstinputlisting[firstline=13,lastline=29]{dessinerPlateau.py}
 
 \begin{figure}[h]
 	\begin{center}
