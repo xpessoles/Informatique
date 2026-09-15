@@ -186,13 +186,13 @@ On peut aussi concaténer des listes :
 \end{lstlisting}
 
 
-Enfin, on peut insérer un élément à un index donné. Tous les les éléments suivant voient donc leur index décalé vers la droite.  
-\begin{lstlisting}
->>> L = [10,-12,20,54,4]
->>> L.insert(1,12) # Insertion de la valeur 12 au rang 1
->>> print(L)
-    [10,12,-12,20,54,4]
-\end{lstlisting}
+%Enfin, on peut insérer un élément à un index donné. Tous les les éléments suivant voient donc leur index décalé vers la droite.  
+%\begin{lstlisting}
+%>>> L = [10,-12,20,54,4]
+%>>> L.insert(1,12) # Insertion de la valeur 12 au rang 1
+%>>> print(L)
+%    [10,12,-12,20,54,4]
+%\end{lstlisting}
 
 
 Pour supprimer un élément, on peut utiliser son index (\lstinline(del)) ou sa valeur (\lstinline{(L.remove()}). Attention, après suppression d'un élément tous les éléments suviants sont décalés vers la guache.  
@@ -322,8 +322,9 @@ syntaxe suivante : \texttt{a.method()}, les parenthèses pouvant contenir des pa
 %\end{lstlisting}
 
 Les méthodes rassemblées dans le tableau~\ref{tab.list.methodes} ne sont pas exigibles.
-\begin{table}[!h]
-\centering
+%\begin{table}[!h]
+%\centering
+\begin{center}
     \begin{tabular}{lp{9cm}}
       \hline 
       \textbf{Méthode} & \textbf{Description} \\
@@ -347,10 +348,10 @@ Les méthodes rassemblées dans le tableau~\ref{tab.list.methodes} ne sont pas e
       \texttt{reverse()} & Renverse la liste \\
       \hline
     \end{tabular}
-    \caption{Méthodes applicables aux listes.}
+    \captionof{table}{Méthodes applicables aux listes.}
   \label{tab.list.methodes}
-  \end{table}
-  
+%  \end{table}
+  \end{center}
 \subsection{Tableaux multidimensionnels}
 
 On peut représenter une matrice avec des listes Python, par exemple en la décrivant ligne par 
@@ -841,7 +842,7 @@ On peut aussi chercher la présence d'un motif dans une chaîne avec \texttt{in}
 
 \subsection{Chaînes et méthodes}
 De nombreuses méthodes existent sur les chaînes, voici les plus utiles.
-\begin{table}[!h]
+%\begin{table}[!h]
   \begin{center}
     \begin{tabular}{lp{8cm}}
       \hline
@@ -856,10 +857,10 @@ De nombreuses méthodes existent sur les chaînes, voici les plus utiles.
       \texttt{upper()}& Mets en majuscules la chaîne.  \\
       \hline
     \end{tabular}
-   \caption{Quelques méthodes sur les chaînes de caractères.}
+   \captionof{table}{Quelques méthodes sur les chaînes de caractères.}
     %\label{tab.str.methodes}
   \end{center}
-\end{table}
+%\end{table}
 
 \begin{lstlisting}
 s = "    que ; d'espaces ; mes ; amis ! ;   "
